@@ -294,7 +294,7 @@
         }
         .ufsm-lo-card p { margin: 0 0 16px; color: var(--ufsm-ink); font-size: 1rem; }
         .ufsm-lo-card p:last-child { margin-bottom: 0; }
-        .ufsm-lo-viz { margin: 6px auto 18px; max-width: 260px; }
+        .ufsm-lo-viz { margin: 14px auto 26px; max-width: 260px; }
         .ufsm-lo-viz svg { display: block; width: 100%; height: auto; overflow: visible; }
         .ufsm-lo-gnum {
             font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 2.4rem;
@@ -919,12 +919,16 @@
                     </div>
                     <p>Public charter schools were not included in the passage of Act 139.</p>
                     <div class="ufsm-lo-viz">
-                        <svg viewBox="0 0 230 182" role="img" aria-label="Native Hawaiian students: 37 percent at public charter schools versus 63 percent others.">
-                            <circle cx="84" cy="104" r="42" fill="none" stroke="var(--ufsm-green-light)" stroke-width="18"/>
-                            <circle cx="84" cy="104" r="42" fill="none" stroke="var(--ufsm-green-deep)" stroke-width="18" stroke-dasharray="97.6 263.9" transform="rotate(-90 84 104)"/>
-                            <text x="169" y="58" text-anchor="middle" class="ufsm-lo-donut-lbl" font-size="13">Native Hawaiian</text>
-                            <text x="169" y="80" text-anchor="middle" class="ufsm-lo-donut-lbl b" font-size="16">37%</text>
-                            <text x="24" y="132" text-anchor="middle" class="ufsm-lo-donut-lbl b" font-size="16">63%</text>
+                        <!-- Label column is clear of the ring: ring spans x 29-131,
+                             the right-hand labels start at x 148. Viewbox is also
+                             tightened vertically so the graphic doesn't sit in a pool
+                             of empty space above the caption below it. -->
+                        <svg viewBox="0 0 262 164" role="img" aria-label="Native Hawaiian students: 37 percent at public charter schools versus 63 percent others.">
+                            <circle cx="80" cy="86" r="42" fill="none" stroke="var(--ufsm-green-light)" stroke-width="18"/>
+                            <circle cx="80" cy="86" r="42" fill="none" stroke="var(--ufsm-green-deep)" stroke-width="18" stroke-dasharray="97.6 263.9" transform="rotate(-90 80 86)"/>
+                            <text x="196" y="76" text-anchor="middle" class="ufsm-lo-donut-lbl" font-size="13">Native Hawaiian</text>
+                            <text x="196" y="100" text-anchor="middle" class="ufsm-lo-donut-lbl b" font-size="16">37%</text>
+                            <text x="24" y="124" text-anchor="middle" class="ufsm-lo-donut-lbl b" font-size="16">63%</text>
                         </svg>
                     </div>
                     <p>They serve the largest percentage of Native Hawaiian students in the public school system&mdash;14 percent more than HIDOE schools.</p>
@@ -1212,6 +1216,33 @@
 
         document.querySelectorAll('.ufsm-reveal').forEach(function (el) { observer.observe(el); });
 
+        /* ---------- Reveal fallback ----------
+           The sections above start at opacity:0 and are only made visible by the
+           observer, so ANY failure to fire leaves content permanently invisible —
+           which is what happened once this page was embedded in Squarespace rather
+           than served standalone. Two known ways it fails there:
+             - a section taller than ~8x the viewport can never reach threshold 0.12,
+               so it is never revealed no matter how far you scroll;
+             - the host page may scroll an inner element rather than the document.
+           This fallback reveals anything that has entered the viewport, listening in
+           the CAPTURE phase so it also sees scrolling from a nested scroll container.
+           Visibility must not depend on the animation working. */
+        function revealVisible() {
+            var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+            document.querySelectorAll('.ufsm-reveal:not(.active)').forEach(function (el) {
+                var r = el.getBoundingClientRect();
+                if (r.top < vh * 0.92 && r.bottom > 0) {
+                    el.classList.add('active');
+                    triggerAnim(el);
+                    observer.unobserve(el);
+                }
+            });
+        }
+        window.addEventListener('scroll', revealVisible, { passive: true });
+        document.addEventListener('scroll', revealVisible, { passive: true, capture: true });
+        window.addEventListener('resize', revealVisible);
+        revealVisible();
+
         // Tooltips open above by default; flip below when too close to the top of the viewport.
         document.querySelectorAll('.ufsm-tipword, .ufsm-fn').forEach(function (el) {
             function place() { el.classList.toggle('ufsm-tip-flip', el.getBoundingClientRect().top < 200); }
@@ -1220,6 +1251,17 @@
         });
 
         // Charts live in always-open sections — initialize on load (robust; guarded).
+        // Chart.js and its datalabels plugin come from a CDN, and initPie/initBar
+        // bail out when the library is not there yet. Embedded in a host page those
+        // scripts can finish loading AFTER the reveal and load hooks have already
+        // run, and nothing would ever retry — leaving the charts permanently blank.
+        // Poll until the library shows up (both init functions are idempotent).
+        var chartTries = 0;
+        (function waitForChart() {
+            if (typeof Chart !== 'undefined') { initPie(); initBar(); return; }
+            if (chartTries++ < 40) { setTimeout(waitForChart, 300); }
+        })();
+
         window.addEventListener('load', function () {
             setTimeout(function () { initPie(); initBar(); }, 150);
 
