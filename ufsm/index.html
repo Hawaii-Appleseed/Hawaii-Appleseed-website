@@ -404,7 +404,7 @@
             font-size: 1.24rem; line-height: 1.34; max-width: 960px; margin: 6px 0 0;
         }
         .ufsm-tl {
-            display: grid; grid-template-columns: repeat(5, 1fr);
+            display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
             column-gap: 6px; margin-top: 44px;
         }
         .ufsm-tl .col1 { grid-column: 1; }
@@ -583,6 +583,12 @@
         .ufsm-pdf-capture .ufsm-tl-chev.col1,
         .ufsm-pdf-capture .ufsm-tl-chev.ufsm-tl-goal-wide { clip-path: none !important; border-radius: 8px; }
         .ufsm-pdf-capture #ufsm-pdf-btn { display: none !important; }
+        /* A PDF page can't be scrolled sideways: if the viewport is narrow enough
+           that .ufsm-table-scroll is scrolling internally, the off-screen columns
+           would simply be missing from the export. Let the tables reflow to fit
+           the captured width instead — tighter, but nothing is lost. */
+        .ufsm-pdf-capture .ufsm-table-scroll { overflow: visible !important; }
+        .ufsm-pdf-capture .ufsm-table { min-width: 0 !important; }
         /* Blanket kill-switch for anything that fades/slides/counts in.
            html2canvas renders a CLONE of this subtree in an off-screen iframe, and
            in that clone every CSS animation restarts from its 0% keyframe (opacity:0
@@ -606,14 +612,22 @@
             .ufsm-section-title { font-size: 3.1rem; }
             .ufsm-hero h1 { font-size: 4.6rem; }
             .ufsm-hero h1 .ufsm-hero-sub { font-size: 3rem; }
-            .ufsm-why-grid { grid-template-columns: repeat(2, 1fr); gap: 48px; max-width: 900px; margin: 0 auto; }
-            .ufsm-cost-grid { grid-template-columns: 1fr 1fr; }
-            .ufsm-levers { grid-template-columns: repeat(3, 1fr); }
+            /* NOTE: every multi-column grid here uses minmax(0, 1fr), not 1fr.
+               A bare 1fr track can't shrink below its content's min-content width,
+               so the cost table (min-width: 460px) was stretching its track and
+               pushing document.scrollWidth past the viewport — which showed up as
+               a blank strip down the right edge of the exported PDF, since the
+               full-bleed bands are sized to the viewport, not to scrollWidth.
+               A minmax(0, 1fr) track can shrink, so .ufsm-table-scroll scrolls
+               internally the way it was meant to. */
+            .ufsm-why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; max-width: 900px; margin: 0 auto; }
+            .ufsm-cost-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+            .ufsm-levers { grid-template-columns: repeat(3, minmax(0, 1fr)); }
             .ufsm-fund-title { font-size: 3.4rem; }
-            .ufsm-fund-grid { grid-template-columns: 1.05fr 1fr; gap: 48px; }
+            .ufsm-fund-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 48px; }
             .ufsm-fund-right { border-left: 1px solid #C9C9C9; padding-left: 48px; }
-            .ufsm-fund-levers { grid-template-columns: 1fr 1fr; gap: 28px; }
-            .ufsm-reasons-2col { grid-template-columns: 1fr 1fr; }
+            .ufsm-fund-levers { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; }
+            .ufsm-reasons-2col { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
             .ufsm-reasons-kicker { font-size: 2.15rem; }
             .ufsm-reasons-head { font-size: 3.7rem; }
             /* dotted green vertical dividers between the Why columns */
@@ -623,7 +637,7 @@
                 background-size: 5px 18px; background-repeat: repeat-y;
             }
             /* "Who is still left out?" — 3 columns with the same dotted dividers */
-            .ufsm-lo-grid { grid-template-columns: repeat(3, 1fr); gap: 56px; }
+            .ufsm-lo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px; }
             .ufsm-lo-card + .ufsm-lo-card::before {
                 content: ""; position: absolute; left: -30px; top: 4px; bottom: 4px; width: 5px;
                 background-image: radial-gradient(circle, var(--ufsm-green) 2.2px, transparent 2.6px);
@@ -1254,8 +1268,12 @@
             // Redraw the charts with animation switched off so they can't be caught
             // half-drawn — this previously relied on Chart.js's own ~1s entrance
             // animation happening to already be finished when html2canvas ran.
-            if (pieChart) { pieChart.options.animation = false; pieChart.update(); }
-            if (barChart) { barChart.options.animation = false; barChart.update(); }
+            // resize() before update(): a chart built at one window width keeps that
+            // canvas size until a real resize event, so after the window is resized
+            // the canvas can be WIDER than the capture area and get clipped at the
+            // right edge. update() alone does not re-measure the container.
+            if (pieChart) { pieChart.resize(); pieChart.options.animation = false; pieChart.update(); }
+            if (barChart) { barChart.resize(); barChart.options.animation = false; barChart.update(); }
 
             animateFills(document);
             document.querySelectorAll('.ufsm-gap-fill, .ufsm-lever-fill').forEach(function (e) { e.style.transition = 'none'; });
@@ -1347,13 +1365,22 @@
                 }).then(function () {
                     return new Promise(function (res) { setTimeout(res, 200); });
                 }).then(function () {
+                    // Capture the VISIBLE width, not scrollWidth. If anything on the
+                    // page overflows horizontally, scrollWidth is wider than the
+                    // viewport — but the full-bleed bands are sized to the viewport,
+                    // so the extra columns captured are pure background and print as
+                    // a blank strip down the right edge. Clipping the overflow is
+                    // also what the embedded version does on screen (overflow: clip).
+                    var capW = (captureRoot === document.body)
+                        ? document.documentElement.clientWidth
+                        : captureRoot.clientWidth;
                     return html2canvas(captureRoot, {
                         onclone: function (doc) { freezeClone(doc); },
                         scale: 2,
                         backgroundColor: '#ffffff',
                         useCORS: true,
                         windowWidth: document.documentElement.clientWidth,
-                        width: captureRoot.scrollWidth,
+                        width: capW,
                         height: captureRoot.scrollHeight,
                         scrollX: 0,
                         scrollY: 0
