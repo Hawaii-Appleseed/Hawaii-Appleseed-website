@@ -404,7 +404,7 @@
             font-size: 1.24rem; line-height: 1.34; max-width: 960px; margin: 6px 0 0;
         }
         .ufsm-tl {
-            display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+            display: grid; grid-template-columns: repeat(5, 1fr);
             column-gap: 6px; margin-top: 44px;
         }
         .ufsm-tl .col1 { grid-column: 1; }
@@ -612,22 +612,14 @@
             .ufsm-section-title { font-size: 3.1rem; }
             .ufsm-hero h1 { font-size: 4.6rem; }
             .ufsm-hero h1 .ufsm-hero-sub { font-size: 3rem; }
-            /* NOTE: every multi-column grid here uses minmax(0, 1fr), not 1fr.
-               A bare 1fr track can't shrink below its content's min-content width,
-               so the cost table (min-width: 460px) was stretching its track and
-               pushing document.scrollWidth past the viewport — which showed up as
-               a blank strip down the right edge of the exported PDF, since the
-               full-bleed bands are sized to the viewport, not to scrollWidth.
-               A minmax(0, 1fr) track can shrink, so .ufsm-table-scroll scrolls
-               internally the way it was meant to. */
-            .ufsm-why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; max-width: 900px; margin: 0 auto; }
-            .ufsm-cost-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-            .ufsm-levers { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .ufsm-why-grid { grid-template-columns: repeat(2, 1fr); gap: 48px; max-width: 900px; margin: 0 auto; }
+            .ufsm-cost-grid { grid-template-columns: 1fr 1fr; }
+            .ufsm-levers { grid-template-columns: repeat(3, 1fr); }
             .ufsm-fund-title { font-size: 3.4rem; }
-            .ufsm-fund-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 48px; }
+            .ufsm-fund-grid { grid-template-columns: 1.05fr 1fr; gap: 48px; }
             .ufsm-fund-right { border-left: 1px solid #C9C9C9; padding-left: 48px; }
-            .ufsm-fund-levers { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; }
-            .ufsm-reasons-2col { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+            .ufsm-fund-levers { grid-template-columns: 1fr 1fr; gap: 28px; }
+            .ufsm-reasons-2col { grid-template-columns: 1fr 1fr; }
             .ufsm-reasons-kicker { font-size: 2.15rem; }
             .ufsm-reasons-head { font-size: 3.7rem; }
             /* dotted green vertical dividers between the Why columns */
@@ -637,7 +629,7 @@
                 background-size: 5px 18px; background-repeat: repeat-y;
             }
             /* "Who is still left out?" — 3 columns with the same dotted dividers */
-            .ufsm-lo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px; }
+            .ufsm-lo-grid { grid-template-columns: repeat(3, 1fr); gap: 56px; }
             .ufsm-lo-card + .ufsm-lo-card::before {
                 content: ""; position: absolute; left: -30px; top: 4px; bottom: 4px; width: 5px;
                 background-image: radial-gradient(circle, var(--ufsm-green) 2.2px, transparent 2.6px);
@@ -1292,17 +1284,31 @@
         // Undo the inline overrides above once the PDF has been captured, so the live
         // page's normal look/behavior isn't left permanently frozen.
         function restoreLiveState() {
+            // These elements are opacity:0 in CSS and only become visible via a
+            // fade-in animation, so their finished state is PINNED here rather than
+            // handed back to the stylesheet. Clearing the inline animation restarts
+            // that animation from its opacity:0 keyframe, and a running animation
+            // outranks an inline opacity — so "restoring" them by clearing both is
+            // what left headings and body copy invisible after an export. The whole
+            // page has been revealed by the export anyway, so visible IS the correct
+            // resting state; only the properties that can't hide anything are reset.
             document.querySelectorAll(FADE_IN_SEL).forEach(function (e) {
                 e.style.transition = '';
-                e.style.animation = '';
-                e.style.opacity = '';
                 e.style.transform = '';
+                e.style.animation = 'none';
+                e.style.opacity = '1';
             });
             document.querySelectorAll('.ufsm-gap-fill, .ufsm-lever-fill').forEach(function (e) { e.style.transition = ''; });
             var arc = document.getElementById('ufsm-gauge-arc');
             if (arc) { arc.style.transition = ''; }
-            if (pieChart) { pieChart.options.animation = undefined; }
-            if (barChart) { barChart.options.animation = undefined; }
+            // Re-measure the charts against the RESTORED layout. Capture runs with
+            // .ufsm-pdf-capture applied, which changes widths (the tables reflow),
+            // so a chart resized during capture would otherwise stay stuck at the
+            // capture-time size — leaving a shrunken or near-invisible chart behind
+            // on the live page. Runs after the class has been removed by .finally().
+            if (pieChart) { pieChart.options.animation = undefined; pieChart.resize(); }
+            if (barChart) { barChart.options.animation = undefined; barChart.resize(); }
+            setFullBleedWidth();
         }
 
         // html2canvas rasterizes a CLONE of the subtree inside an off-screen iframe.
