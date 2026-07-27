@@ -62,10 +62,16 @@
         }
 
         /* Full-bleed bands */
+        /* Full-bleed bands
+           NOTE: uses --ha-ufsm-vw (set by JS to document.documentElement.clientWidth)
+           instead of 100vw. 100vw includes the vertical scrollbar's width, so on any
+           page with a scrollbar the full-bleed sections were rendered a few pixels
+           wider than the visible viewport, showing up as a stray strip/margin on the
+           right (and in the PDF, since html2canvas captures that same overflow). */
         .ufsm-full-width {
-            width: 100vw;
-            margin-left: calc(50% - 50vw);
-            margin-right: calc(50% - 50vw);
+            width: var(--ha-ufsm-vw, 100vw);
+            margin-left: calc(50% - (var(--ha-ufsm-vw, 100vw) / 2));
+            margin-right: calc(50% - (var(--ha-ufsm-vw, 100vw) / 2));
             padding: 72px 0;
         }
         .ufsm-bg-white { background: var(--ufsm-white); }
@@ -435,7 +441,16 @@
             padding-left: 18px;
             clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%);
         }
+        /* The goal is a single span across the last two columns (SY 29–30), with a
+           flat right edge so the band runs out to the end of the timeline. */
+        .ufsm-tl-chev.ufsm-tl-goal-wide {
+            grid-row: 2; grid-column: 4 / span 2;
+            padding-right: 20px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 18px 50%);
+        }
         .ufsm-tl-chev .yr { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 1.28rem; line-height: 1.05; }
+        .ufsm-tl-chev.ufsm-tl-goal-wide .yr { font-size: 1.6rem; }
+        .ufsm-tl-chev.ufsm-tl-goal-wide .ph { font-size: 0.9rem; }
         .ufsm-tl-chev .ph { font-size: 0.8rem; font-weight: 600; opacity: 0.96; margin-top: 4px; }
         .ufsm-tl-law  { background: var(--ufsm-green); }
         .ufsm-tl-goal { background: var(--ufsm-green-deep); }
@@ -565,8 +580,26 @@
         /* html2canvas can't rasterize clip-path — render the Legislature timeline
            chevrons as clean rounded bars (keeps the horizontal grid layout). */
         .ufsm-pdf-capture .ufsm-tl-chev,
-        .ufsm-pdf-capture .ufsm-tl-chev.col1 { clip-path: none !important; border-radius: 8px; }
+        .ufsm-pdf-capture .ufsm-tl-chev.col1,
+        .ufsm-pdf-capture .ufsm-tl-chev.ufsm-tl-goal-wide { clip-path: none !important; border-radius: 8px; }
         .ufsm-pdf-capture #ufsm-pdf-btn { display: none !important; }
+        /* Blanket kill-switch for anything that fades/slides/counts in.
+           html2canvas renders a CLONE of this subtree in an off-screen iframe, and
+           in that clone every CSS animation restarts from its 0% keyframe (opacity:0
+           here) — which is why the export intermittently came out with missing
+           headings and reasons text depending on how fast the clone was rasterized.
+           Zero-length animations with fill-mode:forwards snap straight to the 100%
+           keyframe instead, so the clone paints the finished state no matter when
+           it is captured. This covers any future animated element for free. */
+        .ufsm-pdf-capture *,
+        .ufsm-pdf-capture *::before,
+        .ufsm-pdf-capture *::after {
+            animation-delay: 0s !important;
+            animation-duration: 0s !important;
+            animation-iteration-count: 1 !important;
+            animation-fill-mode: forwards !important;
+            transition: none !important;
+        }
 
         /* ===== Desktop ===== */
         @media (min-width: 768px) {
@@ -758,8 +791,7 @@
 
                 <!-- OUR GOAL group -->
                 <div class="ufsm-tl-bracket ufsm-tl-bracket--goal"><span>Our Goal</span></div>
-                <div class="ufsm-tl-chev ufsm-tl-goal col4"><span class="yr">SY 27&ndash;28</span><span class="ph">Free for all</span></div>
-                <div class="ufsm-tl-chev ufsm-tl-goal col5"><span class="yr">SY 29&ndash;30</span><span class="ph">Free for all</span></div>
+                <div class="ufsm-tl-chev ufsm-tl-goal ufsm-tl-goal-wide"><span class="yr">SY 29&ndash;30</span><span class="ph">Free for all</span></div>
                 <div class="ufsm-tl-caption">Household income to qualify for free meals <small>(family of 4)</small></div>
             </div>
         </div>
@@ -942,6 +974,21 @@
     (function () {
         'use strict';
 
+        /* ---------- Full-bleed width fix ----------
+           document.documentElement.clientWidth excludes the scrollbar (unlike 100vw),
+           so this gives the full-bleed sections the *actual* visible width instead of
+           a few pixels too much. Re-run on resize so it stays correct. */
+        function setFullBleedWidth() {
+            // Guard against a 0 measurement — clientWidth reads 0 while the page is
+            // in a zero-sized or not-yet-laid-out viewport (hidden tab, display:none
+            // iframe), and writing 0px here would collapse every full-bleed band to
+            // nothing. Keep the last good value (or the 100vw fallback) instead.
+            var w = document.documentElement.clientWidth;
+            if (w > 0) { document.documentElement.style.setProperty('--ha-ufsm-vw', w + 'px'); }
+        }
+        setFullBleedWidth();
+        window.addEventListener('resize', setFullBleedWidth);
+
         /* ---------- Accordion (5 reasons: single-open) ---------- */
         window.toggleAccordion = function (btn) {
             var item = btn.parentElement;
@@ -1010,6 +1057,7 @@
 
         /* ---------- Chart.js ---------- */
         var pieDone = false, barDone = false;
+        var pieChart = null, barChart = null;
         function initPie() {
             if (pieDone || typeof Chart === 'undefined') return;
             var ctx = document.getElementById('ufsm-pie');
@@ -1057,7 +1105,7 @@
                     c.restore();
                 }
             };
-            new Chart(ctx, {
+            pieChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
                     labels: labels,
@@ -1107,7 +1155,7 @@
                     c.restore();
                 }
             };
-            new Chart(ctx, {
+            barChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: ['SY 24-25 (Current) — Free', 'SY 25-26 — Reduced price', 'SY 26-27 — 300% FPL'],
@@ -1184,15 +1232,77 @@
         /* ---------- Download as PDF (html2canvas → jsPDF, exactly 2 pages) ---------- */
         // Force every scroll-revealed section + both charts to their final rendered
         // state so nothing captures blank (learned the hard way testing headlessly).
+        // Selectors for everything that starts at opacity:0 and animates in.
+        var FADE_IN_SEL = '.ufsm-reveal, .ufsm-reasons-kicker, .ufsm-reasons-head .ufsm-rh-line, .ufsm-reasons-2col .ufsm-reason';
+
         function forceFinalState() {
+            // Belt-and-suspenders: force every reveal + text animation to its finished
+            // state via INLINE styles, not just the .active / .ufsm-pdf-capture classes.
+            // Inline styles win regardless of cascade/specificity, so nothing can be
+            // caught mid-transition no matter when this runs — i.e. even if the user
+            // clicks Download without ever having scrolled the sections into view.
             document.querySelectorAll('.ufsm-reveal').forEach(function (e) { e.classList.add('active'); });
+            document.querySelectorAll(FADE_IN_SEL).forEach(function (e) {
+                e.style.transition = 'none';
+                e.style.animation = 'none';
+                e.style.opacity = '1';
+                e.style.transform = 'none';
+            });
+
             initPie();
             initBar();
+            // Redraw the charts with animation switched off so they can't be caught
+            // half-drawn — this previously relied on Chart.js's own ~1s entrance
+            // animation happening to already be finished when html2canvas ran.
+            if (pieChart) { pieChart.options.animation = false; pieChart.update(); }
+            if (barChart) { barChart.options.animation = false; barChart.update(); }
+
             animateFills(document);
+            document.querySelectorAll('.ufsm-gap-fill, .ufsm-lever-fill').forEach(function (e) { e.style.transition = 'none'; });
+
             var arc = document.getElementById('ufsm-gauge-arc');
             var num = document.getElementById('ufsm-gauge-num');
-            if (arc) { var len = arc.getTotalLength(); arc.style.strokeDasharray = len; arc.style.strokeDashoffset = len * (1 - 0.34); }
+            if (arc) {
+                var len = arc.getTotalLength();
+                arc.style.transition = 'none';
+                arc.style.strokeDasharray = len;
+                arc.style.strokeDashoffset = len * (1 - 0.34);
+            }
             if (num) num.textContent = '34%';
+        }
+
+        // Undo the inline overrides above once the PDF has been captured, so the live
+        // page's normal look/behavior isn't left permanently frozen.
+        function restoreLiveState() {
+            document.querySelectorAll(FADE_IN_SEL).forEach(function (e) {
+                e.style.transition = '';
+                e.style.animation = '';
+                e.style.opacity = '';
+                e.style.transform = '';
+            });
+            document.querySelectorAll('.ufsm-gap-fill, .ufsm-lever-fill').forEach(function (e) { e.style.transition = ''; });
+            var arc = document.getElementById('ufsm-gauge-arc');
+            if (arc) { arc.style.transition = ''; }
+            if (pieChart) { pieChart.options.animation = undefined; }
+            if (barChart) { barChart.options.animation = undefined; }
+        }
+
+        // html2canvas rasterizes a CLONE of the subtree inside an off-screen iframe.
+        // Class/stylesheet-driven animations RESTART in that clone (from opacity:0),
+        // which is what made the export intermittently drop headings and body text.
+        // Re-assert the finished state directly on the cloned nodes — this is the one
+        // place guaranteed to run after the clone exists and before it is painted.
+        function freezeClone(clonedDoc) {
+            var root = clonedDoc.getElementById('ha-ufsm-embed') || clonedDoc.body;
+            if (!root) return;
+            root.classList.add('ufsm-pdf-capture');
+            root.querySelectorAll(FADE_IN_SEL).forEach(function (e) {
+                e.classList.add('active');
+                e.style.setProperty('animation', 'none', 'important');
+                e.style.setProperty('transition', 'none', 'important');
+                e.style.setProperty('opacity', '1', 'important');
+                e.style.setProperty('transform', 'none', 'important');
+            });
         }
 
         // When this markup is embedded inside another page (e.g. pasted into a
@@ -1215,15 +1325,30 @@
                 var orig = label ? label.textContent : '';
                 pdfBtn.disabled = true;
                 if (label) label.textContent = 'Generating…';
+                setFullBleedWidth();
                 captureRoot.classList.add('ufsm-pdf-capture');
                 forceFinalState();
 
                 var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
                 fontsReady.then(function () {
-                    // let Chart.js finish its rAF draw + the forced states settle
-                    return new Promise(function (res) { setTimeout(res, 450); });
+                    // Wait for two real animation frames so the browser has actually
+                    // PAINTED the inline-style and chart changes above, rather than
+                    // guessing a fixed delay long enough to outlast the animations
+                    // (which is what made this unreliable when nothing had been
+                    // scrolled into view yet: the animations hadn't even started, so
+                    // racing them with a timeout was a coin flip).
+                    // Raced against a timeout because rAF never fires in a background
+                    // or hidden tab — without the race, clicking Download in a tab
+                    // that isn't being painted would hang on "Generating…" forever.
+                    return new Promise(function (res) {
+                        requestAnimationFrame(function () { requestAnimationFrame(res); });
+                        setTimeout(res, 400);
+                    });
+                }).then(function () {
+                    return new Promise(function (res) { setTimeout(res, 200); });
                 }).then(function () {
                     return html2canvas(captureRoot, {
+                        onclone: function (doc) { freezeClone(doc); },
                         scale: 2,
                         backgroundColor: '#ffffff',
                         useCORS: true,
@@ -1274,6 +1399,7 @@
                     alert('Sorry — PDF generation failed. See the console for details.');
                 }).finally(function () {
                     captureRoot.classList.remove('ufsm-pdf-capture');
+                    restoreLiveState();
                     pdfBtn.disabled = false;
                     if (label) label.textContent = orig || 'Download as PDF';
                 });
