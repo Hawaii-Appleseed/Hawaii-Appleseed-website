@@ -15,12 +15,12 @@
       --ash:#CAD2C5; --teal:#84A98C; --teal-deep:#52796F; --slate:#354F52; --charcoal:#2F3E46; --white:#fff;
     }
     html{scroll-behavior:smooth;}
-    body{font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif;background:var(--charcoal);color:var(--white);overflow-x:hidden;}
+    body{font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-serif;background:var(--charcoal);color:var(--white);overflow-x:hidden;}
 
     .proto-ribbon{
       position:fixed; bottom:16px; left:16px; z-index:200;
       background:var(--teal); color:var(--charcoal);
-      font-family:'Manrope',sans-serif; font-weight:700; font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+      font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:11px; letter-spacing:.12em; text-transform:uppercase;
       padding:8px 14px; border-radius:3px; box-shadow:0 8px 24px rgba(47,62,70,.35);
     }
     .proto-ribbon a{ color:var(--charcoal); }
@@ -29,7 +29,7 @@
     }
     .proto-controls button{
       background:rgba(47,62,70,.7); color:#fff; border:1px solid rgba(202,210,197,.3);
-      font-family:'Poppins',sans-serif; font-size:12px; padding:8px 12px; border-radius:4px; cursor:pointer;
+      font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:12px; padding:8px 12px; border-radius:4px; cursor:pointer;
       backdrop-filter:blur(6px);
     }
     .proto-controls button:hover{ border-color:var(--teal); }
@@ -64,20 +64,20 @@
     .hero-inner{ position:relative; z-index:2; max-width:780px; }
 
     .eyebrow{
-      font-family:'Poppins',sans-serif; text-transform:uppercase; letter-spacing:.32em;
+      font-family:OkinaPoppins, 'Poppins',sans-serif; text-transform:uppercase; letter-spacing:.32em;
       font-size:16px; font-weight:500; color:var(--ash);
       display:flex; align-items:center; gap:14px; margin-bottom:36px;
     }
     .eyebrow::before{ content:""; width:48px; height:1px; background:var(--teal); }
     .hero-quote{
-      font-family:'Manrope',sans-serif; font-weight:500;
+      font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:500;
       font-size:clamp(28px,3.4vw,52px); line-height:1.18; letter-spacing:-0.015em;
       color:#fff; max-width:24ch; margin:0;
     }
     .hero-quote .open-q{ color:var(--teal); font-weight:300; font-size:1.4em; line-height:0; margin-right:.08em; vertical-align:-0.1em; }
     .hero-quote .accent{ color:var(--teal); }
     .hero-meta{ position:relative; z-index:2; margin-top:44px; display:flex; flex-wrap:wrap; gap:40px 72px; color:var(--ash); font-size:14px; }
-    .hero-meta .num{ font-family:'Manrope',sans-serif; font-weight:700; font-size:38px; color:#fff; line-height:1; margin-bottom:4px; }
+    .hero-meta .num{ font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:38px; color:#fff; line-height:1; margin-bottom:4px; }
     .hero-meta .lbl{ text-transform:uppercase; letter-spacing:.18em; font-size:11px; color:var(--ash); }
 
     @media (max-width:900px){ .story-hero{ padding:96px 6vw 64px; } }
@@ -94,6 +94,7 @@
   <script type="importmap">
   { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
   </script>
+  <link rel="stylesheet" href="assets/okina.css">
 </head>
 <body>
 

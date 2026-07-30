@@ -5,6 +5,7 @@
      HOW: Board page > Edit > add a Code Block > paste ALL of this >
           make sure "Display Source" is OFF > Save.
      ===================================================================== -->
+<link rel="stylesheet" href="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/okina.css">
 <style>
   /* ===== Brand-guide palette (scoped) ===== */
   .ha-board{
@@ -16,7 +17,7 @@
     --ha-white:      #FFFFFF;
     --ha-rule:       rgba(53,79,82,.18);
 
-    font-family:'Poppins', system-ui, -apple-system, Arial, sans-serif;
+    font-family:OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif;
     color:var(--ha-charcoal);
     background:var(--ha-white);
     -webkit-font-smoothing:antialiased;
@@ -33,7 +34,7 @@
 
   .ha-board .ha-eyebrow{
     display:inline-flex;align-items:center;gap:14px;
-    font-family:'Poppins',sans-serif;font-weight:600;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:600;
     font-size:12px;letter-spacing:.28em;text-transform:uppercase;
     color:var(--ha-teal-deep);
   }
@@ -56,22 +57,22 @@
   }
   .ha-board .ha-president-inner .ha-info{flex:1;padding-top:8px;}
   .ha-board .ha-president-inner .ha-role{
-    font-family:'Poppins',sans-serif;font-size:10.5px;font-weight:600;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:10.5px;font-weight:600;
     letter-spacing:.22em;text-transform:uppercase;
     color:var(--ha-teal);margin-bottom:10px;
   }
   .ha-board .ha-president-inner .ha-role::before{display:none;}
   .ha-board .ha-president-inner .ha-name{
-    font-family:'Manrope',sans-serif;font-weight:800;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:800;
     font-size:clamp(28px,4vw,40px);line-height:1.1;
     color:#fff;margin-bottom:6px;
   }
   .ha-board .ha-president-inner .ha-org{
-    font-family:'Poppins',sans-serif;font-size:13px;font-weight:400;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:13px;font-weight:400;
     color:var(--ha-ash);opacity:.75;margin-bottom:20px;
   }
   .ha-board .ha-president-inner .ha-teaser{
-    font-family:'Manrope',sans-serif;font-size:15px;line-height:1.65;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-size:15px;line-height:1.65;
     color:var(--ha-ash);margin-bottom:0;
   }
   .ha-board .ha-president-inner .ha-bio-more p{color:var(--ha-ash);opacity:.85;}
@@ -125,12 +126,12 @@
 
   /* Identity */
   .ha-board .ha-name{
-    font-family:'Manrope',sans-serif;font-weight:600;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;
     font-size:21px;line-height:1.2;letter-spacing:-0.01em;
     color:var(--ha-charcoal);margin-bottom:4px;
   }
   .ha-board .ha-role{
-    font-family:'Poppins',sans-serif;font-weight:500;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:500;
     font-size:12px;letter-spacing:.14em;text-transform:uppercase;
     color:var(--ha-teal-deep);margin-bottom:14px;
     display:flex;align-items:center;gap:10px;line-height:1.4;
@@ -141,14 +142,14 @@
   }
   .ha-board .ha-member:hover .ha-role::before{width:28px;}
   .ha-board .ha-org{
-    font-family:'Manrope',sans-serif;font-weight:500;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:500;
     font-size:13.5px;color:var(--ha-slate);opacity:.78;
     margin-bottom:16px;font-style:italic;
   }
 
   /* Bio teaser (always visible) */
   .ha-board .ha-teaser{
-    font-family:'Poppins',sans-serif;font-size:14px;line-height:1.65;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:14px;line-height:1.65;
     color:var(--ha-charcoal);opacity:.88;
   }
 
@@ -168,7 +169,7 @@
     min-height:0;overflow:hidden;
   }
   .ha-board .ha-bio-more p{
-    font-family:'Poppins',sans-serif;font-size:14px;line-height:1.65;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:14px;line-height:1.65;
     color:var(--ha-charcoal);opacity:0;
     transform:translateY(8px) scale(.99);
     filter:blur(2px);
@@ -201,7 +202,7 @@
   .ha-board .ha-read{
     margin-top:18px;
     display:inline-flex;align-items:center;gap:10px;
-    font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:600;font-size:12px;
     letter-spacing:.16em;text-transform:uppercase;color:var(--ha-teal-deep);
     background:transparent;border:0;padding:8px 0;cursor:pointer;
     position:relative;
@@ -239,12 +240,12 @@
     background:var(--ha-ash);padding:96px 0;text-align:center;
   }
   .ha-board .ha-cta h2{
-    font-family:'Manrope',sans-serif;font-weight:700;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;
     font-size:clamp(28px, 3.2vw, 42px);line-height:1.15;letter-spacing:-0.02em;
     color:var(--ha-charcoal);margin:16px auto 14px;max-width:22ch;
   }
   .ha-board .ha-cta p{
-    font-family:'Poppins',sans-serif;font-size:16px;color:var(--ha-charcoal);
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:16px;color:var(--ha-charcoal);
     opacity:.8;margin:0 auto 32px;max-width:46ch;
   }
   .ha-board .ha-cta .ha-eyebrow{justify-content:center;}
@@ -252,7 +253,7 @@
   .ha-board .ha-btn{
     display:inline-flex;align-items:center;gap:10px;
     padding:14px 28px;border-radius:999px;
-    font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;letter-spacing:.04em;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:600;font-size:14px;letter-spacing:.04em;
     transition:transform .3s, background .3s, color .3s, border-color .3s;
   }
   .ha-board .ha-btn-primary{background:var(--ha-charcoal);color:#fff;border:1px solid var(--ha-charcoal);}

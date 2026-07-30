@@ -7,6 +7,7 @@
      ===================================================================== -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap">
+<link rel="stylesheet" href="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/okina.css">
 
 <style>
 /* ===== Brand palette ===== */
@@ -20,7 +21,7 @@
   --ha-bg:        #F6F8F5;
   --ha-rule:      rgba(53,79,82,.14);
 
-  font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif;
+  font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-serif;
   color:var(--ha-charcoal);
   background:var(--ha-white);
   -webkit-font-smoothing:antialiased;
@@ -37,7 +38,7 @@
   text-align:center;
 }
 .ha-pub__hero-eyebrow {
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   text-transform:uppercase; letter-spacing:.32em; font-size:13px;
   color:var(--ha-ash); margin-bottom:18px;
   display:flex; align-items:center; justify-content:center; gap:14px;
@@ -49,7 +50,7 @@
    mirroring the "Our Impact" pattern on the issues page. */
 .ha-pub__hero-title {
   margin:0 0 14px;
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:clamp(36px, 5vw, 52px); line-height:1.04; letter-spacing:-0.02em;
   color:var(--ha-white);
 }
@@ -86,7 +87,7 @@
   background:none; border:none; padding:0;
   width:var(--switch-tab-w); height:44px;
   cursor:pointer;
-  font-family:'Manrope',sans-serif; font-weight:600;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600;
   font-size:16px; letter-spacing:-.01em; line-height:1;
   color:rgba(255,255,255,.55);
   border-radius:999px;
@@ -160,12 +161,12 @@
   display:flex; flex-direction:column; gap:10px; flex:1;
 }
 .ha-pub__data-card-eyebrow {
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:10.5px; font-weight:600; letter-spacing:.22em;
   text-transform:uppercase; color:var(--ha-teal-deep);
 }
 .ha-pub__data-card-title {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:25px; line-height:1.2; color:var(--ha-charcoal);
   letter-spacing:-.01em;
   margin:0;
@@ -180,7 +181,7 @@
   padding:11px 22px;
   background:var(--ha-teal-deep); color:var(--ha-white);
   border-radius:3px;
-  font-family:'Poppins',sans-serif; font-size:14px; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:14px; font-weight:600;
   letter-spacing:.02em;
   transition:background .18s, gap .18s, transform .18s;
 }
@@ -216,7 +217,7 @@
 .ha-pub__search {
   width:100%; padding:11px 16px;
   border:1px solid var(--ha-rule); border-radius:3px;
-  font-family:'Poppins',sans-serif; font-size:14px; color:var(--ha-charcoal);
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:14px; color:var(--ha-charcoal);
   background:var(--ha-bg); outline:none;
   transition:border-color .18s;
 }
@@ -236,7 +237,7 @@
   padding:6px 14px;
   border:1px solid var(--ha-rule);
   border-radius:999px;
-  font-family:'Poppins',sans-serif; font-size:14px; font-weight:500;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:14px; font-weight:500;
   color:rgba(47,62,70,.7); background:transparent;
   cursor:pointer; transition:background .16s, border-color .16s, color .16s;
   white-space:nowrap;
@@ -263,7 +264,7 @@
 }
 .ha-pub__count {
   font-size:15px; color:rgba(47,62,70,.55);
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 .ha-pub__count strong { color:var(--ha-teal-deep); font-weight:600; }
 
@@ -333,17 +334,17 @@
   padding:3px 9px;
   border-radius:3px;
   background:rgba(82,121,111,.11);
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:10.5px; font-weight:600; letter-spacing:.14em;
   text-transform:uppercase; color:var(--ha-teal-deep);
   white-space:nowrap;
 }
 .ha-pub__card-date {
   font-size:12px; color:rgba(47,62,70,.45);
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 .ha-pub__card-title {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:18px; line-height:1.35; color:var(--ha-charcoal);
   margin:0;
 }
@@ -353,14 +354,14 @@
   -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
 }
 .ha-pub__card-author {
-  font-family:'Manrope',sans-serif; font-size:13px; font-weight:600;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-size:13px; font-weight:600;
   color:var(--ha-charcoal);
   margin-top:auto; padding-top:12px;
   border-top:1px solid var(--ha-rule);
 }
 .ha-pub__card-author::before {
   content:"BY ";
-  font-family:'Poppins',sans-serif; font-size:11px; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:11px; font-weight:600;
   letter-spacing:.15em;
   color:var(--ha-teal-deep);
   margin-right:2px;
@@ -368,7 +369,7 @@
 .ha-pub__card-link {
   display:inline-flex; align-items:center; gap:6px;
   margin-top:12px;
-  font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:12.5px; font-weight:600;
   letter-spacing:.04em; color:var(--ha-teal-deep);
   transition:gap .18s;
 }
@@ -380,7 +381,7 @@
   grid-column:1/-1;
   text-align:center; padding:72px 20px;
   color:rgba(47,62,70,.45);
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 .ha-pub__empty strong { display:block; font-size:18px; margin-bottom:8px; color:var(--ha-charcoal); }
 
@@ -388,7 +389,7 @@
 .ha-pub__sync-note {
   text-align:center; padding:0 20px 36px;
   font-size:11.5px; color:rgba(47,62,70,.35);
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 .ha-pub__sync-note a { color:var(--ha-teal-deep); text-decoration:underline; }
 
@@ -438,7 +439,7 @@
   display:inline-block;
   background:rgba(132,169,140,.18);
   color:var(--ha-teal-deep);
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:11px; font-weight:700;
   letter-spacing:.16em; text-transform:uppercase;
   padding:5px 11px; border-radius:4px;
@@ -446,20 +447,20 @@
 }
 .ha-pub__spotlight-eyebrow::before { display:none; }
 .ha-pub__spotlight-title {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:clamp(22px,2.6vw,30px); line-height:1.08;
   letter-spacing:-.025em; color:var(--ha-charcoal);
   margin:0 0 12px;
 }
 .ha-pub__spotlight-desc {
-  font-family:'Manrope',sans-serif;
+  font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:16px; line-height:1.62; color:rgba(47,62,70,.78);
   margin:0 0 26px;
 }
 .ha-pub a.ha-pub__spotlight-link {
   display:inline-flex; align-items:center; gap:10px;
   background:var(--ha-teal-deep); color:#fff;
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:15px; letter-spacing:.01em;
   padding:14px 28px; border-radius:999px;
   text-decoration:none;
@@ -496,7 +497,7 @@
 .ha-pub.is-view-publications .ha-pub__spotlight-eyebrow {
   background:none; padding:0; border-radius:0;
   margin:0; flex:none;
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:11px; font-weight:700;
   letter-spacing:.22em; text-transform:uppercase;
   color:var(--ha-teal-deep);
@@ -531,7 +532,7 @@
   position:absolute; right:10px; bottom:10px; z-index:2;
   background:rgba(47,62,70,.92); color:#fff;
   padding:7px 14px; border-radius:999px;
-  font-family:'Poppins',sans-serif; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-weight:600;
   font-size:12px; letter-spacing:.01em;
   text-decoration:none;
   transition:background .18s, gap .18s, transform .18s, box-shadow .18s;

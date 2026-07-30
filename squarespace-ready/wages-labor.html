@@ -14,7 +14,7 @@
 <style id="ha-term-css">
 .ha-term{position:relative;display:inline;border-bottom:1px dotted #52796F;cursor:help;color:inherit;font-style:inherit;}
 .ha-term:focus{outline:2px solid #84A98C;outline-offset:2px;border-radius:2px;}
-.ha-term-tip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);z-index:80;width:250px;max-width:76vw;background:#2F3E46;color:#fff;padding:10px 14px;border-radius:6px;font-family:'Poppins',sans-serif;font-style:normal;font-weight:400;font-size:12.5px;letter-spacing:.01em;line-height:1.5;text-align:left;text-transform:none;opacity:0;pointer-events:none;box-shadow:0 10px 26px rgba(47,62,70,.28);transition:opacity .2s,transform .2s;white-space:normal;}
+.ha-term-tip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);z-index:80;width:250px;max-width:76vw;background:#2F3E46;color:#fff;padding:10px 14px;border-radius:6px;font-family:OkinaPoppins, 'Poppins',sans-serif;font-style:normal;font-weight:400;font-size:12.5px;letter-spacing:.01em;line-height:1.5;text-align:left;text-transform:none;opacity:0;pointer-events:none;box-shadow:0 10px 26px rgba(47,62,70,.28);transition:opacity .2s,transform .2s;white-space:normal;}
 .ha-term-tip::after{content:"";position:absolute;bottom:-5px;left:50%;transform:translateX(-50%) rotate(45deg);width:10px;height:10px;background:#2F3E46;}
 .ha-term:hover .ha-term-tip,.ha-term:focus .ha-term-tip{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
 .ha-term-tip strong{color:#84A98C;font-weight:700;}
@@ -26,7 +26,7 @@
      chevrons rendered at default SVG size and the panels were permanently
      open (no 0fr collapse, no toggle JS). Keep them inside the markers. -->
 <style id="ha-acc-css">
-.ha-acc-btn{display:inline-flex;align-items:center;gap:7px;margin-top:10px;background:none;border:0;cursor:pointer;font-family:'Manrope',sans-serif;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#52796F;padding:6px 0;}
+.ha-acc-btn{display:inline-flex;align-items:center;gap:7px;margin-top:10px;background:none;border:0;cursor:pointer;font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#52796F;padding:6px 0;}
 .ha-acc-btn:hover{color:#2F3E46;}
 .ha-acc-chev{width:13px;height:13px;flex:none;transition:transform .25s ease;}
 .ha-acc-btn[aria-expanded="true"] .ha-acc-chev{transform:rotate(180deg);}
@@ -38,6 +38,7 @@
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap">
+<link rel="stylesheet" href="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/okina.css">
 
 <style>
 .ha-wages {
@@ -50,7 +51,7 @@
   --ha-white:     #FFFFFF;
   --ha-rule:      rgba(53,79,82,.14);
 
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   color:var(--ha-charcoal);
   line-height:1.6;
 }
@@ -95,7 +96,7 @@
 }
 .ha-wages__hero-inner { max-width:900px; margin:0 auto; position:relative; z-index:1; }
 .ha-wages__hero h1 {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:78px; line-height:1; letter-spacing:-.035em;
   margin:0 0 22px;
   color:#fff;
@@ -139,7 +140,7 @@
   border-radius:999px;
   backdrop-filter:blur(4px);
   -webkit-backdrop-filter:blur(4px);
-  font-family:'Manrope',sans-serif;
+  font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:13.5px; font-weight:600;
   letter-spacing:.01em;
   color:rgba(255,255,255,.78);
@@ -188,7 +189,7 @@
   background:none; border:none; padding:0;
   width:var(--tab-w); height:46px;
   cursor:pointer;
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:15.5px; letter-spacing:.01em;
   color:rgba(255,255,255,.6);
   border-radius:999px;
@@ -205,7 +206,7 @@
   background:transparent;
   border:1px solid rgba(202,210,197,.18);
   border-radius:999px;
-  font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:500;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:12.5px; font-weight:500;
   letter-spacing:.02em;
   color:rgba(202,210,197,.72);
   text-decoration:none;
@@ -224,7 +225,7 @@
   background:transparent;
   border:1px solid rgba(202,210,197,.28);
   border-radius:999px;
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:13px; font-weight:500;
   letter-spacing:.02em;
   color:rgba(202,210,197,.85);
@@ -248,7 +249,7 @@
 .ha-wages a.ha-wages__back {
   position:absolute; top:18px; left:24px;
   display:inline-flex; align-items:center; gap:6px;
-  font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:500;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:12.5px; font-weight:500;
   letter-spacing:.02em;
   color:rgba(202,210,197,.72);
   text-decoration:none;
@@ -326,7 +327,7 @@
   color:var(--ha-teal-deep);
 }
 .ha-wages__hub-card-title {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:18px; line-height:1.3;
   color:var(--ha-charcoal); margin:0;
 }
@@ -393,20 +394,20 @@
   margin-bottom:22px;
 }
 .ha-wages__vision-quote {
-  font-family:'Poppins',sans-serif; font-style:italic; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:600;
   font-size:120px; line-height:.6; letter-spacing:-.02em;
   color:rgba(82,121,111,.18);
   margin:0 auto 4px;
   user-select:none;
 }
 .ha-wages__vision h2 {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:44px; line-height:1.12; letter-spacing:-.02em;
   color:var(--ha-charcoal);
   max-width:880px; margin:0 auto 18px;
 }
 .ha-wages__vision h2 em {
-  font-family:'Poppins',sans-serif; font-style:italic; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:600;
   color:var(--ha-teal-deep);
 }
 .ha-wages__vision-rule {
@@ -434,7 +435,7 @@
   max-width:680px; margin:0 auto 18px;
 }
 .ha-wages__vision-pullquote {
-  font-family:'Poppins',sans-serif; font-style:italic; font-weight:500;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:500;
   font-size:24px; line-height:1.45; letter-spacing:-.01em;
   color:var(--ha-teal-deep);
   max-width:720px; margin:36px auto 36px;
@@ -449,7 +450,7 @@
   left:14px; top:-6px;
   font-size:54px; line-height:1;
   color:rgba(82,121,111,.18);
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 @media (max-width:700px) {
   .ha-wages__vision-pullquote { font-size:19px; padding-left:22px; margin:28px auto; }
@@ -504,7 +505,7 @@
   color:var(--ha-teal-deep); margin-bottom:8px;
 }
 .ha-wages__vision-pillar h3 {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:18px; line-height:1.25; color:var(--ha-charcoal);
   margin:0 0 10px;
 }
@@ -519,7 +520,7 @@
   margin-top:auto;
 }
 .ha-wages__vision-pillar-stat-num {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:22px; line-height:1.1; color:var(--ha-charcoal);
   letter-spacing:-.01em; margin-bottom:3px;
 }
@@ -537,13 +538,13 @@
 }
 .ha-wages__stat-headline-fy {
   display:inline-block;
-  font-family:'Poppins',sans-serif; font-size:11px; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase; color:var(--ha-teal-deep);
   background:rgba(82,121,111,.1); padding:5px 12px; border-radius:3px;
   margin-bottom:18px;
 }
 .ha-wages__stat-headline h2 {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:54px; line-height:1.1; letter-spacing:-.02em;
   color:var(--ha-charcoal); margin:0;
 }
@@ -595,7 +596,7 @@
 }
 .ha-wages__milestone-year {
   display:block;
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:13px; letter-spacing:.12em; text-transform:uppercase;
   color:var(--ha-teal-deep);
   margin-bottom:8px;
@@ -613,7 +614,7 @@
   transform:translateY(-2px);
 }
 .ha-wages__milestone-title {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:18px; line-height:1.32; letter-spacing:-.01em;
   color:var(--ha-charcoal);
   margin:0 0 8px;
@@ -660,7 +661,7 @@
   color:var(--ha-teal-deep); margin-bottom:12px;
 }
 .ha-wages__h2 {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:38px; line-height:1.15; letter-spacing:-.02em;
   color:var(--ha-charcoal); margin:0 0 16px;
 }
@@ -735,7 +736,7 @@
   font-size:14px; font-weight:500; flex:1;
 }
 .ha-wages__legend-pct {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:15px; color:var(--ha-teal-deep);
 }
 .ha-wages__desc {
@@ -746,11 +747,11 @@
   min-height:280px;
 }
 .ha-wages__desc-name {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:22px; color:var(--ha-charcoal); margin:0 0 4px;
 }
 .ha-wages__desc-pct {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:36px; line-height:1; margin-bottom:6px;
   letter-spacing:-.02em;
 }
@@ -804,13 +805,13 @@
 .ha-wages__service-icon svg { width:24px; height:24px; stroke:var(--ha-teal-deep); }
 .ha-wages__service-body { flex:1; }
 .ha-wages__service-title {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:15px; color:var(--ha-charcoal);
   text-transform:uppercase; letter-spacing:.05em;
   margin:0 0 6px;
 }
 .ha-wages__service-cost {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:24px; color:var(--ha-teal-deep);
   letter-spacing:-.01em; line-height:1.1; margin:0 0 8px;
 }
@@ -823,7 +824,7 @@
   padding:6px 12px;
   background:rgba(82,121,111,.10);
   border-radius:999px;
-  font-family:'Manrope',sans-serif;
+  font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:11.5px; font-weight:700; letter-spacing:.04em;
   color:var(--ha-teal-deep);
 }
@@ -875,7 +876,7 @@
 
 .ha-wages__bar-value {
   position:absolute; top:-30px; left:50%; transform:translateX(-50%);
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:16px; color:var(--ha-charcoal); white-space:nowrap;
   opacity:0; transition:opacity .3s ease .5s;
 }
@@ -896,7 +897,7 @@
 .ha-wages__bars-annotation {
   position:absolute;
   top:8px; left:14%; max-width:200px;
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:12px; line-height:1.35;
   color:var(--ha-teal-deep);
   text-align:left;
@@ -959,14 +960,14 @@
 }
 .ha-wages__compare-eyebrow {
   display:inline-block;
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase;
   color:var(--ha-teal-deep);
   margin-bottom:14px;
 }
 .ha-wages__compare h3 {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:26px; line-height:1.18; letter-spacing:-.015em;
   color:var(--ha-charcoal); margin:0 0 12px;
 }
@@ -987,7 +988,7 @@
   gap:18px; align-items:center;
 }
 .ha-wages__compare-state {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:13.5px; letter-spacing:.02em;
   color:rgba(47,62,70,.70);
   text-align:right;
@@ -1030,7 +1031,7 @@
 .ha-wages__compare-row[data-side="left"] .ha-wages__compare-fill { right:50%; left:auto; }
 .ha-wages__compare-row[data-side="right"] .ha-wages__compare-fill { left:50%; right:auto; }
 .ha-wages__compare-val {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:13.5px; color:rgba(47,62,70,.65);
   text-align:left;
 }
@@ -1040,7 +1041,7 @@
 .ha-wages__compare-axis {
   display:flex; justify-content:space-between;
   margin:18px 0 0;
-  font-family:'Manrope',sans-serif;
+  font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:10.5px; font-weight:700;
   letter-spacing:.14em; text-transform:uppercase;
   color:rgba(47,62,70,.55);
@@ -1072,7 +1073,7 @@
   color:var(--ha-teal-deep); margin-bottom:10px;
 }
 .ha-wages__callout-q {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:24px; color:var(--ha-charcoal);
   margin:0 0 14px; line-height:1.3;
 }
@@ -1098,7 +1099,7 @@
 .ha-wages__priority-num {
   position:absolute;
   top:-32px; right:-4px;
-  font-family:'Poppins',sans-serif; font-style:italic; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:600;
   font-size:160px; line-height:1;
   color:rgba(82,121,111,.10);
   pointer-events:none;
@@ -1112,7 +1113,7 @@
 .ha-wages__priority-stat,
 .ha-wages__priority-bills { position:relative; z-index:1; }
 .ha-wages__priority-title {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:22px; color:var(--ha-charcoal);
   letter-spacing:-.01em; line-height:1.15; margin:0 0 4px;
 }
@@ -1130,7 +1131,7 @@
   margin-bottom:18px;
 }
 .ha-wages__priority-stat-num {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:28px; color:var(--ha-charcoal);
   line-height:1.1; letter-spacing:-.01em;
   margin-bottom:4px;
@@ -1174,7 +1175,7 @@
 }
 .ha-wages__priority-list strong {
   display:block;
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:14.5px; color:var(--ha-charcoal);
   margin-bottom:4px; letter-spacing:-0.005em;
 }
@@ -1190,7 +1191,7 @@
 }
 .ha-wages__combined-col-head {
   display:flex; align-items:center; gap:14px;
-  font-family:'Manrope',sans-serif; font-size:11px; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-size:11px; font-weight:700;
   letter-spacing:.24em; text-transform:uppercase;
   color:var(--ha-teal-deep);
   margin-bottom:6px;
@@ -1228,7 +1229,7 @@
   display:inline-flex; align-items:center; gap:4px;
   background:var(--ha-teal-deep); color:#fff;
   padding:3px 7px; border-radius:999px;
-  font-family:'Manrope',sans-serif; font-size:8.5px; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-size:8.5px; font-weight:700;
   letter-spacing:.14em; text-transform:uppercase;
   box-shadow:0 3px 10px rgba(47,62,70,.22);
 }
@@ -1239,14 +1240,14 @@
   display:flex; flex-direction:column; gap:6px; min-width:0;
 }
 .ha-wages__pub-list-meta {
-  font-family:'Manrope',sans-serif;
+  font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:10.5px; font-weight:700;
   letter-spacing:.18em; text-transform:uppercase;
   color:var(--ha-teal-deep);
   line-height:1;
 }
 .ha-wages__pub-list-title {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:15.5px; line-height:1.34; letter-spacing:-.005em;
   color:var(--ha-charcoal); margin:0;
   transition:color .18s;
@@ -1256,7 +1257,7 @@
 }
 .ha-wages__pub-list-all {
   margin-top:18px;
-  font-family:'Manrope',sans-serif; font-size:12.5px; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-size:12.5px; font-weight:700;
   letter-spacing:.06em;
   color:var(--ha-teal-deep);
   display:inline-flex; align-items:center; gap:6px;
@@ -1285,7 +1286,7 @@
   display:flex; align-items:center; justify-content:center;
   background:var(--ha-teal-deep);
   color:#fff;
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:11px; letter-spacing:.12em; text-transform:uppercase;
   position:relative;
   overflow:hidden;
@@ -1302,7 +1303,7 @@
   display:flex; flex-direction:column; min-width:0;
 }
 .ha-wages__news-source {
-  font-family:'Manrope',sans-serif;
+  font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:10.5px; font-weight:700;
   letter-spacing:.18em; text-transform:uppercase;
   color:var(--ha-teal-deep);
@@ -1321,19 +1322,19 @@
   content:""; width:4px; height:4px; border-radius:50%; background:var(--ha-teal-deep);
 }
 .ha-wages__news-title {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:16px; line-height:1.32; letter-spacing:-.005em;
   color:var(--ha-charcoal); margin:0 0 8px;
   transition:color .18s;
 }
 .ha-wages__news-excerpt {
-  font-family:'Manrope',sans-serif; font-weight:400;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:400;
   font-size:14px; line-height:1.55;
   color:rgba(47,62,70,.75);
   margin:0 0 12px;
 }
 .ha-wages__news-byline {
-  font-family:'Manrope',sans-serif; font-size:10.5px; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-size:10.5px; font-weight:700;
   letter-spacing:.16em; text-transform:uppercase;
   color:rgba(47,62,70,.55);
   margin-bottom:12px;
@@ -1346,7 +1347,7 @@
 }
 .ha-wages__news-byline-sep::before { content:"\b7 "; }
 .ha-wages__news-link {
-  font-family:'Manrope',sans-serif;
+  font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:12.5px; font-weight:700; color:var(--ha-teal-deep);
   letter-spacing:.04em;
   text-decoration:none;
@@ -1371,7 +1372,7 @@
   border:1px solid rgba(53,79,82,.2);
   border-radius:999px;
   padding:9px 22px;
-  font-family:'Poppins',sans-serif; font-size:13px; font-weight:500;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:13px; font-weight:500;
   color:rgba(47,62,70,.55);
   cursor:pointer;
   transition:color .18s, border-color .18s, background .18s;
@@ -1411,7 +1412,7 @@
   color:#fff;
   padding:10px 14px;
   border-radius:6px;
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-style:normal;
   font-size:12.5px; font-weight:400;
   letter-spacing:.01em;
@@ -1460,7 +1461,7 @@
 .ha-wages button.ha-wages__stuck-tab {
   display:inline-flex; align-items:center;
   padding:7px 22px; border-radius:999px;
-  font-family:'Manrope',sans-serif; font-weight:700; font-size:13.5px;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:13.5px;
   letter-spacing:.01em;
   color:var(--ha-charcoal);
   background:transparent;
@@ -1485,7 +1486,7 @@
 
 /* ===== TIER 1: Priority pull-quote (human voice) ===== */
 .ha-wages__priority-quote {
-  font-family:'Poppins',sans-serif; font-style:italic; font-weight:500;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:500;
   font-size:15.5px; line-height:1.5;
   color:var(--ha-teal-deep);
   margin:18px 0 0;
@@ -1496,7 +1497,7 @@
 }
 .ha-wages__priority-quote cite {
   display:block;
-  font-family:'Manrope',sans-serif; font-style:normal; font-weight:600;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-style:normal; font-weight:600;
   font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
   color:rgba(47,62,70,.55);
   margin-top:10px;
@@ -1521,18 +1522,18 @@
 .ha-wages__cta-inner { max-width:760px; margin:0 auto; position:relative; z-index:1; }
 .ha-wages__cta-eyebrow {
   display:inline-block;
-  font-family:'Poppins',sans-serif; font-size:11px; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase;
   color:var(--ha-teal);
   margin-bottom:18px;
 }
 .ha-wages__cta h2 {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:clamp(30px, 4.2vw, 48px); line-height:1.12; letter-spacing:-.02em;
   color:#fff; margin:0 0 18px;
 }
 .ha-wages__cta p {
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:17px; line-height:1.65;
   color:rgba(202,210,197,.86);
   margin:0 auto 32px; max-width:580px;
@@ -1541,7 +1542,7 @@
 .ha-wages a.ha-wages__cta-btn {
   display:inline-flex; align-items:center;
   padding:14px 28px; border-radius:999px;
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:13.5px; letter-spacing:.04em;
   text-decoration:none;
   transition:transform .25s, background .25s, color .25s, border-color .25s;
@@ -1572,11 +1573,11 @@
 .ha-wages__more { background:var(--ha-bg); padding:72px 28px 80px; border-top:1px solid var(--ha-rule); }
 .ha-wages__more-inner { max-width:1180px; margin:0 auto; }
 .ha-wages__more-eyebrow {
-  display:inline-block; font-family:'Poppins',sans-serif; font-size:11px; font-weight:600;
+  display:inline-block; font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase; color:var(--ha-teal-deep); margin-bottom:10px;
 }
 .ha-wages__more h2 {
-  font-family:'Manrope',sans-serif; font-weight:700; font-size:clamp(24px,2.6vw,34px);
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:clamp(24px,2.6vw,34px);
   line-height:1.15; letter-spacing:-.02em; color:var(--ha-charcoal); margin:0;
 }
 .ha-wages__more-grid {
@@ -1598,13 +1599,13 @@
 }
 .ha-wages__more-card:focus-visible { outline:2px solid var(--ha-teal-deep); outline-offset:3px; }
 .ha-wages__more-name {
-  font-family:'Manrope',sans-serif; font-weight:700; font-size:16px;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:16px;
   line-height:1.3; color:var(--ha-charcoal);
 }
 .ha-wages__more-desc { font-size:13.5px; line-height:1.55; color:var(--ha-teal-deep); flex:1; margin:0; }
 .ha-wages__more-go {
   display:inline-flex; align-items:center; gap:6px; margin-top:4px;
-  font-family:'Manrope',sans-serif; font-weight:600; font-size:12.5px;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600; font-size:12.5px;
   letter-spacing:.04em; color:var(--ha-teal-deep);
 }
 .ha-wages__more-card:hover .ha-wages__more-go { color:var(--ha-charcoal); gap:9px; }

@@ -16,11 +16,11 @@
 
 html,body { margin:0; padding:0; background:#fff; }
 html { scroll-behavior:smooth; }
-body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F3E46; }
+body { font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F3E46; }
 
 .px-announce {
   background:#2F3E46; color:#fff;
-  font:500 13px/1.4 'Poppins',sans-serif; letter-spacing:.01em;
+  font:500 13px/1.4 OkinaPoppins, 'Poppins',sans-serif; letter-spacing:.01em;
   padding:10px 18px; text-align:center;
   position:fixed; top:0; left:0; right:0; z-index:50;
 }
@@ -31,14 +31,14 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   background:#fff; border-bottom:1px solid rgba(53,79,82,.15);
   padding:16px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px;
   position:fixed; top:38px; left:0; right:0; z-index:49;
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 .px-nav .px-brand { display:flex; align-items:center; gap:12px; flex:none; }
 .px-nav .px-brand-mark { width:40px; height:40px; flex:none; }
 .px-nav .px-brand-mark svg { width:100%; height:100%; display:block; }
 .px-nav .px-brand-text { line-height:1; }
-.px-nav .px-brand-name { font-family:'Poppins',sans-serif; font-weight:700; letter-spacing:.14em; font-size:18px; color:#52796F; }
-.px-nav .px-brand-tag { font-family:'Poppins',sans-serif; font-size:9px; letter-spacing:.26em; color:#52796F; margin-top:3px; }
+.px-nav .px-brand-name { font-family:OkinaPoppins, 'Poppins',sans-serif; font-weight:700; letter-spacing:.14em; font-size:18px; color:#52796F; }
+.px-nav .px-brand-tag { font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:9px; letter-spacing:.26em; color:#52796F; margin-top:3px; }
 .px-nav .px-links { display:none; gap:20px; font-size:14px; font-weight:500; color:#2F3E46; flex:1; justify-content:flex-end; flex-wrap:nowrap; white-space:nowrap; }
 .px-nav .px-links a { color:inherit; text-decoration:none; }
 .px-nav .px-links a:hover { color:#52796F; }
@@ -47,13 +47,13 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .px-nav-right { display:flex; align-items:center; gap:14px; flex:none; }
 .px-social { display:flex; gap:10px; color:#2F3E46; }
 .px-social svg { width:16px; height:16px; }
-.px-donate-btn { background:#2F3E46; color:#fff; padding:9px 20px; font-family:'Poppins',sans-serif; font-weight:500; font-size:14px; border-radius:2px; text-decoration:none; }
+.px-donate-btn { background:#2F3E46; color:#fff; padding:9px 20px; font-family:OkinaPoppins, 'Poppins',sans-serif; font-weight:500; font-size:14px; border-radius:2px; text-decoration:none; }
 .px-donate-btn:hover { background:#52796F; }
 
 .px-dropdown { position:relative; }
 .px-dropdown-trigger {
   background:none; border:none; padding:0; margin:0; cursor:pointer;
-  font-family:'Poppins',sans-serif; font-size:14px; font-weight:500;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:14px; font-weight:500;
   color:#2F3E46; display:inline-flex; align-items:center; gap:4px;
 }
 .px-dropdown-trigger:hover { color:#52796F; }
@@ -69,14 +69,14 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .px-dropdown.is-open .px-dropdown-menu { display:block; }
 .px-dropdown-menu a {
   display:block; padding:9px 18px;
-  font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:400;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:13.5px; font-weight:400;
   color:#2F3E46; text-decoration:none; white-space:nowrap;
 }
 .px-dropdown-menu a:hover { background:rgba(82,121,111,.08); color:#52796F; }
 
 .px-footer {
   background:#2F3E46; color:#CAD2C5; padding:60px 28px 40px;
-  font-family:'Poppins',sans-serif; font-size:14px; line-height:1.7;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:14px; line-height:1.7;
 }
 .px-footer .px-foot-grid {
   display:grid; grid-template-columns:1fr; gap:32px;
@@ -84,7 +84,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 }
 @media (min-width:760px) { .px-footer .px-foot-grid { grid-template-columns:2fr 1fr 1fr; } }
 .px-footer h4 {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   color:#fff; margin:0 0 12px; font-size:14px;
   letter-spacing:.04em; text-transform:uppercase;
 }
@@ -136,6 +136,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   .px-nav .px-dropdown-menu a{padding:9px 4px;white-space:normal;}
 }
 </style>
+  <link rel="stylesheet" href="assets/okina.css">
 </head>
 <body>
 
@@ -211,7 +212,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   --ha-bg:        #F6F8F5;
   --ha-rule:      rgba(53,79,82,.14);
 
-  font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif;
+  font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-serif;
   color:var(--ha-charcoal);
   background:var(--ha-white);
   -webkit-font-smoothing:antialiased;
@@ -228,7 +229,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   text-align:center;
 }
 .ha-pub__hero-eyebrow {
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   text-transform:uppercase; letter-spacing:.32em; font-size:13px;
   color:var(--ha-ash); margin-bottom:18px;
   display:flex; align-items:center; justify-content:center; gap:14px;
@@ -240,7 +241,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
    mirroring the "Our Impact" pattern on the issues page. */
 .ha-pub__hero-title {
   margin:0 0 14px;
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:clamp(36px, 5vw, 52px); line-height:1.04; letter-spacing:-0.02em;
   color:var(--ha-white);
 }
@@ -277,7 +278,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   background:none; border:none; padding:0;
   width:var(--switch-tab-w); height:44px;
   cursor:pointer;
-  font-family:'Manrope',sans-serif; font-weight:600;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600;
   font-size:16px; letter-spacing:-.01em; line-height:1;
   color:rgba(255,255,255,.55);
   border-radius:999px;
@@ -351,12 +352,12 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   display:flex; flex-direction:column; gap:10px; flex:1;
 }
 .ha-pub__data-card-eyebrow {
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:10.5px; font-weight:600; letter-spacing:.22em;
   text-transform:uppercase; color:var(--ha-teal-deep);
 }
 .ha-pub__data-card-title {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:25px; line-height:1.2; color:var(--ha-charcoal);
   letter-spacing:-.01em;
   margin:0;
@@ -371,7 +372,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   padding:11px 22px;
   background:var(--ha-teal-deep); color:var(--ha-white);
   border-radius:3px;
-  font-family:'Poppins',sans-serif; font-size:14px; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:14px; font-weight:600;
   letter-spacing:.02em;
   transition:background .18s, gap .18s, transform .18s;
 }
@@ -407,7 +408,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-pub__search {
   width:100%; padding:11px 16px;
   border:1px solid var(--ha-rule); border-radius:3px;
-  font-family:'Poppins',sans-serif; font-size:14px; color:var(--ha-charcoal);
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:14px; color:var(--ha-charcoal);
   background:var(--ha-bg); outline:none;
   transition:border-color .18s;
 }
@@ -427,7 +428,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   padding:6px 14px;
   border:1px solid var(--ha-rule);
   border-radius:999px;
-  font-family:'Poppins',sans-serif; font-size:14px; font-weight:500;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:14px; font-weight:500;
   color:rgba(47,62,70,.7); background:transparent;
   cursor:pointer; transition:background .16s, border-color .16s, color .16s;
   white-space:nowrap;
@@ -454,7 +455,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 }
 .ha-pub__count {
   font-size:15px; color:rgba(47,62,70,.55);
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 .ha-pub__count strong { color:var(--ha-teal-deep); font-weight:600; }
 
@@ -524,17 +525,17 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   padding:3px 9px;
   border-radius:3px;
   background:rgba(82,121,111,.11);
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:10.5px; font-weight:600; letter-spacing:.14em;
   text-transform:uppercase; color:var(--ha-teal-deep);
   white-space:nowrap;
 }
 .ha-pub__card-date {
   font-size:12px; color:rgba(47,62,70,.45);
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 .ha-pub__card-title {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:18px; line-height:1.35; color:var(--ha-charcoal);
   margin:0;
 }
@@ -544,14 +545,14 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
 }
 .ha-pub__card-author {
-  font-family:'Manrope',sans-serif; font-size:13px; font-weight:600;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-size:13px; font-weight:600;
   color:var(--ha-charcoal);
   margin-top:auto; padding-top:12px;
   border-top:1px solid var(--ha-rule);
 }
 .ha-pub__card-author::before {
   content:"BY ";
-  font-family:'Poppins',sans-serif; font-size:11px; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:11px; font-weight:600;
   letter-spacing:.15em;
   color:var(--ha-teal-deep);
   margin-right:2px;
@@ -559,7 +560,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-pub__card-link {
   display:inline-flex; align-items:center; gap:6px;
   margin-top:12px;
-  font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:12.5px; font-weight:600;
   letter-spacing:.04em; color:var(--ha-teal-deep);
   transition:gap .18s;
 }
@@ -571,7 +572,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   grid-column:1/-1;
   text-align:center; padding:72px 20px;
   color:rgba(47,62,70,.45);
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 .ha-pub__empty strong { display:block; font-size:18px; margin-bottom:8px; color:var(--ha-charcoal); }
 
@@ -579,7 +580,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-pub__sync-note {
   text-align:center; padding:0 20px 36px;
   font-size:11.5px; color:rgba(47,62,70,.35);
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 .ha-pub__sync-note a { color:var(--ha-teal-deep); text-decoration:underline; }
 
@@ -629,7 +630,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   display:inline-block;
   background:rgba(132,169,140,.18);
   color:var(--ha-teal-deep);
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:11px; font-weight:700;
   letter-spacing:.16em; text-transform:uppercase;
   padding:5px 11px; border-radius:4px;
@@ -637,20 +638,20 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 }
 .ha-pub__spotlight-eyebrow::before { display:none; }
 .ha-pub__spotlight-title {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:clamp(22px,2.6vw,30px); line-height:1.08;
   letter-spacing:-.025em; color:var(--ha-charcoal);
   margin:0 0 12px;
 }
 .ha-pub__spotlight-desc {
-  font-family:'Manrope',sans-serif;
+  font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:16px; line-height:1.62; color:rgba(47,62,70,.78);
   margin:0 0 26px;
 }
 .ha-pub a.ha-pub__spotlight-link {
   display:inline-flex; align-items:center; gap:10px;
   background:var(--ha-teal-deep); color:#fff;
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:15px; letter-spacing:.01em;
   padding:14px 28px; border-radius:999px;
   text-decoration:none;
@@ -687,7 +688,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-pub.is-view-publications .ha-pub__spotlight-eyebrow {
   background:none; padding:0; border-radius:0;
   margin:0; flex:none;
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:11px; font-weight:700;
   letter-spacing:.22em; text-transform:uppercase;
   color:var(--ha-teal-deep);
@@ -722,7 +723,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   position:absolute; right:10px; bottom:10px; z-index:2;
   background:rgba(47,62,70,.92); color:#fff;
   padding:7px 14px; border-radius:999px;
-  font-family:'Poppins',sans-serif; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-weight:600;
   font-size:12px; letter-spacing:.01em;
   text-decoration:none;
   transition:background .18s, gap .18s, transform .18s, box-shadow .18s;

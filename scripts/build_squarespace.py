@@ -728,6 +728,31 @@ def build_homepage(lines):
     )
 
 
+# The ʻokina (U+02BB) is missing from both Manrope and Poppins, so the pages
+# carry one-glyph faces in assets/okina.css and lead every stack with the
+# matching Okina* family. Each builder hand-picks the font <link> lines out of
+# the <head>, so that stylesheet has to be re-attached here or the injected
+# blocks name a family the browser never loads — and every ʻokina on the live
+# site quietly falls back to Helvetica again. Hotlinked from Pages like the
+# images above, and subject to the same stopgap caveat.
+OKINA_CSS = ASSET_BASE + "assets/okina.css"
+
+
+def ensure_okina(html):
+    """Attach assets/okina.css after the Google Fonts link, once."""
+    if "okina.css" in html:
+        return html
+    link = '<link rel="stylesheet" href="%s">' % OKINA_CSS
+    out, n = re.subn(r'(<link[^>]*fonts\.googleapis\.com/css2[^>]*>)',
+                     lambda m: m.group(1) + "\n" + link, html, count=1)
+    if n:
+        return out
+    # Blocks whose marker starts below the <head> carry no font link of their
+    # own (they inherit the Squarespace template's). They still name the
+    # Okina* families in their CSS, so the stylesheet goes in ahead of it.
+    return html.replace("<style>", link + "\n<style>", 1)
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     manifest = []
@@ -735,27 +760,27 @@ def main():
     for src, slug, page, note in MARKER_PAGES:
         block = extract_marker(read(src), slug)
         out_name = src  # keep the same stem so the mapping is obvious
-        body = entity_encode(remap_internal_links(absolutize_assets(
+        body = entity_encode(ensure_okina(remap_internal_links(absolutize_assets(
             header(page, note) + "\n".join(block).strip()
-            + STICKY_BAR_OVERRIDE + FULL_BLEED_OVERRIDE)))
+            + STICKY_BAR_OVERRIDE + FULL_BLEED_OVERRIDE))))
         with open(os.path.join(OUT, out_name), "w", encoding="utf-8") as f:
             f.write(body)
         manifest.append((out_name, page, len(body)))
 
-    home = entity_encode(remap_internal_links(
-        absolutize_assets(build_homepage(read("index.html")))))
+    home = entity_encode(ensure_okina(remap_internal_links(
+        absolutize_assets(build_homepage(read("index.html"))))))
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
         f.write(home)
     manifest.append(("index.html", "Home", len(home)))
 
-    support = entity_encode(remap_internal_links(
-        absolutize_assets(build_support(read("support.html")))))
+    support = entity_encode(ensure_okina(remap_internal_links(
+        absolutize_assets(build_support(read("support.html"))))))
     with open(os.path.join(OUT, "support.html"), "w", encoding="utf-8") as f:
         f.write(support)
     manifest.append(("support.html", "Support / Donate", len(support)))
 
-    ufsm = entity_encode(remap_internal_links(
-        absolutize_assets(build_ufsm(read("ufsm/index.html")))))
+    ufsm = entity_encode(ensure_okina(remap_internal_links(
+        absolutize_assets(build_ufsm(read("ufsm/index.html"))))))
     with open(os.path.join(OUT, "ufsm.html"), "w", encoding="utf-8") as f:
         f.write(ufsm)
     manifest.append(("ufsm.html", "Universal Free School Meals (UFSM)", len(ufsm)))

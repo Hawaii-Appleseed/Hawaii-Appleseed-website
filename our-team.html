@@ -13,10 +13,10 @@
      =========================================================== -->
 <style>
   html,body{margin:0;padding:0;background:#fff;}
-  body{font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif;color:#2F3E46;}
+  body{font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-serif;color:#2F3E46;}
   .px-announce{
     background:#2F3E46;color:#fff;
-    font:500 13px/1.4 'Poppins',sans-serif;letter-spacing:.01em;
+    font:500 13px/1.4 OkinaPoppins, 'Poppins',sans-serif;letter-spacing:.01em;
     padding:10px 18px;text-align:center;
     position:fixed;top:0;left:0;right:0;z-index:50;
   }
@@ -26,14 +26,14 @@
     background:#fff;border-bottom:1px solid rgba(53,79,82,.15);
     padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;
     position:fixed;top:38px;left:0;right:0;z-index:49;
-    font-family:'Poppins',sans-serif;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;
   }
   .px-nav .px-brand{display:flex;align-items:center;gap:12px;flex:none;}
   .px-nav .px-brand-mark{width:40px;height:40px;flex:none;}
   .px-nav .px-brand-mark svg{width:100%;height:100%;display:block;}
   .px-nav .px-brand-text{line-height:1;}
-  .px-nav .px-brand-name{font-family:'Poppins',sans-serif;font-weight:700;letter-spacing:.14em;font-size:18px;color:#52796F;}
-  .px-nav .px-brand-tag{font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:.26em;color:#52796F;margin-top:3px;}
+  .px-nav .px-brand-name{font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:700;letter-spacing:.14em;font-size:18px;color:#52796F;}
+  .px-nav .px-brand-tag{font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:9px;letter-spacing:.26em;color:#52796F;margin-top:3px;}
   .px-nav .px-links{display:none;gap:20px;font-size:14px;font-weight:500;color:#2F3E46;flex:1;justify-content:flex-end;align-items:center;flex-wrap:nowrap;white-space:nowrap;}
   .px-nav .px-links a{color:inherit;text-decoration:none;}
   .px-nav .px-links a:hover{color:#52796F}
@@ -41,28 +41,28 @@
   @media (min-width:900px){ .px-nav .px-links{display:flex} }
 
 .px-dropdown{position:relative;}
-.px-dropdown-trigger{background:none;border:none;cursor:pointer;padding:0;font-family:'Poppins',sans-serif;font-size:14px;font-weight:500;color:#2F3E46;display:flex;align-items:center;gap:5px;line-height:1;}
+.px-dropdown-trigger{background:none;border:none;cursor:pointer;padding:0;font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:14px;font-weight:500;color:#2F3E46;display:flex;align-items:center;gap:5px;line-height:1;}
 .px-dropdown-trigger:hover,.px-dropdown-trigger.active{color:#52796F;}
 .px-dropdown-trigger.active{font-weight:600;}
 .px-chevron{font-size:9px;transition:transform .2s;display:inline-block;margin-top:1px;}
 .px-dropdown.is-open .px-chevron{transform:rotate(180deg);}
 .px-dropdown-menu{display:none;position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);background:#fff;border:1px solid rgba(53,79,82,.12);border-radius:3px;box-shadow:0 8px 24px rgba(47,62,70,.12);min-width:170px;z-index:100;padding:6px 0;}
 .px-dropdown.is-open .px-dropdown-menu{display:block;}
-.px-dropdown-menu a{display:block;padding:9px 18px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:500;color:#2F3E46;text-decoration:none;white-space:nowrap;transition:background .15s,color .15s;}
+.px-dropdown-menu a{display:block;padding:9px 18px;font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:14px;font-weight:500;color:#2F3E46;text-decoration:none;white-space:nowrap;transition:background .15s,color .15s;}
 .px-dropdown-menu a:hover{background:rgba(132,169,140,.1);color:#52796F;}
 .px-dropdown-menu a.active{color:#52796F;font-weight:600;}
   .px-nav-right{display:flex;align-items:center;gap:14px;flex:none;}
   .px-social{display:flex;gap:10px;color:#2F3E46;}
   .px-social svg{width:16px;height:16px;}
-  .px-donate-btn{background:#2F3E46;color:#fff;padding:9px 20px;font-family:'Poppins',sans-serif;font-weight:500;font-size:14px;border-radius:2px;text-decoration:none;}
+  .px-donate-btn{background:#2F3E46;color:#fff;padding:9px 20px;font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:500;font-size:14px;border-radius:2px;text-decoration:none;}
   .px-donate-btn:hover{background:#52796F;}
   .px-footer{
     background:#2F3E46;color:#CAD2C5;padding:60px 28px 40px;
-    font-family:'Poppins',sans-serif;font-size:14px;line-height:1.7;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:14px;line-height:1.7;
   }
   .px-footer .px-foot-grid{display:grid;grid-template-columns:1fr;gap:32px;max-width:1200px;margin:0 auto 40px;}
   @media (min-width:760px){.px-footer .px-foot-grid{grid-template-columns:2fr 1fr 1fr;}}
-  .px-footer h4{font-family:'Manrope',sans-serif;font-weight:700;color:#fff;margin:0 0 12px;font-size:14px;letter-spacing:.04em;text-transform:uppercase;}
+  .px-footer h4{font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;color:#fff;margin:0 0 12px;font-size:14px;letter-spacing:.04em;text-transform:uppercase;}
   .px-footer a{color:#CAD2C5;text-decoration:none;display:block;margin-bottom:6px;}
   .px-footer a:hover{color:#84A98C}
   .px-foot-bottom{max-width:1200px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(202,210,197,.18);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:12px;}
@@ -109,6 +109,7 @@
   .px-nav .px-dropdown-menu a{padding:9px 4px;white-space:normal;}
 }
 </style>
+  <link rel="stylesheet" href="assets/okina.css">
 </head>
 <body>
 
@@ -182,7 +183,7 @@
     --ha-rule:       rgba(53,79,82,.18);
     --ha-rule-dark:  rgba(202,210,197,.18);
 
-    font-family:'Poppins', system-ui, -apple-system, Arial, sans-serif;
+    font-family:OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif;
     color:var(--ha-charcoal);
     background:var(--ha-white);
     -webkit-font-smoothing:antialiased;
@@ -200,7 +201,7 @@
 
   .ha-team .ha-eyebrow{
     display:inline-flex;align-items:center;gap:14px;
-    font-family:'Poppins',sans-serif;font-weight:600;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:600;
     font-size:12px;letter-spacing:.28em;text-transform:uppercase;
     color:var(--ha-teal-deep);
   }
@@ -235,14 +236,14 @@
     100% { transform:translate(40px,-30px) scale(1.08); }
   }
   .ha-team .ha-hero h1{
-    font-family:'Manrope',sans-serif;font-weight:700;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;
     font-size:clamp(40px, 6vw, 80px);
     line-height:1.05;letter-spacing:-0.025em;
     color:var(--ha-charcoal);max-width:18ch;margin-top:24px;
   }
   .ha-team .ha-hero h1 .ha-mark{color:var(--ha-teal-deep);font-style:italic;font-weight:600;}
   .ha-team .ha-hero-lead{
-    font-family:'Poppins',sans-serif;font-weight:400;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:400;
     font-size:clamp(16px, 1.6vw, 19px);line-height:1.65;
     color:var(--ha-charcoal);max-width:54ch;margin:24px 0 0;opacity:.85;
   }
@@ -301,23 +302,23 @@
   }
   .ha-team .ha-ed.is-in .ha-ed-content{opacity:1;transform:translateX(0);}
   .ha-team .ha-ed h2{
-    font-family:'Manrope',sans-serif;font-weight:700;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;
     font-size:clamp(34px, 4.4vw, 58px);line-height:1.05;letter-spacing:-0.025em;
     color:#fff;margin:18px 0 6px;
   }
   .ha-team .ha-ed-role{
-    font-family:'Manrope',sans-serif;font-weight:500;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:500;
     font-size:clamp(16px, 1.6vw, 19px);letter-spacing:.02em;
     color:var(--ha-teal);margin-bottom:28px;
   }
   .ha-team .ha-ed-bio{
-    font-family:'Poppins',sans-serif;font-size:16px;line-height:1.75;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:16px;line-height:1.75;
     color:var(--ha-ash);max-width:60ch;
   }
   .ha-team .ha-ed-bio p + p{margin-top:16px;}
   .ha-team .ha-ed-email{
     display:inline-flex;align-items:center;gap:10px;margin-top:32px;
-    font-family:'Poppins',sans-serif;font-weight:500;font-size:14px;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:500;font-size:14px;
     letter-spacing:.04em;color:#fff;
     padding:14px 22px;border:1px solid var(--ha-teal);border-radius:999px;
     background:rgba(132,169,140,.08);
@@ -351,7 +352,7 @@
   }
   .ha-team .ha-ed-learn-more{
     display:inline-flex;align-items:center;gap:10px;
-    font-family:'Poppins',sans-serif;font-weight:500;font-size:14px;letter-spacing:.04em;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:500;font-size:14px;letter-spacing:.04em;
     color:#fff;background:transparent;border:1px solid rgba(202,210,197,.4);
     padding:13px 22px;border-radius:999px;cursor:pointer;
     transition:background .3s, border-color .3s, color .3s, transform .3s;
@@ -373,12 +374,12 @@
   .ha-team .ha-grid-wrap{background:var(--ha-white);padding:120px 0;}
   .ha-team .ha-grid-head{margin-bottom:56px;}
   .ha-team .ha-grid-head h2{
-    font-family:'Manrope',sans-serif;font-weight:700;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;
     font-size:clamp(42px, 5vw, 64px);line-height:1.05;letter-spacing:-0.025em;
     color:var(--ha-charcoal);margin:16px 0 8px;max-width:22ch;
   }
   .ha-team .ha-grid-head p{
-    font-family:'Poppins',sans-serif;font-size:16px;color:var(--ha-charcoal);
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:16px;color:var(--ha-charcoal);
     opacity:.75;max-width:54ch;
   }
   .ha-team .ha-grid{
@@ -417,7 +418,7 @@
   /* "+ Bio" hint chip — bottom-right corner of photo */
   .ha-team .ha-member-hint{
     position:absolute;bottom:12px;right:12px;
-    font-family:'Poppins',sans-serif;font-weight:600;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:600;
     font-size:11px;letter-spacing:.12em;text-transform:uppercase;
     color:var(--ha-charcoal);background:rgba(255,255,255,.94);
     padding:6px 11px;border-radius:999px;
@@ -446,7 +447,7 @@
   }
   .ha-team .ha-member-bio{padding:18px 22px;}
   .ha-team .ha-member-bio p{
-    font-family:'Poppins',sans-serif;font-size:14px;line-height:1.55;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:14px;line-height:1.55;
     color:var(--ha-ash);
   }
   .ha-team .ha-member-bio p + p{margin-top:8px;}
@@ -465,12 +466,12 @@
   }
 
   .ha-team .ha-member-name{
-    font-family:'Manrope',sans-serif;font-weight:600;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;
     font-size:clamp(21px, 1.7vw, 24px);line-height:1.2;letter-spacing:-0.01em;
     color:var(--ha-charcoal);margin-bottom:6px;
   }
   .ha-team .ha-member-role{
-    font-family:'Poppins',sans-serif;font-weight:500;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:500;
     font-size:15px;letter-spacing:.02em;color:var(--ha-teal-deep);
     display:flex;align-items:center;gap:10px;margin-bottom:12px;
     line-height:1.4;
@@ -481,7 +482,7 @@
   }
   .ha-team .ha-member:hover .ha-member-role::before{width:32px;}
   .ha-team .ha-member-email{
-    display:inline-block;font-family:'Poppins',sans-serif;font-size:13px;
+    display:inline-block;font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:13px;
     color:var(--ha-charcoal);letter-spacing:.01em;
     border-bottom:1px solid var(--ha-rule);padding-bottom:2px;
     transition:color .3s, border-color .3s;
@@ -493,12 +494,12 @@
     background:var(--ha-ash);padding:96px 0;text-align:center;
   }
   .ha-team .ha-cta h2{
-    font-family:'Manrope',sans-serif;font-weight:700;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;
     font-size:clamp(28px, 3.2vw, 42px);line-height:1.15;letter-spacing:-0.02em;
     color:var(--ha-charcoal);margin:16px auto 14px;max-width:22ch;
   }
   .ha-team .ha-cta p{
-    font-family:'Poppins',sans-serif;font-size:16px;color:var(--ha-charcoal);
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:16px;color:var(--ha-charcoal);
     opacity:.8;margin:0 auto 32px;max-width:46ch;
   }
   .ha-team .ha-cta .ha-eyebrow{justify-content:center;}
@@ -506,7 +507,7 @@
   .ha-team .ha-btn{
     display:inline-flex;align-items:center;gap:10px;
     padding:14px 28px;border-radius:999px;
-    font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;letter-spacing:.04em;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:600;font-size:14px;letter-spacing:.04em;
     transition:transform .3s, background .3s, color .3s, border-color .3s;
   }
   .ha-team .ha-btn-primary{background:var(--ha-charcoal);color:#fff;border:1px solid var(--ha-charcoal);}

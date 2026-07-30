@@ -14,10 +14,10 @@
      =========================================================== -->
 <style>
   html,body{margin:0;padding:0;background:#fff;}
-  body{font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif;color:#2F3E46;}
+  body{font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-serif;color:#2F3E46;}
   .px-announce{
     background:#2F3E46;color:#fff;
-    font:500 13px/1.4 'Poppins',sans-serif;letter-spacing:.01em;
+    font:500 13px/1.4 OkinaPoppins, 'Poppins',sans-serif;letter-spacing:.01em;
     padding:10px 18px;text-align:center;
     position:fixed;top:0;left:0;right:0;z-index:50;
   }
@@ -27,14 +27,14 @@
     background:#fff;border-bottom:1px solid rgba(53,79,82,.15);
     padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;
     position:fixed;top:38px;left:0;right:0;z-index:49;
-    font-family:'Poppins',sans-serif;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;
   }
   .px-nav .px-brand{display:flex;align-items:center;gap:12px;flex:none;}
   .px-nav .px-brand-mark{width:40px;height:40px;flex:none;}
   .px-nav .px-brand-mark svg{width:100%;height:100%;display:block;}
   .px-nav .px-brand-text{line-height:1;}
-  .px-nav .px-brand-name{font-family:'Poppins',sans-serif;font-weight:700;letter-spacing:.14em;font-size:18px;color:#52796F;}
-  .px-nav .px-brand-tag{font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:.26em;color:#52796F;margin-top:3px;}
+  .px-nav .px-brand-name{font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:700;letter-spacing:.14em;font-size:18px;color:#52796F;}
+  .px-nav .px-brand-tag{font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:9px;letter-spacing:.26em;color:#52796F;margin-top:3px;}
   .px-nav .px-links{display:none;gap:20px;font-size:14px;font-weight:500;color:#2F3E46;flex:1;justify-content:flex-end;align-items:center;flex-wrap:nowrap;white-space:nowrap;}
   .px-nav .px-links a{color:inherit;text-decoration:none;}
   .px-nav .px-links a:hover{color:#52796F}
@@ -42,28 +42,28 @@
   @media (min-width:900px){ .px-nav .px-links{display:flex} }
 
 .px-dropdown{position:relative;}
-.px-dropdown-trigger{background:none;border:none;cursor:pointer;padding:0;font-family:'Poppins',sans-serif;font-size:14px;font-weight:500;color:#2F3E46;display:flex;align-items:center;gap:5px;line-height:1;}
+.px-dropdown-trigger{background:none;border:none;cursor:pointer;padding:0;font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:14px;font-weight:500;color:#2F3E46;display:flex;align-items:center;gap:5px;line-height:1;}
 .px-dropdown-trigger:hover,.px-dropdown-trigger.active{color:#52796F;}
 .px-dropdown-trigger.active{font-weight:600;}
 .px-chevron{font-size:9px;transition:transform .2s;display:inline-block;margin-top:1px;}
 .px-dropdown.is-open .px-chevron{transform:rotate(180deg);}
 .px-dropdown-menu{display:none;position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);background:#fff;border:1px solid rgba(53,79,82,.12);border-radius:3px;box-shadow:0 8px 24px rgba(47,62,70,.12);min-width:170px;z-index:100;padding:6px 0;}
 .px-dropdown.is-open .px-dropdown-menu{display:block;}
-.px-dropdown-menu a{display:block;padding:9px 18px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:500;color:#2F3E46;text-decoration:none;white-space:nowrap;transition:background .15s,color .15s;}
+.px-dropdown-menu a{display:block;padding:9px 18px;font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:14px;font-weight:500;color:#2F3E46;text-decoration:none;white-space:nowrap;transition:background .15s,color .15s;}
 .px-dropdown-menu a:hover{background:rgba(132,169,140,.1);color:#52796F;}
 .px-dropdown-menu a.active{color:#52796F;font-weight:600;}
   .px-nav-right{display:flex;align-items:center;gap:14px;flex:none;}
   .px-social{display:flex;gap:10px;color:#2F3E46;}
   .px-social svg{width:16px;height:16px;}
-  .px-donate-btn{background:#2F3E46;color:#fff;padding:9px 20px;font-family:'Poppins',sans-serif;font-weight:500;font-size:14px;border-radius:2px;text-decoration:none;}
+  .px-donate-btn{background:#2F3E46;color:#fff;padding:9px 20px;font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:500;font-size:14px;border-radius:2px;text-decoration:none;}
   .px-donate-btn:hover{background:#52796F;}
   .px-footer{
     background:#2F3E46;color:#CAD2C5;padding:60px 28px 40px;
-    font-family:'Poppins',sans-serif;font-size:14px;line-height:1.7;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:14px;line-height:1.7;
   }
   .px-footer .px-foot-grid{display:grid;grid-template-columns:1fr;gap:32px;max-width:1200px;margin:0 auto 40px;}
   @media (min-width:760px){.px-footer .px-foot-grid{grid-template-columns:2fr 1fr 1fr;}}
-  .px-footer h4{font-family:'Manrope',sans-serif;font-weight:700;color:#fff;margin:0 0 12px;font-size:14px;letter-spacing:.04em;text-transform:uppercase;}
+  .px-footer h4{font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;color:#fff;margin:0 0 12px;font-size:14px;letter-spacing:.04em;text-transform:uppercase;}
   .px-footer a{color:#CAD2C5;text-decoration:none;display:block;margin-bottom:6px;}
   .px-footer a:hover{color:#84A98C}
   .px-foot-bottom{max-width:1200px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(202,210,197,.18);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:12px;}
@@ -81,6 +81,7 @@
   .px-spacer-top{height:180px;}
 }
 </style>
+  <link rel="stylesheet" href="assets/okina.css">
 </head>
 <body>
 
@@ -159,7 +160,7 @@
     --ha-rule:       rgba(53,79,82,.18);
     --ha-rule-dark:  rgba(202,210,197,.18);
 
-    font-family:'Poppins', system-ui, -apple-system, Arial, sans-serif;
+    font-family:OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif;
     color:var(--ha-charcoal);
     background:var(--ha-white);
     -webkit-font-smoothing:antialiased;
@@ -175,7 +176,7 @@
   .ha-mission .ha-wrap{ max-width:1100px;margin:0 auto;padding:0 28px; }
   .ha-mission .ha-eyebrow{
     display:inline-flex;align-items:center;gap:14px;
-    font-family:'Poppins',sans-serif;font-weight:600;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:600;
     font-size:12px;letter-spacing:.28em;text-transform:uppercase;
     color:var(--ha-teal-deep);
   }
@@ -215,7 +216,7 @@
   .ha-mission .ha-hero .ha-eyebrow.on-dark{color:var(--ha-teal-deep);}
   .ha-mission .ha-hero .ha-eyebrow.on-dark::before{background:var(--ha-teal-deep);}
   .ha-mission .ha-hero h1{
-    font-family:'Manrope',sans-serif;font-weight:700;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;
     font-size:clamp(38px, 6vw, 80px);
     line-height:1.05;letter-spacing:-0.025em;
     color:var(--ha-charcoal);max-width:16ch;
@@ -236,7 +237,7 @@
     background:var(--ha-ash);padding:110px 0;text-align:center;
   }
   .ha-mission .ha-statement-body{
-    font-family:'Manrope',sans-serif;font-weight:500;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:500;
     font-size:clamp(26px, 3.4vw, 44px);
     line-height:1.25;letter-spacing:-0.015em;
     color:var(--ha-charcoal);max-width:24ch;margin:18px auto 0;
@@ -251,7 +252,7 @@
     background:var(--ha-white);padding:110px 0;
   }
   .ha-mission .ha-approach h2{
-    font-family:'Manrope',sans-serif;font-weight:700;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;
     font-size:clamp(28px, 3.6vw, 44px);
     line-height:1.15;letter-spacing:-0.02em;color:var(--ha-charcoal);
     margin:14px 0 60px;max-width:20ch;
@@ -271,12 +272,12 @@
     .ha-mission .ha-step{grid-template-columns:80px 1fr;gap:36px;}
   }
   .ha-mission .ha-step .ha-step-num{
-    font-family:'Manrope',sans-serif;font-weight:700;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;
     font-size:clamp(22px, 2.4vw, 28px);
     color:var(--ha-teal);letter-spacing:-0.02em;line-height:1;
   }
   .ha-mission .ha-step h3{
-    font-family:'Manrope',sans-serif;font-weight:600;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;
     font-size:clamp(18px, 1.8vw, 22px);
     line-height:1.3;letter-spacing:-0.005em;color:var(--ha-charcoal);
   }
@@ -291,12 +292,12 @@
     top:-240px;right:-180px;filter:blur(40px);
   }
   .ha-mission .ha-focus h2{
-    font-family:'Manrope',sans-serif;font-weight:700;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;
     font-size:clamp(28px, 3.6vw, 44px);line-height:1.15;letter-spacing:-0.02em;
     color:#fff;max-width:22ch;margin:14px 0 14px;
   }
   .ha-mission .ha-focus .ha-section-lead{
-    font-family:'Poppins',sans-serif;font-size:16px;line-height:1.65;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:16px;line-height:1.65;
     color:var(--ha-ash);max-width:54ch;margin-bottom:48px;
   }
   .ha-mission .ha-focus-grid{
@@ -335,7 +336,7 @@
   .ha-mission .ha-focus-card:hover .ha-focus-icon{background:var(--ha-teal);}
   .ha-mission .ha-focus-card .ha-focus-icon svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.7;}
   .ha-mission .ha-focus-card h3{
-    font-family:'Manrope',sans-serif;font-weight:600;font-size:16px;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;font-size:16px;
     color:#fff;letter-spacing:-0.005em;line-height:1.25;
   }
 
@@ -344,7 +345,7 @@
     background:var(--ha-ash);padding:110px 0;
   }
   .ha-mission .ha-values h2{
-    font-family:'Manrope',sans-serif;font-weight:700;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;
     font-size:clamp(28px, 3.6vw, 44px);line-height:1.15;letter-spacing:-0.02em;
     color:var(--ha-charcoal);margin:14px 0 48px;max-width:18ch;
   }
@@ -369,11 +370,11 @@
   .ha-mission .ha-value-card:hover{border-color:var(--ha-teal);}
   .ha-mission .ha-value-card:hover::before{transform:scaleX(1);}
   .ha-mission .ha-value-card h3{
-    font-family:'Manrope',sans-serif;font-weight:700;font-size:18px;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;font-size:18px;
     color:var(--ha-charcoal);margin-bottom:8px;letter-spacing:-0.01em;
   }
   .ha-mission .ha-value-card p{
-    font-family:'Poppins',sans-serif;font-size:14px;line-height:1.55;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:14px;line-height:1.55;
     color:var(--ha-charcoal);
   }
 
@@ -387,13 +388,13 @@
     max-width:780px;
   }
   .ha-mission .ha-lived h2{
-    font-family:'Manrope',sans-serif;font-weight:600;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;
     font-size:clamp(22px, 2.6vw, 30px);
     line-height:1.3;letter-spacing:-0.01em;color:var(--ha-charcoal);
     max-width:32ch;
   }
   .ha-mission .ha-lived p{
-    font-family:'Poppins',sans-serif;font-size:16px;line-height:1.65;
+    font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:16px;line-height:1.65;
     color:var(--ha-charcoal);max-width:60ch;
   }
 
@@ -409,7 +410,7 @@
   }
   .ha-mission .ha-cta-inner{position:relative;}
   .ha-mission .ha-cta h2{
-    font-family:'Manrope',sans-serif;font-weight:700;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;
     font-size:clamp(28px, 4vw, 48px);line-height:1.1;letter-spacing:-0.02em;
     color:#fff;max-width:20ch;margin:18px auto 32px;
   }
@@ -419,7 +420,7 @@
   }
   .ha-mission .ha-btn{
     display:inline-flex;align-items:center;gap:10px;
-    font-family:'Manrope',sans-serif;font-weight:600;font-size:14px;
+    font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;font-size:14px;
     padding:14px 26px;border-radius:999px;letter-spacing:.01em;
     transition:transform .25s, background .25s, color .25s, border-color .25s;
     cursor:pointer;border:1px solid transparent;

@@ -5,19 +5,20 @@
      HOW: In the News page > Edit > add a Code Block > paste ALL of this >
           make sure "Display Source" is OFF > Save.
      ===================================================================== -->
+<link rel="stylesheet" href="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/okina.css">
 <style>
   .ha-news{max-width:1180px;margin:0 auto;padding:0 28px 80px;}
   @media (max-width:700px){ .ha-news{padding:0 20px 56px;} }
   .ha-news__hero{padding:36px 0 8px;}
-  .ha-news__eyebrow{font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#52796F;display:flex;align-items:center;gap:12px;}
+  .ha-news__eyebrow{font-family:OkinaManrope, 'Manrope',sans-serif;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#52796F;display:flex;align-items:center;gap:12px;}
   .ha-news__eyebrow::before{content:"";width:40px;height:1px;background:#84A98C;}
-  .ha-news__title{font-family:'Manrope',sans-serif;font-weight:300;font-size:clamp(2.4rem,5vw,3.6rem);color:#2F3E46;margin:14px 0 10px;}
+  .ha-news__title{font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:300;font-size:clamp(2.4rem,5vw,3.6rem);color:#2F3E46;margin:14px 0 10px;}
   .ha-news__lede{font-size:1.02rem;line-height:1.7;color:#52796F;max-width:60ch;margin:0;}
   .ha-news__toolbar{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:30px 0 8px;}
-  .ha-news__search{flex:1;min-width:220px;max-width:360px;padding:11px 16px;border:1px solid #CAD2C5;border-radius:4px;font-family:'Poppins',sans-serif;font-size:14px;color:#2F3E46;background:#fff;}
+  .ha-news__search{flex:1;min-width:220px;max-width:360px;padding:11px 16px;border:1px solid #CAD2C5;border-radius:4px;font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:14px;color:#2F3E46;background:#fff;}
   .ha-news__search:focus{outline:2px solid #84A98C;outline-offset:1px;border-color:#84A98C;}
   .ha-news__filters{display:flex;flex-wrap:wrap;gap:8px;}
-  .ha-news__pill{font-family:'Manrope',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.02em;padding:7px 14px;border:1px solid #CAD2C5;border-radius:999px;background:#fff;color:#354F52;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+  .ha-news__pill{font-family:OkinaManrope, 'Manrope',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.02em;padding:7px 14px;border:1px solid #CAD2C5;border-radius:999px;background:#fff;color:#354F52;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
   .ha-news__pill:hover{border-color:#84A98C;color:#52796F;}
   .ha-news__pill.is-active{background:#52796F;border-color:#52796F;color:#fff;}
   .ha-news__count{font-size:13px;color:#52796F;margin:14px 0 18px;}
@@ -27,16 +28,16 @@
   .ha-news__card{display:flex;flex-direction:column;background:#fff;border:1px solid #E8EDE6;border-radius:6px;padding:22px 22px 20px;transition:border-color .25s,box-shadow .25s,transform .25s;text-decoration:none;color:inherit;cursor:pointer;}
   .ha-news__card:focus-visible{outline:2px solid #52796F;outline-offset:3px;}
   .ha-news__card:hover{border-color:#84A98C;box-shadow:0 10px 26px rgba(47,62,70,.08);transform:translateY(-2px);}
-  .ha-news__src{display:flex;align-items:center;gap:8px;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#52796F;margin-bottom:12px;}
+  .ha-news__src{display:flex;align-items:center;gap:8px;font-family:OkinaManrope, 'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#52796F;margin-bottom:12px;}
   .ha-news__tag{background:#84A98C;color:#fff;border-radius:3px;padding:2px 7px;font-size:10px;letter-spacing:.1em;}
-  .ha-news__card h3{font-family:'Manrope',sans-serif;font-weight:600;font-size:1.08rem;line-height:1.34;color:#2F3E46;margin:0 0 10px;}
+  .ha-news__card h3{font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;font-size:1.08rem;line-height:1.34;color:#2F3E46;margin:0 0 10px;}
   .ha-news__excerpt{font-size:.92rem;line-height:1.6;color:#52796F;margin:0 0 16px;flex:1;}
   .ha-news__meta{font-size:12px;color:#7d8f86;margin-bottom:14px;}
-  .ha-news__link{font-family:'Manrope',sans-serif;font-size:13px;font-weight:600;color:#52796F;text-decoration:none;display:inline-flex;align-items:center;gap:7px;margin-top:auto;}
+  .ha-news__link{font-family:OkinaManrope, 'Manrope',sans-serif;font-size:13px;font-weight:600;color:#52796F;text-decoration:none;display:inline-flex;align-items:center;gap:7px;margin-top:auto;}
   .ha-news__link:hover{color:#2F3E46;}
   .ha-news__link svg{width:13px;height:13px;}
   .ha-news__more-wrap{text-align:center;margin:36px 0 8px;}
-  .ha-news__more{font-family:'Manrope',sans-serif;font-weight:600;font-size:14px;letter-spacing:.04em;color:#2F3E46;background:#fff;border:1px solid #354F52;border-radius:3px;padding:13px 30px;cursor:pointer;transition:background .2s,color .2s;}
+  .ha-news__more{font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;font-size:14px;letter-spacing:.04em;color:#2F3E46;background:#fff;border:1px solid #354F52;border-radius:3px;padding:13px 30px;cursor:pointer;transition:background .2s,color .2s;}
   .ha-news__more:hover{background:#2F3E46;color:#fff;}
   .ha-news__more[hidden]{display:none;}
   .ha-news__synced{text-align:center;font-size:12px;color:#9aa89f;margin-top:22px;}
@@ -46,8 +47,8 @@
   .ha-news__section:first-of-type{margin-top:40px;}
   .ha-news__section[hidden]{display:none;}
   .ha-news__section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid #E8EDE6;}
-  .ha-news__section-title{font-family:'Manrope',sans-serif;font-weight:600;font-size:1.6rem;color:#2F3E46;margin:0;}
-  .ha-news__viewall{font-family:'Manrope',sans-serif;font-size:13px;font-weight:600;color:#52796F;text-decoration:none;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;}
+  .ha-news__section-title{font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;font-size:1.6rem;color:#2F3E46;margin:0;}
+  .ha-news__viewall{font-family:OkinaManrope, 'Manrope',sans-serif;font-size:13px;font-weight:600;color:#52796F;text-decoration:none;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;}
   .ha-news__viewall:hover{color:#2F3E46;}
   .ha-news__viewall svg{width:13px;height:13px;}
   .ha-news__date{color:#7d8f86;font-weight:600;}

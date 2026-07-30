@@ -41,11 +41,11 @@
 
 html,body { margin:0; padding:0; background:#fff; }
 html { scroll-behavior:smooth; }
-body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F3E46; }
+body { font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F3E46; }
 
 .px-announce {
   background:#2F3E46; color:#fff;
-  font:500 13px/1.4 'Poppins',sans-serif; letter-spacing:.01em;
+  font:500 13px/1.4 OkinaPoppins, 'Poppins',sans-serif; letter-spacing:.01em;
   padding:10px 18px; text-align:center;
   position:fixed; top:0; left:0; right:0; z-index:50;
 }
@@ -56,14 +56,14 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   background:#fff;border-bottom:1px solid rgba(53,79,82,.15);
   padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;
   position:fixed;top:38px;left:0;right:0;z-index:49;
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 .px-nav .px-brand{display:flex;align-items:center;gap:12px;flex:none;}
 .px-nav .px-brand-mark{width:40px;height:40px;flex:none;}
 .px-nav .px-brand-mark svg{width:100%;height:100%;display:block;}
 .px-nav .px-brand-text{line-height:1;}
-.px-nav .px-brand-name{font-family:'Poppins',sans-serif;font-weight:700;letter-spacing:.14em;font-size:18px;color:#52796F;}
-.px-nav .px-brand-tag{font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:.26em;color:#52796F;margin-top:3px;}
+.px-nav .px-brand-name{font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:700;letter-spacing:.14em;font-size:18px;color:#52796F;}
+.px-nav .px-brand-tag{font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:9px;letter-spacing:.26em;color:#52796F;margin-top:3px;}
 .px-nav .px-links{display:none;gap:20px;font-size:14px;font-weight:500;color:#2F3E46;flex:1;justify-content:flex-end;align-items:center;flex-wrap:nowrap;white-space:nowrap;}
 .px-nav .px-links a{color:inherit;text-decoration:none;}
 .px-nav .px-links a:hover{color:#52796F}
@@ -71,25 +71,25 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 @media (min-width:900px){ .px-nav .px-links{display:flex} }
 
 .px-dropdown{position:relative;}
-.px-dropdown-trigger{background:none;border:none;cursor:pointer;padding:0;font-family:'Poppins',sans-serif;font-size:14px;font-weight:500;color:#2F3E46;display:flex;align-items:center;gap:5px;line-height:1;}
+.px-dropdown-trigger{background:none;border:none;cursor:pointer;padding:0;font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:14px;font-weight:500;color:#2F3E46;display:flex;align-items:center;gap:5px;line-height:1;}
 .px-dropdown-trigger:hover,.px-dropdown-trigger.active{color:#52796F;}
 .px-dropdown-trigger.active{font-weight:600;}
 .px-chevron{font-size:9px;transition:transform .2s;display:inline-block;margin-top:1px;}
 .px-dropdown.is-open .px-chevron{transform:rotate(180deg);}
 .px-dropdown-menu{display:none;position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);background:#fff;border:1px solid rgba(53,79,82,.12);border-radius:3px;box-shadow:0 8px 24px rgba(47,62,70,.12);min-width:170px;z-index:100;padding:6px 0;}
 .px-dropdown.is-open .px-dropdown-menu{display:block;}
-.px-dropdown-menu a{display:block;padding:9px 18px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:500;color:#2F3E46;text-decoration:none;white-space:nowrap;transition:background .15s,color .15s;}
+.px-dropdown-menu a{display:block;padding:9px 18px;font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:14px;font-weight:500;color:#2F3E46;text-decoration:none;white-space:nowrap;transition:background .15s,color .15s;}
 .px-dropdown-menu a:hover{background:rgba(132,169,140,.1);color:#52796F;}
 .px-dropdown-menu a.active{color:#52796F;font-weight:600;}
 .px-nav-right{display:flex;align-items:center;gap:14px;flex:none;}
 .px-social{display:flex;gap:10px;color:#2F3E46;}
 .px-social svg{width:16px;height:16px;}
-.px-donate-btn{background:#2F3E46;color:#fff;padding:9px 20px;font-family:'Poppins',sans-serif;font-weight:500;font-size:14px;border-radius:2px;text-decoration:none;}
+.px-donate-btn{background:#2F3E46;color:#fff;padding:9px 20px;font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:500;font-size:14px;border-radius:2px;text-decoration:none;}
 .px-donate-btn:hover{background:#52796F;}
 
 .px-footer {
   background:#2F3E46; color:#CAD2C5; padding:60px 28px 40px;
-  font-family:'Poppins',sans-serif; font-size:14px; line-height:1.7;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:14px; line-height:1.7;
 }
 .px-footer .px-foot-grid {
   display:grid; grid-template-columns:1fr; gap:32px;
@@ -97,7 +97,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 }
 @media (min-width:760px) { .px-footer .px-foot-grid { grid-template-columns:2fr 1fr 1fr; } }
 .px-footer h4 {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   color:#fff; margin:0 0 12px; font-size:14px;
   letter-spacing:.04em; text-transform:uppercase;
 }
@@ -149,6 +149,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   .px-nav .px-dropdown-menu a{padding:9px 4px;white-space:normal;}
 }
 </style>
+  <link rel="stylesheet" href="assets/okina.css">
 </head>
 <body>
 
@@ -218,7 +219,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 <style id="ha-term-css">
 .ha-term{position:relative;display:inline;border-bottom:1px dotted #52796F;cursor:help;color:inherit;font-style:inherit;}
 .ha-term:focus{outline:2px solid #84A98C;outline-offset:2px;border-radius:2px;}
-.ha-term-tip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);z-index:80;width:250px;max-width:76vw;background:#2F3E46;color:#fff;padding:10px 14px;border-radius:6px;font-family:'Poppins',sans-serif;font-style:normal;font-weight:400;font-size:12.5px;letter-spacing:.01em;line-height:1.5;text-align:left;text-transform:none;opacity:0;pointer-events:none;box-shadow:0 10px 26px rgba(47,62,70,.28);transition:opacity .2s,transform .2s;white-space:normal;}
+.ha-term-tip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);z-index:80;width:250px;max-width:76vw;background:#2F3E46;color:#fff;padding:10px 14px;border-radius:6px;font-family:OkinaPoppins, 'Poppins',sans-serif;font-style:normal;font-weight:400;font-size:12.5px;letter-spacing:.01em;line-height:1.5;text-align:left;text-transform:none;opacity:0;pointer-events:none;box-shadow:0 10px 26px rgba(47,62,70,.28);transition:opacity .2s,transform .2s;white-space:normal;}
 .ha-term-tip::after{content:"";position:absolute;bottom:-5px;left:50%;transform:translateX(-50%) rotate(45deg);width:10px;height:10px;background:#2F3E46;}
 .ha-term:hover .ha-term-tip,.ha-term:focus .ha-term-tip{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
 .ha-term-tip strong{color:#84A98C;font-weight:700;}
@@ -230,7 +231,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
      chevrons rendered at default SVG size and the panels were permanently
      open (no 0fr collapse, no toggle JS). Keep them inside the markers. -->
 <style id="ha-acc-css">
-.ha-acc-btn{display:inline-flex;align-items:center;gap:7px;margin-top:10px;background:none;border:0;cursor:pointer;font-family:'Manrope',sans-serif;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#52796F;padding:6px 0;}
+.ha-acc-btn{display:inline-flex;align-items:center;gap:7px;margin-top:10px;background:none;border:0;cursor:pointer;font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#52796F;padding:6px 0;}
 .ha-acc-btn:hover{color:#2F3E46;}
 .ha-acc-chev{width:13px;height:13px;flex:none;transition:transform .25s ease;}
 .ha-acc-btn[aria-expanded="true"] .ha-acc-chev{transform:rotate(180deg);}
@@ -254,7 +255,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   --ha-white:     #FFFFFF;
   --ha-rule:      rgba(53,79,82,.14);
 
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   color:var(--ha-charcoal);
   line-height:1.6;
 }
@@ -299,7 +300,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 }
 .ha-food__hero-inner { max-width:900px; margin:0 auto; position:relative; z-index:1; }
 .ha-food__hero h1 {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:78px; line-height:1; letter-spacing:-.035em;
   margin:0 0 22px;
   color:#fff;
@@ -343,7 +344,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   border-radius:999px;
   backdrop-filter:blur(4px);
   -webkit-backdrop-filter:blur(4px);
-  font-family:'Manrope',sans-serif;
+  font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:13.5px; font-weight:600;
   letter-spacing:.01em;
   color:rgba(255,255,255,.78);
@@ -392,7 +393,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   background:none; border:none; padding:0;
   width:var(--tab-w); height:46px;
   cursor:pointer;
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:15.5px; letter-spacing:.01em;
   color:rgba(255,255,255,.6);
   border-radius:999px;
@@ -409,7 +410,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   background:transparent;
   border:1px solid rgba(202,210,197,.18);
   border-radius:999px;
-  font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:500;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:12.5px; font-weight:500;
   letter-spacing:.02em;
   color:rgba(202,210,197,.72);
   text-decoration:none;
@@ -428,7 +429,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   background:transparent;
   border:1px solid rgba(202,210,197,.28);
   border-radius:999px;
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:13px; font-weight:500;
   letter-spacing:.02em;
   color:rgba(202,210,197,.85);
@@ -452,7 +453,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-food a.ha-food__back {
   position:absolute; top:18px; left:24px;
   display:inline-flex; align-items:center; gap:6px;
-  font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:500;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:12.5px; font-weight:500;
   letter-spacing:.02em;
   color:rgba(202,210,197,.72);
   text-decoration:none;
@@ -530,7 +531,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   color:var(--ha-teal-deep);
 }
 .ha-food__hub-card-title {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:18px; line-height:1.3;
   color:var(--ha-charcoal); margin:0;
 }
@@ -597,20 +598,20 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   margin-bottom:22px;
 }
 .ha-food__vision-quote {
-  font-family:'Poppins',sans-serif; font-style:italic; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:600;
   font-size:120px; line-height:.6; letter-spacing:-.02em;
   color:rgba(82,121,111,.18);
   margin:0 auto 4px;
   user-select:none;
 }
 .ha-food__vision h2 {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:44px; line-height:1.12; letter-spacing:-.02em;
   color:var(--ha-charcoal);
   max-width:880px; margin:0 auto 18px;
 }
 .ha-food__vision h2 em {
-  font-family:'Poppins',sans-serif; font-style:italic; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:600;
   color:var(--ha-teal-deep);
 }
 .ha-food__vision-rule {
@@ -638,7 +639,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   max-width:680px; margin:0 auto 18px;
 }
 .ha-food__vision-pullquote {
-  font-family:'Poppins',sans-serif; font-style:italic; font-weight:500;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:500;
   font-size:24px; line-height:1.45; letter-spacing:-.01em;
   color:var(--ha-teal-deep);
   max-width:720px; margin:36px auto 36px;
@@ -653,7 +654,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   left:14px; top:-6px;
   font-size:54px; line-height:1;
   color:rgba(82,121,111,.18);
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 @media (max-width:700px) {
   .ha-food__vision-pullquote { font-size:19px; padding-left:22px; margin:28px auto; }
@@ -708,7 +709,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   color:var(--ha-teal-deep); margin-bottom:8px;
 }
 .ha-food__vision-pillar h3 {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:18px; line-height:1.25; color:var(--ha-charcoal);
   margin:0 0 10px;
 }
@@ -723,7 +724,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   margin-top:auto;
 }
 .ha-food__vision-pillar-stat-num {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:22px; line-height:1.1; color:var(--ha-charcoal);
   letter-spacing:-.01em; margin-bottom:3px;
 }
@@ -741,13 +742,13 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 }
 .ha-food__stat-headline-fy {
   display:inline-block;
-  font-family:'Poppins',sans-serif; font-size:11px; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase; color:var(--ha-teal-deep);
   background:rgba(82,121,111,.1); padding:5px 12px; border-radius:3px;
   margin-bottom:18px;
 }
 .ha-food__stat-headline h2 {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:54px; line-height:1.1; letter-spacing:-.02em;
   color:var(--ha-charcoal); margin:0;
 }
@@ -799,7 +800,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 }
 .ha-food__milestone-year {
   display:block;
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:13px; letter-spacing:.12em; text-transform:uppercase;
   color:var(--ha-teal-deep);
   margin-bottom:8px;
@@ -817,7 +818,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   transform:translateY(-2px);
 }
 .ha-food__milestone-title {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:18px; line-height:1.32; letter-spacing:-.01em;
   color:var(--ha-charcoal);
   margin:0 0 8px;
@@ -864,7 +865,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   color:var(--ha-teal-deep); margin-bottom:12px;
 }
 .ha-food__h2 {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:38px; line-height:1.15; letter-spacing:-.02em;
   color:var(--ha-charcoal); margin:0 0 16px;
 }
@@ -939,7 +940,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   font-size:14px; font-weight:500; flex:1;
 }
 .ha-food__legend-pct {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:15px; color:var(--ha-teal-deep);
 }
 .ha-food__desc {
@@ -950,11 +951,11 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   min-height:280px;
 }
 .ha-food__desc-name {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:22px; color:var(--ha-charcoal); margin:0 0 4px;
 }
 .ha-food__desc-pct {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:36px; line-height:1; margin-bottom:6px;
   letter-spacing:-.02em;
 }
@@ -1008,13 +1009,13 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-food__service-icon svg { width:24px; height:24px; stroke:var(--ha-teal-deep); }
 .ha-food__service-body { flex:1; }
 .ha-food__service-title {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:15px; color:var(--ha-charcoal);
   text-transform:uppercase; letter-spacing:.05em;
   margin:0 0 6px;
 }
 .ha-food__service-cost {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:24px; color:var(--ha-teal-deep);
   letter-spacing:-.01em; line-height:1.1; margin:0 0 8px;
 }
@@ -1027,7 +1028,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   padding:6px 12px;
   background:rgba(82,121,111,.10);
   border-radius:999px;
-  font-family:'Manrope',sans-serif;
+  font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:11.5px; font-weight:700; letter-spacing:.04em;
   color:var(--ha-teal-deep);
 }
@@ -1079,7 +1080,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 
 .ha-food__bar-value {
   position:absolute; top:-30px; left:50%; transform:translateX(-50%);
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:16px; color:var(--ha-charcoal); white-space:nowrap;
   opacity:0; transition:opacity .3s ease .5s;
 }
@@ -1100,7 +1101,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-food__bars-annotation {
   position:absolute;
   top:8px; left:14%; max-width:200px;
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:12px; line-height:1.35;
   color:var(--ha-teal-deep);
   text-align:left;
@@ -1163,14 +1164,14 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 }
 .ha-food__compare-eyebrow {
   display:inline-block;
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase;
   color:var(--ha-teal-deep);
   margin-bottom:14px;
 }
 .ha-food__compare h3 {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:26px; line-height:1.18; letter-spacing:-.015em;
   color:var(--ha-charcoal); margin:0 0 12px;
 }
@@ -1191,7 +1192,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   gap:18px; align-items:center;
 }
 .ha-food__compare-state {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:13.5px; letter-spacing:.02em;
   color:rgba(47,62,70,.70);
   text-align:right;
@@ -1234,7 +1235,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-food__compare-row[data-side="left"] .ha-food__compare-fill { right:50%; left:auto; }
 .ha-food__compare-row[data-side="right"] .ha-food__compare-fill { left:50%; right:auto; }
 .ha-food__compare-val {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:13.5px; color:rgba(47,62,70,.65);
   text-align:left;
 }
@@ -1244,7 +1245,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-food__compare-axis {
   display:flex; justify-content:space-between;
   margin:18px 0 0;
-  font-family:'Manrope',sans-serif;
+  font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:10.5px; font-weight:700;
   letter-spacing:.14em; text-transform:uppercase;
   color:rgba(47,62,70,.55);
@@ -1276,7 +1277,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   color:var(--ha-teal-deep); margin-bottom:10px;
 }
 .ha-food__callout-q {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:24px; color:var(--ha-charcoal);
   margin:0 0 14px; line-height:1.3;
 }
@@ -1302,7 +1303,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-food__priority-num {
   position:absolute;
   top:-32px; right:-4px;
-  font-family:'Poppins',sans-serif; font-style:italic; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:600;
   font-size:160px; line-height:1;
   color:rgba(82,121,111,.10);
   pointer-events:none;
@@ -1316,7 +1317,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-food__priority-stat,
 .ha-food__priority-bills { position:relative; z-index:1; }
 .ha-food__priority-title {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:22px; color:var(--ha-charcoal);
   letter-spacing:-.01em; line-height:1.15; margin:0 0 4px;
 }
@@ -1334,7 +1335,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   margin-bottom:18px;
 }
 .ha-food__priority-stat-num {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:28px; color:var(--ha-charcoal);
   line-height:1.1; letter-spacing:-.01em;
   margin-bottom:4px;
@@ -1379,7 +1380,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 }
 .ha-food__priority-list strong {
   display:block;
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:14.5px; color:var(--ha-charcoal);
   margin-bottom:4px; letter-spacing:-0.005em;
 }
@@ -1395,7 +1396,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 }
 .ha-food__combined-col-head {
   display:flex; align-items:center; gap:14px;
-  font-family:'Manrope',sans-serif; font-size:11px; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-size:11px; font-weight:700;
   letter-spacing:.24em; text-transform:uppercase;
   color:var(--ha-teal-deep);
   margin-bottom:6px;
@@ -1433,7 +1434,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   display:inline-flex; align-items:center; gap:4px;
   background:var(--ha-teal-deep); color:#fff;
   padding:3px 7px; border-radius:999px;
-  font-family:'Manrope',sans-serif; font-size:8.5px; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-size:8.5px; font-weight:700;
   letter-spacing:.14em; text-transform:uppercase;
   box-shadow:0 3px 10px rgba(47,62,70,.22);
 }
@@ -1444,14 +1445,14 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   display:flex; flex-direction:column; gap:6px; min-width:0;
 }
 .ha-food__pub-list-meta {
-  font-family:'Manrope',sans-serif;
+  font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:10.5px; font-weight:700;
   letter-spacing:.18em; text-transform:uppercase;
   color:var(--ha-teal-deep);
   line-height:1;
 }
 .ha-food__pub-list-title {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:15.5px; line-height:1.34; letter-spacing:-.005em;
   color:var(--ha-charcoal); margin:0;
   transition:color .18s;
@@ -1461,7 +1462,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 }
 .ha-food__pub-list-all {
   margin-top:18px;
-  font-family:'Manrope',sans-serif; font-size:12.5px; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-size:12.5px; font-weight:700;
   letter-spacing:.06em;
   color:var(--ha-teal-deep);
   display:inline-flex; align-items:center; gap:6px;
@@ -1490,7 +1491,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   display:flex; align-items:center; justify-content:center;
   background:var(--ha-teal-deep);
   color:#fff;
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:11px; letter-spacing:.12em; text-transform:uppercase;
   position:relative;
   overflow:hidden;
@@ -1507,7 +1508,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   display:flex; flex-direction:column; min-width:0;
 }
 .ha-food__news-source {
-  font-family:'Manrope',sans-serif;
+  font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:10.5px; font-weight:700;
   letter-spacing:.18em; text-transform:uppercase;
   color:var(--ha-teal-deep);
@@ -1526,19 +1527,19 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   content:""; width:4px; height:4px; border-radius:50%; background:var(--ha-teal-deep);
 }
 .ha-food__news-title {
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:16px; line-height:1.32; letter-spacing:-.005em;
   color:var(--ha-charcoal); margin:0 0 8px;
   transition:color .18s;
 }
 .ha-food__news-excerpt {
-  font-family:'Manrope',sans-serif; font-weight:400;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:400;
   font-size:14px; line-height:1.55;
   color:rgba(47,62,70,.75);
   margin:0 0 12px;
 }
 .ha-food__news-byline {
-  font-family:'Manrope',sans-serif; font-size:10.5px; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-size:10.5px; font-weight:700;
   letter-spacing:.16em; text-transform:uppercase;
   color:rgba(47,62,70,.55);
   margin-bottom:12px;
@@ -1551,7 +1552,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 }
 .ha-food__news-byline-sep::before { content:"·"; }
 .ha-food__news-link {
-  font-family:'Manrope',sans-serif;
+  font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:12.5px; font-weight:700; color:var(--ha-teal-deep);
   letter-spacing:.04em;
   text-decoration:none;
@@ -1576,7 +1577,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   border:1px solid rgba(53,79,82,.2);
   border-radius:999px;
   padding:9px 22px;
-  font-family:'Poppins',sans-serif; font-size:13px; font-weight:500;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:13px; font-weight:500;
   color:rgba(47,62,70,.55);
   cursor:pointer;
   transition:color .18s, border-color .18s, background .18s;
@@ -1616,7 +1617,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
   color:#fff;
   padding:10px 14px;
   border-radius:6px;
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-style:normal;
   font-size:12.5px; font-weight:400;
   letter-spacing:.01em;
@@ -1665,7 +1666,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-food button.ha-food__stuck-tab {
   display:inline-flex; align-items:center;
   padding:7px 22px; border-radius:999px;
-  font-family:'Manrope',sans-serif; font-weight:700; font-size:13.5px;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:13.5px;
   letter-spacing:.01em;
   color:var(--ha-charcoal);
   background:transparent;
@@ -1690,7 +1691,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 
 /* ===== TIER 1: Priority pull-quote (human voice) ===== */
 .ha-food__priority-quote {
-  font-family:'Poppins',sans-serif; font-style:italic; font-weight:500;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:500;
   font-size:15.5px; line-height:1.5;
   color:var(--ha-teal-deep);
   margin:18px 0 0;
@@ -1701,7 +1702,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 }
 .ha-food__priority-quote cite {
   display:block;
-  font-family:'Manrope',sans-serif; font-style:normal; font-weight:600;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-style:normal; font-weight:600;
   font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
   color:rgba(47,62,70,.55);
   margin-top:10px;
@@ -1726,18 +1727,18 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-food__cta-inner { max-width:760px; margin:0 auto; position:relative; z-index:1; }
 .ha-food__cta-eyebrow {
   display:inline-block;
-  font-family:'Poppins',sans-serif; font-size:11px; font-weight:600;
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase;
   color:var(--ha-teal);
   margin-bottom:18px;
 }
 .ha-food__cta h2 {
-  font-family:'Manrope',sans-serif; font-weight:800;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:clamp(30px, 4.2vw, 48px); line-height:1.12; letter-spacing:-.02em;
   color:#fff; margin:0 0 18px;
 }
 .ha-food__cta p {
-  font-family:'Poppins',sans-serif;
+  font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:17px; line-height:1.65;
   color:rgba(202,210,197,.86);
   margin:0 auto 32px; max-width:580px;
@@ -1746,7 +1747,7 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-food a.ha-food__cta-btn {
   display:inline-flex; align-items:center;
   padding:14px 28px; border-radius:999px;
-  font-family:'Manrope',sans-serif; font-weight:700;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:13.5px; letter-spacing:.04em;
   text-decoration:none;
   transition:transform .25s, background .25s, color .25s, border-color .25s;
@@ -1777,11 +1778,11 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 .ha-food__more { background:var(--ha-bg); padding:72px 28px 80px; border-top:1px solid var(--ha-rule); }
 .ha-food__more-inner { max-width:1180px; margin:0 auto; }
 .ha-food__more-eyebrow {
-  display:inline-block; font-family:'Poppins',sans-serif; font-size:11px; font-weight:600;
+  display:inline-block; font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase; color:var(--ha-teal-deep); margin-bottom:10px;
 }
 .ha-food__more h2 {
-  font-family:'Manrope',sans-serif; font-weight:700; font-size:clamp(24px,2.6vw,34px);
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:clamp(24px,2.6vw,34px);
   line-height:1.15; letter-spacing:-.02em; color:var(--ha-charcoal); margin:0;
 }
 .ha-food__more-grid {
@@ -1803,13 +1804,13 @@ body { font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif; color:#2F
 }
 .ha-food__more-card:focus-visible { outline:2px solid var(--ha-teal-deep); outline-offset:3px; }
 .ha-food__more-name {
-  font-family:'Manrope',sans-serif; font-weight:700; font-size:16px;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:16px;
   line-height:1.3; color:var(--ha-charcoal);
 }
 .ha-food__more-desc { font-size:13.5px; line-height:1.55; color:var(--ha-teal-deep); flex:1; margin:0; }
 .ha-food__more-go {
   display:inline-flex; align-items:center; gap:6px; margin-top:4px;
-  font-family:'Manrope',sans-serif; font-weight:600; font-size:12.5px;
+  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600; font-size:12.5px;
   letter-spacing:.04em; color:var(--ha-teal-deep);
 }
 .ha-food__more-card:hover .ha-food__more-go { color:var(--ha-charcoal); gap:9px; }
