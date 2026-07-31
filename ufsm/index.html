@@ -607,6 +607,26 @@
             transition: none !important;
         }
 
+        /* ===== Browser print (Cmd/Ctrl+P) =====
+           The JS side (beforeprint -> forceFinalState) pins the animated
+           elements' finished state, but print can also happen with no JS
+           warning (e.g. some browsers' "print frame"), so the same
+           guarantees are duplicated here declaratively. */
+        @media print {
+            .ufsm-pdf-fab { display: none !important; }
+            .ufsm-reveal,
+            .ufsm-reasons-kicker,
+            .ufsm-reasons-head .ufsm-rh-line,
+            .ufsm-reasons-2col .ufsm-reason { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
+            /* paper is narrower than the stored --ha-ufsm-vw pixel width, so the
+               calc()-based full-bleed would overflow the sheet */
+            .ufsm-full-width { width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; }
+            /* keep the green bands/chevrons; print-color-adjust inherits */
+            .ufsm-full-width { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .ufsm-fn::after, .ufsm-tipword::after { display: none !important; }
+            .ufsm-why-card, .ufsm-lo-card, .ufsm-lever, .ufsm-chart-box, .ufsm-tl, .ufsm-cta { break-inside: avoid; page-break-inside: avoid; }
+        }
+
         /* ===== Desktop ===== */
         @media (min-width: 768px) {
             .ufsm-section-title { font-size: 3.1rem; }
@@ -1479,6 +1499,22 @@
                     pdfBtn.disabled = false;
                     if (label) label.textContent = orig || 'Download as PDF';
                 });
+            });
+        }
+
+        /* ---------- Browser print (Cmd/Ctrl+P) ---------- */
+        // Printing goes nowhere near the Download-PDF pipeline, so a user who
+        // prints without having scrolled would get unrevealed (invisible)
+        // sections and uninitialised charts on paper. Reuse the exact same
+        // force/restore pair the export uses. afterprint also fires on print
+        // CANCEL, so the live page always comes back.
+        window.addEventListener('beforeprint', forceFinalState);
+        window.addEventListener('afterprint', restoreLiveState);
+        if (window.matchMedia) {
+            // Safari has historically fired matchMedia('print') more reliably
+            // than beforeprint; both paths are idempotent so double-firing is fine.
+            window.matchMedia('print').addListener(function (mql) {
+                if (mql.matches) { forceFinalState(); } else { restoreLiveState(); }
             });
         }
     })();

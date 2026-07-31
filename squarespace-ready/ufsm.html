@@ -603,6 +603,23 @@
             transition: none !important;
         }
 
+        /* ===== Browser print (Cmd/Ctrl+P) =====
+           The JS side (beforeprint -> forceFinalState) pins the animated
+           elements' finished state, but print can also happen with no JS
+           warning (e.g. some browsers' "print frame"), so the same
+           guarantees are duplicated here declaratively. */
+        @media print {
+            #ha-ufsm-embed .ufsm-pdf-fab{ display: none !important; }
+            #ha-ufsm-embed .ufsm-reveal, #ha-ufsm-embed .ufsm-reasons-kicker, #ha-ufsm-embed .ufsm-reasons-head .ufsm-rh-line, #ha-ufsm-embed .ufsm-reasons-2col .ufsm-reason{ opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
+            /* paper is narrower than the stored --ha-ufsm-vw pixel width, so the
+               calc()-based full-bleed would overflow the sheet */
+            #ha-ufsm-embed .ufsm-full-width{ width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; }
+            /* keep the green bands/chevrons; print-color-adjust inherits */
+            #ha-ufsm-embed .ufsm-full-width{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            #ha-ufsm-embed .ufsm-fn::after, #ha-ufsm-embed .ufsm-tipword::after{ display: none !important; }
+            #ha-ufsm-embed .ufsm-why-card, #ha-ufsm-embed .ufsm-lo-card, #ha-ufsm-embed .ufsm-lever, #ha-ufsm-embed .ufsm-chart-box, #ha-ufsm-embed .ufsm-tl, #ha-ufsm-embed .ufsm-cta{ break-inside: avoid; page-break-inside: avoid; }
+        }
+
         /* ===== Desktop ===== */
         @media (min-width: 768px) {
             #ha-ufsm-embed .ufsm-section-title{ font-size: 3.1rem; }
@@ -671,6 +688,21 @@
 }
 @media (max-width:767px){
   #ha-ufsm-embed .ufsm-pdf-fab{ margin: 10px 12px 0 auto !important; }
+}
+/* Print only the flyer, not the surrounding Squarespace page. These
+   rules target the HOST page's elements, so they must live in this
+   unscoped block \2014  the scoped stylesheet can only reach inside the
+   embed. visibility (not display) keeps the embed's layout intact
+   while blanking the host chrome, and re-showing a child of a hidden
+   ancestor is exactly what visibility permits. Pulling the embed out
+   of flow (position:absolute) lifts it to the top of page 1 and
+   collapses the document height the hidden host content occupied,
+   so there are no leading/trailing blank pages. */
+@media print {
+  body * { visibility: hidden !important; }
+  #ha-ufsm-embed, #ha-ufsm-embed * { visibility: visible !important; }
+  #ha-ufsm-embed { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; margin: 0 !important; }
+  html, body { height: auto !important; overflow: visible !important; }
 }
 </style>
 
@@ -1486,6 +1518,22 @@
                     pdfBtn.disabled = false;
                     if (label) label.textContent = orig || 'Download as PDF';
                 });
+            });
+        }
+
+        /* ---------- Browser print (Cmd/Ctrl+P) ---------- */
+        // Printing goes nowhere near the Download-PDF pipeline, so a user who
+        // prints without having scrolled would get unrevealed (invisible)
+        // sections and uninitialised charts on paper. Reuse the exact same
+        // force/restore pair the export uses. afterprint also fires on print
+        // CANCEL, so the live page always comes back.
+        window.addEventListener('beforeprint', forceFinalState);
+        window.addEventListener('afterprint', restoreLiveState);
+        if (window.matchMedia) {
+            // Safari has historically fired matchMedia('print') more reliably
+            // than beforeprint; both paths are idempotent so double-firing is fine.
+            window.matchMedia('print').addListener(function (mql) {
+                if (mql.matches) { forceFinalState(); } else { restoreLiveState(); }
             });
         }
     })();
