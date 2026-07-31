@@ -1182,7 +1182,13 @@
                     c.moveTo(x, top); c.lineTo(x, bot); c.stroke();
                     c.setLineDash([]); c.fillStyle = getVar('--ufsm-alert');
                     c.font = '600 12px Poppins, sans-serif'; c.textAlign = 'center';
-                    c.fillText('ALICE survival budget $107,796', x, top - 6);
+                    // Clamp the label inside the canvas: the dashed line sits near
+                    // the right edge, so on a narrow canvas (print, small windows)
+                    // a center-anchored label at x runs off and gets clipped.
+                    var lbl = 'ALICE survival budget $107,796';
+                    var half = c.measureText(lbl).width / 2;
+                    var lx = Math.max(half + 2, Math.min(x, chart.width - half - 2));
+                    c.fillText(lbl, lx, top - 6);
                     c.restore();
                 }
             };

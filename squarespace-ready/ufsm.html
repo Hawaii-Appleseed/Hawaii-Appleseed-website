@@ -699,6 +699,11 @@
    collapses the document height the hidden host content occupied,
    so there are no leading/trailing blank pages. */
 @media print {
+  /* must repeat display:none here: the sticky override above says
+     display:block !important at equal specificity and later cascade
+     position, so it beats the scoped print rule and the button's
+     icon printed on page 1. This block is last, so it wins. */
+  #ha-ufsm-embed .ufsm-pdf-fab { display: none !important; }
   body * { visibility: hidden !important; }
   #ha-ufsm-embed, #ha-ufsm-embed * { visibility: visible !important; }
   #ha-ufsm-embed { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; margin: 0 !important; }
@@ -1201,7 +1206,13 @@
                     c.moveTo(x, top); c.lineTo(x, bot); c.stroke();
                     c.setLineDash([]); c.fillStyle = getVar('--ufsm-alert');
                     c.font = '600 12px Poppins, sans-serif'; c.textAlign = 'center';
-                    c.fillText('ALICE survival budget $107,796', x, top - 6);
+                    // Clamp the label inside the canvas: the dashed line sits near
+                    // the right edge, so on a narrow canvas (print, small windows)
+                    // a center-anchored label at x runs off and gets clipped.
+                    var lbl = 'ALICE survival budget $107,796';
+                    var half = c.measureText(lbl).width / 2;
+                    var lx = Math.max(half + 2, Math.min(x, chart.width - half - 2));
+                    c.fillText(lbl, lx, top - 6);
                     c.restore();
                 }
             };
