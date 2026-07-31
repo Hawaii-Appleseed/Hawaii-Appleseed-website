@@ -149,6 +149,7 @@ INTERNAL_LINK_MAP = {
     "board-of-directors.html":   "/board-of-directors",
     "publications.html":         "/publications",
     "in-the-news.html":          "/in-the-news",
+    "blog.html":                 "/blog",
     "support.html":              "/support",
     "taxes-budget.html":         "/taxes-budget",
     "food-security.html":        "/food-equity",
@@ -221,6 +222,7 @@ MARKER_PAGES = [
     ("wages-labor.html",        "ha-wages",        "Wages & Labor",   ""),
     ("publications.html",       "ha-publications", "Publications",    ""),
     ("in-the-news.html",        "ha-news",         "In the News",     ""),
+    ("blog.html",               "ha-blog",         "Blog",            ""),
 ]
 
 
