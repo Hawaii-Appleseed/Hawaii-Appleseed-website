@@ -581,6 +581,15 @@
            chevrons as clean rounded bars (keeps the horizontal grid layout). */
         #ha-ufsm-embed.ufsm-pdf-capture .ufsm-tl-chev, #ha-ufsm-embed.ufsm-pdf-capture .ufsm-tl-chev.col1, #ha-ufsm-embed.ufsm-pdf-capture .ufsm-tl-chev.ufsm-tl-goal-wide{ clip-path: none !important; border-radius: 8px; }
         #ha-ufsm-embed.ufsm-pdf-capture #ufsm-pdf-btn{ display: none !important; }
+        /* Full-bleed bands are VIEWPORT-width and centred on the capture root with
+           negative margins. Standalone that is exactly right (the root is the body,
+           so root width == viewport). Embedded in a host page whose content column
+           is narrower than the viewport, the band overhangs the root on both sides
+           and the .ufsm-container inside it \2014  being centred in that wider band \2014 
+           ends up wider than the captured area, so its left and right edges are
+           cropped out of the PDF. Make the bands self-contained for the capture:
+           the container then centres inside the captured width and nothing is lost. */
+        #ha-ufsm-embed.ufsm-pdf-capture .ufsm-full-width{ width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; }
         /* A PDF page can't be scrolled sideways: if the viewport is narrow enough
            that .ufsm-table-scroll is scrolling internally, the off-screen columns
            would simply be missing from the export. Let the tables reflow to fit
