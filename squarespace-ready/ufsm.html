@@ -1448,6 +1448,32 @@
                 e.style.setProperty('opacity', '1', 'important');
                 e.style.setProperty('transform', 'none', 'important');
             });
+
+            // The HOST page can have a scroll-reveal system of its own, and it does
+            // not stop at the edge of this embed. Squarespace's site animations tag
+            // elements inside the flyer \u2014 every h2 and p it recognises \u2014 with its
+            // `preFade` class plus inline transitions, holding them at opacity:0
+            // until its own scroll handler marks them revealed. That handler never
+            // runs in html2canvas's off-screen clone, so on the live site those
+            // headings and paragraphs rasterized blank while our own div/span
+            // elements (eyebrows, kickers) came out fine. Nothing in OUR stylesheet
+            // could fix it, because the rule holding them at zero is the host's.
+            //
+            // Rather than hard-code one host's class names, reveal anything left at
+            // exactly opacity:0 by any stylesheet. visibility:hidden is the tell for
+            // things meant to STAY hidden (our tooltips), so those are skipped, and
+            // partly-faded decorative elements are untouched because their opacity
+            // is never exactly 0. This runs on the throwaway clone only \u2014 the live
+            // page is never mutated.
+            var win = clonedDoc.defaultView || window;
+            root.querySelectorAll('*').forEach(function (e) {
+                var cs = win.getComputedStyle(e);
+                if (cs.visibility === 'hidden' || parseFloat(cs.opacity) !== 0) return;
+                e.style.setProperty('opacity', '1', 'important');
+                e.style.setProperty('transform', 'none', 'important');
+                e.style.setProperty('animation', 'none', 'important');
+                e.style.setProperty('transition', 'none', 'important');
+            });
         }
 
         // When this markup is embedded inside another page (e.g. pasted into a
