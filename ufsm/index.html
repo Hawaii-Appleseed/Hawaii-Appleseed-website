@@ -592,6 +592,12 @@
            cropped out of the PDF. Make the bands self-contained for the capture:
            the container then centres inside the captured width and nothing is lost. */
         .ufsm-pdf-capture .ufsm-full-width { width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; }
+        /* Safety net for the chart canvases. Narrowing the bands above narrows the
+           chart containers too, and Chart.js resizes its canvas asynchronously, so a
+           canvas can momentarily still be laid out at the pre-capture width. Scaling
+           it down loses nothing; overflowing would clip its right edge off the PDF. */
+        .ufsm-pdf-capture .ufsm-chart-box { overflow: hidden; }
+        .ufsm-pdf-capture .ufsm-chart-box canvas { max-width: 100% !important; }
         /* A PDF page can't be scrolled sideways: if the viewport is narrow enough
            that .ufsm-table-scroll is scrolling internally, the off-screen columns
            would simply be missing from the export. Let the tables reflow to fit
@@ -1319,6 +1325,20 @@
         // Selectors for everything that starts at opacity:0 and animates in.
         var FADE_IN_SEL = '.ufsm-reveal, .ufsm-reasons-kicker, .ufsm-reasons-head .ufsm-rh-line, .ufsm-reasons-2col .ufsm-reason';
 
+        // Re-measure both charts against their CURRENT container width and redraw
+        // with animation off, so neither can be captured half-drawn or at a stale
+        // size. Called twice: once up-front in forceFinalState(), and again after
+        // the capture layout has settled — see the call site below for why once is
+        // not enough.
+        function fitCharts() {
+            [pieChart, barChart].forEach(function (ch) {
+                if (!ch) return;
+                ch.options.animation = false;
+                ch.resize();
+                ch.update('none');
+            });
+        }
+
         function forceFinalState() {
             // Belt-and-suspenders: force every reveal + text animation to its finished
             // state via INLINE styles, not just the .active / .ufsm-pdf-capture classes.
@@ -1342,8 +1362,7 @@
             // canvas size until a real resize event, so after the window is resized
             // the canvas can be WIDER than the capture area and get clipped at the
             // right edge. update() alone does not re-measure the container.
-            if (pieChart) { pieChart.resize(); pieChart.options.animation = false; pieChart.update(); }
-            if (barChart) { barChart.resize(); barChart.options.animation = false; barChart.update(); }
+            fitCharts();
 
             animateFills(document);
             document.querySelectorAll('.ufsm-gap-fill, .ufsm-lever-fill').forEach(function (e) { e.style.transition = 'none'; });
@@ -1448,6 +1467,23 @@
                     });
                 }).then(function () {
                     return new Promise(function (res) { setTimeout(res, 200); });
+                }).then(function () {
+                    // The capture stylesheet narrows the full-bleed bands to the
+                    // captured width, and every chart container narrows with them.
+                    // Chart.js sizes its canvas from that container but defers the
+                    // actual resize to requestAnimationFrame, so the resize asked for
+                    // in forceFinalState() — which ran before the narrowed layout had
+                    // even been painted — can still be pending here. That leaves the
+                    // canvas laid out at the PRE-capture width, overflowing the
+                    // capture and getting clipped at the right edge (the bar chart
+                    // lost its ALICE budget label this way). Re-fit now that the
+                    // narrowed layout is settled, then give Chart.js's own deferred
+                    // resize a frame to land and repaint before we rasterize.
+                    fitCharts();
+                    return new Promise(function (res) {
+                        requestAnimationFrame(function () { requestAnimationFrame(res); });
+                        setTimeout(res, 300);
+                    });
                 }).then(function () {
                     // Capture the VISIBLE width, not scrollWidth. If anything on the
                     // page overflows horizontally, scrollWidth is wider than the
