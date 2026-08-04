@@ -169,9 +169,15 @@
       background: linear-gradient(0deg, rgba(47,62,70,0.30) 0%, rgba(47,62,70,0) 44%);
     }
 
-    /* 1200px, not 1024: below this the right column can't hold the panel
-       without squeezing the headline. */
-    @media (min-width: 1200px) {
+    /* 1000px. The earlier full-bleed version of this had to stop at 1200,
+       because a narrow full-height column cropped the group at the edges.
+       A contained panel has no such problem — it just scales down — so it
+       can run much lower. Below 1000 the two columns start squeezing the
+       headline, so the hero falls back to the seedling layout.
+       Note this is a common laptop/window width: at 1200 the photo was
+       invisible on a lot of real screens, and inside the narrower
+       Squarespace editor canvas. */
+    @media (min-width: 1000px) {
       /* Two real columns, so the copy can never run under the photo. */
       .hero {
         display: grid;
