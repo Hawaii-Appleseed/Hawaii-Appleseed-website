@@ -21,7 +21,11 @@ import urllib.parse
 import urllib.request
 
 SOURCES = {
-    "blog":           "https://hiappleseed.org/blog?format=json",
+    # The blog collection was renamed off /blog to /blog-source so that
+    # /blog itself could become the static ha-blog Code Block page — its
+    # posts still resolve at hiappleseed.org/blog-source/<slug>, which is
+    # what item["fullUrl"] returns and what the rendered cards link to.
+    "blog":           "https://hiappleseed.org/blog-source?format=json",
     "press":          "https://hiappleseed.org/in-the-news?format=json",
     "press_releases": "https://hiappleseed.org/press-releases?format=json",
 }
