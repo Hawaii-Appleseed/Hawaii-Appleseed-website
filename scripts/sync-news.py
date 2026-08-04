@@ -157,6 +157,10 @@ def slim_blog(item):
         "categories": item.get("categories", []),
         "tags":       item.get("tags", []),
         "author":     {"displayName": author.get("displayName", "")},
+        # Post image, served off the Squarespace CDN. Kept as the bare
+        # original URL — renderers append ?format=<width>w to get a
+        # thumbnail rather than the ~2500px original.
+        "assetUrl":   item.get("assetUrl", ""),
     }
 
 
@@ -215,7 +219,19 @@ def fetch_all(name, source_url):
     return items
 
 
+def load_existing(path):
+    """Previous news.json, or {} on first run / unreadable file."""
+    try:
+        with open(path) as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return {}
+
+
 def main():
+    out_path = os.path.abspath(OUT_PATH)
+    previous = load_existing(out_path)
+
     output = {}
     for name, source_url in SOURCES.items():
         print(f"Fetching {name} from {source_url} ...")
@@ -227,9 +243,28 @@ def main():
         output[name] = slimmed
         print(f"  [{name}] slimmed: {len(slimmed)} items")
 
+    # A Squarespace collection that gets renamed, unpublished, or replaced by
+    # a static page still answers 200 with zero items — indistinguishable from
+    # a healthy empty feed. Writing that through silently wipes a section of
+    # the site, so refuse to overwrite a non-empty feed with nothing and let
+    # the workflow fail loudly instead.
+    emptied = [
+        name for name in SOURCES
+        if not output[name] and previous.get(name)
+    ]
+    if emptied:
+        detail = ", ".join(
+            f"{n} (had {len(previous[n])}, got 0)" for n in emptied
+        )
+        raise SystemExit(
+            f"ABORT: refusing to write news.json — {detail}. "
+            "The source collection is probably renamed, unpublished, or "
+            "shadowed by a static page at the same slug. Existing "
+            "news.json left untouched."
+        )
+
     output["lastSynced"] = int(time.time() * 1000)
 
-    out_path = os.path.abspath(OUT_PATH)
     with open(out_path, "w") as f:
         json.dump(output, f, indent=2)
 

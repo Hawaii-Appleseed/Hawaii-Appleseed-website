@@ -7,6 +7,10 @@
      ===================================================================== -->
 <link rel="stylesheet" href="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/okina.css">
 <style>
+  /* Without this the Squarespace full-bleed override (width:100vw) adds the
+     28/20px horizontal padding ON TOP of the viewport width, so the right
+     edge is clipped by the fluid-engine wrapper's overflow-x:clip. */
+  .ha-news, .ha-news *, .ha-news *::before, .ha-news *::after { box-sizing:border-box; }
   .ha-news{max-width:1180px;margin:0 auto;padding:0 28px 80px;}
   @media (max-width:700px){ .ha-news{padding:0 20px 56px;} }
   .ha-news__hero{padding:36px 0 8px;}
@@ -30,6 +34,10 @@
   .ha-news__card{display:flex;flex-direction:column;background:#fff;border:1px solid #E8EDE6;border-radius:6px;padding:22px 22px 20px;transition:border-color .25s,box-shadow .25s,transform .25s;text-decoration:none;color:inherit;cursor:pointer;}
   .ha-news__card:focus-visible{outline:2px solid #52796F;outline-offset:3px;}
   .ha-news__card:hover{border-color:#84A98C;box-shadow:0 10px 26px rgba(47,62,70,.08);transform:translateY(-2px);}
+  /* Post thumbnail \2014  the image Squarespace attaches to each blog post.
+     Pulled out to the card edge with negative margins that cancel the
+     card's 22px padding. Cards without an image simply omit it. */
+  .ha-news__thumb{display:block;width:calc(100% + 44px);margin:-22px -22px 16px;aspect-ratio:16/9;object-fit:cover;border-radius:5px 5px 0 0;background:#F1F4F0;}
   .ha-news__src{display:flex;align-items:center;gap:8px;font-family:OkinaManrope, 'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#52796F;margin-bottom:12px;}
   .ha-news__tag{background:#84A98C;color:#fff;border-radius:3px;padding:2px 7px;font-size:10px;letter-spacing:.1em;}
   .ha-news__card h3{font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;font-size:1.08rem;line-height:1.34;color:#2F3E46;margin:0 0 10px;}
@@ -90,6 +98,18 @@
   function fmtDate(ms){if(!ms)return '';var d=new Date(ms);return d.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});}
   function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
+  // Squarespace serves post images off its CDN, which resizes on demand
+  // via ?format=<width>w \u2014 so cards pull a thumbnail, not the 2500px
+  // original. 2x variant supplied for retina.
+  function thumb(p){
+    var u=p.assetUrl; if(!u) return '';
+    var sep=u.indexOf('?')>-1?'&':'?';
+    return '<img class="ha-news__thumb" loading="lazy" decoding="async" alt="" '+
+      'src="'+esc(u+sep+'format=500w')+'" '+
+      'srcset="'+esc(u+sep+'format=500w')+' 500w, '+esc(u+sep+'format=1000w')+' 1000w" '+
+      'sizes="(max-width:700px) 100vw, 360px">';
+  }
+
   // Blog posts are internal Squarespace collection items:
   // they link to hiappleseed.org + fullUrl (no external sourceUrl).
   function postCard(p, tag){
@@ -97,6 +117,7 @@
     var cat=(p.categories&&p.categories[0])||'';
     var ex=strip(p.excerpt); if(ex.length>170) ex=ex.slice(0,167)+'\u2026';
     return '<a class="ha-news__card" href="'+url+'" target="_blank" rel="noopener">'+
+      thumb(p)+
       '<div class="ha-news__src"><span class="ha-news__tag">'+esc(tag)+'</span>'+(cat?esc(cat):'<span class="ha-news__date">'+fmtDate(p.publishOn)+'</span>')+'</div>'+
       '<h3>'+esc(strip(p.title))+'</h3>'+
       (ex?'<p class="ha-news__excerpt">'+esc(ex)+'</p>':'')+

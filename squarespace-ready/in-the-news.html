@@ -7,6 +7,10 @@
      ===================================================================== -->
 <link rel="stylesheet" href="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/okina.css">
 <style>
+  /* Without this the Squarespace full-bleed override (width:100vw) adds the
+     28/20px horizontal padding ON TOP of the viewport width, so the right
+     edge is clipped by the fluid-engine wrapper's overflow-x:clip. */
+  .ha-news, .ha-news *, .ha-news *::before, .ha-news *::after { box-sizing:border-box; }
   .ha-news{max-width:1180px;margin:0 auto;padding:0 28px 80px;}
   @media (max-width:700px){ .ha-news{padding:0 20px 56px;} }
   .ha-news__hero{padding:36px 0 8px;}
