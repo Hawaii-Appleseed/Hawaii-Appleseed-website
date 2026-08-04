@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Millionaires Report — Hawaiʻi Wealth Data</title>
+    <meta name="description" content="A data report on Hawaiʻi's millionaires: 83,424 people hold $457.6 billion — about 19× the annual state budget. Explore the wealth tiers, how concentrated it is, and the revenue a modest wealth tax could raise.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Millionaires in Hawaiʻi — Wealth Data Report">
+    <meta property="og:description" content="83,424 millionaires hold $457.6B in Hawaiʻi — about 19× the annual state budget. See the tiers, the concentration, and what a wealth tax could raise.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Millionaires in Hawaiʻi — Wealth Data Report">
+    <meta name="twitter:description" content="83,424 millionaires hold $457.6B in Hawaiʻi — about 19× the annual state budget.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231a3c34'/%3E%3Ctext x='16' y='23' font-family='Nunito,Arial,sans-serif' font-size='20' font-weight='900' fill='%238ad6a0' text-anchor='middle'%3E$%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+            background: #f4f1eb;
+            background-image:
+                url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            color: #2a2a2a;
+            padding: clamp(1rem, 4vw, 2.5rem);
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: left;
+            margin-bottom: 2.5rem;
+            max-width: 960px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 2.5rem;
+        }
+
+        .header h1 {
+            font-family: 'Nunito', system-ui, sans-serif;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 900;
+            color: #1a3c34;
+            letter-spacing: -0.5px;
+        }
+
+        /* Kicker lockup: accent bar → eyebrow → title */
+        .header .kicker::before {
+            content: '';
+            display: block;
+            width: 52px;
+            height: 5px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #1f5a44, #6abc7a);
+            margin-bottom: 0.7rem;
+        }
+
+        .header .kicker {
+            color: #5e8268;
+            font-size: 0.95rem;
+            margin: 0 0 0.55rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ── Infographic Summary Banner ── */
+        .infographic-banner {
+            max-width: 960px;
+            margin: 0 auto 0;
+            background: linear-gradient(160deg, #0f2922 0%, #1a3c34 30%, #1e4f40 70%, #245a48 100%);
+            border-radius: 20px 20px 0 0;
+            padding: clamp(1.5rem, 4vw, 2.8rem) clamp(1.5rem, 4vw, 3rem);
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            box-shadow:
+                0 1px 2px rgba(0,0,0,0.07),
+                0 4px 12px rgba(15, 41, 34, 0.12),
+                0 16px 40px rgba(15, 41, 34, 0.18);
+            position: relative;
+            overflow: visible;
+            z-index: 100;
+        }
+
+        .infographic-banner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 55%),
+                radial-gradient(ellipse at 90% 20%, rgba(168, 230, 176, 0.07) 0%, transparent 55%);
+            pointer-events: none;
+            border-radius: 20px;
+        }
+
+        .infographic-banner::after {
+            content: none;
+        }
+
+        /* Headline row */
+        .banner-headline {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.5rem;
+            position: relative;
+            z-index: 20;
+            margin-bottom: clamp(1.2rem, 3vw, 2rem);
+            padding-right: 172px; /* reserve room for the pinned trend pill */
+        }
+
+        .banner-headline .label {
+            color: rgba(255,255,255,0.6);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 500;
+        }
+
+        .banner-headline .count {
+            font-family: 'Nunito', system-ui, sans-serif;
+            color: #ffffff;
+            font-size: clamp(2rem, 6vw, 3.2rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -1px;
+            background: linear-gradient(180deg, rgba(168,230,176,0.15) 60%, rgba(168,230,176,0.25) 100%);
+            padding: 2px 8px 4px;
+            border-radius: 6px;
+        }
+
+        /* Revenue callout — sits flush under the dark banner */
+        .revenue-callout {
+            max-width: 960px;
+            margin: 0 auto 2.5rem;
+            padding: 1.4rem 2rem 1.35rem;
+            background:
+                radial-gradient(ellipse 60% 90% at 50% 58%, rgba(106,188,122,0.11) 0%, transparent 72%),
+                linear-gradient(135deg, #e8f0ec 0%, #d4e3da 100%);
+            border-radius: 0 0 20px 20px;
+            border: 1px solid rgba(26, 60, 52, 0.08);
+            border-top: none;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(26, 60, 52, 0.06);
+            position: relative;
+            z-index: 1;
+        }
+        /* Seam accent at the banner↔callout boundary */
+        .revenue-callout::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 56%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(106,188,122,0.6), transparent);
+            border-radius: 0 0 3px 3px;
+        }
+        .revenue-callout-prompt {
+            font-size: 1.07rem;
+            color: #3a5a4d;
+            font-weight: 500;
+            line-height: 1.6;
+            letter-spacing: 0.005em;
+            max-width: 32em;
+            margin: 0 auto 0.95rem;
+        }
+        .revenue-callout-prompt strong {
+            color: #173a31;
+            font-weight: 700;
+            /* soft money-green highlight under the tax rate — cleaner than bare bold */
+            background: linear-gradient(transparent 62%, rgba(106,188,122,0.34) 0);
+            padding: 0 0.12em;
+        }
+        .revenue-callout-prompt #revenueTierLabel {
+            color: #1a3c34;
+            font-weight: 600;
+        }
+        /* Dark inset "readout" pill — echoes the banner's count chip */
+        .revenue-callout-figure {
+            display: inline-flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 0 auto;
+            padding: 0.5rem 1.5rem 0.55rem;
+            background: linear-gradient(160deg, #16302700 0%, #16302700 100%), linear-gradient(160deg, #163027 0%, #1e4538 100%);
+            border-radius: 14px;
+            box-shadow:
+                0 6px 18px rgba(15,41,34,0.22),
+                inset 0 1px 0 rgba(255,255,255,0.07);
+            flex-wrap: wrap;
+        }
+        .revenue-callout-range {
+            font-size: clamp(1.9rem, 5.2vw, 2.6rem);
+            font-weight: 800;
+            color: #a8e6b0;
+            letter-spacing: -0.015em;
+            line-height: 1.15;
+            text-shadow: 0 0 22px rgba(106,188,122,0.28);
+        }
+        .revenue-callout-connector {
+            color: rgba(168,230,176,0.55);
+            font-size: 0.4em;
+            font-weight: 500;
+            font-style: italic;
+            text-transform: lowercase;
+            letter-spacing: 0.03em;
+        }
+        /* Unit lives inside the pill, attached to the number it modifies */
+        .revenue-callout-per {
+            font-size: 1rem;
+            font-weight: 700;
+            color: rgba(168, 230, 176, 0.78);
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+        .revenue-callout-context {
+            font-size: 0.92rem;
+            color: #6b8f71;
+            font-weight: 500;
+            margin: 0.7rem 0 0;
+        }
+
+        /* Stats row */
+        .banner-stats {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            gap: 0;
+            position: relative;
+            z-index: 2;
+            background: rgba(255,255,255,0.05);
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.07);
+            padding: clamp(1rem, 2.5vw, 1.5rem) 0;
+        }
+
+        .banner-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 clamp(0.75rem, 3vw, 1.5rem);
+        }
+
+        .banner-stat-value {
+            font-family: 'Nunito', system-ui, sans-serif;
+            color: #a8e6b0;
+            font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+        }
+
+        .banner-stat-unit {
+            color: rgba(168, 230, 176, 0.5);
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.15rem;
+        }
+
+        .banner-stat-label {
+            color: rgba(255,255,255,0.45);
+            font-size: clamp(0.85rem, 1.8vw, 0.92rem);
+            font-weight: 500;
+            margin-top: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .banner-divider {
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(255,255,255,0.15), transparent);
+            align-self: stretch;
+        }
+
+        /* ── Trend pill (headline-right) ── */
+        .banner-trend {
+            /* Pinned to the headline's top-right so it never shifts when the
+               count / dropdown label width changes between tier selections. */
+            position: absolute;
+            top: 0.2rem;
+            right: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.45rem 0.85rem;
+            background: rgba(168, 230, 176, 0.1);
+            border: 1px solid rgba(168, 230, 176, 0.18);
+            border-radius: 12px;
+        }
+        .banner-trend-spark {
+            display: block;
+            flex-shrink: 0;
+        }
+        .banner-trend-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.05;
+        }
+        .banner-trend-figure {
+            font-family: 'Nunito', system-ui, sans-serif;
+            color: #a8e6b0;
+            font-weight: 900;
+            font-size: 1.3rem;
+            letter-spacing: -0.01em;
+        }
+        .banner-trend-since {
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-top: 0.1rem;
+        }
+
+        /* ── Concentration proportion bar ── */
+        .conc-bar {
+            display: flex;
+            width: 100%;
+            max-width: 170px;
+            height: 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            margin: 0.55rem auto 0.45rem;
+            overflow: hidden;
+        }
+        /* Segments are interactive in the "all" wealth-by-tier view */
+        .conc-seg { cursor: default; }
+        .conc-bar-fill {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, #4f9b72, #8ad6a0);
+            border-radius: 6px;
+            transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        /* Stacked breakdown segments (shown for the "all" view) */
+        .conc-seg {
+            height: 100%;
+            transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .conc-seg:not(:last-child) {
+            box-shadow: inset -1.5px 0 0 rgba(255, 255, 255, 0.4);
+        }
+        /* Color-keyed percentage legend under the stacked bar */
+        .conc-key {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.28rem;
+            margin: 0 0.32rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .conc-key-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ── Coin stack ── */
+        .coin-stack-svg {
+            display: block;
+            margin: 0 auto 0.4rem;
+        }
+
+        /* ── Budget pie grid ── */
+        .budget-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+            max-width: 160px;
+            margin: 0.5rem auto 0.35rem;
+        }
+
+        .budget-pie {
+            width: 14px;
+            height: 14px;
+            position: relative;
+        }
+
+        .budget-pie svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ── Dropdown in banner ── */
+        .dropdown-wrapper {
+            position: relative;
+            display: inline-block;
+            z-index: 10;
+        }
+
+        .dropdown-btn {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.85);
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: all 0.2s;
+            white-space: nowrap;
+            line-height: 1.4;
+            backdrop-filter: blur(4px);
+        }
+
+        .dropdown-btn .small {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            white-space: nowrap;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(26, 60, 52, 0.2);
+            z-index: 9999;
+            min-width: 280px;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-menu.open { display: block; }
+
+        .dropdown-menu button {
+            display: block;
+            width: 100%;
+            padding: 0.65rem 1.2rem;
+            text-align: left;
+            background: none;
+            border: none;
+            font-size: 0.9rem;
+            color: #2a2a2a;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.15s;
+            font-weight: 500;
+        }
+
+        .dropdown-menu button:hover { background: #f0f7f2; }
+        .dropdown-menu button.active { color: #2a6b4f; font-weight: 700; }
+
+        /* ── Charts ── */
+        .chart-container {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow:
+                0 1px 2px rgba(0,0,0,0.04),
+                0 4px 16px rgba(26, 60, 52, 0.06),
+                0 12px 40px rgba(26, 60, 52, 0.05);
+            border: 1px solid rgba(255,255,255,0.8);
+            padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem) 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 960px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+
+        .chart-switcher {
+            appearance: none;
+            -webkit-appearance: none;
+            font-family: 'Nunito', system-ui, sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1a3c34;
+            background-color: #f0f7f2;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231f5a44' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 11px;
+            border: 1.5px solid #d4e3da;
+            border-radius: 10px;
+            padding: 0.38rem 2.1rem 0.42rem 0.85rem;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .chart-title-group { min-width: 0; }
+        .chart-switcher:hover {
+            border-color: #6abc7a;
+            background-color: #e3f0e8;
+        }
+        .chart-switcher:focus {
+            outline: none;
+            border-color: #4f9b72;
+            box-shadow: 0 0 0 3px rgba(106, 188, 122, 0.25);
+        }
+
+        .map-embed-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fcfcf9;
+            border: 1px solid rgba(26, 60, 52, 0.08);
+            margin-top: 0.5rem;
+        }
+
+        .map-embed-wrapper iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .tax-popup {
+            position: absolute;
+            background: rgba(26, 60, 52, 0.95);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            max-width: 250px;
+        }
+
+        .tax-popup.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .tax-popup .arrow {
+            display: inline-block;
+            margin: 0 4px;
+            font-weight: bold;
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Section marker — small green accent above each section title */
+        .chart-title-group::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 4px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #1f5a44, #6abc7a);
+            margin-bottom: 0.6rem;
+        }
+
+        .chart-header h2 {
+            font-family: 'Nunito', system-ui, sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1a3c34;
+        }
+
+        .chart-header .subtitle {
+            font-size: 0.92rem;
+            color: #8fa89a;
+            font-weight: 500;
+        }
+
+        .year-select {
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.3rem 0.7rem;
+            border: 1.5px solid #c8d9ce;
+            border-radius: 8px;
+            color: #1a3c34;
+            background: #f5f7f0;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .year-select:hover { border-color: #2a6b4f; }
+
+        .chart-wrapper {
+            position: relative;
+            height: 420px;
+        }
+
+        .legend-hint {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #a3b8aa;
+            margin-top: 0.75rem;
+        }
+
+        .source {
+            text-align: center;
+            font-size: 0.78rem;
+            color: #b3ab9e;
+            margin-top: 1.25rem;
+            max-width: 960px;
+            margin-left: auto;
+            margin-right: auto;
+            font-style: italic;
+        }
+
+        /* budget-callout removed — now integrated into banner */
+
+        /* ── Narrative Section ── */
+        .narrative-section {
+            max-width: 960px;
+            margin: 0 auto 2.5rem;
+            background: linear-gradient(180deg, #ffffff 0%, #fbfdfc 100%);
+            border-radius: 20px;
+            box-shadow:
+                0 1px 2px rgba(0,0,0,0.04),
+                0 4px 16px rgba(26, 60, 52, 0.06),
+                0 12px 40px rgba(26, 60, 52, 0.05);
+            border: 1px solid rgba(255,255,255,0.8);
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Editorial accent strip — marks this as the "insight" card vs the data cards */
+        .narrative-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #1f5a44 0%, #4f9b72 50%, #6abc7a 100%);
+        }
+
+        .narrative-title {
+            font-family: 'Nunito', system-ui, sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #1a3c34;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e8f0ea;
+        }
+
+        .narrative-point {
+            margin-bottom: 1.25rem;
+        }
+
+        .narrative-point-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .narrative-point-header h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1a3c34;
+        }
+
+        .narrative-point p {
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: #3a3a3a;
+            margin-left: 0;
+        }
+
+        .narrative-source {
+            display: block;
+            font-size: 0.85rem;
+            color: #8fa89a;
+            margin-top: 0.5rem;
+            margin-left: 0;
+        }
+
+        .narrative-more-toggle {
+            background: none;
+            border: none;
+            color: #2a6b4f;
+            font-weight: 600;
+            font-size: 0.92rem;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 0;
+            margin-top: 0.5rem;
+            text-decoration: underline;
+            transition: opacity 0.2s;
+        }
+
+        .narrative-more-toggle:hover {
+            opacity: 0.8;
+        }
+
+        .narrative-more-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .narrative-more-content.open {
+            max-height: 500px;
+        }
+
+        .narrative-source a {
+            color: #2a6b4f;
+            text-decoration: underline;
+        }
+
+        /* Pull-stat highlight inside the narrative argument */
+        .narrative-stat {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            margin: 1.1rem 0 0 0;
+            padding: 1rem 1.3rem;
+            background:
+                radial-gradient(ellipse 70% 120% at 12% 50%, rgba(106,188,122,0.14) 0%, transparent 70%),
+                linear-gradient(135deg, #f0f7f2 0%, #e3f0e8 100%);
+            border-left: 4px solid #4f9b72;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 4px 14px rgba(26, 60, 52, 0.05);
+        }
+
+        .narrative-stat-figure {
+            font-family: 'Nunito', system-ui, sans-serif;
+            font-size: clamp(1.7rem, 4.5vw, 2.2rem);
+            font-weight: 900;
+            color: #1f5a44;
+            line-height: 1;
+            white-space: nowrap;
+            letter-spacing: -0.015em;
+            flex-shrink: 0;
+        }
+
+        .narrative-stat-figure .unit {
+            font-size: 0.46em;
+            font-weight: 700;
+            color: #6b8f71;
+            margin-left: 0.18em;
+            letter-spacing: 0;
+        }
+
+        .narrative-stat-desc {
+            font-size: 0.92rem;
+            line-height: 1.55;
+            color: #3a5a4d;
+        }
+
+        .narrative-stat-desc strong { color: #173a31; font-weight: 800; }
+
+        /* ── Wealth-chart total badges (label segment + value segment) ── */
+        .chart-totals-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            padding: 0.35rem 1rem 0.1rem;
+        }
+        .chart-total {
+            display: inline-flex;
+            align-items: stretch;
+            border-radius: 999px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(26, 60, 52, 0.1);
+            line-height: 1;
+        }
+        .chart-total-label {
+            display: flex;
+            align-items: center;
+            background: #e3ece7;
+            color: #5e8268;
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 0.32rem 0.55rem 0.32rem 0.72rem;
+        }
+        .chart-total-value {
+            display: flex;
+            align-items: center;
+            background: #1f5a44;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.92rem;
+            padding: 0.32rem 0.72rem 0.32rem 0.6rem;
+        }
+        /* Past total muted; current total in money-green to signal progression */
+        .chart-total.is-past .chart-total-label { background: #eef2f0; color: #8fa89a; }
+        .chart-total.is-past .chart-total-value { background: #6b8f71; }
+
+        /* ── Wealth-by-tier segment hover tooltip (light card on the dark banner) ── */
+        .tier-tip {
+            position: fixed;
+            z-index: 300;
+            pointer-events: none;
+            opacity: 0;
+            transform: translate(-50%, -100%);
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 0.45rem 0.7rem 0.5rem;
+            box-shadow: 0 10px 26px rgba(15, 41, 34, 0.4);
+            font-family: 'Nunito', system-ui, sans-serif;
+            white-space: nowrap;
+            transition: opacity 0.12s ease;
+        }
+        .tier-tip::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            transform: translateX(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #ffffff;
+        }
+        .tier-tip-row {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .tier-tip-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: inset 0 0 0 1px rgba(26, 60, 52, 0.18);
+        }
+        .tier-tip-name {
+            font-weight: 800;
+            font-size: 0.82rem;
+            color: #1a3c34;
+        }
+        .tier-tip-amt {
+            display: block;
+            margin-top: 0.18rem;
+            font-weight: 800;
+            font-size: 0.98rem;
+            color: #1f5a44;
+            letter-spacing: -0.01em;
+        }
+        .tier-tip-pct {
+            color: #6b8f71;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        /* ── Custom HTML chart tooltip ── */
+        .chart-tooltip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 200;
+            opacity: 0;
+            min-width: 178px;
+            padding: 0.65rem 0.75rem 0.6rem;
+            background: rgba(22, 48, 39, 0.97);
+            border: 1px solid rgba(168, 230, 176, 0.18);
+            border-radius: 11px;
+            box-shadow: 0 10px 30px rgba(15, 41, 34, 0.32);
+            font-family: 'Nunito', system-ui, sans-serif;
+            color: #fff;
+            transition: opacity 0.12s ease;
+        }
+        .chart-tooltip-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 0.01em;
+            margin-bottom: 0.5rem;
+        }
+        .chart-tooltip-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.3rem 0;
+            font-size: 0.86rem;
+        }
+        .chart-tooltip-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .chart-tooltip-name {
+            color: rgba(255, 255, 255, 0.82);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .chart-tooltip-pill {
+            margin-left: auto;
+            background: rgba(168, 230, 176, 0.16);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.84rem;
+            padding: 0.13rem 0.55rem;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+        .chart-tooltip-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.16);
+            margin: 0.5rem 0 0.45rem;
+        }
+        .chart-tooltip-total {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 800;
+        }
+        .chart-tooltip-total .chart-tooltip-name { color: #ffffff; }
+        .chart-tooltip-total .chart-tooltip-pill {
+            background: #6abc7a;
+            color: #0f2922;
+        }
+
+        /* ── Scroll-reveal: sections fade + rise as they enter the viewport ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.in {
+            opacity: 1;
+            transform: none;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+        }
+
+        @media (max-width: 600px) {
+            .banner-headline {
+                justify-content: center;
+                padding-right: 0;
+            }
+            /* "Hawaiʻi has" leads on its own line so the count + dropdown stay together */
+            .banner-headline .label {
+                flex-basis: 100%;
+                text-align: center;
+            }
+            .banner-headline .count {
+                margin-top: 0.15rem;
+            }
+            .banner-trend {
+                position: static;
+                margin: 0.6rem auto 0;
+            }
+            .banner-stats {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .banner-divider {
+                width: 60%;
+                height: 1px;
+                margin: 0.8rem auto;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            }
+            .banner-stat {
+                padding: 0.4rem 1rem;
+            }
+            .header { padding-left: 0; text-align: center; }
+            .header .kicker::before { margin-left: auto; margin-right: auto; }
+            .map-embed-wrapper {
+                aspect-ratio: 4 / 5;
+            }
+            .chart-switcher {
+                width: 100%;
+                font-size: 1rem;
+            }
+            .revenue-callout {
+                padding: 1.1rem 1.25rem;
+            }
+            .narrative-stat {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <p class="kicker">Data Breakdown</p>
+        <h1>Millionaires in Hawaiʻi</h1>
+    </div>
+
+    <!-- Infographic Banner -->
+    <div class="infographic-banner">
+        <div class="banner-headline">
+            <span class="label">Hawaiʻi has</span>
+            <span class="count" id="summaryCount">83,424</span>
+            <div class="dropdown-wrapper">
+                <button class="dropdown-btn" id="tierBtn">millionaires &#9662;</button>
+                <div class="dropdown-menu" id="tierMenu">
+                    <button data-tier="all" class="active">millionaires (all)</button>
+                    <button data-tier="$1M-$20M">millionaires ($1M&ndash;$20M)</button>
+                    <button data-tier="$20M-$50M">ultra-millionaires ($20M&ndash;$50M)</button>
+                    <button data-tier="$50M+">ultra-millionaires ($50M+)</button>
+                </div>
+            </div>
+            <div class="banner-trend" id="bannerTrend">
+                <svg class="banner-trend-spark" id="trendSpark" width="52" height="26" viewBox="0 0 52 26" aria-hidden="true"></svg>
+                <span class="banner-trend-text">
+                    <span class="banner-trend-figure" id="trendFigure">+184%</span>
+                    <span class="banner-trend-since">since 2010</span>
+                </span>
+            </div>
+        </div>
+        <div class="banner-stats">
+            <div class="banner-stat">
+                <svg class="coin-stack-svg" width="38" height="38" viewBox="0 0 38 38">
+                    <!-- Bottom coin side -->
+                    <path d="M4,27 L4,31 A15,5 0 0 0 34,31 L34,27 Z" fill="rgba(45,100,58,0.6)"/>
+                    <!-- Bottom coin face -->
+                    <ellipse cx="19" cy="27" rx="15" ry="5" fill="rgba(72,145,88,0.45)" stroke="rgba(168,230,176,0.28)" stroke-width="1"/>
+                    <!-- Middle coin side -->
+                    <path d="M4,18 L4,22 A15,5 0 0 0 34,22 L34,18 Z" fill="rgba(55,118,70,0.68)"/>
+                    <!-- Middle coin face -->
+                    <ellipse cx="19" cy="18" rx="15" ry="5" fill="rgba(88,165,104,0.58)" stroke="rgba(168,230,176,0.38)" stroke-width="1"/>
+                    <!-- Top coin side -->
+                    <path d="M4,9 L4,13 A15,5 0 0 0 34,13 L34,9 Z" fill="rgba(65,135,80,0.75)"/>
+                    <!-- Top coin face -->
+                    <ellipse cx="19" cy="9" rx="15" ry="5" fill="rgba(105,188,122,0.72)" stroke="rgba(168,230,176,0.55)" stroke-width="1"/>
+                    <!-- Inner ring on top -->
+                    <ellipse cx="19" cy="9" rx="10" ry="3.3" fill="none" stroke="rgba(168,230,176,0.3)" stroke-width="0.7"/>
+                    <text x="19" y="11.5" text-anchor="middle" fill="rgba(168,230,176,0.85)" font-size="6.5" font-weight="900" font-family="Nunito,sans-serif">$</text>
+                </svg>
+                <span class="banner-stat-value" id="summaryWealth">$457.6</span>
+                <span class="banner-stat-unit">billion</span>
+                <span class="banner-stat-label">total wealth held</span>
+            </div>
+            <div class="banner-divider"></div>
+            <div class="banner-stat">
+                <span class="banner-stat-value" id="concentrationValue">15%</span>
+                <span class="banner-stat-unit" id="concentrationUnit">of all wealth</span>
+                <div class="conc-bar" id="concBar" aria-hidden="true"><span class="conc-bar-fill" id="concBarFill" style="width:15.1%"></span></div>
+                <span class="banner-stat-label" id="concentrationLabel">held by the top 365 (0.4%)</span>
+            </div>
+            <div class="banner-divider"></div>
+            <div class="banner-stat">
+                <span class="banner-stat-value" id="budgetMultiple">19.3</span>
+                <span class="banner-stat-unit">times the state budget</span>
+                <div class="budget-grid" id="budgetGrid"></div>
+                <span class="banner-stat-label"><span style="display:inline-block;width:8px;height:8px;background:rgba(252,196,72,0.8);border-radius:50%;vertical-align:middle;margin-right:3px;"></span> = 1 state budget <span style="white-space:nowrap;">($23.7B &middot; 2026)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wealth-tax revenue callout -->
+    <div class="revenue-callout">
+        <p class="revenue-callout-prompt">
+            A <strong>0.1%&ndash;0.2%</strong> wealth tax on <span id="revenueTierLabel">these 83,424 millionaires</span> could raise
+        </p>
+        <div class="revenue-callout-figure">
+            <span class="revenue-callout-range">
+                <span id="revenueLow">$458M</span>
+                <span class="revenue-callout-connector">to</span>
+                <span id="revenueHigh">$915M</span>
+            </span>
+            <span class="revenue-callout-per">/ year</span>
+        </div>
+        <p class="revenue-callout-context">
+            &asymp; <span id="revenueBudgetPct">1.9% &ndash; 3.9%</span> of Hawaiʻi&rsquo;s annual state budget
+        </p>
+    </div>
+
+    <!-- Geographic Map (embedded dashboard) -->
+    <div class="chart-container">
+        <div class="chart-header">
+            <div class="chart-title-group">
+                <h2 style="font-size: 1.15rem; font-weight: 700; color: #1a3c34; margin: 0;">
+                    Where Hawaiʻi&rsquo;s Millionaires Live
+                </h2>
+                <span class="subtitle">Circle size and color scale with the number of millionaires per city</span>
+            </div>
+        </div>
+        <div class="map-embed-wrapper">
+            <iframe
+                src="https://dtomkatsu.github.io/hawaii-appleseed-dashboard/?var=millionaires&amp;embed=1"
+                title="Map of millionaire locations in Hawaiʻi"
+                loading="lazy"
+                allow="fullscreen"
+                referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+        </div>
+        <p class="chart-caption" style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: #6b8f71; font-style: italic;">
+            Honolulu dominates the count, but ultra-wealth pockets exist on every island.
+        </p>
+    </div>
+
+    <!-- Single Chart Container with Switcher -->
+    <div class="chart-container">
+        <div class="chart-header">
+            <div class="chart-title-group">
+                <select class="chart-switcher" id="chartSwitcher">
+                    <option value="wealth">Wealth Held by Wealthy Individuals, Billions</option>
+                    <option value="individuals"># of Individuals by Wealth Tier</option>
+                </select>
+                <span class="subtitle" id="chartSubtitle">Hawaiʻi, 2010&ndash;2024 (USD) &middot; Stacked area shows tiers as portions of total</span>
+            </div>
+            <select class="year-select" id="yearSelect" style="display:none;"></select>
+        </div>
+        
+        <!-- Wealth Chart Wrapper -->
+        <div id="wealthWrapper">
+            <div class="chart-totals-row">
+                <span class="chart-total is-past">
+                    <span class="chart-total-label">2010 Total</span>
+                    <span class="chart-total-value" id="aggregate2010">$167.1B</span>
+                </span>
+                <span class="chart-total is-current">
+                    <span class="chart-total-label">2024 Total</span>
+                    <span class="chart-total-value" id="aggregateTotal">$457.6B</span>
+                </span>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="wealthChart"></canvas>
+            </div>
+        </div>
+        <p class="chart-caption" id="wealthCaption" style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: #6b8f71; font-style: italic;">
+            Even with tax increases, the wealth held by millionaires in Hawaiʻi has almost tripled since 2010.
+        </p>
+
+        <!-- Individuals Chart Wrapper -->
+        <div class="chart-wrapper" id="individualsWrapper" style="display:none;">
+            <canvas id="individualsChart"></canvas>
+        </div>
+        <p class="chart-caption" id="individualsCaption" style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: #6b8f71; font-style: italic; display: none;">
+            The number of millionaires in Hawaiʻi has steadily increased since 2010, despite tax increases.
+        </p>
+    </div>
+
+    <p class="source">Source: Wealth-X / Altrata &mdash; Market Sizing Wealth Data for Hawaiʻi (Nov 9, 2025)</p>
+
+    <!-- Narrative Section -->
+    <div class="narrative-section">
+        <h2 class="narrative-title">Ultra-millionaires have advantages over the rest of us</h2>
+        <div class="narrative-point">
+            <div class="narrative-point-header">
+                <h3>They pay low taxes on their investments</h3>
+            </div>
+            <p>Hawaiʻi is one of only nine states that taxes capital gains at a lower rate than ordinary income&mdash;effectively a loophole that almost entirely benefits the wealthy.</p>
+            <div class="narrative-stat">
+                <span class="narrative-stat-figure">$180M<span class="unit">/year</span></span>
+                <span class="narrative-stat-desc">in new revenue if capital gains were taxed like regular income &mdash; with <strong>97% paid by the top 5%</strong> of earners, and nothing more from the bottom 80%.</span>
+            </div>
+            <button class="narrative-more-toggle" data-target="narrative-1">More</button>
+            <div class="narrative-more-content" id="narrative-1">
+                <p style="margin-left: 0; margin-top: 0.5rem; font-size: 0.92rem; line-height: 1.7; color: #3a3a3a;">Of taxpayers who reported capital gains in 2019, the 7.7% who earned $400,000+ received <strong>79.4% of all capital gains income</strong> in the state. Those making over $1&nbsp;million a year actually pay a <em>lower</em> effective tax rate than the income group just below them, because Hawaiʻi taxes long-term capital gains at just 7.25% versus the top marginal rate of 11%. If capital gains were taxed like regular income, the state would gain roughly <strong>$180&nbsp;million per year</strong>&mdash;with 97% paid by the top 5% of earners. The bottom 80% of taxpayers would pay nothing additional.</p>
+            </div>
+            <span class="narrative-source">Source: <a href="https://www.hitaxfairness.org/capital-gains" target="_blank">HI Tax Fairness Coalition &mdash; Capital Gains Tax Reform</a></span>
+        </div>
+    </div>
+
+    <!-- Wealth-by-tier segment hover tooltip -->
+    <div class="tier-tip" id="tierTip" role="status" aria-hidden="true"></div>
+
+    <!-- Tax Popup -->
+    <div class="tax-popup" id="taxPopup">
+        The top income tax rate went from 8.25% <span class="arrow">→</span> 11%
+    </div>
+
+    <script>
+        // ── Data ──
+        const years = [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+
+        const individualsData = {
+            '$1M\u2013$20M':  [28801, 28276, 32043, 37933, 41121, 41187, 44731, 50833, 50374, 54437, 53425, 58904, 56745, 66976, 81814],
+            '$20M\u2013$50M': [466, 458, 516, 604, 652, 654, 706, 796, 789, 848, 835, 915, 883, 1031, 1245],
+            '$50M+': [138, 135, 152, 178, 192, 192, 208, 234, 232, 249, 246, 270, 260, 304, 365]
+        };
+
+        const wealthData = {
+            '$1M\u2013$20M':  [105.7, 103.9, 117.2, 138.0, 149.2, 149.5, 161.7, 184.1, 181.8, 196.5, 192.9, 213.3, 205.6, 241.6, 292.7],
+            '$20M\u2013$50M': [35.6, 35.0, 39.3, 45.9, 49.4, 49.6, 53.3, 61.1, 59.8, 64.8, 63.6, 70.9, 68.4, 79.9, 95.6],
+            '$50M+': [25.8, 25.4, 28.5, 33.2, 35.7, 35.9, 38.4, 44.3, 43.2, 47.0, 46.0, 51.6, 49.7, 58.2, 69.3]
+        };
+
+        // Brand money-green ramp: deep teal (largest base tier) → mint (smallest top tier)
+        const tierShades = [
+            { main: '#1f5a44', fill: 'rgba(31, 90, 68, 0.90)',    faded: 'rgba(31, 90, 68, 0.14)' },
+            { main: '#4f9b72', fill: 'rgba(79, 155, 114, 0.86)',  faded: 'rgba(79, 155, 114, 0.14)' },
+            { main: '#8ad6a0', fill: 'rgba(138, 214, 160, 0.82)', faded: 'rgba(138, 214, 160, 0.14)' }
+        ];
+
+        Chart.register(ChartDataLabels);
+
+        // ── Custom HTML tooltip (shared by both charts) ──
+        function getChartTooltipEl() {
+            let el = document.getElementById('chartTooltip');
+            if (!el) {
+                el = document.createElement('div');
+                el.id = 'chartTooltip';
+                el.className = 'chart-tooltip';
+                document.body.appendChild(el);
+            }
+            return el;
+        }
+
+        function externalTooltipHandler(context) {
+            const chart = context.chart;
+            const tooltip = context.tooltip;
+            const el = getChartTooltipEl();
+
+            if (tooltip.opacity === 0) { el.style.opacity = '0'; return; }
+
+            const isWealth = chart.canvas.id === 'wealthChart';
+            const fmt = isWealth
+                ? function(v) { return '$' + v.toFixed(1) + 'B'; }
+                : function(v) { return Math.round(v).toLocaleString(); };
+
+            const title = (tooltip.title && tooltip.title.length) ? tooltip.title[0] : '';
+            const items = tooltip.dataPoints || [];
+
+            let html = '<div class="chart-tooltip-title">' + title + '</div>';
+            let total = 0;
+            items.forEach(function(dp) {
+                const color = dp.dataset.borderColor || dp.dataset.backgroundColor;
+                total += dp.raw;
+                html += '<div class="chart-tooltip-row">' +
+                    '<span class="chart-tooltip-dot" style="background:' + color + '"></span>' +
+                    '<span class="chart-tooltip-name">' + dp.dataset.label + '</span>' +
+                    '<span class="chart-tooltip-pill">' + fmt(dp.raw) + '</span>' +
+                    '</div>';
+            });
+            if (items.length > 1) {
+                html += '<div class="chart-tooltip-divider"></div>' +
+                    '<div class="chart-tooltip-total">' +
+                    '<span class="chart-tooltip-name">Total</span>' +
+                    '<span class="chart-tooltip-pill">' + fmt(total) + '</span>' +
+                    '</div>';
+            }
+            el.innerHTML = html;
+
+            // Position next to the caret, flipping/clamping to stay on-screen
+            const rect = chart.canvas.getBoundingClientRect();
+            el.style.opacity = '1';
+            const tipW = el.offsetWidth;
+            const tipH = el.offsetHeight;
+            const docW = document.documentElement.clientWidth;
+            const docH = document.documentElement.clientHeight;
+            let left = rect.left + window.scrollX + tooltip.caretX + 16;
+            if (left + tipW > window.scrollX + docW - 8) {
+                left = rect.left + window.scrollX + tooltip.caretX - tipW - 16;
+            }
+            let top = rect.top + window.scrollY + tooltip.caretY - tipH / 2;
+            const minTop = window.scrollY + 8;
+            const maxTop = window.scrollY + docH - tipH - 8;
+            top = Math.max(minTop, Math.min(top, maxTop));
+            el.style.left = left + 'px';
+            el.style.top = top + 'px';
+        }
+
+        // ═══════════════════════════════════════
+        // BAR CHART — Individuals by Wealth Tier
+        // ═══════════════════════════════════════
+        const yearSelect = document.getElementById('yearSelect');
+        years.forEach(y => {
+            const opt = document.createElement('option');
+            opt.value = y; opt.textContent = y;
+            if (y === 2024) opt.selected = true;
+            yearSelect.appendChild(opt);
+        });
+
+        function getBarData() {
+            const tiers = Object.keys(individualsData);
+            return tiers.map((tier, i) => ({
+                label: tier,
+                data: individualsData[tier],
+                backgroundColor: tierShades[i].main,
+                borderRadius: 4,
+                barPercentage: 0.8,
+                categoryPercentage: 0.9
+            }));
+        }
+
+        // Created lazily on first reveal — a bar chart initialized inside a display:none
+        // container never gets correct element geometry, so we defer creation until visible.
+        let barChart = null;
+        function createBarChart() {
+            const barCtx = document.getElementById('individualsChart').getContext('2d');
+            return new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: years,
+                datasets: getBarData()
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                layout: {
+                    padding: { left: 20, right: 20, top: 30 }
+                },
+                plugins: {
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        offset: 6,
+                        clip: false,
+                        backgroundColor: 'rgba(255,255,255,0.92)',
+                        borderColor: function(ctx) { return ctx.dataset.backgroundColor; },
+                        borderWidth: 1.25,
+                        borderRadius: 7,
+                        padding: { top: 3, bottom: 3, left: 7, right: 7 },
+                        font: { size: 12, weight: '800' },
+                        color: function(ctx) { return ctx.dataset.backgroundColor; },
+                        formatter: function(value) {
+                            return value > 0 ? value.toLocaleString() : '';
+                        },
+                        display: function(ctx) {
+                            // Label every tier at the first and last year so the small tiers are legible
+                            return ctx.dataIndex === 0 || ctx.dataIndex === years.length - 1;
+                        }
+                    },
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            pointStyle: 'rectRounded',
+                            padding: 20,
+                            font: { size: 14, weight: '600' },
+                            color: '#2a2a2a'
+                        }
+                    },
+                    tooltip: {
+                        enabled: false,
+                        external: externalTooltipHandler
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: {
+                            font: { size: 12 },
+                            color: '#8fa89a',
+                            callback: function(value, index) {
+                                // Show every 3rd year to reduce clutter, but always show 2010 and 2024
+                                if (index === 0 || index === years.length - 1 || index % 3 === 0) {
+                                    return years[index];
+                                }
+                                return '';
+                            }
+                        }
+                    },
+                    y: {
+                        type: 'logarithmic',
+                        min: 100,
+                        grid: { color: 'rgba(26,60,52,0.06)', drawTicks: false },
+                        border: { display: false },
+                        ticks: {
+                            padding: 8,
+                            font: { size: 11 },
+                            color: '#a3b8aa',
+                            callback: function(value) {
+                                if (value === 100 || value === 1000 || value === 10000 || value === 100000) {
+                                    return value.toLocaleString();
+                                }
+                                return '';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        }
+
+        // Year select no longer needed - showing all years
+
+        // ═══════════════════════════════
+        // LINE CHART — Wealth (Stacked)
+        // ═══════════════════════════════
+        function buildWealthDatasets() {
+            const tiers = Object.keys(wealthData);
+            return tiers.map((tier, i) => ({
+                label: tier,
+                data: wealthData[tier],
+                borderColor: tierShades[i].main,
+                backgroundColor: tierShades[i].fill,
+                pointBackgroundColor: tierShades[i].main,
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: tierShades[i].main,
+                borderWidth: 2.5,
+                pointRadius: 4,
+                pointHoverRadius: 9,
+                tension: 0.3,
+                // Bottom tier fills to baseline; upper tiers fill to the band below → clean stacked bands
+                fill: i === 0 ? 'origin' : '-1',
+                _origColor: tierShades[i].main,
+                _origFill: tierShades[i].fill,
+                _fadedColor: tierShades[i].faded,
+                _fadedFill: tierShades[i].faded
+            }));
+        }
+
+        const wealthCtx = document.getElementById('wealthChart').getContext('2d');
+        let highlightedIdx = null;
+
+        // Compute aggregate total per year (sum of all tiers)
+        const wealthTiers = Object.keys(wealthData);
+        const wealthTotal = years.map((_, yi) => {
+            return wealthTiers.reduce((sum, t) => sum + wealthData[t][yi], 0);
+        });
+
+        // Update aggregate total display
+        const firstTotal = wealthTotal[0];
+        const lastTotal = wealthTotal[wealthTotal.length - 1];
+        document.getElementById('aggregate2010').textContent = '$' + firstTotal.toFixed(1) + 'B';
+        document.getElementById('aggregateTotal').textContent = '$' + lastTotal.toFixed(1) + 'B';
+
+        // Tax increase annotation using Chart.js annotation plugin
+        const taxIncreaseAnnotation = {
+            id: 'taxIncreaseAnnotation',
+            afterDraw: function(chart) {
+                // Only run on wealth chart, not individuals chart
+                if (chart.canvas.id !== 'wealthChart') return;
+                
+                const ctx = chart.ctx;
+                const area = chart.chartArea;
+                const meta = chart.getDatasetMeta(0);
+                const dataIndex = years.indexOf(2017);
+                
+                if (dataIndex === -1 || !meta.data[dataIndex]) return;
+                
+                const x = meta.data[dataIndex].x;
+                const yBottom = area.bottom;
+                const yMiddle = area.top + (area.bottom - area.top) / 2;
+                
+                // Draw dotted vertical line
+                ctx.save();
+                ctx.strokeStyle = '#2a6b4f';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.moveTo(x, yBottom);
+                ctx.lineTo(x, yMiddle);
+                ctx.stroke();
+                
+                // Draw label
+                ctx.fillStyle = '#2a6b4f';
+                ctx.font = 'bold 12px Nunito, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('tax increase', x, yMiddle - 25);
+                ctx.restore();
+                
+                // Store position for interaction
+                chart.taxIncreaseLine = { x, yBottom, yMiddle, width: 20 };
+            }
+        };
+
+        Chart.register(taxIncreaseAnnotation);
+
+        const wealthChart = new Chart(wealthCtx, {
+            type: 'line',
+            data: { labels: years, datasets: buildWealthDatasets() },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                layout: {
+                    padding: { left: 50, right: 78, top: 18 }
+                },
+                plugins: {
+                    datalabels: {
+                        // 2010 label floats above its point (clear of the y-axis); 2024 label sits in the right margin
+                        align: function(ctx) {
+                            return ctx.dataIndex === 0 ? 'top' : 'right';
+                        },
+                        anchor: 'center',
+                        offset: function(ctx) { return ctx.dataIndex === 0 ? 4 : 10; },
+                        clip: false,
+                        backgroundColor: 'rgba(255,255,255,0.92)',
+                        borderColor: function(ctx) { return ctx.dataset.borderColor; },
+                        borderWidth: 1.25,
+                        borderRadius: 7,
+                        padding: { top: 3, bottom: 3, left: 7, right: 7 },
+                        font: { size: 12, weight: '800' },
+                        color: function(ctx) { return ctx.dataset.borderColor; },
+                        formatter: function(v) { return '$' + v.toFixed(1) + 'B'; },
+                        display: function(ctx) {
+                            if (ctx.datasetIndex !== 0) return false;
+                            return ctx.dataIndex === 0 || ctx.dataIndex === ctx.chart.data.labels.length - 1;
+                        }
+                    },
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            padding: 20,
+                            font: { size: 14, weight: '600' },
+                            color: '#2a2a2a'
+                        }
+                    },
+                    tooltip: {
+                        enabled: false,
+                        external: externalTooltipHandler
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { size: 13 }, color: '#8fa89a' }
+                    },
+                    y: {
+                        stacked: true,
+                        min: 0,
+                        max: 500,
+                        grid: { color: 'rgba(0,0,0,0.05)' },
+                        ticks: {
+                            stepSize: 150,
+                            font: { size: 13 },
+                            color: '#8fa89a',
+                            callback: function(v) { return '$' + v + 'B'; }
+                        },
+                        title: {
+                            display: false
+                        }
+                    }
+                },
+                onClick: function(event, elements) {
+                    // Check if tax increase line was clicked
+                    if (wealthChart.taxIncreaseLine) {
+                        const rect = wealthChart.canvas.getBoundingClientRect();
+                        const x = event.clientX - rect.left;
+                        const y = event.clientY - rect.top;
+                        const line = wealthChart.taxIncreaseLine;
+                        
+                        if (Math.abs(x - line.x) < line.width && y >= line.yMiddle && y <= line.yBottom) {
+                            showTaxPopup(event.clientX, event.clientY);
+                            return;
+                        }
+                    }
+                    
+                    if (elements.length === 0) return;
+                    // Get the dataset index from the clicked element
+                    const ci = elements[0].datasetIndex;
+                    if (highlightedIdx === ci) {
+                        wealthChart.data.datasets.forEach(ds => {
+                            ds.borderColor = ds._origColor;
+                            ds.backgroundColor = ds._origFill;
+                            ds.pointBackgroundColor = ds._origColor;
+                            ds.borderWidth = 2.5;
+                            ds.pointRadius = 4;
+                        });
+                        highlightedIdx = null;
+                    } else {
+                        wealthChart.data.datasets.forEach((ds, i) => {
+                            if (i === ci) {
+                                ds.borderColor = ds._origColor;
+                                ds.backgroundColor = ds._origFill;
+                                ds.pointBackgroundColor = ds._origColor;
+                                ds.borderWidth = 4;
+                                ds.pointRadius = 6;
+                            } else {
+                                ds.borderColor = ds._fadedColor;
+                                ds.backgroundColor = ds._fadedFill;
+                                ds.pointBackgroundColor = ds._fadedColor;
+                                ds.borderWidth = 1.5;
+                                ds.pointRadius = 2;
+                            }
+                        });
+                        highlightedIdx = ci;
+                    }
+                    wealthChart.update();
+                }
+            }
+        });
+
+        // ── Tax Popup Functions ──
+        const taxPopup = document.getElementById('taxPopup');
+        let popupTimeout;
+
+        function showTaxPopup(x, y) {
+            clearTimeout(popupTimeout);
+            taxPopup.style.left = x + 'px';
+            taxPopup.style.top = (y - 60) + 'px';
+            taxPopup.classList.add('show');
+        }
+
+        function hideTaxPopup() {
+            popupTimeout = setTimeout(() => {
+                taxPopup.classList.remove('show');
+            }, 200);
+        }
+
+        // Add hover and click handlers for wealth chart with higher priority
+        const handleTaxLineHover = (e) => {
+            if (wealthChart.taxIncreaseLine) {
+                const rect = wealthChart.canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const line = wealthChart.taxIncreaseLine;
+                
+                // Check if mouse is near the vertical line
+                if (Math.abs(x - line.x) < line.width && y >= line.yMiddle && y <= line.yBottom) {
+                    wealthChart.canvas.style.cursor = 'pointer';
+                    showTaxPopup(e.clientX, e.clientY);
+                    e.stopPropagation(); // Prevent chart tooltip
+                } else {
+                    wealthChart.canvas.style.cursor = 'default';
+                    hideTaxPopup();
+                }
+            }
+        };
+
+        const handleTaxLineClick = (e) => {
+            if (wealthChart.taxIncreaseLine) {
+                const rect = wealthChart.canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const line = wealthChart.taxIncreaseLine;
+                
+                if (Math.abs(x - line.x) < line.width && y >= line.yMiddle && y <= line.yBottom) {
+                    showTaxPopup(e.clientX, e.clientY);
+                    e.stopPropagation(); // Prevent chart click
+                }
+            }
+        };
+
+        wealthChart.canvas.addEventListener('mousemove', handleTaxLineHover, { capture: true });
+        wealthChart.canvas.addEventListener('mouseleave', hideTaxPopup, { capture: true });
+        wealthChart.canvas.addEventListener('click', handleTaxLineClick, { capture: true });
+
+        // ── Chart Switching Logic ──
+        const chartSwitcher = document.getElementById('chartSwitcher');
+        const wealthWrapper = document.getElementById('wealthWrapper');
+        const individualsWrapper = document.getElementById('individualsWrapper');
+        const chartSubtitle = document.getElementById('chartSubtitle');
+
+        chartSwitcher.addEventListener('change', (e) => {
+            const individualsCaption = document.getElementById('individualsCaption');
+            const wealthCaption = document.getElementById('wealthCaption');
+            
+            if (e.target.value === 'wealth') {
+                wealthWrapper.style.display = 'block';
+                yearSelect.style.display = 'none';
+                individualsWrapper.style.display = 'none';
+                individualsCaption.style.display = 'none';
+                wealthCaption.style.display = 'block';
+                chartSubtitle.innerHTML = "Hawaiʻi, 2010&ndash;2024 (USD) &middot; Stacked area shows tiers as portions of total";
+            } else {
+                wealthWrapper.style.display = 'none';
+                yearSelect.style.display = 'none';
+                individualsWrapper.style.display = 'block';
+                individualsCaption.style.display = 'block';
+                wealthCaption.style.display = 'none';
+                chartSubtitle.innerHTML = "Hawaiʻi, 2010&ndash;2024 &middot; Number of individuals by wealth tier &middot; log scale";
+                // Create the bar chart on first reveal (it can't size while hidden).
+                // Force a reflow so the now-visible wrapper has real dimensions, then
+                // create or resize the chart synchronously against the correct size.
+                void individualsWrapper.offsetWidth;
+                if (!barChart) {
+                    barChart = createBarChart();
+                } else {
+                    barChart.resize();
+                    barChart.update();
+                }
+            }
+        });
+        const STATE_BUDGET = 23.7; // $23.7B in 2026
+
+        const summaryMapping = {
+            'all':       { label: 'millionaires',                         count: 83424, wealth: 457.6, count2010: 29405 },
+            '$1M-$20M':  { label: 'millionaires ($1M\u2013$20M)',        count: 81814, wealth: 292.7, count2010: 28801 },
+            '$20M-$50M': { label: 'ultra-millionaires ($20M\u2013$50M)', count: 1245,  wealth: 95.6,  count2010: 466 },
+            '$50M+':     { label: 'ultra-millionaires ($50M+)',           count: 365,   wealth: 69.3,  count2010: 138 }
+        };
+
+        const tierBtn = document.getElementById('tierBtn');
+        const tierMenu = document.getElementById('tierMenu');
+        const summaryCount = document.getElementById('summaryCount');
+        const summaryWealth = document.getElementById('summaryWealth');
+        const budgetMultiple = document.getElementById('budgetMultiple');
+
+        // ── Count-up animation ──
+        function animateValue(el, start, end, duration, formatter) {
+            const startTime = performance.now();
+            function tick(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = start + (end - start) * eased;
+                el.textContent = formatter(current);
+                if (progress < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }
+
+        function pieSVG(fill, stroke, sliceColor) {
+            // Full pie with 4 slice lines
+            const c = 8; // center
+            const r = 7; // radius
+            const lines = [0, 90, 180, 270].map(deg => {
+                const rad = (deg - 90) * Math.PI / 180;
+                const x2 = c + r * Math.cos(rad);
+                const y2 = c + r * Math.sin(rad);
+                return `<line x1="${c}" y1="${c}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${sliceColor}" stroke-width="0.5"/>`;
+            }).join('');
+            return `<svg viewBox="0 0 16 16"><circle cx="${c}" cy="${c}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="1"/>${lines}</svg>`;
+        }
+
+        function partialPieSVG(fraction) {
+            const c = 8, r = 7;
+            const deg = fraction * 360;
+            const rad = (deg - 90) * Math.PI / 180;
+            const x = c + r * Math.cos(rad);
+            const y = c + r * Math.sin(rad);
+            const large = deg > 180 ? 1 : 0;
+            const path = `M${c},${c} L${c},${c - r} A${r},${r} 0 ${large},1 ${x.toFixed(2)},${y.toFixed(2)} Z`;
+            return `<svg viewBox="0 0 16 16"><circle cx="${c}" cy="${c}" r="${r}" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)" stroke-width="1"/><path d="${path}" fill="rgba(255,255,255,0.22)"/></svg>`;
+        }
+
+        function updateBudgetGrid(multiple) {
+            const grid = document.getElementById('budgetGrid');
+            const full = Math.floor(multiple);
+            const partial = multiple - full;
+            let html = '';
+            for (let i = 0; i < full; i++) {
+                if (i === 0) {
+                    html += `<div class="budget-pie">${pieSVG('rgba(252,196,72,0.75)', 'rgba(252,196,72,0.5)', 'rgba(252,196,72,0.3)')}</div>`;
+                } else {
+                    html += `<div class="budget-pie">${pieSVG('rgba(255,255,255,0.18)', 'rgba(255,255,255,0.10)', 'rgba(255,255,255,0.07)')}</div>`;
+                }
+            }
+            if (partial > 0.05) {
+                html += `<div class="budget-pie">${partialPieSVG(partial)}</div>`;
+            }
+            grid.innerHTML = html;
+        }
+
+        // Summed series for the aggregate "all" view (2010–2024 counts)
+        const ALL_TREND_SERIES = years.map((_, i) =>
+            individualsData['$1M–$20M'][i] + individualsData['$20M–$50M'][i] + individualsData['$50M+'][i]
+        );
+
+        function renderSparkline(series) {
+            const svg = document.getElementById('trendSpark');
+            if (!svg) return;
+            const W = 52, H = 26, pad = 3;
+            const min = Math.min(...series), max = Math.max(...series);
+            const range = max - min || 1;
+            const n = series.length;
+            const pts = series.map((v, i) => {
+                const x = pad + (W - 2 * pad) * (i / (n - 1));
+                const y = H - pad - (H - 2 * pad) * ((v - min) / range);
+                return [x, y];
+            });
+            const line = pts.map((p, i) => (i === 0 ? 'M' : 'L') + p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ');
+            const area = line + ' L' + pts[n - 1][0].toFixed(1) + ',' + (H - pad) + ' L' + pts[0][0].toFixed(1) + ',' + (H - pad) + ' Z';
+            const last = pts[n - 1];
+            svg.innerHTML =
+                '<defs><linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">' +
+                '<stop offset="0%" stop-color="rgba(138,214,160,0.4)"/>' +
+                '<stop offset="100%" stop-color="rgba(138,214,160,0)"/>' +
+                '</linearGradient></defs>' +
+                '<path d="' + area + '" fill="url(#sparkFill)"/>' +
+                '<path d="' + line + '" fill="none" stroke="#8ad6a0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>' +
+                '<circle cx="' + last[0].toFixed(1) + '" cy="' + last[1].toFixed(1) + '" r="1.9" fill="#a8e6b0"/>';
+        }
+
+        function updateSummary(info) {
+            const mainText = info.label.split('(')[0].trim();
+            const parenthetical = info.label.includes('(') ? info.label.match(/\(([^)]+)\)/)[1] : '';
+            
+            if (parenthetical) {
+                tierBtn.innerHTML = `${mainText} <span class="small">(${parenthetical})</span> ▾`;
+            } else {
+                tierBtn.innerHTML = `${mainText} ▾`;
+            }
+            
+            summaryCount.textContent = info.count.toLocaleString();
+            animateValue(summaryWealth, 0, info.wealth, 1000, v => '$' + v.toFixed(1));
+            const multiple = info.wealth / STATE_BUDGET;
+            budgetMultiple.textContent = multiple.toFixed(1);
+            updateBudgetGrid(multiple);
+
+            // Trend: growth in this group since 2010
+            const growthPct = Math.round((info.count / info.count2010 - 1) * 100);
+            document.getElementById('trendFigure').textContent = '+' + growthPct + '%';
+
+            // Sparkline of this group's 2010–2024 trajectory
+            const trendKey = info.label.includes('(') ? info.label.match(/\(([^)]+)\)/)[1] : null;
+            renderSparkline(trendKey ? individualsData[trendKey] : ALL_TREND_SERIES);
+
+            // Concentration column — "all" view shows a stacked breakdown of wealth by tier;
+            // a specific tier shows that tier's single share of all millionaire wealth.
+            const allWealth = summaryMapping['all'].wealth;
+            const isAllTiers = !info.label.includes('(');
+            // Brighter ramp than the charts' tierShades — readable against the dark banner
+            const TIER_RAMP = [
+                { key: '$1M-$20M',  label: '$1M–$20M',  color: '#5dae80' },
+                { key: '$20M-$50M', label: '$20M–$50M', color: '#86d29b' },
+                { key: '$50M+',     label: '$50M+',          color: '#bfeaca' }
+            ];
+            const concValueEl = document.getElementById('concentrationValue');
+            const concUnitEl = document.getElementById('concentrationUnit');
+            const concBarEl = document.getElementById('concBar');
+            const concLabelEl = document.getElementById('concentrationLabel');
+
+            if (isAllTiers) {
+                const shares = TIER_RAMP.map(t => ({ ...t, pct: summaryMapping[t.key].wealth / allWealth * 100 }));
+                concValueEl.style.display = 'none';
+                // Bar leads as the column's "figure" so all three stats share the
+                // same rhythm: figure → caps label → caption.
+                concBarEl.style.order = '-1';
+                concUnitEl.textContent = 'wealth by tier';
+                concBarEl.innerHTML = shares.map(s => {
+                    const millions = '$' + Math.round(summaryMapping[s.key].wealth * 1000).toLocaleString() + 'M';
+                    return '<span class="conc-seg" style="width:' + s.pct.toFixed(1) + '%;background:' + s.color + '"'
+                        + ' data-tier="' + s.label + '" data-amt="' + millions + '" data-pct="' + Math.round(s.pct) + '" data-color="' + s.color + '"></span>';
+                }).join('');
+                concLabelEl.innerHTML = shares.map(s =>
+                    '<span class="conc-key"><span class="conc-key-dot" style="background:' + s.color + '"></span>' + Math.round(s.pct) + '%</span>'
+                ).join('');
+            } else {
+                const tierKey = info.label.match(/\(([^)]+)\)/)[1];
+                const ramp = TIER_RAMP.find(t => t.label === tierKey);
+                const share = info.wealth / allWealth * 100;
+                const color = ramp ? ramp.color : '#6abc7a';
+                concValueEl.style.display = '';
+                concValueEl.textContent = Math.round(share) + '%';
+                concBarEl.style.order = '';
+                concUnitEl.textContent = 'of all wealth';
+                concBarEl.innerHTML = '<span class="conc-bar-fill" style="width:' + share.toFixed(1) + '%;background:' + color + '"></span>';
+                concLabelEl.textContent = 'held by the ' + tierKey + ' tier';
+            }
+
+            // Wealth-tax revenue: 0.1% – 0.2% on info.wealth (in $B)
+            const revLowB = info.wealth * 0.001;
+            const revHighB = info.wealth * 0.002;
+            const fmtRev = (b) => b >= 1 ? '$' + b.toFixed(1) + 'B' : '$' + Math.round(b * 1000) + 'M';
+            document.getElementById('revenueLow').textContent = fmtRev(revLowB);
+            document.getElementById('revenueHigh').textContent = fmtRev(revHighB);
+
+            const budgetPctLow = (revLowB / STATE_BUDGET) * 100;
+            const budgetPctHigh = (revHighB / STATE_BUDGET) * 100;
+            document.getElementById('revenueBudgetPct').textContent =
+                budgetPctLow.toFixed(1) + '% – ' + budgetPctHigh.toFixed(1) + '%';
+
+            const tierCountStr = info.count.toLocaleString();
+            const labelMain = info.label.split('(')[0].trim();
+            const labelParen = info.label.match(/\(([^)]+)\)/)?.[1];
+            document.getElementById('revenueTierLabel').textContent =
+                'these ' + tierCountStr + ' ' + labelMain + (labelParen ? ' (' + labelParen + ')' : '');
+        }
+
+        // Initial animation on load
+        updateSummary(summaryMapping['all']);
+
+        tierBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            tierMenu.classList.toggle('open');
+        });
+
+        document.addEventListener('click', () => tierMenu.classList.remove('open'));
+        tierMenu.addEventListener('click', (e) => e.stopPropagation());
+
+        tierMenu.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tier = btn.dataset.tier;
+                const info = summaryMapping[tier];
+                updateSummary(info);
+                tierMenu.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                tierMenu.classList.remove('open');
+            });
+        });
+
+        // ── More/Less toggle for narrative sections ──
+        document.querySelectorAll('.narrative-more-toggle').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = btn.dataset.target;
+                const content = document.getElementById(targetId);
+                content.classList.toggle('open');
+                btn.textContent = content.classList.contains('open') ? 'Less' : 'More';
+            });
+        });
+
+        // ── Scroll-reveal: fade/slide sections in as they enter view ──
+        // Classes are added by JS so the page stays fully visible if JS is off
+        // or the user prefers reduced motion.
+        (function () {
+            const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduce || !('IntersectionObserver' in window)) return;
+            const targets = document.querySelectorAll('.chart-container, .narrative-section');
+            targets.forEach(el => el.classList.add('reveal'));
+            const io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+            targets.forEach(el => io.observe(el));
+        })();
+
+        // ── Wealth-by-tier bar: hover a segment to see its exact wealth ──
+        // Delegated on the (persistent) #concBar container; segments are
+        // rebuilt by updateSummary but carry data-* the tooltip reads.
+        (function () {
+            const bar = document.getElementById('concBar');
+            const tip = document.getElementById('tierTip');
+            if (!bar || !tip) return;
+            function place(seg) {
+                tip.innerHTML =
+                    '<span class="tier-tip-row">' +
+                        '<span class="tier-tip-dot" style="background:' + seg.dataset.color + '"></span>' +
+                        '<span class="tier-tip-name">' + seg.dataset.tier + '</span>' +
+                    '</span>' +
+                    '<span class="tier-tip-amt">' + seg.dataset.amt +
+                        ' <span class="tier-tip-pct">&middot; ' + seg.dataset.pct + '%</span></span>';
+                const r = seg.getBoundingClientRect();
+                tip.style.left = (r.left + r.width / 2) + 'px';
+                tip.style.top = (r.top - 8) + 'px';
+                tip.style.opacity = '1';
+            }
+            const onMove = (e) => {
+                const seg = e.target.closest('.conc-seg');
+                if (seg && seg.dataset.tier) place(seg);
+                else tip.style.opacity = '0';
+            };
+            bar.addEventListener('mouseover', onMove);
+            bar.addEventListener('mousemove', onMove);
+            bar.addEventListener('mouseleave', () => { tip.style.opacity = '0'; });
+        })();
+    </script>
+</body>
+</html>

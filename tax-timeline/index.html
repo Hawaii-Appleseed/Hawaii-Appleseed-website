@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hawaiʻi Tax History Timeline</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700;900&family=Public+Sans:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4A6B5C;
+            --bg: #F5F5F0;
+            --card-bg: #ffffff;
+            --path-color: #C8D9D3;
+            
+            /* Green Theme Colors */
+            --accent-primary: #4A6B5C;
+            --accent-secondary: #6B8E7F;
+            --accent: var(--accent-primary);
+            --accent-light: rgba(107, 142, 127, 0.85);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--bg);
+            color: var(--primary);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(245, 245, 240, 0.85);
+            z-index: 1000;
+            padding: 10px 0;
+            box-shadow: 0 1px 8px rgba(74, 107, 92, 0.06);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid #E8F0ED;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-bottom: 2px;
+            font-family: 'Public Sans', sans-serif;
+            font-weight: 800;
+            color: #4A6B5C;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Mini Timeline Navigation */
+        .mini-timeline-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .mini-dots-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Mini dot wrapper */
+        .mini-dot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            cursor: pointer;
+            position: relative;
+            padding-top: 2px;
+        }
+
+        .mini-dot-main {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.35;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .mini-dot.active .mini-dot-main {
+            opacity: 1;
+            transform: scale(1.5);
+        }
+
+        /* Hover brightens dot */
+        .mini-dot:hover .mini-dot-main {
+            opacity: 1;
+        }
+
+        .mini-dot::after {
+            content: attr(data-date);
+            position: absolute;
+            top: 26px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: #4A6B5C;
+            background: rgba(245, 245, 240, 0.95);
+            border: 1px solid #C8D9D3;
+            border-radius: 4px;
+            padding: 1px 5px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 10;
+        }
+        
+        .mini-dot:hover::after, .mini-dot.active::after {
+            opacity: 1;
+        }
+
+        /* === TIMELINE === */
+        
+        .timeline-container {
+            padding-top: 120px;
+            padding-bottom: 100px;
+            position: relative;
+        }
+
+        .timeline-line-container {
+            position: absolute;
+            top: 120px;
+            bottom: 100px;
+            width: 4px;
+            z-index: 1;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .timeline-line-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--path-color);
+            border-radius: 3px;
+        }
+
+        .timeline-line-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: var(--accent);
+            transition: background 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 80px;
+            min-height: 200px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 80px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid var(--path-color);
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(74, 107, 92, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .timeline-dot.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(74, 107, 92, 0.3);
+            transform: translate(-50%, -50%) scale(1.3);
+        }
+
+        .timeline-dot.passed {
+            border-color: var(--accent);
+        }
+
+        /* Year label to the left of dots */
+        .year-label {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #8BA89E;
+            opacity: 1;
+            z-index: 5;
+            font-family: 'Public Sans', sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        .timeline-card {
+            width: calc(100% - 140px);
+            max-width: 600px;
+            background: var(--card-bg);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+            padding: 34px 32px 30px;
+            border-radius: 3px;
+            box-shadow: 
+                0 1px 3px rgba(0,0,0,0.06),
+                0 8px 24px rgba(74, 107, 92, 0.06),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+            border: 1px solid rgba(74, 107, 92, 0.1);
+            border-top: none;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: transform 0.3s ease, box-shadow 0.25s ease, opacity 0.6s ease;
+            margin-left: 120px;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(74, 107, 92, 0.25) 15%, rgba(74, 107, 92, 0.25) 85%, transparent);
+        }
+
+        .timeline-card::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            width: 24px;
+            height: 24px;
+            border-top: 1.5px solid rgba(74, 107, 92, 0.15);
+            border-right: 1.5px solid rgba(74, 107, 92, 0.15);
+            pointer-events: none;
+        }
+
+        .timeline-card.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-card.fading-out {
+            opacity: 0.2;
+            transform: translateX(-10px);
+        }
+
+        .timeline-card.visible:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 
+                0 2px 6px rgba(0,0,0,0.06),
+                0 12px 32px rgba(74, 107, 92, 0.12),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+        }
+
+        /* Alternating editorial treatments */
+        .timeline-item:nth-child(even) .timeline-card {
+            border-left: 2px solid rgba(74, 107, 92, 0.08);
+            border-right: none;
+        }
+
+        .timeline-item:nth-child(even) .timeline-card::after {
+            top: auto;
+            bottom: 10px;
+            right: auto;
+            left: 14px;
+            border-top: none;
+            border-right: none;
+            border-bottom: 1.5px solid rgba(74, 107, 92, 0.12);
+            border-left: 1.5px solid rgba(74, 107, 92, 0.12);
+        }
+
+        .timeline-item:nth-child(3n) .timeline-card .date::after {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(74, 107, 92, 0.3), transparent);
+        }
+
+        .timeline-item:nth-child(4n+1) .timeline-card {
+            border-top: none;
+            border-bottom: 1px solid rgba(74, 107, 92, 0.08);
+        }
+
+        @media (max-width: 768px) {
+            .timeline-card {
+                width: calc(100% - 100px);
+                margin-left: 100px !important;
+                margin-right: 20px !important;
+                padding: 20px !important;
+            }
+
+            .timeline-line-container {
+                left: 30px;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+        }
+
+        .timeline-card .date {
+            display: inline-block;
+            background: none;
+            color: #8BA89E;
+            padding: 0 0 10px 0;
+            border-radius: 0;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            border-bottom: none;
+            width: 100%;
+            position: relative;
+        }
+
+        .timeline-card .date::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, #6B8E7F, transparent);
+        }
+
+        .timeline-card h3 {
+            color: #3A5A4C;
+            margin-bottom: 14px;
+            font-size: 1.45rem;
+            font-family: 'Public Sans', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+        }
+
+        .timeline-card h3::first-letter {
+            font-size: 1.15em;
+            color: #4A6B5C;
+        }
+
+        .timeline-card p {
+            color: #5C7A6E;
+            line-height: 1.75;
+            font-size: 1rem;
+            font-family: 'Source Sans 3', serif;
+        }
+
+        /* Before/After Split Card */
+        .before-after-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-top: 12px;
+        }
+
+        .before-section, .after-section {
+            padding: 15px 18px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .before-section {
+            background: #f8faf9;
+            border-left: 4px solid #C8D9D3;
+        }
+
+        .after-section {
+            background: #E8F0ED;
+            border-left: 4px solid #6B8E7F;
+        }
+
+        .before-section .section-label,
+        .after-section .section-label {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 2px 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .before-section .section-label {
+            background: #8BA89E;
+            color: white;
+        }
+
+        .after-section .section-label {
+            background: #4A6B5C;
+            color: white;
+        }
+
+        .before-section p, .after-section p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .split-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 0;
+        }
+
+        .split-divider .arrow {
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+
+        /* Collapsible More Section */
+        .more-toggle {
+            display: block;
+            background: none;
+            border: 1px solid #C8D9D3;
+            color: #6B8E7F;
+            padding: 5px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-top: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .more-toggle:hover {
+            background: #6B8E7F;
+            color: white;
+            border-color: #6B8E7F;
+        }
+
+        .more-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .more-content.open {
+            max-height: 2000px;
+        }
+
+        .more-content-inner {
+            padding-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-card {
+                width: 85%;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                padding: 20px !important;
+                border-left: none !important;
+                border-top: 3px solid #6B8E7F !important;
+                border-right: none !important;
+            }
+
+            .timeline-line-container {
+                left: 30px;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .timeline-item:nth-child(even) .timeline-card {
+                transform: translateX(-20px);
+            }
+        }
+
+        /* Floating Year Background */
+        .year-indicator {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 300px;
+            font-weight: 900;
+            color: rgba(74, 107, 92, 0.04);
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+            transition: opacity 0.5s ease;
+            text-align: center;
+            line-height: 1;
+            font-family: 'Public Sans', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .year-indicator {
+                font-size: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Hawaiʻi Tax History Timeline</h1>
+            <div class="mini-timeline-container">
+                <div class="mini-dots-group" id="mini-dots"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="year-indicator" id="year-indicator">2025</div>
+    
+    <div class="timeline-container" id="timeline-container">
+        <div class="timeline-line-container" id="timeline-line">
+            <div class="timeline-line-bg"></div>
+            <div class="timeline-line-progress" id="timeline-progress"></div>
+        </div>
+        <div class="container" id="timeline-items">
+            <!-- Injected by JS -->
+        </div>
+    </div>
+
+    <script>
+        const taxData = [
+            { 
+                date: '1700-01-01', 
+                title: 'Traditional Hoʻokupu System', 
+                desc: 'In old Hawaiʻi, people did not pay property tax in money but through tribute and labor. Commoners farmed and fished on lands controlled by chiefs. They also gave part of their crops, animals, and handmade goods—along with their work days—to support the chiefs and the king.', 
+                secondCard: '<div style="padding:4px 0;"><div style="display:flex;align-items:baseline;gap:10px;margin-bottom:18px;"><div style="color:white;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;opacity:0.5;">Forms of Tribute</div><div style="flex:1;height:1px;background:linear-gradient(90deg, rgba(255,255,255,0.15), transparent);"></div></div><svg viewBox="0 0 440 150" style="width:100%;height:auto;display:block;" role="img" aria-label="A pastel scene of hookupu tribute: kalo growing in a loi, a pig rooting in the earth, a kapa mat, and a stone adze standing in the ground"><defs><linearGradient id="hokSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0DA"/><stop offset="0.5" stop-color="#FCE0C6"/><stop offset="1" stop-color="#EAF3E4"/></linearGradient><radialGradient id="hokSunG"><stop offset="0" stop-color="#FFEDC4"/><stop offset="0.45" stop-color="#FFD9A0"/><stop offset="1" stop-color="#FFD9A0" stop-opacity="0"/></radialGradient><radialGradient id="hokGlow"><stop offset="0" stop-color="#FFDFB0" stop-opacity="0.7"/><stop offset="1" stop-color="#FFDFB0" stop-opacity="0"/></radialGradient><linearGradient id="hokHaze" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8EE" stop-opacity="0"/><stop offset="0.5" stop-color="#FFF8EE" stop-opacity="0.55"/><stop offset="1" stop-color="#FFF8EE" stop-opacity="0"/></linearGradient><linearGradient id="hokHillA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D6EEE1"/><stop offset="1" stop-color="#C2E3D1"/></linearGradient><linearGradient id="hokHillB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ABDAC3"/><stop offset="1" stop-color="#8FC7AD"/></linearGradient><linearGradient id="hokHillC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66AB8E"/><stop offset="1" stop-color="#4A9074"/></linearGradient><radialGradient id="hokPondG" cx="0.5" cy="0.4" r="0.65"><stop offset="0" stop-color="#E6F6F2"/><stop offset="0.7" stop-color="#C4E4DF"/><stop offset="1" stop-color="#AFD6D0"/></radialGradient><linearGradient id="hokPigG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D6A272"/><stop offset="1" stop-color="#B67F51"/></linearGradient><radialGradient id="hokShade"><stop offset="0" stop-color="#1E4636" stop-opacity="0.32"/><stop offset="1" stop-color="#1E4636" stop-opacity="0"/></radialGradient><linearGradient id="hokLeafG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5BA584"/><stop offset="1" stop-color="#3E7D62"/></linearGradient><linearGradient id="hokLeafG2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#63AE8C"/><stop offset="1" stop-color="#478367"/></linearGradient><clipPath id="hokClip"><rect x="0" y="0" width="440" height="150" rx="10"/></clipPath><g id="hokLeaf"><path d="M0 -4 C -2.5 -8, -7.5 -8.5, -9.5 -5 C -11.5 -1.5, -9 3, -6 7 C -3.5 10.5, -1.5 14, 0 18 C 1.5 14, 3.5 10.5, 6 7 C 9 3, 11.5 -1.5, 9.5 -5 C 7.5 -8.5, 2.5 -8, 0 -4 Z"/><path d="M0 -2 L0 13 M0 -2 L-5.5 -5.5 M0 -2 L5.5 -5.5" fill="none" stroke="#B9E2CC" stroke-width="1" opacity="0.9"/></g><g id="hokTuft" fill="none" stroke-linecap="round"><path d="M-1 0 Q -2 -4.5 -3 -7.5" stroke="#2F6E56" stroke-width="1.2"/><path d="M0 0 Q 0.2 -5.5 0 -9.5" stroke="#A7DCC2" stroke-width="1.2"/><path d="M1 0 Q 2 -4 3 -7" stroke="#2F6E56" stroke-width="1.2"/></g></defs><g clip-path="url(#hokClip)"><rect width="440" height="150" fill="url(#hokSky)"/><ellipse cx="420" cy="18" rx="130" ry="85" fill="url(#hokGlow)"/><circle cx="398" cy="26" r="26" fill="url(#hokSunG)"/><g><animateTransform attributeName="transform" type="translate" values="0 0;8 0;0 0" dur="26s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><g transform="translate(70 20)" fill="#FFF6E7" opacity="0.9"><ellipse cx="0" cy="0" rx="13" ry="4.5"/><ellipse cx="11" cy="-3" rx="9" ry="4"/><ellipse cx="-10" cy="-2" rx="8" ry="3.5"/></g></g><g><animateTransform attributeName="transform" type="translate" values="0 0;-7 0;0 0" dur="32s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><g transform="translate(300 34)" fill="#FFF6E7" opacity="0.75"><ellipse cx="0" cy="0" rx="11" ry="3.8"/><ellipse cx="9" cy="-2.5" rx="7.5" ry="3.2"/></g></g><g opacity="0.65"><animateTransform attributeName="transform" type="translate" values="150 38;164 33;150 38" dur="26s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><path stroke="#8B7A63" stroke-width="1.1" fill="none" stroke-linecap="round" d="M0 0 Q3 -2.8 6 0 M6 0 Q9 -2.8 12 0"><animate attributeName="d" values="M0 0 Q3 -2.8 6 0 M6 0 Q9 -2.8 12 0;M0 0 Q3 -0.8 6 0 M6 0 Q9 -0.8 12 0;M0 0 Q3 -2.8 6 0 M6 0 Q9 -2.8 12 0" dur="0.9s" repeatCount="indefinite"/></path><path transform="translate(21 8) scale(0.75)" stroke="#8B7A63" stroke-width="1.2" fill="none" stroke-linecap="round" d="M0 0 Q3 -0.8 6 0 M6 0 Q9 -0.8 12 0"><animate attributeName="d" values="M0 0 Q3 -0.8 6 0 M6 0 Q9 -0.8 12 0;M0 0 Q3 -2.8 6 0 M6 0 Q9 -2.8 12 0;M0 0 Q3 -0.8 6 0 M6 0 Q9 -0.8 12 0" dur="1.1s" repeatCount="indefinite"/></path></g><path d="M0 86 C 70 72, 150 74, 220 84 C 300 94, 370 70, 440 82 L440 150 L0 150 Z" fill="url(#hokHillA)"/><rect x="0" y="76" width="440" height="34" fill="url(#hokHaze)"/><path d="M0 104 C 90 92, 200 96, 280 102 C 350 107, 400 98, 440 104 L440 150 L0 150 Z" fill="url(#hokHillB)"/><path d="M0 104 C 90 92, 200 96, 280 102 C 350 107, 400 98, 440 104" fill="none" stroke="#C8E9D8" stroke-width="1.2" opacity="0.5"/><path d="M0 120 C 110 112, 230 116, 320 114 C 380 112, 410 114, 440 113 L440 150 L0 150 Z" fill="url(#hokHillC)"/><path d="M0 120 C 110 112, 230 116, 320 114 C 380 112, 410 114, 440 113" fill="none" stroke="#8CC7AB" stroke-width="1.2" opacity="0.6"/><use href="#hokTuft" transform="translate(24 132)"/><use href="#hokTuft" transform="translate(133 127) scale(0.9)"/><g transform="translate(240 126)"><g><animateTransform attributeName="transform" type="rotate" values="-3 0 0;3 0 0;-3 0 0" dur="3.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><use href="#hokTuft"/></g></g><use href="#hokTuft" transform="translate(352 129) scale(0.85)"/><g transform="translate(428 124)"><g><animateTransform attributeName="transform" type="rotate" values="3 0 0;-3 0 0;3 0 0" dur="4.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><use href="#hokTuft"/></g></g><path d="M36 128 C 44 122.5, 66 121, 80 121.5 C 98 122, 116 124, 120 128.5 C 122 132, 110 136, 92 137 C 70 138, 46 136.5, 38 132.5 C 34.5 130.5, 34 129.5, 36 128 Z" fill="url(#hokPondG)" stroke="#A9D3CC" stroke-width="0.8" opacity="0.97"/><g><animateTransform attributeName="transform" type="translate" values="0 0;5 0;0 0" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><ellipse cx="66" cy="127.5" rx="10" ry="1.7" fill="#FFFFFF" opacity="0.45"><animate attributeName="opacity" values="0.25;0.55;0.25" dur="5s" repeatCount="indefinite"/></ellipse><ellipse cx="100" cy="132" rx="6.5" ry="1.3" fill="#FFFFFF" opacity="0.35"><animate attributeName="opacity" values="0.4;0.2;0.4" dur="6s" repeatCount="indefinite"/></ellipse></g><path d="M48 130 q9 2.2 18 0" stroke="#E8F4F0" stroke-width="1" fill="none" opacity="0.7"/><path d="M88 132.5 q10 2.2 20 0" stroke="#E8F4F0" stroke-width="1" fill="none" opacity="0.6"/><g transform="translate(48 128)"><g><animateTransform attributeName="transform" type="rotate" values="-2.5 0 0;2.5 0 0;-2.5 0 0" dur="5.5s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><path d="M0 0 Q -5 -13 -13 -20" stroke="#D2917F" stroke-width="1.9" fill="none"/><path d="M0 0 Q -1 -15 -2 -28" stroke="#D2917F" stroke-width="1.9" fill="none"/><path d="M0 0 Q 5 -11 11 -17" stroke="#D2917F" stroke-width="1.8" fill="none"/><use href="#hokLeaf" fill="url(#hokLeafG)" transform="translate(-13 -20) rotate(-38) scale(0.9)"/><use href="#hokLeaf" fill="url(#hokLeafG2)" transform="translate(-2 -28) rotate(-4)"/><use href="#hokLeaf" fill="url(#hokLeafG)" transform="translate(11 -17) rotate(36) scale(0.9)"/></g></g><g transform="translate(84 125)"><g><animateTransform attributeName="transform" type="rotate" values="2.5 0 0;-2.5 0 0;2.5 0 0" dur="6.5s" begin="-2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><path d="M0 0 Q -6 -15 -15 -24" stroke="#D2917F" stroke-width="2" fill="none"/><path d="M0 0 Q -1 -18 -3 -36" stroke="#D2917F" stroke-width="2" fill="none"/><path d="M0 0 Q 5 -14 13 -22" stroke="#D2917F" stroke-width="1.9" fill="none"/><use href="#hokLeaf" fill="url(#hokLeafG)" transform="translate(-15 -24) rotate(-40)"/><use href="#hokLeaf" fill="url(#hokLeafG2)" transform="translate(-3 -36) rotate(-6) scale(1.15)"/><use href="#hokLeaf" fill="url(#hokLeafG)" transform="translate(13 -22) rotate(38)"/></g></g><g transform="translate(114 129)"><g><animateTransform attributeName="transform" type="scale" values="0.45 0.45;1 1;1 1;0.45 0.45" keyTimes="0;0.45;0.7;1" dur="11s" repeatCount="indefinite" calcMode="spline" keySplines="0.25 0.1 0.35 1;0 0 1 1;0.5 0 0.7 1"/><path d="M0 0 Q -2 -8 -6 -12" stroke="#D2917F" stroke-width="1.5" fill="none"/><path d="M0 0 Q 1 -9 3 -15" stroke="#D2917F" stroke-width="1.5" fill="none"/><use href="#hokLeaf" fill="url(#hokLeafG2)" transform="translate(-6 -12) rotate(-26) scale(0.55)"/><use href="#hokLeaf" fill="url(#hokLeafG)" transform="translate(3 -15) rotate(12) scale(0.65)"/></g></g><ellipse cx="195" cy="130.5" rx="34" ry="6" fill="url(#hokShade)"/><ellipse cx="168" cy="130" rx="27" ry="6" fill="#C9A57E" opacity="0.9"/><ellipse cx="166" cy="130.5" rx="16" ry="3.6" fill="#B08157" opacity="0.5"/><circle cx="152" cy="128" r="2" fill="#B08968"/><circle cx="161" cy="132" r="1.7" fill="#B08968"/><circle cx="177" cy="132" r="2" fill="#B08968"/><g transform="translate(199 106)"><g><animateTransform attributeName="transform" type="rotate" values="0 18 22;-8 18 22;-2 18 22;0 18 22" keyTimes="0;0.4;0.7;1" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"/><rect x="-16" y="8" width="4.5" height="14" rx="2" fill="#A8734A"/><rect x="-7" y="9" width="4.5" height="14" rx="2" fill="#C99163"/><rect x="7" y="9" width="4.5" height="14" rx="2" fill="#A8734A"/><rect x="15" y="8" width="4.5" height="14" rx="2" fill="#C99163"/><rect x="-16" y="19.5" width="4.5" height="2.8" rx="1" fill="#7A4E2B"/><rect x="-7" y="20.5" width="4.5" height="2.8" rx="1" fill="#7A4E2B"/><rect x="7" y="20.5" width="4.5" height="2.8" rx="1" fill="#7A4E2B"/><rect x="15" y="19.5" width="4.5" height="2.8" rx="1" fill="#7A4E2B"/><ellipse cx="0" cy="0" rx="25" ry="14" fill="url(#hokPigG)"/><path d="M-20 -9 Q 0 -15.5 18 -8" stroke="#F0CD9E" stroke-width="1.5" fill="none" opacity="0.65" stroke-linecap="round"/><g><animateTransform attributeName="transform" type="rotate" values="0 25 -3;16 25 -3;0 25 -3" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><path d="M25 -3 c 6 -2, 8 3, 3 5 c 3 0, 5 -2, 3 -5" stroke="#A8734A" stroke-width="1.6" fill="none" stroke-linecap="round"/></g><circle cx="-24" cy="5" r="10.5" fill="url(#hokPigG)"/><path d="M-29 -4 C -27 -11, -20 -9, -22 -3 Z" fill="#A8734A"/><ellipse cx="-33" cy="9" rx="4.5" ry="3.5" fill="#8F5E36"/><circle cx="-34.5" cy="8.5" r="0.8" fill="#5A3820"/><circle cx="-31.5" cy="8.5" r="0.8" fill="#5A3820"/><circle cx="-27" cy="2" r="1.1" fill="#3D2817"/><circle cx="-27.35" cy="1.65" r="0.35" fill="#FFFFFF" opacity="0.8"/><g><animateTransform attributeName="transform" type="translate" values="0 0;-5 -7;-9 -2" keyTimes="0;0.5;1" dur="3s" repeatCount="indefinite"/><circle cx="-37" cy="16" r="1.4" fill="#B08968"><animate attributeName="opacity" values="0;1;0" keyTimes="0;0.45;0.9" dur="3s" repeatCount="indefinite"/></circle><circle cx="-41" cy="13" r="1.1" fill="#C9A57E"><animate attributeName="opacity" values="0;0.9;0" keyTimes="0;0.5;1" dur="3s" repeatCount="indefinite"/></circle></g></g></g><ellipse cx="290" cy="130.5" rx="48" ry="6.5" fill="url(#hokShade)"/><path d="M262 116 L326 116 L338 130 L250 130 Z" fill="#F4EAD5" stroke="#C9B896" stroke-width="1"/><path d="M262 116 L326 116" stroke="#FFFDF5" stroke-width="1.2" opacity="0.8"/><path d="M259.5 119.5 L330 119.5" stroke="#8A6F55" stroke-width="1" stroke-dasharray="4 3" opacity="0.55"/><path d="M255 126.5 L334.5 126.5" stroke="#8A6F55" stroke-width="1" stroke-dasharray="2 4" opacity="0.5"/><path d="M268 124.5 l4 -3.5 l4 3.5 Z" fill="#8A6F55" opacity="0.65"/><path d="M281 124.5 l4 -3.5 l4 3.5 Z" fill="#8A6F55" opacity="0.65"/><path d="M294 124.5 l4 -3.5 l4 3.5 Z" fill="#8A6F55" opacity="0.65"/><path d="M307 124.5 l4 -3.5 l4 3.5 Z" fill="#8A6F55" opacity="0.65"/><ellipse cx="379" cy="131" rx="14" ry="4" fill="url(#hokShade)"/><ellipse cx="386" cy="129" rx="11" ry="3.5" fill="#C9A57E" opacity="0.85"/><circle cx="377" cy="128" r="1.8" fill="#B08968"/><circle cx="395" cy="130.5" r="1.5" fill="#B08968"/><path d="M399 99 Q 410 82 424 56" stroke="#A9835F" stroke-width="5.2" stroke-linecap="round" fill="none"/><path d="M400.5 97 Q 411 81 423.5 58" stroke="#C9A176" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M390 104 L398 108 L386 130 L379 126 Z" fill="#454C52"/><path d="M381 124 L386 127.5" stroke="#8C99A1" stroke-width="1.6" stroke-linecap="round"/><path d="M392 106 L402 95" stroke="#C89B62" stroke-width="13" stroke-linecap="round"/><path d="M389.5 100.5 L398 107.5" stroke="#A87F4C" stroke-width="1.4" opacity="0.9"/><path d="M391.5 98 L400 105" stroke="#D9AC72" stroke-width="1.3" opacity="0.9"/><path d="M393.5 95.5 L402 102.5" stroke="#A87F4C" stroke-width="1.4" opacity="0.9"/><path d="M395.5 93 L403.5 99.5" stroke="#D9AC72" stroke-width="1.2" opacity="0.85"/></g></svg><div style="display:flex;gap:8px;margin:10px 0 22px;text-align:center;"><div style="flex:1;"><div style="color:white;font-weight:700;font-size:0.9rem;">Crops</div><div style="color:rgba(255,255,255,0.4);font-size:0.7rem;font-style:italic;">Kalo, ʻuala</div></div><div style="flex:1;"><div style="color:white;font-weight:700;font-size:0.9rem;">Pigs</div><div style="color:rgba(255,255,255,0.4);font-size:0.7rem;font-style:italic;">Puaʻa</div></div><div style="flex:1;"><div style="color:white;font-weight:700;font-size:0.9rem;">Goods</div><div style="color:rgba(255,255,255,0.4);font-size:0.7rem;font-style:italic;">Kapa, mats</div></div><div style="flex:1;"><div style="color:white;font-weight:700;font-size:0.9rem;">Labor</div><div style="color:rgba(255,255,255,0.4);font-size:0.7rem;font-style:italic;">Work days</div></div></div><div style="position:relative;"><div style="color:rgba(255,255,255,0.35);font-size:0.55rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:10px;text-align:center;">Tribute flows upward</div><div style="display:flex;align-items:stretch;gap:0;height:110px;"><div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;"><div style="background:rgba(255,255,255,0.06);border-radius:4px 4px 0 0;height:25%;display:flex;align-items:center;justify-content:center;"><div style="color:rgba(255,255,255,0.5);font-size:0.65rem;">Makaʻāinana</div></div></div><div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;"><div style="background:rgba(255,255,255,0.1);border-radius:4px 4px 0 0;height:50%;display:flex;align-items:center;justify-content:center;"><div style="color:rgba(255,255,255,0.6);font-size:0.65rem;">Konohiki</div></div></div><div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;"><div style="background:rgba(255,255,255,0.16);border-radius:4px 4px 0 0;height:75%;display:flex;align-items:center;justify-content:center;"><div style="color:rgba(255,255,255,0.75);font-size:0.65rem;">Aliʻi</div></div></div><div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;"><div style="background:rgba(255,255,255,0.24);border-radius:4px 4px 0 0;height:100%;display:flex;align-items:center;justify-content:center;"><div style="color:white;font-size:0.7rem;font-weight:700;">Mōʻī</div></div></div></div></div></div>' 
+            },
+            { 
+                date: '1800-01-01', 
+                title: 'Kingdom Era Begins', 
+                desc: 'The Hawaiian Kingdom\'s modern tax system began, originally relying on foreign import taxes and a poll tax.', 
+                secondCard: '<div style="padding:4px 0;"><div style="color:white;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:16px;opacity:0.7;">Kingdom Tax System — 1800s</div><div style="display:flex;gap:16px;margin-bottom:18px;align-items:center;"><div style="flex:1;"><img src="https://images.squarespace-cdn.com/content/601374ae84e51e430a1829d8/d9e82cb6-b76c-41e6-ba24-d3723e983f13/Hawaii_revenue_stamp_50c.jpg?content-type=image%2Fjpeg" alt="Hawaiian Kingdom 50¢ revenue stamp" style="width:100%;max-width:180px;height:auto;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.3);border:2px solid rgba(255,255,255,0.15);"/></div><div style="flex:1.2;"><div style="color:rgba(255,255,255,0.45);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Revenue stamp</div><div style="color:rgba(255,255,255,0.85);font-size:0.85rem;line-height:1.5;">Official stamps like this 50¢ piece were used to collect taxes on documents and transactions in the Hawaiian Kingdom</div></div></div><div style="display:flex;gap:12px;"><div style="flex:1;background:rgba(255,255,255,0.1);border-radius:8px;padding:14px 10px;text-align:center;"><svg viewBox="0 0 220 120" style="width:100%;height:auto;display:block;margin:0 0 10px;" role="img" aria-label="A 19th century trading brig bobbing on pastel ocean waves"><defs><linearGradient id="impSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEFD8"/><stop offset="0.55" stop-color="#FCE2C9"/><stop offset="1" stop-color="#EAF3E4"/></linearGradient><clipPath id="impClip"><rect x="0" y="0" width="220" height="120" rx="10"/></clipPath></defs><g clip-path="url(#impClip)"><rect width="220" height="120" fill="url(#impSky)"/><circle cx="180" cy="26" r="17" fill="#FFE8C8" opacity="0.55"/><circle cx="180" cy="26" r="11" fill="#FFD9A0"/><g><animateTransform attributeName="transform" type="translate" values="0 0;7 0;0 0" dur="24s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><g transform="translate(38 22)" fill="#FFF6E7" opacity="0.9"><ellipse cx="0" cy="0" rx="14" ry="5"/><ellipse cx="12" cy="-3" rx="10" ry="4.5"/><ellipse cx="-11" cy="-2" rx="9" ry="4"/></g></g><g><animateTransform attributeName="transform" type="translate" values="0 0;-8 0;0 0" dur="30s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><g transform="translate(148 44)" fill="#FFF6E7" opacity="0.75"><ellipse cx="0" cy="0" rx="12" ry="4"/><ellipse cx="10" cy="-3" rx="8" ry="3.5"/></g></g><g><animateTransform attributeName="transform" type="translate" values="0 0;-110 0" dur="13s" repeatCount="indefinite"/><path d="M-115 66 q27.5 -8 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 L435 130 L-115 130 Z" fill="#C4E6D4"/><path d="M-115 66 q27.5 -8 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0" fill="none" stroke="#FFF9EC" stroke-width="1.4" opacity="0.7"/></g><g transform="translate(93 86)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -3.5;0 0" dur="4.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><g><animateTransform attributeName="transform" type="rotate" values="-2.2 0 0;2.2 0 0;-2.2 0 0" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><g stroke="#6E5C48" stroke-width="0.6" opacity="0.5"><path d="M12 -58 L55 -17"/><path d="M-11.5 -64 L12 -58"/><path d="M-11.5 -64 L-36 -6"/></g><path d="M-12 -45 L-32 -39.5 C-33 -30, -34 -20, -35 -10 C-27 -7.5, -19 -7.5, -12 -8.5 Z" fill="#EFE3C6"/><path d="M-10.5 -46.5 L-33 -40.5" stroke="#8A6F55" stroke-width="1.1"/><path d="M-11 -8.5 L-37 -10" stroke="#8A6F55" stroke-width="1.1"/><path d="M-20.5 -35 L1.5 -35 C2.5 -29, 3 -23, 3.5 -17 C-5 -13.5, -14 -13.5, -22.5 -17 C-22 -23, -21.2 -29, -20.5 -35 Z" fill="#F3E9D2"/><path d="M-19 -51.5 L-3 -51.5 C-2 -46.5, -1.2 -41.5, -0.5 -36.5 L-22 -36.5 C-21 -41.5, -20 -46.5, -19 -51.5 Z" fill="#F8F0DD"/><path d="M2.5 -31 L23.5 -31 C24.5 -25.5, 25 -19.5, 25.5 -14 C17 -10.5, 8 -10.5, 0.5 -14 C1 -20, 1.8 -25.5, 2.5 -31 Z" fill="#F6EDD8"/><path d="M5 -47.5 L20.5 -47.5 C21.5 -43, 22.5 -37.5, 23.5 -32.5 L2.5 -32.5 C3.5 -38, 4.3 -43, 5 -47.5 Z" fill="#FAF3E2"/><path d="M12.5 -54 C24 -44, 38 -28, 51 -16.5 L26 -11.5 C21 -25, 16 -40, 12.5 -54 Z" fill="#F1E6CC"/><path d="M14 -46 C23 -37, 33 -25, 43 -16 L24 -11 C20 -22, 16.5 -34, 14 -46 Z" fill="#F8F0DE" opacity="0.95"/><path d="M14 -6 L12 -58" stroke="#8A6F55" stroke-width="1.7"/><path d="M-9 -6 L-11.5 -64" stroke="#8A6F55" stroke-width="1.8"/><path d="M2 -32 L24 -32" stroke="#8A6F55" stroke-width="1.2"/><path d="M4.5 -48 L21 -48" stroke="#8A6F55" stroke-width="1.1"/><path d="M-21 -36 L2 -36" stroke="#8A6F55" stroke-width="1.2"/><path d="M-19.5 -52 L-2 -52" stroke="#8A6F55" stroke-width="1.1"/><path d="M33 -8 L55 -17" stroke="#8A6F55" stroke-width="1.6" stroke-linecap="round"/><path d="M-11.5 -66 l9 2.2 l-9 2.2 Z" fill="#E59C87"/><path d="M-35 -7 C-20 -4, 20 -4, 35 -9 L31 3 C16 6.5, -16 6.5, -29 3 Z" fill="#47525B"/><path d="M-33 -5.2 C-19 -2.6, 19 -2.6, 33 -7" stroke="#F4ECD9" stroke-width="2.2" fill="none"/><path d="M-31 -5 C-18 -2.7, 18 -2.7, 31 -6.6" stroke="#39434B" stroke-width="1.2" fill="none" stroke-dasharray="1.8 4.2"/></g></g></g><g><animateTransform attributeName="transform" type="translate" values="0 0;-110 0" dur="10s" repeatCount="indefinite"/><path d="M-115 84 q27.5 -18 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 L435 130 L-115 130 Z" fill="#8FCBB1"/><path d="M-115 84 q27.5 -18 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0" fill="none" stroke="#FFF8E8" stroke-width="1.8" opacity="0.85"/><path d="M-115 88 q27.5 -16 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0" fill="none" stroke="#FFF8E8" stroke-width="1.3" opacity="0.3" stroke-dasharray="6 30"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;-110 0" dur="7s" repeatCount="indefinite"/><path d="M-115 104 q27.5 -22 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 L435 130 L-115 130 Z" fill="#57A084"/><path d="M-115 104 q27.5 -22 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0" fill="none" stroke="#FFFAEE" stroke-width="2.2" opacity="0.95"/><path d="M-115 109 q27.5 -18 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0" fill="none" stroke="#FFFAEE" stroke-width="1.6" opacity="0.3" stroke-dasharray="8 34"/></g></g></svg><div style="color:white;font-weight:700;font-size:0.95rem;">Import Taxes</div><div style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Foreign trade</div></div><div style="flex:1;background:rgba(255,255,255,0.1);border-radius:8px;padding:14px 10px;text-align:center;"><svg viewBox="0 0 220 120" style="width:100%;height:auto;display:block;margin:0 0 10px;" role="img" aria-label="Simplified family silhouettes each with a dollar sign bobbing above, representing a per-person poll tax"><defs><linearGradient id="ptSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEFD8"/><stop offset="0.6" stop-color="#FCE2C9"/><stop offset="1" stop-color="#EAF3E4"/></linearGradient><clipPath id="ptClip"><rect x="0" y="0" width="220" height="120" rx="10"/></clipPath></defs><g clip-path="url(#ptClip)"><rect width="220" height="120" fill="url(#ptSky)"/><g fill="#3E6B58" opacity="0.13"><ellipse cx="45" cy="113" rx="20" ry="3"/><ellipse cx="95" cy="114" rx="20" ry="3"/><ellipse cx="140" cy="114" rx="13" ry="2.5"/><ellipse cx="178" cy="114" rx="13" ry="2.5"/></g><g fill="#5B3B27"><g><path d="M39 88 L36 112 L44 112 L45 92 L46 112 L54 112 L51 88 Z"/><path d="M34 111 q4 3 11 1 L45 112 L34 113 Z"/><path d="M45 112 q5 2 11 -1 L56 113 L45 113 Z"/><path d="M35 60 L31.5 87 L36.5 87 L39 61 Z"/><path d="M34 58 Q45 53 56 58 L54 90 L36 90 Z"/><path d="M54 61 Q62 74 66.5 85 L62 88 Q56 75 50 63 Z"/><rect x="42" y="46" width="6" height="6"/><circle cx="45" cy="49" r="7"/><path d="M38 46 Q39 33 45 32 Q51 33 52 46 Z"/><ellipse cx="45" cy="45.5" rx="15" ry="3.4"/></g><g><path d="M88 61 Q95 56 102 61 L113 109 Q95 115 77 109 Z"/><path d="M90 64 Q80 75 65.5 85 L68 88 Q83 79 93 66 Z"/><path d="M100 64 Q112 78 121.5 88 L118 91 Q107 79 97 66 Z"/><rect x="92" y="49" width="6" height="6"/><circle cx="95" cy="52" r="6.4"/><circle cx="100.5" cy="49" r="3.4"/></g><g><path d="M135 99 L134 112 L139 112 L140 100 L141 112 L146 112 L145 99 Z"/><path d="M133 111 q4 2 8 0 Z"/><path d="M139 111 q4 2 8 0 Z"/><path d="M134 90 L133 100 L140 100 L141 100 L147 100 L146 90 Z"/><path d="M133 76 Q140 73 147 76 L146 91 L134 91 Z"/><path d="M134 79 Q127 85 120.5 89 L122.5 92 Q130 87 137 82 Z"/><path d="M146 79 Q153 86 159.5 91 L157.5 94 Q150 88 143 82 Z"/><rect x="138" y="65" width="4.5" height="5"/><circle cx="140" cy="69" r="5.6"/><path d="M134.5 68 Q136 61 140 61 Q145 61 145.5 68 Q140 65 134.5 68 Z"/></g><g><path d="M172 79 Q178 75 184 79 L191 109 Q178 114 165 109 Z"/><path d="M173 81 Q167 87 159.5 91 L161.5 94 Q169 89 176 84 Z"/><path d="M184 81 Q190 90 188 101 L184 100 Q185 89 181 82 Z"/><rect x="176" y="67" width="4.4" height="5"/><circle cx="178" cy="71" r="5.4"/><path d="M182.5 68 Q187 68 187 73 Q186 77 183 77 Q184 72 182.5 68 Z"/></g><ellipse cx="66" cy="86.5" rx="3" ry="2.3"/><ellipse cx="121" cy="89.5" rx="2.7" ry="2.1"/><ellipse cx="159.5" cy="92" rx="2.5" ry="2"/></g><g font-family="Public Sans, Arial, sans-serif" font-weight="800" text-anchor="middle" fill="#D9A441" stroke="#7A4E1E" stroke-width="0.5" paint-order="stroke"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.9s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><text x="45" y="24" font-size="17">$</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="2.3s" begin="-0.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><text x="95" y="31" font-size="15">$</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="2.05s" begin="-1.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><text x="140" y="49" font-size="13">$</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="2.45s" begin="-0.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/><text x="178" y="53" font-size="13">$</text></g></g></g></svg><div style="color:white;font-weight:700;font-size:0.95rem;position:relative;"><span style="cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;" onmouseenter="this.nextElementSibling.style.display=\'block\'" onmouseleave="this.nextElementSibling.style.display=\'none\'" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'">Poll Tax</span><div style="display:none;position:absolute;z-index:1000;background:rgba(0,0,0,0.95);color:white;padding:12px 16px;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.4);width:280px;font-size:0.8rem;line-height:1.5;border:1px solid rgba(255,255,255,0.2);left:0;top:100%;margin-top:8px;" onmouseenter="this.style.display=\'block\'" onmouseleave="this.style.display=\'none\'">Hawaiʻi\'s poll tax was a flat per-person charge set in the 1842 laws, with fixed dollar amounts for men, women, boys, and girls regardless of income or property, plus exemptions for some kūpuna.</div></div><div style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Per-person levy</div></div></div><div style="margin-top:22px;position:relative;"><div style="position:absolute;top:-8px;left:16px;background:rgba(255,255,255,0.12);padding:3px 10px;border-radius:3px;z-index:2;"><span style="color:rgba(255,255,255,0.7);font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;">The Capital</span></div><div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px 16px 14px;"><div style="display:flex;gap:14px;align-items:stretch;"><div style="flex:1.6;border-radius:8px;overflow:hidden;position:relative;box-shadow:0 6px 20px rgba(0,0,0,0.4);"><img src="https://images.squarespace-cdn.com/content/601374ae84e51e430a1829d8/b2c3b3be-bd1e-4125-b6cb-0cec52525c30/%27Honolulu%2C_capitale_des_iles_Sandwich_ou_Hawaii%27_by_Paul_Emmert%2C_c._1858%2C_Honolulu_Museum_of_Art.jpg?content-type=image%2Fjpeg" alt="Honolulu, c. 1858 by Paul Emmert" style="width:100%;height:100%;object-fit:cover;display:block;filter:sepia(15%) contrast(1.05);"/></div><div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;"><div style="border-left:2px solid rgba(255,255,255,0.2);padding-left:12px;margin-bottom:12px;"><div style="color:rgba(255,255,255,0.9);font-size:0.95rem;font-style:italic;line-height:1.5;font-family:Source Sans 3,serif;">A port town where foreign ships paid duties that funded a kingdom</div></div><div style="background:rgba(255,255,255,0.06);border-radius:6px;padding:10px;"><div style="color:rgba(255,255,255,0.4);font-size:0.55rem;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Artwork</div><div style="color:rgba(255,255,255,0.7);font-size:0.7rem;line-height:1.4;font-style:italic;">Honolulu, capitale des îles Sandwich</div><div style="color:rgba(255,255,255,0.45);font-size:0.65rem;margin-top:3px;">Paul Emmert, c. 1858</div><div style="color:rgba(255,255,255,0.35);font-size:0.6rem;">Honolulu Museum of Art</div></div></div></div></div></div></div>' 
+            },
+            { 
+                date: '1893-01-17', 
+                title: 'Illegal Overthrow of Kingdom', 
+                desc: '<div style="margin-top:10px;background:linear-gradient(135deg, rgba(74,107,92,0.04), rgba(200,217,211,0.08));border-radius:8px;padding:20px;position:relative;overflow:hidden;"><div style="position:absolute;top:8px;right:12px;font-size:3rem;font-family:Georgia,serif;color:rgba(74,107,92,0.08);line-height:1;pointer-events:none;">§</div><div style="display:flex;gap:0;align-items:stretch;"><div style="flex:1;padding-right:18px;"><div style="display:inline-block;background:#C8D9D3;color:#3A5A4C;font-size:0.6rem;font-weight:800;text-transform:uppercase;letter-spacing:0.18em;padding:3px 10px;border-radius:2px;margin-bottom:10px;">Before</div><div style="color:#6B8E7F;font-size:1.05rem;line-height:1.6;font-family:Source Sans 3,serif;font-style:italic;">Hawaiian Kingdom operated under community-oriented taxation with import and poll taxes</div></div><div style="width:1px;background:linear-gradient(180deg, transparent, #C8D9D3, #6B8E7F, transparent);flex-shrink:0;"></div><div style="flex:1;padding-left:18px;"><div style="display:inline-block;background:#4A6B5C;color:white;font-size:0.6rem;font-weight:800;text-transform:uppercase;letter-spacing:0.18em;padding:3px 10px;border-radius:2px;margin-bottom:10px;">After</div><div style="color:#3A5A4C;font-size:1.05rem;line-height:1.6;font-family:Source Sans 3,serif;font-weight:600;">Following the overthrow, government shifted toward Western taxation models, including taxes on real and personal property</div></div></div></div>', 
+                secondCard: '<div style="padding:4px 0;"><div style="display:flex;align-items:baseline;gap:10px;margin-bottom:16px;"><div style="color:white;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;opacity:0.5;">Western Tax Model</div><div style="flex:1;height:1px;background:linear-gradient(90deg, rgba(255,255,255,0.15), transparent);"></div></div><div style="margin-bottom:20px;padding-left:16px;position:relative;"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg, rgba(255,255,255,0.3), rgba(255,255,255,0.05));"></div><div style="color:rgba(255,255,255,0.35);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Replaced</div><div style="color:rgba(255,255,255,0.4);font-size:0.95rem;font-style:italic;text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.2);">Community-based taxation</div></div><div style="text-align:center;margin-bottom:20px;"><div style="font-size:2.4rem;font-weight:900;color:white;font-family:Public Sans,sans-serif;letter-spacing:-0.04em;line-height:1;">Individual</div><div style="color:rgba(255,255,255,0.35);font-size:0.7rem;letter-spacing:0.08em;margin-top:6px;">TAXATION OF PERSONS &amp; PROPERTY</div></div><div style="display:flex;gap:0;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);"><div style="flex:1;padding:16px;border-right:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.05);"><div style="color:rgba(255,255,255,0.35);font-size:0.55rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">01</div><div style="color:white;font-weight:800;font-size:1rem;margin-bottom:4px;">Property Tax</div><div style="color:rgba(255,255,255,0.45);font-size:0.75rem;line-height:1.4;">Levies on land and buildings</div></div><div style="flex:1;padding:16px;background:rgba(255,255,255,0.05);"><div style="color:rgba(255,255,255,0.35);font-size:0.55rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">02</div><div style="color:white;font-weight:800;font-size:1rem;margin-bottom:4px;">Personal Tax</div><div style="color:rgba(255,255,255,0.45);font-size:0.75rem;line-height:1.4;">Assessed on belongings and assets</div></div></div></div>' 
+            },
+            { 
+                date: '1898-08-12', 
+                title: 'Annexation by United States', 
+                desc: 'Hawaiʻi was formally annexed by the United States, further cementing Western tax structures and removing indigenous governance.', 
+                secondCard: '<div style="padding:0;"><div style="border-radius:8px;overflow:hidden;position:relative;margin-bottom:18px;"><img src="https://images.squarespace-cdn.com/content/601374ae84e51e430a1829d8/c72a8219-d597-4e89-8831-583d257fd4ea/Annexation_of_Hawaii_%28PP-35-8-023%29.jpg?content-type=image%2Fjpeg" alt="Annexation ceremony at Iolani Palace, 1898" style="width:100%;height:320px;object-fit:cover;display:block;filter:grayscale(40%) contrast(1.1);"/><div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.7) 100%);"></div><div style="position:absolute;top:12px;left:14px;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);padding:5px 12px;border-radius:3px;"><div style="color:white;font-size:1.6rem;font-weight:900;font-family:Public Sans,sans-serif;letter-spacing:-0.03em;line-height:1;">1898</div><div style="color:rgba(255,255,255,0.5);font-size:0.55rem;text-transform:uppercase;letter-spacing:0.12em;">August 12</div></div><div style="position:absolute;bottom:0;left:0;right:0;padding:16px 18px;"><div style="color:rgba(255,255,255,0.6);font-size:0.6rem;font-style:italic;margin-bottom:6px;">Iolani Palace, Honolulu</div><div style="color:white;font-size:1.1rem;font-weight:700;line-height:1.3;font-family:Public Sans,sans-serif;">The flag comes down. A new tax regime begins.</div></div></div><div style="padding:0 4px;"><div style="display:flex;align-items:baseline;gap:10px;margin-bottom:14px;"><div style="color:rgba(255,255,255,0.4);font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15em;">Consequences</div><div style="flex:1;height:1px;background:linear-gradient(90deg, rgba(255,255,255,0.12), transparent);"></div></div><div style="display:flex;flex-direction:column;gap:0;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);"><div style="display:flex;align-items:center;padding:14px 16px;background:rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);"><div style="color:rgba(255,255,255,0.25);font-size:1.2rem;font-weight:900;font-family:Public Sans,sans-serif;margin-right:14px;flex-shrink:0;">01</div><div><div style="color:white;font-weight:700;font-size:0.9rem;">US Tax System Imposed</div><div style="color:rgba(255,255,255,0.4);font-size:0.72rem;line-height:1.4;margin-top:2px;">Federal taxation extended to the islands</div></div></div><div style="display:flex;align-items:center;padding:14px 16px;background:rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.06);"><div style="color:rgba(255,255,255,0.25);font-size:1.2rem;font-weight:900;font-family:Public Sans,sans-serif;margin-right:14px;flex-shrink:0;">02</div><div><div style="color:white;font-weight:700;font-size:0.9rem;">Hawaiian Governance Ended</div><div style="color:rgba(255,255,255,0.4);font-size:0.72rem;line-height:1.4;margin-top:2px;">Indigenous fiscal autonomy dissolved</div></div></div><div style="display:flex;align-items:center;padding:14px 16px;background:rgba(255,255,255,0.03);"><div style="color:rgba(255,255,255,0.25);font-size:1.2rem;font-weight:900;font-family:Public Sans,sans-serif;margin-right:14px;flex-shrink:0;">03</div><div><div style="color:white;font-weight:700;font-size:0.9rem;">Territorial Tax Era Begins</div><div style="color:rgba(255,255,255,0.4);font-size:0.72rem;line-height:1.4;margin-top:2px;">New legal framework for revenue collection</div></div></div></div></div></div>' 
+            },
+            { 
+                date: '1901-01-01', 
+                title: 'Income Tax Established', 
+                desc: 'Income tax was first established in Hawaiʻi under territorial governance.', 
+                secondCard: '<div style="padding:4px 0;"><div style="color:white;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:18px;opacity:0.7;">Flat Rate Tax — 1901</div><div style="text-align:center;margin-bottom:20px;"><div style="font-size:4rem;font-weight:900;color:white;font-family:Public Sans,sans-serif;line-height:1;letter-spacing:-0.04em;">2%</div><div style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:4px;">flat rate on taxable income</div></div><div style="display:flex;gap:12px;margin-bottom:16px;"><div style="flex:1;background:rgba(255,255,255,0.1);border-radius:8px;padding:14px 12px;text-align:center;"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="white" stroke-width="1.2" style="margin-bottom:8px;"><circle cx="12" cy="9" r="4"/><path d="M12 13v3"/><path d="M7 26c0-3 2-5.5 5-5.5s5 2.5 5 5.5"/><circle cx="23" cy="14" r="4.5" stroke-dasharray="2 1.5"/><path d="M22 14h2" stroke-opacity="0.6"/><path d="M23 13v2" stroke-opacity="0.6"/></svg><div style="color:white;font-weight:700;font-size:1rem;margin-bottom:2px;">Individual</div><div style="color:rgba(255,255,255,0.55);font-size:0.85rem;">Income over $1,000</div></div><div style="flex:1;background:rgba(255,255,255,0.1);border-radius:8px;padding:14px 12px;text-align:center;"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="white" stroke-width="1.2" style="margin-bottom:8px;"><rect x="4" y="12" width="16" height="16" rx="1"/><rect x="8" y="16" width="4" height="4" rx="0.5" fill="rgba(255,255,255,0.2)"/><rect x="8" y="22" width="4" height="4" rx="0.5" fill="rgba(255,255,255,0.2)"/><rect x="14" y="16" width="4" height="4" rx="0.5" fill="rgba(255,255,255,0.2)"/><rect x="14" y="22" width="4" height="4" rx="0.5" fill="rgba(255,255,255,0.2)"/><path d="M22 20v8"/><path d="M22 20h4v8h-4" fill="rgba(255,255,255,0.1)"/><path d="M26 22h2v6h-2" fill="rgba(255,255,255,0.05)"/><path d="M22 16l2-4 2 4" stroke-linecap="round"/></svg><div style="color:white;font-weight:700;font-size:1rem;margin-bottom:2px;">Corporate</div><div style="color:rgba(255,255,255,0.55);font-size:0.85rem;">Net profits</div></div></div><div style="background:rgba(255,255,255,0.08);border-radius:6px;padding:10px 14px;display:flex;align-items:center;gap:10px;"><div style="width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.65rem;color:rgba(255,255,255,0.5);font-weight:700;">$</div><div style="color:rgba(255,255,255,0.6);font-size:0.8rem;line-height:1.5;">First $1,000 of individual income was exempt from taxation</div></div></div>' 
+            },
+            { 
+                date: '1916-01-01', 
+                title: 'Federal Estate Tax Adopted', 
+                desc: 'The federal estate tax was adopted, which eventually influenced Hawaiʻi\'s own progressive tax structures.', 
+                secondCard: '<div style="padding:4px 0;"><div style="color:white;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:18px;opacity:0.7;">Federal Estate Tax — 1916</div><div style="display:flex;align-items:flex-end;gap:16px;margin-bottom:22px;"><div style="text-align:center;flex:1;"><div style="font-size:3.5rem;font-weight:900;color:white;font-family:Public Sans,sans-serif;line-height:1;letter-spacing:-0.04em;">10%</div><div style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:4px;">max rate at inception</div></div><div style="flex:1;background:rgba(255,255,255,0.08);border-radius:8px;padding:12px;"><div style="color:rgba(255,255,255,0.45);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">The idea</div><div style="color:rgba(255,255,255,0.8);font-size:0.85rem;line-height:1.5;">Tax the transfer of large estates at death to prevent dynastic wealth concentration</div></div></div><div style="margin-bottom:18px;padding:16px;background:rgba(255,255,255,0.06);border-radius:10px;"><div style="display:flex;align-items:center;justify-content:center;gap:6px;"><div style="text-align:center;"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1"><path d="M7 26V14l8-7 8 7v12"/><path d="M7 26h16"/><rect x="11" y="18" width="3" height="4" rx="0.5" fill="rgba(255,255,255,0.1)"/><rect x="16" y="16" width="3" height="3" rx="0.5" fill="rgba(255,255,255,0.1)"/></svg><div style="color:rgba(255,255,255,0.5);font-size:0.6rem;margin-top:2px;">Wealth</div></div><svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"><path d="M2 6h16" stroke-linecap="round"/><path d="M14 2l4 4-4 4"/></svg><div style="text-align:center;background:rgba(255,255,255,0.12);border-radius:4px;padding:4px 8px;"><div style="color:white;font-weight:800;font-size:0.75rem;">TAX</div><div style="color:rgba(255,255,255,0.4);font-size:0.55rem;">10%</div></div><svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"><path d="M2 6h16" stroke-linecap="round"/><path d="M14 2l4 4-4 4"/></svg><div style="text-align:center;"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1"><circle cx="10" cy="12" r="4"/><path d="M10 16v2"/><path d="M6 24c0-3 2-5 4-5"/><circle cx="20" cy="12" r="3.5"/><path d="M20 16v2"/><path d="M16 24c0-3 2-4.5 4-4.5"/></svg><div style="color:rgba(255,255,255,0.5);font-size:0.6rem;margin-top:2px;">Heirs</div></div></div><div style="color:rgba(255,255,255,0.4);font-size:0.65rem;text-align:center;margin-top:6px;">When someone dies, the government taxes the estate before heirs receive it</div></div><div style="display:flex;gap:10px;"><div style="flex:1;background:rgba(255,255,255,0.1);border-radius:8px;padding:14px 10px;text-align:center;"><svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke="white" stroke-width="1.1" style="margin-bottom:8px;"><path d="M4 24l6-8 4 4 4-6 6 4" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 24h22" stroke-opacity="0.3"/><path d="M4 4v20" stroke-opacity="0.3"/></svg><div style="color:white;font-weight:700;font-size:0.9rem;">Progressive</div><div style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Higher wealth, higher rate</div></div><div style="flex:1;background:rgba(255,255,255,0.1);border-radius:8px;padding:14px 10px;text-align:center;"><svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke="white" stroke-width="1.1" style="margin-bottom:8px;"><circle cx="14" cy="14" r="8"/><path d="M14 10v8"/><path d="M10 14h8"/><circle cx="14" cy="14" r="3" stroke-opacity="0.3"/></svg><div style="color:white;font-weight:700;font-size:0.9rem;">Redistribution</div><div style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Funded public services</div></div><div style="flex:1;background:rgba(255,255,255,0.1);border-radius:8px;padding:14px 10px;text-align:center;"><svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke="white" stroke-width="1.1" style="margin-bottom:8px;"><path d="M14 4l8 5v14H6V9l8-5z" fill="rgba(255,255,255,0.05)"/><path d="M6 9h16"/><rect x="10" y="12" width="3" height="3" rx="0.5" fill="rgba(255,255,255,0.1)"/><rect x="15" y="12" width="3" height="3" rx="0.5" fill="rgba(255,255,255,0.1)"/><path d="M12 23v-5h4v5" stroke-opacity="0.5"/></svg><div style="color:white;font-weight:700;font-size:0.9rem;">Hawaiʻi model</div><div style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Shaped local policy</div></div></div></div>' 
+            },
+            { 
+                date: '1930-01-01', 
+                title: 'General Excise Tax Established', 
+                desc: '<div>The General Excise Tax (GET) was established during the Great Depression as a way to generate stable revenue.</div><div style="margin-top:14px;display:flex;gap:12px;"><div style="flex:1;background:linear-gradient(135deg, rgba(74,107,92,0.06), rgba(200,217,211,0.1));border-radius:6px;padding:12px 14px;"><div style="font-size:0.6rem;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:#8BA89E;margin-bottom:4px;">Depression Response</div><div style="color:#4A6B5C;font-size:0.85rem;line-height:1.5;">Created to provide stable government revenue during economic uncertainty</div></div><div style="flex:1;background:linear-gradient(135deg, rgba(74,107,92,0.06), rgba(200,217,211,0.1));border-radius:6px;padding:12px 14px;"><div style="font-size:0.6rem;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:#8BA89E;margin-bottom:4px;">Long-Term Impact</div><div style="color:#4A6B5C;font-size:0.85rem;line-height:1.5;">Became Hawai&#699;i\'s primary revenue source — later criticized as regressive</div></div></div>', 
+                secondCard: '<div style="padding:4px 0;"><div style="display:flex;align-items:baseline;gap:10px;margin-bottom:20px;"><div style="color:rgba(255,255,255,0.4);font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15em;">The GET</div><div style="flex:1;height:1px;background:linear-gradient(90deg, rgba(255,255,255,0.12), transparent);"></div><div style="color:rgba(255,255,255,0.3);font-size:0.6rem;letter-spacing:0.1em;">Est. 1935</div></div><div style="text-align:center;margin-bottom:22px;position:relative;"><div style="font-size:5.5rem;font-weight:900;color:white;font-family:Public Sans,sans-serif;line-height:0.85;letter-spacing:-0.06em;">4%</div><div style="color:rgba(255,255,255,0.35);font-size:0.75rem;margin-top:6px;letter-spacing:0.06em;">ON NEARLY EVERY TRANSACTION</div></div><div style="margin-bottom:18px;"><div style="color:rgba(255,255,255,0.35);font-size:0.55rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:10px;">Tax cascades through each layer</div><div style="display:flex;flex-direction:column;gap:4px;"><div style="display:flex;align-items:center;gap:10px;"><div style="flex:1;background:rgba(255,255,255,0.18);border-radius:4px;height:28px;display:flex;align-items:center;padding:0 12px;"><div style="color:white;font-size:0.75rem;font-weight:700;">Manufacturer</div></div><div style="color:rgba(255,255,255,0.3);font-size:0.65rem;flex-shrink:0;width:36px;text-align:right;">+4%</div></div><div style="display:flex;align-items:center;gap:10px;"><div style="flex:1;background:rgba(255,255,255,0.12);border-radius:4px;height:28px;display:flex;align-items:center;padding:0 12px;"><div style="color:rgba(255,255,255,0.85);font-size:0.75rem;font-weight:700;">Wholesaler</div></div><div style="color:rgba(255,255,255,0.3);font-size:0.65rem;flex-shrink:0;width:36px;text-align:right;">+4%</div></div><div style="display:flex;align-items:center;gap:10px;"><div style="flex:1;background:rgba(255,255,255,0.08);border-radius:4px;height:28px;display:flex;align-items:center;padding:0 12px;"><div style="color:rgba(255,255,255,0.7);font-size:0.75rem;font-weight:700;">Retailer</div></div><div style="color:rgba(255,255,255,0.3);font-size:0.65rem;flex-shrink:0;width:36px;text-align:right;">+4%</div></div><div style="display:flex;align-items:center;gap:10px;"><div style="flex:1;background:rgba(255,255,255,0.04);border-radius:4px;height:28px;display:flex;align-items:center;padding:0 12px;border:1px dashed rgba(255,255,255,0.12);"><div style="color:rgba(255,255,255,0.5);font-size:0.75rem;font-weight:600;font-style:italic;">You pay all of it</div></div><div style="color:white;font-size:0.7rem;font-weight:800;flex-shrink:0;width:36px;text-align:right;">12%+</div></div></div></div><div style="background:rgba(255,255,255,0.05);border-radius:6px;padding:12px 14px;border-left:2px solid rgba(255,255,255,0.2);"><div style="color:rgba(255,255,255,0.5);font-size:0.75rem;line-height:1.6;font-style:italic;">Unlike a sales tax, GET is charged at every level — costs pyramid through the supply chain and land on the consumer.</div></div></div>' 
+            },
+            { 
+                date: '1963-01-01', 
+                title: 'Property Tax Reform Begins', 
+                desc: 'A period of significant property tax reform that would span over a decade.', 
+                moreContent: '<p style="margin:6px 0 14px;">In Hawaiʻi, property tax power was shifted to the counties so that the level of government providing local services would also control the main local tax that pays for those services.</p><p style="margin:6px 0 14px;">Before this change, the State ran the property tax system and then passed money down to the counties, which left counties in an awkward position: they were responsible for roads, police, parks, and other local functions but did not fully control the tax base or rates that funded them.</p><p style="margin:6px 0 14px;">Over time this arrangement created political tension and blurred accountability, because residents could not clearly see which level of government to hold responsible for tax levels and service quality.</p><p style="margin:6px 0 0;">The constitutional change in the 1970s resolved this by giving counties exclusive authority over real property tax, while the State kept the broader taxes like income and general excise, clarifying roles and tying local fiscal decisions more directly to local elected officials.</p>',
+                secondCard: '<div style="padding:4px 0;"><div style="color:white;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:16px;opacity:0.7;">County Control Era</div><div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;"><div style="flex:1;"><div style="font-size:2.5rem;font-weight:900;color:white;font-family:Public Sans,sans-serif;line-height:1;letter-spacing:-0.03em;">1963-1977</div><div style="font-size:0.85rem;color:rgba(255,255,255,0.5);margin-top:2px;">Major property tax reforms</div></div><div style="flex:1;background:rgba(255,255,255,0.08);border-radius:8px;padding:14px;"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2"><path d="M3 21v-8l7-7 7 7v8"/><path d="M10 21v-6l4-4 4 4v6"/><path d="M3 21h18"/></svg><div style="color:white;font-weight:700;font-size:0.95rem;">Local control</div></div><div style="display:flex;align-items:center;gap:10px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/></svg><div style="color:white;font-weight:700;font-size:0.95rem;">Accountability</div></div><div style="display:flex;align-items:center;gap:10px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg><div style="color:white;font-weight:700;font-size:0.95rem;">Modernization</div></div></div></div><div style="display:flex;gap:10px;"><div style="flex:1;background:rgba(255,255,255,0.1);border-radius:8px;padding:14px 10px;text-align:center;"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="white" stroke-width="1.1" style="margin-bottom:8px;"><path d="M8 22V14l6-5 6 5v8"/><path d="M8 22h12"/><rect x="12" y="17" width="2" height="3" rx="0.3" fill="rgba(255,255,255,0.1)"/><circle cx="20" cy="10" r="5" stroke-opacity="0.6"/><path d="M24 14l3 3" stroke-width="1.5" stroke-linecap="round"/></svg><div style="color:white;font-weight:700;font-size:0.95rem;">Assessment</div><div style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Updated methods</div></div><div style="flex:1;background:rgba(255,255,255,0.1);border-radius:8px;padding:14px 10px;text-align:center;"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="white" stroke-width="1.1" style="margin-bottom:8px;"><path d="M14 4v18" stroke-width="1.3"/><path d="M14 6l-8 4v2h16v-2l-8-4" fill="rgba(255,255,255,0.05)"/><circle cx="6" cy="14" r="3" fill="rgba(255,255,255,0.08)"/><circle cx="22" cy="14" r="3" fill="rgba(255,255,255,0.08)"/><path d="M10 22h8"/></svg><div style="color:white;font-weight:700;font-size:0.95rem;">Equity</div><div style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Fairer rates</div></div><div style="flex:1;background:rgba(255,255,255,0.1);border-radius:8px;padding:14px 10px;text-align:center;"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="white" stroke-width="1.1" style="margin-bottom:8px;"><ellipse cx="14" cy="20" rx="6" ry="2" fill="rgba(255,255,255,0.08)"/><ellipse cx="14" cy="17" rx="6" ry="2" fill="rgba(255,255,255,0.08)"/><ellipse cx="14" cy="14" rx="6" ry="2" fill="rgba(255,255,255,0.08)"/><ellipse cx="14" cy="20" rx="6" ry="2"/><ellipse cx="14" cy="17" rx="6" ry="2"/><ellipse cx="14" cy="14" rx="6" ry="2"/><path d="M8 14v6" stroke-opacity="0.4"/><path d="M20 14v6" stroke-opacity="0.4"/></svg><div style="color:white;font-weight:700;font-size:0.95rem;">Revenue</div><div style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Stable funding</div></div></div></div>' 
+            },
+            { 
+                date: '1970-01-01', 
+                title: 'Property Tax Power Transferred to Counties', 
+                desc: '<div style="margin-top:10px;background:linear-gradient(135deg, rgba(74,107,92,0.04), rgba(200,217,211,0.08));border-radius:8px;padding:20px;position:relative;overflow:hidden;"><div style="position:absolute;top:8px;right:12px;font-size:3rem;font-family:Georgia,serif;color:rgba(74,107,92,0.08);line-height:1;pointer-events:none;">§</div><div style="display:flex;gap:0;align-items:stretch;"><div style="flex:1;padding-right:18px;"><div style="display:inline-block;background:#C8D9D3;color:#3A5A4C;font-size:0.6rem;font-weight:800;text-transform:uppercase;letter-spacing:0.18em;padding:3px 10px;border-radius:2px;margin-bottom:10px;">Before</div><div style="color:#6B8E7F;font-size:1.05rem;line-height:1.6;font-family:Source Sans 3,serif;font-style:italic;">State government collected property taxes directly</div></div><div style="width:1px;background:linear-gradient(180deg, transparent, #C8D9D3, #6B8E7F, transparent);flex-shrink:0;"></div><div style="flex:1;padding-left:18px;"><div style="display:inline-block;background:#4A6B5C;color:white;font-size:0.6rem;font-weight:800;text-transform:uppercase;letter-spacing:0.18em;padding:3px 10px;border-radius:2px;margin-bottom:10px;">After</div><div style="color:#3A5A4C;font-size:1.05rem;line-height:1.6;font-family:Source Sans 3,serif;font-weight:600;">Counties took over property tax collection, forcing the state to rely more heavily on the GET</div></div></div></div><div style="margin-top:14px;background:rgba(74,107,92,0.06);border-left:3px solid #6B8E7F;border-radius:0 6px 6px 0;padding:14px 16px;"><div style="font-size:0.6rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:#8BA89E;margin-bottom:6px;">Regressive Impact</div><div style="color:#4A6B5C;font-size:0.95rem;line-height:1.6;">The GET takes a larger share of income from lower-income families, making this shift particularly impactful for working families.</div></div>', 
+                secondCard: '<div style="padding:4px 0;"><div style="color:white;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:18px;opacity:0.7;">Power Transfer — 1970s</div><div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;"><div style="flex:1;background:rgba(255,255,255,0.08);border-radius:8px;padding:14px;text-align:center;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.1" style="margin-bottom:6px;"><path d="M6 24h20"/><rect x="8" y="14" width="16" height="10" fill="rgba(255,255,255,0.03)"/><path d="M8 14h16"/><rect x="10" y="16" width="3" height="3" rx="0.3" fill="rgba(255,255,255,0.06)"/><rect x="15" y="16" width="3" height="3" rx="0.3" fill="rgba(255,255,255,0.06)"/><rect x="20" y="16" width="3" height="3" rx="0.3" fill="rgba(255,255,255,0.06)"/><rect x="10" y="21" width="3" height="3" rx="0.3" fill="rgba(255,255,255,0.06)"/><rect x="15" y="21" width="3" height="3" rx="0.3" fill="rgba(255,255,255,0.06)"/><rect x="20" y="21" width="3" height="3" rx="0.3" fill="rgba(255,255,255,0.06)"/><path d="M12 14L16 8l4 6" fill="rgba(255,255,255,0.04)"/><circle cx="16" cy="11" r="1" fill="rgba(255,255,255,0.15)"/></svg><div style="color:rgba(255,255,255,0.5);font-weight:700;font-size:0.85rem;">State</div><div style="color:rgba(255,255,255,0.3);font-size:0.7rem;text-decoration:line-through;">Property tax</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;"><svg width="28" height="16" viewBox="0 0 28 16" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M4 8h20"/><path d="M18 3l6 5-6 5"/></svg></div><div style="flex:1;background:rgba(255,255,255,0.15);border-radius:8px;padding:14px;text-align:center;border:1px solid rgba(255,255,255,0.15);"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="white" stroke-width="1" style="margin-bottom:6px;"><ellipse cx="8" cy="18" rx="4" ry="2.5" fill="rgba(255,255,255,0.12)"/><ellipse cx="16" cy="14" rx="3" ry="2" fill="rgba(255,255,255,0.12)"/><ellipse cx="22" cy="16" rx="5" ry="3" fill="rgba(255,255,255,0.12)"/><ellipse cx="14" cy="22" rx="2.5" ry="1.5" fill="rgba(255,255,255,0.12)"/><circle cx="8" cy="18" r="0.8" fill="rgba(255,255,255,0.4)"/><circle cx="16" cy="14" r="0.8" fill="rgba(255,255,255,0.4)"/><circle cx="22" cy="16" r="0.8" fill="rgba(255,255,255,0.4)"/><circle cx="14" cy="22" r="0.8" fill="rgba(255,255,255,0.4)"/></svg><div style="color:white;font-weight:700;font-size:0.85rem;">Counties</div><div style="color:rgba(255,255,255,0.55);font-size:0.7rem;">Full control</div></div></div><div style="display:flex;gap:8px;margin-bottom:16px;"><div style="flex:1;text-align:center;padding:10px 6px;"><div style="font-size:1.8rem;font-weight:900;color:white;font-family:Public Sans,sans-serif;letter-spacing:-0.03em;line-height:1;">4</div><div style="color:rgba(255,255,255,0.5);font-size:0.7rem;margin-top:2px;">Counties</div></div><div style="width:1px;background:rgba(255,255,255,0.1);"></div><div style="flex:1;text-align:center;padding:10px 6px;"><div style="font-size:1.8rem;font-weight:900;color:white;font-family:Public Sans,sans-serif;letter-spacing:-0.03em;line-height:1;">100%</div><div style="color:rgba(255,255,255,0.5);font-size:0.7rem;margin-top:2px;">Local authority</div></div><div style="width:1px;background:rgba(255,255,255,0.1);"></div><div style="flex:1;text-align:center;padding:10px 6px;"><div style="font-size:1.8rem;font-weight:900;color:white;font-family:Public Sans,sans-serif;letter-spacing:-0.03em;line-height:1;">$0</div><div style="color:rgba(255,255,255,0.5);font-size:0.7rem;margin-top:2px;">To state</div></div></div><div style="background:rgba(255,255,255,0.06);border-radius:6px;padding:10px 14px;border-left:2px solid rgba(255,255,255,0.25);"><div style="color:rgba(255,255,255,0.5);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Consequence</div><div style="color:rgba(255,255,255,0.7);font-size:0.8rem;line-height:1.5;">State turned to the broad-based GET for revenue — a tax that falls harder on lower-income families</div></div></div>' 
+            },
+            { 
+                date: '2017-01-01', 
+                title: 'State Earned Income Tax Credit Created', 
+                desc: 'The state-level Earned Income Tax Credit (EITC) was created through Act 107.', 
+                secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:16px;font-size:1.3rem;">Act 107</h3><div style="color:white;font-size:1.1rem;">State EITC established<br>Supports working families<br>Progressive tax policy</div></div>' 
+            },
+            { 
+                date: '2018-01-01', 
+                title: 'State EITC Becomes Effective', 
+                desc: 'The state EITC became effective, though it was initially non-refundable.', 
+                secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:16px;font-size:1.3rem;">Limited Impact</h3><div style="color:white;font-size:1.1rem;">Non-refundable initially<br>Limited to tax liability<br>First benefits delivered</div></div>' 
+            },
+            { 
+                date: '2021-01-01', 
+                title: 'Federal Child Tax Credit Expansion', 
+                desc: 'A temporary expansion of the federal Child Tax Credit (CTC) significantly reduced child poverty in Hawaiʻi, sparking local advocacy for a state-level version.', 
+                secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:16px;font-size:1.3rem;">Child Poverty Reduction</h3><div style="color:white;font-size:1.1rem;">Federal CTC expansion<br>Major poverty reduction<br>Sparks state advocacy</div></div>' 
+            },
+            { 
+                date: '2022-01-01', 
+                title: 'State EITC Made Permanent and Refundable', 
+                desc: 'The state EITC was made permanent and fully refundable, significantly expanding its impact.', 
+                secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:16px;font-size:1.3rem;">Major Expansion</h3><div style="color:white;font-size:1.1rem;">Permanent and refundable<br>Full credit access<br>Greater poverty reduction</div></div>' 
+            },
+            { 
+                date: '2023-01-01', 
+                title: 'State EITC Expanded to 40%', 
+                desc: 'The state EITC was further expanded from 20% to 40% of the federal credit.', 
+                secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:16px;font-size:1.3rem;">Doubled Impact</h3><div style="color:white;font-size:1.1rem;">20% → 40% of federal<br>Maximum benefit increase<br>Working families supported</div></div>' 
+            },
+            { 
+                date: '2024-01-01', 
+                title: 'Act 46 - Major Tax Overhaul', 
+                desc: 'Act 46 was passed, implementing a major overhaul of the income tax system, including large adjustments to tax brackets and a massive increase in the standard deduction.', 
+                moreContent: '<strong style="color:var(--accent);">Bracket Changes:</strong><p style="margin:6px 0 14px;">Significant adjustments to tax brackets across all income levels.</p><strong style="color:var(--accent);">Standard Deduction Increase:</strong><p style="margin:6px 0 14px;">Massive increase in standard deduction amounts.</p><strong style="color:var(--accent);">Revenue Impact:</strong><p style="margin:6px 0 0;">Projected $1.4 billion annual revenue loss by 2031 if fully implemented.</p>', 
+                secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:16px;font-size:1.3rem;">Act 46 Overhaul</h3><div style="color:white;font-size:1.1rem;margin-bottom:16px;">Major tax system changes</div><div style="color:white;font-size:2rem;font-weight:800;margin-bottom:16px;">$1.4B</div><div style="color:rgba(255,255,255,0.85);font-size:0.9rem;">Projected annual revenue loss by 2031</div></div>' 
+            },
+            { 
+                date: '2025-01-01', 
+                title: 'Current Advocacy Focus', 
+                desc: 'Present advocacy focuses on pausing Act 46\'s scheduled bracket shifts to avoid projected revenue loss. Efforts also include closing the capital gains tax loophole and restructuring the conveyance tax to fund affordable housing.', 
+                secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:16px;font-size:1.3rem;">Current Priorities</h3><div style="color:white;font-size:1.1rem;">Pause Act 46 implementation<br>Close capital gains loophole<br>Conveyance tax for housing<br>Progressive tax reform</div></div>' 
+            }
+        ];
+
+        let itemElements = [];
+        let miniDotElements = [];
+
+        function formatDate(dateStr) {
+            const [y, m, d] = dateStr.split('-');
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return `${months[parseInt(m) - 1]} ${parseInt(d)}, ${y}`;
+        }
+        
+        function formatShortDate(dateStr) {
+            const [y, m, d] = dateStr.split('-');
+            return `${parseInt(m)}/${y}`;
+        }
+
+        function buildSectionsHTML(sections) {
+            let html = '';
+            sections.forEach(s => {
+                html += `<div style="margin-top:16px;"><strong style="color:var(--accent);font-size:1rem;">${s.heading}</strong>`;
+                if (s.before && s.after) {
+                    html += `<button class="more-toggle" onclick="toggleMore(this)">More</button>`;
+                    html += `<div class="more-content"><div class="more-content-inner">`;
+                    html += `<div class="before-after-container">`;
+                    html += `<div class="before-section"><span class="section-label">Before</span><p>${s.before}</p></div>`;
+                    html += `<div class="split-divider"><span class="arrow">▼</span></div>`;
+                    html += `<div class="after-section"><span class="section-label">After</span><p>${s.after}</p></div>`;
+                    html += `</div>`;
+                    html += `</div></div>`;
+                } else if (s.note) {
+                    html += `<p style="margin-top:8px;color:#555;line-height:1.6;">${s.note}</p>`;
+                }
+                html += `</div>`;
+            });
+            return html;
+        }
+
+        function buildConsolidatedCard(item) {
+            let cardHTML = `<span class="date">${formatDate(item.date)}</span><h3>${item.title}</h3>`;
+            
+            if (item.sections) {
+                cardHTML += buildSectionsHTML(item.sections);
+            } else if (item.desc) {
+                cardHTML += `<p>${item.desc}</p>`;
+            }
+            
+            if (item.moreContent) {
+                cardHTML += `<button class="more-toggle" onclick="toggleMore(this)">More</button>`;
+                cardHTML += `<div class="more-content"><div class="more-content-inner"><p>${item.moreContent}</p></div></div>`;
+            }
+            
+            // Add second card content if it exists
+            if (item.secondCard) {
+                cardHTML += `<div style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #4A6B5C 0%, #6B8E7F 100%); color: white; border-radius: 8px; text-align: center;">${item.secondCard}</div>`;
+            }
+            
+            return cardHTML;
+        }
+
+        function updateScrollProgress() {
+            const scrollTop = window.pageYOffset;
+            
+            let activeIndex = 0;
+            let currentYear = taxData.length > 0 ? taxData[0].date.split('-')[0] : '2025';
+            
+            itemElements.forEach((el, i) => {
+                const rect = el.getBoundingClientRect();
+                const itemTop = rect.top + scrollTop;
+                const itemMiddle = itemTop + rect.height / 2;
+                
+                if (scrollTop + window.innerHeight / 2 >= itemMiddle) {
+                    activeIndex = i;
+                    if (taxData[i]) {
+                        currentYear = taxData[i].date.split('-')[0];
+                    }
+                }
+            });
+            
+            miniDotElements.forEach((dot, i) => {
+                if (i === activeIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+            
+            const yearIndicator = document.getElementById('year-indicator');
+            if (yearIndicator.textContent !== currentYear) {
+                yearIndicator.style.opacity = '0';
+                setTimeout(() => {
+                    yearIndicator.textContent = currentYear;
+                    yearIndicator.style.opacity = '1';
+                }, 250);
+            }
+            
+            if (itemElements.length > 0) {
+                const lineContainer = document.querySelector('.timeline-line-container');
+                const lineRect = lineContainer.getBoundingClientRect();
+                const lineTop = lineRect.top + scrollTop;
+                const lineHeight = lineRect.height;
+                
+                const viewportMiddle = scrollTop + window.innerHeight * 0.35;
+
+                // Progress: colored line always visible up to first dot, then grows with scroll
+                const firstDot = document.querySelector('.timeline-dot');
+                const progress = document.getElementById('timeline-progress');
+                if (firstDot) {
+                    const dotRect = firstDot.getBoundingClientRect();
+                    const dotCenter = dotRect.top + scrollTop + dotRect.height / 2;
+                    const minProgressPx = dotCenter - lineTop;
+                    const scrollProgressPx = viewportMiddle - lineTop;
+                    const progressPx = Math.max(minProgressPx, Math.min(lineHeight, scrollProgressPx));
+                    progress.style.top = '0';
+                    progress.style.height = (progressPx / lineHeight) * 100 + '%';
+                }
+                
+                itemElements.forEach((el, i) => {
+                    const rect = el.getBoundingClientRect();
+                    const elTop = rect.top + scrollTop;
+                    
+                    // Timeline dot
+                    const dot = el.querySelector('.timeline-dot');
+                    if (dot) {
+                        const dotRect = dot.getBoundingClientRect();
+                        const dotCenter = dotRect.top + scrollTop + dotRect.height / 2;
+                        
+                        if (viewportMiddle >= dotCenter) {
+                            dot.classList.add('passed');
+                        } else {
+                            dot.classList.remove('passed');
+                        }
+                        const distanceFromLine = Math.abs(viewportMiddle - dotCenter);
+                        if (distanceFromLine < 150) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    }
+                    
+                    const cards = el.querySelectorAll('.timeline-card');
+                    cards.forEach(card => {
+                        const distanceFromCenter = Math.abs(rect.top + rect.height / 2 - window.innerHeight / 2);
+                        const fadeThreshold = window.innerHeight * 0.6;
+                        
+                        if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+                            card.classList.add('visible');
+                            
+                            // Add fade effect based on distance from center
+                            if (distanceFromCenter > fadeThreshold) {
+                                card.classList.add('fading-out');
+                            } else {
+                                card.classList.remove('fading-out');
+                            }
+                        } else {
+                            card.classList.remove('visible');
+                            card.classList.remove('fading-out');
+                        }
+                    });
+                });
+            }
+        }
+
+        function scrollToItem(index) {
+            if (itemElements[index]) {
+                const rect = itemElements[index].getBoundingClientRect();
+                const scrollTop = window.pageYOffset;
+                const itemTop = rect.top + scrollTop;
+                const itemMiddle = itemTop + rect.height / 2;
+                const targetScroll = itemMiddle - window.innerHeight / 2;
+                
+                window.scrollTo({
+                    top: targetScroll,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function toggleMore(btn) {
+            const content = btn.nextElementSibling;
+            content.classList.toggle('open');
+            btn.textContent = content.classList.contains('open') ? 'Less' : 'More';
+        }
+
+        function computeMargins(dates) {
+            // Convert dates to timestamps, compute proportional spacing
+            const timestamps = dates.map(d => new Date(d).getTime());
+            const minGap = 60; // minimum px between items
+            const maxGap = 200; // maximum px between items
+            const margins = [];
+            for (let i = 0; i < timestamps.length - 1; i++) {
+                const diffDays = (timestamps[i + 1] - timestamps[i]) / (1000 * 60 * 60 * 24);
+                // Scale: 30 days = minGap, 365+ days = maxGap
+                const scaled = minGap + (maxGap - minGap) * Math.min(1, diffDays / 365);
+                margins.push(Math.round(scaled));
+            }
+            margins.push(0); // last item
+            return margins;
+        }
+
+        function renderItems() {
+            const container = document.getElementById('timeline-items');
+            const miniDots = document.getElementById('mini-dots');
+            
+            container.innerHTML = '';
+            miniDots.innerHTML = '';
+            itemElements = [];
+            miniDotElements = [];
+
+            const dates = taxData.map(d => d.date).sort();
+            const margins = computeMargins(dates);
+
+            dates.forEach((date, i) => {
+                const item = taxData.find(t => t.date === date);
+                const label = formatShortDate(date);
+
+                // Mini dot
+                const miniDot = document.createElement('div');
+                miniDot.className = 'mini-dot';
+                miniDot.dataset.date = label;
+                miniDot.onclick = () => scrollToItem(i);
+                const dotMain = document.createElement('div');
+                dotMain.className = 'mini-dot-main';
+                if (!item) dotMain.style.opacity = '0.15';
+                miniDot.appendChild(dotMain);
+                miniDots.appendChild(miniDot);
+                miniDotElements.push(miniDot);
+
+                // Timeline Item
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'timeline-item';
+                itemDiv.style.marginBottom = margins[i] + 'px';
+                
+                if (item) {
+                    const group = document.createElement('div');
+                    group.style.position = 'relative';
+                    group.style.width = '100%';
+
+                    // Year label
+                    const yearLabel = document.createElement('div');
+                    yearLabel.className = 'year-label';
+                    yearLabel.textContent = item.date.split('-')[0];
+                    yearLabel.style.top = '50px';
+                    group.appendChild(yearLabel);
+
+                    // Timeline dot
+                    const dot = document.createElement('div');
+                    dot.className = 'timeline-dot';
+                    dot.style.top = '50px';
+                    dot.onclick = () => scrollToItem(i);
+                    group.appendChild(dot);
+
+                    // Consolidated card
+                    const card = document.createElement('div');
+                    card.className = 'timeline-card';
+                    card.innerHTML = buildConsolidatedCard(item);
+                    group.appendChild(card);
+
+                    itemDiv.appendChild(group);
+                }
+                
+                container.appendChild(itemDiv);
+                itemElements.push(itemDiv);
+            });
+
+            setTimeout(() => {
+                alignTimelineLine();
+                updateScrollProgress();
+            }, 100);
+        }
+
+        function alignTimelineLine() {
+            const firstDot = document.querySelector('.timeline-dot');
+            const timelineContainer = document.getElementById('timeline-container');
+            const line = document.getElementById('timeline-line');
+            if (firstDot && timelineContainer && line) {
+                const dotRect = firstDot.getBoundingClientRect();
+                const containerRect = timelineContainer.getBoundingClientRect();
+                const dotCenterX = dotRect.left + dotRect.width / 2 - containerRect.left;
+                line.style.left = (dotCenterX - 2) + 'px'; // subtract half line width (4/2=2)
+            }
+        }
+
+        function toggleMoreContent(button) {
+            const moreContent = button.nextElementSibling;
+            const arrow = button.querySelector('svg path');
+            const buttonText = button.querySelector('span');
+            
+            if (moreContent.style.display === 'none' || moreContent.style.display === '') {
+                moreContent.style.display = 'block';
+                arrow.setAttribute('d', 'M18 15l-6-6-6 6');
+                buttonText.textContent = 'Less';
+            } else {
+                moreContent.style.display = 'none';
+                arrow.setAttribute('d', 'M6 9l6 6-6');
+                buttonText.textContent = 'More';
+            }
+        }
+
+        // Initialize
+        document.getElementById('timeline-line').onclick = () => {
+            // Click on timeline line scrolls to next unpassed item
+            const nextUnpassedIndex = itemElements.findIndex(el => {
+                const dot = el.querySelector('.timeline-dot');
+                return dot && !dot.classList.contains('passed');
+            });
+            if (nextUnpassedIndex >= 0) {
+                scrollToItem(nextUnpassedIndex);
+            }
+        };
+        
+        window.addEventListener('scroll', updateScrollProgress);
+        window.addEventListener('resize', () => renderItems());
+        
+        window.onload = () => {
+            renderItems();
+        };
+    </script>
+</body>
+</html>

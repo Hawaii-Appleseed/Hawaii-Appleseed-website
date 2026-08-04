@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ship Watercolor Dev</title>
+<style>
+  body { background: #F5F5F0; font-family: sans-serif; padding: 40px; }
+  .card { background: #5F7A6C; border-radius: 16px; padding: 28px; max-width: 900px; margin: 0 auto; }
+  .boxes { display: flex; gap: 16px; }
+  .taxbox { flex: 1; background: rgba(255,255,255,0.1); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .label { color: white; font-weight: 700; font-size: 0.95rem; }
+  .sub { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+  .tag { color: rgba(255,255,255,0.65); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="boxes">
+    <div class="taxbox">
+      <div class="tag">Current</div>
+      <svg viewBox="0 0 220 120" style="width:100%;height:auto;display:block;margin:0 0 10px;">
+        <defs>
+          <linearGradient id="impSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FFEFD8"/>
+            <stop offset="0.55" stop-color="#FCE2C9"/>
+            <stop offset="1" stop-color="#EAF3E4"/>
+          </linearGradient>
+          <clipPath id="impClip"><rect x="0" y="0" width="220" height="120" rx="10"/></clipPath>
+        </defs>
+        <g clip-path="url(#impClip)">
+          <rect width="220" height="120" fill="url(#impSky)"/>
+          <circle cx="180" cy="26" r="17" fill="#FFE8C8" opacity="0.55"/>
+          <circle cx="180" cy="26" r="11" fill="#FFD9A0"/>
+          <g transform="translate(38 22)" fill="#FFF6E7" opacity="0.9">
+            <ellipse cx="0" cy="0" rx="14" ry="5"/><ellipse cx="12" cy="-3" rx="10" ry="4.5"/><ellipse cx="-11" cy="-2" rx="9" ry="4"/>
+          </g>
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 0;-110 0" dur="13s" repeatCount="indefinite"/>
+            <path d="M-115 66 q27.5 -8 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 L435 130 L-115 130 Z" fill="#C4E6D4"/>
+            <path d="M-115 66 q27.5 -8 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0" fill="none" stroke="#FFF9EC" stroke-width="1.4" opacity="0.7"/>
+          </g>
+          <g transform="translate(93 86)">
+            <g>
+              <animateTransform attributeName="transform" type="translate" values="0 0;0 -3.5;0 0" dur="4.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+              <g>
+                <animateTransform attributeName="transform" type="rotate" values="-2.2 0 0;2.2 0 0;-2.2 0 0" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+                <g stroke="#6E5C48" stroke-width="0.6" opacity="0.5"><path d="M12 -58 L55 -17"/><path d="M-11.5 -64 L12 -58"/><path d="M-11.5 -64 L-36 -6"/></g>
+                <path d="M-12 -45 L-32 -39.5 C-33 -30, -34 -20, -35 -10 C-27 -7.5, -19 -7.5, -12 -8.5 Z" fill="#EFE3C6"/>
+                <path d="M-10.5 -46.5 L-33 -40.5" stroke="#8A6F55" stroke-width="1.1"/>
+                <path d="M-11 -8.5 L-37 -10" stroke="#8A6F55" stroke-width="1.1"/>
+                <path d="M-20.5 -35 L1.5 -35 C2.5 -29, 3 -23, 3.5 -17 C-5 -13.5, -14 -13.5, -22.5 -17 C-22 -23, -21.2 -29, -20.5 -35 Z" fill="#F3E9D2"/>
+                <path d="M-19 -51.5 L-3 -51.5 C-2 -46.5, -1.2 -41.5, -0.5 -36.5 L-22 -36.5 C-21 -41.5, -20 -46.5, -19 -51.5 Z" fill="#F8F0DD"/>
+                <path d="M2.5 -31 L23.5 -31 C24.5 -25.5, 25 -19.5, 25.5 -14 C17 -10.5, 8 -10.5, 0.5 -14 C1 -20, 1.8 -25.5, 2.5 -31 Z" fill="#F6EDD8"/>
+                <path d="M5 -47.5 L20.5 -47.5 C21.5 -43, 22.5 -37.5, 23.5 -32.5 L2.5 -32.5 C3.5 -38, 4.3 -43, 5 -47.5 Z" fill="#FAF3E2"/>
+                <path d="M12.5 -54 C24 -44, 38 -28, 51 -16.5 L26 -11.5 C21 -25, 16 -40, 12.5 -54 Z" fill="#F1E6CC"/>
+                <path d="M14 -46 C23 -37, 33 -25, 43 -16 L24 -11 C20 -22, 16.5 -34, 14 -46 Z" fill="#F8F0DE" opacity="0.95"/>
+                <path d="M14 -6 L12 -58" stroke="#8A6F55" stroke-width="1.7"/>
+                <path d="M-9 -6 L-11.5 -64" stroke="#8A6F55" stroke-width="1.8"/>
+                <path d="M2 -32 L24 -32" stroke="#8A6F55" stroke-width="1.2"/>
+                <path d="M4.5 -48 L21 -48" stroke="#8A6F55" stroke-width="1.1"/>
+                <path d="M-21 -36 L2 -36" stroke="#8A6F55" stroke-width="1.2"/>
+                <path d="M-19.5 -52 L-2 -52" stroke="#8A6F55" stroke-width="1.1"/>
+                <path d="M33 -8 L55 -17" stroke="#8A6F55" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M-11.5 -66 l9 2.2 l-9 2.2 Z" fill="#E59C87"/>
+                <path d="M-35 -7 C-20 -4, 20 -4, 35 -9 L31 3 C16 6.5, -16 6.5, -29 3 Z" fill="#47525B"/>
+                <path d="M-33 -5.2 C-19 -2.6, 19 -2.6, 33 -7" stroke="#F4ECD9" stroke-width="2.2" fill="none"/>
+                <path d="M-31 -5 C-18 -2.7, 18 -2.7, 31 -6.6" stroke="#39434B" stroke-width="1.2" fill="none" stroke-dasharray="1.8 4.2"/>
+              </g>
+            </g>
+          </g>
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 0;-110 0" dur="10s" repeatCount="indefinite"/>
+            <path d="M-115 84 q27.5 -18 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 L435 130 L-115 130 Z" fill="#8FCBB1"/>
+            <path d="M-115 84 q27.5 -18 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0" fill="none" stroke="#FFF8E8" stroke-width="1.8" opacity="0.85"/>
+          </g>
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 0;-110 0" dur="7s" repeatCount="indefinite"/>
+            <path d="M-115 104 q27.5 -22 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 L435 130 L-115 130 Z" fill="#57A084"/>
+            <path d="M-115 104 q27.5 -22 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0" fill="none" stroke="#FFFAEE" stroke-width="2.2" opacity="0.95"/>
+          </g>
+        </g>
+      </svg>
+      <div class="label">Import Taxes</div>
+      <div class="sub">Foreign trade</div>
+    </div>
+    <div class="taxbox">
+      <div class="tag">Watercolor / Expressionist</div>
+      <svg viewBox="0 0 220 120" style="width:100%;height:auto;display:block;margin:0 0 10px;">
+        <defs>
+          <clipPath id="wcClip"><rect x="0" y="0" width="220" height="120" rx="10"/></clipPath>
+          <linearGradient id="wcSea" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#96C9B2"/>
+            <stop offset="1" stop-color="#4E9478"/>
+          </linearGradient>
+          <filter id="wcSoft"><feGaussianBlur stdDeviation="0.8"/></filter>
+          <filter id="wcBlur3"><feGaussianBlur stdDeviation="3"/></filter>
+          <filter id="wcGrain">
+            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="3"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0.45  0 0 0 0 0.4  0 0 0 0 0.33  0 0 0 0.05 0"/>
+          </filter>
+          <path id="wcComma" d="M0 0 C 5 -1.8, 11 -2.2, 16 -1.2 C 11 0.6, 5 1, 0 0 Z"/>
+          <g id="wcFoamM" fill="#FFF7E6">
+            <use href="#wcComma" transform="translate(-101 73.8) rotate(-6)" opacity="0.9"/>
+            <use href="#wcComma" transform="translate(-31 73.6) rotate(-7) scale(1.1)" opacity="0.85"/>
+            <use href="#wcComma" transform="translate(-63 80.5) scale(0.5) rotate(4)" opacity="0.6"/>
+            <circle cx="-57" cy="81.5" r="1" opacity="0.6"/>
+          </g>
+          <g id="wcFoamF" fill="#FFF9EA">
+            <use href="#wcComma" transform="translate(-102 93.2) rotate(-8) scale(1.25)" opacity="0.95"/>
+            <use href="#wcComma" transform="translate(-30 96.2) rotate(-9)" opacity="0.9"/>
+            <use href="#wcComma" transform="translate(-60 101.5) scale(0.55) rotate(4)" opacity="0.65"/>
+            <circle cx="-84" cy="95" r="1.2" opacity="0.7"/>
+            <circle cx="-14" cy="99" r="1" opacity="0.6"/>
+          </g>
+        </defs>
+        <g clip-path="url(#wcClip)">
+          <rect width="220" height="120" fill="#FDF0DC"/>
+          <g filter="url(#wcSoft)">
+            <path d="M-8 6 C 40 0, 90 10, 140 6 C 180 3, 210 8, 226 5 C 228 20, 200 26, 150 24 C 100 22, 40 28, -8 22 Z" fill="#F8D8B6" opacity="0.75"/>
+            <path d="M-8 6 C 40 0, 90 10, 140 6 C 180 3, 210 8, 226 5 C 228 20, 200 26, 150 24 C 100 22, 40 28, -8 22 Z" fill="none" stroke="#EABE92" stroke-width="1" opacity="0.35"/>
+            <path d="M100 -6 C 150 -2, 200 -8, 226 -4 C 228 8, 205 16, 165 12 C 135 9, 110 4, 100 -6 Z" fill="#F3BF9C" opacity="0.5"/>
+            <path d="M-8 30 C 50 24, 120 34, 226 28 L 226 40 C 160 46, 60 40, -8 44 Z" fill="#FBE4C4" opacity="0.6"/>
+            <path d="M-8 52 C 60 47, 150 55, 226 50 L 226 62 L -8 62 Z" fill="#DDEEE3" opacity="0.5"/>
+          </g>
+          <path d="M28 18 C 50 15, 76 14.5, 96 16 C 76 18.5, 50 19.5, 28 18 Z" fill="#F4C99E" opacity="0.5"/>
+          <path d="M120 10 C 140 8, 162 8, 178 10 C 162 12.5, 140 12.5, 120 10 Z" fill="#F9DFC0" opacity="0.55"/>
+          <path d="M60 40 C 85 37.5, 115 37.5, 138 39 C 115 41.5, 85 42, 60 40 Z" fill="#EFDABA" opacity="0.4"/>
+          <circle cx="176" cy="27" r="24" fill="#FFC493" opacity="0.4" filter="url(#wcBlur3)"/>
+          <circle cx="176" cy="27" r="14.5" fill="#FFAC6C" opacity="0.88"/>
+          <circle cx="176" cy="27" r="14.5" fill="none" stroke="#E98F4F" stroke-width="1.4" opacity="0.5" stroke-dasharray="58 33" transform="rotate(-30 176 27)"/>
+          <circle cx="172" cy="23" r="5" fill="#FFE7C0" opacity="0.8"/>
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 0;9 0;0 0" dur="26s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+            <g transform="translate(42 22)" fill="#FBEEDD">
+              <path d="M-16 0 C -6 -2.5, 8 -3, 18 -1.5 C 8 1, -6 1.5, -16 0 Z" opacity="0.85"/>
+              <path d="M-6 4 C 2 2.5, 12 2.5, 19 4 C 12 5.5, 2 5.5, -6 4 Z" opacity="0.6"/>
+            </g>
+          </g>
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 0;-7 0;0 0" dur="32s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+            <g transform="translate(146 42)" fill="#FBEEDD">
+              <path d="M-12 0 C -4 -2, 6 -2.2, 13 -1 C 6 0.8, -4 1.2, -12 0 Z" opacity="0.6"/>
+            </g>
+          </g>
+          <rect x="-5" y="56" width="230" height="70" fill="url(#wcSea)" opacity="0.95"/>
+          <path d="M14 60 C 60 58.5, 120 58.5, 170 60 C 120 61.5, 60 61.5, 14 60 Z" fill="#FFF7E6" opacity="0.3"/>
+          <path d="M40 65 C 90 63.8, 150 63.8, 196 65 C 150 66.3, 90 66.3, 40 65 Z" fill="#4E8E74" opacity="0.35"/>
+          <!-- back swell -->
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 0;-110 0" dur="13s" repeatCount="indefinite"/>
+            <path d="M-115 64 q20 -7 38 -1 q14 4 30 0 q18 -6 42 1 q20 -7 38 -1 q14 4 30 0 q18 -6 42 1 q20 -7 38 -1 q14 4 30 0 q18 -6 42 1 q20 -7 38 -1 q14 4 30 0 q18 -6 42 1 q20 -7 38 -1 q14 4 30 0 q18 -6 42 1 L435 130 L-115 130 Z" fill="#A9DAC4" opacity="0.95"/>
+            <path d="M-115 64 q20 -7 38 -1 q14 4 30 0 q18 -6 42 1 q20 -7 38 -1 q14 4 30 0 q18 -6 42 1 q20 -7 38 -1 q14 4 30 0 q18 -6 42 1 q20 -7 38 -1 q14 4 30 0 q18 -6 42 1" fill="none" stroke="#82BFA6" stroke-width="1.1" opacity="0.5" transform="translate(0 1.5)"/>
+          </g>
+          <!-- ship reflection -->
+          <path d="M74 95 C 84 93.5, 98 93.5, 110 95 C 98 96.5, 84 96.5, 74 95 Z" fill="#3A4C63" opacity="0.22"/>
+          <path d="M80 101 C 88 99.8, 100 99.8, 108 101 C 100 102.2, 88 102.2, 80 101 Z" fill="#3A4C63" opacity="0.16"/>
+          <path d="M86 106.5 C 92 105.5, 100 105.5, 106 106.5 C 100 107.5, 92 107.5, 86 106.5 Z" fill="#FFF7E6" opacity="0.3"/>
+          <!-- ship: crisp line-and-wash -->
+          <g transform="translate(93 86)">
+            <g>
+              <animateTransform attributeName="transform" type="translate" values="0 0;0 -4.5;0 0" dur="4.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+              <g>
+                <animateTransform attributeName="transform" type="rotate" values="-3.2 0 0;3.2 0 0;-3.2 0 0" dur="6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+                <g stroke="#6E5C48" stroke-width="0.6" opacity="0.55"><path d="M12 -58 L55 -17"/><path d="M-11.5 -64 L12 -58"/><path d="M-11.5 -64 L-36 -6"/></g>
+                <path d="M-12 -45 L-32 -39.5 C-33 -30, -34 -20, -35 -10 C-27 -7.5, -19 -7.5, -12 -8.5 Z" fill="#F1E2BE" opacity="0.92" stroke="#D8C49E" stroke-width="0.7" stroke-opacity="0.7"/>
+                <path d="M-10.5 -46.5 L-33 -40.5" stroke="#7C6248" stroke-width="1.2"/>
+                <path d="M-11 -8.5 L-37 -10" stroke="#7C6248" stroke-width="1.2"/>
+                <path d="M-20.5 -35 L1.5 -35 C2.5 -29, 3 -23, 3.5 -17 C-5 -13.5, -14 -13.5, -22.5 -17 C-22 -23, -21.2 -29, -20.5 -35 Z" fill="#F7ECD1" opacity="0.93" stroke="#D8C49E" stroke-width="0.7" stroke-opacity="0.7"/>
+                <path d="M-16 -31 C -12 -27, -9 -23, -7 -19" stroke="#FFFDF4" stroke-width="2" opacity="0.5" stroke-linecap="round" fill="none"/>
+                <path d="M-19 -51.5 L-3 -51.5 C-2 -46.5, -1.2 -41.5, -0.5 -36.5 L-22 -36.5 C-21 -41.5, -20 -46.5, -19 -51.5 Z" fill="#FBF3DE" opacity="0.93" stroke="#D8C49E" stroke-width="0.7" stroke-opacity="0.6"/>
+                <path d="M2.5 -31 L23.5 -31 C24.5 -25.5, 25 -19.5, 25.5 -14 C17 -10.5, 8 -10.5, 0.5 -14 C1 -20, 1.8 -25.5, 2.5 -31 Z" fill="#F7ECD1" opacity="0.93" stroke="#D8C49E" stroke-width="0.7" stroke-opacity="0.7"/>
+                <path d="M7 -27 C 10.5 -23.5, 13 -20, 15 -16.5" stroke="#FFFDF4" stroke-width="2" opacity="0.5" stroke-linecap="round" fill="none"/>
+                <path d="M5 -47.5 L20.5 -47.5 C21.5 -43, 22.5 -37.5, 23.5 -32.5 L2.5 -32.5 C3.5 -38, 4.3 -43, 5 -47.5 Z" fill="#FBF3DE" opacity="0.93" stroke="#D8C49E" stroke-width="0.7" stroke-opacity="0.6"/>
+                <path d="M12.5 -54 C24 -44, 38 -28, 51 -16.5 L26 -11.5 C21 -25, 16 -40, 12.5 -54 Z" fill="#F3E6C4" opacity="0.92" stroke="#D8C49E" stroke-width="0.7" stroke-opacity="0.6"/>
+                <path d="M14 -46 C23 -37, 33 -25, 43 -16 L24 -11 C20 -22, 16.5 -34, 14 -46 Z" fill="#FBF3DE" opacity="0.92" stroke="#D8C49E" stroke-width="0.7" stroke-opacity="0.55"/>
+                <path d="M14 -6 L12 -58" stroke="#7C6248" stroke-width="1.8"/>
+                <path d="M-9 -6 L-11.5 -64" stroke="#7C6248" stroke-width="1.9"/>
+                <path d="M2 -32 L24 -32" stroke="#7C6248" stroke-width="1.3"/>
+                <path d="M4.5 -48 L21 -48" stroke="#7C6248" stroke-width="1.2"/>
+                <path d="M-21 -36 L2 -36" stroke="#7C6248" stroke-width="1.3"/>
+                <path d="M-19.5 -52 L-2 -52" stroke="#7C6248" stroke-width="1.2"/>
+                <path d="M33 -8 L55 -17" stroke="#7C6248" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M-11.5 -66 l9 2.2 l-9 2.2 Z" fill="#E2795F"/>
+                <path d="M-35 -7 C-20 -4, 20 -4, 35 -9 L31 3 C16 6.5, -16 6.5, -29 3 Z" fill="#3A4C63" stroke="#2C3A4E" stroke-width="0.8"/>
+                <path d="M-33 -5.2 C-19 -2.6, 19 -2.6, 33 -7" stroke="#F6EBD2" stroke-width="2.2" fill="none" stroke-dasharray="5 2 8 3" opacity="0.95"/>
+              </g>
+            </g>
+          </g>
+          <!-- mid swell -->
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 0;-110 0" dur="9.5s" repeatCount="indefinite"/>
+            <path d="M-115 82 q22 -14 42 -3 q16 8 32 -1 q18 -10 36 4 q22 -14 42 -3 q16 8 32 -1 q18 -10 36 4 q22 -14 42 -3 q16 8 32 -1 q18 -10 36 4 q22 -14 42 -3 q16 8 32 -1 q18 -10 36 4 q22 -14 42 -3 q16 8 32 -1 q18 -10 36 4 L435 130 L-115 130 Z" fill="#6FB096" opacity="0.96"/>
+            <path d="M-115 82 q22 -14 42 -3 q16 8 32 -1 q18 -10 36 4 q22 -14 42 -3 q16 8 32 -1 q18 -10 36 4 q22 -14 42 -3 q16 8 32 -1 q18 -10 36 4 q22 -14 42 -3 q16 8 32 -1 q18 -10 36 4 q22 -14 42 -3 q16 8 32 -1 q18 -10 36 4" fill="none" stroke="#4F8D74" stroke-width="1.3" opacity="0.5" transform="translate(0 2)"/>
+            <use href="#wcFoamM" x="110"/>
+            <use href="#wcFoamM" x="220"/>
+            <use href="#wcFoamM" x="330"/>
+            <use href="#wcFoamM" x="440"/>
+          </g>
+          <!-- front swell -->
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 0;-110 0" dur="6.5s" repeatCount="indefinite"/>
+            <path d="M-115 102 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4 L435 130 L-115 130 Z" fill="#438A6D" opacity="0.97"/>
+            <path d="M-115 102 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4" fill="none" stroke="#2F6B54" stroke-width="1.5" opacity="0.55" transform="translate(0 2)"/>
+            <path d="M-115 102 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4 q24 -16 44 -4 q18 9 34 0 q16 -11 32 4" fill="none" stroke="#5C74A6" stroke-width="2" opacity="0.16" transform="translate(0 6)"/>
+            <use href="#wcFoamF" x="110"/>
+            <use href="#wcFoamF" x="220"/>
+            <use href="#wcFoamF" x="330"/>
+            <use href="#wcFoamF" x="440"/>
+          </g>
+          <rect width="220" height="120" filter="url(#wcGrain)"/>
+        </g>
+      </svg>
+      <div class="label">Import Taxes</div>
+      <div class="sub">Foreign trade</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

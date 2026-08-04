@@ -1,0 +1,1197 @@
+<!-- SIMPLE SQUARESPACE VERSION -->
+<!-- Just copy this ENTIRE file and paste into ONE Code Block on Squarespace -->
+<!-- Make sure to add the external libraries in Settings > Advanced > Code Injection > Header first -->
+
+<style>
+/* All CSS embedded here */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #F5F5F0;
+    font-family: 'Source Sans 3', sans-serif;
+}
+
+.tax-overview-container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 3rem;
+    margin: 0 auto;
+    font-family: 'Source Sans 3', sans-serif;
+    background: #F5F5F0;
+}
+
+.tax-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.revenue-highlight {
+    display: inline-block;
+    background: #E8F0ED;
+    border: 1px solid #C8D9D3;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-weight: 700;
+    color: #4A6B5C;
+    vertical-align: baseline;
+}
+
+.fund-container {
+    cursor: pointer;
+    position: relative;
+}
+
+.fund-popup {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4A6B5C;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 6px;
+    white-space: normal;
+    font-size: 0.85rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 9999;
+    max-width: 280px;
+    text-align: center;
+    min-width: 250px;
+    line-height: 1.4;
+    transition: visibility 0.2s, opacity 0.2s;
+    pointer-events: none;
+}
+
+.fund-container:hover .fund-popup {
+    visibility: visible;
+    opacity: 1;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+.service-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(74, 107, 92, 0.1);
+}
+
+.service-icon {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #E8F0ED;
+    border-radius: 10px;
+}
+
+.service-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #8BA89E;
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.service-cost {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #4A6B5C;
+    margin-bottom: 0.35rem;
+    font-family: 'Public Sans', sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.service-desc {
+    color: #6B8E7F;
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+
+.content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.content-wrapper.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
+.description-container {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-top: 3px solid #6B8E7F;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.where-taxes-go-section {
+    margin-top: 5rem;
+    margin-bottom: 4rem;
+    padding: 3rem 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border-top: 3px solid #6B8E7F;
+}
+
+.bar-charts-section {
+    margin: 5rem 0;
+    padding-top: 4rem;
+    border-top: 1px solid #C8D9D3;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.bar-charts-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.bar-chart-container {
+    background: white;
+    border-radius: 12px;
+    padding: 2.5rem 3rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border-top: 3px solid #6B8E7F;
+}
+
+.bar-chart-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #8BA89E;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    letter-spacing: 0.15em;
+}
+
+.title-popup {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4A6B5C;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 9999;
+    width: 280px;
+    text-align: left;
+    white-space: normal;
+}
+
+.bar-chart-title:hover .title-popup {
+    display: block;
+}
+
+.bar-chart {
+    height: 320px;
+    position: relative;
+    padding-bottom: 80px;
+    margin-top: 3rem;
+}
+
+.bar {
+    position: absolute;
+    bottom: 30px;
+    border-radius: 4px 4px 0 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.bar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.bar-label {
+    position: absolute;
+    bottom: -70px;
+    text-align: center;
+    width: 100%;
+}
+
+.bar-value {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4A6B5C;
+}
+
+.bar-axis {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #cbd5e0;
+}
+
+.bar-gridlines {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.gridline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e2e8f0;
+    opacity: 0.5;
+}
+
+.description-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #4A6B5C;
+    margin-bottom: 1rem;
+    font-family: 'Public Sans', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.description-percentage {
+    font-size: 2.8rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    font-family: 'Public Sans', sans-serif;
+    letter-spacing: -0.02em;
+}
+
+.description-text {
+    color: #5C7A6E;
+    line-height: 1.7;
+    font-size: 1rem;
+    border-top: 1px solid #E8F0ED;
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+}
+
+.placeholder-text {
+    color: #8BA89E;
+    font-style: italic;
+    text-align: center;
+    font-size: 1.05rem;
+}
+
+.legend {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.legend-item:hover {
+    background-color: #f1f5f9;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.legend-label {
+    font-size: 0.9rem;
+    color: #4a5568;
+}
+
+.legend-percentage {
+    font-weight: 600;
+    color: #2d3748;
+    margin-left: auto;
+}
+
+.seg-popup {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    z-index: 10;
+    pointer-events: none;
+}
+
+@media (min-width: 769px) {
+    .content-wrapper {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 3rem !important;
+    }
+    
+    .chart-section {
+        display: block !important;
+    }
+    
+    .description-container {
+        display: flex !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .tax-overview-container {
+        padding: 1.5rem 1rem;
+        overflow-x: hidden;
+    }
+    
+    .tax-header h1 {
+        font-size: 2rem !important;
+    }
+    
+    .tax-header p {
+        font-size: 1rem !important;
+        padding: 0 0.5rem;
+    }
+    
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .chart-section {
+        display: flex;
+        flex-direction: column;
+        order: 1;
+    }
+    
+    .chart-section > div:first-child {
+        order: 1;
+    }
+    
+    .chart-container {
+        height: 300px;
+        order: 2;
+    }
+    
+    .legend {
+        grid-template-columns: 1fr;
+        order: 4;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+    }
+    
+    .legend-item {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+    }
+    
+    .legend-label {
+        font-size: 0.8rem !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .legend-percentage {
+        font-size: 0.85rem !important;
+        flex-shrink: 0;
+    }
+    
+    .legend-color {
+        width: 16px !important;
+        height: 16px !important;
+        flex-shrink: 0;
+    }
+    
+    .description-container {
+        order: 3;
+        margin-top: 1.5rem !important;
+        margin-bottom: 1.5rem !important;
+        min-height: auto !important;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .bar-chart {
+        height: 280px;
+        padding-bottom: 140px;
+        overflow-x: hidden;
+        width: 100%;
+    }
+    
+    .bar-chart-container {
+        padding: 1.5rem 0.75rem 3rem !important;
+        overflow-x: hidden;
+    }
+    
+    .bar-charts-section {
+        overflow-x: hidden;
+    }
+    
+    .bar-label {
+        font-size: 0.65rem !important;
+        white-space: normal !important;
+        line-height: 1.2 !important;
+        max-width: 100% !important;
+    }
+    
+    .bar-label > div:first-child {
+        font-size: 0.75rem !important;
+    }
+    
+    .bar-label > div:last-child {
+        font-size: 0.65rem !important;
+    }
+    
+    .bar-value {
+        font-size: 0.8rem !important;
+        top: -28px !important;
+    }
+    
+    .description-container {
+        min-height: auto;
+        padding: 1.5rem;
+    }
+    
+    .where-taxes-go-section {
+        padding: 2rem 1rem;
+    }
+    
+    .where-taxes-go-section h2 {
+        font-size: 1.8rem !important;
+    }
+    
+    .bar-chart-container {
+        padding: 1.5rem 1rem 3rem;
+    }
+    
+    .bar-charts-section {
+        margin: 3rem 0;
+    }
+    
+    .bar-charts-section h2 {
+        font-size: 1.8rem !important;
+        margin-left: 0 !important;
+        padding: 0 0.5rem;
+    }
+    
+    .fiscal-year-text {
+        font-size: 0.85rem !important;
+        padding: 0.3rem 0.8rem !important;
+    }
+    
+    .main-heading {
+        font-size: 1.8rem !important;
+        margin-bottom: 2rem !important;
+    }
+    
+    .main-heading span span {
+        padding-left: 0 !important;
+        position: static !important;
+        display: block !important;
+    }
+    
+    .service-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .service-icon {
+        margin: 0 auto;
+    }
+    
+    section[style*="grid-template-columns: repeat(3, 1fr)"] {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 1.5rem !important;
+        padding: 0 0.5rem !important;
+    }
+    
+    section[style*="grid-template-columns: repeat(3, 1fr)"] > div:nth-child(3) {
+        grid-column: 1 / -1;
+    }
+    
+    section div[style*="border-left: 1px solid #DDE8E2"] {
+        border-left: none !important;
+        padding-left: 0 !important;
+        border-top: 2px solid #DDE8E2 !important;
+        padding-top: 2rem !important;
+        margin-top: 0 !important;
+    }
+    
+    section[style*="margin-top: 4rem"] {
+        margin-top: 3rem !important;
+        padding: 0 !important;
+    }
+    
+    section[style*="margin-top: 4rem"] > div:first-child {
+        padding: 0 1rem !important;
+        margin-bottom: 2rem !important;
+    }
+    
+    section[style*="margin-top: 4rem"] h2 {
+        font-size: 1.8rem !important;
+        padding: 0 !important;
+        line-height: 1.2 !important;
+    }
+    
+    section[style*="margin-top: 4rem"] > div:first-child > p {
+        font-size: 0.9rem !important;
+        padding: 0 !important;
+    }
+    
+    section[style*="margin-top: 4rem"] h3 {
+        font-size: 1.3rem !important;
+    }
+    
+    section[style*="margin-top: 4rem"] p {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+    }
+    
+    section[style*="margin-top: 4rem"] div[style*="border-left: 3px solid"] {
+        padding: 0.75rem 1rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    section[style*="margin-top: 4rem"] div[style*="border-left: 3px solid"] p:first-child {
+        font-size: 1.4rem !important;
+    }
+    
+    section[style*="margin-top: 4rem"] div[style*="border-left: 3px solid"] p:last-child {
+        font-size: 0.85rem !important;
+    }
+    
+    .description-title {
+        font-size: 1.1rem !important;
+    }
+    
+    .description-percentage {
+        font-size: 2rem !important;
+    }
+    
+    div[style*="display: grid; grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+}
+</style>
+
+<div class="tax-overview-container">
+    <header class="tax-header">
+        <h1 style="font-family: 'Public Sans', sans-serif; font-weight: 800; font-size: 3.2rem; line-height: 1.15; letter-spacing: -0.03em; color: #4A6B5C; margin-bottom: 0;">Overview of Hawaiʻi's<br>Tax System</h1>
+        <div style="width: 80px; height: 1px; background: #C8D9D3; margin: 1.5rem auto;"></div>
+        <p style="font-size: 1.25rem; line-height: 1.65; font-weight: 400; color: #6B8E7F; margin: 0 auto 2rem; text-align: center; max-width: 520px;">Taxes are the engine of our state government — funding the programs and services that we all benefit from.</p>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="chart-section">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div class="fiscal-year-text" style="display: inline-block; font-family: 'Source Sans 3', sans-serif; font-size: 1.1rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 1rem; border: 1px solid #8BA89E; border-radius: 50px; color: #6B8E7F; background: #F8FAF9; box-shadow: 2px 2px 0px rgba(107, 142, 127, 0.2); margin-bottom: 1rem; opacity: 0; transform: translateY(-30px); transition: opacity 1.8s ease, transform 1.8s ease;">In FY 2025</div>
+                <h2 class="main-heading" style="font-size: 2.5rem; line-height: 1.2; font-weight: 800; color: #4A6B5C; margin: 0 auto 4rem; text-align: center; letter-spacing: -0.02em; opacity: 0; transform: translateY(-30px); transition: opacity 1.8s ease 0.8s, transform 1.8s ease 0.8s; font-family: 'Public Sans', sans-serif;">Hawaiʻi made over<br><span style="display: inline-block; text-align: left; position: relative;"><span style="color: #A8BFB5; -webkit-text-stroke: 0.5px #4A6B5C;">$11.08 billion</span><br><span style="position: absolute; top: 100%; left: 0; padding-left: 7.8rem; color: #4A6B5C; -webkit-text-stroke: 0; white-space: nowrap; font-size: 0.85em;">from taxes.</span></span></h2>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="taxPieChart"></canvas>
+            </div>
+            <div class="legend" id="legend"></div>
+        </div>
+
+        <div class="description-container" id="descriptionContainer">
+            <div class="placeholder-text">
+                Click on a pie slice or legend item to see detailed information about that tax category.
+            </div>
+        </div>
+    </div>
+
+    <div style="width: 60px; height: 1px; background: #C8D9D3; margin: 4rem 0;"></div>
+
+    <div style="max-width: 600px; margin: 0; padding: 0 0 0 1.5rem; border-left: 3px solid #6B8E7F;">
+        <p style="font-size: 1.35rem; color: #4A6B5C; line-height: 1.7; margin: 0 0 0.75rem 0; font-weight: 600;">Hawaiʻi has many different kinds of taxes, including taxes on personal income, goods and services, and hotel rooms.</p>
+        <p style="font-size: 0.85rem; color: #8BA89E; margin: 0; font-weight: 600; letter-spacing: 0.03em;">* Property is taxed at the county level</p>
+    </div>
+
+    <section class="where-taxes-go-section">
+        <h2 style="font-size: 2.5rem; line-height: 1.2; font-weight: 800; color: #4A6B5C; margin: 0 0 1.5rem 0; text-align: left; letter-spacing: -0.02em; font-family: 'Public Sans', sans-serif;">Taxes fund our communities.</h2>
+        <div style="margin-bottom: 2rem;">
+            <p style="font-size: 1.15rem; color: #5C7A6E; line-height: 1.7; margin: 0; max-width: 800px;"><span style="float: left; font-size: 3.5rem; line-height: 1; font-weight: 800; color: #4A6B5C; margin-right: 0.5rem; margin-top: 0.1rem; font-family: 'Public Sans', sans-serif;">M</span>ost of Hawai'i's <span class="revenue-highlight">$11.079 billion</span> in tax revenue goes to the <strong class="fund-container">general fund<span class="fund-popup">The general fund pays for most state operations and services, including education, healthcare, and public safety.</span></strong> and <strong class="fund-container">special funds<span class="fund-popup">Special funds are dedicated to specific purposes, like highway maintenance or environmental programs.</span></strong>. This money supports the common goods our communities depend on, from healthcare and education to housing and food security.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6B8E7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <div>
+                    <div class="service-title">Healthcare</div>
+                    <div class="service-cost">$1.83 billion</div>
+                    <div class="service-desc">Health coverage for 441,000 children and adults</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6B8E7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                </div>
+                <div>
+                    <div class="service-title">Affordable Housing</div>
+                    <div class="service-cost">$305+ million</div>
+                    <div class="service-desc">Building affordable units, rental assistance, and homelessness programs</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6B8E7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                </div>
+                <div>
+                    <div class="service-title">Public K-12 Schools</div>
+                    <div class="service-cost">$1.76 billion</div>
+                    <div class="service-desc">Education for 165,000+ students across 296 schools</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6B8E7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8L22 12L18 16"/><path d="M6 8L2 12L6 16"/><path d="M2 12H22"/></svg>
+                </div>
+                <div>
+                    <div class="service-title">Food Security</div>
+                    <div class="service-cost">$30+ million</div>
+                    <div class="service-desc">Free and reduced-price school meals for 78,000 students and SNAP administration for over 163,000 people</div>
+                </div>
+            </div>
+        </div>
+        
+        <p style="font-size: 0.95rem; color: #5C7A6E; margin: 2rem 0 1rem 0; text-align: center; line-height: 1.6;">Besides taxes, the state government is funded by bonds (borrowed money) and federal dollars.</p>
+        <div style="text-align: center;">
+            <a href="https://hiappleseed.org/publications/hawaii-budget-primer-fy202526" target="_blank" style="color: #4A6B5C; font-size: 1rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                Learn more about the state budget
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+        </div>
+    </section>
+
+    <section class="bar-charts-section">
+        <h2 style="font-size: 2.5rem; line-height: 1.2; font-weight: 800; color: #4A6B5C; max-width: 800px; margin: 0 0 3rem 2rem; text-align: left; letter-spacing: -0.02em; font-family: 'Public Sans', sans-serif;">Wealthy people spend a<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #6B8E7F;">smaller part</span> of their income on taxes.</h2>
+
+        <div style="max-width: 900px; margin: 0 auto;">
+            <div class="bar-chart-container">
+                <div class="bar-chart-title">
+                    PERCENTAGE OF INCOME SPENT ON TAXES
+                    <div class="title-popup">An effective tax rate is the actual percentage of your total income that you pay in taxes, after accounting for all deductions, credits, and the progressive tax bracket system.</div>
+                </div>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 1rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 1rem; color: #4A6B5C; font-weight: 600;">
+                        <input type="radio" name="chartView" value="total" checked onchange="updateChartView(this.value)" style="width: 18px; height: 18px; cursor: pointer; accent-color: #6B8E7F;">
+                        Total
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 1rem; color: #4A6B5C; font-weight: 600;">
+                        <input type="radio" name="chartView" value="type" onchange="updateChartView(this.value)" style="width: 18px; height: 18px; cursor: pointer; accent-color: #6B8E7F;">
+                        Tax Type
+                    </label>
+                </div>
+                <div class="bar-chart" id="incomeBarChart">
+                    <div class="bar-gridlines">
+                        <div class="gridline" style="bottom: 20%;"></div>
+                        <div class="gridline" style="bottom: 40%;"></div>
+                        <div class="gridline" style="bottom: 60%;"></div>
+                        <div class="gridline" style="bottom: 80%;"></div>
+                    </div>
+                    <div class="bar-axis"></div>
+                </div>
+                <div id="taxTypeLegend" style="padding: 1rem; margin-top: 2.5rem; text-align: center; display: none;">
+                    <div style="font-weight: 600; color: #4A6B5C; margin-bottom: 0.5rem; font-size: 0.9rem;">Tax Types:</div>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 16px; height: 16px; background: #6B8E7F; border-radius: 3px;"></div>
+                            <span style="font-size: 0.85rem; color: #5C7A6E;">GET</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 16px; height: 16px; background: #8BA89E; border-radius: 3px;"></div>
+                            <span style="font-size: 0.85rem; color: #5C7A6E;">Property</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 16px; height: 16px; background: #A8BFB5; border-radius: 3px;"></div>
+                            <span style="font-size: 0.85rem; color: #5C7A6E;">Income</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="max-width: 800px; margin: 2.5rem auto 0; padding: 2rem 2.5rem; background: white; border-radius: 12px; border: 2px solid #E8F0ED; box-shadow: 0 2px 8px rgba(0,0,0,0.04); position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #4A6B5C, #6B8E7F, #8BA89E);"></div>
+            <div style="display: flex; align-items: flex-start; gap: 1.25rem; margin-bottom: 1.25rem;">
+                <div style="width: 48px; height: 48px; background: #E8F0ED; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.25rem;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4A6B5C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.6rem; font-weight: 800; color: #4A6B5C; margin-bottom: 0.75rem; line-height: 1.3; font-family: 'Public Sans', sans-serif;">Why do lower-income families pay <span style="color: #6B8E7F;">more</span>?</h3>
+                    <p style="font-size: 1.05rem; color: #5C7A6E; line-height: 1.7; margin: 0;">The General Excise Tax (GET) is the main reason. Unlike income taxes that take a percentage of what you earn, GET is added to almost everything you buy—groceries, rent, utilities, even medical care.</p>
+                </div>
+            </div>
+            
+            <button id="moreExplanationBtn" onclick="toggleExplanation()" style="background: #6B8E7F; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.3s ease, color 0.3s ease; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;">
+                Example
+            </button>
+            
+            <div id="moreExplanation" style="display: none;">
+                <div style="background: #F8FAF9; border: 1px solid #E8F0ED; border-radius: 8px; padding: 1.5rem; margin-top: 1rem;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <!-- Min. Wage Household -->
+                        <div style="border: 2px solid #E8F0ED; border-radius: 12px; padding: 1.5rem; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.04); position: relative; overflow: hidden;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #991b1b, #dc2626);"></div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <div style="width: 40px; height: 40px; background: #fef2f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#991b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </div>
+                                <p style="font-size: 1.1rem; color: #4A6B5C; font-weight: 700; margin: 0;">Min. Wage Household</p>
+                            </div>
+                            <div style="background: #f8faf9; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.75rem; text-align: center;">
+                                <p style="font-size: 0.8rem; color: #8BA89E; margin: 0 0 0.25rem 0; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Annual Income</p>
+                                <p style="font-size: 1.3rem; color: #4A6B5C; margin: 0; font-weight: 800;">$58,240</p>
+                            </div>
+                            <div style="background: #fef2f2; padding: 0.75rem; border-radius: 8px; text-align: center; border: 1px solid #fecaca;">
+                                <p style="font-size: 0.8rem; color: #991b1b; margin: 0 0 0.25rem 0; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">GET Burden</p>
+                                <p style="font-size: 1.4rem; color: #991b1b; margin: 0; font-weight: 800;">1.42%</p>
+                                <p style="font-size: 0.85rem; color: #b91c1c; margin: 0.25rem 0 0 0;">of income</p>
+                            </div>
+                        </div>
+
+                        <!-- High-Income Household -->
+                        <div style="border: 2px solid #E8F0ED; border-radius: 12px; padding: 1.5rem; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.04); position: relative; overflow: hidden;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #166534, #22c55e);"></div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <div style="width: 40px; height: 40px; background: #f0fdf4; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </div>
+                                <p style="font-size: 1.1rem; color: #4A6B5C; font-weight: 700; margin: 0;">High-Income Household</p>
+                            </div>
+                            <div style="background: #f8faf9; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.75rem; text-align: center;">
+                                <p style="font-size: 0.8rem; color: #8BA89E; margin: 0 0 0.25rem 0; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Annual Income</p>
+                                <p style="font-size: 1.3rem; color: #4A6B5C; margin: 0; font-weight: 800;">$200,000</p>
+                            </div>
+                            <div style="background: #f0fdf4; padding: 0.75rem; border-radius: 8px; text-align: center; border: 1px solid #bbf7d0;">
+                                <p style="font-size: 0.8rem; color: #166534; margin: 0 0 0.25rem 0; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">GET Burden</p>
+                                <p style="font-size: 1.4rem; color: #166534; margin: 0; font-weight: 800;">0.41%</p>
+                                <p style="font-size: 0.85rem; color: #15803d; margin: 0.25rem 0 0 0;">of income</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <p style="font-size: 1rem; color: #4A6B5C; font-weight: 600; font-style: italic; margin: 0;">Same tax, 3.5× the impact.</p>
+                    </div>
+                    <p style="font-size: 1.05rem; color: #5C7A6E; line-height: 1.7; margin-top: 1rem;">The tax rate is the same, but the <em>impact</em> is very different. Lower-income families must spend most of what they earn just to get by, so they end up paying a much larger share of their income in taxes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="margin-top: 4rem;">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto 3.5rem;">
+            <p style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #8BA89E; margin-bottom: 1rem;">Policy Priorities</p>
+            <h2 style="font-size: 3rem; line-height: 1.1; font-weight: 900; color: #4A6B5C; margin: 0 auto 1.25rem; letter-spacing: -0.03em; font-family: 'Public Sans', sans-serif;">The ultra-wealthy should pay their fair share</h2>
+            <div style="width: 60px; height: 3px; background: #6B8E7F; margin: 0 auto 1.25rem; border-radius: 2px;"></div>
+            <p style="font-size: 1.15rem; color: #6B8E7F; line-height: 1.6; max-width: 560px; margin: 0 auto;">Three areas where Hawaiʻi can create a more equitable tax system and invest in our communities.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; max-width: 1200px; margin: 0 auto;">
+            <div>
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1.25rem;">
+                    <span style="font-family: 'Public Sans', sans-serif; font-size: 3rem; font-weight: 900; color: rgba(107, 142, 127, 0.15); line-height: 1;">1</span>
+                    <div>
+                        <h3 style="font-size: 1.4rem; font-weight: 800; color: #4A6B5C; font-family: 'Public Sans', sans-serif; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.25rem;">Income</h3>
+                        <p style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #8BA89E; margin: 0;">Tax on Multi-Millionaires</p>
+                    </div>
+                </div>
+                <p style="font-size: 1.1rem; color: #5C7A6E; line-height: 1.75; margin-bottom: 1.25rem;">Hawaiʻi has 1,800 people who earn more than $1 million a year. This group is not struggling to pay their bills or make ends meet, and they should be taxed at a higher rate than everyone else.</p>
+                <div style="border-left: 3px solid #6B8E7F; padding: 1rem 1.25rem;">
+                    <p style="font-size: 1.6rem; font-weight: 800; color: #4A6B5C; line-height: 1.3; font-family: 'Public Sans', sans-serif; margin-bottom: 4px;">$71M+</p>
+                    <p style="font-size: 0.95rem; color: #6B8E7F; margin: 0; line-height: 1.5;">per year from a 2% surcharge on income above $1 million</p>
+                </div>
+            </div>
+
+            <div style="border-left: 1px solid #DDE8E2; padding-left: 2.5rem;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1.25rem;">
+                    <span style="font-family: 'Public Sans', sans-serif; font-size: 3rem; font-weight: 900; color: rgba(107, 142, 127, 0.15); line-height: 1;">2</span>
+                    <div>
+                        <h3 style="font-size: 1.4rem; font-weight: 800; color: #4A6B5C; font-family: 'Public Sans', sans-serif; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.25rem;">Investments</h3>
+                        <p style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #8BA89E; margin: 0;">Tax Work Like Wealth</p>
+                    </div>
+                </div>
+                <p style="font-size: 1.1rem; color: #5C7A6E; line-height: 1.75; margin-bottom: 1.25rem;">Income from investments should be taxed the same as income from regular work. Currently, Hawaiʻi allows capital gains to be taxed at a lower rate (7.25%) than ordinary income—a loophole that almost entirely benefits the rich.</p>
+                <div style="border-left: 3px solid #6B8E7F; padding: 1rem 1.25rem; margin-bottom: 1.25rem;">
+                    <p style="font-size: 1.6rem; font-weight: 800; color: #4A6B5C; line-height: 1.3; font-family: 'Public Sans', sans-serif; margin-bottom: 4px;">79.4%</p>
+                    <p style="font-size: 0.95rem; color: #6B8E7F; margin: 0; line-height: 1.5;">of capital gains income goes to the top 7.7% of earners ($400K+)</p>
+                </div>
+                <p style="font-size: 1rem; color: #5C7A6E; line-height: 1.7;">Closing this loophole would generate revenue for affordable housing, schools, and infrastructure while making the tax system more equitable.</p>
+            </div>
+
+            <div style="border-left: 1px solid #DDE8E2; padding-left: 2.5rem;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1.25rem;">
+                    <span style="font-family: 'Public Sans', sans-serif; font-size: 3rem; font-weight: 900; color: rgba(107, 142, 127, 0.15); line-height: 1;">3</span>
+                    <div>
+                        <h3 style="font-size: 1.4rem; font-weight: 800; color: #4A6B5C; font-family: 'Public Sans', sans-serif; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.25rem;">Real Estate</h3>
+                        <p style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #8BA89E; margin: 0;">Conveyance Tax Reform</p>
+                    </div>
+                </div>
+                <p style="font-size: 1.1rem; color: #5C7A6E; line-height: 1.75; margin-bottom: 1.25rem;">The conveyance tax is a one-time tax paid when property is sold. Despite soaring luxury home values, expensive properties pay very low rates—only 0.5 to 1.25%.</p>
+                <div style="border-left: 3px solid #6B8E7F; padding: 1rem 1.25rem; margin-bottom: 1.25rem;">
+                    <p style="font-size: 1.6rem; font-weight: 800; color: #4A6B5C; line-height: 1.3; font-family: 'Public Sans', sans-serif; margin-bottom: 4px;">$300–400M</p>
+                    <p style="font-size: 0.95rem; color: #6B8E7F; margin: 0; line-height: 1.5;">annually if rates rise to 2–6% for homes worth $2M+</p>
+                </div>
+                <p style="font-size: 1rem; color: #5C7A6E; line-height: 1.7;">This revenue would fund affordable housing, homelessness programs, land conservation, and the Department of Hawaiian Homelands—while middle-class homeowners pay less.</p>
+            </div>
+        </div>
+    </section>
+    
+    <div style="text-align: center; margin: 3rem 0;">
+        <p style="font-size: 1.2rem; color: #4A6B5C; font-weight: 600; margin-bottom: 1rem;">Learn More About Our Tax Priorities</p>
+        <a href="https://hiappleseed.org/publications/fair-tax-code-thriving-hawaii" target="_blank" style="color: #6B8E7F; font-size: 1.1rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border: 2px solid #6B8E7F; border-radius: 8px;">
+            Read our full report
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+    </div>
+</div>
+
+<script>
+// All JavaScript embedded here
+const taxData = [
+    {
+        name: 'General Excise Tax (GET)',
+        percentage: 40,
+        amount: '$4,630,396,252',
+        color: '#6B8E7F',
+        description: 'This is a tax on almost all business sales in Hawaii. It ends up built into the prices people pay and is the state\'s biggest source of money.'
+    },
+    {
+        name: 'Individual Income Tax',
+        percentage: 29,
+        amount: '$3,288,092,878',
+        color: '#8BA89E',
+        description: 'This is the tax people pay on the money they earn from jobs, investments, and other income. It is the second‑largest way the state raises money.'
+    },
+    {
+        name: 'Corporate Income Tax',
+        percentage: 3,
+        amount: '$400,383,815',
+        color: '#A8BFB5',
+        description: 'This is the tax that companies pay on their profits.'
+    },
+    {
+        name: 'Transient Accommodations Tax',
+        percentage: 7,
+        amount: '$816,183,712',
+        color: '#4A6B5C',
+        description: 'This is the tax added to short‑term stays, like hotel rooms and vacation rentals. It is strongly tied to tourism.'
+    },
+    {
+        name: 'Other Taxes and Fees',
+        percentage: 17,
+        amount: '$405,766,217',
+        color: '#5C7A6E',
+        description: 'This group includes many smaller taxes and charges, like those on gasoline, liquor, tobacco, and property transfers.'
+    }
+];
+
+let chart;
+
+function initChart() {
+    const ctx = document.getElementById('taxPieChart').getContext('2d');
+    chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: taxData.map(item => item.name),
+            datasets: [{
+                data: taxData.map(item => item.percentage),
+                backgroundColor: taxData.map(item => item.color),
+                borderWidth: 3,
+                borderColor: '#ffffff',
+                hoverOffset: 15
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.label + ': ' + context.parsed + '%';
+                        }
+                    }
+                }
+            },
+            onClick: (event, elements) => {
+                if (elements.length > 0) {
+                    showDescription(elements[0].index);
+                }
+            }
+        }
+    });
+    createLegend();
+}
+
+function createLegend() {
+    const legendContainer = document.getElementById('legend');
+    legendContainer.innerHTML = '';
+    taxData.forEach((item, index) => {
+        const legendItem = document.createElement('div');
+        legendItem.className = 'legend-item';
+        legendItem.onclick = () => showDescription(index);
+        legendItem.innerHTML = `
+            <div class="legend-color" style="background-color: ${item.color}"></div>
+            <span class="legend-label">${item.name}</span>
+            <span class="legend-percentage">${item.percentage}%</span>
+        `;
+        legendContainer.appendChild(legendItem);
+    });
+}
+
+function showDescription(index) {
+    const item = taxData[index];
+    document.getElementById('descriptionContainer').innerHTML = `
+        <div class="description-title">${item.name}</div>
+        <div class="description-percentage" style="color: ${item.color}">${item.percentage}%</div>
+        <div style="font-size: 1.2rem; font-weight: 600; color: #4a5568; margin-bottom: 1rem;">${item.amount}</div>
+        <div class="description-text">${item.description}</div>
+    `;
+    if (chart) {
+        const offsets = new Array(taxData.length).fill(0);
+        offsets[index] = 15;
+        chart.data.datasets[0].offset = offsets;
+        chart.setActiveElements([{datasetIndex: 0, index: index}]);
+        chart.update();
+    }
+}
+
+let currentChartView = 'total';
+
+function createSegment(pct, total, color, label) {
+    const seg = document.createElement('div');
+    seg.style.cssText = `
+        height: ${pct/total*100}%;
+        background: ${color};
+        cursor: pointer;
+        transition: all .2s ease;
+        position: relative;
+    `;
+
+    const popup = document.createElement('div');
+    popup.className = 'seg-popup';
+    popup.textContent = `${label}: ${pct}%`;
+    seg.appendChild(popup);
+
+    seg.addEventListener('mouseenter', () => {
+        popup.style.display = 'block';
+        seg.style.filter = 'brightness(1.1)';
+        seg.style.transform = 'scale(1.05)';
+        seg.parentElement.style.zIndex = '100';
+    });
+    
+    seg.addEventListener('mouseleave', () => {
+        popup.style.display = 'none';
+        seg.style.filter = '';
+        seg.style.transform = '';
+        seg.parentElement.style.zIndex = '2';
+    });
+    
+    return seg;
+}
+
+function createBarChart() {
+    const incomeData = [
+        { group: 'Lowest 20%', range: 'Less than $21,900', total: 14.10, get: 8.80, property: 4.60, income: 0.50, color: '#4A6B5C' },
+        { group: 'Second 20%', range: '$21,900–$44,200', total: 13.70, get: 8.60, property: 2.60, income: 2.40, color: '#5C7A6E' },
+        { group: 'Third 20%', range: '$44,200–$80,100', total: 14.20, get: 6.70, property: 2.50, income: 4.90, color: '#6B8E7F' },
+        { group: 'Fourth 20%', range: '$80,100–$136,600', total: 13.40, get: 5.10, property: 3.10, income: 5.10, color: '#8BA89E' },
+        { group: 'Top 20%', range: 'Over $136,600', total: 10.70, get: 2.67, property: 2.03, income: 6.00, color: '#A8BFB5' }
+    ];
+
+    const barChart = document.getElementById('incomeBarChart');
+    barChart.innerHTML = '<div class="bar-gridlines"><div class="gridline" style="bottom: 20%;"></div><div class="gridline" style="bottom: 40%;"></div><div class="gridline" style="bottom: 60%;"></div><div class="gridline" style="bottom: 80%;"></div></div><div class="bar-axis"></div>';
+    
+    const chartWidth = barChart.offsetWidth;
+    const isMobile = window.innerWidth <= 768;
+    const barWidth = chartWidth / incomeData.length * (isMobile ? 0.7 : 0.5);
+    const barSpacing = chartWidth / incomeData.length;
+    const labelOffset = isMobile ? 50 : 40;
+
+    incomeData.forEach((data, index) => {
+        if (currentChartView === 'total') {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.style.left = (index * barSpacing + (barSpacing - barWidth) / 2) + 'px';
+            bar.style.width = barWidth + 'px';
+            bar.style.height = (data.total / 20 * 100) + '%';
+            bar.style.background = `linear-gradient(135deg, ${data.color} 0%, ${data.color}dd 100%)`;
+            
+            const valueLabel = document.createElement('div');
+            valueLabel.className = 'bar-value';
+            valueLabel.textContent = data.total + '%';
+            bar.appendChild(valueLabel);
+
+            const groupLabel = document.createElement('div');
+            groupLabel.className = 'bar-label';
+            groupLabel.innerHTML = `<div style="font-weight: 800; color: #4A6B5C; font-size: 1.1rem; font-family: 'Public Sans', sans-serif;">${data.group}</div><div style="width: 20px; height: 2px; background: #C8D9D3; margin: 6px auto;"></div><div style="font-size: 0.8rem; color: #8BA89E; font-weight: 600;">${data.range}</div>`;
+            groupLabel.style.left = `-${labelOffset}px`;
+            groupLabel.style.width = (barWidth + (labelOffset * 2)) + 'px';
+            bar.appendChild(groupLabel);
+
+            barChart.appendChild(bar);
+        } else {
+            // Stacked bar chart for "Type" view
+            const stackedBar = document.createElement('div');
+            stackedBar.className = 'bar';
+            stackedBar.style.left = (index * barSpacing + (barSpacing - barWidth) / 2) + 'px';
+            stackedBar.style.width = barWidth + 'px';
+            stackedBar.style.height = (data.total / 20 * 100) + '%';
+            stackedBar.style.background = 'transparent';
+            stackedBar.style.position = 'absolute';
+            stackedBar.style.bottom = '40px';
+            stackedBar.style.display = 'flex';
+            stackedBar.style.flexDirection = 'column-reverse';
+
+            // Create segments
+            const getSeg = createSegment(data.get, data.total, '#6B8E7F', 'GET');
+            const propSeg = createSegment(data.property, data.total, '#8BA89E', 'Property');
+            const incSeg = createSegment(data.income, data.total, '#A8BFB5', 'Income');
+            incSeg.style.borderRadius = '8px 8px 0 0';
+            
+            stackedBar.appendChild(getSeg);
+            stackedBar.appendChild(propSeg);
+            stackedBar.appendChild(incSeg);
+
+            // Total value label
+            const valueLabel = document.createElement('div');
+            valueLabel.className = 'bar-value';
+            valueLabel.textContent = data.total + '%';
+            valueLabel.style.position = 'absolute';
+            valueLabel.style.top = '-35px';
+            valueLabel.style.left = '50%';
+            valueLabel.style.transform = 'translateX(-50%)';
+            stackedBar.appendChild(valueLabel);
+
+            const groupLabel = document.createElement('div');
+            groupLabel.className = 'bar-label';
+            groupLabel.innerHTML = `<div style="font-weight: 800; color: #4A6B5C; font-size: 1.1rem; font-family: 'Public Sans', sans-serif;">${data.group}</div><div style="width: 20px; height: 2px; background: #C8D9D3; margin: 6px auto;"></div><div style="font-size: 0.8rem; color: #8BA89E; font-weight: 600;">${data.range}</div>`;
+            groupLabel.style.left = `-${labelOffset}px`;
+            groupLabel.style.width = (barWidth + (labelOffset * 2)) + 'px';
+            stackedBar.appendChild(groupLabel);
+
+            barChart.appendChild(stackedBar);
+        }
+    });
+}
+
+function updateChartView(view) {
+    currentChartView = view;
+    document.getElementById('taxTypeLegend').style.display = view === 'type' ? 'block' : 'none';
+    createBarChart();
+}
+
+function toggleExplanation() {
+    const explanationDiv = document.getElementById('moreExplanation');
+    const button = document.getElementById('moreExplanationBtn');
+    
+    explanationDiv.classList.toggle('explanation-visible');
+    
+    if (explanationDiv.classList.contains('explanation-visible')) {
+        button.textContent = 'Close';
+        button.style.background = '#4A6B5C';
+    } else {
+        button.textContent = 'Example';
+        button.style.background = '#6B8E7F';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    initChart();
+    createBarChart();
+    setTimeout(() => {
+        document.querySelector('.fiscal-year-text').style.opacity = '1';
+        document.querySelector('.fiscal-year-text').style.transform = 'translateY(0)';
+        document.querySelector('.main-heading').style.opacity = '1';
+        document.querySelector('.main-heading').style.transform = 'translateY(0)';
+        document.querySelector('.content-wrapper').classList.add('visible');
+        document.querySelector('.bar-charts-section').classList.add('visible');
+    }, 500);
+});
+</script>

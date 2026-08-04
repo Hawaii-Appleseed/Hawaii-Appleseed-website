@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ship Scene Dev</title>
+<style>
+  body { background: #F5F5F0; font-family: sans-serif; padding: 40px; }
+  .card { background: #5F7A6C; border-radius: 16px; padding: 28px; max-width: 620px; margin: 0 auto; }
+  .boxes { display: flex; gap: 16px; }
+  .taxbox { flex: 1; background: rgba(255,255,255,0.1); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .label { color: white; font-weight: 700; font-size: 0.95rem; }
+  .sub { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="boxes">
+    <div class="taxbox" id="import-box">
+      <svg viewBox="0 0 220 120" style="width:100%;height:auto;display:block;margin:0 0 10px;" role="img" aria-label="A 19th century trading brig bobbing on pastel ocean waves">
+        <defs>
+          <linearGradient id="impSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FFEFD8"/>
+            <stop offset="0.55" stop-color="#FCE2C9"/>
+            <stop offset="1" stop-color="#EAF3E4"/>
+          </linearGradient>
+          <clipPath id="impClip"><rect x="0" y="0" width="220" height="120" rx="10"/></clipPath>
+        </defs>
+        <g clip-path="url(#impClip)">
+          <rect width="220" height="120" fill="url(#impSky)"/>
+          <circle cx="180" cy="26" r="17" fill="#FFE8C8" opacity="0.55"/>
+          <circle cx="180" cy="26" r="11" fill="#FFD9A0"/>
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 0;7 0;0 0" dur="24s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+            <g transform="translate(38 22)" fill="#FFF6E7" opacity="0.9">
+              <ellipse cx="0" cy="0" rx="14" ry="5"/>
+              <ellipse cx="12" cy="-3" rx="10" ry="4.5"/>
+              <ellipse cx="-11" cy="-2" rx="9" ry="4"/>
+            </g>
+          </g>
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 0;-8 0;0 0" dur="30s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+            <g transform="translate(148 44)" fill="#FFF6E7" opacity="0.75">
+              <ellipse cx="0" cy="0" rx="12" ry="4"/>
+              <ellipse cx="10" cy="-3" rx="8" ry="3.5"/>
+            </g>
+          </g>
+          <!-- back wave band -->
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 0;-110 0" dur="13s" repeatCount="indefinite"/>
+            <path d="M-115 66 q27.5 -8 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 L435 130 L-115 130 Z" fill="#C4E6D4"/>
+            <path d="M-115 66 q27.5 -8 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0" fill="none" stroke="#FFF9EC" stroke-width="1.4" opacity="0.7"/>
+          </g>
+          <!-- ship -->
+          <g transform="translate(93 86)">
+            <g>
+              <animateTransform attributeName="transform" type="translate" values="0 0;0 -3.5;0 0" dur="4.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+              <g>
+                <animateTransform attributeName="transform" type="rotate" values="-2.2 0 0;2.2 0 0;-2.2 0 0" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+                <!-- rigging stays (behind sails) -->
+                <g stroke="#6E5C48" stroke-width="0.6" opacity="0.5">
+                  <path d="M12 -58 L55 -17"/>
+                  <path d="M-11.5 -64 L12 -58"/>
+                  <path d="M-11.5 -64 L-36 -6"/>
+                </g>
+                <!-- spanker (gaff sail, aft) -->
+                <path d="M-12 -45 L-32 -39.5 C-33 -30, -34 -20, -35 -10 C-27 -7.5, -19 -7.5, -12 -8.5 Z" fill="#EFE3C6"/>
+                <path d="M-10.5 -46.5 L-33 -40.5" stroke="#8A6F55" stroke-width="1.1"/>
+                <path d="M-11 -8.5 L-37 -10" stroke="#8A6F55" stroke-width="1.1"/>
+                <!-- mainmast sails -->
+                <path d="M-20.5 -35 L1.5 -35 C2.5 -29, 3 -23, 3.5 -17 C-5 -13.5, -14 -13.5, -22.5 -17 C-22 -23, -21.2 -29, -20.5 -35 Z" fill="#F3E9D2"/>
+                <path d="M-19 -51.5 L-3 -51.5 C-2 -46.5, -1.2 -41.5, -0.5 -36.5 L-22 -36.5 C-21 -41.5, -20 -46.5, -19 -51.5 Z" fill="#F8F0DD"/>
+                <!-- foremast sails -->
+                <path d="M2.5 -31 L23.5 -31 C24.5 -25.5, 25 -19.5, 25.5 -14 C17 -10.5, 8 -10.5, 0.5 -14 C1 -20, 1.8 -25.5, 2.5 -31 Z" fill="#F6EDD8"/>
+                <path d="M5 -47.5 L20.5 -47.5 C21.5 -43, 22.5 -37.5, 23.5 -32.5 L2.5 -32.5 C3.5 -38, 4.3 -43, 5 -47.5 Z" fill="#FAF3E2"/>
+                <!-- jibs -->
+                <path d="M12.5 -54 C24 -44, 38 -28, 51 -16.5 L26 -11.5 C21 -25, 16 -40, 12.5 -54 Z" fill="#F1E6CC"/>
+                <path d="M14 -46 C23 -37, 33 -25, 43 -16 L24 -11 C20 -22, 16.5 -34, 14 -46 Z" fill="#F8F0DE" opacity="0.95"/>
+                <!-- masts, yards, bowsprit -->
+                <path d="M14 -6 L12 -58" stroke="#8A6F55" stroke-width="1.7"/>
+                <path d="M-9 -6 L-11.5 -64" stroke="#8A6F55" stroke-width="1.8"/>
+                <path d="M2 -32 L24 -32" stroke="#8A6F55" stroke-width="1.2"/>
+                <path d="M4.5 -48 L21 -48" stroke="#8A6F55" stroke-width="1.1"/>
+                <path d="M-21 -36 L2 -36" stroke="#8A6F55" stroke-width="1.2"/>
+                <path d="M-19.5 -52 L-2 -52" stroke="#8A6F55" stroke-width="1.1"/>
+                <path d="M33 -8 L55 -17" stroke="#8A6F55" stroke-width="1.6" stroke-linecap="round"/>
+                <!-- pennant -->
+                <path d="M-11.5 -66 l9 2.2 l-9 2.2 Z" fill="#E59C87"/>
+                <!-- hull -->
+                <path d="M-35 -7 C-20 -4, 20 -4, 35 -9 L31 3 C16 6.5, -16 6.5, -29 3 Z" fill="#47525B"/>
+                <path d="M-33 -5.2 C-19 -2.6, 19 -2.6, 33 -7" stroke="#F4ECD9" stroke-width="2.2" fill="none"/>
+                <path d="M-31 -5 C-18 -2.7, 18 -2.7, 31 -6.6" stroke="#39434B" stroke-width="1.2" fill="none" stroke-dasharray="1.8 4.2"/>
+              </g>
+            </g>
+          </g>
+          <!-- mid wave band -->
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 0;-110 0" dur="10s" repeatCount="indefinite"/>
+            <path d="M-115 84 q27.5 -18 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 L435 130 L-115 130 Z" fill="#8FCBB1"/>
+            <path d="M-115 84 q27.5 -18 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0" fill="none" stroke="#FFF8E8" stroke-width="1.8" opacity="0.85"/>
+            <path d="M-115 88 q27.5 -16 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0" fill="none" stroke="#FFF8E8" stroke-width="1.3" opacity="0.3" stroke-dasharray="6 30"/>
+          </g>
+          <!-- front wave band -->
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 0;-110 0" dur="7s" repeatCount="indefinite"/>
+            <path d="M-115 104 q27.5 -22 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 L435 130 L-115 130 Z" fill="#57A084"/>
+            <path d="M-115 104 q27.5 -22 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0" fill="none" stroke="#FFFAEE" stroke-width="2.2" opacity="0.95"/>
+            <path d="M-115 109 q27.5 -18 55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0 t55 0" fill="none" stroke="#FFFAEE" stroke-width="1.6" opacity="0.3" stroke-dasharray="8 34"/>
+          </g>
+        </g>
+      </svg>
+      <div class="label">Import Taxes</div>
+      <div class="sub">Foreign trade</div>
+    </div>
+    <div class="taxbox">
+      <div style="height:120px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.3);">Poll Tax scene (later)</div>
+      <div class="label">Poll Tax</div>
+      <div class="sub">Per-person levy</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

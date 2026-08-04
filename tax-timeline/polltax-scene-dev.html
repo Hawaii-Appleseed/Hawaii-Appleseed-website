@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Poll Tax Scene Dev</title>
+<style>
+  body { background: #EDE7DA; font-family: sans-serif; padding: 40px 20px; display:flex; flex-direction:column; align-items:center; gap:24px; }
+  .card { background: #5F7A6C; border-radius: 16px; padding: 24px; width: 320px; }
+  .taxbox { background: rgba(255,255,255,0.1); border-radius: 8px; padding: 14px 12px; text-align: center; }
+  .label { color: white; font-weight: 700; font-size: 1rem; }
+  .sub { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+  .big { width: 620px; background:#fff; border-radius:10px; padding:10px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="taxbox">
+      <svg id="scene" viewBox="0 0 220 120" style="width:100%;height:auto;display:block;margin:0 0 10px;" role="img" aria-label="Simplified family silhouettes each with a dollar sign bobbing above, representing a per-person poll tax">
+        <defs>
+          <linearGradient id="ptSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FFEFD8"/>
+            <stop offset="0.6" stop-color="#FCE2C9"/>
+            <stop offset="1" stop-color="#EAF3E4"/>
+          </linearGradient>
+          <clipPath id="ptClip"><rect x="0" y="0" width="220" height="120" rx="10"/></clipPath>
+        </defs>
+        <g clip-path="url(#ptClip)">
+          <rect width="220" height="120" fill="url(#ptSky)"/>
+          <!-- ground shadows -->
+          <g fill="#3E6B58" opacity="0.13">
+            <ellipse cx="45" cy="113" rx="20" ry="3"/>
+            <ellipse cx="95" cy="114" rx="20" ry="3"/>
+            <ellipse cx="140" cy="114" rx="13" ry="2.5"/>
+            <ellipse cx="178" cy="114" rx="13" ry="2.5"/>
+          </g>
+
+          <!-- ================= FIGURES (flat brown silhouettes) ================= -->
+          <g fill="#5B3B27">
+            <!-- FATHER -->
+            <g>
+              <!-- legs -->
+              <path d="M39 88 L36 112 L44 112 L45 92 L46 112 L54 112 L51 88 Z"/>
+              <!-- feet -->
+              <path d="M34 111 q4 3 11 1 L45 112 L34 113 Z"/>
+              <path d="M45 112 q5 2 11 -1 L56 113 L45 113 Z"/>
+              <!-- left arm hanging (flush to torso) -->
+              <path d="M35 60 L31.5 87 L36.5 87 L39 61 Z"/>
+              <!-- jacket torso -->
+              <path d="M34 58 Q45 53 56 58 L54 90 L36 90 Z"/>
+              <!-- right arm reaching to mother -->
+              <path d="M54 61 Q62 74 66.5 85 L62 88 Q56 75 50 63 Z"/>
+              <!-- neck + head -->
+              <rect x="42" y="46" width="6" height="6"/>
+              <circle cx="45" cy="49" r="7"/>
+              <!-- hat -->
+              <path d="M38 46 Q39 33 45 32 Q51 33 52 46 Z"/>
+              <ellipse cx="45" cy="45.5" rx="15" ry="3.4"/>
+            </g>
+
+            <!-- MOTHER -->
+            <g>
+              <!-- dress bell -->
+              <path d="M88 61 Q95 56 102 61 L113 109 Q95 115 77 109 Z"/>
+              <!-- left arm to father -->
+              <path d="M90 64 Q80 75 65.5 85 L68 88 Q83 79 93 66 Z"/>
+              <!-- right arm to boy -->
+              <path d="M100 64 Q112 78 121.5 88 L118 91 Q107 79 97 66 Z"/>
+              <!-- neck + head + bun -->
+              <rect x="92" y="49" width="6" height="6"/>
+              <circle cx="95" cy="52" r="6.4"/>
+              <circle cx="100.5" cy="49" r="3.4"/>
+            </g>
+
+            <!-- BOY -->
+            <g>
+              <!-- legs (bare) -->
+              <path d="M135 99 L134 112 L139 112 L140 100 L141 112 L146 112 L145 99 Z"/>
+              <path d="M133 111 q4 2 8 0 Z"/>
+              <path d="M139 111 q4 2 8 0 Z"/>
+              <!-- shorts -->
+              <path d="M134 90 L133 100 L140 100 L141 100 L147 100 L146 90 Z"/>
+              <!-- shirt -->
+              <path d="M133 76 Q140 73 147 76 L146 91 L134 91 Z"/>
+              <!-- left arm to mother -->
+              <path d="M134 79 Q127 85 120.5 89 L122.5 92 Q130 87 137 82 Z"/>
+              <!-- right arm to girl -->
+              <path d="M146 79 Q153 86 159.5 91 L157.5 94 Q150 88 143 82 Z"/>
+              <!-- head + hair -->
+              <rect x="138" y="65" width="4.5" height="5"/>
+              <circle cx="140" cy="69" r="5.6"/>
+              <path d="M134.5 68 Q136 61 140 61 Q145 61 145.5 68 Q140 65 134.5 68 Z"/>
+            </g>
+
+            <!-- GIRL -->
+            <g>
+              <!-- dress bell -->
+              <path d="M172 79 Q178 75 184 79 L191 109 Q178 114 165 109 Z"/>
+              <!-- left arm to boy -->
+              <path d="M173 81 Q167 87 159.5 91 L161.5 94 Q169 89 176 84 Z"/>
+              <!-- right arm hanging -->
+              <path d="M184 81 Q190 90 188 101 L184 100 Q185 89 181 82 Z"/>
+              <!-- head + ponytail -->
+              <rect x="176" y="67" width="4.4" height="5"/>
+              <circle cx="178" cy="71" r="5.4"/>
+              <path d="M182.5 68 Q187 68 187 73 Q186 77 183 77 Q184 72 182.5 68 Z"/>
+            </g>
+
+            <!-- clasped hands -->
+            <ellipse cx="66" cy="86.5" rx="3" ry="2.3"/>
+            <ellipse cx="121" cy="89.5" rx="2.7" ry="2.1"/>
+            <ellipse cx="159.5" cy="92" rx="2.5" ry="2"/>
+          </g>
+
+          <!-- ================= DOLLAR SIGNS (bob up & down) ================= -->
+          <g font-family="Public Sans, Arial, sans-serif" font-weight="800" text-anchor="middle" fill="#D9A441" stroke="#7A4E1E" stroke-width="0.5" paint-order="stroke">
+            <g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.9s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+              <text x="45" y="24" font-size="17">$</text></g>
+            <g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="2.3s" begin="-0.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+              <text x="95" y="31" font-size="15">$</text></g>
+            <g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="2.05s" begin="-1.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+              <text x="140" y="49" font-size="13">$</text></g>
+            <g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="2.45s" begin="-0.3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"/>
+              <text x="178" y="53" font-size="13">$</text></g>
+          </g>
+        </g>
+      </svg>
+      <div class="label">Poll Tax</div>
+      <div class="sub">Per-person levy</div>
+    </div>
+  </div>
+
+  <!-- large view for detail work -->
+  <div class="big">
+    <svg viewBox="0 0 220 120" style="width:100%;height:auto;display:block;">
+      <use href="#scene"/>
+    </svg>
+  </div>
+</body>
+</html>

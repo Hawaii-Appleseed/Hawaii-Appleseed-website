@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watercolor Ship — Animated Painting</title>
+<style>
+  body { background: #EDE7DA; font-family: sans-serif; margin: 0; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  h1 { font: 600 0.8rem/1 sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: #8a7a5c; }
+  .stage {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 1672 / 941;
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: 0 18px 50px rgba(80,60,30,0.28);
+    background: #FDF0DC;
+  }
+  .stage img { position: absolute; display: block; image-rendering: auto; will-change: transform; }
+  /* layer footprints (as % of stage) */
+  .l-base  { left: 0;       top: 0;         width: 100%;    }
+  .l-sun   { left: 64.53%;  top: 0;         width: 35.47%;  }
+  .l-ship  { left: 21.53%;  top: 5.42%;     width: 55.44%;  }
+  .l-front { left: 0;       top: 73.33%;    width: 100%;    }
+
+  /* --- animations (all ease-in-out alternate = seamless ping-pong, no snap) --- */
+  .base-move { animation: baseSwell 11s ease-in-out infinite alternate; }
+  @keyframes baseSwell { from { transform: translateY(0); } to { transform: translateY(-0.5%); } }
+
+  .sun-spin  { animation: sunSpin 26s ease-in-out infinite alternate; transform-origin: 50% 50%; }
+  @keyframes sunSpin { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+  .sun-breathe { animation: sunBreathe 6s ease-in-out infinite alternate; transform-origin: 50% 50%; }
+  @keyframes sunBreathe { from { transform: scale(1); } to { transform: scale(1.045); } }
+
+  .ship-bob  { animation: shipBob 4.6s ease-in-out infinite alternate; }
+  @keyframes shipBob { from { transform: translateY(0.8%); } to { transform: translateY(-1.6%); } }
+  .ship-roll { animation: shipRoll 6.8s ease-in-out infinite alternate; transform-origin: 43.15% 90%; }
+  @keyframes shipRoll { from { transform: rotate(-2.4deg); } to { transform: rotate(2.4deg); } }
+
+  .front-bob  { animation: frontBob 5.4s ease-in-out infinite alternate; }
+  @keyframes frontBob { from { transform: translateY(0); } to { transform: translateY(-3%); } }
+  .front-sway { animation: frontSway 8s ease-in-out infinite alternate; }
+  @keyframes frontSway { from { transform: translateX(-0.5%); } to { transform: translateX(0.6%); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .base-move,.sun-spin,.sun-breathe,.ship-bob,.ship-roll,.front-bob,.front-sway { animation: none; }
+  }
+</style>
+</head>
+<body>
+  <h1>Import Taxes — animated painting</h1>
+  <div class="stage">
+    <!-- base sky + sea (ship & sun painted out) -->
+    <div class="base-move" style="position:absolute;inset:0;">
+      <img class="l-base" src="wc-assets/asset-base.png" alt="">
+    </div>
+    <!-- sun: slow swirl + breathe (nested transforms) -->
+    <div class="sun-spin" style="position:absolute;left:64.53%;top:0;width:35.47%;">
+      <div class="sun-breathe">
+        <img src="wc-assets/asset-sun.png" alt="" style="position:relative;width:100%;display:block;">
+      </div>
+    </div>
+    <!-- ship: bob + roll (nested transforms) -->
+    <div class="ship-bob" style="position:absolute;left:21.53%;top:5.42%;width:55.44%;">
+      <div class="ship-roll">
+        <img src="wc-assets/asset-ship.png" alt="" style="position:relative;width:100%;display:block;">
+      </div>
+    </div>
+    <!-- foreground waves: bob + sway (seats the hull) -->
+    <div class="front-bob" style="position:absolute;left:0;top:73.33%;width:100%;">
+      <div class="front-sway">
+        <img src="wc-assets/asset-front.png" alt="" style="position:relative;width:100%;display:block;">
+      </div>
+    </div>
+  </div>
+</body>
+</html>
