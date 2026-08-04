@@ -128,6 +128,75 @@
       filter: invert(1);
     }
 
+    /* Hero photo \2014  fills the empty right side on wide screens. Hidden
+       below 1024px: there's no spare width once hero-inner needs the
+       full line for its own padding, and a cropped photo competing with
+       the headline reads worse than no photo. */
+    #ha-support-embed .hero-photo{ display: none; }
+
+    /* A contained landscape panel rather than a full-height bleed.
+       Landscape, though the source is portrait (3:4): the group is a wide
+       row of people sitting in the middle of a tall frame, so showing the
+       photo whole leaves them small between a lot of thatch and dirt. A
+       5:4 crop holds the full width of the group and trims the dead space
+       above and below it. */
+    #ha-support-embed .hero-photo__frame{
+      position: relative;
+      width: min(100%, 520px);
+      aspect-ratio: 5 / 4;
+      overflow: hidden;
+      border-radius: 14px;
+      /* Hairline edge, plus a deep soft shadow so the panel lifts off the
+         charcoal instead of sitting flat on it. */
+      box-shadow:
+        inset 0 0 0 1px rgba(202,210,197,0.22),
+        0 34px 70px rgba(0,0,0,0.45);
+    }
+    #ha-support-embed .hero-photo__frame img{
+      display: block;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      /* Biased below centre: keeps everyone's feet in frame and trims the
+         roof rather than the group. */
+      object-position: 50% 55%;
+      /* Barely touched \2014  the panel is its own object now, so the photo
+         doesn't need dimming to keep anything else legible. */
+      filter: saturate(0.94) brightness(0.97);
+    }
+    /* Whisper of a vignette so the lower edge settles into the hero. */
+    #ha-support-embed .hero-photo__frame::after{
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(0deg, rgba(47,62,70,0.30) 0%, rgba(47,62,70,0) 44%);
+    }
+
+    /* 1200px, not 1024: below this the right column can't hold the panel
+       without squeezing the headline. */
+    @media (min-width: 1200px) {
+      /* Two real columns, so the copy can never run under the photo. */
+      #ha-support-embed .hero{
+        display: grid;
+        grid-template-columns: 1fr 46%;
+        align-items: center;
+      }
+      /* padding-left in vw, not %, so the headline keeps the same optical
+         left margin as every other section on the page (which pad 8% of
+         the full viewport, not of a 54% column). */
+      #ha-support-embed .hero-inner{
+        max-width: none;
+        padding: 7rem 5% 6rem 8vw;
+      }
+      #ha-support-embed .hero-photo{
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+        z-index: 1;
+        /* Mirrors the headline's 8vw gutter, so the panel's right edge and
+           the headline's left edge sit at matching page margins. */
+        padding-right: 8vw;
+      }
+    }
+
     #ha-support-embed .hero-inner{
       position: relative;
       z-index: 2;
@@ -801,6 +870,15 @@
         <a href="https://crm.bloomerang.co/HostedDonation?WidgetId=52224&amp;ApiKey=pub_719d1ab5-5621-11f1-9ea1-06612d4c9559" target="_blank" rel="noopener" class="btn btn-solid">Give Now</a>
         <a href="#ways" class="btn btn-ghost">Other Ways to Help</a>
       </div>
+    </div>
+
+    <!-- After .hero-inner in source order so the grid puts it in the
+         right-hand column and screen readers reach the headline first. -->
+    <div class="hero-photo">
+      <figure class="hero-photo__frame">
+        <img src="https://images.squarespace-cdn.com/content/601374ae84e51e430a1829d8/8f1a3f17-012f-4b49-9e51-947803d4886f/IMG_0238.jpg?content-type=image%2Fjpeg&format=1000w"
+             alt="Hawai&#699;i Appleseed staff, board, and community volunteers gathered together" />
+      </figure>
     </div>
   </section>
 
