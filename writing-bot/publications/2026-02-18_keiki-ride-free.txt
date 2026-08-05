@@ -1,0 +1,1635 @@
+Title: Keiki Ride Free
+Date: unknown
+URL: https://hiappleseed.org/publications/keiki-ride-free
+PDF: https://hiappleseed.org/s/Keiki-Ride-Free_FINAL.pdf
+============================================================
+
+February 2026
+
+KEIKI RIDE FREE
+ADOPTING A STATEWIDE 
+FARE-FREE TRANSIT POLICY
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+www.hiappleseed.org
+
+Authors: Trinity Gilliam and Abbey Seitz
+
+Hawaiʻi Appleseed is committed to a more socially and economically just Hawaiʻi, where everyone has genuine 
+opportunities to achieve economic security and fulfill their potential. We change systems to address inequity 
+and foster greater opportunity by conducting data analysis and research to address income inequality, educating 
+policymakers and the public, engaging in collaborative problem solving and coalition building, and advocating 
+for policy and systems change.
+
+The work of Hawaiʻi Appleseed is about people. The issues we work on—housing, food, wages, mobility, the state 
+budget and taxation, and racial and indigenous equity—are important because they ensure people have access 
+to shelter, sustenance, and the means to survive and thrive individually and collectively. Addressing these issues 
+requires the knowledge and expertise of the people that have first-hand experience and live with the adverse 
+consequences of our flawed systems.
+
+TABLE OF CONTENTS
+
+Executive Summary
+
+Benefits of Public Transit
+
+Existing Transit Fares in Hawai‘i
+
+Existing Transit Use and Costs
+
+Fare-Free Transit Lessons Learned
+
+Recommendations
+
+Endotes
+
+3
+
+5
+
+8
+
+10
+
+14
+
+21
+
+24
+
+Copyright © 2026 Hawaiʻi Appleseed Center for Law & Economic Justice. All rights reserved. 
+733 Bishop Street, Suite 1180, Honolulu, HI 96813
+
+2 • KEIKI RIDE FREE
+
+EXECUTIVE SUMMARY
+
+PUBLIC TRANSIT is more than a way to get from place to place—it’s a tool for growth, opportunity and 
+community connection. Transit is particularly important for young people, the largest demographic of residents 
+who do not drive. 
+
+When young people can move freely, they gain confidence, independence, and access to the full range of 
+opportunities the islands offer. Transit connects keiki to after-school programs, internships, health care, 
+recreation and friends, while also building lifelong habits that favor walking, biking and public transportation 
+over driving alone.
+
+To improve transit access, localities across the country are increasingly offering reduced and fare-free transit 
+programs. This report examines the economic, health, and safety benefits of public transit; summarizes the 
+
+KEIKI RIDE FREE • 3
+
+current fare-free programs offered in Hawaiʻi; and discusses the costs and benefits of existing fare-free transit 
+programs (local and national). A review of eight existing fare-free transit programs revealed several benefits of 
+subsidizing transit fares. These include:
+
+• 
+
+Significant increases in overall transit ridership; 
+
+•  Boosted local economic activity;
+
+•  Reduced fuel consumption and carbon emissions; and
+
+• 
+
+Improved transit access for economically disadvantaged individuals and families. 
+
+This report also provides recommendations to improve transit access and affordability, with a particular focus 
+on young riders. The main recommendation is to implement a statewide, year-round fare-free transit program 
+for residents age 18 and under. Similar to the free transit for youth provided in Washington State, this report 
+recommends that the state legislature establish a dedicated state funding mechanism to provide county transit 
+agencies recurring reimbursements for foregone youth fare revenue. 
+
+To inform this policy report, our team relied on four key research methods: reviewing existing studies and reports 
+on fare-free transit programs; examining the impacts of high transit fares on vulnerable community members; 
+analyzing existing national and local fare-free and reduced-fare transit programs; and evaluating local  transit 
+ridership trends. 
+
+4 • KEIKI RIDE FREE
+
+BENEFITS OF PUBLIC 
+TRANSIT
+
+Public transit is an essential asset to rural communities and urban neighborhoods alike. Public transit is a 
+lifeline for individuals who cannot drive or do not have a vehicle to access employment, education, and essential 
+services. As roadway congestion and vehicle costs continue to grow, public transit has become more appealing 
+for a variety of socioeconomic groups. Some of the key economic, health and safety benefits offered by public 
+transit are summarized below. 
+
+Figure 1: Benefits of Sustained Investment in Public Transit
+
+1. ECONOMIC BENEFITS
+
+Because 87 percent of all public transit trips directly contribute to the local economy, investment in public transit 
+has been shown to spur economic growth.1 The American Public Transportation Association (APTA) reports that 
+long-term transit investment yields strong economic benefits, with each $1 billion in additional annual spending 
+generating roughly $5 billion in additional GDP over 20 years.2 A $1 billion annual investment in public transit has 
+also been found to generate an estimated 17,900 jobs.3 
+
+In 2025, the Ulupono Initiative found that the public cost of the vehicle economy4 in Hawaiʻi was $14,400 
+per taxpayer, or $33,600 per household, regardless of vehicle ownership.5 The additional private cost of 
+vehicle ownership is substantial—an extra $21,800 per household, per year.6 Given this, it is unsurprising that 
+transportation is, on average, the second largest household expenditure in the U.S. In Honolulu, it is the third 
+largest expenditure on average7 due to high local food costs (Figure 2, next page). 
+
+KEIKI RIDE FREE • 5
+
+Figure 2: Shares of Average Expenditures, by Category, U.S. vs. Honolulu8
+
+United States
+
+Honolulu
+
+Housing
+
+Food
+
+Transportation
+
+Personal Insurance and Pension
+
+Healthcare
+
+Entertainment
+
+Cash Contributions
+
+Apparel and Services
+
+0%
+
+5%
+
+10%
+
+15%
+
+20%
+
+25%
+
+30%
+
+35%
+
+40%
+
+The cost of transportation is also regressive, as it consumes a larger share of household budgets for lower-
+income residents than for higher-income ones.9 In 2022, the average U.S. household spent 16 percent of their 
+after-tax income on transportation, while low-income households in the U.S. spent an average 30 percent of their 
+after-tax income on transportation.10 
+
+When individuals shift vehicle trips to transit trips, money saved from vehicle expenditures can be used for 
+purchasing power on other necessities, such as housing, food and healthcare. If the U.S. were to sustain a 
+higher level of investment in public transit for 20 years, the APTA estimates that would save American drivers an 
+estimated $11.7 billion in annual in car operating costs.11
+
+2. PUBLIC HEALTH BENEFITS 
+
+Public transportation can improve public health through enhanced accessibility of health care services, 
+reduction of carbon emission, and increased physical activity. In 2017, approximately 5.8 million people in the 
+U.S. (1.8 percent) postponed medical care because they lacked access to transportation.12 According to a 2020 
+study, medical care inaccessibility is most prominent for those below the federal poverty threshold, Medicaid 
+
+6 • KEIKI RIDE FREE
+
+  
+recipients, as well as those with physical disabilities.13 This study highlighted the importance of communities 
+having a variety of transportation options, including public transit, especially for economically-disadvantaged 
+individuals as well as those with disabilities.14
+
+Public transit often requires walking. One study found that 96 percent of people who use public transport 
+walk from their starting point to a station or bus stop, and 95 percent walk from public transport to their final 
+destination.15 An additional study found that adult transit users within the U.S. walked an average of 21 minutes 
+daily to complete their trips.16 Transit users often achieve a majority of the daily recommendation of moderate 
+physical activity for adults set by the U.S. Department of Health and Human Services in just their day to day lives 
+without setting aside time to work out.17
+
+3. ROAD SAFETY BENEFITS
+
+Compared to vehicle travel, public transit is safer for its occupants, as well as pedestrians and cyclists. In 2018, a 
+study comparing the safety of different roadway users on 10 major urban roads in Montreal found that the injury 
+rate for personal vehicle occupants was 3.7 times higher than for bus occupants.18 The researchers found that 
+pedestrian injury rates were 4.1 times higher along vehicle-dominated routes compared to bus routes.19 Overall, 
+the study estimated that bus travel on these 10 routes alone prevented 2,437 injuries over a 10-year period.20
+
+Local data tells a similar story. In 2024, the City and County of Honolulu’s bus fleet traveled over 21.6 million 
+miles.21 That year there was an average of 553,145 miles per major bus collision—roughly 39 major bus collisions 
+in total.22 In contrast, the Honolulu Police Department recorded 4,432 major vehicle collisions in 2024.23 
+
+Each year, more than 100 people are killed in crashes on Hawaiʻi’s roads and highways, yet fatal bus crashes 
+remain rare.24 From 2012 to 2018, an estimated 12 fatalities were associated with bus collisions.25 These figures 
+suggest that shifting trips from personal vehicles to public transit could substantially reduce traffic injuries and 
+fatalities, leading to fewer emergency room visits, lower long-term medical costs, and fewer families affected by 
+serious crashes. 
+
+KEIKI RIDE FREE • 7
+
+ 
+EXISTING TRANSIT 
+FARES IN HAWAI‘I
+
+Public transit in Hawaiʻi, like in most states, is operated by its respective county agencies. Hawaiʻi’s counties each 
+have a different, and in some cases, complex fare structure (Table 1). While all of the counties offer some form 
+of reduced-fare or fare-free program for specific populations, the eligibility and costs of these programs differ 
+greatly. Some of the fare-free programs shown in Table 1 are discussed in more detail in the following section. 
+
+Table 1: Existing Transit Fares in Hawai‘i, by County (Current as of December 2025)
+
+Kaua‘i County
+
+Single Fare / Day 
+Cap
+
+Basic
+
+$2 / $5
+
+Discounted (ADA, Seniors, and Youth)
+
+$1 / $2.50
+
+Monthly / Annual
+
+$50 / $550
+
+$25 / $275
+
+Kaua‘i public shuttle service: $0.50/trip for basic; $0.25/trip for discounted rate.
+
+City and County of Honolulu
+
+Single Fare / Day 
+Cap
+
+Basic
+
+Disability
+
+Low-Income
+
+Seniors
+
+Youth
+
+$3 / $7.50
+
+$1.25 / $3
+
+$1.25 / $3
+
+$1.25 / $3
+
+$1.50 / $3.75
+
+Monthly / Annual
+
+$80 / $880
+
+$20 / $45
+
+$20 / $45
+
+$20 / $45
+
+$40 / $440
+
+FREE
+
+Currently free for all city employees.
+
+8 • KEIKI RIDE FREE
+
+Maui County
+
+One-Way / Daily Pass
+
+$2 / $4 (For all riders except those who are eligible for fare-free transit.)
+
+Monthly
+
+$45 (For all riders except those who eligible for fare-free transit.)
+
+FREE
+
+Currently free for qualified income-eligible households, youth (24 and younger), 
+senior citizens (55 and older), and Medicare and Maui Bus Paratransit card holders.
+
+Hawai‘i County
+
+Currently free for all riders.
+
+Additional Free Transit Program – Provided by the Hawai‘i Department of Education (HiDOE)
+
+Current high school and intermediate public school students are eligible to receive free county bus passes 
+for use during the school year if they live 1.5 miles or more from their home school.
+
+KEIKI RIDE FREE • 9
+
+EXISTING TRANSIT 
+USAGE AND COSTS
+
+Figure 3: Average Monthly Ridership On TheBus (2016–2025)26
+
+6,000,000
+
+4,000,000
+
+2,000,000
+
+0
+
+l
+
+s
+p
+i
+r
+T
+y
+h
+t
+n
+o
+M
+e
+g
+a
+r
+e
+v
+A
+
+2016
+
+2018
+
+2020
+
+2022
+
+2024
+
+Year
+
+A. OVERALL RIDERSHIP
+
+While public transit usage differs greatly between Hawaiʻi’s four counties, this section of the report focuses 
+primarily on Oʻahu’s TheBus, since this system has the greatest number of riders, and the most data available. 
+It is also the state’s most costly transit system. Before the COVID-19 pandemic, average monthly ridership on 
+TheBus had decreased by nearly 10 percent between 2015 and 2019 (Figure 3). 27 During the COVID-19 pandemic 
+TheBus reached an all-time low of approximately 30.4 million annual rides in 2021.28 
+
+In 2022, annual ridership began to recover, with a 24.9 percent increase in ridership, compared to the dramatic 
+decline in 2021. Between 2021 and 2025, total annual ridership continued to increase by an average of 9 percent 
+annually.29 However, this positive trend has recently begun to decline. Between 2024 and 2025, total annual bus 
+ridership increased by less than 1 percent.30
+
+10 • KEIKI RIDE FREE
+
+ 
+ 
+Figure 4: TheBus Fare Increases For a Family of Four, 2021–2025 (Bill 54)
+
+Monthly: $210
+Annually: $2,310
+(2021)
+
+Monthly: $240
+Annually: $2,640
+(2022–24)
+
+Monthly: $270
+Annually: $2,970
+(Bill 54)
+
+$
+
+O‘ahu Average 
+Family Size: 4 
+(2023)
+
+Calculations are based on a family of two adults and two youths. 
+
+Honolulu’s ongoing fare hikes have likely contributed to its slow post-COVID ridership recovery. TheBus has seen 
+two fare increases over the past five years, and in January 2026, the Honolulu City Council voted to pass Bill 
+54. This bill will increase fares for adult, youth, and other reduced-fare riders (such as low-income, people with 
+disabilities and kūpuna).31 Under Bill 54, both monthly and annual passes for youth will increase by 12.5 percent 
+(Figure 4).32 
+
+Increases to transit fares are particularly harmful for low-income riders who rely on it as their primary mode of 
+transportation. Based on a 2021–2022 survey conducted by DTS, 21 percent of TheBus riders had a household 
+annual income of less than $20,000, and 71 percent had a household income of less than $60,000.33 Survey 
+results also showed that 54 percent of TheBus riders did not have a vehicle at home and 53 percent did not have 
+a driver’s license.34
+
+Increased fares come at a cost. Studies show that when transit fares increase, ridership declines.35 This dynamic 
+is measured by “price elasticity of demand,” which describes how consumption or demand for a service changes 
+when the prices change.36 In 2019, former DTS Director Wes Frysztacki informed the Honolulu Rate Commission 
+that for every 10 percent increase in fare, there is a 3 percent decline in ridership.37
+
+KEIKI RIDE FREE • 11
+
+Figure 5: 2024 O‘ahu Transit Rides, by Fare Category (HOLO Card Only) 
+
+4.9%
+
+1.2%
+
+<1%
+
+19.2%
+
+73.7%
+
+Basic
+
+Seniors
+
+Disability
+
+Low-Income
+
+Youth
+
+B. RIDERSHIP BY FARE CATEGORY
+
+Of the roughly 42 million trips made on Oʻahu’s transit system in 2024, 26.2 percent of those trips (10.7 million) 
+were made by reduced fare riders using a HOLO card (Figure 5). 38 Reduced fare seniors had the highest ridership 
+of any reduced fare group (19 percent of total rides), and youth had the least, with only 391,520 rides.39 
+
+While an estimated 20.2 percent of Oʻahu residents are below the age of 18,40 youth riders in 2024 accounted for 
+less than 1 percent of public transit rides taken on Oʻahu. 
+
+These figures for reduced-fare riders only account for individuals who used a HOLO card, and do not include 
+those who paid for their transit fare via cash. To be eligible for a reduced fare, a rider must present a valid senior, 
+disability, low-income, or youth HOLO Card. Any transit rider who pays cash must pay the full price. 
+
+Youth ridership on Oʻahu’s public transit system is likely suppressed by fare costs and administrative barriers. 
+While youth day fares are comparable to other reduced fare rates, monthly and annual passes are significantly 
+more expensive for youth, and obtaining a youth HOLO card can be burdensome. These factors may discourage 
+regular use and lead some youth to pay cash or avoid transit altogether. 
+
+Findings from a late-2025 Hawaiʻi Appleseed travel survey underscore the potential impact of fare-free transit for 
+youth. The survey reached 660 households across Oʻahu, and 36 percent of respondent households had school-
+aged children.41 Among respondents with high school-aged children, 34 percent reported that their children 
+
+12 • KEIKI RIDE FREE
+
+Figure 6: Likelihood That Free Transit Would Increase Youth Bus Ridership Across O‘ahu, by Region
+
+Very Likely (%)
+
+Somewhat Likely (%)
+
+100
+
+80
+
+60
+
+40
+
+20
+
+0
+
+Island-Wide
+
+Urban Honolulu
+
+East Honolulu
+
+Windward / 
+North Shore
+
+Pearl City, ‘Aiea, 
+Moanalua
+
+Central O‘ahu
+
+‘Ewa / Leeward
+
+relied in part or entirely on TheBus to get to and from school—exceeding reliance on school buses.42 However, 
+most students still depended on family vehicles, indicating room to increase transit use. 
+
+Importantly, the survey found that cost is a key barrier: 54 percent of respondents said they would be very or 
+somewhat likely to encourage their children to use public transit if fares were free (Figure 6). 43 Support for free 
+youth fares was especially strong among households in the Windward/North Shore and ʻEwa/Leeward areas.
+
+Together, these findings suggest that eliminating fares for youth could meaningfully increase transit use and 
+better meet the mobility needs of young people across Oʻahu.
+
+C. FARES VERSUS OPERATING COSTS
+
+In 2024, the City and County of Honolulu’s public transit system operational costs were an estimated $330 
+million.44 During this time period, approximately $47 million in passenger fares were collected, an operating loss 
+of approximately $283 million, or an 85 percent deficit. A similar trend occurred in 2022 and 2023, with passenger 
+fares covering less than 20 percent of operating costs during those years.45 
+
+Opponents to reducing or eliminating transit fares often assume that fares are needed to cover operating costs. 
+The reality is that in Honolulu, as in most localities, fare revenue covers only a small share of transit expenses. 
+Local governments must fund the majority of transit operations regardless of fares. 
+
+KEIKI RIDE FREE • 13
+
+FARE-FREE TRANSIT 
+LESSONS LEARNED
+
+A growing number of localities across the 
+United States, and the globe, are prioritizing 
+transit affordability and accessibility over 
+fare revenue by adopting fare-free transit 
+programs. While fare-free and reduced-
+fare programs have traditionally targeted 
+specific populations (such as elderly or 
+disabled groups) or geographic areas (such as 
+downtown regions), city-wide or state-wide 
+programs that cover a jurisdiction’s entire 
+population are becoming more common. 
+
+Seven existing local and national fare-free 
+transit programs are described in the following 
+section. While these programs differ greatly in 
+terms of the population served, and resulting 
+impact, generally all of the reviewed programs 
+were found to substantially boost transit 
+ridership. The different models of fare free 
+programs explored in this section, and their 
+resulting impact, is summarized in Figure 7.  
+
+Figure 7: Scale of Impact of Fare-Free Transit, by Program Model
+
+Programs 
+For Speciﬁc 
+Geographic Areas 
+(e.g. “Downtown”)
+
+Programs 
+For Speciﬁc 
+Demographic 
+Groups (e.g. 
+Youth, City/State 
+Employees)
+
+City or 
+County-Wide 
+Programs That Do 
+Not Require Fare 
+Collection
+
+State-Wide 
+Programs That Do 
+Not Require Fare 
+Collection
+
+Low Impact
+
+14 • KEIKI RIDE FREE
+
+High Impact
+
+LOCAL EXAMPLES
+
+Hawaiʻi County, HI: The Hawaiʻi County Hele-On bus system launched a fare-free pilot program in 2022.46 The 
+fare-free program allows anyone to use the bus without a transit pass.47 The program was promoted through the 
+Hele-On website, signage on buses, and county press releases.
+
+Following implementation of the fare-free program, in fiscal year (FY) 22 there were over 588,000 passenger rides 
+across Hele-On’s buses, vans, and bikeshare services, representing an 81 percent increase from FY21.48 
+
+In 2022, the Hawaiʻi County Council approved the extension of the free fare program through 2025.49 Grant 
+funding from the Federal Transit Administration helped to cover the annual fare revenue loss of $560,000.50 
+Hawaiʻi County Mass Transit Agency’s acting administrator, Zac Bergum, recently indicated that the agency 
+would need to spend over $1 million if the county decided to reintroduce fares and install fare boxes throughout 
+the Hele-On system.51
+
+In 2025, the Hawaiʻi County Council approved the extension of the fare-free transit program through 2028.52 Part 
+of the reasoning behind its extension has been the continual increase in ridership, which surpassed 940,000 
+rides for FY25.53 Ridership now mirrors pre-pandemic levels, which was at an all-time high in 2012 (1.2 annual 
+million rides).54 
+
+▶
+
+Lesson: Eliminating fares is an effective way to boost transit ridership to pre-pandemic levels.
+
+Hawaiʻi Department of Education: HiDOE has faced an ongoing school bus driver shortage since the onset of 
+the COVID-19 pandemic.55 Despite recruitment efforts such as providing signing bonuses, job fairs, and flexible 
+schedules for drivers, the shortage has persisted.56
+
+In 2022, HiDOE launched a pilot program called Expanding Ridership to Educate Students in Schools (EXPRESS). 
+The EXPRESS program aimed to alleviate the impacts of Hawaiʻi’s school bus driver shortage and improve 
+access to school by providing free county bus passes—only be used during the school year—to eligible high 
+school students. 
+
+Eligible students must apply through the HiDOE website, and will then receive a transit pass from their respective 
+county. In 2022, it was estimated that the DOE spent $3–4 million on the pilot program.57 In 2025, the program 
+was expanded to include intermediate school students. 
+
+The program was originally available to all high school students without a school bus pass. However, to be 
+eligible for the program currently, students must also live 1.5 miles or further from their school. Students who 
+receive a geographic exemption are completely ineligible. The program also only serves students on Oʻahu and 
+Kauaʻi, since Maui and Hawaiʻi County already provide free transit for youth.
+
+In 2022, HIDOE estimated that the program could benefit 47 percent of high school students statewide.58 In the 
+first year of the pilot program, 10,000 students enrolled in the program, with numbers  climbing as high as 17,600 
+students in 2024.59 However, following the introduction of geographic restrictions, enrollment has since declined.
+
+▶
+
+Lesson: Providing free transit access can be a cost-effective way to improve access to school during a time 
+that many students lack access to school transportation services. However, free transit programs that impose 
+seasonal and geographic restrictions limit their impact. 
+
+KEIKI RIDE FREE • 15
+
+NATIONAL EXAMPLES
+
+Washington State: In 2021, Washington State enacted legislation enabling every transit system to offer free 
+boarding for passengers under 18, including state ferries and Amtrak routes. This policy now provides free transit 
+access to approximately 1.4 million young Washingtonians.60 
+
+Officially launched in late 2022, the program allows Washington transit agencies to qualify for the newly-created 
+Transit Support Grant, which reimburses agencies for the cost of lost fare revenue, and provides additional funds 
+to invest in operations, capital and maintenance.61 To receive funding, transit agencies must document their 
+implementation of the zero-fare policy, as well as provide ridership data.62 
+
+Program funding is sustainable for the next 16 years through Washington’s Climate Commitment Act, distributed 
+every two years to eligible transit agencies.63 For the 2023–2025 biennium, approximately $33.6 million from the 
+Transit Support Grant was allocated to reimburse agencies for offering fare-free policy for youth.64
+
+In 2023, Washington transit agencies reported more than 16.5 million fare-free rides for passengers under 
+18, with most trips being taken on ground-based transit.65 After steep ridership declines during the COVID-19 
+pandemic, the fare-free policy likely helped drive recovery. Between 2022 and 2023, total statewide transit trips 
+
+16 • KEIKI RIDE FREE
+
+increased by 19.8 percent, rising from 137.66 million in 2022 to 164.93 million in 2023.66 For agencies serving 
+under 1 million passengers, total trips grew by 23.4 percent. 
+
+Whatcom Smart Trips program manager Michelle Grandy further highlighted the program’s positive impact:
+
+“Each year we find students to be more eager to ride the bus than the year before… Faces light up when 
+suggested destinations are shared in our presentations. Photos of the waterslides, county fair, local arcade, 
+and more spark the imagination of the students spurring good questions about where else the bus may go and 
+how to find their closest bus stop. They’re especially excited when they learn the bus is free for them to ride.”67
+
+The Washington State legislature recently allocated an additional $188.9 million for the Transit Support Grant 
+for the 2025–2027 biennium, to be awarded to 31 transit agencies statewide.68 Individual awards will range from  
+$864 to $66.1 million.69
+
+▶
+
+Lesson: Establishing a statewide policy for free transit provides riders universal transit access across 
+different counties and transit systems (such as bus and rail). Establishing a statewide grant that provides 
+reimbursements to county transit agencies is one potential way to accomplish this. 
+
+Albuquerque, NM: ABQ Ride, Albuquerque’s public transportation system, previously charged adults $1 dollar 
+for a one-way trip.70 In a 2017 rider survey, 84 percent of respondents reported annual household incomes below 
+$35,000, and about 46% percent reported not owning a vehicle.71 As a result, being unable to afford transit fares 
+was a frequent reality for much of ABQ Rides’s customer base.
+
+In January 2022, the City of Albuquerque launched the ABQ Ride Zero Fares pilot, temporarily allowing anyone 
+to ride ABQ Ride buses, ART lines, and Sun Van paratransit services (for qualified riders) for free. The pilot was 
+funded by a one-time, non-recurring $3 million appropriation from the City Council, with the intent to continue 
+or terminate based on data collected in 2022.72 Riders did not need to enroll, show ID, or use a transit pass to 
+board the transit system; they could simply board and exit vehicles, and fareboxes were taken out of service.
+
+ABQ Ride Zero Fare helped reverse the steep ridership declines caused by the COVID-19 pandemic. Between 
+December 2021 and December 2022, fixed-route ridership had increased by 49.4 percent73 and Sun Van 
+paratransit ridership grew by 73 percent. On November 8, 2023, the City Council voted to make the zero-fare 
+program permanent.74 In 2024, ABQ Ride provided over 7.3 million rides, reaching roughly 80 percent of pre-
+pandemic annual ridership.75
+
+During the first 12 months, the total cost of implementation, operations and maintenance for the program was 
+just over $3 million.76 After the pilot funding was exhausted, ABQ Ride Zero Fare continued using the transit 
+department’s regular budget. According to Transit Department leadership, fares had previously generated about 
+$3 million per year in revenue in an agency with a $67 million annual budget, meaning fare revenue represented 
+a small share of overall funding once collection and pass administration costs were considered.77 
+
+If ABQ Ride had reinstituted fares and a pass system in 2023, it is estimated the city would face a net  revenue 
+loss of about $1.8 million, roughly 3 percent of the Transit Department’s $58 million operating budget.78 By 
+eliminating fare collection, funds once spent on fare administration are now redirected to improve service 
+quality and to expand access to transit for Albuquerque residents.
+
+▶
+
+Lesson: Eliminating fares reduces administrative costs, allowing funds that would otherwise be spent on fare 
+collection to go towards expanding transit access. 
+
+KEIKI RIDE FREE • 17
+
+Alexandria, VA: In September 2021, Alexandria’s bus system, DASH, began offering free transit to all riders with 
+no pass or other verification required. In FY22, the City of Alexandria contributed $1.47 million to subsidize the 
+first 10 months of fare-free service.79 At the same time, DASH underwent a system redesign that introduced 15 
+minute or less service intervals and a 24/7 bus system, reaching an additional 50,000 residents and 25,000 jobs.80 
+
+Driven by the network redesign and the elimination of fares, average daily ridership between 2021 and 2023 
+grew by over 152 percent (see Figure 8). 81A rider survey found that 53 percent of existing DASH riders reported 
+increasing their transit use because of the free fare program. 
+
+One challenge emerging from the program was overcrowding on frequent routes (running every 10–15 minutes) 
+and on routes serving large numbers of students, especially before and after school. To address these issues, 
+DASH deployed larger 40-foot and 60-foot buses on the busiest trips, which required additional municipal 
+resources and funding.82 
+
+Figure 8: Changes in DASH Ridership (FY 2018–2024) 
+
+600,000
+
+500,000
+
+400,000
+
+300,000
+
+200,000
+
+i
+
+g
+n
+d
+r
+a
+o
+B
+y
+h
+t
+n
+o
+M
+
+l
+
+l
+
+a
+t
+o
+T
+
+100,000
+
+0
+
+July
+
+Aug
+
+Sept
+
+Oct
+
+Nov
+
+Dec
+
+Jan
+
+Feb Mar
+
+Apr May
+
+June
+
+Pre-Pandemic 
+(FY17–FY19 Average)
+
+Pandemic (FY21)
+
+Post Pandemic (FY23)
+
+Current (FY24)
+
+Before COVID-19, passenger fares were the largest revenue source for DASH, generating up to $4 million 
+annually.83 Based on the DASH Fare Free Framework, the city estimated that the cost of the fare-free program to 
+be $4.72 million in FY 2023, $5.09 million in FY 2024, and $5.51 million in FY 2025.84 The Virginia Department of 
+Rail and Public Transportation Transit Ridership Incentivization Program awarded Alexandria $7.1 million to help 
+offset lost fare revenue, with the condition that DASH operate for at least four years.85
+
+▶
+
+Lesson: In some cases, free transit access can lead to overcrowding on buses. However, this seems to most 
+prevalent on high frequency routes in urban areas. 
+
+18 • KEIKI RIDE FREE
+
+ 
+ 
+Columbus, OH: In 2015, a fare-free pilot program in Columbus, OH found that transit ridership doubled when 
+downtown workers were given access to free bus passes.86 As a result, Columbus’s Downtown C-Pass program 
+was initiated in June 2018 to provide fare-free transit access with a goal to improve the local economy and 
+citizens’ perspectives on commuting via transit.87 
+
+The program made unlimited free transit access available to employees of companies and businesses located 
+in downtown Columbus. C-Pass is funded by the Mid-Ohio Regional Planning Commission (MORPC) and the 
+Capital Crossroads Special Improvement District, the first fare-free program of its kind to be partially funded by 
+downtown property owners.88
+
+A 2019 survey of program participants (employers and employees) found that: 
+
+• 
+
+• 
+
+68 percent of respondents attributed C-pass as the reason they started using the bus;
+
+93 percent of new transit riders had access to a private vehicle;
+
+•  New riders were economically diverse, with 46 percent annually earning below $75,000, and the remainder 
+
+earning more than $75,000; and
+
+• 
+
+52 percent of companies reported knowing that employees had relinquished parking because they now take 
+Central Ohio Transit Agency (COTA) bus service.89 
+
+The survey showed that transit usage during rush hour had increased by 24 percent. These findings highlight 
+the environmental benefits of fare-free transit, in particular potential reductions in vehicle usage and carbon 
+emissions. For example, within a year, individuals who switched to Columbus public transit were estimated to 
+have saved more than 350,000 gallons of fuel and averted 6.8 million pounds of carbon dioxide emissions.90  
+
+Due to its success, beginning in 2021, the program was renewed for an additional five years.91 The program 
+initially began with 230 companies and 7,600 employees enrolled. By 2024, the C-Pass program had 370 
+companies enrolled and 12,305 employees enrolled.92 In 2024, an estimated 585,000 rides utilized the C-Pass 
+program on COTA.93
+
+▶
+
+Lesson: Free transit programs are an effective way to attract people who would otherwise not typically use the 
+bus, including higher income individuals who own personal vehicles.
+
+KEIKI RIDE FREE • 19
+
+Orange County, CA: In September 2021, Orange County began a Youth Ride Free program for children ages 
+6–18.94 Schools collaborated with the Orange County Transportation Authority (OCTA) in outreach efforts, and 
+distributed unique physical passes to families. In cases where a school did not participate, students or guardians 
+retained the option to request annual passes directly via OCTA’s website or via mail. 
+
+In late January 2022, OCTA collected 581 community comments on the program, with roughly 96 percent of 
+respondents expressing support. The primary reasons cited were general support (39.6 percent), academic 
+success (34.8 percent), and financial benefits (27.9 percent).
+
+Within the first 4.5 months of the program, OCTA buses had more than 18,000 youth program participants taking 
+over 672,000 rides.95 OCTA found that most of the trips were school-related and that approximately 70 percent of 
+participants were high schoolers. The program was initially planned to last only six months. However, due to its 
+success, it received additional funding to continue its operations through present day.  
+
+OCTA staff estimated an annual decrease in fixed-route fare revenue of about $2.2 million, and $23,000 for 
+paratransit fare revenue, due to the Youth Ride Free program.96 The revenue loss will continue to be subsidized 
+by state funding from CalTrans’ Low Carbon Transit Operations Program (LCTOP), which funds transit agencies’ 
+efforts to reduce greenhouse gas emissions and improve mobility, particularly for disadvantaged communities.97 
+
+By the end of January 2025, the Youth Ride Free program exceeded 10.6 million rides and had over 55,000 
+participants.98 While youth only accounted for 2–3 percent of bus ridership prior to the COVID-19 pandemic, 
+youth rose to 10 percent of bus ridership following the fare-free program.99 In April 2025, Orange County 
+approved the use of additional funds to continue the Youth Ride Free program through September 2027.100
+
+▶
+
+Lesson: Free transit programs for youth are primarily utilized by older (i.e., high school aged) populations for 
+the purposes of accessing school-related activities.
+
+20 • KEIKI RIDE FREE
+
+ 
+RECOMMENDATIONS
+
+Given the strong evidence that fare-free transit increases ridership, reduces household transportation costs, 
+improves access to essential services, and helps build lifelong transit habits, this report recommends that 
+Hawaiʻi should enact statewide legislation establishing a permanent, year-round fare-free transit program for all 
+residents age 18 and under. 
+
+We acknowledge that affordable transit access is important for all people, and ultimately the most effective 
+fare free programs (such as the ones provided by the County of Hawaiʻi and in Albuquerque) provide universal 
+transit access. However, providing statewide access for youth is an important step to make this vision a reality. 
+Moreover, as demonstrated in this report, young people are the largest demographic of individuals who do not 
+drive and are currently underserved by our public transit system—particularly on Oʻahu. 
+
+Although there is a patchwork of reduced-fare and limited fare-free programs available in Hawaiʻi—including 
+the HiDOE’s EXPRESS program and county-specific initiatives—the state still lacks a unified system that 
+guarantees all young people equitable access to transportation regardless of county, school type, or family 
+income. A statewide program modeled after Washington’s Youth Ride Free initiative would create consistent 
+access, reduce administrative burden, and ensure that county transit agencies are financially supported as they 
+expand youth ridership.
+
+KEIKI RIDE FREE • 21
+
+KEY COMPONENTS OF A FREE TRANSIT PROGRAM 
+
+1. Provide statewide, zero-fare transit access for youth (18 and under), as well as caregivers accompanying 
+young children.
+
+Based on national best practices, youth should be able to ride any county transit system at no cost, and at any 
+time of the year. Making the program year-round—not limited to the school year—ensures that young people can 
+reliably travel to summer programs, employment, sports, cultural activities, medical care, and family obligations. 
+
+Because guardians may hesitate to allow younger children to travel alone, Hawaiʻi should include a free caregiver 
+pass for an adult accompanying youth riders aged 12 or younger.
+
+2. Simple, pass-free boarding to reduce administrative burden and increase transit access.
+
+The statewide program should allow all youth ages 18 and under to board county buses (and the rail on Oʻahu) 
+without needing a transit pass, following the proven Washington State model. Eliminating passes removes 
+enrollment barriers, shortens boarding times, and significantly reduces administrative costs associated with 
+issuing, replacing, and verifying transit passes. National best practices consistently show that fare-free programs 
+experience higher utilization and lower overhead when riders are not required to carry specialized transit passes.
+
+To support appropriate fare enforcement while maintaining barrier-free access, bus drivers could ask youth who 
+appear older than 18 to show a student ID or state-issued ID. This light-touch identification approach ensures 
+program integrity without placing unnecessary burdens on families, schools, or transit agencies. By relying on 
+existing IDs rather than creating new pass systems, counties can focus resources on improving service quality 
+rather than managing fare administration.
+
+22 • KEIKI RIDE FREE
+
+3. Create a statewide grant/fund to reimburse county agencies.
+
+To fund the program sustainably, the Hawaiʻi State Legislature should establish a dedicated state funding 
+mechanism—similar to Washington’s Climate Commitment Act funding—providing transit agencies recurring 
+reimbursements for foregone youth fare revenue. Formula-based allocations could be tied to each county’s 
+youth population, ridership levels, and demonstrated need, while encouraging counties to expand safe, reliable 
+service. 
+
+Established by the Hawaiʻi State Legislature as Act 96 in 2025, the Hawaiʻi Green Fee could also serve as a 
+potential source of funding to support the youth transit program. Reducing vehicle travel emissions would 
+fall within the law’s purpose to protect the state’s natural environment and infrastructure from the impacts of 
+climate change.
+
+4. Require county transit agencies to document program costs.
+
+To ensure long-term success and legislative oversight, the program should include an annual statewide report 
+summarizing:
+
+• 
+
+Total youth ridership and changes over time; 
+
+•  Peak periods and heavily used routes; 
+
+•  Program benefits, such as youth access to education and extracurricular activities, as well as impacts on 
+
+vehicle traffic and congestion near schools; and 
+
+• 
+
+Any operational challenges, such as overcrowding or changes in service needs. 
+
+Survey data should be collected in the first two years of the program and periodically thereafter. Combining 
+ridership statistics with qualitative insights from families, schools, and youth will help counties refine service 
+and help the Legislature assess long-term impacts and funding needs.
+
+KEIKI RIDE FREE • 23
+
+ 
+ENDNOTES
+
+American Public Transportation Association 
+
+1. 
+(APTA), “Public Transportation Facts,” accessed 
+November 2025. https://www.apta.com/news-
+publications/public-transportation-facts
+
+10. 
+
+Ibid.
+
+11. 
+
+APTA, 2025
+
+American Public Transportation Association, 
+
+2. 
+“Economic Impact of Public Transportation 
+Investment,” April 2020. https://www.apta.com/
+wp-content/uploads/APTA-Economic-Impact-Public-
+Transit-2020.pdf
+
+12. 
+Wolfe, M. K., McDonald, N. C., & Holmes, G. M., 
+“Transportation Barriers to Health Care in the United 
+States: Findings From the National Health Interview 
+Survey, 1997-2017,” American Journal of Public Health, 
+110(6), p. 815–822, 2020. https://pmc.ncbi.nlm.nih.gov/
+articles/PMC7204444
+
+3. 
+
+Ibid.
+
+4. 
+In addition to roadways and vehicles, the 
+“vehicle economy” also includes the direct costs 
+of transportation infrastructure (e.g., bridges, on/
+off ramps, signs, speed bumps, parking, signals) as 
+well as indirect costs to society, such as pollution 
+and congestion resulting from the use of the ground 
+transportation system.
+
+Ulupono Initiative, “The Cost of the Vehicle 
+
+5. 
+Economy in Hawaiʻi,” April 2025. https://ulupono.com/
+media/rddfxc20/the-cost-of-the-vehicle-economy-in-
+hawaii_2025-7-14-final.pdf
+
+6. 
+
+Ibid.
+
+U.S. Bureau of Labor Statistics, “Consumer 
+7. 
+Expenditures in the Honolulu Metropolitan Area — 
+2022–23,” November 20, 2024. https://www.bls.gov/
+regions/west/news-release/consumerexpendtures_
+honolulu.htm#:~:text=Highlights%20of%20the%20
+Honolulu%20area’s,on%20food%20away%20from%20
+home
+
+8. 
+
+Ibid..
+
+Institute for Transportation & Development, 
+
+9. 
+“The High Cost of Transportation in the United States,” 
+January 24, 2024. https://itdp.org/2024/01/24/high-
+cost-transportation-united-states
+
+13. 
+
+Ibid.
+
+14. 
+
+Ibid.
+
+15. 
+Hillnhütter, Helge, “Pedestrian Access to 
+Public Transport,” University of Stavanger, PhD 
+thesis UiS no. 314, 2016. https://nva.sikt.no/
+registration/0198cc5f08ca-e89a327e-90fd-4e70-b137-
+ff5d10d9ea1d
+
+Freeland, A. L., Banerjee, S. N., Dannenberg, 
+
+16. 
+A. L., & Wendel, A. M., “Walking associated with 
+public transit: moving toward increased physical 
+activity in the United States,” American Journal of 
+Public Health, 103(3), p. 536–542, 2013. https://
+ajph.aphapublications.org/doi/full/10.2105/
+AJPH.2012.300912
+
+17. 
+U.S. Department of Health and Human 
+Services, “Physical Activity Guidelines for Americans,” 
+2018. https://odphp.health.gov/sites/default/
+files/2019-09/Physical_Activity_Guidelines_2nd_
+edition.pdf
+
+Morency, P., Strauss, J., Pépin, F., Tessier, 
+
+18. 
+F., & Grondines, J., “Traveling by Bus Instead of Car 
+on Urban Major Roads: Safety Benefits for Vehicle 
+Occupants, Pedestrians, and Cyclists,” Journal of 
+Urban Health, 95(2), p. 196–207, 2018. https://doi.
+org/10.1007/s11524-017-0222-6
+
+24 • KEIKI RIDE FREE
+
+19. 
+
+Ibid.
+
+20. 
+
+Ibid.
+
+Department of Business, Economic 
+
+21. 
+Development & Tourism, “State of Hawaiʻi Data Book 
+2024, Table 18.25 — PUBLIC TRANSIT, FOR OAHU: 
+1993–2024,” August 2025. https://files.hawaii.gov/
+dbedt/economic/databook/2024-individual/18/182524.
+pdf
+
+22. 
+Oʻahu Transit Services, “Fixed Route Monthly 
+Performance Report for the Month Ending January FY 
+2025,” Accessed November 2025. https://www.thebus.
+org/Performance/Bus/Fixed%20Route%20-%20%20
+%20%20%20%20%20%20%20%20%20%20%20%20
+%20%2001-2025%20Performance.pdf 
+
+23. 
+Honolulu Police Department, 
+“Oʻahu Vehicle Collisions,” Accessed 
+November 2025. https://app.powerbigov.us/
+view?r=eyJrIjoiZGY4YzcxNTMtZWI3Ny00ODkwL 
+WIwZWYtOGY4MjZhNjk3YzZjIiwidCI6ImQ1Z 
+TUyMTdmLWZhMTYtNGU5Mi04MmQ1LWY4N 
+mNkYWJhZmJlMyJ9 
+
+30. 
+
+Ibid.
+
+Honolulu City Council, “Bill 54 (CD1): Relating 
+
+31. 
+to Public Transit,” 2025. https://hnldoc.ehawaii.gov/
+hnldoc/document-download?id=25846
+
+32. 
+
+Ibid.
+
+Department of Transportation Services, “2025 
+
+33. 
+Public Transit Title VI Program,” City and County of 
+Honolulu, Accessed September 2025.
+https://www4.honolulu.gov/docushare/dsweb/
+Get/Document-352782/Final%202025%20DTS%20
+Public%20Transit%20TVI%20Program%20Report%20
+%20-%2008-2025.pdf
+
+34. 
+
+Ibid.
+
+35. 
+Litman, Todd, “Understanding Transport 
+Demands and Elasticities How Prices and Other Factors 
+Affect Travel Behavior,” Victoria Transport Policy 
+Institute, September 2025. https://www.vtpi.org/
+elasticities.pdf
+
+36. 
+
+Ibid.
+
+24. 
+Hawaiʻi Climate Change Commission, 
+“Transportation Choices,” 2024. https://climate.hawaii.
+gov/hi-mitigation/hi-clean-cars-faq/transportation-
+choices
+
+25. 
+Paulson Coletti Trial Attorneys PC, “Bus 
+Accident Statistics in the United States [2025],” 
+Accessed November 2025. https://www.paulsoncoletti.
+com/bus-accident-statistics
+
+37. 
+Honoré, Marcel, “Honolulu Traffic Is Terrible. 
+So Why Aren’t More People Riding TheBus?” Honolulu 
+Civil Beat, September 2019. https://www.civilbeat.
+org/2019/11/honolulu-traffic-is-terrible-so-why-arent-
+more-people-riding-thebus
+
+Data provided by the Transportation Mobility 
+
+38. 
+Division - Bus Service and Operations Branch via email. 
+Shown figures do not include reduced fare riders who 
+paid cash.
+
+Based on the collection of data from TheBus 
+
+26. 
+Ridership and Performance Statistics monthly reports.
+
+39. 
+
+Ibid.
+
+27. 
+City and County of Honolulu, “TheBus 
+Ridership and Performance Statistics, Monthly 
+Reports,” Accessed September 2025. https://www.
+thebus.org/Performance/Performance_Bus.asp
+
+Based on the collection of data from TheBus 
+
+28. 
+Ridership and Performance Statistics monthly reports.
+
+29. 
+
+Ibid.
+
+40. 
+Hawaiʻi State Data Center, Research and 
+Economic Analysis Division, “Hawaiʻi Population 
+Characteristics 2024,” Hawaiʻi Department of Business, 
+Economic Development & Tourism, June 2025. https://
+files.hawaii.gov/dbedt/census/popestimate/2024/
+state-county-char/Highlights_Hawaii-Population-
+Characteristics-2024.pdf
+
+Hawaiʻi Appleseed Center for Law & Economic 
+
+41. 
+Justice, “Transportation Survey,” Prepared by 
+
+KEIKI RIDE FREE • 25
+
+ 
+Ward Research Incorporated, November 2025. 
+https://drive.google.com/file/d/1dm1EsqxtvuO-
+WoIzScvqvRafHktfF593/view?usp=share_link
+
+42. 
+
+Ibid.
+
+43. 
+
+Ibid.
+
+2023. https://www.civilbeat.org/2023/07/why-hawaii-
+cant-solve-its-school-bus-driver-shortage
+
+56. 
+Office of the Governor, “Proclamation Relating 
+to School Bus Services,” August 2024. https://governor.
+hawaii.gov/wp-content/uploads/2024/08/2408014_
+Proclamation-Relating-to-School-Bus-Services.pdf
+
+Office of the City Auditor, “City and County 
+44. 
+of Honolulu Public Transportation System Bus and 
+Paratransit Operations,” p. 6, December 2024.
+https://www.honolulu.gov/oca/wp-content/uploads/
+sites/39/2025/01/CC-PTS-FS-2024-Final.pdf
+
+Ordonio, Cassie, “Hawaiʻi High School Students 
+
+57. 
+To Get Free Rides On Public Transportation,” Honolulu 
+Civil Beat, September, 2022. https://www.civilbeat.
+org/2022/09/hawaii-high-school-students-to-get-free-
+rides-on-public-transportation
+
+45. 
+
+Ibid.
+
+County of Hawaiʻi, “2022 Supplement to 
+
+46. 
+the County of Hawaiʻi Transit and Multi-Modal 
+Transportation Master Plan,” Prepared by SSFM 
+International, Inc., September 2022. https://konahub.
+info/county-hawaii-transit-and-multi-modal-
+transportation-master-plan-supplement-2022
+
+47. 
+
+Ibid.
+
+48. 
+Big Island Video News, “Hawaiʻi County Sees 
+Increase In Hele-On Passenger Trips,” October 2022. 
+https://www.bigislandvideonews.com/2022/10/04/
+hawai%CA%BBi-county-sees-increase-in-hele-on-
+passenger-trips
+
+49. 
+
+Ibid.
+
+50. 
+
+Ibid.
+
+Casey Harlow, “High schoolers can get 
+
+58. 
+free county bus passes under new state program,” 
+Hawaiʻi Public Radio, September 2022. https://www.
+hawaiipublicradio.org/local-news/2022-09-13/high-
+schoolers-can-get-free-county-bus-passes-under-new-
+state-program
+
+Tagami, Megan, “ʻThe Kids Feel Miserable’ 
+
+59. 
+But There’s No End In Sight For Hawaii’s School Bus 
+Shortage,” Honolulu Civil Beat, March 2024. https://
+www.civilbeat.org/2024/03/the-kids-feel-miserable-
+but-theres-no-end-in-sight-for-hawaiis-school-bus-
+shortage
+
+60. 
+Transportation Choices, “Free transit 
+coming to nearly 1.5 million young Washingtonians 
+with ʻYouth Ride Free!,’” September 2022. https://
+transportationchoices.org/youthridefree
+
+61. 
+
+Ibid.
+
+Daniel Farr, Council committee passes bill 
+
+51. 
+to extend free bus rides through 2028, West Hawaii 
+Today, September 2025. https://www.westhawaiitoday.
+com/2025/09/09/hawaii-news/council-committee-
+passes-bill-to-extend-free-bus-rides-through-2028
+
+62. 
+Washington State Department of 
+Transportation (WSDOT), “Transit Support Grant: 
+Frequently Asked Questions,” April 2025. https://wsdot.
+wa.gov/sites/default/files/2023-07/PT-Guide-Grants-Tr
+ansitSupportGrantFrequentlyAskedQuestions.pdf
+
+52. 
+
+Ibid.
+
+53. 
+
+Ibid.
+
+54. 
+
+Ibid.
+
+WSDOT, “Fare-free transit programs boost 
+
+63. 
+youth ridership on public transportation statewide,” 
+December 2024. https://wsdot.wa.gov/about/
+news/2024/fare-free-transit-programs-boost-youth-
+ridership-public-transportation-statewide
+
+55. 
+Budiono, Victoria, “Why Hawaii Can’t Solve Its 
+School Bus Driver Shortage,” Honolulu Civil Beat, July 
+
+State of Washington, 67th Legislature, “Additive 
+
+64. 
+Transportation Budget,” March 25, 2022. https://
+
+26 • KEIKI RIDE FREE
+
+lawfilesext.leg.wa.gov/biennium/2021-22/Pdf/Bills/
+Session%20Laws/Senate/5975-S.SL.pdf
+
+WSDOT, “Fare-free transit programs boost 
+
+65. 
+youth ridership on public transportation statewide,” 
+December 2024. https://wsdot.wa.gov/about/
+news/2024/fare-free-transit-programs-boost-youth-
+ridership-public-transportation-statewide
+
+City of Albuquerque, “Zero Fares is Here to 
+
+74. 
+Stay,” November 2023. https://www.cabq.gov/transit/
+news/zero-fares-is-here-to-stay
+
+City of Albuquerque, “7 Million+ Rides Strong: 
+75. 
+ABQ RIDE is Making a Comeback,” March 2025. https://
+www.cabq.gov/transit/news/7-million-rides-strong-
+abq-ride-is-making-a-comeback
+
+WSDOT, “Washington State: 2023 Summary of 
+
+66. 
+Public Transportation,” October 2024. https://www.
+wsdot.wa.gov/publications/manuals/fulltext/M3079/
+spt.pdf
+
+67. 
+WSDOT, “2024 Public Transportation Mobility 
+Report,” December 2024. https://wsdot.wa.gov/sites/
+default/files/2024-12/2024-Public-Transportation-
+Mobility-Report.pdf
+
+WSDOT, “Transit Support Grant,” Accessed 
+
+68. 
+November 2025. https://wsdot.wa.gov/business-
+wsdot/grants/public-transportation-grants/public-
+transportation-grant-programs-and-awards/transit-
+support-grant
+
+69. 
+
+Ibid.
+
+City of Albuquerque Transit Department, 
+
+70. 
+“City of Albuquerque Council Proposal to Resume 
+Fare Collection And Provide Long-Term Free Passes 
+(O-22-47),” December 2022. https://www.cabq.
+gov/council/documents/o-22-47-proposal-equity-
+analysis-2022-12-13.pdf
+
+ABQ Ride, “The Zero Fares Pilot Program 
+
+71. 
+Quarterly Report: January 2022–March 2022,” 
+Accessed August 2025. https://www.cabq.gov/transit/
+documents/zero-fares-1st-quarterly-report-final.pdf 
+
+72. 
+City of Albuquerque, “ABQ RIDE’s Zero Fares 
+Pilot Program Set to Kick Off 2022,” December 2021. 
+https://www.cabq.gov/transit/news/abq-ride2019s-
+zero-fares-pilot-program-set-to-kick-off-2022
+
+ABQ Ride, “The Zero Fares Pilot Program – 
+
+73. 
+Monthly Information Report,” p. 3, December 2022. 
+https://www.cabq.gov/transit/documents/december-
+zf-report-2022.pdf
+
+76. 
+
+ABQ Ride, December 2022, p. 10.
+
+Rode, Erin, “What Free Transit Looks Like 
+
+77. 
+in Albuquerque, Nearly Two Years After the City 
+Eliminated Fares,” Next City, July 2025.
+https://nextcity.org/urbanist-news/what-free-transit-
+looks-like-in-albuquerque-nearly-two-years-after-the-
+city
+
+City of Albuquerque Twenty Fifth Council, 
+
+78. 
+“Council Bill NO. O-23-89,” November 2023. https://
+www.cabq.gov/clerk/documents/o-23-89.pdf 
+
+Alexandria Transit Company, 2021, “DASH Fare 
+
+79. 
+Free Framework,” 2021. https://dashbus.com/wp-
+content/uploads/DASH-FARE-FREE-FRAMEWORK.pdf
+
+Kerkhoff, H., “Alexandria, VA, Transit Riders 
+
+80. 
+Enjoying ʻThe DASH Difference,’” April 2, 2025. https://
+buslinemag.com/features/transit-bus-systems/
+alexandria-va-transit-riders-enjoying-the-dash-
+difference
+
+Alexandria Transit Company, “DASH Free 
+
+81. 
+Fare Program Annual Report – 2023,” p. 2, April 2024. 
+https://www.dashbus.com/wp-content/uploads/DASH-
+Fare-Free-Program-Report-2023_FINAL.pdf
+
+82. 
+
+Ibid, p. 11.
+
+83. 
+
+Ibid, p. 18.
+
+84. 
+Alexandria Transit Company, “DASH Fare-Free 
+Framework,” September 8, 2021. https://dashbus.com/
+wp-content/uploads/DASH-Fare-Free-Program-Report-
+FY-2022_FINAL.pdf
+
+85. 
+
+Alexandria Transit Company, April 2024, p. 18. 
+
+86. 
+
+Downtown C-pass, “What is the Downtown 
+
+KEIKI RIDE FREE • 27
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+Copyright © 2026 Hawaiʻi Appleseed Center for 
+Law & Economic Justice. All rights reserved. 
+733 Bishop Street, Suite 1180, Honolulu, HI 96813
+
+C-pass Program?” September 2025. https://www.
+downtowncpass.com/what-is-c-pass
+
+Fare Policy, Board Agenda,” February 2022. https://
+octa.legistar.com/View.ashx?M=E1&ID=886437&GUID=F
+77B4270-5741-4C6C-8108-71443B38981B
+
+87. 
+
+Ibid.
+
+95. 
+
+Ibid.
+
+Smart Columbus, “Final Report for the Smart 
+
+88. 
+Columbus Demonstration Program,” June 2021. 
+https://d2rfd3nxvhnf29.cloudfront.net/2021-06/SCC-J-
+Program-Final%20Report-Final-V2_0.pdf
+
+Mass Transit, “C-pass doubles transit ridership 
+
+89. 
+in downtown Columbus,” August 2019. https://www.
+masstransitmag.com/bus/press-release/21093288/
+capital-crossroads-special-improvement-district-sid-c-
+pass-doubles-transit-ridership-in-downtown-columbus
+
+96. 
+New University Official Campus Newspaper, 
+“OCTA Permanently Offers Free Youth Bus Passes,” 
+University of California Irvine, March 2022. https://
+newuniversity.org/2022/03/10/octa-permanently-
+offers-free-youth-bus-passes
+
+California Climate Investments, “Low Carbon 
+97. 
+Transit Operations Program,” Accessed July 2, 2025, 
+https://www.caclimateinvestments.ca.gov/lctop
+
+90. 
+
+Ibid.
+
+91. 
+
+Ibid.
+
+Capital Crossroads & Discovery 
+92. 
+Special Improvement Districts, “2024 State of 
+Downtown Columbus,” September 2025. https://
+csids.wpenginepowered.com/wp-content/
+uploads/2025/05/2024_SID_state_downtown-
+Final-050925.pdf
+
+COTA, “2024 Community Relations Impact 
+
+93. 
+Report,” Accessed September 2025. https://www.cota.
+com/static/b3b8e4fb7e97f172bbd5338533e0a964/cota-
+2024-community-impact-report-infographic.pdf
+
+94. 
+Orange County Transportation Authority, 
+“Public Hearing for the Addition of the Youth Ride Free 
+Pass to the Orange County Transportation Authority’s 
+
+28 • KEIKI RIDE FREE
+
+Orange County Transportation Authority, “Low 
+98. 
+Carbon Transit Operations Program Recommendations 
+for OC Bus Transit Projects, Transit Committee,” p. 2, 
+April 2025. https://octa.legistar.com/View.ashx?M=F
+&ID=14002541&GUID=1AAD43ED-FDA4-4521-B9BC-
+75A68CEBDC05
+
+Pho, Brandon, “Orange County Takes Free 
+
+99. 
+Public Transit Leap With ʻPermanent’ Youth Bus 
+Passes,” Voice of OC, February 2022. https://voiceofoc.
+org/2022/02/orange-county-takes-free-public-transit-
+leap-with-permanent-youth-bus-passes
+
+100.  Orange County Transportation Authority, “Low 
+Carbon Transit Operations Program Recommendations 
+for OC Bus Transit Projects, Transit Committee,” p. 3, 
+April 2025. https://octa.legistar.com/View.ashx?M=F
+&ID=14002541&GUID=1AAD43ED-FDA4-4521-B9BC-
+75A68CEBDC05

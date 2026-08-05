@@ -1,0 +1,101 @@
+﻿1/26/25 Updates
+Remove the following text: According to DTS Director Roger Morton, the proposed rate hikes are expected to generate about $2 million in additional revenue. These funds will go toward offsetting the deficit that the transit system typically operates at. Currently, DTS collects about $50 million in revenue from passengers, with $11 million coming from cash payments. As such, fare collection contributes minimally (less than 12 percent) to the DTS’s estimated $430 million budget.
+And Replace with:  According to DTS Director Roger Morton, the proposed rate hikes are expected to generate about $2 million in additional revenue. But fares make up only a small fraction of the system’s budget. In 2024, TheBus cost the City and County of Honolulu an estimated $330 million to operate, while passenger fares brought in about $47 million—covering less than 15 percent of total costs. Similar gaps existed in 2022 and 2023, when fares accounted for under 20 percent of operating expenses. 
+Despite common assumptions, transit fares do not meaningfully fund Honolulu’s public transportation system. As in most cities, local government already pays for the vast majority of transit operations, whether fares go up, down, or away entirely.
+
+
+…
+
+
+Remove the following text: Based on TheBus Performance Statistics, even before the COVID-19 pandemic, monthly ridership had decreased by nearly 17 percent between 2015 and 2020. 
+While bus ridership has increased from its low in 2021, the rate is beginning to decline. For example, in July 2025, Oʻahu Transit Services reported an average weekday ridership of 112,882, marking a 1 percent (1,117 riders) decrease from the previous year. 
+Proposed fare increases will also put a financial strain on riders who desperately rely on TheBus. According to national data, an estimated 30 percent of bus riders have a household income less than $15,000, and 55 percent of all transit riders have a household income less than $50,000.
+And Replace with: Based on TheBus Performance Statistics, even before the COVID-19 pandemic, average monthly ridership had decreased by nearly 10 percent between 2015 and 2019. During the COVID-19 pandemic TheBus reached an all-time low of approximately 30.4 million annual rides in 2021.  
+While bus ridership has increased from its low in 2021, the rate is beginning to decline. For example, between 2024 and 2025, total annual bus ridership increased by less than one percent.
+Proposed fare increases will also put a financial strain on riders who desperately rely on TheBus. Based on a 2021–2022 survey conducted by DTS, 21 percent of TheBus riders had a household annual income of less than $20,000, and 71 percent had a household income of less than $60,000. Survey results also showed that 54 percent of TheBus riders did not have a vehicle at home and 53 percent did not have a driver’s license.
+________________
+
+
+….
+Proposal to raise transit fares will hurt Oʻahu riders
+Authors: Trinity Gilliam and Abbey Seitz 
+Increasing bus ridership is one of the most effective ways to decrease traffic congestion, reduce carbon emissions, and lower residents’ transportation costs. Yet, Bill 54—currently being considered by the Honolulu City Council—would do just the opposite. As currently proposed, Bill 54 would increase fares for adult, youth, and other reduced-fare riders (such as low-income, disabled, and kūpuna).  
+This is just the latest fare increase for TheBus, which raised its rates just three years ago. Proposed transit fare increases (shown in the table below) would impact fares across multiple rider categories. Adults and youth riders would be especially hard-hit, as these groups would experience a 12 percent rate fare increase for monthly and annual passes under the current proposal.
+Transit Fare Increases, as Proposed by Bill 54
+Fare Category
+	Single Ride (Cash)
+	Monthly Pass
+	Annual Pass 
+	
+
+	Current 
+	Proposed
+	Current 
+	Proposed
+	Current 
+	Proposed
+	Adult
+	$3
+	$3.25
+	$80
+	$90
+	$880
+	$990
+	Youth
+	$1.50
+	$1.75
+	$40
+	$45
+	$440
+	$495
+	Reduced Fare
+	$1.25
+	$1.75
+	$20
+	$20
+	$45
+	$50
+	
+
+In addition to the fare increases described above, if passed, Bill 54 would also: 
+* Establish a $0.25 cash premium above the HOLO card single ride fare to incentivize the use of the HOLO card. 
+* Establish one reduced fare price for Senior Citizens, Persons with a Disability, Paratransit Eligibility ID Holders, and Individuals with Extremely Low Incomes.
+* Restrict eligibility for deeply discounted fares only to Hawaiʻi residents.  
+* Give the Department of Transportation Services (DTS) Director the authority to impose special event single-ride fares for concerts, athletic events, and large community events where non-scheduled transit service is provided, including to and from the Daniel K. Inouye International Airport. 
+Impacts of Bill 54: Decreased Ridership and Financial Strain 
+According to DTS Director Roger Morton, the proposed rate hikes are expected to generate about $2 million in additional revenue. These funds will go toward offsetting the deficit that the transit system typically operates at. Currently, DTS collects about $50 million in revenue from passengers, with $11 million coming from cash payments. As such, fare collection contributes minimally (less than 12 percent) to the DTS’s estimated $430 million budget. 
+However, increased fares come at a cost. Global studies show that when transit fares increase, ridership declines. This dynamic is measured by “price elasticity of demand,” which shows the percentage drop in consumption for each percentage increase in price. For example, in 2019, former DTS Director Wes Frysztacki informed the Honolulu Rate Commission that for every 10 percent increase in fare, there is a 3 percent decline in ridership. 
+Monthly Bus Ridership (2015 to 2025)
+  
+
+Nevertheless, Honolulu’s TheBus has increased its fares twice within the last five years, which has likely contributed to its slow post-COVID ridership recovery. Based on TheBus Performance Statistics, even before the COVID-19 pandemic, monthly ridership had decreased by nearly 17 percent between 2015 and 2020.   
+While bus ridership has increased from its low in 2021, the rate is beginning to decline. For example, in July 2025, Oʻahu Transit Services reported an average weekday ridership of 112,882, marking a 1 percent (1,117 riders) decrease from the previous year. 
+Proposed fare increases will also put a financial strain on riders who desperately rely on TheBus. According to national data, an estimated 30 percent of bus riders have a household income less than $15,000, and 55 percent of all transit riders have a household income less than $50,000.
+Economic hardship is prevalent on Oʻahu. In 2023, approximately 33 percent of all Oʻahu households (110,544) were asset-limited, income-constrained, but employed—or ALICE—an acronym that describes the experience of earning enough to be above the federal poverty level but still struggling to afford basic needs consistently. An additional 9 percent (31,246) of Oʻahu households live below the federal poverty level ($16,770 for a single adult). 
+If Bill 54 is adopted, families of four on Oʻahu (assuming two adults and two youth) will pay $2,970 in annual transit passes—nearly 29 percent more than 2021 costs.  
+The steady increase of transit fares continues a long and unfortunate legacy of regressive taxes that hurt low-income residents the most. There are alternative ways, such as federal and state grants, and revenue from the gas tax and road usage fees, to offset the transit system’s financial deficit that do not put the burden on its riders. For many, the bus is a necessity. By increasing fares while household budgets are already stretched thin, Bill 54 risks pushing out the very riders who rely on public transit the most. 
+________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EXTRA NOTES 
+
+
+Canva link for family estimates for Oʻahu.

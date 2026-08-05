@@ -1,0 +1,37 @@
+Census poverty data for 2023 highlights the importance of government assistance
+
+The U.S. Census Bureau’s data for 2023 shows promising trends for families across the nation. The poverty rate has continued to drop, while wages grew faster than inflation for the first time since 2019.
+In 2023,
+the job market improved and was even stronger than before the pandemic
+. The percentage of adults aged 25–54 who were employed reached 80.7 percent, the highest it had been since 2000. In addition, the real median household income for the U.S. climbed from $77,540 to $80,610, showing a 4 percent increase.
+These improvements partly reflect the recovery of the American economy since the height of the COVID-19 pandemic in 2020 and 2021. They are also the product of historic investments in federal and state assistance for working families in recent years.
+Nationally, the Official Poverty Measure (OPM) marked
+a decrease from 11.5 percent in 2022 to 11.1 percent in 2023
+.
+In Hawaiʻi, the OPM was
+10.1 percent, down from 10.2 percent for the previous year
+.
+Although the OPM is the federal government’s benchmark for poverty rates, the Supplemental Poverty Measure (SPM) is a better indicator of poverty for a few reasons. The SPM takes into account a wider range of factors, like housing, food costs, and government assistance, to calculate poverty. In contrast, the OPM is based only on pre-tax cash income and sets a fixed poverty threshold that doesn't consider regional cost differences or non-cash benefits.
+However, a technical quirk with how the government calculates the SPM makes it seem like the poverty rate has worsened, even though it has actually improved. Since the SPM factors in household spending for each year, it can be distorted by years where household spending in the U.S. is unusually low or high compared to the baseline.
+*Adjusted for only inflation, excluding the swings in household spending from the pandemic to post-pandemic era
+During the pandemic, mass unemployment caused households to pull back on their spending. However, once the economy started to rebound, household spending returned to its pre-pandemic levels. This trend has skewed the SPM to be higher than it should have been for 2023—for example, the SPM threshold for renters rose by 8.6 percent for 2023,
+which is more than double the inflation rate for that year
+.
+After accounting for the swings in household spending, the inflation-only adjusted SPM for the U.S. shows an improvement from 13.3 percent in 2022 to 12.9 percent in 2023. This same measure shows the SPM has declined
+from 15 percent in 2018 to 12.9 percent in 2023
+.
+The dip in this adjusted poverty rate during 2021 is a result of the
+temporary expansion of the federal Child Tax Credit (CTC)
+, which
+lifted 2.9 million children out of poverty
+. Unfortunately, the CTC expansion ended in 2021, leading to a corresponding rise in poverty for the following year.
+Along with recovery of the U.S. economy, the poverty decline shown in 2023 is
+partly due to the increase in SNAP benefits due to the revision of the Thrifty Food Plan
+.
+Despite the improvements captured in the 2023 census data, many families continue to feel the lasting effects of large-scale unemployment during the pandemic, the rising cost of living, and inadequate government assistance.
+More states have recognized the importance of investing in the economic security of their working families. In Minnesota, current governor and vice presidential candidate, Tim Walz, signed bills into law making school meals free for all students and significantly expanding the state CTC. By supporting these kinds of effective, time-tested policies, Walz has set his state’s working families up for a better future.
+Hawaiʻi, too, has the opportunity to be a national leader in caring for our working families. When our legislature meets again in 2025, both universal free school meals and a state CTC proposal will again be put forward, along with other proven anti-poverty proposals. Finding the money to pay for them in the future will be difficult, however, given
+reduced revenues from last session’s income tax cut
+, signed into law as
+Act 046
+(2024).

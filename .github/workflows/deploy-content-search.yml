@@ -1,0 +1,193 @@
+name: Build Content Search bundle
+
+# Rebuilds content-search/data/ from the writing-bot corpus and commits it,
+# then dispatches the plain Pages deploy (deploy.yml). Scoped by `paths` so
+# ordinary site edits never trigger this build — the site's own deploy stays
+# a plain no-build upload.
+#
+# The heavy steps (Chroma index + browser-parity q8 embedding, ~180 MB model
+# download on a cold cache) only run when the corpus content actually changed;
+# a run that produces byte-identical data (modulo api.json's generatedAt)
+# commits nothing and deploys nothing. Use the `force` input to rebuild
+# embeddings without a content change (e.g. after a model/dtype bump).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "writing-bot/**"
+      - "content-search/js/**"
+      - "content-search/index.html"
+      - ".github/workflows/deploy-content-search.yml"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Rebuild + commit even if content is unchanged"
+        type: boolean
+        default: false
+
+concurrency:
+  group: content-search-build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write # to dispatch deploy.yml
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Python deps
+        run: pip install chromadb rank-bm25
+
+      - name: Build index + export data bundle
+        working-directory: writing-bot
+        run: |
+          python -c "import bot; bot.index_documents(force=True)"
+          python tools/build_static.py --verify
+          python eval/static_dump.py > ../content-search/test/fixtures.json
+
+      # api.json's generatedAt changes every build; everything else in the
+      # bundle is content-derived. Embeddings are also skipped when text is
+      # unchanged — they're a pure function of chunks.json, and re-running
+      # them on different runner hardware can flip float bits for no reason.
+      - name: Check for real content changes
+        id: diff
+        run: |
+          python3 - <<'PYEOF'
+          import json, os, subprocess
+
+          def norm_api(text):
+              try:
+                  d = json.loads(text)
+              except ValueError:
+                  return text
+              d.pop("generatedAt", None)
+              return json.dumps(d, sort_keys=True)
+
+          tracked = [
+              "content-search/data/docs.json",
+              "content-search/data/chunks.json",
+              "content-search/data/bm25.json",
+              "content-search/data/positions.json",
+              "content-search/data/topics.json",
+              "content-search/data/tokenizer_fixture.json",
+              "content-search/test/fixtures.json",
+          ]
+          changed = False
+          for path in tracked:
+              old = subprocess.run(["git", "show", f"HEAD:{path}"],
+                                    capture_output=True, text=True)
+              old_text = old.stdout if old.returncode == 0 else ""
+              with open(path) as f:
+                  new_text = f.read()
+              if old_text != new_text:
+                  changed = True
+                  print(f"{path}: changed")
+
+          # corpus/ dir: compare the file list + git's own diff
+          st = subprocess.run(["git", "status", "--porcelain",
+                               "content-search/data/corpus"],
+                              capture_output=True, text=True).stdout.strip()
+          if st:
+              changed = True
+              print("corpus/: changed")
+
+          api_old = subprocess.run(["git", "show", "HEAD:content-search/api.json"],
+                                    capture_output=True, text=True)
+          api_old_text = api_old.stdout if api_old.returncode == 0 else ""
+          with open("content-search/api.json") as f:
+              if norm_api(api_old_text) != norm_api(f.read()):
+                  changed = True
+                  print("api.json: changed (beyond generatedAt)")
+
+          if not changed:
+              print("no content changes")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"changed={'true' if changed else 'false'}\n")
+          PYEOF
+
+      - name: Decide whether to continue
+        id: gate
+        env:
+          FORCED: ${{ inputs.force == true && 'true' || 'false' }}
+        run: |
+          if [ "${{ steps.diff.outputs.changed }}" = "true" ] || [ "$FORCED" = "true" ]; then
+            echo "go=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "go=false" >> "$GITHUB_OUTPUT"
+            git checkout -- content-search/ || true
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.go == 'true'
+        with:
+          node-version: "20"
+
+      - name: Cache HuggingFace models
+        if: steps.gate.outputs.go == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-models-all-MiniLM-L6-v2-q8
+
+      - name: Install Node deps
+        if: steps.gate.outputs.go == 'true'
+        working-directory: writing-bot/tools
+        run: npm ci
+
+      - name: Embed corpus q8 (retry on transient HF 429)
+        if: steps.gate.outputs.go == 'true'
+        working-directory: writing-bot/tools
+        run: |
+          for attempt in 1 2 3 4 5; do
+            echo "Embedding attempt $attempt…"
+            if node embed_corpus.mjs; then exit 0; fi
+            echo "attempt $attempt failed; backing off…"; sleep $((attempt * 20))
+          done
+          echo "embed_corpus failed after 5 attempts"; exit 1
+
+      - name: Unit tests (parity gate)
+        if: steps.gate.outputs.go == 'true'
+        run: node content-search/test/run_all.mjs
+
+      - name: Guard — no relationship-memory in bundle
+        if: steps.gate.outputs.go == 'true'
+        run: |
+          if find content-search/data/corpus -path '*relationship-memory*' | grep -q .; then
+            echo "relationship-memory leaked into bundle!"; exit 1
+          fi
+          if grep -l "relationship-memory/" content-search/data/chunks.json >/dev/null 2>&1; then
+            echo "relationship-memory path in chunks.json!"; exit 1
+          fi
+
+      - name: Commit bundle
+        if: steps.gate.outputs.go == 'true'
+        id: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content-search/
+          if git diff --cached --quiet; then
+            # possible on a `force` run that reproduced the bundle byte-identically
+            echo "nothing to commit"
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "content-search: rebuild data bundle"
+            git push
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # GITHUB_TOKEN pushes don't fire deploy.yml's `on: push` (recursion
+      # guard) — dispatch it explicitly, same pattern as sync-publications.yml.
+      - name: Deploy to Pages
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy.yml --ref main

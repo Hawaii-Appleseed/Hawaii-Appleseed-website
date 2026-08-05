@@ -1,0 +1,616 @@
+Title: County Leadership in Combating Food Insecurity
+Date: unknown
+URL: https://hiappleseed.org/publications/county-leadership-combating-food-insecurity
+PDF: https://hiappleseed.org/s/County-Food-Levers-Brief_FINAL.pdf
+============================================================
+
+COUNTY 
+LEADERSHIP 
+IN COMBATING 
+FOOD 
+INSECURITY
+SEIZING LOCAL 
+LEVERS IN 
+UNCERTAIN TIMES
+
+DECEMBER 2025
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+www.hiappleseed.org
+
+Author: Genevieve Mumma and Daniela Spoto
+
+Hawaiʻi Appleseed is committed to a more socially and economically just Hawaiʻi, where everyone has genuine 
+opportunities to achieve economic security and fulfill their potential. We change systems to address inequity 
+and foster greater opportunity by conducting data analysis and research to address income inequality, educating 
+policymakers and the public, engaging in collaborative problem solving and coalition building, and advocating 
+for policy and systems change.
+
+The work of Hawaiʻi Appleseed is about people. The issues we work on—housing, food, wages, mobility, the state 
+budget and taxation, and racial and indigenous equity—are important because they ensure people have access 
+to shelter, sustenance, and the means to survive and thrive individually and collectively. Addressing these issues 
+requires the knowledge and expertise of the people that have first-hand experience and live with the adverse 
+consequences of our flawed systems.
+
+TABLE OF CONTENTS
+
+Introduction: Why County Action Matters
+
+County Levers and Actions Already Underway
+
+Recommendations: What Counties Can Do Now
+
+Conclusion
+
+Appendix I: Summer Feeding Funding Flow Chart
+
+Appendix II: Kūpuna Feeding Programs Funding Flow Chart
+
+Endotes
+
+3
+
+5 
+
+11
+
+12
+
+13
+
+14 
+
+15
+
+Copyright © 2025 Hawaiʻi Appleseed Center for Law & Economic Justice. All rights reserved. 
+733 Bishop Street, Suite 1180, Honolulu, HI 96813
+
+2 • COUNTY FOOD LEVERS
+
+INTRODUCTION: 
+WHY COUNTY 
+ACTION MATTERS
+
+COUNTIES HAVE A CRITICAL ROLE to play in strengthening food security, especially as Hawaiʻi faces rising costs 
+of living and high rates of food insecurity. 
+
+According to recent numbers, food insecurity is a pressing challenge across the islands: Hawaiʻi Island faces the 
+greatest impact, where 43 percent of households are affected. Sizeable proportions in Maui (41 percent), Kauaʻi 
+(32 percent), and Oʻahu (25 percent) also report difficulty accessing enough food.1 
+
+At the same time, shifting federal priorities and proposed cuts to nutrition and health programs threaten to 
+reduce the reliability of resources that low-income families rely on, including the Supplemental Nutrition 
+Assistance Program (SNAP) and Medicaid.
+
+Since 2018, each county has added a dedicated Food Access Coordinator (FAC), partially funded by the SNAP-
+Education program and administered through the Hawaiʻi Department of Health.2 These FACs play a central 
+role in assessing community needs, leading the development of county-wide Food Systems Plans, and 
+mapping emergency food-response efforts.3 In 2025, Congress cut SNAP-Ed funding with the passage of H.R.1. 
+Without stable funding for these critical positions, communities risk losing the backbone of their local food 
+security infrastructure.
+
+Against this backdrop, counties are uniquely positioned to adapt and respond to smaller-scale community 
+needs. Unlike federal and state programs, county-level governance has a closer connection to residents, making 
+for community-focused solutions that reflect local needs. 
+
+For instance, as the state’s most rural county,4 Hawaiʻi County’s approach to food production may reflect its 
+uniquely dispersed communities and agricultural landscape. Maui County, on the other hand, is the only county 
+comprising three islands, and may need to prioritize interisland transportation support for Molokaʻi and Lanaʻi to 
+address geographic barriers to access. 
+
+While this report aims to evaluate the current programs and resources that counties in Hawaiʻi can use to 
+strengthen food security, these recommendations are not meant as a replacement of entire nutrition programs 
+like SNAP, which are seeing historically drastic reductions in benefits and overall funding. Nor do these 
+recommendations assume that counties will be shouldering these efforts alone. County efforts must be coupled 
+with significant state support, and utilization of federal programs that remain strong.
+
+COUNTY FOOD LEVERS • 3
+
+Table 1. Snapshot of State and County Food Security Functions
+
+Function
+
+State Role5
+
+County Role
+
+Coordination and 
+Governance
+
+Develop and implement food system 
+goals, metrics and plans; interagency 
+coordination.
+
+Develop county-level food system plans, 
+led (in most cases) by a county food access 
+coordinator position.
+
+Data and 
+Information
+
+Provide accurate and timely agricultural 
+data and track statewide progress.
+
+Collect ground-level data; assess 
+community needs.
+
+Land Use, Water, & 
+Infrastructure
+
+Administer agricultural leases and zoning 
+and permitting rules on Important 
+Agricultural lands; maintain roads and 
+irrigation systems.
+
+Local zoning, land use permits; 
+Infrastructure funds; management of public 
+space/parks.
+
+Institutional 
+Purchasing
+
+Procure food and prepare meals for various 
+nutrition programs (in some cases through 
+a vendor).
+
+Limited; Direct feeding programs typically 
+through vendors.
+
+Value-Added 
+Infrastructure
+
+Develop regional kitchens that improve 
+connectivity between existing agricultural 
+infrastructure and institutions.
+
+Limited; Some public private partnerships 
+may exist.
+
+Federal Nutrition 
+Program 
+Administration
+
+Administer SNAP, WIC, TEFAP and Child 
+Nutrition Programs.
+
+Limited implementation role (except some 
+kūpuna feeding programs); support/
+partnership role.
+
+Disaster Feeding: 
+Planning and 
+Response
+
+Emergency Support Functions (Mass 
+Care and Human Services); create State 
+Distribution Management Plan.
+
+Create County Multi-Agency Feeding 
+Support Plans; provide sustained funding 
+for food bank (Maui only)
+
+4 • COUNTY FOOD LEVERS
+
+COUNTY LEVERS 
+AND ACTIONS 
+ALREADY UNDERWAY
+
+Hawaiʻi’s four counties are already taking steps to strengthen food security through the development and 
+implementation of individual county food access plans or food systems plans.6 In most cases, counties already 
+have the key agencies, staff and infrastructure to administer these programs. 
+
+The high level “policy levers” and examples listed below illustrate how counties are already advancing these 
+priorities, and where further investment and coordination could have the greatest impact.
+
+Legend
+
+COUNTY FOOD LEVERS • 5
+
+1. DISASTER PREPARATION AND PLANNING
+
+Key Agency: Emergency Management Agencies
+
+Rationale: Counties can play a vital role in disaster 
+response by coordinating food distribution efforts 
+before, during and after disasters.
+
+County Emergency Management Agencies are 
+well-positioned to lead or support planning that 
+ensures food distribution networks are ready to 
+respond to crises—from wildfires to economic 
+shocks These agencies should strengthen their 
+connections with schools, food banks, and 
+community organizations. Disaster preparation is 
+most effective when it’s part of broader resilience 
+planning that ensures all agencies and partners 
+understand their roles in advance.14
+
+6 • COUNTY FOOD LEVERS
+
+Objectives in county plan or in progress:Kaua‘i CountyObjectives in county plan or in progress:City & County of HonoluluBuilt a Mass Feeding Task Force (in lieu of a Multi-Agency Feeding Plan) Maui CountyHas a Maui Emergency Feeding Task Force (EFT) along with the “Maui EFT Plan,” which takes a lessons-learned approach following the Maui Wildfires. The plan does not include multi-agency feeding coordination.8Objectives in county plan or in progress:Hawai‘i CountyHas a completed County Multi-Agency Feeding Support Plan which outlines guidance and procedures for coordination among the various organizations/agencies participating in disaster feeding operations.12 This plan establishes the roles and responsibilities of a Multi-Agency Feeding Task Force and supplement to an Emergency Operations Plan and/or Mass Care Annex.132. SUMMER FEEDING PROGRAMS
+
+Key Agency: Departments of Parks and Recreation
+
+Rationale: Summer meal programs provide a critical bridge by ensuring children continue to receive the nutrition 
+they need when school is not in session.
+
+Across Hawaiʻi, Departments of Parks and Recreation (DPRs) in every county have, at one point, sponsored the 
+federally-reimbursed Summer Food Service Program (SFSP) (See Appendix I).17 These departments administer 
+summer programs at parks and community centers, usually partnering with a local food vendor or the Department 
+of Education to provide daily meals for children, whether they are enrolled in the program or not. 
+
+Counties can strengthen summer feeding systems by continuing to expand coverage to underserved areas or 
+coordinating with partners to offer non-congregate options (such as a weekly food box) in rural areas.
+
+COUNTY FOOD LEVERS • 7
+
+Kaua‘i CountyObjectives in county plan or in progress:City & County of HonoluluMaui CountyObjectives in county plan or in progress:Hawai‘i CountyNot an SFSP sponsor.Current SFSP sponsor.Current SFSP sponsor.Current SFSP sponsor.3. KŪPUNA FEEDING PROGRAMS
+
+Key Agency: Area Agencies on Aging
+
+Rationale: Counties can support senior nutrition through funding, coordination and partnerships that expand 
+home-delivered meals, congregate sites and food boxes.
+
+Each county has a federally-funded Area Agency on Aging (AAA) that plays a central role in kūpuna feeding (See 
+Appendix II). The state of Hawaiʻi offers additional funding to these offices, known as Kūpuna Care.24 Together, 
+these funds provide kūpuna with a variety of support services, including home-delivered and congregate meals. 
+Coverage for these programs varies based on how each county chooses to allocate funds and the partners involved.  
+
+8 • COUNTY FOOD LEVERS
+
+Kaua‘i CountyObjectives in county plan or in progress:City & County of HonoluluMaui CountyObjectives in county plan or in progress:Hawai‘i CountyFirst and only county-funded kūpuna feeding program. Has county-supported home-delivered meals as well as hot lunches at congregate meal sites. Additionally, programs like Nourish Kaua‘i’s Kōkua Kūpuna meal kits and Common Ground’s Meal Kit Delivery Program ensure seniors receive fresh, locally sourced foods—with funding flowing through the county.18Provides congregate and home-delivered meals.19Provides congregate and home-delivered meals.19Provides congregate and home-delivered meals.20Provides congregate and home-delivered meals.234. DIRECT SUPPORT FOR FOOD BANKS
+
+Key Agency: Varies
+
+Rationale: Food banks play a critical role, especially for people who don’t qualify for other types of food 
+assistance. They are often seen as a “last line of defense” for families when no other options are available. While 
+federal programs often provide a baseline of support, these charitable organizations tend to rely largely on 
+donations.29 Funding from both the state and county can enable a more flexible response to the steadily increasing 
+need that food banks are seeing as food costs rise.
+
+Although it is not yet common in Hawaiʻi, counties can directly support these critical institutions, tailoring 
+programs to each county’s need. County funds can be targeted to help expand food distribution, purchase fresh or 
+culturally relevant foods, support local farmers, and strengthen infrastructure like cold storage and transportation. 
+
+COUNTY FOOD LEVERS • 9
+
+Kaua‘i CountyObjectives in county plan or in progress:City & County of HonoluluMaui CountyObjectives in county plan or in progress:Hawai‘i CountyStands out as the only county with a recurring line item every fiscal year for its food bank—$400,000 per year to the Maui Food Bank.27Objectives in county plan or in progress:Objectives in county plan or in progress:5. OTHER NOTABLE COUNTY INITIATIVES
+
+Key Agency: Varies
+
+Rationale: Even for programs that are largely 
+administered by the state (such as WIC, SNAP, and 
+school meals), counties can still play an important 
+support role. In the face of increasing federal 
+restrictions, counties are finding low-cost ways 
+to innovate–expanding awareness, reach and 
+impact. For example, all four counties have passed 
+resolutions calling for the state to expand access 
+to universal free school meals.
+
+10 • COUNTY FOOD LEVERS
+
+Kaua‘i CountyObjectives in county plan or in progress:City & County of HonoluluMaui CountyObjectives in county plan or in progress:Hawai‘i CountyPassed resolution 24-203 on UFSM.34Objectives in county plan or in progress:Objectives in county plan or in progress:Passed resolution 2025-19 on UFSM.30Passed resolution 2025-19 on UFSM.32Local Food Purchasing Incentive, also known as “Farm to Families” is expected to launch in FY26 through a $1 million RFP process.35Passed resolution 42-25 on UFSM.39RECOMMENDATIONS: 
+WHAT COUNTIES 
+CAN DO NOW
+
+Each county’s respective food access plan provides the 
+overarching framework for action. Counties already 
+have the agencies, staff and infrastructure to play a 
+stronger role in food security. Building on these plans 
+and existing programs, a few priorities stand out as 
+especially actionable:
+
+1.  Standardize and strengthen county multi-agency 
+
+feeding support plans. Several counties are already 
+developing comprehensive multi-agency plans with 
+connected task forces to improve preparation for 
+disaster feeding. Counties without them should follow 
+suit, ensuring clear roles, pre-arranged agreements, 
+and partnerships with local suppliers and relevant 
+feeding agencies. 
+
+2.  Provide direct, flexible support to food banks. 
+
+Reliable county funding can stabilize core food bank 
+operations, expand fresh and culturally-preferred 
+food purchasing, and strengthen infrastructure like 
+cold storage and transportation.
+
+3.  Expand kūpuna and keiki feeding programs. Building 
+
+on the Area Agencies on Aging and Department 
+of Parks and Recreation programs, counties can 
+extend reach by utilizing all federal programs eligible 
+to them (SFSP, CSFP, CACFP, Summer EBT) while 
+investing more in home-delivered meals, congregate 
+sites, and keiki summer feeding.
+
+4.  Maximize federal nutrition programs at the local 
+level. Counties can boost participation in federal 
+programs such as SNAP, WIC and DA BUX by funding 
+outreach, supporting application assistance, and 
+expanding vendor capacity to accept benefits.
+
+COUNTY FOOD LEVERS • 11
+
+CONCLUSION
+
+Counties across Hawaiʻi face both pressing challenges and powerful opportunities in the fight against food 
+insecurity. With federal nutrition programs under threat and state resources stretched thin, counties cannot afford 
+to remain passive. By implementing existing food access plans, investing in emergency preparedness, supporting 
+food banks, and strengthening kūpuna and keiki feeding programs, counties can make immediate, tangible 
+improvements in residents’ daily lives.
+
+At the same time, county action is not a substitute for robust federal and state support. Rather, it is a 
+complementary strategy—one that grounds statewide food security goals in the realities of local communities. 
+Counties are closest to the people they serve, and that proximity allows them to innovate, partner, and act with 
+agility. By seizing these levers, Hawaiʻi’s counties can not only buffer their residents against federal funding 
+uncertainty but also build more resilient, equitable food systems for the future.
+
+12 • COUNTY FOOD LEVERS
+
+APPENDIX I
+
+COUNTY FOOD LEVERS • 13
+
+APPENDIX II
+
+14 • COUNTY FOOD LEVERS
+
+ENDNOTES
+
+Hawaiʻi Food Bank, “The State of Food 
+
+1. 
+Insecurity in Hawaiʻi 2024-2025: Executive 
+Summary,” November 2025. https://hawaiifoodbank.
+org/wp-content/uploads/2025/11/HFB.
+ExecutiveSummary2025_Web-FINAL.pdf 
+
+Hawaiʻi State Department of Health, “Physical 
+
+2. 
+Activity & Nutrition Program: SNAP-Ed,” 2024.
+https://health.hawaii.gov/physical-activity-nutrition/
+home/snap-ed
+
+3. 
+
+Ibid.
+
+Hawaiʻi State Department of Business, 
+
+4. 
+“Economic Development & Tourism, The State of 
+Hawaiʻi Data Book 2024, Table 1.20, Urban and Rural 
+Areas, by County: 2020,” 2024. https://files.hawaii.gov/
+dbedt/economic/databook/2024-individual/01/012024.
+pdf
+
+Adapted from the Food And Agricultural Inter-
+
+5. 
+Agency Coordination Framework, 2025–2026.
+
+See the status of each county’s food system plan 
+
+6. 
+at https://transforminghawaiifoodsystem.org/hawaii-
+food-system-plans. It should be noted that Hawaiʻi 
+Island and Oʻahu plans are still in draft form. Oʻahu Food 
+Systems Plan is available for public comment and input.
+
+Malama Kauaʻi, 2030, “Kauaʻi Food Access 
+
+7. 
+Plan,” p. 15, 2025. https://www.canva.com/
+design/DAFKLqZGpG0/oiIp-jat1wvEl3rgoFfRYA/
+view?utm_content=DAFKLqZGpG0&utm_
+campaign=designshare&utm_medium=link&utm_
+source=homepage_design_menu#1
+
+Heaivilin, Hunter, “General Emergency 
+
+8. 
+Food Planning Scaffold,” Supersistence, accessed 
+September 17, 2025. https://supersistence.notion.
+site/572c16b8197c455e8e0106722f13b625?v=6f29
+4f3f0dd64811a1e205b293fb5add
+
+9. 
+
+Maui County Department of Agriculture, 
+
+“Maui County Food & Nutrition Security Plan 2025–
+2030,” p.21, 2025. https://www.mauicounty.gov/
+DocumentCenter/View/152469/Maui-County-Food-and-
+Nutrition-Security-Plan
+
+10. 
+
+Ibid.
+
+11. 
+
+Ibid.
+
+The County of Hawaiʻi Emergency Feeding Plan 
+
+12. 
+is not available for public information. Still in the process 
+of being updated.
+
+13. 
+
+Heaivilin, 2025.
+
+Transforming Hawaiʻi’s Food Systems Together, 
+
+14. 
+“Integrated State Food Policy Framework: 3.1 Food 
+System Resilience, Disaster Preparedness & Response,” 
+June 2024, accessed September 17, 2025. https://
+transforminghawaiifoodsystem.org/framework
+
+Includes Child & School Nutrition Programs in 
+
+15. 
+the draft plan. Oʻahu Food Systems Plan is available for 
+public comment and input.
+
+16. 
+
+Maui County, 2025, p. 23.
+
+Kauaʻi County has not been an SFSP sponsor 
+
+17. 
+since 2023.
+
+18. 
+Kauaʻi County Agency on Elderly Affairs, 
+“Services, accessed November 13, 2025.” https://www.
+kauai.gov/Government/Departments-Agencies/Agency-
+on-Elderly-Affairs/Services
+
+City & County of Honolulu Elderly Affairs 
+19. 
+Division, “Home,” accessed November 13, 2025. https://
+elderlyaffairs.com
+
+Maui County Department of Human Concerns, 
+
+20. 
+“Senior Programs,” accessed November 13, 2025. 
+https://www.mauicounty.gov/458/Senior-Programs
+
+COUNTY FOOD LEVERS • 15
+
+Maui County Department of Agriculture, 2025,  
+
+21. 
+p. 24.
+
+Hawaiʻi Department of Research and 
+
+31. 
+Development, 2025, p. 5.
+
+22. 
+
+Ibid.
+
+Hawaiʻi County Department of Parks and 
+
+23. 
+Recreation, “Hawaiʻi County Nutrition Program 
+(HCNP),” accessed November 13, 2025. https://www.
+parks.hawaiicounty.gov/divisions/elderly-activities/
+hawai-i-county-nutrition-program-hcnp
+
+24. 
+
+Hawaiʻi Revised Statutes, § 349-17, 2024.
+
+25. 
+
+Ibid., p. 5.
+
+“Hawaiʻi Food Access Plans Brief 2030,” 
+
+26. 
+Hawaiʻi Department of Research and Development, 
+p. 3, 2025. https://drive.google.com/file/d/1E_V37U_
+VHYnBjjsSyGnIO1rtNxAhnOKw/view
+
+Maui County Council, “Bill 41 (2025) — Exhibit 
+
+27. 
+1: Fiscal Year 2026 Operating Budget,” p. 33, April 
+28, 2025. https://mauicounty.legistar.com/View.
+ashx?M=F&ID=14120160&GUID=7388BFB2-4E95-
+428A-8442-249095494299
+
+28. 
+
+Ibid., p. 4
+
+Billings, K. C., Lee, E. A., Webster, E. M., “Food 
+
+29. 
+banks and other emergency feeding organizations: 
+Federal aid and the response to COVID-19 
+(CRS Report R46432),” Congressional Research Service, 
+June 25, 2020.
+
+County of Kauaʻi, “Resolution No. 2025-19: 
+
+30. 
+Urging the State Legislature Support the Establishment 
+of  a Universal Free School Breakfast and Lunch 
+Program,” 2025. https://dakine.kauai.gov/WebLink/
+DocView.aspx?id=3883762&dbid=0&repo=LF-
+IMAGING&cr=1
+
+16 • COUNTY FOOD LEVERS
+
+City and County of Honolulu, “Resolution 
+
+32. 
+25-2: Urging the Hawaiʻi State Legislature to Adopt 
+Legislation That Would Create a Universal Free 
+School Lunch Program for Public School Students,” 
+2025. https://hnldoc.ehawaii.gov/hnldoc/document-
+download?id=23275
+
+Shinagawa, Nathan, “New Food Hub initiative at 
+33. 
+Skyline stations,” KHON2 News, October 7, 2024. https://
+www.youtube.com/watch?v=d6GRPWM4Irc
+
+County of Maui, “Resolution 24-203: Urging the 
+
+34. 
+Hawaiʻi State Legislature to Establish a Universal Free 
+School Meals Program for Students at Public Schools,” 
+2024. https://mauicounty.legistar.com/View.ashx?M
+=F&ID=13632539&GUID=588A27AE-9718-41AF-A64B-
+B1DAEB43E75E
+
+35. 
+
+Maui County Council, 2025, p. 7.
+
+Maui County Department of Agriculture, 2025,  
+
+36. 
+p. 23. 
+
+37. 
+
+Ibid.
+
+38. 
+
+Ibid., p. 24.
+
+39. 
+County of Hawaiʻi, “Resolution 042: Urging the 
+State of Hawaiʻi to Implement a Universal Free School 
+Meals Program That Promotes Nutritional Equity, 
+Support Local Agriculture, and Enhances Student 
+Success,” 2025. https://records.hawaiicounty.gov/
+weblink/0/doc/1091891/Page1.aspx
+
+40. 
+
+Ibid., p. 2.

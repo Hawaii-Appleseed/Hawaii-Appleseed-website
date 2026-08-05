@@ -1,0 +1,81 @@
+﻿How to fix Honolulu’s Empty Homes Tax proposal
+
+
+A newly released report commissioned by the county council demonstrates the need to align Honolulu’s policy proposal with demonstrated best practices.
+
+
+–
+
+
+Susan Le
+
+
+Addressing Hawaiʻi’s complex housing crisis requires a multi-faceted approach that combines investment of public resources into infrastructure such as roads, water and electricity, as well as in the construction of new affordable housing, with the preservation of existing housing stock to ensure—as much as possible—that housing units are used to house people. 
+
+
+Creating an Empty Homes Tax (EHT) at the county level is a promising strategy for the City & County of Honolulu to generate revenue for affordable housing development, while reducing to some degree the prevalence of units sitting vacant as they are used as investments. 
+
+
+However, the specifics of how an EHT policy is designed and implemented in Honolulu will matter a great deal to its potential for success.
+
+
+At its last hearing in 2024, Hawaiʻi Appleseed suspended its support of Honolulu City Council Bill 46, which proposed establishing an EHT, after modifications made in committee raised serious concerns about the policy’s feasibility. In the interim period, the council commissioned the firm Ernst & Young to create a feasibility report that was released in April 2025.
+
+
+Key Concerns with Bill 46’s Current Draft
+
+Hawaiʻi Appleseed’s primary concern with the current draft of Bill 46 (CD2, FD1) is over how the proposal would impact revenue, and the subsequent funding available to reinvest into affordable housing initiatives. 
+
+
+Bill 46 CD2, FD1:
+* Restructures the EHT from a supplementary tax into a new tax classification, which would reduce tax revenue, complicate enforcement, and increase operational costs;
+* Greatly expands exemptions, which narrows the taxable base, increases administrative complexity, and creates potential loopholes for indefinite tax avoidance; and
+* Reduces the allocation of revenues dedicated toward affordable housing initiatives
+
+
+The Ernst & Young Report
+
+The Ernst & Young team assessed financial feasibility of the EHT in four different scenarios. In all four scenarios, the team found that the EHT would be financially feasible and would produce an average positive net revenue ranging from $29.1–$54.9 million annually. However, the financial impact assessment raises several concerns. 
+
+The Ernst & Young report does not specify the exact inputs and rates for its 10-year revenue projections. The report seems to use the average of optimistic and conservative projections for the taxable base in its financial analysis, as opposed to using the conservative projection to confirm financial feasibility. 
+Hawaiʻi Appleseed’s analysis of the financial assessment is that the report assumes a supply growth of  992–1,725 new single-family homes annually, significantly higher than the University of Hawaiʻi Economic Research Organization's documented average of 487 units annually (2019–2023). This substantial overestimation inflates the taxable base and projected gross revenue. 
+Additionally, the report acknowledges it does not include collectable revenue rates. Applying Canadian collection benchmarks (60–75 percent of projected revenue) would dramatically reduce the projected revenue.
+EHT Tax Structure
+
+The report included scenarios in which the tax was applied as a supplemental tax, as well as a new tax class entirely. 
+
+
+The supplemental tax framework presumes all non-owner occupied properties are subject to the tax, and requires an annual exemption declaration to “opt out.” The new tax class design instead requires property owners to “opt in” by registering their property under the new tax class.
+Hawaiʻi Appleseed research of other jurisdictions shows that compliance was most effective when identification of taxable properties did not depend on property owner behavior. Although the taxation department bears the responsibility for assessing compliance and identifying false declarations, proactive identification methods proved more effective than relying on owner-initiated reporting. 
+Expanding the List of Exemptions 
+
+Expanding the number of exemptions could significantly increase the administrative and enforcement complexity of the tax. This would consequently raise operational costs while simultaneously reducing tax revenue due to a narrowed tax base.
+
+
+The report provides an analysis for scenarios in which the taxable base includes the expanded list of exemptions, as well as a proposal with a more narrowed list of exemptions, in line with other jurisdictions. A lack of variable operational costs between the scenarios suggests that the increased complexity in administration and compliance enforcement required by increasing exemptions was not considered. This oversight likely results in overestimated net revenue projections.
+
+
+The report notes that failing to set a time limit for properties listed for sale or rent could allow indefinite tax avoidance, making accurate revenue projections impossible.
+
+
+Reducing Allocation to Affordable Housing Development
+
+
+Emphasis has been placed on the EHT’s ability to decrease housing vacancy, and increase housing supply. While evidence from other jurisdictions suggests that this is true, research also indicates that an EHT is an insufficient policy on its own in decreasing rents and increasing affordability. In order to provide affordable housing, as intended by the EHT, the county needs to reinvest revenue from the tax directly into affordable housing development.
+
+
+If the projected net revenues in the Ernst & Young report are accurate ($29.1 million annually), Bill 46’s current draft would have only a modest financial impact. With only 20 percent of the revenue allocated to affordable housing, Bill 46 would provide an average investment of just $5.82 million annually over the next 10 years, which is not sufficient for the county to meaningfully finance affordable housing projects. 
+
+
+To put that amount in perspective, in 2022 the City & County of Honolulu invested $15 million to support the development of 482 affordable housing units on O‘ahu across three projects. One of those projects, Halawa View II, had a total cost of $168 million. The city’s affordable housing fund was only able to provide $5 million towards the project. 
+
+Looking ahead, the Honolulu City Council will need to make significant changes to its proposed EHT before the proposal would be likely to succeed in its goal of reducing vacancies and, more significantly, generating revenue to reinvest into affordable housing initiatives. 
+
+
+An effective policy would allow for reasonable exemptions, but not attempt to exempt any and all multi-homeowners who reside in Hawaiʻi, which reduces the tax base to a wholly insufficient level and compromises the purpose of the policy. 
+
+
+To increase compliance, reduce administrative costs and boost revenue collection rates, the tax structure should be supplemental, not a new tax class.
+
+
+Finally, the county must allocate sufficient revenue from the tax directly to the development of new, affordable housing to ensure the policy is effective in its intended goal of addressing our affordable housing crisis.

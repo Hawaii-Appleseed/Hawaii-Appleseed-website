@@ -1,0 +1,46 @@
+{
+  "name": "hawaii-appleseed-content-search",
+  "version": 1,
+  "generatedAt": "2026-08-05T20:20:35Z",
+  "counts": {
+    "documents": 195,
+    "chunks": 1866,
+    "positions": 17,
+    "topics": 5
+  },
+  "files": {
+    "docs.json": {
+      "path": "data/docs.json",
+      "sha256": "f935c019d247588ea5cd39a6a314070c6be9e0232f78443601ee922863a5cd2e"
+    },
+    "chunks.json": {
+      "path": "data/chunks.json",
+      "sha256": "699bf593b17506144e4a0e1e706dd4487a416a5636ac2b0837aa9b05df29b136"
+    },
+    "bm25.json": {
+      "path": "data/bm25.json",
+      "sha256": "6480ab5bfb727d834f63e0cd24a2751d15ef287f2163ec5f3f57954ff473b9c3"
+    },
+    "positions.json": {
+      "path": "data/positions.json",
+      "sha256": "9c6f6054ea2a6d49ad1fcaba44ab59e2d3f61cba9837a16cc0205eab6b654797"
+    },
+    "topics.json": {
+      "path": "data/topics.json",
+      "sha256": "11f81bac5288dada0d2d55268e21bea94227ff7d61c65d65f949e8fdf2995fd5"
+    },
+    "embeddings.bin": {
+      "path": "data/embeddings.bin",
+      "sha256": "4e66ce1b3d7c1c43af793f798c68abe4bb9dcd8dd87d34af592840afbdb4f163"
+    },
+    "embeddings.meta.json": {
+      "path": "data/embeddings.meta.json"
+    }
+  },
+  "app": "index.html",
+  "model": {
+    "embed": "Xenova/all-MiniLM-L6-v2",
+    "dtype": "q8",
+    "dim": 384
+  }
+}

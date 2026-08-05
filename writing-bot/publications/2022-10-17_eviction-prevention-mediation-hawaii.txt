@@ -1,0 +1,1553 @@
+Title: Eviction Prevention Through Hawai‘i’s Tenant-Landlord Mediation Program
+Date: unknown
+URL: https://hiappleseed.org/publications/eviction-prevention-mediation-hawaii
+PDF: https://hiappleseed.org/s/Eviction-Prevention-Report_FINAL-2.pdf
+============================================================
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+Eviction Prevention Through Hawai‘i’s 
+Tenant-Landlord Mediation Program
+
+OCTOBER 2022
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+Authors: Ray Kong, Kenna StormoGipson, Abbey Seitz, Gavin Thornton
+Cover Image: Jess Vide
+
+Hawaiʻi Appleseed envisions a Hawaiʻi that puts its people first—a Hawaiʻi where everyone can meet their 
+basic needs while living happy, healthy and creative lives. We advocate for economic justice for and with 
+Hawaiʻi’s people.
+
+TABLE OF CONTENTS
+
+Acknowledgments 
+
+Executive Summary
+
+Background 
+
+•  The Act 57 Mediation Program
+•  The Pre-COVID Summary Possession 
+
+Mediation Program
+
+•  The Summary Possession During COVID 
+
+Mediation Program
+
+•  Comparison of the Three Mediation 
+
+Programs
+
+Methodology
+
+•  Quantitative Methods
+•  Qualitative Methods
+
+Insights From a Review of the Data
+
+•  Overview of Different Outcomes 
+
+• 
+
+Between Programs
+January–June 2019 Pre-Covid Summary 
+Possession Mediations
+
+3
+
+4
+
+6
+
+6
+7
+
+8
+
+8
+
+9
+
+9
+10
+
+12
+
+12
+
+13
+
+• 
+
+• 
+
+June 2021 to August 2022 Summary 
+Possession During COVID Mediations
+June 2021 to August 2022 Act 57 
+Mediations
+
+Interview Insights
+
+•  Mediators
+•  Attorneys
+•  Tenants
+
+Analysis of the Potential Impacts of Each 
+Factor
+
+•  Pre-Litigation Mediation
+•  Availability of Rent Relief
+•  Time for Mediation
+•  Mediator Characteristics
+•  Video Conferencing
+•  Other Potential Factors
+
+Conclusion and Recommendations
+
+Endnotes
+
+13
+
+15
+
+16
+
+16
+17
+19
+
+20
+
+20
+21
+22
+23
+23
+24
+
+26
+
+28
+
+Copyright © 2022 Hawaiʻi Appleseed Center for Law & Economic Justice. All rights reserved. 
+733 Bishop Street, Suite 1180, Honolulu, HI 96813
+
+2 • EVICTION PREVENTION, MEDIATION
+
+Urban 
+Honolulu, 
+Hawai‘i // Jess 
+Loiterton
+
+ACKNOWLEDGMENTS
+
+This report was funded by the Housing Crisis Research 
+Collaborative (“HCRC”). HCRC is supported by the 
+Wells Fargo Foundation and JPMorgan Chase & Co. 
+and managed by the Urban Institute. We are grateful to 
+HCRC and to all of our funders, who make it possible 
+for Hawaiʻi Appleseed to conduct research and 
+advance its mission. The views expressed are those 
+of the authors and should not be attributed to the 
+Housing Crisis Research Collaborative or its funders.
+
+Hawaiʻi Appleseed Center for Law & Economic 
+Justice would like to thank and acknowledge Tracey 
+Wiltgen and her staff at the Mediation Center of the 
+Pacific for their assistance in providing the source 
+documents and data that were the focus of this 
+report, and for Tracey’s insight into the program. We 
+would also like to thank Joni Chun of the Susannah 
+Wesley Center for her contributions to discussions 
+and this report.
+
+EVICTION PREVENTION, MEDIATION • 3
+
+EXECUTIVE SUMMARY
+
+EVICTIONS ARE HARMFUL for everyone involved. Landlords and tenants both want stability in housing 
+arrangements. For landlords, the process of eviction and finding new tenants is costly. For tenants and 
+their families, the costs are even higher: A forced move may mean the loss of their security deposit 
+and belongings, a change in schools, a longer commute to work, and a negative mark on their rental 
+history that can make finding suitable housing more difficult. For some tenants, eviction will result in 
+homelessness. Finding ways to increase housing stability by resolving disputes between landlords and 
+tenants benefits everyone.
+
+This study aims to ascertain whether or not there are ways to increase housing stability by examining the 
+temporary measures Hawaiʻi put into place in response to the COVID-19 pandemic. To avoid the threat of 
+mass evictions brought on by large scale job loss, Hawaiʻi created rent relief programs that helped tenants 
+and landlords cover rent shortfalls, and created a pre-litigation mediation program through enacting Act 57 
+(2021), which is the primary focus of this study.
+
+The unique circumstances created by the pandemic permitted the examination of three different 
+mediation programs that varied with respect to timing of the mediation (pre-litigation versus post-case 
+filing), duration of mediation, availability of rental relief, use of video conferencing, and other factors. To 
+better understand the comparative outcomes of the different approaches to landlord-tenant mediation, 
+the research team for this study analyzed data on the outcomes from these three different approaches. 
+Additionally, the team conducted 20 one-on-one interviews with attorneys, tenants and mediators 
+involved in the Act 57 mediation program to better understand the participants’ perceptions about the 
+mediation process.
+
+The analysis revealed that Act 57 pre-litigation mediations had far higher rates of success when compared 
+to the other two programs, both of which held the mediation post-filing of an eviction action (known 
+as “summary possession” in Hawaiʻi and elsewhere)—one in effect prior to the pandemic and the other 
+during. Within the samples reviewed for the study, 87 percent of the Act 57 cases resulted in settlement 
+compared to 47 percent of pre-COVID summary possession mediationsn and 52 percent for the summary 
+possession meditations during COVID. 
+
+More significantly, of the mediated settlement agreements reviewed for the study, 85 percent of Act 57 
+cases resulted in the tenant remaining in their home, which only occurred 11 percent of the time in the 
+pre-COVID summary possession settlements, and 20 percent of the time in the summary possession 
+settlements during COVID.
+
+The outcome data, coupled with the participants’ perceptions, suggests the following insights:
+
+4 • EVICTION PREVENTION, MEDIATION
+
+ 
+ 
+EXECUTIVE SUMMARY
+
+Kailua, Hawai‘i 
+// Brian Garrity
+
+•  The availability of rental relief is a key factor to ensuring housing stability, but combining rent relief 
+
+with a robust pre-litigation mediation process is likely to lead to significantly better outcomes than rent 
+relief alone.
+
+•  Holding mediation prior to litigation rather than during is likely to help mediation participants avoid 
+
+an eviction filing and from developing entrenched positions, which can reduce the pressure on tenants 
+to accept settlements that require them to move out, increasing the likelihood of tenants remaining in 
+place.  
+
+•  Mediation by video conferencing may provide tenants with more comfort and confidence than they 
+
+would have in an intimidating court environment, placing the parties on a more even field, even if the 
+landlord is represented by counsel at mediation. 
+
+•  Providing adequate time to mediate may alleviate pressure to rush to a settlement, and contracting paid 
+mediators who are skilled at finding solutions that are mutually beneficial to the needs of both landlords 
+and tenants may increase the likelihood of agreements that permit tenants to stay in their home. 
+
+Based on these insights, this report recommends that the Act 57-type mediations be continued in a 
+manner that permits further study of the efficacy of its features, and that the mediation program be paired 
+with emergency rent relief that is more widely available than what existed pre-pandemic.  
+
+EVICTION PREVENTION, MEDIATION • 5
+
+BACKGROUND
+
+During the pandemic, Hawaiʻi—as in other states—saw many of its residents lose their jobs, or incur other 
+economic hardships as a result of COVID-19. A moratorium on evictions for failure to pay rent was issued by 
+the governor, which was extended several times.1
+
+The state and its counties used federal pandemic-relief funds to create a rental and utility relief program to 
+assist tenants who were unable to pay their rent due to loss in income, and to help avoid a loss in income 
+for landlords and utility providers relying on tenants’ payments. The program for the City & County of 
+Honolulu—Hawaiʻi’s most populous county, from which the data for this study was collected—ultimately 
+approved relief of over $188 million for 14,651 households.2
+
+The specific requirements for the rent relief program evolved during the course of the pandemic, but the 
+program generally required proof of a valid tenancy, rent delinquency, loss of income due to Covid-19, and 
+a gross household income not exceeding a certain threshold (80 percent of the HUD Area Median Income 
+in the most recent iteration of the program). Payments through the program were made directly to the 
+landlord. Landlords who evicted tenants would forgo their ability to receive any rent from the Program.
+
+Applications could be initiated either by the tenant or the landlord through an online portal, after which 
+contracted community-based organizations would work with the landlord and tenant to complete the 
+application.3 Due to the high volume of applicants and the time-intensive nature of processing the 
+applications because of documentation and other requirements, it took many months to get the rental 
+relief into the hands of all the landlords and tenants who requested it. 
+
+THE ACT 57 MEDIATION PROGRAM
+
+In anticipation of the end of Hawaiʻi’s eviction moratorium in August of 2021, the state passed Act 57 (2021), 
+establishing a landlord-tenant mediation program for the purpose of preventing an onslaught of evictions 
+for tenants who had fallen behind on rent.4 As noted by Hawaiʻi’s legislature in the bill, at the time, tens of 
+thousands of residents were still unable to pay rent due to pandemic-related job loss, many of whom had 
+not yet been able to access the available rental relief.5
+
+Act 57 created a temporary pathway for landlords and tenants to mediate in lieu of litigating an eviction 
+case in court.6 Under the Act 57 program, before landlords could file a summary possession action due to 
+non-payment of rent, they were required to provide tenants with notice of the opportunity to schedule a 
+mediation session within 15 days from the date of the notice. In the City & County of Honolulu, the landlord 
+was also required to submit the notice to the Mediation Center of the Pacific (“MCOP”), the entity hired by 
+the county to carry out the mediations under Act 57.
+
+The landlord could not proceed with a summary judgment action for 30 days from the date they provided 
+
+6 • EVICTION PREVENTION, MEDIATION
+
+ 
+ 
+BACKGROUND
+
+Urban 
+Honolulu, 
+Hawai‘i // 
+Aleksey 
+Kuprikov
+
+notice to MCOP, which would allow the mediation to take place before the landlord could pursue legal 
+action. If the tenant opted-in to mediate the dispute, MCOP would schedule a free 1.5 hour mediation 
+session for the landlord and the tenant, facilitated by a trained and seasoned mediator. 
+
+MCOP accepted 75 applications and interviewed 35 people, hiring 15 mediators as independent 
+contractors. All 15 contractors were seasoned mediators with private practices who had experience in 
+the landlord-tenant arena, and who were available and willing to mediate 4–6 cases a day, six days a 
+week. They were selected based on criteria such as their understanding of effective management of 
+power imbalances, their sensitivity to working with different cultures, and experience working with 
+interpreters. As independent contractors, they managed their own video conferencing accounts and sent 
+the confidentiality agreement out to landlords and tenants, as well as reminders, thereby establishing a 
+foundation of trust earlier in the process with both landlord and tenant.
+
+THE PRE-COVID SUMMARY POSSESSION MEDIATION PROGRAM
+
+Prior to the pandemic, Hawaiʻi already had a landlord-tenant mediation program in place. The existing 
+mediation program differed from the Act 57 program in several ways, including: 
+
+•  Mediations occurring after the summary possession court process was well underway (rather than prior 
+
+to case filing under Act 57); 
+
+•  The length of the mediation sessions (20–30 minutes versus 90 minutes under Act 57 mediations);
+
+•  Being required to make an in-person appearance in court (rather than using video conferencing in Act 
+
+57 mediations); and 
+
+EVICTION PREVENTION, MEDIATION • 7
+
+BACKGROUND
+
+•  The use of volunteer mediators rather than paid professionals. 
+
+Another important difference, although not an explicit feature of the mediation program, was the 
+availability of pandemic-response rent relief, which Act 57 mediators could refer the parties to—something 
+that was not available pre-pandemic.
+
+THE SUMMARY POSSESSION DURING COVID MEDIATION PROGRAM
+
+Although the vast majority of mediations conducted during the pandemic were done through the Act 57 
+process, some were not. Landlords could file a summary possession action during the eviction moratorium 
+if the grounds for eviction included allegations regarding a breach of non rent payment-related lease 
+conditions, such as the tenant refusing to vacate the property after the landlord provided notice of their 
+desire to sell. 
+
+In these circumstances, landlords were required to provide tenants with a 45-day notice of lease 
+termination before filing a summary possession case with the court. In this way, even where non-payment 
+of rent appeared to be a primary factor for the eviction, landlords could attempt to circumvent the 
+moratorium by providing the 45 day notice and including allegations regarding grounds for termination 
+other than non-payment of rent. 
+
+Cases that proceeded in this manner did not go through the Act 57 process. Instead, the Judiciary required 
+the parties to participate in a mediation program that retained the post-filing/pre-trial timing of the pre-
+COVID summary possession mediation program, but adopted the other features of the Act 57 program 
+(namely providing 1.5 hour mediations, and the use of video conferencing). Additionally, as with the Act 57 
+program, the landlords and tenants involved in summary possession mediations conducted during COVID 
+had access to the large-scale pandemic rental relief program that was not available pre-COVID.
+
+COMPARISON OF THE THREE MEDIATION PROGRAMS
+
+Program
+
+Pre-Litigation
+
+Volunteer 
+vs. Hired 
+Professional 
+Mediator
+
+Time Allowed or 
+Mediation
+
+Availability of 
+Rental Relief
+
+Mediation 
+Over Video 
+Conferencing
+
+Allegations by 
+Landlord
+
+Pre-Covid 
+Summary 
+Possession
+
+No
+
+Volunteer
+
+20–30 Minutes
+
+No
+
+Act 57
+
+Yes
+
+Hired 
+Professional
+
+1.5 Hours
+
+Yes
+
+Summary 
+Possession 
+During Covid
+
+No
+
+Volunteer
+
+1.5 Hours
+
+Yes
+
+No
+
+Yes
+
+Yes
+
+Non-Payment 
+of Rent and/or 
+Other
+
+Non-Payment of 
+Rent
+
+Non-Payment 
+of Rent and/or 
+Other
+
+8 • EVICTION PREVENTION, MEDIATION
+
+METHODOLOGY
+
+To understand the comparative outcomes of the three different approaches to landlord tenant mediation 
+analyzed by this study, the research team analyzed outcome data from the three different approaches and 
+conducted interviews to gain insight into the perceptions of mediation participants.
+
+QUANTITATIVE METHODS
+
+The Mediation Center of the Pacific (MCOP) maintains a database of all the landlord-tenant mediations 
+they conduct on the island of Oʻahu, including the three approaches examined by this study. MCOP 
+provided the research team with data on the following:
+
+•  All of the eviction cases mediated by MCOP from January 2019 to June 2019, totaling 92 cases (the “Pre-
+
+COVID Summary Possession Data Set”).
+
+•  All of the eviction cases mediated by MCOP from August 2021 to August 2022 under the Act 57 program, 
+
+totaling 1,378 cases (the “Act 57 Data Set”).
+
+•  All of the eviction cases mediated by MCOP from August 2021 to August 2022 that were done outside of 
+
+the Act 57 process, totaling 183 cases (the “Summary Possession During COVID Data Set”).
+
+The data provided for each of the cases in the three datasets listed above indicated whether a settlement 
+was reached, and it included limited demographic data such as the income and zip code of the tenant.
+Determining whether the settlements resulted in the tenant remaining in place required a review of the 
+settlement agreements for each case. Because a review of all of the settlement agreements in all of the 
+data sets was not feasible within the resources available for this study, samples from each data set were 
+reviewed as follows:
+
+•  Pre-COVID Summary Possession Data Set: Of the 92 cases that were mediated, 43 settled. MCOP 
+reviewed all 43 settlement agreements and provided the research team with data on which of the 
+agreements resulted in the tenant remaining in place. Generally, all contested cases are sent to 
+mediation by the judge before trial.
+
+•  Act 57 Data Set: Of the 1,378 cases that were mediated, 1201 settled. MCOP provided the research 
+
+team access to a sample of 41 settlement agreements to determine in which cases the tenant remained 
+in place. To obtain a geographically diverse sample, MCOP selected an even distribution of cases by zip 
+code, but otherwise selected at random.  
+
+•  Summary Possession During COVID Data Set: Of the 183 cases that were mediated, 96 settled. Using 
+
+EVICTION PREVENTION, MEDIATION • 9
+
+METHODOLOGY
+
+He‘eia, Hawai‘i 
+// Will Caron
+
+a selection process similar to the one used to generate the Act 57 sample of settlement agreements, 
+MCOP provided the research team access to a sample of 31 settlement agreements to determine in 
+which cases the tenant remained in place. 
+
+In addition to reviewing the settlement agreements to determine whether the tenant remained in place 
+post-settlement, the review was used to determine the following:
+
+•  Whether the parties were represented by counsel; 
+
+•  Whether rental relief was mentioned in the settlement agreement; 
+
+•  Whether the agreement indicated the tenant would remain in place as an ongoing tenant; and 
+
+•  Whether the agreement required the tenant to pay back all back rent;
+
+The research team then used this data to examine the various factors that may have contributed to the 
+differing outcomes under each of the three programs.
+
+QUALITATIVE METHODS
+
+To gain insights from the perceptions of program participants, a total of 20 interviews were conducted over 
+the course of three weeks. Interviewees were all individuals who participated in mediations after August 
+2021 as follows:
+
+•  Six mediators (all of whom participated in the Act 57 mediation program);
+
+10 • EVICTION PREVENTION, MEDIATION
+
+ 
+METHODOLOGY
+
+Kailua, Hawai‘i 
+// Rich Howard
+
+•  Two attorneys (one representing multiple landlords and one representing multiple tenants, both of 
+
+whom participated in all three mediation program categories);
+
+• 
+
+12 tenants (one of whom participated in the Summary Possession During-COVID mediation program; 11 
+who participated in the Act 57 mediation program); 
+
+•  No landlords were interviewed because none responded to outreach efforts for the study. 
+
+All of the interviewees were identified by MCOP. The tenants who received outreach emails were selected 
+at random. MCOP sent an email to an initial batch of 40 tenants, half of whom went through the Act 57 
+mediation program, and half of whom went through the Summary Possession During COVID mediation 
+program. The initial batch of emails garnered eight tenant interviews. A second batch of tenants was 
+emailed to secure an additional four tenant interviews. 
+
+MCOP reached out to all of the mediators that participated in mediations after August 2021, eight 
+responded, and six were ultimately interviewed. 
+
+On Oʻahu, there are two attorneys that handle the vast majority of landlord representation in summary 
+possession cases, and one attorney that handles most of the tenant representation (in the relatively rare 
+instances where tenants are represented). One of the two landlord attorneys and the sole tenant attorney 
+were interviewed. 
+
+All of the interviews were conducted by the same interviewer utilizing the same set of questions created for 
+each category of interviewee. 
+
+EVICTION PREVENTION, MEDIATION • 11
+
+INSIGHTS FROM A 
+REVIEW OF THE DATA
+
+OVERVIEW OF DIFFERENT OUTCOMES BETWEEN PROGRAMS
+
+Based on a review of the data from the three different programs—Pre-COVID Summary Possession 
+mediations, Act 57 mediations, and Summary Possession During COVID mediations—along with the review 
+of the mediation agreements included in the samples, it is clear that the mediations conducted under the 
+Act 57 program had overwhelming positive outcomes relative to the other mediation programs. 
+
+While dealing with 15 times the number of cases mediated pre-COVID, settlement rates were 40 percent 
+higher under the Act 57 program. More importantly, of the cases that settled and that were reviewed for the 
+study, the Act 57 program resulted in 74 percent more tenants remaining as ongoing tenants than in the 
+pre-COVID sample.
+
+Program
+
+Number of 
+Mediations
+
+Number of 
+Mediations that 
+Settled
+
+Percent of 
+Mediations that 
+Settled
+
+Number of 
+Settlement 
+Agreements 
+Reviewed
+
+Percent of 
+Reviewed 
+Agreements that 
+Results in Tenant 
+Leaving Property
+
+Percent of Reviewed 
+Agreements that 
+Results in Tenant 
+Remaining as Ongoing 
+Tenant
+
+Pre-Covid 
+Summary 
+Possession
+
+92
+
+43
+
+Act 57
+
+1,378
+
+1,201
+
+Summary 
+Possession 
+During Covid
+
+183
+
+96
+
+47%
+
+87%
+
+52%
+
+43
+
+41
+
+31
+
+89%
+
+15%
+
+80%
+
+11%
+
+85%
+
+20%
+
+When compared to the Summary Possession During COVID mediations, the Act 57 mediations retained 
+much higher rates of settlement and housing stability for the tenants (87 percent of cases settled under Act 
+57 versus 52 percent under the Summary Possession During COVID mediations; 85 percent of settlements 
+in the Act 57 sample resulted in the tenant remaining in place versus 20 percent in the Summary 
+Possession During COVID sample).
+
+12 • EVICTION PREVENTION, MEDIATION
+
+DATA INSIGHTS
+
+Notably, there was a relatively small difference between the percentage of mediations that settled between 
+the Pre-COVID Summary Possession and Summary Possession During COVID mediations (47 percent versus 
+52 percent). Additionally, of the settlement agreements reviewed from each of those data sets, there was a 
+relatively small difference in the percentage of agreements that resulted in the tenant remaining in place 
+(11 percent versus 20 percent). 
+
+In trying to ascertain the impact of rent relief, it is interesting to note that such relief was available to the 
+participants of both the Act 57 and Summary Possession During COVID mediations, yet the outcomes were 
+vastly different. The outcomes for the Summary Possession During COVID participants were only marginally 
+better than the outcomes for the Pre-COVID Summary Possession participants despite the availability of 
+rent relief for the former, but not the latter. Taken together, these comparisons suggest that the availability 
+of rental relief, on its own, may have only a slight impact on mediation outcomes. 
+
+This does not mean the availability of rental relief is inconsequential. Indeed, information garnered from 
+the data provided by MCOP and participant interviews demonstrates that rent relief was used frequently 
+in the mediated settlements in which tenants retained their housing. Rather, the information considered 
+for this study suggests that, to be effective, rent relief needs to be combined with other factors. One such 
+factor is likely timing the mediation prior to the commencement of litigation rather than after—one of the 
+primary differences between the Act 57 and Summary Possession During COVID processes. Another factor 
+could be differences in the pool of mediators used for the different types of mediations. 
+
+JANUARY–JUNE 2019 PRE-COVID SUMMARY POSSESSION MEDIATIONS
+
+To help establish a baseline of mediation outcomes, we reviewed data from a six-month period prior to 
+COVID—approximately January through June of 2019. During this time period, 92 summary possession cases 
+were mediated. Of those, 47 percent reached agreement, and of those cases agreed, 11 percent allowed 
+the tenant to remain in the residence as an ongoing tenant. This means that 89 percent of settled cases still 
+resulted in the tenant leaving the property. These mediations were conducted without any availability of 
+rental assistance, as those programs had not been set up yet and COVID had not yet impacted the ability of 
+tenants to pay rent. The settlement agreements did not contain enough information to determine if the case 
+was brought due to non-payment of rent, other reasons, or a combination of the two.
+
+JUNE 2021 TO AUGUST 2022 SUMMARY POSSESSION DURING COVID MEDIATIONS 
+
+We reviewed data and settlement agreements from June 2021 through August 2022 for cases that were 
+referred to mediation by the court after landlords initiated a summary possession case. These cases 
+avoided the Act 57 requirement of pre-litigation mediation by alleging lease violations in addition to non-
+payment of rent.
+
+Other than the route by which these cases arrived in mediation, the most significant differences between 
+the Act 57 mediations and the During-COVID Summary Possession Mediations were the timing of the 
+mediations (pre-litigation versus mid-litigation) and the pool of mediators conducting the mediations 
+(paid professional mediators versus volunteers). 
+
+EVICTION PREVENTION, MEDIATION • 13
+
+ 
+DATA INSIGHTS
+
+Waikīkī, 
+Hawai‘i // Jess 
+Loiterton
+
+During this time period, 183 summary possession cases were mediated. Of those, 52 percent reached 
+agreement. Of the 31 settlement agreements reviewed in this category, 20 percent of the agreements 
+allowed the tenant to remain in the residence as an ongoing tenant. This means that 80 percent of settled 
+cases still resulted in the tenant leaving the property, slightly less than the 92 percent of Pre-COVID 
+Summary Possession settled cases in which tenants moved out.  
+
+In the sample of settlement agreements reviewed under this category, landlords were represented by 
+counsel 54 percent of the time. Tenants were represented by counsel less than 1 percent of the time. 
+
+Number of 
+Mediations
+
+Number of 
+Mediations 
+that Settled
+
+Percent of 
+Cases that 
+Settled
+
+Sample Size 
+of Cases 
+Reviewed
+
+2021
+
+2022
+
+Combined 
+2021 and 
+2022
+
+94
+
+89
+
+183
+
+46
+
+50
+
+96
+
+49%
+
+56%
+
+52%
+
+18
+
+13
+
+31
+
+14 • EVICTION PREVENTION, MEDIATION
+
+Percent of 
+Settled Cases 
+that Resulted 
+in Tenant 
+Leaving 
+Property
+
+Percent of 
+Settled Cases 
+that Resulted 
+in Tenant 
+Remaining 
+as Ongoing 
+Tenant
+
+Percent 
+Landlords 
+Represented 
+by Counsel
+
+Percent 
+Tenants 
+Represented 
+by Counsel
+
+72%
+
+28%
+
+61%
+
+<1%
+
+92%
+
+8%
+
+46%
+
+<1%
+
+80%
+
+20%
+
+54%
+
+<1%
+
+DATA INSIGHTS
+
+Waimea 
+(O‘ahu), 
+Hawai‘i // Jess 
+Vide
+
+JUNE 2021 TO AUGUST 2022 ACT 57 MEDIATIONS
+
+We reviewed data and settlement agreements from June 2021 through August 2022 for the Act 57 cases. 
+Under Act 57 during this time period, 1,378 mediations were conducted. Of those, 87 percent reached 
+agreement. Of the 41 settlement agreements reviewed in this category, 85 percent of tenants remained in 
+the home. All of the agreements noted that the tenant would repay all back rent owed, with 66 percent of 
+the agreements explicitly noting that rental assistance would be used to do so. In this sample, 5 percent of 
+landlords were represented by counsel and none of the tenants were. 
+
+Number of 
+Mediations
+
+Number of 
+Mediations 
+that Settled
+
+Percent of 
+Cases that 
+Settled
+
+Sample Size 
+of Cases 
+Reviewed
+
+Percent of 
+Settled Cases 
+that Resulted 
+in Tenant 
+Leaving 
+Property
+
+Percent of 
+Settled Cases 
+that Resulted 
+in Tenant 
+Remaining 
+as Ongoing 
+Tenant
+
+Percent 
+Landlords 
+Represented 
+by Counsel
+
+Percent 
+Tenants 
+Represented 
+by Counsel
+
+2021
+
+447
+
+392
+
+88%
+
+20
+
+15%
+
+85%
+
+0%
+
+0%
+
+2022
+
+931
+
+809
+
+87%
+
+Combined 
+2021 and 
+2022
+
+1,378
+
+1,201
+
+87%
+
+21
+
+41
+
+14%
+
+86%
+
+9%
+
+0%
+
+15%
+
+85%
+
+5%
+
+<1%
+
+EVICTION PREVENTION, MEDIATION • 15
+
+ 
+INTERVIEW INSIGHTS
+
+MEDIATORS
+
+Of the six mediators interviewed, one resides in Hawaiʻi and the other five reside in the Continental United 
+States. The mediators interviewed for this study were screened and hired specifically to participate in 
+the Act 57 mediation program. They did not participate in either the Pre-COVID Summary Possession 
+or Summary Possession During COVID mediation programs, which each utilized local volunteers who 
+conducted mediations at court. Because of this, we were unable to compare mediator perspectives across 
+the different programs.
+
+Each mediator interviewed noted that they had conducted approximately 100 mediations. Each mediator 
+reported a settlement rate of between 85 and 95 percent, and most recalled that in at least 90 percent 
+of the settled cases, the tenant was allowed to remain as an ongoing tenant. These recollections were 
+consistent with the data provided by MCOP and the sample of mediation agreements reviewed. 
+
+The mediators noted that they had direct access to those administering rental relief, so they were able 
+to find out where the tenant was in the application process, whether they had been approved and were 
+just awaiting funds, and whether tenants could still apply for rental assistance. All of the mediators who 
+were interviewed conducted their mediations over video conferencing, and noted that a few participants 
+logged in from the Mediation Center of the Pacific, but most participants logged in from their home or 
+other personal location. The mediators felt that video conferencing was instrumental in helping tenants to 
+speak more freely, because they were in a comfortable location, and they were not physically present with 
+the landlord. Several mediators noted that some of the participants also turned their camera off, which 
+allowed them to speak more freely and more comfortably. 
+
+Some mediators utilized joint sessions over video conferencing, while others primarily separated the 
+parties. This seems to have been largely a choice of personal style by the mediator and does not seem 
+to have contributed to the success rate of settlement or keeping tenants in place. Mediators reported no 
+issues using video conferencing.
+
+Several of the out of state mediators participated in both Hawaiʻi’s Act 57 mediation program as well as 
+mediation programs in their home state. For those who did both, they all noted that Hawaiʻi’s program was 
+better than the program in the state they were in, specifically because of the access to rental relief and the 
+relatively high frequency of mediations they conducted on a regular basis. They felt that having a constant 
+stream of mediations allowed them to become experts in how the Hawaiʻi mediations could be resolved 
+using Hawaiʻi’s rental relief program.
+
+In discussions with the Executive Director of the Mediation Center of the Pacific, she noted that she 
+
+16 • EVICTION PREVENTION, MEDIATION
+
+ 
+INTERVIEW INSIGHTS
+
+specifically hired mediators who she felt, through discussion and interviews, would be skilled at initially 
+helping the tenants and landlords view each other as individuals with mutual financial challenges 
+created by the outstanding rent owed by the tenant. She felt this skill would promote greater creativity in 
+negotiations that would enable the tenant to remain in the residence while meeting the financial needs 
+of the landlord. She noted that this approach may be different from the pre-COVID, 20-minute summary 
+possession mediations, which she believed were often primarily focused on how much a tenant could pay 
+and when they would move out.
+
+All of the mediators felt that rental relief was the primary contributor in being able to settle so many 
+cases with tenants being able to remain in place as ongoing tenants. Although the majority of settlements 
+included a component of rental relief, there were still a significant number of settlements that did not 
+explicitly reference rental relief but included a payment plan to catch the tenant up on back rent. 
+
+Mediators were asked about the time they had to conduct mediations. The 1.5 hours allowed (and 
+sometimes multiple sessions) is a dramatic increase from the 20–30 minutes allowed in Pre-COVID 
+Summary Possession mediations. Mediators felt that the time given was a reasonable amount. They 
+reported that some meditations were able to be settled more quickly than the time allotted, while some 
+required an additional session.
+
+ATTORNEYS
+
+There are very few attorneys on Oʻahu who represent residential landlords and tenants in eviction-related 
+disputes. Two attorneys were interviewed for the study: an attorney who represents many landlords and 
+an attorney that represents many tenants. The attorneys interviewed had experience with all three of 
+the mediation programs examined in this study, though most of their experience was with the Pre-COVID 
+Summary Possession mediations, followed by the Summary Possession During COVID mediations. The 
+tenants’ attorney noted that in many of the Act 57 mediations, his office provided general advice to tenants 
+but did not represent them at the mediations. 
+
+Both attorneys thought that pre-trial mediation would be a positive for all sides. Each recognized the 
+different mindset that a landlord is in once litigation has been initiated and they have begun to incur its 
+financial costs. 
+
+The landlord attorney’s main concern with a pre-trial mediation program was that the process needed to 
+be efficient with less return to court dates. He noted that, during COVID, due to the number of appearances 
+required before finally going to trial, the cost to evict a tenant nearly doubled. He believed that because 
+of these extra costs and the time lost, once a landlord went down this road, they were adamant about 
+eviction, and a settlement in which the tenant remains in the unit is less likely. The delays could be 
+attributed to the backlog of cases/mediations that backed up during the eviction moratorium, and an 
+ongoing program would hopefully not see the same delays. 
+
+Additionally, if a pre-litigation program is put in place, landlords and tenants could avoid return to court 
+dates entirely, because no summary possession case would have been filed before the mediation took place. 
+
+EVICTION PREVENTION, MEDIATION • 17
+
+INTERVIEW INSIGHTS
+
+Pūpūkea, 
+Hawai‘i // Jess 
+Loiterton
+
+The landlord attorney also expressed concern about the time it could take to get to mediation. He 
+believes it is important that mediations are scheduled and occur quickly once the parties agree to the 
+process. If the mediation does not occur quickly, he believes it will deter landlords from agreeing to take 
+part as they seek quick resolution of their dispute.
+
+Both attorneys reported no issues with using video conferencing for mediations, and said that they 
+actually preferred using it because of its convenience. The landlord attorney commented that he felt that 
+video conferencing mediation reduced some of the leverage or advantage he and the landlord might 
+otherwise have at court, because there is an intimidation factor for tenants going to court. He noted that 
+if a tenant goes to court, the judge explains the situation to the tenant, sends them to a mediator, and the 
+tenant is usually “beaten down” so they end up going along with whatever is suggested. There might be 
+some discussion over when they can leave, but the discussion is more of “when they will leave” and not 
+“if they will leave.” 
+
+In the context of litigation, the tenant often has little option but to settle and voluntarily leave or else 
+return to court where the judge will likely rule against them anyway. This might explain why several of 
+the settlement agreements from the Summary Possession During COVID mediation sample resulted in 
+settlements where the tenant agreed to leave and agreed to pay the outstanding rent. 
+
+The tenant attorney remarked that it was a benefit to use paid mediators who focused on trying to keep 
+
+18 • EVICTION PREVENTION, MEDIATION
+
+INTERVIEW INSIGHTS
+
+tenants in place. Similar to the views of the landlord attorney and the MCOP executive director, the tenant 
+attorney believed that, due to the short amount of time available for volunteers to mediate summary 
+possession cases, there seems to be a focus on reaching agreement on when the tenant can move out 
+instead of trying to mediate a solution where the tenant remains in the unit and stays on as a tenant. 
+
+TENANTS
+
+Twelve tenants were interviewed for this study. One of the tenants participated in mediation as part of the 
+Summary Possession During COVID mediation program, while the rest of the tenants interviewed were part 
+of the Act 57 program. Only two of the 12 tenants interviewed left the property as part of the settlement, 
+one of whom was the tenant that went through the Summary Possession During COVID program. Ten of the 
+11 tenants interviewed who went through the Act 57 program remained in place as ongoing tenants with 
+some agreement to pay back rent through either rental assistance or through a payment plan. 
+
+All of the tenants reported that their mediation was over video conferencing and that video conferencing 
+was easy to use. Only one of the tenants went into the mediation center to use a computer there, while the 
+rest logged in from home. The majority of tenants indicated they used their cell phone. Only one tenant 
+indicated a brief issue with the technology, which was solved by logging out and logging back in. 
+
+Two of the interviewees reported slight difficulties in getting the mediation scheduled or a lack of 
+response, while the rest applauded the ease of the process. 
+
+Two of the participants had heard of the program through news sources. Four heard about the program 
+from their landlord. One was sent to mediation from the court. The rest of the tenants heard about the Act 
+57 program for the first time in the notice they received informing them of their right to mediate before the 
+landlord could file a summary possession action.
+
+All of the tenants interviewed reported that this was their first time mediating and that their mediator 
+was skillful. All felt they could speak freely because they were more comfortable speaking over video 
+conferencing rather than in court and in the same location as the landlord. Some tenants were told the 
+mediator was from out of state, but they did not think it had any effect on the outcome of the mediation.
+Most of the tenants utilized rental assistance to make up any back rent. The few that did not agreed to use 
+some form of payment plan to catch up. 
+
+None of the tenants interviewed were represented by counsel. Although not represented at mediation by 
+counsel, several of the tenants interviewed noted that they had spoken with an attorney for some advice 
+before the mediation. A few reported that the landlord had an attorney at the mediation and “he did all 
+the talking.”
+
+Most of the tenants noted that they understood where their landlord was coming from and understood 
+that the landlord was out of money and they did not hold it against them that they got a notice to be 
+evicted. They were glad the process existed so they could talk and try to work it out. Eleven out of 12 of the 
+tenants interviewed reported that the mediation was over quickly, in under 40 minutes.
+
+EVICTION PREVENTION, MEDIATION • 19
+
+ANALYSIS OF THE 
+POTENTIAL IMPACTS OF 
+EACH FACTOR
+
+PRE-LITIGATION MEDIATION
+
+In Hawaiʻi, and around the country, mediations in eviction cases typically take place after a case has been 
+filed.7 Day-of-trial mediation programs have been found to be associated with reductions in eviction or 
+a mitigation of their consequences.8 Yet some studies suggest that pre-litigation mediation may be even 
+more effective. 
+
+In one such study in which mediation providers were interviewed, the providers believed that offering 
+mediation to the parties before an eviction is filed is advantageous to all parties.9 The study points out that 
+pre-litigation mediation may be better at resolving disputes because parties tend to harden their positions 
+once they get to court, especially as costs associated with litigation mount.10
+
+Another examination of mediations in the context of evictions points to the fact that even when tenants dispute 
+the grounds for eviction, they may be afraid to raise their defenses in the intimidating atmosphere of the 
+courtroom.11 As noted by the study, “On the day of trial, tenants are under tremendous psychological pressure 
+to agree to any terms presented by the landlord to keep a roof over their children’s heads.”12 In addition to 
+mitigating this pressure, the study points out that pre-filing mediation helps tenants avoid a stain on their rental 
+history that can make it difficult to find housing in the future. Furthermore, pre-filing mediation has the potential 
+to provide the parties more time to secure rental assistance that could address rent shortfalls.13
+
+The suggestion that pre-litigation mediation may be more effective than mediations held during the course 
+of litigation is supported by the data analyzed by the present study, in which one of the primary differences 
+between Act 57 mediations and Summary Possessions During COVID was the timing of the mediation. 
+
+The perceptions of the mediation participants interviewed for the present study also align with this 
+conclusion. Both of the attorneys interviewed expressed the belief that pre-trial mediation was a positive 
+for both landlords and tenants, and each attorney likewise recognized the different mindset that a landlord 
+is in once they are in litigation and have begun to incur the costs of litigation. While none of the tenants 
+interviewed had any prior experience with being involved in an eviction case that had been filed in court, 
+
+20 • EVICTION PREVENTION, MEDIATION
+
+ANALYSIS OF FACTORS
+
+some expressed their belief that going to court would be “harder” or “more intimidating.”
+
+The landlord attorney interviewed for the present study identified the potential drawback of pre-litigation 
+mediation resulting in a delay for a landlord seeking eviction if the mediation proved to be unsuccessful. 
+But we determined the following potential advantages of pre-litigation mediation:
+
+•  A higher rate of settlements that help the landlord recover past due rent while allowing the tenant to 
+
+remain in place;
+
+•  Savings in time and money for the parties by avoiding litigation; and
+
+•  A reduced burden on the court system when disputes are settled through mediation before a case is 
+
+ever filed.  
+
+AVAILABILITY OF RENT RELIEF
+
+There is no question that rent relief played a key role in the settlement of unpaid rent issues between 
+landlords and tenants. According to Princeton University’s Eviction Lab, which tracks eviction data from 
+across the country, “the communities that were able to distribute rental assistance had lower displacement 
+rates”14 and “[a]s rental aid programs started closing, eviction filings overall have reached nearly the same 
+level as before the pandemic.”15
+
+The data and interviews from the present study supports the suggestion that rent relief is key. Out of the 41 
+settlement agreements reviewed from the Act 57 process, all of them noted that the tenant would repay all 
+back rent owed, with 66 percent of the agreements explicitly noting that rental assistance would be used to 
+do so. It is unclear whether the remaining 33 percent did not utilize rental assistance or if the mediator just 
+did not make reference to it in the settlement agreements.
+
+All of the mediators interviewed confirmed their belief that rent relief was the primary reason so many 
+cases settled with an agreement for the tenants to remain in their homes. Both attorneys believed that 
+rent relief assisted in settling disputes. All but one of the tenants interviewed mentioned that they had 
+received, or would be receiving, some form of rent relief. Some of the tenants expressed their belief that 
+the availability of rental relief helped pay the past due rent, which was key to their landlord's decision to 
+allow them to stay in the home as an ongoing tenant.
+
+Although the importance of rent relief is clear, its availability in the Summary Possession During COVID 
+process did not translate to a high settlement rate or a high rate of tenants being able to reach settlements.16 
+This suggests that rent relief alone is not sufficient to ensure housing stability, and other factors may have an 
+impact on the outcome, such as whether mediation was conducted before versus during litigation. Another 
+important factor is the true motivation of the landlord. Whether the landlord is trying to recover unpaid rent, 
+or wants to terminate the relationship with the tenant, could affect whether a case is more or less likely to 
+settle and whether the landlord agrees to allow a tenant to remain as an ongoing tenant. Unfortunately, these 
+motivations are impossible to know or quantify without landlords providing their reasoning.
+
+EVICTION PREVENTION, MEDIATION • 21
+
+ANALYSIS OF FACTORS
+
+View of 
+Portlock from 
+Koko Crater, 
+Hawai‘i // Jess 
+Loiterton
+
+TIME FOR MEDIATION
+
+Mediation is a process that requires the mediator to establish credibility with both parties so that each 
+party feels comfortable speaking freely, while also listening to recommendations made by the mediator. 
+The ability to make connections with mediation participants, no matter how skilled the mediator is, takes 
+time—as does exploring creative options for settlement. As such, it seems likely that the amount of time 
+allocated for mediation is important and directly affects the outcomes of the mediation.
+
+Before COVID, summary adjudication actions were usually sent to mediation if both parties appeared for 
+their return date hearing or trial. At the courthouse, voluntary mediators await assignment, then attempt to 
+settle the case within 20–30 minutes, before the parties need to return to court. With such a short amount 
+of time, mediators have little time to establish connections with participants and explore creative options 
+for settlement.
+
+22 • EVICTION PREVENTION, MEDIATION
+
+ANALYSIS OF FACTORS
+
+Mediations under both the Act 57 program and the Summary Possession During COVID programs provided 
+90 minutes for the mediations to be conducted. 
+
+The data reviewed for the present study does not reveal any strong suggestions that the additional time 
+resulted in better outcomes. Pre-COVID Summary Possession mediations conducted in less than 30 
+minutes had a 47 percent settlement rate. The 90-minute Summary Possession During COVID mediations 
+had a similar settlement rate of 52 percent, while the Act 57 mediations, with the same 90 minute 
+mediations had a much higher settlement rate of 87 percent. 
+
+However, both the mediators and attorneys interviewed believed that the additional time was important. 
+All of the mediators felt that at least 45 minutes were needed to establish the necessary relationships with 
+mediation participants to allow for a meaningful session, and they reported that they sometimes needed 
+additional time. The attorneys interviewed noted that the shorter mediation session may affect the options 
+a mediation can explore, and would explain why pre-covid mediation were so focused on mediating a date 
+by which the tenant would move out instead of exploring potentially more complex options under which 
+the tenant could remain in place as an ongoing tenant.
+
+MEDIATOR CHARACTERISTICS
+
+The Act 57 mediations were conducted by a different pool of mediators than both the Pre-COVID Summary 
+Possession and Summary Possession During COVID mediations. The summary possession mediations were 
+mediated by a volunteer mediator from Hawaiʻi. Act 57 mediations were conducted by paid professional 
+mediators hired specifically for the program, and either residing in Hawaiʻi or in the Continental United 
+States. The paid mediators handled a higher volume of cases and, as related by MCOP, they were hired 
+specifically for their commitment in trying to find ways to help landlords and tenants reach agreements 
+that allowed tenants to remain as ongoing tenants while repaying the landlords for rent owed. 
+
+Because the use of the paid mediators was one of few differences between the Act 57 and Summary 
+Possession During COVID programs, it is possible that the difference in the mediation pool had an impact 
+on mediation outcomes. This possibility is supported by both MCOP and the attorneys interviewed for 
+the study, who all noted that mediators who conducted mediations pre-COVID were largely focused on 
+resolving a case by determining when a tenant would move out instead of focusing on exploring other 
+options, while the hired mediators were specifically focused on finding ways to keep tenants in place.  
+
+VIDEO CONFERENCING
+
+Video conferencing was used for both Act 57 and Summary Possession During COVID mediations, not as an 
+attempted improvement to the mediation process, but as a byproduct of the pandemic. 
+
+Prior to using video conferencing for the mediations, there was a concern that its use might pose a barrier 
+to participants that lacked access to the appropriate technology, and that mediation over video would 
+make it more difficult for the mediator and the parties to build rapport. On the other hand, potential 
+advantages included:
+
+EVICTION PREVENTION, MEDIATION • 23
+
+ 
+ANALYSIS OF FACTORS
+
+• 
+
+Increased access to mediation because of not having to take time off from work or having to find child care;
+
+•  Reduced intimidation that tenants can experience in a formal court setting, helping to mitigate the 
+
+power imbalance between landlord and tenant; and
+
+•  Elimination of the time and expense of travel.
+
+Again, the data reviewed for the present study does not provide conclusive evidence of whether video 
+conferencing had any impact on mediation outcomes. The Summary Possession During COVID mediations 
+had slightly better success rates than Pre-COVID Summary Possession mediations in terms of the 
+percentage of cases settled (52 percent versus 47 percent) and percentage of tenants that remained in the 
+unit (20 percent versus 11 percent). 
+
+However, the use of video conferencing was one of multiple differences between the Summary Possession 
+During COVID and Pre-COVID Summary Possession mediations (others included differences in the 
+mediation pool, the time allocated for mediation, and the availability of rent relief). 
+
+While the data collected reveals little, the interviews conducted for the study indicate that participants 
+believed the use of video conferencing fostered better outcomes, or at the very least, was a welcome 
+convenience. 
+
+Mediators noted that most participants logged in from their home or personal location, while a few 
+logged in from the Mediation Center of the Pacific. The attorneys interviewed stated that they had no 
+problems with the technology, and they favored the convenience of mediating via video conference over 
+in-person meetings. 
+
+Tenants reported that video conferencing was easy to use, and primarily used their phones to access the 
+software. They reported no major technology issues. These comments suggest that the lack of access to 
+technology was not a significant barrier to participation in mediation. 
+
+Additionally, the mediators interviewed believed that video conferencing was instrumental in helping 
+tenants speak more freely, because they were in a more comfortable location than a courthouse and they 
+were not physically present with the landlord. The mediators reported that some of the participants also 
+turned their camera off, which the mediators believed allowed the participants to speak more freely and 
+comfortably. Similarly, the landlord attorney commented about the potential loss of leverage for landlords 
+without the intimidation factor for tenants of having to go to court.
+
+OTHER POTENTIAL FACTORS
+
+In addition to differences in design of the three mediation programs and the availability of rent relief, 
+it should be noted that there are other factors that may have impacted the outcomes of the different 
+mediation programs. 
+
+24 • EVICTION PREVENTION, MEDIATION
+
+ANALYSIS OF FACTORS
+
+One such factor is the potential that landlords may have been more willing to entertain settlement in the 
+unique environment created by the pandemic. When the pandemic hit, a large number of tenants lost their 
+jobs and were unable to pay rent. 
+
+Landlords may have perceived that their tenants were not “bad tenants” that needed to be replaced. 
+Rather, they may have been perceived as victims of a circumstance that was out of their control and 
+impacted many people at the same time. In such a scenario, landlords may have been more willing to try 
+to keep their current tenants housed rather than seeking to replace them with new tenants, provided the 
+inability to pay the rent did not become a chronic problem. 
+
+The above consideration might explain, at least in part, why Act 57 mediations had a much higher 
+settlement rate than Pre-COVID Summary Possession mediations. But it would not explain why the 
+settlement rates between Pre-COVID and Summary Possession During COVID mediations were so similar. 
+
+One possible explanation—outside of the other factors discussed above—is that landlords who used the 
+Summary Possession During COVID process may have been more intent on terminating the tenancy than 
+landlords who submitted to the Act 57 process. 
+
+To avoid the Act 57 pre-filing mediation requirement, even when rent delinquency was one of the reasons 
+why the landlord wanted to evict the tenant, the landlord had to allege alternative reasons for eviction, 
+such as wanting to sell the unit or the tenant’s destruction of property. It is possible that landlords who 
+used the Summary Possession During COVID process had legitimate reasons for evicting their tenants 
+outside of rent delinquency, which could not be addressed by mediation. Or landlords who used the 
+Summary Possession During COVID process even though their primary motivation for eviction was the 
+rent delinquency may have done so because they were intent on eviction and were hoping to expedite the 
+tenant’s removal. 
+
+A final factor that may have contributed to the difference in outcomes between the various mediation 
+programs is the presence of attorneys at the mediations. It is notable that in the Summary Possession 
+During COVID mediations, landlords were represented by attorneys 54 percent of the time, while they were 
+represented only 5 percent of the time in Act 57 cases (tenants were represented less than 1 percent of the 
+time in both types of mediations). 
+
+While the data suggests that the presence of attorneys may have led to fewer settlements and fewer 
+instances of tenants remaining in their homes, it also suggests that attorneys were more likely to be 
+present when mediation is conducted during litigation as opposed to before, so mediation design may 
+address the issue. 
+
+It is likely that these additional factors had some influence on the outcomes of the Act 57 and Summary 
+Possession During COVID meditations. Nevertheless, the data reviewed by the present study in combination 
+with the information garnered from participant interviews strongly suggests that mediation design and the 
+availability of rent relief had a significant positive influence on the outcomes of Act 57 mediations. 
+
+EVICTION PREVENTION, MEDIATION • 25
+
+CONCLUSION AND 
+RECOMMENDATIONS
+
+The Act 57 program ended on August 6, 2022, in what should be considered resounding success. The 
+percentage of mediations that resulted in settlement significantly increased from the Pre-COVID Summary 
+Possession mediation program, going from 47 percent to 87 percent. More significantly, the number of 
+tenants that remained in place as ongoing tenants, increased from 11 percent to 85 percent.
+
+For the landlords, the agreements reached through Act 57 mediations often meant they were able to 
+recover back rent and avoid the costly processes of litigating an eviction action and finding new tenants. 
+For families who were able to remain in their homes as a result of Act 57 and the availability of rent relief, 
+they avoided forced moves that often result in the loss of security deposits and belongings, a change in 
+schools, a longer commute to work, a negative mark on their rental history, and for some, homelessness.
+
+Not only did the program promote housing stability for landlords and tenants, but the program effectively 
+reduced the load on the Judiciary by eliminating the need to file any summary possession action for each 
+case that settled. 
+
+The Act 57 program diverted from the court system as many as 1,201 eviction cases—the total number 
+of Act 57 cases that were settled during the program’s duration. Doing so undoubtedly reduced strain on 
+judges’ calendars, filing clerks, workers who assist litigants when they get to court, and everyone else 
+involved in the process of a case making its way through the system. 
+
+Further study on these costs is necessary, but it is reasonable to anticipate that the costs of mediation under 
+an Act 57-like program—estimated at $250 to open each case with an additional $250 for every mediation 
+session conducted (e.g. $350,000 to open 1,000 cases and hold 500 mediations)—is likely to be either 
+comparable to or lower than the costs to the Judiciary if the cases were to go through the court process.  
+
+While it is not feasible to determine with certainty from the data available for this study which of the 
+various factors from the Act 57 program had the greatest impact on the starkly different outcomes between 
+Act 57 mediations and the Pre-COVID Summary Possession and Summary Possession During COVID 
+mediations, when examined along with participant perceptions gathered from the interviews conducted 
+for the study, it is reasonable to conclude that: 
+
+•  Conducting mediation pre-litigation is likely to have had a significant impact on settlement and 
+
+whether a tenant remains as an ongoing tenant.
+
+26 • EVICTION PREVENTION, MEDIATION
+
+ 
+ 
+  
+CONCLUSION
+
+•  Providing adequate time to mediate and contracting paid mediators, as opposed to relying on 
+volunteer mediators, also appears to have increased the likelihood of successful mediation.
+
+•  The availability of rental relief was key to ensuring housing stability, but rental relief alone is 
+
+insufficient.
+
+•  The use of video conferencing software in lieu of requiring a personal appearance in court provides 
+
+tenants with more comfort and confidence by placing parties on a more even field, even if the landlord 
+is represented by counsel.
+
+MCOP plans to continue to provide pre-litigation mediation services to landlords and tenants at no cost, as 
+budget permits. However, in absence of a continuing requirement that landlords provide tenants with an 
+opportunity to mediate before proceeding with a summary possession lawsuit, it is likely that pre-litigation 
+mediation will not be used often. 
+
+As of publication, no additional funding has been allocated to allow MCOP to continue to use the paid 
+professional mediators that were used for the Act 57 program. Nor has funding been available to cover the 
+expense of the program administrative support that allowed MCOP to reach out to tenants and schedule 
+mediations relatively quickly (usually within 15 days of receiving the notice from the landlord). 
+
+While the volume of eviction-related mediations is likely to be below the levels experienced in the 
+aftermath of widespread job loss due to the pandemic, elements of the Act 57 program that have proved 
+to be so effective at maintaining housing stability for landlords and tenants could be incorporated into 
+permanent process changes, including the following recommendations: 
+
+1.  Require landlords to provide notice of an opportunity to mediate before being able to file a Summary 
+
+Possession Lawsuit and require participation if the tenant requests mediation. 
+
+2.  Provide funding to The Mediation Center of the Pacific to hire independent mediators. 
+
+3.  Provide funding to The Mediation Center of the Pacific for administration of the cases. 
+
+4.  Provide for up to 1.5-hour mediation sessions with the possibility of one additional session to follow up 
+
+on how an agreement is working or to renegotiate the terms of the agreement. 
+
+5.  Allow parties to participate in mediation via video conferencing.
+
+Additionally, access to emergency rental assistance was an important factor in the success of many of the 
+mediations. Concurrent with updates to the existing mediation program for landlord/tenant disputes, 
+access to rental assistance funds should be made permanent.
+
+EVICTION PREVENTION, MEDIATION • 27
+
+ENDNOTES
+
+Office of the Governor, “Fifth Supplementary 
+
+1. 
+Emergency Proclamation for COVID-19,” State of 
+Hawaiʻi, April 16, 2020, https://governor.hawaii.
+gov/wp-content/uploads/2020/04/2004088-ATG_
+Fifth-Supplementary-Proclamation-for-COVID-19-
+distribution-signed.pdf
+
+One Oʻahu, “Rental & Utility Relief Program 
+
+2. 
+Frequently Asked Questions,” City & County of 
+Honolulu, Updated September 28, 2022, https://
+www.oneoahu.org/renthelp/#faqs
+
+Resolution Strategies,” Mitchell Hamline Law Journal 
+of Public Policy and Practice, 41;3, p 129, 2020, 
+https://open.mitchellhamline.edu/cgi/viewcontent.
+cgi?article=1035&context=policypractice
+
+Original Source: Bezdek, Barbara, “Silence in the 
+Court: Participation and Subordination of Poor 
+Tenants’ Voices in Legal Process,” Hofstra Law 
+Review, 20;3, 1992, https://scholarlycommons.
+law.hofstra.edu/cgi/viewcontent.
+cgi?referer=&httpsredir=1&article=1742&context=hlr 
+
+One Oʻahu, “Rental and Utility Relief 
+3. 
+Program Frequently Asked Questions,” City 
+& County of Honolulu, Updated June 30, 
+2022, https://static1.squarespace.com/
+static/5e69ad07bb2a7750ffc9a8ed/t/62b
+e5f333b3efc0c11779b91/1656643380231/
+Public+Version+RURP+FAQ+6-30-2022.docx.pdf
+
+4. 
+The Mediation Center of the Pacific, “Eviction 
+Mediation Program Related to Act 57,” 2021, https://
+www.mediatehawaii.org/semp
+
+5. 
+Act 57 (H.B. 1376, H.D. 2, S.D. 2, C.D. I), 
+Session Laws of Hawaiʻi 2021, Related to the 
+Landlord-Tenant Code, https://www.capitol.hawaii.
+gov/session2021/bills/GM1157_.PDF 
+
+6. 
+
+ibid
+
+Urban Institute, “Getting Landlords and 
+
+7. 
+Tenants to Talk: The Use of Mediation in Eviction,” 
+p 2, April, 2020, https://www.urban.org/sites/
+default/files/publication/101991/getting-landlords-
+and-tenants-to-talk_3.pdf
+
+8. 
+Eisenberg, Deborah Thompson and Ebner, 
+Noam, “Disrupting the Eviction Crisis with Conflict 
+
+28 • EVICTION PREVENTION, MEDIATION
+
+9. 
+
+Urban Institute (2020), p 10 
+
+10. 
+
+ibid
+
+11. 
+
+Eisenberg (2020), p 129
+
+12. 
+
+ibid 
+
+13. 
+
+Eisenberg (2020), p 143–144
+
+Boghani, Priyanka, Dan Nolan, and Anthony 
+14. 
+DeLorenzo, “How Moratoriums & Rental Assistance 
+Impacted Evictions in the U.S. During COVID-19,” 
+Frontline, July 26, 2022, https://www.pbs.org/
+wgbh/frontline/article/how-moratoriums-rental-
+assistance-impacted-evictions-in-the-u-s-during-
+covid-19/
+
+Luddin, Jennifer, “Eviction filings are up 
+
+15. 
+sharply as pandemic rental aid starts to run out,” 
+National Public Radio, May 4, 2022, https://www.npr.
+org/2022/05/04/1095559147/eviction-filings-are-up-
+sharply-as-pandemic-rental-aid-starts-to-run-out
+
+For the mediations in this category that 
+
+16. 
+resulted in settlement, we were not able to obtain 
+information on whether rent relief was a factor.

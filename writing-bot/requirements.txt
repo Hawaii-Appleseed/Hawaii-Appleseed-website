@@ -1,0 +1,9 @@
+chromadb
+openai
+anthropic
+requests
+beautifulsoup4
+pdfminer.six
+rank-bm25
+sentence-transformers
+streamlit

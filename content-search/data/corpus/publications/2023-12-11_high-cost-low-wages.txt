@@ -1,0 +1,1381 @@
+Title: The High Cost of Low Wages
+Date: unknown
+URL: https://hiappleseed.org/publications/high-cost-low-wages
+PDF: https://hiappleseed.org/s/The-High-Cost-of-Low-Wages_FINAL.pdf
+============================================================
+
+December 2023
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+THE HIGH COST
+
+OF LOW WAGES
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+Hawaiʻi Appleseed is committed to a more socially and economically just Hawaiʻi, where everyone has genuine 
+opportunities to achieve economic security and fulfill their potential. We change systems to address inequity 
+and foster greater opportunity by conducting data analysis and research to address income inequality, 
+educating policymakers and the public, engaging in collaborative problem solving and coalition building, and 
+advocating for policy and systems change.
+
+The work of Hawaiʻi Appleseed is about people. The issues we work on—housing, food, wages, the state 
+budget and taxation, and racial and indigenous equity—are important because they ensure people have 
+access to shelter, sustenance, and the means to survive and thrive individually and collectively. Addressing 
+these issues requires the knowledge and expertise of the people that have first-hand experience and live with 
+the adverse consequences of our flawed systems.
+
+The Hawaiʻi Budget & Policy Center is a program of Hawaiʻi Appleseed Center for Law & Economic Justice. 
+Our mission is to ensure that our state and local economic policies increase opportunity for all residents. We 
+do this by analyzing and understanding the implications of tax and budget decisions and making sure that 
+the public and policy-makers are informed through strategic communications, coalitions, and key partners. 
+HBPC’s work is guided by the belief that government at all levels should play an active role in helping people 
+reach their full potential.
+
+TABLE OF CONTENTS
+
+Executive Summary 
+
+The High Cost of Living
+
+The Growth of Low-Wage Work
+
+Why Are Wages Low?
+
+The Social Costs of Low Wages 
+
+Recommendations
+
+Endnotes
+
+3
+
+4
+
+8
+
+15
+
+17
+
+19
+
+22
+
+Copyright © 2023 Hawaiʻi Appleseed Center for Law & Economic Justice. All rights reserved. 
+733 Bishop Street, Suite 1180, Honolulu, HI 96813
+
+2 • HIGH COST OF LOW WAGES
+
+EXECUTIVE SUMMARY
+
+Growing up in a financially secure household is often one 
+of the highest predictors of future economic success. 
+Despite working and being active players in our local 
+economy, more than half of Hawaiʻi’s households are 
+living paycheck to paycheck, and are one financial 
+hardship away from slipping into poverty. The causes 
+of poverty are many, but here in Hawaiʻi much of it is 
+driven by our high cost of basic needs, including housing, 
+healthcare and food, as well as the growing share of low-
+wage, low-opportunity jobs. 
+
+Living in a low-wage household can have permanent 
+adverse impacts on a child’s chances of success as an 
+adult, and this impact carries over from one generation 
+to the next. The disadvantages of growing up in poverty 
+mean that children in low-income households are less 
+likely to move up the income ladder when they begin 
+working, compared to their peers from financially 
+secure households.1 The failure of low-wage jobs to 
+provide economic stability can perpetuate a cycle of 
+intergenerational poverty that keeps families trapped 
+in poverty. This lack of economic mobility can impose a 
+
+high cost on our keiki through loss of future economic 
+productivity, poorer health outcomes, and less 
+educational attainment. 
+
+However, policymakers have at their disposal highly 
+targeted interventions that can help to short-circuit the 
+cycle of poverty, and help Hawaiʻi’s children from low-
+income families ladder-up on their journey to economic 
+success. Specifically, lawmakers can invest in proven 
+economic supports—such as creating a state-level Child 
+Tax Credit—that will help low-income families cope with 
+Hawaiʻi’s high cost of raising a family. In addition, the state 
+and counties can continue to make public investments in 
+the construction of income-restricted affordable housing, 
+so Hawaiʻi’s low-income families can afford to continue to 
+live and work here.   
+
+In this report, we demonstrate how chronically low wages 
+have prevented Hawaiʻi’s working families from thriving, 
+and identify policies that can help to resolve the root 
+problems that cause poverty. 
+
+HIGH COST OF LOW WAGES • 3
+
+THE HIGH COST OF 
+LIVING
+
+The high cost of living in Hawaiʻi means that residents need higher wages to get by. Hawaiʻi continues to be the most 
+expensive U.S. state to live in, with prices that are 13 percent higher than the national average.2 In addition, the states  
+that come close to Hawaiʻi’s cost of living have median incomes that are either comparable or significantly higher.3
+
+Figure 1. State costs of living compared to the U.S. average (2022)
+
+13.20%
+
+11.80%
+
+11.30%
+
+9.10%
+
+8.90%
+
+15.00%
+
+10.00%
+
+5.00%
+
+0.00%
+
+Hawai‘i
+
+California
+
+District of 
+Columbia
+
+New York
+
+New Jersey
+
+Note: An RPP of 100 represents the U.S. average.
+
+4 • HIGH COST OF LOW WAGES
+
+Figure 2. Median income by state (2022)
+
+$66,045.00
+
+$41,754.00
+
+$40,526.00
+
+$40,710.00
+
+$45,882.00
+
+$80,000.00
+
+$60,000.00
+
+$40,000.00
+
+$20,000.00
+
+$0.00
+
+Hawai‘i
+
+California
+
+District of 
+Columbia
+
+New York
+
+New Jersey
+
+Figure 3. Median home price by state (2022)4
+
+$1,000,000.00
+
+$750,000.00
+
+$500,000.00
+
+$250,000.00
+
+$0.00
+
+$820,100.00
+
+$715,900.00
+
+$711,100.00
+
+$400,400.00
+
+$428,900.00
+
+Hawai‘i
+
+California
+
+District of 
+Columbia
+
+New York
+
+New Jersey
+
+HIGH COST OF LOW WAGES • 5
+
+After adjusting it for 
+inflation, Hawaiʻi’s 
+average wage only 
+climbed by about 
+24 percent between 
+1980 and 2020.5 These 
+stagnant wages have 
+made it difficult for low-
+income Hawaiʻi residents 
+to enter the middle-
+class. In Honolulu, the 
+cost of housing alone 
+accounts for over 41 
+percent of the average 
+household’s budget.6
+
+Figure 4. Average wage adjusted for inflation, Hawai‘i (1980–2020)
+
+$25,000.00
+
+$20,000.00
+
+$16,323.00
+
+$15,000.00
+
+$10,000.00
+
+$5,000.00
+
+$0.00
+
+$20,259.00
+
+1980
+
+1990
+
+2000
+
+2010
+
+2020
+
+Hawai‘i’s average wage has only risen slightly with the rate of inflation over the last 40 years.
+
+6 • HIGH COST OF LOW WAGES
+
+Since low-income households spend a higher portion of 
+their budget on basic necessities compared to high-income 
+households, cost increases can push them even deeper into 
+economic insecurity. One survey found that 54 percent of 
+Hawaiʻi residents spend all of their income on necessities, 
+leaving them with little savings for unexpected costs, such as 
+emergency room bills or vehicle repairs.7
+
+Having a child can also add thousands of dollars to a 
+family’s yearly expenses, since parents have to budget for 
+their children’s education, food and medical care. Although 
+it can be costly to afford childcare for infants and toddlers, 
+the overall cost of raising a child only increases with age. In 
+2015, it cost the average American couple about 10 percent 
+more to support a 17-year-old compared to a 2-year-old.8 
+
+Figure 5. Average household budget by spending category, Honolulu (2020-2021)9
+
+Food
+15.2%
+
+Healthcare
+6.5%
+
+Edu.
+1.8%
+
+Entertainment 
+3.1%
+
+Value
+
+Housing
+41.2%
+
+40
+
+30
+
+20
+
+10
+
+Transportation
+12.4%
+
+Insurance & 
+Pensions 14.1%
+
+Housing and food costs take up over half of the average household’s budget in Honolulu.
+
+HIGH COST OF LOW WAGES • 7
+
+THE GROWTH OF LOW 
+WAGE WORK
+
+The wages earned by many of Hawaiʻi’s workers are not enough to sustain a comfortable standard of living. In 2022, the 
+median wage in Hawaiʻi was $21.66 an hour, or $45,043 a year before taxes. Although Hawaiʻi’s median wage almost 
+counts as a “living” wage for single workers without children—the wage needed to be financially secure at a basic 
+level—it is well below the living wage for single-income families with any number of children. The minimum wage, on 
+the other hand, is not enough for even single workers to support themselves.
+
+Figure 6. Living wage for a full-time working adult with children, Hawai‘i (2022)10
+
+$60.00
+
+$40.00
+
+$20.00
+
+$0.00
+
+$50.87
+
+$41.71
+
+$21.66
+
+$21.99
+
+$12.00
+
+Minimum 
+Wage
+
+Median
+Wage
+
+Living Wage 
+(0 Children)
+
+Living Wage 
+(1 Child)
+
+Living Wage 
+(2 Children)
+
+Note: All data is for one adult.
+
+8 • HIGH COST OF LOW WAGES
+
+The financial burden 
+of raising a child is 
+compounded when 
+households have to rely 
+on the income of only one 
+working adult. Reflecting 
+this reality, single-mothers 
+with children in Hawaiʻi are 
+more than twice as likely to 
+live in poverty compared 
+to households without 
+children, and all single 
+mother households are 
+more than twice as likely to 
+live in poverty than married 
+couple households.
+
+Figure 7. Poverty rate of households with children, Hawai‘i (2022)11
+
+100.00%
+
+75.00%
+
+50.00%
+
+25.00%
+
+0.00%
+
+Single Mothers
+
+Married Couples
+
+96.70%
+
+54.60%
+
+40.60%
+
+6.90%
+
+3.30%
+
+Household 
+has no 
+children
+
+18.60%
+
+3.00%
+
+Household 
+has 1 or 2 
+children
+
+10.80%
+
+Household 
+has 3 or 4 
+children
+
+Household 
+has 5 or more 
+children
+
+HIGH COST OF LOW WAGES • 9
+
+Figure 8. Poverty level by work status, Hawai‘i (2022)12
+
+100.00%
+
+75.00%
+
+50.00%
+
+98.40%
+
+88.50%
+
+25.00%
+
+0.00%
+
+Working full-time, 
+year-round in the past 
+12 months
+
+11.50%
+
+Working part-time or 
+part-year in the past 
+12 months
+
+Percent below poverty level
+
+Percent above poverty level
+
+Another issue is that many low-income parents work multiple part-time jobs so that they have more flexibility to take 
+care of their children. Part-time jobs almost always come with lower wages and fewer benefits than full-time jobs. One 
+2019 survey reported that 39 percent of Hawaiʻi adults in households earning less than $40,000 work multiple jobs, in 
+contrast to 16 percent of adults in households earning above $100,000 per year.13 
+
+Aside from the lack of job opportunities, full-time work may not always be a realistic option for low-income parents. 
+Parents with lower incomes have to balance their work commitments with other responsibilities, such as school or 
+childcare. Across the United States, school attendance and personal obligations are the most common reasons for 
+doing part-time work, while 20 percent of part-time workers cannot work full-time due to economic reasons, such as 
+issues with finding a job.14
+
+Part-time workers are nearly six times as likely to be in poverty compared to full-time workers.15 This makes sense given 
+the fact that part-time jobs are most commonly found in the retail and hospitality industries, where workers tend to 
+have lower earnings.16
+
+10 • HIGH COST OF LOW WAGES
+
+During the Great Recession of 2009, 
+the resulting steep drop in wages for 
+U.S. workers was accompanied by an 
+increase in the number of part-time 
+jobs.17 18  Hawaiʻi state law only requires 
+employers to provide health insurance 
+to employees who work a minimum 
+of 20 hours a week, which means 
+that many part-time workers—who 
+often have their hours intentionally 
+restricted to 19 a week—have to pay for 
+their own private insurance or enroll 
+in a state Medicaid plan. Perhaps just 
+as important, part-time jobs are less 
+stable than full-time jobs in general, 
+since many of them are seasonal.19 
+Twice as many Hawaiʻi workers with 
+multiple part-time jobs report having 
+inconsistent earnings compared to 
+those who have a single job.20 
+
+Job losses during the COVID-19 
+pandemic were skewed towards the 
+accommodations and food services 
+sectors as well—all of which have 
+the highest proportions of part-time 
+jobs out of all sectors. On a month-
+to-month average, these sectors were 
+responsible for a combined 40 percent 
+of the unemployment claims in Hawaiʻi 
+in 2020.21 
+
+Gig work is also on the rise, and it carries with it other disadvantages for part-time workers. Gig workers are defined as 
+independent contractors—workers temporarily contracted with an employer.22 In 2022, it was estimated that 16 percent 
+of the U.S. labor force participated in some form of “independent” work—including gig work—in a given prior month.23 
+
+Gig workers have minimal job security, especially during recessions. For example, between 2020 and 2021, 3.1 million 
+new workers in the U.S. entered the platform-based gig economy, which includes services such as Uber or DoorDash. 
+At the same time, 1.2 million workers left this type of gig work behind. Evidence suggests that this sudden increase in 
+gig workers was strongly influenced by the large number of workers who were seeking employment after being laid off 
+during the COVID-19 pandemic.24 
+
+Given that most gig workers are employed as independent contractors, many companies in the gig economy are not 
+legally required to treat their workers as employees. Consequently, gig workers often have to cover their own job-
+related expenses, and they rarely receive benefits such as health insurance.25 Despite the drawbacks of gig work, not all 
+workers can find full-time jobs that fit their personal situations.
+
+HIGH COST OF LOW WAGES • 11
+
+Jobs that pay a living wage are 
+in short supply for Hawaiʻi’s 
+workers. When compared 
+to the rest of the nation, 
+Hawaiʻi has an unusually high 
+concentration of low-paying 
+occupations. For example, 
+food preparation and serving-
+related jobs make up the 
+second-largest proportion (12.4 
+percent) of jobs in the state. 
+The median wage for these jobs 
+is $14.45 an hour, and at least 
+three-fourths of them do not 
+pay the living wage for a single 
+parent with a young child.26
+
+Figure 9. Percentage of total employment by occupation, Hawai‘i (2022)27
+
+Other (16.9%)
+
+Administrative Support (13.4%)
+
+Healthcare Support (3.7%)
+
+Installation, Repair (3.9%)
+
+Finance (4.8%)
+
+Construction (4.9%)
+
+Custodial (5.0%)
+
+Healthcare Practice (5.4%)
+
+Management (6.4%)
+
+Hawai‘i had a total of 594,880 employed workers in May of 2022.
+
+12 • HIGH COST OF LOW WAGES
+
+Food Service, Prep (12.4%)
+
+Retail, Sales (8.6%)
+
+Transportation, Shipping (8.0%)
+
+Educational, Library (6.5%)
+
+Through the rest of the 2020s, 
+Hawaiʻi’s job growth will provide few 
+opportunities for low-income residents 
+to boost their income. Between 
+2018 and 2028, it is predicted that 73 
+percent of 25,450 new jobs will be in 
+the health and social assistance, food 
+services, and construction industries.28 
+Health and social assistance jobs, 
+such as nurses, can offer high wages 
+to qualified workers. However, they 
+typically require a college education, 
+and there has been a severe shortage 
+of available slots in Hawaiʻi-based 
+educational programs.29
+
+$27.20
+
+Figure 10. Median wage for the top five occupations, Hawai‘i (2022)30
+
+$30.00
+
+$20.00
+
+$10.00
+
+$0.00
+
+$19.46
+
+$17.32
+
+$21.67
+
+$14.45
+
+Food Prep 
+and Service
+Occupations
+
+Sales and 
+Retail 
+Occupations
+
+Transportation 
+and Shipping 
+Occupations
+
+Administrative 
+Support
+Occupations
+
+Educational 
+and Library 
+Occupations
+
+The median wages for the five largest occupation groups are far below the $41.71 living wage for a single parent.
+
+HIGH COST OF LOW WAGES • 13
+
+There is an undeniable connection 
+between income and race in both 
+Hawaiʻi and the United States at 
+large. People of all backgrounds 
+are struggling to make a living in 
+Hawaiʻi, but there have always been 
+more barriers to financial security 
+for some groups. In Hawaiʻi, white 
+and Japanese residents consistently 
+report having the highest average 
+incomes in the state. There is a large 
+income gap between these groups 
+and Filipinos, Native Hawaiians, and 
+Micronesians.
+
+Figure 11. Average income (per person) by ethnicity, Hawai‘i (2022)31
+
+Micronesian Alone
+
+$27,597
+
+Native Hawaiian Alone
+
+$30,851
+
+Filipino Alone
+
+$36,106
+
+White Alone
+
+$56,592
+
+Japanese Alone
+
+$61,852
+
+$0
+
+$20,000
+
+$40,000
+
+$60,000
+
+14 • HIGH COST OF LOW WAGES
+
+WHY ARE WAGES 
+LOW?
+
+Hawaiʻi’s low wages are influenced by its unbalanced economy and geographical distance from the continental U.S. 
+Tourism has been the dominant industry in the islands for decades, providing mostly low-wage service jobs. Although 
+the state is less reliant on tourism now compared to 20 years ago, it still drives around 23 percent of the economy.32
+
+The state’s dependence on tourism is one of the primary reasons why low-wage jobs remain prevalent. One large-
+scale study discovered that jobs in the leisure and hospitality industry have the lowest earnings in the U.S. economy.33  
+Unfortunately, there are limited opportunities for local workers to enter higher-paying careers.
+
+Higher-paying industries, such as the high-tech sector, make up a small fraction of Hawaiʻi’s job market. Since the early 
+1980s, the State of Hawaiʻi has provided over $1 billion in tax credits to local startups in the technology sector. However, 
+only 4.5 percent of Hawaiʻi’s workers belonged to this industry in 2018, and it drove less than 4 percent of the state’s 
+economic output.34
+
+Figure 12. Employment numbers by occupation, Hawai‘i (2014–2016)35
+
+60,000
+
+53,085
+
+52,384
+
+52,213
+
+64,254
+
+61,245
+
+57,359
+
+40,000
+
+20,000
+
+15,246
+
+11,152
+
+12,813
+
+12,156
+
+13,197
+
+13,165
+
+0
+
+2014
+
+2015
+
+2016
+
+2017
+
+2018
+
+2019
+
+Food Prep and Service
+
+Computer and Mathematics
+
+HIGH COST OF LOW WAGES • 15
+
+Since high-paying job opportunities are in short supply and require a college education, only workers with the time and 
+money to pursue a college education can eventually switch to careers with higher pay—a path that is out of reach when 
+most low-wage workers cannot even afford their rent. 
+
+The decline in union organizing across the U.S. has also negatively affected wages and job opportunities. Historically, 
+unions have been a key force behind fairer wages and higher labor standards, leveraging their collective bargaining 
+power and strikes to advocate for reforms.36 However, the national decline in union membership has gone hand-in-
+hand with growing wage inequality between the working class and the wealthy.37 Even though Hawaiʻi still has a high 
+rate of union membership compared to the national average, the percentage of local workers in unions dropped from 
+29.9 percent in 1989 to 23.5 percent by 2019.38
+
+16 • HIGH COST OF LOW WAGES
+
+SOCIAL COSTS OF 
+LOW-WAGES
+
+The high concentration of low-wage jobs in Hawaiʻi, 
+coupled with our high cost of living, creates barriers 
+to economic security for workers across the islands. 
+For children living in these families, growing up 
+in a low-income household can be particularly 
+costly. These costs manifest in the form of lower 
+income, poorer health and educational outcomes, 
+higher incidences of contact with the criminal-legal 
+system, and higher rates of houselessness. 
+
+These poorer outcomes impose high costs on 
+our collective resources, and lead to losses in 
+economic productivity. Recent research estimates 
+that the annual cost of childhood poverty in the 
+U.S. amounts to over $1.03 trillion annually.39 This 
+aggregate cost is the result of increased healthcare 
+costs ($192.1 billion), reduced earnings ($294 
+billion), higher incidences of crime ($200 billion), 
+nominal and social costs of incarceration ($205.7 
+billion), and child homelessness and neglect 
+($137.4 billion).40
+
+HEALTH
+
+Children who grow up in low-income households are more likely to be exposed to adverse life conditions, including 
+food and housing insecurity. When experienced early in life, these adverse conditions can impact health outcomes 
+throughout a child’s lifetime. Children who experienced poverty in their first 6 years of life are more than twice as likely 
+to report being in poor overall health as adults, relative to their peers who grew up in families with incomes that were 
+above twice the poverty level.41 
+
+Furthermore, children who experience poverty are more likely to experience toxic stress as a result of adverse childhood 
+experiences, which can negatively impact brain development. Prolonged exposure to these stressors can disrupt 
+brain development in children, leading to increased incidences of stress-related diseases and even impaired cognitive 
+function later in life.42
+
+HIGH COST OF LOW WAGES • 17
+
+EDUCATION
+
+Children from low-income families are also more likely to 
+experience lower levels of educational attainment, and can 
+lag behind their more affluent peers while attending school. 
+Research suggests adults who experience poverty early in life 
+achieve two fewer years of schooling on average, while also 
+dropping out of school at far higher rates, relative to higher 
+income students.43 44
+
+Differences in academic performance between low-income 
+and higher income children can also be observed as early as 
+kindergarten. Nationally, just 48 percent of keiki from low-
+income households entering school at age 5 are considered 
+“school-ready,” meaning they possess adequate early math 
+and reading skills. By contrast, 75 percent of keiki from middle 
+and high income households are considered school ready 
+by age 5. This represents a nearly 30 percentage point gap 
+between these populations, putting children from low-income 
+households at a considerable disadvantage, when compared 
+with higher income children.45 
+
+INCOME
+
+Poorer outcomes in both health and education for low-income children can also translate to lower levels of success 
+later in life. Research demonstrates that children who grow up in persistent poverty are 37 percent less likely to to 
+be consistently employed as young adults relative to children from less poor households.46 These lower levels of 
+employment can often correspond with higher levels of poverty in early adulthood and middle age. One study found 
+that children growing up persistently poor had a poverty rate of 46 percent in early adulthood, while those who never 
+experienced poverty as children had a poverty rate of just 4.1 percent.47
+
+These outcomes strongly suggest an intergenerational effect of poverty on children: Experiencing poverty early in life 
+makes it far more likely that a child will experience poverty in adulthood. In this sense, the income and well-being of 
+parents can be strong predictors for the income and well-being of their children in the future. This intergenerational 
+cycle deprives our future workforce of economic opportunity and may pose a significant threat to the health of our 
+economy overall.
+
+ECONOMIC IMPACTS
+
+These costs could be significantly reduced by investments that support working families and that help them to reach 
+economic success. Cash transfers, such as the Child Tax Credit and Earned Income Tax Credit represent key investments 
+that the federal and state governments can make to help lift up families struggling to make ends meet. Researchers 
+have estimated that for every dollar dedicated to reducing childhood poverty, the U.S. saves up to seven dollars 
+in terms of the economic costs that are connected to poverty.48 Clearly, investments in the economic well-being of 
+children and families, now, will produce future savings and give our children a chance to succeed throughout their 
+lifetimes.
+
+18 • HIGH COST OF LOW WAGES
+
+RECOMMENDATIONS
+
+1. Establish a state-level Keiki 
+Credit to augment the federal Child 
+Tax Credit.  
+
+Children are our most important 
+investment and ensuring that every 
+child is set up for success throughout 
+their lifetimes should be our highest 
+priority as a society. Refundable 
+tax credits like the federal Child Tax 
+Credit and Earned Income Tax Credit 
+are some of the most effective ways 
+to make those investments, as they 
+provide direct economic assistance 
+to working families so they can meet 
+their basic needs.  
+
+In response to the COVID-19 
+pandemic, the federal government 
+temporarily expanded the federal 
+Child Tax Credit from $2,000 per child 
+to $3,600 for children aged 0–5 and 
+to $3,000 for children aged 6–17. 
+These direct investments in children 
+reduced child poverty rates by a 
+staggering 40 percent throughout 
+2021. This was one of the steepest 
+drops in child poverty on record, and 
+clearly demonstrates the efficacy 
+of refundable tax credits like the 
+CTC. However, this expansion was 
+allowed to expire by Congressional 
+policymakers, and child poverty has 
+
+more than doubled from 5.2 percent in 2021 to 12.4 percent in 2022.49 
+
+The Hawaiʻi State Legislature should help to fill the gap left by the federal government by creating Hawaiʻi’s first state 
+level Child Tax Credit—or “Keiki Credit.” Given that income is such a strong predictor of future earnings, good health 
+outcomes, and higher educational attainment, the Keiki Credit would level the playing field for children from low-
+income families, and help to start them on a pathway to future economic success. For more on creating a state level 
+CTC, see our report “Investing in our Future: A Keiki Credit for Hawaiʻi.”  
+
+HIGH COST OF LOW WAGES • 19
+
+ 
+ 
+ 
+2. Index the minimum 
+wage to the cost of living or 
+inflation.  
+
+Hawaiʻi’s minimum wage 
+workers face some of the 
+steepest obstacles to achieving 
+economic security, given our 
+extremely high cost of living. 
+The high cost of housing 
+alone represents one of the 
+most significant barriers to 
+financial stability, especially 
+for those earning the legal 
+minimum wage. Recently, the 
+legislature passed a landmark 
+piece of legislation, raising 
+our minimum wage to $18 per 
+hour by 2028 and putting our 
+state on a path to having one 
+of the highest state-mandated 
+minimum wages in the country 
+
+However, the legislature 
+missed an opportunity to 
+ensure continued economic 
+prosperity for low-wage 
+earners by failing to tie future 
+wage growth to either the 
+cost of living or inflation. This 
+means that, once the wage 
+reaches its maximum of $18 
+in 2028, it will remain there 
+until the legislature once again 
+takes action to increase it. 
+Minimum wage earners will 
+then be trapped in a cycle of 
+wage stagnation, which can 
+only be remedied by action 
+from lawmakers. 
+
+Tying the wage to the cost of living—“indexing” the minimum wage—avoids wage stagnation by linking increases in the 
+minimum wage to  either inflation or increases in the consumer price index. Doing so would ensure that the minimum 
+wage continues to grow as the costs for basic necessities continue to rise. Currently, 13 states and the District of 
+Columbia index their wages to the cost of living, ensuring their wages are growing with the cost of goods and services.50 
+Hawaiʻi should take this next step in its minimum wage policy, and index our wage to the cost of living as well. Costs will 
+inevitably continue to rise, and the wages of our lowest wage workers should rise too. 
+
+20 • HIGH COST OF LOW WAGES
+
+ 
+ 
+ 
+3. Increase dedicated revenue for 
+affordable housing construction.  
+
+Housing is often the most expensive 
+item in the budgets of working families. 
+59 percent of low-income households 
+are cost burdened, meaning they 
+spend more than 30 percent of their 
+monthly income on housing.51 These 
+costs will continue to rise as the high 
+demand and limited supply of housing 
+units continues to put upward pressure 
+on rents. This in turn puts additional 
+pressure on the monthly finances of 
+low-income renters who are already 
+struggling to keep up with the rising 
+costs of other basic needs. 
+
+To combat the lack of affordable 
+housing, the state needs to make large 
+scale investments in the construction, 
+acquisition, and rehabilitation of 
+affordable housing rentals for local 
+working families. While the state does 
+invest millions each year in affordable 
+housing,—mostly through one-time 
+appropriations—these investments 
+need to ratchet up if they are to 
+effectively address our housing needs. 
+However, doing so requires an increase 
+in dedicated revenue for affordable 
+housing.  
+
+One way the state can achieve this is by 
+increasing the conveyance tax, which 
+is levied on the sale of real property in 
+the state. Under this tax, home sales 
+are taxed at progressively higher rates 
+depending on their sale value and 50% 
+or $38 million, whichever is lower, is 
+dedicated to the Rental Housing Revolving Fund. The Rental Housing Revolving Fund is used as gap financing for Low 
+Income Housing Tax Credit (LIHTC) projects for construction of affordable units for those making 0-60 percent Area 
+Median Income (AMI), and the Tier 2 Program which funds construction of affordable workforce rental housing at 60-100 
+percent AMI. Projections estimate that more than 50 percent of our housing production needs to be affordable rentals 
+for low-income and workforce families. The conveyance tax is one of the only dedicated revenue sources for affordable 
+housing in our tax code and should be increased or have its revenue caps removed to drive more funding to affordable 
+housing development.
+
+HIGH COST OF LOW WAGES • 21
+
+ 
+ 
+ 
+ENDNOTES
+
+Le Menestrel, S. and G. Duncan, “A Roadmap 
+
+1. 
+to Reducing Child Poverty,” National Academies Press, 
+February 28, 2019, https://www.ncbi.nlm.nih.gov/books/
+NBK547371
+
+Families, 2015,” U.S. Department of Agriculture, Center for
+Nutrition Policy and Promotion, 1528(2015): March 15, 
+2017, https://fns-prod.azureedge.us/sites/default/files/
+resource-files/crc2015-march2017.pdf
+
+Bureau of Economic Analysis, “Real Personal 
+
+2. 
+Consumption Expenditures by State and Real Personal 
+Income by State and Metropolitan Area,” U.S. Department 
+of Commerce, December 15, 2022, https://www.bea.gov/
+news/2022/real-personal-consumption-expenditures-
+state-and-real-personal-income-state-and
+
+Bureau of Labor Statistics, “Quarterly 
+
+3. 
+Census of Employment and Wages,” U.S. 
+Department of Labor, 2018, https://data.bls.
+gov/cew/apps/table_maker/v4/table_maker.
+htm#type=0&year=2018&qtr=A&own=0&ind=10&supp=1
+
+Bureau of the Census, “American Community 
+
+4. 
+Survey: Table DP04,” U.S. Department of Commerce, 2021, 
+https://data.census.gov/table?q=home+price&g=040XX00 
+US06,11,15,36&tid=ACSDP5Y2021.DP04&moe=false
+
+Giesting, Beth, “The Case for a New Economy,” 
+
+5. 
+Hawaiʻi Budget & Policy Center, 2020,
+https://www.hibudget.org/publications/the-case-for-a-
+new-economy
+
+6. 
+Bureau of Labor Statistics, “Consumer 
+Expenditures for the Honolulu Metropolitan Area,  2020–
+21,” U.S. Department of Labor, Thursday, October 19, 
+2023, https://www.bls.gov/regions/west/news-release/
+consumerexpenditures_honolulu.htm#table1
+
+Ohri, Chandi et al., “Hawaii Financial Health 
+
+7. 
+Pulse,” Financial Health Network, 2019: 9, https://
+s3.amazonaws.com/cfsi-innovation-files-2018/wp-
+content/uploads/2020/02/03230029/Hawaii_Financial_
+Health_Pulse.pdf
+
+8. 
+
+Lino, Mark et al., “Expenditures on Children by 
+
+9. 
+
+Bureau of Labor Statistics, 2023
+
+“Living Wage Calculation for Hawaii,” 
+
+10. 
+Massachusetts Institute of Technology, 2022, https://web.
+archive.org/web/20220723060941/https://livingwage.mit.
+edu/states/15
+
+11. 
+Bureau of the Census, “American Community 
+Survey: Table S1702,” U.S. Department of Commerce, 
+2022, https://data.census.gov/table/ACSST1Y2022.
+S1702?q=poverty+household&g=040XX00US15&moe=false
+
+12. 
+Bureau of the Census, “Poverty Status in the Past 
+12 Months: Table S1702,”  U.S. Department of Commerce, 
+2022, https://data.census.gov/table/ACSST1Y2022.
+S1702?q=s1702&g=040XX00US15
+
+13. 
+
+Ohri, 2019: 13
+
+Dunn, Megan, “Monthly Labor Review,” Bureau 
+
+14. 
+of Labor Statistics, 2018, https://www.bls.gov/opub/
+mlr/2018/article/pdf/who-chooses-part-time-work-and-
+why.pdf  
+
+15. 
+
+Ohri, 2019: 27
+
+Hund-Mejean, Martina and Marcela Escobari, “Our 
+
+16. 
+employment system has failed low-wage workers. How 
+can we rebuild?” Brookings Institution, April 28, 2020, 
+https://www.brookings.edu/blog/up-front/2020/04/28/
+our-employment-system-is-failing-low-wage-workers-
+how-do-we-make-it-more-resilient
+
+Farber, Henry, “Job Loss in the Great Recession: 
+
+17. 
+Historical Perspective from the Displaced Workers Survey, 
+1984-2010,” National Bureau of Economic Research, 
+
+22 • HIGH COST OF LOW WAGES
+
+10(3386), May 2011, https://www.nber.org/papers/w17040
+
+27. 
+
+Ibid
+
+Kang, Hyunju, Jaevin Park, Hyunduk Suh, “The 
+
+18. 
+Rise of Part-time Employment in the Great Recession: 
+Its Causes and Macroeconomic Effects,” Journal of 
+Macroeconomics, 66(103257), December 2020, https://
+www.sciencedirect.com/science/article/abs/pii/
+S0164070420301828
+
+Golden, Lonnie, “Still falling short on hours and 
+
+19. 
+pay,” Economic Policy Institute, December 5, 2016, https://
+www.epi.org/publication/still-falling-short-on-hours-and-
+pay-part-time-work-becoming-new-normal
+
+20. 
+
+Ohri, 2019: 27
+
+“Characteristics of the Insured Unemployed,” 
+
+21. 
+Hawaiʻi State Department of Labor and Industrial 
+Relations, 2020, https://labor.hawaii.gov/rs/files/2020/10/
+CIUpub2020-finalcorrected.pdf
+
+Zipper, Ben, et al., “National survey of gig workers 
+
+22. 
+paints a picture of poor working conditions, low pay,” 
+Economic Policy Institute, June 1, 2022,
+https://www.epi.org/publication/gig-worker-survey
+
+Lloro, Alicia, “Economic Well-Being of U.S. 
+
+23. 
+Households in 2022,” Federal Reserve Board, 2023: 26, 
+https://www.federalreserve.gov/publications/files/2022-
+report-economic-well-being-us-households-202305.pdf
+
+Garin, Andrew, et al., “The Evolution of Platform 
+
+24. 
+Gig Work, 2012–2021,” National Bureau of Economic 
+Research, May 2023. https://www.nber.org/system/files/
+working_papers/w31273/w31273.pdf
+
+Tran, Molly and Rosemary K. Sokas, “The Gig 
+
+25. 
+Economy and Contingent Work: An Occupational Health 
+Assessment,” Journal of Occupational and Environmental 
+Medicine, 59(4): 63–66, April 2017,
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5374746
+
+26. 
+Bureau of Labor Statistics, “May 2022 State 
+Occupational Employment and Wage Estimates, Hawaiʻi,” 
+U.S. Department of Labor, 2022, https://www.bls.gov/oes/
+current/oes_hi.htm
+
+Research & Statistics Office,  “Long-Term Industry 
+
+28. 
+Projections to 2028, Sstate of Hawaii,” Hawaiʻi State 
+Department of Labor and Industrial Relations, July 2020,
+https://www.hirenethawaii.com/admin/gsipub/htmlarea/
+uploads/LT_2018-28_Highlights-State.pdf
+
+Blair, Allyson, “Amid severe shortage of nurses, 
+
+29. 
+Hawaii nursing schools reject 100s of qualified applicants,” 
+Hawaii News Now, September 14, 2022, https://www.
+hawaiinewsnow.com/2022/09/15/amid-severe-shortage-
+nurses-hawaii-nursing-schools-reject-hundreds-qualified-
+applicants
+
+30. 
+
+Bureau of Labor Statistics, 2022
+
+Bureau of the Census, “American Community 
+
+31. 
+Survey 1-year estimates: Table S0201,” U.S. Department 
+of Commerce, 2022, https://data.census.gov/table/
+ACSSPP1Y2022.S0201
+
+“Experts: 77% of Hawaii’s Economy Isn’t Tourism; 
+
+32. 
+Policymakers Can Take Steps To Reopen It,” Hawaiʻi 
+Public Radio, April 2020, https://www.hawaiipublicradio.
+org/business-news/2020-04-10/experts-77-of-hawaiis-
+economy-isnt-tourism-policymakers-can-take-steps-to-
+reopen-it
+
+Dogru, Tarik, et al., “Employee earnings growth in 
+
+33. 
+the leisure and hospitality industry,” Tourism Management, 
+74: 1–11, October 2019, https://www.sciencedirect.com/
+science/article/abs/pii/S0261517719300378
+
+“Cyberstates 2019,” CompTIA USA , 2019, https://
+
+34. 
+www.cyberstates.org
+
+35. 
+
+Bureau of Labor Statistics, 2019
+
+Cooper, George and Gavin Dawes, “Land and 
+36. 
+Power in Hawaii: The Democratic Years,” University of 
+Hawaiʻi Press, January 1, 1990
+
+Western, Bruce and Jake Rosenfield, “Unions, 
+37. 
+Norms, and the Rise in U.S. Wage Inequality,” American 
+Sociological Review, 76(4): 513–537, 2011, https://www.
+asanet.org/sites/default/files/savvy/images/journals/
+
+HIGH COST OF LOW WAGES • 23
+
+nces.ed.gov/pubs2011/dropout08/tables/table_01.
+asp?referrer=report&utm_source=Child+Trends+5%3A+5+
+Ways+Poverty+Harms+Children&utm_campaign=5+ways+
+poverty+harms+kids&utm_medium=email
+
+Isaacs, Julia B., “Starting School at a 
+45. 
+Disadvantage:The School Readiness of Poor Children,” 
+Brookings Institution, March 2012, https://www.brookings.
+edu/wp-content/uploads/2016/06/0319_school_
+disadvantage_isaacs.pdf
+
+Ratcliffe, Caroline, “Child Poverty and Adult 
+
+46. 
+Success,” Urban Institute, September 2015, https://www.
+urban.org/sites/default/files/publication/65766/2000369-
+Child-Poverty-and-Adult-Success.pdf
+
+Wagmiller, Robert Lee and Robert M. Adelman, 
+
+47. 
+“Childhood and Intergenerational Poverty: The Long-Term 
+Consequences of Growing Up Poor,” National Center for 
+Children in Poverty, November 2009, https://www.nccp.
+org/publication/childhood-and-intergenerational-poverty
+
+48. 
+
+Ibid
+
+Marr, Chuck, Kris Cox, and Sarah Calame, “Any 
+
+49. 
+year-end tax legislation should expand child tax credit to 
+cut child poverty,” Center on Budget & Policy Priorities, 
+November 7, 2023, https://www.cbpp.org/research/
+federal-tax/any-year-end-tax-legislation-should-expand-
+child-tax-credit-to-cut-child
+
+Kamper, Dave and Sebastian Martinez Hickey, 
+
+50. 
+“Tying minimum-wage increases to inflation, as 13 states 
+do, will lift up low-wage workers and their families across 
+the country,”  Economic Policy Institute, September 6, 
+2022, https://www.epi.org/blog/tying-minimum-wage-
+increases-to-inflation-as-12-states-do-will-lift-up-low-
+wage-workers-and-their-families-across-the-country
+
+National Low-Income Housing Coalition, “Housing 
+51. 
+Needs By State - Hawaiʻi,” 2023, https://nlihc.org/housing-
+needs-by-state/hawaii#:~:text=Across%20Hawaii%2C%20
+there%20is%20a,of%20their%20income%20on%20
+housing
+
+docs/pdf/asr/WesternandRosenfeld.pdf
+
+38. 
+Bureau of Labor Statistics, “Union Members 
+in Hawaii — 2022,” U.S. Department of Labor, 2022, 
+https://www.bls.gov/regions/west/news-release/
+unionmembership_hawaii.htm#:~:text=In%20
+2019%2C%20union%20members%20
+accounted,of%20Labor%20Statistics%20reported%20
+today.&text=Hawaii%20had%20135%2C000%20union%20
+members%20in%202019 
+
+McLaughlin, Michael and Mark R. Rank, 
+39. 
+“Estimating the Economic Cost of Childhood Poverty in 
+the United States,” Social Work Research, 42(2): 73–83, 
+June 2018, https://academic.oup.com/swr/article-
+abstract/42/2/73/4956930
+
+40. 
+
+Ibid
+
+41. 
+
+Le Menestrel, 2019
+
+Center on the Developing Child, “Tackling Toxic 
+
+42. 
+Stress,” Harvard University, 2013, https://developingchild.
+harvard.edu/science/key-concepts/toxic-stress
+
+43. 
+
+Le Menestrel, 2019
+
+National Center for Educational Statistics, 
+
+44. 
+“Trends in High School Dropout and Completion Rates 
+in the United States: 1972-2008,” U.S. Department of 
+Education, Institute of Education Sciences, 2008, https://
+
+24 • HIGH COST OF LOW WAGES

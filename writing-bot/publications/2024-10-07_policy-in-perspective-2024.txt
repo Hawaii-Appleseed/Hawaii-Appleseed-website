@@ -1,0 +1,1533 @@
+Title: Policy in Perspective 2024
+Date: unknown
+URL: https://hiappleseed.org/publications/policy-in-perspective-2024
+PDF: https://hiappleseed.org/s/Policy-In-Perspective-2024_FINAL.pdf
+============================================================
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+POLICY
+
+I
+
+N
+
+PERSPECTIVE
+
+LOOKING FORWARD FROM THE 2024 STATE LEGISLATIVE SESSION
+
+ 
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+www.hiappleseed.org
+
+Authors: Hawaiʻi Appleseed Staff
+
+Hawaiʻi Appleseed is committed to a more socially and economically just Hawaiʻi, where everyone has genuine 
+opportunities to achieve economic security and fulfill their potential. We change systems to address inequity 
+and foster greater opportunity by conducting data analysis and research to address income inequality, educating 
+policymakers and the public, engaging in collaborative problem solving and coalition building, and advocating 
+for policy and systems change.
+
+The work of Hawaiʻi Appleseed is about people. The issues we work on—housing, food, wages, mobility, the state 
+budget and taxation, and racial and indigenous equity—are important because they ensure people have access 
+to shelter, sustenance, and the means to survive and thrive individually and collectively. Addressing these issues 
+requires the knowledge and expertise of the people that have first-hand experience and live with the adverse 
+consequences of our flawed systems.
+
+TABLE OF CONTENTS
+
+Forward
+
+Executive Summary
+
+Tax & Budget
+
+Affordable Housing
+
+Food Equity
+
+Transportation Equity
+
+Endnotes
+
+3
+
+4 
+
+6
+
+12
+
+18 
+
+23 
+
+26
+
+Copyright © 2024 Hawaiʻi Appleseed Center for Law & Economic Justice. All rights reserved. 
+733 Bishop Street, Suite 1180, Honolulu, HI 96813
+
+2 • POLICY IN PERSPECTIVE
+
+FORWARD
+
+Every year, Hawaiʻi Appleseed dedicates considerable staff time and resources to the state legislative session, 
+a process of lawmaking that speeds by in a mere 60 days. This narrow window provides advocates, lawmakers 
+and community members with the opportunity to work together to make bold, systemic changes to the way 
+we organize our society for the betterment of all Hawaiʻi’s people. The challenges and roadblocks that emerge 
+during each session are significant, and every year we try to become more skilled at overcoming them. 
+
+“Policy in Perspective” is an annual report that looks back at the work Appleseed staff and coalition partners put 
+into advancing the issues that we have identified as priorities for creating a Hawaiʻi that puts its people first. By 
+examining both our successes and our shortcomings, we attempt to draw lessons from our experience, identify 
+patterns in the obstacles we face, and create a record of the impact our work has on the public policy process. 
+
+This report is for us, and for you, to reference and return to as we push forward together toward a brighter 
+future for us all.
+
+POLICY IN PERSPECTIVE • 3
+
+EXECUTIVE SUMMARY
+
+BY COMMITTING TO TRANSPARENCY, PUBLIC ENGAGEMENT, AND ACCOUNTABILITY, WE 
+CAN CREATE A SHARED PROSPERITY AND A THRIVING, UNITED HAWAIʻI.
+
+EFFECTIVE POLICY MAKING is grounded in respect 
+for all people, open dialogue, and evidence-based 
+decisions. These principles promote social cohesion 
+and ensure policies are based on facts, designed to 
+achieve shared, long-term prosperity. In recent years, 
+Hawaiʻi has seen successful examples of this approach. 
+
+In 2022, a collaboration between public and private 
+sector leaders helped address the economic struggles 
+of many Hawaiʻi residents. This resulted in historic 
+investments in affordable housing, a tax credit for 
+working families, and progress toward universal 
+preschool.1 Similarly, when the COVID-19 pandemic 
+threatened mass evictions, Hawaiʻi brought together 
+diverse housing stakeholders to craft solutions, 
+creating one of the nation’s most effective responses.2
+
+However, in 2024, the state legislature took a different 
+approach and enacted the largest tax cut in the state’s 
+history without a single public hearing or any input 
+from the public.3 
+
+Initially designed to provide equitable tax relief at a 
+cost of $150 million annually, the bill was drastically 
+altered behind closed doors in the final days of the 
+legislative session.4 The overhauled bill emerged from 
+the conference committee with a price tag that will 
+cost the state $656 million in 2025, before growing to 
+$1.4 billion annually by 2031—nearly 10 percent of 
+Hawaiʻi’s general fund tax revenues.5 
+
+When Hawaiʻi faced a similar-sized budget deficit 
+during the Great Recession (a 10 percent loss between 
+2008–09, amounting to $525 million at the time) the 
+state implemented “Furlough Fridays,” closing all 
+state offices including public schools one day a week, 
+and slashing behavioral health and social services.6 
+
+Those cuts wreaked havoc on Hawaiʻi’s families and 
+the public education system, and we still have yet to 
+truly recover.
+
+While the bill provides a helpful boost to struggling 
+families, it gives high earners a much larger tax cut—
+one that our state likely cannot afford. While the 
+bottom 20 percent of earners would receive $440 on 
+average, the top 1 percent will stand to gain nearly 
+$12,800 each year.7 
+
+This is the bill that was signed into law as Act 046 
+(2024), representing a sweeping decision that was 
+made by fewer than 10 legislators in the conference 
+committee, excluding public engagement and 
+independent expert analysis.
+
+Not only that, it happened at the end of a legislative 
+session that began with lawmakers publicly fretting 
+over the state budget and asking state department 
+heads to prepare for the possibility of 10–15 percent 
+cuts in spending on education and human services.8 
+While some lawmakers hailed the tax cut as “historic,”9 
+the process eroded public trust by excluding input 
+from the very people the decision will impact.
+
+A thoughtful discussion on tax policy would 
+acknowledge that tax cuts can help struggling 
+families, but should also consider more effective 
+ways to allocate resources. For example, directing 
+$84 million toward a $650-per-child tax credit would 
+benefit 176,000 children in Hawaiʻi working families.10 
+A $23 million investment could provide free school 
+meals to all public school students.11 And $13 million 
+could fund rent relief and mediation to prevent 2,500 
+evictions each year.12 These alternatives reflect more 
+equitable and efficient ways to support those in need.
+
+4 • POLICY IN PERSPECTIVE
+
+ 
+ 
+EXECUTIVE SUMMARY
+
+Hawaiʻi’s tax policy should aim to improve economic 
+security for all residents. This requires a return 
+to transparent, inclusive governance that values 
+equity. Progressive tax reforms that foster a shared 
+prosperity, alongside investments in affordable 
+housing and essential services, will help Hawaiʻi 
+address its most pressing challenges.
+
+policy that shifts the blame for traffic violence onto 
+pedestrians without actually keeping them any 
+safer. Ending this practice would actually save the 
+government money that could be invested into better 
+multimodal infrastructure to help meet transportation  
+goals, yet the Hawaiʻi State Department of 
+Transportation opposed the policy.
+
+Lack of affordable housing continues to drive 
+houselessness and outmigration, straining the local 
+economy and diminishing community cohesion. Yet, 
+although 2024 saw progress in zoning reforms and 
+infrastructure financing, many proposals aimed at 
+alleviating the current housing crisis were sidelined. 
+
+Similarly, food insecurity continues to present another 
+urgent problem for a growing number of working 
+families in Hawaiʻi. Yet, while the legislature did invest 
+in food access policies like DA BUX and summer-EBT, 
+it failed to pass Universal Free School Meals, one 
+of the most effective ways to increase educational 
+attainment while combating childhood hunger, which 
+has lasting detrimental effects on keiki.
+
+On the transportation equity front, Hawaiʻi Appleseed 
+launched its forray into the issue with a bill to 
+decriminalize “jaywalking,” an archaic enforcement 
+
+Trust plays a critical role in effective governance. 
+Societies with high levels of trust experience stronger 
+economic growth, lower transaction costs, and greater 
+civic engagement.13 Trust fosters social capital and 
+leads to better outcomes in areas like public health, 
+education, and infrastructure. Conversely, the 
+erosion of trust—through closed-door decisions and 
+inequitable policies—undermines social cohesion and 
+deepens divisions.
+
+When we build trust, we lay the foundation for 
+a stronger Hawaiʻi. Building trust in our public 
+institutions and within our community requires 
+embracing past examples of successful, inclusive, 
+and collaborative problem-solving. By committing to 
+transparency, public engagement and accountability, 
+we can create a shared prosperity and a thriving, 
+united Hawaiʻi. 
+
+POLICY IN PERSPECTIVE • 5
+
+TAX & BUDGET
+
+Devin Thomas, Hawai‘i Appleseed’s senior analyst for tax and 
+budget policy, speaks at a Keiki Credit rally on Valentine’s 
+Day, 2024. // Christy MacPherson, Hawai‘i Appleseed
+
+As Beth Giesting, Director Emeritus of the Hawaiʻi Budget & Policy Center, wrote in Hawaiʻi Appleseed’s 2024–25 
+Budget Primer, “the state budget is a statement of our values. It’s where we invest in programs that increase 
+fairness, opportunity and wellbeing for all.”14 Programs and policy that put people first is the heart of what 
+Hawaiʻi Appleseed fights for at the state legislature every year. The work Appleseed does on tax and budget 
+policy therefore impacts the work we do in all other areas. 
+
+Going into the 2024 legislative session, Hawaiʻi Appleseed was part of a coalition effort to create a state Child 
+Tax Credit, and to reform the state capital gains tax to help pay for it. This effort leaned heavily on Hawaiʻi 
+Appleseed research done in 2023 by Devin Thomas, senior analyst for tax and budget policy.
+
+In 2024, lawmakers had an opportunity to champion tax policies that equitably distribute the tax burden, 
+ensuring everyone contributes fairly to support vital public resources and systems—the foundations that enable 
+economic success for all. However, the tax policies that advanced the furthest in the legislature leaned toward 
+debunked “trickle-down” economic approaches that prioritize tax cuts for the wealthy, despite extensive 
+research demonstrating that such measures fail to reduce poverty, improve wages for average workers, or 
+promote broad economic benefits.15
+
+Lawmakers advanced a series of bills that would have doubled the amount of money the very richest 0.1 
+percent of Hawaiʻi families could exempt from the Hawaiʻi estate tax—further concentrating wealth in the hands 
+
+6 • POLICY IN PERSPECTIVE
+
+TAX & BUDGET
+
+Cover image, “Concentrating Wealth” // Hawai‘i Appleseed
+
+Cover image, “Hawai‘i Budget Primer, 2024–25” // Hawai‘i 
+Appleseed
+
+of the elite few. Hawaiʻi Appleseed and its partners quickly mobilized opposition to these bills, and our tax and 
+budget team developed a policy brief outlining the serious threat this concentration of wealth would pose for 
+the economy. Thanks to the public pressure mobilized against these bills, these policies stalled out toward the 
+end of session. 
+
+Although the proposed estate tax cut stopped short of passage, another tax bill that will have extraordinary 
+consequences—House Bill 2404—passed. Signed into law as Act 046 by Governor Green on June 3, the bill 
+enacts sweeping tax cuts for people of all income levels, but most of the benefit goes to those at the top of the 
+income scale. 
+
+Notably, the bill the governor signed emerged from the conference committee stage of the legislative process 
+a significantly different measure than what Gov. Green’s office proposed at the beginning of the 2024 session. 
+Conference committee does not allow for any public input, and the negotiations are largely carried out behind 
+closed doors. This means the public had no say in the final bill or its provisions. While the governor’s original 
+proposal would have cost $150 million per year, the bill that emerged from the conference committee process 
+will cost the state an estimated $1.2–1.4 billion per year in foregone revenue by 2031, once the changes to the 
+income tax are fully phased-in.
+
+It is unclear whether the state will be able to afford this monumental cost. The fully phased-in tax cut will 
+
+POLICY IN PERSPECTIVE • 7
+
+ 
+TAX & BUDGET
+
+swallow up about 10 percent of Hawaiʻi’s general fund tax revenues. Consequently, as the bill phases in over the 
+next 5 years, it may limit the money that can be put towards the state’s chronically underfunded programs and 
+services. Low-income residents will be affected the most by a decline in revenue, as many of them may rely on 
+government programs to help make ends meet. 
+
+Under the new law, those same folks in the bottom 20 percent of the income scale will see an average of just 
+$440 in tax breaks in 2031; perhaps enough to help with a bill, or back-to-school supplies, but nowhere near 
+enough to change their standard of living. Meanwhile the top 1 percent will see an average tax break of $12,800. 
+The biggest dollars will go to wealthy households who already enjoy preferential tax policies like Hawaiʻi’s 
+flawed capital gains tax,16 or the massive estate tax exemptions already provided by the federal government 
+through the Trump-era Tax Cuts & Jobs Act.17
+
+In the event of lower-than-expected tax collections, economic recessions, or disasters like the Maui Wildfires, 
+the state would likely have a smaller cushion of funds to fall back on. Any major shortfalls would likely require 
+Hawaiʻi to decrease its funding for key priorities, just as it did during the Great Recession. 
+
+The 2008 Great Recession demonstrated the potential consequences of a revenue loss similar in magnitude 
+to the forecast for HB 2404. State departments underwent budget cuts that seriously compromised their 
+existing programs and services. To clamp down on the cost of teacher salaries, the Department of Education 
+canceled school sessions on its “Furlough Fridays.” In addition, the Department of Human Services was dealt 
+a $111 million budget cut that affected healthcare and cash payments to families, services for low-income and 
+disabled adults, and contracts with non-profit organizations.18 Our state is still—to this day—recovering from 
+the adverse impacts these cuts had on our educational attainment and public health.
+
+Priority Measures
+
+•  HB2404 (Act 046): This bill doubles the amount that can be claimed by the standard deduction, a welcome 
+change that will help working families that are burdened with the high cost of living in Hawaiʻi. However, 
+at the same time, HB2404’s tax bracket adjustments will give away millions to households that are by no 
+means struggling to pay for basic necessities. 
+
+HB2404 will steadily shift Hawaiʻi’s income tax brackets (and rates) upward. This will reduce income taxes 
+for nearly all taxpayers, but most of the total tax cut will go to high-earners. For example, in the first year 
+alone, the top 1 percent of taxpayers will receive a tax break of over $6,000 on average, compared to just 
+$335 for the bottom 20 percent.19 
+
+HB2404 reflects recurring debates surrounding tax policy, highlighting the stark contrast between those 
+who can easily meet all their needs and the working families who form the backbone of Hawaiʻi’s economy 
+but struggle to make ends meet. Focusing on providing meaningful relief to those who need it most to 
+achieve stability and security will benefit everyone, not just our most struggling families.  
+
+In addition to its mixed efficacy in helping working families make ends meet, HB2404 also had the effect 
+of sidelining other, more effective tax policies, such as the proposed state Child Tax Credit, which were 
+dismissed citing a lack of funds. 
+
+•  HB1662: This bill would have created a state Child Tax Credit (CTC) for Hawaiʻi, focused on helping working 
+families afford their everyday costs. The expanded federal CTC lifted 2.9 million children out of poverty 
+
+8 • POLICY IN PERSPECTIVE
+
+ 
+ 
+ 
+Figure 1. Percentage of Income from Capital Gains vs Income from Work in Hawai‘i, by Income Level (2021)
+
+TAX & BUDGET
+
+2.3%
+
+97.7%
+
+33.1%
+
+Income from Work
+
+66.9%
+
+Income from Capital Gains
+
+Income Range: $75,000–$100,000
+
+Income Range: $400,000 and above
+
+during the pandemic, reducing child poverty by 40 percent in 2021.20 Unfortunately, Congress allowed the 
+expansion to lapse, and much of the gains made against poverty have since been lost. A total of 15 states 
+have already implemented their own state-level CTCs to fill in the gap left by the federal expansion lapse, 
+and these states have been able to hold on to the anti-poverty benefits of the policy as a result.21 
+
+While HB1662 received an outpouring of supportive testimony from a diverse cohort of advocates, union 
+members and concerned community members,22 it was deferred in the Senate Committee on Health and 
+Human Services after crossing over from the State House. 
+
+•  HB1660: This bill aimed to raise revenue for state services by reforming the capital gains tax on investment 
+income. Currently, Hawaiʻi taxes capital gains at a flat rate of 7.25 percent, even for those in the highest 
+income bracket who would otherwise pay the top income tax rate of 11 percent. For high-income taxpayers, 
+capital gains often make up a significant share of their total income.23 This structure effectively provides 
+wealthier taxpayers with a preferential tax advantage, while lower-income individuals, who rarely benefit 
+from capital gains, face a higher tax rate on such income if they were to have it. 
+
+HB1660 would have closed this loophole by taxing capital gains at the same, progressively increasing rates 
+as ordinary income from work, making our tax system more fair and generating what had been estimated at 
+$167 million in new revenue each year.24 The House Committee on Finance passed this bill, but the Senate 
+Committee on Ways & Means declined to schedule it for a hearing.
+
+Change Analysis
+
+POLICY IN PERSPECTIVE • 9
+
+ 
+ 
+TAX & BUDGET
+
+In addition to the research done ahead of the 2023 legislative session on the Child Tax Credit and capital gains tax 
+reform proposals, Hawaiʻi Appleseed produced two additional reports prior to the 2024 session. The first analyzes 
+the current economic situation for working families in Hawaiʻi to demonstrate the serious need for government 
+investments, and the other provides updated proposals to lawmakers to equitably generate new revenue to fund 
+investments in those same working families. 
+
+“The High Cost of Low Wages,” lifts up the major economic and social problems that occur when working 
+families are not earning enough to cover their basic needs. Using a wide range of data and statistics, the 
+report paints a picture of the dire situation many low- and middle-income Hawaiʻi households find themselves 
+in today as they struggle to afford the highest-in-the-nation cost of living on wages that fall far short of the 
+need. The report looks to the future, as it outlines the major costs to our keiki’s health, development and 
+socioeconomic success that come with growing up in an income-insecure household.
+
+Key Findings: 
+
+•  Hawaiʻi’s lack of economic mobility imposes a high cost on our keiki through loss of future economic 
+
+productivity, poorer health outcomes, and less educational attainment.  
+
+• 
+
+A state-level Child Tax Credit, an indexed minimum wage that automatically adjusts to inflation and other cost 
+increases, and increased dedicated revenue to affordable housing (the largest cost in a household budget) 
+would go a long way toward helping Hawaiʻi working families afford the high cost of living and avoid poverty.
+
+“Funding our Future” outlines strategies the state can adopt to increase tax revenue in ways that do not adversely 
+impact low- or even middle-income households, targeting only those that can better afford to pay instead. 
+
+Even before the passage of HB2404, Hawaiʻi was already dealing with significant budget strain from the Lahaina 
+Wildfire recovery effort, increasing fixed or obligated costs,25 and a heavily tourism-dependent economy not yet 
+fully recovered from the COVID-19 pandemic. With lawmakers naturally cautious about spending money under 
+the projected outlook, but the need to spend money on helping working families so great, this brief provided 
+lawmakers with a menu of options for solving this dilemma in a fair and equitable manner.
+
+Key Revenue Raising Recommendations: 
+
+•  Create a new individual income tax bracket (additional $16–$64 million per year); 
+
+• 
+
+Increase the capital gains tax (less than an additional $87 million per year now that Act 046 has adjusted 
+income tax brackets upward); 
+
+•  Reform the conveyance tax on mansions (additional $103–$300 million per year); 
+
+•  Close the estate tax loophole (varies widely each year, but somewhere around $19–$57 million per year); 
+
+• 
+
+• 
+
+Increase corporate tax rates (additional $200 million per year); and 
+
+Implement worldwide combined reporting (additional $38 million per year).
+
+As previously discussed, Hawaiʻi Appleseed also produced a policy brief (“Concentrating Wealth”) in response to 
+the push to cut the estate tax. The brief laid out why HB2653 would be detrimental to Hawaiʻi’s budget and people.
+
+10 • POLICY IN PERSPECTIVE
+
+TAX & BUDGET
+
+Table 1. Key Hawaiʻi Appleseed Tax & Budget Communications Products, 2024 Legislative Session
+
+Title
+
+Type
+
+Date Published
+
+Congress considers making the federal Child Tax Credit refundable; Hawai‘i 
+considers Keiki Credit
+
+Blog Post
+
+Feb. 14, 2024
+
+Trickle-down estate tax break bills are bad policy for Hawai‘i
+
+Blog Post
+
+March 13, 2024
+
+The big budget trouble with HB2404’s over-broad and sweeping tax cuts
+
+Blog Post
+
+May 29, 2024
+
+Hawai‘i’s elected leaders buy-in to costly “trickle-down” myth
+
+Blog Post
+
+June 13, 2024
+
+Fund Our Future, Progressive Revenue Raisers 2024
+
+Fact Sheet
+
+Jan. 2024
+
+Rebalance Hawai‘i’s upside-down tax code to achieve prosperity for all
+
+Op-Ed
+
+Jan. 23, 2024
+
+Lawmakers should embrace keiki credit
+
+Op-Ed
+
+Feb. 13, 2024
+
+What do estate tax cuts for the wealthy say about Hawai‘i’s priorities?
+
+Op-Ed
+
+April 5, 2024
+
+Hawai‘i’s low wages relative to its cost of living put a serious strain on society, 
+local economy
+
+Press Release
+
+Dec. 13, 2023
+
+Hawai‘i’s tax system makes inequality worse, national study finds
+
+Press Release
+
+Jan. 9, 2024
+
+Estate tax giveaway HB2653 would further concentrate wealth, drive inequality
+
+Press Release
+
+April 17, 2024
+
+2024 Hawai‘i Legislature Tax & Budget Policy Update #1
+
+Video Update
+
+Feb. 28, 2024
+
+Hawai‘i Appleseed recorded nine earned media pieces related to the 2024 legislative session focused on taxes and budget.
+
+In 2024, Hawaiʻi Appleseed centered its efforts to build people-power around the issue of taxes and budget policy 
+on the state Child Tax Credit, or “Keiki Credit.” This included efforts to reach working moms, who would be core 
+beneficiaries of a state child tax credit. Hawaiʻi Appleseed and its coalition partners held a Valentine’s Day rally in 
+
+support of the Keiki Credit that included both grass-tops partners and legislative champions, 
+as well as working moms and other grassroots supporters.
+
+YES
+HI TAX
+FAIRNESS
+
+The Hawaiʻi Tax Fairness Coalition continues to act as a mobilization tool for sending out 
+frequent, tax & budget-specific newsletter alerts for testimony and other legislative process 
+actions to its list of a few hundred members. 
+
+Sign up for tax and budget-related action alerts from the coaliton here.
+
+POLICY IN PERSPECTIVE • 11
+
+AFFORDABLE HOUSING
+
+Hawai‘i Appleseed staff and coalition 
+partners particiapte in a Housing 
+Concerns Listening Session in 
+Kalihi on February 3, 2024. // Keith 
+Webster, Faith Action for Community 
+Equity
+
+Lack of affordable housing has been a critical issue for Hawaiʻi residents for more than 50 years.26 The 
+past decade has seen the problem grow significantly, with the gap between housing costs and wages and 
+affordability widening.27 The devastation brought by the Lahaina wildfires made things even worse. In addition 
+to the more than 100 lives lost, the wildfire destroyed some 3,000 precious housing units, including 142 low-
+income affordable units at Front Street Apartments Hawaiʻi Appleseed helped preserve as affordable through 
+2051.28 Yet housing, Hawaiʻi’s biggest cost-of-living policy challenge, saw only mixed results in 2024.
+
+The 2024 legislative session saw the introduction of close to 300 bills related to housing, reflecting the urgency 
+and complexity of the issue. While significant progress was made with some key legislation, measures aimed at 
+direct assistance for those most affected by the housing crisis were often sidelined.
+
+Instead, the focus remained predominantly on supply-side solutions to the housing shortage. For example, 
+SB3202 takes aim at exclusionary zoning rules by allowing two accessory dwelling units (ADUs) by right on 
+
+12 • POLICY IN PERSPECTIVE
+
+ 
+AFFORDABLE HOUSING
+
+residential property, while HB2090 allows for commercial properties and zones to be used for residential 
+purposes. Both measures look to increase the overall number of housing units available in the hopes of bringing 
+down costs by increasing supply. Both bills were signed into law by Governor Green.
+
+While SB3202 and HB 2090 are important for long-term stability as the state works to meet future demand, they 
+do nothing to address the immediate needs of renters facing housing insecurity today. By contrast, demand-
+side policies look to stabilize the market today by increasing access to existing housing and keeping people 
+stably-housed long-term. 
+
+Based in part on Hawaiʻi Appleseed research29 into a successful pandemic-era rent-relief and mediation 
+program, SB3332 would have extended the notice period for end-of-rental agreements, and would have 
+required landlords to engage in mediation before filing in eviction court. HB1339, meanwhile, would have given 
+tenants longer notice of a landlord’s intent to raise rent or not renew a leasing agreement. Neither bill made it 
+to the governor, but measures like these are critical to protecting local residents’ ability to access housing in 
+today’s global market. 
+
+Funding a permanent rent relief fund should be a centerpiece of the demand-side of the housing policy 
+continuum. If we continue to overlook essential measures that would provide immediate housing stability to 
+Hawaiʻi residents, while only focusing on supply-side policies, we could very well end up with more housing 
+units that are nevertheless still out of reach for the average resident. We know this because it’s been a 
+fundamental problem with Hawaiʻi’s housing policy for decades.30 We must remember to implement policies 
+that ensure the new units we build or restore that come onto the market are actually accessible and affordable.
+
+It’s not just the moral imperative that informs this belief: our lack of accessible and affordable housing is what 
+is driving our houselessness and outmigration epidemics, both of which are putting an increasing drain our 
+local economy, our quality of life, our community cohesiveness, and even Hawaiʻi’s unique culture itself.
+
+Priority Measures
+
+• 
+
+SB3202 (Act 039): This bill restricts counties from perpetuating exclusionary zoning by allowing up to two 
+ADUs, by right, on residential property (provided the necessary infrastructure is in place to support the 
+units). Ultimate decision-making authority over projects is retained by the counties. 
+
+•  HB2090 (Act 037): This bill allows for commercially-zoned properties to be used for residential purposes 
+
+(again, infrastructure allowing). 
+
+•  HB1763 (Act 235): This bill closes a financing loophole within the state’s Hawaiʻi Housing Financing & 
+
+Development Corporation (HHFDC). Currently, Rental Housing Revolving Fund (RHRF) loans are subject to 
+an artificially low interest rate that is incredibly beneficial to the developer. These loans can be forgiven for 
+almost any reason. This has created a financial drain of public money for projects that are successful and 
+profitable. Act 235 allows for loan forgiveness only if the corporation forecloses on a project, effectively 
+removing language which previously allowed RHRF to function as a grant program instead of a loan program. 
+
+• 
+
+SB2133 (Act 034): This bill allows HHFDC to issue bonds for housing project infrastructure and to finance 
+the development of regional state infrastructure projects. Investment in infrastructure upgrades is long 
+overdue for Hawaiʻi. Infrastructure is vital for housing construction, and its deficit is a major factor in 
+slowing down project development statewide. It will take a multi-billion dollar investment over years to 
+secure all the freshwater, wastewater, and road upgrades necessary to meet Hawaii’s housing needs. Having 
+
+POLICY IN PERSPECTIVE • 13
+
+AFFORDABLE HOUSING
+
+the state take charge of financing and developing regional infrastructure projects takes the burden off of 
+developers, and can create better opportunities to develop housing in areas closer to jobs. 
+
+• 
+
+SB2066 (Act 038): This bill allows 201H exemptions to go to projects which commit 100 percent of the 
+units exclusively for qualified residents for the entire life of the project. 201H exemptions are sought after 
+by developers to make the development of housing quicker and less costly. Currently, 201H requires a 
+50 percent +1 affordable housing requirement with a price restriction period anywhere from 2–30 years, 
+depending on the project.  
+
+201H has been good for development, but the affordability requirement typically creates smaller sized units 
+that are only $200-$300K cheaper than market rate, and rarely exceed two bedrooms. This bill could give 
+developers the opportunity to access 201H benefits without affordability requirements, as long as all units 
+are sold to current residents for the lifetime of the building, though many questions about how this would 
+play out remain. 
+
+•  HB2364/SB3053: This bill would have increased the conveyance tax on investment properties and would 
+have dedicated a portion of the funds to regional infrastructure projects. This proposal would have 
+increased the tax on home sales for properties which are sold at $2 million and above for non-owner-
+occupied units, and at $4 million and above for owner-occupied units.  
+
+14 • POLICY IN PERSPECTIVE
+
+ 
+AFFORDABLE HOUSING
+
+The proposal would have also created a dedicated source of funding for the Dwelling Unit Revolving Fund 
+to commit to regional infrastructure projects. The current practice for infrastructure upgrades is to have 
+private entities do them piecemeal, which is inefficient and costly. This proposal would have encouraged 
+the state to do regional infrastructure projects and work towards filling the more than $1 billion gap in 
+necessary infrastructure for housing development.  
+
+•  HB2642/SB3332: These companion bills would have extended the period of notice for ending a rental 
+agreement, and would have required landlords to engage in mediation prior to initiating eviction 
+proceedings. The proposal did not include rent relief. SB3332 borrows from the success of landlord tenant 
+mediation paired with rent relief of Act 57 to stabilize fire survivors in Maui county. 
+
+This is the third iteration of Act 57 (2021), a temporary, pandemic-era policy that made mediation 
+mandatory between landlord and tenant before a formal eviction process. This process required both 
+parties to come together in a less intense setting than court with the goal of coming to an agreement that 
+avoids an eviction. Act 57 featured a rent relief fund that ensured landlords could be made whole, which 
+our research shows dramatically improved the success of the program. Neither bill in 2024 included a rent 
+relief fund attached to the mediation requirement, despite compelling testimony from multiple community 
+partners explaining why it is so critical. 
+
+•  HB1339/SB1464: These bills would have extended the notice period for a landlord to notify fixed-term 
+
+tenants of their intent to raise rent or terminate a rental agreement. Extending this notice period would 
+give renters a better ability to financially prepare for a rent increase, or to look for alternative living 
+arrangements without undue cost to either party. 
+
+•  HB2007: This bill would have allowed religious, educational and medical institutions to build dwelling 
+
+units on their lands, as long as those lands are within the urban land use districts. Sometimes referred to as 
+YIGBY, or Yes In God’s Back Yard, this policy is a growing trend on the U.S. continent. Nonprofit institutions, 
+particularly religious ones, often have excess land and sometimes have a desire to assist in creating housing 
+opportunities for the community. Our antiquated zoning rules currently restrict their ability to do so.
+
+POLICY IN PERSPECTIVE • 15
+
+ 
+AFFORDABLE HOUSING
+
+Change Analysis
+
+Hawaiʻi Appleseed Housing Policy Director Arjuna Heim created a new policy brief focused on options for 
+reforming the state’s conveyance tax on the sale of multi-million dollar mansions. “Preserving Hawaiʻi” 
+compares multiple proposals to increase the tax paid when mansions are sold as a means of both generating 
+revenue earmarked for affordable housing (and infrastructure) development, as well as to discourage the kind 
+of investment speculation in Hawaiʻi’s real-estate market that drives up prices for everyone. 
+
+Since lowering housing costs is the most important way to keep Hawaiʻi families living and thriving in here in 
+the islands, the report title drives at the heart of the issue. The brief outlines the pros and cons of each proposal 
+using detailed analysis of sales and tax data from the state to give lawmakers an accurate expectation of the 
+impacts of such a policy. 
+
+Key Findings:
+
+•  Projected housing demand estimates that some 
+
+4,000–5,000 additional affordable rental units must 
+be added to our housing supply each year for the 
+next 5 years to meet residents’ needs.  
+
+• 
+
+• 
+
+A review of projects approved by the Hawaiʻi 
+Housing and Finance Development Corporation 
+(HHFDC) over the last 5 years shows ongoing and 
+growing demand for funds from the Rental Housing 
+Revolving Fund (RHRF). In all 5 of those years, the 
+RHRF ran up against the $38 million allocation cap 
+from the conveyance tax. 
+
+In 2022, HHFDC approved over $320 million of RHRF 
+to 13 projects which will eventually produce 1,989 
+affordable units, dependent on permitting and other 
+approval processes. 
+
+•  Hawaiʻis also need to increase its investments into 
+the Dwelling Unit Revolving Fund (DURF), which is 
+used by the state to develop the infrastructure it 
+needs—sewer, electrical, roadways—to meet our 
+housing demand. 
+
+16 • POLICY IN PERSPECTIVE
+
+Cover image, “Preserving Hawai‘i” // Hawai‘i Appleseed
+
+ 
+AFFORDABLE HOUSING
+
+• 
+
+Increasing conveyance tax rates, removing caps on the RHRF (and Land Conservation Fund, or LCF), and 
+creating a dedicated DURF fund, can provide millions of dollars to addressing some of the most pressing 
+barriers to providing affordable housing to residents today.
+
+Hawaiʻi Appleseed also continued to rely on research done in both 2022 and 2023 around the highly successful 
+Act 057 (2021) pandemic-era eviction mediation and rent relief program in attempts to get a permanent 
+program established.
+
+Table 2. Key Hawaiʻi Appleseed Affordable Housing Communications Products, 2024 Legislative Session
+
+Title
+
+Type
+
+Date Published
+
+Leverage Hawai‘i’s conveyance tax to equitably fund affordable housing, land 
+conservation and infrastructure needs
+
+Blog Post
+
+Feb. 22, 2024
+
+A mix of progress and missed opportunities: affordable housing efforts at the 
+2024 legislature
+
+Blog Post
+
+July 11, 2024
+
+Rethinking Hawai‘i’s conveyance tax
+
+Op-Ed
+
+March 17, 2024
+
+Allow more ‘ohana housing to ease crisis
+
+Op-Ed
+
+March 24, 2024
+
+Hawai‘i’s conveyance tax can be an effective tool to address our housing crisis
+
+Press Release
+
+Feb. 28, 2024
+
+2024 Hawai‘i Legislature Housing Policy Update #1
+
+Video Update
+
+Feb. 13, 2024
+
+Hawai‘i Appleseed recorded six earned media pieces related to the 2024 legislative session focused on affordable housing.
+
+In 2024, Hawaiʻi Appleseed’s efforts to bring people-power to the legislature on the issue of housing 
+affordability were focused on rent relief and eviction mediation, with important emerging partnerships like 
+the Hawaiʻi Workers Center’s Maui Tenants and Workers Association, and the Honolulu Tenants Union helping 
+to elevate the serious issue of tenant protections and rent stabilization, both critical to a healthy housing 
+ecosystem. Hawaiʻi Appleseed also held a housing-focused listening session that led to a partnership with the 
+tenants of Kuhio Park Terrace (KPT) and other social service provider organizations rooted in Kalihi.
+
+The Hawaiʻi Housing Affordability Coalition, our vehicle for community-driven change, 
+continues to meet regularly throughout the year to plan strategy, host workshops and 
+organize for effective housing policy. Recently, the coalition has expanded its efforts to 
+include county-level housing policy, ensuring continued engagement and meaningful work 
+beyond the legislative session. 
+
+Sign up for affordable housing-related action alerts from the coaliton here.
+
+HIHAC
+
+POLICY IN PERSPECTIVE • 17
+
+FOOD EQUITY
+
+Juniors from Castle High 
+School in Kāne‘ohe attended 
+a State House education 
+committee hearing to 
+support a Universal Free 
+School Meals bill in 2024. 
+The committee passed 
+the policy, as did the State 
+House, but the proposal 
+died in the Senate without 
+a hearing. // Will Caron, 
+Hawai‘i Appleseed
+
+Hawaiʻi faces some of the highest food prices in the nation. 31 This, coupled with stagnant wages and soaring 
+housing costs makes it increasingly difficult for households to make ends meet and afford nutritious foods. The 
+sobering statistic that 1 in 3 families in Hawaiʻi is food insecure32 underscores the urgent need for robust policy 
+interventions to ensure that all residents have access to adequate and nutritious food. 
+
+Hawaiʻi Appleseed’s work around ending hunger for Hawaiʻi’s residents is critical, a fact underscored by 
+the enthusiasm with which those most impacted by hunger participated in the 2024 legislative process. It’s 
+challenging for regular everyday folks to participate at the legislature. Lawmaking takes place during regular 
+work and school hours, and the folks for whom these policies can mean a big difference in quality of life are 
+often those least able to access the decision-making process. 
+
+That’s why it was so inspiring to see some two dozen Castle High School students attend both the House 
+Education and Finance committee hearings to testify in support of HB1775. The bill would have implemeted a 
+Universal Free School Meals (UFSM) program, a policy that would directly impact their lives in profound ways: 
+
+18 • POLICY IN PERSPECTIVE
+
+FOOD EQUITY
+
+better health and growth, better learning and brain development, better family and social life.33 Their personal 
+stories about struggling with food insecurity both at home and at school were powerful, and greatly contributed 
+to both House committees moving the policy forward. Unfortunately, the bill died in the Senate when it was not 
+given a hearing.  
+
+But there was also some good news on the food front: our collective efforts secured funding for the Summer 
+Electronic Benefits Transfer for Children Program (Summer EBT) through summer 2025. The inaugural Summer 
+EBT program is crucial as it provides additional nutritional support to children who rely on school meals 
+during the academic year, but face increased risk of hunger during the summer months. And the state budget 
+now includes a $1.5 million annual recurring allocation to support the DA BUX program, helping more families 
+access healthy, locally sourced food.
+
+While some progress was made, we must redouble our efforts next session, and do more to bring in students, 
+workers and family members who can directly testify to the urgent need for policies that promote food equity.
+
+Priority Measures
+
+•  HB2430 (Act 155): This bill secures funding for the Summer Electronic Benefits Transfer for Children 
+
+Program (Summer EBT) through summer 2025. The inaugural Summer EBT program is crucial as it provides 
+additional nutritional support to children who rely on school meals during the academic year but face 
+increased risk of hunger during the summer months. With this funding in place, we can ensure that more 
+than 100,000 vulnerable keiki will receive the nutrition they need even when school is out this summer, 
+helping to bridge the gap and reduce summertime food insecurity. 
+
+•  HB2771: This bill sought to secure matching funding for the DA BUX Double Up Food Bucks Program. This 
+
+innovative program helps Supplemental Nutrition Assistance Program (SNAP) participants by doubling the 
+value of their benefits when purchasing locally grown fruits and vegetables resulting in tremendous benefits 
+for the local economy and producers.  
+
+While HB2771 itself did not pass, there was a silver lining: the state budget (HB1800) included a $1.5M 
+annual recurring allocation to support the DA BUX program. This funding provides an essential state match 
+to the federal Gus Schumacher Nutrition Incentive Program (GusNIP) grant administered by The Food 
+Basket Inc, Hawaiʻi Island's Food Bank, allowing for expansion into Foodland stores across the state. This 
+funding will also support the continued seamless administration of this successful program, helping more 
+families access healthy, locally sourced food. 
+
+•  HB1775: At the heart of our legislative efforts this year was HB1775, the Universal Free School Meals bill. 
+
+This initiative aimed to ensure that every public school student in Hawaiʻi had access to free school meals, 
+regardless of their family's ability to pay. The rationale was simple yet powerful: hungry keiki can’t learn, 
+and access to nutritious meals is fundamental to a child's ability to learn and thrive.  
+
+Unfortunately, despite strong support from community advocates, students, teachers, and some legislators, 
+HB1775 did not pass. This was a significant disappointment, as universal free school meals have proven 
+benefits, including reducing stigma associated with free meals and improving overall student health and 
+academic performance.  
+
+• 
+
+SB2135: Expanding SNAP eligibility was another important bill this session focused on increasing access to 
+
+POLICY IN PERSPECTIVE • 19
+
+ 
+ 
+FOOD EQUITY
+
+public benefits. This bill aimed to establish a state funded SNAP program, making more families eligible for 
+SNAP benefits, thereby reducing food insecurity and supporting those who might be just above the current 
+200 percent income eligibility thresholds (about $64,000 for a family of 4 in 2024) but still struggling to 
+afford basic necessities.  
+
+Sadly, SB2135 did not make it through the legislative process due to a lack of information regarding cost 
+and impact. This represents a missed opportunity to broaden the safety net and support more households 
+in need. Despite this setback, legislators and local advocates seem very interested in continuing discussion 
+around this type of program to better understand what it could look like, and how much it would cost.
+
+Change Analysis
+
+Hawaiʻi Appleseed’s policy brief on Universal Free 
+School Meals, “Equity on the Menu,” released in 
+January of 2024, highlighted the positive impacts 
+of a nutrient-dense school breakfast and lunch. The 
+brief has been recently updated into a fact sheet that 
+summarizes these benefits, as well as an analysis of 
+barriers to participation and the challenging impact on 
+families, students, and teachers. The new resource also 
+includes an updated cost analysis and opportunities for 
+generating revenue to cover this critical service.
+
+Key Findings:
+
+•  Hawaiʻi still allows schools to deny meals to students 
+who have a negative meal balance, making students 
+not only hungry, but also ashamed. UFSM creates a 
+more inclusive and supportive school environment. 
+
+• 
+
+Studies of UFSM in other states have shown a 
+resulting, significant boost in test scores and 
+improved academic performance.34 
+
+•  UFSM supports ALICE (Asset Limited, Income 
+
+Constrained, Employed) households in Hawaiʻi 
+struggling to stretch their budgets. It makes sure that 
+every child has access to nutritious meals regardless 
+of ability to pay.
+
+20 • POLICY IN PERSPECTIVE
+
+Cover image, “Equity on the Menu” // Hawai‘i Appleseed
+
+ 
+• 
+
+For many students, school breakfast and lunch are the only full, balanced meals they receive a day. UFSM is 
+a proven strategy to improve nutrition and food insecurity. 
+
+•  UFSM supports Farm-to-School initiatives and local farmers by incorporating fresh, locally grown produce 
+
+into school meals. This provides students with healthier, more sustainable food options. 
+
+• 
+
+The impact of hungry students is not limited to children and parents. Schools are bearing the financial 
+impact as well. In fact, many teachers have reported using money from their own paychecks to keep a 
+supply of snacks on hand for when students come to school hungry. 
+
+Table 3. Key Hawaiʻi Appleseed Food Equity Communications Products, 2024 Legislative Session
+
+Title
+
+Type
+
+Date Published
+
+Universal Free School Meals ensures every keiki thrives
+
+Blog Post
+
+Feb. 20, 2024
+
+Community participation during 2024 legislative session highlights pressing 
+nature of food insecurity in Hawai‘i
+
+Blog Post
+
+July 18, 2024
+
+The Case for Universal Free School Meals
+
+Fact Sheet
+
+March, 2024
+
+New report calls upon the state to join a growing national movement and 
+provide free meals to all Hawai‘i public school students
+
+Press Release
+
+Jan. 11, 2024
+
+2024 Hawai‘i Legislature Food Equity Policy Update #1
+
+Video Update
+
+Feb. 20, 2024
+
+Hawai‘i Appleseed recorded three earned media pieces related to the 2024 legislative session focused on food equity.
+
+POLICY IN PERSPECTIVE • 21
+
+FOOD EQUITY
+
+On the community engagement front, Hawaiʻi Appleseed was deeply impressed with the Castle High School 
+students who testified on Universal Free School Meals. Hunger in our schools is clearly an issue that resonates 
+with its impacted population of students and their families. Hawaiʻi Public Health Institute’s Nate Hix, who 
+spearheaded the organizing for bringing the students to the Capitol, was able to connect with a former 
+colleague to bring the issue and the advocacy opportunity to the attention of the students, who then embraced 
+the chance to share their stories. Finding ways to replicate this kind of success would be immensely helpful.
+
+At the same time, Hawaiʻi Appleseed Community Engagement Specialist for Food Equity, Rein Terrado, 
+continues to hold listening sessions and one-on-ones with community members to build community capacity to 
+advocate for food equity policies going forward.
+
+H A W A I‘I
+
+HUNGER
+ACTION
+
+N E T W O R K
+
+The Hawaiʻi Hunger Action Network functions as a statewide collaborative of grass-tops 
+anti-hunger institutions and advocates working to ensure that Hawaiʻi’s food system 
+reflects the needs of all of its communities. The mission of the network is to connect 
+community with the policy-making process, and to take systems level action to ensure all 
+people in Hawaiʻi have enough food to live healthy, dignified, productive lives. 
+
+Sign up for affordable food equity-related action alerts from the coaliton here.
+
+22 • POLICY IN PERSPECTIVE
+
+TRANSPORTATION 
+EQUITY
+
+Hawaiʻi has seen more than 20 pedestrian fatalities 
+so far in 2024.35 While nearly all of the media 
+coverage of these deadly collisions has focused on 
+the actions of the pedestrians—noting if they were 
+or were not in a marked crosswalk—little attention 
+has been paid to traffic safety solutions.36 
+
+This “victim-blaming” is in part due to jaywalking 
+laws.37 Generally, jaywalking laws prohibit 
+pedestrians from crossing a street outside of 
+designated crosswalks or against traffic signals. 
+Although jaywalking is foundational to the way 
+many Americans understand roadway safety, it is a 
+relatively young concept. 
+
+Jaywalking laws were enacted in the 1920s 
+following a lobbying campaign by the auto industry 
+to shift the blame onto pedestrians for the national 
+rise in traffic fatalities.38 Unfortunately, jaywalking 
+laws have done little to prevent the nation’s 
+growing traffic-related injuries and deaths.39 
+Moreover,  jaywalking tickets have been found to 
+disproportionately impact people of color.40 
+
+Over the past few years, legislation to repeal 
+or reform jaywalking laws has been enacted in 
+Virginia, California, Nevada, Denver, and in Kansas 
+City. About 51 million Americans now live in 
+places where jaywalking has been decriminalized 
+in some form.41 
+
+Cover image, “Freedom to Walk” // Hawai‘i Appleseed
+
+In 2024, Hawaiʻi Appleseed’s newly-launched Transportation Equity initiative joined this national movement 
+by advocating for a “Freedom to Walk” bill at the Hawaiʻi State Legislature. A primary challenge for the bill was 
+that, throughout the legislative session, the state’s departments of transportation and law enforcement, as well 
+as the county police departments, testified in staunch opposition. 
+
+The opposition argued that repealing jaywalking laws would lead to adverse roadway safety impacts—claims 
+that have been disproven by data collected in the localities where similar legislation has been recently passed 
+
+POLICY IN PERSPECTIVE • 23
+
+ 
+TRANSPORTATION EQUITY
+
+(such as Virginia and California43). Ultimately, these opposing narratives are often driven by our society’s 
+automobile-centric understanding of mobility and safety, and unfounded and irrational fears about crime. 
+Nevertheless, these opposition arguments played a significant role in preventing the bill from being assigned 
+conference committee appointments in the final stage of session. 
+
+During the conference committee process, appointed legislators negotiate the final details of a bill to secure its 
+passage. Despite support for the bill from community groups and agencies such as the Department of Health 
+outweighing the opposition, and in spite of compromises already made as the bill navigated through multiple 
+subject matter committees in both chambers, the Freedom to Walk bill ultimately did not make it past this 
+critical stage. These challenges underscore the complexities of the legislative process, and the need for broad-
+based education and support from the community within the advocacy process.
+
+Priority Measures
+
+SB2630/HB1623: The “Freedom to Walk” bill would have prevented pedestrians from being stopped by a law 
+enforcement officer, fined, or subjected to any other penalty for jaywalking (unless there is an immediate 
+danger of a collision with a moving vehicle).  
+
+Hawaiʻi Appleseed also supported partner organization’s transportation policy priorities, such as efforts to 
+increase the rebate for electric mobility devices (SB3021), and to impose rideshare fees to raise funds for the 
+safe routes to school program (SB3022). 
+
+Change Analysis
+
+The legislative effort to pass a Freedom to Walk bill was strengthened by Hawaiʻi Appleseed research into 
+jaywalking citation records. These records show that Hawaiʻi police, particularly in Honolulu, give out a much 
+higher number of jaywalking-related citations compared to other localities in the U.S. This data was compiled 
+into a “Freedom to Walk” policy report written by Hawaiʻi Appleseed Director of Transportation Equity, Abbey 
+Seitz. The report summarizes the history of jaywalking laws, the negative impacts of jaywalking enforcement, 
+and provides recommendations for future transportation investment. 
+
+While the Freedom to Walk bill did not ultimately pass during the 2024 session, the bill did pass through its 
+referred transportation and judiciary committees in both the House and Senate. This success was a testament 
+to the diverse coalition of community partners that showed up at the four hearings to testify in support of the 
+legislation, including the Hawaiʻi Public Health Institute, Hawaiʻi Bicycling League, the ACLU of Hawaiʻi, and 
+the Grassroot Institute of Hawaiʻi, among others. This advocacy effort sparked important discussions on over-
+policing, and on how to better allocate public resources to enhance pedestrian safety through roadway design 
+and pedestrian infrastructure that will continue during the 2025 legislative session.
+
+24 • POLICY IN PERSPECTIVE
+
+TRANSPORTATION EQUITY
+
+b
+e
+e
+3
+2
+/
+/
+
+i
+
+S
+t
+o
+c
+k
+
+Table 4. Key Hawaiʻi Appleseed Transportation Equity Communications Products, 2024 Legislative Session
+
+Title
+
+Type
+
+Date Published
+
+Decriminalize jaywalking in the 2024 legislative session
+
+Blog Post
+
+Jan. 24, 2024
+
+Jaywalking remains illegal in Hawai‘i; Freedom to Walk elevates transportation 
+equity discussion
+
+Blog Post
+
+July 2, 2024
+
+Want safer streets? Stop blaming pedestrians for traffic violence
+
+Op-Ed
+
+March 26, 2024
+
+Repeal jaywalking laws to boost safety
+
+Op-Ed
+
+April. 24, 2024
+
+Freedom to Walk: the high cost of jaywalking enforcement in Hawai‘i
+
+Press Release
+
+March 6, 2024
+
+Hawai‘i Appleseed recorded seven earned media pieces related to the 2024 legislative session focused on transportation 
+equity.
+
+POLICY IN PERSPECTIVE • 25
+
+ 
+ 
+ENDNOTES
+
+Caron, Will, “Policy in Perspective 2022,” 
+1. 
+Hawaiʻi Appleseed Center for Law & Economic Justice, 
+Nov. 2022, https://hiappleseed.org/publications/
+policy-in-perspective-2022 
+
+Kong, Ray, et al., “Eviction Prevention Through 
+
+2. 
+Hawaiʻi’s Tenant-Landlord Mediation Program,” 
+Hawaiʻi Appleseed Center for Law & Economic Justice, 
+Oct. 2022, https://hiappleseed.org/publications/
+eviction-prevention-mediation-hawaii
+
+Dayton, Kevin, “Lawmakers Give Final Approval 
+
+9. 
+To A ʻHistoric’ Income Tax Cut In Long Day Of Voting,” 
+Honolulu Civil Beat, May 2, 2024, https://www.
+civilbeat.org/2024/05/lawmakers-give-final-approval-
+to-a-historic-income-tax-cut-in-long-day-of-voting
+
+Thomas, Devin, “Investing In Our Future: A Keiki 
+
+10. 
+Credit for Hawaiʻi,” Hawaiʻi Budget & Policy Center, 
+Feb. 2023, p. 5, https://hiappleseed.org/publications/
+investing-in-our-future-a-keiki-credit-for-hawaii 
+
+Mizuo, Ashley, “Concerns rise for low-income 
+
+3. 
+families over Legislature’s recent tax cut measure,” 
+Hawaiʻi Public Radio, May 14, 2024, https://www.
+hawaiipublicradio.org/local-news/2024-05-14/
+concerns-rise-for-low-income-families-over-
+legislatures-recent-tax-cut-measure
+
+Caron, Will, “The big budget trouble with 
+
+4. 
+HB2404’s over-broad and sweeping tax cuts,” Hawaiʻi 
+Appleseed Center for Law & Economic Justice, May 29, 
+2024, https://hiappleseed.org/blog/the-big-budget-
+trouble-with-hb2404s-over-broad-and-sweeping-tax-cuts
+
+Thomas, Devin, “Hawaiʻi’s elected leaders buy-
+
+5. 
+in to costly ʻtrickle-down’ myth,” Hawaiʻi Appleseed 
+Center for Law & Economic Justice, June 13, 2024, 
+https://hiappleseed.org/blog/hawaii-elected-leaders-
+buy-in-costly-trickle-down-myth
+
+Giesting, Beth, “Recession in Review: Looking 
+
+6. 
+back at the Great Recession, 2007–09,” Hawaiʻi Budget 
+& Policy Center, June 2019, https://hiappleseed.org/
+publications/recession-in-review
+
+7. 
+
+Thomas, June 13, 2024
+
+Smith, Jordan, “Equity on the Menu: The Case 
+
+11. 
+for Universal Free School Meals,” Hawaiʻi Appleseed 
+Center for Law & Economic Justice, Jan. 2024, https://
+hiappleseed.org/publications/equity-on-the-menu
+
+12. 
+White, Will, “Keeping Hawaiʻi Housed: 
+Reducing the high costs of eviction through a 
+combination of rent relief, eviction mediation 
+and tenant protections,” Hawaiʻi Budget & Policy 
+Center, March 2023, p. 8, https://hiappleseed.org/
+publications/keeping-hawaii-housed
+
+Carey, Isaac, “A Study of the Impact of Social 
+
+13. 
+Trust on Economic Growth and Defining a Potential
+Threshold for ʻHigh Trust’ in Economic Research,” 
+Skidmore College Economics Student Theses and 
+Capstone Projects, May 5, 2024, p. 170,
+https://creativematter.skidmore.edu/econ_studt_
+schol/170
+
+Giesting, Beth, “Hawaiʻi Budget Primer 2024-
+
+14. 
+25,” Hawaiʻi Appleseed Center for Law & Economic 
+Justice, Aug. 2024, https://hiappleseed.org/
+publications/hawaii-budget-primer-2024-25
+
+Spangler, Sam, “Preparations for ʻworst case 
+
+8. 
+scenario’ underway with Hawaii budget cuts,” KHON2, 
+Feb. 27, 2024, https://www.khon2.com/local-news/
+preparations-for-worst-case-scenario-underway-with-
+hawaii-budget-cuts/ 
+
+15. 
+Jacoby, Samantha, “After Decades of Costly, 
+Regressive, and Ineffective Tax Cuts, a New Course Is 
+Needed,” Center on Budget & Policy Priorities, May 
+17, 2023, https://www.cbpp.org/research/federal-tax/
+after-decades-of-costly-regressive-and-ineffective-tax-
+cuts-a-new-course-is
+
+26 • POLICY IN PERSPECTIVE
+
+ENDNOTES
+
+Thomas, Devin, “Hawaiʻi’s capital gains 
+
+16. 
+loophole floats the rich as working families struggle 
+to stay above water,” Hawaiʻi Appleseed Center for 
+Law & Economic Justice, March 27, 2024, https://
+hiappleseed.org/blog/hawaii-capital-gains-loophole-
+floats-rich-working-families-struggle
+
+Giesting, Beth, “A Public Investment:
+
+25. 
+Recommendations on handling Hawaiʻi’s public 
+worker retirement commitments as the Baby 
+Boomer generation prepares to enter retirement,” 
+Hawaiʻi Budget & Policy Center, March 2019, https://
+hiappleseed.org/publications/a-public-investment
+
+Marr, Chuck, et al., “The 2017 Trump Tax Law 
+
+17. 
+Was Skewed to the Rich, Expensive, and Failed to 
+Deliver on Its Promises,” Center on Budget & Policy 
+Priorities, June 13, 2024, https://www.cbpp.org/
+research/federal-tax/the-2017-trump-tax-law-was-
+skewed-to-the-rich-expensive-and-failed-to-deliver
+
+Giesting, Beth, “The Case for a New Economy:
+
+26. 
+40 Years of Rising Costs & Stagnant Wages,” Hawaiʻi 
+Budget & Policy Center, Nov. 2020, p. 12, https://
+hiappleseed.org/publications/new-economy
+
+27. 
+
+Ibid
+
+18. 
+
+Giesting, June 2019
+
+19. 
+
+Caron, May 29, 2024
+
+20. 
+
+Thomas, Feb. 2023, p. 5
+
+Uechi, Colleen, “Deal will keep rent affordable 
+
+28. 
+at Front Street Apartments,” The Maui News, July 
+15, 2022, https://www.mauinews.com/news/local-
+news/2022/07/deal-will-keep-rent-affordable-at-front-
+street-apartments  
+
+21. 
+
+Ibid
+
+29. 
+
+Kong, October 2022
+
+Testimony on House Bill 1662 before 
+22. 
+committees of the Hawaiʻi State Legislature:
+
+•  House Committee on Finance, Feb. 21, 2024, 
+https://www.capitol.hawaii.gov/sessions/
+session2024/Testimony/HB1662_TESTIMONY_
+FIN_02-21-24_.PDF 
+
+• 
+
+Senate Committee on Health & Human Services, 
+March 18, 2024, https://www.capitol.hawaii.gov/
+sessions/session2024/Testimony/HB1662_HD1_
+TESTIMONY_HHS_03-18-24_.PDF
+
+Caron, Will, “What Finland can teach us about 
+30. 
+ending homelessness in Hawaiʻi,” Hawaiʻi Appleseed 
+Center for Law & Economic Justice, Dec. 21, 2022, 
+https://hiappleseed.org/blog/finland-teach-hawaii-
+ending-homelessness
+
+Smith, Jordan, “Community participation during 
+
+31. 
+2024 legislative session highlights pressing nature of 
+food insecurity in Hawaiʻi,” Hawaiʻi Appleseed Center 
+for Law & Economic Justice, July 18, 2024, https://
+hiappleseed.org/blog/community-participation-2024-
+legislative-session-food-insecurity-hawaii
+
+Thomas, Devin, “Closing the Capital Gains 
+
+23. 
+Loophole,” Hawaiʻi Budget & Policy Center, Jan. 
+2023, p. 5, https://www.capitol.hawaii.gov/sessions/
+session2024/Testimony/HB1662_HD1_TESTIMONY_
+HHS_03-18-24_.PDF
+
+ “The State of Food Insecurity in 
+
+32. 
+Hawaiʻi 2023,” Hawaiʻi Foodbank, July 
+2024, https://d9x3r8n6.rocketcdn.me/wp-
+content/uploads/2024/07/HawaiiFoodbank_
+TheStateOfFoodInsecurityInHawaii_2023.pdf
+
+Thomas, March 27, 2024: The estimated 
+
+24. 
+revenue collections from Hawaiʻi Appleseed’s 
+proposed capital gains reform was based on income 
+tax calcultions that predate the changes to the tax 
+code made by Act 046 (2024). Estimates for capital 
+gains revenue from a House Bill 1660 (2024)-style 
+proposal under the newly implemented tax code 
+would be significantly less than previously calculated.
+
+33. 
+
+Smith, Jan. 2024, p. 7
+
+Schwartz, Amy Ellen and Michah Rothbart, “Let 
+
+34. 
+Them Eat Lunch: The Impact of Universal Free Meals 
+on Student Performance,” Maxwell School Center for 
+Policy Research, Working Paper Series No. 203, July 
+2019, https://www.maxwell.syr.edu/docs/default-
+source/research/cpr/working-papers/wp-203-let-
+
+POLICY IN PERSPECTIVE • 27
+
+ 
+ENDNOTES
+
+them-eat-lunch.pdf?sfvrsn=efae783d_8
+
+37. 
+
+Seitz, March 2024, p. 5
+
+35. 
+Gutierrez, Ben, “Experts: More steps ahead to 
+curb rising pedestrian deaths in Hawaii,” Hawaii News 
+Now, Sept. 25, 2024, https://www.hawaiinewsnow.
+com/2024/09/26/transportation-experts-say-more-
+steps-are-ahead-curb-rising-pedestrian-deaths 
+
+Seitz, Abbey, “Freedom to Walk: 
+
+36. 
+Decriminalizing Jaywalking and Shifting Investment 
+Towards Safe, Accessible Pedestrian Infrastructure,” 
+Hawaiʻi Appleseed Center for Law & Economic 
+Justice, March 2024, p. 10, https://hiappleseed.org/
+publications/freedom-to-walk
+
+38. 
+
+Ibid
+
+39. 
+
+Seitz, March 2024, p. 12
+
+40. 
+
+Ibid
+
+41. 
+
+Seitz, March 2024, p. 15
+
+42. 
+
+Ibid
+
+28 • POLICY IN PERSPECTIVE

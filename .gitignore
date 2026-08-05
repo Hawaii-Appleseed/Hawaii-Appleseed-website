@@ -4,3 +4,6 @@ node_modules/
 .env
 __pycache__/
 *.pyc
+writing-bot/.chroma/
+writing-bot/tools/node_modules/
+writing-bot/.venv/

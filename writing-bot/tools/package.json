@@ -1,0 +1,13 @@
+{
+  "name": "appleseed-static-build",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Build-time corpus embedding for the static Appleseed Source Search.",
+  "scripts": {
+    "embed": "node embed_corpus.mjs"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "3.7.5"
+  }
+}

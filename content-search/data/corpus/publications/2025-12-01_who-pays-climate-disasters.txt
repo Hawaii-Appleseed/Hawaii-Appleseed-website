@@ -1,0 +1,2015 @@
+Title: Who Pays for Climate Disasters?
+Date: unknown
+URL: https://hiappleseed.org/publications/who-pays-climate-disasters
+PDF: https://hiappleseed.org/s/Climate-Insurance-Report_FINAL.pdf
+============================================================
+
+December 2025
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+WHO 
+WHO 
+PAYS FOR 
+PAYS FOR 
+CLIMATE 
+CLIMATE 
+DISASTERS?
+DISASTERS?
+
+Case Studies on Regulatory Responses to Climate 
+Change-Related Disasters
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+www.hiappleseed.org
+
+Author: Arjuna Heim
+
+Hawaiʻi Appleseed is committed to a more socially and economically just Hawaiʻi, where everyone has genuine 
+opportunities to achieve economic security and fulfill their potential. We change systems to address inequity 
+and foster greater opportunity by conducting data analysis and research to address income inequality, educating 
+policymakers and the public, engaging in collaborative problem solving and coalition building, and advocating 
+for policy and systems change.
+
+The work of Hawaiʻi Appleseed is about people. The issues we work on—housing, food, wages, mobility, the state 
+budget and taxation, and racial and indigenous equity—are important because they ensure people have access 
+to shelter, sustenance, and the means to survive and thrive individually and collectively. Addressing these issues 
+requires the knowledge and expertise of the people that have first-hand experience and live with the adverse 
+consequences of our flawed systems.
+
+TABLE OF CONTENTS
+
+Executive Summary
+
+Glossary of Terms
+
+Issue Overview
+
+Key Factors in Market Destabilization
+
+Equity and Climate Justice
+
+Case Studies
+
+Policy Intervention Recommendations
+
+Endnotes
+
+3
+
+5 
+
+6
+
+9
+
+11 
+
+14
+
+21
+
+26
+
+Copyright © 2025 Hawaiʻi Appleseed Center for Law & Economic Justice. All rights reserved. 
+733 Bishop Street, Suite 1180, Honolulu, HI 96813
+
+2 • CLIMATE DISASTERS
+
+EXECUTIVE SUMMARY
+
+On September 11, 1992, 
+Hurricane ‘Iniki struck Kaua‘i 
+with 143 mph winds, killing 
+seven and causing $1.8 billion 
+in damage. This GOES-7 
+satellite image from September 
+12 captures the storm, which 
+forecasters successfully tracked 
+despite limited data to provide 
+life-saving warnings. // NOAA, 
+Public domain, via Wikimedia 
+Commons
+
+OVER THE PAST SEVERAL DECADES, the United States has experienced a dramatic rise in the frequency, severity, 
+and geographic reach of climate-driven disasters—from hurricanes and floods, to wildfires and extreme heat.
+
+These tragic events devastate communities and take lives. They also strain the financial infrastructure that 
+underpins recovery: the property insurance system.
+
+As disaster claims mount, private insurers are taking in record profits while adopting strategies that harm 
+consumers. These tactics include pleading depletion of capital reserves despite record CEO pay,1 retreating from 
+high-risk markets, or sharply increasing premiums. 
+
+In a self-reinforcing cycle, these firms then reinvest their profits into the very fossil fuel companies that intensify the 
+climate disasters that force them to abandon vulnerable markets.2
+
+In the wake of this abandonment, federal and state governments have been forced to intervene with a patchwork 
+
+CLIMATE DISASTERS • 3
+
+of strategies, ranging from legislative reforms and public “insurers of last resort,” to expansion of programs like 
+the National Flood Insurance Program (NFIP). 
+
+At the same time, legal doctrines such as subrogation, shifting norms in public-private responsibility, and the 
+growing role of catastrophe modeling are redefining how insurance works in the age of accelerating climate change. 
+
+These pressures are more acute in Hawaiʻi: over 60 percent of our housing stock was constructed before 1990. This 
+aging housing stock carries added risk, and requires regular maintenance and costly resilience upgrades. These 
+are major financial barriers for many in a state with some of the highest housing costs in the U.S.3 
+
+Additionally, 40 percent of Hawaiʻi’s available housing stock is in multifamily buildings, structures that require 
+property insurance not just as a financial safeguard, but as a precondition for mobility, homeownership and 
+equity. Without insurance, rents increase, mortgages collapse, units become unsellable, and entire condominium 
+associations can be left exposed to catastrophic risk.
+
+Two major sets of factors interact to drive instability in Hawaiʻi’s insurance sector: 
+
+•  Property-specific issues, such as building age, deferred maintenance and loss history; and 
+
+• 
+
+Systemic dynamics, such as global reinsurance markets, catastrophe risk and regulatory constraints. 
+
+Between 2018 and 2023, nonrenewals for insurance policies increased by nearly 216 percent across the state.4 
+Between 2021 to 2024, Hawaiʻi homeowners saw an average increase in insurance premiums of 12 percent,5 and 
+condo Home Owners Associations have seen an average increase of 16 percent, with fee increases ranging from $1 
+to more than $2,000.6
+
+This report investigates how climate change is reshaping the structure, function and equity of insurance markets—
+nationally and in Hawaiʻi. It explores:
+
+• 
+
+• 
+
+• 
+
+• 
+
+The historical interaction between climate disasters, market retrenchment and government intervention;
+
+The particular vulnerabilities facing Hawaiʻi’s housing insurance system;
+
+The legal, regulatory, and market tools being mobilized to manage escalating risk; and
+
+The equity and governance implications of an insurance market in retreat.
+
+By analyzing both past disasters and unfolding crises, the report captures a system in flux—where each disaster 
+reshapes not only the built environment but also the financial rules, legal responsibilities, and social norms that 
+determine who is protected, who pays for recovery, and who is left behind. 
+
+To build a more resilient and equitable future for Hawaiʻi’s residents, this report recommends: 
+
+1.  Enabling the state to subrogate companies most responsible for climate disasters; 
+
+2.  Reshaping land use patterns to create natural resiliency buffers; 
+
+3.  Retrofitting older housing stock to withstand climate impacts; 
+
+4.  Adopting and enforcing updated building codes for new construction; and 
+
+5.  Expanding education on risk management and available resources to help households and communities take 
+
+preventative measures.
+
+4 • CLIMATE DISASTERS
+
+ 
+ 
+GLOSSARY OF TERMS
+
+•  Catastrophic risk: Low-frequency, high-severity risk that can cause large, simultaneous losses across 
+many policyholders, often overwhelming the financial capacity of insurers. Catastrophic risks—such 
+as major hurricanes, wildfires, earthquakes, or other climate-driven disasters—are difficult to diversify 
+and often require reinsurance, public backstops, or government intervention to manage.
+
+• 
+
+• 
+
+• 
+
+Insurability: The extent to which a risk can be covered by an insurer at a reasonable price and under 
+workable conditions. A risk is considered insurable when losses are predictable enough to price, 
+not excessively likely or severe, and can be spread across a broad pool. As climate-driven disasters 
+become more frequent and severe, some areas and properties may become less insurable, even if 
+insurance products still technically exist.
+
+Insurance: A financial arrangement in which individuals or organizations transfer risk to an insurer 
+in exchange for paying premiums. Insurance works by pooling risks across many policyholders, 
+allowing the costs of losses to be shared.
+
+Insurer of last resort: A government-run or government-backed insurance entity that provides 
+coverage where private insurers will not, typically because the risk is considered too high, 
+unpredictable, or unprofitable. These programs act as a safety net to ensure that people and 
+communities can still obtain essential insurance in areas facing catastrophic or concentrated risks, 
+such as hurricanes, wildfires, floods, or volcanic eruptions. 
+
+•  Moral hazard: A situation in which individuals or organizations change their behavior because they 
+are insulated from the consequences of risk, often due to insurance coverage or public support. In 
+climate-related disasters, moral hazard may occur when properties continue to be built or rebuilt in 
+high-risk areas because insurance, subsidies, or public aid reduce the perceived cost of exposure.
+
+•  Prior approval (insurance rate regulation): A state regulatory process that requires insurance 
+companies to submit proposed rates for review and obtain approval from the state insurance 
+regulator before the rates can be used. Prior approval is designed to ensure that rates are not 
+excessive, inadequate, or unfairly discriminatory, especially in markets affected by rising climate-
+related risks. 
+
+•  Reinsurance: Insurance that insurance companies purchase to protect themselves against very large 
+
+or catastrophic losses.
+
+•  Subrogation: The legal process that allows an insurer to seek reimbursement from a third party that 
+caused the loss after the insurer has paid a claim to the policyholder. Subrogation shifts costs back to 
+the party responsible for the damage, helping to reduce overall losses in the insurance system.
+
+CLIMATE DISASTERS • 5
+
+ISSUE OVERVIEW
+
+Property insurance is not just a financial safeguard—it also functions as a gatekeeper to the U.S. housing system. 
+Access to coverage determines access to mortgage finance and, without that, homes become uninsurable, 
+unsellable and ultimately inaccessible. This dynamic is especially acute in multifamily housing markets such as 
+Hawaiʻi, where approximately 40 percent of the existing housing stock is multifamily.7
+
+Nationally, climate change is destabilizing insurance markets through cascading effects on affordability and 
+availability. Between 2020 and 2023, average homeowners insurance premiums rose by about 30 percent.8 At the 
+same time, the costs of home repair climbed by more than 50 percent in just two years, further amplifying insurer 
+exposure.9 These pressures have led private insurers to retreat from an increasing number of high-risk markets, 
+leaving entire regions with limited or no access to new coverage.10
+
+In California, the top three insurers stopped writing new homeowners policies in wildfire-prone zones.11 In 2023 
+alone, State Farm declined to renew over 70,000 policies.12 
+
+Florida’s state-backed insurer of last resort, Citizens Property Insurance Corporation, has ballooned to more 
+than 1.4 million policies, making it one of the 10 largest insurers in the nation.13 Such programs are designed as 
+temporary backstops, but Florida’s program now shoulders systemic levels of risk.
+
+6 • CLIMATE DISASTERS
+
+Figure 1. The 10 States with the Most Projects Blacklisted by Fannie Mae, as of February 2025
+
+0
+
+200
+
+400
+
+600
+
+800
+
+1,000
+
+1,200
+
+1,400
+
+1,600
+
+Florida
+
+California
+
+Colorado
+
+Hawai‘i
+
+Texas
+
+Georgia
+
+New Jersey
+
+South Carolina
+
+Illinois
+
+New York
+
+Source: Allcock Marcus
+
+The problem extends to all forms and tenure of housing. After the 2021 Surfside condominium collapse in Miami, 
+Fannie Mae and Freddie Mac imposed stricter financing standards on multifamily properties across the nation.14 
+Thousands of condominium units across the United States were placed on “blacklists,” making them ineligible for 
+federally backed mortgages (Figure 1).15 
+
+Deferred maintenance and underfunded reserves in older buildings have pushed many associations into an 
+uninsurable category, with policies canceled or premiums spiking by multiples.16
+
+The Urban Climate Change Research Network has described this convergence of climate pressures, market 
+withdrawals, and structural vulnerabilities as a “rising tide of risk.” Without proactive intervention, that tide 
+threatens to make housing financially inaccessible to tens of millions of people, undermining not only property 
+markets but the broader social contract around homeownership of economic stability.17 
+
+In Hawaiʻi, these risks are destabilizing the property insurance market, particularly for condominiums. Between 
+2018 and 2023, nonrenewals increased by 216 percent statewide.18 Premiums have risen in tandem, threatening 
+the financial viability of condominium associations and pushing households toward financial insecurity. 
+
+Because insurance is a prerequisite for mortgage lending, this instability threatens not only individual households 
+but also the broader housing market. Federal Reserve Chair Jerome Powell recently underscored this risk, noting 
+that insurers and banks are “pulling out of coastal areas, areas where there are a lot of fires,” and predicted that in 
+“10 to 15 years there are going to be regions of the country where you can’t get a mortgage.”19 
+
+CLIMATE DISASTERS • 7
+
+Figure 2. Share of Hawai‘i Median Income Needed to Afford Median Home Price vs 
+Percentage of Hawai‘i Households that can Afford Median Home Price
+
+d
+e
+r
+i
+u
+q
+e
+R
+e
+m
+o
+c
+n
+
+I
+
+i
+
+n
+a
+d
+e
+M
+
+f
+o
+e
+r
+a
+h
+S
+
+l
+
+s
+d
+o
+h
+e
+s
+u
+o
+H
+f
+o
+e
+g
+a
+t
+n
+e
+c
+r
+e
+P
+
+200%
+
+180%
+
+160%
+
+140%
+
+120%
+
+100%
+
+80%
+
+60%
+
+100%
+
+80%
+
+60%
+
+40%
+
+20%
+
+0%
+
+Median Single-Family Home
+
+Median Condominium
+
+Median Rental
+
+2012
+
+2014
+
+2016
+
+2018
+
+2020
+
+2022
+
+2024
+
+Median Single-Family Home
+
+Median Condominium
+
+Median Rental
+
+Source: 2025 University of 
+Hawai‘i Economic Research 
+Organization (UHERO) Data 
+Book
+
+The calculations account 
+for changing home prices, 
+mortgage interest rates, and 
+the state’s household income 
+distrcibution. UHERO assumes 
+a 30-year fixed-rate mortgage 
+with a 20 percent down 
+payment.
+
+2012
+
+2014
+
+2016
+
+2018
+
+2020
+
+2022
+
+2024
+
+History demonstrates that when private insurers retreat—as they did in the wake of Hurricane ʻIniki, Hurricane 
+Katrina, or the California wildfires—the burden shifts to taxpayers, homeowners, and state-backed insurers of last 
+resort.
+
+Hawaiʻi is one of the most unaffordable markets for both renters and homeowners. Residents already feel boxed 
+out of ever-rising housing prices. Barriers are particularly steep for would-be first time buyers.20 The median cost 
+to own for residents has increased dramatically in the last five years for both single family homes and condos, 
+while the share of residents who could afford it has dropped (Figure 2).21 
+
+Rising insurance premiums and questions of uninsurability compound the problem. Homes saddled with 
+increasing HOA fees demand a higher monthly payment on top of the mortgage. Where properties cannot be 
+insured, only cash buyers can compete. Few local residents have $600,000–$950,000 in cash on hand to compete 
+with out-of-state and international buyers. First time homebuyers are also increasingly being locked out of 
+generally more affordable older condo stock.22
+
+8 • CLIMATE DISASTERS
+
+ 
+ 
+ 
+ 
+ 
+ 
+KEY FACTORS 
+IN MARKET 
+DESTABILIZATION
+
+Climate Change
+
+The accelerating pace of climate-related disasters is the 
+most powerful force destabilizing insurance markets. 
+Hurricanes, wildfires and floods are now more frequent and 
+more destructive than when these markets were created.23 
+To keep pace with insured losses and the increased chance 
+of having to pay out potential losses, insurance companies 
+must increase capital reserves or purchase additional 
+reinsurance—a cost directly passed to the consumer.24  
+
+Each new climate disaster carries the risk of multi-billion 
+dollar claims, forcing insurers to hold even higher capital 
+reserves and purchase costly reinsurance–or withdraw 
+entirely from areas deemed too risky. These expenses cascade 
+directly to consumers in the form of rapidly rising premiums.
+
+Insurer Market Exit
+
+As catastrophic risk grows, insurers are pulling out of 
+vulnerable markets.25 In Hawaiʻi, insurer market exit 
+increased premiums for condos, while some 400 condos 
+in Hawaiʻi don’t have 100 percent coverage. An increasing 
+number of single family homes are also facing non-renewal 
+due to risks associated with single-wall construction.26 27 
+These market exits create “insurance voids,” where 
+properties can no longer secure mortgages, saleability 
+lowers as homes spend more time on the market, and condo 
+associations face financial distress.
+
+CLIMATE DISASTERS • 9
+
+Deferred Maintenance & HOAs
+
+Deferred maintenance—particularly in Hawaiʻi’s multifamily buildings—has 
+become a critical issue limiting residents’ ability to buy and sell older units that 
+are often the most attainable and naturally affordable options in the market.28 29 
+
+The high risk factor for deferred maintenance in Hawaiʻi housing is due 
+largely to the fact that the majority of our existing housing stock is built 
+before 1990.30 Standards of construction and insurance have changed over 
+time as building codes are updated often in response to natural disasters. 
+The typical single-wall construction of the mid-20th century requires 
+more preventative measures,31 while older condos where boards have not 
+raised maintenance fees in decades have less money to address routine 
+maintenance.32 When these units are deemed uninsurable, it makes it more 
+onerous for residents to finance. 
+
+Regulatory Pressures
+
+State-level regulation also shapes market outcomes. In Florida and California, 
+laws that cap or slow premium increases are designed to protect consumers 
+but often discourage insurers from staying in the market.33 “Prior approval” 
+systems, where regulators must authorize any rate changes, protect consumers 
+but may also limit an insurer’s flexibility to respond to new risk data.34 
+
+Increasingly, climate change is driving higher and more volatile losses—costs 
+that insurers must carry and ultimately seek to recover.35 Regulators play a 
+critical role in balancing consumer protection with market stability, ensuring 
+coverage remains accessible without imposing restrictions that risk driving 
+insurers out. The central question is where, and how, those rising costs 
+should be recouped.
+
+Moral Hazard and Risk Modeling
+
+Finally, insurers are increasingly using advanced catastrophe models to set 
+rates at the property level. These models reward proactive risk reduction 
+measures—such as roof reinforcements, storm shutters, or wildfire 
+hardening—with lower premiums. In theory, this reduces moral hazard by 
+aligning cost with risk. In practice, many households and associations cannot 
+afford expensive upgrades, leaving them exposed to higher rates or outright 
+denial of coverage.36 While less immediately destabilizing than climate 
+shocks or market exits, this shift is reshaping insurability and limiting the 
+accessibility of housing.
+
+10 • CLIMATE DISASTERS
+
+EQUITY AND CLIMATE 
+JUSTICE
+
+The sharpest equity impact of insurance market instability is the surge in premiums and non-renewals. For many 
+households, especially those with limited incomes, dramatic increases can be devastating.
+
+In Hawaiʻi, condo associations have seen an average 16 percent increase in HOA fees since the Lahaina wildfires, 
+with some associations reporting overall increases of 1000 percent.37 While wealthier owners may be able to 
+absorb higher costs or self-insure, working families often cannot. In practice, this means that the very people most 
+in need of financial protection are being pushed out of the insurance market altogether.
+
+When a condominium association is denied coverage, federally-backed lenders such as Fannie Mae and Freddie 
+Mac will not approve loans for its units.38 The result is that homes in those buildings lose value, leaving owners 
+unable to sell or refinance. For households whose primary wealth is tied to their home, this dynamic represents 
+not only rising costs but also a collapse of long-term financial security.
+
+CLIMATE DISASTERS • 11
+
+ 
+Figure 3. Migration of Lahaina Residents After the 2023 Wildfires
+
+Honolulu County
+Hawai‘i County
+Kaua‘i County
+California
+Nevada
+Oregon
+Florida
+Arizona
+Colorado
+Washington State
+North Carolina
+Utah
+Other State
+
+0
+
+20
+
+40
+
+60
+
+Number of departing residents identiﬁed in data
+
+Source: Data Axle. The data are incomplete. As a result, the estimates in Figure 3 undercount the true number of residents who left.
+
+Renters are also affected, though their exposure is less visible. In multifamily housing, insurance premiums 
+are passed on through maintenance fees or rents. As associations face higher costs, landlords and unit owners 
+adjust rents upward to compensate. At the same time, some associations or property owners respond to 
+mounting premiums by deferring maintenance. This creates a double burden for tenants: higher rents paired with 
+deteriorating housing quality.
+
+Over time, the layering of these pressures deepens existing wealth gaps. Low-income households, renters and 
+Native Hawaiian families with limited intergenerational wealth are disproportionately exposed. As insurability 
+declines, lenders become wary and developers disinvest, compounding cycles of housing insecurity and 
+neighborhood decline.39 What begins as a financial recalibration in the insurance sector ultimately produces social 
+and spatial inequities across Hawaiʻi. 
+
+In the aftermath of the 2023 Lahaina wildfires a recent survey analyzed by the University of Hawaiʻi Economic 
+Research Organization (UHERO), has estimated that approximately 500 people departed Maui as a result of the 
+fires (Figure 3). Half of these survey respondents reside in temporary housing, more than a third are currently 
+unhoused, living with family or friends, or temporary units without assistance, indicating that displacement 
+remains a significant risk.40 Without sufficient affordable housing in Maui or across the state residents are forced 
+out or at risk of homelessness.41 Insurance payouts benefit homeowners, leaving the renters of Lahaina at 
+disproportional risk of permanent displacement.
+
+12 • CLIMATE DISASTERS
+
+Addressing some of these inequities in the aftermath of climate disaster will require proactive intervention to 
+address rising insurance costs. Proposals across the U.S. range from income-based subsidies that buffer premium 
+spikes,42 to microinsurance products that offer limited but affordable protection,43 to partial-coverage plans that at 
+least preserve some safety net for at risk units.44
+
+Hawaiʻi has also experimented with resilience credits prompted in the wake of Hurricane ʻIniki; the Hawaiʻi 
+Hurricane Relief Fund (HHRF) created a hazard mitigation program to encourage homeowners to strengthen their 
+homes against hurricanes through reduced premiums (Table 1).45 Expanding and scaling these measures could 
+help residents keep up with resilience measures, become insurable, and shift the market from reactive exclusion 
+to proactive inclusion. Doing so would ensure that protection against climate risk is not a privilege reserved solely 
+for high income households.
+
+Table 1. Examples of Credit Reductions Based on Resilience Measures
+
+Resilience Measure
+
+New roof with wall connection hardware
+
+Wall to foundation connections
+
+Installation of storm shutters and opening protection 
+systems
+
+Credit
+
+10%
+
+10–12%
+
+15–18%
+
+CLIMATE DISASTERS • 13
+
+CASE STUDIES
+
+Case studies provide a critical window into how legislatures respond when natural disasters threaten the viability 
+of home insurance markets. Each event forces policymakers to confront the same dilemma: how to stabilize 
+insurance availability without undermining affordability or driving private carriers out of the market. 
+
+By examining the tools deployed in different contexts—from the creation of state-run insurers of last resort, to 
+reforms in catastrophe modeling, to federal interventions through programs like the National Flood Insurance 
+Plan (NFIP)—we can trace how regulatory choices shape long-term outcomes for homeowners. Looking at these 
+responses side by side not only reveals the diversity of strategies, but also highlights their lasting implications for 
+equity, access to credit, and the overall resilience of housing systems.
+
+14 • CLIMATE DISASTERS
+
+1. FLORIDA: HURRICANE ANDREW & THE EMERGENCE OF STATE INSURANCE
+
+When Hurricane Andrew struck South Florida in August 1992, it left behind one of the costliest natural disasters 
+in U.S. history. Winds exceeding 165 miles per hour leveled more than 25,000 homes, damaged over 100,00 more, 
+and shuttered 82,000 businesses.46 
+
+In total, the 1992 storm inflicted an estimated $15 billion in insured losses, overwhelming not only residents and 
+local economies, but also the state’s insurance sector.47 Adjusted for inflation, that’s over $34 billion in 2025 dollars. 
+
+Prior to landfall, industry experts estimated a worst-case insured loss of around $4–5 billion.48 When the actual 
+loss was around three times more, eight insurers became insolvent in Andrew’s wake. Florida homeowners, 
+already reeling from physical destruction, were suddenly burdened with skyrocketing insurance costs.
+
+The collapse of the private insurance market prompted the state to take unprecedented action. Lawmakers first 
+created two temporary insurance pools: 
+
+• 
+
+• 
+
+The Florida Windstorm Underwriting Association (FWUA), which offered limited coverage in coastal areas; and 
+
+The Florida Residential Property and Casualty Joint Underwriting Association (JUA), which provided broader 
+coverage for households unable to secure private policies.49  
+
+In 2002, these entities were merged to form Citizens Property Insurance Corporation (CPIC), a nonprofit, tax-exempt 
+public insurer designed to serve as the state’s insurer of last resort. CPIC quickly grew to become one of the largest 
+property insurers in Florida, filling the gap left by private carriers that refused to re-enter high-risk markets.
+
+To stabilize the market, Florida also introduced a moratorium on insurer withdrawals, preventing companies from 
+exiting too quickly and leaving residents stranded.50 To improve future resilience, the state created the Florida 
+Commission on Hurricane Loss Projection Methodology (FCHLPM), tasked with setting standards for catastrophe 
+modeling and probable maximum loss calculations. 
+
+These regulatory innovations—particularly the development of CPIC and the creation of rigorous catastrophe 
+modeling standards—marks a significant shift in regulatory experimentation in the aftermath of repeated disasters.
+
+At the same time, Florida’s legal reforms aimed at curbing insurance litigation have drawn criticism. Lawsuits by 
+policy holders whose claims were denied remain among the highest in the nation; premiums continue to rank near 
+the top nationally; and consumer advocates argue that recent tort reforms have largely benefited insurers more 
+than residents.51 
+
+Reporting has also highlighted concerts with CPIC’s use of administrative hearings. Thousands of cases have been 
+delivered to the Division of Administrative Hearings (DOAH), where critics argue that homeowners face procedural 
+disadvantages. CPIC prevails more than 90 percent of the time in these hearings.52
+
+Hurricane Andrew was a turning point in the relationship between climate disasters and the insurance 
+industry. It exposed the limits of private capital to absorb catastrophic risk and demonstrated the necessity of 
+state intervention. 
+
+The legacy of Andrew continues to shape Florida’s insurance system today, where CPIC remains a dominant player. 
+However, Florida consumers continue to face some of the highest premiums in the nation, weaker protections in 
+disputes, and an influx of undercapitalized carriers that may not withstand the disaster.
+
+CLIMATE DISASTERS • 15
+
+2. HAWAIʻI: HURRICANE ʻINIKI & THE HAWAIʻI HURRICANE RELIEF FUND
+
+On September 11, 1992, Hurricane ʻIniki struck Kauaʻi as the most powerful hurricane in Hawaiʻi’s recorded 
+history.53 With sustained winds of 145 miles per hour, the storm damaged or destroyed more than 14,000 homes 
+and left much of the island without power or potable water for weeks.54
+
+Insured losses totaled around $1.6 billion. For insurers, the scale of claims was overwhelming. Many companies 
+lacked sufficient reserves to cover payouts, forcing them to withdraw from the market or raise premiums by 
+four to five times their previous levels.55 Thousands of households that had just endured catastrophic damage 
+suddenly found themselves unable to secure or afford property insurance.
+
+The market collapse pushed Hawaiʻi lawmakers to act. In 1993, the state created the Hawaiʻi Hurricane Relief Fund 
+(HHRF), a public program designed to provide hurricane coverage when private insurers refused.56 At its peak, 
+the HHRF served over 155,000 policyholders statewide,57 stabilizing access to coverage and preventing a broader 
+mortgage crisis. Once the private market began to recover, the HHRF was wound down and ceased writing 
+policies in 2000.58 But the memory of ʻIniki lingered. When insurers again began retreating in 2024, lawmakers 
+revived the HHRF through Act 296 (2025),59 and expanded its authority to cover condominium and townhouse 
+associations (AOAOs) denied by at least two private insurers.60
+
+HHRF was the second insurer of last resort. The first—Hawaii Property Insurance Association (HPIA)—was 
+established in 1991 and is still active today. The HPIA is the only insurer across the nation that covers lava damage 
+in the highest-risk zones, Lava Zone 1 & 2.61
+
+The HHRF now provides excess hurricane 
+insurance for building exteriors and 
+shared amenities. This has also allowed 
+the HPIA to establish low interest loans 
+for associations so that older condos 
+can finance deferred maintenance that 
+may have put the condominium at risk 
+of uninsurability.62 This pilot program is 
+designed to target the average condo: 
+non-luxury, older, and more naturally 
+affordable units to make “high-impact 
+repairs” so they can remain insurable 
+and affordable to residents.63
+
+Beyond the financial backstop provided 
+by the HHRF, Kauaʻi County has 
+experimented with its own mitigation 
+incentives. Project Blue Sky, a public-
+private partnership launched in the 
+wake of ʻIniki, promoted building 
+resilience through both education 
+and discounted products to increase 
+resilience.64 The HHRF incorporated 
+credits that lowered premiums for 
+policyholders who invested in upgrades 
+such as reinforced roofs, wall-to-
+
+16 • CLIMATE DISASTERS
+
+Much of Hawaiʻi’s lowest-cost housing is found in Lava Zones 1 
+& 2—areas on Hawaiʻi Island at highest risk of being impacted 
+by lava flow. When private insurers decline coverage, the 
+HPIA provides essential fire and volcano insurance, funded by 
+mandatory participation from all property insurers licensed 
+in the state. However, high risk translates to lower benefits 
+and much higher insurance premiums compared to standard 
+market policies: sometimes $4,000–$7,000 annually.65 
+
+This situation raises a complex equity dilemma: Hawaiʻi’s 
+approach effectively allows some of the state’s most 
+affordable housing to exist in locations where catastrophic 
+loss is predictable and recurring. After each eruption as 
+losses mount, premiums in lava zones often spike, sometimes 
+making even the HPIA unaffordable for local residents.66 
+
+While the cost of the HPIA is usually carried by policyholders 
+in these risk zones, any extraordinary shortfall could trigger 
+state-mandated insurer assessments, the costs of which 
+might eventually be passed to policyholders across the state. 
+This system sparks debate about risk, affordability, and the 
+long-term wisdom of policies that facilitate and subsidize 
+settlement in areas where homes are likely to be lost to 
+natural disaster.
+
+The roof and upper floor of this home 
+received major wind damage from 
+Hurricane ‘Iniki. // FEMA News Photo, 
+Public domain, via Wikimedia Commons
+
+foundation connections, and storm shutters.67 Even basic measures like installing storm shutters were estimated 
+to cut losses by as much as half.68 These policies reflected a recognition that insurance markets could not only 
+spread risk but also shape homeowner behavior toward resilience.
+
+The long-term lesson from ʻIniki is twofold. First, even in a relatively small and geographically isolated market 
+like Hawaiʻi, insurers can retreat rapidly when faced with catastrophic loss, leaving entire communities stranded. 
+Second, public insurance mechanisms can buy time and maintain market stability, but their durability depends on 
+how they are financed. 
+
+Under Act 296, the HHRF carries about $170 million in reserves and insures up to $90 million per building, with the 
+option to expand coverage by purchasing reinsurance.69 Yet a storm on the scale of ʻIniki, which caused $1.6 billion 
+in losses in 199270 ($3.6 billion today adjusted for inflation) would quickly overwhelm the fund. 
+
+In an event of that scale, in which the HHRF could not cover the losses, an assessment would be made on private 
+insurers to cover the loss. That assessment would be passed on to policyholders across the state and increase 
+premiums on homeowners and auto insurance for everyone.71 This exposure—that a large-scale climate-driven 
+disaster would drive up insurance premiusm for everyone—underscores the necessity of public intervention to fill-
+in where private insurance finds the risk to be too high.
+
+CLIMATE DISASTERS • 17
+
+3. LOUISIANA: HURRICANE KATRINA, STATE & FEDERAL COORDINATION GAPS
+
+When Hurricane Katrina made landfall in August 2005, it 
+became the most expensive natural disaster in U.S. history, 
+surpassing the damage of Hurricane Andrew.72 The storm 
+surge overwhelmed levees and left 80 percent of New Orleans 
+underwater. More than 300,000 housing units were damaged 
+or destroyed, and insured losses exceeded $40 billion.73 74
+
+However, the majority of flood damage was not covered 
+under standard homeowners’ policies, leaving families 
+reliant on the National Flood Insurance Program (NFIP). 
+That program, already strained, was forced to borrow over 
+$20 billion from the U.S. Treasury to meet claims. Even then, 
+payouts were slow and uneven.75
+
+For residents, the insurance crisis was compounded by poor 
+management and oversight. Many claims were delayed for 
+months as FEMA and private insurers struggled to access 
+properties in flooded neighborhoods. Inaccessible addresses, 
+washed-out street signs, and widespread displacement made 
+accurate assessments difficult. 
+
+When FEMA attempted to expedite the process, the result 
+was inconsistent outcomes. An internal review estimated 
+16 percent of total payments were improper or potentially 
+fraudulent.76 Meanwhile, homeowners in “low-risk” flood 
+zones who had not been required to purchase NFIP policies 
+were left without any coverage at all.77 
+
+The lack of timely insurance payouts by NFIP and FEMA 
+in 2006 made rebuilding impossible for thousands of 
+households, particularly low-income and Black ones, many 
+of whom were displaced permanently.78 
+
+Katrina made clear that without coordinated federal and 
+state reform, insurance markets in disaster-prone regions 
+risk not only financial collapse but also deepening cycles of 
+displacement and inequality among the people the markets 
+are meant to serve. Coverage gaps between private insurance 
+and federal flood insurance left millions unprotected. Delays 
+and inequities in claims handling exacerbated human 
+suffering and slowed recovery. 
+
+This dynamic also raises larger questions about fairness: 
+As the cost and frequency of climate disasters escalate, the 
+burden has largely fallen on households and taxpayers, 
+while the industries most responsible for driving climate risk 
+remain insulated from its financial consequences.79
+
+18 • CLIMATE DISASTERS
+
+Climate change is driving more 
+frequent and severe disasters 
+across the United States, including 
+hurricanes, wildfires and floods. This 
+has heavily strained FEMA’s resources 
+and response capabilities. 
+
+The growing scale and cost of climate-
+related catastrophes have resulted in 
+higher annual spending on disaster 
+assistance, routine depletion of relief 
+funds, and stretched federal capacity 
+to provide timely aid. As events 
+intensify, FEMA faces record demand 
+for emergency support and mounting 
+costs to meet it.80
+
+  
+4. CALIFORNIA: PARADISE & PACIFIC PALISADES
+
+The 2018 Camp Fire destroyed more than 18,000 structures in the town of Paradise. At the time, it was the 
+deadliest and most destructive wildfire in California state history. The fire killed 85 people, destroyed more than 
+18,000 buildings, and spanned almost 240 square miles.81 Some 50,000 people were evacuated and the community 
+was left fractured after tens of thousands of people relocated beyond Paradise, and beyond California.82
+
+The event was a glaring reality check. Climate change was indeed making wildfires more frequent, more intense, 
+and more costly.83 Losses from the fire overwhelmed insurers. Faced with escalating exposure, major carriers 
+such as State Farm began pulling back from the riskiest areas of the California market. Others started raising 
+rates and tightening underwriting in wildfire-prone regions. Some chose not to renew policies, or withdrew from 
+the market entirely. This made rebuilding nearly impossible for many Paradise residents.84
+
+California’s fallback mechanism, the Fair Access to Insurance Requirements (FAIR) Plan, was originally created in 
+1968 as an insurer of last resort.85 In recent years, it has been forced to absorb massive growth in policies as private 
+insurers retreated.86 The FAIR Plan is expected to pay out over $4 billion in claims related to the 2025 wildfires. 
+
+The FAIR plan’s coverage limit for residential housing is $3 million, and applies to single-family homes, condos 
+and most personal residence policies.87 The plan has also expanded coverage to commercial properties, 
+increasing its risk exposure and the state’s financial responsibility in the event of a disaster.88 
+
+By 2025, new fires in high-value urban areas like Pacific Palisades showed that affluent communities were 
+not immune from raging climate change-fueled fires, or from financial risk of being unable to recover. The 
+destruction of Pacific Palisades, layered on top of the previous catastrophic losses at Paradise, reinforced both 
+the limits of private insurers and the vulnerability of the safety net FAIR plan.89 
+
+CLIMATE DISASTERS • 19
+
+ 
+Figure 5. FAIR Plan Total New Business, Year-Over-Year 2022–2024, and through June 2025
+
+212,960
+
+204,269
+
+65,500
+
+89,995
+
+09/22
+
+09/23
+
+09/24
+
+10/24–06/25
+
+Dwelling and Commercial NB
+
+Source: California FAIR Plan
+
+In response, state regulators moved aggressively. The current Insurance Commissioner of California launched 
+an investigation into State Farm’s claims handling, citing widespread reports of denials and inconsistent smoke-
+damage adjustment.90 The Commissioner also established a Smoke Claims and Remediation Task Force to 
+develop science based standards for assessing smoke damage claims.91 
+
+However, the FAIR Plan has very real limitations, such as the $3 million cap—not enough to cover damage for 
+Palisades residents where the median home price was around $4.9 million.92 The plan also carries significant 
+exposure in high-risk fire areas,93 at the same time that it is experiencing a significant increase in new clients 
+(Figure 5).94
+
+The rapid growth in California’s FAIR Plan coverage shows how climate change is overwhelming the private 
+market’s ability to manage catastrophic risk. However, the crisis is not just about climate change outpacing 
+insurance; it’s also about insurers fueling the very problem they now refuse to cover. 
+
+Major carriers have profited for decades by investing premiums into fossil fuel companies and underwriting oil 
+and gas expansions, while withdrawing coverage from the very homeowners now living with the consequences.95 
+The result is a system where insurers protect their balance sheets, public insurers of last resort absorb systemic 
+risks they weren’t designed for, and the public is left footing the bill. 
+
+The question is not just how to stabilize the insurance market, but whether regulators will confront the corrosive 
+cycle between polluters and insurance profits, and seize opportunities to recoup costs from those responsible, 
+rather than saddling the bill at the feet of those most impacted.96 97
+
+20 • CLIMATE DISASTERS
+
+POLICY INTERVENTION 
+RECOMMENDATIONS
+
+Insurance markets are global in nature, shaped by reinsurance flows and actuarial models far beyond Hawaiʻi’s 
+borders. This reality limits the extent to which state governments can directly bring costs down. Yet Hawaiʻi is not 
+powerless. State leaders can deploy regulatory authority, land use planning, and litigation strategies to buffer 
+volatility, protect consumers, and keep housing markets functioning.
+
+CLIMATE DISASTERS • 21
+
+ACCOUNTABILITY: POLLUTERS MUST PAY
+
+“THE QUESTION REMAINS: WHO PAYS WHEN CATASTROPHIC LOSSES OVERWHELM THE 
+STATE-BACKED SYSTEM? IF RESERVES ARE DEPLETED AFTER A MAJOR HURRICANE OR 
+TSUNAMI, IT IS TAXPAYERS THAT WILL BE LEFT WITH THE BILL.” 
+
+Fossil fuel combustion has long been known to have adverse effects on our climate. As far back as 1978, the 
+planning departments of fossil fuel producers were reporting about long term negative effects to our atmosphere 
+from continued extraction and combustion of fossil fuels.98 
+
+Multiple fossil fuel companies had this in mind and predicted changes in a 1988 report: “Sea level, ocean currents, 
+
+22 • CLIMATE DISASTERS
+
+precipitation patterns, regional temperature and weather… these changes could be larger than any that have 
+occurred over the last 12,000 years.”99 
+
+Fossil fuel companies have reaped massive financial gains while knowingly expediting climate instability. The 
+rest of the world has been forced to deal with the ever intensifying consequences of climate disasters: increased 
+likelihoods of stronger hurricanes, dramatic coastal flooding, longer droughts, and more destructive wildfires. The 
+costs to insurers for these risks was $140 billion in 2024.100
+
+The Hawaiʻi State Legislature acted decisively in 2024 to reactivate the HHRF, stabilizing coverage for condo 
+associations and strengthening the HPIA as the insurer of last resort beyond just lava hazards. However, the 
+question remains: Who pays when catastrophic losses overwhelm the state-backed system? If reserves are 
+depleted after a major hurricane or wildfire, it is taxpayers that will be left with the bill. 
+
+A more equitable sollution is to authorize the state to act on behalf of insurers like HHRF and HPIA to pursue 
+recovery from fossil fuel companies whose products and deception have directly fueled climate-related costs.101 
+This would ensure that when disasters drive premiums to unaffordable levels or overwhelm state-backed reserves, 
+the costs are not pushed onto Hawaiʻi residents who already face some of the highest housing costs in the country. 
+
+Instead, the state could exercise subrogation on behalf of insurers like HHRF and HPIA, stepping into the shoes 
+of policyholders to recover damages directly from fossil fuel companies. Subrogation would ensure that those 
+who knowingly exacerbated climate-related insurance  risk can be held financially accountable. This is not only a 
+matter of fiscal prudence and protecting the state in the event of a disaster, but also of fairness. Polluters should 
+pay for the damages they caused, rather than leaving Hawaiʻi residents to absorb the cost of climate change. 
+
+Other states have already taken action to recoup costs from fossil fuel companies:
+
+•  Vermont: Climate Superfund Act. In 2024, Vermont passed a Climate Superfund Act, holding large fossil fuel 
+
+polluters strictly liable for the damages their emissions have caused since 1995. The law requires companies to 
+reimburse the state for climate disaster costs, including losses from catastrophic flooding.102  
+
+This followed a lawsuit in 2021 in which the State of Vermont successfully sued a handful of major fossil fuel 
+companies under the Vermont Consumer Protection Act. The state argued that these companies lied about the 
+effects that their business would have on global climate. The lawsuit is currently being challenged.
+
+•  New York: Climate Change Superfund Act. In 2024, New York also enacted a “Climate Superfund” law, 
+
+requiring major fossil fuel companies to pay billions of dollars annually into a state fund for climate adaptation 
+and disaster costs. The law shifts financial responsibility for damages like flooding and extreme heat from 
+taxpayers to those companies that contributed most to climate change.103 This law is also being challenged.
+
+•  California: Lawsuits against ExxonMobil, Shell and Chevron. In 2023, California sued major oil companies, 
+including ExxonMobil, Shell and Chevron. The state is seeking billions in damages for decades of deception 
+and subsequent harm caused to its taxpayers through climate catastrophes such as wildfires, extreme 
+heat and drought. California’s lawsuit also seeks punitive damages and injunctive relief to prevent further 
+misleading conduct by polluters.104
+
+•  Hawaiʻi: City & County of Honolulu Fossil Fuel Litigation. In 2019, the Honolulu City Council authorized the 
+Honolulu Department of Corporation Counsel to initiate legal action against fossil fuel companies to recoup 
+costs that the county will incur to pay for climate adaptation projects and extreme weather impacts. This 
+action seeks to recover damages from the fossil fuel companies which profit from oil sales in Hawaiʻi, while 
+participating in a decades-long coordinated effort to hide the negative effects of burning fossil fuels to the 
+global climate.105
+
+CLIMATE DISASTERS • 23
+
+ 
+LAND USE REFORM: PATTERNS FOR RESILIENCY
+
+Aerial view of Hilo, Hawai‘i 
+Island, 1940s. Today, this area 
+is occupied by park space and 
+lagoons. // Aero Photo Surveys, 
+Digital Archives of Hawai‘i 
+
+Land use planning sits at the center of long-term disaster resilience. Climate risk is not evenly distributed across 
+Hawaiʻi’s islands. Current development patterns have allowed for housing to be built in some of our most 
+vulnerable zones: low-lying coastal areas threatened by sea level rise and flooding, or fire-prone landscapes at 
+the urban-wildland boundary.106 Continuing to approve the same land use patterns in these areas compounds 
+exposure and ultimately shifts escalating insurance and recovery costs on to households and the public.107
+
+Other states are proactively confronting climate risk in land use planning by establishing new policies that directly 
+link zoning, infrastructure and hazard reduction. South Carolina mandates a “resiliency element" in all local 
+comprehensive plans, so cities and counties must systematically evaluate and address vulnerabilities to flooding, 
+sea level rise, and other hazards.108
+
+Similarly, New Jersey and Washington state have made climate hazard assessments a requirement for local 
+planning, tying them directly to decisions about new development, infrastructure investments, and zoning 
+changes to minimize future disaster exposure.109 Even the federal NFIP incentivizes smarter land use by rewarding 
+jurisdictions that adopt floodplain management and mitigation strategies with lower insurance premiums for local 
+residents through a Community Rating System (CRS).110
+
+This concept isn’t foreign to Hawaiʻi. After a tsunami devastated Hilo town in 1946 and killed 159 people, the 
+community rebuilt on the same spot only to suffer the same devastating consequences in 1960 after another 
+tsunami struck.111 
+
+The response to the 1960 tsunami was dramatically different. Hawaiʻi County undertook major changes to land 
+use, hazard planning, and disaster resilience to protect the vulnerable coastal city.112 The county government 
+mandated a broader oceanside greenbelt bufferzone of lagoons, gardens, and recreational facilities designed to 
+protect inland areas by absorbing the impacts of future tsunamis.113
+
+Resilient land use planning gives local governments a powerful tool to contain risk, reduce potential of moral 
+hazards, and promote both safety and equity.114 By strengthening zoning and hazard mitigation policies, Hawaiʻi 
+can help stabilize insurance markets, relieve low- and moderate-income households of hidden financial burdens, 
+and turn smart land use into a foundation for long-term disaster resilience.
+
+24 • CLIMATE DISASTERS
+
+NEW HOUSING: BUILT FOR RESILIENCE
+
+Over 60 percent of Hawaiʻi’s housing stock was built before 1990. That means the majority of our housing is 30 
+years or older. During a three decade time span, roofs should be replaced, pipes checked and updated, and retrofit 
+requirements for single-wall homes or sprinkler upgrades for condos should be completed at least once. That 
+includes hurricane clips115—metal connectors that reinforce the connection between a home’s roof and walls. 
+These are all expensive upgrades and retrofits to make for older housing stock. 
+
+The Marco Polo residential building in Honolulu was required to retrofit 568 units after a 2017 fire, the cost of 
+which was nearly $9,000 per unit for an overall $5 million upgrade.116 To add hurricane clips to single family 
+homes, prices start around $1,500 and go up depending on construction type and number of stories.117 For many 
+residents, these kinds of expenses are simply not feasible.118 119 
+
+Environmental conditions in Hawaiʻi accelerate deterioration. Termites, mold, sun, saltwater, and humidity all 
+shorten the lifespan of building materials.120 The result is that much of our older housing stock has not kept 
+up with evolving safety requirements or higher standards demanded by insurers. Many properties face rising 
+premiums, non renewals, or limited coverage—not because residents have done anything wrong, but because the 
+buildings themselves are aging out of compliance.
+
+Facing a dual challenge, Hawaiʻi must retrofit its older housing for climate resilience—a costly but essential task—
+while ensuring new construction meets modern codes from the start. Strengthening existing homes protects 
+current communities and affordability, while building resilient new housing secures a safer, more insurable future 
+for all.
+
+Actionable tools that the state and counties can use to build resilient communities, upgrade both older and newer 
+housing stock, and address moral hazard in insurance markets include:
+
+•  Code Updates and Resilience Overlays. Fast-track adoption of the latest hazard-specific building codes, 
+
+moving urgently from 2018 codes to current international standards and tailor amendments for regional risks 
+such as hurricanes, wildfires and coastal flooding.121  
+
+Develop overlay zones within local zoning maps, applying stricter resilience standards, including elevation, 
+fire resistance and hurricane protection in areas with the highest environmental risk.122
+
+•  Retrofit Incentive Programs & Anti-Displacement Provisions. Expand state and county tax credits 
+
+specifically for upgrades like hurricane clips, fire-resistant roofing, elevation, and pest/moisture mitigation.  
+
+Establish and fully fund grants or low-interest loans for multifamily properties to facilitate sprinkler retrofits, 
+resilient utility upgrades, climate-proof heating/cooling, and full roof and plumbing replacements.  
+
+Pair incentives with robust anti-displacement protections, such as requiring tenant habitability plans, 
+temporary relocation assistance, and rent stabilization during retrofit work.
+
+•  Education & Community Partnerships. Support and scale up partnerships with organizations like the Hawaiʻi 
+Wildfire Management Organization and local resilience offices to provide homeowner and tenant education on 
+environmental risks, preparedness, and strategies for building resilience.123  
+
+Include resilience education for planners, homebuilders, realtors, landlords, tenants and homeowners, 
+ensuring widespread understanding of mitigation resources, local programs to build resilience, and 
+insurance requirements.
+
+CLIMATE DISASTERS • 25
+
+ 
+ 
+ 
+ 
+ENDNOTES
+
+1. 
+“As Insurance Policy Holders Pay Record 
+Rates, Industry Executives Rake in Record Pay,” Public 
+Citizen, July 24, 2025. https://www.citizen.org/news/
+as-insurance-policy-holders-pay-record-rates-industry-
+executives-rake-in-record-pay
+
+Fenlock, Lindsay, Charles Slidders and Nikki 
+
+2. 
+Reisch, “Cut and Run: How Insurers Dodge the Climate 
+Costs They Help Create and Why Fossil Fuel Should 
+Pay,” Center for International Environmental Law, 
+March 3. 2025, https://www.ciel.org/insurers-dodge-
+climate-costs-fossil-fuel-should-pay
+
+3. 
+“The Cost of Homeownership Continues to 
+Rise,” United States Census Bureau, September 11, 
+2025. https://www.census.gov/newsroom/press-
+releases/2025/acs-1-year-estimates.html
+
+“In Vulnerable Areas, Climate Risk Drives 
+
+4. 
+Home Insurance Non-Renewals, Not Just Rate 
+Hikes,” InsuranceNewsNet, July 3, 2025. https://
+insurancenewsnet.com/oarticle/in-vulnerable-areas-
+climate-risk-drives-home-insurance-non-renewals-not-
+just-rate-hikes-insurify
+
+5. 
+Cornelissen, Sharon, Douglas Heller, Ethan 
+Weiland and Michael DeLong, Overburdened: The 
+Dramatic Increase in Homeowners Insurance Premiums 
+and its Impacts on American Homeowners, The 
+Consumer Federation of America, April 2025. https://
+consumerfed.org/wp-content/uploads/2025/03/
+OverburdenedReport.pdf
+
+Tyndall, Justin et. al, “The Hawaiʻi
+
+6. 
+Housing Factbook 2025,” University of Hawaiʻi 
+Economic Research Organization, May 14, 2025. https://
+uhero.hawaii.edu/wp-content/uploads/2025/05/
+HawaiiHousingFactbook2025.pdf
+
+SMS Research and Marketing Services, “Hawaiʻi 
+7. 
+Housing Planning Study 2024,” Hawaiʻi Housing Finance 
+& Development Corporation, 2024. https://dbedt.
+
+hawaii.gov/hhfdc/files/2025/05/FINAL_2024-HHPS-
+State-Report_Ward-Research.pdf
+
+Keys, Benjamin J. and Philip Mulder, “Property 
+
+8. 
+Insurance and Disaster Risk: New Evidence from 
+Mortgage Escrow Data,” National Bureau of Economic 
+Research, June 2024. https://www.nber.org/papers/
+w32579
+
+Fowlie, Meredith, Judson Boomhower, Daniel 
+9. 
+Richter and Riki Fujii-Rajani, “How is climate change 
+impacting home insurance markets?” The Brookings 
+Institution, January 14, 2025. https://www.brookings.
+edu/articles/how-is-climate-change-impacting-home-
+insurance-markets
+
+Hemmati, Mona, Ian P. Gray and Steven G. 
+
+10. 
+Bowen, “The growing void in the U.S. homeowners 
+insurance market: who should bear the rising cost of 
+climate change?” npj Climate Action, 4(1), April 2025. 
+https://www.researchgate.net/publication/390679775_
+The_growing_void_in_the_US_homeowners_
+insurance_market_who_should_bear_the_rising_cost_
+of_climate_change
+
+Todoroff, Natalie, “Limited home insurance 
+
+11. 
+options in California as major carriers pull back,” 
+Bankrate, August 12, 2024. https://www.bankrate.
+com/insurance/homeowners-insurance/carriers-exit-
+california-home-insurance/#what-s-next-for-the-
+california-home-insurance-market
+
+Willard, Jack, “State Farm to pull out of 72,000 
+
+12. 
+California insurance policies,” Reinsurance News, March 
+21, 2024. https://www.reinsurancene.ws/state-farm-to-
+pull-out-of-72000-california-insurance-policies
+
+13. 
+Carbonaro, Giulia, “Florida vs. California: 
+How Two States Are Facing the Insurance Crisis,” 
+Newsweek, April 7, 2025. https://www.newsweek.com/
+florida-california-how-two-states-facing-insurance-
+crisis-2055256
+
+26 • CLIMATE DISASTERS
+
+Eaglesham, Jean and Nicole Friedman, “A 
+
+14. 
+Secret Mortgage Blacklist Leaves Condos Unsellable,” 
+The Wall Street Journal, March 18, 2025. https://
+www.wsj.com/public/resources/documents/
+Hxdjn1ZMy9eAdg5nWiqY-WSJNewsPaper-3-18-2025.
+pdf?gaa_at=eafs&gaa_n=ASWzDAgn8HK-eUyM
+weCu0TH3TZ2nhjkvd5xocGFMVkTA2GCaPAZ9v
+scIrube57eW2uo%3D&gaa_ts=68c0824e&gaa_
+sig=z1WvxGu9HzO-VaiZO4AZAxqOaFEU0fiBFcb-9_
+ZVFRRrpjmd9JxX0s4iwwLc-
+NZwygXP3pWvZAYhqZDQNllEtw%3D%3D
+
+15. 
+
+Ibid
+
+16. 
+
+Ibid
+
+Meyer, Peter B., Oleksandr Sushchenko and 
+
+17. 
+Reimund Schwarze, “Climate Change, Cities, and 
+Insurance,” Urban Climate Change Research Network, 
+March 17, 2025. https://academiccommons.columbia.
+edu/doi/10.7916/bzcs-zx28
+
+18. 
+
+InsuranceNewsNet, 2025
+
+“Fed’s Powell says some areas of U.S. may be 
+
+19. 
+ʻuninsurable’ in next decade,” ABA Banking Journal, 
+February 18, 2025. https://bankingjournal.aba.
+com/2025/02/feds-powell-says-some-areas-of-u-s-may-
+be-uninsurable-in-next-decade
+
+20. 
+
+Tyndall, 2025
+
+21. 
+
+Ibid
+
+22. 
+
+Ibid
+
+23. 
+Pörtner, Hans O., et. al, “Climate Change 2022: 
+Impacts, Adaptation and Vulnerability—Summary for 
+Policymakers,” United Nations Intergovernmental 
+Panel on Climate Change, 2022. https://www.ipcc.ch/
+report/ar6/wg2/downloads/report/IPCC_AR6_WGII_
+SummaryForPolicymakers.pdf
+
+24. 
+
+Fowlie, 2025
+
+25. 
+
+Meyer, 2025
+
+2024. https://www.hawaiibusiness.com/hawaii-condo-
+insurance-market-challenges-crisis
+
+Magin, Janis, “Hawaiʻi single-family homes 
+
+27. 
+increasingly face insurance policy nonrenewals,” 
+Hawaiʻi Public Radio, July 11, 2025. https://www.
+hawaiipublicradio.org/local-news/2025-07-11/hawaii-
+single-family-homes-insurance-policy-nonrenewals
+
+Magin, Janis, “Hawaiʻi’s Condo Insurance Crisis 
+
+28. 
+Is Now Hurting Sales,” Hawaii Business, August 28, 
+2024. https://www.hawaiibusiness.com/hawaii-condo-
+insurance-crisis-impact-hurting-sales/
+
+29. 
+
+Tyndall, 2025
+
+30. 
+
+Ibid
+
+31. 
+
+Magin, 2025
+
+32. 
+
+Magin, June 21, 2024
+
+Grace, Martin F., “Price Regulation and Its 
+
+33. 
+Effects on Insurance Markets: Analysis and Case 
+Studies,” American Property Casualty Insurance 
+Assocation, January 2025. https://ncoil.org/
+wp-content/uploads/2025/07/PriceRegulation_
+WhitePaper-6.pdf
+
+“Analysis Of Property/Casualty Insurance
+
+34. 
+Rate Regulatory Laws,” Property Casualty Insurance 
+Assocation of America, November 29, 2010. https://
+archive.leg.state.nv.us/Session/76th2011/Exhibits/
+Assembly/CMC/ACMC279L.pdf
+
+Henderson, Elizabeth and Daniel Murphy, 
+
+35. 
+“Natural disasters have cost us $162 billion this year. 
+Insurance covered most of it,” World Economic Forum, 
+Aug 8, 2025. https://www.weforum.org/stories/2025/08/
+global-insurance-industry-gap
+
+36. 
+
+Meyer, 2025
+
+37. 
+
+Tyndall, 2025
+
+38. 
+
+Eaglesham, 2025
+
+26. 
+Magin, Janis, “Insurance Crisis Worsens in 
+Hawaiʻi’s ʻCondoland,’” Hawaii Business, June 21, 
+
+Taylor, Zac and Sarah Knuth, “The Insurance 
+
+39. 
+Crisis is a Housing Crisis,” The Climate and Community 
+
+CLIMATE DISASTERS • 27
+
+Institute, April 18, 2024. https://climateandcommunity.
+org/research/insurance-crisis/
+
+40. 
+
+Tyndall, 2025
+
+41. 
+Garnham, Juan Pablo and Arjuna Heim, 
+“Climate Disasters Are an Affordable Housing Problem,” 
+Bloomberg CityLab, August 16, 2024. https://www.
+bloomberg.com/news/articles/2024-08-16/maui-
+wildfires-show-climate-disasters-are-an-affordable-
+housing-problem
+
+“Homeowner Assistance Fund,” U.S. Department 
+
+42. 
+of the Treasury, Updated 2025. https://home.treasury.
+gov/policy-issues/coronavirus/assistance-for-state-
+local-and-tribal-governments/homeowner-assistance-
+fund
+
+Kousky, Carolyn, Helen Wiley and Len Shabman, 
+
+43. 
+“Can Parametric Microinsurance Improve the Financial 
+Resilience of Low-Income Households in the United 
+States?” Economics of Disasters and Climate Change, 
+5(3), p. 301–327, July 30, 2021. https://pmc.ncbi.nlm.
+nih.gov/articles/PMC8321888
+
+44. 
+“Hawaii Hurricane Relief Fund (HHRF): 
+Hurricane Insurance Available for Condominium and 
+Apartment Owners,” Hawaiʻi Department of Commerce 
+and Consumer Affairs, Updated 2025. https://cca.
+hawaii.gov/ins/hhrf
+
+Muir-Wood, Robert, “30 Years on from Hurricane 
+
+49. 
+Andrew: Managing a torm of Florida’s own making,”  
+Moody’s Analytics, August 24, 2022. https://www.
+moodys.com/web/en/us/insights/insurance/30-years-
+on-from-hurricane-andrew-managing-a-storm-of-
+floridas-own-making.html
+
+50. 
+
+McChristian, 2012
+
+51. 
+Sacks, Brianna, “Florida’s fix for its struggling 
+insurance market hurt homeowners, data shows,” The 
+Washington Post, September 5, 2025. https://www.
+washingtonpost.com/climate-environment/2025/09/05/
+florida-insurance-law-climate-change
+
+Ariza, Mario, “A Florida Home Insurer Was 
+
+52. 
+Allowed to Bypass the Courts During Claim Disputes. 
+It Won More Than 90% of the Time,” ProPublica, 
+September 15, 2025. https://www.propublica.org/
+article/citizens-property-insurance-florida-arbitration-
+cases
+
+Coffman, Makena and Ilan Noy, “A Hurricane 
+
+53. 
+Hits Hawaii: A Tale Of Vulnerability to Natural Disasters,”  
+CESifo, 2010. https://www2.hawaii.edu/~noy/papers/
+inikiCESIFO.pdf
+
+54. 
+
+Ibid
+
+55. 
+
+Federal Emergency Management Agency, 2021
+
+“Hawaii Hurricane Relief Project,” Federal 
+
+45. 
+Emergency Management Agency, February 11, 2021. 
+https://www.fema.gov/case-study/hawaii-hurricane-
+relief-project
+
+56. 
+
+Ibid
+
+57. 
+
+Ibid
+
+Sansone, Michele, “Remembering Hurricane 
+
+46. 
+Andrew’s lessons, 30 years later,” AXA XL, August 8, 
+2022. https://axaxl.com/fast-fast-forward/articles/
+remembering-hurricane-andrews-lessons-30-years-
+later 
+
+Hawaiʻi Department of Commerce and 
+
+58. 
+Consumer Affairs, 2025
+
+Act 296, Thirty-Third Legislature of the State of 
+59. 
+Hawaiʻi, July 7, 2025. https://www.capitol.hawaii.gov/
+sessions/session2025/bills/GM1407_.PDF
+
+McChristian, Lynne, “Hurricane Andrew 
+
+47. 
+and Insurance: The Enduring Impact of an Historic 
+Storm,” Insurance Information Institute, August 
+2012. https://www.iii.org/sites/default/files/paper_
+HurricaneAndrew_final.pdf
+
+“Governor Green Enacts Laws To Stabilize 
+
+60. 
+Property Insurance Market,” Office of the Governor of 
+the State of Hawaiʻi, July 7, 2025. https://cca.hawaii.
+gov/ins/release-governor-green-enacts-laws-to-
+stabilize-property-insurance-market
+
+48. 
+
+Ibid
+
+61. 
+
+“Welcome/History of HPIA,” The Hawaii 
+
+28 • CLIMATE DISASTERS
+
+Property Insurance Association, 2016, https://www.
+hpiainfo.com/welcomehistory-of-hpia
+
+72. 
+
+McChristian, 2012
+
+Ioh, Kai, “Hawaii Condo Insurance Crisis: New 
+
+62. 
+Law Brings Relief—But Not a Miracle Cure,” KE Team 
+Hawaii, July 2025. https://www.keteamhawaii.com/
+hawaii-condo-insurance-crisis-new-law-brings-relief-
+but-not-a-miracle-cure
+
+Office of the Governor of the State of Hawaiʻi, 
+
+63. 
+2025
+
+73. 
+“National Flood Insurance Program: New 
+Processes Aided Hurricane Katrina Claims Handling, but 
+FEMA’s Oversight Should Be Improved,” United States 
+Government Accountability Office, December 2006. 
+https://www.gao.gov/assets/gao-07-169.pdf
+
+“Hurricane Katrina Fact File,” Insurance 
+
+74. 
+Information Institute, March 2010. https://
+www.iii.org/sites/default/files/docs/pdf/
+HurricaneKatrinaFactFile-0320101.pdf
+
+64. 
+
+Federal Emergency Management Agency, 2021
+
+United States Government Accountability Office, 
+
+75. 
+2006
+
+Dayton, Kevin, “Insurance Prices Threaten 
+65. 
+An Affordable Housing Oasis In Hawaii,” Honolulu 
+Civil Beat, October 21, 2024. https://www.civilbeat.
+org/2024/10/insurance-prices-threaten-an-affordable-
+housing-oasis-in-hawaii
+
+“Hawaii Insurance Market Stabilization 
+
+66. 
+Recommendations,” Hawaiʻi State Department of 
+Commerce and Consumer Affairs, January 14, 2025. 
+https://cca.hawaii.gov/ins/files/2025/01/Hawaii-
+Insurance-Market-Stabilization-Recommendations-
+Whitepaper-1-14-25.pdf
+
+“Hurricanes Katrina and Rita Disaster Relief: 
+
+76. 
+Improper and Potentially Fraudulent Individual 
+Assistance Payments Estimated to Be Between $600 
+Million and $1.4 Billion,” United States Government 
+Accountability Office, June 14, 2006. https://www.
+govinfo.gov/content/pkg/GAOREPORTS-GAO-06-844T/
+html/GAOREPORTS-GAO-06-844T.htm
+
+“The Impact Of Hurricanes Katrina, Rita,
+
+77. 
+And Wilma On The Gulf Coast Housing Stock,” U.S. 
+Housing Market Conditions, 2006. https://www.huduser.
+gov/periodicals/ushmc/spring06/USHMC_06Q1_ch1.pdf
+
+67. 
+Aon, “Project Status & Recommendations 
+for Hawaii Hurricane Relief Fund (HHRF) Board of 
+Directors Meeting,” Hawaiʻi State Department of 
+Commerce and Consumer Affairs, February 18, 2025. 
+https://cca.hawaii.gov/ins/files/2025/02/HHRF_Board-
+Meeting-02_18_2025_AON-Presentation.pdf
+
+78. 
+Landry, Jr., Terry C., “From Katrina to Today: 
+Connecting Past Lessons to Future Policy Priorities,” 
+The Southern Poverty Law Center, August 29, 2025. 
+https://www.splcenter.org/resources/reports/post-
+hurricane-katrina-policy-priorities
+
+Office of the Governor of the State of Hawaiʻi, 
+
+79. 
+
+Fenlock, 2025
+
+68. 
+2025
+
+69. 
+
+Act 296, 2025
+
+“More Than 20 Years After Iniki, Hawaii Is Facing 
+
+70. 
+Two Strong Storms,” Insurance Information Institute, 
+August 8, 2014. https://www.iii.org/press-release/more-
+than-20-years-after-iniki-hawaii-is-facing-two-strong-
+storms
+
+“Budget Basics: The National Flood Insurance 
+
+80. 
+Program,” Peter G. Peterson Foundation, Updated June 
+3, 2025. https://www.pgpf.org/article/the-national-
+flood-insurance-program
+
+“Camp Fire WERT Report,” California 
+81. 
+Department of Forestry and Fire Protection, Updated 
+September 26, 2024. https://www.fire.ca.gov/
+incidents/2018/11/8/camp-fire
+
+Hawaiʻi Revised Statutes § 431P-5, 2024. https://
+
+71. 
+law.justia.com/codes/hawaii/title-24/chapter-431p/
+section-431p-5
+
+82. 
+Hansen, Peter, “Mapping a Displaced 
+Population,” Chico State Today, November 7, 2019. 
+
+CLIMATE DISASTERS • 28
+
+https://today.csuchico.edu/mapping-a-displaced-
+population
+
+Matt, J., “Paradise Redux: In Butte County, 
+
+83. 
+California, five years after the Camp Fire,” Places 
+Journal, March 2024. https://placesjournal.org/article/
+paradise-redux-five-years-after-camp-fire
+
+“Insurance costs make rebuilding nearly 
+84. 
+impossible after Paradise, California wildfire,” Finance 
+& Commerce, November 7, 2023. https://finance-
+commerce.com/2023/11/insurance-costs-make-
+rebuilding-nearly-impossible-after-paradise-california-
+wildfire
+
+“About the California FAIR Plan,” California FAIR 
+
+85. 
+Plan Association, Updated 2025. https://www.cfpnet.
+com/about-fair-plan
+
+Recamara, Josh, “FAIR Plan jumps 42% as 
+
+86. 
+insurers retreat from California market - report,” 
+Insurance Business, July 21, 2025. https://www.
+insurancebusinessmag.com/us/news/catastrophe/
+fair-plan-jumps-42-as-insurers-retreat-from-california-
+market--report-543205.aspx
+
+“Commissioner Lara approves major FAIR 
+
+87. 
+Plan expansion to help HOAs, builders, farmers, and 
+businesses access insurance coverage,” California 
+Department of Insurance, March 28, 2025. https://www.
+insurance.ca.gov/0400-news/0100-press-releases/2025/
+release028-2025.cfm
+
+Lara, Ricardo, “Updated Guidance regarding 
+
+88. 
+Insurer Recoupment Procedures in Response to 
+Assessment by the FAIR Plan,” California Department 
+of Insurance, February 11, 2025. https://www.
+insurance.ca.gov/0250-insurers/0300-insurers/0200-
+bulletins/bulletin-notices-commiss-opinion/upload/
+Bulletin-2025-4-Updated-Guidance-regarding-Insurer-
+Recoupment-Procedures-in-Response-to-Assessment-
+by-the-FAIR-Plan.pdf
+
+89. 
+Darmiento, Laurence, “How the devastating Los 
+Angeles fires could deepen California’s home insurance 
+crisis,” Los Angeles Times, January 9, 2025. https://
+www.latimes.com/business/story/2025-01-09/la-fires-
+property-home-insurance-crisis-fair-plan-lara-state-
+farm-allstate-palisades-eaton-altadena-wildfires
+
+“Commissioner Lara Launches Investigation 
+
+90. 
+into State Farm Wildfire Claims, Wildfire Survivors 
+Urged to File Formal Complaints,” California 
+Department of Insurance, June 12, 2025. https://
+www.insurance.ca.gov/0400-news/0102-alerts/2025/
+Commissioner-Lara-Launches-Investigation.cfm
+
+91. 
+“Commissioner Lara announces new Smoke 
+Claims & Remediation Task,” California Department 
+of Insurance, May 19, 2025. https://www.insurance.
+ca.gov/0400-news/0100-press-releases/2025/
+release039-2025.cfm
+
+Stephenson, Regina, “Not Only the Fires 
+
+92. 
+Are Wild: California and the P&C Market Outlook,” 
+AgentSync, June 16, 2025. https://agentsync.io/blog/
+industry-news/not-only-the-fires-are-wild-california-
+and-the-pc-market-outlook
+
+Li, Zhiyun and William Yu, “Economic Impact 
+
+93. 
+of the Los Angeles Wildfires,” UCLA Anderson School of 
+Management, March 3, 2025. https://www.anderson.
+ucla.edu/about/centers/ucla-anderson-forecast/
+economic-impact-los-angeles-wildfires#15
+
+“Key Statistics & Data,” California FAIR Plan 
+
+94. 
+Association, Updated 2025. https://www.cfpnet.com/
+key-statistics-data
+
+95. 
+
+Fenlock, 2025
+
+96. 
+
+Ibid
+
+Slidders, Charles, “Katrina 20 Years Later: 
+
+97. 
+Lessons We Must Heed This Hurricane Season,” Center 
+for International Environmental Law, August 25, 2025. 
+https://www.ciel.org/katrina-20-years-later
+
+Black, J. F., “The Greenhouse Effect,” Exxon 
+98. 
+Research and Engineering Co., June 6, 1978. https://
+climateintegrity.org/uploads/deception/1978-Exxon-
+BlackMemo.pdf
+
+Jacobs, R.P.W.M. et. al, “The Greenhouse 
+
+99. 
+Effect,” Shell Internationale Petroleum Maatschappij 
+B.V., May 1988. https://climateintegrity.org/uploads/
+deception/1988-Shell.pdf
+
+100. 
+
+“How Big Oil is Fueling the Insurance Crisis And 
+
+30 • CLIMATE DISASTERS
+
+Why State Policymakers Should Act,” Center for Climate 
+Integrity, August 2025. https://climateintegrity.org/
+uploads/media/Fueling-the-Insurance-Crisis-2025.pdf
+
+101. 
+
+Ibid
+
+102. 
+Drugmand, Dana, “Vermont v. Big Oil In Court: 
+State’s Climate Deception Case Moves Closer To Trial, 
+While Industry Allies Challenge Landmark Climate 
+Superfund Law,” Climate in the Courts, January 4, 
+2025. https://www.climateinthecourts.com/vermont-
+v-big-oil-in-court-states-climate-deception-case-
+moves-closer-to-trial-while-industry-allies-challenge-
+landmark-climate-superfund-law
+
+“Governor Hochul Signs Landmark Legislation 
+
+103. 
+Creating New Climate Superfund,” Office of the 
+Governor of the State of New York, December 26, 2024. 
+https://www.governor.ny.gov/news/governor-hochul-
+signs-landmark-legislation-creating-new-climate-
+superfund
+
+“People of the State of California v. 
+
+104. 
+Big Oil,” Office of the Governor of the State of 
+California, September 16, 2023. https://www.gov.
+ca.gov/2023/09/16/people-of-the-state-of-california-v-
+big-oil
+
+“Accountability for the Fossil Fuel Industry,” 
+
+105. 
+City and County of Honolulu Office of Climate Change, 
+Sustainability and Resiliency, Updated 2020. https://
+www.resilientoahu.org/fossil-fuel-litigation
+
+Abrahams, Daniel and Tim Robustelli, “Climate 
+
+106. 
+Change, Housing, and Homeowners Insurance in 
+Hawaii: Lessons for California,” New America, Sept. 
+17, 2025. https://www.newamerica.org/future-land-
+housing/briefs/insurance-in-hawaii-lessons-for-
+california
+
+107. 
+Frank, Sadie, Eric Gesick and David G. Victor, 
+“Inviting danger: How federal disaster, insurance and 
+infrastructure policies are magnifying the harm of 
+climate change,” The Brookings Institution, March 
+24, 2021. https://www.brookings.edu/articles/
+inviting-danger-how-federal-disaster-insurance-and-
+infrastructure-policies-are-magnifying-the-harm-of-
+climate-change
+
+“State Policy Considerations for Disaster 
+
+108. 
+Risk and Resilience,” National Conference of State 
+Legislatures, November 2023. https://documents.ncsl.
+org/wwwncsl/Environment/State-Policy-Disaster-Risk-
+Resilience.pdf
+
+109. 
+
+Ibid
+
+“Floodplain Management in Hawaiʻi,” Hawaiʻi 
+
+110. 
+Department of Land and Natural Resources, December 
+2021. https://waihalana.hawaii.gov/wp-content/
+uploads/2022/07/HIQG_PRESS_December2021_
+protected.pdf
+
+111.  McDaniel, Josh, “ʻLike the Whole Ocean Was 
+Coming at You,’” University of Hawaiʻi Sea Grant College 
+Program, 2020. https://seagrant.soest.hawaii.edu/like-
+the-whole-ocean-was-coming-at-you
+
+112.  Miller, Holly, “Waves of Change: The Role of 
+Tsunamis in the Changing Built Landscape on Mokuola
+Island in Hilo Bay, Hawaiʻi,” Hohonu - A Journal 
+of Academic Writing, 9(1), p. 19–28, 2011. https://
+hilo.hawaii.edu/campuscenter/hohonu/volumes/
+documents/Vol09x03WavesofChange.pdf
+
+“Urban Renewal Plan Kaikoo Project No. 
+
+113. 
+Hawaii R-4,” Hawaii Redevelopment Agency, June 25, 
+1965. https://records.hawaiicounty.gov/weblink/1/
+edoc/78934/Urban%20Renewal%20Plan%20
+Kaikoo%20Project%20No.%20Hawaii%20R-4.pdf
+
+114. 
+SMS Research and Marketing Services, 
+“Natural Hazard Risks Within Low-Moderate Income 
+Communities,” Hawaiʻi Housing Finance & Development 
+Corporation, August 2024. https://dbedt.hawaii.gov/
+hhfdc/files/2025/06/Natural-Hazard-Risks-Within-Low-
+Moderate-Income-Communities.pdf
+
+“Hurricane Retrofitting: Ensuring Safety for 
+
+115. 
+Older Homes in Hawaii,” Statewide General Contracting 
+and Construction, Inc., Updated 2020. https://
+statewidehawaii.com/hurricane-retrofitting-ensuring-
+safety-for-older-homes-in-hawaii
+
+116. 
+“Marco Polo fire sprinkler retrofit to cost $5M,” 
+Leis Co., Inc., 2018. https://fireprotection.leisinc.com/
+blog/fire-protection-services/marco-polo-fire-sprinkler-
+retrofit-to-cost-5m
+
+CLIMATE DISASTERS • 31
+
+“Hurricane Protection Services,” 
+
+117. 
+HPS Construction Services, Ltd., Updated 2025. https://
+www.hurricaneprotect.com/hurricane-protection-faq.
+html
+
+hawaiipublicradio.org/local-news/2024-08-27/
+stakeholders-navigate-building-code-updates-
+counties-bear-burden
+
+118.  Magin, June 21, 2024
+
+119.  Magin, 2025
+
+“Hawaii Humidity-Resistant Home Design: 
+
+120. 
+Building for Island Climate Comfort,” H-1 Construction 
+LLC, April 25, 2025. https://h1constructionhawaii.com/
+hawaii-humidity-resistant-home-design-building-for-
+island-climate-comfort
+
+121.  Mizuo, Ashley, “As stakeholders navigate 
+building code updates, counties bear the burden,” 
+Hawaiʻi Public Radio, August 27, 2024. https://www.
+
+Cohen, Oriya, Sara McTarnaghan and Anne 
+
+122. 
+Junod, “Preserving, Protecting, and Building Climate-
+Resilient Affordable Housing,” Urban Institute, 
+January 2024. https://www.urban.org/sites/default/
+files/2024-01/Preserving_Protecting_and_Building_
+Climate-Resilient_Affordable_Housing.pdf
+
+“Building for Wildfire Resilience in Hawaiʻi,” 
+
+123. 
+Community Planning Assistance for Wildfire, 
+October 2024. https://static1.squarespace.com/
+static/660b500392aae13704d0e302/t/68646758b00c077
+7c6ab9921/1751410530215BROCHURE_2024HE+Buildin
+g+For+Wildfire+in+Hawai%27i+R5.pdf
+
+32 • CLIMATE DISASTERS

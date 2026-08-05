@@ -1,0 +1,682 @@
+Title: Renters left behind at the Hawaiʻi State Legislature
+Date: unknown
+URL: https://hiappleseed.org/publications/renters-left-behind-hawaii-state-legislature
+PDF: https://hiappleseed.org/s/Renters-Left-Behind-at-the-Hawaii-Legislature_Report_FINAL.pdf
+============================================================
+
+March 2025 
+
+Renters left 
+behind at the 
+Hawai‘i State 
+Legislature
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+www.hiappleseed.org
+
+Author: Arjuna Heim
+
+Hawaiʻi Appleseed is committed to a more socially and economically just Hawaiʻi, where everyone has genuine 
+opportunities to achieve economic security and fulfill their potential. We change systems to address inequity 
+and foster greater opportunity by conducting data analysis and research to address income inequality, educating 
+policymakers and the public, engaging in collaborative problem solving and coalition building, and advocating 
+for policy and systems change.
+
+The work of Hawaiʻi Appleseed is about people. The issues we work on—housing, food, wages, mobility, the state 
+budget and taxation, and racial and indigenous equity—are important because they ensure people have access 
+to shelter, sustenance, and the means to survive and thrive individually and collectively. Addressing these issues 
+requires the knowledge and expertise of the people that have first-hand experience and live with the adverse 
+consequences of our flawed systems.
+
+TABLE OF CONTENTS
+
+Executive Summary
+
+How Renters Struggle in Hawai‘i
+
+Renters Issues at the State Legislature
+
+Recommendations 
+
+Endnotes
+
+3
+
+4 
+
+6
+
+9
+
+11
+
+Copyright © 2025 Hawaiʻi Appleseed Center for Law & Economic Justice. All rights reserved. 
+733 Bishop Street, Suite 1180, Honolulu, HI 96813
+
+2 • RENTERS LEFT BEHIND
+
+EXECUTIVE SUMMARY
+
+HAWAIʻI STANDS at a critical juncture. Our existing 
+housing policy framework fails to adequately 
+address the challenges faced by renters. Recent 
+crises such as the Maui Wildfires highlight the 
+interconnectedness of our housing ecosystem and 
+the urgent need for comprehensive reform. 
+
+In Hawaiʻi, two-fifths (38 percent) of households 
+rent the homes in which they live.1 Renters tend 
+to be lower on the income scale, and often work 
+multiple jobs to support their families and keep a 
+roof over their heads. They are usually the ones to 
+feel the crunch of Hawaiʻi’s housing market most 
+acutely, and this added stress can have serious 
+repercussions on health and future earnings. 
+
+Renter instability has serious impacts on our local 
+workforce and economy. Maui County and Kauaʻi 
+County each have some of the highest median 
+rent prices in the country.2 This makes finding a 
+home near work difficult for many, which in turn 
+has consequences for the local economy. A 2024 
+Kauaʻi Council Candidate forum highlighted how 
+renters issues are becoming a catalyst for all sorts 
+of quality of life issues for residents—not just cost 
+of living, but also health, safety and job security.3 
+
+Too often the needs of renters are sidelined at the 
+Hawaiʻi State Legislature. In the last five years, bills 
+aimed at increasing the supply of housing through 
+new development have received strong support 
+and seen passage into law. However, with the 
+exception of Act 57 (2021) and Act 237 (2022), the 
+legislature has failed to pass any bills specifically 
+targeting assistance to stabilize renters and keep 
+them housed.
+
+•  Act 57 (2021): Signed into law at the peak of 
+COVID 19 pandemic, this bill made landlord-
+
+tenant mediation mandatory upon eviction 
+filing, and made rent-relief funds available; 
+
+•  Act 237 (2022): This bill increased TANF/TONF 
+
+benefits by $500 for qualifying families that can 
+be put toward housing costs.  
+
+Act 57 (2021) became a national model to keep 
+renters housed during the pandemic.4 However, 
+even though the need for the program persists, 
+it was allowed to lapse after the pandemic was 
+declared over. The legislature has failed to re-enact 
+this popular and effective program year after year.
+
+Our existing statutes don’t do enough to protect 
+renters from displacement and instability. Hawaiʻi 
+lacks a just-cause eviction requirement, provides 
+insufficient rental support, and requires no advance 
+notice of lease non-renewal or rent increases. 
+Hawaiʻi provides no incentives for landlords and 
+tenants to engage in mediation, and there is no 
+effective enforcement mechanism for landlord 
+violations of the landlord-tenant code.
+
+The absence of a right to counsel perpetuates 
+the power imbalance between landlord and 
+tenant. Tenants without legal representation face 
+significant challenges in contesting illegal evictions 
+or displacement. 
+
+Implement just-cause eviction requirements;
+
+To address these challenges, Hawaiʻi must adopt a 
+comprehensive set of renter protections: 
+• 
+•  Provide legal counsel for tenants; 
+•  Offer sufficient, accessible rental support;
+•  Mandate a 60 day minimum advance notice for 
+
+lease non-renewal or rent increases; and 
+•  Create enforcement mechanisms for landlord-
+
+tenant code violations. 
+
+RENTERS LEFT BEHIND • 3
+
+HOW RENTERS 
+STRUGGLE IN HAWAI‘I
+
+Figure 1. Percentage of Cost-Burdened Hawai‘i Renters, 2010–235
+
+Cost-Burdened
+
+Severely Cost-Burdened
+
+53%
+
+50%
+
+49% 50%
+
+52% 52% 51% 51%
+
+53%
+
+52%
+
+51%
+
+48% 49%
+
+2010 2011
+
+2012
+
+2013
+
+2014 2015
+
+2016 2017 2018 2019 2021 2022 2023
+
+50%
+
+40%
+
+30%
+
+20%
+
+10%
+
+0%
+
+Figure 1. To be cost 
+burdened means a 
+household is spending 
+30 percent or more 
+of its income on 
+rent. Severely cost 
+burdened means 
+a household is 
+sepending more than 
+50 percent of its 
+income on rent. Since 
+2010, roughly half of 
+Hawai‘i’s total renter 
+population has been 
+either cost burdened 
+or severely cost 
+burdened.
+
+Renters in Hawaiʻi face significant cost burdens and limited protection from displacement. Hawaiʻi 
+renters are often evicted or forced to self-evict under a range of circumstances.6
+
+A National Low Income Housing Coalition (NLIHC) snapshot of the cost of renting in Hawaiʻi done in 
+2023 shows that 38 percent of residents are renters, with 21 percent earning low incomes and 36 percent 
+earning extremely low-incomes.7 More than half (51 percent) of all renters now spend more than 30 
+percent of their income on rent, making them “cost-burdened.” Furthermore, 26 percent of all renters are 
+“severely cost burdened,” which means they spend more than 50 percent of their income on rent.8
+
+Displacement and housing instability have profound consequences for individuals and families beyond 
+the obvious financial burden. Studies show that housing instability is also linked to increased stress, 
+anxiety, and depression, all of which can deteriorate both mental and physical well-being.9 Chronic 
+
+4 • RENTERS LEFT BEHIND
+
+HOW RENTERS STRUGGLE
+
+stress from the fear of eviction or the inability to secure stable housing has been found to exacerbate 
+preexisting health conditions, as well as contribute to the development of new ones, such as heart 
+disease, respiratory issues, and other chronic ailments,10 as some renters choose to postpone medical 
+services to pay for rent. 
+
+For children, housing instability can also lead to interruptions in education, with frequent moves 
+resulting in lower academic performance, increased absenteeism,11 and problems with social, emotional 
+and physical development.12 
+
+Hawaiʻi’s high housing costs and comparatively low wages, coupled with low levels of protection 
+for renters, has left a very large portion of our residents vulnerable to displacement and the social 
+disruption, detrimental health outcomes, economic insecurity and, in extreme but not infrequent cases, 
+homelessness that can accompany it.13 14
+
+Impacts of the Maui Wildfires
+
+In addition to the tragic loss of more than 100 lives, the Maui Wildfires devastated 2,207 
+structures. Some 86 percent of these structures were residential, including an 89 unit affordable 
+rental housing project that Hawaiʻi Appleseed worked with residents and local attorneys to 
+keep affordable.15 Prior to the 2023 Maui Wildfires, Hawaiʻi was already the 4th most expensive 
+state for renters.16 The loss of these housing units displaced thousands of Lahaina residents and 
+exacerbated an already dire situation for Maui County.
+
+In the aftermath of the fires, policies designed to rehouse displaced residents led to 
+unintended consequences.17 The Federal Emergency Management Agency’s generous rental 
+assistance—$5,000 per studio unit and up to $11,000 a month for a four-bedroom18—doubled the 
+market rate for most rental units.19 This pushed the rental market beyond the reach of current 
+residents across the county, forcing them to either leave their homes or pay exorbitant new 
+market prices.20
+
+While the aid benefited those directly affected by the fires, renters who were not directly 
+impacted now face an increased risk of displacement.21 The vulnerability of Maui County’s 
+struggling, wider renter population underscores the urgent need for legislative intervention to 
+protect renters and ensure the availability of affordable housing options. Without a significant 
+increase in housing units and improvements in housing affordability, the housing market will 
+continue to exclude working-class people across Hawaiʻi.
+
+During the 2024 legislative session, members of the Maui delegation introduced numerous 
+bills aimed at regulating the rental market, including proposals for rent price restrictions and 
+mediation requirements. 
+
+RENTERS LEFT BEHIND • 5
+
+RENTERS ISSUES AT THE 
+STATE LEGISLATURE
+
+The landlord-tenant law in the Hawaiʻi Revised Statutes is limited in protections against displacement. 
+Enforcement of the landlord-tenant code favors landlords implicitly by not providing tenants with a 
+guaranteed right to counsel. Rental assistance is limited and can’t always cover the necessary funds to 
+bridge a gap in rent owed versus cash available. 
+
+The majority of Hawaiʻi’s rental assistance programs in existence today feature a number of barriers 
+tenants must overcome, have a long waiting period, or require showing that the tenant is homeless or 
+about to become homeless to qualify. With just a five-day eviction notice required for non-payment of 
+rent, there is almost no time for renters to access, or qualify for temporary assistance.
+
+6 • RENTERS LEFT BEHIND
+
+RENTERS ISSUES
+
+The 2024 legislative session had the potential to produce statutes that could have increased renter 
+stability. However, of the 37 applicable bills introduced in 2024, only two made it to the governor’s desk, 
+and both were aimed at assisting landlords, rather than stabilizing tenants in their homes. 
+
+•  SB2834 (Act 33) established a process whereby a landlord could dispose of and repossess a dwelling 
+
+unit when a tenant passes away. 
+
+•  SB2132 (Act 32) amends the deadline related to repairing of unsafe housing conditions and increases 
+
+the amount deducted from tenants rent for the expenditures made to correct such conditions. 
+
+Best Practices for Tenant Protections
+
+The NLIHC has published multiple reports on efforts to further increase the security of renters. 
+Lack of federal tenant protections means that states must legislate these protections to avoid 
+harmful power imbalances between landlords and tenants. In the “State of Statewide Renter 
+Protections” (2023), the NLIHC found that across the U.S. there are five common types of state-
+level protections to support housing stability and prevent harmful evictions:
+
+1.  Right to Counsel: Ensures that tenants facing eviction are guaranteed legal representation in 
+court, helping to prevent unjust evictions and ensuring fair legal proceedings for renters who 
+cannot afford an attorney. 
+
+2.  Just Cause Eviction: Mandates that landlords can only evict tenants for specific, 
+
+documented reasons (such as non-payment of rent or lease violations), rather than at the 
+landlord’s discretion. This offers greater protection against capricious displacement. 
+
+3.  Source of Income Discrimination: Prohibits landlords from refusing to rent to potential 
+
+tenants based on their source of income, such as relying on government subsidies or housing 
+vouchers. This ensures equitable access to housing for low-income individuals. 
+
+4.  Eviction Record Sealing and Expungement Laws: Allow individuals with eviction records to 
+have their records sealed or expunged after a certain period, providing a second chance and 
+helping to reduce barriers to securing future housing. 
+
+5.  Anti-Rent Gouging: Imposes restrictions on how much landlords can increase rent, 
+
+particularly during emergencies or periods of high demand, to protect tenants from excessive 
+rent hikes.
+
+Hawaiʻi currently has in effect a source of income discrimination law on the books. However,  it 
+exempts property owners who own less than four units, making it overly narrow in scope. 
+
+RENTERS LEFT BEHIND • 7
+
+RENTERS ISSUES
+
+Figure 2. Landlord-Tenant Code and Tenant Benefit Bills in the Hawai‘i State Legislature, 2019–24
+
+No Hearing
+
+Deferred
+
+Conference
+
+Law
+
+0
+
+5
+
+10
+
+15
+
+20
+
+25
+
+Landlord-Tenant Code (2019)
+
+Tenant Beneﬁt (2019)
+
+Landlord-Tenant Code (2020)
+
+Tenant Beneﬁt (2020)
+
+Landlord-Tenant Code (2021)
+
+Tenant Beneﬁt (2021)
+
+Landlord-Tenant Code (2022)
+
+Tenant Beneﬁt (2022)
+
+Landlord-Tenant Code (2023)
+
+Tenant Beneﬁt (2023)
+
+Landlord-Tenant Code (2024)
+
+Tenant Beneﬁt (2024)
+
+For the analysis in this report, Hawaiʻi Appleseed looked at all landlord-tenant related bills introduced 
+since the 2019 legislative session, and broke them into two categories:22  
+
+•  General landlord-tenant code changes, some which include reduction of tenants rights. 
+•  Policy that benefits tenants through expansion of tenant rights via the landlord-tenant code.
+
+We tracked the course of each bill through the legislative session to determine what happened to the 
+measure and converted the data into the graph detailed in Figure 2.  
+
+In addition, in 2023 Governor Josh Green signed an emergency proclamation enacting a temporary 
+eviction moratorium in the aftermath of the Maui Wildfires. The proclamation was almost unenforceable, 
+as tenants must know their rights and have means to access legal services in order to make use of it. 
+Renters on Maui have continued to face eviction, either formally or informally.
+
+8 • RENTERS LEFT BEHIND
+
+RECOMMENDATIONS
+
+Hawaiʻi's existing statutes do not provide sufficient protection against displacement. There are no just-
+cause eviction requirements, little if any rental support, no advance notice of lease non-renewal or rent 
+increases, and no accessible resources for mediating landlord-tenant disputes. Furthermore, there is 
+no effective enforcement mechanism for violations of the landlord-tenant code. The absence of a right 
+to counsel exacerbates these issues. Tenants without legal representation face significant challenges in 
+contesting illegal evictions or displacement. 
+
+Hawaiʻi needs a comprehensive revision of its landlord-tenant code. A robust renters' rights policy is 
+essential for ensuring tenants live in safe, fair, and secure housing. Such a policy should include:
+
+1.  Access to Legal Resources: Information and support for tenants to understand and be able to 
+
+exercise their rights. 
+
+2.  Protection Against Unlawful Eviction: Legal processes for evictions, protection against retaliatory 
+
+actions, and access to contest eviction notices. 
+
+3.  Transparent and Fair Leasing Practices: Clear lease agreements, fair rent increase regulations, and 
+
+procedures for lease termination. 
+
+4.  Privacy and Respect: Reasonable notice before landlord entry and prohibition of harassment. 
+
+5.  Fair Rent Practices: Regulated rent increases and clear communication of changes. 
+
+6.  Security Deposits: Fair handling of deposits, including clear procedures for interest, deductions, as 
+
+well as returns. 
+
+7.  Non-Discrimination: Enforcement of anti-discrimination laws in rental practices. 
+
+8.  Support for Vulnerable Populations: Additional protections for low-income renters, seniors, and 
+
+individuals with disabilities. 
+
+9.  Right to Safe and Habitable Housing: Ensuring properties meet health and safety standards, with 
+
+mandatory repairs and inspections.
+
+ADDITIONAL CONSIDERATIONS
+
+Applicability: To construct a fair and equitable landlord-tenant code of conduct around just cause 
+evictions, the policy should apply to any rental agreements with a minimum lease of six months, and for 
+holdover tenants from a previous lease agreement, statewide.
+
+RENTERS LEFT BEHIND • 9
+
+RECOMMENDATIONS
+
+Just Cause: The policy should require that documented just cause be required for evictions. Just cause 
+should include: non payment of rent, substantial damage to the premises, threatening injury or injuring 
+others on premise, reckless endangerments, material violation of lease, repeat violation after receipt 
+of proper notice of violation, nuisance disturbance or negligent damage to property, property damage, 
+failure to disclose sex offender status, sexual advances or harassment of owner or manager or other 
+tenants, and threats to landlord. 
+
+No Fault Cause: The policy should provide that tenants cannot be held at fault in the event of demolition 
+or conversion of residential premises, substantial repair or renovation, documented need for landlord 
+or landlord’s family member to assume occupancy, selling of home, notice of non renewal of lease by 
+landlord under 90 days, or notice of rental increase under 60 days. 
+
+Relocation Assistance: In the event of demolition or conversion of residential premises, the policy 
+should require relocation assistance to supplement renters previous housing costs up to six months, and 
+for all other no fault cause one month’s rent for relocation assistance or waiver of the final month of rent.
+
+Enforcement: Effective enforcement of these protections ensures that these policies are actively 
+implemented, preventing exploitation and further displacement. Enforcement mechanisms should 
+include regular inspections, clear reporting procedures, and accessible legal support.
+
+Right To Counsel: When facing eviction, just 4 percent of tenants are represented by counsel as opposed 
+to 83 percent of landlords. Across the country there are approximately 24 jurisdictions that have enacted 
+tenant right-to-counsel measures, with reported positive outcomes that maintain tenant occupancy and 
+limit no-fault evictions. 
+
+In Oklahoma, Massachusetts, California, Minnesota and Denver, Colorado, studies consistently show 
+that tenants with legal counsel are significantly more likely to retain their housing or receive more time 
+to find alternative accommodations. Specifically, legal representation increases the odds of staying in 
+a home by up to 75 percent, with some studies revealing that fully represented tenants are three times 
+more likely to stay in their units, and therefore avoid homelessness. Additionally, tenants with counsel 
+tend to have cleaner eviction records, which can help avoid future housing instability.23 
+
+These findings underscore the need for a right to legal representation in eviction proceedings, as it 
+ensures tenants have a fair opportunity to remain in their homes, access sufficient time to relocate, and 
+avoid the long-term negative consequences of eviction. Providing legal assistance to tenants can prevent 
+displacement, reduce homelessness and promote housing stability. 
+
+Hawaiʻi can create a more equitable rental market, ensuring that all residents—particularly those most 
+in need—have access to safe and affordable housing. Addressing these gaps will not only support renters 
+but also contribute to a more stable housing market overall, benefiting the community as a whole.
+
+The 2025 legislative session offers another opportunity to pass sensible landlord-tenant code reform 
+around just cause eviction, right to counsel, and extended notice. Without comprehensive reforms, we 
+risk further social and economic disruptions, along with enduring health consequences for Hawaiʻi’s 
+most vulnerable populations.
+
+10 • RENTERS LEFT BEHIND
+
+ 
+ 
+ 
+ENDNOTES
+
+U.S. Census Bureau, “American Community 
+
+1. 
+Survey Table S1101: Households and Families,” 
+2023, https://data.census.gov/table/ACSST1Y2023.
+S1101?q=Hawaii%20Housing
+
+Tyndall, Justin et al., “The Hawaiʻi Housing 
+
+2. 
+Factbook,” University of Hawaiʻi Economic 
+Research Organization, 2024. https://uhero.
+hawaii.edu/wp-content/uploads/2024/05/
+HawaiiHousingFactbook2024.pdf
+
+Azambuja, Léo, “Kauai Council Candidates 
+
+3. 
+Agree County Can’t Ignore Housing Crisis,” Honolulu 
+Civil Beat,  October 10, 2024. https://www.civilbeat.
+org/2024/10/kauai-council-candidates-say-the-
+county-cant-afford-to-ignore-housing-crisis
+
+4. 
+Fujii-Oride, Noelle, “Why Rent Relief in 
+Hawaiʻi Became a National Model,” Hawaii Business, 
+June 13, 2022. https://www.hawaiibusiness.com/
+hawaii-rent-relief-national-model-covid-housing-
+state-legislative-subcommittee 
+
+U.S. Census Bureau, “American Community 
+
+5. 
+Survey Table B25070: Gross Rent as a Percentage 
+of Household Income in the Past 12 Months,” 2023. 
+https://data.census.gov/table/ACSDT1Y2023.
+B25070?q=b25070%20hawaii
+
+Legal Services Corporation, “LSC Eviction 
+
+6. 
+Laws Database,” 2021. https://www.lsc.gov/
+initiatives/effect-state-local-laws-evictions/lsc-
+eviction-laws-database#pt-12
+
+7. 
+National Low Income Housing Coalition, “Out 
+of Reach: Hawaii Dashboard,” 2024. https://nlihc.org/
+oor/state/hi
+
+8. 
+
+U.S. Census Bureau, “Table B25070,” 2023
+
+9. 
+Giesting, Beth, “Good Health Depends on 
+Decent Housing,” Hawaiʻi Budget & Policy Center, 
+December 2021. https://static1.squarespace.
+com/static/601374ae84e51e430a1829d8/t/6
+5b1c5e7ba03db650a747ce8/1706149351596/
+Health+%26+Housing+Handout.pdf
+
+Meltzer, Rachel and Alex Schwartz, “Housing 
+
+10. 
+Affordability and Health: Evidence From New York 
+City,” Housing Policy Debate, 26(1), 80–104, 2015. 
+https://doi.org/10.1080/10511482.2015.1020321
+
+Ziol-Guest, Kathleen and Claire McKenna, 
+
+11. 
+“Early childhood housing instability and school 
+readiness,” Child Development, 85(1), 103–113, 
+March 27, 2013. https://srcd.onlinelibrary.wiley.com/
+doi/10.1111/cdev.12105
+
+Holtz, Casey, Robert Fox and John Meurer, 
+12. 
+“Incidence of behavior problems in toddlers and 
+preschool children from families living in poverty,” 
+The Journal of Psychology, 149(2), 161–174, March 4, 
+2014. https://www.tandfonline.com/doi/abs/10.1080
+/00223980.2013.853020
+
+Collinson, Robert et al., “Eviction and 
+13. 
+Poverty in American Cities,” The Quarterly Journal of 
+Economics, 139(1), 57–120, February 2024. https://
+doi.org/10.1093/qje/qjad042
+
+Bauman, Tristia, Michael Santos et al., 
+
+14. 
+“Protect Tenants, Prevent Homelessness,” 
+National Law Center on Homelessness & Poverty, 
+2018, https://homelesslaw.org/wp-content/
+uploads/2018/10/ProtectTenants2018.pdf
+
+Meierdiercks, Janis, “Lost in the Lāhainā 
+
+15. 
+Fire: A New Affordable Housing Complex,” 
+Hawaii Business, August 15, 2023. https://www.
+
+RENTERS LEFT BEHIND • 11
+
+ENDNOTES
+
+hawaiibusiness.com/lahaina-fire-takes-new-
+affordable-housing-complex-maui
+
+16. 
+
+National Low Income Housing Coalition, 2024
+
+17. 
+Dobbyn, Paula, “Renters Fear Unintended 
+Consequences Of Tax Breaks To Help House Maui 
+Fire Survivors,” Honolulu Civil Beat, December 
+15, 2023. https://www.civilbeat.org/2023/12/
+tax-incentives-and-fema-perks-add-to-long-term-
+renters-agony-on-maui
+
+Hawaiʻi State Department of Human Services, 
+
+18. 
+“State of Hawaiʻi Department of Human Services 
+Launches $2.5M Rental Assisstance Program,” 
+December 1, 2023. https://humanservices.hawaii.
+gov/state-of-hawaii-department-of-human-services-
+launches-2-5m-rental-assistance-program
+
+Tyndall, Justin et al., “The Hawaiʻi Housing 
+
+19. 
+Factbook,” University of Hawaiʻi Economic 
+Research Organization, 2023. https://uhero.
+hawaii.edu/wp-content/uploads/2023/06/
+TheHawaiiHousingFactbook.pdf
+
+Garnham, Juan Pablo and Arjuna Heim, 
+
+20. 
+“Climate Disasters Are an Affordable Housing 
+Problem,” Bloomberg, August 16, 2024. https://www.
+bloomberg.com/news/articles/2024-08-16/maui-
+wildfires-show-climate-disasters-are-an-affordable-
+housing-problem
+
+List, Madeleine, “These Maui Tenants Didn’t 
+
+21. 
+Lose Their Homes In The Fire, But They’re Still Being 
+Displaced,” Honolulu Civil Beat, August 29, 2023. 
+https://www.civilbeat.org/2023/08/these-maui-
+tenants-didnt-lose-their-homes-in-the-fire-but-
+theyre-still-being-displaced
+
+This filtering did not capture two pieces 
+22. 
+of legislation which were beneficial to tenants; 
+increase in TANF/TONF rental assistance and non 
+discrimination of rent.
+
+23. 
+National Coalition for a Civil Right to 
+Counsel, “The Right to Counsel for Tenants Facing 
+Eviction: Enacted Legislation,” December 2024. 
+https://civilrighttocounsel.org/wp-content/
+uploads/2023/11/RTC_Enacted_Legislation_in_
+Eviction_Proceedings_FINAL.pdf
+
+12 • RENTERS LEFT BEHIND

@@ -1,0 +1,1308 @@
+Title: Freedom to Walk
+Date: unknown
+URL: https://hiappleseed.org/publications/freedom-to-walk
+PDF: https://hiappleseed.org/s/Freedom-to-Walk_FINAL.pdf
+============================================================
+
+March, 2024
+
+FREEDOM TO WALK
+
+Decriminalizing Jaywalking and Shifting Investment 
+Towards Safe, Accessible Pedestrian Infrastructure
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+www.hiappleseed.org
+
+Author: Abbey Seitz
+Cover Image: Hotel Street in Chinatown, Honolulu // Will Caron, Hawaiʻi Appleseed
+
+Hawaiʻi Appleseed is committed to a more socially and economically just Hawaiʻi, where everyone has genuine 
+opportunities to achieve economic security and fulfill their potential. We change systems to address inequity 
+and foster greater opportunity by conducting data analysis and research to address income inequality, educating 
+policymakers and the public, engaging in collaborative problem solving and coalition building, and advocating 
+for policy and systems change.
+
+The work of Hawaiʻi Appleseed is about people. The issues we work on—housing, food, wages, mobility, the state 
+budget and taxation, and racial and indigenous equity—are important because they ensure people have access 
+to shelter, sustenance, and the means to survive and thrive individually and collectively. Addressing these issues 
+requires the knowledge and expertise of the people that have first-hand experience and live with the adverse 
+consequences of our flawed systems.
+
+TABLE OF CONTENTS
+
+Executive Summary
+
+History of Jaywalking Laws
+
+Jaywalking Citations in Hawai‘i
+•  Heavy-Handed Enforcement
+•  Citation Hotspots in Urban O‘ahu
+•  Fines Assessed and Fees Collected
+
+3
+
+4
+
+6
+6
+8
+9
+
+•  Blaming the Victim
+•  Rising Traffic Violence
+•  Debt Collectors and Court Records 
+
+Decriminalizing Jaywalking and 
+Shifting Resources
+
+Recommendations
+
+Enforcement Impacts
+
+10
+
+Endnotes
+
+10
+12
+13
+
+14
+
+16
+
+18
+
+Copyright © 2024 Hawaiʻi Appleseed Center for Law & Economic Justice. All rights reserved. 
+733 Bishop Street, Suite 1180, Honolulu, HI 96813
+
+2 • FREEDOM TO WALK
+
+EXECUTIVE SUMMARY
+
+While media coverage of pedestrian injuries and 
+fatalities focuses on the actions of the pedestrians—
+noting if they were or were not in a marked 
+crosswalk—little attention is paid to traffic safety and 
+infrastructure solutions. This “victim-blaming” is in 
+part due to jaywalking laws. 
+
+Jaywalking laws prohibit pedestrians from crossing 
+a street outside of designated crosswalks or against 
+traffic signals. Although jaywalking is foundational to 
+the way many Americans understand roadway safety, 
+it is a relatively young concept. Jaywalking laws were 
+enacted in the 1920s following a lobbying campaign by 
+the auto industry to shift the blame onto pedestrians 
+for the national rise in traffic fatalities.1 
+
+Analysis of court records from 2018 to 2023 indicates 
+that the number of jaywalking-related citations given 
+in Hawaiʻi is significantly higher than other localities 
+in the U.S. During this time period, 5,028 jaywalking 
+citations were given per year in Hawaiʻi, which 
+amounts to 349 jaywalking tickets given for every 
+100,000 people. In comparison, in Washington state, on 
+average only six jaywalking tickets are given for every 
+100,000 people.2
+
+Unfortunately, jaywalking laws have done little to 
+prevent the nation’s growing traffic violence. Although 
+jaywalking is often cited by government enforcement 
+officials as a tool to keep pedestrians safe, analysis 
+of pedestrian tickets in cities such as Jacksonville3 
+show there is no strong relationship between where 
+jaywalking tickets are being issued and where 
+pedestrians are being killed. 
+
+Moreover, in nearly every city where these laws have 
+been studied, jaywalking tickets have been found 
+to disproportionately impact people of color.4 For 
+these reasons, jaywalking laws are classified by 
+transportation scholar Charles Brown as an “arrested 
+mobility” policy—transportation-related practices that 
+
+are inequitably enforced and lead to limited mobility, 
+opportunity, and access for people of color.5
+
+To address these issues, legislation to repeal or 
+reform jaywalking laws has been enacted in Virginia, 
+California, Nevada, Denver, Anchorage, and in Kansas 
+City. Legislation is also being proposed in New York 
+City, Washington (state) and Hawaiʻi. As of early 2024, 
+about 52 million Americans now live in places where 
+jaywalking has been decriminalized in some form.6 
+
+In this report, we summarize the history of jaywalking 
+laws, the negative impacts of jaywalking enforcement, 
+the progress of national efforts to repeal jaywalking 
+laws, and recommendations for more constructive 
+ways to spend public resources for improved roadway 
+safety. The key policy recommendation is to repeal 
+jaywalking laws in Hawaiʻi and redirect resources 
+that would otherwise would go towards pedestrian 
+enforcement, towards building infrastructure that:  
+
+• 
+• 
+• 
+
+Slows vehicle speeds;
+Increases visibility of pedestrians; and
+Physically separates vehicles and pedestrians.
+
+Note: We sometimes use the term “decriminalize” to 
+refer to repealing jaywalking laws. This is a colloquial 
+definition rather than a strictly legal definition, 
+as jaywalking fines are currently administrative 
+violations in Hawaiʻi. However, as described in the 
+2022 How-To Guide for Decriminalizing Mobility, people 
+stopped and cited while walking, biking and rolling 
+sometimes report being made to feel like criminals. 
+These administrative violations can then serve as a 
+pretext for law enforcement to run background checks 
+and issue warrants, which can sometimes lead to 
+criminal charges.7 
+
+Other times, we use the term “Freedom to Walk,” which is 
+used in campaigns by both national organizations, as well 
+as groups in Hawaiʻi, working to repeal jaywalking laws.
+
+FREEDOM TO WALK • 3
+
+HISTORY OF 
+JAYWALKING LAWS
+
+4 • FREEDOM TO WALK
+
+Safety 
+posters 
+mock 
+jaywalking. 
+Source: 
+National 
+Safety 
+Council/
+Library of 
+Congress
+
+A common depiction of cars during the 1920s—as killing machines. 
+Source: New York Times, 1924
+
+Jaywalking commonly refers to the act of crossing 
+a street outside of designated crosswalks or against 
+traffic signals. Under the current traffic code in Hawaiʻi 
+(HRS§291C), pedestrians can be fined for these 
+jaywalking offenses, in addition to more confusing 
+prohibited activities such as “suddenly leaving the 
+curb” or starting to cross the roadway when a Upraised 
+Palm (i.e., a flashing countdown timer) is present.
+
+was to blame.10 As stated by Peter Norton, a historian 
+at the University of Virginia, “Most judges defended 
+pedestrians’ rights to the pavement.”11 The public 
+outcry spurred anti-car activists in cities across the 
+country to advocate for laws to limit the speed of 
+vehicles (i.e., requiring speed governors), and restrict 
+certain types of vehicles from urban centers.12 
+
+Jaywalking laws are uncommon outside of the 
+United States, and were largely the invention of 
+the automobile industry. Before the invention 
+of petroleum gas in the 1920s and the rise of 
+automobiles, streets were considered a public space 
+for vendors, children, and the elderly alike. 
+
+As cars increased in popularity, so did pedestrian 
+injuries and fatalities. Just like today, the majority 
+of pedestrians killed were children and the elderly.8 
+The public decried these fatalities; large monuments 
+in cities were erected; and local newspapers covered 
+traffic violence in detail.9 News coverage from this 
+period typically blamed drivers for the rising death of 
+pedestrians. A 1924 cartoon featured in the New York 
+Times exemplifies this messaging, representing cars 
+as killing machines—the “grim reaper” of cities. The 
+sentiment reflected the laws of the time. 
+
+Before jaywalking laws were implemented, judges 
+typically ruled that, in any collision, the larger vehicle 
+
+Understanding the threat to the growth of the 
+industry, auto groups took action to stop the proposed 
+measures, and worked to legally redefine the street so 
+that pedestrians, rather than cars, would be restricted.  
+Unfortunately, the auto industry won the battle.
+After auto groups took control of a series of meetings 
+convened by Herbert Hoover to create a national 
+traffic law model, most cities enacted a form of the 
+1928 Model Municipal Traffic Ordinance, requiring that 
+pedestrians only cross the street at crosswalks and 
+only at right angles.13
+
+To further the enforcement of the new traffic laws, 
+auto groups used local media to reshape the narrative 
+about traffic violence. Auto groups also lobbied 
+police to publicly shame transgressors by whistling or 
+shouting at them. It is from this shaming strategy that 
+the word jaywalking originates. During this time, the 
+word “jay” meant something similar to a “hick.”14 Pro-
+auto groups promoted the use of the word "jay walker" 
+as someone who didn't know how to walk in a city and 
+threatened public safety.15
+
+FREEDOM TO WALK • 5
+
+ 
+JAYWALKING 
+CITATIONS IN HAWAI‘I
+
+Figure 1. Jaywalking Citations in Hawai‘i by Violation, 2018–2023
+
+<1%
+
+5%
+
+Crossing Outside of Crosswalks
+
+Crossing on the Do Not Walk Sign, or 
+Countdown Timer
+
+46%
+
+49%
+
+Suddenly Leaving the Curb
+
+Other
+
+Heavy-Handed Enforcement
+
+Hawaiʻi Appleseed collected citation records for 
+jaywalking-related offenses from the Hawaiʻi State 
+Judiciary for the time period of 2018 to 2023. These 
+citations were given as violations to the following 
+statues in the traffic code:  
+
+•  HRS§291C-33: Crossing on the Don’t Walk Sign or 
+
+•  HRS§291C-71: Disobeying the Instructions of a 
+
+Traffic-Control Device; 
+
+•  HRS§291C-72: Suddenly Leaving the Curb; 
+
+•  HRS§291C-73: Crossing Outside of Crosswalks; and 
+
+Countdown Timer;
+
+•  HRS§291C-75: Not Using the Right Half of Crosswalks.
+
+6 • FREEDOM TO WALK
+
+Figure 2. Average Annual Jaywalking Citations per 100,000 People, Hawai‘i Versus Other Localities16
+
+l
+
+e
+p
+o
+e
+P
+0
+0
+0
+0
+0
+1
+
+,
+
+r
+e
+p
+s
+n
+o
+i
+t
+a
+t
+i
+C
+g
+n
+k
+a
+w
+y
+a
+J
+
+l
+
+i
+
+400
+
+300
+
+200
+
+100
+
+0
+
+Hawai‘i
+
+Jacksonville,
+Florida
+
+Sacremento, 
+California
+
+Washington 
+State
+
+New York City, 
+New York
+
+Over a six-year time period, 30,168 citations were 
+given for jaywalking offenses, with an average of 5,028 
+jaywalking citations per year. This does not include 
+sealed cases or juvenile records. The highest number 
+of citations (8,201) were given in 2018. 
+
+A majority of the citations were given for crossing outside 
+of crosswalks (49 percent) and crossing intersections on 
+the don’t walk or countdown timer (46 percent). About 5 
+percent of the citations were given for suddenly leaving 
+the curb. Only a handful of citations were given for 
+disobeying the instructions of a traffic control device or 
+not using the right half of the crosswalk.
+
+Notably, the number of jaywalking-related citations 
+
+given in Hawaiʻi is significantly higher than other 
+localities in the U.S (where similar studies have been 
+conducted). For example, data on jaywalking citations 
+given in Washington state (population appx. 7.7 
+million) was recently released by the Transportation 
+Choices Coalition. 
+
+This data shows that 9,833 jaywalking citations were 
+issued across Washington state from 2000 to 2023, 
+which averages about 428 citations per year.17 As 
+shown in Figure 2, this means that only 6 jaywalking 
+citations are given for every 100,000 people in 
+Washington state. Comparatively, a staggering 349 
+jaywalking citations are given for every 100,000 people 
+in Hawaiʻi. 
+
+FREEDOM TO WALK • 7
+
+ 
+ 
+ 
+ 
+Figure 3. Heat Map of Jaywalking Citations on O‘ahu, 2018
+
+Frequency of jaywalking
+citations (2018)
+
+high
+
+low
+
+Citation Hotspots in Urban O‘ahu
+
+The citation records from 2018 (8,201 citations) were 
+geocoded and analyzed via a geographic information 
+system (GIS). Results from this analysis indicate 
+that the vast majority (99.9 percent) of jaywalking 
+citations were given on Oʻahu by the Honolulu Police 
+Department (HPD), while only a handful of tickets were 
+given on Maui and Hawaiʻi Island. 
+
+Nearly 78 percent percent of all jaywalking tickets 
+are given within urban Honolulu (spanning from 
+Kalihi to Kaimukī).18 A heat map showing the areas 
+with highest amounts of jaywalking on Oʻahu given is 
+shown in Figure 3. Within these areas, there are certain 
+
+intersections where a disproportionately high number 
+of jaywalking citations were given, including, but not 
+limited to: 
+
+•  Hotel Street (Chinatown), 1,316 citations (16 
+
+percent of 2018 total); 
+
+•  King Street (Kalihi -Mōʻiliʻili), 936 citations (11 
+
+percent of 2018 total); 
+
+•  Kalākaua Avenue (Waikīkī), 640 citations (7 percent 
+
+of 2018 total); 
+
+8 • FREEDOM TO WALK
+
+•  Hikimoe Street (Waipahu), 300 citations (4 percent 
+
+of 2018 total); 
+
+citations, compared to lower-density, higher income 
+areas (with larger White populations). 
+
+•  Pauahi Street (Chinatown), 282 citations (3 percent 
+
+of 2018 total); and 
+
+• 
+
+Leoku Street (Waipahu), 215 citations (3 percent of 
+2018 total). 
+
+Unfortunately, sociodemographic information (with 
+the exception of gender) was not obtained by the 
+police for the reviewed jaywalking citations. Thus, it is 
+difficult to assess with precision whether certain racial/
+ethnic populations in Hawaiʻi are disproportionately 
+impacted by jaywalking enforcement. 
+
+However, by using zip code as proxy, we found that 
+generally densely populated, urban areas (with larger 
+mixed-Asian, Native Hawaiian, and Pacific Island 
+populations) had greater concentrations of jaywalking 
+
+Notably, data from other localities where jaywalking 
+enforcement was studied (and where police collected 
+racial data) shows that jaywalking citations were given 
+disproportionately to Black and Brown pedestrians. 
+This has proven to be the case in nearly every such 
+locality, including:  
+
+•  New York City: A 2019 study found that 90 percent 
+of jaywalking tickets in New York City were given 
+to Black and Hispanic people, although they only 
+make up 55 percent of the city’s population.19 
+
+• 
+
+Jacksonville: A 2017 investigation by ProPublica 
+and the Florida Times-Union found that Black 
+people in Jacksonville are three times as likely 
+to be stopped and cited for jaywalking as White 
+people.20
+
+Table 1. Jaywalking Citations, Fees Collected and Fees Assessed
+
+Year
+
+Fees Assessed
+
+Fees Collected
+
+Total Fees (2018–2023)
+
+$3,823,392
+
+$854,947
+
+Estimated Cost of Enforcement
+
+Estimated Revenue Loss
+
+Fines Assessed and Fees Collected
+
+$1,810,080
+
+$955,133
+
+Despite the heavy-handed approach to jaywalking 
+enforcement in Hawaiʻi, these citations do not produce 
+large sums of money for our local government. As 
+shown in Table 1, while the jaywalking citations given 
+during the 2018–2023 time period resulted in over $3.8 
+million in assessed fees, only $854,947 of those fees 
+were collected. This means only 22.4 percent of the 
+fees are being paid. 
+
+Assuming that each jaywalking ticket requires an hour 
+of police time, we estimate the cost of jaywalking 
+enforcement between 2018 and 2023 was over $1.8 
+million (note, this amount does not include judiciary 
+resources to process the citation).21 While this is an 
+approximation, it shows that the state is likely losing 
+revenue due to jaywalking enforcement. 
+
+FREEDOM TO WALK • 9
+
+ENFORCEMENT 
+IMPACTS
+
+Blaming the Victim
+
+Just as the auto industry hoped, jaywalking laws 
+successfully created a “moral basis” for pedestrian 
+deaths.22 We see this reflected in media coverage of 
+pedestrian deaths where the common protocol is to 
+note the victim “wasn’t in the crosswalk.”23 This is 
+further proven in a 2019 study of local media coverage 
+
+of crashes involving pedestrians or bicyclists in 
+Hawaiʻi—77 percent of the 162 media articles analyzed 
+were found to focus on the actions of the pedestrian/
+bicyclist, and 69 percent of the articles did not even 
+mention a driver or vehicle.24 Only 15 percent of the 
+articles described a traffic safety solution. 
+
+10 • FREEDOM TO WALK
+
+Examples of media headlines that victim-
+blame pedestrians. 
+
+Source: Honolulu Star-Advertiser (top); The 
+Arizona Republic (middle); ABC7 (bottom)
+
+Other newspaper headlines highlight how 
+jaywalking tickets can alson lead to other 
+forms of violence between police and 
+pedestrians. 
+
+Source: The Seattle Times (top); New York 
+Post (bottom)
+
+In some cases, the media, as well as government 
+officials, go so far as to call pedestrians stupid, or 
+out-right blame pedestrians for being injured or killed. 
+This was no more evident than in a 2014 column 
+for The Arizona Republic titled “You Can’t Protect 
+Stupid Pedestrians from Themselves.” In that column, 
+the author outlines Arizona’s efforts to address its 
+pedestrian fatalities, which is among the highest in the 
+nation. The author concludes that the state’s efforts 
+will prove fruitless “in a large part because you can 
+never make pedestrian stupidity go away.”25
+
+The heavy burden pedestrians carry can also be seen 
+in the structure of traffic fines. In Hawaiʻi, fines for 
+jaywalking range between $100 and $150 (plus fines), 
+depending on the county, and the type of jaywalking 
+violation.26 These fines are more than some other 
+driving-related traffic violations, such as speeding, 
+which is a key contributor to traffic injuries and 
+fatalities. For example, on Oʻahu, speeding (1–10 miles 
+over the posted speed limit) only results in a fine of $62 
+(plus $5/mph over).27 Similarly, the fine for running a 
+red light on Oʻahu starts at $97.28 
+
+In some rare situations, pedestrians have also been 
+held criminally liable for traffic violence. A notable 
+case of this occurred in 2010 in Cobb County, Georgia, 
+when Raquel Nelson, a single-mother was on trial for 
+
+the death of her four-year old son, who had been the 
+victim of a hit-and-run crash.29 After missing a bus, 
+Nelson and her two children had to cross a dimly lit, 
+four-lane, high-speed road in the dark. Nelson and her 
+two children were struck by a partially-blind driver 
+with two previous hit-and-run convictions. The mother 
+and her younger daughter suffered minor injuries, but 
+her son was killed. 
+
+This story made national headlines when the Cobb 
+County Solicitor General indicted Nelson for vehicular 
+homicide, jaywalking, and reckless conduct. In 2011, 
+Nelson was convicted and sentenced to three years 
+in jail, though her charges were eventually dropped 
+in 2014 in exchange for a guilty plea for jaywalking 
+charges alone.30 This phenomenon—in which the 
+media, public officials, and the courts emphasize 
+pedestrians’ responsibilities to an extreme degree 
+while minimizing the responsibility of drivers—is what 
+pedestrian advocates call the “windshield bias.”31 
+
+Conversely, in the Nordic countries, which have 
+been global leaders in pedestrian safety,  drivers 
+are automatically assigned a greater share of legal 
+responsibility when collisions occur with pedestrians 
+or bicyclists. In the Netherlands, drivers are even 
+automatically considered fully responsible if the victim 
+is a child.32
+
+FREEDOM TO WALK • 11
+
+Figure 4. Percent Increase in Number of National Traffic Deaths, 2010–2021
+
+80%
+
+60%
+
+40%
+
+20%
+
+0%
+
++77%
+
+Pedestrians
+
+All Other Trafﬁc Fatalities
+
++25%
+
+Rising Traffic Violence
+
+While jaywalking laws were successful in shaping how 
+Americans view pedestrians, they failed to create safe 
+streets. In 2021, there were over 43,300 traffic-related 
+fatalities across the United States.33 Some 7,500 (18 
+percent) of those killed were pedestrians, representing 
+the highest number of pedestrian deaths since 1981.34 
+From 2010 to 2021, pedestrian deaths increased by 77 
+percent while other types of traffic fatalities increased 
+by 25 percent.35 
+
+Although not as drastic as the national average, similar 
+trends have occurred in Hawaiʻi. This is particularly 
+true on Oʻahu, where the majority of collisions 
+between vehicles and pedestrians occur. For example, 
+according to the 2022 Oʻahu Pedestrian Plan, the 
+average annual number of pedestrian fatalities rose 
+from 15.2 per year during the 2009–2013 time period, 
+to 21 per year during the 2014–2018 time period (a 38 
+percent increase).36 During those same time periods, 
+the average annual number of pedestrian fatalities 
+across the state of Hawaiʻi rose by 26 percent.37
+
+Hidden within these statistics are staggering class 
+and racial disparities, with pedestrian deaths falling 
+disproportionately on Black and Brown, low-income, 
+elderly, and disabled individuals, or a combination 
+thereof. Nationally, the pedestrian death rate among 
+Black people is 118 percent higher than it is among 
+White people.38 Similar trends occur in Hawaiʻi. For 
+example, 2020 data shows that Native Hawaiians and 
+Pacific Islanders are three times more likely than White 
+
+residents to be killed or injured in traffic collisions on 
+Hawaiʻi Island.39 Moreover, according to 2022 data, 
+almost half of all pedestrian deaths in Hawaiʻi were 
+houseless individuals.40
+
+This information is presented to underscore the fact 
+that jaywalking enforcement has been unsuccessful 
+in achieving roadway safety, particularly for the most 
+vulnerable pedestrians. In fact, globally the cities 
+with the lowest traffic death rates (mainly in Western 
+and Northern Europe) do not have jaywalking laws.41 
+Instead, the cities which have been leading efforts to 
+reduce roadway deaths rely on comprehensive “vision 
+zero” strategies which recognize that all roadway 
+deaths are preventable. The vision zero approach 
+moves away from the traditional model which focuses 
+on changing an individual’s behavior and instead 
+focuses on a systems approach which changes 
+engineering and planning practices, policies, and 
+design to lessen the severity of crashes.42 
+
+This has proven successful for countries such as 
+Sweden, who reduced their roadway fatality rate from 
+7 traffic deaths per 100,000 people in 1997 (when 
+the Vision Zero strategy was adopted)43 to 1.96 traffic 
+deaths per 100,000 people in 2020.44 For comparison, in 
+2021 there were roughly 13 traffic deaths per 100,000 
+people in the United States.45 In 2018, Sweden, with 
+a population of 10.3 million, had fewer pedestrian 
+fatalities than Hawaiʻi (Sweden: 34 fatalities46; Hawaiʻi: 
+44 fatalities47). 
+
+12 • FREEDOM TO WALK
+
+Pedestrian crossing fronting senior housing in Līhu‘e, Kaua‘i // Abbey Seitz, Hawai‘i Appleseed
+
+Debt Collectors and Court Records
+
+As previously discussed, the majority (nearly 78 
+percent) of jaywalking citation fees in Hawaiʻi are not 
+collected by the state. Unpaid tickets are typically 
+sent to debt collectors, which can lead to damage to 
+an individual’s credit score. Debt collectors can also 
+add collection fees and interest to the original ticket 
+amount, which can make it even more challenging to 
+pay the ticket off. 
+
+If left unpaid, debt can lead to legal consequences (such 
+as potential court appearances and wage garnishment), 
+difficulty in obtaining government services (such as 
+vehicle registration), as well as negative impacts to 
+
+employment and housing opportunities, as some 
+employers and landlords conduct credit checks as part 
+of the application process. 
+
+Moreover, because jaywalking citations are filed by the 
+state court in Hawaiʻi, an individual’s citation records 
+are available publicly online via eCourt Kokua. Even 
+if the jaywalking ticket is paid, the citation remains 
+public information unless the defendant makes a 
+request to the court to seal the record. Again, this 
+can have negative implications as sometimes eCourt 
+Kokua is used by employers and landlords to search 
+prospective applicants.
+
+FREEDOM TO WALK • 13
+
+DECRIMINALIZING 
+JAYWALKING AND 
+SHIFTING RESOURCES
+
+An example of quick-build curb extensions and pedestrian/bike path in Keaukaha, Hawai‘i Island. Source: Lanihuli 
+Kanahele, ‘A‘a Media
+
+14 • FREEDOM TO WALK
+
+Table 2. Potential Infrastructure Improvements to Reduce Pedestrian Fatalities and Injuries
+
+Slow Vehicle Speeds
+
+Increase Visibility of Pedestrians
+
+Physically Separate Vehicles and 
+Pedestrians
+
+•  Road diets
+•  Speed humps
+
+Intersection curb extenstions
+Leading pedestrian intervals
+
+• 
+• 
+•  Street and crosswalk light 
+
+improvements
+•  Raised crosswalks
+•  Rectangular rapid flashing 
+
+beacons
+
+•  Pedestrian hybrid beacons
+
+•  Pedestrian refuge islands
+•  Sidewalks
+•  Protected bike lanes
+•  Off-street pathways
+•  Restricting vehicle access in 
+areas of high foot-traffic
+
+Over the past few years, legislation to decriminalize 
+jaywalking has been enacted in Virginia, California, 
+Nevada, Anchorage (AK), Kansas City (MO), and is being 
+proposed in New York City, Washington (state) and 
+other localities. Nearly 52 million Americans now live 
+in places where jaywalking has been decriminalized 
+in some form.48 Many states and cities have found 
+that by decriminalizing jaywalking and other minor 
+traffic violations, they have helped to reduce the 
+burden on the justice system, decrease opportunities 
+for police escalations, and provide more constructive 
+applications of traffic safety resources. 
+
+While some critics claim that this legislation will 
+increase traffic collisions, preliminary data from 
+localities where similar legislation was implemented 
+show that there has been little to no change in the 
+number of traffic injuries and fatalities.49 Notably, it 
+is difficult to assess the direct-connection between 
+jaywalking laws and changes to traffic violence, as 
+pedestrian fatalities in the U.S. have been sharply 
+increasing over the last decade, well before efforts to 
+repeal jaywalking laws occurred.
+
+Slowing vehicle speeds, increasing visibility of 
+pedestrians, and creating separate facilities for people 
+walking, biking and rolling have been proven to be 
+the most effective means to reduce traffic collisions.50 
+To pursue these strategies, there are a multitude of 
+infrastructural improvements which can be employed. 
+Some of these infrastructural improvements are 
+identified in Table 2. 
+
+Many of the infrastructure improvements can achieve 
+multiple benefits. For example, road diets (i.e., 
+reducing the number of vehicle lanes) are a way to 
+reduce vehicle speeds, while providing opportunities 
+to accommodate new pedestrian and bike amenities. 
+Similarly, curb extensions are an intervention to reduce 
+vehicle speeds near intersections/mid-block crossings, 
+while also increasing driver awareness of pedestrians. 
+
+It is important to remember that, when designing 
+pedestrian improvements, each roadway requires 
+a unique approach because the characteristics, 
+traffic patterns, and surrounding environments vary 
+significantly between localities.
+
+FREEDOM TO WALK • 15
+
+RECOMMENDATIONS
+
+Hawai‘i Appleseed seeks to catalyze a shift away from our current roadway safety strategy that focuses 
+on enforcement, and towards a holistic approach that centers building safe, accessible pedestrian 
+infrastructure through the recommended strategies discussed in this section.
+
+Buffered bike lane and pedestrian path in Waimea, Hawai‘i Island // Abbey Seitz, Hawai‘i Appleseed
+
+Decriminalize Jaywalking
+
+In Hawaiʻi, jaywalking laws and other similar 
+pedestrian enforcement has not been successful in 
+reducing pedestrian deaths and injuries, and it is clear 
+that business-as-usual will not create safer streets. 
+
+To address these issues, Hawaiʻi Appleseed 
+recommends:  
+
+•  Decriminalizing jaywalking by amending the state 
+
+traffic code (HRS§291C) to state that pedestrians 
+
+shall not be stopped by a law enforcement officer, 
+fined, or subjected to any other penalty, for acting 
+contrary to the traffic code.  
+
+• 
+
+• 
+
+Studying which communities have been most 
+impacted by jaywalking enforcement in Hawaiʻi. 
+
+Studying the amount of public resources that 
+currently goes towards jaywalking enforcement in 
+Hawaiʻi.
+
+16 • FREEDOM TO WALK
+
+Dedicated Funding for Pedestrian Infrastructure
+
+Due to the nature in which transportation projects 
+are funded and planned in Hawaiʻi, the installation 
+of pedestrian infrastructure has often occurred 
+sporadically. For example, the City & County of 
+Honolulu passed a Complete Streets Ordinance in 
+2012, requiring that the planning of new city roadways 
+(or repaving/maintenance projects) incorporate 
+Complete Streets principles. 
+
+plan and implement safe system infrastructure in 
+Hawaiʻi. For example, in 2023, the State legislature 
+allocated $20 million towards the creation of a Safe 
+Routes to School (SRTS) fund (Act 244). This fund will 
+allow state and county agencies to implement safety 
+projects within one-mile of schools. However, this is 
+a one time investment which will expire at the end of 
+Fiscal Year 2025. 
+
+Every year, the Complete Streets program implements 
+crosswalk improvements, walkways, protected and 
+shared bikeways, traffic calming features, bus stop 
+improvements, and street trees. However, because 
+the city’s Complete Streets office does not have 
+a standalone budget, the majority of multimodal 
+facilities are planned/implemented only when 
+roadways are in-need of repaving, or when federal 
+funding or grants are received. 
+
+To address these issues, Hawaiʻi Appleseed 
+recommends:  
+
+• 
+
+Studying new potential federal, state and county 
+revenue sources for pedestrian infrastructure.  
+
+•  Creating stand-alone budgets for county 
+
+transportation agencies to implement pedestrian 
+infrastructure improvements.  
+
+Notably, there have been recent efforts to create 
+stand-alone budgets for transportation agencies to 
+
+•  Creating a permanent funding source for the SRTS 
+
+fund. 
+
+Prioritize Pedestrian Improvements in High-Crash Locations
+
+The fact that roadway safety issues are not evenly 
+distributed, but in-fact are geographically isolated, 
+demonstrates the need to prioritize pedestrian 
+infrastructure at locations where frequent collisions 
+occur. In addition to lacking dedicated funding for 
+pedestrian safety projects, government agencies 
+often lack access to comprehensive, statewide data on 
+pedestrian, bicycle, and transit facilities, as well as the 
+location of roadway collisions, injuries and fatalities. 
+Agencies also lack shared criteria to determine where 
+
+future pedestrian safety projects should be located. To 
+address these issues, Hawaiʻi Appleseed recommends:  
+
+•  Creating a publicly-accessible statewide mapping 
+
+database that compiles existing datasets related 
+to existing and planned transportation facilities, 
+safety, and equity into one common platform.  
+
+•  Developing criteria to assess for agencies to select 
+
+project locations.
+
+FREEDOM TO WALK • 17
+
+ENDNOTES
+
+ Norton, Peter, “Street Rivals: Jaywalking and 
+
+1. 
+the Invention of the Motor Age Street,” Technology and 
+Culture, 48(2), p. 331–359, 2007, https://cdn1.vox-cdn.
+com/uploads/chorus_asset/file/2934608/Norton_
+Street_Rivals.0.pdf
+
+Campbell, Ethan C., “Ticket to Walk: How 
+
+2. 
+Jaywalking Enforcement Impacts Washingtonians,” 
+Transportation Choices Coalition, January 23, 
+2024, https://freetowalkwa.org/wp-content/
+uploads/2024/01/Ticket-to-Walk_Research-
+Report_2024.pdf
+
+Sanders, Topher, Kate Rabinowitz and 
+
+3. 
+Benjamin Conarck, “Walking While Black: 
+Jacksonville’s enforcement of pedestrian violations 
+raises concerns that it’s another example of racial 
+profiling,” ProPublica and Florida Times-Union, 
+November 16, 2017, https://features.propublica.
+org/walking-while-black/jacksonville-pedestrian-
+violations-racial-profiling
+
+2022, https://www.saferoutespartnership.org/sites/
+default/files/resource_files/decriminalization_guide_0.
+pdf
+
+8. 
+
+Norton, 2007, p. 331
+
+Stomber, Joseph, “The Forgotten History 
+
+9. 
+of How Automakers Invented the Crime of 
+ʻJaywalking,’” Vox, November 4, 2015, https://www.vox.
+com/2015/1/15/7551873/jaywalking-history 
+
+Norton, Peter, Fighting Traffic: The Dawn of the 
+10. 
+Motor Age in the American City, Chapter 2: Police Chao 
+Ordo, MIT Press, p. 63, 2011, https://mitpress.mit.
+edu/9780262516129/fighting-traffic/
+
+11. 
+
+Norton, 2011, p. 337
+
+12. 
+
+Stomber, 2015
+
+Norton, 2011, Chapter 9: The Dawn of the Motor 
+
+13. 
+Age, p. 221.
+
+Free to Walk Washington, “Black and Unhoused 
+
+4. 
+People Disportionately Targeted for Jaywalking,” 
+2024, https://freetowalkwa.org/data-black-people-
+disproportionately-targeted-for-jaywalking
+
+14. 
+
+Stomber, 2015
+
+15. 
+
+Norton, 2007, p. 342
+
+Brown, Charles, “Arrested Mobility: Barriers 
+
+5. 
+to Walking, Biking and E-Scooter Use in Black 
+Communities in the United States,” 2020, https://
+arrestedmobility.com
+
+Campbell, Ethan C., “Ticket to Walk: How 
+
+6. 
+Jaywalking Enforcement Impacts Washingtonians,” 
+Transportation Choices Coalition, January 23, 
+2024, https://freetowalkwa.org/wp-content/
+uploads/2024/01/Ticket-to-Walk_Research-
+Report_2024.pdf 
+
+Kelley, Michael and Marisa Jones, “Taking 
+
+7. 
+on Traffic Laws: A How-To Guide for Decriminalizing 
+Mobility,” BikeWalk KC and Safe Routes Partnership, 
+
+Hawaiʻi data based on 2018 to 2023 annual 
+16. 
+averages, provided by the Hawaiʻi State Judiciary; 
+Jacksonville data based on 2017 records, available at 
+https://features.propublica.org/walking-while-black/
+jacksonville-pedestrian-violations-racial-profiling; 
+Sacramento data based on 2017 records, available 
+at https://www.sacbee.com/news/equity-lab/
+article253623943.html; Washington state data based 
+on 2000 to 2023 annual averages, available at https://
+freetowalkwa.org/wp-content/uploads/2024/01/
+Ticket-to-Walk_Research-Report_2024.pdf;  New York 
+City data based on 2019 records, available at https://
+nyc.streetsblog.org/2020/01/27/jaywalking-while-
+black-final-2019-numbers-show-race-based-nypd-
+crackdown-continues.
+
+18 • FREEDOM TO WALK
+
+17. 
+
+Campbell, 2024
+
+Includes the 96858, 96819, 96817, 96813, 96814, 
+
+18. 
+96822 and 96816 zip codes
+
+Kuntzman, Gersh, “ʻJaywalking While 
+19. 
+Black’: Final 2019 Numbers Show Race-Based NYPD 
+Crackdown Continues,” StreetsBlog NYC, January 
+27, 2020, https://nyc.streetsblog.org/2020/01/27/
+jaywalking-while-black-final-2019-numbers-show-
+race-based-nypd-crackdown-continues
+
+20. 
+
+Sanders, 2017
+
+The cost of enforcement reflects an estimated 
+
+21. 
+30,168 hours of time provided by the HPD between 
+2018 and 2023, assuming each officer is paid 
+approximately $60 per hour. This estimate of the public 
+cost of a police officer ($115,291 annual salary) reflects 
+the Honolulu Police Department’s Operating Budget 
+in FY 2021 divided by total department FTE and does 
+not include expenses from FICA, pensions, workers’ 
+compensation, benefits, or overtime.
+
+Brown, Charles and Angie Schmitt, “9 
+22. 
+Reasons to Eliminate Jaywalking Laws Now,” October 
+16, 2020, https://www.bloomberg.com/news/
+articles/2020-10-16/jaywalking-laws-don-t-make-
+streets-safer
+
+23. 
+
+Ibid
+
+Keliikoa, L. Brooke et. al., “Public health 
+
+24. 
+framing in local media coverage of crashes involving 
+pedestrians or bicyclists in Hawaiʻi, 2019: A content 
+analysis,” Transportation Research Interdisciplinary 
+Perspectives, 13, 2022, https://doi.org/10.1016/j.
+trip.2021.100525
+
+pedestrians who jaywalk,” 2024, https://hidot.hawaii.
+gov/highways/safe-communites/walkwisehawaii/faq
+
+27. 
+Honolulu Police Department, “Motor 
+Vehicle Safety,” 2024, https://www.honolulupd.org/
+information/motor-vehicle-safety
+
+Hawaiʻi State Department of Transportation, 
+
+28. 
+“HDOT Red-Light Safety Camera Program,” 2022, 
+https://hidot.hawaii.gov/highways/files/2022/12/Final-
+RLSC-brochure.pdf
+
+Schmitt, Angie, Right of Way: Race, Class, and 
+
+29. 
+the Silent Epidemic of Pedestrian Deaths in America, 
+Chapter 3: Blaming the Victim, Island Press, p. 48, 2020, 
+https://islandpress.org/books/right-way#desc
+
+Schmitt, Angie, “Raquel Nelson Finally 
+30. 
+Cleared of Homicide Charges, Pleads to Jaywalking,” 
+Streetsblog, June 14, 2013, https://usa.streetsblog.
+org/2013/06/14/raquel-nelson-finally-cleared-of-
+homicide-charges-pleads-to-jaywalking
+
+31. 
+
+Schmitt, 2020
+
+32. 
+
+Ibid
+
+Macek, Kara, “Report on Pedestrian Traffic 
+
+33. 
+Fatalities by State,” Governors Highway Safety 
+Association, 2022, https://www.ghsa.org/sites/
+default/files/2023-06/GHSA%20-%20Pedestrian%20
+Traffic%20Fatalities%20by%20State%2C%202022%20
+Preliminary%20Data%20%28January-December%29.
+pdf
+
+34. 
+
+Ibid
+
+35. 
+
+Ibid
+
+McEachern, Doug, “You can’t protect stupid 
+25. 
+pedestrians from themselves,” The Arizona Republic, 
+August 13, 2014, https://www.azcentral.com/story/
+dougmaceachern/2014/08/13/governing-pedestrians-
+dangerous-phoenix-tucson/14007489
+
+City & County of Honolulu, Department of 
+36. 
+Transportation Services, “Oʻahu Pedestrian Plan. 
+Available,” 2022, https://www.honolulu.gov/rep/site/
+dts/dts_docs/20230525_Ped%20Plan%20Final%20
+Report_noappendices_compressed.pdf
+
+Hawaiʻi State Department of Transportation, 
+
+26. 
+“Frequently Asked Questions: What is the fine for 
+
+Hawaiʻi State Department of Transportation, 
+
+37. 
+“State of Hawaiʻi Traffic Fatalities,” 2022, https://
+
+FREEDOM TO WALK • 19
+
+hidot.hawaii.gov/highways/files/2021/06/Fatality-
+Breakdown-by-Counties_10012020-16.pdf
+
+38. 
+
+Macek, 2022
+
+Profile - Sweden,” European Commission, 2023, 
+https://road-safety.transport.ec.europa.eu/system/
+files/2023-02/erso-country-overview-2023-sweden_0.
+pdf
+
+County of Hawaiʻi, “Hawaiʻi Island Vision Zero 
+
+39. 
+Action Plan,” 2020, https://heyzine.com/flip-book/
+e77b6ed2ea.html#page/2
+
+Hawaiʻi State Department of Transportation, 
+
+40. 
+“State of Hawaiʻi Traffic Fatalities,” 2022
+
+41. 
+
+Brown, 2020
+
+45. 
+
+Macek, 2022
+
+International Transport Forum, “Sweden: Road 
+
+46. 
+Safety Country Profile, 2021,” 2021, https://www.itf-
+oecd.org/sites/default/files/sweden-road-safety.pdf
+
+Hawaiʻi State Department of Transportation, 
+
+47. 
+“State of Hawaiʻi Traffic Fatalities,” 2022
+
+Vision Zero Network, “Core Elements for Vision 
+
+42. 
+Zero Communities,” 2022, https://visionzeronetwork.
+org/wp-content/uploads/2022/07/Vision_Zero_Core_
+Elements.pdf
+
+Schmitt, Angie, “The Movement to 
+
+48. 
+Decriminalize Walking Notching More Wins,” America 
+Walks, February 14, 2023, https://americawalks.org/
+decriminalizing-walking-notching-more-wins
+
+Government Offices of Sweden and the World 
+
+43. 
+Health Organization, “Vision Zero - no fatalities or 
+serious injuries through road accidents,” 2019, https://
+www.roadsafetysweden.com/about-the-conference/
+vision-zero---no-fatalities-or-serious-injuries-through-
+road-accidents
+
+44. 
+
+Schoeters, Annelies, “National Road Safety 
+
+Schmitt, Angie, “These Communities 
+
+49. 
+Are Making Progress After ʻJaywalking’ Reform,” 
+StreetsBlog USA, June 23, 2022, https://usa.streetsblog.
+org/2022/06/23/these-u-s-communities-are-making-
+safety-progress-after-jaywalking-reform 
+
+50. 
+
+Macek, 2022
+
+20 • FREEDOM TO WALK

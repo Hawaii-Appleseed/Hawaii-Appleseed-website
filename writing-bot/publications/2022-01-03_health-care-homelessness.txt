@@ -1,0 +1,846 @@
+Title: Health and Care for People Experiencing Homelessness
+Date: unknown
+URL: https://hiappleseed.org/publications/health-care-homelessness
+PDF: https://hiappleseed.org/s/Health-and-Housing-2_REV_FINAL.pdf
+============================================================
+
+January 2022
+
+Good Health Depends on Decent Housing
+
+Health and Care for People 
+Experiencing Homelessness
+
+A program of the Hawai‘i Appleseed Center for Law & Economic Justice 
+733 Bishop Street, Suite 1180, Honolulu, HI 96813
+
+Author: Beth Giesting, Director
+
+The Hawaiʻi Budget & Policy Center gratefully acknowledges the following sponsors of this 
+report, who believe that good health depends on decent housing, and are working every day 
+on solutions for Hawaiʻi: 
+
+AlohaCare, a community-led, non-profit health plan founded in 1994 by Hawaiʻi’s community 
+health centers. We are the only statewide health plan solely dedicated to serving residents 
+who are eligible for Hawaiʻi’s QUEST Integration (Medicaid) and Medicare programs; and
+
+Hawaiʻi Pacific Health, a not-for-profit health care system of medical centers, clinics, 
+physicians and other care providers. Our mission is to create a healthier Hawaiʻi. Anchored 
+by our four medical centers—Kapiʻolani Medical Center for Women & Children, Pali Momi 
+Medical Center, Straub Medical Center and Wilcox Medical Center—Hawaiʻi Pacific Health 
+also includes more than 70 convenient locations statewide.
+
+Copyright © 2022 Hawai‘i Budget & Policy Center. All rights reserved.
+
+The strong link between health and housing is magnified for people experiencing homelessness. 
+Living conditions—the stress and conflict of crowded shelters or living on the streets, emotional 
+trauma, unsanitary conditions, poor nutrition, sleep deprivation, and violence and sexual 
+abuse—contribute to poor mental and physical health. Healthcare costs are particularly high 
+for people without shelter and social support because it is often rendered in hospitals and at 
+emergency rooms. 
+
+Part Two of our series, Good Health Depends on Decent Housing, reports on how helping people 
+who are currently experiencing homelessness with housing and other needs is not only life-
+changing, but also saves money.
+
+PART TWO. HEALTH AND CARE FOR PEOPLE 
+EXPERIENCING HOMELESSNESS
+
+People who experience homelessness are often in that position 
+because family, government services, and society have offered little 
+support and few opportunities. Individuals who have been without 
+stable housing describe the loss of self-respect and hope, and the 
+pain caused by scornful treatment from most of the public. Small 
+wonder, then, that the strong link between health and housing is 
+magnified for people experiencing homelessness.
+
+HEALTH & HOUSING • 3
+
+HOMELESSNESS
+
+On O‘ahu, 31 percent of people experiencing homelessness are Native Hawaiian or Pacific Islander, an over-representation of both ethnic 
+groupings compared to their overall share of the state population. Above: Hotel Street, Downtown/Chinatown, Honolulu. // Will Caron
+
+POVERTY AND POOR HEALTH go hand in hand, but the living conditions of people experiencing 
+homelessness—the stress and conflict of crowded shelters or living on the streets, emotional trauma, 
+unsanitary conditions, poor nutrition, sleep deprivation, and violence and sexual abuse—usually make health 
+outcomes much worse. 
+
+In addition, diseases may be far advanced before healthcare attention is sought or provided. Once 
+diagnosed, compliance with medical recommendations may be impossible due to the uncertainty inherent 
+in transitory living arrangements, loss of personal possessions to theft or “sweeps,” and mental illness, 
+substance use, and distrust of care providers. These factors together result in a greatly reduced lifespan for a 
+person experiencing homelessness.1
+
+The January 2020 Point in Time survey, which collects information from people experiencing homelessness 
+as a “snapshot” on a particular day, found that 6,458 Hawai‘i residents were houseless.2 The survey, which is 
+
+4 • HEALTH & HOUSING
+
+HOMELESSNESS
+
+conducted across the country, shows that 45.6 people were experiencing homelessness in Hawai‘i for every 
+10,000 residents. This is the third highest rate in the country, putting Hawai‘i well behind Washington, D.C. (90 
+people per 10,000), but close to second highest New York (46.9 people per 10,000).3
+
+Hawaiʻi Survey Data 
+
+The Point in Time survey on O‘ahu, conducted by Partners in Care, found that there were 4,448 people 
+experiencing homelessness in January 2020.4 Bridging the Gap Hawai‘i found 2,010 individuals and families 
+experiencing homelessness in Hawai‘i, Kaua‘i and Maui Counties.5 Among their combined findings: 
+
+• 
+
+• 
+
+• 
+
+• 
+
+24 percent of adults (1,533) indicated they had serious mental health challenges; 
+
+18 percent of adults (1,143) suffered from substance use disorders (the data doesn’t show how many of 
+these adults had a “dual diagnosis” of both mental illness and substance use disorders); 
+
+57 adults (1 percent) had an HIV/AIDS diagnosis; and 
+
+1,590 individuals (25 percent) were chronically houseless—that is, they had experienced homelessness 
+constantly for a year or more, or were houseless on at least four separate occasions over the past three 
+years.
+
+More than 1,100 people surveyed on all islands were children in families, which is troubling on many levels, 
+not least being the serious implications for their lifelong health. Compared to their peers who had never 
+experienced homelessness, young children who experience homelessness are more likely to have fair to poor 
+health, experience developmental delays, be overweight, and be hospitalized. Poor health outcomes affect 
+even children who were houseless only prenatally.6
+
+The surveys found that “Native Hawaiian or Other Pacific Islander” made up 31 percent of respondents 
+on O‘ahu and 26 percent on neighbor islands. These two groups are over-represented among people 
+experiencing homelessness. According to 2019 American Community Survey estimates, Native Hawaiians 
+and Pacific Islanders, alone and in combination with at least one other race, make up 25 percent of the state’s 
+population. 
+
+Disproportionate Hospital Usage
+
+People experiencing homelessness—particularly those who are chronically homeless—are often frequent 
+users of the most expensive level of healthcare: emergency and inpatient services. This can be due to the 
+advanced course of a disease by the time treatment is sought, or it can result from higher than average rates 
+of mental illness and substance use disorders, among other causes, that lead to frequent ER use. 
+
+Hospitals, which have sophisticated information systems, are in a better position to collect data about patients 
+who are experiencing homelessness than many other healthcare sites. In Hawai‘i, hospitals have contributed 
+
+HEALTH & HOUSING • 5
+
+HOMELESSNESS
+
+data to shared databases for more than 25 years, first through the Hawai‘i Health Information Corporation 
+(HHIC) and then through the Laulima Data Alliance, a project of the Healthcare Association of Hawai‘i. These two 
+databases are the source of the information summarized below. There are notable differences in the average 
+number of monthly visits reported by the two data sets. This is likely because HHIC used informal information 
+about houseless status based on patient address or provider notes while Laulima included only patients that 
+were identified by a “z code,” which is a special diagnostic code that reports factors that influence health status.
+
+Comparison of HHIC vs Laulima Databases
+
+The HHIC report was issued in 2017 and shared 
+demographics, utilization and charges for care 
+at hospitals in Hawaiʻi that were attributed 
+to people experiencing homelessness.7 It’s 
+report, covering the period from January 
+2010–September 2017, showed the following: 
+
+•  An average of about 1,300 houseless 
+
+patients per month used hospital inpatient 
+and emergency department services at 16 
+reporting hospitals; 
+
+The Laulima Data Alliance made information 
+available to members of the Hawaiʻi Pacific 
+Health Bridge to Leadership cohort. The 
+cohort summarized key data and provided 
+it as a courtesy for this report. The following 
+summarized Laulima Data is for the period of 
+January 2016–June 2021: 
+
+•  An average of 542 houseless patients 
+
+per month used hospital inpatient and 
+emergency department services at 11 
+reporting hospitals; 
+
+•  Average monthly charges for care 
+
+amounted to more than $8.5 million;8 
+
+•  No information was available about 
+
+•  Demographically, 47 percent of patients 
+were white and 16 percent were Native 
+Hawaiian. More than 70 percent were male, 
+and nearly 80 percent were between the 
+ages of 25–64.
+
+charges; 
+
+•  Patient demographic information was 
+
+nearly identical to that reported by HHIC. 
+
+The Queen’s Health System (QHS) serves a much larger number of patients who are experiencing 
+homelessness than other Hawai‘i hospitals. In order to best meet the special needs of these patients, QHS 
+collected and used service data to tailor care for them. 
+
+QHS has built the Queen’s Care Coalition (QCC), a team of patient navigators, social workers and nurses 
+to work with patients upon discharge to help them find and settle into appropriate housing, and to assist 
+
+6 • HEALTH & HOUSING
+
+HOMELESSNESS
+
+with other needs. QHS continues to provide behavioral as well as physical health care, which also enhances 
+housing stability. 
+
+According to information shared with the Hawai‘i Pacific Health Bridge to Leadership group, by comparing 
+six months of pre-intervention cost data to six months post-intervention, QHS achieved healthcare savings of 
+nearly $5 million for 120 patients due to fewer and shorter hospital stays, and fewer readmissions, emergency 
+room visits and ambulance transports. Because the QCC’s services have proven to be so effective, it is noted 
+by Med-QUEST as a special Community Integration Services (CIS) provider for super-user and Native Hawaiian 
+patients.
+
+Other Successful Interventions
+
+The cost of healthcare for people experiencing homelessness is often much higher than for the general 
+population, and is usually covered by public insurers—predominantly Medicaid. For these reasons, Medicaid-
+supported intervention programs around the country have been designed to provide supportive housing and 
+behavioral health services with the goal of improving health and reducing healthcare costs. 
+
+Reports from these programs show significant successes. A dozen of them, including the Hawaiʻi Pathways 
+Project, were cited by the state Med-QUEST Division (MQD) in its application for a demonstration waiver 
+to provide similar services. Intervention programs reported reductions in hospital admissions by up to 72 
+percent and per-person cost savings of up to $51,000 per year.
+
+Med-QUEST’s Initiatives 
+
+With the approval of its waiver proposal, Med-QUEST and its contracted health plans have embarked on 
+an initiative aimed at improving the lives of people experiencing chronic homelessness. The plan focuses 
+on permanent supportive housing, a proven strategy for Hawai‘i as demonstrated by the Hawai‘i Pathways 
+Project. 
+
+The target group is adults (aged 18 or older) who are chronically houseless, or are at risk for homelessness, 
+and have at least one disabling mental or physical illness and/or substance use disorder. Other individuals 
+eligible for supportive housing services are frequent users of emergency room and inpatient services.9
+
+According to its approved proposal to the federal Centers for Medicare and Medicaid Services (CMS),10 MQD 
+will start by identifying and assisting individuals who have been incurring the highest healthcare costs, and 
+expand to other eligible people over the course of five years. Over the five-year span, the program expects to:
+
+•  Provide permanent supportive housing services to nearly 2,000 people; and 
+
+•  Save more than $25 million in public costs (these savings reflect $42 million less spent for healthcare as 
+
+$17 million more is spent for supportive housing services). 
+
+The costs of room and board are not a benefit paid for by Med-QUEST; rather, those costs are to be covered 
+
+HEALTH & HOUSING • 7
+
+HOMELESSNESS
+
+by housing vouchers and rent paid by beneficiaries of up to 30 percent of their incomes. Supportive housing 
+service costs will be paid for using the $25 million in savings projected over five years.
+
+Med-QUEST itself and the health plans with which it contracts—AlohaCare, the Hawai‘i Medical Service 
+Association (HMSA), Kaiser-Permanente, ‘Ohana Health Plan/Centene, and UnitedHealthcare—will provide or 
+pay for the housing-related services outlined in the box on page 9.11
+
+Health plans and state mental health agencies also provide a full range of clinical and therapeutic services for 
+individuals with mental illnesses and other behavioral health needs, such as substance use disorders.
+
+Home and Community Based Services 
+
+In addition, new benefits were added to Home and Community Based Services (HCBS) for individuals 
+who either currently qualify for institutional-level care, or are likely to need such care in the near future if 
+preventive services are not provided. HCBS benefits are aimed at giving the client the option to receive care at 
+home rather than in a care facility, with “home” defined as being in the community and offering the individual 
+privacy, dignity, and personal choice, among other things. Under HCBS, health plans working with Med-
+QUEST are expected to provide adult day care and day health, meals and personal assistance, among other 
+services designed to prevent institutional care. 
+
+HCBS offers additional opportunities to meet the needs of people experiencing homelessness and connect 
+them to permanent housing and needed services. These include psychosocial rehabilitation, social supports, 
+and “habilitative services,” which “assist individuals in acquiring, retaining, or improving the self-help, 
+
+8 • HEALTH & HOUSING
+
+HOMELESSNESS
+
+Housing-Related Services Covered by Med-QUEST and Contractors
+
+Screening, assessment, service planning: 
+
+•  Referral to Department of Health Program 
+
+•  Outreach to and screen and assess all 
+
+clients for housing instability and other 
+social and economic needs to determine 
+eligibility. 
+
+•  Where needed, develop an individualized 
+housing support plan that addresses pre-
+tenancy and tenancy. 
+
+• 
+
+For clients who are elderly or disabled 
+by physical or mental illnesses, help 
+with transitions from institutions such as 
+hospitals, correctional facilities, or long-
+term care, to housing. 
+
+Pre-tenancy assistance and community 
+integration for clients who are experiencing 
+chronic homelessness and a disabling mental 
+or physical illness and/or substance use 
+disorder: 
+
+•  Help with finding, applying for, and 
+
+supports, as appropriate. 
+
+•  Safety and social risk factors supports. 
+
+•  Housing readiness supports. 
+
+•  Case management to follow-up on missed 
+
+appointments. 
+
+•  Employment and financial assistance 
+
+supports.
+
+Tenancy support to maintain housing:
+
+•  Help clients understand and accept tenant 
+
+responsibilities. 
+
+•  Teach dispute resolution with landlords 
+
+and neighbors.
+
+• 
+
+If appropriate, participate in job skills and 
+employment search activities.
+
+securing housing. 
+
+•  Coordinate healthcare and other needed 
+
+services.
+
+•  Medical reengagement and care 
+
+coordination.
+
+socialization, and adaptive skills necessary to reside successfully in home and community-based settings.”12 
+In addition to more traditional medical care and equipment, the list of HCBS services covers a broadly-
+interpreted array of interventions aimed at locating and maintaining housing, including counseling and 
+education, home location assistance, moving assistance, home maintenance, home-delivered meals, non-
+medical transportation, and personal assistance.
+
+HEALTH & HOUSING • 9
+
+ 
+HOMELESSNESS
+
+The Hawaiʻi Pathways Project
+
+The Hawai‘i Department of Health Alcohol and Drug Abuse Division launched the state’s first “Pathways 
+to Housing” project in 2013. This evidence-based approach connects individuals experiencing chronic 
+homelessness to permanent housing, and then addresses their mental health, substance use, medical, and 
+social and economic needs.13  The program was supported by a federal grant from the Substance Abuse and 
+Mental Health Services Administration (SAMHSA).
+
+Services were provided on O‘ahu by Helping Hands Hawai‘i and Catholic Charities Hawai‘i, with program 
+evaluation carried out by the University of Hawai‘i Center on the Family. The program ran from 2014–2017 
+and served 134 clients who suffered from a substance use disorder, mental illness, or both. Most had been 
+unsheltered at the beginning of the project and half had been homeless for six or more years. 
+
+Clients were placed in private housing units across O‘ahu through existing Permanent Supportive Housing 
+Programs. Clients paid 30 percent of their incomes for rent with housing vouchers typically covering the 
+balance. Pathways staff delivered housing support services, case management, treatment, peer support, 
+health education, and employment services where and when needed.
+
+Results
+
+The program was transformative for the clients it served. Ninety percent of program participants had retained 
+housing for an average of 13.9 months by the time the grant ended. Client-reported health status improved, 
+including decreases in psychological and emotional challenges, alcohol and drug use, and the health and 
+social consequences of substance use. 
+
+On a monthly basis, the cost of housing averaged $1,100 per client, while supportive services cost $850 per 
+client. Healthcare costs decreased by 76 percent. ER and inpatient use dropped and so did involvement in 
+the criminal justice system. Net savings amounted to $4,257 per month per client—more than $51,000 per 
+program participant, annually. 
+
+The Hawai‘i Pathways project demonstrated the value of housing and of supporting people experiencing 
+long-term homelessness with accompanying substance use disorders and/or serious mental illness. It 
+provided practical experience to identify system strengths and address weaknesses, and it helped inform 
+Med-QUEST’s housing assistance waiver demonstration proposal to the federal Centers for Medicare and 
+Medicaid Services (CMS).
+
+Challenges
+
+Two significant challenges limited the program’s ability to offer services to all the people eligible. One was 
+finding landlords willing to accept program participants and housing vouchers. The other was the shortage of 
+housing vouchers needed to pay the rent. Housing voucher scarcity limited the number of participants and 
+delayed placement for some of those who were served (clients waited an average of 8.5 months to move into 
+permanent housing).
+
+10 • HEALTH & HOUSING
+
+HOMELESSNESS
+
+There is no doubt that providing housing 
+to all people who are experiencing 
+homelessness is good for the individuals 
+affected, and it is clear that doing so also 
+reduces publicly-supported healthcare 
+and other costs. 
+
+The savings anticipated by Med-QUEST’s 
+five-year demonstration project did not 
+include an estimate for housing costs. 
+However, another study estimated the 
+full costs to provide housing as well 
+as healthcare and support services in 
+Hawai‘i, and the evaluation of the Hawai‘i 
+Pathways Project also captured full costs. 
+As shown in Table 1, the potential for cost 
+savings over 10 years is considerable.
+
+Projections over 10 Years
+
+Corporation for Supportive Housing 
+(CSH) Study (2017):14 1,807 households, 
+largely individual, O‘ahu only.
+
+Pathways Evaluation (2017):15
+134 participants, O‘ahu only.
+
+Without Permanent Supportive Housing
+
+1. Healthcare Costs
+
+$2.29 billion
+
+$170 million
+
+With Permanent Supportive Housing
+
+2. Housing Costs (Development, Rehab, 
+Vouchers, Subsidies)
+
+3. Permanent Supportive Housing 
+Services
+
+4. Healthcare Costs
+
+5. Total Costs with Permanent 
+Supportive Housing (Lines 2–4)
+
+$533 million
+
+$129 million
+
+$1.30 billion
+
+$1.96 billion
+
+Savings (Line 1 minus Line 5)
+
+$334 million
+
+Savings per client/unit
+
+$184,737
+
+$18 million
+
+$14 million
+
+$96 million
+
+$128 million
+
+$42 million
+
+$316,800
+
+Table 1. Med-QUEST’s estimate of savings through permanent supportive housing is supported by another Hawai‘i-specific study and the 
+evaluation of the Hawai‘i Pathways project. They show expected net savings over 10 years that range from $185,000–317,000 per client.
+
+HEALTH & HOUSING • 11
+
+HOMELESSNESS
+
+Help for People Experiencing Homelessness
+
+Homelessness and deep poverty are disturbing symptoms of growing economic inequality, long-standing 
+systemic racism, and inadequate investment in human needs. While this report does not address those larger 
+issues, it does outline ways to strengthen the continuum of services aimed at preventing people from losing 
+their homes and restoring stable housing to those who are experiencing homelessness. These resources 
+not only support housing but provide health services and other interventions that may be needed to ensure 
+individuals and families can maintain stable housing.
+
+Housing Vouchers 
+
+A primary cause of homelessness is the lack of homes affordable to the lowest-income households. Housing 
+vouchers are among the best resources available to reduce the cost of rent to maintain and regain housing. 
+
+In August 2021, the U.S. Department of Housing and Urban Development (HUD) provided vouchers sufficient 
+to pay for nearly 13,500 housing units, about 11,500 (85 percent) of which were in use.16 Housing vouchers, 
+which are administered by state and county agencies, are targeted to different needs which are covered in the 
+box on page 13.
+
+Targeted subsidies like housing vouchers are essential to counteract the acute shortage of housing units 
+available to low-income renters. But vouchers are largely used in the private housing market where their 
+usefulness is hampered by landlord discrimination. 
+
+Although there are no federal laws that prohibit housing discrimination by source of income, a number of 
+states and local jurisdictions have passed anti-discrimination laws to good effect.17 Hawai‘i should enact an 
+anti-discrimination law similar to bills introduced at the state legislature in 2021 as Senate Bills 1135 and 36, 
+and House Bill 981.
+
+Prevention and Rapid Rehousing 
+
+While a quarter of the people counted in the Point in Time survey were experiencing chronic homelessness, 
+the remaining 75 percent of people without stable housing had less complex needs. Homelessness 
+prevention programs help households that are otherwise likely to lose stable housing with financial 
+assistance and other supportive services that may be necessary. 
+
+Rapid rehousing programs aim to quickly restore permanent housing to families who have recently lost their 
+homes. Financial and other supportive services may be offered briefly or up to 24 months. Both prevention 
+and rapid rehousing are good investments because they avert the costly long-term consequences of 
+prolonged homelessness.
+
+12 • HEALTH & HOUSING
+
+HOMELESSNESS
+
+Comparison of Housing Vouchers and their Target Beneficiaries
+
+Section 8 Housing Choice Vouchers 
+subsidize the cost of housing for low-
+income individuals and families, usually 
+so that the household pays no more 
+than 30 percent of its income in rent. 
+Hawaiʻi gets 10,400 of these vouchers 
+for 114,000 eligible households.18
+
+Emergency Housing Vouchers were 
+funded in the American Rescue Plan 
+Act to assist individuals or families 
+who are or were recently homeless, 
+at risk for homelessness, or are 
+fleeing domestic violence or human 
+trafficking.19 Hawaiʻi was allocated 
+708 of these vouchers, which work 
+like Section 8 housing vouchers. 
+While federal funding to support 
+these vouchers is available through 
+September 30, 2030, they must be used 
+(that is, leases for housing secured) by 
+September 30, 2023. Any vouchers not 
+used by that date will be lost.
+
+Special Purpose Housing Choice Vouchers target 
+individuals and households with additional needs. 
+They include: 
+
+•  Veterans Affairs Supportive Housing (HUD-
+
+VASH) vouchers are directed to assist veterans 
+experiencing homelessness. Total vouchers: 994. 
+Vouchers in use: 786 (79 percent). 
+
+•  Mainstream vouchers assist families that include 
+a non-elderly person with disabilities. Total 
+vouchers: 340. Vouchers in use: 183 (54 percent). 
+
+•  Non-Elderly Disabled vouchers also assist 
+
+families where a member has disabilities. Total 
+vouchers: 175. Vouchers in use: 165 (94 percent). 
+
+• 
+
+Family Unification Program vouchers are 
+available to help families avoid out-placement 
+of children due to inadequate housing and assist 
+young adults between the ages of 18–24 exiting 
+the foster care system. Total vouchers: 118. 
+Vouchers in use: 72 (61 percent).
+
+Housing First and Permanent Supportive Housing
+
+For individuals experiencing chronic homelessness in tandem with disabling physical, mental, and substance 
+use disorders, Housing First and Permanent Supportive Housing (PSH) are considered the community 
+standard of care. Housing First recognizes that stable housing is needed before an individual can address 
+health and economic concerns. It is linked with PSH, which provides tailored supportive services to address 
+health and economic needs. The aim of PSH is to support physical and behavioral health recovery and 
+provide the tools to maintain stable housing.
+
+HEALTH & HOUSING • 13
+
+HOMELESSNESS
+
+Special Needs Housing
+
+Housing may also be available for people with special needs, for either long or short periods. For instance, 
+the federally-funded Housing Opportunities for Persons with AIDS program provides financial assistance for 
+housing as well as case management and other services to support stable housing. Medical respite housing 
+addresses the post-acute care needs of individuals released from hospitals who are too ill or frail to recover 
+from a physical illness or injury on the streets. This service is usually delivered as short-term residential care 
+that combines a safe environment with access to follow-up medical care and other supportive services.
+
+Emergency Shelters
+
+Emergency shelters are part of the continuum of services for people experiencing homelessness. Their 
+existence is essential to individuals and families fleeing domestic violence or made homeless by recent 
+financial circumstances, but they are just as necessary for helping unsheltered people transition from the 
+street to housing. 
+
+Shelters must offer safe respite and have low-barriers to access, such as not requiring identification, 
+documentation, or payment. Their function is to be a temporary home while they enroll guests in programs 
+that offer services and permanent housing. Hawai‘i needs to maintain the capacity of its shelters, many of 
+which need capital repairs after decades of use.
+
+Flexibility and Innovation
+
+The state legislature appropriated ‘Ohana Zones funding in 2018 and 2019 to foster solutions to housing and 
+homelessness that encouraged partnership, could be implemented rapidly, and met local circumstances. 
+Hawai‘i’s ‘Ohana Zones pilot program uses state or county facilities and/or matches county funds to provide a 
+continuum of services. Since its start in 2019, ‘Ohana Zones has served more than 5,000 people. Some of the 
+programs launched with ‘Ohana Zones funding include:20
+
+•  Permanent supportive housing, including a project that serves young adults between 18 and 24 and 
+
+another that helps survivors of domestic violence;
+
+•  The development of “tiny homes;”
+
+•  Assessment centers that connect families to housing, enrolls them in public services, and offers mail pick-
+
+up and emergency or transitional shelter;
+
+•  Nontraditional mobile outreach, screening, navigation and hygiene services for unsheltered people;
+
+•  Emergency shelter and stabilization services;
+
+• 
+
+Law-enforcement diversion programs that connect people with low-level offenses with services instead of 
+issuing citations.
+
+14 • HEALTH & HOUSING
+
+ 
+HOMELESSNESS
+
+Affordable Housing is the Key to Ending Homelessness
+
+A number of programs seek to reduce the 
+number of people experiencing homelessness 
+and diminish the effects of unstable housing. 
+They are much-needed. Yet the inescapable 
+reason that most people experience 
+homelessness is the lack of affordable homes. 
+
+This was demonstrated by a 10-year initiative 
+to end homelessness in Salt Lake City, Utah, 
+which began in 2005. Over that decade, the 
+number of housing units built or retrofitted for 
+permanent supportive housing nearly doubled, 
+giving the city the capacity to accommodate 
+more than 2,400 people by 2015.21 Still, the 
+overall population of people experiencing 
+homelessness in 2020 totaled nearly 2,000—
+
+just 180 fewer than were counted in 2005. In 
+addition, the subpopulation of individuals 
+who are chronically homeless increased by 18 
+percent, from 369 to 436.22 
+
+While some Salt Lake officials blame the 
+apparent lack of success on changes in counting 
+procedures, others concede that in the city’s 
+increasingly competitive housing market, the 
+problem is the availability of housing that 
+working people can afford. 
+
+We, too, conclude that Hawaiʻi will not succeed 
+in ending homelessness without ensuring that 
+working families, kūpuna, and people with 
+special needs have housing they can afford. 
+
+Endnotes
+
+Maness, David L. and Muneeza Khan, “Care of the Homeless: An 
+
+1. 
+Overview,” American Family Physician 89(8): 634–640, April 2014, https://
+www.aafp.org/afp/2014/0415/p634.html
+
+Homeless Point-In-Time Count,” Bridging the Gap, May 2020, https://
+www.btghawaii.org/media/uploads/2020_btg_pit_count_report_
+final_-_5.6.20.pdf
+
+State of Hawai‘i Homelessness Initiative, “2020 Point in 
+
+2. 
+Time Count,” Hawai‘i State Department of Human Services, https://
+homelessness.hawaii.gov/point-in-time-count
+
+3. 
+“State of Homelessness: 2021 Edition,” National Alliance to End 
+Homelessness, https://endhomelessness.org/homelessness-in-america/
+homelessness-statistics/state-of-homelessness-2021
+
+4. 
+“2020 O‘ahu Point in Time Count Comprehensive 
+Report,” Partners in Care, https://static1.squarespace.com/
+static/5db76f1aadbeba4fb77280f1/t/5efa984a8ae4f77486350
+9e8/1593481306526/PIC+2020+PIT+Count+Report+Final.pdf
+
+6. 
+Sandel, Megan, Richard Sheward and Lisa Sturtevant, 
+“Compounding Stress: The Timing and Duration Effects of Homelessness 
+on Children’s Health,” Center for Housing Policy, June 2015, http://media.
+wix.com/ugd/19cfbe_07b13c8e56a14337a316e2e991aa0bf7.pdf
+“Homelessness and the Impact on Healthcare: An Overview,” 
+7. 
+7. 
+Hawai‘i Health Information Corporation, Accessed October 5, 
+2021, https://hhic.org/downloads/category/topics/patient-populations/
+homelessness
+
+8. 
+Charges are typically higher than the costs associated with the 
+care provided and are also more than Medicaid (Med-QUEST), Medicare 
+or private insurers would reimburse for a service.
+
+5. 
+
+Ka Mana O Na Helu, “We Count Because Everyone Matters: 
+
+Continued on next page.
+
+HEALTH & HOUSING • 15
+
+HOMELESSNESS
+
+Endnotes Continued
+
+“Amendment to the Hawai‘i QUEST Expanded Medicaid 
+
+9. 
+Section 1115 Demonstration (11-W-00001/9),” Hawai‘i State Department 
+of Human Services, August 29, 2017, https://www.medicaid.gov/
+Medicaid-CHIP-Program-Information/By-Topics/Waivers/1115/
+downloads/hi/hi-quest-expanded-pa.pdf
+
+United States Office of Public & Indian Housing, “Housing 
+
+16 
+Choice Voucher Program Dashboard,” U.S. Department of Housing and 
+Urban Development, Accessed October 27, 2021, 
+https://app.powerbigov.us/view?r=eyJrIjoiM2Y2OTQ2MTAtODVkNC00Y
+mM2LThhOWEtZWY4MGU5YWFmZDFmIiwidCI6IjYxNTUyNGM1LTIyZTkt
+NGJjZC1hODkzLTExODBhNTNmYzdiMiJ9
+
+10. 
+
+Ibid
+
+“Community Integration Services (CIS) Implementation 
+
+11. 
+Guidelines, Overview, Member Eligibility, Service delivery, Coordination 
+& Reimbursement,” Med-QUEST Memo Number QI-2105, CCS-2102, April 
+2021, https://medquest.hawaii.gov/en/plans-providers/provider-memo.
+html
+
+Wilkins, Carol, Martha Burt and Gretchen Locke, “A Primer 
+
+12 
+on Using Medicaid for People Experiencing Chronic Homelessness and 
+Tenants in Permanent Supportive Housing,” U.S. Department of Health 
+and Human Services, July 2014, https://aspe.hhs.gov/sites/default/files/
+migrated_legacy_files//44471/PSHprimer.pdf
+
+Bell, Alison, Barbara Sard and Becky Koepnick, “Prohibiting 
+
+17 
+Discrimination Against Renters Using Housing Vouchers Improves 
+Results,” Center on Budget and Policy Priorities, December 20, 2018, 
+https://www.cbpp.org/research/housing/prohibiting-discrimination-
+against-renters-using-housing-vouchers-improves-results 
+
+18 
+Reina, Vincent, Claudia Aiken and Jenna Epstein, “Exploring a 
+Universal Housing Voucher,” The Housing Initiative at Penn, https://www.
+housinginitiative.org/universal-voucher.html
+
+“American Rescue Plan Act,” Public Law 117-2, Section 3202, 
+
+19 
+https://www.congress.gov/117/plaws/publ2/PLAW-117publ2.pdf
+
+Yuan, S., J. Azuma and K. Gauci, “Hawai‘i Pathways Project 
+
+13. 
+Final Report, August 2014–September 2017,” University of Hawai‘i Center 
+on the Family, https://uhfamily.hawaii.edu/sites/uhfamily.hawaii.edu/
+files/publications/PathwaysProjectFinalReport.pdf 
+
+State of Hawai‘i Homelessness Initiative, “Key Focus Areas/
+
+20 
+‘Ohana Zones,” Hawai‘i State Department of Human Services, accessed 
+December 9, 2021, https://homelessness.hawaii.gov/ohana-zones
+
+14 
+Lyons, Heather, “Housing Projections & Financial Modeling 
+for Permanent Supportive Housing (PSH) on O‘ahu,” Corporation for 
+Supportive Housing, 2017, https://homelessness.hawaii.gov/wp-content/
+uploads/2019/03/HI-ProjectionsFinancial-Modeling.-Focus-on-PSH-only.
+pdf
+
+Yuan, S., J. Azuma and K. Gauci, “Hawai‘i Pathways Project 
+
+15 
+Final Report, August 2014–September 2017,” University of Hawai‘i Center 
+on the Family, https://uhfamily.hawaii.edu/sites/uhfamily.hawaii.edu/
+files/publications/PathwaysProjectFinalReport.pdf 
+
+16 • HEALTH & HOUSING
+
+Rogers, Bethany, “Utah was once lauded for solving 
+
+21 
+homelessness—the reality was far more complicated,” The Salt Lake 
+Tribune, May 11, 2020, https://www.sltrib.com/news/politics/2020/05/11/
+utah-was-once-lauded
+
+HUD Exchange, “Continuum of Care Homeless Populations 
+
+22 
+and Subpopulations Reports,” United States Department of Housing and 
+Urban Development, https://www.hudexchange.info/programs/coc/coc-
+homeless-populations-and-subpopulations-reports
