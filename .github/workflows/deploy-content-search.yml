@@ -186,8 +186,13 @@ jobs:
 
       # GITHUB_TOKEN pushes don't fire deploy.yml's `on: push` (recursion
       # guard) — dispatch it explicitly, same pattern as sync-publications.yml.
+      # The short sleep lets the just-pushed commit become main's resolved head
+      # before dispatch; without it the deploy can race and ship the parent
+      # commit (observed on the first run of this workflow).
       - name: Deploy to Pages
         if: steps.commit.outputs.pushed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run deploy.yml --ref main
+        run: |
+          sleep 15
+          gh workflow run deploy.yml --ref main
