@@ -1,25 +1,25 @@
 {
   "name": "hawaii-appleseed-content-search",
   "version": 1,
-  "generatedAt": "2026-08-05T20:54:59Z",
+  "generatedAt": "2026-08-05T23:25:48Z",
   "counts": {
-    "documents": 202,
-    "chunks": 1922,
+    "documents": 201,
+    "chunks": 1914,
     "positions": 17,
     "topics": 5
   },
   "files": {
     "docs.json": {
       "path": "data/docs.json",
-      "sha256": "d56f8dc73c9232366ecd8f1269b216e0406e5204a0ae71b5e08c2fa83b644952"
+      "sha256": "53142600b687a460460b87ca6164f67bc4d517afa8d59e0f1fa72af56ebace07"
     },
     "chunks.json": {
       "path": "data/chunks.json",
-      "sha256": "4ff377c79a939eae1b81bac8bd84b87678341f1ff97dfd2c6800301d2c3e8cc5"
+      "sha256": "ae44348b9d0e30654272da17a34622ac32114cb933be9035e6762c695c7761da"
     },
     "bm25.json": {
       "path": "data/bm25.json",
-      "sha256": "950231fc23ebf83ea128557b4a6ba1620d4cef715dce0573f97a10a207f913a4"
+      "sha256": "f8f759d597459dfa595a8bcfefe100bf3cf61b0f9653e90db94c59ec0bbc217b"
     },
     "positions.json": {
       "path": "data/positions.json",
@@ -31,7 +31,7 @@
     },
     "embeddings.bin": {
       "path": "data/embeddings.bin",
-      "sha256": "5da4ee1934749f6ec8501d559d7122853a7bf74599083a3887e999737fad632b"
+      "sha256": "8602d1d351588c526b32d7adc8fa68d303b5201e60791d0cc2791b9ea1788696"
     },
     "embeddings.meta.json": {
       "path": "data/embeddings.meta.json"
