@@ -1,14 +1,16 @@
 // Thin promise-based client over the ML worker (request/response by id).
 
 export class WorkerClient {
-  constructor(onProgress) {
+  constructor(onProgress, onPhase) {
     this.worker = new Worker(new URL("./worker.js", import.meta.url), { type: "module" });
     this.pending = new Map();
     this.seq = 0;
     this.onProgress = onProgress || (() => {});
+    this.onPhase = onPhase || (() => {}); // "embedder" (dense ready) | "full" (rerank ready)
     this.worker.onmessage = (e) => {
-      const { id, type, payload, error, msg } = e.data;
+      const { id, type, payload, error, msg, phase } = e.data;
       if (type === "progress") { this.onProgress(msg); return; }
+      if (type === "phase") { this.onPhase(phase); return; }
       if (type === "ready") return;
       const p = this.pending.get(id);
       if (!p) return;

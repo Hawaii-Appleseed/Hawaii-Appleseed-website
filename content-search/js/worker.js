@@ -33,13 +33,19 @@ const MAX_TOKENS = 256; // bi-encoder cap; keep in lockstep with embed_corpus.mj
 let extractor = null;
 let rerankTok = null;
 let rerankModel = null;
-let ready = null;
+// Two-phase readiness: the embedder (22 MB) loads and warms first so hybrid
+// dense+BM25 search works at the halfway point; the reranker (another 22 MB)
+// follows serially — deliberately not in parallel, so it doesn't contend for
+// bandwidth with the model that unlocks results sooner. `embed` calls await
+// only embedderReady; `rerank` (and init's resolution) await full readiness.
+let embedderReady = null;
+let fullReady = null;
 
 function progress(msg) {
   self.postMessage({ type: "progress", msg });
 }
 
-async function init() {
+async function initEmbedder() {
   progress("Loading search model…");
   extractor = await pipeline("feature-extraction", EMBED_MODEL, {
     dtype: DTYPE,
@@ -50,7 +56,11 @@ async function init() {
     },
   });
   extractor.tokenizer.model_max_length = MAX_TOKENS;
+  await embed("warm up");
+  self.postMessage({ type: "phase", phase: "embedder" });
+}
 
+async function initReranker() {
   progress("Loading relevance model…");
   rerankTok = await AutoTokenizer.from_pretrained(RERANK_MODEL);
   rerankModel = await AutoModelForSequenceClassification.from_pretrained(RERANK_MODEL, {
@@ -61,12 +71,18 @@ async function init() {
       }
     },
   });
-
-  // Warm both off the hot path (mirrors the Python warm-boot).
-  await embed("warm up");
   await rerank([["warm", "up"]]);
   progress("Ready");
+  self.postMessage({ type: "phase", phase: "full" });
   self.postMessage({ type: "ready" });
+}
+
+function startInit() {
+  if (!embedderReady) {
+    embedderReady = initEmbedder();
+    fullReady = embedderReady.then(initReranker);
+  }
+  return fullReady;
 }
 
 async function embed(text) {
@@ -100,17 +116,17 @@ self.onmessage = async (e) => {
   const { id, type, payload } = e.data;
   try {
     if (type === "init") {
-      if (!ready) ready = init();
-      await ready;
+      await startInit();
       self.postMessage({ id, type: "result", payload: true });
       return;
     }
-    if (!ready) ready = init();
-    await ready;
+    startInit();
     if (type === "embed") {
+      await embedderReady; // don't block queries on the reranker download
       const vec = await embed(payload.text);
       self.postMessage({ id, type: "result", payload: vec }, [vec.buffer]);
     } else if (type === "rerank") {
+      await fullReady;
       const scores = await rerank(payload.pairs);
       self.postMessage({ id, type: "result", payload: scores });
     } else {

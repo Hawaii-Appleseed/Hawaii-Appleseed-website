@@ -17,9 +17,15 @@ lineage); the engine and corpus live in [`../writing-bot/`](../writing-bot/).
   (`Xenova/all-MiniLM-L6-v2`, q8, 256-token cap) so query and corpus share one
   embedding space.
 - **Query time** (`js/`): a Web Worker embeds the query and runs the
-  cross-encoder (models lazy-load on first search intent, ~44 MB one-time);
-  everything else (tokenizing, BM25 scoring, RRF, bill boost, recency,
-  grouping, highlighting) is a bit-for-bit JS port of the Python retrieval.
+  cross-encoder; everything else (tokenizing, BM25 scoring, RRF, bill boost,
+  recency, grouping, highlighting) is a bit-for-bit JS port of the Python
+  retrieval.
+- **Progressive boot**: models lazy-load on first search intent and search
+  works at every stage — instant BM25 keyword results with no models, hybrid
+  dense+BM25 once the embedder lands (~22 MB), full reranked results plus key
+  figures and the position card once the cross-encoder lands (~44 MB total,
+  one-time; cached by the browser thereafter). Results upgrade in place with a
+  status banner as each tier arrives.
 
 ## Public API — for other projects
 

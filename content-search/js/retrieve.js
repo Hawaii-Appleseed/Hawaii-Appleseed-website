@@ -76,22 +76,25 @@ function applyBillBoost(query, ids, store) {
 
 // Main entry. opts:
 //   query, store, whereMatches(idx)->bool, n,
-//   useBm25, useRerank, denseK, bm25K, rerankK, recencyWeight,
+//   useDense, useBm25, useRerank, denseK, bm25K, rerankK, recencyWeight,
 //   embed(text)->Promise<Float32Array>, rerank(pairs)->Promise<number[]>
 // Returns ordered array of chunk indices (length ≤ n).
+// useDense=false skips the query embedding entirely (BM25-only) — the
+// progressive-boot path uses it to answer before the embedder has downloaded.
 export async function hybridRetrieve(opts) {
   const {
     query, store, whereMatches, n,
-    useBm25 = true, useRerank = true,
+    useDense = true, useBm25 = true, useRerank = true,
     denseK = 80, bm25K = 80, rerankK = 40, recencyWeight = 0.05,
     embed, rerank,
   } = opts;
 
   const expanded = expandQuery(query);
-  const queryVec = await embed(expanded);
-  const denseIds = denseSearch(queryVec, store, denseK, whereMatches);
-
-  const rankings = [denseIds];
+  const rankings = [];
+  if (useDense) {
+    const queryVec = await embed(expanded);
+    rankings.push(denseSearch(queryVec, store, denseK, whereMatches));
+  }
   if (useBm25) {
     const bm25Ids = store.bm25.search(tokenize(expanded), bm25K, whereMatches);
     rankings.push(bm25Ids);
