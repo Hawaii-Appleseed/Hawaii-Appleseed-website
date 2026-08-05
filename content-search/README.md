@@ -98,6 +98,7 @@ python3 -m http.server 8531 --directory content-search
 `writing-bot/**` or this app's source. It rebuilds the bundle, skips out early
 when content is byte-identical (modulo `api.json`'s `generatedAt`), otherwise
 commits the new bundle and dispatches the site's plain Pages deploy
-(`deploy.yml`). New corpus content arrives via the weekly content-monitor
-(laptop launchd job → scrape → commit → push), which triggers exactly that
-chain.
+(`deploy.yml`). New corpus content arrives via `refresh-corpus.yml`, which
+scrapes hiappleseed.org every Sunday (15:00 UTC / 5 AM HST) and commits to
+`writing-bot/`, then dispatches exactly that chain. The whole pipeline runs
+in Actions — no personal machine is involved.

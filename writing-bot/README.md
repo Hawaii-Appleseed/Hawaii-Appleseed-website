@@ -4,7 +4,8 @@
 > this website repo (minus the internal `relationship-memory/` module, which
 > stays private). The static search app lives at [`../content-search/`](../content-search/)
 > and rebuilds via `.github/workflows/deploy-content-search.yml`; new corpus
-> content arrives via the weekly content-monitor launchd job.
+> content arrives via `.github/workflows/refresh-corpus.yml`, which scrapes
+> hiappleseed.org every Sunday in GitHub Actions.
 
 RAG-powered writing assistant. Generates testimony, blog posts, and op-eds in Hawaiʻi Appleseed's voice, anchored to a curated `positions.md` and grounded in retrieved excerpts from HA's prior writing.
 
