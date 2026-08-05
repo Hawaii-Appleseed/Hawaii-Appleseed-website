@@ -61,15 +61,7 @@ jobs:
         id: diff
         run: |
           python3 - <<'PYEOF'
-          import json, os, subprocess
-
-          def norm_api(text):
-              try:
-                  d = json.loads(text)
-              except ValueError:
-                  return text
-              d.pop("generatedAt", None)
-              return json.dumps(d, sort_keys=True)
+          import os, subprocess
 
           # fixtures.json is deliberately NOT in this list: its input hit
           # lists come from dense retrieval over a freshly built Chroma HNSW
@@ -104,13 +96,12 @@ jobs:
               changed = True
               print("corpus/: changed")
 
-          api_old = subprocess.run(["git", "show", "HEAD:content-search/api.json"],
-                                    capture_output=True, text=True)
-          api_old_text = api_old.stdout if api_old.returncode == 0 else ""
-          with open("content-search/api.json") as f:
-              if norm_api(api_old_text) != norm_api(f.read()):
-                  changed = True
-                  print("api.json: changed (beyond generatedAt)")
+          # api.json is NOT compared: it is fully derived from the files
+          # above (their sha256s + counts) plus generatedAt and the
+          # embeddings entries that embed_corpus.mjs patches in AFTER this
+          # gate — so at gate time it never matches HEAD and would force
+          # go=true on every run. If nothing tracked changed, api.json
+          # cannot have semantically changed either.
 
           if not changed:
               print("no content changes")
