@@ -71,6 +71,12 @@ jobs:
               d.pop("generatedAt", None)
               return json.dumps(d, sort_keys=True)
 
+          # fixtures.json is deliberately NOT in this list: its input hit
+          # lists come from dense retrieval over a freshly built Chroma HNSW
+          # index, which is nondeterministic in the candidate tail. The
+          # parity test is self-consistent (JS reconstructs from input_ids),
+          # so that churn is noise — fixtures still refresh in any commit
+          # triggered by real content changes, and get discarded otherwise.
           tracked = [
               "content-search/data/docs.json",
               "content-search/data/chunks.json",
@@ -78,7 +84,6 @@ jobs:
               "content-search/data/positions.json",
               "content-search/data/topics.json",
               "content-search/data/tokenizer_fixture.json",
-              "content-search/test/fixtures.json",
           ]
           changed = False
           for path in tracked:

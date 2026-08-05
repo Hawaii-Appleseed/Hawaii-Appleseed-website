@@ -107,7 +107,9 @@ def build():
     public_vocab = set()
     for d in public_docs:
         public_vocab.update(d.keys())
-    idf_public = {t: bm25.idf[t] for t in public_vocab if t in bm25.idf}
+    # sorted() so the JSON is byte-stable across runs (set order follows
+    # PYTHONHASHSEED, which would make every CI build look "changed").
+    idf_public = {t: bm25.idf[t] for t in sorted(public_vocab) if t in bm25.idf}
     bm25_out = {
         "k1": bm25.k1, "b": bm25.b, "epsilon": bm25.epsilon,
         "avgdl": bm25.avgdl, "N": bm25.corpus_size,
