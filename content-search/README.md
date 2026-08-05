@@ -26,6 +26,12 @@ lineage); the engine and corpus live in [`../writing-bot/`](../writing-bot/).
   figures and the position card once the cross-encoder lands (~44 MB total,
   one-time; cached by the browser thereafter). Results upgrade in place with a
   status banner as each tier arrives.
+- **Critical path**: page boot fetches only what keyword search needs
+  (~1.8 MB gzipped). `embeddings.bin` (2.7 MB) is *not* on that path — it
+  loads later via `loadEmbeddings()`, concurrently with the embedder model
+  (different hosts: Pages vs the HF CDN). Dense search switches on when the
+  slower of the two arrives; if `embeddings.bin` fails, keyword search keeps
+  working.
 
 ## Public API — for other projects
 
