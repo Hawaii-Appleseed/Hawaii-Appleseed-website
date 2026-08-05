@@ -1,0 +1,134 @@
+name: Refresh writing-bot corpus
+
+# Scrapes hiappleseed.org for new blog posts and publications and commits them
+# into writing-bot/. Replaces the laptop launchd job
+# (com.appleseed.content-monitor) so the refresh no longer depends on a
+# personal machine being awake.
+#
+# This is only the INGEST half. Committing writing-bot/** would normally fire
+# deploy-content-search.yml's `on: push`, but GITHUB_TOKEN pushes don't trigger
+# other workflows (recursion guard), so we dispatch it explicitly — it then
+# rebuilds the search bundle, runs the parity gate, and dispatches the Pages
+# deploy. Nothing downstream changes.
+#
+# The scraper is incremental: it stops crawling once it hits posts already in
+# the repo, so a typical run fetches 0-2 new documents. No credentials needed —
+# hiappleseed.org is public, and the "already seen" state lives in the repo.
+
+on:
+  schedule:
+    # Sundays 15:00 UTC (5 AM Hawaii; HST is UTC-10 year-round, no DST) —
+    # matches the cadence of the launchd job this replaces.
+    - cron: "0 15 * * 0"
+  workflow_dispatch:
+    inputs:
+      full:
+        description: "Full crawl instead of incremental (backfill; slow)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: refresh-corpus
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write # to dispatch deploy-content-search.yml
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Only what scrape_publications.py imports — deliberately NOT chromadb.
+      # The launchd script reindexed Chroma after scraping, but that index is
+      # for local CLI use only; deploy-content-search.yml rebuilds it in CI
+      # from scratch anyway.
+      - name: Install scraper deps
+        run: pip install 'requests==2.32.3' 'beautifulsoup4==4.12.3' 'pdfminer.six==20240706'
+
+      # Incremental by default: --stop-after-known 5 halts a listing crawl once
+      # 5 already-known items are seen, --max-pages 3 bounds it. Exit code 2 is
+      # the scraper's self-test ("found 0 links") meaning the site's structure
+      # changed — fail loudly rather than silently committing nothing.
+      - name: Scrape hiappleseed.org
+        id: scrape
+        working-directory: writing-bot
+        run: |
+          set +e
+          if [ "${{ inputs.full }}" = "true" ]; then
+            ARGS="--all"
+          else
+            ARGS="--all --stop-after-known 5 --max-pages 3"
+          fi
+          echo "running: scrape_publications.py $ARGS"
+          python scrape_publications.py $ARGS 2>&1 | tee /tmp/scrape.log
+          scrape_status=${PIPESTATUS[0]}
+          set -e
+
+          if [ "$scrape_status" -eq 2 ]; then
+            echo "::error::Scraper self-test failed — found 0 links. The site structure probably changed; scrape_publications.py needs updating."
+            exit 1
+          elif [ "$scrape_status" -ne 0 ]; then
+            echo "::error::Scraper exited $scrape_status"
+            exit "$scrape_status"
+          fi
+
+          new=$(grep -oE 'NEW_FILES=[0-9]+' /tmp/scrape.log | tail -1 | cut -d= -f2)
+          new=${new:-0}
+          echo "new_files=$new" >> "$GITHUB_OUTPUT"
+          echo "NEW_FILES=$new"
+
+      - name: Summarize
+        run: |
+          {
+            echo "### Corpus refresh"
+            echo ""
+            echo "New files: **${{ steps.scrape.outputs.new_files }}**"
+            if [ "${{ steps.scrape.outputs.new_files }}" != "0" ]; then
+              echo ""
+              echo '```'
+              grep -E '^  (blog-posts|publications)/' /tmp/scrape.log || true
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # Guard on the scraper's own count AND on git actually seeing changes —
+      # the scraper can rewrite a file byte-identically on a re-crawl.
+      - name: Commit new corpus files
+        id: commit
+        if: steps.scrape.outputs.new_files != '0'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add writing-bot/
+          if git diff --cached --quiet; then
+            echo "scraper reported new files but tree is unchanged — nothing to commit"
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "corpus: ingest ${{ steps.scrape.outputs.new_files }} new file(s) from hiappleseed.org"
+          # sync-publications.yml commits news.json/publications.json on its own
+          # nightly schedule; rebase rather than fail if it landed first.
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin main && git push && break
+            echo "push attempt $attempt failed; retrying"
+            sleep 5
+          done
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # GITHUB_TOKEN pushes don't fire deploy-content-search.yml's `on: push`.
+      # Dispatch it so the search bundle actually rebuilds; it handles the
+      # parity gate and the downstream Pages deploy itself.
+      - name: Rebuild the search bundle
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sleep 15 # let the pushed commit become main's resolved head
+          gh workflow run deploy-content-search.yml --ref main
