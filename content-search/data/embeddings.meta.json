@@ -2,7 +2,7 @@
   "model": "Xenova/all-MiniLM-L6-v2",
   "dtype": "q8",
   "dim": 384,
-  "count": 1922,
-  "sha256": "5da4ee1934749f6ec8501d559d7122853a7bf74599083a3887e999737fad632b",
+  "count": 1916,
+  "sha256": "4d1874ead749b1b5e163c1d7bcc09d18cc8bf094e91cd9379ec2fb1115fe89c7",
   "transformersjs_version": "3.7.5"
 }
