@@ -12,10 +12,20 @@
 - **No build step**: hand-rolled HTML/CSS, no SSG, no JS framework. Don't introduce one without explicit approval.
 - **Static hosting**: GitHub Pages or drop-in to existing site.
 
-## Pages currently
+## Orientation
 
-- `index.html`, `our-mission.html`, `our-story.html` — more in flight.
-- `index.html` still contains the legacy sage-green `<style>` block; needs migration.
+**Read [`README.md`](README.md) first** — it maps the two deploy models
+(Squarespace paste-in vs. GitHub Pages sub-sites), every root page to its live
+URL, what each directory is, and which files are generated.
+
+Things that file will tell you and are easy to get wrong:
+
+- Filename ≠ live slug for several pages (`our-story.html` → `/our-history`,
+  `food-security.html` → `/food-equity`). `INTERNAL_LINK_MAP` in
+  `scripts/build_squarespace.py` is the source of truth.
+- Paste into Squarespace from `squarespace-ready/`, **never** the raw root file.
+- `index.html` still contains the legacy sage-green `<style>` block; migrate it
+  to the brand palette when you touch it.
 
 ## Issue deep-dive pages — MIRROR FORMAT
 
@@ -56,4 +66,51 @@ What *differs* between pages (and SHOULD differ):
 
 - `~/.openclaw/workspace/projects/HawaiiAppleseed.md` — full project context.
 - `~/.openclaw/workspace/tasks/HawaiiAppleseed.md` — active worklist.
-- Distinct from `~/.openclaw/workspace/projects/appleseed-writing-bot.md` (RAG bot, separate repo).
+- The RAG writing bot was **merged into this repo** on 2026-08-05 (`writing-bot/`
+  + `content-search/`). The standalone `appleseed-writing-bot` repo is superseded
+  and now private — don't work there.
+
+## Content Search / writing-bot subsystem
+
+`writing-bot/` holds the RAG engine **and the corpus**; `content-search/` is the
+static browser app that indexes it. Full detail in each directory's README —
+the rules that will bite you:
+
+- **`content-search/data/` and `api.json` are committed but CI-generated.**
+  Never hand-edit them. `deploy-content-search.yml` rebuilds them from
+  `writing-bot/`; CI output is canonical (local builds differ byte-wise).
+- **Model dtype must stay in lockstep** between `content-search/js/worker.js`
+  (`DTYPE`) and `writing-bot/tools/embed_corpus.mjs`. Query and corpus embeddings
+  must live in the same space — changing one without the other silently
+  corrupts relevance rather than erroring.
+- **The parity gate is model-free.** `content-search/test/run_all.mjs` checks the
+  BM25/tokenizer/grouping core against Python fixtures. It will happily pass
+  through a bad model change — validate those separately
+  (`writing-bot/tools/probe_quality.mjs`).
+- **`content-search/js/app.js` contains a byte that makes `grep` treat it as
+  binary.** Use `grep -a`.
+- Corpus scraping is idempotent via **two** mechanisms: the output filename and
+  `writing-bot/content-monitor/blog-urls.json`. The URL manifest short-circuits
+  *before* fetching, so to force a re-ingest you must remove both.
+
+## Automation rules
+
+- **`GITHUB_TOKEN` pushes do not trigger other workflows** (GitHub's recursion
+  guard). Any workflow that must kick off a downstream one dispatches it
+  explicitly via `gh workflow run` and needs `actions: write`. This has caused
+  silent no-deploy bugs twice — follow the existing pattern.
+- **Never `gh run rerun` a failed Pages deploy** — it errors on a duplicate
+  artifact. Start a fresh run: `gh workflow run deploy.yml --ref main`.
+- Workflows that regenerate data guard on *real content change*, not just a
+  dirty tree — several generators restamp a timestamp on every run, so a naive
+  `git diff --quiet` is never quiet and would deploy on every tick.
+- The whole refresh chain runs in **GitHub Actions**; no personal machine is in
+  the loop. Don't reintroduce a laptop cron/launchd dependency.
+
+## Verifying changes
+
+- Site pages: check at **375px first** (see the mobile rule above), then desktop.
+- Content Search: it's a real app — run it and exercise it, don't just read the
+  diff. `python3 -m http.server 8532 --directory content-search`.
+- Don't trust a screenshot of an embedded/injected page to prove a fix; several
+  of these render blank in screenshots. Verify via DOM evaluation.
