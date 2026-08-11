@@ -1,0 +1,21 @@
+name: Test Capitol RSS Fetch
+on:
+  workflow_dispatch:
+
+jobs:
+  test-fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch a few capitol.hawaii.gov RSS feeds
+        run: |
+          set -e
+          bills="HB2049 SB3028 HB2306 SB3125"
+          for b in $bills; do
+            echo "=== $b ==="
+            code=$(curl -s -o /tmp/resp.xml -w "%{http_code}" \
+              "https://www.capitol.hawaii.gov/sessions/session2026/rss/${b}.xml")
+            echo "status=$code size=$(wc -c < /tmp/resp.xml)"
+            head -c 300 /tmp/resp.xml
+            echo ""
+            echo ""
+          done
