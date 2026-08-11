@@ -5,7 +5,7 @@
      HOW: In the News page > Edit > add a Code Block > paste ALL of this >
           make sure "Display Source" is OFF > Save.
      ===================================================================== -->
-<link rel="stylesheet" href="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/okina.css">
+<link rel="stylesheet" href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/assets/okina.css">
 <style>
   /* Without this the Squarespace full-bleed override (width:100vw) adds the
      28/20px horizontal padding ON TOP of the viewport width, so the right
@@ -209,7 +209,7 @@
     emptyText:'No press releases match your filters.'
   });
 
-  fetch('https://dtomkatsu.github.io/Hawaii-Appleseed-website/news.json').then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
+  fetch('https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/news.json').then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
     newsFeed.setData(d.press);
     prFeed.setData(d.press_releases);
     if(d.lastSynced) syncedEl.textContent='Last updated '+fmtDate(d.lastSynced);

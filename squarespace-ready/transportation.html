@@ -38,7 +38,7 @@
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap">
-<link rel="stylesheet" href="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/okina.css">
+<link rel="stylesheet" href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/assets/okina.css">
 
 <style>
 .ha-transit {
@@ -2110,7 +2110,7 @@
 
   async function loadPubs() {
     try {
-      const r = await fetch('https://dtomkatsu.github.io/Hawaii-Appleseed-website/publications.json');
+      const r = await fetch('https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/publications.json');
       if (!r.ok) throw new Error('fetch failed');
       const data = await r.json();
       const items = (data.items || []).filter(i =>
@@ -2223,7 +2223,7 @@
   }
   async function loadNews() {
     try {
-      const r = await fetch('https://dtomkatsu.github.io/Hawaii-Appleseed-website/news.json');
+      const r = await fetch('https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/news.json');
       if (!r.ok) throw new Error('fetch failed');
       const data = await r.json();
       const pickFirst = items => (items || [])
