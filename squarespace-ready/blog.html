@@ -5,7 +5,7 @@
      HOW: Blog page > Edit > add a Code Block > paste ALL of this >
           make sure "Display Source" is OFF > Save.
      ===================================================================== -->
-<link rel="stylesheet" href="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/okina.css">
+<link rel="stylesheet" href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/assets/okina.css">
 <style>
   /* Without this the Squarespace full-bleed override (width:100vw) adds the
      28/20px horizontal padding ON TOP of the viewport width, so the right
@@ -184,7 +184,7 @@
     emptyText:'No posts match your filters.'
   });
 
-  fetch('https://dtomkatsu.github.io/Hawaii-Appleseed-website/news.json').then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
+  fetch('https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/news.json').then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
     blogFeed.setData(d.blog);
     if(d.lastSynced) syncedEl.textContent='Last updated '+fmtDate(d.lastSynced);
   }).catch(function(){errFallbackGrid.innerHTML='<p class="ha-news__empty">Unable to load posts right now. Visit <a href="https://hiappleseed.org/blog" target="_blank" rel="noopener">hiappleseed.org/blog</a>.</p>';});

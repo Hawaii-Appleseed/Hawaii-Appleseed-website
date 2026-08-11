@@ -10,7 +10,7 @@
 <div id="ha-home-embed">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/okina.css">
+<link rel="stylesheet" href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/assets/okina.css">
   <style>
     /* Mobile black-box guard (2026-07-10): the hero's hover-ring SVG
        (.ha-home__hero-trace) is styled only inside the desktop-pointer
@@ -1131,11 +1131,11 @@
 
     <!-- Curved video viewport. Placeholder = the rainbow "living photo"; when the hero
          video is ready, drop a <video class="ha-home__hero-video" autoplay muted loop
-         playsinline poster="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/story/hero-rainbow.webp"><source src="&#8230;mp4"></video>
+         playsinline poster="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/assets/story/hero-rainbow.webp"><source src="&#8230;mp4"></video>
          inside .ha-home__hero-media and it will be clipped by the same arc. -->
     <div class="ha-home__hero-arc-wrap" aria-hidden="true"><div class="ha-home__hero-arc"></div></div>
     <div class="ha-home__hero-media">
-      <img class="ha-home__hero-photo" src="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/story/hero-rainbow.webp" alt="" aria-hidden="true">
+      <img class="ha-home__hero-photo" src="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/assets/story/hero-rainbow.webp" alt="" aria-hidden="true">
       <canvas class="ha-home__hero-canvas" aria-hidden="true"></canvas>
       <!-- Hero video: YouTube embed via the IFrame API. Autoplays MUTED (browser
            autoplay policy) and loops; the watermark button opts the user into
@@ -1322,7 +1322,7 @@
 
     <div class="ha-home__impact-grid reveal-group">
       <a class="ha-home__dash" href="https://hiappleseed.org/hibudget" target="_blank" rel="noopener">
-        <img src="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/data/hawaii-budget-tracker.png" alt="Hawai&#699;i Appleseed Budget Tracker" loading="lazy">
+        <img src="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/assets/data/hawaii-budget-tracker.png" alt="Hawai&#699;i Appleseed Budget Tracker" loading="lazy">
         <span class="ha-home__dash-cta">Explore the Budget Tracker &#8594;</span>
       </a>
     </div>
@@ -1332,7 +1332,7 @@
   <section class="ha-home__story" id="story">
     <div class="ha-home__story-grid reveal-group">
       <div class="ha-home__story-media">
-        <img src="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/story/04-current-pilina-builders.webp" alt="Hawai&#699;i Appleseed staff and community partners" loading="lazy">
+        <img src="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/assets/story/04-current-pilina-builders.webp" alt="Hawai&#699;i Appleseed staff and community partners" loading="lazy">
       </div>
       <div class="ha-home__story-text">
         <div class="section-label">Who We Are</div>
@@ -1449,7 +1449,7 @@
         + '<span class="way-link">Read more</span>'
         + '</div></a>';
     }
-    fetch('https://dtomkatsu.github.io/Hawaii-Appleseed-website/publications.json')
+    fetch('https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/publications.json')
       .then(function(r){ if(!r.ok) throw new Error('http '+r.status); return r.json(); })
       .then(function(d){
         var items = (d.items || []).slice().sort(function(a,b){ return b.publishOn - a.publishOn; }).slice(0,3);

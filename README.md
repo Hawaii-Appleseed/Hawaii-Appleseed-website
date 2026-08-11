@@ -36,7 +36,7 @@ python3 scripts/build_squarespace.py
 ### 2. GitHub Pages sub-sites
 
 Everything under a sub-directory with its own `index.html` is served directly
-from GitHub Pages at `https://dtomkatsu.github.io/Hawaii-Appleseed-website/<dir>/`,
+from GitHub Pages at `https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/<dir>/`,
 and embedded into or linked from Squarespace. These deploy automatically on
 push to `main` via `deploy.yml` (a plain upload — **no build step**).
 
@@ -83,7 +83,7 @@ CLAUDE.md before making any structural change to one of them.
 | Path | What it is |
 | --- | --- |
 | `assets/` | Shared images, fonts, `okina.css`. Referenced by absolute Pages URLs after the Squarespace build. |
-| `content-search/` | **Content Search** static app — client-side semantic + keyword search over Appleseed's writing. Live at [`/content-search/`](https://dtomkatsu.github.io/Hawaii-Appleseed-website/content-search/). See its [README](content-search/README.md). |
+| `content-search/` | **Content Search** static app — client-side semantic + keyword search over Appleseed's writing. Live at [`/content-search/`](https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/content-search/). See its [README](content-search/README.md). |
 | `writing-bot/` | RAG writing assistant + **the corpus** (testimony, blog posts, publications) that Content Search indexes. See its [README](writing-bot/README.md). |
 | `tax-fairness/` | Tax Fairness Coalition sub-site (`/tax-fairness/`). Formerly its own repo. |
 | `tax-timeline/` | Hawaiʻi tax history timeline (`/tax-timeline/`). |

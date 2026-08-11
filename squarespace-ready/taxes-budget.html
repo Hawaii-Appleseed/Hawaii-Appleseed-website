@@ -27,7 +27,7 @@
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap">
-<link rel="stylesheet" href="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/okina.css">
+<link rel="stylesheet" href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/assets/okina.css">
 
 <style>
 .ha-tax {
@@ -1974,7 +1974,7 @@
       </article>
     </div>
     <div style="text-align:center;margin-top:48px;">
-      <a href="https://dtomkatsu.github.io/Hawaii-Appleseed-website/tax-fairness/" style="display:inline-flex;align-items:center;gap:8px;font-weight:700;color:#52796F;text-decoration:none;border-bottom:2px solid #52796F;padding-bottom:2px;font-size:1.05rem;">Explore the Tax Fairness Coalition &rarr;</a>
+      <a href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/" style="display:inline-flex;align-items:center;gap:8px;font-weight:700;color:#52796F;text-decoration:none;border-bottom:2px solid #52796F;padding-bottom:2px;font-size:1.05rem;">Explore the Tax Fairness Coalition &rarr;</a>
     </div>
     </div>
     <div class="ha-tax__impact">
@@ -2089,7 +2089,7 @@
       <p>Sign up for email alerts on bills moving at the Capitol, read our SB 3125 FAQ or the Budget Primer, or reach out to your legislator &#8212; every voice helps shape a more equitable tax code.</p>
       <div class="ha-tax__cta-actions">
         <a class="ha-tax__cta-btn ha-tax__cta-btn--primary" href="https://hiappleseed.quorum.us/campaign/taxfairnesshisubscribe/" target="_blank" rel="noopener">Get email alerts</a>
-        <a class="ha-tax__cta-btn ha-tax__cta-btn--ghost" href="https://dtomkatsu.github.io/Hawaii-Appleseed-website/tax-fairness/faq_squarespace.html">Read the SB 3125 FAQ</a>
+        <a class="ha-tax__cta-btn ha-tax__cta-btn--ghost" href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/faq_squarespace.html">Read the SB 3125 FAQ</a>
         <a class="ha-tax__cta-btn ha-tax__cta-btn--ghost" href="https://hiappleseed.org/publications/hawaii-budget-primer-fy202526" target="_blank" rel="noopener">Read the Budget Primer</a>
       </div>
     </div>
@@ -2249,7 +2249,7 @@
 
   async function loadPubs() {
     try {
-      const r = await fetch('https://dtomkatsu.github.io/Hawaii-Appleseed-website/publications.json');
+      const r = await fetch('https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/publications.json');
       if (!r.ok) throw new Error('fetch failed');
       const data = await r.json();
       const items = (data.items || []).filter(i =>
@@ -2362,7 +2362,7 @@
   }
   async function loadNews() {
     try {
-      const r = await fetch('https://dtomkatsu.github.io/Hawaii-Appleseed-website/news.json');
+      const r = await fetch('https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/news.json');
       if (!r.ok) throw new Error('fetch failed');
       const data = await r.json();
       const pickFirst = items => (items || [])
