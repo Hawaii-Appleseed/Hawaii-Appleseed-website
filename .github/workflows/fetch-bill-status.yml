@@ -1,0 +1,53 @@
+name: Fetch bill status
+
+# Fetches RSS status for tracked bills from capitol.hawaii.gov and commits
+# tax-fairness/data/bill-status.json. Replaces the old approach where the
+# browser fetched RSS live through a public CORS proxy (api.allorigins.win)
+# on every page load — see tax-fairness/README.md for the full picture.
+#
+# The bill list is NOT configured here: tax-fairness/scripts/fetch-bill-status.mjs
+# discovers it from data-hb/data-sb attributes in the tracked HTML pages, so
+# adding/removing a bill is a content edit, not a workflow edit.
+
+on:
+  schedule:
+    # Every 30 minutes. The page only ever shows data this workflow already
+    # wrote (no more live client-side fetching), so this interval is the only
+    # thing controlling freshness.
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: fetch-bill-status
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch bill status
+        run: node tax-fairness/scripts/fetch-bill-status.mjs
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add tax-fairness/data/bill-status.json
+          if git diff --cached --quiet; then
+            echo "no change"
+            exit 0
+          fi
+          git commit -m "bill-status: refresh from capitol.hawaii.gov RSS"
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin main && git push && break
+            echo "push attempt $attempt failed; retrying"
+            sleep 5
+          done

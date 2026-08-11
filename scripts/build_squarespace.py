@@ -31,7 +31,7 @@ OUT = os.path.join(ROOT, "squarespace-ready")
 # Pages host, which serves the same asset tree. NOTE: this hotlinks assets
 # from GitHub Pages — a stopgap; for production, upload the images to
 # Squarespace and swap these URLs so the site doesn't depend on Pages.
-ASSET_BASE = "https://dtomkatsu.github.io/Hawaii-Appleseed-website/"
+ASSET_BASE = "https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/"
 
 
 # The issue pages carry fixed-position scroll enhancements — a scroll

@@ -1254,11 +1254,11 @@ header .header-nav-folder-content a,
         <div class="tfc-hearings-header">
             <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                 <h3 class="tfc-hearings-title">Bill Status Tracker</h3>
-                <button class="tfc-hearings-toggle" onclick="toggleBillStatusWidget()" aria-label="Toggle bill status">&#9660;</button>
+                <button class="tfc-hearings-toggle" onclick="BillTracker.toggleBillStatusWidget()" aria-label="Toggle bill status">&#9660;</button>
             </div>
             <div style="margin-top: 12px; padding: 8px 12px; background: rgba(255, 255, 255, 0.1); border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.2);">
                 <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #fbbf24; cursor: pointer; font-weight: 500;">
-                    <input type="checkbox" id="alive-filter" checked onchange="filterBillStatus()" style="cursor: pointer; transform: scale(1.1);">
+                    <input type="checkbox" id="alive-filter" checked onchange="BillTracker.filterBillStatus()" style="cursor: pointer; transform: scale(1.1);">
                     <span>Alive Only</span>
                 </label>
             </div>
@@ -1278,6 +1278,7 @@ header .header-nav-folder-content a,
             <!-- Bill Tracker Component - Auto-updating Widget -->
             <div class="tfc-bill-tracker has-testimony" 
                  data-tracker-id="freezing-act-46"
+                 data-issue-area="Stop Tax Cuts for the Wealthy"
                  data-hb="2306"
                  data-sb="3125"
                  data-year="2026">
@@ -1312,6 +1313,7 @@ header .header-nav-folder-content a,
             <div class="tfc-bill-tracker has-testimony" 
                  id="capgains-tracker"
                  data-tracker-id="capital-gains"
+                 data-issue-area="Tax Wealth Like Work"
                  data-hb="1850"
                  data-sb="2441"
                  data-year="2026">
@@ -1335,6 +1337,7 @@ header .header-nav-folder-content a,
             <!-- Bill Tracker Component -->
             <div class="tfc-bill-tracker has-testimony" 
                  data-tracker-id="conveyance-tax"
+                 data-issue-area="Tweak the Conveyance Tax"
                  data-hb="2049"
                  data-sb="3028"
                  data-year="2026">
@@ -1359,6 +1362,7 @@ header .header-nav-folder-content a,
             <!-- Bill Tracker Component -->
             <div class="tfc-bill-tracker has-testimony" 
                  data-tracker-id="reits"
+                 data-issue-area="Closing the Real Estate Investment Trust Loophole"
                  data-hb="2150"
                  data-sb="2362"
                  data-year="2026">
@@ -1393,6 +1397,7 @@ header .header-nav-folder-content a,
             <div class="tfc-bill-tracker has-testimony" 
                  id="millionaires-tracker"
                  data-tracker-id="millionaires-tax"
+                 data-issue-area="Millionaire's Income Tax"
                  data-hb="2010"
                  data-sb="2468"
                  data-year="2026">
@@ -1421,6 +1426,7 @@ header .header-nav-folder-content a,
             <!-- Bill Tracker Component -->
             <div class="tfc-bill-tracker has-testimony" 
                  data-tracker-id="wealth-proceeds"
+                 data-issue-area="Wealth Proceeds Tax"
                  data-hb="2623"
                  data-sb=""
                  data-year="2026">
@@ -1441,379 +1447,7 @@ header .header-nav-folder-content a,
     </div>
 </div>
 
-<!-- Bill Tracker Widget (INLINE) -->
-<script>
-const BillTrackerWidget = (function() {
-    'use strict';
-    const CONFIG = {
-        corsProxy: 'https://api.allorigins.win/raw?url=',
-        defaultYear: '2026',
-        refreshInterval: 3600000,
-        cachePrefix: 'btw_cache_',
-        cacheDuration: 3600000,
-        fetchTimeout: 10000
-    };
-    const trackers = {};
-    async function fetchWithTimeout(url, timeout) {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), timeout);
-        try {
-            const response = await fetch(url, { signal: controller.signal });
-            clearTimeout(timeoutId);
-            return response;
-        } catch (error) {
-            clearTimeout(timeoutId);
-            throw error;
-        }
-    }
-    async function fetchRSS(billType, billNumber, year) {
-        const cacheKey = `${CONFIG.cachePrefix}${billType}_${billNumber}_${year}`;
-        const cached = getFromCache(cacheKey);
-        if (cached) { return cached; }
-        
-        year = year || CONFIG.defaultYear;
-        const rssUrl = `https://www.capitol.hawaii.gov/sessions/session${year}/rss/${billType}${billNumber}.xml`;
-        const url = CONFIG.corsProxy + encodeURIComponent(rssUrl);
-        
-        try {
-            const response = await fetchWithTimeout(url, CONFIG.fetchTimeout);
-            if (!response.ok) { 
-                console.error(`Failed to fetch ${billType}${billNumber}: HTTP ${response.status}`);
-                return null;
-            }
-            
-            const xmlText = await response.text();
-            
-            if (xmlText.includes('<rss') || xmlText.includes('<item>')) {
-                saveToCache(cacheKey, xmlText);
-                console.log(`✓ ${billType}${billNumber} fetched successfully`);
-                return xmlText;
-            }
-            
-            console.error(`Invalid RSS response for ${billType}${billNumber}`);
-            return null;
-        } catch (error) {
-            console.error(`Error fetching ${billType}${billNumber}:`, error.message);
-            return null;
-        }
-    }
-    function getFromCache(key) {
-        try {
-            const item = localStorage.getItem(key);
-            if (!item) return null;
-            const { data, timestamp } = JSON.parse(item);
-            if (Date.now() - timestamp < CONFIG.cacheDuration) { return data; }
-            localStorage.removeItem(key);
-            return null;
-        } catch (e) { return null; }
-    }
-    function saveToCache(key, data) {
-        try { localStorage.setItem(key, JSON.stringify({ data: data, timestamp: Date.now() })); } catch (e) {}
-    }
-    function clearCache() {
-        const keys = Object.keys(localStorage).filter(k => k.startsWith(CONFIG.cachePrefix));
-        keys.forEach(k => localStorage.removeItem(k));
-    }
-    function parseRSS(xmlText) {
-        if (!xmlText) return [];
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-        const parseError = xmlDoc.querySelector('parsererror');
-        if (parseError) { return []; }
-        const items = xmlDoc.getElementsByTagName("item");
-        const updates = [];
-        for (let i = 0; i < items.length; i++) {
-            const titleEl = items[i].getElementsByTagName("title")[0];
-            const pubDateEl = items[i].getElementsByTagName("pubDate")[0];
-            const linkEl = items[i].getElementsByTagName("link")[0];
-            if (!titleEl || !pubDateEl) continue;
-            const title = titleEl.textContent;
-            const pubDate = pubDateEl.textContent;
-            const link = linkEl ? linkEl.textContent : '';
-            let description = title;
-            const parts = title.split(': ');
-            if (parts.length > 1) { description = parts.slice(1).join(': '); }
-            updates.push({
-                title: title,
-                description: description,
-                date: new Date(pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-                rawDate: new Date(pubDate),
-                link: link
-            });
-        }
-        updates.sort((a, b) => b.rawDate - a.rawDate);
-        return updates;
-    }
-    function getStatusBadge(description) {
-        const desc = description.toLowerCase();
-        if (desc.includes('signed by governor') || desc.includes('became law')) return { text: 'Enacted', class: 'enacted' };
-        if (desc.includes('passed third reading') && desc.includes('transmitted')) return { text: 'Passed Chamber', class: 'passed' };
-        if (desc.includes('passed third reading')) return { text: 'Passed', class: 'passed' };
-        if (desc.includes('passed second reading')) return { text: 'Second Reading', class: 'progress' };
-        if (desc.includes('passed first reading')) return { text: 'First Reading', class: 'progress' };
-        if (desc.includes('carried over')) return { text: 'Carried Over', class: 'deferred' };
-        if (desc.includes('deferred')) return { text: 'Deferred', class: 'deferred' };
-        if (desc.includes('hearing')) return { text: 'Hearing', class: 'hearing' };
-        if (desc.includes('referred to')) return { text: 'Referred', class: 'referred' };
-        if (desc.includes('recommitted')) return { text: 'Recommitted', class: 'referred' };
-        if (desc.includes('reported from')) return { text: 'Reported', class: 'progress' };
-        if (desc.includes('introduced')) return { text: 'Introduced', class: 'new' };
-        return { text: 'Update', class: 'update' };
-    }
-    function generateTrackerHTML(trackerId, hbNumbers, sbNumbers, year) {
-        year = year || CONFIG.defaultYear;
-        const hbDisplay = hbNumbers.length > 0 
-            ? `HB <span class="hb-numbers">${hbNumbers.map(num => `<a href="https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=HB&billnumber=${num}&year=${year}" target="_blank" onclick="event.stopPropagation()">${num}</a>`).join(', ')}</span>`
-            : 'No Bill';
-        const sbDisplay = sbNumbers.length > 0 
-            ? `SB <span class="sb-numbers">${sbNumbers.map(num => `<a href="https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=SB&billnumber=${num}&year=${year}" target="_blank" onclick="event.stopPropagation()">${num}</a>`).join(', ')}</span>`
-            : 'No Bill';
-        return `
-            <div class="tfc-legislation-header" onclick="BillTrackerWidget.toggleTracker('${trackerId}')">
-                Legislation <span class="tfc-legislation-toggle-icon"></span>
-            </div>
-            <div class="tfc-tracker-content" id="${trackerId}-content">
-                <div class="tfc-bill-columns">
-                    <div class="tfc-bill-col ${hbNumbers.length > 0 ? 'active' : ''}" data-bill-type="hb" onclick="BillTrackerWidget.switchFeed('${trackerId}', 'hb')">
-                        <h4>House Bill${hbNumbers.length > 1 ? 's' : ''}</h4>
-                        <div class="tfc-bill-number">${hbDisplay}</div>
-                    </div>
-                    <div class="tfc-bill-col ${hbNumbers.length === 0 && sbNumbers.length > 0 ? 'active' : ''}" data-bill-type="sb" onclick="BillTrackerWidget.switchFeed('${trackerId}', 'sb')">
-                        <h4>Senate Bill${sbNumbers.length > 1 ? 's' : ''}</h4>
-                        <div class="tfc-bill-number">${sbDisplay}</div>
-                    </div>
-                </div>
-                <div class="tfc-status-section" id="${trackerId}-status">
-                    <div class="tfc-status-header" onclick="BillTrackerWidget.toggleHistory('${trackerId}')">
-                        <span class="tfc-status-title">Latest Status <span class="tfc-status-badge" id="${trackerId}-badge">Loading...</span></span>
-                        <span class="tfc-status-toggle">History</span>
-                    </div>
-                    <div class="tfc-latest-update" id="${trackerId}-latest"><span class="tfc-loading">Loading bill status...</span></div>
-                    <div class="tfc-status-history" id="${trackerId}-history"></div>
-                </div>
-                <div class="tfc-tracker-meta">
-                    <span class="tfc-last-updated" id="${trackerId}-updated"></span>
-                    <button class="tfc-refresh-btn" onclick="BillTrackerWidget.refresh('${trackerId}')" title="Refresh">&#8635;</button>
-                </div>
-            </div>
-        `;
-    }
-    function updateTrackerUI(trackerId, updates, billType, billNumbers, isMultipleBills = false) {
-        const latestEl = document.getElementById(`${trackerId}-latest`);
-        const badgeEl = document.getElementById(`${trackerId}-badge`);
-        const historyEl = document.getElementById(`${trackerId}-history`);
-        const updatedEl = document.getElementById(`${trackerId}-updated`);
-        if (!latestEl) { return; }
-        if (isMultipleBills && Array.isArray(updates)) {
-            let hasAnyUpdates = false;
-            let hasError = false;
-            let latestOverallBadge = { text: 'N/A', class: 'update' };
-            latestEl.innerHTML = '';
-            if (historyEl) historyEl.innerHTML = '';
-            updates.forEach(billData => {
-                const billUpdates = billData.updates;
-                const billNum = billData.billNum;
-                const billTypeUpper = billType.toUpperCase();
-                if (billUpdates === 'ERROR') {
-                    hasError = true;
-                    const billSection = document.createElement('div');
-                    billSection.className = 'tfc-bill-status-section';
-                    billSection.innerHTML = `<div class="tfc-bill-status-header"><strong>${billTypeUpper} ${billNum}</strong><span class="tfc-status-badge" style="background: #ef4444; color: white;">Error</span></div><div class="tfc-bill-latest"><span style="color: #ef4444; font-weight: 500;">Error: Press Refresh button</span></div>`;
-                    latestEl.appendChild(billSection);
-                } else if (billUpdates && billUpdates.length > 0) {
-                    hasAnyUpdates = true;
-                    const latest = billUpdates[0];
-                    const badge = getStatusBadge(latest.description);
-                    if (badge.class !== 'update') { latestOverallBadge = badge; }
-                    const billSection = document.createElement('div');
-                    billSection.className = 'tfc-bill-status-section';
-                    billSection.innerHTML = `<div class="tfc-bill-status-header"><strong>${billTypeUpper} ${billNum}</strong><span class="tfc-status-badge tfc-badge-${badge.class}">${badge.text}</span></div><div class="tfc-bill-latest"><span class="tfc-status-date">${latest.date}</span>${latest.description}</div>`;
-                    latestEl.appendChild(billSection);
-                    if (historyEl && billUpdates.length > 1) {
-                        for (let i = 1; i < billUpdates.length; i++) {
-                            const update = billUpdates[i];
-                            const div = document.createElement('div');
-                            div.className = 'tfc-history-item';
-                            div.innerHTML = `<strong>${billTypeUpper} ${billNum}:</strong><span class="tfc-status-date">${update.date}</span>${update.description}`;
-                            historyEl.appendChild(div);
-                        }
-                    }
-                } else {
-                    const billSection = document.createElement('div');
-                    billSection.className = 'tfc-bill-status-section';
-                    billSection.innerHTML = `<div class="tfc-bill-status-header"><strong>${billTypeUpper} ${billNum}</strong><span class="tfc-status-badge">N/A</span></div><div class="tfc-bill-latest"><span style="color: #718096;">No status updates available</span></div>`;
-                    latestEl.appendChild(billSection);
-                }
-            });
-            if (hasError) { if (badgeEl) { badgeEl.textContent = 'Error'; badgeEl.style.background = '#ef4444'; badgeEl.style.color = 'white'; } }
-            else if (!hasAnyUpdates) { if (badgeEl) badgeEl.textContent = 'N/A'; }
-            else { if (badgeEl) { badgeEl.textContent = latestOverallBadge.text; badgeEl.className = `tfc-status-badge tfc-badge-${latestOverallBadge.class}`; } }
-        } else {
-            if (updates === 'ERROR') {
-                latestEl.innerHTML = '<span style="color: #ef4444; font-weight: 500;">Error: Press Refresh button</span>';
-                if (badgeEl) { badgeEl.textContent = 'Error'; badgeEl.style.background = '#ef4444'; badgeEl.style.color = 'white'; }
-                return;
-            }
-            if (!updates || updates.length === 0) {
-                latestEl.innerHTML = '<span style="color: #718096;">No status updates available</span>';
-                if (badgeEl) badgeEl.textContent = 'N/A';
-                return;
-            }
-            const latest = updates[0];
-            const badge = getStatusBadge(latest.description);
-            latestEl.innerHTML = `<span class="tfc-status-date">${latest.date}</span>${latest.description}`;
-            if (badgeEl) { badgeEl.textContent = badge.text; badgeEl.className = `tfc-status-badge tfc-badge-${badge.class}`; }
-            if (historyEl) {
-                historyEl.innerHTML = '';
-                for (let i = 1; i < updates.length; i++) {
-                    const update = updates[i];
-                    const div = document.createElement('div');
-                    div.className = 'tfc-history-item';
-                    div.innerHTML = `<span class="tfc-status-date">${update.date}</span>${update.description}`;
-                    historyEl.appendChild(div);
-                }
-            }
-        }
-        if (updatedEl) { updatedEl.textContent = `Updated: ${new Date().toLocaleTimeString()}`; }
-    }
-    class Tracker {
-        constructor(config) {
-            this.id = config.trackerId;
-            this.element = config.element;
-            this.hbNumbers = config.hbNumbers || [];
-            this.sbNumbers = config.sbNumbers || [];
-            this.year = config.year || CONFIG.defaultYear;
-            this.refreshInterval = config.refreshInterval || CONFIG.refreshInterval;
-            this.currentType = this.hbNumbers.length > 0 ? 'hb' : 'sb';
-            this.feeds = { hb: {}, sb: {} };
-            this.intervalId = null;
-        }
-        async init() {
-            this.element.innerHTML = generateTrackerHTML(this.id, this.hbNumbers, this.sbNumbers, this.year);
-            await this.loadFeeds();
-            this.startAutoRefresh();
-        }
-        async loadFeeds() {
-            const hbPromises = this.hbNumbers.map(async billNum => {
-                const xmlText = await fetchRSS('HB', billNum, this.year);
-                if (xmlText === null) {
-                    this.feeds.hb[billNum] = 'ERROR';
-                } else {
-                    this.feeds.hb[billNum] = parseRSS(xmlText);
-                }
-            });
-            const sbPromises = this.sbNumbers.map(async billNum => {
-                const xmlText = await fetchRSS('SB', billNum, this.year);
-                if (xmlText === null) {
-                    this.feeds.sb[billNum] = 'ERROR';
-                } else {
-                    this.feeds.sb[billNum] = parseRSS(xmlText);
-                }
-            });
-            await Promise.all([...hbPromises, ...sbPromises]);
-            this.updateDisplay();
-        }
-        updateDisplay() {
-            const numbers = this.currentType === 'hb' ? this.hbNumbers : this.sbNumbers;
-            if (numbers.length === 0) { updateTrackerUI(this.id, [], this.currentType, numbers); return; }
-            if (numbers.length > 1) {
-                const billsData = numbers.map(billNum => {
-                    const feedData = this.feeds[this.currentType][billNum];
-                    return { billNum: billNum, updates: feedData === 'ERROR' ? 'ERROR' : (feedData || []) };
-                });
-                updateTrackerUI(this.id, billsData, this.currentType, numbers, true);
-            } else {
-                const feedData = this.feeds[this.currentType][numbers[0]];
-                const updates = feedData === 'ERROR' ? 'ERROR' : (feedData || []);
-                updateTrackerUI(this.id, updates, this.currentType, numbers, false);
-            }
-        }
-        switchFeed(billType) {
-            this.currentType = billType;
-            const cols = this.element.querySelectorAll('.tfc-bill-col');
-            cols.forEach(col => { col.classList.remove('active'); if (col.dataset.billType === billType) { col.classList.add('active'); } });
-            this.updateDisplay();
-        }
-        toggleHistory() {
-            const section = document.getElementById(`${this.id}-status`);
-            if (section) { section.classList.toggle('expanded'); }
-        }
-        async refresh() {
-            const refreshBtn = this.element.querySelector('.tfc-refresh-btn');
-            const updatedEl = document.getElementById(`${this.id}-updated`);
-            
-            if (refreshBtn) {
-                refreshBtn.disabled = true;
-                refreshBtn.style.opacity = '0.5';
-                refreshBtn.innerHTML = '&#8635;';
-                refreshBtn.classList.add('spinning');
-            }
-            
-            for (const billNum of this.hbNumbers) { const key = `${CONFIG.cachePrefix}HB_${billNum}_${this.year}`; localStorage.removeItem(key); }
-            for (const billNum of this.sbNumbers) { const key = `${CONFIG.cachePrefix}SB_${billNum}_${this.year}`; localStorage.removeItem(key); }
-            
-            await this.loadFeeds();
-            
-            if (refreshBtn) {
-                refreshBtn.disabled = false;
-                refreshBtn.style.opacity = '1';
-                refreshBtn.classList.remove('spinning');
-            }
-            
-            if (updatedEl) {
-                const now = new Date();
-                updatedEl.textContent = `Updated: ${now.toLocaleTimeString()}`;
-            }
-        }
-        startAutoRefresh() {
-            if (this.intervalId) { clearInterval(this.intervalId); }
-            this.intervalId = setInterval(() => { this.refresh(); }, this.refreshInterval);
-        }
-        stopAutoRefresh() { if (this.intervalId) { clearInterval(this.intervalId); this.intervalId = null; } }
-        destroy() { this.stopAutoRefresh(); delete trackers[this.id]; }
-    }
-    return {
-        init: function(config) { const tracker = new Tracker(config); trackers[config.trackerId] = tracker; tracker.init(); return tracker; },
-        initAll: function() {
-            const elements = document.querySelectorAll('[data-tracker-id]');
-            elements.forEach(element => {
-                const trackerId = element.dataset.trackerId;
-                const hbNumbers = element.dataset.hb ? element.dataset.hb.split(',').map(n => n.trim()).filter(n => n) : [];
-                const sbNumbers = element.dataset.sb ? element.dataset.sb.split(',').map(n => n.trim()).filter(n => n) : [];
-                const year = element.dataset.year || CONFIG.defaultYear;
-                this.init({ trackerId: trackerId, element: element, hbNumbers: hbNumbers, sbNumbers: sbNumbers, year: year });
-            });
-        },
-        switchFeed: function(trackerId, billType) { const tracker = trackers[trackerId]; if (tracker) { tracker.switchFeed(billType); } },
-        toggleHistory: function(trackerId) { const tracker = trackers[trackerId]; if (tracker) { tracker.toggleHistory(); } },
-        toggleTracker: function(trackerId) {
-            const content = document.getElementById(`${trackerId}-content`);
-            const tracker = document.querySelector(`[data-tracker-id="${trackerId}"]`);
-            if (content && tracker) {
-                tracker.classList.toggle('expanded');
-            }
-        },
-        refresh: function(trackerId) { const tracker = trackers[trackerId]; if (tracker) { tracker.refresh(); } },
-        reinit: function(trackerId) {
-            const existingTracker = trackers[trackerId];
-            if (existingTracker) { existingTracker.destroy(); }
-            const element = document.querySelector(`[data-tracker-id="${trackerId}"]`);
-            if (!element) { return; }
-            const hbNumbers = element.dataset.hb ? element.dataset.hb.split(',').map(n => n.trim()).filter(n => n) : [];
-            const sbNumbers = element.dataset.sb ? element.dataset.sb.split(',').map(n => n.trim()).filter(n => n) : [];
-            const year = element.dataset.year || CONFIG.defaultYear;
-            this.init({ trackerId: trackerId, element: element, hbNumbers: hbNumbers, sbNumbers: sbNumbers, year: year });
-        },
-        refreshAll: function() { Object.values(trackers).forEach(tracker => tracker.refresh()); },
-        clearCache: clearCache,
-        getTracker: function(trackerId) { return trackers[trackerId]; },
-        configure: function(options) { Object.assign(CONFIG, options); },
-        getConfig: function() { return { ...CONFIG }; }
-    };
-})();
-if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', () => BillTrackerWidget.initAll()); }
-else { BillTrackerWidget.initAll(); }
-</script>
+<script src="bill-tracker.js"></script>
 
 <script>
 // Capital Gains Policy Toggle Configuration
@@ -1858,11 +1492,11 @@ function switchCapGainsPolicy(policy) {
     
     // Update bill tracker
     const trackerEl = document.getElementById('capgains-tracker');
-    if (trackerEl && typeof BillTrackerWidget !== 'undefined') {
+    if (trackerEl && typeof BillTracker !== 'undefined') {
         trackerEl.setAttribute('data-hb', config.hbNumbers);
         trackerEl.setAttribute('data-sb', config.sbNumbers);
         // Reinitialize tracker with new bills
-        BillTrackerWidget.reinit('capital-gains');
+        BillTracker.reinit('capital-gains');
     }
     
     // Update testimony link
@@ -1924,11 +1558,11 @@ function switchMillionairesTaxPolicy(policy) {
     
     // Update bill tracker
     const trackerEl = document.getElementById('millionaires-tracker');
-    if (trackerEl && typeof BillTrackerWidget !== 'undefined') {
+    if (trackerEl && typeof BillTracker !== 'undefined') {
         trackerEl.setAttribute('data-hb', config.hbNumbers);
         trackerEl.setAttribute('data-sb', config.sbNumbers);
         // Reinitialize tracker with new bills
-        BillTrackerWidget.reinit('millionaires-tax');
+        BillTracker.reinit('millionaires-tax');
     }
     
     // Update testimony link
@@ -1941,228 +1575,8 @@ function switchMillionairesTaxPolicy(policy) {
     }
 }
 
-// Toggle bill status widget
-function toggleBillStatusWidget() {
-    const widget = document.getElementById('bill-status-widget');
-    if (widget) {
-        widget.classList.toggle('collapsed');
-    }
-}
-
-// Bill Status Table functionality
-async function loadBillStatusTable() {
-    const bills = [
-        { type: 'SB', number: '3125', year: '2026', issueArea: 'Stop Tax Cuts for the Wealthy' },
-        { type: 'SB', number: '2441', year: '2026', issueArea: 'Tax Wealth Like Work' },
-        { type: 'SB', number: '2587', year: '2026', issueArea: 'Tax Wealth Like Work' },
-        { type: 'HB', number: '2010', year: '2026', issueArea: 'Millionaires Tax' },
-        { type: 'SB', number: '2468', year: '2026', issueArea: 'Millionaires Tax' },
-        { type: 'HB', number: '1807', year: '2026', issueArea: 'Millionaires Tax' },
-        { type: 'HB', number: '2008', year: '2026', issueArea: 'Millionaires Tax' },
-        { type: 'HB', number: '2049', year: '2026', issueArea: 'Conveyance Tax' },
-        { type: 'SB', number: '3028', year: '2026', issueArea: 'Conveyance Tax' },
-        { type: 'HB', number: '2150', year: '2026', issueArea: 'Closing REIT Loophole' },
-        { type: 'HB', number: '2623', year: '2026', issueArea: 'Wealth Proceeds Tax' }
-    ];
-    
-    const statusContent = document.getElementById('bill-status-content');
-    if (!statusContent) return;
-    
-    const corsProxy = 'https://api.allorigins.win/raw?url=';
-    const billStatuses = [];
-    
-    for (const bill of bills) {
-        try {
-            const rssUrl = `https://www.capitol.hawaii.gov/sessions/session${bill.year}/rss/${bill.type}${bill.number}.xml`;
-            const url = corsProxy + encodeURIComponent(rssUrl);
-            const response = await fetch(url);
-            if (!response.ok) continue;
-            
-            const xmlText = await response.text();
-            if (!xmlText.includes('<rss') && !xmlText.includes('<item>')) continue;
-            
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-            const items = xmlDoc.getElementsByTagName('item');
-            
-            let latestStatus = '';
-            let latestDate = '';
-            let hasScheduledHearing = false;
-            let isDeferred = false;
-            let hasHadHearing = false;
-            
-            if (items.length > 0) {
-                const updates = [];
-                for (let i = 0; i < items.length; i++) {
-                    const titleEl = items[i].getElementsByTagName('title')[0];
-                    const pubDateEl = items[i].getElementsByTagName('pubDate')[0];
-                    if (titleEl && pubDateEl) {
-                        updates.push({
-                            title: titleEl.textContent,
-                            date: new Date(pubDateEl.textContent)
-                        });
-                    }
-                }
-                updates.sort((a, b) => b.date - a.date);
-                
-                // Check for scheduled hearings (future hearings) and if bill has had any hearings
-                for (const update of updates) {
-                    const titleLower = update.title.toLowerCase();
-                    const isHearing = titleLower.includes('hearing') || 
-                                     titleLower.includes('scheduled') ||
-                                     titleLower.includes('notice') ||
-                                     titleLower.includes('decision') ||
-                                     titleLower.includes('public') ||
-                                     titleLower.includes('hold');
-                    
-                    if (isHearing) {
-                        hasHadHearing = true;
-                        // Try to extract date from title
-                        const dateMatch = update.title.match(/(\d{1,2}[-\/]\d{1,2}[-\/]\d{2,4})/);
-                        if (dateMatch) {
-                            try {
-                                const parts = dateMatch[1].split(/[-\/]/);
-                                if (parts.length === 3) {
-                                    const month = parseInt(parts[0]) - 1;
-                                    const day = parseInt(parts[1]);
-                                    const year = parts[2].length === 2 ? 2000 + parseInt(parts[2]) : parseInt(parts[2]);
-                                    const hearingDate = new Date(year, month, day);
-                                    hearingDate.setHours(0, 0, 0, 0);
-                                    
-                                    const now = new Date();
-                                    now.setHours(0, 0, 0, 0);
-                                    
-                                    if (hearingDate >= now) {
-                                        hasScheduledHearing = true;
-                                        break;
-                                    }
-                                }
-                            } catch (e) {}
-                        }
-                    }
-                }
-                
-                if (updates.length > 0) {
-                    const latestTitle = updates[0].title.toLowerCase();
-                    latestDate = updates[0].date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-                    
-                    // Parse description from title
-                    let desc = updates[0].title;
-                    const colonIdx = desc.indexOf(':');
-                    if (colonIdx !== -1) desc = desc.substring(colonIdx + 1).trim();
-                    
-                    // Remove voting details - look for patterns like "with Representative(s) ... voting"
-                    desc = desc.replace(/\s*with\s+Representative\(s\)[^.]*\./g, '');
-                    desc = desc.replace(/\s*with\s+Senator\(s\)[^.]*\./g, '');
-                    desc = desc.replace(/\s*voting\s+[^.]*\./g, '');
-                    
-                    // Clean up any extra whitespace
-                    desc = desc.replace(/\s+/g, ' ').trim();
-                    
-                    latestStatus = desc;
-                    
-                    // Check if bill is deferred
-                    if (latestTitle.includes('deferred') || latestTitle.includes('carried over')) {
-                        isDeferred = true;
-                    }
-                }
-            }
-            
-            billStatuses.push({
-                bill: `${bill.type} ${bill.number}`,
-                type: bill.type,
-                number: bill.number,
-                year: bill.year,
-                issueArea: bill.issueArea,
-                latestStatus: latestStatus || 'No updates available',
-                latestDate: latestDate,
-                hasScheduledHearing: hasScheduledHearing,
-                isDeferred: isDeferred,
-                hasHadHearing: hasHadHearing
-            });
-        } catch (error) {
-            console.error(`Error checking status for ${bill.type} ${bill.number}:`, error);
-        }
-    }
-    
-    if (billStatuses.length === 0) {
-        statusContent.innerHTML = '<div class="tfc-hearings-empty">Unable to load bill statuses</div>';
-        return;
-    }
-    
-    // Build table HTML
-    let tableHTML = `
-        <table class="tfc-bill-status-table">
-            <thead>
-                <tr>
-                    <th>Bill Number</th>
-                    <th>Issue Area</th>
-                    <th>Latest Status</th>
-                </tr>
-            </thead>
-            <tbody>
-    `;
-    
-    billStatuses.forEach(bill => {
-        const capitolUrl = `https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=${bill.type}&billnumber=${bill.number}&year=${bill.year}`;
-        const rowClass = bill.hasScheduledHearing ? 'has-hearing' : '';
-        const hearingIndicator = bill.hasScheduledHearing ? '<span class="hearing-indicator">Hearing Scheduled</span>' : '';
-        
-        // Determine if bill is "alive" (not deferred and has had a hearing)
-        const isAlive = !bill.isDeferred && bill.hasHadHearing;
-        
-        tableHTML += `
-            <tr class="${rowClass}" data-alive="${isAlive}" data-deferred="${bill.isDeferred}" data-has-hearing="${bill.hasHadHearing}">
-                <td class="bill-number">
-                    <a href="${capitolUrl}" target="_blank">${bill.bill}</a>
-                    ${hearingIndicator}
-                </td>
-                <td class="issue-area">${bill.issueArea}</td>
-                <td class="latest-status">
-                    ${bill.latestDate ? `<span class="status-date">${bill.latestDate}</span>` : ''}
-                    ${bill.latestStatus}
-                </td>
-            </tr>
-        `;
-    });
-    
-    tableHTML += `
-            </tbody>
-        </table>
-    `;
-    
-    statusContent.innerHTML = tableHTML;
-    
-    // Apply initial filter (show only alive bills by default)
-    filterBillStatus();
-}
-
-// Filter bill status table based on "Alive Only" checkbox
-function filterBillStatus() {
-    const checkbox = document.getElementById('alive-filter');
-    const rows = document.querySelectorAll('#bill-status-content tbody tr');
-    
-    if (!checkbox || !rows.length) return;
-    
-    const showAliveOnly = checkbox.checked;
-    
-    rows.forEach(row => {
-        if (showAliveOnly) {
-            // Show only alive bills (not deferred and has had a hearing)
-            const isAlive = row.getAttribute('data-alive') === 'true';
-            row.style.display = isAlive ? '' : 'none';
-        } else {
-            // Show all bills
-            row.style.display = '';
-        }
-    });
-}
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Load bill status table
-    loadBillStatusTable();
-    
-    
     // Particle effect that follows cursor on summary card hover
     const summaryCard = document.querySelector('.tfc-summary-card');
     if (summaryCard) {

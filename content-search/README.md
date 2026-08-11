@@ -38,7 +38,7 @@ lineage); the engine and corpus live in [`../writing-bot/`](../writing-bot/).
 Everything under this directory is a public, CORS-enabled (GitHub Pages sends
 `Access-Control-Allow-Origin: *`) static endpoint. Base URL:
 
-    https://dtomkatsu.github.io/Hawaii-Appleseed-website/content-search/
+    https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/content-search/
 
 | Endpoint | What it is |
 |---|---|
@@ -54,7 +54,7 @@ Everything under this directory is a public, CORS-enabled (GitHub Pages sends
 Polling pattern (e.g. from another repo's workflow or app):
 
 ```bash
-curl -s https://dtomkatsu.github.io/Hawaii-Appleseed-website/content-search/api.json \
+curl -s https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/content-search/api.json \
   | jq -r '.generatedAt, .counts.documents'
 ```
 

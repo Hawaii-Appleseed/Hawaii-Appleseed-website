@@ -5,7 +5,7 @@
      HOW: Issues page > Edit > add a Code Block > paste ALL of this >
           make sure "Display Source" is OFF > Save.
      ===================================================================== -->
-<link rel="stylesheet" href="https://dtomkatsu.github.io/Hawaii-Appleseed-website/assets/okina.css">
+<link rel="stylesheet" href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/assets/okina.css">
 <style>
   /* ===== Brand-guide palette (scoped) ===== */
   .ha-issues{
@@ -1109,7 +1109,7 @@
       +   '</a>'
       + '</article>';
   }
-  fetch('https://dtomkatsu.github.io/Hawaii-Appleseed-website/publications.json')
+  fetch('https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/publications.json')
     .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
     .then(function(data){
       var items = (data && data.items) || [];
