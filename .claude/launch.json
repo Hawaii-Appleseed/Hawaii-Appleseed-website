@@ -6,6 +6,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "8742"],
       "port": 8742
+    },
+    {
+      "name": "Content Search (site repo)",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8532", "--directory", "content-search"],
+      "port": 8532
     }
   ]
 }
