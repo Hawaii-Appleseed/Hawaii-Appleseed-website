@@ -221,9 +221,29 @@ async function fetchBillStatus(type, number, year) {
   }
 }
 
+async function readExistingContent() {
+  try {
+    const parsed = JSON.parse(await readFile(OUTPUT_PATH, 'utf8'));
+    const { generatedAt, source, ...content } = parsed;
+    return content;
+  } catch {
+    return null; // first run, or file is missing/corrupt — treat as "no prior content"
+  }
+}
+
 async function main() {
   const { trackers, extraBills } = await loadTrackers();
   const bills = uniqueBills(trackers, extraBills);
+
+  if (bills.length === 0) {
+    // Discovery scans HTML structure with regexes (see discoverTrackers /
+    // discoverPolicyToggleBills above) — 0 results almost certainly means that
+    // structure changed, not that there are genuinely no bills. Fail loudly
+    // (mirrors the self-test pattern in refresh-corpus.yml) instead of
+    // silently overwriting bill-status.json with an empty result.
+    console.error('::error::Discovered 0 bills to track — the HTML structure this script scans probably changed. Leaving bill-status.json untouched.');
+    process.exit(1);
+  }
 
   const billStatus = {};
   for (const bill of bills) {
@@ -232,9 +252,7 @@ async function main() {
     billStatus[key] = { type: bill.type, number: bill.number, year: bill.year, ...(await fetchBillStatus(bill.type, bill.number, bill.year)) };
   }
 
-  const output = {
-    generatedAt: new Date().toISOString(),
-    source: 'capitol.hawaii.gov RSS, fetched via GitHub Actions',
+  const content = {
     trackers: trackers.map((t) => ({
       trackerId: t.trackerId,
       issueArea: t.issueArea,
@@ -243,6 +261,22 @@ async function main() {
       sbNumbers: t.sbNumbers,
     })),
     bills: billStatus,
+  };
+
+  // generatedAt would make the file differ on every single run even when no
+  // bill's status actually changed, turning a 30-minute cron into a commit
+  // every 30 minutes forever. Only touch the file (and bump the timestamp)
+  // when the actual content differs from what's already there.
+  const existing = await readExistingContent();
+  if (existing && JSON.stringify(existing) === JSON.stringify(content)) {
+    console.log('No change in bill status content — leaving bill-status.json untouched.');
+    return;
+  }
+
+  const output = {
+    generatedAt: new Date().toISOString(),
+    source: 'capitol.hawaii.gov RSS, fetched via GitHub Actions',
+    ...content,
   };
 
   await writeFile(OUTPUT_PATH, JSON.stringify(output, null, 2) + '\n');

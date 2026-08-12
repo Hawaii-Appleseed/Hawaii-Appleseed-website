@@ -26,6 +26,18 @@ const BillTracker = (function () {
     return dataPromise;
   }
 
+  // bill.description/error come from capitol.hawaii.gov RSS text — low-risk (it's
+  // auto-generated procedural text, not user input) but it's spliced into innerHTML
+  // below, so escape it rather than trust it.
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function formatDate(iso) {
     return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
   }
@@ -67,11 +79,6 @@ const BillTracker = (function () {
     `;
   }
 
-  function billEntry(billData, type, num) {
-    if (!billData) return { updates: [], error: 'not tracked' };
-    return billData;
-  }
-
   function renderTrackerFeed(trackerId, billsData, type, numbers) {
     const latestEl = document.getElementById(`${trackerId}-latest`);
     const badgeEl = document.getElementById(`${trackerId}-badge`);
@@ -95,18 +102,18 @@ const BillTracker = (function () {
       const section = document.createElement('div');
       section.className = 'tfc-bill-status-section';
       if (!bill || bill.error) {
-        section.innerHTML = `<div class="tfc-bill-status-header"><strong>${type} ${num}</strong><span class="tfc-status-badge" style="background:#ef4444;color:#fff;">Error</span></div><div class="tfc-bill-latest"><span style="color:#ef4444;font-weight:500;">${bill && bill.error ? bill.error : 'No data'}</span></div>`;
+        section.innerHTML = `<div class="tfc-bill-status-header"><strong>${type} ${num}</strong><span class="tfc-status-badge" style="background:#ef4444;color:#fff;">Error</span></div><div class="tfc-bill-latest"><span style="color:#ef4444;font-weight:500;">${escapeHtml(bill && bill.error ? bill.error : 'No data')}</span></div>`;
       } else if (bill.updates && bill.updates.length) {
         anyUpdates = true;
         const latest = bill.updates[0];
         if (latest.badge.class !== 'update') overallBadge = latest.badge;
-        section.innerHTML = `<div class="tfc-bill-status-header"><strong>${type} ${num}</strong><span class="tfc-status-badge tfc-badge-${latest.badge.class}">${latest.badge.text}</span></div><div class="tfc-bill-latest"><span class="tfc-status-date">${formatDate(latest.date)}</span>${latest.description}</div>`;
+        section.innerHTML = `<div class="tfc-bill-status-header"><strong>${type} ${num}</strong><span class="tfc-status-badge tfc-badge-${latest.badge.class}">${latest.badge.text}</span></div><div class="tfc-bill-latest"><span class="tfc-status-date">${formatDate(latest.date)}</span>${escapeHtml(latest.description)}</div>`;
         if (historyEl && bill.updates.length > 1 && numbers.length === 1) {
           for (let i = 1; i < bill.updates.length; i++) {
             const u = bill.updates[i];
             const div = document.createElement('div');
             div.className = 'tfc-history-item';
-            div.innerHTML = `<span class="tfc-status-date">${formatDate(u.date)}</span>${u.description}`;
+            div.innerHTML = `<span class="tfc-status-date">${formatDate(u.date)}</span>${escapeHtml(u.description)}`;
             historyEl.appendChild(div);
           }
         }
@@ -223,7 +230,7 @@ const BillTracker = (function () {
         <tr class="${rowClass}" data-alive="${r.isAlive}">
           <td class="bill-number"><a href="${capitolUrl}" target="_blank">${r.bill}</a>${hearingIndicator}</td>
           <td class="issue-area">${r.issueArea}</td>
-          <td class="latest-status">${r.latestDate ? `<span class="status-date">${r.latestDate}</span>` : ''}${r.latestStatus}</td>
+          <td class="latest-status">${r.latestDate ? `<span class="status-date">${r.latestDate}</span>` : ''}${escapeHtml(r.latestStatus)}</td>
         </tr>
       `;
     });
