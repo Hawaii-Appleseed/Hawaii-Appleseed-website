@@ -27,7 +27,11 @@ export function toDescription(title) {
 // .tfc-badge-* rules in wealth_taxes_squarespace.html if you add a new one.
 export function getStatusBadge(description) {
   const desc = description.toLowerCase();
-  if (desc.includes('signed by governor') || desc.includes('became law')) return { text: 'Enacted', class: 'enacted' };
+  // Real phrasing when a bill is signed is "Act 024, on 05/21/2026 (Gov. Msg. No. 1124)."
+  // — capitol.hawaii.gov never actually sends "signed by governor" or "became law".
+  if (/^act\s+\d+/.test(desc) || desc.includes('signed by governor') || desc.includes('became law')) {
+    return { text: 'Passed', class: 'enacted' };
+  }
   if (desc.includes('passed third reading') && desc.includes('transmitted')) return { text: 'Passed Chamber', class: 'passed' };
   if (desc.includes('passed third reading')) return { text: 'Passed', class: 'passed' };
   if (desc.includes('passed second reading')) return { text: 'Second Reading', class: 'progress' };
