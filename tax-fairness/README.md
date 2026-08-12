@@ -2,8 +2,55 @@
 
 This file is written for an AI assistant (Claude) operating this repo on
 behalf of a partner organization, not for a human reading it cold. If you
-are Claude and were asked to "add a bill," "update the tracker," or "why
-isn't the bill status updating," start here.
+are Claude and were handed this code to adapt for a different state, start
+with the checklist immediately below. If you're just here to add a bill or
+debug the tracker, skip to "Where the bill list lives."
+
+## Adapting this for a different state's legislature — do this, in order
+
+1. **Read `tax-fairness/scripts/status-rules.mjs` first.** Its header
+   explains what it is. Everything in that file is Hawaii-specific; nothing
+   else described below should need to change to make the *mechanism* work
+   for a new state.
+2. **Confirm your state's legislature publishes per-bill machine-readable
+   status** (RSS, JSON API, anything fetchable). Most don't. If none exists,
+   the realistic path is a paid/free-tier aggregator (LegiScan, Open States)
+   instead — that means rewriting `fetchBillStatus()` in
+   `fetch-bill-status.mjs` to call that API, not just changing a URL. Don't
+   proceed past this step assuming RSS exists; verify it first (fetch one
+   known bill's feed URL directly and confirm you get real content back).
+3. **Edit exactly one line**: `RSS_URL_TEMPLATE` near the top of
+   `fetch-bill-status.mjs`, marked with a comment banner. It's a function
+   `({year, type, number}) => url`.
+4. **Rewrite `status-rules.mjs`** to match your state's phrasing:
+   `getStatusBadge()` (what phrases mean "passed," "deferred," etc.),
+   `isHearingTitle()`, `toDescription()` (strips your legislature's own
+   filler text, e.g. Hawaii's "with Representative(s) X voting no"),
+   `extractHearingDate()` (only needs changing if hearing dates aren't in
+   `M/D/YY` format). Test in isolation — these are pure functions, no
+   network needed: `node -e "import('./status-rules.mjs').then(m => console.log(m.getStatusBadge('Passed Third Reading')))"`
+5. **`bill-tracker.js` needs no edits.** It locates its own data file
+   relative to wherever it was loaded from (see the `SELF_URL` comment near
+   the top) — this is true regardless of what domain hosts the fork.
+6. **Verify locally before touching the workflow**, in this order:
+   - `node tax-fairness/scripts/fetch-bill-status.mjs` — writes a real
+     `tax-fairness/data/bill-status.json` from your state's live feeds.
+     Check it by eye first.
+   - `python3 -m http.server 8000` from the repo root, then open
+     `http://localhost:8000/tax-fairness/<your-page>.html` in a browser.
+     Because `bill-tracker.js` self-locates, this works with **no file
+     edits or query params** — it'll load the JSON you just generated from
+     the same local server. Check the browser console for errors and
+     confirm at least one tracker renders real status text, not "Error" or
+     "N/A" for every bill.
+7. **Only after step 6 passes**, point `.github/workflows/fetch-bill-status.yml`
+   at your fork (repo checkout is automatic via `actions/checkout`; nothing
+   else in that file is Hawaii-specific) and confirm GitHub Pages is
+   enabled so the JSON it commits becomes fetchable.
+
+If you get stuck, don't guess — the "Quick diagnostics" section at the
+bottom of this file has copy-pasteable commands for each stage of the
+pipeline, and will tell you which stage is actually broken.
 
 ## What this directory is
 
@@ -17,16 +64,16 @@ Static HTML/CSS/JS for the Hawai'i Tax Fairness Coalition site
 - **GitHub Pages**: this whole repo is also published at
   `https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/`. The
   wealth-taxes page itself isn't served from there — Squarespace is — but
-  Pages is used as free, CORS-friendly hosting for the bill-status *data* and
-  the tracker *script*, both of which the Squarespace-hosted page loads
-  cross-origin. That's the mechanism the rest of this doc explains.
+  Pages is used as free, CORS-friendly hosting for the bill-status *data*
+  that page loads cross-origin. That's the mechanism the next section
+  explains.
 
 ## The bill-status pipeline
 
 Before August 2026 this page fetched RSS feeds from `capitol.hawaii.gov`
 directly from the visitor's browser on every page load, routed through a
 free public CORS proxy (`api.allorigins.win`) because that RSS endpoint
-doesn't send CORS headers. That proxy has no SLA and is a single point of
+doesn't send CORS headers. That proxy had no SLA and was a single point of
 failure for a feature on a live advocacy page — see `git log` around
 August 2026 for the change that replaced it.
 
@@ -35,18 +82,23 @@ August 2026 for the change that replaced it.
 ```
 .github/workflows/fetch-bill-status.yml   (runs every 30 min, GitHub Actions)
   → tax-fairness/scripts/fetch-bill-status.mjs
-      - discovers which bills to track (see "Where the bill list lives" below)
-      - fetches each bill's RSS from capitol.hawaii.gov directly (no proxy —
-        GitHub's runners aren't subject to browser CORS rules)
-      - writes tax-fairness/data/bill-status.json
+      - discovers which bills to track (see "Where the bill list lives")
+      - fetches each bill's status (RSS_URL_TEMPLATE) directly — GitHub's
+        runners aren't subject to browser CORS rules, so no proxy needed
+      - interprets each update via status-rules.mjs
+      - writes tax-fairness/data/bill-status.json — but ONLY if the content
+        actually changed (see "Why the workflow doesn't spam commits" below)
   → commits bill-status.json to main
       → GitHub Pages republishes it at:
         https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/data/bill-status.json
 
-tax-fairness/bill-tracker.js   (loaded by <script src> from GitHub Pages,
-                                 even when the page itself is on Squarespace)
-  - fetches that JSON once per page load (same-origin as far as GH Pages'
-    `access-control-allow-origin: *` is concerned — no proxy needed)
+tax-fairness/bill-tracker.js   (loaded by <script src>, from GitHub Pages,
+                                 even when the embedding page is on Squarespace)
+  - locates that JSON relative to its OWN <script src> (document.currentScript),
+    not the embedding page's origin — see the SELF_URL comment in the file.
+    This means forking to a different GitHub Pages project needs zero edits
+    here, and testing locally needs no file edits either (see the runbook
+    above).
   - renders the per-proposal mini trackers AND the "Bill Status Tracker"
     summary table from it
 ```
@@ -56,11 +108,22 @@ browser. If a bill's status seems stale, check whether the workflow is
 actually running (`gh run list --workflow=fetch-bill-status.yml`) before
 assuming the page is broken.
 
-## Where the bill list lives — this is the part a partner edits
+### Why the workflow doesn't spam commits
+
+`fetch-bill-status.mjs` reads the *existing* `bill-status.json`, computes
+the new content, and compares them **excluding the `generatedAt` field**
+before deciding whether to write anything. This matters: an earlier version
+stamped a fresh timestamp on every run unconditionally, which meant the
+file differed on every single run even when zero bills changed status, and
+the workflow's git-diff-based "did anything change" check committed every
+~30 minutes forever. If you're touching this script, preserve that
+comparison — don't go back to an unconditional write.
+
+## Where the bill list lives — this is the part a partner edits day-to-day
 
 **There is no separate config file listing which bills to track.** The list
-is discovered by scanning `wealth_taxes_squarespace.html` itself (see
-`TRACKED_PAGES` in `fetch-bill-status.mjs`) for two patterns:
+is discovered by scanning the tracked HTML page(s) — see `TRACKED_PAGES` in
+`fetch-bill-status.mjs` — for two patterns:
 
 1. `<div class="tfc-bill-tracker" data-tracker-id="..." data-issue-area="..."
    data-hb="..." data-sb="..." data-year="...">` — one per proposal card.
@@ -79,48 +142,22 @@ block (card + `.tfc-bill-tracker` div + optional sample-testimony block),
 give the tracker div a unique `data-tracker-id` and a `data-issue-area`
 label, and set `data-hb`/`data-sb`/`data-year`. Nothing else needs to change
 — the next workflow run (or a manual `gh workflow run fetch-bill-status.yml`)
-will pick it up automatically.
+picks it up automatically.
+
+**To track a whole new page**, add its repo-relative path to
+`TRACKED_PAGES` in `fetch-bill-status.mjs`.
 
 **Don't hand-edit `tax-fairness/data/bill-status.json`** — it's generated.
 Edits will be overwritten within 30 minutes.
-
-## Adapting this for a different state's legislature
-
-If a partner org outside Hawai'i wants to reuse this, two things are
-Hawai'i-specific and need to change together — changing only one silently
-breaks the other:
-
-1. **`RSS_BASE_URL` in `fetch-bill-status.mjs`** — currently
-   `https://www.capitol.hawaii.gov/sessions/session{year}/rss/{TYPE}{NUMBER}.xml`.
-   Most state legislatures do NOT publish per-bill RSS. Check first; if none
-   exists, the realistic replacement is a paid/free-tier aggregator API
-   (e.g. LegiScan, Open States) rather than a direct feed, which means
-   rewriting `fetchBillStatus()`, not just the URL.
-2. **The status-parsing heuristics** — `getStatusBadge()`,
-   `isHearingTitle()`, and the hearing-date regex in `fetch-bill-status.mjs`
-   all pattern-match on the specific English phrasing Hawaii's Legislature
-   uses in its RSS item titles (e.g. "passed third reading", "carried
-   over"). A different legislature's feed (or an aggregator's status
-   vocabulary) will use different phrasing and needs its own mapping.
-
-Everything else — `bill-tracker.js`, the workflow, the discovery-from-HTML
-approach — is not Hawai'i-specific and can be reused as-is.
 
 ## Known rough edges (not yet cleaned up)
 
 - `wealth_taxes.html` (the non-Squarespace standalone version) still has a
   dead search box: the JS wires up `#searchInput` but no such element exists
-  in that file's markup. Search silently does nothing. Not touched by this
-  change.
-- `bill_tracker_widget.js` and `bill_tracker_component.html` in this
-  directory are older, separate copies of tracker logic that predate the
-  consolidation above and are not used by `wealth_taxes_squarespace.html`
-  anymore. They're still referenced by `bill_tracker_demo.html`. Treat them
-  as legacy/reference, not something to keep in sync — if a page still
-  loads one of them, it's using the old live-proxy-fetch approach.
+  in that file's markup. Search silently does nothing.
 - Card revenue figures, descriptions, and the revenue-comparison bar chart
   widths are still hand-typed HTML/CSS, not generated from data. Only the
-  bill-status pipeline was rebuilt in this pass.
+  bill-status pipeline has been rebuilt to be config-free.
 
 ## Unrelated: `scripts/generate_departmental_reports.py`
 
@@ -135,9 +172,24 @@ the script itself.
 
 ## Quick diagnostics
 
-- Is the workflow running? `gh run list --workflow=fetch-bill-status.yml --limit 5`
-- Is the JSON fresh? `curl -s https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/data/bill-status.json | jq .generatedAt`
-- Force a refresh: `gh workflow run fetch-bill-status.yml`
-- Test the discovery/fetch logic locally: `node tax-fairness/scripts/fetch-bill-status.mjs`
-  (writes to your local `tax-fairness/data/bill-status.json` — don't commit
-  a manual run's output over the workflow's).
+Work through these in order — each one isolates a different stage of the
+pipeline, so stop at the first one that shows a problem:
+
+1. **Is bill discovery finding the right bills?**
+   `node tax-fairness/scripts/fetch-bill-status.mjs` — prints each bill it
+   fetches. Wrong count or missing bills means `discoverTrackers`/
+   `discoverPolicyToggleBills` in `fetch-bill-status.mjs` isn't matching
+   your HTML (e.g. after a markup restructure).
+2. **Is the status-interpretation correct for what you got back?** Open the
+   `tax-fairness/data/bill-status.json` that step 1 just wrote and read a
+   `bills.<BILL>.updates[0]` entry by eye. Wrong badge/description means
+   `status-rules.mjs` needs adjusting for your legislature's phrasing.
+3. **Does it render?** `python3 -m http.server 8000` from repo root, open
+   `http://localhost:8000/tax-fairness/wealth_taxes_squarespace.html`,
+   check the browser console. No file edits needed — see the runbook above
+   for why.
+4. **Is the scheduled workflow actually running in CI?**
+   `gh run list --workflow=fetch-bill-status.yml --limit 5`
+5. **Is the published JSON fresh?**
+   `curl -s https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/data/bill-status.json | jq .generatedAt`
+6. **Force a refresh**: `gh workflow run fetch-bill-status.yml`

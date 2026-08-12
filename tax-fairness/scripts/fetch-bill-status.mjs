@@ -1,12 +1,18 @@
 #!/usr/bin/env node
-// Fetches bill status RSS from the Hawaii Legislature and writes tax-fairness/data/bill-status.json.
-// Bill numbers are NOT hardcoded here — they're discovered from data-tracker-id/data-hb/data-sb/
-// data-year/data-issue-area attributes in the tracked HTML pages (see TRACKED_PAGES below).
-// See tax-fairness/README.md for how to add a bill or point this at a different legislature.
+// Fetches bill status RSS and writes tax-fairness/data/bill-status.json. Bill numbers
+// are NOT hardcoded here — they're discovered from data-tracker-id/data-hb/data-sb/
+// data-year/data-issue-area attributes in the tracked HTML pages (see TRACKED_PAGES
+// below). See tax-fairness/README.md for the full picture.
+//
+// Porting this to a different state's legislature: this file needs at most the ONE
+// edit marked below (RSS_URL_TEMPLATE). The rules for how to interpret that
+// legislature's RSS content (what phrasing means "passed," "deferred," etc.) belong
+// in status-rules.mjs, not here — see that file's header.
 
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { toDescription, getStatusBadge, isHearingTitle, isDeferredTitle, extractHearingDate } from './status-rules.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
@@ -16,7 +22,16 @@ const TRACKED_PAGES = [
 ];
 
 const OUTPUT_PATH = path.join(REPO_ROOT, 'tax-fairness/data/bill-status.json');
-const RSS_BASE_URL = 'https://www.capitol.hawaii.gov/sessions/session'; // {year}/rss/{TYPE}{NUMBER}.xml
+
+// ---- The one line to change for a different legislature ----
+// Must produce a URL to that bill's status feed given (year, type, number). Most
+// state legislatures do NOT publish per-bill RSS — check first. If none exists, the
+// realistic replacement is an aggregator API (e.g. LegiScan, Open States), which means
+// rewriting fetchBillStatus() below to call it instead, not just this template.
+const RSS_URL_TEMPLATE = ({ year, type, number }) =>
+  `https://www.capitol.hawaii.gov/sessions/session${year}/rss/${type}${number}.xml`;
+// ---------------------------------------------------------------
+
 const FETCH_TIMEOUT_MS = 15000;
 
 function discoverTrackers(html) {
@@ -125,38 +140,8 @@ function decodeEntities(str) {
     .replace(/&quot;/g, '"');
 }
 
-function getStatusBadge(description) {
-  const desc = description.toLowerCase();
-  if (desc.includes('signed by governor') || desc.includes('became law')) return { text: 'Enacted', class: 'enacted' };
-  if (desc.includes('passed third reading') && desc.includes('transmitted')) return { text: 'Passed Chamber', class: 'passed' };
-  if (desc.includes('passed third reading')) return { text: 'Passed', class: 'passed' };
-  if (desc.includes('passed second reading')) return { text: 'Second Reading', class: 'progress' };
-  if (desc.includes('passed first reading')) return { text: 'First Reading', class: 'progress' };
-  if (desc.includes('carried over')) return { text: 'Carried Over', class: 'deferred' };
-  if (desc.includes('deferred')) return { text: 'Deferred', class: 'deferred' };
-  if (desc.includes('hearing')) return { text: 'Hearing', class: 'hearing' };
-  if (desc.includes('referred to')) return { text: 'Referred', class: 'referred' };
-  if (desc.includes('recommitted')) return { text: 'Recommitted', class: 'referred' };
-  if (desc.includes('reported from')) return { text: 'Reported', class: 'progress' };
-  if (desc.includes('introduced')) return { text: 'Introduced', class: 'new' };
-  return { text: 'Update', class: 'update' };
-}
-
-function toDescription(title) {
-  const parts = title.split(': ');
-  let desc = parts.length > 1 ? parts.slice(1).join(': ') : title;
-  desc = desc.replace(/\s*with\s+Representative\(s\)[^.]*\./g, '');
-  desc = desc.replace(/\s*with\s+Senator\(s\)[^.]*\./g, '');
-  desc = desc.replace(/\s*voting\s+[^.]*\./g, '');
-  return desc.replace(/\s+/g, ' ').trim();
-}
-
-function isHearingTitle(titleLower) {
-  return ['hearing', 'scheduled', 'notice', 'decision', 'public', 'hold'].some((kw) => titleLower.includes(kw));
-}
-
 async function fetchBillStatus(type, number, year) {
-  const rssUrl = `${RSS_BASE_URL}${year}/rss/${type}${number}.xml`;
+  const rssUrl = RSS_URL_TEMPLATE({ year, type, number });
   try {
     const response = await fetchWithTimeout(rssUrl, FETCH_TIMEOUT_MS);
     if (!response.ok) {
@@ -185,23 +170,12 @@ async function fetchBillStatus(type, number, year) {
       const titleLower = item.title.toLowerCase();
       if (isHearingTitle(titleLower)) {
         hasHadHearing = true;
-        const dateMatch = item.title.match(/(\d{1,2}[-/]\d{1,2}[-/]\d{2,4})/);
-        if (dateMatch) {
-          const parts = dateMatch[1].split(/[-/]/);
-          if (parts.length === 3) {
-            const month = parseInt(parts[0], 10) - 1;
-            const day = parseInt(parts[1], 10);
-            const yr = parts[2].length === 2 ? 2000 + parseInt(parts[2], 10) : parseInt(parts[2], 10);
-            const hearingDate = new Date(yr, month, day);
-            hearingDate.setHours(0, 0, 0, 0);
-            if (hearingDate >= now) hasScheduledHearing = true;
-          }
-        }
+        const hearingDate = extractHearingDate(item.title);
+        if (hearingDate && hearingDate >= now) hasScheduledHearing = true;
       }
     }
     if (rawItems.length > 0) {
-      const latestLower = rawItems[0].title.toLowerCase();
-      isDeferred = latestLower.includes('deferred') || latestLower.includes('carried over');
+      isDeferred = isDeferredTitle(rawItems[0].title.toLowerCase());
     }
 
     const updates = rawItems.map((item) => ({

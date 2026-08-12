@@ -8,10 +8,21 @@
 const BillTracker = (function () {
   'use strict';
 
-  // Loaded via <script src> from GitHub Pages, so use an absolute URL — a relative fetch
-  // would resolve against the embedding page's origin (e.g. hitaxfairness.org) when this
-  // script is pasted into Squarespace, not against where the JSON actually lives.
-  const DATA_URL = 'https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/data/bill-status.json';
+  // This script is loaded via <script src> from GitHub Pages, so a plain relative
+  // fetch('data/bill-status.json') would resolve against the EMBEDDING page's origin
+  // (e.g. hitaxfairness.org when pasted into Squarespace) rather than where the JSON
+  // actually lives. Instead, derive it from this script's own URL via
+  // document.currentScript — that's only valid while the script first executes
+  // synchronously, so it's captured into a const right here at the top level, not
+  // inside loadData() below. Forking this repo to a different GitHub Pages project
+  // needs ZERO edits here: this always finds "data/bill-status.json" next to wherever
+  // bill-tracker.js itself was loaded from.
+  //
+  // ?tfc_data=<url> on the page's own URL overrides this — useful for pointing a page
+  // at a different environment's JSON without editing any file.
+  const SELF_URL = document.currentScript ? document.currentScript.src : 'bill-tracker.js';
+  const DATA_URL =
+    new URLSearchParams(location.search).get('tfc_data') || new URL('data/bill-status.json', SELF_URL).href;
 
   let dataPromise = null;
   function loadData() {
@@ -19,7 +30,7 @@ const BillTracker = (function () {
       dataPromise = fetch(DATA_URL)
         .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
         .catch((err) => {
-          console.error('BillTracker: failed to load bill-status.json', err);
+          console.error(`BillTracker: failed to load ${DATA_URL}`, err);
           return null;
         });
     }
