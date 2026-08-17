@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T22:53:40.630Z",
+  "generatedAt": "2026-08-17T23:26:29.016Z",
   "source": "capitol.hawaii.gov RSS, fetched via GitHub Actions",
   "trackers": [
     {
@@ -72,85 +72,2018 @@
       "type": "HB",
       "number": "2306",
       "year": "2026",
-      "error": "HTTP 403"
+      "updates": [
+        {
+          "title": "3/12/26 HB2306: Passed First Reading.",
+          "description": "Passed First Reading.",
+          "date": "2026-03-12T21:55:59.000Z",
+          "badge": {
+            "text": "First Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/12/26 HB2306: Referred to WAM.",
+          "description": "Referred to WAM.",
+          "date": "2026-03-12T18:29:05.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "3/12/26 HB2306: Received from House (Hse. Com. No. 394).",
+          "description": "Received from House (Hse. Com. No. 394).",
+          "date": "2026-03-12T01:04:58.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/10/26 HB2306: Passed Third Reading with none voting aye with reservations; Representative(s) Alcos, Amato, Garcia, Gedeon, Kong, Matsumoto, Muraoka, Pierick, Reyes Oda, Shimizu, Souza voting no (11) and none excused (0).  Transmitted to Senate.",
+          "description": "Passed Third Reading with none Transmitted to Senate.",
+          "date": "2026-03-11T02:48:44.000Z",
+          "badge": {
+            "text": "Passed Chamber",
+            "class": "passed"
+          }
+        },
+        {
+          "title": "3/6/26 HB2306: Passed Second Reading as amended in HD 1; placed on the calendar for Third Reading with Representative(s) Amato, Souza voting aye with reservations; Representative(s) Alcos, Garcia, Gedeon, Kong, Matsumoto, Muraoka, Pierick, Reyes Oda, Shimizu voting no (9) and Representative(s) Hashem, Perruso, Quinlan, Sayama excused (4).",
+          "description": "Passed Second Reading as amended in HD 1; placed on the calendar for Third Reading",
+          "date": "2026-03-07T00:58:41.000Z",
+          "badge": {
+            "text": "Second Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/6/26 HB2306: Reported from FIN (Stand. Com. Rep. No. 1018-26) as amended in HD 1, recommending passage on Second Reading and placement on the calendar for Third Reading.",
+          "description": "Reported from FIN (Stand. Com. Rep. No. 1018-26) as amended in HD 1, recommending passage on Second Reading and placement on the calendar for Third Reading.",
+          "date": "2026-03-06T07:34:10.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/4/26 HB2306: The committee on FIN recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 16 Ayes: Representative(s) Todd, Takenouchi, Hartsfield, Hussey, Keohokapu-Lee Loy, Kitagawa, Kusch, Lee, M., Miyake, Morikawa, Perruso, Templo, Yamashita, Alcos, Gedeon, Reyes Oda; Ayes with reservations: none;  Noes: none; and  Excused: none.",
+          "description": "The committee on FIN recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 16 Ayes: Representative(s) Todd, Takenouchi, Hartsfield, Hussey, Keohokapu-Lee Loy, Kitagawa, Kusch, Lee, M., Miyake, Morikawa, Perruso, Templo, Yamashita, Alcos, Gedeon, Reyes Oda; Ayes with reservations: none; Noes: none; and Excused: none.",
+          "date": "2026-03-05T00:28:58.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/3/26 HB2306: Bill scheduled for decision making on Wednesday, 03-04-26 10:00AM in conference room 308 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled for decision making on Wednesday, 03-04-26 10:00AM in conference room 308 VIA VIDEOCONFERENCE.",
+          "date": "2026-03-04T01:09:22.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/3/26 HB2306: The committee(s) on FIN recommend(s) that the measure be deferred until 03-04-26.",
+          "description": "The committee(s) on FIN recommend(s) that the measure be deferred until 03-04-26.",
+          "date": "2026-03-04T00:32:38.000Z",
+          "badge": {
+            "text": "Deferred",
+            "class": "deferred"
+          }
+        },
+        {
+          "title": "2/27/26 HB2306: Bill scheduled to be heard by FIN on Tuesday, 03-03-26 10:00AM in House conference room 308 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled to be heard by FIN on Tuesday, 03-03-26 10:00AM in House conference room 308 VIA VIDEOCONFERENCE.",
+          "date": "2026-02-28T00:48:11.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "1/30/26 HB2306: Referred to FIN, referral sheet 5",
+          "description": "Referred to FIN, referral sheet 5",
+          "date": "2026-01-31T04:04:06.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/28/26 HB2306: Introduced and Pass First Reading.",
+          "description": "Introduced and Pass First Reading.",
+          "date": "2026-01-28T22:54:34.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        },
+        {
+          "title": "1/26/26 HB2306: Pending introduction.",
+          "description": "Pending introduction.",
+          "date": "2026-01-27T06:19:43.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": true,
+      "isDeferred": false,
+      "isAlive": true
     },
     "SB3125": {
       "type": "SB",
       "number": "3125",
       "year": "2026",
-      "error": "HTTP 403"
+      "updates": [
+        {
+          "title": "5/21/26 SB3125: Act 024, on 05/21/2026 (Gov. Msg. No. 1124).",
+          "description": "Act 024, on 05/21/2026 (Gov. Msg. No. 1124).",
+          "date": "2026-05-22T02:31:01.000Z",
+          "badge": {
+            "text": "Passed",
+            "class": "enacted"
+          }
+        },
+        {
+          "title": "5/21/26 SB3125: Act 024, 05/21/2026 (Gov. Msg. No. 1124).",
+          "description": "Act 024, 05/21/2026 (Gov. Msg. No. 1124).",
+          "date": "2026-05-22T02:28:47.000Z",
+          "badge": {
+            "text": "Passed",
+            "class": "enacted"
+          }
+        },
+        {
+          "title": "5/8/26 SB3125: Received notice of passage on Final Reading in House (Hse. Com. No. 889).",
+          "description": "Received notice of passage on Final Reading in House (Hse. Com. No. 889).",
+          "date": "2026-05-12T21:24:02.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/8/26 SB3125: Enrolled to Governor.",
+          "description": "Enrolled to Governor.",
+          "date": "2026-05-10T02:41:11.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/8/26 SB3125: Received notice of Final Reading (Sen. Com. No. 820).",
+          "description": "Received notice of Final Reading (Sen. Com. No. 820).",
+          "date": "2026-05-09T03:47:21.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/8/26 SB3125: Passed Final Reading, as amended (CD 2).  Ayes, 24; Aye(s) with reservations: none.  Noes, 0 (none).  Excused, 1 (Senator(s) San Buenaventura).",
+          "description": "Passed Final Reading, as amended (CD 2). Ayes, 24; Aye(s) with reservations: none. Noes, 0 (none). Excused, 1 (Senator(s) San Buenaventura).",
+          "date": "2026-05-09T00:48:37.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/8/26 SB3125: Passed Final Reading as amended in CD 2 with Representative(s) Amato, Garcia, Iwamoto, Lowen, Muraoka, Perruso, Shimizu, Souza voting aye with reservations; Representative(s) Alcos, Cochran, Gedeon, Hashem, Lee, M., Pierick voting no (6) and none excused (0).",
+          "description": "Passed Final Reading as amended in CD 2, Pierick",
+          "date": "2026-05-08T23:24:02.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/6/26 SB3125: 48 Hrs. Notice 05-08-26",
+          "description": "48 Hrs. Notice 05-08-26",
+          "date": "2026-05-06T22:10:02.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/6/26 SB3125: Report filed.",
+          "description": "Report filed.",
+          "date": "2026-05-06T22:09:58.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/6/26 SB3125: Separated Committee Report.",
+          "description": "Separated Committee Report.",
+          "date": "2026-05-06T22:09:58.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/6/26 SB3125: Floor amendment adopted as amended (CD 2).",
+          "description": "Floor amendment adopted as amended (CD 2).",
+          "date": "2026-05-06T22:09:58.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/6/26 SB3125: Floor Amendment No. 7 offered.",
+          "description": "Floor Amendment No. 7 offered.",
+          "date": "2026-05-06T22:09:58.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/6/26 SB3125: Forty-eight (48) hours notice Friday 05-08-26.",
+          "description": "Forty-eight (48) hours notice Friday 05-08-26.",
+          "date": "2026-05-06T22:02:47.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/6/26 SB3125: Floor amendment adopted as amended CD 2 with none voting no and none excused.",
+          "description": "Floor amendment adopted as amended CD 2 with none",
+          "date": "2026-05-06T22:02:44.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/6/26 SB3125: Floor Amendment No. 8 offered by Rep. Todd.",
+          "description": "Floor Amendment No. 8 offered by Rep. Todd.",
+          "date": "2026-05-06T22:02:41.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/1/26 SB3125: Forty-eight (48) hours notice Wednesday, 05-06-26.",
+          "description": "Forty-eight (48) hours notice Wednesday, 05-06-26.",
+          "date": "2026-05-02T00:04:42.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/1/26 SB3125: Reported from Conference Committee (Conf Com. Rep. No. 114-26) as amended in (CD 1).",
+          "description": "Reported from Conference Committee (Conf Com. Rep. No. 114-26) as amended in (CD 1).",
+          "date": "2026-05-02T00:04:27.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "5/1/26 SB3125: 48 Hrs. Notice (as amended CD 1) 05-06-26.",
+          "description": "48 Hrs. Notice (as amended CD 1) 05-06-26.",
+          "date": "2026-05-01T23:18:16.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/1/26 SB3125: Reported from Conference Committee as amended CD 1 (Conf. Com. Rep. No. 114-26).",
+          "description": "Reported from Conference Committee as amended CD 1 (Conf. Com. Rep. No. 114-26).",
+          "date": "2026-05-01T23:18:16.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "4/28/26 SB3125: The Conference Committee recommends that the measure be Passed, with Amendments. The votes were as follows: 2 Ayes: Representative(s) Todd, Takenouchi; Ayes with reservations: none; 1 Noes: Representative(s) Gedeon; and 0 Excused: none.",
+          "description": "The Conference Committee recommends that the measure be Passed, with Amendments. The votes were as follows: 2 Ayes: Representative(s) Todd, Takenouchi; Ayes with reservations: none; 1 Noes: Representative(s) Gedeon; and 0 Excused: none.",
+          "date": "2026-04-29T07:26:58.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/28/26 SB3125: The Conference committee recommends that the measure be PASSED, WITH AMENDMENTS. The votes of the Senate Conference Managers were as follows: 3 Aye(s): Senator(s) Dela Cruz, Moriwaki, Fevella; Aye(s) with reservations: none ; 0 No(es): none; and 0 Excused: none.",
+          "description": "The Conference committee recommends that the measure be PASSED, WITH AMENDMENTS. The votes of the Senate Conference Managers were as follows: 3 Aye(s): Senator(s) Dela Cruz, Moriwaki, Fevella; Aye(s) with reservations: none ; 0 No(es): none; and 0 Excused: none.",
+          "date": "2026-04-29T07:21:26.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/28/26 SB3125: Conference committee meeting to reconvene on 04-28-26 9:00 PM; Conference Room 309.",
+          "description": "Conference committee meeting to reconvene on 04-28-26 9:00 PM; Conference Room 309.",
+          "date": "2026-04-29T06:06:17.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/28/26 SB3125: Conference committee meeting to reconvene on 04-28-26 8:00 PM; Conference Room 309.",
+          "description": "Conference committee meeting to reconvene on 04-28-26 8:00 PM; Conference Room 309.",
+          "date": "2026-04-29T04:51:10.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/28/26 SB3125: Conference committee meeting to reconvene on 04-28-26 6:45 PM; Conference Room 309.",
+          "description": "Conference committee meeting to reconvene on 04-28-26 6:45 PM; Conference Room 309.",
+          "date": "2026-04-29T02:53:36.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/28/26 SB3125: Conference committee meeting to reconvene on 04-28-26 4:45 PM; Conference Room 309.",
+          "description": "Conference committee meeting to reconvene on 04-28-26 4:45 PM; Conference Room 309.",
+          "date": "2026-04-29T02:08:20.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/28/26 SB3125: Conference committee meeting to reconvene on 04-28-26 4:00 PM; Conference Room 309.",
+          "description": "Conference committee meeting to reconvene on 04-28-26 4:00 PM; Conference Room 309.",
+          "date": "2026-04-29T02:07:20.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/27/26 SB3125: Conference committee meeting scheduled for 04-28-26 2:45PM; Conference Room 309.",
+          "description": "Conference committee meeting scheduled for 04-28-26 2:45PM; Conference Room 309.",
+          "date": "2026-04-28T01:11:51.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/21/26 SB3125: Received notice of Senate conferees (Sen. Com. No. 718).",
+          "description": "Received notice of Senate conferees (Sen. Com. No. 718).",
+          "date": "2026-04-22T03:34:17.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/21/26 SB3125: Senate Conferees Appointed: Dela Cruz Chair; Moriwaki, Fevella.",
+          "description": "Senate Conferees Appointed: Dela Cruz Chair; Moriwaki, Fevella.",
+          "date": "2026-04-21T23:51:20.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/20/26 SB3125: Received notice of appointment of House conferees (Hse. Com. No. 787).",
+          "description": "Received notice of appointment of House conferees (Hse. Com. No. 787).",
+          "date": "2026-04-20T19:50:18.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/20/26 SB3125: House Conferees Appointed: Todd Chair; Takenouchi, Gedeon.",
+          "description": "House Conferees Appointed: Todd Chair; Takenouchi, Gedeon.",
+          "date": "2026-04-20T19:00:28.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/16/26 SB3125: Received notice of disagreement (Sen. Com. No. 710).",
+          "description": "Received notice of disagreement (Sen. Com. No. 710).",
+          "date": "2026-04-16T23:49:51.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/16/26 SB3125: Senate disagrees with House amendments.",
+          "description": "Senate disagrees with House amendments.",
+          "date": "2026-04-16T21:43:26.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/16/26 SB3125: Received from House (Hse. Com. No. 747).",
+          "description": "Received from House (Hse. Com. No. 747).",
+          "date": "2026-04-15T22:18:09.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/14/26 SB3125: Passed Third Reading with Representative(s) Reyes Oda voting aye with reservations; Representative(s) Alcos, Cochran, Garcia, Gedeon, Kong, Matsumoto, Muraoka, Pierick, Shimizu, Souza voting no (10) and Representative(s) Quinlan excused (1).  Transmitted to Senate.",
+          "description": "Passed Third Reading Transmitted to Senate.",
+          "date": "2026-04-15T01:39:23.000Z",
+          "badge": {
+            "text": "Passed Chamber",
+            "class": "passed"
+          }
+        },
+        {
+          "title": "4/14/26 SB3125: Floor amendment failed with Noes, 1 (Representative(s) Todd). Excused, 2 (Representative(s) Perruso, Quinlan).",
+          "description": "Floor amendment failed with Noes, 1 (Representative(s) Todd). Excused, 2 (Representative(s) Perruso, Quinlan).",
+          "date": "2026-04-15T01:36:45.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/14/26 SB3125: Floor Amendment No. 2 offered by Rep. Garcia.",
+          "description": "Floor Amendment No. 2 offered by Rep. Garcia.",
+          "date": "2026-04-15T01:36:23.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/9/26 SB3125: Passed Second Reading as amended in HD 1; placed on the calendar for Third Reading with Representative(s) Reyes Oda voting aye with reservations; Representative(s) Alcos, Garcia, Gedeon, Kong, Matsumoto, Muraoka, Pierick, Shimizu, Souza voting no (9) and Representative(s) Cochran excused (1).",
+          "description": "Passed Second Reading as amended in HD 1; placed on the calendar for Third Reading",
+          "date": "2026-04-09T23:33:47.000Z",
+          "badge": {
+            "text": "Second Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "4/9/26 SB3125: Reported from FIN (Stand. Com. Rep. No. 1986-26) as amended in HD 1, recommending passage on Second Reading and placement on the calendar for Third Reading.",
+          "description": "Reported from FIN (Stand. Com. Rep. No. 1986-26) as amended in HD 1, recommending passage on Second Reading and placement on the calendar for Third Reading.",
+          "date": "2026-04-09T06:04:49.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "4/7/26 SB3125: The committee on FIN recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 14 Ayes: Representative(s) Todd, Takenouchi, Hartsfield, Hussey, Keohokapu-Lee Loy, Kitagawa, Kusch, Lee, M., Miyake, Morikawa, Perruso, Templo, Yamashita; Ayes with reservations: Representative(s) Reyes Oda; 2 Noes: Representative(s) Alcos, Gedeon; and  Excused: none.",
+          "description": "The committee on FIN recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 14 Ayes: Representative(s) Todd, Takenouchi, Hartsfield, Hussey, Keohokapu-Lee Loy, Kitagawa, Kusch, Lee, M., Miyake, Morikawa, Perruso, Templo, Yamashita; Ayes with reservations: Representative(s) Reyes Oda; 2 Noes: Representative(s) Alcos, Gedeon; and Excused: none.",
+          "date": "2026-04-08T06:22:02.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/2/26 SB3125: Bill scheduled to be heard by FIN on Tuesday, 04-07-26 2:00PM in House conference room 308 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled to be heard by FIN on Tuesday, 04-07-26 2:00PM in House conference room 308 VIA VIDEOCONFERENCE.",
+          "date": "2026-04-03T00:59:44.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/12/26 SB3125: Referred to FIN, referral sheet 17",
+          "description": "Referred to FIN, referral sheet 17",
+          "date": "2026-03-12T22:09:28.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "3/12/26 SB3125: Pass First Reading",
+          "description": "Pass First Reading",
+          "date": "2026-03-12T22:08:58.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/10/26 SB3125: Received from Senate (Sen. Com. No. 364) in amended form (SD 1).",
+          "description": "Received from Senate (Sen. Com. No. 364) in amended form (SD 1).",
+          "date": "2026-03-11T04:13:18.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/10/26 SB3125: Passed Third Reading, as amended (SD 1).  Ayes, 23; Aye(s) with reservations: none.  Noes, 2 (Senator(s) Awa, DeCorte).  Excused, 0 (none).  Transmitted to House.",
+          "description": "Passed Third Reading, as amended (SD 1). Ayes, 23; Aye(s) with reservations: none. Noes, 2 (Senator(s) Awa, DeCorte). Excused, 0 (none). Transmitted to House.",
+          "date": "2026-03-10T20:12:17.000Z",
+          "badge": {
+            "text": "Passed Chamber",
+            "class": "passed"
+          }
+        },
+        {
+          "title": "3/6/26 SB3125: 48 Hrs. Notice 03-10-26.",
+          "description": "48 Hrs. Notice 03-10-26.",
+          "date": "2026-03-06T23:09:12.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/6/26 SB3125: Report adopted; Passed Second Reading, as amended (SD 1).",
+          "description": "Report adopted; Passed Second Reading, as amended (SD 1).",
+          "date": "2026-03-06T23:08:46.000Z",
+          "badge": {
+            "text": "Second Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/6/26 SB3125: Reported from WAM (Stand. Com. Rep. No. 2965) with recommendation of passage on Second Reading, as amended (SD 1) and placement on the calendar for Third Reading.",
+          "description": "Reported from WAM (Stand. Com. Rep. No. 2965) with recommendation of passage on Second Reading, as amended (SD 1) and placement on the calendar for Third Reading.",
+          "date": "2026-03-06T04:13:41.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/5/26 SB3125: The committee(s) on  WAM recommend(s) that the measure be PASSED, WITH AMENDMENTS.  The votes in WAM were as follows: 13 Aye(s): Senator(s) Dela Cruz, Moriwaki, DeCoite, Elefante, Hashimoto, Inouye, Kanuha, Kidani, Kim, Lee, C., Richards, Wakai, Fevella; Aye(s) with reservations: none ; 0 No(es): none; and 0 Excused: none.",
+          "description": "The committee(s) on WAM recommend(s) that the measure be PASSED, WITH AMENDMENTS. The votes in WAM were as follows: 13 Aye(s): Senator(s) Dela Cruz, Moriwaki, DeCoite, Elefante, Hashimoto, Inouye, Kanuha, Kidani, Kim, Lee, C., Richards, Wakai, Fevella; Aye(s) with reservations: none ; 0 No(es): none; and 0 Excused: none.",
+          "date": "2026-03-05T23:51:41.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/4/26 SB3125: The committee(s) on WAM has scheduled a public hearing on 03-05-26 12:00PM; Conference Room 211 & Videoconference (Proposed Draft).",
+          "description": "The committee(s) on WAM has scheduled a public hearing on 03-05-26 12:00PM; Conference Room 211 & Videoconference (Proposed Draft).",
+          "date": "2026-03-04T23:35:32.000Z",
+          "badge": {
+            "text": "Hearing",
+            "class": "hearing"
+          }
+        },
+        {
+          "title": "3/4/26 SB3125: The committee(s) on WAM deleted the measure from the public hearing scheduled on 03-05-26 10:15AM; CR 211 & Videoconference.",
+          "description": "The committee(s) on WAM deleted the measure from the public hearing scheduled on 03-05-26 10:15AM; CR 211 & Videoconference.",
+          "date": "2026-03-04T23:18:32.000Z",
+          "badge": {
+            "text": "Hearing",
+            "class": "hearing"
+          }
+        },
+        {
+          "title": "3/2/26 SB3125: The committee(s) on WAM has scheduled a public hearing on 03-05-26 10:15AM; Conference Room 211 & Videoconference.",
+          "description": "The committee(s) on WAM has scheduled a public hearing on 03-05-26 10:15AM; Conference Room 211 & Videoconference.",
+          "date": "2026-03-02T20:24:13.000Z",
+          "badge": {
+            "text": "Hearing",
+            "class": "hearing"
+          }
+        },
+        {
+          "title": "2/2/26 SB3125: Referred to WAM.",
+          "description": "Referred to WAM.",
+          "date": "2026-02-03T03:55:22.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/28/26 SB3125: Introduced.",
+          "description": "Introduced.",
+          "date": "2026-01-29T00:29:18.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        },
+        {
+          "title": "1/28/26 SB3125: Passed First Reading.",
+          "description": "Passed First Reading.",
+          "date": "2026-01-28T21:48:18.000Z",
+          "badge": {
+            "text": "First Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "1/26/26 SB3125: Pending Introduction.",
+          "description": "Pending Introduction.",
+          "date": "2026-01-27T01:31:34.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": true,
+      "isDeferred": false,
+      "isAlive": true
     },
     "HB1850": {
       "type": "HB",
       "number": "1850",
       "year": "2026",
-      "error": "HTTP 403"
+      "updates": [
+        {
+          "title": "3/12/26 HB1850: Passed First Reading.",
+          "description": "Passed First Reading.",
+          "date": "2026-03-12T21:55:58.000Z",
+          "badge": {
+            "text": "First Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/12/26 HB1850: Referred to WAM.",
+          "description": "Referred to WAM.",
+          "date": "2026-03-12T18:29:02.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "3/12/26 HB1850: Received from House (Hse. Com. No. 299).",
+          "description": "Received from House (Hse. Com. No. 299).",
+          "date": "2026-03-12T01:04:54.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/10/26 HB1850: Passed Third Reading as amended in HD 2 with Representative(s) Reyes Oda, Souza voting aye with reservations; Representative(s) Alcos, Amato, Garcia, Gedeon, Kong, Matsumoto, Muraoka, Shimizu voting no (8) and Representative(s) Pierick excused (1).  Transmitted to Senate.",
+          "description": "Passed Third Reading as amended in HD 2 Transmitted to Senate.",
+          "date": "2026-03-10T23:36:01.000Z",
+          "badge": {
+            "text": "Passed Chamber",
+            "class": "passed"
+          }
+        },
+        {
+          "title": "3/6/26 HB1850: Forty-eight (48) hours notice Tuesday,  03-10-26.",
+          "description": "Forty-eight (48) hours notice Tuesday, 03-10-26.",
+          "date": "2026-03-07T05:27:40.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/6/26 HB1850: Reported from FIN (Stand. Com. Rep. No. 1117-26) as amended in HD 2, recommending passage on Third Reading.",
+          "description": "Reported from FIN (Stand. Com. Rep. No. 1117-26) as amended in HD 2, recommending passage on Third Reading.",
+          "date": "2026-03-07T05:27:40.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/3/26 HB1850: The committee on FIN recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 15 Ayes: Representative(s) Todd, Takenouchi, Hartsfield, Hussey, Keohokapu-Lee Loy, Kitagawa, Kusch, Lee, M., Miyake, Morikawa, Perruso, Templo, Yamashita; Ayes with reservations: Representative(s) Gedeon, Reyes Oda; 1 Noes: Representative(s) Alcos; and  Excused: none.",
+          "description": "The committee on FIN recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 15 Ayes: Representative(s) Todd, Takenouchi, Hartsfield, Hussey, Keohokapu-Lee Loy, Kitagawa, Kusch, Lee, M., Miyake, Morikawa, Perruso, Templo, Yamashita; Ayes with reservations: Representative(s) Gedeon, Reyes Oda; 1 Noes: Representative(s) Alcos; and Excused: none.",
+          "date": "2026-03-04T04:42:44.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/2/26 HB1850: Bill scheduled for decision making on Tuesday, 03-03-26 2:00PM in conference room 308 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled for decision making on Tuesday, 03-03-26 2:00PM in conference room 308 VIA VIDEOCONFERENCE.",
+          "date": "2026-03-03T02:37:32.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/2/26 HB1850: The committee(s) on FIN recommend(s) that the measure be deferred until 03-03-26.",
+          "description": "The committee(s) on FIN recommend(s) that the measure be deferred until 03-03-26.",
+          "date": "2026-03-03T02:05:13.000Z",
+          "badge": {
+            "text": "Deferred",
+            "class": "deferred"
+          }
+        },
+        {
+          "title": "2/27/26 HB1850: Bill scheduled to be heard by FIN on Monday, 03-02-26 2:00PM in House conference room 308 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled to be heard by FIN on Monday, 03-02-26 2:00PM in House conference room 308 VIA VIDEOCONFERENCE.",
+          "date": "2026-02-28T00:46:10.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/17/26 HB1850: Passed Second Reading as amended in HD 1 and referred to the committee(s) on FIN with Representative(s) Amato, Reyes Oda, Souza voting aye with reservations; Representative(s) Alcos, Garcia, Gedeon, Matsumoto, Muraoka, Pierick, Shimizu voting no (7) and Representative(s) Cochran, Lee, M., Poepoe excused (3).",
+          "description": "Passed Second Reading as amended in HD 1 and referred to the committee(s) on FIN, Poepoe excused (3).",
+          "date": "2026-02-17T22:52:00.000Z",
+          "badge": {
+            "text": "Second Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "2/17/26 HB1850: Reported from ECD (Stand. Com. Rep. No. 294-26) as amended in HD 1, recommending passage on Second Reading and referral to FIN.",
+          "description": "Reported from ECD (Stand. Com. Rep. No. 294-26) as amended in HD 1, recommending passage on Second Reading and referral to FIN.",
+          "date": "2026-02-14T01:44:11.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "2/4/26 HB1850: The committee on ECD recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 6 Ayes: Representative(s) Ilagan, Hussey, Holt, Tam, Templo, Yamashita; Ayes with reservations: none; 1 Noes: Representative(s) Gedeon; and  Excused: none.",
+          "description": "The committee on ECD recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 6 Ayes: Representative(s) Ilagan, Hussey, Holt, Tam, Templo, Yamashita; Ayes with reservations: none; 1 Noes: Representative(s) Gedeon; and Excused: none.",
+          "date": "2026-02-04T21:49:03.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "1/30/26 HB1850: Bill scheduled to be heard by ECD on Wednesday, 02-04-26 10:00AM in House conference room 423 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled to be heard by ECD on Wednesday, 02-04-26 10:00AM in House conference room 423 VIA VIDEOCONFERENCE.",
+          "date": "2026-01-31T02:15:24.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "1/26/26 HB1850: Referred to ECD, FIN, referral sheet 2",
+          "description": "Referred to ECD, FIN, referral sheet 2",
+          "date": "2026-01-27T05:02:15.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/26/26 HB1850: Introduced and Pass First Reading.",
+          "description": "Introduced and Pass First Reading.",
+          "date": "2026-01-26T19:18:13.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        },
+        {
+          "title": "1/23/26 HB1850: Pending introduction.",
+          "description": "Pending introduction.",
+          "date": "2026-01-23T22:25:45.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": true,
+      "isDeferred": false,
+      "isAlive": true
     },
     "SB2441": {
       "type": "SB",
       "number": "2441",
       "year": "2026",
-      "error": "HTTP 403"
+      "updates": [
+        {
+          "title": "1/28/26 SB2441: Referred to WAM.",
+          "description": "Referred to WAM.",
+          "date": "2026-01-28T06:18:27.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/22/26 SB2441: Passed First Reading.",
+          "description": "Passed First Reading.",
+          "date": "2026-01-22T21:48:50.000Z",
+          "badge": {
+            "text": "First Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "1/22/26 SB2441: Introduced.",
+          "description": "Introduced.",
+          "date": "2026-01-22T00:08:36.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": false,
+      "isDeferred": false,
+      "isAlive": false
     },
     "HB2049": {
       "type": "HB",
       "number": "2049",
       "year": "2026",
-      "error": "HTTP 403"
+      "updates": [
+        {
+          "title": "4/6/26 HB2049: The committee on WAM deferred the measure.",
+          "description": "The committee on WAM deferred the measure.",
+          "date": "2026-04-07T00:08:38.000Z",
+          "badge": {
+            "text": "Deferred",
+            "class": "deferred"
+          }
+        },
+        {
+          "title": "4/1/26 HB2049: The committee(s) on WAM deferred the measure until 04-06-26 10:31AM; Conference Room 211 & Videoconference.",
+          "description": "The committee(s) on WAM deferred the measure until 04-06-26 10:31AM; Conference Room 211 & Videoconference.",
+          "date": "2026-04-01T22:40:14.000Z",
+          "badge": {
+            "text": "Deferred",
+            "class": "deferred"
+          }
+        },
+        {
+          "title": "3/30/26 HB2049: Report adopted; Passed Second Reading, as amended (SD 1) and referred to WAM.",
+          "description": "Report adopted; Passed Second Reading, as amended (SD 1) and referred to WAM.",
+          "date": "2026-03-30T21:57:58.000Z",
+          "badge": {
+            "text": "Second Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/30/26 HB2049: The committee(s) on WAM will hold a public decision making on 04-01-26 10:03AM; Conference Room 211 & Videoconference.",
+          "description": "The committee(s) on WAM will hold a public decision making on 04-01-26 10:03AM; Conference Room 211 & Videoconference.",
+          "date": "2026-03-30T20:08:46.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/30/26 HB2049: Reported from WLA/HOU/HWN (Stand. Com. Rep. No. 3396) with recommendation of passage on Second Reading, as amended (SD 1) and referral to WAM.",
+          "description": "Reported from WLA/HOU/HWN (Stand. Com. Rep. No. 3396) with recommendation of passage on Second Reading, as amended (SD 1) and referral to WAM.",
+          "date": "2026-03-28T04:48:42.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/25/26 HB2049: The committee(s) on  HWN recommend(s) that the measure be PASSED, WITH AMENDMENTS.  The votes in HWN were as follows: 3 Aye(s): Senator(s) Richards, Keohokalole; Aye(s) with reservations: Senator(s) Lamosao ; 1 No(es): Senator(s) DeCorte; and 1 Excused: Senator(s) Ihara.",
+          "description": "The committee(s) on HWN recommend(s) that the measure be PASSED, WITH AMENDMENTS. The votes in HWN were as follows: 3 Aye(s): Senator(s) Richards, Keohokalole; Aye(s) with reservations: Senator(s) Lamosao ; 1 No(es): Senator(s) DeCorte; and 1 Excused: Senator(s) Ihara.",
+          "date": "2026-03-26T04:03:38.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/25/26 HB2049: The committee(s) on  WLA recommend(s) that the measure be PASSED, WITH AMENDMENTS.  The votes in WLA were as follows: 3 Aye(s): Senator(s) Lee, C.; Aye(s) with reservations: Senator(s) Chang, Lamosao ; 2 No(es): Senator(s) Inouye, DeCorte; and 0 Excused: none.",
+          "description": "The committee(s) on WLA recommend(s) that the measure be PASSED, WITH AMENDMENTS. The votes in WLA were as follows: 3 Aye(s): Senator(s) Lee, C.; Aye(s) with reservations: Senator(s) Chang, Lamosao ; 2 No(es): Senator(s) Inouye, DeCorte; and 0 Excused: none.",
+          "date": "2026-03-26T02:08:53.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/25/26 HB2049: The committee(s) on  HOU recommend(s) that the measure be PASSED, WITH AMENDMENTS.  The votes in HOU were as follows: 4 Aye(s): Senator(s) Fevella; Aye(s) with reservations: Senator(s) Chang, Hashimoto, Elefante ; 0 No(es): none; and 1 Excused: Senator(s) Rhoads.",
+          "description": "The committee(s) on HOU recommend(s) that the measure be PASSED, WITH AMENDMENTS. The votes in HOU were as follows: 4 Aye(s): Senator(s) Fevella; Aye(s) with reservations: Senator(s) Chang, Hashimoto, Elefante ; 0 No(es): none; and 1 Excused: Senator(s) Rhoads.",
+          "date": "2026-03-26T01:13:55.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/22/26 HB2049: The committee(s) on WLA/HOU/HWN has scheduled a public hearing on 03-25-26 1:02PM; Conference Room 224 & Videoconference.",
+          "description": "The committee(s) on WLA/HOU/HWN has scheduled a public hearing on 03-25-26 1:02PM; Conference Room 224 & Videoconference.",
+          "date": "2026-03-22T23:11:52.000Z",
+          "badge": {
+            "text": "Hearing",
+            "class": "hearing"
+          }
+        },
+        {
+          "title": "3/12/26 HB2049: Passed First Reading.",
+          "description": "Passed First Reading.",
+          "date": "2026-03-12T21:55:58.000Z",
+          "badge": {
+            "text": "First Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/12/26 HB2049: Referred to WLA/HOU/HWN, WAM.",
+          "description": "Referred to WLA/HOU/HWN, WAM.",
+          "date": "2026-03-12T18:29:04.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "3/12/26 HB2049: Received from House (Hse. Com. No. 348).",
+          "description": "Received from House (Hse. Com. No. 348).",
+          "date": "2026-03-12T01:04:56.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/10/26 HB2049: Passed Third Reading as amended in HD 3 with Representative(s) Amato, Chun, Cochran, Kitagawa, Lee, M., Shimizu, Takenouchi, Yamashita voting aye with reservations; Representative(s) Alcos, Garcia, Gedeon, Kong, Matsumoto, Muraoka, Reyes Oda voting no (7) and Representative(s) Pierick excused (1).  Transmitted to Senate.",
+          "description": "Passed Third Reading as amended in HD 3, Shimizu, Takenouchi, Yamashita Transmitted to Senate.",
+          "date": "2026-03-10T23:33:11.000Z",
+          "badge": {
+            "text": "Passed Chamber",
+            "class": "passed"
+          }
+        },
+        {
+          "title": "3/6/26 HB2049: Forty-eight (48) hours notice Tuesday,  03-10-26.",
+          "description": "Forty-eight (48) hours notice Tuesday, 03-10-26.",
+          "date": "2026-03-07T04:40:03.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/6/26 HB2049: Reported from FIN (Stand. Com. Rep. No. 1096-26) as amended in HD 3, recommending passage on Third Reading.",
+          "description": "Reported from FIN (Stand. Com. Rep. No. 1096-26) as amended in HD 3, recommending passage on Third Reading.",
+          "date": "2026-03-07T04:40:03.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/5/26 HB2049: The committee on FIN recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 15 Ayes: Representative(s) Todd, Takenouchi, Hartsfield, Hussey, Keohokapu-Lee Loy, Kitagawa, Kusch, Lee, M., Miyake, Morikawa, Templo, Yamashita; Ayes with reservations: Representative(s) Alcos, Gedeon, Reyes Oda;  Noes: none; and 1 Excused: Representative(s) Perruso.",
+          "description": "The committee on FIN recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 15 Ayes: Representative(s) Todd, Takenouchi, Hartsfield, Hussey, Keohokapu-Lee Loy, Kitagawa, Kusch, Lee, M., Miyake, Morikawa, Templo, Yamashita; Ayes with reservations: Representative(s) Alcos, Gedeon, Reyes Oda; Noes: none; and 1 Excused: Representative(s) Perruso.",
+          "date": "2026-03-06T03:17:07.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/4/26 HB2049: Bill scheduled for decision making on Thursday, 03-05-26 2:00PM in conference room 308 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled for decision making on Thursday, 03-05-26 2:00PM in conference room 308 VIA VIDEOCONFERENCE.",
+          "date": "2026-03-05T00:19:29.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/4/26 HB2049: The committee(s) on FIN recommend(s) that the measure be deferred until 03-05-26.",
+          "description": "The committee(s) on FIN recommend(s) that the measure be deferred until 03-05-26.",
+          "date": "2026-03-05T00:14:40.000Z",
+          "badge": {
+            "text": "Deferred",
+            "class": "deferred"
+          }
+        },
+        {
+          "title": "3/3/26 HB2049: Bill scheduled for decision making on Wednesday, 03-04-26 10:00AM in conference room 308 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled for decision making on Wednesday, 03-04-26 10:00AM in conference room 308 VIA VIDEOCONFERENCE.",
+          "date": "2026-03-04T01:09:22.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/3/26 HB2049: The committee(s) on FIN recommend(s) that the measure be deferred until 03-04-26.",
+          "description": "The committee(s) on FIN recommend(s) that the measure be deferred until 03-04-26.",
+          "date": "2026-03-04T00:32:38.000Z",
+          "badge": {
+            "text": "Deferred",
+            "class": "deferred"
+          }
+        },
+        {
+          "title": "2/27/26 HB2049: Bill scheduled to be heard by FIN on Tuesday, 03-03-26 10:00AM in House conference room 308 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled to be heard by FIN on Tuesday, 03-03-26 10:00AM in House conference room 308 VIA VIDEOCONFERENCE.",
+          "date": "2026-02-28T00:48:11.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/20/26 HB2049: Report adopted; referred to the committee(s) on FIN as amended in HD 2 with Representative(s) Cochran, Reyes Oda, Shimizu voting aye with reservations; Representative(s) Alcos, Garcia, Gedeon, Matsumoto, Muraoka, Pierick voting no (6) and Representative(s) Quinlan excused (1).",
+          "description": "Report adopted; referred to the committee(s) on FIN as amended in HD 2",
+          "date": "2026-02-21T00:33:03.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "2/20/26 HB2049: Reported from JHA (Stand. Com. Rep. No. 743-26) as amended in HD 2, recommending referral to FIN.",
+          "description": "Reported from JHA (Stand. Com. Rep. No. 743-26) as amended in HD 2, recommending referral to FIN.",
+          "date": "2026-02-20T06:43:01.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "2/13/26 HB2049: The committee on JHA recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 7 Ayes: Representative(s) Tarnas, Poepoe, Belatti, Hashem, Kahaloa, Sayama; Ayes with reservations: Representative(s) Shimizu; 1 Noes: Representative(s) Garcia; and 2 Excused: Representative(s) Cochran, Takayama.",
+          "description": "The committee on JHA recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 7 Ayes: Representative(s) Tarnas, Poepoe, Belatti, Hashem, Kahaloa, Sayama; Ayes with reservations: Representative(s) Shimizu; 1 Noes: Representative(s) Garcia; and 2 Excused: Representative(s) Cochran, Takayama.",
+          "date": "2026-02-14T03:23:06.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/11/26 HB2049: Bill scheduled to be heard by JHA on Friday, 02-13-26 2:00PM in House conference room 325 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled to be heard by JHA on Friday, 02-13-26 2:00PM in House conference room 325 VIA VIDEOCONFERENCE.",
+          "date": "2026-02-12T00:16:07.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/11/26 HB2049: Passed Second Reading as amended in HD 1 and referred to the committee(s) on JHA with Representative(s) Reyes Oda voting aye with reservations; Representative(s) Alcos, Garcia, Gedeon, Matsumoto, Muraoka, Pierick voting no (6) and Representative(s) Holt excused (1).",
+          "description": "Passed Second Reading as amended in HD 1 and referred to the committee(s) on JHA",
+          "date": "2026-02-11T23:10:03.000Z",
+          "badge": {
+            "text": "Second Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "2/11/26 HB2049: Reported from HSG/WAL (Stand. Com. Rep. No. 181-26) as amended in HD 1, recommending passage on Second Reading and referral to JHA.",
+          "description": "Reported from HSG/WAL (Stand. Com. Rep. No. 181-26) as amended in HD 1, recommending passage on Second Reading and referral to JHA.",
+          "date": "2026-02-11T02:37:27.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "2/6/26 HB2049: The committee on WAL recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 8 Ayes: Representative(s) Hashem, Morikawa, Belatti, Ichiyama, Iwamoto, Poepoe, Souza; Ayes with reservations: Representative(s) Shimizu;  Noes: none; and 1 Excused: Representative(s) Woodson.",
+          "description": "The committee on WAL recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 8 Ayes: Representative(s) Hashem, Morikawa, Belatti, Ichiyama, Iwamoto, Poepoe, Souza; Ayes with reservations: Representative(s) Shimizu; Noes: none; and 1 Excused: Representative(s) Woodson.",
+          "date": "2026-02-07T00:27:42.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/6/26 HB2049: The committee on HSG recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 8 Ayes: Representative(s) Evslin, Miyake, Grandinetti, Kila, Kitagawa, La Chica; Ayes with reservations: Representative(s) Cochran, Muraoka; 1 Noes: Representative(s) Pierick; and  Excused: none.",
+          "description": "The committee on HSG recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 8 Ayes: Representative(s) Evslin, Miyake, Grandinetti, Kila, Kitagawa, La Chica; Ayes with reservations: Representative(s) Cochran, Muraoka; 1 Noes: Representative(s) Pierick; and Excused: none.",
+          "date": "2026-02-07T00:27:22.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/3/26 HB2049: Bill scheduled to be heard by HSG/WAL on Friday, 02-06-26 8:45AM in House conference room 430 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled to be heard by HSG/WAL on Friday, 02-06-26 8:45AM in House conference room 430 VIA VIDEOCONFERENCE.",
+          "date": "2026-02-04T02:00:43.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "1/28/26 HB2049: Referred to HSG/WAL, JHA, FIN, referral sheet 3",
+          "description": "Referred to HSG/WAL, JHA, FIN, referral sheet 3",
+          "date": "2026-01-28T19:34:26.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/26/26 HB2049: Introduced and Pass First Reading.",
+          "description": "Introduced and Pass First Reading.",
+          "date": "2026-01-26T19:18:14.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        },
+        {
+          "title": "1/23/26 HB2049: Pending introduction.",
+          "description": "Pending introduction.",
+          "date": "2026-01-24T04:27:24.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": true,
+      "isDeferred": true,
+      "isAlive": false
     },
     "SB3028": {
       "type": "SB",
       "number": "3028",
       "year": "2026",
-      "error": "HTTP 403"
+      "updates": [
+        {
+          "title": "5/1/26 SB3028: Conference Committee Meeting will reconvene on Friday, 05-01-26 at 5:50PM in Conference Room 016.",
+          "description": "Conference Committee Meeting will reconvene on Friday, 05-01-26 at 5:50PM in Conference Room 016.",
+          "date": "2026-05-02T03:47:18.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/1/26 SB3028: Conference Committee Meeting will reconvene on Friday, 05-01-26 at 5:21PM in Conference Room 016.",
+          "description": "Conference Committee Meeting will reconvene on Friday, 05-01-26 at 5:21PM in Conference Room 016.",
+          "date": "2026-05-02T03:13:17.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/1/26 SB3028: Conference Committee Meeting will reconvene on Friday, 05-01-26 at 5:00PM in Conference Room 016.",
+          "description": "Conference Committee Meeting will reconvene on Friday, 05-01-26 at 5:00PM in Conference Room 016.",
+          "date": "2026-05-02T01:35:01.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/1/26 SB3028: Conference committee meeting to reconvene on 05-01-26 2:42 PM; Conference Room 329.",
+          "description": "Conference committee meeting to reconvene on 05-01-26 2:42 PM; Conference Room 329.",
+          "date": "2026-05-01T21:22:36.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/30/26 SB3028: Conference Committee Meeting will reconvene on Friday 05-01-26 10:45AM in conference room 224.",
+          "description": "Conference Committee Meeting will reconvene on Friday 05-01-26 10:45AM in conference room 224.",
+          "date": "2026-04-30T22:13:43.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/30/26 SB3028: Received notice of change in Senate conferees (Sen. Com. No. 797).",
+          "description": "Received notice of change in Senate conferees (Sen. Com. No. 797).",
+          "date": "2026-04-30T19:06:28.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/30/26 SB3028: Senate Conferees Changed: Senator Dela Cruz added as Co-Chair. Senator Kim discharged as Co-Chair.",
+          "description": "Senate Conferees Changed: Senator Dela Cruz added as Co-Chair. Senator Kim discharged as Co-Chair.",
+          "date": "2026-04-30T17:24:19.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/29/26 SB3028: Conference Committee Meeting will reconvene on Thursday 04-30-26 10:45AM in conference room 224.",
+          "description": "Conference Committee Meeting will reconvene on Thursday 04-30-26 10:45AM in conference room 224.",
+          "date": "2026-04-29T23:01:31.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/28/26 SB3028: Conference Committee Meeting will reconvene on Wednesday 04-29-26 10:45AM in conference room 224.",
+          "description": "Conference Committee Meeting will reconvene on Wednesday 04-29-26 10:45AM in conference room 224.",
+          "date": "2026-04-28T22:58:33.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/27/26 SB3028: Bill scheduled for Conference Committee Meeting on Tuesday, 04-28-26 10:45AM in conference room 224.",
+          "description": "Bill scheduled for Conference Committee Meeting on Tuesday, 04-28-26 10:45AM in conference room 224.",
+          "date": "2026-04-27T19:37:56.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/27/26 SB3028: Received notice of Senate conferees (Sen. Com. No. 762).",
+          "description": "Received notice of Senate conferees (Sen. Com. No. 762).",
+          "date": "2026-04-27T18:45:58.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/24/26 SB3028: Senate Conferees Appointed: Lee, C. Chairs; Wakai, Kim Co-Chairs.",
+          "description": "Senate Conferees Appointed: Lee, C. Chairs; Wakai, Kim Co-Chairs.",
+          "date": "2026-04-24T21:15:13.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/20/26 SB3028: Received notice of appointment of House conferees (Hse. Com. No. 787).",
+          "description": "Received notice of appointment of House conferees (Hse. Com. No. 787).",
+          "date": "2026-04-20T19:50:17.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/20/26 SB3028: House Conferees Appointed: Evslin, Todd Co-Chairs; Muraoka.",
+          "description": "House Conferees Appointed: Evslin, Todd Co-Chairs; Muraoka.",
+          "date": "2026-04-20T19:00:28.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/16/26 SB3028: Received notice of disagreement (Sen. Com. No. 710).",
+          "description": "Received notice of disagreement (Sen. Com. No. 710).",
+          "date": "2026-04-16T23:49:51.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/16/26 SB3028: Senate disagrees with House amendments.",
+          "description": "Senate disagrees with House amendments.",
+          "date": "2026-04-16T21:43:26.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/16/26 SB3028: Received from House (Hse. Com. No. 729).",
+          "description": "Received from House (Hse. Com. No. 729).",
+          "date": "2026-04-15T22:18:09.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/14/26 SB3028: Passed Third Reading as amended in HD 2 with none voting aye with reservations; Representative(s) Alcos, Cochran, Garcia, Gedeon, Kong, Lee, M., Matsumoto, Muraoka, Pierick, Reyes Oda voting no (10) and none excused (0).  Transmitted to Senate.",
+          "description": "Passed Third Reading as amended in HD 2 with none, Matsumoto, Muraoka, Pierick, Reyes Oda Transmitted to Senate.",
+          "date": "2026-04-14T21:21:57.000Z",
+          "badge": {
+            "text": "Passed Chamber",
+            "class": "passed"
+          }
+        },
+        {
+          "title": "4/9/26 SB3028: Forty-eight (48) hours notice Tuesday,  04-14-26.",
+          "description": "Forty-eight (48) hours notice Tuesday, 04-14-26.",
+          "date": "2026-04-09T06:49:45.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/9/26 SB3028: Reported from FIN (Stand. Com. Rep. No. 2020-26) as amended in HD 2, recommending passage on Third Reading.",
+          "description": "Reported from FIN (Stand. Com. Rep. No. 2020-26) as amended in HD 2, recommending passage on Third Reading.",
+          "date": "2026-04-09T06:49:45.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "4/7/26 SB3028: The committee on FIN recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 14 Ayes: Representative(s) Todd, Takenouchi, Hartsfield, Hussey, Keohokapu-Lee Loy, Kitagawa, Kusch, Miyake, Morikawa, Perruso, Templo, Yamashita; Ayes with reservations: Representative(s) Lee, M., Gedeon; 2 Noes: Representative(s) Alcos, Reyes Oda; and  Excused: none.",
+          "description": "The committee on FIN recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 14 Ayes: Representative(s) Todd, Takenouchi, Hartsfield, Hussey, Keohokapu-Lee Loy, Kitagawa, Kusch, Miyake, Morikawa, Perruso, Templo, Yamashita; Ayes with reservations: Representative(s) Lee, M., Gedeon; 2 Noes: Representative(s) Alcos, Reyes Oda; and Excused: none.",
+          "date": "2026-04-07T22:43:46.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/2/26 SB3028: Bill scheduled for decision making on Tuesday, 04-07-26 10:10AM in conference room 308 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled for decision making on Tuesday, 04-07-26 10:10AM in conference room 308 VIA VIDEOCONFERENCE.",
+          "date": "2026-04-03T05:20:03.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/2/26 SB3028: The committee(s) on FIN recommend(s) that the measure be deferred until 04-07-26.",
+          "description": "The committee(s) on FIN recommend(s) that the measure be deferred until 04-07-26.",
+          "date": "2026-04-03T04:37:33.000Z",
+          "badge": {
+            "text": "Deferred",
+            "class": "deferred"
+          }
+        },
+        {
+          "title": "3/31/26 SB3028: Bill scheduled to be heard by FIN on Thursday, 04-02-26 2:00PM in House conference room 308 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled to be heard by FIN on Thursday, 04-02-26 2:00PM in House conference room 308 VIA VIDEOCONFERENCE.",
+          "date": "2026-03-31T20:32:42.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/25/26 SB3028: Re-referred to HSG, FIN, referral sheet 21",
+          "description": "Re-referred to HSG, FIN, referral sheet 21",
+          "date": "2026-03-26T03:25:18.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "3/20/26 SB3028: Passed Second Reading as amended in HD 1 and referred to the committee(s) on WAL with none voting aye with reservations; Representative(s) Alcos, Cochran, Garcia, Gedeon, Matsumoto, Muraoka, Pierick, Reyes Oda voting no (8) and Representative(s) Quinlan excused (1).",
+          "description": "Passed Second Reading as amended in HD 1 and referred to the committee(s) on WAL with none",
+          "date": "2026-03-20T23:21:04.000Z",
+          "badge": {
+            "text": "Second Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/20/26 SB3028: Reported from HSG (Stand. Com. Rep. No. 1310-26) as amended in HD 1, recommending passage on Second Reading and referral to WAL.",
+          "description": "Reported from HSG (Stand. Com. Rep. No. 1310-26) as amended in HD 1, recommending passage on Second Reading and referral to WAL.",
+          "date": "2026-03-20T04:27:12.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/18/26 SB3028: The committee on HSG recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 6 Ayes: Representative(s) Evslin, Miyake, Grandinetti, Kila, Kitagawa, La Chica; Ayes with reservations: none; 3 Noes: Representative(s) Cochran, Muraoka, Pierick; and  Excused: none.",
+          "description": "The committee on HSG recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 6 Ayes: Representative(s) Evslin, Miyake, Grandinetti, Kila, Kitagawa, La Chica; Ayes with reservations: none; 3 Noes: Representative(s) Cochran, Muraoka, Pierick; and Excused: none.",
+          "date": "2026-03-18T21:52:51.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/16/26 SB3028: Bill scheduled to be heard by HSG on Wednesday, 03-18-26 9:00AM in House conference room 430 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled to be heard by HSG on Wednesday, 03-18-26 9:00AM in House conference room 430 VIA VIDEOCONFERENCE.",
+          "date": "2026-03-16T19:04:57.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/12/26 SB3028: Referred to HSG, WAL, FIN, referral sheet 17",
+          "description": "Referred to HSG, WAL, FIN, referral sheet 17",
+          "date": "2026-03-12T22:09:27.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "3/12/26 SB3028: Pass First Reading",
+          "description": "Pass First Reading",
+          "date": "2026-03-12T22:08:58.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/10/26 SB3028: Received from Senate (Sen. Com. No. 345) in amended form (SD 2).",
+          "description": "Received from Senate (Sen. Com. No. 345) in amended form (SD 2).",
+          "date": "2026-03-11T04:10:52.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/10/26 SB3028: Report adopted; Passed Third Reading, as amended (SD  2). Ayes, 25; Aye(s) with reservations: none .  Noes, 0 (none). Excused, 0 (none).  Transmitted to House.",
+          "description": "Report adopted; Passed Third Reading, as amended (SD 2). Ayes, 25; Aye(s) with reservations: none . Noes, 0 (none). Excused, 0 (none). Transmitted to House.",
+          "date": "2026-03-10T19:43:55.000Z",
+          "badge": {
+            "text": "Passed Chamber",
+            "class": "passed"
+          }
+        },
+        {
+          "title": "3/6/26 SB3028: 48 Hrs. Notice 03-10-26.",
+          "description": "48 Hrs. Notice 03-10-26.",
+          "date": "2026-03-07T01:15:01.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/6/26 SB3028: Reported from WAM (Stand. Com. Rep. No. 2999) with recommendation of passage on Third Reading, as amended (SD 2).",
+          "description": "Reported from WAM (Stand. Com. Rep. No. 2999) with recommendation of passage on Third Reading, as amended (SD 2).",
+          "date": "2026-03-07T01:15:01.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/3/26 SB3028: The committee(s) on  WAM recommend(s) that the measure be PASSED, WITH AMENDMENTS.  The votes in WAM were as follows: 12 Aye(s): Senator(s) Dela Cruz, Moriwaki, DeCoite, Elefante, Hashimoto, Inouye, Kanuha, Kidani, Kim, Lee, C., Richards, Wakai; Aye(s) with reservations: none ; 0 No(es): none; and 1 Excused: Senator(s) Fevella.",
+          "description": "The committee(s) on WAM recommend(s) that the measure be PASSED, WITH AMENDMENTS. The votes in WAM were as follows: 12 Aye(s): Senator(s) Dela Cruz, Moriwaki, DeCoite, Elefante, Hashimoto, Inouye, Kanuha, Kidani, Kim, Lee, C., Richards, Wakai; Aye(s) with reservations: none ; 0 No(es): none; and 1 Excused: Senator(s) Fevella.",
+          "date": "2026-03-04T01:00:49.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/25/26 SB3028: The committee(s) on WAM deferred the measure until 03-03-26 10:15AM; Conference Room 211 & Videoconference.",
+          "description": "The committee(s) on WAM deferred the measure until 03-03-26 10:15AM; Conference Room 211 & Videoconference.",
+          "date": "2026-02-26T00:07:15.000Z",
+          "badge": {
+            "text": "Deferred",
+            "class": "deferred"
+          }
+        },
+        {
+          "title": "2/23/26 SB3028: The committee(s) on WAM will hold a public decision making on 02-25-26 10:57AM; Conference Room 211 & Videoconference.",
+          "description": "The committee(s) on WAM will hold a public decision making on 02-25-26 10:57AM; Conference Room 211 & Videoconference.",
+          "date": "2026-02-23T21:15:18.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/20/26 SB3028: Report adopted; Passed Second Reading, as amended (SD 1) and referred to WAM.",
+          "description": "Report adopted; Passed Second Reading, as amended (SD 1) and referred to WAM.",
+          "date": "2026-02-20T21:39:59.000Z",
+          "badge": {
+            "text": "Second Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "2/20/26 SB3028: Reported from WLA/EIG (Stand. Com. Rep. No. 2596) with recommendation of passage on Second Reading, as amended (SD 1) and referral to WAM.",
+          "description": "Reported from WLA/EIG (Stand. Com. Rep. No. 2596) with recommendation of passage on Second Reading, as amended (SD 1) and referral to WAM.",
+          "date": "2026-02-20T03:09:40.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "2/17/26 SB3028: The committee(s) on  WLA recommend(s) that the measure be PASSED, WITH AMENDMENTS.  The votes in WLA were as follows: 4 Aye(s): Senator(s) Lee, C., Chang, Lamosao, DeCorte; Aye(s) with reservations: none ; 0 No(es): none; and 1 Excused: Senator(s) Inouye.",
+          "description": "The committee(s) on WLA recommend(s) that the measure be PASSED, WITH AMENDMENTS. The votes in WLA were as follows: 4 Aye(s): Senator(s) Lee, C., Chang, Lamosao, DeCorte; Aye(s) with reservations: none ; 0 No(es): none; and 1 Excused: Senator(s) Inouye.",
+          "date": "2026-02-18T20:19:21.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/17/26 SB3028: The committee(s) on  EIG recommend(s) that the measure be PASSED, WITH AMENDMENTS.  The votes in EIG were as follows: 5 Aye(s): Senator(s) Wakai, Chang, DeCoite, Richards, Fevella; Aye(s) with reservations: none ; 0 No(es): none; and 0 Excused: none.",
+          "description": "The committee(s) on EIG recommend(s) that the measure be PASSED, WITH AMENDMENTS. The votes in EIG were as follows: 5 Aye(s): Senator(s) Wakai, Chang, DeCoite, Richards, Fevella; Aye(s) with reservations: none ; 0 No(es): none; and 0 Excused: none.",
+          "date": "2026-02-18T03:17:40.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/13/26 SB3028: The committee(s) on WLA/EIG has scheduled a public hearing on 02-17-26 3:03PM; Conference Room 224 & Videoconference.",
+          "description": "The committee(s) on WLA/EIG has scheduled a public hearing on 02-17-26 3:03PM; Conference Room 224 & Videoconference.",
+          "date": "2026-02-13T20:32:03.000Z",
+          "badge": {
+            "text": "Hearing",
+            "class": "hearing"
+          }
+        },
+        {
+          "title": "1/30/26 SB3028: Referred to WLA/EIG, WAM.",
+          "description": "Referred to WLA/EIG, WAM.",
+          "date": "2026-01-31T03:14:50.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/26/26 SB3028: Passed First Reading.",
+          "description": "Passed First Reading.",
+          "date": "2026-01-26T19:38:09.000Z",
+          "badge": {
+            "text": "First Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "1/23/26 SB3028: Introduced.",
+          "description": "Introduced.",
+          "date": "2026-01-24T06:38:55.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": true,
+      "isDeferred": false,
+      "isAlive": true
     },
     "HB2150": {
       "type": "HB",
       "number": "2150",
       "year": "2026",
-      "error": "HTTP 403"
+      "updates": [
+        {
+          "title": "1/30/26 HB2150: Referred to ECD, CPC, FIN, referral sheet 5",
+          "description": "Referred to ECD, CPC, FIN, referral sheet 5",
+          "date": "2026-01-31T04:03:58.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/28/26 HB2150: Introduced and Pass First Reading.",
+          "description": "Introduced and Pass First Reading.",
+          "date": "2026-01-28T22:54:33.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        },
+        {
+          "title": "1/26/26 HB2150: Pending introduction.",
+          "description": "Pending introduction.",
+          "date": "2026-01-26T22:24:28.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": false,
+      "isDeferred": false,
+      "isAlive": false
     },
     "SB2362": {
       "type": "SB",
       "number": "2362",
       "year": "2026",
-      "error": "HTTP 403"
+      "updates": [
+        {
+          "title": "3/10/26 SB2362: Referred to ECD, FIN, referral sheet 16",
+          "description": "Referred to ECD, FIN, referral sheet 16",
+          "date": "2026-03-10T19:40:38.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "3/10/26 SB2362: Pass First Reading",
+          "description": "Pass First Reading",
+          "date": "2026-03-10T19:40:27.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/6/26 SB2362: Received from Senate (Sen. Com. No. 53) in amended form (SD 1).",
+          "description": "Received from Senate (Sen. Com. No. 53) in amended form (SD 1).",
+          "date": "2026-03-07T03:12:41.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/6/26 SB2362: Report Adopted; Passed Third Reading. Ayes, 24; Aye(s) with reservations: none.  Noes, 0 (none).  Excused, 1 (Senator(s) Ihara).  Transmitted to House.",
+          "description": "Report Adopted; Passed Third Reading. Ayes, 24; Aye(s) with reservations: none. Noes, 0 (none). Excused, 1 (Senator(s) Ihara). Transmitted to House.",
+          "date": "2026-03-06T23:04:36.000Z",
+          "badge": {
+            "text": "Passed Chamber",
+            "class": "passed"
+          }
+        },
+        {
+          "title": "3/5/26 SB2362: One Day Notice 03-06-26.",
+          "description": "One Day Notice 03-06-26.",
+          "date": "2026-03-05T19:08:56.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/5/26 SB2362: Reported from WAM (Stand. Com. Rep. No. 2864) with recommendation of passage on Third Reading.",
+          "description": "Reported from WAM (Stand. Com. Rep. No. 2864) with recommendation of passage on Third Reading.",
+          "date": "2026-03-05T19:08:56.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/2/26 SB2362: The committee(s) on WAM recommend(s) that the measure be PASSED, UNAMENDED.  The votes in WAM were as follows: 13 Aye(s): Senator(s) Dela Cruz, Moriwaki, DeCoite, Elefante, Hashimoto, Inouye, Kanuha, Kidani, Kim, Lee, C., Richards, Wakai, Fevella; Aye(s) with reservations: none ; 0 No(es): none; and 0 Excused: none.",
+          "description": "The committee(s) on WAM recommend(s) that the measure be PASSED, UNAMENDED. The votes in WAM were as follows: 13 Aye(s): Senator(s) Dela Cruz, Moriwaki, DeCoite, Elefante, Hashimoto, Inouye, Kanuha, Kidani, Kim, Lee, C., Richards, Wakai, Fevella; Aye(s) with reservations: none ; 0 No(es): none; and 0 Excused: none.",
+          "date": "2026-03-02T23:15:07.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/27/26 SB2362: The committee on WAM has rescheduled its decision making to 03-02-26 10:02AM; CR 211 & Videoconference.",
+          "description": "The committee on WAM has rescheduled its decision making to 03-02-26 10:02AM; CR 211 & Videoconference.",
+          "date": "2026-02-27T20:34:09.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/23/26 SB2362: The committee(s) on WAM will hold a public decision making on 03-02-26 10:31AM; Conference Room 211 & Videoconference.",
+          "description": "The committee(s) on WAM will hold a public decision making on 03-02-26 10:31AM; Conference Room 211 & Videoconference.",
+          "date": "2026-02-24T02:16:44.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/20/26 SB2362: Report adopted; Passed Second Reading, as amended (SD 1) and referred to WAM.",
+          "description": "Report adopted; Passed Second Reading, as amended (SD 1) and referred to WAM.",
+          "date": "2026-02-20T21:39:59.000Z",
+          "badge": {
+            "text": "Second Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "2/20/26 SB2362: Reported from EDT/CPN (Stand. Com. Rep. No. 2630) with recommendation of passage on Second Reading, as amended (SD 1) and referral to WAM.",
+          "description": "Reported from EDT/CPN (Stand. Com. Rep. No. 2630) with recommendation of passage on Second Reading, as amended (SD 1) and referral to WAM.",
+          "date": "2026-02-20T04:15:48.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "2/18/26 SB2362: The committee(s) on  CPN recommend(s) that the measure be PASSED, WITH AMENDMENTS.  The votes in CPN were as follows: 4 Aye(s): Senator(s) Keohokalole, Fukunaga, Lamosao, Awa; Aye(s) with reservations: none ; 0 No(es): none; and 1 Excused: Senator(s) McKelvey.",
+          "description": "The committee(s) on CPN recommend(s) that the measure be PASSED, WITH AMENDMENTS. The votes in CPN were as follows: 4 Aye(s): Senator(s) Keohokalole, Fukunaga, Lamosao, Awa; Aye(s) with reservations: none ; 0 No(es): none; and 1 Excused: Senator(s) McKelvey.",
+          "date": "2026-02-19T01:56:05.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/18/26 SB2362: The committee(s) on  EDT recommend(s) that the measure be PASSED, WITH AMENDMENTS.  The votes in EDT were as follows: 5 Aye(s): Senator(s) DeCoite, Wakai, Fukunaga, Kim, Fevella; Aye(s) with reservations: none ; 0 No(es): none; and 0 Excused: none.",
+          "description": "The committee(s) on EDT recommend(s) that the measure be PASSED, WITH AMENDMENTS. The votes in EDT were as follows: 5 Aye(s): Senator(s) DeCoite, Wakai, Fukunaga, Kim, Fevella; Aye(s) with reservations: none ; 0 No(es): none; and 0 Excused: none.",
+          "date": "2026-02-18T21:12:03.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/12/26 SB2362: The committee(s) on EDT/CPN has scheduled a public hearing on 02-18-26 10:05AM; Conference Room 229 & Videoconference.",
+          "description": "The committee(s) on EDT/CPN has scheduled a public hearing on 02-18-26 10:05AM; Conference Room 229 & Videoconference.",
+          "date": "2026-02-12T22:59:36.000Z",
+          "badge": {
+            "text": "Hearing",
+            "class": "hearing"
+          }
+        },
+        {
+          "title": "1/26/26 SB2362: Referred to EDT/CPN, WAM.",
+          "description": "Referred to EDT/CPN, WAM.",
+          "date": "2026-01-27T04:34:27.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/21/26 SB2362: Introduced and passed First Reading.",
+          "description": "Introduced and passed First Reading.",
+          "date": "2026-01-21T21:38:43.000Z",
+          "badge": {
+            "text": "First Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "1/16/26 SB2362: Pending Introduction.",
+          "description": "Pending Introduction.",
+          "date": "2026-01-16T20:17:51.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": true,
+      "isDeferred": false,
+      "isAlive": true
     },
     "HB2010": {
       "type": "HB",
       "number": "2010",
       "year": "2026",
-      "error": "HTTP 403"
+      "updates": [
+        {
+          "title": "2/5/26 HB2010: The committee(s) on HSH recommend(s) that the measure be deferred.",
+          "description": "The committee(s) on HSH recommend(s) that the measure be deferred.",
+          "date": "2026-02-05T22:37:00.000Z",
+          "badge": {
+            "text": "Deferred",
+            "class": "deferred"
+          }
+        },
+        {
+          "title": "2/2/26 HB2010: Bill scheduled to be heard by HSH on Thursday, 02-05-26 9:30AM in House conference room 329 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled to be heard by HSH on Thursday, 02-05-26 9:30AM in House conference room 329 VIA VIDEOCONFERENCE.",
+          "date": "2026-02-02T22:05:18.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "1/28/26 HB2010: Referred to HSH, FIN, referral sheet 3",
+          "description": "Referred to HSH, FIN, referral sheet 3",
+          "date": "2026-01-28T19:34:24.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/26/26 HB2010: Introduced and Pass First Reading.",
+          "description": "Introduced and Pass First Reading.",
+          "date": "2026-01-26T19:18:14.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        },
+        {
+          "title": "1/23/26 HB2010: Pending introduction.",
+          "description": "Pending introduction.",
+          "date": "2026-01-24T04:01:29.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": true,
+      "isDeferred": true,
+      "isAlive": false
     },
     "SB2468": {
       "type": "SB",
       "number": "2468",
       "year": "2026",
-      "error": "HTTP 403"
+      "updates": [
+        {
+          "title": "1/28/26 SB2468: Referred to HHS, WAM.",
+          "description": "Referred to HHS, WAM.",
+          "date": "2026-01-28T06:18:28.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/22/26 SB2468: Passed First Reading.",
+          "description": "Passed First Reading.",
+          "date": "2026-01-22T21:48:50.000Z",
+          "badge": {
+            "text": "First Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "1/22/26 SB2468: Introduced.",
+          "description": "Introduced.",
+          "date": "2026-01-22T02:21:33.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": false,
+      "isDeferred": false,
+      "isAlive": false
     },
     "HB2623": {
       "type": "HB",
       "number": "2623",
       "year": "2026",
-      "error": "HTTP 403"
+      "updates": [
+        {
+          "title": "2/2/26 HB2623: Referred to FIN, referral sheet 6",
+          "description": "Referred to FIN, referral sheet 6",
+          "date": "2026-02-02T05:51:49.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/28/26 HB2623: Introduced and Pass First Reading.",
+          "description": "Introduced and Pass First Reading.",
+          "date": "2026-01-29T04:24:05.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": false,
+      "isDeferred": false,
+      "isAlive": false
     },
     "SB2587": {
       "type": "SB",
       "number": "2587",
       "year": "2026",
-      "error": "HTTP 403"
+      "updates": [
+        {
+          "title": "1/28/26 SB2587: Referred to WAM.",
+          "description": "Referred to WAM.",
+          "date": "2026-01-29T03:56:39.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/23/26 SB2587: Passed First Reading.",
+          "description": "Passed First Reading.",
+          "date": "2026-01-23T22:13:10.000Z",
+          "badge": {
+            "text": "First Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "1/23/26 SB2587: Introduced.",
+          "description": "Introduced.",
+          "date": "2026-01-23T03:04:55.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": false,
+      "isDeferred": false,
+      "isAlive": false
     },
     "HB1807": {
       "type": "HB",
       "number": "1807",
       "year": "2026",
-      "error": "HTTP 403"
+      "updates": [
+        {
+          "title": "1/26/26 HB1807: Referred to ECD, FIN, referral sheet 1",
+          "description": "Referred to ECD, FIN, referral sheet 1",
+          "date": "2026-01-26T21:38:59.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/23/26 HB1807: Introduced and Pass First Reading.",
+          "description": "Introduced and Pass First Reading.",
+          "date": "2026-01-23T22:20:01.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        },
+        {
+          "title": "1/22/26 HB1807: Pending introduction.",
+          "description": "Pending introduction.",
+          "date": "2026-01-22T22:20:36.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": false,
+      "isDeferred": false,
+      "isAlive": false
     },
     "HB2008": {
       "type": "HB",
       "number": "2008",
       "year": "2026",
-      "error": "HTTP 403"
+      "updates": [
+        {
+          "title": "1/28/26 HB2008: Referred to FIN, referral sheet 3",
+          "description": "Referred to FIN, referral sheet 3",
+          "date": "2026-01-28T19:34:24.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/26/26 HB2008: Introduced and Pass First Reading.",
+          "description": "Introduced and Pass First Reading.",
+          "date": "2026-01-26T19:18:14.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        },
+        {
+          "title": "1/23/26 HB2008: Pending introduction.",
+          "description": "Pending introduction.",
+          "date": "2026-01-24T03:57:53.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": false,
+      "isDeferred": false,
+      "isAlive": false
     }
   }
 }
