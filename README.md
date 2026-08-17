@@ -27,11 +27,29 @@ injected into Squarespace Code Blocks.
 file has un-rewritten asset paths and internal links, and pasting it produces
 missing images plus a duplicated footer.
 
-Regenerate with:
+Regenerate + copy to the clipboard in one step with the pipeline CLI
+([`scripts/squarespace.py`](scripts/squarespace.py)):
 
 ```bash
-python3 scripts/build_squarespace.py
+python3 scripts/squarespace.py our-team        # rebuild, payload on clipboard
+python3 scripts/squarespace.py                 # list every target
+python3 scripts/squarespace.py --all           # rebuild everything, no copy
 ```
+
+It resolves any target in the repo: pages built by `build_squarespace.py`
+(copied from `squarespace-ready/`), hand-authored snippets like
+`header-search` / `footer` / `video-hero` (copied as-is), and **any other
+page or sub-site directory** via a generic embed builder — e.g.
+`python3 scripts/squarespace.py snap-medicaid-timeline` regenerates
+`snap-medicaid-timeline/squarespace-inject.html`. The generic builder
+auto-scopes CSS under a wrapper id for standalone pages, rewrites
+`window.onload`/`DOMContentLoaded` init to survive post-load injection,
+absolutizes assets, remaps internal links, attaches the ʻokina fonts, and
+entity-encodes non-ASCII. To make a brand-new page embeddable, just run it
+through the CLI — no per-page code needed.
+
+(`python3 scripts/build_squarespace.py` alone still works and only rebuilds
+`squarespace-ready/`.)
 
 ### 2. GitHub Pages sub-sites
 
