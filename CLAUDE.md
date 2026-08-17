@@ -93,6 +93,22 @@ the rules that will bite you:
   `writing-bot/content-monitor/blog-urls.json`. The URL manifest short-circuits
   *before* fetching, so to force a re-ingest you must remove both.
 
+## Pol.is poll data (tax-fairness)
+
+`tax-fairness/scripts/fetch-polis-report.py` pulls a Pol.is member poll
+(topic, every idea's agree/disagree/pass tally, opinion-group clustering)
+into one JSON file — stdlib-only, no auth, reverse-engineered from the four
+public API calls a `pol.is/report/<id>` page makes itself. Its companion,
+`polis-sync-primer.py`, refreshes a primer-editor report's `content.md` from
+that JSON via a per-project map file, touching only the vote-derived slots
+the map names — never prose. `--check` reports drift without writing.
+`tax-fairness/README.md`'s two "Unrelated:" sections have full usage; a real
+worked pull lives at `tax-fairness/data/polis/tfc-2027-priorities.json`,
+feeding `primer-editor/projects/tfc-2027-priorities` (a separate repo — its
+own `polis-map.json` is the worked example for a map file). Pol.is only
+knows who voted, never who was invited — that number stays hand-entered
+wherever a report shows it.
+
 ## Automation rules
 
 - **`GITHUB_TOKEN` pushes do not trigger other workflows** (GitHub's recursion
