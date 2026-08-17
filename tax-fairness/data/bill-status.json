@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T15:53:07.576Z",
+  "generatedAt": "2026-08-17T16:31:41.596Z",
   "source": "capitol.hawaii.gov RSS, fetched via GitHub Actions",
   "trackers": [
     {
@@ -715,7 +715,165 @@
       "type": "HB",
       "number": "1850",
       "year": "2026",
-      "error": "HTTP 502"
+      "updates": [
+        {
+          "title": "3/12/26 HB1850: Passed First Reading.",
+          "description": "Passed First Reading.",
+          "date": "2026-03-12T21:55:58.000Z",
+          "badge": {
+            "text": "First Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/12/26 HB1850: Referred to WAM.",
+          "description": "Referred to WAM.",
+          "date": "2026-03-12T18:29:02.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "3/12/26 HB1850: Received from House (Hse. Com. No. 299).",
+          "description": "Received from House (Hse. Com. No. 299).",
+          "date": "2026-03-12T01:04:54.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/10/26 HB1850: Passed Third Reading as amended in HD 2 with Representative(s) Reyes Oda, Souza voting aye with reservations; Representative(s) Alcos, Amato, Garcia, Gedeon, Kong, Matsumoto, Muraoka, Shimizu voting no (8) and Representative(s) Pierick excused (1).  Transmitted to Senate.",
+          "description": "Passed Third Reading as amended in HD 2 Transmitted to Senate.",
+          "date": "2026-03-10T23:36:01.000Z",
+          "badge": {
+            "text": "Passed Chamber",
+            "class": "passed"
+          }
+        },
+        {
+          "title": "3/6/26 HB1850: Forty-eight (48) hours notice Tuesday,  03-10-26.",
+          "description": "Forty-eight (48) hours notice Tuesday, 03-10-26.",
+          "date": "2026-03-07T05:27:40.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/6/26 HB1850: Reported from FIN (Stand. Com. Rep. No. 1117-26) as amended in HD 2, recommending passage on Third Reading.",
+          "description": "Reported from FIN (Stand. Com. Rep. No. 1117-26) as amended in HD 2, recommending passage on Third Reading.",
+          "date": "2026-03-07T05:27:40.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/3/26 HB1850: The committee on FIN recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 15 Ayes: Representative(s) Todd, Takenouchi, Hartsfield, Hussey, Keohokapu-Lee Loy, Kitagawa, Kusch, Lee, M., Miyake, Morikawa, Perruso, Templo, Yamashita; Ayes with reservations: Representative(s) Gedeon, Reyes Oda; 1 Noes: Representative(s) Alcos; and  Excused: none.",
+          "description": "The committee on FIN recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 15 Ayes: Representative(s) Todd, Takenouchi, Hartsfield, Hussey, Keohokapu-Lee Loy, Kitagawa, Kusch, Lee, M., Miyake, Morikawa, Perruso, Templo, Yamashita; Ayes with reservations: Representative(s) Gedeon, Reyes Oda; 1 Noes: Representative(s) Alcos; and Excused: none.",
+          "date": "2026-03-04T04:42:44.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/2/26 HB1850: Bill scheduled for decision making on Tuesday, 03-03-26 2:00PM in conference room 308 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled for decision making on Tuesday, 03-03-26 2:00PM in conference room 308 VIA VIDEOCONFERENCE.",
+          "date": "2026-03-03T02:37:32.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/2/26 HB1850: The committee(s) on FIN recommend(s) that the measure be deferred until 03-03-26.",
+          "description": "The committee(s) on FIN recommend(s) that the measure be deferred until 03-03-26.",
+          "date": "2026-03-03T02:05:13.000Z",
+          "badge": {
+            "text": "Deferred",
+            "class": "deferred"
+          }
+        },
+        {
+          "title": "2/27/26 HB1850: Bill scheduled to be heard by FIN on Monday, 03-02-26 2:00PM in House conference room 308 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled to be heard by FIN on Monday, 03-02-26 2:00PM in House conference room 308 VIA VIDEOCONFERENCE.",
+          "date": "2026-02-28T00:46:10.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/17/26 HB1850: Passed Second Reading as amended in HD 1 and referred to the committee(s) on FIN with Representative(s) Amato, Reyes Oda, Souza voting aye with reservations; Representative(s) Alcos, Garcia, Gedeon, Matsumoto, Muraoka, Pierick, Shimizu voting no (7) and Representative(s) Cochran, Lee, M., Poepoe excused (3).",
+          "description": "Passed Second Reading as amended in HD 1 and referred to the committee(s) on FIN, Poepoe excused (3).",
+          "date": "2026-02-17T22:52:00.000Z",
+          "badge": {
+            "text": "Second Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "2/17/26 HB1850: Reported from ECD (Stand. Com. Rep. No. 294-26) as amended in HD 1, recommending passage on Second Reading and referral to FIN.",
+          "description": "Reported from ECD (Stand. Com. Rep. No. 294-26) as amended in HD 1, recommending passage on Second Reading and referral to FIN.",
+          "date": "2026-02-14T01:44:11.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "2/4/26 HB1850: The committee on ECD recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 6 Ayes: Representative(s) Ilagan, Hussey, Holt, Tam, Templo, Yamashita; Ayes with reservations: none; 1 Noes: Representative(s) Gedeon; and  Excused: none.",
+          "description": "The committee on ECD recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 6 Ayes: Representative(s) Ilagan, Hussey, Holt, Tam, Templo, Yamashita; Ayes with reservations: none; 1 Noes: Representative(s) Gedeon; and Excused: none.",
+          "date": "2026-02-04T21:49:03.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "1/30/26 HB1850: Bill scheduled to be heard by ECD on Wednesday, 02-04-26 10:00AM in House conference room 423 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled to be heard by ECD on Wednesday, 02-04-26 10:00AM in House conference room 423 VIA VIDEOCONFERENCE.",
+          "date": "2026-01-31T02:15:24.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "1/26/26 HB1850: Referred to ECD, FIN, referral sheet 2",
+          "description": "Referred to ECD, FIN, referral sheet 2",
+          "date": "2026-01-27T05:02:15.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/26/26 HB1850: Introduced and Pass First Reading.",
+          "description": "Introduced and Pass First Reading.",
+          "date": "2026-01-26T19:18:13.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        },
+        {
+          "title": "1/23/26 HB1850: Pending introduction.",
+          "description": "Pending introduction.",
+          "date": "2026-01-23T22:25:45.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": true,
+      "isDeferred": false,
+      "isAlive": true
     },
     "SB2441": {
       "type": "SB",
