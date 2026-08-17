@@ -170,6 +170,21 @@ BudgetPrimerFinal). Usage:
 (`department_code`, `section`, `fund_type`, `amount`, etc.) are documented in
 the script itself.
 
+## Unrelated: `scripts/fetch-polis-report.py`
+
+Also standalone, also unrelated to the bill tracker: pulls a Pol.is member
+poll (topic, every idea's agree/disagree/pass tally, and the opinion-group
+clustering) into one JSON file, stdlib-only, no auth. Reverse-engineered from
+the four public API calls a `pol.is/report/<id>` page itself makes — see the
+script's own header for the full endpoint list and what it deliberately
+leaves out (how many people were *invited* to vote isn't knowable from
+Pol.is; neither is any editorial read of the numbers). Usage:
+`python3 scripts/fetch-polis-report.py <report-id-or-url> -o data/polis/<name>.json`.
+`data/polis/tfc-2027-priorities.json` is a real pull (the coalition's 2027
+priorities poll, also written up at
+`primer-editor/projects/tfc-2027-priorities`) kept as a worked example —
+regenerate it the same way if that poll's votes change.
+
 ## Quick diagnostics
 
 Work through these in order — each one isolates a different stage of the
