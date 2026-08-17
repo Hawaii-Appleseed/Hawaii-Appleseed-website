@@ -316,6 +316,87 @@ def pbcopy(path):
     return len(data)
 
 
+# ---------------------------------------------------------------------------
+# --snippet: browser-console paste (see README "Pasting from the browser")
+# ---------------------------------------------------------------------------
+
+# One self-contained expression, pasted into the DevTools console (or run by
+# Claude via the Chrome MCP) while a Code Block editor is open. It pulls the
+# payload straight from GitHub Pages, so the bytes never travel through the
+# clipboard or a chat transcript, and size is irrelevant.
+#
+# Why it is built this way (all four verified live in the 7.1 editor):
+#   • Squarespace's code editor is CodeMirror 6 and exposes no EditorView on
+#     the DOM, so the document is replaced through the two events CM6 itself
+#     listens for: a synthetic Mod-A keydown (its keymap runs selectAll on the
+#     STATE, which a DOM Selection cannot do — CM6 only renders the visible
+#     lines) followed by a synthetic paste carrying a DataTransfer.
+#   • A synthetic paste does register with Squarespace's change tracking: the
+#     SAVE button lights up, so the edit is real and will persist.
+#   • A real Cmd+V does NOT work — the automation layer's key events do not
+#     drive a native clipboard paste.
+#   • navigator.clipboard.readText() is a dead end: it needs a focused tab AND
+#     a one-time permission grant, and hangs the tab while that prompt is up.
+SNIPPET_JS = (
+    "await (async () => {"
+    "const t = await fetch('%s?t=' + Date.now(), {cache:'no-store'})"
+    ".then(r => r.ok ? r.text() : Promise.reject('HTTP ' + r.status));"
+    "const c = document.querySelector('.cm-content');"
+    "if (!c) throw new Error('No code editor found - open the Code Block editor first');"
+    "c.focus();"
+    "c.dispatchEvent(new KeyboardEvent('keydown',{key:'a',code:'KeyA',metaKey:true,"
+    "keyCode:65,which:65,bubbles:true,cancelable:true}));"
+    "const d = new DataTransfer(); d.setData('text/plain', t);"
+    "c.dispatchEvent(new ClipboardEvent('paste',{clipboardData:d,bubbles:true,cancelable:true}));"
+    "return 'pasted ' + t.length + ' chars';})()"
+)
+
+
+def pages_url(rel_out):
+    return bs.ASSET_BASE + rel_out.replace(os.sep, "/")
+
+
+def check_pages_matches(rel_out):
+    """True if GitHub Pages already serves the local bytes. The snippet reads
+    from Pages, so an unpushed payload would silently paste the OLD content —
+    exactly the stale-paste failure this pipeline exists to prevent."""
+    import hashlib
+    import urllib.request
+    local = hashlib.sha256(open(os.path.join(ROOT, rel_out), "rb").read()).hexdigest()
+    try:
+        with urllib.request.urlopen(pages_url(rel_out) + "?t=check", timeout=20) as r:
+            remote = hashlib.sha256(r.read()).hexdigest()
+    except Exception as e:
+        return None, "could not reach GitHub Pages (%s)" % e
+    return local == remote, None
+
+
+def emit_snippet(rel_out):
+    url = pages_url(rel_out)
+    match, err = check_pages_matches(rel_out)
+    if err:
+        print("WARNING: %s — snippet may paste stale content." % err)
+    elif not match:
+        print("WARNING: GitHub Pages is serving DIFFERENT bytes than your local")
+        print("         %s" % rel_out)
+        print("         Commit + push and wait for the Pages deploy (~90s), else")
+        print("         this snippet pastes the OLD payload. Re-run to re-check.")
+    else:
+        print("GitHub Pages is serving the current bytes. ✓")
+    js = SNIPPET_JS % url
+    subprocess.run(["pbcopy"], input=js.encode("utf-8"), check=True)
+    print("\nConsole snippet is on the clipboard (%d chars). Source:\n  %s" % (len(js), url))
+    print("\nHow to use:")
+    print("  1. Squarespace > the page > EDIT > double-click the Code Block")
+    print("     (its editor panel opens on the right; leave Display Source OFF)")
+    print("  2. Open DevTools (Cmd+Opt+I) > Console > paste the snippet > Enter")
+    print("     It prints  'pasted N chars'  and the SAVE button lights up.")
+    print("  3. Check the payload, then click SAVE yourself.")
+    print("\nNote: embedded scripts stay disabled while you are logged in and")
+    print("editing, so the block shows a placeholder until you preview or log out.")
+    print("\n" + js)
+
+
 def copy_and_report(rel_out):
     size = pbcopy(os.path.join(ROOT, rel_out))
     print("\n%s (%d KB) is on the clipboard." % (rel_out, round(size / 1024)))
@@ -337,8 +418,9 @@ def list_targets():
 
 
 def main(argv):
-    copy = "--no-copy" not in argv
-    argv = [a for a in argv if a != "--no-copy"]
+    snippet = "--snippet" in argv
+    copy = "--no-copy" not in argv and not snippet
+    argv = [a for a in argv if a not in ("--no-copy", "--snippet")]
 
     if not argv:
         list_targets()
@@ -357,30 +439,27 @@ def main(argv):
     if stem in known:
         bs.main()
         out = os.path.join("squarespace-ready", known[stem])
-        if copy:
-            copy_and_report(out)
-        return 0
-
-    if target in SNIPPETS:
-        if copy:
-            copy_and_report(SNIPPETS[target])
-        else:
-            print(SNIPPETS[target])
-        return 0
-
-    # Generic: directory with index.html, or a direct .html path.
-    if os.path.isdir(os.path.join(ROOT, target)):
-        rel = os.path.join(target, "index.html")
+    elif target in SNIPPETS:
+        out = SNIPPETS[target]
     else:
-        rel = target if target.endswith(".html") else target + ".html"
-    if not os.path.exists(os.path.join(ROOT, rel)):
-        print("No such target: %s (run with no arguments to list)" % target,
-              file=sys.stderr)
-        return 1
-    out = build_generic(rel)
-    print("built %s" % out)
-    if copy:
+        # Generic: directory with index.html, or a direct .html path.
+        if os.path.isdir(os.path.join(ROOT, target)):
+            rel = os.path.join(target, "index.html")
+        else:
+            rel = target if target.endswith(".html") else target + ".html"
+        if not os.path.exists(os.path.join(ROOT, rel)):
+            print("No such target: %s (run with no arguments to list)" % target,
+                  file=sys.stderr)
+            return 1
+        out = build_generic(rel)
+        print("built %s" % out)
+
+    if snippet:
+        emit_snippet(out)
+    elif copy:
         copy_and_report(out)
+    else:
+        print(out)
     return 0
 
 
