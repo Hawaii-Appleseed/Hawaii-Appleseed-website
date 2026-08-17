@@ -51,6 +51,44 @@ through the CLI — no per-page code needed.
 (`python3 scripts/build_squarespace.py` alone still works and only rebuilds
 `squarespace-ready/`.)
 
+### Pasting from the browser (no manual copy/paste)
+
+Payloads run 15–126 KB, which is miserable to hand-paste. `--snippet` skips it:
+
+```bash
+python3 scripts/squarespace.py our-team --snippet
+```
+
+That puts a one-line **console snippet** on the clipboard which pulls the
+payload straight from GitHub Pages and drops it into the open Code Block
+editor. Then:
+
+1. Squarespace → the page → **EDIT** → double-click the Code Block. Its editor
+   opens on the right; leave **Display Source Code OFF**.
+2. DevTools (`Cmd+Opt+I`) → Console → paste the snippet → Enter. It prints
+   `pasted N chars` and the **SAVE** button lights up.
+3. Eyeball it, then click **SAVE** yourself.
+
+Because the snippet reads from Pages, **push first** — `--snippet` checks the
+served bytes against your local file and warns loudly if Pages is stale, so a
+forgotten push can't silently re-paste the old payload.
+
+Two things that look broken but aren't: the block renders a grey *"embedded
+scripts are disabled"* placeholder while you're logged in and editing (use
+Preview or a logged-out window), and pasting identical content leaves SAVE
+greyed out — that means the page already matches the repo.
+
+Mechanics, in case it ever breaks: the editor is **CodeMirror 6** and exposes
+no `EditorView` on the DOM, so the snippet drives the two events CM6 itself
+listens for — a synthetic `Mod-A` keydown (its keymap selects the whole
+*state*; a DOM Selection can't, since CM6 only renders visible lines) then a
+synthetic `paste` carrying a `DataTransfer`. Squarespace's change tracking
+does observe that paste. Three things that do **not** work: a real `Cmd+V`
+(automation key events don't drive a native paste), `navigator.clipboard.
+readText()` (needs a focused tab plus a one-time permission grant, and hangs
+the tab while the prompt is up), and `fetch` to a `localhost` server (Private
+Network Access blocks it and the promise never settles).
+
 ### 2. GitHub Pages sub-sites
 
 Everything under a sub-directory with its own `index.html` is served directly
