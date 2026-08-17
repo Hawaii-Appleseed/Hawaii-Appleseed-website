@@ -185,6 +185,17 @@ priorities poll, also written up at
 `primer-editor/projects/tfc-2027-priorities`) kept as a worked example —
 regenerate it the same way if that poll's votes change.
 
+Its companion, `scripts/polis-sync-primer.py`, takes that JSON and gets the
+vote-derived numbers into a primer-editor report's `content.md` — the format
+docsync actually consumes — touching only the slots a per-project map file
+names (never prose, never anything editorial). Usage:
+`python3 scripts/polis-sync-primer.py POLIS_JSON CONTENT_MD MAP_JSON --check`
+to see drift without writing anything, then drop `--check` to apply. The
+`--check` run against `primer-editor/projects/tfc-2027-priorities` is what
+caught the 102-vs-101 discrepancy above — every other mapped slot already
+matched. `primer-editor/projects/tfc-2027-priorities/polis-map.json` is the
+worked example for a map file, including what it deliberately doesn't cover.
+
 ## Quick diagnostics
 
 Work through these in order — each one isolates a different stage of the
