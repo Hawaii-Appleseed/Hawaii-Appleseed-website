@@ -51,6 +51,34 @@ through the CLI — no per-page code needed.
 (`python3 scripts/build_squarespace.py` alone still works and only rebuilds
 `squarespace-ready/`.)
 
+### Fully automated publish (no clipboard, no DevTools)
+
+`scripts/publish_squarespace.py` does the whole thing — rebuild, open the
+editor, replace the Code Block, click SAVE:
+
+```bash
+.venv/bin/python scripts/publish_squarespace.py --login          # once, ever
+.venv/bin/python scripts/publish_squarespace.py our-team --dry-run
+.venv/bin/python scripts/publish_squarespace.py our-team
+```
+
+`--login` opens Chrome so you can sign in to Squarespace once; the session
+lives in `.sqs-profile/` (gitignored) and is reused from then on. It drives
+the Google Chrome already installed on the machine, in its own profile
+directory, so it never fights your running browser.
+
+After that, one command per page. `--dry-run` does everything except the
+final SAVE click and leaves the window open to inspect. The payload is
+injected straight from the local file, so this needs **no push and no Pages
+round trip** — unlike `--snippet` below.
+
+If SAVE comes back greyed out, that is not a failure: the live page already
+matched the payload byte for byte.
+
+Page targets map to sidebar titles in `PAGE_TITLES` (filename != slug !=
+title — `our-story` is "Our History", `food-security` is "Food Equity"); an
+unknown target falls back to the live site's own title for that slug.
+
 ### Pasting from the browser (no manual copy/paste)
 
 Payloads run 15–126 KB, which is miserable to hand-paste. `--snippet` skips it:

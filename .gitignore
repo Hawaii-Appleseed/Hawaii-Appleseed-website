@@ -7,3 +7,4 @@ __pycache__/
 writing-bot/.chroma/
 writing-bot/tools/node_modules/
 writing-bot/.venv/
+.venv/
