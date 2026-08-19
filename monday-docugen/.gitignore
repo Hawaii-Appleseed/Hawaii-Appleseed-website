@@ -1,0 +1,5 @@
+# .venv/, node_modules/, __pycache__/, .env, .DS_Store are already ignored repo-wide.
+# This subtree's own generated output:
+out/
+monday-app/output/
+apps-script/.tokens.json

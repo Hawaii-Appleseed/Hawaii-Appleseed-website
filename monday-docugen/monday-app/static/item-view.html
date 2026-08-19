@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generate document</title>
+<script src="https://cdn.jsdelivr.net/npm/monday-sdk-js/dist/main.js"></script>
+<style>
+  :root { color-scheme: light dark; --fg:#323338; --muted:#676879; --line:#d0d4e4;
+          --accent:#0073ea; --ok:#00854d; --bad:#d83a52; --bg:#fff; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg:#d5d8df; --muted:#9699a6; --line:#4b4e69; --bg:#181b34; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:16px; background:var(--bg); color:var(--fg);
+         font: 14px/1.5 Figtree, Roboto, -apple-system, system-ui, sans-serif; }
+  h1 { font-size:16px; margin:0 0 12px; }
+  label { display:block; font-size:12px; color:var(--muted); margin:12px 0 4px; }
+  select, input { width:100%; padding:8px 10px; border:1px solid var(--line);
+                  border-radius:4px; background:var(--bg); color:var(--fg); font:inherit; }
+  button { margin-top:16px; width:100%; padding:9px 14px; border:0; border-radius:4px;
+           background:var(--accent); color:#fff; font:600 14px/1 inherit; cursor:pointer; }
+  button:disabled { opacity:.55; cursor:default; }
+  #connect { display:none; margin-top:10px; padding:9px 14px; border-radius:4px;
+             border:1px solid var(--accent); color:var(--accent); text-align:center;
+             text-decoration:none; font-weight:600; }
+  #status { margin-top:14px; padding:10px 12px; border-radius:4px; font-size:13px;
+            border:1px solid var(--line); display:none; }
+  #status.show { display:block; }
+  #status.ok { border-color:var(--ok); color:var(--ok); }
+  #status.bad { border-color:var(--bad); color:var(--bad); }
+  .row { display:flex; gap:10px; }
+  .row > div { flex:1; }
+</style>
+</head>
+<body>
+<h1>Generate document</h1>
+
+<label for="template">Template</label>
+<select id="template"><option value="">Loading…</option></select>
+
+<div class="row">
+  <div>
+    <label for="format">Format</label>
+    <select id="format">
+      <option value="docx">Word (.docx)</option>
+      <option value="pdf">PDF</option>
+    </select>
+  </div>
+  <div>
+    <label for="filesColumn">Files column id (optional)</label>
+    <input id="filesColumn" placeholder="files">
+  </div>
+</div>
+
+<button id="go" disabled>Generate</button>
+<a id="connect" target="_blank" rel="noopener">Connect monday account</a>
+<div id="status"></div>
+
+<script>
+const mondayClient = window.mondaySdk();
+const $ = (id) => document.getElementById(id);
+let itemId = null, sessionToken = null;
+
+function say(message, kind) {
+  const el = $('status');
+  el.textContent = message;
+  el.className = 'show' + (kind ? ' ' + kind : '');
+}
+
+class NeedsAuth extends Error {
+  constructor(installUrl) {
+    super('This monday account has not connected the app yet.');
+    this.installUrl = installUrl;
+  }
+}
+
+async function api(path, options = {}) {
+  const response = await fetch(path, {
+    ...options,
+    headers: { 'Content-Type': 'application/json',
+               'Authorization': sessionToken, ...(options.headers || {}) },
+  });
+  const body = await response.json().catch(() => ({}));
+  if (response.status === 428 && body.needsAuth) throw new NeedsAuth(body.installUrl);
+  if (!response.ok) throw new Error(body.error || `HTTP ${response.status}`);
+  return body;
+}
+
+function offerConnect(installUrl) {
+  say('Connect your monday account to generate documents.', 'bad');
+  const select = $('template');
+  if (!select.value) select.innerHTML = '<option value="">Not connected</option>';
+  $('connect').href = installUrl || '/oauth/install';
+  $('connect').style.display = 'block';
+  $('go').disabled = true;
+}
+
+function handle(error) {
+  if (error instanceof NeedsAuth) offerConnect(error.installUrl);
+  else say(error.message, 'bad');
+}
+
+async function init() {
+  sessionToken = await mondayClient.get('sessionToken').then((r) => r.data);
+  if (!sessionToken) throw new Error('No session token — is this running inside monday?');
+
+  const context = (await mondayClient.get('context').then((r) => r.data)) || {};
+  itemId = context.itemId || context.itemIds?.[0];
+  if (!itemId) {
+    throw new Error('No item in context. This app has to be added as an item view.');
+  }
+
+  const connection = await api('/oauth/status');
+  if (!connection.connected) {
+    offerConnect(connection.install_url);
+    return;
+  }
+  $('connect').style.display = 'none';
+
+  const { options } = await api('/api/templates');
+  const select = $('template');
+  select.innerHTML = '';
+  if (!options.length) {
+    select.innerHTML = '<option value="">No templates installed</option>';
+    say('Add a .docx template to the app before generating.', 'bad');
+    return;
+  }
+  for (const option of options) {
+    select.insertAdjacentHTML('beforeend',
+      `<option value="${option.value}">${option.title}</option>`);
+  }
+  $('go').disabled = false;
+}
+
+async function poll(jobId) {
+  for (let attempt = 0; attempt < 120; attempt++) {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const job = await api(`/api/jobs/${jobId}`);
+    if (job.status === 'done') return job.result;
+    if (job.status === 'error') throw new Error(job.error);
+  }
+  throw new Error('Timed out waiting for the document');
+}
+
+$('go').addEventListener('click', async () => {
+  $('go').disabled = true;
+  say('Generating…');
+  try {
+    const { jobId } = await api('/api/generate', {
+      method: 'POST',
+      body: JSON.stringify({
+        itemId,
+        template: $('template').value,
+        outputFormat: $('format').value,
+        filesColumn: $('filesColumn').value || null,
+      }),
+    });
+    const result = await poll(jobId);
+    say(`Created ${result.filename}` +
+        (result.uploaded ? ' and filed it on this item.' : '.'), 'ok');
+    mondayClient.execute('notice',
+      { message: `Document ready: ${result.filename}`, type: 'success', timeout: 5000 });
+  } catch (error) {
+    handle(error);
+  } finally {
+    $('go').disabled = $('connect').style.display === 'block';
+  }
+});
+
+init().catch(handle);
+</script>
+</body>
+</html>
