@@ -1,0 +1,4 @@
+# everything except the two files Apps Script actually wants
+**/**
+!Code.js
+!appsscript.json
