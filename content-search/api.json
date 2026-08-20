@@ -1,7 +1,7 @@
 {
   "name": "hawaii-appleseed-content-search",
   "version": 1,
-  "generatedAt": "2026-08-20T22:49:00Z",
+  "generatedAt": "2026-08-20T23:26:54Z",
   "counts": {
     "documents": 205,
     "chunks": 2000,
@@ -15,7 +15,7 @@
     },
     "chunks.json": {
       "path": "data/chunks.json",
-      "sha256": "8d040d35c9c8a933803a59ff3cb2dae4f5e2c52fa5ba0ec73e711267ed5492f0"
+      "sha256": "6e4063895b0c6235d9149a4773105f95fb9173df26b9f3d514e5910344bf2d18"
     },
     "bm25.json": {
       "path": "data/bm25.json",
@@ -31,7 +31,7 @@
     },
     "embeddings.bin": {
       "path": "data/embeddings.bin",
-      "sha256": "78d709f3c1655e9bca076622b56d4e7c09ac30e507d0331d4f9b9a8b6825effd"
+      "sha256": "ad85fbf0e47180d06eeb4f4316a8cd8bee82f06fa66c3a43de246c80ff98414b"
     },
     "embeddings.meta.json": {
       "path": "data/embeddings.meta.json"
