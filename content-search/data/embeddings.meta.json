@@ -3,6 +3,6 @@
   "dtype": "q8",
   "dim": 384,
   "count": 2000,
-  "sha256": "691240dfcbea2a2269e80f50a96e1da909cfe783f7bb4d64d6e9133f8d823ea9",
+  "sha256": "78d709f3c1655e9bca076622b56d4e7c09ac30e507d0331d4f9b9a8b6825effd",
   "transformersjs_version": "3.7.5"
 }
