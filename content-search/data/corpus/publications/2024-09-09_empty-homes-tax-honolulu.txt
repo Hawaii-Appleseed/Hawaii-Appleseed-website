@@ -13,7 +13,7 @@ September 2024
 Exploring an Empty 
 Homes Tax for Honolulu
 
-H AWA I‘I   A P P L E S E E D
+H AWA IʻI   A P P L E S E E D
 
 CENTER FOR LAW & ECONOMIC JUSTICE
 
@@ -617,11 +617,11 @@ Honolulu’s low property tax rates make it particularly attractive for investor
 long-term appreciation of property values. The combination of strong demand, limited supply, and favorable tax 
 conditions creates an environment where real estate holdings can generate substantial financial gains.
 
-Figure 1. Median Home Sales Price, Hawai‘i vs National Average, Single-Family Home (SFH) vs Condo
+Figure 1. Median Home Sales Price, Hawaiʻi vs National Average, Single-Family Home (SFH) vs Condo
 
-Median Hawai‘i SFH
+Median Hawaiʻi SFH
 
-Median Hawai‘i Condo
+Median Hawaiʻi Condo
 
 Median National SFH
 
@@ -640,7 +640,7 @@ $250,000.00
 $0.00
 
 Figure 1. Home sale prices in 
-Hawai‘i have increased nearly 
+Hawaiʻi have increased nearly 
 400 percent since 2000—a 
 much larger increase than the 
 national average. Buyers who 
@@ -661,7 +661,7 @@ on a condominium.
 
 2020
 
-History of Median Sales Price for Single Family Homes and Condos in Hawai‘i:
+History of Median Sales Price for Single Family Homes and Condos in Hawaiʻi:
 • 
 
 “Annual Residential Resales Data for Oahu”, Honolulu Board of Realtors, 2024. https://www.hicentral.com/oahu-
@@ -722,19 +722,19 @@ per home.
 
 Property taxes paid per year aggregated data by applying the corresponding City & County of Honolulu property tax rate(s) 
 for Residential and Residential A (introduced 2017) between the years 2000–2023, to the median value of a single family 
-home or condo in Hawai‘i.
+home or condo in Hawaiʻi.
 •  Yearly City & County of Honolulu Real Property Tax Rates: Department of Budget & Fiscal Services Real Property 
 
-Assessment Division, “State of Hawai‘i - Tax Rates,” City & County of Honolulu, 2000–2023. https://realproperty.honolulu.
+Assessment Division, “State of Hawaiʻi - Tax Rates,” City & County of Honolulu, 2000–2023. https://realproperty.honolulu.
 gov/state-reports/2000 
 
 Property taxes that could have been paid per year if the national average of property tax rate in 2024 was applied to the 
-median value of a single family home or condo in Hawai‘i.
+median value of a single family home or condo in Hawaiʻi.
 •  Aggregated national average effective property tax rate: “Property tax rates by state,” Bankrate, March 2024. https://
 
 www.bankrate.com/real-estate/property-tax-by-state/#tax-by-state
 
-•  Historical median values of single family homes and condos: “Annual Residential Resales Data for O‘ahu”, Honolulu Board 
+•  Historical median values of single family homes and condos: “Annual Residential Resales Data for Oʻahu”, Honolulu Board 
 
 of Realtors, 2024. https://www.hicentral.com/oahu-historical-data.php
 
@@ -783,7 +783,7 @@ local residents.
 
 REASONS FOR VACANT PROPERTIES
 
-Figure 3. Active Short Term Rental Listings on O‘ahu
+Figure 3. Active Short Term Rental Listings on Oʻahu
 
 10,000
 
@@ -807,7 +807,7 @@ Figure 3. Active Short Term Rental Listings on O‘ahu
 
 8/23
 
-Figure 4. STR Listings by Minimum Stay, O‘ahu
+Figure 4. STR Listings by Minimum Stay, Oʻahu
 
 30+ Nights
 
@@ -824,7 +824,7 @@ Nights
 
 9,743
 Current STR Listings
-(O‘ahu, 2024)
+(Oʻahu, 2024)
 
 9.1%
 

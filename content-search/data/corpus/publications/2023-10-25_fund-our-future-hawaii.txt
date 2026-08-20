@@ -52,7 +52,7 @@ Copyright © 2023 Hawaiʻi Budget & Policy Center. All rights reserved.
 EVEN THOUGH HAWAIʻI HAS A PROGRESSIVE TAX SYSTEM ON PAPER, LOWER-INCOME 
 TAXPAYERS STILL HAVE A DISPROPORTIONATELY HIGH TAX BURDEN.
 
-Figure 1. Percentage of Income Paid in Hawai‘i State Taxes
+Figure 1. Percentage of Income Paid in Hawaiʻi State Taxes
 
 14%
 
@@ -111,11 +111,11 @@ small to make families financially secure.
 
 FUND OUR FUTURE • 3
 
-HAWAI’I’S MARGINAL TAX 
+HAWAIʻI’S MARGINAL TAX 
 RATES
 
 Table 1. Income Tax Brackets for 
-Hawai‘i
+Hawaiʻi
 
 The state’s income tax rates for 
 single filers range from 1.4 percent 
@@ -236,7 +236,7 @@ CREATING A NEW INDIVIDUAL
 INCOME TAX BRACKET
 
 Figure 2. Estimated Revenue from New Income Tax Bracket, 
-Hawai‘i (2024)3
+Hawaiʻi (2024)3
 
 In Hawaiʻi, the difference in 
 income tax rates across the board 
@@ -324,7 +324,7 @@ It is estimated that this increase to the capital gains tax would generate $87 m
 vast majority of the projected tax burden (85.4 percent) would fall on the wealthiest taxpayers in Hawaiʻi, since 
 they can afford to invest their money in assets.
 
-Figure 3. Share of Capital Gains Tax Increase by Income Bracket, Hawai‘i (2024)5
+Figure 3. Share of Capital Gains Tax Increase by Income Bracket, Hawaiʻi (2024)5
 
 100%
 
@@ -450,13 +450,13 @@ revenue from this tax.6
 CLOSING THE ESTATE TAX LOOPHOLE
 
 Taxes on estates and inheritance are highly progressive. They help reduce the concentration of property and 
-income by taxing the transfer of wealth from one generation to the next. Hawai’i’s estate tax rates are 10 percent 
+income by taxing the transfer of wealth from one generation to the next. Hawaiʻi’s estate tax rates are 10 percent 
 on the first $1 million or less, increasing to 20 percent for estates valued at more than $10 million. However, 
 there is no tax on the first $5.49 million of an estate, and the rate is marginal. 
 
 Revenues from the estate tax vary considerably from year to year: they were as low as $19 million in 2019 7 and 
 as high as $57 million in 2022. 8 However, they are likely to increase in coming years as the population ages and 
-real property values increase. We recommend improving the progressivity of Hawai’i’s estate tax by reducing the 
+real property values increase. We recommend improving the progressivity of Hawaiʻi’s estate tax by reducing the 
 exemption from $5.49 million to $2.75 million or less.
 
 FUND OUR FUTURE • 7
@@ -487,7 +487,7 @@ $25,000-$99,999*
 Rate for Income 
 $100,000/more*
 
-Hawai‘i Rate
+Hawaiʻi Rate
 
 Average U.S. Rate
 
