@@ -4,17 +4,17 @@ URL: https://hiappleseed.org/publications/hawaii-budget-primer-fy202526
 PDF: https://hiappleseed.org/s/Budget-Primer-FY202526-FINAL.pdf
 ============================================================
 
-H AWA I‘I   A P PL E S E E D
+H AWA IʻI   A P PL E S E E D
 
 CENTER FOR LAW & ECONOMIC JUSTICE
 
-HAWAI‘I
+HAWAIʻI
 BUDGET
 PRIMER
 
 FY2025−26
 
-H AWA I‘I   A P P L E S E E D
+H AWA IʻI   A P P L E S E E D
 
 CENTER FOR LAW & ECONOMIC JUSTICE
 
@@ -107,7 +107,7 @@ Hawaiʻi uses a two-year (biennial) budget cycle. The full budget is passed in o
 adjustments can be made in the second year. Fiscal Years (FY) cover July 1 through June 30, labeled by the 
 calendar year in which they end (e.g. FY 2026 runs from July 2025 through June 2026).
 
-Figure 1. Hawai‘i Budget Lifecycle
+Figure 1. Hawaiʻi Budget Lifecycle
 
 The governor submits the 
 executive budget proposal 
@@ -273,7 +273,7 @@ projects.
 Since it manages the state’s departments and agencies, the Executive Branch receives almost all of the funds in 
 each spending category.
 
-Table 1. Budget Breakdown by Branch and Spending Category, Hawai‘i, FY 2025–26 
+Table 1. Budget Breakdown by Branch and Spending Category, Hawaiʻi, FY 2025–26 
 
 Executive2
 
@@ -342,7 +342,7 @@ BUDGET PRIMER • 5
 
 Operating Budget
 
-Figure 2. Hawai‘i State Budget by Branch and Department, FY2026
+Figure 2. Hawaiʻi State Budget by Branch and Department, FY2026
 
 $4.8B
 
@@ -564,7 +564,7 @@ fund a new Benefits Eligibility Solution.14
 
 FUNDING THE BUDGET
 
-Figure 4. Hawai‘i Budget Means of Finance, FY2026 ($Billions)15
+Figure 4. Hawaiʻi Budget Means of Finance, FY2026 ($Billions)15
 
 $1.5
 (7.3%)
@@ -623,7 +623,7 @@ BUDGET PRIMER • 9
 
 Taxes
 
-Figure 5. Projected Hawai‘i State Tax Revenue, FY2026 ($Billions)16
+Figure 5. Projected Hawaiʻi State Tax Revenue, FY2026 ($Billions)16
 
 $0.45
 (4.4%)

@@ -14,7 +14,7 @@ priorities to expand
 mobility options & 
 reduce vehicle travel
 
-H AWA I‘I   A P P L E S E E D
+H AWA IʻI   A P P L E S E E D
 
 CENTER FOR LAW & ECONOMIC JUSTICE
 
@@ -40,7 +40,7 @@ Executive Summary
 
 Impacts of Rising Vehicle Travel
 
-Transportation Funding in Hawai‘i
+Transportation Funding in Hawaiʻi
 
 •  Federal Transportation Funding Sources
 
@@ -75,7 +75,7 @@ Copyright © 2024 Hawaiʻi Appleseed Center for Law & Economic Justice. All righ
 
 EXECUTIVE SUMMARY
 
-HAWAI‘I’S TRANSPORTATION system is at a 
+HAWAIʻI’S TRANSPORTATION system is at a 
 crossroads. Rising vehicle travel has contributed 
 to increasing traffic congestion, air pollution, and 
 greenhouse gas emissions,1 all while straining the 
@@ -432,7 +432,7 @@ inaccessible for many Hawaiʻi residents.
  
  
 TRANSPORTATION 
-FUNDING IN HAWAI‘I
+FUNDING IN HAWAIʻI
 
 Transportation infrastructure, programs and services are funded through a combination of federal, state and 
 county sources. This report analyzes federal and state transportation budgets in Hawaiʻi, with a focus on what 
@@ -461,7 +461,7 @@ that outlines transportation projects and initiatives funded with federal, state
 multi-year period. It serves as a comprehensive list of projects prioritized for funding, ensuring they align 
 with federal requirements.  
 
-The State of Hawai‘i Capital Improvement Plan (CIP) budget complements the STIP by detailing the 
+The State of Hawaiʻi Capital Improvement Plan (CIP) budget complements the STIP by detailing the 
 specific funding allocated for infrastructure projects within the state. While the STIP focuses on the broader 
 program of transportation improvements, the CIP provides the financial framework necessary for project 
 implementation, including revenue sources, expenditures, and timelines.
@@ -496,7 +496,7 @@ prioritized
 for 
 funding
 
-State of Hawai‘i 
+State of Hawaiʻi 
 Capital 
 Improvement 
 Plan (CIP)
@@ -581,7 +581,7 @@ transportation systems, including urban and rural transit services.
 There are two types of federal funding: discretionary funding and formula-based funding. The process for 
 awarding this funding is shown in Figure 3. 
 
-Figure 3. How Federal Transportation Funding in Hawai‘i is Awarded
+Figure 3. How Federal Transportation Funding in Hawaiʻi is Awarded
 
 Discretionary Funding
 
@@ -611,7 +611,7 @@ Organizations and Public Institutions
 
 HDOT and the Counties
 
-*O‘ahu and 
+*Oʻahu and 
 Maui 
 Metropolitan 
 Planning 
@@ -653,27 +653,27 @@ Honolulu Authority for Rapid Transit (HART), $892,000,000
 
 City & County of Honolulu, $892,556,000
 
-Kaua‘i County, $164,004,000
+Kauaʻi County, $164,004,000
 
 Maui County, $166,852,000
 
-Hawai‘i County, $138,206,000
+Hawaiʻi County, $138,206,000
 
 3% 4% 4%
 
 Total Statewide Funding: $4,121,589,000
 
-Hawai‘i Department of Transportation, $1,866,971,000
+Hawaiʻi Department of Transportation, $1,866,971,000
 
 Figure 5. Federally-Funded Transportation Projects and Sources, by County
 
-Kaua‘i County Total: $282,622,000
+Kauaʻi County Total: $282,622,000
 
 Federal
 
 Local
 
-City & County of Honolulu (O‘ahu) 
+City & County of Honolulu (Oʻahu) 
 Total: $2,529,812,000
 
 Federal
@@ -686,7 +686,7 @@ Federal
 
 Local
 
-Hawai‘i County Total: $436,441,000
+Hawaiʻi County Total: $436,441,000
 
 Federal
 
@@ -698,19 +698,19 @@ Federal
 
 Local
 
-Kaua‘i
+Kauaʻi
 35 Projects
 
 Additional Statewide 
 Projects: 36
 
-O‘ahu
+Oʻahu
 97 Projects
 
 Maui
 42 Projects
 
-Hawai‘i
+Hawaiʻi
 31 Projects
 
 As far as projects that support non-vehicular modes of transportation, while there is a variety of funding 
@@ -792,9 +792,9 @@ FUNDING TRANSPORTATION
 
 1%
 
-Hawai‘i Department of Transportation
+Hawaiʻi Department of Transportation
 
-Kaua‘i County
+Kauaʻi County
 
 Maui County
 
@@ -822,7 +822,7 @@ Increases VMT
 
 Honolulu Authority for Rapid Transit
 
-Hawai‘i County
+Hawaiʻi County
 
 City & County of Honolulu
 
@@ -839,14 +839,14 @@ and Agency31
 
 2%
 
-Kaua‘i County
+Kauaʻi County
 
 Maui County
 
-Hawai‘i Department 
+Hawaiʻi Department 
 of Transportation
 
-Hawai‘i County
+Hawaiʻi County
 
 City & County of 
 Honolulu
@@ -906,7 +906,7 @@ projects and programs. The revenue source is typically related to the projects o
 
 16 • RETHINKING ROADS
 
-Figure 10. Sources of Hawai‘i’s Transportation CIP Budget (FY17 to FY23)
+Figure 10. Sources of Hawaiʻi’s Transportation CIP Budget (FY17 to FY23)
 
 1%
 
@@ -1155,7 +1155,7 @@ FFY22–FFY25 Federal Funding Allocations by
 
 Agency and Project Type
 
-Hawai‘i Department of Transportation (HDOT)
+Hawaiʻi Department of Transportation (HDOT)
 
 VMT Category
 
@@ -1409,7 +1409,7 @@ Total Funding
 Project Type Funding 
 Percentage of Agency Total
 
-Hawai‘i County
+Hawaiʻi County
 
 Decreases Vehicle Travel 
 (45.63%)
@@ -1451,11 +1451,11 @@ New Roadway Capacity
 
 $0
 
-Hawai‘i County TOTAL
+Hawaiʻi County TOTAL
 
 $138,206,000
 
-Kaua‘i County
+Kauaʻi County
 
 6.94%
 
@@ -1529,7 +1529,7 @@ New Roadway Capacity
 
 $900,000
 
-Kaua‘i County TOTAL
+Kauaʻi County TOTAL
 
 $164,004,000
 
