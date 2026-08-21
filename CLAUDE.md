@@ -24,8 +24,10 @@ Things that file will tell you and are easy to get wrong:
   `food-security.html` → `/food-equity`). `INTERNAL_LINK_MAP` in
   `scripts/build_squarespace.py` is the source of truth.
 - Paste into Squarespace from `squarespace-ready/`, **never** the raw root file.
-- `index.html` still contains the legacy sage-green `<style>` block; migrate it
-  to the brand palette when you touch it.
+- The legacy sage-green `<style>` block is **gone** — `index.html` was migrated
+  to the brand palette in `63ef507` / `422c211`. `--sage-*` and `#3a7811` now
+  appear nowhere in the repo except the prohibition above. Don't "migrate" it
+  again; every hex in `index.html` is already a brand token value.
 
 ## Issue deep-dive pages — MIRROR FORMAT
 
@@ -41,7 +43,9 @@ The five issue deep-dive pages share a single canonical format:
 
 1. **Same nav + announcement bar** (the `px-*` chrome at top)
 2. **Same hero structure**: eyebrow + h1 + lead paragraph + tabs row
-3. **Same four tabs in the same order**: `Vision`, `Overview`, `Opportunities`, `Impact`
+3. **Same two tabs in the same order**: `Overview`, `Priorities` — panels
+   `#ha-{ns}-panel-overview` and `#ha-{ns}-panel-priorities`. ("Vision" is not a
+   tab; it's the `.ha-{ns}__vision` sub-block that opens the Overview panel.)
 4. **Same sticky-tabs behavior** (`.ha-{slug}__stuck-tabs` reveals on scroll)
 5. **Same panel skeleton** inside each tab (heading, body, supporting blocks)
 6. **Same trailing sections**: Research & News → CTA → Footer
@@ -51,8 +55,12 @@ What *differs* between pages (and SHOULD differ):
 
 - The CSS namespace prefix (`.ha-tax__*` → `.ha-housing__*` etc.)
 - Per-page copy, stats, and pull-quotes
-- Per-page accent color from the brand palette (but stay within Ash / Teal / Teal-deep / Slate / Charcoal)
 - SVG icons / charts specific to the issue
+
+All five pages are **token-identical** — same eight `--ha-*` custom properties,
+no per-page accent. The per-issue tint lives one level up, in `issues.html`'s
+hub cards (`--section-bg` / `--section-accent`). If you want an issue to read as
+"its" color, set it there, not in the deep-dive page.
 
 **When in doubt about a format change:** ask "would this make sense if applied to all five pages?" If no, the change probably belongs in a *content* block (where pages diverge), not the *structure*.
 
