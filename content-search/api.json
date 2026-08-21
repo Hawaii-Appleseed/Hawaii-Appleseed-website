@@ -1,7 +1,7 @@
 {
   "name": "hawaii-appleseed-content-search",
   "version": 1,
-  "generatedAt": "2026-08-20T23:26:54Z",
+  "generatedAt": "2026-08-21T00:32:50Z",
   "counts": {
     "documents": 205,
     "chunks": 2000,
@@ -11,11 +11,11 @@
   "files": {
     "docs.json": {
       "path": "data/docs.json",
-      "sha256": "da6508c8c66a42b0324a31ec44e6c785aabd2b89711207d6fd7c4d753d5ab7ad"
+      "sha256": "a5e5b8fb23c4bb5e1aaf43109b9b7f4048d032f83557e908a768cd7553adcfc0"
     },
     "chunks.json": {
       "path": "data/chunks.json",
-      "sha256": "6e4063895b0c6235d9149a4773105f95fb9173df26b9f3d514e5910344bf2d18"
+      "sha256": "e2632fb035a03b61de55644cee4426b437c18a37823c1118b7be26eda0284721"
     },
     "bm25.json": {
       "path": "data/bm25.json",
@@ -31,7 +31,7 @@
     },
     "embeddings.bin": {
       "path": "data/embeddings.bin",
-      "sha256": "ad85fbf0e47180d06eeb4f4316a8cd8bee82f06fa66c3a43de246c80ff98414b"
+      "sha256": "095297c9c8a56153353305928300b33eaf3f050fd54ae12295a9a5b8f5ba4b95"
     },
     "embeddings.meta.json": {
       "path": "data/embeddings.meta.json"
