@@ -176,7 +176,23 @@ jobs:
             echo "pushed=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "content-search: rebuild data bundle"
-            git push
+            # sync-publications.yml and refresh-corpus.yml can land on main
+            # while the ~3 min embed step runs, and a bare push then dies on a
+            # non-fast-forward (observed 2026-08-21). Rebase and retry, and
+            # fail loudly rather than silently skipping the Pages deploy.
+            pushed=false
+            for attempt in 1 2 3; do
+              if git pull --rebase --autostash origin main && git push; then
+                pushed=true
+                break
+              fi
+              echo "push attempt $attempt failed; retrying"
+              sleep 5
+            done
+            if [ "$pushed" != "true" ]; then
+              echo "::error::could not push the rebuilt bundle after 3 attempts"
+              exit 1
+            fi
             echo "pushed=true" >> "$GITHUB_OUTPUT"
           fi
 
