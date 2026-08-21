@@ -29,6 +29,27 @@ Things that file will tell you and are easy to get wrong:
   appear nowhere in the repo except the prohibition above. Don't "migrate" it
   again; every hex in `index.html` is already a brand token value.
 
+## Skills
+
+`.claude/skills/` ships two project skills. They load automatically for anyone who
+opens this repo in Claude Code — no install step, no copying into `~/.claude/`:
+
+- **`appleseed-voice`** — house voice for anything going out under HA's name
+  (blog posts, testimony, op-eds, web copy). Reads `writing-bot/positions.md`
+  fresh on every use; that file is authoritative and policy-staff-maintained.
+- **`appleseed-report`** — house structure and brand system for reports and
+  briefs (cover, exec summary, recommendations, endnotes, figures).
+
+Paths inside them are **repo-root-relative**, so launch Claude from the repo
+root. Everything they read (`positions.md`, the 112-post corpus, the brand
+tokens) lives in this repo, so a fresh clone works with no setup. The single
+external dependency is `appleseed-report`'s primer-editor output step, which
+needs `Hawaii-Appleseed/primer-editor` cloned separately — the skill gives the
+clone command inline.
+
+**Edit them here, not in `~/.claude/skills/`.** A personal copy silently drifts
+from what everyone else is running.
+
 ## Issue deep-dive pages — MIRROR FORMAT
 
 The five issue deep-dive pages share a single canonical format:
