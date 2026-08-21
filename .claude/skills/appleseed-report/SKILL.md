@@ -27,19 +27,7 @@ Median across all reports is ~5,400 words. Ask the user if the tier isn't obviou
 
 ## Step 2 — Build the section architecture
 
-**Only the bookends are generic. The middle sections are named to the subject — never "Background," "Analysis," or "Findings."**
-
-Measured frequency across 42 reports:
-
-| Section | Files | Share |
-|---|---|---|
-| Endnotes | 39 | **93%** |
-| Table of Contents | 31 | 74% |
-| Executive Summary | 22 | 52% |
-| Recommendations | 18 | 43% |
-| Introduction | 8 | 19% |
-| Conclusion | 4 | 10% |
-| Methodology | 4 | 10% |
+**Only the bookends are generic. The middle sections are named to the subject — never "Background," "Analysis," or "Findings."** Across 42 measured reports, Endnotes are near-universal (93%), TOC 74%, Executive Summary 52%, Recommendations 43%; everything else — Introduction, Conclusion, Methodology — is the exception. Full frequency table, real TOCs, and exemplar files: `reference/report-architecture.md`.
 
 Canonical order:
 
@@ -52,11 +40,7 @@ Executive Summary
 
 The **"proven model elsewhere" section is near-obligatory** — real ones: `Parking Reform On The Continent`, `Lessons From National Programs`, `Case Studies`.
 
-Real tables of contents to model:
-
-- *Who Pays for Climate Disasters?* — Executive Summary · Glossary of Terms · Issue Overview · Key Factors in Market Destabilization · Equity and Climate Justice · Case Studies · Policy Intervention Recommendations · Endnotes
-- *Stalled* — Executive Summary · How Parking Impacts Affordable Housing · Efforts To Reduce Parking Mandates · Parking Reform On The Continent · Impacts Of Oʻahu Parking Reform · Recommendations To Further The Impact Of Ordinance 20-41 · Endnotes
-- *Pedestrian Head Start* (brief) — Background · Accessible Pedestrian Signals · Leading Pedestrian Intervals · Lessons From National Programs · Benefits · Costs · Recommendations for Hawaiʻi · Endnotes
+A real table of contents to model — *Stalled*: Executive Summary · How Parking Impacts Affordable Housing · Efforts To Reduce Parking Mandates · Parking Reform On The Continent · Impacts Of Oʻahu Parking Reform · Recommendations To Further The Impact Of Ordinance 20-41 · Endnotes. (More, including the flagship and short-brief variants, in the reference.)
 
 Section headings are ALL CAPS in the PDFs, and each section's **first few words open in caps** as a lead-in: "OVER THE PAST SEVERAL DECADES, the United States has experienced…"
 
