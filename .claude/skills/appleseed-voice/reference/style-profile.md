@@ -1,6 +1,6 @@
 # Measured style profile — HA blog corpus
 
-Derived from all 112 posts in `writing-bot/blog-posts/` (101,513 words, 2021–2026). Use for calibration when a judgment call comes up. Regenerate if the corpus grows substantially.
+Derived from all 112 posts in `writing-bot/blog-posts/` (~100,500 words by whitespace tokens; 2021–2026). Measured 2026-08-20; orthography re-measured the same day, after the corpus ʻokina normalization (commits `155238d`, `86daaf4`, `a5fdf40`). Use for calibration when a judgment call comes up. Regenerate if the corpus grows substantially.
 
 ## Length and shape
 
@@ -75,10 +75,13 @@ Em dashes unspaced 511 vs spaced 2. En dashes for numeric ranges only.
 
 ## Orthography
 
-- `Hawaiʻi` **1,023** vs bare `Hawaii` **11**. 110/112 posts use the ʻokina.
-- **Must be U+02BB (ʻ).** 1,130 correct; **33 wrong U+2018 (') in 2025 files**; 3 ASCII apostrophes.
-- `Hawaiʻi's` possessive: 280. `Hawaiian` correctly takes **no** ʻokina (45 uses, 0 errors).
-- `Oʻahu` 26 vs `Oahu` 2 · `Kauaʻi` 24 vs `Kauai` 2 · `Maui` 32 · `Hawaiʻi Island` 4 · `Native Hawaiian` 18.
+Post-normalization counts (2026-08-20 — the commits above corrected ~1,400 curly-quote ʻokina repo-wide):
+
+- `Hawaiʻi` **1,123** vs bare `Hawaii` **11**. **112/112 posts** use the ʻokina; U+02BB total 1,233.
+- **Fake-ʻokina count is now 0.** The only 2 remaining U+2018 in the blog corpus are legitimate opening quotes (`'Keiki Credit'`, one nested quote) — don't "fix" them.
+- The 11 bare `Hawaii` are mostly genuine slips in older/draft files (one is even "Hawaii Appleseed") — evidence for the rule, not exceptions to copy.
+- `Hawaiʻi's` possessive: 315. `Hawaiian` correctly takes **no** ʻokina (0 errors).
+- `Oʻahu` 27 vs `Oahu` 2 · `Kauaʻi` 27 vs `Kauai` 2 · `Maui` 32.
 
 ## Hawaiian vocabulary (count / posts)
 
@@ -98,7 +101,7 @@ Collocations by doc spread: `earned income tax credit` (19 posts) · `universal 
 
 `low-income households/families/residents` 47 (30 posts) vs `the poor` **2**, `poor people` **0**. `struggling` 57 (39 posts). `houseless` 45 vs `homeless` 60 — actively transitioning toward `houseless`/`unsheltered`. `undocumented` 19; `illegal immigrant`/`alien` **0**.
 
-## Verified zeros across 101,513 words
+## Verified zeros across the full corpus
 
 **Attack register:** greedy · corrupt · evil · outrageous · shameful · disgusting · scandal · crazy · "attack on" · "fight back" · radical — all **0**.
 

@@ -184,7 +184,6 @@ At ≤700px: page padding → 20px · section padding → `56px 20px` · hero 78
 
 **Fixed-chrome offsets** (these drive the sticky math): `.px-announce` is `position:fixed; top:0`, `padding:10px 18px`, 13px line-height → ~38px tall. `.px-nav` is `position:fixed; top:38px`, `padding:16px 28px` → ~107px total. Hence `__stuck-bar{top:107px}` and `section[id]{scroll-margin-top:124px}`.
 
-## Two places the repo docs have drifted
+## Issue-page accents
 
-1. **Tabs.** `CLAUDE.md` mandates four tabs — `Vision`, `Overview`, `Opportunities`, `Impact`. All five pages actually ship **two**: `Overview` and `Priorities` (panel IDs `ha-{ns}-panel-overview` / `-priorities`). The mirror requirement itself is honored; only the documented names are stale. "Vision" survives as a sub-block inside Overview.
-2. **Per-page accent.** `CLAUDE.md` says each page takes its own accent from the palette. In practice all five are token-identical. The per-issue accent lives only in `issues.html`'s `--section-bg`/`--section-accent` hub tints.
+All five issue pages are **token-identical** — no per-page accent variable. The per-issue tint lives one level up, in `issues.html`'s `--section-bg`/`--section-accent` hub tints (the CSS block quoted above). Page structure — two tabs, `Overview` and `Priorities`, with "Vision" a sub-block inside Overview — is documented in `CLAUDE.md`'s mirror-format section (corrected 2026-08-20).
