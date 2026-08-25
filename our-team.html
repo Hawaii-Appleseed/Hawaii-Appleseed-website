@@ -466,6 +466,85 @@
     }
   }
 
+  /* ===== PAGED BIOS =========================================================
+     Some bios don't fit the fixed 340×425 overlay. Those cards wrap the photo
+     button in .ha-member-figure and split the bio into .ha-bio-page slides the
+     reader advances with the arrows, a swipe, or the ← → keys.
+
+     The arrows live OUTSIDE .ha-member-photo (a <button> can't contain other
+     buttons) and are absolutely positioned back over it by the figure. */
+  .ha-team .ha-member-figure{position:relative;margin:0 0 20px;}
+  .ha-team .ha-member-figure .ha-member-photo{margin:0;}
+  /* The nav row is the affordance on these cards, so the "+ Bio" chip is out. */
+  .ha-team .ha-member-figure .ha-member-hint{display:none;}
+
+  .ha-team .ha-member-bio--paged{padding:20px 22px 52px;justify-content:stretch;}
+  .ha-team .ha-bio-viewport{flex:1 1 auto;min-height:0;overflow:hidden;}
+  .ha-team .ha-bio-track{
+    display:flex;height:100%;
+    transition:transform .45s cubic-bezier(.22,.61,.36,1);
+  }
+  /* justify-content:center would clip both ends of a slide that outgrows the
+     overlay (the centered-flex overflow trap) — auto block margins center it
+     when it fits and collapse to 0 when it doesn't, so it stays scrollable. */
+  .ha-team .ha-bio-page{
+    flex:0 0 100%;width:100%;min-width:0;
+    display:flex;flex-direction:column;justify-content:flex-start;
+    overflow-y:auto;overscroll-behavior:contain;
+    padding-right:2px;
+  }
+  .ha-team .ha-bio-page > *{margin-block:auto;}
+
+  .ha-team .ha-bio-nav{
+    position:absolute;left:20px;right:20px;bottom:14px;z-index:3;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    opacity:0;transform:translateY(8px);pointer-events:none;
+    transition:opacity .35s, transform .35s;
+  }
+  .ha-team .ha-member:hover .ha-bio-nav,
+  .ha-team .ha-member-figure:focus-within .ha-bio-nav,
+  .ha-team .ha-member-photo[aria-expanded="true"] ~ .ha-bio-nav{
+    opacity:1;transform:translateY(0);pointer-events:auto;
+  }
+  /* Keyboard focus on an arrow must hold the overlay open. */
+  .ha-team .ha-member-figure:focus-within .ha-member-bio{
+    opacity:1;transform:translateY(0);pointer-events:auto;
+  }
+  @media (hover:none){
+    .ha-team .ha-member:hover .ha-bio-nav{opacity:0;transform:translateY(8px);pointer-events:none;}
+    .ha-team .ha-member-photo[aria-expanded="true"] ~ .ha-bio-nav{
+      opacity:1;transform:translateY(0);pointer-events:auto;
+    }
+  }
+
+  .ha-team .ha-bio-arrow{
+    position:relative;
+    flex:0 0 auto;width:34px;height:34px;padding:0;border:0;border-radius:999px;
+    background:rgba(255,255,255,.94);color:var(--ha-charcoal);
+    display:inline-flex;align-items:center;justify-content:center;
+    cursor:pointer;font:inherit;
+    transition:background .25s, opacity .25s, transform .25s;
+  }
+  .ha-team .ha-bio-arrow:hover:not(:disabled){background:#fff;transform:scale(1.08);}
+  .ha-team .ha-bio-arrow:focus-visible{outline:2px solid #fff;outline-offset:2px;}
+  .ha-team .ha-bio-arrow:disabled{opacity:.3;cursor:default;}
+  .ha-team .ha-bio-arrow svg{width:15px;height:15px;display:block;}
+  /* 34px reads right against the photo but is under the 44px touch minimum —
+     grow the hit area, not the chip. */
+  .ha-team .ha-bio-arrow::after{content:"";position:absolute;inset:-6px;border-radius:inherit;}
+
+  .ha-team .ha-bio-dots{display:flex;align-items:center;gap:7px;}
+  .ha-team .ha-bio-dot{
+    width:7px;height:7px;border-radius:999px;
+    background:rgba(255,255,255,.4);
+    transition:background .25s, transform .25s;
+  }
+  .ha-team .ha-bio-dot.is-on{background:#fff;transform:scale(1.25);}
+
+  @media (prefers-reduced-motion: reduce){
+    .ha-team .ha-bio-track{transition:none;}
+  }
+
   .ha-team .ha-member-name{
     font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;
     font-size:clamp(21px, 1.7vw, 24px);line-height:1.2;letter-spacing:-0.01em;
@@ -543,7 +622,10 @@
     .ha-team .ha-ed-photo::after{transform:translate(10px,10px);}
     .ha-team .ha-grid{grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:32px 24px;}
     .ha-team .ha-member,
+    .ha-team .ha-member-figure,
     .ha-team .ha-member-photo{width:100%;max-width:340px;margin-left:auto;margin-right:auto;}
+    .ha-team .ha-member-bio--paged{padding:16px 18px 48px;}
+    .ha-team .ha-bio-nav{left:16px;right:16px;bottom:12px;}
     .ha-team .ha-cta-actions{flex-direction:column;width:100%;}
     .ha-team .ha-cta .ha-btn{justify-content:center;width:100%;}
   }
@@ -738,6 +820,44 @@
           <a class="ha-member-email" href="mailto:genevieve@hiappleseed.org">genevieve@hiappleseed.org</a>
         </article>
 
+        <!-- OSEGUEDA, Josh — paged bio (see .ha-member-figure CSS above) -->
+        <article class="ha-member" data-fade>
+          <div class="ha-member-figure">
+            <button type="button" class="ha-member-photo"
+                    aria-expanded="false" aria-label="Read bio for Josh Osegueda">
+              <img src="assets/team/osegueda-josh.webp"
+                   alt="Portrait of Josh Osegueda."
+                   loading="lazy" decoding="async">
+              <div class="ha-member-bio ha-member-bio--paged">
+                <div class="ha-bio-viewport">
+                  <div class="ha-bio-track">
+                    <div class="ha-bio-page">
+                      <p>Josh is passionate about advancing policies and programs that strengthen the economic and social well-being of Hawaiʻi's communities. As Director of Food and Healthcare Equity, he leads efforts to improve access to food and healthcare by bringing together research, policy advocacy, community partnerships, and systems change to help ensure that all Hawaiʻi residents have opportunities to thrive.</p>
+                    </div>
+                    <div class="ha-bio-page">
+                      <p>Josh brings more than 15 years of experience spanning nonprofit leadership, government, education, healthcare, and community-based initiatives. Before joining Hawaiʻi Appleseed, he led healthcare policy and regulatory initiatives at HMSA, developed statewide programs and managed multimillion-dollar grant initiatives at Aloha United Way, and supported juvenile justice initiatives at the Hawaiʻi Department of Human Services.</p>
+                    </div>
+                    <div class="ha-bio-page">
+                      <p>Originally from San Francisco, Josh holds a bachelor's degree in psychology from UCLA and a Master of Social Work from the University of Michigan, with a focus on program evaluation and social policy analysis.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <span class="ha-member-hint" aria-hidden="true">+ Bio</span>
+            </button>
+            <div class="ha-bio-nav">
+              <button type="button" class="ha-bio-arrow ha-bio-prev" aria-label="Previous part of Josh Osegueda's bio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+              <span class="ha-bio-dots" aria-hidden="true">
+                <span class="ha-bio-dot"></span><span class="ha-bio-dot"></span><span class="ha-bio-dot"></span>
+              </span>
+              <button type="button" class="ha-bio-arrow ha-bio-next" aria-label="Next part of Josh Osegueda's bio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            </div>
+          </div>
+          <h3 class="ha-member-name">Josh Osegueda</h3>
+          <div class="ha-member-role">Director of Healthcare and Food Equity</div>
+          <a class="ha-member-email" href="mailto:josh@hiappleseed.org">josh@hiappleseed.org</a>
+        </article>
+
         <!-- SEITZ, Abbey -->
         <article class="ha-member" data-fade>
           <button type="button" class="ha-member-photo"
@@ -888,9 +1008,80 @@
       btn.setAttribute('aria-expanded', String(!expanded));
     });
   });
+  // === Paged staff bios: arrows, swipe, and ← → keys page the overlay ===
+  var canHover = window.matchMedia('(hover: hover)').matches;
+  root.querySelectorAll('.ha-member-figure').forEach(function(fig){
+    var track = fig.querySelector('.ha-bio-track');
+    var photo = fig.querySelector('.ha-member-photo');
+    if (!track || !photo) return;
+    var pages = track.querySelectorAll('.ha-bio-page');
+    var last  = pages.length - 1;
+    if (last < 1) return;
+    var prev  = fig.querySelector('.ha-bio-prev');
+    var next  = fig.querySelector('.ha-bio-next');
+    var dots  = Array.prototype.slice.call(fig.querySelectorAll('.ha-bio-dot'));
+    var i = 0;
+
+    function render(){
+      track.style.transform = 'translateX(' + (-i * 100) + '%)';
+      if (prev) prev.disabled = (i === 0);
+      if (next) next.disabled = (i === last);
+      dots.forEach(function(d, n){ d.classList.toggle('is-on', n === i); });
+    }
+    function go(n){
+      n = Math.max(0, Math.min(last, n));
+      if (n === i) return;
+      i = n; render();
+    }
+    render();
+
+    if (prev) prev.addEventListener('click', function(e){ e.stopPropagation(); go(i - 1); });
+    if (next) next.addEventListener('click', function(e){ e.stopPropagation(); go(i + 1); });
+
+    fig.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight'){ e.preventDefault(); go(i + 1); }
+      else if (e.key === 'ArrowLeft'){ e.preventDefault(); go(i - 1); }
+    });
+
+    // Swipe. A swipe would otherwise land as a tap on the photo button and
+    // collapse the card, so a recognized swipe eats the click that follows.
+    var x0 = null, y0 = null, swiped = false;
+    photo.addEventListener('touchstart', function(e){
+      var t = e.changedTouches[0]; x0 = t.clientX; y0 = t.clientY; swiped = false;
+    }, {passive:true});
+    photo.addEventListener('touchend', function(e){
+      if (x0 === null) return;
+      var t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) &&
+          photo.getAttribute('aria-expanded') === 'true'){
+        swiped = true;
+        go(dx < 0 ? i + 1 : i - 1);
+      }
+    }, {passive:true});
+    // Capture on the figure, so this always beats the button's own handler.
+    fig.addEventListener('click', function(e){
+      if (!swiped) return;
+      swiped = false;
+      e.stopPropagation(); e.preventDefault();
+    }, true);
+
+    // Back to page 1 whenever the card closes.
+    if (canHover){
+      fig.addEventListener('mouseleave', function(){
+        if (photo.getAttribute('aria-expanded') !== 'true') go(0);
+      });
+    } else {
+      new MutationObserver(function(){
+        if (photo.getAttribute('aria-expanded') !== 'true') go(0);
+      }).observe(photo, {attributes:true, attributeFilter:['aria-expanded']});
+    }
+  });
+
   // Click outside any card closes the open one
   document.addEventListener('click', function(e){
     if (e.target.closest('.ha-member-photo')) return;
+    if (e.target.closest('.ha-bio-nav')) return;
     root.querySelectorAll('.ha-member-photo[aria-expanded="true"]').forEach(function(btn){
       btn.setAttribute('aria-expanded', 'false');
     });
