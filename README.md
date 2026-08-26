@@ -195,6 +195,8 @@ href resolves against the Squarespace slug and 404s.
 | `sync-publications.yml` | nightly 22:00 UTC | Pulls blog/press/publications JSON from hiappleseed.org into `news.json` + `publications.json`, then dispatches `deploy.yml`. |
 | `refresh-corpus.yml` | Sundays 15:00 UTC (5 AM HST), or dispatch | Scrapes hiappleseed.org for new posts/publications into `writing-bot/`, then dispatches the Content Search rebuild. |
 | `deploy-content-search.yml` | push touching `writing-bot/**` or `content-search/js|index.html`, or dispatch | Rebuilds the search bundle (`content-search/data/`), runs the parity gate, commits, dispatches `deploy.yml`. |
+| `fetch-bill-status.yml` | every 30 min (cron), or dispatch | Fetches bill RSS from capitol.hawaii.gov into `tax-fairness/data/bill-status.json`. Bill list is discovered from `data-hb`/`data-sb` attributes in the tracked pages — adding a bill is a content edit, not a workflow edit. |
+| `canary.yml` | hourly, or dispatch | Watches the other scheduled workflows for a **silently dropped trigger**. Opens/updates a `canary-alert` issue and fails when one goes quiet; comments and auto-closes when it recovers. |
 
 **None of this depends on a personal machine** — the whole chain runs in Actions.
 
@@ -202,6 +204,28 @@ href resolves against the Squarespace slug and 404s.
 > does **not** fire another workflow's `on: push` (GitHub's recursion guard).
 > Every workflow above that needs a downstream job dispatches it explicitly with
 > `gh workflow run`. If you add automation that must trigger a deploy, do the same.
+
+### Why `canary.yml` exists
+
+GitHub Actions sometimes **fails to fire a cron trigger at all** (it did on
+2026-08-26, dropping a `sync-publications.yml` run and stalling
+`fetch-bill-status.yml` for hours). When that happens no run object is ever
+created — and GitHub's only built-in notification is "a *run* failed," so a
+dropped trigger is completely silent. The symptom is stale content on the live
+site with a green Actions tab.
+
+The canary closes that gap by checking each watched workflow's **last-run age**
+against a threshold, alerting via an issue plus a real job failure (which *does*
+notify).
+
+Thresholds are calibrated off **observed** gaps, not the cron's stated interval.
+`fetch-bill-status.yml` says "every 30 minutes" but real-world gaps of 50–82 min
+are routine on a perfectly healthy day, so a naive 35-min threshold would alert
+constantly on nothing. If you add a workflow to the canary, measure its actual
+cadence first and leave generous headroom.
+
+**It can't catch its own dropped trigger** — no in-repo monitor can. That needs an
+external pinger, which we've deliberately not built.
 
 ---
 
