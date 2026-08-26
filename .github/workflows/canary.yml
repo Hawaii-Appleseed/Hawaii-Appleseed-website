@@ -64,7 +64,7 @@ jobs:
           # weekly, Sundays 15:00 UTC
           check "refresh-corpus.yml"      11520
 
-          existing=$(gh issue list --label canary-alert --state open --json number -q '.[0].number // empty')
+          existing=$(gh issue list --repo "$REPO" --label canary-alert --state open --json number -q '.[0].number // empty')
 
           if [ -s "$STALE_FILE" ]; then
             {
@@ -75,16 +75,16 @@ jobs:
               echo "_Checked $(date -u +'%Y-%m-%d %H:%M UTC')._"
             } > body.md
             if [ -n "$existing" ]; then
-              gh issue comment "$existing" --body-file body.md
+              gh issue comment "$existing" --repo "$REPO" --body-file body.md
             else
-              gh issue create --title "Scheduled workflow(s) went quiet" --label canary-alert --body-file body.md
+              gh issue create --repo "$REPO" --title "Scheduled workflow(s) went quiet" --label canary-alert --body-file body.md
             fi
             exit 1
           fi
 
           if [ -n "$existing" ]; then
             echo "All watched workflows are fresh again as of $(date -u +'%Y-%m-%d %H:%M UTC')." > body.md
-            gh issue comment "$existing" --body-file body.md
-            gh issue close "$existing"
+            gh issue comment "$existing" --repo "$REPO" --body-file body.md
+            gh issue close "$existing" --repo "$REPO"
           fi
           echo "All watched workflows are fresh."
