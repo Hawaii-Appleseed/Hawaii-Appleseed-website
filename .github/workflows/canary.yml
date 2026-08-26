@@ -1,0 +1,90 @@
+name: Canary — scheduled workflow health
+
+# Watches this repo's OTHER scheduled workflows for a silently dropped
+# trigger. GitHub Actions occasionally fails to fire a cron trigger at all
+# (see the 2026-08-26 incident on githubstatus.com) — when that happens no
+# run is ever created, so there's nothing for GitHub's normal
+# "scheduled workflow failed" email to attach to. This job runs on its own
+# schedule and checks how long it's been since each watched workflow last
+# ran, of any conclusion. If one's gone quiet, it opens (or updates) a
+# single tracking issue and fails the job — a real failure here DOES fire
+# GitHub's built-in notification, and the issue gives a persistent, visible
+# marker independent of anyone's notification settings.
+#
+# Thresholds are calibrated off *observed* gaps on a normal day, not the
+# cron's stated interval — fetch-bill-status.yml says "every 30 minutes"
+# but real gaps of 50-82 min are routine even with no incident, so a naive
+# 35-40 min threshold would alert constantly on nothing.
+#
+# Caveat this can't fully solve: if THIS workflow's own trigger gets
+# dropped, nothing fires. No in-repo monitoring is immune to that failure
+# mode without an external pinger (e.g. a third-party uptime check hitting
+# a workflow_dispatch or a status endpoint) — out of scope for "lightweight."
+
+on:
+  schedule:
+    - cron: "20 * * * *" # hourly, offset from the top of the hour
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check last-run freshness, alert on staleness
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          STALE_FILE=$(mktemp)
+
+          check() {
+            local file="$1" max_age_min="$2"
+            local created age_min
+            created=$(gh api "repos/$REPO/actions/workflows/$file/runs?per_page=1" \
+                        -q '.workflow_runs[0].created_at // empty' 2>/dev/null)
+            if [ -z "$created" ]; then
+              echo "- **$file**: could not determine last run time (API error or no runs)" >> "$STALE_FILE"
+              return
+            fi
+            age_min=$(( ( $(date +%s) - $(date -d "$created" +%s) ) / 60 ))
+            echo "$file: last run ${age_min}m ago (limit ${max_age_min}m)"
+            if [ "$age_min" -gt "$max_age_min" ]; then
+              echo "- **$file**: last run ${age_min} min ago (limit ${max_age_min}m), at $created" >> "$STALE_FILE"
+            fi
+          }
+
+          # every ~30min in name, ~50-80min in observed practice
+          check "fetch-bill-status.yml"   150
+          # daily at 22:00 UTC
+          check "sync-publications.yml"   1800
+          # weekly, Sundays 15:00 UTC
+          check "refresh-corpus.yml"      11520
+
+          existing=$(gh issue list --label canary-alert --state open --json number -q '.[0].number // empty')
+
+          if [ -s "$STALE_FILE" ]; then
+            {
+              echo "One or more scheduled workflows have gone quiet — most likely a dropped or delayed GitHub Actions trigger ([check for an active incident](https://githubstatus.com)), not necessarily a bug in this repo."
+              echo
+              cat "$STALE_FILE"
+              echo
+              echo "_Checked $(date -u +'%Y-%m-%d %H:%M UTC')._"
+            } > body.md
+            if [ -n "$existing" ]; then
+              gh issue comment "$existing" --body-file body.md
+            else
+              gh issue create --title "Scheduled workflow(s) went quiet" --label canary-alert --body-file body.md
+            fi
+            exit 1
+          fi
+
+          if [ -n "$existing" ]; then
+            echo "All watched workflows are fresh again as of $(date -u +'%Y-%m-%d %H:%M UTC')." > body.md
+            gh issue comment "$existing" --body-file body.md
+            gh issue close "$existing"
+          fi
+          echo "All watched workflows are fresh."
