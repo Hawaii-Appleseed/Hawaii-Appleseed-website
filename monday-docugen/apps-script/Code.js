@@ -24,7 +24,18 @@ const CONFIG_KEYS = {
   folderId: 'OUTPUT_FOLDER_ID',     // Drive folder for generated PDFs (optional)
   statusColumnId: 'STATUS_COLUMN_ID', // used by pollBoard()
   readyStatus: 'READY_STATUS',      // status label meaning "generate now", e.g. Submitted
+  webhookSecret: 'WEBHOOK_SECRET',  // shared secret in the webhook URL's ?key= (doPost)
+  templateVersion: 'TEMPLATE_VERSION', // stamped by setupTemplate(); see TEMPLATE_VERSION
 };
+
+// Bump whenever setupTemplate()'s layout changes. The template lives in Drive, so editing
+// this file is not enough - a stale template keeps rendering the old design until it is
+// rebuilt. Workspace policy blocks `clasp run`, so relying on someone remembering to click
+// Run in the editor is how v1 shipped a stretched logo. renderToPdf_ compares this against
+// the stored stamp and rebuilds automatically instead.
+//   1 - initial layout
+//   2 - logo aspect ratio corrected, widened to DocuGen's 3.55in
+var TEMPLATE_VERSION = '2';
 
 const API_URL = 'https://api.monday.com/v2';
 const FILE_URL = 'https://api.monday.com/v2/file';
@@ -34,6 +45,8 @@ const API_VERSION = '2024-10';
 var BLACK_PIXEL_B64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR42mNgYGAAAAAEAAHI6uv5AAAAAElFTkSuQmCC';
 
 // Appleseed logo, lifted from one of DocuGen's own PDFs so the mark matches.
+// 3.55in wide in DocuGen's layout; InlineImage units are px@96dpi -> 3.55 * 96.
+var LOGO_WIDTH_PX = 341;
 var LOGO_B64 = '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';
 
 function config_(key, required) {
@@ -282,10 +295,25 @@ function fillLineItems_(body, lines) {
 }
 
 /**
+ * Rebuild the Drive template if it predates the current layout (or is missing).
+ *
+ * Cheap: two property reads on the common path, and setupTemplate() already trashes the
+ * template it replaces, so this cannot accumulate copies.
+ */
+function ensureTemplateCurrent_() {
+  const stored = config_('templateVersion', false);
+  if (config_('templateId', false) && stored === TEMPLATE_VERSION) return;
+  Logger.log('Template is version %s, code expects %s - rebuilding.',
+             stored || '(none)', TEMPLATE_VERSION);
+  setupTemplate();
+}
+
+/**
  * Render the template for one context and return a PDF blob.
  * Works by copying the template Doc, editing the copy, exporting, then deleting it.
  */
 function renderToPdf_(context, filename) {
+  ensureTemplateCurrent_();
   const templateId = config_('templateId', true);
   const copy = DriveApp.getFileById(templateId).makeCopy('~docugen working copy');
   let pdf;
@@ -313,19 +341,6 @@ function outputFolder_() {
 // ------------------------------------------------------------------ main flow
 
 /** Generate the PDF for one monday item and file it back on that item. */
-/**
- * TEMPORARY. The editor's function dropdown defaults to the first PUBLIC function in the
- * file (everything above here is _-suffixed and therefore hidden), and driving that
- * dropdown through automation is unreliable. Sitting here makes Run target setup
- * deterministically. Deleted once the template has been regenerated.
- */
-function runSetupNow() {
-  const templateUrl = setupTemplate();
-  Logger.log('--- template rebuilt, now rendering it ---');
-  const pdfUrl = runSelfTest();
-  return { template: templateUrl, pdf: pdfUrl };
-}
-
 function generateForItem(itemId) {
   const item = fetchItem_(itemId);
   const context = buildContext_(item);
@@ -343,13 +358,70 @@ function generateForItem(itemId) {
   return { itemId: item.id, file: saved.getUrl(), uploaded: uploaded };
 }
 
+/**
+ * Why this event should NOT produce a PDF, or null to go ahead.
+ *
+ * Two independent reasons, both needed:
+ *  - the status is not the "ready" one (a change to any other label still fires the hook)
+ *  - the item already has a PDF (re-delivery, or another column change after submission)
+ */
+function skipReason_(itemId, body) {
+  const readyStatus = config_('readyStatus', false);
+
+  // Prefer the label carried in the event - no extra API call, and it reflects the change
+  // that actually fired rather than whatever the column says by the time we look.
+  const eventLabel = body && body.event && body.event.value && body.event.value.label
+    ? body.event.value.label.text : null;
+  if (readyStatus && eventLabel && eventLabel !== readyStatus) {
+    return 'status is "' + eventLabel + '", not "' + readyStatus + '"';
+  }
+
+  const item = fetchItem_(itemId);
+  const byTitle = {};
+  (item.column_values || []).forEach(function (cv) {
+    byTitle[cv.id] = cv;
+  });
+
+  const statusColumn = config_('statusColumnId', false);
+  if (readyStatus && !eventLabel && statusColumn && byTitle[statusColumn]) {
+    const current = byTitle[statusColumn].text;
+    if (current !== readyStatus) {
+      return 'status is "' + current + '", not "' + readyStatus + '"';
+    }
+  }
+
+  const pdfColumn = config_('pdfColumnId', false);
+  if (pdfColumn && byTitle[pdfColumn] && coerce_(byTitle[pdfColumn])) {
+    return 'already has a PDF';
+  }
+  return null;
+}
+
 /** monday "send webhook" automation posts here. Also answers monday's challenge handshake. */
 function doPost(e) {
   const body = JSON.parse((e && e.postData && e.postData.contents) || '{}');
 
   // monday verifies a new webhook by POSTing {challenge: "..."} and expecting it echoed.
+  // Answer that BEFORE the secret check: monday sends the challenge to whatever URL you
+  // registered, and a rejected handshake means the webhook never gets created at all.
   if (body.challenge) {
     return ContentService.createTextOutput(JSON.stringify({ challenge: body.challenge }))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // A web app deployed for ANYONE_ANONYMOUS is callable by anyone who learns the URL, and
+  // this one writes files onto monday items. Require the shared secret carried in the
+  // registered webhook's query string, and refuse events from any other board.
+  const expected = config_('webhookSecret', false);
+  if (expected && (!e || !e.parameter || e.parameter.key !== expected)) {
+    return ContentService.createTextOutput(JSON.stringify({ error: 'forbidden' }))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+  const allowedBoard = config_('boardId', false);
+  const eventBoard = body.event && body.event.boardId;
+  if (allowedBoard && eventBoard && String(eventBoard) !== String(allowedBoard)) {
+    Logger.log('Ignoring event from board %s (configured: %s)', eventBoard, allowedBoard);
+    return ContentService.createTextOutput(JSON.stringify({ ignored: 'wrong board' }))
                          .setMimeType(ContentService.MimeType.JSON);
   }
 
@@ -358,6 +430,18 @@ function doPost(e) {
     return ContentService.createTextOutput(JSON.stringify({ ignored: 'no pulseId' }))
                          .setMimeType(ContentService.MimeType.JSON);
   }
+
+  // The webhook fires on EVERY change to the watched column, not just the one we care
+  // about, and monday can deliver the same event more than once. Without both guards
+  // below a single item accumulates duplicate PDFs - which is exactly what happened the
+  // first time this was wired up. pollBoard has always had these; doPost needs them too.
+  const skip = skipReason_(itemId, body);
+  if (skip) {
+    Logger.log('Skipping item %s: %s', itemId, skip);
+    return ContentService.createTextOutput(JSON.stringify({ ignored: skip, itemId: itemId }))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+
   try {
     const result = generateForItem(itemId);
     return ContentService.createTextOutput(JSON.stringify(result))
@@ -552,7 +636,15 @@ function setupTemplate() {
   logoCell.getChild(0).asParagraph().clear();
   const logo = logoCell.getChild(0).asParagraph().appendInlineImage(
     Utilities.newBlob(Utilities.base64Decode(LOGO_B64), 'image/png', 'appleseed-logo.png'));
-  logo.setWidth(256).setHeight(Math.round(256 * logo.getHeight() / logo.getWidth()));
+  // Read the intrinsic ratio BEFORE resizing. Chaining
+  //   logo.setWidth(W).setHeight(W * logo.getHeight() / logo.getWidth())
+  // looks right but stretches the mark: JS runs the callee (setWidth, which mutates the
+  // image) before evaluating the argument, so getWidth() already returns W and the height
+  // resolves to its own unchanged value. Like the footer rule, these units are PIXELS at
+  // 96dpi, so DocuGen's 3.55in logo is 341px wide, not 256.
+  const logoRatio = logo.getHeight() / logo.getWidth();
+  logo.setWidth(LOGO_WIDTH_PX);
+  logo.setHeight(Math.round(LOGO_WIDTH_PX * logoRatio));
 
   const titleCell = masthead.getCell(0, 1);
   titleCell.setPaddingRight(0);
@@ -662,6 +754,8 @@ function setupTemplate() {
   doc.saveAndClose();
   PropertiesService.getScriptProperties()
                    .setProperty(CONFIG_KEYS.templateId, doc.getId());
+  PropertiesService.getScriptProperties()
+                   .setProperty(CONFIG_KEYS.templateVersion, TEMPLATE_VERSION);
   Logger.log('Template created and TEMPLATE_DOC_ID saved automatically.');
   Logger.log('Edit it here: %s', doc.getUrl());
   return doc.getUrl();

@@ -127,6 +127,52 @@ automations directly:
 - **Webhook** — point a monday webhook at a small endpoint that shells out to
   `generate --item <pulseId>`; the payload's `event.pulseId` is the item id.
 
+## Running it for free on Google Apps Script (the live setup)
+
+[`apps-script/`](apps-script/) is the one that actually replaced DocuGen. It needs no server
+and no LibreOffice: Google Docs does the PDF conversion, and Google hosts the endpoint.
+Submitting a request on the board files a PDF back on the item in **under 20 seconds**.
+
+```
+monday status -> Submitted
+   -> webhook POST -> doPost()  -> copy template Doc -> fill -> export PDF
+   -> add_file_to_column -> "PDF of Request"
+```
+
+`pollBoard()` does the same sweep on a timer and exists only as a backstop for a webhook
+monday failed to deliver; the webhook is the live path.
+
+**Deploy with clasp, never by pasting.** A clipboard paste once overwrote the whole file
+with unrelated text, and a paste of non-ASCII mangles the glottal in *Hawai‘i*.
+
+```bash
+cd apps-script && npx clasp push
+npx clasp deploy -i <DEPLOYMENT_ID>      # NOT a bare `clasp deploy`
+```
+
+The webhook points at a **versioned** deployment, which is a frozen snapshot: `clasp push`
+alone updates the editor but leaves the live endpoint running the old code. Always redeploy
+to the same id, which also keeps the registered webhook URL valid.
+
+`clasp run` does not work here — it needs the `drive`/`documents` scopes, which Workspace
+policy refuses for unverified apps. So nothing may depend on a human running a function by
+hand: `setupTemplate()` is invoked automatically when `TEMPLATE_VERSION` in `Code.js` no
+longer matches the stamp stored in Script Properties. **Bump that constant whenever you
+change the template layout**, or the old template Doc keeps rendering the old design no
+matter what the code says.
+
+Configuration lives in Script Properties (see `CONFIG_KEYS`): `MONDAY_TOKEN`, `BOARD_ID`,
+`PDF_COLUMN_ID`, `STATUS_COLUMN_ID`, `READY_STATUS`, and `WEBHOOK_SECRET` — the shared
+secret in the webhook URL's `?key=`. The endpoint must be `ANYONE_ANONYMOUS` because monday
+calls it unauthenticated, so it verifies the secret, pins the board id, ignores any status
+other than `READY_STATUS`, and skips items that already have a PDF. Without those last two
+guards a single submission produces duplicate PDFs, because the hook fires on *every* change
+to the watched column and monday may redeliver an event.
+
+```bash
+node apps-script/tests_node_harness.js     # logic tests, no Google or monday needed
+```
+
 ## Tests
 
 `tests_selftest.py` exercises coercion, rendering, filters, loops, and output-path templating
