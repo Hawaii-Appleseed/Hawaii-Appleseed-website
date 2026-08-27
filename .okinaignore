@@ -1,0 +1,9 @@
+# Paths exempt from the ʻokina lint (~/.config/git-hooks/okina-lint.py).
+
+# These skills document the WRONG glyphs on purpose — they carry grep patterns
+# for finding fake ʻokina, so the bad characters are the content.
+.claude/skills/*
+
+# Synced verbatim from the live Squarespace site by sync-publications.yml.
+# Whatever glyph the CMS published is what belongs here; the fix goes upstream.
+news.json
