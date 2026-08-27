@@ -90,6 +90,20 @@
             --hairline:       rgba(var(--field-rgb), 0.09);
             --shadow-hero:    0 10px 30px rgba(var(--shadow-rgb), 0.16);
             --shadow-overlay: 0 10px 30px rgba(var(--shadow-rgb), 0.30);
+
+            /* Rhythm. Every block used to be separated by the same 2.5rem, so
+               the page read as an undifferentiated stack. --space-block keeps
+               related blocks together; --space-movement marks a change of
+               kind — here, the shift from presenting data to making an
+               argument about it. */
+            --space-block:    2.5rem;
+            --space-movement: clamp(3.5rem, 8vw, 5.5rem);
+
+            /* Comfortable reading measure. Prose set to the full 960px card
+               ran 118 characters per line; 60–75 is the readable range.
+               Note ch is the width of "0", which is narrower than Nunito's
+               average glyph — 58ch measures out to ~70 real characters. */
+            --measure: 58ch;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -228,7 +242,7 @@
         /* Revenue callout — sits flush under the dark banner */
         .revenue-callout {
             max-width: 960px;
-            margin: 0 auto 2.5rem;
+            margin: 0 auto var(--space-block);
             padding: 1.6rem 2rem 1.75rem;
             /* Continues the banner's field rather than dropping to a light
                band: picks up at the banner's end color (var(--field-edge)) and deepens
@@ -578,7 +592,9 @@
                the border defines the card without lifting it. */
             border: 1px solid var(--hairline);
             padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem) 1.5rem;
-            margin-bottom: 2rem;
+            /* Charts sit close together — they're one movement, read in
+               sequence. The larger break comes before the narrative. */
+            margin-bottom: var(--space-block);
             max-width: 960px;
             margin-left: auto;
             margin-right: auto;
@@ -738,35 +754,47 @@
 
         /* budget-callout removed — now integrated into banner */
 
-        /* ── Narrative Section ── */
+        /* ── Narrative Section ──
+           Deliberately NOT a card. The charts and the map are instruments and
+           belong in cards; this section is the argument being made about them.
+           Giving it the same white-rounded-bordered treatment made the whole
+           page read as a stack of widgets. On the page background, with a
+           reading measure and room around it, it reads as the report's
+           closing argument — which is what it is. */
         .narrative-section {
             max-width: 960px;
-            margin: 0 auto 2.5rem;
-            background: linear-gradient(180deg, var(--surface) 0%, #fbfdfc 100%);
-            border-radius: var(--r-lg);
-            border: 1px solid var(--hairline);
-            padding: clamp(1.5rem, 3vw, 2.5rem);
+            margin: var(--space-movement) auto var(--space-block);
+            padding: 0 clamp(0rem, 2vw, 0.5rem);
             position: relative;
-            overflow: hidden;
         }
 
-        /* Editorial accent strip — marks this as the "insight" card vs the data cards */
+        /* The accent was a full-bleed strip across the top of the card. With
+           the card gone, it becomes the same short kicker bar the page already
+           uses above section titles — a prose idiom rather than a card one. */
         .narrative-section::before {
             content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 5px;
+            display: block;
+            width: 54px;
+            height: 4px;
+            border-radius: var(--r-pill);
+            margin-bottom: 1rem;
             background: linear-gradient(90deg, var(--green-deep) 0%, var(--green) 50%, var(--money) 100%);
         }
 
         .narrative-title {
             font-family: 'Nunito', system-ui, sans-serif;
-            font-size: 1.3rem;
+            font-size: clamp(1.45rem, 3.2vw, 1.85rem);
             font-weight: 800;
             color: var(--field);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid #e8f0ea;
+            letter-spacing: -0.015em;
+            line-height: 1.25;
+            /* Balance the line lengths rather than filling greedily — at a
+               fixed width this headline drops a lone "us" onto a third line. */
+            max-width: 30ch;
+            text-wrap: balance;
+            margin-bottom: 1.75rem;
+            padding-bottom: 0;
+            border-bottom: none;
         }
 
         .narrative-point {
@@ -786,11 +814,18 @@
             color: var(--field);
         }
 
+        /* 0.92rem was sized for body text inside a card. As the page's prose
+           it carries the argument, so it sizes up — and is held to a reading
+           measure instead of running the full 960px (118 chars/line). */
         .narrative-point p {
-            font-size: 0.92rem;
-            line-height: 1.7;
+            font-size: 1.02rem;
+            line-height: 1.72;
             color: var(--ink-soft);
             margin-left: 0;
+            max-width: var(--measure);
+        }
+        .narrative-more-content p {
+            max-width: var(--measure);
         }
 
         .narrative-source {
@@ -834,20 +869,21 @@
             text-decoration: underline;
         }
 
-        /* Pull-stat highlight inside the narrative argument */
+        /* Pull-stat: now a genuine pull-quote sitting on the page rather than
+           a tinted panel inside a card. Held slightly wider than the prose
+           measure so it reads as a break in the text, not part of it. */
         .narrative-stat {
             display: flex;
             align-items: center;
             gap: 1.1rem;
-            margin: 1.1rem 0 0 0;
-            padding: 1rem 1.3rem;
+            margin: 1.4rem 0 0 0;
+            padding: 1.1rem 1.4rem;
+            max-width: calc(var(--measure) + 8ch);
             background:
                 radial-gradient(ellipse 70% 120% at 12% 50%, rgba(var(--money-rgb), 0.14) 0%, transparent 70%),
                 linear-gradient(135deg, var(--tint) 0%, #e3f0e8 100%);
             border-left: 4px solid var(--green);
             border-radius: 0 var(--r-md) var(--r-md) 0;
-            /* Nested inside a card — its tint and accent bar already separate
-               it, so a shadow only adds haze. */
         }
 
         .narrative-stat-figure {
