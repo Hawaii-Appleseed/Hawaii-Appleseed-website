@@ -72,11 +72,24 @@
             --field-rgb:  26, 60, 52;
             --shadow-rgb: 15, 41, 34;
 
-            /* Radius scale */
-            --r-sm:   8px;
-            --r-md:   14px;
-            --r-lg:   20px;
+            /* Radius scale. Everything on the page maps onto these; the only
+               other permitted radius is 50%, for actual circles (legend and
+               tooltip dots). Tiny accent bars use --r-pill so their ends are
+               fully round rather than approximately round. */
+            --r-xs:   6px;   /* inline chips set into text */
+            --r-sm:   8px;   /* small controls, tooltips */
+            --r-md:   14px;  /* nested panels, pills, embeds */
+            --r-lg:   20px;  /* page-level cards */
             --r-pill: 999px;
+
+            /* Elevation. Shadow is reserved for things that genuinely float
+               above the page — the hero, and overlays that appear over other
+               content. Flat surfaces are separated by a hairline instead,
+               which is what stops a page of stacked cards reading as a
+               dashboard. */
+            --hairline:       rgba(var(--field-rgb), 0.09);
+            --shadow-hero:    0 10px 30px rgba(var(--shadow-rgb), 0.16);
+            --shadow-overlay: 0 10px 30px rgba(var(--shadow-rgb), 0.30);
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -134,7 +147,7 @@
             display: block;
             width: 52px;
             height: 5px;
-            border-radius: 3px;
+            border-radius: var(--r-pill);
             background: linear-gradient(90deg, var(--green-deep), var(--money));
             margin-bottom: 0.7rem;
         }
@@ -158,10 +171,10 @@
             display: flex;
             flex-direction: column;
             gap: 0;
-            box-shadow:
-                0 1px 2px rgba(0,0,0,0.07),
-                0 4px 12px rgba(var(--shadow-rgb), 0.12),
-                0 16px 40px rgba(var(--shadow-rgb), 0.18);
+            /* The hero is the one thing on the page that should read as
+               lifted off the cream, so it keeps a shadow — but one, not the
+               three stacked layers it had. */
+            box-shadow: var(--shadow-hero);
             position: relative;
             overflow: visible;
             z-index: 100;
@@ -209,7 +222,7 @@
             letter-spacing: -1px;
             background: linear-gradient(180deg, rgba(var(--mint-rgb), 0.15) 60%, rgba(var(--mint-rgb), 0.25) 100%);
             padding: 2px 8px 4px;
-            border-radius: 6px;
+            border-radius: var(--r-xs);
         }
 
         /* Revenue callout — sits flush under the dark banner */
@@ -226,9 +239,9 @@
                 linear-gradient(160deg, var(--field-edge) 0%, var(--field-mid) 45%, var(--field-deep) 100%);
             border-radius: 0 0 var(--r-lg) var(--r-lg);
             text-align: center;
-            box-shadow:
-                0 4px 12px rgba(var(--shadow-rgb), 0.12),
-                0 16px 40px rgba(var(--shadow-rgb), 0.18);
+            /* Same elevation as the banner — they're one object, so they must
+               cast one shadow, not two different ones. */
+            box-shadow: var(--shadow-hero);
             position: relative;
             z-index: 1;
         }
@@ -267,7 +280,7 @@
             font-weight: 800;
             background: linear-gradient(180deg, rgba(var(--mint-rgb), 0.14) 60%, rgba(var(--mint-rgb), 0.22) 100%);
             padding: 1px 0.34em 2px;
-            border-radius: 5px;
+            border-radius: var(--r-xs);
             white-space: nowrap;
         }
         .revenue-callout-prompt #revenueTierLabel {
@@ -389,7 +402,7 @@
             padding: 0.45rem 0.85rem;
             background: rgba(var(--mint-rgb), 0.1);
             border: 1px solid rgba(var(--mint-rgb), 0.18);
-            border-radius: 12px;
+            border-radius: var(--r-md);
         }
         .banner-trend-spark {
             display: block;
@@ -434,7 +447,7 @@
             display: block;
             height: 100%;
             background: linear-gradient(90deg, var(--green), var(--mint-soft));
-            border-radius: 6px;
+            border-radius: var(--r-xs);
             transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
         /* Stacked breakdown segments (shown for the "all" view) */
@@ -529,8 +542,8 @@
             top: calc(100% + 6px);
             left: 0;
             background: var(--surface);
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(var(--field-rgb), 0.2);
+            border-radius: var(--r-md);
+            box-shadow: var(--shadow-overlay);
             z-index: 9999;
             min-width: 280px;
             padding: 0.5rem 0;
@@ -560,11 +573,10 @@
         .chart-container {
             background: var(--surface);
             border-radius: var(--r-lg);
-            box-shadow:
-                0 1px 2px rgba(0,0,0,0.04),
-                0 4px 16px rgba(var(--field-rgb), 0.06),
-                0 12px 40px rgba(var(--field-rgb), 0.05);
-            border: 1px solid rgba(255,255,255,0.8);
+            /* Flat surface, hairline edge. Three stacked shadows on every
+               card is what made a column of these read as a dashboard;
+               the border defines the card without lifting it. */
+            border: 1px solid var(--hairline);
             padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem) 1.5rem;
             margin-bottom: 2rem;
             max-width: 960px;
@@ -586,7 +598,7 @@
             background-position: right 0.75rem center;
             background-size: 11px;
             border: 1.5px solid #d4e3da;
-            border-radius: 10px;
+            border-radius: var(--r-sm);
             padding: 0.38rem 2.1rem 0.42rem 0.85rem;
             max-width: 100%;
             overflow: hidden;
@@ -610,7 +622,7 @@
             position: relative;
             width: 100%;
             aspect-ratio: 4 / 3;
-            border-radius: 12px;
+            border-radius: var(--r-md);
             overflow: hidden;
             background: var(--surface-alt);
             border: 1px solid rgba(var(--field-rgb), 0.08);
@@ -633,7 +645,7 @@
             border-radius: var(--r-sm);
             font-size: 13px;
             font-weight: 500;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow-overlay);
             z-index: 1000;
             pointer-events: none;
             opacity: 0;
@@ -668,7 +680,7 @@
             display: block;
             width: 32px;
             height: 4px;
-            border-radius: 3px;
+            border-radius: var(--r-pill);
             background: linear-gradient(90deg, var(--green-deep), var(--money));
             margin-bottom: 0.6rem;
         }
@@ -732,11 +744,7 @@
             margin: 0 auto 2.5rem;
             background: linear-gradient(180deg, var(--surface) 0%, #fbfdfc 100%);
             border-radius: var(--r-lg);
-            box-shadow:
-                0 1px 2px rgba(0,0,0,0.04),
-                0 4px 16px rgba(var(--field-rgb), 0.06),
-                0 12px 40px rgba(var(--field-rgb), 0.05);
-            border: 1px solid rgba(255,255,255,0.8);
+            border: 1px solid var(--hairline);
             padding: clamp(1.5rem, 3vw, 2.5rem);
             position: relative;
             overflow: hidden;
@@ -837,8 +845,9 @@
                 radial-gradient(ellipse 70% 120% at 12% 50%, rgba(var(--money-rgb), 0.14) 0%, transparent 70%),
                 linear-gradient(135deg, var(--tint) 0%, #e3f0e8 100%);
             border-left: 4px solid var(--green);
-            border-radius: 0 12px 12px 0;
-            box-shadow: 0 4px 14px rgba(var(--field-rgb), 0.05);
+            border-radius: 0 var(--r-md) var(--r-md) 0;
+            /* Nested inside a card — its tint and accent bar already separate
+               it, so a shadow only adds haze. */
         }
 
         .narrative-stat-figure {
@@ -882,7 +891,7 @@
             align-items: stretch;
             border-radius: var(--r-pill);
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(var(--field-rgb), 0.1);
+            box-shadow: inset 0 0 0 1px var(--hairline);
             line-height: 1;
         }
         .chart-total-label {
@@ -917,9 +926,9 @@
             opacity: 0;
             transform: translate(-50%, -100%);
             background: var(--surface);
-            border-radius: 10px;
+            border-radius: var(--r-sm);
             padding: 0.45rem 0.7rem 0.5rem;
-            box-shadow: 0 10px 26px rgba(var(--shadow-rgb), 0.4);
+            box-shadow: var(--shadow-overlay);
             font-family: 'Nunito', system-ui, sans-serif;
             white-space: nowrap;
             transition: opacity 0.12s ease;
@@ -977,8 +986,8 @@
             padding: 0.65rem 0.75rem 0.6rem;
             background: rgba(22, 48, 39, 0.97);
             border: 1px solid rgba(var(--mint-rgb), 0.18);
-            border-radius: 11px;
-            box-shadow: 0 10px 30px rgba(var(--shadow-rgb), 0.32);
+            border-radius: var(--r-sm);
+            box-shadow: var(--shadow-overlay);
             font-family: 'Nunito', system-ui, sans-serif;
             color: #fff;
             transition: opacity 0.12s ease;
