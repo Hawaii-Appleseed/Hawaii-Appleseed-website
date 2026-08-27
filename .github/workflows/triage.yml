@@ -1,0 +1,158 @@
+name: Triage a failed run
+
+# Every failure in this repo has followed the same manual path: a red X or an
+# email, then a session opened just to paste the symptom in and ask what broke.
+# That first hop is mechanical, so it runs here instead — the notification you
+# get already contains the diagnosis.
+#
+# The packet is built deterministically by scripts/triage_failure.py, so it
+# always works. If CLAUDE_CODE_OAUTH_TOKEN is configured, a short narrative is
+# layered on top; without it you still get the classified cause and the log
+# excerpt. Same graceful-degradation shape as the Council on Revenues monitor
+# in BudgetPrimerFinal.
+#
+# canary.yml is deliberately NOT watched: it fails on purpose when a scheduled
+# workflow goes quiet, and it already sends its own ntfy alert. Triaging it
+# would double up on every staleness event.
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Triage this run id (any past run, failed or not)"
+        required: true
+        type: string
+  workflow_run:
+    workflows:
+      - "Deploy to GitHub Pages"
+      - "Fetch bill status"
+      - "Sync content from hiappleseed.org"
+      - "Refresh writing-bot corpus"
+      - "Build Content Search bundle"
+    types: [completed]
+
+permissions:
+  actions: read      # read the failed run's logs
+  contents: read
+  issues: write
+
+concurrency:
+  group: triage-${{ github.event.workflow_run.name }}
+  cancel-in-progress: false
+
+jobs:
+  triage:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO: ${{ github.repository }}
+      RUN_ID: ${{ github.event.workflow_run.id || inputs.run_id }}
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      HAS_CLAUDE: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the triage packet
+        run: |
+          # Resolve metadata from the run id rather than the event payload, so
+          # a manual dispatch and a real failure follow the identical path.
+          meta=$(gh run view "$RUN_ID" --repo "$REPO" \
+                   --json workflowName,headBranch,event,headSha,url \
+                   -q '[.workflowName,.headBranch,.event,.headSha,.url]|@tsv')
+          IFS=$'\t' read -r WF BRANCH EVENT SHA RUN_URL <<< "$meta"
+          {
+            echo "WF=$WF"
+            echo "RUN_URL=$RUN_URL"
+          } >> "$GITHUB_ENV"
+
+          # --log-failed exits non-zero when a run produced no failed-step log
+          # (cancelled, or the job died before output). The packet script says
+          # so plainly in that case, so don't let it kill the triage.
+          gh run view "$RUN_ID" --repo "$REPO" --log-failed > failed.log 2>/dev/null || true
+          python3 scripts/triage_failure.py \
+            --workflow "$WF" --url "$RUN_URL" --branch "$BRANCH" \
+            --event "$EVENT" --commit "$SHA" \
+            < failed.log > packet.md
+          cat packet.md
+
+      - name: Add a narrative
+        if: env.HAS_CLAUDE == 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: '--allowedTools "Read,Glob,Grep,Bash(git log:*),Bash(git show:*),Bash(ls:*),Bash(cat:*)" --max-turns 12'
+          prompt: |
+            The workflow "${{ env.WF }}" just failed in this repository.
+            Read packet.md — it has the classified cause and the log excerpt.
+
+            Read the workflow file and any script it invokes, then append a
+            section titled "### What this means" to packet.md covering:
+
+            1. What actually broke, in one or two sentences.
+            2. Whether this is ours to fix or an upstream/transient problem.
+               Say which plainly — a Squarespace 503 and a KeyError from
+               changed markup need very different responses.
+            3. The smallest next step. If it is transient, say "re-run it" and
+               stop; do not invent work.
+
+            Be concrete and short. If the packet does not contain enough to
+            tell, say so rather than speculating. Append only — do not rewrite
+            what is already in the file, and do not commit.
+
+      - name: Report
+        run: |
+          title="${WF} failed"
+
+          # One open issue per workflow: a flaky job should not open a new
+          # issue every night.
+          existing=$(gh issue list --repo "$REPO" --state open --label triage \
+                       --search "\"$title\" in:title" --json number,title \
+                       --jq "[.[] | select(.title == \"$title\")][0].number // empty")
+
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --repo "$REPO" --body-file packet.md
+            issue_url="https://github.com/$REPO/issues/$existing"
+          else
+            issue_url=$(gh issue create --repo "$REPO" --title "$title" \
+              --label triage --body-file packet.md 2>/dev/null) || \
+            issue_url=$(gh issue create --repo "$REPO" --title "$title" \
+              --body-file packet.md)
+          fi
+          echo "issue: $issue_url"
+
+          if [ -n "${NTFY_TOPIC:-}" ]; then
+            # First two lines of the packet carry the classification.
+            guess=$(grep -m1 '^\*\*Looks like' packet.md | tr -d '*' || true)
+            curl -s -m 10 \
+              -H "Title: Appleseed: ${WF} failed" \
+              -H "Priority: high" \
+              -H "Actions: view, Open run, ${RUN_URL}" \
+              -d "$(printf '%s\n%s' "${guess:-See the run for details.}" "$issue_url")" \
+              "https://ntfy.sh/$NTFY_TOPIC" >/dev/null 2>&1 || true
+          fi
+
+  # A workflow that starts passing again should not leave its issue open — the
+  # canary's tracking issue sat open through a resolved incident for exactly
+  # this reason.
+  resolve:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO: ${{ github.repository }}
+      WF: ${{ github.event.workflow_run.name }}
+      RUN_URL: ${{ github.event.workflow_run.html_url }}
+    steps:
+      - name: Close a resolved triage issue
+        run: |
+          title="${WF} failed"
+          existing=$(gh issue list --repo "$REPO" --state open --label triage \
+                       --search "\"$title\" in:title" --json number,title \
+                       --jq "[.[] | select(.title == \"$title\")][0].number // empty")
+          [ -z "$existing" ] && { echo "nothing open for $WF"; exit 0; }
+          gh issue comment "$existing" --repo "$REPO" \
+            --body "Passing again as of $RUN_URL — closing."
+          gh issue close "$existing" --repo "$REPO"
