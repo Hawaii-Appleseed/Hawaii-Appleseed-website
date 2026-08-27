@@ -26,8 +26,36 @@
      Don't remove the !important without re-testing at 375px.
      =================================================================== -->
 <style>
-  /* ---------- desktop: magnifier + dropdown panel ---------- */
-  .ha-hdr-search{display:inline-flex;align-items:center;position:relative;}
+  /* ---------- desktop: magnifier + dropdown panel ----------
+     Absolute, NOT inline. Sitting in the flex row costs 45px (32px button +
+     13px gap), which steals 35px from .header-nav-list — it needs 636px and
+     only gets 601px, so "Subscribe" wraps to a second line between roughly
+     1200px and 1300px wide. Taking the icon out of flow gives the nav its
+     full width back at every viewport.
+
+     It is offset into the header's right gutter (91px of empty space at
+     1263px). Measured clearance from the viewport edge: 48px @1280,
+     25px @900, 19px @800 — never overflows, and stays 12px clear of the
+     Donate button throughout, so no media query is needed.
+
+     Positioning context is .header-display-desktop (position:relative);
+     .header-actions and .header-actions--right are both static.
+
+     Known cosmetic trade-off: the icon sits ~44px outside the content
+     column, so the header is slightly asymmetric (logo insets 77px on the
+     left, magnifier 33px from the right). Accepted deliberately — the
+     alternative was squeezing the social icons from 12.8px to 4px margins.
+
+     NOTE: below ~1200px the nav wraps regardless of this widget — that is a
+     pre-existing condition of an 8-item nav, not something this can fix.
+
+     Selector is scoped to .header-display-desktop deliberately: Squarespace
+     sets position:relative on .header-actions-action at equal specificity
+     (0,1,0), so a bare .ha-hdr-search rule would depend on source order. */
+  .ha-hdr-search{display:inline-flex;align-items:center;}
+  .header-display-desktop .ha-hdr-search{
+    position:absolute;right:-44px;top:50%;transform:translateY(-50%);
+  }
 
   .ha-hdr-search__toggle{
     background:none;border:0;cursor:pointer;padding:6px;margin:0;
