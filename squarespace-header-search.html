@@ -1,34 +1,84 @@
 <!-- ===================================================================
      Hawaiʻi Appleseed — header search (Squarespace-native).
      PASTE INTO: Settings → Advanced → Code Injection → FOOTER.
+
      One injection, whole site. Adds a magnifier to the header (right of
-     Donate on desktop, a field in the burger menu on mobile) that sends
-     the visitor to Squarespace's own /search?q= results page — so there
-     is NO index to build, host, or keep in sync; it always reflects live
-     site content. Self-heals via MutationObserver if the header re-renders.
+     Donate on desktop, a field at the top of the burger menu on mobile)
+     that sends the visitor to Squarespace's own /search?q= results page —
+     so there is NO index to build, host, or keep in sync; it always
+     reflects live site content. Self-heals via MutationObserver if the
+     header re-renders.
+
+     WHY A DROPDOWN, NOT AN INLINE EXPANDING FIELD
+     The obvious design — a field that grows sideways out of the icon —
+     was built first and fails on this site: the desktop header is already
+     full at ~1300px, so adding ~190px of inline width pushed the input
+     off the right edge of the viewport AND forced the nav to wrap to two
+     lines. The panel is absolutely positioned instead, so opening it can
+     never reflow the header. It is anchored right:0 (expands leftward)
+     and drops BELOW the header rather than over it, so it never covers
+     the Donate CTA. Verified no clipping ancestor — every wrapper up to
+     .clearfix is overflow:visible.
+
+     BOX-SIZING NEEDS !important
+     Squarespace's own stylesheet sets content-box on inputs and wins on
+     specificity, which makes width:100% overflow its padded container.
+     Don't remove the !important without re-testing at 375px.
      =================================================================== -->
 <style>
-  /* desktop: icon that expands to an input, sitting right of Donate */
+  /* ---------- desktop: magnifier + dropdown panel ---------- */
   .ha-hdr-search{display:inline-flex;align-items:center;position:relative;}
-  .ha-hdr-search__box{width:0;overflow:hidden;transition:width .28s cubic-bezier(.22,.61,.36,1);}
-  .ha-hdr-search.is-open .ha-hdr-search__box{width:190px;margin-right:6px;}
-  .ha-hdr-search__input{width:100%;box-sizing:border-box;padding:7px 12px;border:1px solid rgba(0,0,0,.28);
-    border-radius:3px;background:#fff;color:#2F3E46;font:inherit;font-size:14px;opacity:0;transition:opacity .18s ease;}
-  .ha-hdr-search.is-open .ha-hdr-search__input{opacity:1;}
-  .ha-hdr-search__input:focus{outline:2px solid #84A98C;outline-offset:1px;border-color:#84A98C;}
-  .ha-hdr-search__toggle{background:none;border:0;cursor:pointer;padding:6px;margin:0;display:inline-flex;
-    align-items:center;color:currentColor;line-height:0;}
+
+  .ha-hdr-search__toggle{
+    background:none;border:0;cursor:pointer;padding:6px;margin:0;
+    display:inline-flex;align-items:center;color:currentColor;line-height:0;
+  }
   .ha-hdr-search__toggle svg{width:20px;height:20px;display:block;}
   .ha-hdr-search__toggle:hover{opacity:.7;}
+  .ha-hdr-search__toggle:focus-visible{outline:2px solid #84A98C;outline-offset:2px;border-radius:2px;}
 
-  /* mobile: field prepended to the burger menu */
-  .ha-hdr-search-mobile{display:flex;align-items:center;gap:8px;padding:14px 0;margin-bottom:6px;
-    border-bottom:1px solid rgba(0,0,0,.12);color:currentColor;}
+  /* Absolutely positioned so opening never reflows the header. */
+  .ha-hdr-search__box{
+    position:absolute;top:calc(100% + 10px);right:0;
+    width:min(280px, calc(100vw - 32px));
+    background:#fff;border:1px solid rgba(53,79,82,.15);border-radius:4px;
+    box-shadow:0 10px 28px rgba(47,62,70,.16);padding:8px;z-index:1000;
+    opacity:0;visibility:hidden;transform:translateY(-6px);
+    transition:opacity .2s ease,transform .2s ease,visibility .2s;
+  }
+  .ha-hdr-search.is-open .ha-hdr-search__box{opacity:1;visibility:visible;transform:translateY(0);}
+
+  .ha-hdr-search__input{
+    /* !important: Squarespace forces content-box on inputs and wins on
+       specificity, which makes width:100% overflow the padded panel. */
+    box-sizing:border-box !important;
+    width:100%;padding:9px 12px;border:1px solid #CAD2C5;border-radius:3px;
+    background:#fff;color:#2F3E46;
+    font-family:OkinaPoppins,'Poppins',system-ui,-apple-system,Arial,sans-serif;
+    font-size:14px;line-height:1.4;
+  }
+  .ha-hdr-search__input:focus{outline:2px solid #84A98C;outline-offset:1px;border-color:#84A98C;}
+
+  /* ---------- mobile: field at the top of the burger menu ----------
+     22.5px horizontal padding matches .header-menu-nav-item so the field
+     lines up with the nav links below it. */
+  .ha-hdr-search-mobile{
+    display:flex;align-items:center;gap:10px;
+    box-sizing:border-box;width:100%;
+    padding:16px 22.5px 18px;margin:0 0 4px;
+    border-bottom:1px solid rgba(0,0,0,.12);color:currentColor;
+  }
   .ha-hdr-search-mobile svg{width:22px;height:22px;flex:none;}
-  .ha-hdr-search-mobile input{flex:1;min-width:0;padding:10px 12px;border:1px solid rgba(0,0,0,.28);
-    border-radius:3px;background:#fff;color:#2F3E46;font:inherit;font-size:16px;}
+  .ha-hdr-search-mobile input{
+    box-sizing:border-box !important;                 /* same override as above */
+    flex:1;min-width:0;padding:10px 12px;border:1px solid #CAD2C5;border-radius:3px;
+    background:#fff;color:#2F3E46;
+    font-family:OkinaPoppins,'Poppins',system-ui,-apple-system,Arial,sans-serif;
+    font-size:16px;                                   /* 16px: stops iOS zoom-on-focus */
+  }
+  .ha-hdr-search-mobile input:focus{outline:2px solid #84A98C;outline-offset:1px;border-color:#84A98C;}
 
-  @media (prefers-reduced-motion:reduce){.ha-hdr-search__box,.ha-hdr-search__input{transition:none;}}
+  @media (prefers-reduced-motion:reduce){.ha-hdr-search__box{transition:none;}}
 </style>
 <script>
 (function(){
@@ -43,39 +93,47 @@
     var wrap=document.createElement('div');
     wrap.className='header-actions-action ha-hdr-search';           // inherit Squarespace action spacing
     wrap.setAttribute('role','search');
-    // box BEFORE toggle so the input expands leftward (toward Donate); magnifier stays at the edge
-    wrap.innerHTML='<div class="ha-hdr-search__box"><input type="search" class="ha-hdr-search__input" '
-      +'placeholder="Search…" aria-label="Search the site" autocomplete="off" enterkeyhint="search"></div>'
-      +'<button type="button" class="ha-hdr-search__toggle" aria-label="Search" aria-expanded="false">'+MAG+'</button>';
+    wrap.innerHTML='<button type="button" class="ha-hdr-search__toggle" aria-label="Search" aria-expanded="false">'+MAG+'</button>'
+      +'<div class="ha-hdr-search__box"><input type="search" class="ha-hdr-search__input" '
+      +'placeholder="Search…" aria-label="Search the site" autocomplete="off" enterkeyhint="search"></div>';
     actions.appendChild(wrap);
+
     var toggle=wrap.querySelector('.ha-hdr-search__toggle'), input=wrap.querySelector('.ha-hdr-search__input');
     function close(){ wrap.classList.remove('is-open'); toggle.setAttribute('aria-expanded','false'); }
     toggle.addEventListener('click', function(e){
       e.preventDefault(); e.stopPropagation();
       if(wrap.classList.contains('is-open')){ input.value.trim() ? go(input.value) : close(); }
-      else { wrap.classList.add('is-open'); toggle.setAttribute('aria-expanded','true'); setTimeout(function(){input.focus();},20); }
+      else { wrap.classList.add('is-open'); toggle.setAttribute('aria-expanded','true'); setTimeout(function(){input.focus();},60); }
     });
     input.addEventListener('keydown', function(e){
       if(e.key==='Enter'){ e.preventDefault(); go(input.value); }
       else if(e.key==='Escape'){ input.value=''; close(); toggle.focus(); }
     });
     document.addEventListener('click', function(e){ if(!wrap.contains(e.target)) close(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && wrap.classList.contains('is-open')) close(); });
   }
 
-  function addMobile(list){
-    if(list.querySelector('.ha-hdr-search-mobile')) return;         // idempotent
+  // MUST mount inside .header-menu-nav-folder-content, NOT .header-menu-nav-list.
+  // The nav folders are position:absolute; top:0 within the list, so anything
+  // added to the list itself sits in normal flow at the same y and renders
+  // *underneath* the "About" link. folder-content is the in-flow flex column
+  // the nav items actually live in. querySelector takes the first = root menu
+  // (each submenu has its own folder-content).
+  function addMobile(content){
+    if(content.querySelector('.ha-hdr-search-mobile')) return;      // idempotent
     var el=document.createElement('div');
     el.className='ha-hdr-search-mobile';
+    el.setAttribute('role','search');
     el.innerHTML=MAG+'<input type="search" placeholder="Search…" aria-label="Search the site" autocomplete="off" enterkeyhint="search">';
-    list.insertBefore(el, list.firstChild);
+    content.insertBefore(el, content.firstChild);
     var input=el.querySelector('input');
     input.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); go(input.value); } });
   }
 
   function inject(){
     document.querySelectorAll('.header-display-desktop .header-actions--right').forEach(addDesktop);
-    var list=document.querySelector('.header-menu-nav-list');
-    if(list) addMobile(list);
+    var content=document.querySelector('.header-menu-nav-folder-content');
+    if(content) addMobile(content);
   }
 
   function boot(){
