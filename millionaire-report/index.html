@@ -16,14 +16,97 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        /* ── Design tokens ──────────────────────────────────────────────────
+           Every color on this page used to be hand-typed, which is how the
+           revenue callout drifted away from the banner it's supposed to be
+           fused to. These are the actual values already in use, named — a
+           pure rename, no visual change.
+
+           The dark greens are one ramp, ordered deepest → lightest. The
+           banner gradient runs --field-deepest → --field → --field-lift →
+           --field-edge, and the callout picks up exactly where it leaves off
+           (--field-edge) and returns to --field-deep. Keep them in that order
+           and the two blocks stay welded.
+
+           --*-rgb triplets exist so alpha variants compose as
+           rgba(var(--mint-rgb), 0.3) instead of a new hardcoded literal.
+
+           RADIUS: the scale below is the intended one. The page still
+           contains ad-hoc 3/5/6/10/11/12/14px radii that predate it; those
+           are deliberately left alone here so this pass stays a pure rename.
+           Consolidating them onto the scale is a separate, visual change. */
+        :root {
+            /* Dark field — deepest to lightest */
+            --field-deepest: #0f2922;
+            --field-deep:    #14322a;
+            --field:         #1a3c34;
+            --field-mid:     #1a4437;
+            --field-lift:    #1e4f40;
+            --field-edge:    #245a48;
+
+            /* Greens — mid tones and accents */
+            --green-deep:  #1f5a44;
+            --green-mid:   #2a6b4f;
+            --green:       #4f9b72;
+            --money:       #6abc7a;
+            --mint-soft:   #8ad6a0;
+            --mint:        #a8e6b0;
+            --mint-bright: #bdf0c6;
+
+            /* Surfaces */
+            --page:        #f4f1eb;
+            --surface:     #ffffff;
+            --surface-alt: #fcfcf9;
+            --tint:        #f0f7f2;
+            --tint-warm:   #f5f7f0;
+
+            /* Text */
+            --ink:      #2a2a2a;
+            --ink-soft: #3a3a3a;
+            --muted:    #6b8f71;
+            --muted-2:  #8fa89a;
+
+            /* Triplets for alpha composition */
+            --mint-rgb:   168, 230, 176;
+            --money-rgb:  106, 188, 122;
+            --field-rgb:  26, 60, 52;
+            --shadow-rgb: 15, 41, 34;
+
+            /* Radius scale */
+            --r-sm:   8px;
+            --r-md:   14px;
+            --r-lg:   20px;
+            --r-pill: 999px;
+        }
+
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* Figures are the point of this page, and several of them animate or
+           swap on interaction (the counters, the tier tooltip). Proportional
+           digits change width as values change, so numbers visibly jitter.
+           Tabular figures lock the advance width. Scoped to data, not prose —
+           running text keeps proportional digits. */
+        .count,
+        .banner-stat-value,
+        .banner-stat-unit,
+        .banner-trend-figure,
+        .chart-total-value,
+        .narrative-stat-figure,
+        .revenue-callout-range,
+        .revenue-callout-prompt strong,
+        .revenue-callout-context,
+        .tier-tip-amt,
+        .tier-tip-pct {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: 'tnum' 1;
+        }
 
         body {
             font-family: 'Nunito', system-ui, -apple-system, sans-serif;
-            background: #f4f1eb;
+            background: var(--page);
             background-image:
                 url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-            color: #2a2a2a;
+            color: var(--ink);
             padding: clamp(1rem, 4vw, 2.5rem);
             min-height: 100vh;
         }
@@ -41,7 +124,7 @@
             font-family: 'Nunito', system-ui, sans-serif;
             font-size: clamp(2rem, 5vw, 2.8rem);
             font-weight: 900;
-            color: #1a3c34;
+            color: var(--field);
             letter-spacing: -0.5px;
         }
 
@@ -52,7 +135,7 @@
             width: 52px;
             height: 5px;
             border-radius: 3px;
-            background: linear-gradient(90deg, #1f5a44, #6abc7a);
+            background: linear-gradient(90deg, var(--green-deep), var(--money));
             margin-bottom: 0.7rem;
         }
 
@@ -69,16 +152,16 @@
         .infographic-banner {
             max-width: 960px;
             margin: 0 auto 0;
-            background: linear-gradient(160deg, #0f2922 0%, #1a3c34 30%, #1e4f40 70%, #245a48 100%);
-            border-radius: 20px 20px 0 0;
+            background: linear-gradient(160deg, var(--field-deepest) 0%, var(--field) 30%, var(--field-lift) 70%, var(--field-edge) 100%);
+            border-radius: var(--r-lg) var(--r-lg) 0 0;
             padding: clamp(1.5rem, 4vw, 2.8rem) clamp(1.5rem, 4vw, 3rem);
             display: flex;
             flex-direction: column;
             gap: 0;
             box-shadow:
                 0 1px 2px rgba(0,0,0,0.07),
-                0 4px 12px rgba(15, 41, 34, 0.12),
-                0 16px 40px rgba(15, 41, 34, 0.18);
+                0 4px 12px rgba(var(--shadow-rgb), 0.12),
+                0 16px 40px rgba(var(--shadow-rgb), 0.18);
             position: relative;
             overflow: visible;
             z-index: 100;
@@ -90,9 +173,9 @@
             top: 0; left: 0; right: 0; bottom: 0;
             background:
                 linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 55%),
-                radial-gradient(ellipse at 90% 20%, rgba(168, 230, 176, 0.07) 0%, transparent 55%);
+                radial-gradient(ellipse at 90% 20%, rgba(var(--mint-rgb), 0.07) 0%, transparent 55%);
             pointer-events: none;
-            border-radius: 20px;
+            border-radius: var(--r-lg);
         }
 
         .infographic-banner::after {
@@ -124,7 +207,7 @@
             font-weight: 900;
             line-height: 1;
             letter-spacing: -1px;
-            background: linear-gradient(180deg, rgba(168,230,176,0.15) 60%, rgba(168,230,176,0.25) 100%);
+            background: linear-gradient(180deg, rgba(var(--mint-rgb), 0.15) 60%, rgba(var(--mint-rgb), 0.25) 100%);
             padding: 2px 8px 4px;
             border-radius: 6px;
         }
@@ -135,17 +218,17 @@
             margin: 0 auto 2.5rem;
             padding: 1.6rem 2rem 1.75rem;
             /* Continues the banner's field rather than dropping to a light
-               band: picks up at the banner's end color (#245a48) and deepens
+               band: picks up at the banner's end color (var(--field-edge)) and deepens
                toward the bottom edge so the composition lands. The banner and
                this block read as one object whose last line is the payoff. */
             background:
-                radial-gradient(ellipse 70% 120% at 50% 0%, rgba(168,230,176,0.07) 0%, transparent 70%),
-                linear-gradient(160deg, #245a48 0%, #1a4437 45%, #14322a 100%);
-            border-radius: 0 0 20px 20px;
+                radial-gradient(ellipse 70% 120% at 50% 0%, rgba(var(--mint-rgb), 0.07) 0%, transparent 70%),
+                linear-gradient(160deg, var(--field-edge) 0%, var(--field-mid) 45%, var(--field-deep) 100%);
+            border-radius: 0 0 var(--r-lg) var(--r-lg);
             text-align: center;
             box-shadow:
-                0 4px 12px rgba(15, 41, 34, 0.12),
-                0 16px 40px rgba(15, 41, 34, 0.18);
+                0 4px 12px rgba(var(--shadow-rgb), 0.12),
+                0 16px 40px rgba(var(--shadow-rgb), 0.18);
             position: relative;
             z-index: 1;
         }
@@ -160,7 +243,7 @@
             transform: translateX(-50%);
             width: 72%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(168,230,176,0.22), transparent);
+            background: linear-gradient(90deg, transparent, rgba(var(--mint-rgb), 0.22), transparent);
         }
         .revenue-callout-prompt {
             font-size: 1.07rem;
@@ -180,9 +263,9 @@
            steps back to plain weight. Previously both were emphasized and
            neither won. */
         .revenue-callout-prompt strong {
-            color: #bdf0c6;
+            color: var(--mint-bright);
             font-weight: 800;
-            background: linear-gradient(180deg, rgba(168,230,176,0.14) 60%, rgba(168,230,176,0.22) 100%);
+            background: linear-gradient(180deg, rgba(var(--mint-rgb), 0.14) 60%, rgba(var(--mint-rgb), 0.22) 100%);
             padding: 1px 0.34em 2px;
             border-radius: 5px;
             white-space: nowrap;
@@ -207,16 +290,16 @@
         .revenue-callout-range {
             font-size: clamp(2rem, 5.4vw, 2.9rem);
             font-weight: 800;
-            color: #a8e6b0;
+            color: var(--mint);
             letter-spacing: -0.015em;
             line-height: 1.15;
-            text-shadow: 0 0 26px rgba(106,188,122,0.32);
+            text-shadow: 0 0 26px rgba(var(--money-rgb), 0.32);
         }
         /* Not italic: only the weight axis of Nunito is loaded, so italic
            would be a synthetic slant (same reason the house rule forbids it
            on Manrope). Letter-spacing carries the aside instead. */
         .revenue-callout-connector {
-            color: rgba(168,230,176,0.62);
+            color: rgba(var(--mint-rgb), 0.62);
             font-size: 0.46em;
             font-weight: 600;
             letter-spacing: 0.06em;
@@ -226,13 +309,13 @@
         .revenue-callout-per {
             font-size: 1.02rem;
             font-weight: 700;
-            color: rgba(168, 230, 176, 0.82);
+            color: rgba(var(--mint-rgb), 0.82);
             letter-spacing: 0.04em;
             white-space: nowrap;
         }
         .revenue-callout-context {
             font-size: 0.92rem;
-            /* Was #6b8f71 on the light band = 2.91:1, below the 4.5:1 WCAG AA
+            /* Was var(--muted) on the light band = 2.91:1, below the 4.5:1 WCAG AA
                floor for body text. On the dark field this clears it. */
             color: rgba(255,255,255,0.66);
             font-weight: 500;
@@ -248,7 +331,7 @@
             position: relative;
             z-index: 2;
             background: rgba(255,255,255,0.05);
-            border-radius: 14px;
+            border-radius: var(--r-md);
             border: 1px solid rgba(255,255,255,0.07);
             padding: clamp(1rem, 2.5vw, 1.5rem) 0;
         }
@@ -263,7 +346,7 @@
 
         .banner-stat-value {
             font-family: 'Nunito', system-ui, sans-serif;
-            color: #a8e6b0;
+            color: var(--mint);
             font-size: clamp(1.6rem, 4.5vw, 2.4rem);
             font-weight: 900;
             line-height: 1.1;
@@ -271,7 +354,7 @@
         }
 
         .banner-stat-unit {
-            color: rgba(168, 230, 176, 0.5);
+            color: rgba(var(--mint-rgb), 0.5);
             font-size: 0.95rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -304,8 +387,8 @@
             align-items: center;
             gap: 0.55rem;
             padding: 0.45rem 0.85rem;
-            background: rgba(168, 230, 176, 0.1);
-            border: 1px solid rgba(168, 230, 176, 0.18);
+            background: rgba(var(--mint-rgb), 0.1);
+            border: 1px solid rgba(var(--mint-rgb), 0.18);
             border-radius: 12px;
         }
         .banner-trend-spark {
@@ -319,7 +402,7 @@
         }
         .banner-trend-figure {
             font-family: 'Nunito', system-ui, sans-serif;
-            color: #a8e6b0;
+            color: var(--mint);
             font-weight: 900;
             font-size: 1.3rem;
             letter-spacing: -0.01em;
@@ -341,7 +424,7 @@
             height: 16px;
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
+            border-radius: var(--r-sm);
             margin: 0.55rem auto 0.45rem;
             overflow: hidden;
         }
@@ -350,7 +433,7 @@
         .conc-bar-fill {
             display: block;
             height: 100%;
-            background: linear-gradient(90deg, #4f9b72, #8ad6a0);
+            background: linear-gradient(90deg, var(--green), var(--mint-soft));
             border-radius: 6px;
             transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -421,7 +504,7 @@
             font-weight: 600;
             cursor: pointer;
             padding: 0.4rem 0.8rem;
-            border-radius: 8px;
+            border-radius: var(--r-sm);
             font-family: inherit;
             transition: all 0.2s;
             white-space: nowrap;
@@ -445,9 +528,9 @@
             position: absolute;
             top: calc(100% + 6px);
             left: 0;
-            background: #fff;
+            background: var(--surface);
             border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(26, 60, 52, 0.2);
+            box-shadow: 0 8px 30px rgba(var(--field-rgb), 0.2);
             z-index: 9999;
             min-width: 280px;
             padding: 0.5rem 0;
@@ -463,24 +546,24 @@
             background: none;
             border: none;
             font-size: 0.9rem;
-            color: #2a2a2a;
+            color: var(--ink);
             cursor: pointer;
             font-family: inherit;
             transition: background 0.15s;
             font-weight: 500;
         }
 
-        .dropdown-menu button:hover { background: #f0f7f2; }
-        .dropdown-menu button.active { color: #2a6b4f; font-weight: 700; }
+        .dropdown-menu button:hover { background: var(--tint); }
+        .dropdown-menu button.active { color: var(--green-mid); font-weight: 700; }
 
         /* ── Charts ── */
         .chart-container {
-            background: #ffffff;
-            border-radius: 20px;
+            background: var(--surface);
+            border-radius: var(--r-lg);
             box-shadow:
                 0 1px 2px rgba(0,0,0,0.04),
-                0 4px 16px rgba(26, 60, 52, 0.06),
-                0 12px 40px rgba(26, 60, 52, 0.05);
+                0 4px 16px rgba(var(--field-rgb), 0.06),
+                0 12px 40px rgba(var(--field-rgb), 0.05);
             border: 1px solid rgba(255,255,255,0.8);
             padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem) 1.5rem;
             margin-bottom: 2rem;
@@ -496,8 +579,8 @@
             font-family: 'Nunito', system-ui, sans-serif;
             font-size: 1.15rem;
             font-weight: 700;
-            color: #1a3c34;
-            background-color: #f0f7f2;
+            color: var(--field);
+            background-color: var(--tint);
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231f5a44' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 0.75rem center;
@@ -514,13 +597,13 @@
         }
         .chart-title-group { min-width: 0; }
         .chart-switcher:hover {
-            border-color: #6abc7a;
+            border-color: var(--money);
             background-color: #e3f0e8;
         }
         .chart-switcher:focus {
             outline: none;
-            border-color: #4f9b72;
-            box-shadow: 0 0 0 3px rgba(106, 188, 122, 0.25);
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(var(--money-rgb), 0.25);
         }
 
         .map-embed-wrapper {
@@ -529,8 +612,8 @@
             aspect-ratio: 4 / 3;
             border-radius: 12px;
             overflow: hidden;
-            background: #fcfcf9;
-            border: 1px solid rgba(26, 60, 52, 0.08);
+            background: var(--surface-alt);
+            border: 1px solid rgba(var(--field-rgb), 0.08);
             margin-top: 0.5rem;
         }
 
@@ -544,10 +627,10 @@
 
         .tax-popup {
             position: absolute;
-            background: rgba(26, 60, 52, 0.95);
+            background: rgba(var(--field-rgb), 0.95);
             color: white;
             padding: 12px 16px;
-            border-radius: 8px;
+            border-radius: var(--r-sm);
             font-size: 13px;
             font-weight: 500;
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
@@ -586,7 +669,7 @@
             width: 32px;
             height: 4px;
             border-radius: 3px;
-            background: linear-gradient(90deg, #1f5a44, #6abc7a);
+            background: linear-gradient(90deg, var(--green-deep), var(--money));
             margin-bottom: 0.6rem;
         }
 
@@ -594,12 +677,12 @@
             font-family: 'Nunito', system-ui, sans-serif;
             font-size: 1.15rem;
             font-weight: 700;
-            color: #1a3c34;
+            color: var(--field);
         }
 
         .chart-header .subtitle {
             font-size: 0.92rem;
-            color: #8fa89a;
+            color: var(--muted-2);
             font-weight: 500;
         }
 
@@ -609,14 +692,14 @@
             font-weight: 600;
             padding: 0.3rem 0.7rem;
             border: 1.5px solid #c8d9ce;
-            border-radius: 8px;
-            color: #1a3c34;
-            background: #f5f7f0;
+            border-radius: var(--r-sm);
+            color: var(--field);
+            background: var(--tint-warm);
             cursor: pointer;
             transition: border-color 0.2s;
         }
 
-        .year-select:hover { border-color: #2a6b4f; }
+        .year-select:hover { border-color: var(--green-mid); }
 
         .chart-wrapper {
             position: relative;
@@ -647,12 +730,12 @@
         .narrative-section {
             max-width: 960px;
             margin: 0 auto 2.5rem;
-            background: linear-gradient(180deg, #ffffff 0%, #fbfdfc 100%);
-            border-radius: 20px;
+            background: linear-gradient(180deg, var(--surface) 0%, #fbfdfc 100%);
+            border-radius: var(--r-lg);
             box-shadow:
                 0 1px 2px rgba(0,0,0,0.04),
-                0 4px 16px rgba(26, 60, 52, 0.06),
-                0 12px 40px rgba(26, 60, 52, 0.05);
+                0 4px 16px rgba(var(--field-rgb), 0.06),
+                0 12px 40px rgba(var(--field-rgb), 0.05);
             border: 1px solid rgba(255,255,255,0.8);
             padding: clamp(1.5rem, 3vw, 2.5rem);
             position: relative;
@@ -665,14 +748,14 @@
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 5px;
-            background: linear-gradient(90deg, #1f5a44 0%, #4f9b72 50%, #6abc7a 100%);
+            background: linear-gradient(90deg, var(--green-deep) 0%, var(--green) 50%, var(--money) 100%);
         }
 
         .narrative-title {
             font-family: 'Nunito', system-ui, sans-serif;
             font-size: 1.3rem;
             font-weight: 800;
-            color: #1a3c34;
+            color: var(--field);
             margin-bottom: 1.5rem;
             padding-bottom: 0.75rem;
             border-bottom: 2px solid #e8f0ea;
@@ -692,20 +775,20 @@
         .narrative-point-header h3 {
             font-size: 1.05rem;
             font-weight: 700;
-            color: #1a3c34;
+            color: var(--field);
         }
 
         .narrative-point p {
             font-size: 0.92rem;
             line-height: 1.7;
-            color: #3a3a3a;
+            color: var(--ink-soft);
             margin-left: 0;
         }
 
         .narrative-source {
             display: block;
             font-size: 0.85rem;
-            color: #8fa89a;
+            color: var(--muted-2);
             margin-top: 0.5rem;
             margin-left: 0;
         }
@@ -713,7 +796,7 @@
         .narrative-more-toggle {
             background: none;
             border: none;
-            color: #2a6b4f;
+            color: var(--green-mid);
             font-weight: 600;
             font-size: 0.92rem;
             cursor: pointer;
@@ -739,7 +822,7 @@
         }
 
         .narrative-source a {
-            color: #2a6b4f;
+            color: var(--green-mid);
             text-decoration: underline;
         }
 
@@ -751,18 +834,18 @@
             margin: 1.1rem 0 0 0;
             padding: 1rem 1.3rem;
             background:
-                radial-gradient(ellipse 70% 120% at 12% 50%, rgba(106,188,122,0.14) 0%, transparent 70%),
-                linear-gradient(135deg, #f0f7f2 0%, #e3f0e8 100%);
-            border-left: 4px solid #4f9b72;
+                radial-gradient(ellipse 70% 120% at 12% 50%, rgba(var(--money-rgb), 0.14) 0%, transparent 70%),
+                linear-gradient(135deg, var(--tint) 0%, #e3f0e8 100%);
+            border-left: 4px solid var(--green);
             border-radius: 0 12px 12px 0;
-            box-shadow: 0 4px 14px rgba(26, 60, 52, 0.05);
+            box-shadow: 0 4px 14px rgba(var(--field-rgb), 0.05);
         }
 
         .narrative-stat-figure {
             font-family: 'Nunito', system-ui, sans-serif;
             font-size: clamp(1.7rem, 4.5vw, 2.2rem);
             font-weight: 900;
-            color: #1f5a44;
+            color: var(--green-deep);
             line-height: 1;
             white-space: nowrap;
             letter-spacing: -0.015em;
@@ -772,7 +855,7 @@
         .narrative-stat-figure .unit {
             font-size: 0.46em;
             font-weight: 700;
-            color: #6b8f71;
+            color: var(--muted);
             margin-left: 0.18em;
             letter-spacing: 0;
         }
@@ -797,9 +880,9 @@
         .chart-total {
             display: inline-flex;
             align-items: stretch;
-            border-radius: 999px;
+            border-radius: var(--r-pill);
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(26, 60, 52, 0.1);
+            box-shadow: 0 1px 3px rgba(var(--field-rgb), 0.1);
             line-height: 1;
         }
         .chart-total-label {
@@ -816,15 +899,15 @@
         .chart-total-value {
             display: flex;
             align-items: center;
-            background: #1f5a44;
+            background: var(--green-deep);
             color: #ffffff;
             font-weight: 800;
             font-size: 0.92rem;
             padding: 0.32rem 0.72rem 0.32rem 0.6rem;
         }
         /* Past total muted; current total in money-green to signal progression */
-        .chart-total.is-past .chart-total-label { background: #eef2f0; color: #8fa89a; }
-        .chart-total.is-past .chart-total-value { background: #6b8f71; }
+        .chart-total.is-past .chart-total-label { background: #eef2f0; color: var(--muted-2); }
+        .chart-total.is-past .chart-total-value { background: var(--muted); }
 
         /* ── Wealth-by-tier segment hover tooltip (light card on the dark banner) ── */
         .tier-tip {
@@ -833,10 +916,10 @@
             pointer-events: none;
             opacity: 0;
             transform: translate(-50%, -100%);
-            background: #ffffff;
+            background: var(--surface);
             border-radius: 10px;
             padding: 0.45rem 0.7rem 0.5rem;
-            box-shadow: 0 10px 26px rgba(15, 41, 34, 0.4);
+            box-shadow: 0 10px 26px rgba(var(--shadow-rgb), 0.4);
             font-family: 'Nunito', system-ui, sans-serif;
             white-space: nowrap;
             transition: opacity 0.12s ease;
@@ -861,23 +944,23 @@
             height: 9px;
             border-radius: 50%;
             flex-shrink: 0;
-            box-shadow: inset 0 0 0 1px rgba(26, 60, 52, 0.18);
+            box-shadow: inset 0 0 0 1px rgba(var(--field-rgb), 0.18);
         }
         .tier-tip-name {
             font-weight: 800;
             font-size: 0.82rem;
-            color: #1a3c34;
+            color: var(--field);
         }
         .tier-tip-amt {
             display: block;
             margin-top: 0.18rem;
             font-weight: 800;
             font-size: 0.98rem;
-            color: #1f5a44;
+            color: var(--green-deep);
             letter-spacing: -0.01em;
         }
         .tier-tip-pct {
-            color: #6b8f71;
+            color: var(--muted);
             font-weight: 700;
             font-size: 0.8rem;
         }
@@ -893,9 +976,9 @@
             min-width: 178px;
             padding: 0.65rem 0.75rem 0.6rem;
             background: rgba(22, 48, 39, 0.97);
-            border: 1px solid rgba(168, 230, 176, 0.18);
+            border: 1px solid rgba(var(--mint-rgb), 0.18);
             border-radius: 11px;
-            box-shadow: 0 10px 30px rgba(15, 41, 34, 0.32);
+            box-shadow: 0 10px 30px rgba(var(--shadow-rgb), 0.32);
             font-family: 'Nunito', system-ui, sans-serif;
             color: #fff;
             transition: opacity 0.12s ease;
@@ -926,12 +1009,12 @@
         }
         .chart-tooltip-pill {
             margin-left: auto;
-            background: rgba(168, 230, 176, 0.16);
+            background: rgba(var(--mint-rgb), 0.16);
             color: #ffffff;
             font-weight: 800;
             font-size: 0.84rem;
             padding: 0.13rem 0.55rem;
-            border-radius: 999px;
+            border-radius: var(--r-pill);
             white-space: nowrap;
         }
         .chart-tooltip-divider {
@@ -948,8 +1031,8 @@
         }
         .chart-tooltip-total .chart-tooltip-name { color: #ffffff; }
         .chart-tooltip-total .chart-tooltip-pill {
-            background: #6abc7a;
-            color: #0f2922;
+            background: var(--money);
+            color: var(--field-deepest);
         }
 
         /* ── Scroll-reveal: sections fade + rise as they enter the viewport ── */
