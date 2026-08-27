@@ -159,6 +159,12 @@
   var MIN_LOCAL   = 2;     // local matching is free, so it can start early
   var MIN_API     = 3;     // 2-char API queries return 580-859 results
   var MAX_ROWS    = 8;
+  // Local title matches are capped BELOW MAX_ROWS on purpose. Without a
+  // reserve, a common word ("housing") fills all 8 slots from the local
+  // index and the API's full-text hits are never shown at all — which
+  // defeats the whole point of the hybrid. Measured: 8 local rows in,
+  // 0 API rows out. These four slots are what full-text search gets.
+  var MAX_LOCAL   = 4;
   var API_SIZE    = 5;
 
   var MAG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20.5 20.5l-4-4"></path></svg>';
@@ -237,7 +243,7 @@
     }
     scored.sort(function(a,b){ return (b.s - a.s) || ((b.it.d||0) - (a.it.d||0)); });
     var out = [];
-    for(var j=0;j<scored.length && j<MAX_ROWS;j++){
+    for(var j=0;j<scored.length && j<MAX_LOCAL;j++){
       var x = scored[j].it;
       out.push({title:x.t, url:x.u, kind:kindLabel(x.u, x.k), snippet:null});
     }
