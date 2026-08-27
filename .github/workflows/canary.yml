@@ -38,8 +38,25 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
+          # Optional. Unset just means no push — the tracking issue and the
+          # job failure still happen either way.
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: |
           STALE_FILE=$(mktemp)
+
+          # Push to the same ntfy topic the laptop's sync-staleness monitor
+          # uses. Until now this job's only output was a GitHub issue, which
+          # is a fine durable marker but not something anyone sees promptly —
+          # issue #3 sat unread through a real 9.5h dropped-trigger gap on
+          # 2026-08-27. ntfy makes it a phone notification.
+          push() {
+            [ -z "${NTFY_TOPIC:-}" ] && return 0
+            curl -s -m 10 \
+              -H "Title: $1" \
+              -H "Priority: $2" \
+              -d "$3" \
+              "https://ntfy.sh/$NTFY_TOPIC" >/dev/null 2>&1 || true
+          }
 
           check() {
             local file="$1" max_age_min="$2"
@@ -57,8 +74,10 @@ jobs:
             fi
           }
 
-          # every ~30min in name, ~50-80min in observed practice
-          check "fetch-bill-status.yml"   150
+          # every ~30min in name, ~50-80min in observed practice; widened
+          # 150->240 on 2026-08-27 after a genuine ~9.5h dropped-trigger gap
+          # (no declared incident) tripped it twice in one day
+          check "fetch-bill-status.yml"   240
           # daily at 22:00 UTC
           check "sync-publications.yml"   1800
           # weekly, Sundays 15:00 UTC
@@ -79,6 +98,8 @@ jobs:
             else
               gh issue create --repo "$REPO" --title "Scheduled workflow(s) went quiet" --label canary-alert --body-file body.md
             fi
+            push "Appleseed: scheduled workflow quiet" high \
+              "$(sed 's/[*]//g' "$STALE_FILE")"
             exit 1
           fi
 
@@ -86,5 +107,7 @@ jobs:
             echo "All watched workflows are fresh again as of $(date -u +'%Y-%m-%d %H:%M UTC')." > body.md
             gh issue comment "$existing" --repo "$REPO" --body-file body.md
             gh issue close "$existing" --repo "$REPO"
+            push "Appleseed: workflows recovered" default \
+              "All watched scheduled workflows are running again."
           fi
           echo "All watched workflows are fresh."
