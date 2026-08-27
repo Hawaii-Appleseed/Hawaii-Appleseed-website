@@ -2,48 +2,48 @@
   "source": "https://pol.is/report/r3v45armukntdykxcyucd",
   "report_id": "r3v45armukntdykxcyucd",
   "conversation_id": "7bvwfhpf8x",
-  "fetched_at": "2026-08-17T19:47:52+00:00",
+  "fetched_at": "2026-08-27T23:47:10+00:00",
   "topic": "Tax Fairness Coalition Policy Priorities",
-  "description": "Looking ahead to the 2027 legislative session, what tax equity issues, policy reforms, or community relief measures should the Tax Fairness Coalition prioritize? \n\nUpvote or downvote the ideas shared below, then add your own specific policy ideas and concerns you’d like us to fight for.",
-  "participant_count": 12,
+  "description": "Looking ahead to the 2027 legislative session, what tax equity issues, policy reforms, or community relief measures should the Tax Fairness Coalition prioritize? \n\nUpvote or downvote the ideas shared below, then add your own specific policy ideas and concerns you\u2019d like us to fight for.",
+  "participant_count": 16,
   "conversation_created": "1785372608036",
   "labels": null,
   "stats": {
-    "ideas": 14,
-    "authors": 7,
-    "votes_cast": 101,
-    "agree": 63,
-    "disagree": 3,
-    "pass": 35
+    "ideas": 15,
+    "authors": 8,
+    "votes_cast": 158,
+    "agree": 98,
+    "disagree": 5,
+    "pass": 55
   },
   "ideas": [
     {
       "tid": 0,
       "text": "Conveyance Tax",
-      "agree": 9,
+      "agree": 13,
       "disagree": 0,
       "pass": 2,
-      "votes": 11,
+      "votes": 15,
       "is_seed": true,
       "author_pid": 0
     },
     {
       "tid": 1,
       "text": "Combine progressive revenue raiser with reducing the GET on food in order to make tax system overall more progressive",
-      "agree": 5,
-      "disagree": 0,
-      "pass": 4,
-      "votes": 9,
+      "agree": 7,
+      "disagree": 1,
+      "pass": 5,
+      "votes": 13,
       "is_seed": false,
       "author_pid": 2
     },
     {
       "tid": 2,
       "text": "Keiki Rx (unfunding for 1st year post-partum women, partially funded through TANF)",
-      "agree": 5,
+      "agree": 6,
       "disagree": 0,
-      "pass": 3,
-      "votes": 8,
+      "pass": 6,
+      "votes": 12,
       "is_seed": false,
       "author_pid": 4
     },
@@ -52,324 +52,349 @@
       "text": "Fix last session renewable energy tax cuts - ID a more appropriate threshold",
       "agree": 7,
       "disagree": 0,
-      "pass": 0,
-      "votes": 7,
+      "pass": 4,
+      "votes": 11,
       "is_seed": false,
       "author_pid": 4
     },
     {
       "tid": 4,
       "text": "Save working family tax credits set to expire",
-      "agree": 6,
+      "agree": 10,
       "disagree": 0,
       "pass": 1,
-      "votes": 7,
+      "votes": 11,
       "is_seed": false,
       "author_pid": 5
     },
     {
       "tid": 5,
       "text": "Tax capital gains at the same rate as ordinary income",
-      "agree": 6,
-      "disagree": 0,
+      "agree": 9,
+      "disagree": 1,
       "pass": 1,
-      "votes": 7,
+      "votes": 11,
       "is_seed": false,
       "author_pid": 6
     },
     {
       "tid": 6,
       "text": "Close the REITS tax loophole",
-      "agree": 6,
+      "agree": 10,
       "disagree": 0,
       "pass": 1,
-      "votes": 7,
+      "votes": 11,
       "is_seed": false,
       "author_pid": 6
     },
     {
       "tid": 7,
       "text": "Institute worldwide combined reporting",
-      "agree": 3,
+      "agree": 4,
       "disagree": 0,
-      "pass": 4,
-      "votes": 7,
+      "pass": 7,
+      "votes": 11,
       "is_seed": false,
       "author_pid": 6
     },
     {
       "tid": 8,
-      "text": "Strengthen the caregiver tax credit kůpuna caregivers",
-      "agree": 5,
+      "text": "Strengthen the caregiver tax credit k\u016fpuna caregivers",
+      "agree": 8,
       "disagree": 0,
-      "pass": 2,
-      "votes": 7,
+      "pass": 3,
+      "votes": 11,
       "is_seed": false,
       "author_pid": 6
     },
     {
       "tid": 9,
       "text": "Fix the child and dependent care tax credit",
-      "agree": 2,
+      "agree": 3,
       "disagree": 1,
-      "pass": 4,
-      "votes": 7,
+      "pass": 7,
+      "votes": 11,
       "is_seed": false,
       "author_pid": 6
     },
     {
       "tid": 10,
       "text": "ConAm to allow the state to tax high-value investment properties",
-      "agree": 1,
+      "agree": 3,
       "disagree": 1,
-      "pass": 6,
-      "votes": 8,
+      "pass": 8,
+      "votes": 12,
       "is_seed": false,
       "author_pid": 6
     },
     {
       "tid": 11,
       "text": "GET Tax Reform or Replacement",
-      "agree": 2,
+      "agree": 4,
       "disagree": 1,
-      "pass": 4,
-      "votes": 7,
+      "pass": 6,
+      "votes": 11,
       "is_seed": false,
       "author_pid": 7
     },
     {
       "tid": 12,
       "text": "Reform 2011 tax exemption on Oahu historic homes (City and County of Honolulu)",
-      "agree": 2,
+      "agree": 5,
       "disagree": 0,
-      "pass": 2,
-      "votes": 4,
+      "pass": 3,
+      "votes": 8,
       "is_seed": false,
       "author_pid": 4
     },
     {
       "tid": 13,
       "text": "Create a state-level Child Tax Credit",
-      "agree": 4,
+      "agree": 8,
       "disagree": 0,
       "pass": 1,
-      "votes": 5,
+      "votes": 9,
       "is_seed": false,
       "author_pid": 9
+    },
+    {
+      "tid": 14,
+      "text": "Not submitting a stand-alone statement. Error was hitting \"submit.\"",
+      "agree": 1,
+      "disagree": 0,
+      "pass": 0,
+      "votes": 1,
+      "is_seed": false,
+      "author_pid": 15
     }
   ],
   "groups": [
     {
       "id": 0,
-      "size": 3,
+      "size": 5,
       "member_ids": [
         0,
         10,
-        14
+        14,
+        17,
+        18
       ],
       "representative_comments": [
         {
-          "tid": 3,
-          "n-agree": 2,
-          "p-test": -0.5773502691896258,
-          "repness-test": 0.5669467,
-          "n-success": 0,
-          "repful-for": "disagree",
-          "n-trials": 2,
-          "repness": 1.75,
-          "best-agree": true,
-          "p-success": 0.25
-        }
-      ],
-      "votes_by_idea": {
-        "0": {
-          "agree": 1,
-          "disagree": 0,
-          "seen": 3,
-          "pass": 2
-        },
-        "1": {
-          "agree": 1,
-          "disagree": 0,
-          "seen": 2,
-          "pass": 1
-        },
-        "2": {
-          "agree": 0,
-          "disagree": 0,
-          "seen": 2,
-          "pass": 2
-        },
-        "3": {
-          "agree": 2,
-          "disagree": 0,
-          "seen": 2,
-          "pass": 0
-        },
-        "4": {
-          "agree": 1,
-          "disagree": 0,
-          "seen": 2,
-          "pass": 1
-        },
-        "5": {
-          "agree": 1,
-          "disagree": 0,
-          "seen": 2,
-          "pass": 1
-        },
-        "6": {
-          "agree": 2,
-          "disagree": 0,
-          "seen": 2,
-          "pass": 0
-        },
-        "7": {
-          "agree": 0,
-          "disagree": 0,
-          "seen": 2,
-          "pass": 2
-        },
-        "8": {
-          "agree": 2,
-          "disagree": 0,
-          "seen": 2,
-          "pass": 0
-        },
-        "9": {
-          "agree": 0,
-          "disagree": 0,
-          "seen": 2,
-          "pass": 2
-        },
-        "10": {
-          "agree": 0,
-          "disagree": 0,
-          "seen": 2,
-          "pass": 2
-        },
-        "11": {
-          "agree": 1,
-          "disagree": 0,
-          "seen": 2,
-          "pass": 1
-        },
-        "12": {
-          "agree": 0,
-          "disagree": 0,
-          "seen": 2,
-          "pass": 2
-        },
-        "13": {
-          "agree": 1,
-          "disagree": 0,
-          "seen": 2,
-          "pass": 1
-        }
-      }
-    },
-    {
-      "id": 1,
-      "size": 3,
-      "member_ids": [
-        1,
-        6,
-        11
-      ],
-      "representative_comments": [
-        {
-          "tid": 0,
-          "n-agree": 3,
-          "p-test": 2,
-          "repness-test": 1.0249414,
-          "n-success": 3,
+          "tid": 8,
+          "n-agree": 4,
+          "p-test": 2.23606797749979,
+          "repness-test": 1.5612495,
+          "n-success": 4,
           "repful-for": "agree",
-          "n-trials": 3,
-          "repness": 1.142857142857143,
+          "n-trials": 4,
+          "repness": 1.5,
           "best-agree": true,
-          "p-success": 0.8
+          "p-success": 0.8333333333333333
         }
       ],
       "votes_by_idea": {
         "0": {
           "agree": 3,
           "disagree": 0,
-          "seen": 3,
+          "seen": 5,
+          "pass": 2
+        },
+        "1": {
+          "agree": 2,
+          "disagree": 0,
+          "seen": 4,
+          "pass": 2
+        },
+        "2": {
+          "agree": 0,
+          "disagree": 0,
+          "seen": 4,
+          "pass": 4
+        },
+        "3": {
+          "agree": 2,
+          "disagree": 0,
+          "seen": 4,
+          "pass": 2
+        },
+        "4": {
+          "agree": 3,
+          "disagree": 0,
+          "seen": 4,
+          "pass": 1
+        },
+        "5": {
+          "agree": 2,
+          "disagree": 1,
+          "seen": 4,
+          "pass": 1
+        },
+        "6": {
+          "agree": 4,
+          "disagree": 0,
+          "seen": 4,
+          "pass": 0
+        },
+        "7": {
+          "agree": 0,
+          "disagree": 0,
+          "seen": 4,
+          "pass": 4
+        },
+        "8": {
+          "agree": 4,
+          "disagree": 0,
+          "seen": 4,
+          "pass": 0
+        },
+        "9": {
+          "agree": 0,
+          "disagree": 0,
+          "seen": 4,
+          "pass": 4
+        },
+        "10": {
+          "agree": 0,
+          "disagree": 0,
+          "seen": 4,
+          "pass": 4
+        },
+        "11": {
+          "agree": 2,
+          "disagree": 0,
+          "seen": 4,
+          "pass": 2
+        },
+        "12": {
+          "agree": 1,
+          "disagree": 0,
+          "seen": 4,
+          "pass": 3
+        },
+        "13": {
+          "agree": 3,
+          "disagree": 0,
+          "seen": 4,
+          "pass": 1
+        },
+        "14": {
+          "agree": 1,
+          "disagree": 0,
+          "seen": 1,
+          "pass": 0
+        }
+      }
+    },
+    {
+      "id": 1,
+      "size": 4,
+      "member_ids": [
+        1,
+        6,
+        11,
+        15
+      ],
+      "representative_comments": [
+        {
+          "tid": 0,
+          "n-agree": 4,
+          "p-test": 2.23606797749979,
+          "repness-test": 0.9718253,
+          "n-success": 4,
+          "repful-for": "agree",
+          "n-trials": 4,
+          "repness": 1.083333333333333,
+          "best-agree": true,
+          "p-success": 0.8333333333333333
+        }
+      ],
+      "votes_by_idea": {
+        "0": {
+          "agree": 4,
+          "disagree": 0,
+          "seen": 4,
           "pass": 0
         },
         "1": {
           "agree": 0,
-          "disagree": 0,
-          "seen": 3,
+          "disagree": 1,
+          "seen": 4,
           "pass": 3
         },
         "2": {
-          "agree": 1,
+          "agree": 2,
           "disagree": 0,
-          "seen": 2,
+          "seen": 3,
           "pass": 1
         },
         "3": {
           "agree": 2,
           "disagree": 0,
-          "seen": 2,
-          "pass": 0
+          "seen": 3,
+          "pass": 1
         },
         "4": {
-          "agree": 2,
+          "agree": 3,
           "disagree": 0,
-          "seen": 2,
+          "seen": 3,
           "pass": 0
         },
         "5": {
-          "agree": 2,
+          "agree": 3,
           "disagree": 0,
-          "seen": 2,
+          "seen": 3,
           "pass": 0
         },
         "6": {
-          "agree": 1,
+          "agree": 2,
           "disagree": 0,
-          "seen": 2,
+          "seen": 3,
           "pass": 1
         },
         "7": {
-          "agree": 1,
+          "agree": 2,
           "disagree": 0,
-          "seen": 2,
+          "seen": 3,
           "pass": 1
         },
         "8": {
           "agree": 0,
           "disagree": 0,
-          "seen": 2,
-          "pass": 2
+          "seen": 3,
+          "pass": 3
         },
         "9": {
           "agree": 0,
           "disagree": 1,
-          "seen": 2,
-          "pass": 1
+          "seen": 3,
+          "pass": 2
         },
         "10": {
-          "agree": 0,
+          "agree": 1,
           "disagree": 1,
-          "seen": 2,
+          "seen": 3,
           "pass": 1
         },
         "11": {
-          "agree": 0,
+          "agree": 1,
           "disagree": 0,
-          "seen": 2,
+          "seen": 3,
           "pass": 2
         },
         "12": {
-          "agree": 0,
+          "agree": 1,
           "disagree": 0,
-          "seen": 0,
+          "seen": 1,
           "pass": 0
         },
         "13": {
+          "agree": 1,
+          "disagree": 0,
+          "seen": 1,
+          "pass": 0
+        },
+        "14": {
           "agree": 0,
           "disagree": 0,
           "seen": 0,
@@ -379,152 +404,159 @@
     },
     {
       "id": 2,
-      "size": 6,
+      "size": 7,
       "member_ids": [
         4,
         7,
         8,
         9,
         12,
-        13
+        13,
+        16
       ],
       "representative_comments": [
         {
           "tid": 1,
-          "n-agree": 4,
-          "p-test": 2.23606797749979,
-          "repness-test": 2.2886887,
-          "n-success": 4,
+          "n-agree": 5,
+          "p-test": 2.449489742783178,
+          "repness-test": 2.5819888,
+          "n-success": 5,
           "repful-for": "agree",
-          "n-trials": 4,
-          "repness": 2.916666666666667,
+          "n-trials": 5,
+          "repness": 2.857142857142857,
           "best-agree": true,
-          "p-success": 0.8333333333333333
+          "p-success": 0.8571428571428571
         },
         {
-          "tid": 2,
-          "n-success": 4,
+          "tid": 9,
+          "n-success": 3,
           "n-trials": 4,
-          "p-success": 0.8333333333333333,
-          "p-test": 2.23606797749979,
-          "repness": 2.5,
-          "repness-test": 2.0701966,
+          "p-success": 0.6666666666666667,
+          "p-test": 1.341640786499874,
+          "repness": 6,
+          "repness-test": 2.433747,
           "repful-for": "agree"
         },
         {
           "tid": 12,
-          "n-success": 2,
-          "n-trials": 2,
-          "p-success": 0.75,
-          "p-test": 1.7320508075688772,
-          "repness": 3,
-          "repness-test": 1.7320508,
-          "repful-for": "agree"
-        },
-        {
-          "tid": 0,
-          "n-success": 5,
-          "n-trials": 5,
-          "p-success": 0.8571428571428571,
-          "p-test": 2.449489742783178,
-          "repness": 1.371428571428571,
-          "repness-test": 1.4233671,
-          "repful-for": "agree"
-        },
-        {
-          "tid": 8,
           "n-success": 3,
           "n-trials": 3,
           "p-success": 0.8,
           "p-test": 2,
-          "repness": 1.6,
-          "repness-test": 1.4342743,
+          "repness": 1.866666666666667,
+          "repness-test": 1.6903085,
+          "repful-for": "agree"
+        },
+        {
+          "tid": 8,
+          "n-success": 4,
+          "n-trials": 4,
+          "p-success": 0.8333333333333333,
+          "p-test": 2.23606797749979,
+          "repness": 1.5,
+          "repness-test": 1.5612495,
+          "repful-for": "agree"
+        },
+        {
+          "tid": 2,
+          "n-success": 4,
+          "n-trials": 5,
+          "p-success": 0.7142857142857143,
+          "p-test": 1.6329931618554516,
+          "repness": 2.142857142857143,
+          "repness-test": 1.7149262,
           "repful-for": "agree"
         }
       ],
       "votes_by_idea": {
         "0": {
+          "agree": 6,
+          "disagree": 0,
+          "seen": 6,
+          "pass": 0
+        },
+        "1": {
           "agree": 5,
           "disagree": 0,
           "seen": 5,
           "pass": 0
         },
-        "1": {
-          "agree": 4,
-          "disagree": 0,
-          "seen": 4,
-          "pass": 0
-        },
         "2": {
           "agree": 4,
           "disagree": 0,
-          "seen": 4,
-          "pass": 0
+          "seen": 5,
+          "pass": 1
         },
         "3": {
           "agree": 3,
           "disagree": 0,
-          "seen": 3,
-          "pass": 0
+          "seen": 4,
+          "pass": 1
         },
         "4": {
-          "agree": 3,
+          "agree": 4,
           "disagree": 0,
-          "seen": 3,
+          "seen": 4,
           "pass": 0
         },
         "5": {
-          "agree": 3,
+          "agree": 4,
           "disagree": 0,
-          "seen": 3,
+          "seen": 4,
           "pass": 0
         },
         "6": {
-          "agree": 3,
+          "agree": 4,
           "disagree": 0,
-          "seen": 3,
+          "seen": 4,
           "pass": 0
         },
         "7": {
           "agree": 2,
           "disagree": 0,
-          "seen": 3,
-          "pass": 1
+          "seen": 4,
+          "pass": 2
         },
         "8": {
-          "agree": 3,
+          "agree": 4,
           "disagree": 0,
-          "seen": 3,
+          "seen": 4,
           "pass": 0
         },
         "9": {
-          "agree": 2,
+          "agree": 3,
           "disagree": 0,
-          "seen": 3,
+          "seen": 4,
           "pass": 1
         },
         "10": {
-          "agree": 1,
+          "agree": 2,
           "disagree": 0,
-          "seen": 4,
+          "seen": 5,
           "pass": 3
         },
         "11": {
           "agree": 1,
           "disagree": 1,
-          "seen": 3,
-          "pass": 1
+          "seen": 4,
+          "pass": 2
         },
         "12": {
-          "agree": 2,
-          "disagree": 0,
-          "seen": 2,
-          "pass": 0
-        },
-        "13": {
           "agree": 3,
           "disagree": 0,
           "seen": 3,
+          "pass": 0
+        },
+        "13": {
+          "agree": 4,
+          "disagree": 0,
+          "seen": 4,
+          "pass": 0
+        },
+        "14": {
+          "agree": 0,
+          "disagree": 0,
+          "seen": 0,
           "pass": 0
         }
       }

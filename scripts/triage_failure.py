@@ -130,7 +130,15 @@ def main():
         meta.append(f"- Triggered by: `{a.event}`")
     if a.commit:
         meta.append(f"- Commit: `{a.commit[:12]}`")
-    failed_steps = [f"`{j}` / `{s}`" for (j, s) in steps if j or s]
+    # gh reports "UNKNOWN STEP" when it cannot map a log section back to a
+    # step (older runs, or a job that died before the step was registered).
+    # Listing it adds nothing, so show just the job in that case.
+    failed_steps = []
+    for j, st in steps:
+        if not (j or st):
+            continue
+        failed_steps.append(f"`{j}` / `{st}`" if st and st != "UNKNOWN STEP"
+                            else f"`{j}`")
     if failed_steps:
         meta.append("- Failed step(s): " + ", ".join(dict.fromkeys(failed_steps)))
     if meta:
