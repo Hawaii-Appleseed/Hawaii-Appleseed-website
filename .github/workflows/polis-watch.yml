@@ -1,0 +1,87 @@
+name: Pol.is poll watch
+
+# Watches the Tax Fairness Coalition's Pol.is poll for real activity.
+#
+# The pieces either side of this already existed: fetch-polis-report.py pulls
+# the poll, polis-sync-primer.py pushes the result into the primer-editor
+# report. The manual step was the one in the middle — noticing that the poll
+# moved at all, which meant remembering to go look. When this was written the
+# committed snapshot was three weeks stale: 13 participants and 115 votes
+# against a live 16 and 158, with an idea nobody had seen.
+#
+# No Claude step here on purpose. The packet is a table and a list of new
+# ideas; there is nothing for a model to add, and a deterministic job has one
+# less thing that can lapse.
+
+on:
+  schedule:
+    - cron: "0 16 * * *"   # daily 16:00 UTC = 06:00 HST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: polis-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check the poll
+        id: watch
+        run: |
+          set +e
+          python3 tax-fairness/scripts/polis_watch.py --packet polis-packet.md
+          code=$?
+          set -e
+          case "$code" in
+            0)  echo "changed=false" >> "$GITHUB_OUTPUT" ;;
+            10) echo "changed=true"  >> "$GITHUB_OUTPUT" ;;
+            # Exit 1 is a real failure: pol.is changed its endpoints, or the
+            # report id stopped resolving. Staying quiet about that would mean
+            # the watch silently stops watching.
+            *)  echo "::error::polis_watch.py failed (exit $code)"; exit 1 ;;
+          esac
+
+      - name: Commit the snapshot
+        run: |
+          git config user.name  "polis-watch[bot]"
+          git config user.email "polis-watch@users.noreply.github.com"
+          git add tax-fairness/data/polis
+          if git diff --cached --quiet; then
+            echo "snapshot unchanged"
+            exit 0
+          fi
+          git commit -m "polis: refresh TFC poll snapshot $(date -u +%Y-%m-%d)"
+          git pull --rebase --autostash origin main || true
+          git push origin HEAD:main
+
+      - name: Report
+        if: steps.watch.outputs.changed == 'true'
+        run: |
+          today=$(date -u +%Y-%m-%d)
+          url=$(gh issue create --title "Pol.is poll moved — ${today}" \
+                  --body-file polis-packet.md --label "polis" 2>/dev/null) || \
+          url=$(gh issue create --title "Pol.is poll moved — ${today}" \
+                  --body-file polis-packet.md)
+          echo "issue: $url"
+
+          if [ -n "${NTFY_TOPIC:-}" ]; then
+            headline=$(grep -m1 -E '^\| (Participants|Votes cast)' polis-packet.md || true)
+            msg=$(printf '%s\n%s' "${headline:-The TFC poll picked up activity.}" "$url")
+            curl -s -m 10 -H "Title: TFC poll picked up activity" \
+              -H "Priority: default" -d "$msg" \
+              "https://ntfy.sh/$NTFY_TOPIC" >/dev/null 2>&1 || true
+          fi
