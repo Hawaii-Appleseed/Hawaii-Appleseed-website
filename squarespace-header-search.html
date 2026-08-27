@@ -1,58 +1,72 @@
 <!-- ===================================================================
-     Hawaiʻi Appleseed — header search (Squarespace-native).
+     Hawaiʻi Appleseed — header search with typeahead (Squarespace-native).
      PASTE INTO: Settings → Advanced → Code Injection → FOOTER.
 
      One injection, whole site. Adds a magnifier to the header (right of
-     Donate on desktop, a field at the top of the burger menu on mobile)
-     that sends the visitor to Squarespace's own /search?q= results page —
-     so there is NO index to build, host, or keep in sync; it always
-     reflects live site content. Self-heals via MutationObserver if the
-     header re-renders.
+     Donate on desktop, a field at the top of the burger menu on mobile).
+     Typing previews results inline; Enter still goes to Squarespace's own
+     /search?q= page for the full list. Self-heals via MutationObserver if
+     the header re-renders.
 
-     WHY A DROPDOWN, NOT AN INLINE EXPANDING FIELD
-     The obvious design — a field that grows sideways out of the icon —
-     was built first and fails on this site: the desktop header is already
-     full at ~1300px, so adding ~190px of inline width pushed the input
-     off the right edge of the viewport AND forced the nav to wrap to two
-     lines. The panel is absolutely positioned instead, so opening it can
-     never reflow the header. It is anchored right:0 (expands leftward)
-     and drops BELOW the header rather than over it, so it never covers
-     the Donate CTA. Verified no clipping ancestor — every wrapper up to
-     .clearfix is overflow:visible.
+     HYBRID: LOCAL INDEX + SQUARESPACE API
+     Results come from two places at once, because neither alone is good
+     enough:
 
-     BOX-SIZING NEEDS !important
-     Squarespace's own stylesheet sets content-box on inputs and wins on
-     specificity, which makes width:100% overflow its padded container.
-     Don't remove the !important without re-testing at 375px.
+       1. search-index.json (built nightly by scripts/build-search-index.py,
+          served off GitHub Pages, ~57KB gzipped, 1,078 titles). Loaded once,
+          lazily, on first focus — never on page load, so visitors who never
+          search pay nothing. Matching is local, so it is instant and costs
+          no network per keystroke. Titles only.
+
+       2. /api/search/GeneralSearch — Squarespace's own index, full body
+          text. Measured on this site: 270ms-5.6s latency, wildly variable
+          even within one burst, and 78-156KB per query at the default page
+          size. `&size=5` cuts that to ~22KB, which is the only reason this
+          is viable at all. Debounced, and never fires under 3 characters
+          (2-char queries return 580-859 results — pure noise).
+
+     Local hits render immediately; API hits are merged in when they land,
+     deduped by URL. That is why the list can grow a beat after you stop
+     typing — by design, not a bug.
+
+     THE API RACE IS REAL, NOT THEORETICAL
+     Measured 268ms and 2126ms responses inside a single 8-request burst, so
+     a stale response WILL arrive after a newer one. Guarded two ways: an
+     AbortController per keystroke and a monotonic sequence number checked
+     on arrival. Do not remove either.
+
+     EMAILS ARE STRIPPED FROM SNIPPETS
+     Squarespace's highlights splice unrelated text on code-block pages and
+     will happily return a staff email mid-snippet (searching a surname
+     returns "...Director of Food and Healthcare Equity josh@… Abbey is…").
+     Those addresses are already public on /our-team, but rendering them in
+     an autocomplete as someone types makes them trivially scrapeable.
+     stripEmails() removes them. Leave it in.
+
+     ʻOKINA NORMALISATION
+     Visitors type "hawaii"; the content says "Hawaiʻi". norm() folds the
+     ʻokina (U+02BB), curly quotes and diacritics so both match. Without it
+     the single most common query on this site misses.
+
+     WHY THE MAGNIFIER IS position:absolute
+     Sitting in the header flex row cost 45px (32px button + 13px gap),
+     which left .header-nav-list 601px when it needs 636px and wrapped
+     "Subscribe" onto a second line. Absolute = zero inline cost. Measured
+     clearance from the viewport edge: 48px @1280, 25px @900, 19px @800 —
+     never overflows, always 12px clear of Donate, so no media query needed.
+     Trade-off: the icon sits ~44px outside the content column.
+     (Below ~1250px the nav wraps regardless — a pre-existing 8-item-nav
+     problem this cannot fix.)
+
+     BOX-SIZING NEEDS !important — Squarespace sets content-box on inputs
+     and wins on specificity. Don't remove it without re-testing at 375px.
      =================================================================== -->
 <style>
-  /* ---------- desktop: magnifier + dropdown panel ----------
-     Absolute, NOT inline. Sitting in the flex row costs 45px (32px button +
-     13px gap), which steals 35px from .header-nav-list — it needs 636px and
-     only gets 601px, so "Subscribe" wraps to a second line between roughly
-     1200px and 1300px wide. Taking the icon out of flow gives the nav its
-     full width back at every viewport.
-
-     It is offset into the header's right gutter (91px of empty space at
-     1263px). Measured clearance from the viewport edge: 48px @1280,
-     25px @900, 19px @800 — never overflows, and stays 12px clear of the
-     Donate button throughout, so no media query is needed.
-
-     Positioning context is .header-display-desktop (position:relative);
-     .header-actions and .header-actions--right are both static.
-
-     Known cosmetic trade-off: the icon sits ~44px outside the content
-     column, so the header is slightly asymmetric (logo insets 77px on the
-     left, magnifier 33px from the right). Accepted deliberately — the
-     alternative was squeezing the social icons from 12.8px to 4px margins.
-
-     NOTE: below ~1200px the nav wraps regardless of this widget — that is a
-     pre-existing condition of an 8-item nav, not something this can fix.
-
-     Selector is scoped to .header-display-desktop deliberately: Squarespace
-     sets position:relative on .header-actions-action at equal specificity
-     (0,1,0), so a bare .ha-hdr-search rule would depend on source order. */
+  /* ---------- desktop: magnifier + dropdown panel ---------- */
   .ha-hdr-search{display:inline-flex;align-items:center;}
+  /* Scoped to .header-display-desktop: Squarespace sets position:relative on
+     .header-actions-action at equal specificity (0,1,0), so a bare
+     .ha-hdr-search rule would depend on source order. */
   .header-display-desktop .ha-hdr-search{
     position:absolute;right:-44px;top:50%;transform:translateY(-50%);
   }
@@ -65,10 +79,9 @@
   .ha-hdr-search__toggle:hover{opacity:.7;}
   .ha-hdr-search__toggle:focus-visible{outline:2px solid #84A98C;outline-offset:2px;border-radius:2px;}
 
-  /* Absolutely positioned so opening never reflows the header. */
   .ha-hdr-search__box{
     position:absolute;top:calc(100% + 10px);right:0;
-    width:min(280px, calc(100vw - 32px));
+    width:min(400px, calc(100vw - 32px));
     background:#fff;border:1px solid rgba(53,79,82,.15);border-radius:4px;
     box-shadow:0 10px 28px rgba(47,62,70,.16);padding:8px;z-index:1000;
     opacity:0;visibility:hidden;transform:translateY(-6px);
@@ -77,8 +90,6 @@
   .ha-hdr-search.is-open .ha-hdr-search__box{opacity:1;visibility:visible;transform:translateY(0);}
 
   .ha-hdr-search__input{
-    /* !important: Squarespace forces content-box on inputs and wins on
-       specificity, which makes width:100% overflow the padded panel. */
     box-sizing:border-box !important;
     width:100%;padding:9px 12px;border:1px solid #CAD2C5;border-radius:3px;
     background:#fff;color:#2F3E46;
@@ -87,75 +98,347 @@
   }
   .ha-hdr-search__input:focus{outline:2px solid #84A98C;outline-offset:1px;border-color:#84A98C;}
 
+  /* ---------- results list (shared by desktop + mobile) ---------- */
+  .ha-sr{margin-top:6px;max-height:min(60vh,420px);overflow-y:auto;}
+  .ha-sr:empty{display:none;}
+  .ha-sr__row{
+    display:block;padding:9px 10px;border-radius:3px;text-decoration:none;
+    color:#2F3E46;cursor:pointer;border:0;background:none;width:100%;text-align:left;
+    font-family:OkinaPoppins,'Poppins',system-ui,-apple-system,Arial,sans-serif;
+  }
+  .ha-sr__row:hover,.ha-sr__row.is-active{background:rgba(132,169,140,.14);}
+  .ha-sr__row.is-active{outline:2px solid #84A98C;outline-offset:-2px;}
+  .ha-sr__kind{
+    display:inline-block;font-family:OkinaManrope,'Manrope',sans-serif;
+    font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:#fff;background:#84A98C;border-radius:2px;padding:2px 6px;margin-bottom:4px;
+  }
+  .ha-sr__title{display:block;font-size:13.5px;line-height:1.35;font-weight:600;color:#2F3E46;}
+  .ha-sr__snip{display:block;font-size:12px;line-height:1.45;color:#52796F;margin-top:3px;}
+  .ha-sr__snip mark{background:rgba(132,169,140,.35);color:inherit;padding:0 1px;border-radius:2px;}
+  .ha-sr__foot{
+    display:block;padding:9px 10px;margin-top:2px;border-top:1px solid #E8EDE6;
+    font-family:OkinaManrope,'Manrope',sans-serif;font-size:12.5px;font-weight:600;
+    color:#52796F;text-decoration:none;cursor:pointer;background:none;border-left:0;border-right:0;border-bottom:0;
+    width:100%;text-align:left;
+  }
+  .ha-sr__foot:hover,.ha-sr__foot.is-active{background:rgba(132,169,140,.14);color:#2F3E46;}
+  .ha-sr__msg{padding:10px;font-size:12.5px;color:#7d8f86;
+    font-family:OkinaPoppins,'Poppins',system-ui,Arial,sans-serif;}
+
   /* ---------- mobile: field at the top of the burger menu ----------
      22.5px horizontal padding matches .header-menu-nav-item so the field
      lines up with the nav links below it. */
   .ha-hdr-search-mobile{
-    display:flex;align-items:center;gap:10px;
     box-sizing:border-box;width:100%;
     padding:16px 22.5px 18px;margin:0 0 4px;
     border-bottom:1px solid rgba(0,0,0,.12);color:currentColor;
   }
+  .ha-hdr-search-mobile__row{display:flex;align-items:center;gap:10px;}
   .ha-hdr-search-mobile svg{width:22px;height:22px;flex:none;}
   .ha-hdr-search-mobile input{
-    box-sizing:border-box !important;                 /* same override as above */
+    box-sizing:border-box !important;
     flex:1;min-width:0;padding:10px 12px;border:1px solid #CAD2C5;border-radius:3px;
     background:#fff;color:#2F3E46;
     font-family:OkinaPoppins,'Poppins',system-ui,-apple-system,Arial,sans-serif;
     font-size:16px;                                   /* 16px: stops iOS zoom-on-focus */
   }
   .ha-hdr-search-mobile input:focus{outline:2px solid #84A98C;outline-offset:1px;border-color:#84A98C;}
+  .ha-hdr-search-mobile .ha-sr{text-align:left;}
 
   @media (prefers-reduced-motion:reduce){.ha-hdr-search__box{transition:none;}}
 </style>
 <script>
 (function(){
   'use strict';
-  var SEARCH = '/search?q=';
+
+  var SEARCH_PAGE = '/search?q=';
+  var INDEX_URL   = 'https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/search-index.json';
+  var API_URL     = '/api/search/GeneralSearch';
+  var DEBOUNCE_MS = 300;   // long enough that a fast typist fires one request
+  var MIN_LOCAL   = 2;     // local matching is free, so it can start early
+  var MIN_API     = 3;     // 2-char API queries return 580-859 results
+  var MAX_ROWS    = 8;
+  var API_SIZE    = 5;
+
   var MAG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20.5 20.5l-4-4"></path></svg>';
 
-  function go(q){ q=(q||'').trim(); if(q) window.location.assign(SEARCH + encodeURIComponent(q)); }
+  function go(q){ q=(q||'').trim(); if(q) window.location.assign(SEARCH_PAGE + encodeURIComponent(q)); }
+
+  /* ---------- text helpers ---------- */
+
+  // Fold ʻokina (U+02BB), curly quotes and diacritics so "hawaii" finds
+  // "Hawaiʻi". Without this the most common query on the site misses.
+  function norm(s){
+    return (s||'').toLowerCase()
+      // ʻ ʻokina, ʼ modifier apostrophe, ‘’ curly quotes.
+      // Written as escapes on purpose: these are pasted through the
+      // Squarespace editor, where literal combining marks get mangled.
+      .replace(/[\u02BB\u02BC\u2018\u2019']/g,'')
+      .normalize('NFD').replace(/[\u0300-\u036F]/g,'')
+      .replace(/[^a-z0-9]+/g,' ')
+      .replace(/\s+/g,' ').trim();
+  }
+  function esc(s){
+    return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')
+                  .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  // See header note: Squarespace snippets can carry staff emails.
+  function stripEmails(s){ return (s||'').replace(/[\w.+-]+@[\w.-]+\.\w{2,}/g,'…'); }
+  // Escape everything, then re-admit only Squarespace's <em> as <mark>.
+  function safeSnippet(h){
+    return esc(stripEmails(h)).replace(/&lt;em&gt;/g,'<mark>').replace(/&lt;\/em&gt;/g,'</mark>');
+  }
+  function kindLabel(url, k){
+    if(k==='blog') return 'Blog';
+    if(k==='press') return 'News';
+    if(k==='publication') return 'Research';
+    if(k==='page') return 'Page';
+    if(url.indexOf('/blog/')===0) return 'Blog';
+    if(url.indexOf('/in-the-news/')===0 || url.indexOf('/press-releases/')===0) return 'News';
+    if(url.indexOf('/publications/')===0) return 'Research';
+    return 'Page';
+  }
+
+  /* ---------- the local index ---------- */
+
+  var indexPromise = null;   // lazily created; never fetched on page load
+  function loadIndex(){
+    if(!indexPromise){
+      indexPromise = fetch(INDEX_URL, {cache:'force-cache'})
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(d){
+          var items = (d && d.items) || [];
+          for(var i=0;i<items.length;i++) items[i]._n = norm(items[i].t);
+          return items;
+        })
+        .catch(function(){ return []; });   // API-only degradation, not a crash
+    }
+    return indexPromise;
+  }
+
+  function localSearch(items, q){
+    var nq = norm(q);
+    if(!nq) return [];
+    var toks = nq.split(' '), scored = [];
+    for(var i=0;i<items.length;i++){
+      var it = items[i], n = it._n, s = 0;
+      if(n === nq) s = 100;
+      else if(n.indexOf(nq) === 0) s = 80;
+      else if(n.indexOf(nq) > -1) s = 60;
+      else {
+        var all = true;
+        for(var t=0;t<toks.length;t++){ if(n.indexOf(toks[t]) < 0){ all = false; break; } }
+        if(all) s = 40;
+      }
+      if(!s) continue;
+      if(it.k === 'page') s += 12;          // pages are navigation targets
+      scored.push({it:it, s:s});
+    }
+    scored.sort(function(a,b){ return (b.s - a.s) || ((b.it.d||0) - (a.it.d||0)); });
+    var out = [];
+    for(var j=0;j<scored.length && j<MAX_ROWS;j++){
+      var x = scored[j].it;
+      out.push({title:x.t, url:x.u, kind:kindLabel(x.u, x.k), snippet:null});
+    }
+    return out;
+  }
+
+  /* ---------- the Squarespace API ---------- */
+
+  var apiSeq = 0, apiCtrl = null;
+  function apiSearch(q, onResult){
+    var mine = ++apiSeq;
+    if(apiCtrl){ try{ apiCtrl.abort(); }catch(e){} }
+    var ctrl = null;
+    try { ctrl = new AbortController(); apiCtrl = ctrl; } catch(e){}
+    fetch(API_URL + '?q=' + encodeURIComponent(q) + '&size=' + API_SIZE,
+          ctrl ? {signal:ctrl.signal} : {})
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(j){
+        if(mine !== apiSeq || !j) return;   // a newer keystroke already won
+        var rows = (j.items||[]).map(function(i){
+          return {
+            title: i.title || '',
+            url: i.itemUrl || '',
+            kind: kindLabel(i.itemUrl||'', null),
+            snippet: (i.highlight && i.highlight[0]) || null
+          };
+        }).filter(function(r){ return r.url && r.title; });
+        onResult(rows, typeof j.totalCount === 'number' ? j.totalCount : null);
+      })
+      .catch(function(){});                 // aborts land here; nothing to do
+  }
+
+  /* ---------- one search UI (used for both desktop and mobile) ---------- */
+
+  function wire(input, listEl){
+    var state = {rows:[], total:null, q:'', active:-1, timer:null, seq:0};
+
+    function render(){
+      var q = state.q;
+      if(q.length < MIN_LOCAL){ listEl.innerHTML=''; state.active=-1; return; }
+      var html = '';
+      for(var i=0;i<state.rows.length;i++){
+        var r = state.rows[i];
+        html += '<a class="ha-sr__row' + (i===state.active?' is-active':'') + '"'
+             +  ' id="ha-sr-opt-' + i + '" role="option" aria-selected="' + (i===state.active) + '"'
+             +  ' href="' + esc(r.url) + '">'
+             +  '<span class="ha-sr__kind">' + esc(r.kind) + '</span>'
+             +  '<span class="ha-sr__title">' + esc(r.title) + '</span>'
+             +  (r.snippet ? '<span class="ha-sr__snip">' + safeSnippet(r.snippet) + '</span>' : '')
+             +  '</a>';
+      }
+      if(!state.rows.length){
+        html += '<div class="ha-sr__msg">' + (state.total === 0 ? 'No matches yet — press Enter to search everything.' : 'Searching…') + '</div>';
+      }
+      var footIdx = state.rows.length;
+      html += '<a class="ha-sr__foot' + (state.active===footIdx?' is-active':'') + '"'
+           +  ' id="ha-sr-opt-' + footIdx + '" role="option" aria-selected="' + (state.active===footIdx) + '"'
+           +  ' href="' + esc(SEARCH_PAGE + encodeURIComponent(q)) + '">'
+           +  (state.total !== null ? 'See all ' + state.total + ' results' : 'See all results') + ' →</a>';
+      listEl.innerHTML = html;
+      var act = listEl.querySelector('.is-active');
+      input.setAttribute('aria-activedescendant', act ? act.id : '');
+      if(act && act.scrollIntoView) act.scrollIntoView({block:'nearest'});
+    }
+
+    function mergeApi(apiRows, total){
+      var seen = {};
+      for(var i=0;i<state.rows.length;i++) seen[state.rows[i].url] = true;
+      for(var j=0;j<apiRows.length;j++){
+        var r = apiRows[j];
+        if(seen[r.url]){
+          // Same page found locally — keep its position but take the API's
+          // snippet, which is the only place body-text context comes from.
+          for(var k=0;k<state.rows.length;k++){
+            if(state.rows[k].url === r.url && !state.rows[k].snippet){
+              state.rows[k].snippet = r.snippet; break;
+            }
+          }
+          continue;
+        }
+        if(state.rows.length >= MAX_ROWS) break;
+        seen[r.url] = true;
+        state.rows.push(r);
+      }
+      state.total = total;
+      render();
+    }
+
+    function run(){
+      var q = input.value.trim();
+      state.q = q; state.active = -1;
+      if(q.length < MIN_LOCAL){ state.rows=[]; state.total=null; render(); return; }
+      var mySeq = ++state.seq;
+
+      loadIndex().then(function(items){
+        if(mySeq !== state.seq) return;
+        state.rows = localSearch(items, q);
+        render();
+      });
+
+      clearTimeout(state.timer);
+      if(q.length >= MIN_API){
+        state.timer = setTimeout(function(){
+          apiSearch(q, function(rows, total){
+            if(mySeq !== state.seq) return;
+            mergeApi(rows, total);
+          });
+        }, DEBOUNCE_MS);
+      } else {
+        state.total = null;
+      }
+    }
+
+    function move(delta){
+      var max = state.rows.length;            // last index is the footer row
+      if(state.q.length < MIN_LOCAL) return;
+      state.active += delta;
+      if(state.active < -1) state.active = max;
+      if(state.active > max) state.active = -1;
+      render();
+    }
+
+    input.addEventListener('input', run);
+    input.addEventListener('focus', function(){ loadIndex(); });   // warm on focus
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowDown'){ e.preventDefault(); move(1); }
+      else if(e.key === 'ArrowUp'){ e.preventDefault(); move(-1); }
+      else if(e.key === 'Enter'){
+        e.preventDefault();
+        var act = listEl.querySelector('.is-active');
+        if(act && act.getAttribute('href')) window.location.assign(act.getAttribute('href'));
+        else go(input.value);
+      }
+      else if(e.key === 'Escape'){
+        if(state.q){ input.value=''; state.q=''; state.rows=[]; render(); }
+        else if(input.__haClose) input.__haClose();
+      }
+    });
+
+    return {reset:function(){ state.rows=[]; state.total=null; state.q=''; state.active=-1; listEl.innerHTML=''; }};
+  }
+
+  /* ---------- mount points ---------- */
 
   function addDesktop(actions){
     if(actions.querySelector('.ha-hdr-search')) return;            // idempotent
     var wrap=document.createElement('div');
-    wrap.className='header-actions-action ha-hdr-search';           // inherit Squarespace action spacing
+    wrap.className='header-actions-action ha-hdr-search';
     wrap.setAttribute('role','search');
-    wrap.innerHTML='<button type="button" class="ha-hdr-search__toggle" aria-label="Search" aria-expanded="false">'+MAG+'</button>'
-      +'<div class="ha-hdr-search__box"><input type="search" class="ha-hdr-search__input" '
-      +'placeholder="Search…" aria-label="Search the site" autocomplete="off" enterkeyhint="search"></div>';
+    wrap.innerHTML=
+       '<button type="button" class="ha-hdr-search__toggle" aria-label="Search" aria-expanded="false">'+MAG+'</button>'
+      +'<div class="ha-hdr-search__box">'
+      +  '<input type="search" class="ha-hdr-search__input" placeholder="Search…" '
+      +   'aria-label="Search the site" autocomplete="off" enterkeyhint="search" '
+      +   'role="combobox" aria-expanded="true" aria-autocomplete="list" aria-controls="ha-sr-desktop">'
+      +  '<div class="ha-sr" id="ha-sr-desktop" role="listbox" aria-label="Search results"></div>'
+      +'</div>';
     actions.appendChild(wrap);
 
-    var toggle=wrap.querySelector('.ha-hdr-search__toggle'), input=wrap.querySelector('.ha-hdr-search__input');
+    var toggle=wrap.querySelector('.ha-hdr-search__toggle'),
+        input=wrap.querySelector('.ha-hdr-search__input'),
+        list=wrap.querySelector('.ha-sr');
+    var ui = wire(input, list);
+
     function close(){ wrap.classList.remove('is-open'); toggle.setAttribute('aria-expanded','false'); }
+    input.__haClose = function(){ close(); toggle.focus(); };
+
     toggle.addEventListener('click', function(e){
       e.preventDefault(); e.stopPropagation();
       if(wrap.classList.contains('is-open')){ input.value.trim() ? go(input.value) : close(); }
-      else { wrap.classList.add('is-open'); toggle.setAttribute('aria-expanded','true'); setTimeout(function(){input.focus();},60); }
-    });
-    input.addEventListener('keydown', function(e){
-      if(e.key==='Enter'){ e.preventDefault(); go(input.value); }
-      else if(e.key==='Escape'){ input.value=''; close(); toggle.focus(); }
+      else {
+        wrap.classList.add('is-open'); toggle.setAttribute('aria-expanded','true');
+        loadIndex();                                   // prefetch while it opens
+        setTimeout(function(){input.focus();},60);
+      }
     });
     document.addEventListener('click', function(e){ if(!wrap.contains(e.target)) close(); });
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && wrap.classList.contains('is-open')) close(); });
+    document.addEventListener('keydown', function(e){
+      if(e.key==='Escape' && wrap.classList.contains('is-open') && document.activeElement!==input) close();
+    });
   }
 
   // MUST mount inside .header-menu-nav-folder-content, NOT .header-menu-nav-list.
-  // The nav folders are position:absolute; top:0 within the list, so anything
-  // added to the list itself sits in normal flow at the same y and renders
-  // *underneath* the "About" link. folder-content is the in-flow flex column
-  // the nav items actually live in. querySelector takes the first = root menu
-  // (each submenu has its own folder-content).
+  // The nav folders there are position:absolute; top:0, so anything added to
+  // the list sits in normal flow at the same y and renders *underneath* the
+  // "About" link. folder-content is the in-flow flex column the nav items
+  // actually live in. querySelector takes the first = root menu.
   function addMobile(content){
     if(content.querySelector('.ha-hdr-search-mobile')) return;      // idempotent
     var el=document.createElement('div');
     el.className='ha-hdr-search-mobile';
     el.setAttribute('role','search');
-    el.innerHTML=MAG+'<input type="search" placeholder="Search…" aria-label="Search the site" autocomplete="off" enterkeyhint="search">';
+    el.innerHTML=
+       '<div class="ha-hdr-search-mobile__row">' + MAG
+      +  '<input type="search" placeholder="Search…" aria-label="Search the site" '
+      +   'autocomplete="off" enterkeyhint="search" role="combobox" aria-expanded="true" '
+      +   'aria-autocomplete="list" aria-controls="ha-sr-mobile">'
+      +'</div>'
+      +'<div class="ha-sr" id="ha-sr-mobile" role="listbox" aria-label="Search results"></div>';
     content.insertBefore(el, content.firstChild);
-    var input=el.querySelector('input');
-    input.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); go(input.value); } });
+    wire(el.querySelector('input'), el.querySelector('.ha-sr'));
   }
 
   function inject(){
@@ -167,8 +450,7 @@
   function boot(){
     inject();
     // Squarespace can re-render the header (responsive switch, editor, ajax
-    // templates). Re-run inject() when #header mutates; inject() is idempotent
-    // so it no-ops once the search elements are present.
+    // templates). inject() is idempotent so it no-ops once mounted.
     var target=document.getElementById('header')||document.body, t;
     new MutationObserver(function(){ clearTimeout(t); t=setTimeout(inject,150); })
       .observe(target,{childList:true,subtree:true});
