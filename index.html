@@ -604,6 +604,14 @@
          with a percentage-width img child (silently masked by
          .ha-home__impact's own overflow:hidden). */
       .ha-home__dash{ width:410px; }
+      /* Matches the tracker card's width so the paragraph wraps to the same
+         right edge as the card beneath it. At the base max-width:560px this
+         overhung the 410px card by 150px into the gutter on every viewport
+         ≥701px — harmless until the sidebar shipped, at which point the
+         overhang read as drifting into the sidebar's territory. Scoped to
+         this breakpoint only: below 701px there's no fixed-width card to
+         align to, so the wider wrap stays. */
+      .ha-home__impact-sub{ max-width:410px; }
     }
     .ha-home__dash:hover { border-color:rgba(132,169,140,0.55); transform:translateY(-3px); }
     .ha-home__dash img { width:100%; display:block; }
