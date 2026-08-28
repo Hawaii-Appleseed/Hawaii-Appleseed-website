@@ -7,3 +7,4 @@ pdfminer.six
 rank-bm25
 sentence-transformers
 streamlit
+python-docx        # appleseed-testimony: render_testimony.py letterhead output
