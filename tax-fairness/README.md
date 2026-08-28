@@ -54,7 +54,7 @@ pipeline, and will tell you which stage is actually broken.
 
 ## What this directory is
 
-Static HTML/CSS/JS for the Hawai'i Tax Fairness Coalition site
+Static HTML/CSS/JS for the Hawaiʻi Tax Fairness Coalition site
 (hitaxfairness.org), deployed two ways:
 
 - **Squarespace paste-in**: `*_squarespace.html` files are self-contained
