@@ -143,7 +143,7 @@ monday status -> Submitted
 monday failed to deliver; the webhook is the live path.
 
 **Deploy with clasp, never by pasting.** A clipboard paste once overwrote the whole file
-with unrelated text, and a paste of non-ASCII mangles the glottal in *Hawai‘i*.
+with unrelated text, and a paste of non-ASCII mangles the glottal in *Hawaiʻi*.
 
 ```bash
 cd apps-script && npx clasp push
