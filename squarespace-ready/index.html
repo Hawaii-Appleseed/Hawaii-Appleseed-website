@@ -589,12 +589,6 @@
        hence the 1081 floor (an existing breakpoint elsewhere in this file).
        align-items:start (not center) so the "Other research" rule lines up
        with the TOP of the tracker card rather than floating at its midpoint. */
-    @media (min-width:1081px){
-      .ha-home__impact-grid{
-        grid-template-columns:410px minmax(0,410px);
-        gap:4rem; max-width:884px;
-      }
-    }
     .ha-home__dash {
       display:block;border:1px solid rgba(132,169,140,0.25);border-radius:4px;overflow:hidden;
       transition:border-color .3s ease, transform .3s ease;
@@ -641,6 +635,11 @@
       transition:color .3s ease;
     }
     .ha-home__more-all:hover { color:var(--ash); }
+    .ha-home__more-foot {
+      display:flex; align-items:center; gap:0.7rem; margin-top:1.1rem;
+      font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600; font-size:0.66rem;
+      letter-spacing:0.2em; text-transform:uppercase;
+    }
     .ha-home__more-card {
       display:flex; gap:1rem; align-items:center; padding:0.85rem;
       border:1px solid rgba(132,169,140,0.2); border-radius:4px;
@@ -662,7 +661,7 @@
     .ha-home__more-body { display:flex; flex-direction:column; justify-content:center; gap:0.3rem; min-width:0; }
     .ha-home__more-title {
       font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600; font-size:0.95rem;
-      line-height:1.3; color:#fff;
+      line-height:1.3; color:#fff; transition:color .3s ease;
     }
     .ha-home__more-desc {
       font-family:OkinaPoppins, 'Poppins',sans-serif; font-weight:300; font-size:0.8rem;
@@ -673,6 +672,33 @@
       letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-top:0.15rem;
     }
     .ha-home__more-card:hover .ha-home__more-link { color:var(--ash); }
+
+    @media (min-width:1081px){
+      /* Asymmetric on purpose \2014  equal columns read as "two columns, one of them
+         broken" when the right one is half the height; 410 + 400 reads as
+         "main + sidebar". */
+      .ha-home__impact-grid{
+        grid-template-columns:410px minmax(0,400px);
+        gap:3.25rem; max-width:none;
+      }
+      /* stretch (against the grid's align-items:start) so the rule runs the
+         tracker card's full height and the footer has somewhere to sink to. */
+      .ha-home__more{
+        align-self:stretch; display:flex; flex-direction:column; max-width:none;
+        border-left:1px solid rgba(132,169,140,0.18); padding-left:2.25rem;
+      }
+      /* The rule now carries the structure, so the card's own box is redundant.
+         Unboxed content beside a solid card is a stronger "secondary" signal
+         than a small box beside a big one. */
+      .ha-home__more-card{
+        border:0; background:none; padding:0; gap:1rem; align-items:flex-start;
+      }
+      .ha-home__more-card:hover{ background:none; transform:none; }
+      .ha-home__more-card:active{ transform:none; }
+      .ha-home__more-card:hover .ha-home__more-title{ color:var(--ash); }
+      .ha-home__more-thumb{ flex:0 0 124px; width:124px; }
+      .ha-home__more-foot{ margin-top:auto; }
+    }
 
     /* \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 
        SECTION 5 \2014  STORY / WHO WE ARE
@@ -1399,11 +1425,6 @@
         <div class="ha-home__more-label">
           <span>Other research</span>
           <span class="ha-home__more-rule"></span>
-          <!-- Same destination as the "View All Research" button in the Latest
-               section above (hiappleseed.org/research, NOT the nav's
-               /publications). The publications page's Interactive Data tab has
-               no hash routing, so it can't be deep-linked to directly. -->
-          <a class="ha-home__more-all" href="https://hiappleseed.org/research">All research &rarr;</a>
         </div>
         <a class="ha-home__more-card" href="https://hiappleseed.org/data-dashboard" target="_blank" rel="noopener">
           <span class="ha-home__more-thumb">
@@ -1417,6 +1438,18 @@
             <span class="ha-home__more-link">Open the dashboard &#8594;</span>
           </span>
         </a>
+        <!-- Anchored to the BOTTOM of the sidebar column on wide viewports
+             (margin-top:auto), so the column has content at both ends and the
+             space between reads as a deliberate interval rather than a column
+             that just stopped. Stacked, it simply follows the card.
+             Same destination as the "View All Research" button in the Latest
+             section above (hiappleseed.org/research, NOT the nav's
+             /publications). The publications page's Interactive Data tab has
+             no hash routing, so it can't be deep-linked to directly. -->
+        <div class="ha-home__more-foot">
+          <span class="ha-home__more-rule"></span>
+          <a class="ha-home__more-all" href="https://hiappleseed.org/research">All research &rarr;</a>
+        </div>
       </div>
     </div>
   </section>
