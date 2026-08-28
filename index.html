@@ -633,20 +633,9 @@
       letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.42);
       margin-bottom:1rem;
     }
-    /* Real element rather than a ::after so the "All research" link can sit
-       AFTER the rule; flex-shrink lets the rule collapse before the two text
-       runs ever wrap onto a second line at narrow widths. */
+    /* Real element rather than a ::after so it can flex-shrink: the rule
+       collapses before the label text ever wraps to a second line. */
     .ha-home__more-rule { flex:1 1 0; min-width:12px; height:1px; background:rgba(132,169,140,0.18); }
-    .ha-home__more-all {
-      flex:0 0 auto; color:var(--teal); text-decoration:none; letter-spacing:0.14em;
-      transition:color .3s ease;
-    }
-    .ha-home__more-all:hover { color:var(--ash); }
-    .ha-home__more-foot {
-      display:flex; align-items:center; gap:0.7rem; margin-top:1.1rem;
-      font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600; font-size:0.66rem;
-      letter-spacing:0.2em; text-transform:uppercase;
-    }
     .ha-home__more-card {
       display:flex; gap:1rem; align-items:center; padding:0.85rem;
       border:1px solid rgba(132,169,140,0.2); border-radius:4px;
@@ -688,10 +677,12 @@
         grid-template-columns:410px minmax(0,400px);
         gap:3.25rem; max-width:none;
       }
-      /* stretch (against the grid's align-items:start) so the rule runs the
-         tracker card's full height and the footer has somewhere to sink to. */
+      /* stretch (against the grid's align-items:start) so the divider runs the
+         tracker card's full height instead of stopping under the card — it's a
+         column boundary, so it should span the column. The content inside stays
+         top-aligned. */
       .ha-home__more{
-        align-self:stretch; display:flex; flex-direction:column; max-width:none;
+        align-self:stretch; max-width:none;
         border-left:1px solid rgba(132,169,140,0.18); padding-left:2.25rem;
       }
       /* The rule now carries the structure, so the card's own box is redundant.
@@ -704,7 +695,6 @@
       .ha-home__more-card:active{ transform:none; }
       .ha-home__more-card:hover .ha-home__more-title{ color:var(--ash); }
       .ha-home__more-thumb{ flex:0 0 124px; width:124px; }
-      .ha-home__more-foot{ margin-top:auto; }
     }
 
     /* ─────────────────────────────────────
@@ -1470,18 +1460,6 @@
             <span class="ha-home__more-link">Open the dashboard →</span>
           </span>
         </a>
-        <!-- Anchored to the BOTTOM of the sidebar column on wide viewports
-             (margin-top:auto), so the column has content at both ends and the
-             space between reads as a deliberate interval rather than a column
-             that just stopped. Stacked, it simply follows the card.
-             Same destination as the "View All Research" button in the Latest
-             section above (hiappleseed.org/research, NOT the nav's
-             /publications). The publications page's Interactive Data tab has
-             no hash routing, so it can't be deep-linked to directly. -->
-        <div class="ha-home__more-foot">
-          <span class="ha-home__more-rule"></span>
-          <a class="ha-home__more-all" href="https://hiappleseed.org/research">All research &rarr;</a>
-        </div>
       </div>
     </div>
   </section>
