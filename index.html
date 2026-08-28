@@ -607,6 +607,60 @@
     }
     .ha-home__dash:hover .ha-home__dash-cta { background:var(--ash); }
 
+    /* Secondary tool — deliberately subordinate to the Budget Tracker card
+       above: horizontal layout with a small thumb (not a full-bleed preview),
+       hairline border, no filled CTA bar. Capped at the same 410px as
+       .ha-home__dash so both cards share the heading's left edge AND a right
+       edge, reading as one left-aligned column. */
+    .ha-home__more { position:relative; z-index:1; max-width:410px; margin-top:2.75rem; }
+    .ha-home__more-label {
+      display:flex; align-items:center; gap:0.7rem;
+      font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600; font-size:0.66rem;
+      letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.42);
+      margin-bottom:1rem;
+    }
+    /* Real element rather than a ::after so the "All research" link can sit
+       AFTER the rule; flex-shrink lets the rule collapse before the two text
+       runs ever wrap onto a second line at narrow widths. */
+    .ha-home__more-rule { flex:1 1 0; min-width:12px; height:1px; background:rgba(132,169,140,0.18); }
+    .ha-home__more-all {
+      flex:0 0 auto; color:var(--teal); text-decoration:none; letter-spacing:0.14em;
+      transition:color .3s ease;
+    }
+    .ha-home__more-all:hover { color:var(--ash); }
+    .ha-home__more-card {
+      display:flex; gap:1rem; align-items:center; padding:0.85rem;
+      border:1px solid rgba(132,169,140,0.2); border-radius:4px;
+      background:rgba(255,255,255,0.025); text-decoration:none;
+      transition:border-color .3s ease, background .3s ease, transform .3s ease;
+    }
+    .ha-home__more-card:hover {
+      border-color:rgba(132,169,140,0.5); background:rgba(255,255,255,0.05); transform:translateY(-2px);
+    }
+    .ha-home__more-card:active { transform:scale(.995); }
+    .ha-home__more-thumb {
+      flex:0 0 132px; width:132px; aspect-ratio:16/10; overflow:hidden; border-radius:3px;
+      background:rgba(0,0,0,0.2);
+    }
+    /* object-fit keeps this box a fixed shape regardless of the source
+       screenshot's aspect ratio (the dashboard PNG is ~16:9, the tracker's
+       ~4:3), so swapping the image later can't break the card's geometry. */
+    .ha-home__more-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+    .ha-home__more-body { display:flex; flex-direction:column; justify-content:center; gap:0.3rem; min-width:0; }
+    .ha-home__more-title {
+      font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600; font-size:0.95rem;
+      line-height:1.3; color:#fff;
+    }
+    .ha-home__more-desc {
+      font-family:OkinaPoppins, 'Poppins',sans-serif; font-weight:300; font-size:0.8rem;
+      line-height:1.55; color:rgba(255,255,255,0.5);
+    }
+    .ha-home__more-link {
+      font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600; font-size:0.7rem;
+      letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-top:0.15rem;
+    }
+    .ha-home__more-card:hover .ha-home__more-link { color:var(--ash); }
+
     /* ─────────────────────────────────────
        SECTION 5 — STORY / WHO WE ARE
     ───────────────────────────────────── */
@@ -968,6 +1022,10 @@
       .ha-home__involve-grid { grid-template-columns:1fr; }
       .ways-header { margin-bottom:2.5rem; }
       .ha-home__story-media img { aspect-ratio:16/10; }
+      .ha-home__more { margin-top:2.25rem; }
+      .ha-home__more-thumb { flex-basis:88px; width:88px; }
+      .ha-home__more-title { font-size:0.88rem; }
+      .ha-home__more-desc { font-size:0.76rem; line-height:1.5; }
     }
   </style>
   <!-- Fail-safe: if JS is off, reveal elements stay visible. -->
@@ -1348,6 +1406,30 @@
       <a class="ha-home__dash" href="https://hiappleseed.org/hibudget" target="_blank" rel="noopener">
         <img src="assets/data/hawaii-budget-tracker.png" alt="Hawaiʻi Appleseed Budget Tracker" loading="lazy">
         <span class="ha-home__dash-cta">Explore the Budget Tracker →</span>
+      </a>
+    </div>
+
+    <div class="ha-home__more reveal">
+      <div class="ha-home__more-label">
+        <span>Other research</span>
+        <span class="ha-home__more-rule"></span>
+        <!-- Same destination as the "View All Research" button in the Latest
+             section above (hiappleseed.org/research, NOT the nav's
+             /publications). The publications page's Interactive Data tab has
+             no hash routing, so it can't be deep-linked to directly. -->
+        <a class="ha-home__more-all" href="https://hiappleseed.org/research">All research &rarr;</a>
+      </div>
+      <a class="ha-home__more-card" href="https://hiappleseed.org/data-dashboard" target="_blank" rel="noopener">
+        <span class="ha-home__more-thumb">
+          <!-- alt="" on purpose: the title beside it is inside the same link,
+               so a described image would just double up for screen readers. -->
+          <img src="assets/data/economic-justice-dashboard.png" alt="" loading="lazy">
+        </span>
+        <span class="ha-home__more-body">
+          <span class="ha-home__more-title">Economic Justice Data Dashboard</span>
+          <span class="ha-home__more-desc">Income, housing, transportation, and food security, county by county.</span>
+          <span class="ha-home__more-link">Open the dashboard →</span>
+        </span>
       </a>
     </div>
   </section>
