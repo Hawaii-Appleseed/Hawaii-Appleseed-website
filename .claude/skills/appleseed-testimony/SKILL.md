@@ -161,3 +161,44 @@ grep -nE "\bI\b|\bmy\b" draft.md            # first-person singular
 Then read once for: the header block's four lines present and correct; the position in the title line; paragraph 2 defining the subject; paragraph length ≤3 sentences; sentence variety; every statistic footnoted; no legislator blamed by name.
 
 **Flag to the user, don't silently resolve:** any hearing detail you were not given (committee, date, time, room, chair names), any claim you couldn't source, any position not in positions.md, and the positions.md/corpus closing divergence if it came up.
+
+## Shipping — letterhead, .docx, Google Doc
+
+Write the draft as plain text in the shape above (header block, `Dear Chair…`, body paragraphs one per line, closing, signature, `________________`, then `[n]` footnotes), then render it. Do not hand-build the letterhead.
+
+```bash
+S=.claude/skills/appleseed-testimony
+.venv/bin/python $S/render_testimony.py draft.txt -o out/HB1884
+```
+
+That emits **`HB1884.docx`** and **`HB1884.html`** from one source, and adds the furniture automatically:
+
+- the green horizontal lockup (`assets/appleseed-horizontal-green.png`) in the **first-page header** — the corpus's `\\LEJ-SERVER\…\Logos\GREEN\Horizontal.png` is a dead Windows path, this is the same asset
+- a **running header** on later pages: org name + `Page X of Y` as real Word fields
+- Arial 11, one-inch margins, 1.15 spacing
+- the standard org boilerplate paragraph and the footnote block below the rule
+
+**Verify before sending** — the `.docx` is what gets submitted:
+
+```bash
+/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to pdf out/HB1884.docx --outdir out
+sips -s format png --resampleWidth 1000 out/HB1884.pdf --out out/page1.png   # then look at it
+```
+
+### Into a Google Doc
+
+Direct Drive API writes are blocked by Workspace policy. The working route is the clipboard one documented in `~/.claude/drive-routes.yml` (`backend: chrome`):
+
+```bash
+$S/to_gdoc.sh out/HB1884.html
+```
+
+That puts the rendered HTML on the clipboard as HTML flavor and prints the remaining steps: in Chrome signed in as devin@hibudget.org, open the target folder, **New ▸ Google Docs ▸ Blank**, `Cmd+V`, rename.
+
+Three things to know:
+
+- **The `testimony` route in `drive-routes.yml` has no folder id yet.** Ask the user for the Legislative ▸ Testimony folder URL rather than filing the Doc somewhere plausible.
+- **A base64 `data:` logo does not reliably survive the paste.** Check the pasted Doc; if the logo is missing, Insert ▸ Image ▸ Upload with `assets/appleseed-horizontal-green.png`.
+- **Log the new Doc to the "Google Docs in progress" memory list** as soon as it exists, and never remove an entry unless the user says so in chat.
+
+Do not submit to the Capitol testimony portal. Shipping stops at a document the user reviews.
