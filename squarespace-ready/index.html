@@ -637,6 +637,20 @@
     /* Real element rather than a ::after so it can flex-shrink: the rule
        collapses before the label text ever wraps to a second line. */
     .ha-home__more-rule { flex:1 1 0; min-width:12px; height:1px; background:rgba(132,169,140,0.18); }
+
+    .ha-home__more-card + .ha-home__more-card { margin-top:1.15rem; }
+
+    /* Terminates the list. Deliberately unlike BOTH of its neighbours: not the
+       uppercase/tracked treatment of .ha-home__more-label (an earlier version
+       used exactly that, and at the foot of the column it read as a second
+       section heading rather than a link), and not the teal uppercase CTA of
+       .ha-home__more-link, which belongs to a card. */
+    .ha-home__more-all {
+      display:inline-block; margin-top:1.35rem;
+      font-family:OkinaPoppins, 'Poppins',sans-serif; font-weight:300; font-size:0.85rem;
+      color:rgba(255,255,255,0.45); text-decoration:none; transition:color .3s ease;
+    }
+    .ha-home__more-all:hover { color:var(--teal); }
     .ha-home__more-card {
       display:flex; gap:1rem; align-items:center; padding:0.85rem;
       border:1px solid rgba(132,169,140,0.2); border-radius:4px;
@@ -696,6 +710,8 @@
       .ha-home__more-card:active{ transform:none; }
       .ha-home__more-card:hover .ha-home__more-title{ color:var(--ash); }
       .ha-home__more-thumb{ flex:0 0 124px; width:124px; }
+      /* Unboxed here, so the cards need more air than the boxed stack does. */
+      .ha-home__more-card + .ha-home__more-card { margin-top:1.6rem; }
     }
 
     /* \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 
@@ -1436,6 +1452,22 @@
             <span class="ha-home__more-link">Open the dashboard &#8594;</span>
           </span>
         </a>
+        <a class="ha-home__more-card" href="https://hiappleseed.org/snap-medicaid-timeline" target="_blank" rel="noopener">
+          <span class="ha-home__more-thumb">
+            <!-- -thumb.png, not the full screenshot publications.html uses: a
+                 16:10 centre-crop of that one lands on the solid red "who is
+                 affected" panel, which out-shouts the dashboard card above and
+                 inverts the intended reading order. This crop is the white
+                 event card instead. -->
+            <img src="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/assets/data/snap-medicaid-timeline-thumb.png" alt="" loading="lazy">
+          </span>
+          <span class="ha-home__more-body">
+            <span class="ha-home__more-title">SNAP &amp; Medicaid Cuts Timeline</span>
+            <span class="ha-home__more-desc">When the federal cuts land, and who they reach in Hawai&#699;i.</span>
+            <span class="ha-home__more-link">Open the timeline &#8594;</span>
+          </span>
+        </a>
+        <a class="ha-home__more-all" href="https://hiappleseed.org/research">All research &#8594;</a>
       </div>
     </div>
   </section>
