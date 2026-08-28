@@ -15,6 +15,7 @@ Read, in order:
 
 1. **`writing-bot/positions.md`** — HA's curated stances, maintained by policy staff. **Authoritative on positions.** Read it fresh on every use. Never take a position it doesn't cover; `[REVIEW]` means unconfirmed, `[ADD]` means known gap — both mean *ask*.
 2. **`reference/testimony-profile.md`** (in this skill) — the measured corpus statistics.
+3. **`reference/citations.md`** (in this skill) — 58 citations from the corpus footnotes, each paired with the claim it supports. Check it before writing `CITATION NEEDED`.
 
 **Position integrity — non-negotiable:** every factual claim traces to positions.md or a retrieved corpus document. Never invent statistics, bill numbers, hearing dates, committee names, chair names, room numbers, or dollar figures. **Hearing logistics are especially dangerous** — the header block asserts a committee, date, and time on the record. If you weren't given them, leave bracketed placeholders and say so; do not guess.
 
@@ -43,7 +44,21 @@ Corpus layout: `testimony/{food-equity,housing,labor,tax-and-budget,transportati
 
 Good exemplars: `labor/HB2367_2026_Pay_Transparency.txt` (long, subheaded, heavy evidence), `food-equity/HB2296_EDU_School_meals.txt` (short, no subheads), `tax-and-budget/Adjusting_Act_46.txt` (tax mechanics with a rate table).
 
-## Step 3 — Build the scaffold first
+## Step 3 — Ground the scaffold, then build it
+
+Get the bill's real title, current draft suffix, committee, and hearing time from LegiScan rather than asking the user to supply them:
+
+```bash
+python .claude/skills/appleseed-testimony/bill_lookup.py HB1884
+```
+
+It prints a ready header block. **It needs `LEGISCAN_API_KEY`** (free tier, 30K queries/month, https://legiscan.com/user/register). Without the key it exits 2 with instructions — in that case leave the header bracketed and tell the user exactly which details are unverified. Never guess a committee, date, or room.
+
+Two things the lookup will not resolve on its own:
+
+- If LegiScan returns only referral abbreviations (`TRN, FIN`), the committee comes back wrapped in a `[COMMITTEE — …]` marker. Expand it from the hearing notice; do not paste the abbreviations onto the letterhead.
+- The draft suffix moves during session. Re-run the lookup if the draft was prepared more than a day or two before the hearing.
+
 
 Roughly 70 percent of testimonies open with this exact four-line block, before the greeting. Reproduce it:
 
@@ -118,12 +133,14 @@ Hedge **magnitudes** ("approximately 87 percent"), never the judgment.
 | **Person** | Org is **third person** ("Hawaiʻi Appleseed advocates…") when acting; "we/our" for shared civic claims. **First-person singular is effectively banned** — 2 uses of "I" in 13,255 words, both rhetorical. |
 | **Contractions** | 6.6 per 1,000 words. Fine in a rhetorical sentence; not inside policy mechanics. |
 | **Bill numbers** | Corpus uses both `HB2367` and `HB 2367` — pick one per document and hold it. Always carry the draft suffix (`HD1`, `SD2`, `CD1`) once it exists. |
-| **Attribution** | Name real authorities inline (U.S. Bureau of Labor Statistics, ITEP, DBEDT, Hawaiʻi Foodbank, ALICE), then a numbered footnote `[1]` with a full citation and URL after a `________` rule. |
+| **Attribution** | Name real authorities inline (U.S. Bureau of Labor Statistics, ITEP, DBEDT, Hawaiʻi Foodbank, ALICE), then a numbered footnote `[1]` with a full citation and URL after a `________` rule. **Check `reference/citations.md` first** — 58 sources HA has already published are there, indexed by the claim each supports. |
 | **Hawaiian vocabulary** | **Sparse and load-bearing** — 9 words in the entire 13,255-word corpus. `mahalo` belongs in the closing. Do not decorate. |
 
 ### Evidence density
 
-27 numerals per 1,000 words · 1.3 dollar figures per testimony · a bill reference in 84 percent of docs. Every statistic footnoted. Testimony is measurably more numeric than the blog voice — but the numbers arrive *after* a claim, never as the opening.
+27 numerals per 1,000 words · 1.3 dollar figures per testimony · a bill reference in 84 percent of docs. Every statistic footnoted.
+
+**Sourcing order:** (1) `reference/citations.md` — a source HA has already stood behind; (2) a citation carried by a retrieved corpus document; (3) a source the user supplies. If none of those covers the figure, write `CITATION NEEDED` and say so in the handoff. positions.md carries many figures *without* their sources — reusing a number from it does not give you a citation. Never attach the nearest-looking source: a citation that does not support the number is worse than a visible gap. Testimony is measurably more numeric than the blog voice — but the numbers arrive *after* a claim, never as the opening.
 
 ## Anti-patterns — verified zeros across the corpus
 
