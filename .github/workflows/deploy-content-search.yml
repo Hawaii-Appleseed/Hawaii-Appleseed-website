@@ -1,28 +1,36 @@
 name: Build Content Search bundle
 
-# Rebuilds content-search/data/ from the writing-bot corpus and commits it,
-# then dispatches the plain Pages deploy (deploy.yml). Scoped by `paths` so
-# ordinary site edits never trigger this build — the site's own deploy stays
-# a plain no-build upload.
+# Rebuilds the content-search data bundle from the writing-bot corpus and
+# pushes it straight into staff-updates-internal (private, Cloudflare
+# Access-gated) — the app moved off public GitHub Pages 2026-08-29 since
+# nothing linked to or polled it there. See content-search/README.md in that
+# repo for the full picture; this repo keeps only the corpus + build engine
+# (writing-bot/).
+#
+# content-search/ is NOT checked out from this repo — it's checked out from
+# staff-updates-internal instead, then symlinked into place, so every
+# existing path in build_static.py / embed_corpus.mjs / run_all.mjs resolves
+# straight into the hub checkout with zero script changes. index.html, css/,
+# and README.md in the hub are hand-maintained there (hub nav integration)
+# and this workflow never touches them — it only ever writes content-search/
+# data/, api.json, and test/fixtures.json.
 #
 # The heavy steps (Chroma index + browser-parity q8 embedding, ~180 MB model
-# download on a cold cache) only run when the corpus content actually changed;
-# a run that produces byte-identical data (modulo api.json's generatedAt)
-# commits nothing and deploys nothing. Use the `force` input to rebuild
-# embeddings without a content change (e.g. after a model/dtype bump).
+# download on a cold cache) only run when the corpus content actually
+# changed; a run that produces a byte-identical bundle pushes nothing. Use
+# the `force` input to rebuild embeddings without a content change (e.g.
+# after a model/dtype bump).
 
 on:
   push:
     branches: [main]
     paths:
       - "writing-bot/**"
-      - "content-search/js/**"
-      - "content-search/index.html"
       - ".github/workflows/deploy-content-search.yml"
   workflow_dispatch:
     inputs:
       force:
-        description: "Rebuild + commit even if content is unchanged"
+        description: "Rebuild + push even if content is unchanged"
         type: boolean
         default: false
 
@@ -30,15 +38,28 @@ concurrency:
   group: content-search-build
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      actions: write # to dispatch deploy.yml
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout website repo (corpus + build engine)
+        uses: actions/checkout@v4
+        with:
+          path: website
+
+      - name: Checkout staff-updates-internal (publish target)
+        uses: actions/checkout@v4
+        with:
+          repository: Hawaii-Appleseed/staff-updates-internal
+          token: ${{ secrets.STAFF_UPDATES_TOKEN }}
+          path: hub
+
+      - name: Link content-search to the hub checkout
+        run: ln -s "$(pwd)/hub/content-search" website/content-search
 
       - uses: actions/setup-python@v5
         with:
@@ -47,67 +68,32 @@ jobs:
         run: pip install chromadb rank-bm25
 
       - name: Build index + export data bundle
-        working-directory: writing-bot
+        working-directory: website/writing-bot
         run: |
           python -c "import bot; bot.index_documents(force=True)"
           python tools/build_static.py --verify
           python eval/static_dump.py > ../content-search/test/fixtures.json
 
-      # api.json's generatedAt changes every build; everything else in the
-      # bundle is content-derived. Embeddings are also skipped when text is
-      # unchanged — they're a pure function of chunks.json, and re-running
-      # them on different runner hardware can flip float bits for no reason.
+      # Diff against the hub's own HEAD (its last-published bundle) rather
+      # than this repo's, since the bundle no longer lives here. fixtures.json
+      # is deliberately excluded (same reason as before: its inputs come from
+      # a freshly built Chroma HNSW index, nondeterministic in the candidate
+      # tail — real-content runs refresh it anyway, others discard it).
+      # embeddings.bin/meta aren't written yet at this point (embed_corpus
+      # runs later, only if go=true), so they never appear in this diff.
       - name: Check for real content changes
         id: diff
+        working-directory: hub
         run: |
-          python3 - <<'PYEOF'
-          import os, subprocess
-
-          # fixtures.json is deliberately NOT in this list: its input hit
-          # lists come from dense retrieval over a freshly built Chroma HNSW
-          # index, which is nondeterministic in the candidate tail. The
-          # parity test is self-consistent (JS reconstructs from input_ids),
-          # so that churn is noise — fixtures still refresh in any commit
-          # triggered by real content changes, and get discarded otherwise.
-          tracked = [
-              "content-search/data/docs.json",
-              "content-search/data/chunks.json",
-              "content-search/data/bm25.json",
-              "content-search/data/positions.json",
-              "content-search/data/topics.json",
-              "content-search/data/tokenizer_fixture.json",
-          ]
-          changed = False
-          for path in tracked:
-              old = subprocess.run(["git", "show", f"HEAD:{path}"],
-                                    capture_output=True, text=True)
-              old_text = old.stdout if old.returncode == 0 else ""
-              with open(path) as f:
-                  new_text = f.read()
-              if old_text != new_text:
-                  changed = True
-                  print(f"{path}: changed")
-
-          # corpus/ dir: compare the file list + git's own diff
-          st = subprocess.run(["git", "status", "--porcelain",
-                               "content-search/data/corpus"],
-                              capture_output=True, text=True).stdout.strip()
-          if st:
-              changed = True
-              print("corpus/: changed")
-
-          # api.json is NOT compared: it is fully derived from the files
-          # above (their sha256s + counts) plus generatedAt and the
-          # embeddings entries that embed_corpus.mjs patches in AFTER this
-          # gate — so at gate time it never matches HEAD and would force
-          # go=true on every run. If nothing tracked changed, api.json
-          # cannot have semantically changed either.
-
-          if not changed:
-              print("no content changes")
-          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-              f.write(f"changed={'true' if changed else 'false'}\n")
-          PYEOF
+          git add -A content-search/data
+          if git diff --cached --quiet -- content-search/data; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "no content changes"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --cached --stat -- content-search/data
+          fi
+          git reset content-search/data >/dev/null
 
       - name: Decide whether to continue
         id: gate
@@ -118,7 +104,6 @@ jobs:
             echo "go=true" >> "$GITHUB_OUTPUT"
           else
             echo "go=false" >> "$GITHUB_OUTPUT"
-            git checkout -- content-search/ || true
           fi
 
       - uses: actions/setup-node@v4
@@ -135,12 +120,12 @@ jobs:
 
       - name: Install Node deps
         if: steps.gate.outputs.go == 'true'
-        working-directory: writing-bot/tools
+        working-directory: website/writing-bot/tools
         run: npm ci
 
       - name: Embed corpus q8 (retry on transient HF 429)
         if: steps.gate.outputs.go == 'true'
-        working-directory: writing-bot/tools
+        working-directory: website/writing-bot/tools
         run: |
           for attempt in 1 2 3 4 5; do
             echo "Embedding attempt $attempt…"
@@ -151,10 +136,12 @@ jobs:
 
       - name: Unit tests (parity gate)
         if: steps.gate.outputs.go == 'true'
+        working-directory: website
         run: node content-search/test/run_all.mjs
 
       - name: Guard — no relationship-memory in bundle
         if: steps.gate.outputs.go == 'true'
+        working-directory: website
         run: |
           if find content-search/data/corpus -path '*relationship-memory*' | grep -q .; then
             echo "relationship-memory leaked into bundle!"; exit 1
@@ -163,23 +150,17 @@ jobs:
             echo "relationship-memory path in chunks.json!"; exit 1
           fi
 
-      - name: Commit bundle
+      - name: Push bundle to staff-updates-internal
         if: steps.gate.outputs.go == 'true'
-        id: commit
+        working-directory: hub
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add content-search/
+          git add content-search/data content-search/api.json content-search/test/fixtures.json
           if git diff --cached --quiet; then
-            # possible on a `force` run that reproduced the bundle byte-identically
-            echo "nothing to commit"
-            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            echo "nothing to commit (force run reproduced an identical bundle)"
           else
             git commit -m "content-search: rebuild data bundle"
-            # sync-publications.yml and refresh-corpus.yml can land on main
-            # while the ~3 min embed step runs, and a bare push then dies on a
-            # non-fast-forward (observed 2026-08-21). Rebase and retry, and
-            # fail loudly rather than silently skipping the Pages deploy.
             pushed=false
             for attempt in 1 2 3; do
               if git pull --rebase --autostash origin main && git push; then
@@ -193,18 +174,4 @@ jobs:
               echo "::error::could not push the rebuilt bundle after 3 attempts"
               exit 1
             fi
-            echo "pushed=true" >> "$GITHUB_OUTPUT"
           fi
-
-      # GITHUB_TOKEN pushes don't fire deploy.yml's `on: push` (recursion
-      # guard) — dispatch it explicitly, same pattern as sync-publications.yml.
-      # The short sleep lets the just-pushed commit become main's resolved head
-      # before dispatch; without it the deploy can race and ship the parent
-      # commit (observed on the first run of this workflow).
-      - name: Deploy to Pages
-        if: steps.commit.outputs.pushed == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          sleep 15
-          gh workflow run deploy.yml --ref main

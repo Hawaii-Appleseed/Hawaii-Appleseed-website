@@ -97,24 +97,40 @@ hub cards (`--section-bg` / `--section-accent`). If you want an issue to read as
 - `~/.openclaw/workspace/tasks/HawaiiAppleseed.md` — active worklist.
 - The RAG writing bot was **merged into this repo** on 2026-08-05 (`writing-bot/`
   + `content-search/`). The standalone `appleseed-writing-bot` repo is superseded
-  and now private — don't work there.
+  and now private — don't work there. `content-search/` moved again 2026-08-29
+  to `Hawaii-Appleseed/staff-updates-internal` (private, Cloudflare Access) —
+  see below.
 
 ## Content Search / writing-bot subsystem
 
-`writing-bot/` holds the RAG engine **and the corpus**; `content-search/` is the
-static browser app that indexes it. Full detail in each directory's README —
+`writing-bot/` (in **this** repo) holds the RAG engine and the corpus.
+`content-search/`, the static browser app that indexes it, lives in
+**`Hawaii-Appleseed/staff-updates-internal`** — it was never linked from the
+public site, so it moved behind that repo's access gate 2026-08-29 rather than
+staying on public GitHub Pages. `deploy-content-search.yml` in this repo still
+does the actual build (Chroma index, embeddings, parity tests) and pushes the
+result there; nothing content-search-related is committed in this repo anymore
+except the engine. Full detail in `content-search/README.md` in the hub repo —
 the rules that will bite you:
 
-- **`content-search/data/` and `api.json` are committed but CI-generated.**
-  Never hand-edit them. `deploy-content-search.yml` rebuilds them from
-  `writing-bot/`; CI output is canonical (local builds differ byte-wise).
-- **Model dtype must stay in lockstep** between `content-search/js/worker.js`
-  (`DTYPE`) and `writing-bot/tools/embed_corpus.mjs`. Query and corpus embeddings
-  must live in the same space — changing one without the other silently
-  corrupts relevance rather than erroring.
-- **The parity gate is model-free.** `content-search/test/run_all.mjs` checks the
-  BM25/tokenizer/grouping core against Python fixtures. It will happily pass
-  through a bad model change — validate those separately
+- **The hub's `content-search/data/`, `api.json`, and `test/fixtures.json` are
+  committed but CI-generated.** Never hand-edit them there.
+  `deploy-content-search.yml` (in *this* repo) rebuilds them from
+  `writing-bot/` and pushes the result — CI output is canonical (local builds
+  differ byte-wise). `index.html`/`css/`/`README.md` in the hub, by contrast,
+  ARE hand-maintained there (hub nav integration) — this workflow never
+  touches them.
+- **Model dtype must stay in lockstep** between the hub's `content-search/js/worker.js`
+  (`DTYPE`) and this repo's `writing-bot/tools/embed_corpus.mjs`. Query and
+  corpus embeddings must live in the same space — changing one without the
+  other silently corrupts relevance rather than erroring. This is now a
+  cross-repo convention with no automated check — grep both by hand when
+  touching either.
+- **The parity gate is model-free.** `content-search/test/run_all.mjs` (in the
+  hub repo, run from *this* repo's checkout via
+  `deploy-content-search.yml`'s symlink trick) checks the BM25/tokenizer/
+  grouping core against Python fixtures. It will happily pass through a bad
+  model change — validate those separately
   (`writing-bot/tools/probe_quality.mjs`).
 - **`content-search/js/app.js` contains a byte that makes `grep` treat it as
   binary.** Use `grep -a`.
@@ -155,7 +171,10 @@ wherever a report shows it.
 ## Verifying changes
 
 - Site pages: check at **375px first** (see the mobile rule above), then desktop.
-- Content Search: it's a real app — run it and exercise it, don't just read the
-  diff. `python3 -m http.server 8532 --directory content-search`.
+- Content Search: it's a real app, but it now lives in `staff-updates-internal`
+  — run and exercise it from that repo (`python3 -m http.server 8532 --directory
+  content-search`), not this one. Changes here only affect the corpus/build
+  engine (`writing-bot/`), verified via `deploy-content-search.yml`'s parity
+  gate, not by loading a page.
 - Don't trust a screenshot of an embedded/injected page to prove a fix; several
   of these render blank in screenshots. Verify via DOM evaluation.

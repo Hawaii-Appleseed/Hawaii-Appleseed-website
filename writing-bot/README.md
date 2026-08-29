@@ -2,9 +2,13 @@
 
 > Migrated 2026-08-05 from the standalone `appleseed-writing-bot` repo into
 > this website repo (minus the internal `relationship-memory/` module, which
-> stays private). The static search app lives at [`../content-search/`](../content-search/)
-> and rebuilds via `.github/workflows/deploy-content-search.yml`; new corpus
-> content arrives via `.github/workflows/refresh-corpus.yml`, which scrapes
+> stays private). The static search app moved again 2026-08-29 to
+> `Hawaii-Appleseed/staff-updates-internal` (`content-search/` there) — it was
+> never linked from the public site, so it now lives behind that repo's
+> Cloudflare Access gate instead of on public GitHub Pages. This repo keeps
+> the corpus and the build engine; `.github/workflows/deploy-content-search.yml`
+> rebuilds the bundle here and pushes it to the hub repo. New corpus content
+> arrives via `.github/workflows/refresh-corpus.yml`, which scrapes
 > hiappleseed.org every Sunday in GitHub Actions.
 
 RAG-powered writing assistant. Generates testimony, blog posts, and op-eds in Hawaiʻi Appleseed's voice, anchored to a curated `positions.md` and grounded in retrieved excerpts from HA's prior writing.

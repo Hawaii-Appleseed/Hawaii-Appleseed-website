@@ -23,7 +23,7 @@ Defined identically in `taxes-budget.html` · `housing.html` · `food-security.h
 
 **Older unprefixed set** (same hexes) in `index.html` L25–41 and `support.html`: `--teal` `--deep-teal` `--dark-slate` `--charcoal` `--ash` `--ash-light:#E8EDE6` `--cream:#F4F7F5` `--white`, plus the only motion tokens on the site: `--ease-out:cubic-bezier(.22,.61,.36,1)` `--dur-fast:.2s` `--dur-base:.4s` `--dur-slow:.6s`. Minor drift: `--cream:#F4F7F5` vs `--ha-bg:#F4F7F4`; `--ash-light` `#E8EDE6` vs `#E5E9E2`.
 
-A third variant is in `content-search/css/brand.css` L5–11, whose header cites the source of truth: *"Hawaiʻi Appleseed Brand Guide (April 2026 v1.0)"*.
+A third variant is in `content-search/css/brand.css` L5–11 (now in the `staff-updates-internal` repo, not this one), whose header cites the source of truth: *"Hawaiʻi Appleseed Brand Guide (April 2026 v1.0)"*.
 
 **Use the `--ha-*` set for new work** — 26 definition sites vs 9, and it's what the canonical pages use.
 
