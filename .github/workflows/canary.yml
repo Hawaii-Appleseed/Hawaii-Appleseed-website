@@ -76,8 +76,11 @@ jobs:
 
           # every ~30min in name, ~50-80min in observed practice; widened
           # 150->240 on 2026-08-27 after a genuine ~9.5h dropped-trigger gap
-          # (no declared incident) tripped it twice in one day
-          check "fetch-bill-status.yml"   240
+          # (no declared incident) tripped it twice in one day. Widened again
+          # 240->360 on 2026-08-30 — kept tripping every 1-2 days on gaps in
+          # the 250-320min range that always self-recovered before anyone
+          # looked, so 240 was catching routine trigger jitter, not incidents
+          check "fetch-bill-status.yml"   360
           # daily at 22:00 UTC
           check "sync-publications.yml"   1800
           # weekly, Sundays 15:00 UTC
