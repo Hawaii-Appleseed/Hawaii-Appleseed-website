@@ -687,10 +687,20 @@
       /* Asymmetric on purpose — equal columns read as "two columns, one of them
          broken" when the right one is half the height; 410 + 400 reads as
          "main + sidebar". */
+      /* The sidebar column takes ALL the slack (1fr, not a second fixed track).
+         Fixed px columns made this the only non-fluid grid on the page — every
+         sibling section is fractional (issues repeat(6,1fr), latest/involve
+         repeat(3,1fr), story 1fr 1fr) — so at 1920 the section stopped at
+         x=1016 while Latest directly above it ran to 1766. The full-width
+         heading over a short grid is what read as "out of place". */
       .ha-home__impact-grid{
-        grid-template-columns:410px minmax(0,400px);
+        grid-template-columns:410px minmax(400px,1fr);
         gap:3.25rem; max-width:none;
       }
+      /* Unpinned from the tracker card's 410px (see the 701px block): tied to
+         the card it was a narrow ribbon under a headline running twice its
+         width. A ch measure keeps it readable and lets it grow a little. */
+      .ha-home__impact-sub{ max-width:52ch; }
       /* stretch (against the grid's align-items:start) so the divider runs the
          tracker card's full height instead of stopping under the card — it's a
          column boundary, so it should span the column. The content inside stays
@@ -711,6 +721,20 @@
       .ha-home__more-thumb{ flex:0 0 124px; width:124px; }
       /* Unboxed here, so the cards need more air than the boxed stack does. */
       .ha-home__more-card + .ha-home__more-card { margin-top:1.6rem; }
+    }
+
+    /* Once the sidebar column is genuinely wide, stacking two short cards down
+       its left edge leaves the row empty to the right. Two up instead, on
+       capped tracks with justify-content:start so they stay adjacent rather
+       than drifting to opposite ends of a 1700px column at 2560. */
+    @media (min-width:1560px){
+      .ha-home__more{
+        display:grid; grid-template-columns:repeat(2,minmax(0,620px));
+        justify-content:start; gap:1.5rem 2.5rem; align-content:start;
+      }
+      .ha-home__more-label, .ha-home__more-all { grid-column:1/-1; }
+      .ha-home__more-all { justify-self:start; margin-top:0.4rem; }
+      .ha-home__more-card + .ha-home__more-card { margin-top:0; }
     }
 
     /* ─────────────────────────────────────
