@@ -579,9 +579,13 @@
       position:relative;z-index:1;font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:1rem;font-weight:300;
       line-height:1.8;color:rgba(255,255,255,0.55);max-width:560px;margin:0 0 3.5rem;
     }
+    /* No max-width: the grid tracks the section's own content box at every
+       breakpoint, the way every sibling section's grid does. An 820px cap here
+       was the last thing holding the 701\2013 1080 band short of the right edge
+       (54px at 1040, 88px at 1080) after the fixed column widths came out. */
     .ha-home__impact-grid {
       display:grid;grid-template-columns:1fr;gap:2.75rem;align-items:start;
-      position:relative;z-index:1;max-width:820px;
+      position:relative;z-index:1;
     }
     /* Wide viewports: "Other research" moves out from under the tracker and
        sits beside it. 410 + 4rem gap + 410 = 884px of content, which needs
@@ -594,25 +598,18 @@
       transition:border-color .3s ease, transform .3s ease;
       width:100%;   /* unchanged on mobile \2014  a literal half-width card would be illegibly small there */
     }
+    /* No .ha-home__dash width override here on purpose. The base width:100%
+       already produces the right size at every breakpoint once the grid does
+       the work: full content width while the section is a single 1fr column
+       (below 1081), and exactly 410px inside the fixed first track above it.
+       An explicit 410px here used to apply from 701px up, which left the whole
+       section as a 410px ribbon against an empty right half through the
+       701\2013 1080 band while every sibling section filled its content box. */
     @media (min-width:701px){
-      /* ~half the old full-width (820px) preview. LEFT-aligned (not centered)
-         so it shares the same left edge as the heading + .ha-home__impact-sub
-         (max-width:560px, also left-aligned) above it \2014  centering within the
-         820px grid box left it visually adrift, disconnected from the text
-         column it belongs under. An explicit px width, gated behind this
-         breakpoint so mobile keeps width:100%, sidesteps a browser sizing
-         quirk where percentage max-width didn't reliably cap a grid item
-         with a percentage-width img child (silently masked by
-         .ha-home__impact's own overflow:hidden). */
-      .ha-home__dash{ width:410px; }
-      /* Matches the tracker card's width so the paragraph wraps to the same
-         right edge as the card beneath it. At the base max-width:560px this
-         overhung the 410px card by 150px into the gutter on every viewport
-         \2265 701px \2014  harmless until the sidebar shipped, at which point the
-         overhang read as drifting into the sidebar's territory. Scoped to
-         this breakpoint only: below 701px there's no fixed-width card to
-         align to, so the wider wrap stays. */
-      .ha-home__impact-sub{ max-width:410px; }
+      /* A ch measure rather than the tracker card's pixel width. Pinned to the
+         card it was a narrow ribbon under a headline running twice as wide,
+         and it could not follow the card once the card started scaling. */
+      .ha-home__impact-sub{ max-width:52ch; }
     }
     .ha-home__dash:hover { border-color:rgba(132,169,140,0.55); transform:translateY(-3px); }
     .ha-home__dash img { width:100%; display:block; }
@@ -624,10 +621,10 @@
 
     /* Secondary tool \2014  deliberately subordinate to the Budget Tracker card
        above: horizontal layout with a small thumb (not a full-bleed preview),
-       hairline border, no filled CTA bar. Capped at the same 410px as
-       .ha-home__dash so both cards share the heading's left edge AND a right
-       edge, reading as one left-aligned column. */
-    .ha-home__more { position:relative; z-index:1; max-width:410px; }
+       hairline border, no filled CTA bar. Uncapped: it shares the tracker's
+       left AND right edge because both are items in the same grid column, so
+       a fixed cap here only ever made it narrower than the card above it. */
+    .ha-home__more { position:relative; z-index:1; }
     .ha-home__more-label {
       display:flex; align-items:center; gap:0.7rem;
       font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600; font-size:0.66rem;
@@ -696,12 +693,9 @@
          heading over a short grid is what read as "out of place". */
       .ha-home__impact-grid{
         grid-template-columns:410px minmax(400px,1fr);
-        gap:3.25rem; max-width:none;
+        gap:3.25rem;
       }
-      /* Unpinned from the tracker card's 410px (see the 701px block): tied to
-         the card it was a narrow ribbon under a headline running twice its
-         width. A ch measure keeps it readable and lets it grow a little. */
-      .ha-home__impact-sub{ max-width:52ch; }
+
       /* stretch (against the grid's align-items:start) so the divider runs the
          tracker card's full height instead of stopping under the card \2014  it's a
          column boundary, so it should span the column. The content inside stays
