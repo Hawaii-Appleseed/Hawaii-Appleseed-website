@@ -10,6 +10,8 @@ Usage:
   python3 scripts/squarespace.py tax-timeline       any dir/page works (generic)
   python3 scripts/squarespace.py --all              rebuild everything, no copy
   python3 scripts/squarespace.py our-team --no-copy rebuild only
+  python3 scripts/squarespace.py --status           which live pages have drifted
+  python3 scripts/squarespace.py our-team --status  just that one
   python3 scripts/squarespace.py our-team --go      rebuild + push + wait for
                                                     Pages + self-driving snippet
                                                     on the clipboard + open the
@@ -52,6 +54,8 @@ import re
 import subprocess
 import sys
 import time
+import urllib.error
+import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_squarespace as bs
@@ -404,6 +408,159 @@ def emit_snippet(rel_out):
 
 
 # ---------------------------------------------------------------------------
+# Live-page preflight: "is this payload already published?"
+# ---------------------------------------------------------------------------
+#
+# Squarespace serves a Code Block's contents verbatim, so a page's whole
+# payload appears character-for-character inside the live HTML (verified on
+# our-team, board-of-directors and index). One ~1s GET therefore answers
+# whether there is anything to publish at all — which lets --go stop before the
+# push, the ~90s deploy wait and the editor ritual when there is not, and lets
+# --status report drift across every page at once.
+#
+# Three outcomes, because "the payload isn't live" has two very different
+# causes:
+#   current  — the live page contains this exact payload.
+#   stale    — it contains this page's payload header but not this payload, so
+#              a real, older paste has drifted from the repo.
+#   absent   — none of the payload is there. The live page isn't driven by
+#              this Code Block at all (blog and publications are native
+#              Squarespace collection pages, not pasted ones).
+
+def _payload_present(body, live):
+    """Is *some* version of this payload on the page? Samples verbatim chunks
+    from the payload's interior: a drifted paste still shares long stretches
+    with the repo, a page that was never pasted into shares none.
+
+    Deliberately NOT keyed on the generated "PASTE-READY ..." header — pastes
+    made before that header existed are still real pastes (the SNAP/Medicaid
+    timeline is one), and keying on it reports them as never-published.
+    """
+    n = len(body)
+    if n < 2000:
+        return body[:200] in live
+    return any(body[int(n * f):int(n * f) + 200] in live
+               for f in (0.15, 0.3, 0.45, 0.6, 0.75, 0.9))
+
+
+# Live paths for payloads INTERNAL_LINK_MAP doesn't cover (it only lists the
+# pages that are link targets). Generic injects fall out of the rule below.
+LIVE_PATH_EXTRA = {
+    "squarespace-ready/ufsm.html": "/universal-free-school-meals",
+}
+
+_LIVE_CACHE = {}
+
+
+def live_path(rel_out):
+    """The live site path a payload belongs on, or None if we can't know."""
+    rel = rel_out.replace(os.sep, "/")
+    if rel in LIVE_PATH_EXTRA:
+        return LIVE_PATH_EXTRA[rel]
+    known = bs.INTERNAL_LINK_MAP.get(os.path.basename(rel_out))
+    if known:
+        return known
+    # Generic injects live at /<dir>, e.g. snap-medicaid-timeline.
+    if os.path.basename(rel) == "squarespace-inject.html" and "/" in rel:
+        return "/" + rel.rsplit("/", 2)[-2]
+    return None
+
+
+def fetch_live(url):
+    """GET a live page, cached per run and paced — Squarespace 429s a fast
+    sweep of every page."""
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    req = urllib.request.Request(url, headers={
+        "Cache-Control": "no-cache",
+        "User-Agent": "Mozilla/5.0 (squarespace.py --status)"})
+    for attempt in (0, 1):
+        try:
+            with urllib.request.urlopen(req, timeout=25) as r:
+                _LIVE_CACHE[url] = r.read().decode("utf-8", "replace")
+                return _LIVE_CACHE[url]
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt == 0:
+                time.sleep(20)
+                continue
+            raise
+    return None
+
+
+def live_state(rel_out):
+    """('current'|'stale'|'absent'|None, note). None = could not tell, and the
+    caller should carry on rather than treat it as out of date."""
+    path = live_path(rel_out)
+    if not path:
+        return None, "no known live URL for %s" % os.path.basename(rel_out)
+    url = SITE + ("" if path == "/" else path)
+    try:
+        with open(os.path.join(ROOT, rel_out), encoding="utf-8") as f:
+            body = f.read().strip()
+        live = fetch_live(url)
+    except Exception as e:
+        return None, "could not check %s (%s)" % (url, e)
+    if body in live:
+        return "current", url
+    if _payload_present(body, live):
+        return "stale", url
+    return "absent", url
+
+
+def status(targets=None):
+    """For every target with a known live URL, report whether the live page is
+    running the payload currently in the repo."""
+    rows = []
+    known = builder_targets()
+    for name in sorted(set(known) - {"home"}):
+        rows.append((name, os.path.join("squarespace-ready", known[name])))
+    for src in generic_sources():
+        d = os.path.dirname(src)
+        rows.append((d, os.path.join(d, "squarespace-inject.html")))
+    if targets:
+        rows = [r for r in rows if r[0] in targets]
+    rows = [r for r in rows if os.path.exists(os.path.join(ROOT, r[1]))]
+
+    results = []
+    for i, (name, rel) in enumerate(rows):
+        url = live_path(rel)
+        if url and SITE + url not in _LIVE_CACHE and i:
+            time.sleep(1.5)
+        state, note = live_state(rel)
+        results.append([name, rel, state, note])
+
+    # Several payloads can target one live page (our-mission vs
+    # our-mission-light). Only one can be live; the others aren't stale, they
+    # are just the variant that isn't in use.
+    live_current = {r[3] for r in results if r[2] == "current"}
+    for r in results:
+        if r[2] in ("stale", "absent") and r[3] in live_current:
+            r[2] = "alternate"
+
+    counts = {}
+    for name, rel, state, note in results:
+        counts[state] = counts.get(state, 0) + 1
+        if state == "current":
+            print("  current   %s" % name)
+        elif state == "stale":
+            print("  STALE     %-22s live page has an older paste" % name)
+        elif state == "alternate":
+            print("  alternate %-22s not the variant live on %s"
+                  % (name, note.replace(SITE, "")))
+        elif state == "absent":
+            print("  absent    %-22s live page isn't driven by this payload" % name)
+        else:
+            print("  ?         %-22s %s" % (name, note))
+    print("\n%d current, %d stale, %d alternate, %d absent, %d unknown (of %d)"
+          % (counts.get("current", 0), counts.get("stale", 0),
+             counts.get("alternate", 0), counts.get("absent", 0),
+             counts.get(None, 0), len(results)))
+    if counts.get("stale"):
+        print("publish with:  python3 scripts/squarespace.py <target> --go")
+    return 0
+
+
+# ---------------------------------------------------------------------------
 # --go: one command, ending in the open Code Block editor
 # ---------------------------------------------------------------------------
 #
@@ -569,7 +726,19 @@ def wait_for_pages(rel_out, timeout=300):
         time.sleep(10)
 
 
-def go(target, rel_out, sources, push=True):
+def go(target, rel_out, sources, push=True, force=False):
+    state, note = live_state(rel_out)
+    if state == "current" and not force:
+        print("\nThe live page is already running this payload:\n  %s\n"
+              "Nothing to publish. --force to go through the motions anyway."
+              % note)
+        return 0
+    if state == "absent":
+        print("note: none of this payload is on %s — that page may not be "
+              "driven by a Code Block." % note)
+    elif state is None:
+        print("live check: %s — continuing." % note)
+
     if push and not ensure_pushed(rel_out, sources):
         return 1
     match, err = check_pages_matches(rel_out)
@@ -622,10 +791,19 @@ def list_targets():
 def main(argv):
     snippet = "--snippet" in argv
     go_mode = "--go" in argv
+    status_mode = "--status" in argv
+    force = "--force" in argv
     push = "--no-push" not in argv
     copy = "--no-copy" not in argv and not snippet and not go_mode
     argv = [a for a in argv if a not in ("--no-copy", "--snippet", "--go",
-                                         "--no-push")]
+                                         "--no-push", "--status", "--force")]
+
+    if status_mode and (not argv or argv[0] == "--all"):
+        bs.main()
+        for src in generic_sources():
+            build_generic(src)
+        print("live pages vs the payloads in this repo:\n")
+        return status()
 
     if not argv:
         list_targets()
@@ -663,8 +841,10 @@ def main(argv):
         sources.append(rel)
         print("built %s" % out)
 
+    if status_mode:
+        return status([target])
     if go_mode:
-        return go(target, out, sources, push=push)
+        return go(target, out, sources, push=push, force=force)
     if snippet:
         emit_snippet(out)
     elif copy:
