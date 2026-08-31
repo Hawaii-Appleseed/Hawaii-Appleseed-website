@@ -11,6 +11,14 @@
 - **Repo-relative paths only** in commits/prompts. Madison's workdir is `~/repos/HawaiiAppleseed/`.
 - **No build step**: hand-rolled HTML/CSS, no SSG, no JS framework. Don't introduce one without explicit approval.
 - **Static hosting**: GitHub Pages or drop-in to existing site.
+- **Publishing to Squarespace goes through `--go`**, always:
+  `python3 scripts/squarespace.py <target> --go`. It is the preferred and only
+  route — it rebuilds, commits, pushes, waits for the Pages deploy, checks the
+  live page first, and hands you a snippet that drives the editor. Do **not**
+  hand-run the strip/encode/pbcopy recipe, hand-paste from `squarespace-ready/`,
+  or drive the editor ad hoc; those are how stale and half-published pages
+  happen. `--status` shows which live pages have drifted from the repo.
+  The final **SAVE click stays human** — that click is the publish.
 
 ## Orientation
 
