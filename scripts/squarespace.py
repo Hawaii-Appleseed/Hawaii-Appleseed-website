@@ -10,6 +10,10 @@ Usage:
   python3 scripts/squarespace.py tax-timeline       any dir/page works (generic)
   python3 scripts/squarespace.py --all              rebuild everything, no copy
   python3 scripts/squarespace.py our-team --no-copy rebuild only
+  python3 scripts/squarespace.py our-team --go      rebuild + push + wait for
+                                                    Pages + self-driving snippet
+                                                    on the clipboard + open the
+                                                    Squarespace editor in Chrome
 
 Target resolution (first match wins):
 
@@ -42,10 +46,12 @@ plain `window.onload = fn` or 'load'/'DOMContentLoaded' listener would never
 run. Those are rewritten to readyState-guarded forms (the same fix the
 original hand-patched snap-medicaid-timeline inject used).
 """
+import json
 import os
 import re
 import subprocess
 import sys
+import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_squarespace as bs
@@ -397,6 +403,202 @@ def emit_snippet(rel_out):
     print("\n" + js)
 
 
+# ---------------------------------------------------------------------------
+# --go: one command, ending in the open Code Block editor
+# ---------------------------------------------------------------------------
+#
+#   python3 scripts/squarespace.py our-team --go
+#
+# rebuild -> commit + push the payload -> wait until GitHub Pages actually
+# serves the new bytes -> self-driving console snippet on the clipboard ->
+# open Squarespace's Pages panel in your real Chrome. All that is left is to
+# paste the snippet in the console and click SAVE.
+#
+# There is no per-page deep link to open instead: Squarespace 7.1 keeps the URL
+# at /config/pages no matter which page is selected, and /config/<slug>
+# redirects to Home (both verified live). So the snippet navigates for you — it
+# clicks the page in the Pages sidebar by title, presses EDIT, and opens the
+# Code Block. Any step it cannot do it names, and you do that one by hand and
+# re-run the snippet; every later step still runs.
+
+SITE = "https://hiappleseed.org"
+CONFIG_PAGES = SITE + "/config/pages"
+
+# Same paste mechanics as SNIPPET_JS (see the comment there for why CodeMirror
+# needs a synthetic Mod-A + paste), preceded by the three navigation steps that
+# used to be manual. All four are verified live in the 7.1 editor:
+#   • Sidebar rows respond to a synthetic pointer/mouse sequence (a bare
+#     .click() on the text node does NOT select the page).
+#   • The EDIT button responds to a plain .click().
+#   • The Code Block sits in the same-origin #sqs-site-frame preview, and a
+#     synthetic dblclick near its top edge opens the editor panel — landing on
+#     the top edge avoids the embed's own interactive content.
+#   • Pasting content identical to what is live leaves SAVE greyed out; that is
+#     "already in sync", not a failure.
+AUTO_SNIPPET_JS = """await (async () => {
+const U = "%s", T = "%s";
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const until = async (fn, label, ms) => { const t = Date.now(); for (;;) {
+  let v = null; try { v = fn(); } catch (e) {}
+  if (v) return v;
+  if (Date.now() - t > (ms || 45000)) throw new Error("timed out waiting for " + label);
+  await sleep(400); } };
+const byText = re => Array.from(document.querySelectorAll("button,a,[role=button]"))
+  .find(b => re.test((b.textContent || "").trim()));
+let cm = document.querySelector(".cm-content");
+if (!cm) {
+  if (T && document.title.indexOf(T) !== 0) {
+    const rows = [];
+    for (const e of Array.from(document.querySelectorAll("*"))
+        .filter(e => !e.children.length && e.textContent.trim() === T)) {
+      let n = e;
+      for (let i = 0; i < 6 && n && n.getBoundingClientRect().width <= 150; i++) n = n.parentElement;
+      if (n && !rows.some(r => r.contains(n) || n.contains(r))) rows.push(n);
+    }
+    if (rows.length !== 1) throw new Error(rows.length + ' sidebar rows match "' + T
+      + '" - click the page yourself, then re-run this snippet');
+    const b = rows[0].getBoundingClientRect();
+    const o = {bubbles:true, cancelable:true, view:window,
+      clientX:b.left + b.width / 2, clientY:b.top + b.height / 2};
+    for (const t of ["pointerdown","mousedown","pointerup","mouseup","click"])
+      rows[0].dispatchEvent(new (t[0] === "p" ? PointerEvent : MouseEvent)(t, o));
+    await until(() => document.title.indexOf(T) === 0, 'the "' + T + '" page', 20000);
+    await sleep(1500);
+  }
+  const edit = byText(/^edit$/i);
+  if (edit) { edit.click(); await sleep(2500); }
+  const fr = await until(() => document.querySelector("#sqs-site-frame"), "site preview");
+  const doc = await until(() => fr.contentDocument
+    && fr.contentDocument.querySelector(".sqs-block-code") && fr.contentDocument, "code block");
+  const blocks = doc.querySelectorAll(".sqs-block-code");
+  if (blocks.length > 1) throw new Error(blocks.length
+    + " code blocks here - open the right one by hand, then re-run this snippet");
+  const el = blocks[0], r = el.getBoundingClientRect();
+  const o = {bubbles:true, cancelable:true, view:fr.contentWindow,
+    clientX:r.left + Math.min(r.width / 2, 400), clientY:r.top + 40, detail:2};
+  for (const t of ["mousedown","mouseup","click","mousedown","mouseup","click","dblclick"])
+    el.dispatchEvent(new MouseEvent(t, o));
+  cm = await until(() => document.querySelector(".cm-content"),
+    "code editor - double-click the Code Block yourself, then re-run this snippet", 20000);
+  await sleep(1000);
+}
+const t = await fetch(U + "?t=" + Date.now(), {cache:"no-store"})
+  .then(r => r.ok ? r.text() : Promise.reject("HTTP " + r.status));
+cm.focus();
+cm.dispatchEvent(new KeyboardEvent("keydown", {key:"a", code:"KeyA", metaKey:true,
+  keyCode:65, which:65, bubbles:true, cancelable:true}));
+const d = new DataTransfer(); d.setData("text/plain", t);
+const ev = new ClipboardEvent("paste", {clipboardData:d, bubbles:true, cancelable:true});
+cm.dispatchEvent(ev);
+if (!ev.defaultPrevented) throw new Error("CodeMirror did not accept the paste");
+return "pasted " + t.length + " chars - check it, then click SAVE";
+})()"""
+
+
+def page_title(target):
+    """The page's title as it appears in the Pages sidebar. Filename != live
+    slug != sidebar title, so publish_squarespace.py's PAGE_TITLES is the
+    mapping; anything missing falls back to the live site's own title."""
+    stem = os.path.splitext(os.path.basename(target.rstrip("/")))[0]
+    try:
+        import publish_squarespace as ps
+        if stem in ps.PAGE_TITLES:
+            return ps.PAGE_TITLES[stem]
+    except Exception:
+        pass
+    try:
+        import urllib.request
+        with urllib.request.urlopen("%s/%s?format=json" % (SITE, stem), timeout=15) as r:
+            return (json.load(r).get("collection") or {}).get("title")
+    except Exception:
+        return None
+
+
+def _git(*args):
+    return subprocess.run(["git"] + list(args), cwd=ROOT,
+                          capture_output=True, text=True)
+
+
+def ensure_pushed(rel_out, sources):
+    """Commit + push the payload (and the source it was built from) so that the
+    snippet, which reads from GitHub Pages, cannot paste stale content."""
+    paths = [p for p in [rel_out] + list(sources)
+             if p and os.path.exists(os.path.join(ROOT, p))]
+    _git("add", "--", *paths)
+    staged = _git("diff", "--cached", "--name-only").stdout.strip()
+    if staged:
+        print("committing:")
+        for line in staged.splitlines():
+            print("  %s" % line)
+        c = _git("commit", "-m", "Rebuild Squarespace payload: %s" % rel_out)
+        if c.returncode:
+            print(c.stdout + c.stderr, file=sys.stderr)
+            return False
+    ahead = _git("rev-list", "--count", "@{u}..HEAD").stdout.strip()
+    if staged or (ahead.isdigit() and int(ahead) > 0):
+        print("pushing...")
+        p = _git("push")
+        if p.returncode:
+            print(p.stdout + p.stderr, file=sys.stderr)
+            print("push failed — fix that first; the snippet reads from Pages.",
+                  file=sys.stderr)
+            return False
+        print("pushed.")
+    dirty = [l for l in _git("status", "--porcelain").stdout.splitlines()
+             if not l.startswith("??")]
+    if dirty:
+        print("note: %d other modified file(s) left uncommitted." % len(dirty))
+    return True
+
+
+def wait_for_pages(rel_out, timeout=300):
+    """Poll until GitHub Pages serves the local bytes (the deploy is ~90s)."""
+    start = time.time()
+    print("waiting for the GitHub Pages deploy...")
+    while True:
+        match, err = check_pages_matches(rel_out)
+        if match:
+            print("GitHub Pages is serving the current bytes. ✓")
+            return True
+        waited = int(time.time() - start)
+        if waited > timeout:
+            print("STILL STALE after %ds. Pasting now would publish the OLD "
+                  "payload — check the Actions run before continuing." % waited)
+            return False
+        print("  ...%ds%s" % (waited, (" — %s" % err) if err else ""))
+        time.sleep(10)
+
+
+def go(target, rel_out, sources, push=True):
+    if push and not ensure_pushed(rel_out, sources):
+        return 1
+    match, err = check_pages_matches(rel_out)
+    if err:
+        print("WARNING: %s" % err)
+    if match:
+        print("GitHub Pages is serving the current bytes. ✓")
+    elif not wait_for_pages(rel_out):
+        return 1
+
+    title = page_title(target)
+    js = AUTO_SNIPPET_JS % (pages_url(rel_out), title or "")
+    subprocess.run(["pbcopy"], input=js.encode("utf-8"), check=True)
+    subprocess.run(["open", "-a", "Google Chrome", CONFIG_PAGES], check=False)
+
+    print("\nSnippet on the clipboard (%d chars)" % len(js))
+    print("payload : %s" % pages_url(rel_out))
+    print("page    : %s" % (title or "UNKNOWN — the snippet will not be able to "
+                            "pick the page; open it yourself first"))
+    print("Chrome  : %s" % CONFIG_PAGES)
+    print("\n  1. DevTools (Cmd+Opt+I) > Console > paste > Enter.")
+    print("     It picks the page, clicks EDIT, opens the Code Block, and pastes.")
+    print("  2. Check it, then click SAVE.")
+    print("\nSAVE staying greyed out means the live page already matched, byte")
+    print("for byte. The block also shows an 'embedded scripts are disabled'")
+    print("placeholder while you are logged in and editing — use Preview.")
+    return 0
+
+
 def copy_and_report(rel_out):
     size = pbcopy(os.path.join(ROOT, rel_out))
     print("\n%s (%d KB) is on the clipboard." % (rel_out, round(size / 1024)))
@@ -419,8 +621,11 @@ def list_targets():
 
 def main(argv):
     snippet = "--snippet" in argv
-    copy = "--no-copy" not in argv and not snippet
-    argv = [a for a in argv if a not in ("--no-copy", "--snippet")]
+    go_mode = "--go" in argv
+    push = "--no-push" not in argv
+    copy = "--no-copy" not in argv and not snippet and not go_mode
+    argv = [a for a in argv if a not in ("--no-copy", "--snippet", "--go",
+                                         "--no-push")]
 
     if not argv:
         list_targets()
@@ -433,12 +638,15 @@ def main(argv):
         return 0
 
     target = argv[0].rstrip("/")
+    sources = []
 
     known = builder_targets()
     stem = os.path.splitext(target)[0]
     if stem in known:
         bs.main()
         out = os.path.join("squarespace-ready", known[stem])
+        if os.path.exists(os.path.join(ROOT, stem + ".html")):
+            sources.append(stem + ".html")
     elif target in SNIPPETS:
         out = SNIPPETS[target]
     else:
@@ -452,8 +660,11 @@ def main(argv):
                   file=sys.stderr)
             return 1
         out = build_generic(rel)
+        sources.append(rel)
         print("built %s" % out)
 
+    if go_mode:
+        return go(target, out, sources, push=push)
     if snippet:
         emit_snippet(out)
     elif copy:

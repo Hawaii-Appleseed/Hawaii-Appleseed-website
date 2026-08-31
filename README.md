@@ -32,6 +32,7 @@ Regenerate + copy to the clipboard in one step with the pipeline CLI
 
 ```bash
 python3 scripts/squarespace.py our-team        # rebuild, payload on clipboard
+python3 scripts/squarespace.py our-team --go   # rebuild + push + open the editor
 python3 scripts/squarespace.py                 # list every target
 python3 scripts/squarespace.py --all           # rebuild everything, no copy
 ```
@@ -78,6 +79,40 @@ matched the payload byte for byte.
 Page targets map to sidebar titles in `PAGE_TITLES` (filename != slug !=
 title — `our-story` is "Our History", `food-security` is "Food Equity"); an
 unknown target falls back to the live site's own title for that slug.
+
+### One command: `--go`
+
+The whole ritual, minus the two things a human should keep doing (eyeball the
+payload, click SAVE):
+
+```bash
+python3 scripts/squarespace.py our-team --go
+```
+
+That rebuilds the payload, commits + pushes it, **waits for the GitHub Pages
+deploy to actually serve the new bytes**, puts a self-driving console snippet on
+the clipboard, and opens Squarespace's Pages panel in your real Chrome. Then:
+
+1. DevTools (`Cmd+Opt+I`) → Console → paste → Enter. The snippet picks the page
+   in the sidebar, clicks **EDIT**, opens the Code Block, and pastes the payload.
+2. Eyeball it, then click **SAVE**.
+
+`--no-push` skips the commit and push (it still refuses to hand you a snippet
+that would paste stale bytes).
+
+There is no per-page URL to open instead, which is why the snippet does the
+navigating: Squarespace 7.1 keeps the URL at `/config/pages` no matter which
+page is selected, and `/config/<slug>` redirects to Home — both verified live.
+The snippet finds the page by its **sidebar title**, which comes from
+`PAGE_TITLES` in `publish_squarespace.py` (filename ≠ live slug ≠ sidebar
+title), falling back to the live site's own title for the slug. A target with no
+known title still works — open the page yourself first, and the snippet skips
+straight to the EDIT/paste steps.
+
+Every step it can't do it names, so you do that one by hand and re-run the
+snippet; the later steps still run. The two cases worth knowing: more than one
+Code Block on the page, or a sidebar title that matches more than one row
+(*Media* and *Blog* each appear twice — under Main Navigation and Not Linked).
 
 ### Pasting from the browser (no manual copy/paste)
 
