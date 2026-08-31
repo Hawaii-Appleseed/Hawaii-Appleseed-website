@@ -100,6 +100,38 @@ the clipboard, and opens Squarespace's Pages panel in your real Chrome. Then:
 `--no-push` skips the commit and push (it still refuses to hand you a snippet
 that would paste stale bytes).
 
+Before any of that, `--go` checks the **live page** and stops if it is already
+running this exact payload — about a second, versus a push, a ~90s deploy wait
+and a whole editor session to discover the same thing when SAVE turns out
+greyed. `--force` goes through the motions anyway.
+
+### `--status`: which live pages have drifted
+
+```bash
+python3 scripts/squarespace.py --status            # every target
+python3 scripts/squarespace.py our-team --status   # just one
+```
+
+Squarespace serves a Code Block verbatim, so a page's whole payload appears
+character-for-character in the live HTML. That makes drift directly checkable:
+
+| | |
+|---|---|
+| `current` | the live page contains this exact payload |
+| `STALE` | it has an older paste of this payload — republish |
+| `alternate` | another variant is the one live at that URL (`our-mission` vs `our-mission-light`) |
+| `absent` | none of the payload is there; that page isn't driven by this Code Block (`blog`, `publications` and `in-the-news` are native Squarespace collection pages) |
+
+Two things this got wrong before they were fixed, worth not re-introducing:
+sweeping every page as fast as possible earns a **429** from Squarespace (the
+sweep is paced and retries once), and "is some version of this payload live?"
+must NOT be keyed on the generated `PASTE-READY` header — pastes predating that
+header are still real pastes, and the SNAP/Medicaid timeline is one. It samples
+verbatim chunks from the payload's interior instead.
+
+Pages missing from `INTERNAL_LINK_MAP` (it only lists link targets) need an
+entry in `LIVE_PATH_EXTRA`; generic injects are assumed to live at `/<dir>`.
+
 There is no per-page URL to open instead, which is why the snippet does the
 navigating: Squarespace 7.1 keeps the URL at `/config/pages` no matter which
 page is selected, and `/config/<slug>` redirects to Home — both verified live.
