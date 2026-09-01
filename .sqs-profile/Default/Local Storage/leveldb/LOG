@@ -1,0 +1,10 @@
+2026/08/27-15:40:39.910 145ac8e Reusing MANIFEST /Users/dtomkatsu/HawaiiAppleseed/.sqs-profile/Default/Local Storage/leveldb/MANIFEST-000001
+2026/08/27-15:40:39.913 145ac8e Recovering log #4
+2026/08/27-15:40:39.914 145ac8e Level-0 table #7: started
+2026/08/27-15:40:39.933 145ac8e Level-0 table #7: 195310 bytes OK
+2026/08/27-15:40:39.933 145ac8e Recovering log #7
+2026/08/27-15:40:39.934 145ac8e Reusing old log /Users/dtomkatsu/HawaiiAppleseed/.sqs-profile/Default/Local Storage/leveldb/000007.log 
+2026/08/27-15:40:39.936 145ac8e Delete type=0 #4
+2026/08/27-15:40:39.936 145ac8e Delete type=2 #8
+2026/08/27-15:40:47.667 145acb4 Level-0 table #9: started
+2026/08/27-15:40:47.674 145acb4 Level-0 table #9: 196252 bytes OK
