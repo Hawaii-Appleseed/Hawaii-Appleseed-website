@@ -169,6 +169,36 @@ def build_docx(doc_parts: dict, out: Path):
 
 
 # ---------------------------------------------------------------- html
+# --- rich-text helpers for the HTML build -------------------------------------
+# The HTML is imported into Google Docs by the Drive API, which is faithful to
+# the markup it is given and does NOT autolink bare URLs. The old clipboard
+# route relied on Docs' paste autoformat to create links — the same autoformat
+# that bled link styling onto adjacent text. Emitting real <a> and <sup> here
+# gets correct output without depending on that behaviour at all.
+
+_URL_RE = re.compile(r"https?://[^\s<>\)\]]+")
+_MARKER_RE = re.compile(r"\[(\d{1,3})\]")
+
+
+def _linkify(escaped: str) -> str:
+    """Wrap bare URLs in anchors. Input must already be HTML-escaped."""
+    def sub(m):
+        url = m.group(0).rstrip(".,;:")
+        trail = m.group(0)[len(url):]
+        return f'<a href="{url}">{url}</a>{trail}'
+    return _URL_RE.sub(sub, escaped)
+
+
+def _superscript_markers(escaped: str) -> str:
+    """Turn footnote markers like [1] into real superscripts."""
+    return _MARKER_RE.sub(lambda m: f"<sup>{m.group(1)}</sup>", escaped)
+
+
+def _rich(text: str) -> str:
+    """Escape, then restore the two bits of structure testimony actually uses."""
+    return _linkify(_superscript_markers(html.escape(text)))
+
+
 def build_html(doc_parts: dict, out: Path):
     e = html.escape
     logo = ""
@@ -188,14 +218,15 @@ def build_html(doc_parts: dict, out: Path):
     parts.append("<p></p>")
     parts.append(f"<p>{e(doc_parts['greeting'])}</p>")
     for p in doc_parts["body"] + doc_parts["closing"]:
-        parts.append(f"<p>{e(p)}</p>")
+        parts.append(f"<p>{_rich(p)}</p>")
     parts.append(f"<p>{e(ORG)}</p>")
     if doc_parts["notes"]:
         parts.append("<hr>")
         parts.append(f'<p style="font-size:9pt;color:#444">{e(BOILERPLATE)}</p>')
         parts.append("<hr>")
         for n in doc_parts["notes"]:
-            parts.append(f'<p style="font-size:9pt;color:#444;margin:0 0 4px">{e(n)}</p>')
+            parts.append(
+                f'<p style="font-size:9pt;color:#444;margin:0 0 4px">{_rich(n)}</p>')
     parts.append("</div>")
 
     out.parent.mkdir(parents=True, exist_ok=True)
