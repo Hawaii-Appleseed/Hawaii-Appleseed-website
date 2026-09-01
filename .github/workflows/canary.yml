@@ -34,6 +34,11 @@ on:
   schedule:
     - cron: "20 * * * *" # hourly, offset from the top of the hour
   workflow_dispatch:
+    inputs:
+      test_push:
+        description: "Send a test notification and report the topic fingerprint"
+        type: boolean
+        default: false
 
 permissions:
   actions: read
@@ -43,6 +48,30 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      # An honest way to answer "is the alerting channel actually working",
+      # without faking a failure to find out. Everything else here only pushes
+      # when something is wrong, which is exactly when you don't want to be
+      # debugging the notifier.
+      - name: Test the notification channel
+        if: inputs.test_push
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          if [ -z "${NTFY_TOPIC:-}" ]; then
+            echo "ntfy: no NTFY_TOPIC set — nothing to test"
+            exit 0
+          fi
+          fp=$(printf '%s' "$NTFY_TOPIC" | sha256sum | cut -c1-12)
+          echo "ntfy: topic fingerprint $fp (len ${#NTFY_TOPIC})"
+          echo "Compare with the subscribed device:"
+          echo "  printf '%s' \"\$(cat ~/.config/ntfy-topic)\" | shasum -a 256 | cut -c1-12"
+          code=$(curl -s -m 10 -o /dev/null -w '%{http_code}' \
+            -H "Title: Appleseed: canary test push" \
+            -H "Priority: high" \
+            -d "Test push from canary.yml at $(date -u +'%H:%M:%SZ'). If this did not arrive, the secret and the subscribed device are on different topics." \
+            "https://ntfy.sh/$NTFY_TOPIC" 2>/dev/null || echo 000)
+          echo "ntfy: HTTP $code"
+
       - name: Check last-run freshness, alert on staleness
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
