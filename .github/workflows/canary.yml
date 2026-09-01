@@ -20,6 +20,15 @@ name: Canary — scheduled workflow health
 # dropped, nothing fires. No in-repo monitoring is immune to that failure
 # mode without an external pinger (e.g. a third-party uptime check hitting
 # a workflow_dispatch or a status endpoint) — out of scope for "lightweight."
+#
+# Second job: escalating a failure nobody got round to. triage.yml alerts
+# once, the moment a watched workflow fails, and then goes quiet. That is the
+# right behaviour for a notification and the wrong behaviour for a fault that
+# stays unfixed — deploy-content-search.yml broke on 2026-08-29, triage opened
+# issue #6 within a second with the exact cause in it, and the content-search
+# corpus then sat 8 days stale because a single Friday-evening alert is easy to
+# miss. Nothing was watching for "still broken", because that workflow is
+# push-triggered, so the freshness check above can't see it either.
 
 on:
   schedule:
@@ -114,3 +123,69 @@ jobs:
               "All watched scheduled workflows are running again."
           fi
           echo "All watched workflows are fresh."
+
+      # Deliberately a separate step: the check above exits 1 on staleness,
+      # which would skip this, and a stale cron and an unfixed failure are
+      # different faults that should not hide each other.
+      - name: Re-alert on triage issues that are still open
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          # Quiet for the first day — triage has already alerted once, and
+          # most things get fixed the same day without a second nag.
+          ESCALATE_AFTER_H: "24"
+          # Then at most once a day. This job runs hourly; re-pushing hourly
+          # about a two-day-old fault is how an alert channel gets muted.
+          REPEAT_EVERY_H: "24"
+        run: |
+          set -uo pipefail
+          MARKER="<!-- canary-escalation -->"
+
+          push() {
+            [ -z "${NTFY_TOPIC:-}" ] && return 0
+            curl -s -m 10 \
+              -H "Title: $1" \
+              -H "Priority: high" \
+              -H "Actions: view, Open issue, $3" \
+              -d "$2" \
+              "https://ntfy.sh/$NTFY_TOPIC" >/dev/null 2>&1 || true
+          }
+
+          now=$(date -u +%s)
+
+          gh issue list --repo "$REPO" --label triage --state open \
+            --json number,title,createdAt,url \
+            -q '.[] | [.number, .createdAt, .url, .title] | @tsv' \
+          | while IFS=$'\t' read -r num created url title; do
+              [ -z "${num:-}" ] && continue
+              age_h=$(( (now - $(date -d "$created" +%s)) / 3600 ))
+              if [ "$age_h" -lt "$ESCALATE_AFTER_H" ]; then
+                echo "#$num: ${age_h}h old, under the ${ESCALATE_AFTER_H}h threshold"
+                continue
+              fi
+
+              # When did we last nag about this one? No marker means never,
+              # so fall back to the issue's own age.
+              last=$(gh api "repos/$REPO/issues/$num/comments" --paginate \
+                       -q "[.[] | select(.body | contains(\"$MARKER\")) | .created_at] | last // empty" \
+                     2>/dev/null)
+              if [ -n "$last" ]; then
+                since_h=$(( (now - $(date -d "$last" +%s)) / 3600 ))
+              else
+                since_h="$age_h"
+              fi
+              if [ "$since_h" -lt "$REPEAT_EVERY_H" ]; then
+                echo "#$num: ${age_h}h old, last nagged ${since_h}h ago — holding"
+                continue
+              fi
+
+              days=$(( age_h / 24 ))
+              echo "#$num: ${age_h}h old — escalating"
+              printf '%s\n%s\n' "$MARKER" \
+                "Still open after ${days} day(s). The original alert fired once when this broke; this is the daily reminder that it has not been fixed or closed. Closing this issue stops the reminders." \
+                | gh issue comment "$num" --repo "$REPO" --body-file - || true
+              push "Appleseed: still broken after ${days}d — $title" \
+                   "Triage issue #${num} has been open ${age_h}h. $url" "$url"
+            done
