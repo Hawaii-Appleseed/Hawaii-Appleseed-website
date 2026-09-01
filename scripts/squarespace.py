@@ -423,6 +423,27 @@ def _payload_present(body, live):
                for f in (0.15, 0.3, 0.45, 0.6, 0.75, 0.9))
 
 
+# Payloads that are built but deliberately never pasted into Squarespace, with
+# the reason. Without this they show up as "absent" drift forever, which reads
+# like a backlog when it isn't one.
+#
+# The three collections are a structural limit, not a gap in this tool: a
+# Squarespace blog collection has no block to paste into, and converting one to
+# a regular page would break every /blog/<post> URL and the way staff publish.
+# Their repo versions render publications.json / news.json for the GitHub Pages
+# mirror, which is why they're still maintained.
+NOT_PASTE_TARGETS = {
+    "squarespace-ready/publications.html":
+        "live /publications is a blog collection (blog-basic-grid); Pages mirror only",
+    "squarespace-ready/in-the-news.html":
+        "live /in-the-news is a blog collection (blog-side-by-side); Pages mirror only",
+    "squarespace-ready/blog.html":
+        "live /blog is a blog collection (blog-side-by-side); Pages mirror only",
+    "squarespace-ready/ufsm.html":
+        "embed built (build_ufsm) but never pasted; lives at /ufsm/ on Pages",
+}
+
+
 # Live paths for payloads INTERNAL_LINK_MAP doesn't cover (it only lists the
 # pages that are link targets). Generic injects fall out of the rule below.
 LIVE_PATH_EXTRA = {
@@ -519,6 +540,9 @@ def status(targets=None):
 
     counts = {}
     for name, rel, state, note in results:
+        if rel.replace(os.sep, "/") in NOT_PASTE_TARGETS:
+            state = "n/a"
+            note = NOT_PASTE_TARGETS[rel.replace(os.sep, "/")]
         counts[state] = counts.get(state, 0) + 1
         if state == "current":
             print("  current   %s" % name)
@@ -527,14 +551,17 @@ def status(targets=None):
         elif state == "alternate":
             print("  alternate %-22s not the variant live on %s"
                   % (name, note.replace(SITE, "")))
+        elif state == "n/a":
+            print("  n/a       %-22s %s" % (name, note))
         elif state == "absent":
             print("  absent    %-22s live page isn't driven by this payload" % name)
         else:
             print("  ?         %-22s %s" % (name, note))
-    print("\n%d current, %d stale, %d alternate, %d absent, %d unknown (of %d)"
+    print("\n%d current, %d stale, %d alternate, %d absent, %d unknown "
+          "(+%d not paste targets, of %d)"
           % (counts.get("current", 0), counts.get("stale", 0),
              counts.get("alternate", 0), counts.get("absent", 0),
-             counts.get(None, 0), len(results)))
+             counts.get(None, 0), counts.get("n/a", 0), len(results)))
     if counts.get("stale"):
         print("publish with:  python3 scripts/squarespace.py <target> --go")
     return 0
@@ -859,6 +886,12 @@ def ensure_pushed(rel_out, sources):
 
 
 def go(target, rel_out, sources, push=True, force=False):
+    why = NOT_PASTE_TARGETS.get(rel_out.replace(os.sep, "/"))
+    if why and not force:
+        print("\n%s is not a Squarespace paste target:\n  %s\n"
+              "--force to publish it anyway." % (target, why))
+        return 0
+
     state, note = live_state(rel_out)
     if state == "current" and not force:
         print("\nThe live page is already running this payload:\n  %s\n"
