@@ -204,18 +204,55 @@ sips -s format png --resampleWidth 1000 out/HB1884.pdf --out out/page1.png   # t
 
 ### Into a Google Doc
 
-Direct Drive API writes are blocked by Workspace policy. The working route is the clipboard one documented in `~/.claude/drive-routes.yml` (`backend: chrome`):
+The Drive API writes directly — no clipboard, no manual steps:
 
 ```bash
-$S/to_gdoc.sh out/HB1884.html
+~/internal-tools/appleseed-drive/.venv/bin/python \
+  ~/internal-tools/appleseed-drive/filer.py out/HB1884.html \
+  --route testimony --area "Tax and Budget" \
+  --name "HB1884 WAM Testimony"
 ```
 
-That puts the rendered HTML on the clipboard as HTML flavor and prints the remaining steps: in Chrome signed in as devin@hibudget.org, open the target folder, **New ▸ Google Docs ▸ Blank**, `Cmd+V`, rename.
+It prints the Doc URL. Drive converts the HTML to a native Doc server-side, so
+the letterhead logo, hyperlinks, superscript footnote markers and headings all
+arrive intact — verified end to end 2026-09-01.
+
+`--area` is required and picks the issue-area subfolder under Legislative ▸
+Testimony (State): **Tax and Budget**, **Housing**, **Food Equity**,
+**Transportation Equity**, **Labor & Other**. The ids are in
+`~/.claude/drive-routes.yml`; pick the area from the bill's subject, and ask if
+it is genuinely ambiguous rather than defaulting.
+
+To revise a Doc that already exists, update it in place — this keeps the file
+id, so the link you already shared, its comments and its version history all
+survive:
+
+```bash
+filer.py out/HB1884.html --update <docId>
+```
 
 Three things to know:
 
-- **The `testimony` route in `drive-routes.yml` has no folder id yet.** Ask the user for the Legislative ▸ Testimony folder URL rather than filing the Doc somewhere plausible.
-- **A base64 `data:` logo does not reliably survive the paste.** Check the pasted Doc; if the logo is missing, Insert ▸ Image ▸ Upload with `assets/appleseed-horizontal-green.png`.
-- **Log the new Doc to the "Google Docs in progress" memory list** as soon as it exists, and never remove an entry unless the user says so in chat.
+- **`render_testimony.py` must emit the links, not Google Docs.** The Drive
+  importer is faithful to its input and does **not** autolink bare URLs. The
+  renderer wraps URLs in `<a>` and footnote markers in `<sup>` (`_rich()`); if
+  you touch the HTML build, keep that. The old clipboard route got links only
+  because Docs autoformatted on paste — the same autoformat that bled link
+  styling onto neighbouring text. Emitting real markup fixes both problems.
+- **The base64 logo survives the API import**, which it never reliably did
+  through the clipboard. No Insert ▸ Image fallback needed.
+- **Log the new Doc to the "Google Docs in progress" memory list** as soon as it
+  exists, and never remove an entry unless the user says so in chat.
+
+<details>
+<summary>Fallback: the old clipboard route (no credentials needed)</summary>
+
+If the API credential is unavailable, `$S/to_gdoc.sh out/HB1884.html` still puts
+the rendered HTML on the clipboard as HTML flavor and prints the manual steps:
+in Chrome as devin@hibudget.org, open the target folder, **New ▸ Google Docs ▸
+Blank**, `Cmd+V`, rename. Watch for a missing logo and for hyperlink styling
+bleeding onto adjacent text.
+
+</details>
 
 Do not submit to the Capitol testimony portal. Shipping stops at a document the user reviews.
