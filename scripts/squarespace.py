@@ -382,50 +382,30 @@ def check_pages_matches(rel_out):
 
 
 def emit_snippet(rel_out):
-    url = pages_url(rel_out)
-    match, err = check_pages_matches(rel_out)
-    if err:
-        print("WARNING: %s — snippet may paste stale content." % err)
-    elif not match:
-        print("WARNING: GitHub Pages is serving DIFFERENT bytes than your local")
-        print("         %s" % rel_out)
-        print("         Commit + push and wait for the Pages deploy (~90s), else")
-        print("         this snippet pastes the OLD payload. Re-run to re-check.")
-    else:
-        print("GitHub Pages is serving the current bytes. ✓")
-    js = SNIPPET_JS % url
-    subprocess.run(["pbcopy"], input=js.encode("utf-8"), check=True)
-    print("\nConsole snippet is on the clipboard (%d chars). Source:\n  %s" % (len(js), url))
-    print("\nHow to use:")
-    print("  1. Squarespace > the page > EDIT > double-click the Code Block")
-    print("     (its editor panel opens on the right; leave Display Source OFF)")
-    print("  2. Open DevTools (Cmd+Opt+I) > Console > paste the snippet > Enter")
-    print("     It prints  'pasted N chars'  and the SAVE button lights up.")
-    print("  3. Check the payload, then click SAVE yourself.")
-    print("\nNote: embedded scripts stay disabled while you are logged in and")
-    print("editing, so the block shows a placeholder until you preview or log out.")
-    print("\n" + js)
+    """Console snippet — NAVIGATION ONLY.
 
+    This used to paste the payload as well, which was wrong: a synthetic paste
+    never survives the save (see the NAV_JS comment). It now only opens the
+    right Code Block; the paste itself must be a real Cmd+V from the keyboard.
+    Prefer `--go`, which does the whole thing."""
+    path, title = live_path(rel_out), None
+    for t, out in builder_targets().items():
+        if os.path.join("squarespace-ready", out) == rel_out:
+            title = page_title(t)
+            break
+    if not (path and title):
+        print("No known live path / sidebar title for %s." % rel_out, file=sys.stderr)
+        return
+    with open(os.path.join(ROOT, rel_out), "rb") as f:
+        payload = f.read()
+    subprocess.run(["pbcopy"], input=payload, check=True)
+    print("%s (%d KB) is on the clipboard." % (rel_out, len(payload) // 1024))
+    print("\nRun this in the DevTools console on %s/config/pages to open the"
+          " right Code Block:\n" % SITE)
+    print(NAV_JS % {"path": path, "title": title})
+    print("\nThen in the editor: Cmd+A, then a REAL Cmd+V, then SAVE.")
+    print("A scripted paste stages perfectly and SILENTLY FAILS to save.")
 
-# ---------------------------------------------------------------------------
-# Live-page preflight: "is this payload already published?"
-# ---------------------------------------------------------------------------
-#
-# Squarespace serves a Code Block's contents verbatim, so a page's whole
-# payload appears character-for-character inside the live HTML (verified on
-# our-team, board-of-directors and index). One ~1s GET therefore answers
-# whether there is anything to publish at all — which lets --go stop before the
-# push, the ~90s deploy wait and the editor ritual when there is not, and lets
-# --status report drift across every page at once.
-#
-# Three outcomes, because "the payload isn't live" has two very different
-# causes:
-#   current  — the live page contains this exact payload.
-#   stale    — it contains this page's payload header but not this payload, so
-#              a real, older paste has drifted from the repo.
-#   absent   — none of the payload is there. The live page isn't driven by
-#              this Code Block at all (blog and publications are native
-#              Squarespace collection pages, not pasted ones).
 
 def _payload_present(body, live):
     """Is *some* version of this payload on the page? Samples verbatim chunks
@@ -592,8 +572,21 @@ CONFIG_PAGES = SITE + "/config/pages"
 #     the top edge avoids the embed's own interactive content.
 #   • Pasting content identical to what is live leaves SAVE greyed out; that is
 #     "already in sync", not a failure.
-AUTO_SNIPPET_JS = """await (async () => {
-const U = "%s", T = "%s";
+# The block editor is CodeMirror 6, and a SYNTHETIC paste does not survive a
+# save: it updates CM6's view and even enables SAVE (Squarespace's change
+# tracking fires), but Squarespace serialises the block from a model the
+# synthetic event never reaches, so the save writes back the OLD content.
+# Verified the hard way on taxes-budget — 2,686 correct lines staged, SAVE
+# enabled, saved, live page byte-identical to before. Never treat "SAVE lit
+# up" as evidence; only the live page is evidence.
+#
+# What persists is a REAL Cmd+V, driven through System Events. Hence this
+# flow: the payload travels on the clipboard (no GitHub Pages round trip, so
+# no deploy wait), Chrome is focused deterministically, and the page/block are
+# opened by JS run inside the tab.
+NAV_JS = r"""
+(async () => {
+const WANT = "%(path)s";
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, label, ms) => { const t = Date.now(); for (;;) {
   let v = null; try { v = fn(); } catch (e) {}
@@ -602,54 +595,174 @@ const until = async (fn, label, ms) => { const t = Date.now(); for (;;) {
   await sleep(400); } };
 const byText = re => Array.from(document.querySelectorAll("button,a,[role=button]"))
   .find(b => re.test((b.textContent || "").trim()));
-let cm = document.querySelector(".cm-content");
-if (!cm) {
-  if (T && document.title.indexOf(T) !== 0) {
-    const rows = [];
-    for (const e of Array.from(document.querySelectorAll("*"))
-        .filter(e => !e.children.length && e.textContent.trim() === T)) {
-      let n = e;
-      for (let i = 0; i < 6 && n && n.getBoundingClientRect().width <= 150; i++) n = n.parentElement;
-      if (n && !rows.some(r => r.contains(n) || n.contains(r))) rows.push(n);
-    }
-    if (rows.length !== 1) throw new Error(rows.length + ' sidebar rows match "' + T
-      + '" - click the page yourself, then re-run this snippet');
-    const b = rows[0].getBoundingClientRect();
+const framePath = () => { const f = document.querySelector("#sqs-site-frame");
+  try { return f ? f.contentWindow.location.pathname : null; } catch (e) { return null; } };
+
+if (framePath() !== WANT) {
+  const ex = byText(/^exit$/i); if (ex) { ex.click(); await sleep(3500); }
+  // Pick the row by the page it PREVIEWS, never by title: several pages share
+  // a sidebar title, and the live issue pages sit in the lower cluster near
+  // "Deleted Pages".
+  const rows = [];
+  for (const e of Array.from(document.querySelectorAll("*"))
+      .filter(e => !e.children.length && e.textContent.trim() === "%(title)s")) {
+    let n = e;
+    for (let i = 0; i < 6 && n && n.getBoundingClientRect().width <= 150; i++) n = n.parentElement;
+    if (n && !rows.some(r => r.contains(n) || n.contains(r))) rows.push(n);
+  }
+  if (!rows.length) throw new Error('no sidebar row titled "%(title)s"');
+  let ok = false;
+  for (const r of rows) {
+    const b = r.getBoundingClientRect();
     const o = {bubbles:true, cancelable:true, view:window,
       clientX:b.left + b.width / 2, clientY:b.top + b.height / 2};
     for (const t of ["pointerdown","mousedown","pointerup","mouseup","click"])
-      rows[0].dispatchEvent(new (t[0] === "p" ? PointerEvent : MouseEvent)(t, o));
-    await until(() => document.title.indexOf(T) === 0, 'the "' + T + '" page', 20000);
-    await sleep(1500);
+      r.dispatchEvent(new (t[0] === "p" ? PointerEvent : MouseEvent)(t, o));
+    await sleep(4500);
+    if (framePath() === WANT) { ok = true; break; }
   }
-  const edit = byText(/^edit$/i);
-  if (edit) { edit.click(); await sleep(2500); }
+  if (!ok) throw new Error("no row titled \"%(title)s\" previews " + WANT);
+}
+if (!document.querySelector(".cm-content")) {
+  const ed = byText(/^edit$/i); if (ed) { ed.click(); await sleep(4000); }
   const fr = await until(() => document.querySelector("#sqs-site-frame"), "site preview");
-  const doc = await until(() => fr.contentDocument
-    && fr.contentDocument.querySelector(".sqs-block-code") && fr.contentDocument, "code block");
-  const blocks = doc.querySelectorAll(".sqs-block-code");
-  if (blocks.length > 1) throw new Error(blocks.length
-    + " code blocks here - open the right one by hand, then re-run this snippet");
-  const el = blocks[0], r = el.getBoundingClientRect();
-  const o = {bubbles:true, cancelable:true, view:fr.contentWindow,
+  const w = fr.contentWindow;
+  const el = await until(() => fr.contentDocument.querySelector(".sqs-block-code"), "code block");
+  const n = fr.contentDocument.querySelectorAll(".sqs-block-code").length;
+  if (n > 1) throw new Error(n + " code blocks on this page - open the right one by hand");
+  if ((el.textContent || "").trim() === "Code")
+    throw new Error("this page's Code Block is an empty placeholder - inspect it by hand before pasting");
+  // Scroll the block's TOP edge into view. scrollIntoView({block:'center'})
+  // is wrong for tall blocks: a 4,400px block lands its top ~1,900px above
+  // the viewport and the click point is off-screen.
+  w.scrollTo(0, w.scrollY + el.getBoundingClientRect().top - 120);
+  await sleep(1800);
+  const r = el.getBoundingClientRect();
+  const o = {bubbles:true, cancelable:true, view:w,
     clientX:r.left + Math.min(r.width / 2, 400), clientY:r.top + 40, detail:2};
   for (const t of ["mousedown","mouseup","click","mousedown","mouseup","click","dblclick"])
     el.dispatchEvent(new MouseEvent(t, o));
-  cm = await until(() => document.querySelector(".cm-content"),
-    "code editor - double-click the Code Block yourself, then re-run this snippet", 20000);
-  await sleep(1000);
+  await until(() => document.querySelector(".cm-content"), "code editor", 25000);
+  await sleep(1500);
 }
-const t = await fetch(U + "?t=" + Date.now(), {cache:"no-store"})
-  .then(r => r.ok ? r.text() : Promise.reject("HTTP " + r.status));
-cm.focus();
-cm.dispatchEvent(new KeyboardEvent("keydown", {key:"a", code:"KeyA", metaKey:true,
-  keyCode:65, which:65, bubbles:true, cancelable:true}));
-const d = new DataTransfer(); d.setData("text/plain", t);
-const ev = new ClipboardEvent("paste", {clipboardData:d, bubbles:true, cancelable:true});
-cm.dispatchEvent(ev);
-if (!ev.defaultPrevented) throw new Error("CodeMirror did not accept the paste");
-return "pasted " + t.length + " chars - check it, then click SAVE";
-})()"""
+// cm.focus() must be the LAST thing before the paste. If focus sits on the
+// preview iframe instead, Cmd+A/Cmd+V goes into the page and the editor panel
+// silently closes with SAVE still disabled.
+document.querySelector(".cm-content").focus();
+return "ready:" + framePath();
+})()
+"""
+
+VERIFY_JS = r"""
+(async () => {
+const cm = document.querySelector(".cm-content");
+if (!cm) return "ERROR:editor closed - the paste did not land in it";
+const sc = document.querySelector(".cm-scroller");
+sc.scrollTop = 0; await new Promise(r => setTimeout(r, 900));
+const top = Array.from(document.querySelectorAll(".cm-line")).map(l => l.textContent);
+const save = Array.from(document.querySelectorAll("button"))
+  .find(b => /^save$/i.test((b.textContent || "").trim()));
+if (!top.some(l => l.indexOf("%(probe)s") >= 0))
+  return "ERROR:pasted text does not look like this page's payload";
+if (!save || save.disabled) return "ERROR:SAVE is disabled - nothing was staged";
+save.click();
+await new Promise(r => setTimeout(r, 8000));
+const s2 = Array.from(document.querySelectorAll("button"))
+  .find(b => /^save$/i.test((b.textContent || "").trim()));
+return "saved:" + (s2 ? s2.disabled : "gone");
+})()
+"""
+
+ADMIN_MATCH = "/config"
+
+
+class ChromeJSUnavailable(Exception):
+    pass
+
+
+def _osa(script):
+    p = subprocess.run(["osascript", "-"], input=script, text=True,
+                       capture_output=True)
+    return p.returncode, p.stdout.strip(), p.stderr.strip()
+
+
+def chrome_js(js):
+    """Run JS in Chrome's Squarespace admin tab. Needs Chrome's
+    View > Developer > Allow JavaScript from Apple Events."""
+    fd = os.path.join(ROOT, ".sqs-exec.js")
+    with open(fd, "w", encoding="utf-8") as f:
+        f.write(js)
+    try:
+        rc, out, err = _osa(
+            'set js to (read POSIX file "%s" as «class utf8»)\n'
+            'tell application "Google Chrome"\n'
+            '  execute active tab of front window javascript js\n'
+            'end tell' % fd)
+    finally:
+        os.remove(fd)
+    if rc != 0:
+        if "Apple Events" in err or "not running" in err:
+            raise ChromeJSUnavailable(err)
+        raise RuntimeError(err)
+    return out
+
+
+def focus_admin_tab():
+    """Bring the Squarespace admin tab to the front. Returns its URL, or None.
+    Find + focus + verify must stay in ONE osascript: any tool call in between
+    hands focus back to the caller."""
+    rc, out, err = _osa('''
+tell application "Google Chrome"
+  activate
+  set found to false
+  repeat with w from 1 to (count of windows)
+    repeat with t from 1 to (count of tabs of window w)
+      if (URL of tab t of window w) contains "%s" then
+        set active tab index of window w to t
+        set index of window w to 1
+        set found to true
+        exit repeat
+      end if
+    end repeat
+    if found then exit repeat
+  end repeat
+  if not found then return ""
+  delay 1.5
+  return URL of active tab of front window
+end tell''' % ADMIN_MATCH)
+    return out or None
+
+
+def send_real_paste():
+    """Cmd+A then a REAL Cmd+V into whatever is focused in Chrome, guarded on
+    the front tab so a stray focus change can't paste 100KB somewhere else.
+    (It once went into a Google Form.)"""
+    rc, out, err = _osa('''
+tell application "Google Chrome"
+  activate
+  delay 1.5
+  set u to URL of active tab of front window
+end tell
+if u does not contain "%s" then
+  return "ABORT:" & u
+end if
+tell application "System Events"
+  tell process "Google Chrome"
+    keystroke "a" using command down
+    delay 0.6
+    keystroke "v" using command down
+  end tell
+end tell
+delay 5
+return "pasted"''' % ADMIN_MATCH)
+    if rc != 0:
+        return "ERROR:" + err
+    return out
+
+
+def open_admin():
+    subprocess.run(["open", "-a", "Google Chrome", SITE + "/config/pages"],
+                   check=False)
 
 
 def page_title(target):
@@ -708,30 +821,11 @@ def ensure_pushed(rel_out, sources):
     return True
 
 
-def wait_for_pages(rel_out, timeout=300):
-    """Poll until GitHub Pages serves the local bytes (the deploy is ~90s)."""
-    start = time.time()
-    print("waiting for the GitHub Pages deploy...")
-    while True:
-        match, err = check_pages_matches(rel_out)
-        if match:
-            print("GitHub Pages is serving the current bytes. ✓")
-            return True
-        waited = int(time.time() - start)
-        if waited > timeout:
-            print("STILL STALE after %ds. Pasting now would publish the OLD "
-                  "payload — check the Actions run before continuing." % waited)
-            return False
-        print("  ...%ds%s" % (waited, (" — %s" % err) if err else ""))
-        time.sleep(10)
-
-
 def go(target, rel_out, sources, push=True, force=False):
     state, note = live_state(rel_out)
     if state == "current" and not force:
         print("\nThe live page is already running this payload:\n  %s\n"
-              "Nothing to publish. --force to go through the motions anyway."
-              % note)
+              "Nothing to publish. --force to publish it anyway." % note)
         return 0
     if state == "absent":
         print("note: none of this payload is on %s — that page may not be "
@@ -739,33 +833,72 @@ def go(target, rel_out, sources, push=True, force=False):
     elif state is None:
         print("live check: %s — continuing." % note)
 
-    if push and not ensure_pushed(rel_out, sources):
-        return 1
-    match, err = check_pages_matches(rel_out)
-    if err:
-        print("WARNING: %s" % err)
-    if match:
-        print("GitHub Pages is serving the current bytes. ✓")
-    elif not wait_for_pages(rel_out):
-        return 1
+    # Committed for provenance, but nothing waits on the deploy: the payload
+    # reaches Squarespace on the clipboard, not via GitHub Pages.
+    if push:
+        ensure_pushed(rel_out, sources)
 
+    path = live_path(rel_out)
     title = page_title(target)
-    js = AUTO_SNIPPET_JS % (pages_url(rel_out), title or "")
-    subprocess.run(["pbcopy"], input=js.encode("utf-8"), check=True)
-    subprocess.run(["open", "-a", "Google Chrome", CONFIG_PAGES], check=False)
+    if not (path and title):
+        print("Don't know the live path/sidebar title for %s — add it to "
+              "LIVE_PATH_EXTRA / PAGE_TITLES." % target, file=sys.stderr)
+        return 1
 
-    print("\nSnippet on the clipboard (%d chars)" % len(js))
-    print("payload : %s" % pages_url(rel_out))
-    print("page    : %s" % (title or "UNKNOWN — the snippet will not be able to "
-                            "pick the page; open it yourself first"))
-    print("Chrome  : %s" % CONFIG_PAGES)
-    print("\n  1. DevTools (Cmd+Opt+I) > Console > paste > Enter.")
-    print("     It picks the page, clicks EDIT, opens the Code Block, and pastes.")
-    print("  2. Check it, then click SAVE.")
-    print("\nSAVE staying greyed out means the live page already matched, byte")
-    print("for byte. The block also shows an 'embedded scripts are disabled'")
-    print("placeholder while you are logged in and editing — use Preview.")
-    return 0
+    with open(os.path.join(ROOT, rel_out), "rb") as f:
+        payload = f.read()
+    subprocess.run(["pbcopy"], input=payload, check=True)
+    print("payload : %s (%d KB) on the clipboard" % (rel_out, len(payload) // 1024))
+    print("page    : %s  ->  %s" % (title, path))
+
+    url = focus_admin_tab()
+    if not url:
+        open_admin()
+        print("\nOpened the Squarespace Pages panel — log in if needed, then "
+              "re-run this command.")
+        return 1
+
+    probe = "PASTE-READY" if b"PASTE-READY" in payload[:400] else title[:12]
+    try:
+        res = chrome_js(NAV_JS % {"path": path, "title": title})
+    except ChromeJSUnavailable:
+        print("""
+Chrome won't let me script the page, so I can't open the block for you.
+Turn it on once: Chrome menu > View > Developer > Allow JavaScript from Apple
+Events. Then re-run and this whole command is automatic.
+
+For now, the payload is on the clipboard and the admin tab is focused:
+  1. Click the page in the sidebar, then EDIT.
+  2. Double-click the Code Block (its editor opens on the right).
+  3. Cmd+A, then Cmd+V  <- a REAL Cmd+V; a scripted paste does NOT save.
+  4. Click SAVE.
+Then check it landed:  python3 scripts/squarespace.py %s --status""" % target)
+        return 1
+    if not res.startswith("ready:"):
+        print("could not open the Code Block: %s" % res, file=sys.stderr)
+        return 1
+
+    out = send_real_paste()
+    if not out.startswith("pasted"):
+        print("paste aborted: %s" % out, file=sys.stderr)
+        return 1
+
+    res = chrome_js(VERIFY_JS % {"probe": probe})
+    if not res.startswith("saved:"):
+        print("%s" % res, file=sys.stderr)
+        return 1
+
+    # The only evidence that counts.
+    state, note = live_state(rel_out)
+    if state == "current":
+        print("\nPublished and verified live: %s" % note)
+        return 0
+    print("\nSAVE was clicked but the live page does not match yet (%s).\n"
+          "Re-check in a moment:  python3 scripts/squarespace.py %s --status"
+          % (state, target), file=sys.stderr)
+    return 1
+
+
 
 
 def copy_and_report(rel_out):
