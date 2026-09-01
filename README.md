@@ -166,7 +166,8 @@ character-for-character in the live HTML. That makes drift directly checkable:
 | `current` | the live page contains this exact payload |
 | `STALE` | it has an older paste of this payload — republish |
 | `alternate` | another variant is the one live at that URL (`our-mission` vs `our-mission-light`) |
-| `absent` | none of the payload is there; that page isn't driven by this Code Block (`blog`, `publications` and `in-the-news` are native Squarespace collection pages) |
+| `absent` | none of the payload is there; that page isn't driven by this Code Block |
+| `n/a` | built but deliberately never pasted — see `NOT_PASTE_TARGETS` |
 
 Two things this got wrong before they were fixed, worth not re-introducing:
 sweeping every page as fast as possible earns a **429** from Squarespace (the
@@ -174,6 +175,18 @@ sweep is paced and retries once), and "is some version of this payload live?"
 must NOT be keyed on the generated `PASTE-READY` header — pastes predating that
 header are still real pastes, and the SNAP/Medicaid timeline is one. It samples
 verbatim chunks from the payload's interior instead.
+
+Four payloads are marked `n/a` in `NOT_PASTE_TARGETS`, so they stop reading as a
+drift backlog. `blog`, `publications` and `in-the-news` are Squarespace **blog
+collections** (verified via `?format=json`: type 1, 20 items each) — a collection
+index has no block to paste into, and converting one to a regular page would break
+every `/blog/<post>` URL and the way staff publish. Their repo versions render
+`publications.json` / `news.json` for the GitHub Pages mirror, which is why they're
+still maintained. `ufsm` is different: `/universal-free-school-meals` *is* an
+ordinary page, and `build_ufsm()` produces a working embed — it was simply never
+pasted, and the live page has no Code Block to paste into (publishing it would need
+an add-a-Code-Block step, and it's a content decision: the repo version is much
+richer than what's live). `--go` refuses all four unless `--force`.
 
 Pages missing from `INTERNAL_LINK_MAP` (it only lists link targets) need an
 entry in `LIVE_PATH_EXTRA`; generic injects are assumed to live at `/<dir>`.
