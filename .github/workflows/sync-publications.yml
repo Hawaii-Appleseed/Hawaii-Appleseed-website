@@ -48,7 +48,7 @@ jobs:
               return json.dumps(data, sort_keys=True)
 
           changed = False
-          for path in ("news.json", "publications.json", "search-index.json"):
+          for path in ("news.json", "news-tags.json", "publications.json", "search-index.json"):
               old = subprocess.run(["git", "show", f"HEAD:{path}"],
                                     capture_output=True, text=True)
               old_text = old.stdout if old.returncode == 0 else ""
@@ -70,7 +70,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add publications.json news.json search-index.json
+          git add publications.json news.json news-tags.json search-index.json
           git commit -m "sync: update content from hiappleseed.org"
           git push
           echo "pushed=true" >> "$GITHUB_OUTPUT"
@@ -80,7 +80,7 @@ jobs:
       # clean rather than ending the run with an uncommitted diff.
       - name: Discard no-op rewrite
         if: steps.diff.outputs.changed == 'false'
-        run: git checkout -- news.json publications.json search-index.json
+        run: git checkout -- news.json news-tags.json publications.json search-index.json
 
       # The push above is authored by GITHUB_TOKEN, and GitHub's recursion
       # guard means it does NOT fire deploy.yml's `on: push`. Without this
