@@ -1,6 +1,6 @@
 ---
 name: appleseed-report
-description: Build a Hawaiʻi Appleseed research report, policy brief, or issue page in the house structure and brand system — cover, executive summary, subject-named sections, recommendations, numbered endnotes, figures. Ships as an editable primer-editor project or a Word .docx. Use when asked to write, draft, structure, or format an Appleseed report/brief/publication, or to put Appleseed content into brand HTML.
+description: Build a Hawaiʻi Appleseed research report, policy brief, or issue page in the house structure and brand system — cover, executive summary, subject-named sections, recommendations, numbered endnotes, figures. Ships as an editable primer-editor project, a Google Doc in the shared drive, or a Word .docx. Use when asked to write, draft, structure, or format an Appleseed report/brief/publication, or to put Appleseed content into brand HTML.
 ---
 
 # Hawaiʻi Appleseed report
@@ -115,7 +115,21 @@ Creates `~/primer-editor/projects/<slug>/` with `content.md`, `layout.json`, `re
 - **Never start or kill `serve.py` yourself.** "Budget Primer Editor.app" owns it. Ask the user to relaunch the app.
 - Save is pre-authorized at checkpoints. **Push publishes the live site and needs an explicit per-message go-ahead.**
 
-**→ Word .docx** (funders, coalition markup, internal circulation): use the `anthropic-skills:docx` skill. Carry over Manrope/Poppins (fall back to Arial), the `--ha-*` palette, ALL CAPS section headings, numbered endnotes, and figure caption-above/source-below.
+**→ Google Doc** (funders, coalition markup, anyone who will comment on it): file the rendered brand HTML straight into the shared drive.
+
+```bash
+~/internal-tools/appleseed-drive/.venv/bin/python \
+  ~/internal-tools/appleseed-drive/filer.py <report.html> \
+  --route tax-budget-research --name "<Title>"
+```
+
+Routes and folder ids are in `~/.claude/drive-routes.yml`. Use `--update <docId>` to revise in place — the file id survives, so the link you shared, its comments and its version history all do too. Prefer this over `.docx` when the point is markup: comments in a Doc beat tracked changes in a file emailed around.
+
+What survives the conversion, measured on a real report: headings, Poppins/Manrope, the `--ha-*` text colours, bold, hyperlinks, bullets, and figures. What does **not** survive: page layout, backgrounds, and anything positional — a Doc is a flowing document, not the designed artifact. If the design *is* the deliverable, ship primer-editor or PDF instead.
+
+**Figures: `filer.py` rasterizes inline `<svg>` to PNG automatically. Do not bypass it.** Drive's importer drops inline SVG — and it does something worse than dropping: it imports the SVG's `<text>` nodes as loose body text. Measured on the RETITC report, all 58 chart labels landed in the prose as free-floating dollar figures with no chart attached, which reads like sourced text and is not. Every figure needs its caption-above/source-below furniture checked after filing, since that furniture arrives whether the figure did or not.
+
+**→ Word .docx** (when a file, not a link, is the requirement): use the `anthropic-skills:docx` skill. Carry over Manrope/Poppins (fall back to Arial), the `--ha-*` palette, ALL CAPS section headings, numbered endnotes, and figure caption-above/source-below.
 
 ## Before delivering
 
