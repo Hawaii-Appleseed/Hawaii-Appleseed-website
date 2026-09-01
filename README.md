@@ -132,12 +132,24 @@ Opening the block needs Chrome's **View > Developer > Allow JavaScript from Appl
 Events** (one-time). Without it `--go` still rebuilds, checks, pushes, copies the
 payload and focuses the tab, then prints the four manual steps and exits non-zero.
 
-#### Known bad page
+#### Two Chrome-scripting gotchas, already handled
 
-`wages-labor`'s Code Block renders in the editor as an empty `"Code"` placeholder
-(540 chars of stub) even though the live page serves ~100KB from it, and it isn't
-hit-testable — hovering gives *section* controls. `--go` refuses rather than paste
-into a block it can't read. Needs a hand inspection.
+`execute javascript` is **synchronous**: hand it an `async` IIFE and you get back
+the *Promise*, which serialises to an empty string. `chrome_js()` therefore kicks
+async work into a global and polls for the result. If you write new page-driving
+JS, keep that shape.
+
+It also addresses the admin tab **by URL**, never "active tab of front window" —
+the front tab can be anything, and running the verify step (which clicks SAVE)
+against the wrong page is not worth risking.
+
+#### If a block looks empty
+
+`--go` refuses when a page's Code Block renders as a bare `"Code"` placeholder,
+rather than paste into a block it can't read. That state can be transient — a
+stray paste into the preview iframe leaves a page looking like this until it's
+reloaded. Re-run before concluding the page is broken; a healthy block reports
+tens of thousands of characters and an "Embedded Scripts" placeholder.
 
 ### `--status`: which live pages have drifted
 

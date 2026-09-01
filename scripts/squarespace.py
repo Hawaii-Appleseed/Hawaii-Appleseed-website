@@ -686,24 +686,61 @@ def _osa(script):
     return p.returncode, p.stdout.strip(), p.stderr.strip()
 
 
-def chrome_js(js):
-    """Run JS in Chrome's Squarespace admin tab. Needs Chrome's
-    View > Developer > Allow JavaScript from Apple Events."""
+def chrome_js(js, timeout=90):
+    """Run JS in Chrome's Squarespace admin tab and return its value.
+
+    Needs Chrome's View > Developer > Allow JavaScript from Apple Events.
+
+    Chrome's `execute javascript` is synchronous: hand it an async IIFE and it
+    returns the *Promise*, which serialises to nothing. So async work is kicked
+    off into a global and then polled."""
+    if js.lstrip().startswith("(async"):
+        kick = ("window.__sqs = null; (async () => { try { window.__sqs = "
+                "{ok:1, v: await (%s)}; } catch (e) { window.__sqs = "
+                "{ok:0, v: String((e && e.message) || e)}; } })(); 'started'"
+                % js.strip())
+        _chrome_js_raw(kick)
+        deadline = time.time() + timeout
+        while time.time() < deadline:
+            got = _chrome_js_raw("JSON.stringify(window.__sqs)")
+            if got and got != "null":
+                r = json.loads(got)
+                if not r.get("ok"):
+                    raise RuntimeError(r.get("v"))
+                return r.get("v")
+            time.sleep(1)
+        raise RuntimeError("timed out after %ss running JS in Chrome" % timeout)
+    return _chrome_js_raw(js)
+
+
+def _chrome_js_raw(js):
     fd = os.path.join(ROOT, ".sqs-exec.js")
     with open(fd, "w", encoding="utf-8") as f:
         f.write(js)
     try:
+        # Address the admin tab by URL, never "active tab of front window":
+        # the front tab can be anything, and running VERIFY_JS (which clicks
+        # SAVE) against the wrong page is not a mistake worth risking.
         rc, out, err = _osa(
             'set js to (read POSIX file "%s" as «class utf8»)\n'
             'tell application "Google Chrome"\n'
-            '  execute active tab of front window javascript js\n'
-            'end tell' % fd)
+            '  repeat with w from 1 to (count of windows)\n'
+            '    repeat with t from 1 to (count of tabs of window w)\n'
+            '      if (URL of tab t of window w) contains "%s" then\n'
+            '        return execute tab t of window w javascript js\n'
+            '      end if\n'
+            '    end repeat\n'
+            '  end repeat\n'
+            '  return "NOTAB"\n'
+            'end tell' % (fd, ADMIN_MATCH))
     finally:
         os.remove(fd)
     if rc != 0:
         if "Apple Events" in err or "not running" in err:
             raise ChromeJSUnavailable(err)
         raise RuntimeError(err)
+    if out == "NOTAB":
+        raise RuntimeError("no Squarespace admin tab open in Chrome")
     return out
 
 
