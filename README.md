@@ -304,7 +304,7 @@ href resolves against the Squarespace slug and 404s.
 | Workflow | Trigger | Does |
 | --- | --- | --- |
 | `deploy.yml` | push to `main`, or dispatch | Uploads the whole repo to GitHub Pages. Plain upload, no build. |
-| `sync-publications.yml` | nightly 22:00 UTC | Pulls blog/press/publications JSON from hiappleseed.org into `news.json` + `publications.json`, then dispatches `deploy.yml`. |
+| `sync-publications.yml` | nightly 22:00 UTC | Pulls blog/press/publications JSON from hiappleseed.org into `news.json` + `news-tags.json` + `publications.json`, then dispatches `deploy.yml`. |
 | `refresh-corpus.yml` | Sundays 15:00 UTC (5 AM HST), or dispatch | Scrapes hiappleseed.org for new posts/publications into `writing-bot/`, then dispatches the Content Search rebuild. |
 | `deploy-content-search.yml` | push touching `writing-bot/**`, or dispatch | Rebuilds the search bundle, runs the parity gate, and pushes it straight into `Hawaii-Appleseed/staff-updates-internal` (private) — nothing lands in this repo. |
 | `fetch-bill-status.yml` | every 30 min (cron), or dispatch | Fetches bill RSS from capitol.hawaii.gov into `tax-fairness/data/bill-status.json`. Bill list is discovered from `data-hb`/`data-sb` attributes in the tracked pages — adding a bill is a content edit, not a workflow edit. |
@@ -349,6 +349,7 @@ Edits to these are silently overwritten on the next run.
 | --- | --- |
 | `squarespace-ready/**` | `scripts/build_squarespace.py` |
 | `news.json` | `sync-publications.yml` (nightly) |
+| `news-tags.json` | `sync-publications.yml` (nightly) — the Squarespace tags for `news.json`, keyed by item id |
 | `publications.json` | `sync-publications.yml` (nightly) |
 | `writing-bot/blog-posts/`, `writing-bot/publications/` | `refresh-corpus.yml` (weekly scrape) |
 
