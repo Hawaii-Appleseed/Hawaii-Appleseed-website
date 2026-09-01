@@ -82,28 +82,62 @@ unknown target falls back to the live site's own title for that slug.
 
 ### One command: `--go`
 
-The whole ritual, minus the two things a human should keep doing (eyeball the
-payload, click SAVE):
-
 ```bash
 python3 scripts/squarespace.py our-team --go
 ```
 
-That rebuilds the payload, commits + pushes it, **waits for the GitHub Pages
-deploy to actually serve the new bytes**, puts a self-driving console snippet on
-the clipboard, and opens Squarespace's Pages panel in your real Chrome. Then:
+Rebuilds, checks the live page and stops if it's already current, commits and
+pushes the payload, puts it on the clipboard, focuses the Squarespace admin tab,
+opens the right page and Code Block, pastes, saves, and then **verifies against
+the live page** before claiming success. `--force` publishes anyway;
+`--no-push` skips the git half.
 
-1. DevTools (`Cmd+Opt+I`) → Console → paste → Enter. The snippet picks the page
-   in the sidebar, clicks **EDIT**, opens the Code Block, and pastes the payload.
-2. Eyeball it, then click **SAVE**.
+Nothing waits on the GitHub Pages deploy any more — the payload travels on the
+clipboard, so there's no ~90s round trip.
 
-`--no-push` skips the commit and push (it still refuses to hand you a snippet
-that would paste stale bytes).
+#### The one thing you must not get wrong
 
-Before any of that, `--go` checks the **live page** and stops if it is already
-running this exact payload — about a second, versus a push, a ~90s deploy wait
-and a whole editor session to discover the same thing when SAVE turns out
-greyed. `--force` goes through the motions anyway.
+**A synthetic paste does not survive the save.** Dispatching a `ClipboardEvent`
+with a `DataTransfer` updates CodeMirror's view *and* enables SAVE — Squarespace's
+change tracking fires — but Squarespace serialises the block from a model the
+synthetic event never reaches, so the save writes back the **old** content.
+
+This cost a live page and a lot of confusion on 2026-08-31: `taxes-budget` staged
+all 2,686 correct lines, SAVE lit up, it saved, and the live page was byte-identical
+to before. **Never treat "SAVE lit up" as evidence. Only the live page is evidence** —
+which is why `--go` re-checks it at the end.
+
+What persists is a **real `Cmd+V`**, driven through System Events. `--go` does that
+for you, with three traps already handled:
+
+* **Window focus.** Find-tab, focus-window, verify and keystroke must be a *single*
+  `osascript`; any process boundary in between hands focus back. It guards on the
+  front tab's URL first — an early version pasted 100KB into a Google Form because
+  Chrome's front window held a different tab.
+* **Editor focus.** `cm.focus()` must be the last thing before the paste. If focus
+  is on `#sqs-site-frame`, the keystrokes go into the preview and the editor panel
+  silently closes with SAVE still disabled.
+* **Opening the block.** Scroll the block's *top edge* into view
+  (`scrollTo(scrollY + rect.top - 120)`). `scrollIntoView({block:'center'})` is wrong
+  for tall blocks — a 4,400px block puts its top ~1,900px above the viewport and the
+  click lands off-screen.
+
+Pages are chosen by the path they **preview**, never by sidebar title: several pages
+share a title, and the live issue pages sit in the lower sidebar cluster near
+*Deleted Pages*.
+
+#### Requirement
+
+Opening the block needs Chrome's **View > Developer > Allow JavaScript from Apple
+Events** (one-time). Without it `--go` still rebuilds, checks, pushes, copies the
+payload and focuses the tab, then prints the four manual steps and exits non-zero.
+
+#### Known bad page
+
+`wages-labor`'s Code Block renders in the editor as an empty `"Code"` placeholder
+(540 chars of stub) even though the live page serves ~100KB from it, and it isn't
+hit-testable — hovering gives *section* controls. `--go` refuses rather than paste
+into a block it can't read. Needs a hand inspection.
 
 ### `--status`: which live pages have drifted
 
