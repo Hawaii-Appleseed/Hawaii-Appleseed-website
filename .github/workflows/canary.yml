@@ -58,13 +58,29 @@ jobs:
           # is a fine durable marker but not something anyone sees promptly —
           # issue #3 sat unread through a real 9.5h dropped-trigger gap on
           # 2026-08-27. ntfy makes it a phone notification.
+          # Says what happened to the push, because "nothing arrived" was
+          # previously indistinguishable from "nothing was sent".
+          #
+          # The status alone is not enough: ntfy.sh creates topics on demand and
+          # returns 200 for ANY name, so a stale or typo'd secret looks
+          # perfectly healthy forever while every alert goes to a topic nobody
+          # is subscribed to. The fingerprint is the first 12 hex of the topic's
+          # sha256 — it reveals nothing, and it can be compared against the
+          # subscribed device (`sha256sum ~/.config/ntfy-topic`'s contents) to
+          # settle whether they are even the same topic.
           push() {
-            [ -z "${NTFY_TOPIC:-}" ] && return 0
-            curl -s -m 10 \
+            if [ -z "${NTFY_TOPIC:-}" ]; then
+              echo "ntfy: no NTFY_TOPIC set — no push sent"
+              return 0
+            fi
+            local fp code
+            fp=$(printf '%s' "$NTFY_TOPIC" | sha256sum | cut -c1-12)
+            code=$(curl -s -m 10 -o /dev/null -w '%{http_code}' \
               -H "Title: $1" \
               -H "Priority: $2" \
               -d "$3" \
-              "https://ntfy.sh/$NTFY_TOPIC" >/dev/null 2>&1 || true
+              "https://ntfy.sh/$NTFY_TOPIC" 2>/dev/null || echo 000)
+            echo "ntfy: HTTP $code to topic fingerprint $fp (len ${#NTFY_TOPIC})"
           }
 
           check() {
@@ -144,13 +160,18 @@ jobs:
           MARKER="<!-- canary-escalation -->"
 
           push() {
-            [ -z "${NTFY_TOPIC:-}" ] && return 0
-            curl -s -m 10 \
+            if [ -z "${NTFY_TOPIC:-}" ]; then
+              echo "ntfy: no NTFY_TOPIC set — no push sent"
+              return 0
+            fi
+            fp=$(printf '%s' "$NTFY_TOPIC" | sha256sum | cut -c1-12)
+            code=$(curl -s -m 10 -o /dev/null -w '%{http_code}' \
               -H "Title: $1" \
               -H "Priority: high" \
               -H "Actions: view, Open issue, $3" \
               -d "$2" \
-              "https://ntfy.sh/$NTFY_TOPIC" >/dev/null 2>&1 || true
+              "https://ntfy.sh/$NTFY_TOPIC" 2>/dev/null || echo 000)
+            echo "ntfy: HTTP $code to topic fingerprint $fp (len ${#NTFY_TOPIC})"
           }
 
           now=$(date -u +%s)
