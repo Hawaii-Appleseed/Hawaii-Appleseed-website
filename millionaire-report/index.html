@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Millionaires Report — Hawaiʻi Wealth Data</title>
-    <meta name="description" content="A data report on Hawaiʻi's millionaires: 83,424 people hold $457.6 billion — about 19× the annual state budget. Explore the wealth tiers, how concentrated it is, and the revenue a modest wealth tax could raise.">
+    <meta name="description" content="A data report on Hawaiʻi's millionaires: 83,059 people hold $388.3 billion — about 16× the annual state budget. Explore the wealth tiers, how concentrated it is, and the revenue a modest wealth tax could raise.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Millionaires in Hawaiʻi — Wealth Data Report">
-    <meta property="og:description" content="83,424 millionaires hold $457.6B in Hawaiʻi — about 19× the annual state budget. See the tiers, the concentration, and what a wealth tax could raise.">
+    <meta property="og:description" content="83,059 millionaires hold $388.3B in Hawaiʻi — about 16× the annual state budget. See the tiers, the concentration, and what a wealth tax could raise.">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Millionaires in Hawaiʻi — Wealth Data Report">
-    <meta name="twitter:description" content="83,424 millionaires hold $457.6B in Hawaiʻi — about 19× the annual state budget.">
+    <meta name="twitter:description" content="83,059 millionaires hold $388.3B in Hawaiʻi — about 16× the annual state budget.">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231a3c34'/%3E%3Ctext x='16' y='23' font-family='Nunito,Arial,sans-serif' font-size='20' font-weight='900' fill='%238ad6a0' text-anchor='middle'%3E$%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
@@ -302,7 +302,7 @@
             font-weight: 500;
         }
         /* No pill. The figure now sits directly on the dark field, the same
-           way $457.6 billion does in the banner above — one visual language
+           way $388.3 billion does in the banner above — one visual language
            instead of a dark chip stranded on a light band. Dropping the pill
            also reclaims its 48px of horizontal padding, which is what forced
            "/ year" onto its own line at 375px. */
@@ -1156,7 +1156,7 @@
     <div class="infographic-banner">
         <div class="banner-headline">
             <span class="label">Hawaiʻi has</span>
-            <span class="count" id="summaryCount">83,424</span>
+            <span class="count" id="summaryCount">83,059</span>
             <div class="dropdown-wrapper">
                 <button class="dropdown-btn" id="tierBtn">millionaires &#9662;</button>
                 <div class="dropdown-menu" id="tierMenu">
@@ -1193,20 +1193,20 @@
                     <ellipse cx="19" cy="9" rx="10" ry="3.3" fill="none" stroke="rgba(168,230,176,0.3)" stroke-width="0.7"/>
                     <text x="19" y="11.5" text-anchor="middle" fill="rgba(168,230,176,0.85)" font-size="6.5" font-weight="900" font-family="Nunito,sans-serif">$</text>
                 </svg>
-                <span class="banner-stat-value" id="summaryWealth">$457.6</span>
+                <span class="banner-stat-value" id="summaryWealth">$388.3</span>
                 <span class="banner-stat-unit">billion</span>
                 <span class="banner-stat-label">total wealth held</span>
             </div>
             <div class="banner-divider"></div>
             <div class="banner-stat">
-                <span class="banner-stat-value" id="concentrationValue">15%</span>
+                <span class="banner-stat-value" id="concentrationValue">18%</span>
                 <span class="banner-stat-unit" id="concentrationUnit">of all wealth</span>
-                <div class="conc-bar" id="concBar" aria-hidden="true"><span class="conc-bar-fill" id="concBarFill" style="width:15.1%"></span></div>
+                <div class="conc-bar" id="concBar" aria-hidden="true"><span class="conc-bar-fill" id="concBarFill" style="width:17.9%"></span></div>
                 <span class="banner-stat-label" id="concentrationLabel">held by the top 365 (0.4%)</span>
             </div>
             <div class="banner-divider"></div>
             <div class="banner-stat">
-                <span class="banner-stat-value" id="budgetMultiple">19.3</span>
+                <span class="banner-stat-value" id="budgetMultiple">16.4</span>
                 <span class="banner-stat-unit">times the state budget</span>
                 <div class="budget-grid" id="budgetGrid"></div>
                 <span class="banner-stat-label"><span style="display:inline-block;width:8px;height:8px;background:rgba(252,196,72,0.8);border-radius:50%;vertical-align:middle;margin-right:3px;"></span> = 1 state budget <span style="white-space:nowrap;">($23.7B &middot; 2026)</span>
@@ -1217,18 +1217,18 @@
     <!-- Wealth-tax revenue callout -->
     <div class="revenue-callout">
         <p class="revenue-callout-prompt">
-            A <strong>0.1%&ndash;0.2%</strong> wealth tax on <span id="revenueTierLabel">these 83,424 millionaires</span> could raise
+            A <strong>0.1%&ndash;0.2%</strong> wealth tax on <span id="revenueTierLabel">these 83,059 millionaires</span> could raise
         </p>
         <div class="revenue-callout-figure">
             <span class="revenue-callout-range">
-                <span id="revenueLow">$458M</span>
+                <span id="revenueLow">$388M</span>
                 <span class="revenue-callout-connector">to</span>
-                <span id="revenueHigh">$915M</span>
+                <span id="revenueHigh">$777M</span>
             </span>
             <span class="revenue-callout-per">/ year</span>
         </div>
         <p class="revenue-callout-context">
-            &asymp; <span id="revenueBudgetPct">1.9% &ndash; 3.9%</span> of Hawaiʻi&rsquo;s annual state budget
+            &asymp; <span id="revenueBudgetPct">1.6% &ndash; 3.3%</span> of Hawaiʻi&rsquo;s annual state budget
         </p>
     </div>
 
@@ -1274,11 +1274,11 @@
             <div class="chart-totals-row">
                 <span class="chart-total is-past">
                     <span class="chart-total-label">2010 Total</span>
-                    <span class="chart-total-value" id="aggregate2010">$167.1B</span>
+                    <span class="chart-total-value" id="aggregate2010">$141.3B</span>
                 </span>
                 <span class="chart-total is-current">
                     <span class="chart-total-label">2024 Total</span>
-                    <span class="chart-total-value" id="aggregateTotal">$457.6B</span>
+                    <span class="chart-total-value" id="aggregateTotal">$388.3B</span>
                 </span>
             </div>
             <div class="chart-wrapper">
@@ -1332,15 +1332,21 @@
         // ── Data ──
         const years = [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
 
+        // '$20M\u2013$50M' was previously the Wealth-X/Altrata cumulative "$20M+" figure
+        // (i.e. it already included everyone in the '$50M+' tier below), despite the
+        // bounded-sounding label \u2014 giveaway was a $75\u201377M average holder in a tier
+        // capped at $50M, stable across all 15 years. Values here are the true
+        // exclusive $20M\u2013$50M band (cumulative $20M+ minus the $50M+ tier), so the
+        // three tiers now actually partition the population/wealth with no overlap.
         const individualsData = {
             '$1M\u2013$20M':  [28801, 28276, 32043, 37933, 41121, 41187, 44731, 50833, 50374, 54437, 53425, 58904, 56745, 66976, 81814],
-            '$20M\u2013$50M': [466, 458, 516, 604, 652, 654, 706, 796, 789, 848, 835, 915, 883, 1031, 1245],
+            '$20M\u2013$50M': [328, 323, 364, 426, 460, 462, 498, 562, 557, 599, 589, 645, 623, 727, 880],
             '$50M+': [138, 135, 152, 178, 192, 192, 208, 234, 232, 249, 246, 270, 260, 304, 365]
         };
 
         const wealthData = {
             '$1M\u2013$20M':  [105.7, 103.9, 117.2, 138.0, 149.2, 149.5, 161.7, 184.1, 181.8, 196.5, 192.9, 213.3, 205.6, 241.6, 292.7],
-            '$20M\u2013$50M': [35.6, 35.0, 39.3, 45.9, 49.4, 49.6, 53.3, 61.1, 59.8, 64.8, 63.6, 70.9, 68.4, 79.9, 95.6],
+            '$20M\u2013$50M': [9.8, 9.6, 10.8, 12.7, 13.7, 13.7, 14.9, 16.8, 16.6, 17.8, 17.6, 19.3, 18.7, 21.7, 26.3],
             '$50M+': [25.8, 25.4, 28.5, 33.2, 35.7, 35.9, 38.4, 44.3, 43.2, 47.0, 46.0, 51.6, 49.7, 58.2, 69.3]
         };
 
@@ -1830,9 +1836,9 @@
         const STATE_BUDGET = 23.7; // $23.7B in 2026
 
         const summaryMapping = {
-            'all':       { label: 'millionaires',                         count: 83424, wealth: 457.6, count2010: 29405 },
+            'all':       { label: 'millionaires',                         count: 83059, wealth: 388.3, count2010: 29267 },
             '$1M-$20M':  { label: 'millionaires ($1M\u2013$20M)',        count: 81814, wealth: 292.7, count2010: 28801 },
-            '$20M-$50M': { label: 'ultra-millionaires ($20M\u2013$50M)', count: 1245,  wealth: 95.6,  count2010: 466 },
+            '$20M-$50M': { label: 'ultra-millionaires ($20M\u2013$50M)', count: 880,   wealth: 26.3,  count2010: 328 },
             '$50M+':     { label: 'ultra-millionaires ($50M+)',           count: 365,   wealth: 69.3,  count2010: 138 }
         };
 
