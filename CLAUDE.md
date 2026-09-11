@@ -162,6 +162,17 @@ own `polis-map.json` is the worked example for a map file). Pol.is only
 knows who voted, never who was invited — that number stays hand-entered
 wherever a report shows it.
 
+## Tax testimony theme analysis (separate repo)
+
+Not in this repo. `Hawaii-Appleseed/Legislative-Research-Tool` (private) extracts
+Hawaiʻi tax-bill testimony and tallies which arguments testifiers actually make,
+per side, measured against a committed theme file — `testimony/arguments.py`,
+data in `themes/{session}/{slug}.yml`. Cross-campaign output lives at
+`analysis/themes.md` / `analysis/themes.json` there. It also writes
+`staff-updates-internal`'s legislator/committee roster
+(`data/legislators.json`, `data/committees.json`). Clone it separately; nothing
+about it is linked from this repo.
+
 ## Automation rules
 
 - **`GITHUB_TOKEN` pushes do not trigger other workflows** (GitHub's recursion
