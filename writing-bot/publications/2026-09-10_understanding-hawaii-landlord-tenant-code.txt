@@ -1,0 +1,664 @@
+Title: Understanding Hawaiʻi’s Landlord-Tenant Code
+Date: 2026-09-10
+URL: https://hiappleseed.org/publications/understanding-hawaii-landlord-tenant-code
+PDF: https://hiappleseed.org/s/Understanding-Hawaiis-Landlord-Tenant-Code_Report_FINAL.pdf
+============================================================
+
+UNDERSTANDING 
+HAWAI‘I’S 
+LANDLORD-
+TENANT CODE
+
+September 2026
+
+CURRENT PROTECTIONS, GAPS AND THE 
+CASE FOR REFORM
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+www.hiappleseed.org
+
+Author: Arjuna Heim, Director of Housing Policy, Hawaiʻi Appleseed
+
+Hawaiʻi Appleseed is committed to a more socially and economically just Hawaiʻi, where everyone has genuine 
+opportunities to achieve economic security and fulfill their potential. We change systems to address inequity 
+and foster greater opportunity by conducting data analysis and research to address income inequality, educating 
+policymakers and the public, engaging in collaborative problem solving and coalition building, and advocating 
+for policy and systems change.
+
+The work of Hawaiʻi Appleseed is about people. The issues we work on—housing, food, wages, mobility, the state 
+budget and taxation, and racial and indigenous equity—are important because they ensure people have access 
+to shelter, sustenance, and the means to survive and thrive individually and collectively. Addressing these issues 
+requires the knowledge and expertise of the people that have first-hand experience and live with the adverse 
+consequences of our flawed systems.
+
+TABLE OF CONTENTS
+
+A Plain Language Guide to the Current Landlord-Tenant Code
+
+Gaps in the Current Landlord Tenant Code
+
+What Reform Looks Like
+
+Endotes
+
+3
+
+10
+
+12
+
+14
+
+Copyright © 2026 Hawaiʻi Appleseed Center for Law & Economic Justice. All rights reserved. 
+733 Bishop Street, Suite 1180, Honolulu, HI 96813
+
+2 • LANDLORD-TENANT CODE
+
+A PLAIN LANGUAGE GUIDE TO THE 
+CURRENT LANDLORD-TENANT CODE
+
+DISCLAIMER <!>
+
+This guide is a plain-language summary for informational purposes only and does not constitute legal advice. 
+Verify current statutes at www.capitol.hawaii.gov. Landlord-Tenant Information Center: (808) 586-2634. Hawaiʻi 
+State Bar Association Lawyer Referral: (808) 537-9140.
+
+1. RENTAL AGREEMENTS
+
+Written vs. Verbal Leases: §521-22
+
+A verbal agreement creates a month-to-month tenancy and cannot exceed one year. Verbal agreements are valid 
+but difficult to enforce. Both parties should always document terms in writing. New or changed terms require 
+written agreement by both parties.
+
+Month-to-Month Tenancy: §521-22
+
+The default tenancy type when no fixed term is set. Either party may end it with proper advance notice. Offers 
+flexibility but less long-term stability than a fixed lease. Rent or rule changes, as well as termination, all require 
+written notice. The legal requirement is 45 days’ notice to end a month-to-month tenancy. Landlords may not 
+change terms without notice.
+
+LANDLORD-TENANT CODE • 3
+
+Prohibited Lease Clauses: §521-31 to §521-35
+
+Any clause that strips away a tenant’s legal rights is void even if signed. Tenants cannot waive the right to a 
+habitable unit, the right to sue, or the right to proper notice. Landlords cannot include clauses limiting liability for 
+negligence, requiring confession of judgment1, or waiving tenant rights. Such clauses are unenforceable by law.
+
+Move-In Costs: §521-44(b)
+
+At lease signing, a landlord may only collect:
+• 
+• 
+
+First month’s rent; and
+A security deposit. 
+
+Any other upfront fees are prohibited. Charging last month’s 
+rent upfront or other administrative fees is illegal under §521-
+44(b). Tenants can recover any unlawfully collected amounts.
+
+Tenant Screening Fees: §521-46
+
+Illegal Move-In Charges <!>
+
+Charging last month’s rent upfront 
+or any fee beyond the first month’s 
+rent + security deposit is unlawful 
+under §521-44(b). Tenants may 
+recover those amounts in court.
+
+Landlords may charge a screening fee, but only to cover the actual cost of obtaining information about the 
+applicant. Any amount charged beyond actual screening costs must be returned to the applicant within 30 days. 
+There is no fixed dollar cap, but the fee must correspond to a real screening expense. A tenant may request a 
+receipt and itemized breakdown of screening costs. Any amount not used for actual screening costs must be 
+returned to the applicant within 30 days. 
+
+2. SECURITY DEPOSITS
+
+Maximum Deposit Amount: §521-44(b)
+
+•  Base deposit: no more than 1 month’s rent. 
+•  Pet deposit: An additional pet deposit of up to 1 month’s rent may be charged if a tenant has a pet. 
+•  Note: Service and assistance animals are not pets under §515-3 and a pet deposit is not permitted for them.
+
+Permitted Deductions: §521-44(a)
+
+Landlords may only deduct for:
+•  Unpaid rent: 
+•  Cleaning if the unit is left dirtier than received;
+•  Damage beyond normal wear and tear; and
+•  Unreturned keys or access devices. 
+
+Normal wear and tear such as faded paint and carpet wear 
+cannot be deducted.
+
+Deposit Return Deadline: §521-44(c)
+
+The landlord must return the deposit within 14 days after the 
+tenant vacates and surrenders all keys. Missing this deadline 
+
+4 • LANDLORD-TENANT CODE
+
+14-Day Hard Deadline <!>
+
+If a landlord withholds the deposit 
+without a valid reason, the court will 
+award the tenant the full amount 
+plus court costs. If the court finds the 
+landlord deliberately withheld the 
+deposit without a valid claim, the 
+tenant may recover up to 3x the amount 
+plus court costs.
+
+forfeits the right to retain any portion of the deposit: no exceptions, no extensions. The 14-day clock starts once 
+the keys are returned.
+
+Itemized Deductions: §521-44(c)
+
+Any retained portion must be accompanied by a written itemized list with receipts or invoices. A vague 
+“damages” statement is not legally sufficient. A lump-sum deduction without itemization is invalid.
+
+Property Transfer: §521-44(f)
+
+If a building is sold, the new owner is responsible for all existing deposits. The new owner must give written notice 
+of deposit amounts within 20 days of transfer. If they fail to do so, the law assumes the deposit equals one month’s 
+rent at the tenant’s original rate. A property sale does not affect existing leases. The new owner takes over the 
+property bound by all existing rental agreements and their terms.
+
+3. RENT & FEES
+
+When Rent Is Due: §521-21(b)
+
+Rent is due at the beginning of each rental period (typically 
+1st day of the month) unless the lease states otherwise. 
+Landlords cannot demand rent before it is due. Rent is pro-
+rated daily if the tenancy starts mid-period.
+
+Rent Increases: §521-21(d)(e)
+
+•  Month-to-month tenancy: minimum 45 days’ written 
+
+notice before an increase takes effect. 
+•  Week-to-week: 15 days’ written notice.
+
+Late Fees: §521-21
+
+Retalitory Rent Increases  <!>
+
+Any rent increase within 60 days of a 
+tenant complaint or repair request is 
+presumed retaliatory. The burden falls 
+on the landlord to prove otherwise 
+in court. Retaliation does not require 
+a formal complaint. A landlord who 
+threatens or imposes a rent increase 
+in direct response to a tenant’s 
+maintenance request may be in 
+violation of §521-74.
+
+Late fees are only enforceable if the lease explicitly allows them. There is no mandatory statewide grace period. If 
+the lease is silent on late fees, a landlord generally cannot charge one. Any late fee must be reasonable.
+
+Postdated Check: §521-44(e)
+
+Landlords cannot require tenants to provide postdated checks or negotiable instruments for future rent payments. 
+Violation gives tenants grounds for legal remedy.
+
+LANDLORD-TENANT CODE • 5
+
+4. LANDLORD OBLIGATIONS
+
+Habitable Unit: §521-42
+
+Landlords must maintain the unit in compliance with health and building codes at all times. 
+•  Required: weatherproofing, working plumbing, hot and cold water, heat, safe electrical, smoke detectors, and 
+
+freedom from pests. 
+
+Tenants should report issues in writing: first to the landlord, and if no action is taken the tenant may report to the 
+Department of Health (for health and sanitation violations), the respective County Planning or Housing Department 
+(for building code violations), or the Office of Consumer Protection (for general landlord-tenant complaints). 
+
+Reporting issues to the landlord triggers the landlord’s legal duty to act within a reasonable time. Landlords cannot 
+charge tenants for repairs that are the landlord’s obligation.
+
+Essential Services: §521-42, §521-57
+
+Landlords cannot shut off water, electricity, gas, or other 
+essential services to pressure a tenant out even if rent is owed. 
+Shutting off utilities as a form of eviction is unlawful regardless 
+of rent status. Only a court order can remove a tenant.
+
+Required Disclosures: §521-43
+
+Illegal Self-Help Eviction <!>
+
+Shutting off utilities to force a tenant out 
+is an illegal self-help eviction. Penalty: 
+3× monthly rent OR $1,000, whichever is 
+greater, plus any other damages.
+
+Before or at lease signing, the landlord must provide in 
+writing: the name and address of the property owner, the name and address of any agent authorized to receive 
+notices, and a copy of any written lease. Failure to disclose gives the tenant a $100 claim.
+
+5. TENANT OBLIGATIONS
+
+Pay Rent On Time: §521-51
+
+Tenants must pay rent when due. After proper written notice to pay or quit, non-payment can lead to eviction 
+proceedings. Landlords cannot charge rent for any period the unit was uninhabitable due to the landlord’s failure 
+to maintain habitability.
+
+Maintain the Unit: §521-51, §521-52
+
+Tenants must keep the unit reasonably clean, dispose of trash properly, and avoid causing damage. Normal wear 
+and tear minor scuffs, carpet wear, faded paint is not a valid deposit deduction. Actual damage—such as holes in 
+walls, broken fixtures, or stained carpet—is a valid deduction.
+
+Subletting: §521-31
+
+If the lease requires landlord consent to sublet, the tenant must obtain it in writing. Subletting without permission 
+can be grounds for eviction. By default tenants are free to sublet unless the lease says otherwise. If the lease 
+requires landlord approval to sublet, the landlord cannot unreasonably refuse. If the lease prohibits subletting 
+outright, that prohibition is enforceable and the tenant cannot sublet.
+
+6 • LANDLORD-TENANT CODE
+
+6. ACCESS & PRIVACY
+
+Required Notice Before Entry: §521-53
+
+Landlords must give at least 2 days’ written notice before entering a unit for inspections, repairs, or showings. 
+Entry must occur at reasonable hours (generally 8am–8pm). Tenants may refuse entry if proper notice was not 
+given, except in genuine emergencies. Landlords may not abuse entry rights as a form of harassment.
+
+Tenant-Granted Access: §521-53
+
+Tenants may waive the 2-day notice in writing for a specific entry. This waiver applies only to that specific 
+occasion and does not eliminate the general notice requirement.
+
+7. ENDING THE TENANCY
+
+Tenant Ends Month-to-Month: §521-71
+
+Tenants must give at least 28 days’ written notice to end a month-to-month tenancy. The lease may require longer 
+notice. Tenants may also terminate early if the unit becomes uninhabitable (§521-61). Landlords cannot penalize 
+tenants for early termination if the unit was uninhabitable.
+
+Landlord Ends Month-to-Month: §521-71
+
+Landlords must give 45 days’ written notice to end a month-to-month tenancy without cause. If the tenant 
+has violated the lease, 28 days’ notice is required after a notice to cure has been given first. Tenants cannot be 
+removed without a court order even after the notice period expires.
+
+Fixed-Term Lease: §521-71
+
+A fixed-term lease ends on its expiration date with no additional notice required. If the tenant remains past the 
+end date without a new agreement, a month-to-month tenancy is created. Accepting rent from a holdover tenant 
+also creates a month-to-month tenancy.
+
+LANDLORD-TENANT CODE • 7
+
+Condo Conversion: §521-38
+
+If a building is converting to condominiums, tenants must receive at least 120 days’ written notice before their 
+tenancy is terminated. Tenants do not have a statutory right to purchase their unit in a condo conversion. The 120-
+day notice is the only protection provided under §521-38.
+
+Abandonment: §521-70
+
+A unit may be considered abandoned if a tenant is physically absent for 20 or more consecutive days, has not paid 
+rent during that period, and has clearly indicated by their actions or words that they do not intend to return. A 
+tenant who continues to pay rent during an extended absence, such as a vacation, cannot be considered to have 
+abandoned the unit regardless of how long they are away. 
+
+If the lease requires the tenant to notify the landlord of extended absences, failing to do so may make the tenant 
+liable for any damage that occurs in their absence.
+
+8. EVICTIONS & LEGAL REMEDIES
+
+Legal Eviction Process: §521-68 to §521-74 
+
+A landlord cannot physically remove a tenant, change locks, 
+or remove appliances without a court order. The process must 
+follow: written notice → landlord files in court → hearing → 
+judge’s order → sheriff enforcement. Self-help evictions are 
+illegal and expose landlords to significant damages.
+
+Retaliatory Eviction:  §521-74
+
+Illegal Self-Help Evictions 
+Include <!>
+
+Changing locks, removing doors 
+or windows, shutting off utilities, 
+removing appliances, or threatening 
+or intimidating the tenant to leave.
+
+It is illegal to evict a tenant or raise rent in retaliation for: 
+reporting code violations, joining a tenants’ union, or 
+requesting legally required repairs. Any eviction or rent increase within 60 days of a protected action is legally 
+presumed to be retaliatory. The burden of proof lies with the landlord to prove otherwise in court.
+
+Repair & Deduct Remedy: §521-64, §521-65
+
+If a landlord fails to repair after written notice AND a 
+government agency has cited a health or safety violation, the 
+tenant may—after 1 week of landlord inaction—repair and 
+deduct the cost from rent. Deduction is limited to 1 month’s 
+rent per repair, with receipts required.
+
+Rent Withholding: §521-78
+
+If the unit is legally uninhabitable due to the landlord’s failure, 
+the tenant may be entitled to withhold rent or terminate after 
+proper written notice. Tenants should consult the Landlord-
+Tenant Information Center or an attorney before withholding 
+rent. Failure to follow the legal process can result in eviction.
+
+8 • LANDLORD-TENANT CODE
+
+Repair-and-Deduct Requires 
+Two Steps First <!>
+
+1.  Written notice to the landlord; and
+2.  A government agency citation. 
+
+Skipping either step can invalidate 
+the remedy and expose the tenant 
+to eviction.
+
+Small Claims Court: §633
+
+Small claims court is available for disputes up to $10,000, or for security deposit disputes of any amount. Neither 
+party may use an attorney in deposit-only small claims cases. Both landlords and tenants may use small claims 
+court to recover unpaid rent, damages, or wrongfully withheld deposits.
+
+Nonpayment of Rent - Mediation: §521-68
+
+When a tenant does not pay rent, the landlord must serve 
+a written eviction notice and send a copy to the Mediation 
+Center of Hawaiʻi. This automatically notifies the mediation 
+center, which then contacts both parties to offer mediation. 
+The tenant has 10 calendar days from receiving the notice to 
+request mediation. 
+
+Mediation is the tenant’s choice: they are not required to 
+participate. If the tenant requests mediation, the landlord must 
+participate. If an agreement is reached, it is put in writing and 
+signed by both parties. If the tenant requests mediation but 
+fails to attend, the landlord may seek reimbursement of any 
+attorney’s fees incurred. Mediation is free to both parties.
+
+Mediation Pilot Program <!>
+
+Act 278 (2025) which established 
+§521-68 is currently in effect as a 
+two-year pilot program running 
+through February 4, 2028. Contact 
+your local mediation center at 
+mediationcentersofhawaii.org. 
+
+LANDLORD-TENANT CODE • 9
+
+GAPS IN THE CURRENT LANDLORD 
+TENANT CODE
+
+HRS Chapter 521 provides a meaningful framework for landlord-tenant protections. However there are serious 
+structural gaps that undermine housing justice in the rental markets. Most glaring, the nature of enforcement falls 
+to the party whose rights have been violated. 
+
+This means a landlord or tenant must independently: 
+•  Know what rights are granted under the landlord tenant code;
+•  Know how to exercise those rights and communicate them effectively to the other party;
+•  Know what agency or department to log a complaint with; and
+•  Know how to file a claim in court to recover damages or losses.
+• 
+One of the most significant gaps in the landlord tenant code is that it acts largely as a self-help law. Both landlords 
+
+10 • LANDLORD-TENANT CODE
+
+and tenants must independently identify, assert, and litigate their own protections. This structural gap falls 
+hardest on tenants. 
+
+Nationally less than 5 percent of tenants have an attorney in eviction court, compared to more than 80 percent 
+of landlords.2 Eviction proceedings are complex and intimidating processes in which unrepresented tenants face 
+a significant structural disadvantage. Many tenants lose their homes not because they lack a valid defense, but 
+because they lack the resources to use it. As a result, case outcomes often reflect disparities in representation 
+rather than the underlying merits of the case.3
+
+Compounding this, the no-cause termination loophole allows landlords to end a month-to-month tenancy for any 
+reason, or no reason at all, with 45 days’ written notice. Although §521-74 prohibits explicit retaliatory eviction, 
+landlords can sidestep this protection entirely by simply issuing a 45-day no-cause notice rather than citing a 
+reason. This makes the anti-retaliation provision largely unenforceable in practice. 
+
+Just Cause Eviction would require a landlord to have a legally recognized reason before terminating a tenancy, 
+defining two categories of permissible grounds: at-fault causes based on tenant behavior such as nonpayment of 
+rent, lease violations, or property damage; and no-fault causes based on legitimate landlord decisions unrelated 
+to tenant conduct, such as owner move-in or major renovation.
+
+The Furman Center’s analysis of good cause eviction acknowledges that just cause protections provide real 
+benefits in promoting housing stability and reducing evictions, which are associated with poor health outcomes, 
+future housing instability, and decreased earning.4 Longitudinal studies on health outcomes and housing 
+instability and eviction have been linked to the initiation of drug use, elevated risk of blood pressure and weight 
+gain, higher risk of heart disease, and increased risk of domestic abuse that impact both individual adults and 
+families with children.5 
+
+At the same time, the Furman Center notes that poorly designed just cause requirements risk discouraging future 
+housing projects, increasing eviction costs that get passed on to all tenants, and narrowing the choices available 
+to renters in the market.6 These are nuanced and legitimate policy design considerations, not arguments against 
+just cause itself, and point toward the importance of thoughtful policy crafting and implementation, including 
+appropriate exemptions for new construction and small owner-occupied properties. 
+
+Even with those guardrails in place, just cause addresses the terms of displacement, not the conditions that 
+make displacement so devastating in the first place.The deeper question is what just cause eviction can actually 
+accomplish in a market where tenants have nowhere else to go.
+
+LANDLORD-TENANT CODE • 11
+
+WHAT REFORM LOOKS LIKE
+
+Just Cause Eviction (JCE) laws establish minimum legal standards that landlords must meet before terminating a 
+tenancy. Rather than replacing HRS Chapter 521, JCE reforms would plug the specific gaps identified in Part II. 
+
+The framework presented in Table 1 incorporates lessons from jurisdictions that have enacted just cause 
+protections and reflects the design considerations identified by the NYU Furman Center, whose analysis cautions 
+that poorly crafted just cause requirements risk discouraging future housing production, increasing costs passed 
+on to tenants, and straining court resources.
+
+ELIMINATING NO-CAUSE TERMINATION
+
+As established in Part II of this policy brief, the self help-nature of the law is the most significant structural gap in 
+Hawaiʻi’s landlord-tenant law, and the no-cause termination loophole compounds it directly. When a landlord can 
+end a tenancy without stating a reason, a tenant’s only recourse is to independently identify, assert, and mitigate 
+a retaliation claim they may not know they have, against a landlord who was never required to give them a reason 
+to begin with.
+
+Eliminating no-cause termination is not a standalone fix, but a reform that makes the rest of the framework’s 
+protections enforceable. All eviction notices should cite a legally recognized cause, at-fault or no-fault, supported 
+by documentation. Eviction notices must prohibit false, pretextural, or discriminatory termination. The burden 
+is on the landlord to verify their stated reason or compensate the tenant with one month’s rent plus the security 
+deposit required for their new unit.
+
+CONCLUSION
+
+Just Cause Eviction, however well designed, addresses only one dimension of the power imbalance between 
+landlords and tenants. The deeper structural problem is supply. 
+
+When housing production consistently fails to meet demand, as it has for decades in Hawaiʻi, landlords hold all 
+the leverage.7 In a market where only about 4 percent of units are vacant and available8 and well over half of 
+renters are cost-burdened,9 landlords can raise rents and tighten screening with relatively little risk of prolonged 
+vacancy. Under these conditions, tenant protections provide a legal floor but cannot provide tenant power. A 
+tenant who is protected from arbitrary eviction but has nowhere else to go is still a tenant without a real choice. 
+
+Genuine tenant leverage requires a market where landlords compete for tenants: where the threat of a vacant unit 
+carries financial loss, and where a tenant who leaves for better conditions, fairer treatment, or a more favorable 
+location can find one.10 That kind of leverage does not come from regulation alone. It comes from sufficient supply 
+that tenants have options. 
+
+Delaying or blocking the multifamily housing that Hawaiʻi’s rental market needs does not protect tenants. Rather, 
+doing so only maintains the conditions that give landlords outsized power over them.11 Just Cause Eviction is a 
+necessary protection but it is not a substitute for the supply-side reforms that would shift the underlying balance 
+of power in Hawaiʻi’s rental market toward the people who need housing most.
+
+12 • LANDLORD-TENANT CODE
+
+Table 1: Gaps in the Landlord-Tenant Code and Corresponding Just Cause Eviction Solutions
+
+Current HRS Gap
+
+JCE Reform Intervention
+
+Landlords may end month-to-month tenancies for any 
+reason or no reason with 45 days’ notice.
+
+Eliminate no-cause termination. Require a legally-
+recognized just cause at-fault or no-fault for all 
+terminations.
+
+Anti-retaliation protections are easily circumvented via 
+no-cause notice.
+
+All eviction notices must cite a specific cause, closing 
+the workaround. Prohibit false, pretextual, or 
+discriminatory terminations.
+
+No framework distinguishing legitimate landlord needs 
+from arbitrary evictions.
+
+Define enumerated at-fault and no-fault grounds. No-
+fault evictions (e.g., owner move-in, renovation) are 
+recognized but require evidence and 90-day’s notice.
+
+Tenants removed for no-fault reasons have no 
+guarantee the stated reason was genuine.
+
+Landlords who terminate to sell or exit the rental 
+market must list the unit within 60 days. Failure entitles 
+the former tenant to one month’s rent plus security of 
+their new unit in damages.
+
+Tenants facing at-fault eviction have no guaranteed 
+right to remedy curable violations.
+
+Mandate cure periods: 14 days for nonpayment, 14–30 
+days for lease breaches, 10–14 days for other curable 
+violations.
+
+New construction may be discouraged by broad just 
+cause requirements.
+
+New construction is exempt for 10 years from certificate 
+of occupancy to preserve development incentives.
+
+Small owner-occupied landlords face the same 
+obligations as large portfolio operators.
+
+Owner-occupied properties with fewer than 4 units are 
+exempt, reflecting fundamentally different operating 
+contexts.
+
+Court resources are strained by subjective disputes over 
+landlord motives.
+
+Plain-language notice requirements and clearly defined 
+grounds limit ambiguous cases and reduce court 
+burden.
+
+Code operates as a self-help law with no proactive 
+enforcement: tenants must independently identify, 
+assert, and litigate their own protections.
+
+Just cause shifts the burden to landlords to state and 
+verify a legal reason for termination, reducing the 
+evidentiary burden on tenants to prove retaliation.
+
+A significant disparity in legal representation between 
+tenants and landlords in eviction proceedings.
+
+Establish right to counsel in eviction proceedings; 
+expand legal aid funding targeted at eviction defense.
+
+LANDLORD-TENANT CODE • 13
+
+ENDNOTES
+
+A confession of judgment clause means the 
+
+1. 
+tenant agrees in advance to lose any future lawsuit the 
+landlord brings against them: no hearing, no notice, no 
+chance to defend themselves.
+
+National Coalition for a Civil Right to Counsel, 
+
+2. 
+“Enacted Eviction Right To Counsel
+And Eviction Defense Programs,” Aug. 2025. https://
+civilrighttocounsel.org/uploaded_files/283/RTC_
+Enacted_Legislation_in_Eviction_Proceedings_FINAL.
+pdf
+
+6. 
+
+Been, 2024.
+
+7. 
+Tyndall, Justin et al., “Hawaii Housing 
+Factbook,” University of Hawaiʻi Economic Research 
+Organization, 2025. https://uhero.hawaii.edu/the-
+hawaii-housing-factbook-2025
+
+Ward Research, “Hawaiʻi Housing Planning 
+
+8. 
+Study,” Hawaiʻi Housing Finance & Development 
+Corporation, p. 16, 2024. https://www.wardresearch.
+com/2024-hawaii-housing-planning-study
+
+Desmond, Matthew, Evicted: Poverty and Profit 
+
+3. 
+in the American City, Crown Publishers, 2016.
+
+9. 
+
+Tyndall, 2025. 
+
+Been, Vicki et al., “Balancing Act: Navigating 
+
+4. 
+the Tradeoffs of Good Cause Eviction Legislation,” 
+New York University Furman Center, 2024. https://
+www.furmancenter.org/wp-content/uploads/2026/02/
+Balancing_act.pdf
+
+Hoke, Morgan K. and Courtney E. Boen, “The 
+
+5. 
+health impacts of eviction: Evidence from the national 
+longitudinal study of adolescent to adult health,” 
+Social Science & Medicine, 273, Mar. 2021. https://doi.
+org/10.1016/j.socscimed.2021.113742
+
+14 • LANDLORD-TENANT CODE
+
+Lane, Terry, “Renters Gain Advantage in Housing 
+
+10. 
+Market as Landlords Lose Leverage,” Investopedia, 
+Feb. 18, 2026. https://www.investopedia.com/rental-
+market-shifts-toward-renters-as-landlords-lose-
+leverage-11907932
+
+11. 
+Coulson, N. Edward et al., “Tenant rights, 
+eviction, and rent affordability,” Journal of Urban 
+Economics, 147, 2025. https://doi.org/10.1016/j.
+jue.2025.103762
