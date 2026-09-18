@@ -2126,9 +2126,12 @@
 
       if (!items.length) return;
 
-      // Vertical list: 3 most-recent publications, first marked "Latest"
+      // Vertical list: 6 most-recent publications, first marked "Latest".
+      // 6, not 3, so the window reaches back past Policy in Perspective 2025 to
+      // the standalone renter research ("Renters left behind", Mar 2025) \u2014 the
+      // annual round-ups otherwise crowd single-issue housing reports out.
       const grid = document.getElementById('ha-housing-pubs');
-      grid.innerHTML = items.slice(0, 3).map((i, idx) => {
+      grid.innerHTML = items.slice(0, 6).map((i, idx) => {
         const url = i.fullUrl ? 'https://hiappleseed.org' + i.fullUrl : '#';
         const img = i.assetUrl ? `${i.assetUrl}?format=300w` : '';
         const badge = idx === 0 ? `<span class="ha-housing__pub-list-badge">Latest</span>` : '';
