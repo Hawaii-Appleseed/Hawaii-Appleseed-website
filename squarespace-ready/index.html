@@ -1618,7 +1618,14 @@
         if(!items.length){ throw new Error('empty'); }
         grid.innerHTML = items.map(card).join('');
       })
-      .catch(function(){
+      .catch(function(e){
+        // Log it. The fallback line below reads as ordinary editorial copy, so a
+        // dead fetch here is indistinguishable from working-as-designed \u2014 this is
+        // the one publications.json consumer that was silent about it, while the
+        // five issue pages and issues.html all warn. The failure this hides is
+        // real: a Squarespace paste older than 59b7733 still points at the
+        // pre-transfer dtomkatsu.github.io Pages host, which 404s.
+        console.warn('publications.json load failed:', e);
         grid.innerHTML = '<div class="ha-home__latest-loading">See our latest research on the <a href="/publications">publications page</a>.</div>';
       });
   })();
