@@ -49,30 +49,60 @@ SIGNALS = [
 ]
 
 
+# Needles that must not match inside a longer token. Each of these shipped as a
+# bare substring and mislabelled real failures:
+#
+#   "429"       matched the RAW gh output, where every line still carries its
+#               "<job>\t<step>\t<timestamp>" prefix and a timestamp's fractional
+#               seconds supply the digits (2026-09-18T02:35:00.4295703Z). Every
+#               line has a timestamp, so "Looks like rate limiting." could head
+#               almost any failure — it headed the first site-drift one.
+#   "enotfound" matches inside "ModulENOTFOUNDError", and the timeout family is
+#               checked first, so every ModuleNotFoundError read as a DNS
+#               failure rather than a missing dependency.
+#   "rejected"  matches the word anywhere, not just a push rejection.
+#
+# classify() also reads the cleaned body text now, never `raw`.
+RATE_LIMIT_RE = re.compile(
+    r"rate limit|secondary rate|too many requests"
+    r"|(?:http|https|error|status|code)\D{0,10}\b429\b", re.I)
+TIMEOUT_RE = re.compile(
+    r"\b(?:etimedout|econnreset|enotfound|timed out|timeout"
+    r"|connection refused)\b", re.I)
+PUSH_RACE_RE = re.compile(
+    r"non-fast-forward|updates were rejected|fetch first|!\s*\[rejected\]", re.I)
+
+
 def classify(text):
-    """A one-line best guess at the failure family, for the alert title."""
+    """A one-line best guess at the failure family, for the alert title.
+
+    Pass the CLEANED log text (timestamps and job/step prefixes stripped), not
+    raw gh output — see RATE_LIMIT_RE."""
     t = text.lower()
     checks = [
         ("authentication or permissions", ("401 unauthorized", "403 forbidden",
                                            "permission denied", "bad credentials",
                                            "not logged in", "authentication failed")),
-        ("rate limiting", ("rate limit", "429", "secondary rate")),
+        ("rate limiting", RATE_LIMIT_RE),
         ("an upstream server error (5xx)", ("http error 5", "500 internal",
                                             "502 bad gateway", "503 service",
                                             "504 gateway")),
-        ("network or upstream timeout", ("etimedout", "econnreset", "enotfound",
-                                         "timed out", "timeout", "connection refused")),
+        # Checked before the timeout family: "ModuleNotFoundError" is a missing
+        # dependency, and used to be read as one only by accident of ordering.
         ("a missing dependency or binary", ("command not found", "modulenotfounderror",
                                             "no module named", "cannot find module")),
-        ("a git push race", ("non-fast-forward", "rejected", "fetch first",
-                             "updates were rejected")),
+        ("network or upstream timeout", TIMEOUT_RE),
+        ("a git push race", PUSH_RACE_RE),
         ("upstream markup or schema change", ("keyerror", "indexerror", "nonetype",
                                               "parsed nothing", "no such element")),
         ("a failing test", ("assertionerror", "tests failed", "failed tests",
                             "pytest", "test suite")),
     ]
     for label, needles in checks:
-        if any(n in t for n in needles):
+        if hasattr(needles, "search"):
+            if needles.search(t):
+                return label
+        elif any(n in t for n in needles):
             return label
     return None
 
@@ -92,6 +122,7 @@ def main():
 
     # Group lines by (job, step), preserving order.
     steps = OrderedDict()
+    bodies = []
     for line in raw.splitlines():
         m = LINE_RE.match(line)
         if m:
@@ -101,6 +132,10 @@ def main():
             key = ("", "")
             body = clean(line)
         steps.setdefault(key, []).append(body)
+        bodies.append(body)
+    # What the failure actually said, with the job/step/timestamp prefixes gone.
+    # classify() reads this, never `raw` — see RATE_LIMIT_RE.
+    cleaned = "\n".join(bodies)
 
     # Score every line; the highest-scoring ones are the likely cause.
     scored = []
@@ -116,7 +151,7 @@ def main():
     scored.sort(key=lambda t: (-t[0], t[3]))
 
     out = [f"## Failure: {a.workflow}", ""]
-    guess = classify(raw)
+    guess = classify(cleaned)
     if guess:
         out.append(f"**Looks like {guess}.**")
         out.append("")
