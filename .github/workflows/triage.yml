@@ -29,6 +29,7 @@ on:
       - "Sync content from hiappleseed.org"
       - "Refresh writing-bot corpus"
       - "Build Content Search bundle"
+      - "Live site drift check"
     types: [completed]
 
 permissions:

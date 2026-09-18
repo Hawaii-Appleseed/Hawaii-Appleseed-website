@@ -137,6 +137,10 @@ jobs:
           check "fetch-bill-status.yml"   360
           # daily at 22:00 UTC
           check "sync-publications.yml"   1800
+          # daily at 23:40 UTC. Reports stale until its FIRST run ever, because
+          # "no runs" is indistinguishable here from "stopped running" —
+          # dispatch it once by hand after adding it.
+          check "site-drift.yml"          1800
           # weekly, Sundays 15:00 UTC
           check "refresh-corpus.yml"      11520
 
