@@ -84,7 +84,8 @@ def check_drift():
     print("== 1. paste drift ==\n")
     print("live pages vs the payloads in this repo:\n")
     rc = sq.status()
-    return rc
+    stale = [name for name, _, state, _ in sq.LAST_STATUS if state == "stale"]
+    return rc, ("stale: " + ", ".join(stale) if stale else "")
 
 
 def live_page_html():
@@ -112,7 +113,7 @@ def check_asset_hosts(pages):
     if not pages:
         print("  no live page was reachable — nothing to scan")
         print("  FAIL: could not read a single page from %s" % sq.SITE)
-        return 1
+        return 1, "no live page reachable from %s" % sq.SITE
 
     found = {}  # url -> set of pages referencing it
     for url, body in pages.items():
@@ -125,7 +126,7 @@ def check_asset_hosts(pages):
         # assets. None at all means the pages are not the ones we think.
         print("  FAIL: %d pages scanned, not one github.io URL among them"
               % len(pages))
-        return 1
+        return 1, "%d pages scanned, no github.io URL on any of them" % len(pages)
 
     expected_host = bs.ASSET_BASE.split("/")[2]
     bad = []
@@ -144,7 +145,8 @@ def check_asset_hosts(pages):
         print("  BROKEN %s (%s)" % (asset, code))
         for ref in refs:
             print("           referenced by %s" % ref)
-    return 1 if bad else 0
+    detail = ", ".join("%s (%s)" % (a, c) for a, c, _ in bad)
+    return (1, "broken: " + detail) if bad else (0, "")
 
 
 def check_data_files():
@@ -153,18 +155,21 @@ def check_data_files():
     import time
 
     rc = 0
+    bad = []
     for name in DATA_FILES:
         url = bs.ASSET_BASE + name
         code, body = fetch(url)
         if code != 200:
             print("  FAIL   %s -> %s" % (url, code))
             rc = 1
+            bad.append("%s (%s)" % (name, code))
             continue
         try:
             data = json.loads(body)
         except ValueError as e:
             print("  FAIL   %s -> 200 but does not parse (%s)" % (url, e))
             rc = 1
+            bad.append("%s (does not parse)" % name)
             continue
 
         items = data.get("items")
@@ -174,6 +179,7 @@ def check_data_files():
         if not items:
             print("  FAIL   %s -> parses but has no items" % url)
             rc = 1
+            bad.append("%s (no items)" % name)
             continue
 
         synced = data.get("lastSynced")
@@ -186,18 +192,25 @@ def check_data_files():
             print("         over the %d-day limit — the file has gone cold"
                   % MAX_LASTSYNCED_DAYS)
             rc = 1
-    return rc
+            bad.append("%s (cold, %.0f days)" % (name, age_d))
+    return rc, ("failing: " + ", ".join(bad) if bad else "")
 
 
 def main():
-    drift = check_drift()
-    assets = check_asset_hosts(live_page_html())
-    data = check_data_files()
+    # Each check returns (rc, one-line detail). The detail matters: triage.yml
+    # quotes the TAIL of a failed run's log into the alert issue, so whatever
+    # this summary does not name is not in the notification anyone reads. The
+    # first real failure said only "paste drift FAIL" — true, and useless
+    # without the two page names that were 40 lines further up.
+    drift, drift_why = check_drift()
+    assets, assets_why = check_asset_hosts(live_page_html())
+    data, data_why = check_data_files()
 
     print("\n== summary ==\n")
-    for label, rc in (("paste drift", drift), ("asset hosts", assets),
-                      ("data files", data)):
-        print("  %-12s %s" % (label, "FAIL" if rc else "ok"))
+    for label, rc, why in (("paste drift", drift, drift_why),
+                           ("asset hosts", assets, assets_why),
+                           ("data files", data, data_why)):
+        print(("  %-12s %-4s %s" % (label, "FAIL" if rc else "ok", why)).rstrip())
     failed = drift or assets or data
     print("\n%s" % ("one or more checks failed" if failed else "all checks passed"))
     return 1 if failed else 0
