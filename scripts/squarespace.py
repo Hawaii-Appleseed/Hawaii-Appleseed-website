@@ -526,15 +526,22 @@ def live_targets(targets=None):
     return [r for r in rows if os.path.exists(os.path.join(ROOT, r[1]))]
 
 
+# [name, payload path, final state, note] from the last status() call, so a
+# caller that needs the per-page verdicts (scripts/check-live-site.py names the
+# stale pages in its summary) doesn't re-derive them from printed output.
+LAST_STATUS = []
+
+
 def status(targets=None):
     """For every target with a known live URL, report whether the live page is
     running the payload currently in the repo. Returns 1 if anything is STALE,
-    so CI can gate on it.
+    so CI can gate on it, and leaves the per-page verdicts in LAST_STATUS.
 
     Only "stale" fails. "absent" and unknown are left passing on purpose: a
     Squarespace 429, a page mid-edit or a transient fetch error would otherwise
     alert on nothing, and an alert channel that cries wolf gets muted — see the
     thresholds canary.yml has already had to widen twice."""
+    global LAST_STATUS
     rows = live_targets(targets)
 
     results = []
@@ -553,11 +560,16 @@ def status(targets=None):
         if r[2] in ("stale", "absent") and r[3] in live_current:
             r[2] = "alternate"
 
+    # Applied to results rather than to a loop-local, so LAST_STATUS carries the
+    # same verdicts that get printed.
+    for r in results:
+        key = r[1].replace(os.sep, "/")
+        if key in NOT_PASTE_TARGETS:
+            r[2], r[3] = "n/a", NOT_PASTE_TARGETS[key]
+    LAST_STATUS = results
+
     counts = {}
     for name, rel, state, note in results:
-        if rel.replace(os.sep, "/") in NOT_PASTE_TARGETS:
-            state = "n/a"
-            note = NOT_PASTE_TARGETS[rel.replace(os.sep, "/")]
         counts[state] = counts.get(state, 0) + 1
         if state == "current":
             print("  current   %s" % name)
