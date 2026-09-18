@@ -321,6 +321,7 @@ href resolves against the Squarespace slug and 404s.
 | `refresh-corpus.yml` | Sundays 15:00 UTC (5 AM HST), or dispatch | Scrapes hiappleseed.org for new posts/publications into `writing-bot/`, then dispatches the Content Search rebuild. |
 | `deploy-content-search.yml` | push touching `writing-bot/**`, or dispatch | Rebuilds the search bundle, runs the parity gate, and pushes it straight into `Hawaii-Appleseed/staff-updates-internal` (private) — nothing lands in this repo. |
 | `fetch-bill-status.yml` | every 30 min (cron), or dispatch | Fetches bill RSS from capitol.hawaii.gov into `tax-fairness/data/bill-status.json`. Bill list is discovered from `data-hb`/`data-sb` attributes in the tracked pages — adding a bill is a content edit, not a workflow edit. |
+| `site-drift.yml` | nightly 23:40 UTC, or dispatch | Checks the **published** site against this repo: every live page still carries its `squarespace-ready/` payload, every `github.io` URL those pages reference still resolves, and `publications.json` / `news.json` on Pages still fetch and parse. Fails loudly; `triage.yml` turns that into an issue plus an ntfy push. Checks and rationale in `scripts/check-live-site.py`. |
 | `canary.yml` | hourly, or dispatch | Watches the other scheduled workflows for a **silently dropped trigger**. Opens/updates a `canary-alert` issue and fails when one goes quiet; comments and auto-closes when it recovers. |
 
 **None of this depends on a personal machine** — the whole chain runs in Actions.
@@ -348,6 +349,25 @@ Thresholds are calibrated off **observed** gaps, not the cron's stated interval.
 are routine on a perfectly healthy day, so a naive 35-min threshold would alert
 constantly on nothing. If you add a workflow to the canary, measure its actual
 cadence first and leave generous headroom.
+
+A workflow that has **never run** reads the same as one that stopped running:
+the check finds no run object and reports it quiet. So dispatch a newly added
+workflow once by hand before or just after wiring it into the canary, or the
+first alert you get will be about nothing.
+
+### Why `site-drift.yml` exists
+
+Everything above watches the **pipeline**. Nothing watched the far end of it,
+and the far end is where it broke. When the repo moved to the Hawaii-Appleseed
+org on 2026-08-11, GitHub Pages stopped serving the old `dtomkatsu.github.io`
+URLs — Pages does not follow the repo-transfer redirect — and every such URL
+already baked into a page pasted into Squarespace went dead. Broken images got
+noticed. The broken `publications.json` did not: the homepage's Latest section
+answers a failed fetch with a line of prose that reads like ordinary copy, so it
+showed no research at all for weeks, with every workflow green the whole time.
+
+The check asks whether the URLs on the live pages resolve, rather than knowing
+which host is bad, so the next host move is caught the day it happens.
 
 **It can't catch its own dropped trigger** — no in-repo monitor can. That needs an
 external pinger, which we've deliberately not built.

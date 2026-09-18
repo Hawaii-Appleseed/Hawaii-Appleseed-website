@@ -508,11 +508,14 @@ def live_state(rel_out):
     return "absent", url
 
 
-def status(targets=None):
-    """For every target with a known live URL, report whether the live page is
-    running the payload currently in the repo."""
+def live_targets(targets=None):
+    """[(name, payload path)] for every built payload that has a live page to
+    compare against. Split out of status() so the CI drift check
+    (scripts/check-live-site.py) walks exactly the same set of pages rather
+    than reimplementing the rules and quietly drifting from them."""
     rows = []
     known = builder_targets()
+    # "home" and "index" are two names for one payload — walk it once.
     for name in sorted(set(known) - {"home"}):
         rows.append((name, os.path.join("squarespace-ready", known[name])))
     for src in generic_sources():
@@ -520,7 +523,19 @@ def status(targets=None):
         rows.append((d, os.path.join(d, "squarespace-inject.html")))
     if targets:
         rows = [r for r in rows if r[0] in targets]
-    rows = [r for r in rows if os.path.exists(os.path.join(ROOT, r[1]))]
+    return [r for r in rows if os.path.exists(os.path.join(ROOT, r[1]))]
+
+
+def status(targets=None):
+    """For every target with a known live URL, report whether the live page is
+    running the payload currently in the repo. Returns 1 if anything is STALE,
+    so CI can gate on it.
+
+    Only "stale" fails. "absent" and unknown are left passing on purpose: a
+    Squarespace 429, a page mid-edit or a transient fetch error would otherwise
+    alert on nothing, and an alert channel that cries wolf gets muted — see the
+    thresholds canary.yml has already had to widen twice."""
+    rows = live_targets(targets)
 
     results = []
     for i, (name, rel) in enumerate(rows):
@@ -564,6 +579,7 @@ def status(targets=None):
              counts.get(None, 0), counts.get("n/a", 0), len(results)))
     if counts.get("stale"):
         print("publish with:  python3 scripts/squarespace.py <target> --go")
+        return 1
     return 0
 
 

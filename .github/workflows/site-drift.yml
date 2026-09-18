@@ -1,0 +1,56 @@
+name: Live site drift check
+
+# Does the published site still match what this repo builds?
+#
+# Everything else here watches the *pipeline* — that the syncs ran, that the
+# deploy succeeded, that no workflow went quiet. Nothing watched the far end of
+# it, and the far end is where it broke: on 2026-08-11 the repo moved to the
+# Hawaii-Appleseed org, GitHub Pages stopped serving the old dtomkatsu.github.io
+# URLs (Pages does not follow the repo-transfer redirect), and every one of
+# those URLs already baked into a page pasted into Squarespace went dead. The
+# broken images were noticed. The broken publications.json was not: the
+# homepage's Latest section answers a failed fetch with a line of prose that
+# reads exactly like ordinary copy, so the section quietly showed no research at
+# all until someone went looking for a specific report weeks later.
+#
+# scripts/check-live-site.py has the three assertions and why each one exists.
+#
+# Alerting is deliberately not duplicated here. triage.yml watches this
+# workflow by name, so a failure already opens a triage issue carrying the
+# cause and pushes to ntfy, and canary.yml's escalation job re-nags daily until
+# that issue is closed. (canary.yml is excluded from triage for the opposite
+# reason — it sends its own alerts. This one does not.)
+#
+# FIRST RUN: canary.yml watches this file's schedule, and its freshness check
+# treats "no runs at all" as stale. So dispatch this once by hand after merging
+# — Actions > Live site drift check > Run workflow — or canary will report it
+# quiet until the first nightly fire.
+
+on:
+  schedule:
+    # Daily at 23:40 UTC (13:40 HST). Well clear of sync-publications.yml at
+    # 22:00 and the Pages deploy it dispatches, so this reads a settled site,
+    # and off the top of the hour like canary's :20.
+    - cron: "40 23 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-drift
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # No pip install and no browser: the checks are stdlib urllib against the
+      # live pages and the Pages host. A headless render would prove more — it
+      # is the only way to see the cards actually appear — but the pages render
+      # client-side and CLAUDE.md already warns that screenshots of injected
+      # pages are not trustworthy evidence. These check the inputs instead.
+      - name: Check the live site against this repo
+        run: python3 scripts/check-live-site.py
