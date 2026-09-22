@@ -34,11 +34,24 @@ ECHO_RE = re.compile(r"^(##\[(group|endgroup)\]|shell: |env:|\s*$)")
 def clean(line):
     return ANSI_RE.sub("", line).replace("\ufeff", "").rstrip()
 
-# Ordered by how strongly each signals the actual cause.
+# Ordered by how strongly each signals the actual cause. First match wins, so
+# order decides the weight a line gets, not just the ranking.
 SIGNALS = [
+    # The runner appends this to every failed step. It is an ##[error] line, so
+    # it used to score 100 and win outright — which is why "Most likely cause"
+    # so often showed the one line in the log guaranteed to say nothing about
+    # the cause. Matched first and scored below everything else, so it surfaces
+    # only when there is genuinely nothing better.
+    (re.compile(r"^##\[error\](Process completed with exit code|The process "
+                r"'.*' failed with exit code)\s*\d+", re.I), 5),
     (re.compile(r"^##\[error\]", re.I), 100),
     (re.compile(r"\bTraceback \(most recent call last\)", re.I), 95),
     (re.compile(r"^\s*(\w*Error|Exception)\b.*:", re.I), 90),
+    # Uppercase FAIL/FAILED as its own token — what test runners print, and what
+    # this repo's own check summaries print ("paste drift  FAIL stale: ..."),
+    # neither of which ends in a colon. Case-sensitive on purpose: "fail" in
+    # ordinary prose is not a signal.
+    (re.compile(r"\bFAIL(ED)?\b"), 85),
     (re.compile(r"\b(fatal|FAILED|failure):", re.I), 80),
     (re.compile(r"\b(command not found|No such file or directory|Permission denied)\b"), 80),
     (re.compile(r"\bHTTP (4\d\d|5\d\d)\b"), 75),
