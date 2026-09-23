@@ -35,12 +35,12 @@
             /* Track colors. Red and Deep Teal stay distinguishable with
                red-green color blindness; the -soft tints are for numbers on
                the dark panels, the -ink/-tint pairs for highlighted text. */
-            --accent-medicaid: #c0392b;
+            --accent-medicaid: #C0473A;  /* deep coral */
             --accent-snap: #52796F;  /* Deep Teal */
             --accent: var(--accent-medicaid);
-            --medicaid-soft: #F4A196;
-            --snap-soft: #9CC0A4;
-            --medicaid-ink: #a53125;
+            --medicaid-soft: #FFD8D0;
+            --snap-soft: #D6E8DB;
+            --medicaid-ink: #9A3327;
             --medicaid-tint: #fbe3df;
             --snap-ink: #3e5f56;
             --snap-tint: #e3ece8;
@@ -514,8 +514,8 @@
         }
 
         /* Detail panels: beside the card on desktop, below it on mobile.
-           Brand Charcoal/Slate with the track color as a top stripe and on
-           the key numbers, so the page no longer reads as a wall of red. */
+           Each track's panels are a deep shade of its own color (coral /
+           Deep Teal), with key numbers in a light tint of it. */
         #snap-medicaid-timeline .timeline-card.second-card {
             --track: var(--accent-medicaid);
             --track-soft: var(--medicaid-soft);
@@ -528,9 +528,9 @@
             display: block;
             min-height: 0;
             padding: 26px 28px 28px;
-            background: linear-gradient(160deg, var(--ink) 0%, var(--slate) 100%);
+            background: linear-gradient(160deg, #8E2E25 0%, #A83A2E 100%);
             border: none;
-            border-top: 4px solid var(--track);
+            border-top: 4px solid rgba(255,255,255,0.35);
             color: #fff;
             font-size: 1rem;
             font-weight: 400;
@@ -543,7 +543,7 @@
         #snap-medicaid-timeline .timeline-card.second-card.snap-card {
             --track: var(--accent-snap);
             --track-soft: var(--snap-soft);
-            border-top-color: var(--accent-snap);
+            background: linear-gradient(160deg, #2E4A43 0%, #3E5F56 100%);
         }
 
         #snap-medicaid-timeline .timeline-card.second-card.visible {
@@ -1339,7 +1339,7 @@
         }
 
         #snap-medicaid-timeline .timeline-container.snap-active .timeline-line-container:hover .timeline-line-bg {
-            background: rgba(192, 57, 43, 0.3);
+            background: rgba(192,71,58, 0.3);
         }
 
         #snap-medicaid-timeline .timeline-container.snap-active .timeline-line-progress {
@@ -1385,7 +1385,7 @@
             transform: translateX(-100%);
             background: var(--accent-medicaid);
             border-color: var(--accent-medicaid);
-            box-shadow: 0 10px 28px rgba(192,57,43,0.28);
+            box-shadow: 0 10px 28px rgba(192,71,58,0.28);
         }
 
         #snap-medicaid-timeline .total-cost-snap {
