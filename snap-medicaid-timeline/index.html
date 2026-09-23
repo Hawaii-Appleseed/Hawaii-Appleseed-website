@@ -7,16 +7,20 @@
     <meta name="description" content="Follow the unfolding federal cuts to Medicaid and SNAP in Hawai&#699;i — event by event, with estimated costs and the populations affected at each stage.">
   <link rel="stylesheet" href="../assets/okina.css">
 </head>
-<body>
+<body style="margin: 0"> <!-- attribute, not a <style>: the Squarespace build lifts head styles -->
 <div id="snap-medicaid-timeline">
 <style>
-        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Poppins:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
-        :root {
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+        /* Every rule is scoped to the wrapper. This block is pasted into a
+           Squarespace page, where an unscoped rule restyles the site's own
+           header and footer, and the site's h3/p/button rules restyle us. */
+        #snap-medicaid-timeline {
             --primary: #2c3e50;
             --bg: #ffffff;
             --card-bg: #ffffff;
             --path-color: #bdc3c7;
-            
+
             /* Brand fonts */
             --font-head: 'Manrope', 'Arial', sans-serif;
             --font-body: 'Poppins', 'Arial', sans-serif;
@@ -31,35 +35,70 @@
             /* Layered elevation (tinted toward Charcoal, not flat black) */
             --shadow-card: 0 1px 2px rgba(28,37,46,.06), 0 4px 8px rgba(28,37,46,.06), 0 12px 28px rgba(28,37,46,.08);
             --shadow-card-hover: 0 2px 4px rgba(28,37,46,.08), 0 8px 16px rgba(28,37,46,.10), 0 22px 48px rgba(28,37,46,.14);
+
+            /* Layout. --gutter: side padding of .container. Mobile only:
+               --rail-x is the rail's centre, measured from the wrapper's left
+               edge; --card-inset is how far cards sit in from the gutter. */
+            --gutter: 20px;
+            --rail-x: 30px;
+            --card-inset: 40px;
+
+            position: relative;
+            overflow-x: hidden;
+            overflow-x: clip; /* clip, not hidden: hidden would unstick the header */
+            padding: 0 0 40px;
+            background: var(--bg);
+            color: var(--primary);
+            color-scheme: only light; /* forced dark mode turned the chart bars black */
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 400;
+            font-style: normal;
+            line-height: 1.5;
+            letter-spacing: normal;
+            text-transform: none;
+            text-align: left;
+            -webkit-text-size-adjust: 100%;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
+        #snap-medicaid-timeline,
+        #snap-medicaid-timeline *,
+        #snap-medicaid-timeline *::before,
+        #snap-medicaid-timeline *::after {
             box-sizing: border-box;
         }
 
-        #snap-medicaid-timeline {
-            font-family: var(--font-body);
-            background: var(--bg);
-            color: var(--primary);
-            overflow-x: hidden;
-            position: relative;
-            padding: 0 0 40px;
-            min-height: 100vh;
+        #snap-medicaid-timeline * {
+            margin: 0;
+            padding: 0;
         }
 
-        /* --- Modern refresh: brand fonts on display elements --- */
-        #snap-medicaid-timeline .timeline-card h3,
-        #snap-medicaid-timeline .year-indicator,
-        #snap-medicaid-timeline .timeline-card .date,
-        #snap-medicaid-timeline .toggle-btn,
-        #snap-medicaid-timeline .source-tag,
-        #snap-medicaid-timeline .section-label,
-        #snap-medicaid-timeline .total-cost-label,
-        #snap-medicaid-timeline .total-cost-amount {
+        /* Squarespace gives headings its own weight, 2rem margins, line-height
+           and tracking, and paragraphs 1rem margins. Pin ours. */
+        #snap-medicaid-timeline h2,
+        #snap-medicaid-timeline h3,
+        #snap-medicaid-timeline h4 {
             font-family: var(--font-head);
+            font-weight: 700;
+            font-style: normal;
+            line-height: 1.25;
+            letter-spacing: normal;
+            text-transform: none;
+            color: inherit;
         }
+
+        #snap-medicaid-timeline p {
+            line-height: 1.6;
+        }
+
+        #snap-medicaid-timeline button {
+            font-family: inherit;
+            line-height: 1.2;
+            letter-spacing: normal;
+            text-transform: none;
+            color: inherit;
+        }
+
         /* Manrope has no true italic on Google Fonts - keep emphasis on Poppins italic */
         #snap-medicaid-timeline em,
         #snap-medicaid-timeline i {
@@ -67,16 +106,8 @@
             font-style: italic;
             font-weight: 500;
         }
-        /* Unified uppercase eyebrow/label treatment */
-        #snap-medicaid-timeline .source-tag,
-        #snap-medicaid-timeline .section-label,
-        #snap-medicaid-timeline .total-cost-label {
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-        /* Keyboard focus (was absent) */
-        #snap-medicaid-timeline :is(button, .mini-dot, .timeline-dot, .snap-timeline-dot, .total-cost-medicaid, .total-cost-snap):focus-visible {
+
+        #snap-medicaid-timeline :is(button, .timeline-dot, .snap-timeline-dot, .total-cost-medicaid, .total-cost-snap):focus-visible {
             outline: 3px solid var(--primary);
             outline-offset: 3px;
             border-radius: 6px;
@@ -84,7 +115,7 @@
         #snap-medicaid-timeline :focus:not(:focus-visible) {
             outline: none;
         }
-        /* Respect reduced-motion (was absent) */
+
         @media (prefers-reduced-motion: reduce) {
             #snap-medicaid-timeline *,
             #snap-medicaid-timeline *::before,
@@ -99,29 +130,23 @@
             }
         }
 
-        /* Header */
+        /* Header: sticky, so the track switch and the date map stay in reach */
         #snap-medicaid-timeline .timeline-header {
-            position: relative;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.75);
+            position: sticky;
+            top: 0;
             z-index: 100;
-            padding: 15px 0 10px;
+            width: 100%;
+            padding: 12px 0 24px; /* bottom room for the active date under the dots */
+            background: rgba(255, 255, 255, 0.94);
             box-shadow: 0 1px 8px rgba(0,0,0,0.04);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            margin-bottom: 0;
         }
 
         #snap-medicaid-timeline .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 0 20px;
-        }
-
-
-
-        #snap-medicaid-timeline .toggle-container {
-            display: none;
+            padding: 0 var(--gutter);
         }
 
         #snap-medicaid-timeline .toggle-btn {
@@ -131,36 +156,38 @@
             color: #7f8c8d;
             border-radius: 30px;
             cursor: pointer;
+            font-family: var(--font-head);
             font-size: 0.85rem;
             font-weight: 600;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
 
-        #snap-medicaid-timeline .toggle-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        @media (hover: hover) {
+            #snap-medicaid-timeline .toggle-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
         }
 
         #snap-medicaid-timeline .toggle-btn.active {
             color: white;
         }
 
-        #btn-medicaid.active {
+        #snap-medicaid-timeline #btn-medicaid.active {
             background: var(--accent-medicaid);
         }
 
-        #btn-snap.active {
+        #snap-medicaid-timeline #btn-snap.active {
             background: var(--accent-snap);
         }
 
-        /* Mini Timeline Navigation */
+        /* Mini Timeline Navigation: one column per date, one row per track */
         #snap-medicaid-timeline .mini-timeline-rows {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 6px;
         }
         #snap-medicaid-timeline .mini-timeline-row {
             display: flex;
@@ -171,48 +198,41 @@
         #snap-medicaid-timeline .mini-timeline-row .toggle-btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            min-width: 96px; /* equal widths keep the two rows' columns aligned */
             padding: 4px 14px;
             font-size: 0.8rem;
             flex-shrink: 0;
         }
-        #snap-medicaid-timeline .mini-timeline-row .toggle-btn.active {
-            color: white;
-        }
-        #snap-medicaid-timeline .mini-timeline-row #btn-medicaid.active {
-            background: var(--accent-medicaid);
-        }
-        #snap-medicaid-timeline .mini-timeline-row #btn-snap.active {
-            background: var(--accent-snap);
-        }
         #snap-medicaid-timeline .mini-dots-group {
             display: flex;
             align-items: center;
-            gap: 12px;
+        }
+        #snap-medicaid-timeline .now-chip {
+            display: none;
         }
 
-        /* Show date labels only on the active timeline's row */
-        #mini-dots-snap .mini-dot::after {
-            display: none;
-        }
-        #snap-medicaid-timeline.snap-active #mini-dots-snap .mini-dot::after {
-            display: block;
-        }
-        #snap-medicaid-timeline.snap-active #mini-dots-med .mini-dot::after {
-            display: none;
-        }
-        
-        /* Mini dot wrapper — holds both a Medicaid circle and SNAP square */
+        /* Each date is a button: a small mark with a finger-sized hit area */
         #snap-medicaid-timeline .mini-dot {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
             position: relative;
-            padding-top: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 24px;
+            padding: 0;
+            border: 0;
+            background: none;
+            cursor: pointer;
+        }
+        #snap-medicaid-timeline .mini-dot:disabled {
+            cursor: default;
         }
 
         #snap-medicaid-timeline .mini-dot-med {
+            display: block;
             width: 10px;
             height: 10px;
             border-radius: 50%;
@@ -223,6 +243,7 @@
         }
 
         #snap-medicaid-timeline .mini-dot-snap {
+            display: block;
             width: 9px;
             height: 9px;
             border-radius: 2px;
@@ -254,19 +275,22 @@
             transform: scale(1.5);
         }
 
-        /* Hover brightens both */
-        .mini-dot:hover .mini-dot-med,
-        .mini-dot:hover .mini-dot-snap {
+        #snap-medicaid-timeline .mini-dot:not(:disabled):hover .mini-dot-med,
+        #snap-medicaid-timeline .mini-dot:not(:disabled):hover .mini-dot-snap {
             opacity: 1;
         }
 
-        .mini-dot::after {
+        /* The current date's label always hangs under the SNAP row, so it
+           never lands on the other row. Hovering a dot in either row shows
+           that column's date instead. */
+        #snap-medicaid-timeline .mini-dot::after {
             content: attr(data-date);
             position: absolute;
-            top: 26px;
+            top: calc(100% + 1px);
             left: 50%;
             transform: translateX(-50%);
-            font-size: 10px;
+            font-size: 11px;
+            line-height: 1.4;
             color: #333;
             background: rgba(255,255,255,0.92);
             border: 1px solid #ddd;
@@ -278,24 +302,46 @@
             white-space: nowrap;
             z-index: 10;
         }
-        
-        .mini-dot:hover::after, .mini-dot.active::after {
+        #snap-medicaid-timeline #mini-dots-med .mini-dot::after {
+            display: none;
+        }
+        #snap-medicaid-timeline #mini-dots-snap .mini-dot.active::after,
+        #snap-medicaid-timeline #mini-dots-snap .mini-dot.peek::after {
             opacity: 1;
+        }
+        #snap-medicaid-timeline #mini-dots-snap.peeking .mini-dot.active:not(.peek)::after {
+            opacity: 0;
         }
 
         /* === 2D TIMELINE === */
-        
-        .timeline-container {
+
+        #snap-medicaid-timeline .timeline-container {
+            position: relative;
             padding-top: clamp(48px, 7vw, 80px);
             padding-bottom: 100px;
+        }
+
+        /* Desktop: the two cost pills float over the top of the rails */
+        #snap-medicaid-timeline .total-costs {
+            display: contents;
+        }
+
+        /* Rails run the height of the event list, whatever its length */
+        #snap-medicaid-timeline .timeline-track {
             position: relative;
         }
 
-        .timeline-line-container {
+        #snap-medicaid-timeline #timeline-items {
+            display: flex;
+            flex-direction: column;
+            gap: 64px;
+        }
+
+        #snap-medicaid-timeline .timeline-line-container {
             position: absolute;
             left: 50%;
-            top: clamp(48px, 7vw, 80px);
-            bottom: 100px;
+            top: 0;
+            bottom: 0;
             width: 6px;
             margin-left: -3px;
             z-index: 1;
@@ -303,7 +349,7 @@
             border-radius: 3px;
         }
 
-        .timeline-line-bg {
+        #snap-medicaid-timeline .timeline-line-bg {
             position: absolute;
             top: 0;
             left: 0;
@@ -313,7 +359,7 @@
             border-radius: 3px;
         }
 
-        .timeline-line-progress {
+        #snap-medicaid-timeline .timeline-line-progress {
             position: absolute;
             top: 0;
             left: 0;
@@ -324,22 +370,58 @@
             border-radius: 3px;
         }
 
-        .timeline-item {
+        #snap-medicaid-timeline .timeline-item {
             position: relative;
-            margin-bottom: 80px;
             min-height: 200px;
             display: flex;
             flex-direction: column;
         }
 
-        .timeline-item:last-child {
-            margin-bottom: 0;
+        #snap-medicaid-timeline .track-group {
+            position: relative;
+            width: 100%;
         }
 
-        .timeline-dot {
+        /* Only the active track's events are shown; the other track is one
+           tap away in the header. */
+        #snap-medicaid-timeline .timeline-container:not(.snap-active) .timeline-item.snap-only,
+        #snap-medicaid-timeline .timeline-container:not(.snap-active) .shared-date-snap,
+        #snap-medicaid-timeline .timeline-container.snap-active .timeline-item.medicaid-only,
+        #snap-medicaid-timeline .timeline-container.snap-active .shared-date-med {
+            display: none;
+        }
+
+        /* Year markers sit on the active rail at each track's first event of a year */
+        #snap-medicaid-timeline .year-marker {
+            display: none;
+            order: -2;
+            position: relative;
+            z-index: 12;
+            align-self: center;
+            margin-bottom: 22px;
+            padding: 4px 14px;
+            border-radius: 999px;
+            background: #fff;
+            border: 1px solid rgba(44,62,80,0.16);
+            box-shadow: 0 1px 3px rgba(28,37,46,0.08);
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            line-height: 1.3;
+            color: var(--primary);
+        }
+        #snap-medicaid-timeline .timeline-container:not(.snap-active) .year-marker.for-med,
+        #snap-medicaid-timeline .timeline-container.snap-active .year-marker.for-snap {
+            display: block;
+        }
+        #snap-medicaid-timeline .timeline-container.snap-active .year-marker {
+            transform: translateX(22px); /* centre on the SNAP rail */
+        }
+
+        #snap-medicaid-timeline .timeline-dot {
             position: absolute;
             left: 50%;
-            top: 50%;
+            top: 50px; /* level with the card title */
             transform: translate(-50%, -50%);
             width: 24px;
             height: 24px;
@@ -352,78 +434,52 @@
             z-index: 10;
         }
 
-/* SNAP dot on the parallel line */
-.snap-timeline-dot {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: 22px;
-    transform: translate(-50%, -50%);
-    width: 24px;
-    height: 24px;
-    background: white;
-    border: 5px solid #d5d5d5;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 10;
-}
-
-.snap-timeline-dot.active {
-    background: var(--accent-snap);
-    border-color: var(--accent-snap);
-    box-shadow: 0 0 20px var(--accent-snap);
-    transform: translate(-50%, -50%) scale(1.2);
-}
-
-.snap-timeline-dot.passed {
-    border-color: var(--accent-snap);
-}
-
-        /* Grey out SNAP dots when Medicaid is active */
-        .timeline-container:not(.snap-active) .snap-timeline-dot {
-            border-color: #d5d5d5;
-            background: #f0f0f0;
-            opacity: 0.4;
+        /* SNAP dot on the parallel line */
+        #snap-medicaid-timeline .snap-timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 50px;
+            margin-left: 22px;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 24px;
+            background: white;
+            border: 5px solid #d5d5d5;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
         }
 
-        /* Show SNAP dots fully when SNAP is active */
-        .timeline-container.snap-active .snap-timeline-dot {
-            opacity: 1;
+        #snap-medicaid-timeline .snap-timeline-dot.active {
+            background: var(--accent-snap);
+            border-color: var(--accent-snap);
+            box-shadow: 0 0 20px var(--accent-snap);
+            transform: translate(-50%, -50%) scale(1.2);
         }
 
-        /* Grey out Medicaid dots when SNAP is active */
-        .timeline-container.snap-active .timeline-dot {
-            border-color: #d5d5d5;
-            opacity: 0.4;
+        #snap-medicaid-timeline .snap-timeline-dot.passed {
+            border-color: var(--accent-snap);
         }
 
-        .timeline-container.snap-active .timeline-dot.passed {
-            border-color: #d5d5d5;
-        }
-
-        .timeline-container.snap-active .timeline-dot.active {
-            background: #d5d5d5;
-            border-color: #d5d5d5;
-            box-shadow: none;
-        }
-
-        .timeline-dot.active {
+        #snap-medicaid-timeline .timeline-dot.active {
             background: var(--accent);
             border-color: var(--accent);
             box-shadow: 0 0 40px var(--accent);
             transform: translate(-50%, -50%) scale(1.3);
         }
 
-        .timeline-dot.passed {
+        #snap-medicaid-timeline .timeline-dot.passed {
             border-color: var(--accent);
         }
 
-        .timeline-card {
+        #snap-medicaid-timeline .timeline-card {
             width: 45%;
             max-width: 450px;
+            margin-left: 0;
+            margin-right: auto;
+            padding: 30px 60px 30px 30px;
             background: var(--card-bg);
-            padding: 30px;
             border-radius: 16px;
             box-shadow: var(--shadow-card);
             border: 1px solid rgba(28,37,46,.06);
@@ -433,30 +489,34 @@
             transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.5s ease;
         }
 
-        .timeline-card {
-            margin-left: 0;
-            margin-right: auto;
-            padding-right: 60px;
-        }
-
-        .timeline-card.visible {
+        #snap-medicaid-timeline .timeline-card.visible {
             opacity: 1;
             transform: translateX(0);
         }
 
         @media (hover: hover) {
-            .timeline-card.visible:hover {
+            #snap-medicaid-timeline .timeline-card.visible:hover {
                 transform: translateY(-6px);
                 box-shadow: var(--shadow-card-hover);
             }
         }
-        .timeline-card.visible:active {
+        #snap-medicaid-timeline .timeline-card.visible:active {
             transform: translateY(-1px);
         }
 
-        .timeline-card.second-card {
+        #snap-medicaid-timeline .timeline-card.snap-card {
+            border-left: 6px solid var(--accent-snap);
+            border-right: none;
+        }
+
+        /* Detail panels: beside the card on desktop, below it on mobile */
+        #snap-medicaid-timeline .timeline-card.second-card {
             position: absolute;
             top: 0;
+            right: 0;
+            left: auto;
+            margin-left: auto;
+            margin-right: 0;
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             color: white;
             border: none;
@@ -473,34 +533,32 @@
             transform: translateX(20px);
         }
 
-        .timeline-card.second-card {
-            right: 0;
-            left: auto;
-            margin-left: auto;
-            margin-right: 0;
-            border-left: none;
-            border-right: none;
+        #snap-medicaid-timeline .timeline-card.second-card.snap-card {
+            background: linear-gradient(135deg, var(--accent-snap) 0%, var(--accent-snap-bright) 100%);
+            border: none;
         }
 
-        .timeline-card.second-card.visible {
+        #snap-medicaid-timeline .timeline-card.second-card.visible {
             opacity: 1;
             transform: translateX(0);
         }
 
         @media (hover: hover) {
-            .timeline-card.second-card.visible:hover {
+            #snap-medicaid-timeline .timeline-card.second-card.visible:hover {
                 transform: translateY(-6px);
                 box-shadow: var(--shadow-card-hover), 0 0 26px rgba(192,57,43,0.45);
             }
-            .timeline-card.second-card.snap-card.visible:hover {
+            #snap-medicaid-timeline .timeline-card.second-card.snap-card.visible:hover {
                 box-shadow: var(--shadow-card-hover), 0 0 26px rgba(29,138,78,0.45);
             }
         }
 
         /* Stacked cards container (holds second + third cards) */
-        .stacked-cards {
+        #snap-medicaid-timeline .stacked-cards {
             position: absolute;
             top: 0;
+            right: 0;
+            left: auto;
             width: 45%;
             max-width: 450px;
             display: flex;
@@ -508,12 +566,7 @@
             gap: 12px;
         }
 
-        .stacked-cards {
-            right: 0;
-            left: auto;
-        }
-
-        .stacked-cards .timeline-card.second-card {
+        #snap-medicaid-timeline .stacked-cards .timeline-card.second-card {
             position: relative;
             top: auto;
             left: auto;
@@ -523,307 +576,169 @@
             margin: 0;
         }
 
-        @media (max-width: 768px) {
-            .stacked-cards {
-                position: relative;
-                width: 100%;
-                max-width: 100%;
-                margin-top: 20px;
-            }
-            /* Panels inside stacked-cards must fill the (already full-width)
-               stacked container — the generic second-card mobile rule insets
-               them by 70px + calc(100%-80px), shrinking the panel below its
-               content min-width and forcing inner overflow. */
-            .stacked-cards .timeline-card.second-card {
-                width: 100% !important;
-                margin-left: 0 !important;
-                margin-right: 0 !important;
-            }
+        /* Date pill + source tag */
+        #snap-medicaid-timeline .card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px 8px;
+            margin-bottom: 15px;
         }
 
-        @media (max-width: 768px) {
-            .timeline-card.second-card {
-                position: relative;
-                font-size: 1.1rem;
-                padding: 25px 20px;
-                margin-left: 0 !important;
-                margin-right: 0 !important;
-                margin-top: 20px;
-                left: auto !important;
-                right: auto !important;
-            }
-        }
-
-        .timeline-card .date {
+        #snap-medicaid-timeline .timeline-card .date {
             display: inline-block;
-            vertical-align: middle;
             background: var(--accent);
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
+            font-family: var(--font-head);
             font-size: 0.85rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        #snap-medicaid-timeline .timeline-card.snap-card .date {
+            background: var(--accent-snap);
         }
 
         /* Source/authority tag — which law or action drives the change */
-        .source-tag {
+        #snap-medicaid-timeline .source-tag {
             display: inline-block;
-            margin-left: 8px;
-            margin-bottom: 15px;
             padding: 3px 10px;
             border-radius: 999px;
+            font-family: var(--font-head);
             font-size: 0.62rem;
             font-weight: 700;
-            letter-spacing: 0.04em;
+            line-height: 1.4;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            vertical-align: middle;
             border: 1px solid transparent;
             white-space: nowrap;
         }
-        .source-hr1 { background: rgba(44,62,80,0.08); color: #2c3e50; border-color: rgba(44,62,80,0.20); }
-        .source-usda { background: rgba(214,109,46,0.12); color: #b8651f; border-color: rgba(214,109,46,0.32); }
-        .source-state { background: rgba(46,116,168,0.12); color: #2e74a8; border-color: rgba(46,116,168,0.32); }
+        #snap-medicaid-timeline .source-hr1 { background: rgba(44,62,80,0.08); color: #2c3e50; border-color: rgba(44,62,80,0.20); }
+        #snap-medicaid-timeline .source-usda { background: rgba(214,109,46,0.12); color: #b8651f; border-color: rgba(214,109,46,0.32); }
+        #snap-medicaid-timeline .source-state { background: rgba(46,116,168,0.12); color: #2e74a8; border-color: rgba(46,116,168,0.32); }
 
-        .timeline-card h3 {
+        #snap-medicaid-timeline .timeline-card h3 {
             color: var(--accent);
             margin-bottom: 10px;
             font-size: 1.4rem;
         }
 
-        .timeline-card p {
+        #snap-medicaid-timeline .timeline-card.snap-card h3 {
+            color: var(--accent-snap);
+        }
+
+        #snap-medicaid-timeline .timeline-card p {
             color: #555;
             line-height: 1.6;
         }
 
-        /* Before/After Split Card */
-        .before-after-container {
+        /* One change inside a card: heading, then the old rule as a compact
+           grey line and the new one below it, both always visible. */
+        #snap-medicaid-timeline .change {
+            margin-top: 18px;
+        }
+
+        #snap-medicaid-timeline .change-title {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--accent);
+        }
+
+        #snap-medicaid-timeline .timeline-card.snap-card .change-title {
+            color: var(--accent-snap);
+        }
+
+        #snap-medicaid-timeline .timeline-card .change-note {
+            margin-top: 8px;
+        }
+
+        #snap-medicaid-timeline .before-after {
             display: flex;
             flex-direction: column;
-            gap: 0;
-            margin-top: 12px;
+            gap: 6px;
+            margin-top: 10px;
         }
 
-        .before-section, .after-section {
-            padding: 15px 18px;
+        #snap-medicaid-timeline .before-section,
+        #snap-medicaid-timeline .after-section {
+            padding: 10px 14px;
             border-radius: 10px;
-            position: relative;
         }
 
-        .before-section {
-            background: #f8f9fa;
-            border-left: 4px solid #95a5a6;
+        #snap-medicaid-timeline .before-section {
+            background: #f6f7f8;
+            border-left: 3px solid #95a5a6;
         }
 
-        .after-section {
+        #snap-medicaid-timeline .after-section {
             background: #fdf0ef;
-            border-left: 4px solid var(--accent);
+            border-left: 3px solid var(--accent);
         }
 
-        .timeline-card.snap-card .after-section {
+        #snap-medicaid-timeline .timeline-card.snap-card .after-section {
             background: #eef7f1;
             border-left-color: var(--accent-snap);
         }
 
-        .before-section .section-label,
-        .after-section .section-label {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            padding: 2px 10px;
-            border-radius: 4px;
-            margin-bottom: 8px;
+        #snap-medicaid-timeline .timeline-card .before-section p {
+            font-size: 0.875rem;
+            line-height: 1.55;
+            color: #5f6b6d;
         }
 
-        .before-section .section-label {
-            background: #95a5a6;
-            color: white;
-        }
-
-        .after-section .section-label {
-            background: var(--accent);
-            color: white;
-        }
-
-        .before-section p, .after-section p {
+        #snap-medicaid-timeline .timeline-card .after-section p {
             font-size: 0.9rem;
-            margin: 0;
+            color: #444;
         }
 
-        .split-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px 0;
-        }
-
-        .split-divider .arrow {
-            font-size: 1.2rem;
-            color: var(--accent);
-        }
-
-        /* Collapsible More Section */
-        .more-toggle {
-            display: block;
-            background: none;
-            border: 2px solid var(--accent);
-            color: var(--accent);
-            padding: 5px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.8rem;
+        #snap-medicaid-timeline .section-label {
+            display: inline-block;
+            margin-right: 8px;
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-family: var(--font-head);
+            font-size: 0.68rem;
             font-weight: 700;
-            margin-top: 12px;
-            transition: all 0.3s ease;
+            line-height: 1.5;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            vertical-align: 1px;
         }
 
-        .more-toggle:hover {
+        #snap-medicaid-timeline .before-section .section-label {
+            background: rgba(149,165,166,0.22);
+            color: #4f5b5d;
+        }
+
+        #snap-medicaid-timeline .after-section .section-label {
             background: var(--accent);
             color: white;
         }
 
-        .more-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
+        #snap-medicaid-timeline .timeline-card.snap-card .after-section .section-label {
+            background: var(--accent-snap);
         }
 
-        .more-content.open {
-            max-height: 2000px;
-        }
-
-        .more-content-inner {
-            padding-top: 15px;
-        }
-
-        /* Tooltip for School asterisk */
-        .school-tooltip {
-            position: relative;
-            display: inline-block;
-        }
-
-        .school-tooltip .tooltip-text {
-            visibility: hidden;
-            width: 200px;
-            background-color: rgba(44, 62, 80, 0.95);
-            color: white;
-            text-align: center;
-            border-radius: 6px;
-            padding: 8px 12px;
-            position: absolute;
-            z-index: 1000;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.7rem;
-            line-height: 1.3;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .school-tooltip .tooltip-text::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: rgba(44, 62, 80, 0.95) transparent transparent transparent;
-        }
-
-        .school-tooltip:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-            .timeline-container {
-                padding-top: 96px;
-            }
-
-            .timeline-line-container {
-                left: 40px;
-                top: 96px;
-            }
-
-            .timeline-card {
-                width: calc(100% - 80px) !important;
-                max-width: none !important;
-                margin-left: 70px !important;
-                margin-right: 0 !important;
-                padding: 18px !important;
-                border-left: 4px solid var(--accent) !important;
-                border-right: none !important;
-                font-size: 0.95rem;
-            }
-
-            /* Keep SNAP cards green on mobile (the rule above forces red via !important) */
-            .timeline-card.snap-card {
-                border-left-color: var(--accent-snap) !important;
-            }
-
-            .timeline-card.second-card {
-                width: calc(100% - 80px) !important;
-                margin-left: 70px !important;
-                padding: 20px 15px !important;
-                font-size: 0.9rem !important;
-            }
-
-            .timeline-dot {
-                left: 40px;
-                margin-left: 0;
-                transform: translate(-50%, -50%);
-            }
-
-            .snap-timeline-dot {
-                left: 62px;
-                margin-left: 0;
-                transform: translate(-50%, -50%);
-            }
-            
-            .timeline-dot.active {
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-            
-            .snap-timeline-dot.active {
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-
-            .timeline-item:nth-child(even) .timeline-card {
-                transform: none;
-            }
-
-            #snap-medicaid-timeline .mini-timeline-row .toggle-btn {
-                padding: 6px 12px;
-                font-size: 0.75rem;
-            }
-
-            #snap-medicaid-timeline .mini-dots-group {
-                gap: 8px;
-                overflow-x: auto;
-                max-width: calc(100vw - 140px);
-            }
-            /* The horizontal-scroll mini-nav forces overflow-y:auto, which clips
-               the per-dot month/year labels (.mini-dot::after at top:26px). At
-               mobile width those labels also collide with the adjacent row and
-               hide behind the toggle button. Each timeline card already shows its
-               full date and the dots stay tappable, so hide the labels on mobile
-               for a clean, unclipped mini-nav. */
-            #snap-medicaid-timeline .mini-dot::after {
-                display: none !important;
-            }
+        /* Supporting detail that used to sit behind a "More" button */
+        #snap-medicaid-timeline .more-detail {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(28,37,46,0.08);
+            color: #555;
+            font-size: 0.95em;
+            line-height: 1.6;
         }
 
         /* === SNAP Parallel Line (always visible) === */
-        .snap-parallel-line {
+        #snap-medicaid-timeline .snap-parallel-line {
             position: absolute;
             left: 50%;
-            top: clamp(48px, 7vw, 80px);
-            bottom: 100px;
+            top: 0;
+            bottom: 0;
             width: 4px;
             margin-left: 20px;
             z-index: 1;
@@ -832,7 +747,7 @@
             transition: all 0.3s ease;
         }
 
-        .snap-parallel-bg {
+        #snap-medicaid-timeline .snap-parallel-bg {
             position: absolute;
             top: 0;
             left: 0;
@@ -842,7 +757,7 @@
             border-radius: 2px;
         }
 
-        .snap-parallel-progress {
+        #snap-medicaid-timeline .snap-parallel-progress {
             position: absolute;
             top: 0;
             left: 0;
@@ -854,56 +769,48 @@
         }
 
         /* When SNAP is active, color the SNAP line green */
-        .timeline-container.snap-active .snap-parallel-progress {
+        #snap-medicaid-timeline .timeline-container.snap-active .snap-parallel-progress {
             background: var(--accent-snap);
         }
 
         /* When SNAP is active, grey out the Medicaid line */
-        .timeline-container.snap-active .timeline-line-container {
+        #snap-medicaid-timeline .timeline-container.snap-active .timeline-line-container {
             opacity: 0.6;
             transition: opacity 0.3s ease;
         }
 
-        .timeline-container.snap-active .timeline-line-container:hover {
+        #snap-medicaid-timeline .timeline-container.snap-active .timeline-line-container:hover {
             opacity: 1;
         }
 
-        .timeline-container.snap-active .timeline-line-container:hover .timeline-line-bg {
+        #snap-medicaid-timeline .timeline-container.snap-active .timeline-line-container:hover .timeline-line-bg {
             background: rgba(192, 57, 43, 0.3);
         }
 
-        .timeline-container.snap-active .timeline-line-progress {
-            background: #d5d5d5 !important;
+        #snap-medicaid-timeline .timeline-container.snap-active .timeline-line-progress {
+            background: #d5d5d5;
         }
 
-        .timeline-container.snap-active .timeline-line-bg {
+        #snap-medicaid-timeline .timeline-container.snap-active .timeline-line-bg {
             background: #e8e8e8;
         }
 
         /* When Medicaid is active, grey out the SNAP line (default) */
-        .timeline-container:not(.snap-active) .snap-parallel-line {
+        #snap-medicaid-timeline .timeline-container:not(.snap-active) .snap-parallel-line {
             opacity: 0.6;
         }
 
-        .timeline-container:not(.snap-active) .snap-parallel-line:hover {
+        #snap-medicaid-timeline .timeline-container:not(.snap-active) .snap-parallel-line:hover {
             opacity: 1;
         }
 
-        .timeline-container:not(.snap-active) .snap-parallel-line:hover .snap-parallel-bg {
+        #snap-medicaid-timeline .timeline-container:not(.snap-active) .snap-parallel-line:hover .snap-parallel-bg {
             background: rgba(39, 174, 96, 0.3);
         }
 
-        @media (max-width: 768px) {
-            .snap-parallel-line {
-                left: 62px;
-                top: 96px;
-                margin-left: 0;
-            }
-        }
-
         /* Total Cost Containers */
-        .total-cost-medicaid,
-        .total-cost-snap {
+        #snap-medicaid-timeline .total-cost-medicaid,
+        #snap-medicaid-timeline .total-cost-snap {
             position: absolute;
             top: 0;
             padding: 13px 24px;
@@ -918,27 +825,7 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
         }
 
-        .total-cost-medicaid:hover {
-            transform: translateX(-100%) translateY(-2px);
-            box-shadow: 0 14px 34px rgba(192,57,43,0.40);
-        }
-
-        .total-cost-snap:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 34px rgba(29,138,78,0.40);
-        }
-
-        .total-cost-medicaid:active {
-            transform: translateX(-100%) translateY(0px);
-            box-shadow: 0 6px 16px rgba(192,57,43,0.30);
-        }
-
-        .total-cost-snap:active {
-            transform: translateY(0px);
-            box-shadow: 0 6px 16px rgba(29,138,78,0.30);
-        }
-
-        .total-cost-medicaid {
+        #snap-medicaid-timeline .total-cost-medicaid {
             left: calc(50% - 10px);
             transform: translateX(-100%);
             background: rgba(192,57,43,0.90);
@@ -946,190 +833,281 @@
             box-shadow: 0 10px 28px rgba(192,57,43,0.32);
         }
 
-        .total-cost-snap {
+        #snap-medicaid-timeline .total-cost-snap {
             left: calc(50% + 54px);
             background: rgba(29,138,78,0.90);
             color: white;
             box-shadow: 0 10px 28px rgba(29,138,78,0.32);
         }
 
-        .total-cost-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            opacity: 0.85;
-            margin-bottom: 6px;
-            font-weight: 600;
+        #snap-medicaid-timeline .total-cost-medicaid:hover {
+            transform: translateX(-100%) translateY(-2px);
+            box-shadow: 0 14px 34px rgba(192,57,43,0.40);
         }
 
-        .total-cost-amount {
+        #snap-medicaid-timeline .total-cost-snap:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 34px rgba(29,138,78,0.40);
+        }
+
+        #snap-medicaid-timeline .total-cost-medicaid:active {
+            transform: translateX(-100%) translateY(0px);
+            box-shadow: 0 6px 16px rgba(192,57,43,0.30);
+        }
+
+        #snap-medicaid-timeline .total-cost-snap:active {
+            transform: translateY(0px);
+            box-shadow: 0 6px 16px rgba(29,138,78,0.30);
+        }
+
+        #snap-medicaid-timeline .total-cost-label {
+            font-family: var(--font-head);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            opacity: 0.85;
+            margin-bottom: 6px;
+        }
+
+        #snap-medicaid-timeline .total-cost-amount {
+            font-family: var(--font-head);
             font-size: 1.3rem;
             font-weight: 800;
             letter-spacing: -0.01em;
             line-height: 1.2;
         }
 
-        .total-cost-amount .tc-per {
+        #snap-medicaid-timeline .total-cost-amount .tc-per {
             opacity: 0.7;
             font-weight: 600;
         }
 
-        .timeline-container.snap-active .total-cost-medicaid {
+        #snap-medicaid-timeline .timeline-container.snap-active .total-cost-medicaid {
             opacity: 0.3;
         }
 
-        .timeline-container:not(.snap-active) .total-cost-snap {
+        #snap-medicaid-timeline .timeline-container:not(.snap-active) .total-cost-snap {
             opacity: 0.6;
         }
 
+        /* =================== Mobile =================== */
         @media (max-width: 768px) {
-            .total-cost-medicaid {
-                left: 12px;
-                right: auto;
-                transform: none !important;
-                top: 14px;
-                font-size: 0.7rem;
-                padding: 6px 10px;
-                max-width: calc(50% - 18px);
+            /* Break out of Squarespace's mobile page padding to the full
+               screen width: that padding plus two rails left cards 210px wide. */
+            #snap-medicaid-timeline {
+                --gutter: 12px;
+                width: 100vw;
+                max-width: 100vw;
+                margin-left: calc(50% - 50vw);
+                margin-right: calc(50% - 50vw);
             }
-            .total-cost-medicaid:hover {
-                transform: none !important;
-                box-shadow: 0 10px 28px rgba(192,57,43,0.32);
+
+            /* Header becomes a Medicaid | SNAP switch plus the current date */
+            #snap-medicaid-timeline .timeline-header {
+                padding: 8px 0;
             }
-            .total-cost-snap {
-                left: auto;
-                right: 12px;
-                transform: none !important;
-                top: 14px;
-                font-size: 0.7rem;
-                padding: 6px 10px;
-                max-width: calc(50% - 18px);
+            #snap-medicaid-timeline .mini-timeline-rows {
+                flex-direction: row;
+                justify-content: flex-start;
+                gap: 0;
             }
-            .total-cost-snap:hover {
-                transform: none !important;
-                box-shadow: 0 10px 28px rgba(29,138,78,0.32);
+            #snap-medicaid-timeline .mini-dots-group {
+                display: none;
             }
-            .total-cost-label {
-                font-size: 0.58rem;
-                letter-spacing: 1px;
-                margin-bottom: 3px;
+            #snap-medicaid-timeline .mini-timeline-row .toggle-btn {
+                min-width: 0;
+                min-height: 44px;
+                padding: 0 18px;
+                font-size: 0.9rem;
+                font-weight: 700;
+                background: white;
+                border: 2px solid;
+                box-shadow: none;
+                transform: none;
             }
-            .total-cost-amount {
-                font-size: 0.66rem;
+            #snap-medicaid-timeline #btn-medicaid {
+                color: var(--accent-medicaid);
+                border-color: var(--accent-medicaid);
+                border-right-width: 1px;
+                border-radius: 999px 0 0 999px;
+            }
+            #snap-medicaid-timeline #btn-snap {
+                color: var(--accent-snap);
+                border-color: var(--accent-snap);
+                border-left-width: 1px;
+                border-radius: 0 999px 999px 0;
+            }
+            #snap-medicaid-timeline #btn-medicaid.active {
+                background: var(--accent-medicaid);
+                color: white;
+            }
+            #snap-medicaid-timeline #btn-snap.active {
+                background: var(--accent-snap);
+                color: white;
+            }
+            #snap-medicaid-timeline .now-chip {
+                display: block;
+                margin-left: auto;
+                padding: 6px 12px;
+                border-radius: 999px;
+                background: rgba(44,62,80,0.07);
+                color: var(--primary);
+                font-family: var(--font-head);
+                font-size: 0.85rem;
+                font-weight: 700;
                 white-space: nowrap;
             }
-        }
 
-        /* Medicaid cards greyed out when SNAP is active */
-        .timeline-container.snap-active .timeline-card.medicaid-card {
-            opacity: 0.15 !important;
-            filter: grayscale(1);
-            pointer-events: none;
-        }
+            #snap-medicaid-timeline .timeline-container {
+                padding-top: 0;
+                padding-bottom: 48px;
+            }
 
-        /* Hide the inactive track's detail panels so they neither show faintly nor
-           reserve/overlap layout space (mirrors how SNAP panels hide in Medicaid view). */
-        .timeline-container.snap-active .timeline-card.second-card.medicaid-card {
-            display: none !important;
-        }
+            /* Cost pills: a two-up row above the timeline */
+            #snap-medicaid-timeline .total-costs {
+                display: flex;
+                gap: 10px;
+                padding: 16px var(--gutter) 24px;
+            }
+            #snap-medicaid-timeline .total-cost-medicaid,
+            #snap-medicaid-timeline .total-cost-snap,
+            #snap-medicaid-timeline .total-cost-medicaid:hover,
+            #snap-medicaid-timeline .total-cost-snap:hover,
+            #snap-medicaid-timeline .total-cost-medicaid:active,
+            #snap-medicaid-timeline .total-cost-snap:active {
+                position: static;
+                flex: 1 1 0;
+                min-width: 0;
+                padding: 10px 8px;
+                transform: none;
+            }
+            #snap-medicaid-timeline .total-cost-label {
+                font-size: 0.75rem;
+                letter-spacing: 0.06em;
+                margin-bottom: 2px;
+            }
+            #snap-medicaid-timeline .total-cost-amount {
+                font-size: clamp(0.85rem, 4vw, 0.95rem);
+                white-space: nowrap;
+            }
 
-        /* SNAP cards hidden by default */
-        .timeline-card.snap-card {
-            display: none;
-            border-left: 6px solid var(--accent-snap);
-        }
+            #snap-medicaid-timeline #timeline-items {
+                gap: 36px;
+            }
+            #snap-medicaid-timeline .timeline-item {
+                min-height: 0;
+            }
 
-        .timeline-card.snap-card h3 {
-            color: var(--accent-snap);
-        }
+            /* One rail, the active track's, near the left edge */
+            #snap-medicaid-timeline .timeline-line-container {
+                left: var(--rail-x);
+                margin-left: -3px;
+            }
+            #snap-medicaid-timeline .snap-parallel-line {
+                left: var(--rail-x);
+                margin-left: -2px;
+            }
+            #snap-medicaid-timeline .timeline-container.snap-active .timeline-line-container,
+            #snap-medicaid-timeline .timeline-container:not(.snap-active) .snap-parallel-line {
+                display: none;
+            }
 
-        .timeline-card.snap-card .date {
-            background: var(--accent-snap);
-        }
+            /* Dots are positioned inside the padded .container, the rails
+               outside it: subtract the gutter so they land on the rail. */
+            #snap-medicaid-timeline .timeline-dot,
+            #snap-medicaid-timeline .snap-timeline-dot {
+                left: calc(var(--rail-x) - var(--gutter));
+                margin-left: 0;
+                width: 20px;
+                height: 20px;
+                border-width: 4px;
+            }
+            #snap-medicaid-timeline .timeline-dot.active,
+            #snap-medicaid-timeline .snap-timeline-dot.active {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
 
-        .timeline-card.snap-card .more-toggle {
-            color: var(--accent-snap);
-            border-color: var(--accent-snap);
-        }
+            #snap-medicaid-timeline .year-marker,
+            #snap-medicaid-timeline .timeline-container.snap-active .year-marker {
+                align-self: flex-start;
+                margin-left: calc(var(--rail-x) - var(--gutter));
+                margin-bottom: 16px;
+                padding: 3px 8px;
+                font-size: 0.8rem;
+                transform: translateX(-50%);
+            }
 
-        .timeline-card.snap-card .more-toggle:hover {
-            background: var(--accent-snap);
-            color: white;
-        }
+            #snap-medicaid-timeline .timeline-card {
+                width: calc(100% - var(--card-inset));
+                max-width: none;
+                margin-left: var(--card-inset);
+                padding: 16px;
+                border-left-width: 4px;
+                font-size: 0.95rem;
+            }
+            #snap-medicaid-timeline .timeline-card.snap-card {
+                border-left-width: 4px;
+            }
+            #snap-medicaid-timeline .timeline-card h3 {
+                font-size: 1.3rem;
+            }
 
-        .timeline-card.snap-card {
-            border-left: 6px solid var(--accent-snap);
-            border-right: none;
-        }
+            /* Panels line up with the cards (the stacked pair used to run
+               across the rail) */
+            #snap-medicaid-timeline .timeline-card.second-card,
+            #snap-medicaid-timeline .stacked-cards {
+                position: relative;
+                top: auto;
+                right: auto;
+                left: auto;
+                width: calc(100% - var(--card-inset));
+                max-width: none;
+                margin-left: var(--card-inset);
+                margin-right: 0;
+                margin-top: 16px;
+            }
+            #snap-medicaid-timeline .timeline-card.second-card {
+                padding: 20px 16px;
+                font-size: 0.9rem;
+                min-height: 0;
+            }
+            #snap-medicaid-timeline .stacked-cards .timeline-card.second-card {
+                width: 100%;
+                margin: 0;
+            }
 
-        /* Show SNAP cards when SNAP is active */
-        .timeline-container.snap-active .timeline-card.snap-card {
-            display: block;
-            z-index: 20;
-        }
+            /* Nothing under 12px */
+            #snap-medicaid-timeline .source-tag,
+            #snap-medicaid-timeline .section-label {
+                font-size: 0.75rem;
+                letter-spacing: 0.06em;
+            }
 
-        .shared-date-snap {
-            display: none;
-            order: 2;
-        }
+            /* Soda waiver: two stacked lists instead of a cramped two-column grid */
+            #snap-medicaid-timeline .soda-grid {
+                grid-template-columns: 1fr !important;
+            }
+            #snap-medicaid-timeline .soda-grid > :nth-child(odd) {
+                order: 1;
+            }
+            #snap-medicaid-timeline .soda-grid > :nth-child(even) {
+                order: 2;
+            }
+            #snap-medicaid-timeline .soda-grid > :nth-child(2) {
+                margin-top: 8px;
+            }
+            #snap-medicaid-timeline .soda-grid > div {
+                font-size: 0.875rem !important;
+                text-align: left;
+            }
 
-        .timeline-container.snap-active .shared-date-snap {
-            display: block;
-            order: -1;
-        }
-
-        .timeline-container.snap-active .shared-date-med {
-            order: 2;
-        }
-
-        /* SNAP cards greyed when Medicaid is active */
-        .timeline-container:not(.snap-active) .timeline-card.snap-card {
-            display: none;
-        }
-
-        /* Shrink SNAP-only items when Medicaid is active (dot still visible) */
-        .timeline-container:not(.snap-active) .timeline-item.snap-only {
-            min-height: 30px;
-        }
-
-        /* Reduce height for Medicaid-only items when SNAP is active */
-        .timeline-container.snap-active .timeline-item.medicaid-only {
-            min-height: 40px;
-        }
-
-        /* SNAP second card accent */
-        .timeline-card.second-card.snap-card {
-            background: linear-gradient(135deg, var(--accent-snap) 0%, var(--accent-snap-bright) 100%);
-            border: none;
-        }
-
-        .timeline-container.snap-active .timeline-card.second-card.snap-card {
-            display: flex;
-        }
-
-        /* Floating Year Background */
-        #snap-medicaid-timeline .year-indicator {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: clamp(7rem, 22vw, 18rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            color: rgba(44, 62, 80, 0.06);
-            z-index: 0;
-            pointer-events: none;
-            user-select: none;
-            transition: opacity 0.5s ease;
-            text-align: center;
-            line-height: 1;
-        }
-
-        @media (max-width: 768px) {
-            /* Hover-only tooltip: never triggers on touch, and its fixed
-               200px box extends the horizontal overflow — hide on mobile. */
-            .school-tooltip .tooltip-text {
-                display: none !important;
+            /* Eligibility checks: before above after */
+            #snap-medicaid-timeline .elig-compare {
+                flex-direction: column;
+            }
+            #snap-medicaid-timeline .elig-compare > svg {
+                transform: rotate(90deg);
             }
         }
     </style>
@@ -1138,224 +1116,197 @@
         <div class="container">
             <div class="mini-timeline-rows">
                 <div class="mini-timeline-row">
-                    <button class="toggle-btn active" id="btn-medicaid">Medicaid</button>
+                    <button type="button" class="toggle-btn active" id="btn-medicaid" aria-pressed="true">Medicaid</button>
                     <div class="mini-dots-group" id="mini-dots-med"></div>
                 </div>
                 <div class="mini-timeline-row">
-                    <button class="toggle-btn" id="btn-snap">SNAP</button>
+                    <button type="button" class="toggle-btn" id="btn-snap" aria-pressed="false">SNAP</button>
                     <div class="mini-dots-group" id="mini-dots-snap"></div>
                 </div>
+                <span class="now-chip" id="now-chip" aria-hidden="true"></span>
             </div>
         </div>
     </div>
 
-    <div class="year-indicator" id="year-indicator" aria-hidden="true">2025</div>
-    
     <div class="timeline-container" id="timeline-container">
-        <div class="total-cost-medicaid" onclick="setActiveTimeline('medicaid')">
-            <div class="total-cost-label">Total Cost</div>
-            <div class="total-cost-amount">$330M – $550M<span class="tc-per">/yr</span></div>
+        <div class="total-costs">
+            <div class="total-cost-medicaid" onclick="setActiveTimeline('medicaid')">
+                <div class="total-cost-label">Total Cost</div>
+                <div class="total-cost-amount">$330M – $550M<span class="tc-per">/yr</span></div>
+            </div>
+            <div class="total-cost-snap" onclick="setActiveTimeline('snap')">
+                <div class="total-cost-label">Total Cost</div>
+                <div class="total-cost-amount">$52M – $156M<span class="tc-per">/yr</span></div>
+            </div>
         </div>
-        <div class="total-cost-snap" onclick="setActiveTimeline('snap')">
-            <div class="total-cost-label">Total Cost</div>
-            <div class="total-cost-amount">$52M – $156M<span class="tc-per">/yr</span></div>
-        </div>
-        <div class="timeline-line-container" id="medicaid-line">
-            <div class="timeline-line-bg"></div>
-            <div class="timeline-line-progress" id="timeline-progress"></div>
-        </div>
-        <div class="snap-parallel-line" id="snap-parallel-line">
-            <div class="snap-parallel-bg"></div>
-            <div class="snap-parallel-progress" id="snap-parallel-progress"></div>
-        </div>
-        <div class="container" id="timeline-items">
-            <!-- Injected by JS -->
+        <div class="timeline-track">
+            <div class="timeline-line-container" id="medicaid-line">
+                <div class="timeline-line-bg"></div>
+                <div class="timeline-line-progress" id="timeline-progress"></div>
+            </div>
+            <div class="snap-parallel-line" id="snap-parallel-line">
+                <div class="snap-parallel-bg"></div>
+                <div class="snap-parallel-progress" id="snap-parallel-progress"></div>
+            </div>
+            <div class="container" id="timeline-items">
+                <!-- Injected by JS -->
+            </div>
         </div>
     </div>
 
     <script>
         const medicaidData = [
-            { source:'hr1', date: '2025-07-04', title: 'Initial Implementation', desc: 'HR1 legislation signed into law. These changes include: limiting how states can raise money for Medicaid, reducing extra payments to hospitals and providers, and placing restrictions on who will able to qualify for Medicaid (for low-income adults).', secondCard: '<div style="margin-top:40px;"><h3 style="color:white;font-size:1.15rem;margin-bottom:16px;margin-left:24px;">Who will be affected?</h3><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:24px;"><span style="display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;background:rgba(255,255,255,0.25);color:white;border-radius:50%;font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span><div style="flex:1;"><div style="color:white;font-weight:700;font-size:1rem;margin-bottom:8px;text-decoration:underline;text-underline-offset:3px;">Medicaid expansion adults</div><div style="background:rgba(255,255,255,0.15);padding:10px 12px;border-radius:6px;color:white;font-size:0.85rem;line-height:1.4;margin-bottom:20px;">Low-income adults with incomes up to about 138% of the federal poverty level</div><div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:16px 12px;margin-top:8px;"><div style="display:flex;flex-direction:column;align-items:center;"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:4px;"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M12 9v6"/><path d="M13.5 10.5a1.5 1.5 0 0 0-3 0c0 1.5 3 1.5 3 3a1.5 1.5 0 0 1-3 0"/></svg><div style="color:white;font-weight:700;font-size:0.95rem;margin-bottom:16px;">Federal Poverty Level</div><div style="display:flex;align-items:flex-end;justify-content:center;gap:32px;width:100%;"><div style="display:flex;flex-direction:column;align-items:center;"><div style="width:45px;height:70px;background:rgba(255,255,255,0.85);border-radius:4px 4px 0 0;"></div><div style="color:white;font-weight:800;font-size:0.95rem;margin-top:6px;">$2,069</div><div style="color:rgba(255,255,255,0.7);font-size:0.75rem;margin-bottom:4px;">1 person</div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div style="display:flex;flex-direction:column;align-items:center;"><div style="width:45px;height:95px;background:rgba(255,255,255,0.85);border-radius:4px 4px 0 0;"></div><div style="color:white;font-weight:800;font-size:0.95rem;margin-top:6px;">$2,797</div><div style="color:rgba(255,255,255,0.7);font-size:0.75rem;margin-bottom:4px;">2 people</div><svg width="24" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 21v-2a4 4 0 0 0-4-4H4a4 4 0 0 0-4 4v2"/><circle cx="7" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-4-4h-2"/><circle cx="17" cy="7" r="4"/></svg></div></div></div></div></div></div><div style="display:flex;gap:10px;align-items:flex-start;"><span style="display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;background:rgba(255,255,255,0.25);color:white;border-radius:50%;font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span><div style="color:white;font-weight:700;font-size:1rem;text-decoration:underline;text-underline-offset:3px;line-height:1.4;">Refugees, asylum seekers, trafficking victims, and some domestic violence survivors</div></div></div>', moreContent: '<div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;"><span style="display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;background:var(--accent);color:white;border-radius:50%;font-weight:800;font-size:0.85rem;">1</span><span>Freezes provider taxes at their current levels, banning any new taxes or increases, and will gradually lower the maximum tax rate for Medicaid expansion states from 6% to 3.5% by 2032.</span></div><div style="display:flex;gap:12px;align-items:flex-start;"><span style="display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;background:var(--accent);color:white;border-radius:50%;font-weight:800;font-size:0.85rem;">2</span><span>Caps new state-directed payments at Medicare rates (100-110%), with existing higher payments phased down starting in 2028.</span></div>' },
-            { source:'hr1', date: '2026-10-01', title: 'First Major Changes', sections: [{heading: 'Emergency Medicaid match drops (No impact on Hawaii)', before: 'The federal government paid about 90% of emergency care costs for some noncitizens in certain states.', after: 'The federal government pays a smaller share (often around 50–70% depending on the state). States must pay more out of their own pocket.'}, {heading: 'Fewer immigrants qualify for full Medicaid/CHIP', before: 'Many types of lawfully present immigrants could get full Medicaid or CHIP benefits with federal funding.', after: 'Only a few groups still qualify—mainly green card holders, certain Cuban/Haitian entrants, and citizens of Pacific Island nations with U.S. agreements (COFA).'}, {heading: 'Who loses coverage', note: 'Refugees, asylees, trafficking victims, and some domestic violence survivors no longer qualify for federally funded full Medicaid—unless their state pays for it separately or they fit a narrow exception (like being a child or pregnant in certain states).'}], secondCard: '<div style="text-align:center;"><div style="color:white;font-size:1.4rem;font-weight:800;margin-bottom:6px;">1,200 – 2,400</div><div style="color:rgba(255,255,255,0.85);font-size:0.9rem;">members lose coverage</div></div>' },
-            { source:'hr1', date: '2026-12-31', title: 'Year-End Transition (ACA expansion adults)', sections: [{heading: 'Work requirements begin', before: 'You could stay on Medicaid expansion without proving you had a job or were doing certain activities.', after: 'Adults ages 19–64 on Medicaid expansion must prove they’re doing at least <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">80 hours per month</span> of work, job training, school (at least half-time), or community service to keep their coverage.'}, {heading: 'Who’s exempt', note: 'Pregnant women, people with disabilities, full-time caregivers, people in treatment programs, and a few other groups don’t have to meet this requirement.'}, {heading: 'Eligibility checks happen twice as often', before: 'States checked if you still qualified for Medicaid once every 12 months.', after: 'States must check every <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">6 months</span> for adults on Medicaid expansion.<br><br><strong>What this means:</strong> More paperwork, more chances to accidentally lose coverage if you miss a form or deadline.'}, {heading: '\u26a0\ufe0f If you lose Medicaid for not meeting work requirements', note: 'You also can’t get subsidized insurance on the ACA Marketplace (Healthcare.gov). This creates a coverage gap where some people may have no affordable option.'}], secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:6px;font-size:1.3rem;">Work Requirements</h3><div style="color:white;font-size:2rem;font-weight:800;margin-bottom:16px;">80 hrs/month</div><div style="display:flex;justify-content:space-around;flex-wrap:wrap;gap:12px;"><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">Work</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 12l-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/><path d="M17.64 15L22 10.36"/><path d="M20.91 11.7l-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">Training</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="m6 12 4 2 8-4"/></svg><span class="school-tooltip" style="color:rgba(255,255,255,0.8);font-size:0.75rem;">School*<span class="tooltip-text">or enrolled in a half-time course load</span></span></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">Service</span></div></div></div>', thirdCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:16px;font-size:1.2rem;">Eligibility Checks</h3><div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;"><div style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.4);border-radius:10px;padding:12px 16px;text-align:center;min-width:110px;"><div style="color:rgba(255,255,255,0.7);font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Before</div><div style="display:flex;align-items:baseline;justify-content:center;gap:4px;white-space:nowrap;"><span style="color:rgba(255,255,255,0.7);font-size:0.8rem;">Every</span><span style="color:white;font-size:1.8rem;font-weight:800;line-height:1;">12</span><span style="color:rgba(255,255,255,0.8);font-size:0.8rem;">mo</span></div></div><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg><div style="background:rgba(255,255,255,0.3);border:2px solid white;border-radius:10px;padding:12px 16px;text-align:center;min-width:110px;"><div style="color:white;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">After</div><div style="display:flex;align-items:baseline;justify-content:center;gap:4px;white-space:nowrap;"><span style="color:rgba(255,255,255,0.7);font-size:0.8rem;">Every</span><span style="color:white;font-size:1.8rem;font-weight:800;line-height:1;">6</span><span style="color:rgba(255,255,255,0.9);font-size:0.8rem;">mo</span></div></div></div></div>' },
+            { source:'hr1', date: '2025-07-04', title: 'Initial Implementation', desc: 'HR1 legislation signed into law. These changes include: limiting how states can raise money for Medicaid, reducing extra payments to hospitals and providers, and placing restrictions on who will be able to qualify for Medicaid (for low-income adults).', secondCard: '<div style="margin-top:40px;text-align:left;"><h3 style="color:white;font-size:1.15rem;margin-bottom:16px;">Who will be affected?</h3><div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:24px;"><span style="display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;background:rgba(255,255,255,0.25);color:white;border-radius:50%;font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span><div style="flex:1;"><div style="color:white;font-weight:700;font-size:1rem;margin-bottom:8px;text-decoration:underline;text-underline-offset:3px;">Medicaid expansion adults</div><div style="background:rgba(255,255,255,0.15);padding:10px 12px;border-radius:6px;color:white;font-size:0.875rem;line-height:1.4;margin-bottom:20px;">Low-income adults with incomes up to about 138% of the federal poverty level</div><div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:16px 12px;margin-top:8px;"><div style="display:flex;flex-direction:column;align-items:center;"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:4px;"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M12 9v6"/><path d="M13.5 10.5a1.5 1.5 0 0 0-3 0c0 1.5 3 1.5 3 3a1.5 1.5 0 0 1-3 0"/></svg><div style="color:white;font-weight:700;font-size:0.95rem;margin-bottom:16px;">Federal Poverty Level</div><div style="display:flex;align-items:flex-end;justify-content:center;gap:32px;width:100%;"><div style="display:flex;flex-direction:column;align-items:center;"><div style="width:45px;height:70px;background:rgba(255,255,255,0.85);border-radius:4px 4px 0 0;"></div><div style="color:white;font-weight:800;font-size:0.95rem;margin-top:6px;">$2,069</div><div style="color:rgba(255,255,255,0.7);font-size:0.75rem;margin-bottom:4px;white-space:nowrap;">1 person</div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div style="display:flex;flex-direction:column;align-items:center;"><div style="width:45px;height:95px;background:rgba(255,255,255,0.85);border-radius:4px 4px 0 0;"></div><div style="color:white;font-weight:800;font-size:0.95rem;margin-top:6px;">$2,797</div><div style="color:rgba(255,255,255,0.7);font-size:0.75rem;margin-bottom:4px;white-space:nowrap;">2 people</div><svg width="24" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 21v-2a4 4 0 0 0-4-4H4a4 4 0 0 0-4 4v2"/><circle cx="7" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-4-4h-2"/><circle cx="17" cy="7" r="4"/></svg></div></div></div></div></div></div><div style="display:flex;gap:10px;align-items:flex-start;"><span style="display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;background:rgba(255,255,255,0.25);color:white;border-radius:50%;font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span><div style="color:white;font-weight:700;font-size:1rem;text-decoration:underline;text-underline-offset:3px;line-height:1.4;">Refugees, asylum seekers, trafficking victims, and some domestic violence survivors</div></div></div>', moreContent: '<div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;"><span style="display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;background:var(--accent);color:white;border-radius:50%;font-weight:800;font-size:0.85rem;">1</span><span>Freezes provider taxes at their current levels, banning any new taxes or increases, and will gradually lower the maximum tax rate for Medicaid expansion states from 6% to 3.5% by 2032.</span></div><div style="display:flex;gap:12px;align-items:flex-start;"><span style="display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;background:var(--accent);color:white;border-radius:50%;font-weight:800;font-size:0.85rem;">2</span><span>Caps new state-directed payments at Medicare rates (100-110%), with existing higher payments phased down starting in 2028.</span></div>' },
+            { source:'hr1', date: '2026-10-01', title: 'First Major Changes', sections: [{heading: 'Emergency Medicaid match drops (No impact on Hawai\u02BBi)', before: 'The federal government paid about 90% of emergency care costs for some noncitizens in certain states.', after: 'The federal government pays a smaller share (often around 50–70% depending on the state). States must pay more out of their own pocket.'}, {heading: 'Fewer immigrants qualify for full Medicaid/CHIP', before: 'Many types of lawfully present immigrants could get full Medicaid or CHIP benefits with federal funding.', after: 'Only a few groups still qualify—mainly green card holders, certain Cuban/Haitian entrants, and citizens of Pacific Island nations with U.S. agreements (COFA).'}, {heading: 'Who loses coverage', note: 'Refugees, asylees, trafficking victims, and some domestic violence survivors no longer qualify for federally funded full Medicaid—unless their state pays for it separately or they fit a narrow exception (like being a child or pregnant in certain states).'}], secondCard: '<div style="text-align:center;"><div style="color:white;font-size:1.4rem;font-weight:800;margin-bottom:6px;">1,200 – 2,400</div><div style="color:rgba(255,255,255,0.85);font-size:0.9rem;">members lose coverage</div></div>' },
+            { source:'hr1', date: '2026-12-31', title: 'Year-End Transition (ACA expansion adults)', sections: [{heading: 'Work requirements begin', before: 'You could stay on Medicaid expansion without proving you had a job or were doing certain activities.', after: 'Adults ages 19–64 on Medicaid expansion must prove they’re doing at least <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">80 hours per month</span> of work, job training, school (at least half-time), or community service to keep their coverage.'}, {heading: 'Who’s exempt', note: 'Pregnant women, people with disabilities, full-time caregivers, people in treatment programs, and a few other groups don’t have to meet this requirement.'}, {heading: 'Eligibility checks happen twice as often', before: 'States checked if you still qualified for Medicaid once every 12 months.', after: 'States must check every <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">6 months</span> for adults on Medicaid expansion.<br><br><strong>What this means:</strong> More paperwork, more chances to accidentally lose coverage if you miss a form or deadline.'}, {heading: '\u26a0\ufe0f If you lose Medicaid for not meeting work requirements', note: 'You also can’t get subsidized insurance on the ACA Marketplace (Healthcare.gov). This creates a coverage gap where some people may have no affordable option.'}], secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:6px;font-size:1.3rem;">Work Requirements</h3><div style="color:white;font-size:2rem;font-weight:800;margin-bottom:16px;">80 hrs/month</div><div style="display:flex;justify-content:space-around;flex-wrap:wrap;gap:12px;"><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">Work</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 12l-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/><path d="M17.64 15L22 10.36"/><path d="M20.91 11.7l-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">Training</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="m6 12 4 2 8-4"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">School*</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">Service</span></div></div><div style="color:rgba(255,255,255,0.8);font-size:0.75rem;font-weight:500;margin-top:14px;">*Enrolled at least half-time</div></div>', thirdCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:16px;font-size:1.2rem;">Eligibility Checks</h3><div class="elig-compare" style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;"><div style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.4);border-radius:10px;padding:12px 16px;text-align:center;min-width:110px;"><div style="color:rgba(255,255,255,0.7);font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Before</div><div style="display:flex;align-items:baseline;justify-content:center;gap:4px;white-space:nowrap;"><span style="color:rgba(255,255,255,0.7);font-size:0.8rem;">Every</span><span style="color:white;font-size:1.8rem;font-weight:800;line-height:1;">12</span><span style="color:rgba(255,255,255,0.8);font-size:0.8rem;">mo</span></div></div><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg><div style="background:rgba(255,255,255,0.3);border:2px solid white;border-radius:10px;padding:12px 16px;text-align:center;min-width:110px;"><div style="color:white;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">After</div><div style="display:flex;align-items:baseline;justify-content:center;gap:4px;white-space:nowrap;"><span style="color:rgba(255,255,255,0.7);font-size:0.8rem;">Every</span><span style="color:white;font-size:1.8rem;font-weight:800;line-height:1;">6</span><span style="color:rgba(255,255,255,0.9);font-size:0.8rem;">mo</span></div></div></div></div>' },
             { source:'hr1', date: '2027-01-01', title: 'New Eligibility Standards', desc: 'Full implementation of revised Medicaid eligibility standards. All new applications processed under updated guidelines.', secondCard: '19,000 to 38,000 members will potentially be at risk of losing Medicaid coverage' },
-            { source:'hr1', date: '2027-10-01', title: 'Provider Tax Caps Start Dropping', sections: [{heading: 'Provider tax caps start dropping (expansion states only)', before: 'States that expanded Medicaid could tax hospitals/providers up to 6% to help fund Medicaid.', after: 'That 6% cap starts dropping by <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">0.5% per year</span> until it reaches <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">3.5%</span> by 2032.<br><br><strong>What this means:</strong> Expansion states lose a key way to raise money for Medicaid—they’ll have less flexibility to fund their programs.'}], secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:25px;font-size:1.2rem;">Less tax money from hospitals</h3><div style="display:flex;justify-content:space-around;align-items:flex-end;height:160px;padding-top:50px;"><div style="display:flex;flex-direction:column;align-items:center;"><div style="width:60px;height:90px;background:rgba(255,255,255,0.3);border:2px solid white;border-radius:4px;"></div><div style="color:white;font-weight:bold;font-size:1.1rem;margin-top:8px;">6%</div><div style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin-top:2px;">Before</div></div><div style="color:rgba(255,255,255,0.5);font-size:1.8rem;align-self:center;margin-bottom:30px;">→</div><div style="display:flex;flex-direction:column;align-items:center;position:relative;"><div style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.5);border-radius:6px;padding:2px 8px;color:white;font-size:0.7rem;font-weight:800;letter-spacing:1px;margin-bottom:4px;">CAP by 2032</div><div style="width:80px;height:2px;background:white;margin-bottom:4px;"></div><div style="width:60px;height:52px;background:rgba(255,255,255,0.3);border:2px solid white;border-radius:4px;"></div><div style="color:white;font-weight:bold;font-size:1.1rem;margin-top:8px;">3.5%</div><div style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin-top:2px;">By 2032</div></div></div></div>' },
+            { source:'hr1', date: '2027-10-01', title: 'Provider Tax Caps Start Dropping', sections: [{heading: 'Provider tax caps start dropping (expansion states only)', before: 'States that expanded Medicaid could tax hospitals/providers up to 6% to help fund Medicaid.', after: 'That 6% cap starts dropping by <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">0.5% per year</span> until it reaches <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">3.5%</span> by 2032.<br><br><strong>What this means:</strong> Expansion states lose a key way to raise money for Medicaid—they’ll have less flexibility to fund their programs.'}], secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:25px;font-size:1.2rem;">Less tax money from hospitals</h3><div style="display:flex;justify-content:space-around;align-items:flex-end;height:160px;padding-top:50px;"><div style="display:flex;flex-direction:column;align-items:center;"><div style="width:60px;height:90px;background:rgba(255,255,255,0.3);border:2px solid white;border-radius:4px;"></div><div style="color:white;font-weight:bold;font-size:1.1rem;margin-top:8px;">6%</div><div style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin-top:2px;">Before</div></div><div style="color:rgba(255,255,255,0.5);font-size:1.8rem;align-self:center;margin-bottom:30px;">→</div><div style="display:flex;flex-direction:column;align-items:center;position:relative;"><div style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.5);border-radius:6px;padding:2px 8px;color:white;font-size:0.75rem;font-weight:800;letter-spacing:1px;margin-bottom:4px;">CAP by 2032</div><div style="width:80px;height:2px;background:white;margin-bottom:4px;"></div><div style="width:60px;height:52px;background:rgba(255,255,255,0.3);border:2px solid white;border-radius:4px;"></div><div style="color:white;font-weight:bold;font-size:1.1rem;margin-top:8px;">3.5%</div><div style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin-top:2px;">By 2032</div></div></div></div>' },
             { source:'hr1', date: '2028-01-01', title: 'Expanded Requirements', sections: [{heading: 'State-directed payments to providers start shrinking', before: 'States could pay hospitals and other providers extra money on top of regular Medicaid rates—sometimes well above Medicare rates.', after: 'States must cut those extra payments by <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">10 percentage points per year</span> until they reach 100% of Medicare rates (or 110% for non-expansion states).<br><br><strong>What this means:</strong> Hospitals and providers that relied on these extra payments will get less money each year, which could affect services.'}, {heading: 'Home equity limits change for long-term care', before: 'States had varying rules about how much your home could be worth and still qualify for Medicaid nursing home care.', after: 'States can set home equity limits up to <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">$1 million</span> for non-farm homes and <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">$750,000–$1 million</span> for homes on farmland.<br><br><strong>What this means:</strong> Some people with expensive homes may no longer qualify for Medicaid long-term care unless they sell or reduce their home equity.'}, ] },
-            { source:'hr1', date: '2028-10-01', title: 'Mid-Year Adjustments', sections: [{heading: 'States must charge copays for some Medicaid expansion adults', before: 'States could choose whether to charge copays to Medicaid expansion enrollees.', after: 'States <strong>must</strong> charge copays to expansion adults earning more than 100% of the federal poverty level (~$15,560/year for one person).<br><br>• Copays can be <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">up to $35 per service</span><br>• Total out-of-pocket costs capped at <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">5% of family income</span> per year<br>• <strong>Exempt services (no copays):</strong> primary care, mental health, emergency care, prenatal care, family planning, and federally qualified health center visits<br><br><strong>What this means:</strong> People on Medicaid expansion who were used to free or nearly-free care will now have to pay something each time they see a specialist, get lab work, or use certain services—which may cause some to skip care.'}, {heading: 'Provider tax caps drop further (expansion states)', before: 'Expansion states could tax hospitals/providers up to 5.5% (as of Oct. 2027).', after: 'The cap drops to <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">5%</span>, continuing to fall each year until it hits 3.5% in 2032.<br><br><strong>What this means:</strong> States lose more flexibility to raise Medicaid funds from providers.'}, {heading: 'State-directed payment cuts continue', before: 'Hospitals were getting extra payments above Medicare rates, cut by 10 percentage points each year since 2028.', after: 'Those payments drop <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">another 10 percentage points</span> closer to the Medicare rate cap.<br><br><strong>What this means:</strong> Hospitals continue getting less supplemental money from states each year.'}], secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:8px;font-size:1.1rem;font-weight:800;">Mandatory copays up to $35</h3><p style="color:rgba(255,255,255,0.85);font-size:0.82rem;margin-bottom:18px;">for people above the poverty line — <span style="background:rgba(255,255,255,0.25);padding:2px 7px;border-radius:4px;font-weight:700;">applies to some services (e.g. specialists and lab work)</span></p><div style="display:flex;justify-content:center;gap:32px;"><div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6l1 4H8L9 2z"/><rect x="6" y="6" width="12" height="14" rx="2"/><path d="M9 11h6M9 14h4"/></svg></div><div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v5l-4 8a1 1 0 0 0 .9 1.5h10.2a1 1 0 0 0 .9-1.5l-4-8V3"/><path d="M8 16h2M10 13h4"/></svg></div></div></div>' },
+            { source:'hr1', date: '2028-10-01', title: 'Mid-Year Adjustments', sections: [{heading: 'States must charge copays for some Medicaid expansion adults', before: 'States could choose whether to charge copays to Medicaid expansion enrollees.', after: 'States <strong>must</strong> charge copays to expansion adults earning more than 100% of the federal poverty level (~$15,560/year for one person).<br><br>• Copays can be <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">up to $35 per service</span><br>• Total out-of-pocket costs capped at <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">5% of family income</span> per year<br>• <strong>Exempt services (no copays):</strong> primary care, mental health, emergency care, prenatal care, family planning, and federally qualified health center visits<br><br><strong>What this means:</strong> People on Medicaid expansion who were used to free or nearly-free care will now have to pay something each time they see a specialist, get lab work, or use certain services—which may cause some to skip care.'}, {heading: 'Provider tax caps drop further (expansion states)', before: 'Expansion states could tax hospitals/providers up to 5.5% (as of Oct. 2027).', after: 'The cap drops to <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">5%</span>, continuing to fall each year until it hits 3.5% in 2032.<br><br><strong>What this means:</strong> States lose more flexibility to raise Medicaid funds from providers.'}, {heading: 'State-directed payment cuts continue', before: 'Hospitals were getting extra payments above Medicare rates, cut by 10 percentage points each year since 2028.', after: 'Those payments drop <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">another 10 percentage points</span> closer to the Medicare rate cap.<br><br><strong>What this means:</strong> Hospitals continue getting less supplemental money from states each year.'}], secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:8px;font-size:1.1rem;font-weight:800;">Mandatory copays up to $35</h3><p style="color:rgba(255,255,255,0.85);font-size:0.875rem;margin-bottom:18px;">for people above the poverty line — <span style="background:rgba(255,255,255,0.25);padding:2px 7px;border-radius:4px;font-weight:700;">applies to some services (e.g. specialists and lab work)</span></p><div style="display:flex;justify-content:center;gap:32px;"><div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6l1 4H8L9 2z"/><rect x="6" y="6" width="12" height="14" rx="2"/><path d="M9 11h6M9 14h4"/></svg></div><div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v5l-4 8a1 1 0 0 0 .9 1.5h10.2a1 1 0 0 0 .9-1.5l-4-8V3"/><path d="M8 16h2M10 13h4"/></svg></div></div></div>' },
             { source:'hr1', date: '2030-01-01', title: 'Final Phase Implementation', sections: [{heading: 'Enrollment simplification rules finally take effect', before: 'H.R. 1 delayed Obama/Biden-era rules that were supposed to make it easier to sign up for and keep Medicaid.', after: 'Those delayed rules <strong>finally kick in</strong>—10 years late.<br><br>These rules will:<br>• Let states automatically renew more people without paperwork<br>• Make it easier to move between Medicaid and CHIP<br>• Reduce barriers for kids to get CHIP coverage<br>• Remove the requirement to apply for other benefits first<br><br><strong>Why it matters:</strong> Until 2030, states can keep using harder, more complicated enrollment processes that cause more people to lose coverage due to paperwork problems.'}, {heading: 'State-directed payments keep shrinking', before: 'Hospitals were getting supplemental payments above Medicare rates, cut by 10 percentage points each year since 2028.', after: 'Those payments drop <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">another 10 percentage points</span> closer to the Medicare rate cap.'}, {heading: 'Provider tax cap drops further (expansion states)', before: 'Expansion states could tax providers up to 4.5%.', after: 'The cap drops to <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">4%</span>, continuing toward the 3.5% floor in 2032.<br><br><strong>What this means:</strong> States have even less ability to raise money from hospitals/providers to fund Medicaid.'}, {heading: 'Rural health transformation fund continues', note: 'The $50 billion fund created by H.R. 1 distributes its final <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">$10 billion</span> allotment in fiscal year 2030 for states with approved rural health transformation plans.'}] },
         ];
 
         const snapData = [
             { source:'hr1', date: '2025-07-04', title: 'Initial Implementation', desc: 'HR1 legislation introduces major changes to SNAP, including the elimination of SNAP-Ed programs, expanded work requirements for adults who are able to work, new restrictions for immigrants, and increased state administrative costs.' },
-            { source:'hr1', date: '2025-10-01', title: 'SNAP-Ed Eliminated', desc: 'Hawai\u02BBi will lose over <span style="background:var(--accent-snap);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">$2.5 million</span> for SNAP education programs across the state.', secondCard: '<div style="margin-top:-15px;"><h3 style="color:white;font-size:1.65rem;margin-bottom:16px;">SNAP-Ed Programs</h3><div style="display:flex;flex-direction:column;gap:16px;"><div style="display:flex;align-items:flex-start;gap:12px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5"/></svg><div><div style="color:white;font-weight:700;font-size:0.9rem;margin-bottom:4px;">Direct education</div><div style="color:rgba(255,255,255,0.85);font-size:0.8rem;line-height:1.3;">Nutrition and cooking classes, physical activity promotion, gardening programs</div></div></div><div style="display:flex;align-items:flex-start;gap:12px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg><div><div style="color:white;font-weight:700;font-size:0.9rem;margin-bottom:4px;">Policy and environment work</div><div style="color:rgba(255,255,255,0.85);font-size:0.8rem;line-height:1.3;">School wellness, farm-to-keiki, active transportation, community gardens</div></div></div><div style="display:flex;align-items:flex-start;gap:12px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M5.5 11.5c-2-4-1-7 1-8.5a1 1 0 0 1 1.5.5c1.5 2 1.5 5 .5 8"/><path d="M6.5 3.5l-.5-1.5h1.5l-.5 1.5"/><path d="M6 11.5c-1-3-.5-6 .8-7.5"/><path d="M8.5 11.5a1.5 1.5 0 0 1-.5-2.5 2 2 0 0 1 2-2 2 2 0 0 1 2.5 0 2 2 0 0 1 2 2 1.5 1.5 0 0 1-1 2.5"/><path d="M12 11.5v-3.5"/><path d="M12 10l-1.5-1"/><path d="M12 8.5l1.5-1"/><path d="M14.5 11.5v-4.5h3v4.5"/><path d="M14.5 7l1.5-2h3l.5.5"/><path d="M17.5 7l1.5-2"/><path d="M17.5 10.5v-3.5l2-1.5v4.5"/><path d="M16 5v-1h2v1"/><path d="M5 11l1.5 1 1.5-1 1.5 1 1.5-1 1.5 1 1.5-1 1.5 1 1.5-1v9a1 1 0 0 1-1 1h-10a1 1 0 0 1-1-1z"/><path d="M17 11l3-1.5v9a1 1 0 0 1-1 1l-2 1.5"/><path d="M17 21l1.5-1.5v-9.25"/></svg><div><div style="color:white;font-weight:700;font-size:0.9rem;margin-bottom:4px;">Food access initiatives</div><div style="color:rgba(255,255,255,0.85);font-size:0.8rem;line-height:1.3;">EBT at farmers\u0027 markets, DA BUX, produce prescriptions, food banks</div></div></div></div></div></div>' },
-            { source:'hr1', date: '2025-11-01', title: 'Major SNAP Restrictions Begin', desc: 'Restricted utility deductions and new immigrant restrictions take effect.', moreContent: '<strong style="color:var(--accent-snap);">Restricted Utility Deductions</strong><p style="margin:6px 0 14px;">Energy assistance programs will be limited to kūpuna and people with disabilities.</p><strong style="color:var(--accent-snap);">New Immigrant Restrictions</strong><p style="margin:6px 0 14px;">Refugees and asylum seekers will lose SNAP eligibility as they apply or recertify. COFA citizens and Cuban/Haitian immigrants will still have access.</p>' }, { source:'hr1', date: '2026-10-01', title: 'Expanded Work Requirements (ABAWD)', desc: 'The ABAWD age range expands from 18–54 to 18–64, and work requirements now also apply to households with dependent children aged 14 and older.', secondCard: '<div><div style="margin-bottom:22px;"><h3 style="color:white;font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;margin:0 0 8px;">Expanded Work Requirements</h3><div style="color:rgba(255,255,255,0.7);font-size:0.85rem;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;">Previously exempt groups now impacted</div></div><div style="display:flex;flex-direction:column;gap:12px;"><div style="background:rgba(255,255,255,0.08);backdrop-filter:blur(4px);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:16px;border:1px solid rgba(255,255,255,0.1);"><div style="min-width:44px;height:44px;background:rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div style="flex:1;"><div style="color:rgba(255,255,255,0.65);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Adults ages 55\u201364</div><div style="display:flex;align-items:baseline;gap:6px;"><span style="color:white;font-weight:800;font-size:1.6rem;letter-spacing:-0.02em;">16,570</span><span style="color:rgba(255,255,255,0.6);font-size:0.85rem;">individuals</span></div></div></div><div style="background:rgba(255,255,255,0.08);backdrop-filter:blur(4px);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:16px;border:1px solid rgba(255,255,255,0.1);"><div style="min-width:44px;height:44px;background:rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div style="flex:1;"><div style="color:rgba(255,255,255,0.65);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Households with children 14\u201318</div><div style="display:flex;align-items:baseline;gap:6px;"><span style="color:white;font-weight:800;font-size:1.6rem;letter-spacing:-0.02em;">10,303</span><span style="color:rgba(255,255,255,0.6);font-size:0.85rem;">households</span></div></div></div><div style="background:rgba(255,255,255,0.08);backdrop-filter:blur(4px);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:16px;border:1px solid rgba(255,255,255,0.1);"><div style="min-width:44px;height:44px;background:rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div style="flex:1;"><div style="color:rgba(255,255,255,0.65);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Other vulnerable groups</div><div style="color:rgba(255,255,255,0.9);font-size:0.95rem;line-height:1.4;">Veterans, homeless individuals, former foster youth</div></div></div></div></div>', thirdCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:6px;font-size:1.3rem;">Work Requirements</h3><div style="color:white;font-size:2rem;font-weight:800;margin-bottom:16px;">80 hrs/month</div><div style="display:flex;justify-content:space-around;flex-wrap:wrap;gap:12px;margin-bottom:16px;"><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">Work</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 12l-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/><path d="M17.64 15L22 10.36"/><path d="M20.91 11.7l-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">Training</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="m6 12 4 2 8-4"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">School</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">Service</span></div></div><div style="background:rgba(0,0,0,0.15);padding:12px;border-radius:8px;border:2px solid rgba(255,255,255,0.2);"><div style="display:flex;align-items:center;justify-content:center;gap:8px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><div style="color:rgba(255,255,255,0.9);font-size:0.85rem;line-height:1.4;text-align:left;">If you do not meet that minimum, you will generally limited to <strong style="color:white;">3 months of SNAP in a 36-month period</strong></div></div></div></div></div>' },
+            { source:'hr1', date: '2025-10-01', title: 'SNAP-Ed Eliminated', desc: 'Hawai\u02BBi will lose over <span style="background:var(--accent-snap);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">$2.5 million</span> for SNAP education programs across the state.', secondCard: '<div style="margin-top:-15px;text-align:left;"><h3 style="color:white;font-size:1.65rem;margin-bottom:16px;">SNAP-Ed Programs</h3><div style="display:flex;flex-direction:column;gap:16px;"><div style="display:flex;align-items:flex-start;gap:12px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5"/></svg><div><div style="color:white;font-weight:700;font-size:0.9rem;margin-bottom:4px;">Direct education</div><div style="color:rgba(255,255,255,0.85);font-size:0.8rem;line-height:1.3;">Nutrition and cooking classes, physical activity promotion, gardening programs</div></div></div><div style="display:flex;align-items:flex-start;gap:12px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg><div><div style="color:white;font-weight:700;font-size:0.9rem;margin-bottom:4px;">Policy and environment work</div><div style="color:rgba(255,255,255,0.85);font-size:0.8rem;line-height:1.3;">School wellness, farm-to-keiki, active transportation, community gardens</div></div></div><div style="display:flex;align-items:flex-start;gap:12px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M5.5 11.5c-2-4-1-7 1-8.5a1 1 0 0 1 1.5.5c1.5 2 1.5 5 .5 8"/><path d="M6.5 3.5l-.5-1.5h1.5l-.5 1.5"/><path d="M6 11.5c-1-3-.5-6 .8-7.5"/><path d="M8.5 11.5a1.5 1.5 0 0 1-.5-2.5 2 2 0 0 1 2-2 2 2 0 0 1 2.5 0 2 2 0 0 1 2 2 1.5 1.5 0 0 1-1 2.5"/><path d="M12 11.5v-3.5"/><path d="M12 10l-1.5-1"/><path d="M12 8.5l1.5-1"/><path d="M14.5 11.5v-4.5h3v4.5"/><path d="M14.5 7l1.5-2h3l.5.5"/><path d="M17.5 7l1.5-2"/><path d="M17.5 10.5v-3.5l2-1.5v4.5"/><path d="M16 5v-1h2v1"/><path d="M5 11l1.5 1 1.5-1 1.5 1 1.5-1 1.5 1 1.5-1 1.5 1 1.5-1v9a1 1 0 0 1-1 1h-10a1 1 0 0 1-1-1z"/><path d="M17 11l3-1.5v9a1 1 0 0 1-1 1l-2 1.5"/><path d="M17 21l1.5-1.5v-9.25"/></svg><div><div style="color:white;font-weight:700;font-size:0.9rem;margin-bottom:4px;">Food access initiatives</div><div style="color:rgba(255,255,255,0.85);font-size:0.8rem;line-height:1.3;">EBT at farmers\u0027 markets, DA BUX, produce prescriptions, food banks</div></div></div></div></div></div>' },
+            { source:'hr1', date: '2025-11-01', title: 'Major SNAP Restrictions Begin', desc: 'Restricted utility deductions and new immigrant restrictions take effect.', moreContent: '<strong style="color:var(--accent-snap);">Restricted Utility Deductions</strong><p style="margin:6px 0 14px;">Energy assistance programs will be limited to kūpuna and people with disabilities.</p><strong style="color:var(--accent-snap);">New Immigrant Restrictions</strong><p style="margin:6px 0 14px;">Refugees and asylum seekers will lose SNAP eligibility as they apply or recertify. COFA citizens and Cuban/Haitian immigrants will still have access.</p>' }, { source:'hr1', date: '2026-10-01', title: 'Expanded Work Requirements (ABAWD)', desc: 'The ABAWD age range expands from 18–54 to 18–64, and work requirements now also apply to households with dependent children aged 14 and older.', secondCard: '<div><div style="margin-bottom:22px;"><h3 style="color:white;font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;margin:0 0 8px;">Expanded Work Requirements</h3><div style="color:rgba(255,255,255,0.7);font-size:0.85rem;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;">Previously exempt groups now impacted</div></div><div style="display:flex;flex-direction:column;gap:12px;"><div style="background:rgba(255,255,255,0.08);backdrop-filter:blur(4px);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:16px;border:1px solid rgba(255,255,255,0.1);"><div style="min-width:44px;height:44px;background:rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div style="flex:1;"><div style="color:rgba(255,255,255,0.65);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Adults ages 55\u201364</div><div style="display:flex;align-items:baseline;gap:6px;"><span style="color:white;font-weight:800;font-size:1.6rem;letter-spacing:-0.02em;">16,570</span><span style="color:rgba(255,255,255,0.6);font-size:0.85rem;">individuals</span></div></div></div><div style="background:rgba(255,255,255,0.08);backdrop-filter:blur(4px);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:16px;border:1px solid rgba(255,255,255,0.1);"><div style="min-width:44px;height:44px;background:rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div style="flex:1;"><div style="color:rgba(255,255,255,0.65);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Households with children 14\u201318</div><div style="display:flex;align-items:baseline;gap:6px;"><span style="color:white;font-weight:800;font-size:1.6rem;letter-spacing:-0.02em;">10,303</span><span style="color:rgba(255,255,255,0.6);font-size:0.85rem;">households</span></div></div></div><div style="background:rgba(255,255,255,0.08);backdrop-filter:blur(4px);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:16px;border:1px solid rgba(255,255,255,0.1);"><div style="min-width:44px;height:44px;background:rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div style="flex:1;"><div style="color:rgba(255,255,255,0.65);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Other vulnerable groups</div><div style="color:rgba(255,255,255,0.9);font-size:0.95rem;line-height:1.4;">Veterans, homeless individuals, former foster youth</div></div></div></div></div>', thirdCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:6px;font-size:1.3rem;">Work Requirements</h3><div style="color:white;font-size:2rem;font-weight:800;margin-bottom:16px;">80 hrs/month</div><div style="display:flex;justify-content:space-around;flex-wrap:wrap;gap:12px;margin-bottom:16px;"><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">Work</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 12l-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/><path d="M17.64 15L22 10.36"/><path d="M20.91 11.7l-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">Training</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="m6 12 4 2 8-4"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">School</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg><span style="color:rgba(255,255,255,0.8);font-size:0.75rem;">Service</span></div></div><div style="background:rgba(0,0,0,0.15);padding:12px;border-radius:8px;border:2px solid rgba(255,255,255,0.2);"><div style="display:flex;align-items:center;justify-content:center;gap:8px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><div style="color:rgba(255,255,255,0.9);font-size:0.875rem;line-height:1.4;text-align:left;">If you do not meet that minimum, you will generally be limited to <strong style="color:white;">3 months of SNAP in a 36-month period</strong></div></div></div></div></div>' },
             { source:'hr1', date: '2026-10-01', title: 'Administrative Cost Increase', desc: 'States must pay <span style="background:var(--accent-snap);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">75%</span> of SNAP administrative costs (up from 50%). For Hawai\u02BBi, this means paying around <span style="background:var(--accent-snap);color:white;padding:2px 8px;border-radius:4px;font-weight:600;">$14.8 million more</span>.', moreContent: '<strong>Allotments Frozen:</strong> Allotments determined by the Thrifty Food Plan will not see an increase; future changes only account for inflation.', secondCard: '<div><h3 style="color:white;font-size:1.65rem;margin-bottom:16px;">Cost Increase Breakdown</h3><div style="display:flex;flex-direction:column;gap:12px;"><div><div style="color:rgba(255,255,255,0.9);font-size:0.85rem;margin-bottom:6px;">Before: State paid 50%</div><div style="display:flex;align-items:center;height:28px;border-radius:4px;overflow:hidden;"><div style="flex:0 0 50%;height:100%;background:rgba(255,255,255,0.35);transition:all 0.3s ease;cursor:pointer;" onmouseover="this.style.background=\u0027rgba(255,255,255,0.5)\u0027;this.style.transform=\u0027scale(1.02)\u0027" onmouseout="this.style.background=\u0027rgba(255,255,255,0.35)\u0027;this.style.transform=\u0027scale(1)\u0027"></div><div style="flex:0 0 50%;height:100%;background:rgba(255,255,255,0.15);transition:all 0.3s ease;cursor:pointer;" onmouseover="this.style.background=\u0027rgba(255,255,255,0.25)\u0027;this.style.transform=\u0027scale(1.02)\u0027" onmouseout="this.style.background=\u0027rgba(255,255,255,0.15)\u0027;this.style.transform=\u0027scale(1)\u0027"></div></div></div><div><div style="color:rgba(255,255,255,0.9);font-size:0.85rem;margin-bottom:6px;">After: State pays 75%</div><div style="display:flex;align-items:center;height:28px;border-radius:4px;overflow:hidden;"><div style="flex:0 0 75%;height:100%;background:rgba(255,255,255,0.55);transition:all 0.3s ease;cursor:pointer;" onmouseover="this.style.background=\u0027rgba(255,255,255,0.7)\u0027;this.style.transform=\u0027scale(1.02)\u0027" onmouseout="this.style.background=\u0027rgba(255,255,255,0.55)\u0027;this.style.transform=\u0027scale(1)\u0027"></div><div style="flex:0 0 25%;height:100%;background:rgba(255,255,255,0.15);transition:all 0.3s ease;cursor:pointer;" onmouseover="this.style.background=\u0027rgba(255,255,255,0.25)\u0027;this.style.transform=\u0027scale(1.02)\u0027" onmouseout="this.style.background=\u0027rgba(255,255,255,0.15)\u0027;this.style.transform=\u0027scale(1)\u0027"></div></div></div><div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.2);"><div style="color:white;font-weight:700;font-size:0.95rem;text-align:center;">+25% State Share</div><div style="color:rgba(255,255,255,0.85);font-size:0.8rem;text-align:center;margin-top:2px;">$14.8M additional cost</div></div></div></div>' },
-            { source:'usda', date: '2026-10-01', title: 'SNAP Monthly Allotment Decrease', desc: 'A USDA re-evaluation of the Thrifty Food Plan — the federal formula that sets benefit levels nationwide — lowers monthly SNAP benefits for Hawaiʻi households, phasing down each October 1 (2026, 2027, and 2028).', moreContent: 'On average, benefits fall about $8 per person per month. A single-person household sees roughly $11 less, while a family of four sees about $34 less.', secondCard: '<div style="text-align:center;"><h3 style="color:white;font-size:1.2rem;margin-bottom:4px;">Maximum Monthly Allotment</h3><div style="color:rgba(255,255,255,0.8);font-size:0.8rem;margin-bottom:18px;">Family of four in Hawaiʻi</div><div style="display:flex;align-items:flex-end;justify-content:center;gap:6px;"><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1;"><div style="color:white;font-weight:800;font-size:0.7rem;margin-bottom:4px;">$1,794</div><div style="width:100%;max-width:34px;height:135px;background:rgba(255,255,255,0.32);border:1px solid rgba(255,255,255,0.55);border-radius:4px 4px 0 0;"></div><div style="color:rgba(255,255,255,0.75);font-size:0.6rem;margin-top:6px;">FFY23</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1;"><div style="color:white;font-weight:800;font-size:0.7rem;margin-bottom:4px;">$1,759</div><div style="width:100%;max-width:34px;height:132px;background:rgba(255,255,255,0.30);border:1px solid rgba(255,255,255,0.5);border-radius:4px 4px 0 0;"></div><div style="color:rgba(255,255,255,0.75);font-size:0.6rem;margin-top:6px;">FFY24</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1;"><div style="color:white;font-weight:800;font-size:0.7rem;margin-bottom:4px;">$1,723</div><div style="width:100%;max-width:34px;height:129px;background:rgba(255,255,255,0.30);border:1px solid rgba(255,255,255,0.5);border-radius:4px 4px 0 0;"></div><div style="color:rgba(255,255,255,0.75);font-size:0.6rem;margin-top:6px;">FFY25</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1;"><div style="color:white;font-weight:800;font-size:0.7rem;margin-bottom:4px;">$1,689</div><div style="width:100%;max-width:34px;height:127px;background:rgba(255,255,255,0.30);border:1px solid rgba(255,255,255,0.5);border-radius:4px 4px 0 0;"></div><div style="color:rgba(255,255,255,0.75);font-size:0.6rem;margin-top:6px;">FFY26</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1;"><div style="color:white;font-weight:800;font-size:0.7rem;margin-bottom:4px;">$1,655</div><div style="width:100%;max-width:34px;height:124px;background:rgba(255,255,255,0.30);border:1px solid rgba(255,255,255,0.5);border-radius:4px 4px 0 0;"></div><div style="color:rgba(255,255,255,0.75);font-size:0.6rem;margin-top:6px;">FFY27*</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1;"><div style="color:white;font-weight:800;font-size:0.7rem;margin-bottom:4px;">$1,622</div><div style="width:100%;max-width:34px;height:122px;background:rgba(255,255,255,0.30);border:1px solid rgba(255,255,255,0.5);border-radius:4px 4px 0 0;"></div><div style="color:rgba(255,255,255,0.75);font-size:0.6rem;margin-top:6px;">FFY28*</div></div></div><div style="color:rgba(255,255,255,0.7);font-size:0.66rem;margin-top:14px;">Source: Hawaiʻi DHS · *projected</div></div>' }, { source:'state', date: '2027-04-01', title: 'SNAP Sugary Soda Restrictions', desc: 'Hawaiʻi submitted a waiver request to the USDA restricting SNAP purchases of soft drinks. The restrictions would apply to all SNAP participants at SNAP-authorized retailers statewide — with no feasibility study, pilot project, or phased implementation before full rollout.', moreContent: 'Definition: a "soft drink" is any nonalcoholic beverage made with carbonated water and sweetened with more than 10 grams of sugar per serving. It does not include any beverage that contains milk, milk products, soy, rice, or other milk substitutes, or that is more than 50% vegetable or fruit juice by volume.', secondCard: '<div><h3 style="color:white;font-size:1.15rem;text-align:center;margin-bottom:14px;">What SNAP could buy under the waiver</h3><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:stretch;"><div style="background:rgba(0,0,0,0.18);border-radius:8px 8px 0 0;padding:9px 10px;display:flex;align-items:center;gap:7px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(214,109,46,0.95);flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></span><span style="color:white;font-weight:800;font-size:0.78rem;line-height:1.15;">Not eligible</span></div><div style="background:rgba(0,0,0,0.18);border-radius:8px 8px 0 0;padding:9px 10px;display:flex;align-items:center;gap:7px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(46,116,168,0.95);flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span style="color:white;font-weight:800;font-size:0.78rem;line-height:1.15;">Still eligible</span></div><div style="background:rgba(255,255,255,0.12);padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Sparkling lemonade</div><div style="background:rgba(255,255,255,0.12);padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Noncarbonated lemonade or powdered lemonade mix</div><div style="background:rgba(255,255,255,0.12);padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Regular soda</div><div style="background:rgba(255,255,255,0.12);padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Sweetened teas, coffees, diet and lower-sugar sodas (e.g., prebiotic sodas), and sports drinks</div><div style="background:rgba(255,255,255,0.12);padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Carbonated juice drinks with less than 50% juice (e.g., sparkling juice cocktail)</div><div style="background:rgba(255,255,255,0.12);padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Carbonated juice drinks with at least 50% juice (e.g., sparkling apple cider) and noncarbonated juice drinks (e.g., cranberry juice cocktail)</div><div style="background:rgba(255,255,255,0.12);border-radius:0 0 8px 8px;padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Carbonated energy drinks</div><div style="background:rgba(255,255,255,0.12);border-radius:0 0 8px 8px;padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Noncarbonated energy drinks</div></div><div style="color:rgba(255,255,255,0.7);font-size:0.66rem;margin-top:12px;text-align:center;">Source: FRAC</div></div>' }, { source:'hr1', date: '2027-10-01', title: 'State Cost-Share Begins', desc: 'For the first time, Hawai\u02BBi must pay for a share of SNAP benefits, depending on the state\u2019s payment error rate.<span style="display:block;margin-top:14px;padding:11px 14px;background:rgba(29,138,78,0.10);border-left:4px solid var(--accent-snap);border-radius:8px;"><span style="display:block;font-weight:700;color:#176b3c;font-size:0.95rem;line-height:1.35;">Hawaiʻi’s payment error rate from FY25 is <span style="background:var(--accent-snap);color:#fff;padding:1px 8px;border-radius:5px;white-space:nowrap;">10.92%</span></span><span style="display:block;color:#7a8a82;font-size:0.74rem;margin-top:5px;">Source: <a href="https://fna-bwbufwdzbabpezgc.z01.azurefd.us/sites/default/files/resource-files/snap-qcfy25-per.pdf" target="_blank" rel="noopener" style="color:#176b3c;text-decoration:underline;">USDA</a></span></span>', moreContent: 'The state can select either the FY25 or FY26 payment error rate to calculate the cost-shift requirement amount. If Hawaiʻi were to use its FY25 PER, it would cost the state around $139M.', secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:16px;font-size:1.65rem;">Cost for Hawai\u02BBi by Error Rate</h3><div style="display:flex;flex-direction:column;gap:10px;"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="color:rgba(255,255,255,0.8);font-size:0.85rem;">6\u20138%</span><span style="color:white;font-weight:800;font-size:1.05rem;">$34.7M</span></div><div style="width:100%;height:20px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;"><div style="width:25%;height:100%;background:rgba(255,255,255,0.4);"></div></div></div><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="color:rgba(255,255,255,0.8);font-size:0.85rem;">8\u201310%</span><span style="color:white;font-weight:800;font-size:1.05rem;">$69.5M</span></div><div style="width:100%;height:20px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;"><div style="width:50%;height:100%;background:rgba(255,255,255,0.5);"></div></div></div><div style="background:rgba(255,255,255,0.16);border:2px solid rgba(255,255,255,0.95);border-radius:10px;padding:11px 12px 12px;box-shadow:0 6px 18px rgba(0,0,0,0.20);"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><span style="color:white;font-weight:800;font-size:0.95rem;">10%+</span><span style="color:white;font-weight:900;font-size:1.3rem;">$139M</span></div><div style="width:100%;height:22px;background:rgba(255,255,255,0.15);border-radius:4px;overflow:hidden;"><div style="width:100%;height:100%;background:#fff;"></div></div><div style="margin-top:9px;text-align:left;"><span style="display:inline-block;background:#fff;color:#176b3c;font-weight:800;font-size:0.66rem;letter-spacing:0.03em;text-transform:uppercase;padding:3px 9px;border-radius:6px;">Hawaiʻi FY25 · 10.92%</span></div></div></div></div>' },
+            { source:'usda', date: '2026-10-01', title: 'SNAP Monthly Allotment Decrease', desc: 'A USDA re-evaluation of the Thrifty Food Plan — the federal formula that sets benefit levels nationwide — lowers monthly SNAP benefits for Hawaiʻi households, phasing down each October 1 (2026, 2027, and 2028).', moreContent: 'On average, benefits fall about $8 per person per month. A single-person household sees roughly $11 less, while a family of four sees about $34 less.', secondCard: '<div style="text-align:center;"><h3 style="color:white;font-size:1.2rem;margin-bottom:4px;">Maximum Monthly Allotment</h3><div style="color:rgba(255,255,255,0.8);font-size:0.8rem;margin-bottom:18px;">Family of four in Hawaiʻi</div><div style="display:flex;align-items:flex-end;justify-content:center;gap:4px;"><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1;"><div style="color:white;font-weight:800;font-size:0.75rem;margin-bottom:4px;">$1,794</div><div style="width:100%;max-width:34px;height:135px;background:rgba(255,255,255,0.32);border:1px solid rgba(255,255,255,0.55);border-radius:4px 4px 0 0;"></div><div style="color:rgba(255,255,255,0.75);font-size:0.75rem;margin-top:6px;">FFY23</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1;"><div style="color:white;font-weight:800;font-size:0.75rem;margin-bottom:4px;">$1,759</div><div style="width:100%;max-width:34px;height:132px;background:rgba(255,255,255,0.30);border:1px solid rgba(255,255,255,0.5);border-radius:4px 4px 0 0;"></div><div style="color:rgba(255,255,255,0.75);font-size:0.75rem;margin-top:6px;">FFY24</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1;"><div style="color:white;font-weight:800;font-size:0.75rem;margin-bottom:4px;">$1,723</div><div style="width:100%;max-width:34px;height:129px;background:rgba(255,255,255,0.30);border:1px solid rgba(255,255,255,0.5);border-radius:4px 4px 0 0;"></div><div style="color:rgba(255,255,255,0.75);font-size:0.75rem;margin-top:6px;">FFY25</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1;"><div style="color:white;font-weight:800;font-size:0.75rem;margin-bottom:4px;">$1,689</div><div style="width:100%;max-width:34px;height:127px;background:rgba(255,255,255,0.30);border:1px solid rgba(255,255,255,0.5);border-radius:4px 4px 0 0;"></div><div style="color:rgba(255,255,255,0.75);font-size:0.75rem;margin-top:6px;">FFY26</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1;"><div style="color:white;font-weight:800;font-size:0.75rem;margin-bottom:4px;">$1,655</div><div style="width:100%;max-width:34px;height:124px;background:rgba(255,255,255,0.30);border:1px solid rgba(255,255,255,0.5);border-radius:4px 4px 0 0;"></div><div style="color:rgba(255,255,255,0.75);font-size:0.75rem;margin-top:6px;">FFY27*</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1;"><div style="color:white;font-weight:800;font-size:0.75rem;margin-bottom:4px;">$1,622</div><div style="width:100%;max-width:34px;height:122px;background:rgba(255,255,255,0.30);border:1px solid rgba(255,255,255,0.5);border-radius:4px 4px 0 0;"></div><div style="color:rgba(255,255,255,0.75);font-size:0.75rem;margin-top:6px;">FFY28*</div></div></div><div style="color:rgba(255,255,255,0.7);font-size:0.75rem;margin-top:14px;">Source: Hawaiʻi DHS · *projected</div></div>' }, { source:'state', date: '2027-04-01', title: 'SNAP Sugary Soda Restrictions', desc: 'Hawaiʻi submitted a waiver request to the USDA restricting SNAP purchases of soft drinks. The restrictions would apply to all SNAP participants at SNAP-authorized retailers statewide — with no feasibility study, pilot project, or phased implementation before full rollout.', moreContent: 'Definition: a "soft drink" is any nonalcoholic beverage made with carbonated water and sweetened with more than 10 grams of sugar per serving. It does not include any beverage that contains milk, milk products, soy, rice, or other milk substitutes, or that is more than 50% vegetable or fruit juice by volume.', secondCard: '<div><h3 style="color:white;font-size:1.15rem;text-align:center;margin-bottom:14px;">What SNAP could buy under the waiver</h3><div class="soda-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:stretch;"><div style="background:rgba(0,0,0,0.18);border-radius:8px 8px 0 0;padding:9px 10px;display:flex;align-items:center;gap:7px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(214,109,46,0.95);flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></span><span style="color:white;font-weight:800;font-size:0.78rem;line-height:1.15;">Not eligible</span></div><div style="background:rgba(0,0,0,0.18);border-radius:8px 8px 0 0;padding:9px 10px;display:flex;align-items:center;gap:7px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(46,116,168,0.95);flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span style="color:white;font-weight:800;font-size:0.78rem;line-height:1.15;">Still eligible</span></div><div style="background:rgba(255,255,255,0.12);padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Sparkling lemonade</div><div style="background:rgba(255,255,255,0.12);padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Noncarbonated lemonade or powdered lemonade mix</div><div style="background:rgba(255,255,255,0.12);padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Regular soda</div><div style="background:rgba(255,255,255,0.12);padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Sweetened teas, coffees, diet and lower-sugar sodas (e.g., prebiotic sodas), and sports drinks</div><div style="background:rgba(255,255,255,0.12);padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Carbonated juice drinks with less than 50% juice (e.g., sparkling juice cocktail)</div><div style="background:rgba(255,255,255,0.12);padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Carbonated juice drinks with at least 50% juice (e.g., sparkling apple cider) and noncarbonated juice drinks (e.g., cranberry juice cocktail)</div><div style="background:rgba(255,255,255,0.12);border-radius:0 0 8px 8px;padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Carbonated energy drinks</div><div style="background:rgba(255,255,255,0.12);border-radius:0 0 8px 8px;padding:9px 10px;color:rgba(255,255,255,0.92);font-size:0.72rem;line-height:1.3;">Noncarbonated energy drinks</div></div><div style="color:rgba(255,255,255,0.7);font-size:0.75rem;margin-top:12px;text-align:center;">Source: FRAC</div></div>' }, { source:'hr1', date: '2027-10-01', title: 'State Cost-Share Begins', desc: 'For the first time, Hawai\u02BBi must pay for a share of SNAP benefits, depending on the state\u2019s payment error rate.<span style="display:block;margin-top:14px;padding:11px 14px;background:rgba(29,138,78,0.10);border-left:4px solid var(--accent-snap);border-radius:8px;"><span style="display:block;font-weight:700;color:#176b3c;font-size:0.95rem;line-height:1.35;">Hawaiʻi’s payment error rate from FY25 is <span style="background:var(--accent-snap);color:#fff;padding:1px 8px;border-radius:5px;white-space:nowrap;">10.92%</span></span><span style="display:block;color:#7a8a82;font-size:0.75rem;margin-top:5px;">Source: <a href="https://fna-bwbufwdzbabpezgc.z01.azurefd.us/sites/default/files/resource-files/snap-qcfy25-per.pdf" target="_blank" rel="noopener" style="color:#176b3c;text-decoration:underline;">USDA</a></span></span>', moreContent: 'The state can select either the FY25 or FY26 payment error rate to calculate the cost-shift requirement amount. If Hawaiʻi were to use its FY25 PER, it would cost the state around $139M.', secondCard: '<div style="text-align:center;"><h3 style="color:white;margin-bottom:16px;font-size:1.65rem;">Cost for Hawai\u02BBi by Error Rate</h3><div style="display:flex;flex-direction:column;gap:10px;"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="color:rgba(255,255,255,0.8);font-size:0.85rem;">6\u20138%</span><span style="color:white;font-weight:800;font-size:1.05rem;">$34.7M</span></div><div style="width:100%;height:20px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;"><div style="width:25%;height:100%;background:rgba(255,255,255,0.4);"></div></div></div><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="color:rgba(255,255,255,0.8);font-size:0.85rem;">8\u201310%</span><span style="color:white;font-weight:800;font-size:1.05rem;">$69.5M</span></div><div style="width:100%;height:20px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;"><div style="width:50%;height:100%;background:rgba(255,255,255,0.5);"></div></div></div><div style="background:rgba(255,255,255,0.16);border:2px solid rgba(255,255,255,0.95);border-radius:10px;padding:11px 12px 12px;box-shadow:0 6px 18px rgba(0,0,0,0.20);"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><span style="color:white;font-weight:800;font-size:0.95rem;">10%+</span><span style="color:white;font-weight:900;font-size:1.3rem;">$139M</span></div><div style="width:100%;height:22px;background:rgba(255,255,255,0.15);border-radius:4px;overflow:hidden;"><div style="width:100%;height:100%;background:#fff;"></div></div><div style="margin-top:9px;text-align:left;"><span style="display:inline-block;background:#fff;color:#176b3c;font-weight:800;font-size:0.75rem;letter-spacing:0.03em;text-transform:uppercase;padding:3px 9px;border-radius:6px;">Hawaiʻi FY25 · 10.92%</span></div></div></div></div>' },
         ];
 
         let itemElements = [];
+        let miniDotElements = [];
         let activeTimeline = 'medicaid';
+        let activeIndex = 0;
+
+        const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
         function formatDate(dateStr) {
             const [y, m, d] = dateStr.split('-');
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            return `${months[parseInt(m) - 1]} ${parseInt(d)}, ${y}`;
-        }
-        
-        function formatShortDate(dateStr) {
-            const [y, m, d] = dateStr.split('-');
-            return `${parseInt(m)}/${y.slice(2)}`;
+            return `${MONTHS[parseInt(m) - 1]} ${parseInt(d)}, ${y}`;
         }
 
-        function buildSectionsHTML(sections, isSnap) {
-            const accentVar = isSnap ? 'var(--accent-snap)' : 'var(--accent)';
-            let html = '';
-            sections.forEach(s => {
-                html += `<div style="margin-top:16px;"><strong style="color:${accentVar};font-size:1rem;">${s.heading}</strong>`;
+        function formatShortDate(dateStr) {
+            const [y, m] = dateStr.split('-');
+            return `${MONTHS[parseInt(m) - 1]} ${y}`;
+        }
+
+        // display:none (the other track's events) has no offsetParent
+        function isShown(el) {
+            return !!el && el.offsetParent !== null;
+        }
+
+        function headerOffset() {
+            const header = document.querySelector('#snap-medicaid-timeline .timeline-header');
+            return header ? header.getBoundingClientRect().height : 0;
+        }
+
+        // Each change shows in full: the old rule as a compact grey line, the
+        // new one under it. Nothing hides behind a button.
+        function buildSectionsHTML(sections) {
+            return sections.map(s => {
+                let html = `<div class="change"><h4 class="change-title">${s.heading}</h4>`;
                 if (s.before && s.after) {
-                    html += `<button class="more-toggle" onclick="toggleMore(this)">More</button>`;
-                    html += `<div class="more-content"><div class="more-content-inner">`;
-                    html += `<div class="before-after-container">`;
-                    html += `<div class="before-section"><span class="section-label">Before</span><p>${s.before}</p></div>`;
-                    html += `<div class="split-divider"><span class="arrow">\u25BC</span></div>`;
-                    html += `<div class="after-section"><span class="section-label">After</span><p>${s.after}</p></div>`;
-                    html += `</div>`;
-                    html += `</div></div>`;
+                    html += `<div class="before-after">`
+                        + `<div class="before-section"><p><span class="section-label">Before</span>${s.before}</p></div>`
+                        + `<div class="after-section"><p><span class="section-label">After</span>${s.after}</p></div>`
+                        + `</div>`;
                 } else if (s.note) {
-                    html += `<p style="margin-top:8px;color:#555;line-height:1.6;">${s.note}</p>`;
+                    html += `<p class="change-note">${s.note}</p>`;
                 }
-                html += `</div>`;
-            });
+                return html + `</div>`;
+            }).join('');
+        }
+
+        function sourceBadge(source) {
+            if (!source) return '';
+            const map = { hr1: 'HR1 / OBBBA', usda: 'USDA · Thrifty Food Plan', state: 'State waiver' };
+            return `<span class="source-tag source-${source}">${map[source] || source}</span>`;
+        }
+
+        function buildCardHTML(item) {
+            let html = `<div class="card-meta"><span class="date">${formatDate(item.date)}</span>${sourceBadge(item.source)}</div><h3>${item.title}</h3>`;
+            if (item.sections) {
+                html += buildSectionsHTML(item.sections);
+            } else if (item.desc) {
+                html += `<p>${item.desc}</p>`;
+            }
+            if (item.moreContent) {
+                html += `<div class="more-detail">${item.moreContent}</div>`;
+            }
             return html;
+        }
+
+        function getAllDates() {
+            const dateSet = new Set();
+            medicaidData.forEach(d => dateSet.add(d.date));
+            snapData.forEach(d => dateSet.add(d.date));
+            return Array.from(dateSet).sort();
         }
 
         function updateScrollProgress() {
             const scrollTop = window.pageYOffset;
             const allDates = getAllDates();
-            
-            let activeIndex = 0;
-            let currentYear = allDates.length > 0 ? allDates[0].split('-')[0] : '2025';
-            
+            // An event is current once its top passes the reading line, a
+            // third of the way down the screen.
+            const readingLine = scrollTop + window.innerHeight * 0.35;
+
+            let current = -1;
+            let first = -1;
             itemElements.forEach((el, i) => {
-                const rect = el.getBoundingClientRect();
-                const itemTop = rect.top + scrollTop;
-                const itemMiddle = itemTop + rect.height / 2;
-                
-                if (scrollTop + window.innerHeight / 2 >= itemMiddle) {
-                    activeIndex = i;
-                    if (allDates[i]) {
-                        currentYear = allDates[i].split('-')[0];
-                    }
-                }
+                if (!isShown(el)) return;
+                if (first < 0) first = i;
+                if (el.getBoundingClientRect().top + scrollTop <= readingLine) current = i;
             });
-            
+            activeIndex = current >= 0 ? current : Math.max(first, 0);
+
             miniDotElements.forEach(({ medDot, snapDot }, i) => {
-                if (i === activeIndex) {
-                    medDot.classList.add('active');
-                    snapDot.classList.add('active');
-                } else {
-                    medDot.classList.remove('active');
-                    snapDot.classList.remove('active');
+                medDot.classList.toggle('active', i === activeIndex);
+                snapDot.classList.toggle('active', i === activeIndex);
+            });
+
+            const nowChip = document.getElementById('now-chip');
+            if (nowChip && allDates[activeIndex]) {
+                nowChip.textContent = formatDate(allDates[activeIndex]);
+            }
+
+            if (!itemElements.length) return;
+
+            // Active rail: colored up to its first dot, then grows with the scroll
+            [
+                ['medicaid', 'medicaid-line', 'timeline-progress', '.timeline-dot'],
+                ['snap', 'snap-parallel-line', 'snap-parallel-progress', '.snap-timeline-dot']
+            ].forEach(([track, lineId, progressId, dotSelector]) => {
+                const line = document.getElementById(lineId);
+                const progress = document.getElementById(progressId);
+                const firstDot = Array.from(document.querySelectorAll('#timeline-items ' + dotSelector)).find(isShown);
+                if (track !== activeTimeline || !firstDot || !isShown(line)) {
+                    progress.style.height = '0%';
+                    return;
+                }
+                const lineRect = line.getBoundingClientRect();
+                const lineTop = lineRect.top + scrollTop;
+                const lineHeight = lineRect.height || 1;
+                const dotRect = firstDot.getBoundingClientRect();
+                const minProgressPx = dotRect.top + scrollTop + dotRect.height / 2 - lineTop;
+                const progressPx = Math.max(minProgressPx, Math.min(lineHeight, readingLine - lineTop));
+                progress.style.height = Math.min(100, (progressPx / lineHeight) * 100) + '%';
+            });
+
+            itemElements.forEach(el => {
+                if (!isShown(el)) return;
+                el.querySelectorAll('.timeline-dot, .snap-timeline-dot').forEach(dot => {
+                    if (!isShown(dot)) return;
+                    const r = dot.getBoundingClientRect();
+                    const center = r.top + scrollTop + r.height / 2;
+                    dot.classList.toggle('passed', readingLine >= center);
+                    dot.classList.toggle('active', Math.abs(readingLine - center) < 150);
+                });
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+                    el.querySelectorAll('.timeline-card').forEach(card => card.classList.add('visible'));
                 }
             });
-            
-            const yearIndicator = document.getElementById('year-indicator');
-            if (yearIndicator.textContent !== currentYear) {
-                yearIndicator.style.opacity = '0';
-                setTimeout(() => {
-                    yearIndicator.textContent = currentYear;
-                    yearIndicator.style.opacity = '1';
-                }, 250);
-            }
-            
-            if (itemElements.length > 0) {
-                const lineContainer = document.querySelector('.timeline-line-container');
-                const lineRect = lineContainer.getBoundingClientRect();
-                const lineTop = lineRect.top + scrollTop;
-                const lineHeight = lineRect.height;
-                
-                const viewportMiddle = scrollTop + window.innerHeight * 0.35;
-
-                // Medicaid progress: colored line always visible up to first dot, then grows with scroll
-                const firstMedDot = document.querySelector('.timeline-dot');
-                const medProgress = document.getElementById('timeline-progress');
-                if (firstMedDot) {
-                    const dotRect = firstMedDot.getBoundingClientRect();
-                    const dotCenter = dotRect.top + scrollTop + dotRect.height / 2;
-                    const minProgressPx = dotCenter - lineTop;
-                    const scrollProgressPx = viewportMiddle - lineTop;
-                    const progressPx = Math.max(minProgressPx, Math.min(lineHeight, scrollProgressPx));
-                    medProgress.style.top = '0';
-                    medProgress.style.height = (progressPx / lineHeight) * 100 + '%';
-                }
-
-                // SNAP progress: colored line always visible up to first SNAP dot, then grows with scroll
-                const firstSnapDot = document.querySelector('.snap-timeline-dot');
-                const snapProgress = document.getElementById('snap-parallel-progress');
-                if (firstSnapDot) {
-                    const snapDotRect = firstSnapDot.getBoundingClientRect();
-                    const snapDotCenter = snapDotRect.top + scrollTop + snapDotRect.height / 2;
-                    const snapLineContainer = document.querySelector('.snap-parallel-line');
-                    const snapLineRect = snapLineContainer.getBoundingClientRect();
-                    const snapLineTop = snapLineRect.top + scrollTop;
-                    const snapLineHeight = snapLineRect.height;
-                    const snapMinProgressPx = snapDotCenter - snapLineTop;
-                    const snapScrollProgressPx = viewportMiddle - snapLineTop;
-                    const snapProgressPx = Math.max(snapMinProgressPx, Math.min(snapLineHeight, snapScrollProgressPx));
-                    snapProgress.style.top = '0';
-                    snapProgress.style.height = (snapProgressPx / snapLineHeight) * 100 + '%';
-                }
-                
-                itemElements.forEach((el, i) => {
-                    const rect = el.getBoundingClientRect();
-                    const elTop = rect.top + scrollTop;
-                    
-                    // Medicaid dot
-                    const dot = el.querySelector('.timeline-dot');
-                    if (dot) {
-                        const dotRect = dot.getBoundingClientRect();
-                        const dotCenter = dotRect.top + scrollTop + dotRect.height / 2;
-                        
-                        if (viewportMiddle >= dotCenter) {
-                            dot.classList.add('passed');
-                        } else {
-                            dot.classList.remove('passed');
-                        }
-                        const distanceFromLine = Math.abs(viewportMiddle - dotCenter);
-                        if (distanceFromLine < 150) {
-                            dot.classList.add('active');
-                        } else {
-                            dot.classList.remove('active');
-                        }
-                    }
-
-                    // SNAP dot
-                    const snapDot = el.querySelector('.snap-timeline-dot');
-                    if (snapDot) {
-                        const snapDotRect = snapDot.getBoundingClientRect();
-                        const snapDotCenter = snapDotRect.top + scrollTop + snapDotRect.height / 2;
-                        
-                        if (viewportMiddle >= snapDotCenter) {
-                            snapDot.classList.add('passed');
-                        } else {
-                            snapDot.classList.remove('passed');
-                        }
-                        const distanceFromLine = Math.abs(viewportMiddle - snapDotCenter);
-                        if (distanceFromLine < 150) {
-                            snapDot.classList.add('active');
-                        } else {
-                            snapDot.classList.remove('active');
-                        }
-                    }
-                    
-                    const cards = el.querySelectorAll('.timeline-card');
-                    cards.forEach(card => {
-                        if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
-                            card.classList.add('visible');
-                        }
-                    });
-                });
-            }
         }
 
         // Detail panels (secondCard/thirdCard) are position:absolute, so they don't add
@@ -1373,272 +1324,195 @@
             });
         }
 
-        function scrollToItem(index) {
-            if (itemElements[index]) {
-                const rect = itemElements[index].getBoundingClientRect();
-                const scrollTop = window.pageYOffset;
-                const itemTop = rect.top + scrollTop;
-                const itemMiddle = itemTop + rect.height / 2;
-                const targetScroll = itemMiddle - window.innerHeight / 2;
-                
-                window.scrollTo({
-                    top: targetScroll,
-                    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
-                });
-            }
+        // Bring an event up to just under the sticky header
+        function scrollToItem(index, instant) {
+            const el = itemElements[index];
+            if (!isShown(el)) return;
+            const top = el.getBoundingClientRect().top + window.pageYOffset - headerOffset() - 12;
+            const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: Math.max(0, top), behavior: (instant || reduced) ? 'auto' : 'smooth' });
         }
 
-        function toggleMore(btn) {
-            const content = btn.nextElementSibling;
-            content.classList.toggle('open');
-            btn.textContent = content.classList.contains('open') ? 'Less' : 'More';
-            setTimeout(equalizeDetailHeights, 450);
-        }
-
-        function setActiveTimeline(timeline) {
-            activeTimeline = timeline;
+        function setActiveTimeline(timeline, keepPlace) {
             const container = document.getElementById('timeline-container');
             const wrapper = document.getElementById('snap-medicaid-timeline');
-            
-            if (timeline === 'snap') {
-                container.classList.add('snap-active');
-                wrapper.classList.add('snap-active');
-            } else {
-                container.classList.remove('snap-active');
-                wrapper.classList.remove('snap-active');
+            // Switching mid-page hides one track's events and shows the other's,
+            // which would drop the reader somewhere arbitrary. Land on the same
+            // point in time instead.
+            const readingAt = (keepPlace !== false && timeline !== activeTimeline && itemElements.length &&
+                container.getBoundingClientRect().top < headerOffset()) ? activeIndex : -1;
+
+            activeTimeline = timeline;
+            container.classList.toggle('snap-active', timeline === 'snap');
+            wrapper.classList.toggle('snap-active', timeline === 'snap');
+
+            const btnMedicaid = document.getElementById('btn-medicaid');
+            const btnSnap = document.getElementById('btn-snap');
+            btnMedicaid.classList.toggle('active', timeline === 'medicaid');
+            btnSnap.classList.toggle('active', timeline === 'snap');
+            btnMedicaid.setAttribute('aria-pressed', String(timeline === 'medicaid'));
+            btnSnap.setAttribute('aria-pressed', String(timeline === 'snap'));
+
+            equalizeDetailHeights();
+            if (readingAt >= 0) {
+                let target = itemElements.findIndex((el, i) => i >= readingAt && isShown(el));
+                if (target < 0) {
+                    for (let i = itemElements.length - 1; i >= 0; i--) {
+                        if (isShown(itemElements[i])) { target = i; break; }
+                    }
+                }
+                if (target >= 0) scrollToItem(target, true);
             }
-            
-            document.getElementById('btn-medicaid').classList.toggle('active', timeline === 'medicaid');
-            document.getElementById('btn-snap').classList.toggle('active', timeline === 'snap');
 
             // Re-reserve panel room for the now-visible track. The toggled track's panels
             // were display:none and need a layout pass before they measure correctly, so run
             // after the next paint (double rAF) plus a timeout fallback for late layout.
             requestAnimationFrame(function () { requestAnimationFrame(equalizeDetailHeights); });
-            setTimeout(equalizeDetailHeights, 200);
+            setTimeout(function () { equalizeDetailHeights(); updateScrollProgress(); }, 200);
             updateScrollProgress();
         }
 
-        function sourceBadge(source) {
-            if (!source) return '';
-            const map = { hr1: 'HR1 / OBBBA', usda: 'USDA · Thrifty Food Plan', state: 'State waiver' };
-            return ` <span class="source-tag source-${source}">${map[source] || source}</span>`;
+        // Header date map: while a dot is hovered or focused, the label under
+        // the SNAP row shows that column's date.
+        function peek(index, on) {
+            const pair = miniDotElements[index];
+            if (!pair) return;
+            pair.snapDot.classList.toggle('peek', on);
+            document.getElementById('mini-dots-snap').classList.toggle('peeking', on);
         }
 
-        function buildSnapCardHTML(snapItem) {
-            let html = `<span class="date">${formatDate(snapItem.date)}</span>${sourceBadge(snapItem.source)}<h3>${snapItem.title}</h3>`;
-            if (snapItem.sections) {
-                html += buildSectionsHTML(snapItem.sections, true);
-            } else if (snapItem.desc) {
-                html += `<p>${snapItem.desc}</p>`;
+        function miniDot(track, date, index, items) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'mini-dot';
+            button.dataset.date = formatShortDate(date);
+            const mark = document.createElement('span');
+            mark.className = track === 'medicaid' ? 'mini-dot-med' : 'mini-dot-snap';
+            button.appendChild(mark);
+            if (!items.length) {
+                // No event on this track that day
+                button.disabled = true;
+                button.setAttribute('aria-hidden', 'true');
+                mark.style.opacity = '0.15';
+                return button;
             }
-            if (snapItem.moreContent) {
-                html += `<button class="more-toggle" onclick="toggleMore(this)">More</button>`;
-                html += `<div class="more-content"><div class="more-content-inner"><p>${snapItem.moreContent}</p></div></div>`;
+            const more = items.length > 1 ? ` and ${items.length - 1} more` : '';
+            button.setAttribute('aria-label',
+                `${track === 'medicaid' ? 'Medicaid' : 'SNAP'}, ${formatDate(date)}: ${items[0].title}${more}`);
+            button.onclick = () => { setActiveTimeline(track, false); scrollToItem(index); };
+            button.onmouseenter = button.onfocus = () => peek(index, true);
+            button.onmouseleave = button.onblur = () => peek(index, false);
+            return button;
+        }
+
+        function yearMarker(year, trackClass) {
+            const marker = document.createElement('h2');
+            marker.className = 'year-marker ' + trackClass;
+            marker.textContent = year;
+            return marker;
+        }
+
+        // secondCard (+ optional thirdCard): beside the card on desktop, below it on mobile
+        function appendDetail(group, item, trackClass) {
+            if (!item.secondCard) return;
+            const panel = html => {
+                const el = document.createElement('div');
+                el.className = 'timeline-card second-card ' + trackClass;
+                el.innerHTML = html;
+                return el;
+            };
+            if (item.thirdCard) {
+                const stack = document.createElement('div');
+                stack.className = 'stacked-cards';
+                stack.appendChild(panel(item.secondCard));
+                stack.appendChild(panel(item.thirdCard));
+                group.appendChild(stack);
+            } else {
+                group.appendChild(panel(item.secondCard));
             }
-            return html;
+            group.dataset.detail = '1';
         }
-
-        function getAllDates() {
-            const dateSet = new Set();
-            medicaidData.forEach(d => dateSet.add(d.date));
-            snapData.forEach(d => dateSet.add(d.date));
-            return Array.from(dateSet).sort();
-        }
-
-        function computeMargins(allDates) {
-            // Convert dates to timestamps, compute proportional spacing
-            const timestamps = allDates.map(d => new Date(d).getTime());
-            const minGap = 60; // minimum px between items
-            const maxGap = 200; // maximum px between items
-            const margins = [];
-            for (let i = 0; i < timestamps.length - 1; i++) {
-                const diffDays = (timestamps[i + 1] - timestamps[i]) / (1000 * 60 * 60 * 24);
-                // Scale: 30 days = minGap, 365+ days = maxGap
-                const scaled = minGap + (maxGap - minGap) * Math.min(1, diffDays / 365);
-                margins.push(Math.round(scaled));
-            }
-            margins.push(0); // last item
-            return margins;
-        }
-
-        let miniDotElements = [];
 
         function renderItems() {
             const container = document.getElementById('timeline-items');
             const miniDotsMed = document.getElementById('mini-dots-med');
             const miniDotsSnap = document.getElementById('mini-dots-snap');
-            
+
             container.innerHTML = '';
             miniDotsMed.innerHTML = '';
             miniDotsSnap.innerHTML = '';
             itemElements = [];
             miniDotElements = [];
 
-            const allDates = getAllDates();
-            const margins = computeMargins(allDates);
+            const lastYear = { medicaid: null, snap: null };
 
-            allDates.forEach((date, i) => {
+            getAllDates().forEach((date, i) => {
                 const medItem = medicaidData.find(m => m.date === date);
                 const snapItems = snapData.filter(s => s.date === date);
-                const label = formatShortDate(date);
+                const year = date.slice(0, 4);
 
-                // Medicaid mini dot (red circle) — one per date in the med group
-                const medDot = document.createElement('div');
-                medDot.className = 'mini-dot';
-                medDot.dataset.date = label;
-                medDot.onclick = () => scrollToItem(i);
-                const medCircle = document.createElement('div');
-                medCircle.className = 'mini-dot-med';
-                if (!medItem) medCircle.style.opacity = '0.15';
-                medDot.appendChild(medCircle);
+                const medDot = miniDot('medicaid', date, i, medItem ? [medItem] : []);
+                const snapDot = miniDot('snap', date, i, snapItems);
                 miniDotsMed.appendChild(medDot);
-
-                // SNAP mini dot (green square) — one per date in the snap group
-                const snapDot = document.createElement('div');
-                snapDot.className = 'mini-dot';
-                snapDot.dataset.date = label;
-                snapDot.onclick = () => scrollToItem(i);
-                const snapSquare = document.createElement('div');
-                snapSquare.className = 'mini-dot-snap';
-                if (!snapItems.length) snapSquare.style.opacity = '0.15';
-                snapDot.appendChild(snapSquare);
                 miniDotsSnap.appendChild(snapDot);
-
-                // Store both so we can update them by index
                 miniDotElements.push({ medDot, snapDot });
 
-                // Timeline Item
                 const itemDiv = document.createElement('div');
                 let itemClass = 'timeline-item';
                 if (medItem && !snapItems.length) itemClass += ' medicaid-only';
                 if (snapItems.length && !medItem) itemClass += ' snap-only';
                 itemDiv.className = itemClass;
-                itemDiv.style.marginBottom = margins[i] + 'px';
-                
+
+                // A year marker on each track's first event of the year
+                if (medItem && lastYear.medicaid !== year) {
+                    itemDiv.appendChild(yearMarker(year, 'for-med'));
+                    lastYear.medicaid = year;
+                }
+                if (snapItems.length && lastYear.snap !== year) {
+                    itemDiv.appendChild(yearMarker(year, 'for-snap'));
+                    lastYear.snap = year;
+                }
+
                 // === Medicaid Card ===
                 if (medItem) {
                     const medGroup = document.createElement('div');
-                    medGroup.style.position = 'relative';
-                    medGroup.style.width = '100%';
-                    if (snapItems.length) {
-                        medGroup.classList.add('shared-date-med');
-                    }
+                    medGroup.className = 'track-group' + (snapItems.length ? ' shared-date-med' : '');
 
-                    // Medicaid Dot
                     const dot = document.createElement('div');
                     dot.className = 'timeline-dot';
-                    dot.style.top = '50px'; // Align with the left card title
                     dot.onclick = () => scrollToItem(i);
                     medGroup.appendChild(dot);
 
                     const card = document.createElement('div');
                     card.className = 'timeline-card medicaid-card';
-                    
-                    let cardHTML = `<span class="date">${formatDate(medItem.date)}</span>${sourceBadge(medItem.source)}<h3>${medItem.title}</h3>`;
-                    
-                    if (medItem.sections) {
-                        cardHTML += buildSectionsHTML(medItem.sections);
-                    } else if (medItem.desc) {
-                        cardHTML += `<p>${medItem.desc}</p>`;
-                    }
-                    
-                    if (medItem.moreContent) {
-                        cardHTML += `<button class="more-toggle" onclick="toggleMore(this)">More</button>`;
-                        cardHTML += `<div class="more-content"><div class="more-content-inner"><p>${medItem.moreContent}</p></div></div>`;
-                    }
-                    
-                    card.innerHTML = cardHTML;
+                    card.innerHTML = buildCardHTML(medItem);
                     medGroup.appendChild(card);
-                    
-                    // Medicaid Second Card (+ optional Third Card)
-                    if (medItem.secondCard && medItem.thirdCard) {
-                        // Wrap both in a stacked container
-                        const stack = document.createElement('div');
-                        stack.className = 'stacked-cards';
 
-                        const secondCard = document.createElement('div');
-                        secondCard.className = 'timeline-card second-card medicaid-card';
-                        secondCard.innerHTML = medItem.secondCard;
-                        stack.appendChild(secondCard);
-
-                        const thirdCard = document.createElement('div');
-                        thirdCard.className = 'timeline-card second-card medicaid-card';
-                        thirdCard.innerHTML = medItem.thirdCard;
-                        stack.appendChild(thirdCard);
-
-                        medGroup.appendChild(stack);
-                        medGroup.dataset.detail = '1';
-                    } else if (medItem.secondCard) {
-                        const secondCard = document.createElement('div');
-                        secondCard.className = 'timeline-card second-card medicaid-card';
-                        secondCard.innerHTML = medItem.secondCard;
-                        medGroup.appendChild(secondCard);
-                        medGroup.dataset.detail = '1';
-                    }
-
+                    appendDetail(medGroup, medItem, 'medicaid-card');
                     itemDiv.appendChild(medGroup);
                 }
-                
+
                 // === SNAP Card(s) — one or more events can share a date ===
                 snapItems.forEach((snapItem, si) => {
                     const snapGroup = document.createElement('div');
-                    snapGroup.style.position = 'relative';
-                    snapGroup.style.width = '100%';
-                    if (medItem) {
-                        snapGroup.classList.add('shared-date-snap');
-                    }
+                    snapGroup.className = 'track-group' + (medItem ? ' shared-date-snap' : '');
                     // Separate stacked SNAP cards that share a date
                     if (si > 0) snapGroup.style.marginTop = '28px';
 
-                    // SNAP Dot — only the first card at this date gets the dot;
-                    // append to itemDiv when shared date so it aligns with Medicaid dot
+                    // SNAP Dot — only the first card at this date gets the dot
                     if (si === 0) {
                         const snapDot = document.createElement('div');
                         snapDot.className = 'snap-timeline-dot';
-                        snapDot.style.top = '50px';
-                        snapDot.onclick = () => {
-                            setActiveTimeline('snap');
-                            scrollToItem(i);
-                        };
-                        if (medItem) {
-                            itemDiv.appendChild(snapDot);
-                        } else {
-                            snapGroup.appendChild(snapDot);
-                        }
+                        snapDot.onclick = () => scrollToItem(i);
+                        snapGroup.appendChild(snapDot);
                     }
 
                     const snapCard = document.createElement('div');
                     snapCard.className = 'timeline-card snap-card';
-                    snapCard.innerHTML = buildSnapCardHTML(snapItem);
+                    snapCard.innerHTML = buildCardHTML(snapItem);
                     snapGroup.appendChild(snapCard);
 
-                    // SNAP Second Card (+ optional Third Card)
-                    if (snapItem.secondCard && snapItem.thirdCard) {
-                        // Wrap both in a stacked container
-                        const stack = document.createElement('div');
-                        stack.className = 'stacked-cards';
-
-                        const snapSecond = document.createElement('div');
-                        snapSecond.className = 'timeline-card second-card snap-card';
-                        snapSecond.innerHTML = snapItem.secondCard;
-                        stack.appendChild(snapSecond);
-
-                        const snapThird = document.createElement('div');
-                        snapThird.className = 'timeline-card second-card snap-card';
-                        snapThird.innerHTML = snapItem.thirdCard;
-                        stack.appendChild(snapThird);
-
-                        snapGroup.appendChild(stack);
-                        snapGroup.dataset.detail = '1';
-                    } else if (snapItem.secondCard) {
-                        const snapSecond = document.createElement('div');
-                        snapSecond.className = 'timeline-card second-card snap-card';
-                        snapSecond.innerHTML = snapItem.secondCard;
-                        snapGroup.appendChild(snapSecond);
-                        snapGroup.dataset.detail = '1';
-                    }
-
+                    appendDetail(snapGroup, snapItem, 'snap-card');
                     itemDiv.appendChild(snapGroup);
                 });
 
@@ -1650,7 +1524,7 @@
             // Re-run once fonts load (text height shifts) and shortly after, then again on
             // every track switch / resize.
             equalizeDetailHeights();
-            document.fonts.ready.then(equalizeDetailHeights);
+            document.fonts.ready.then(function () { equalizeDetailHeights(); updateScrollProgress(); });
 
             setTimeout(function () { equalizeDetailHeights(); updateScrollProgress(); }, 120);
         }
@@ -1660,10 +1534,12 @@
         document.getElementById('btn-snap').onclick = () => setActiveTimeline('snap');
         document.getElementById('snap-parallel-line').onclick = () => setActiveTimeline('snap');
         document.getElementById('medicaid-line').onclick = () => setActiveTimeline('medicaid');
-        
-        window.addEventListener('scroll', updateScrollProgress);
-        window.addEventListener('resize', () => renderItems());
-        
+
+        window.addEventListener('scroll', updateScrollProgress, { passive: true });
+        // Nothing needs a rebuild on resize. Rebuilding also fired whenever a
+        // phone's browser toolbar collapsed mid-scroll.
+        window.addEventListener('resize', () => { equalizeDetailHeights(); updateScrollProgress(); });
+
         window.onload = () => {
             setActiveTimeline('medicaid');
             renderItems();
