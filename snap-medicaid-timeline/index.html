@@ -1483,6 +1483,50 @@
             line-height: 1.2;
         }
 
+        /* Events with no detail panel: on desktop the card takes the full width
+           (the rail runs behind it, the dot pins its top edge) and its
+           changes flow in two columns to keep lines a readable length. */
+        @media (min-width: 769px) {
+            #snap-medicaid-timeline .track-group.is-wide > .timeline-card {
+                z-index: 2;
+                width: 100%;
+                max-width: none;
+                margin-top: 12px;
+                padding: 32px 36px 30px;
+            }
+            #snap-medicaid-timeline .track-group.is-wide > .timeline-dot,
+            #snap-medicaid-timeline .track-group.is-wide > .snap-timeline-dot {
+                top: 12px;
+            }
+            #snap-medicaid-timeline .track-group.is-wide > .timeline-card > p,
+            #snap-medicaid-timeline .track-group.is-wide .card-meta + h3 {
+                max-width: 68ch;
+            }
+            #snap-medicaid-timeline .track-group.is-wide .changes {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0 36px;
+            }
+            #snap-medicaid-timeline .track-group.is-wide .change + .change:not(.is-warning) {
+                padding-top: 0;
+                border-top: none;
+            }
+            #snap-medicaid-timeline .track-group.is-wide .change:nth-child(n+3) {
+                padding-top: 18px;
+                border-top: 1px solid rgba(47,62,70,0.1);
+            }
+            #snap-medicaid-timeline .track-group.is-wide .more-detail {
+                columns: 2;
+                column-gap: 36px;
+            }
+            #snap-medicaid-timeline .track-group.is-wide .more-detail .detail-head {
+                break-after: avoid;
+            }
+            #snap-medicaid-timeline .track-group.is-wide .more-detail p {
+                break-inside: avoid;
+            }
+        }
+
         /* =================== Mobile =================== */
         @media (max-width: 768px) {
             /* Break out of Squarespace's mobile page padding to the full
@@ -1858,7 +1902,7 @@
         const TAKEAWAY = /<br><br><strong>(What this means|Why it matters):<\/strong>\s*/;
 
         function buildSectionsHTML(sections) {
-            return sections.map(s => {
+            return '<div class="changes">' + sections.map(s => {
                 let html = `<div class="change${s.warn ? ' is-warning' : ''}"><h4 class="change-title">${s.warn ? icon('alert', 18) : ''}${s.heading}</h4>`;
                 if (s.before && s.after) {
                     const [after, label, takeaway] = s.after.split(TAKEAWAY);
@@ -1871,7 +1915,7 @@
                     html += `<p class="change-note">${s.note}</p>`;
                 }
                 return html + `</div>`;
-            }).join('');
+            }).join('') + '</div>';
         }
 
         function sourceBadge(source) {
@@ -2247,7 +2291,7 @@
                 // === Medicaid Card ===
                 if (medItem) {
                     const medGroup = document.createElement('div');
-                    medGroup.className = 'track-group' + (snapItems.length ? ' shared-date-med' : '');
+                    medGroup.className = 'track-group' + (snapItems.length ? ' shared-date-med' : '') + (medItem.secondCard ? '' : ' is-wide');
 
                     const dot = document.createElement('div');
                     dot.className = 'timeline-dot';
@@ -2266,7 +2310,7 @@
                 // === SNAP Card(s) — one or more events can share a date ===
                 snapItems.forEach((snapItem, si) => {
                     const snapGroup = document.createElement('div');
-                    snapGroup.className = 'track-group' + (medItem ? ' shared-date-snap' : '');
+                    snapGroup.className = 'track-group' + (medItem ? ' shared-date-snap' : '') + (snapItem.secondCard ? '' : ' is-wide');
                     // Separate stacked SNAP cards that share a date
                     if (si > 0) snapGroup.style.marginTop = '28px';
 
