@@ -30,7 +30,7 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             --ink-body: rgba(47, 62, 70, 0.85);
             --ink-muted: rgba(47, 62, 70, 0.8);
             --primary: var(--ink);
-            --bg: #ffffff;
+            --bg: #F3F5F2;           /* Ash-tinted canvas so white cards stand off it */
             --card-bg: #ffffff;
             --path-color: var(--ash);
 
@@ -66,7 +66,8 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             position: relative;
             overflow-x: hidden;
             overflow-x: clip; /* clip, not hidden: hidden would unstick the header */
-            padding: 0 0 40px;
+            padding: 28px 0 40px;
+            border-radius: 24px;
             background: var(--bg);
             color: var(--primary);
             color-scheme: only light; /* forced dark mode turned the chart bars black */
@@ -157,8 +158,8 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             z-index: 100;
             width: 100%;
             padding: 12px 0 24px; /* bottom room for the active date under the dots */
-            background: rgba(255, 255, 255, 0.94);
-            box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+            background: rgba(243, 245, 242, 0.94);
+            box-shadow: 0 1px 0 rgba(47,62,70,0.08);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
@@ -337,7 +338,7 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
 
         #snap-medicaid-timeline .timeline-container {
             position: relative;
-            padding-top: clamp(48px, 7vw, 80px);
+            padding-top: clamp(64px, 8.5vw, 108px);
             padding-bottom: 100px;
         }
 
@@ -448,7 +449,7 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             background: white;
             border: 5px solid var(--path-color);
             border-radius: 50%;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            box-shadow: 0 1px 4px rgba(28,37,46,0.2);
             cursor: pointer;
             transition: all 0.3s ease;
             z-index: 10;
@@ -474,7 +475,7 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
         #snap-medicaid-timeline .snap-timeline-dot.active {
             background: var(--accent-snap);
             border-color: var(--accent-snap);
-            box-shadow: 0 0 20px var(--accent-snap);
+            box-shadow: 0 0 0 6px rgba(82,121,111,0.2), 0 1px 4px rgba(28,37,46,0.2);
             transform: translate(-50%, -50%) scale(1.2);
         }
 
@@ -485,8 +486,8 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
         #snap-medicaid-timeline .timeline-dot.active {
             background: var(--accent);
             border-color: var(--accent);
-            box-shadow: 0 0 40px var(--accent);
-            transform: translate(-50%, -50%) scale(1.3);
+            box-shadow: 0 0 0 6px rgba(192,71,58,0.18), 0 1px 4px rgba(28,37,46,0.2);
+            transform: translate(-50%, -50%) scale(1.2);
         }
 
         #snap-medicaid-timeline .timeline-dot.passed {
@@ -498,12 +499,12 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             max-width: 450px;
             margin-left: 0;
             margin-right: auto;
-            padding: 30px 60px 30px 30px;
+            padding: 28px 30px;
             background: var(--card-bg);
             border-radius: 16px;
             box-shadow: var(--shadow-card);
             border: 1px solid rgba(28,37,46,.06);
-            border-left: 6px solid var(--accent);
+            border-left: 4px solid var(--accent);
             opacity: 0.3;
             transform: translateX(-20px);
             transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.5s ease;
@@ -516,8 +517,7 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
 
 
         #snap-medicaid-timeline .timeline-card.snap-card {
-            border-left: 6px solid var(--accent-snap);
-            border-right: none;
+            border-left: 4px solid var(--accent-snap);
         }
 
         /* Detail panels: beside the card on desktop, below it on mobile.
@@ -1064,6 +1064,46 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             margin-top: 8px;
         }
 
+        #snap-medicaid-timeline .change + .change:not(.is-warning) {
+            padding-top: 18px;
+            border-top: 1px solid rgba(47,62,70,0.1);
+        }
+
+        /* "What this means": the takeaway, set apart from the rule text */
+        #snap-medicaid-timeline .takeaway {
+            margin: 12px 0 0 2px;
+            padding: 2px 0 2px 12px;
+            border-left: 3px solid var(--ink);
+        }
+        #snap-medicaid-timeline .takeaway-label {
+            display: block;
+            font-family: var(--font-head);
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink);
+        }
+        #snap-medicaid-timeline .timeline-card .takeaway p {
+            margin-top: 2px;
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+
+        #snap-medicaid-timeline .change.is-warning {
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: var(--hl-bg);
+        }
+        #snap-medicaid-timeline .change.is-warning .change-title {
+            color: var(--hl-ink);
+        }
+        #snap-medicaid-timeline .change-title .p-icon {
+            display: inline-block;
+            margin: 0 6px 0 0;
+            vertical-align: -3px;
+        }
+
         #snap-medicaid-timeline .before-after {
             display: flex;
             flex-direction: column;
@@ -1263,7 +1303,7 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             font-size: 0.8rem;
             font-weight: 800;
             letter-spacing: 0.02em;
-            box-shadow: 0 0 0 4px #fff, 0 2px 8px rgba(28,37,46,0.25);
+            box-shadow: 0 0 0 4px var(--bg), 0 2px 8px rgba(28,37,46,0.25);
             white-space: nowrap;
         }
 
@@ -1337,7 +1377,7 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
 
         /* When SNAP is active, grey out the Medicaid line */
         #snap-medicaid-timeline .timeline-container.snap-active .timeline-line-container {
-            opacity: 0.6;
+            opacity: 0.4;
             transition: opacity 0.3s ease;
         }
 
@@ -1359,7 +1399,7 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
 
         /* When Medicaid is active, grey out the SNAP line (default) */
         #snap-medicaid-timeline .timeline-container:not(.snap-active) .snap-parallel-line {
-            opacity: 0.6;
+            opacity: 0.4;
         }
 
         #snap-medicaid-timeline .timeline-container:not(.snap-active) .snap-parallel-line:hover {
@@ -1424,12 +1464,18 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
 
         #snap-medicaid-timeline .total-cost-label {
             font-family: var(--font-head);
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            opacity: 0.9;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
+        }
+
+        #snap-medicaid-timeline .total-cost-sub {
+            margin-top: 2px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            opacity: 0.92;
         }
 
         #snap-medicaid-timeline .total-cost-amount {
@@ -1531,10 +1577,8 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
                 padding: 10px 8px;
                 transform: none;
             }
-            #snap-medicaid-timeline .total-cost-label {
+            #snap-medicaid-timeline .total-cost-sub {
                 font-size: 0.75rem;
-                letter-spacing: 0.06em;
-                margin-bottom: 2px;
             }
             #snap-medicaid-timeline .total-cost-amount {
                 font-size: clamp(0.85rem, 4vw, 0.95rem);
@@ -1663,8 +1707,22 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
                 margin: 0 0 16px calc(var(--rail-x) - var(--gutter));
                 transform: translateX(-24px);
             }
+            #snap-medicaid-timeline {
+                border-radius: 0;
+                padding-top: 20px;
+            }
+            #snap-medicaid-timeline .timeline-intro {
+                text-align: left;
+            }
             #snap-medicaid-timeline .intro-text {
                 font-size: 1rem;
+                margin-left: 0;
+            }
+            #snap-medicaid-timeline .intro-legend {
+                justify-content: flex-start;
+            }
+            #snap-medicaid-timeline .legend-item {
+                margin-left: 0;
             }
         }
     </style>
@@ -1698,12 +1756,14 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
     <div class="timeline-container" id="timeline-container">
         <div class="total-costs">
             <div class="total-cost-medicaid" onclick="setActiveTimeline('medicaid')">
-                <div class="total-cost-label">Medicaid &#183; yearly cost to Hawai&#699;i</div>
+                <div class="total-cost-label">Medicaid</div>
                 <div class="total-cost-amount">$330M&#8211;$550M</div>
+                <div class="total-cost-sub">yearly cost to Hawai&#699;i</div>
             </div>
             <div class="total-cost-snap" onclick="setActiveTimeline('snap')">
-                <div class="total-cost-label">SNAP &#183; yearly cost to Hawai&#699;i</div>
+                <div class="total-cost-label">SNAP</div>
                 <div class="total-cost-amount">$52M&#8211;$156M</div>
+                <div class="total-cost-sub">yearly cost to Hawai&#699;i</div>
             </div>
         </div>
         <div class="timeline-track">
@@ -1746,7 +1806,7 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
               moreContent: '<ol class="num-list"><li>Freezes provider taxes at their current levels, banning any new taxes or increases, and will gradually lower the maximum tax rate for Medicaid expansion states from 6% to 3.5% by 2032.</li><li>Caps new state-directed payments at Medicare rates (100-110%), with existing higher payments phased down starting in 2028.</li></ol>' },
             { source:'hr1', date: '2026-10-01', title: 'First Major Changes', sections: [{heading: 'Emergency Medicaid match drops (No impact on Hawai\u02bbi)', before: 'The federal government paid about 90% of emergency care costs for some noncitizens in certain states.', after: 'The federal government pays a smaller share (often around 50\u201370% depending on the state). States must pay more out of their own pocket.'}, {heading: 'Fewer immigrants qualify for full Medicaid/CHIP', before: 'Many types of lawfully present immigrants could get full Medicaid or CHIP benefits with federal funding.', after: 'Only a few groups still qualify\u2014mainly green card holders, certain Cuban/Haitian entrants, and citizens of Pacific Island nations with U.S. agreements (COFA).'}, {heading: 'Who loses coverage', note: 'Refugees, asylees, trafficking victims, and some domestic violence survivors no longer qualify for federally funded full Medicaid\u2014unless their state pays for it separately or they fit a narrow exception (like being a child or pregnant in certain states).'}],
               secondCard: { type: 'stat', value: '1,200\u20132,400', label: 'members lose coverage' } },
-            { source:'hr1', date: '2026-12-31', title: 'Year-End Transition (ACA expansion adults)', sections: [{heading: 'Work requirements begin', before: 'You could stay on Medicaid expansion without proving you had a job or were doing certain activities.', after: 'Adults ages 19\u201364 on Medicaid expansion must prove they\u2019re doing at least <mark class="hl">80 hours per month</mark> of work, job training, school (at least half-time), or community service to keep their coverage.'}, {heading: 'Who\u2019s exempt', note: 'Pregnant women, people with disabilities, full-time caregivers, people in treatment programs, and a few other groups don\u2019t have to meet this requirement.'}, {heading: 'Eligibility checks happen twice as often', before: 'States checked if you still qualified for Medicaid once every 12 months.', after: 'States must check every <mark class="hl">6 months</mark> for adults on Medicaid expansion.<br><br><strong>What this means:</strong> More paperwork, more chances to accidentally lose coverage if you miss a form or deadline.'}, {heading: '\u26a0\ufe0f If you lose Medicaid for not meeting work requirements', note: 'You also can\u2019t get subsidized insurance on the ACA Marketplace (Healthcare.gov). This creates a coverage gap where some people may have no affordable option.'}],
+            { source:'hr1', date: '2026-12-31', title: 'Year-End Transition (ACA expansion adults)', sections: [{heading: 'Work requirements begin', before: 'You could stay on Medicaid expansion without proving you had a job or were doing certain activities.', after: 'Adults ages 19\u201364 on Medicaid expansion must prove they\u2019re doing at least <mark class="hl">80 hours per month</mark> of work, job training, school (at least half-time), or community service to keep their coverage.'}, {heading: 'Who\u2019s exempt', note: 'Pregnant women, people with disabilities, full-time caregivers, people in treatment programs, and a few other groups don\u2019t have to meet this requirement.'}, {heading: 'Eligibility checks happen twice as often', before: 'States checked if you still qualified for Medicaid once every 12 months.', after: 'States must check every <mark class="hl">6 months</mark> for adults on Medicaid expansion.<br><br><strong>What this means:</strong> More paperwork, more chances to accidentally lose coverage if you miss a form or deadline.'}, {heading: 'If you lose Medicaid for not meeting work requirements', warn: true, note: 'You also can\u2019t get subsidized insurance on the ACA Marketplace (Healthcare.gov). This creates a coverage gap where some people may have no affordable option.'}],
               secondCard: { type: 'icons', title: 'Work Requirements', value: '80 hrs/month', items: [
                   { icon: 'work', label: 'Work' }, { icon: 'training', label: 'Training' }, { icon: 'school', label: 'School*' }, { icon: 'service', label: 'Service' } ],
                   note: '*Enrolled at least half-time' },
@@ -1831,14 +1891,20 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
 
         // Each change shows in full: the old rule as a compact grey line, the
         // new one under it. Nothing hides behind a button.
+        // "What this means:" / "Why it matters:" at the end of an after-text
+        // becomes its own takeaway row under the before/after pair.
+        const TAKEAWAY = /<br><br><strong>(What this means|Why it matters):<\/strong>\s*/;
+
         function buildSectionsHTML(sections) {
             return sections.map(s => {
-                let html = `<div class="change"><h4 class="change-title">${s.heading}</h4>`;
+                let html = `<div class="change${s.warn ? ' is-warning' : ''}"><h4 class="change-title">${s.warn ? icon('alert', 18) : ''}${s.heading}</h4>`;
                 if (s.before && s.after) {
+                    const [after, label, takeaway] = s.after.split(TAKEAWAY);
                     html += `<div class="before-after">`
                         + `<div class="before-section"><p><span class="section-label">Before</span>${s.before}</p></div>`
-                        + `<div class="after-section"><p><span class="section-label">After</span>${s.after}</p></div>`
+                        + `<div class="after-section"><p><span class="section-label">After</span>${after}</p></div>`
                         + `</div>`;
+                    if (takeaway) html += `<div class="takeaway"><span class="takeaway-label">${label}</span><p>${takeaway}</p></div>`;
                 } else if (s.note) {
                     html += `<p class="change-note">${s.note}</p>`;
                 }
@@ -1884,7 +1950,8 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             flask: '<path d="M9 3h6"/><path d="M10 3v5l-4 8a1 1 0 0 0 .9 1.5h10.2a1 1 0 0 0 .9-1.5l-4-8V3"/><path d="M8 16h2M10 13h4"/>',
             arrow: '<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>',
             no: '<line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>',
-            yes: '<polyline points="20 6 9 17 4 12"/>'
+            yes: '<polyline points="20 6 9 17 4 12"/>',
+            alert: '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>'
         };
 
         function icon(name, size) {
@@ -1949,7 +2016,9 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
         }
 
         // ---- Where "today" falls --------------------------------------------
-        const TODAY = new Date().toISOString().slice(0, 10);
+        // The reader's local date. toISOString() is UTC, which in Hawai\u02BBi
+        // turns into tomorrow at 2pm.
+        const TODAY = (d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`)(new Date());
 
         function statusChip(date) {
             return date <= TODAY
