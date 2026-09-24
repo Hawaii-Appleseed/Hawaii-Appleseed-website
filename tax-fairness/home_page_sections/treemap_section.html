@@ -127,6 +127,14 @@
     text-decoration: none;
 }
 
+/* The Fluid Engine block holding this code sits in columns 8-20 of 26,
+   off-centre, and its resize handles are fiddly. Span the full content
+   width instead; .tfc-chart centres itself at 880px. The class is this
+   block's Squarespace id, so re-check it if the block is ever recreated. */
+@media (min-width: 768px) {
+    .fe-block-yui_3_17_2_1_1770159740777_5942 { grid-column: 2 / 26 !important; }
+}
+
 @media (max-width: 767px) {
     .tfc-chart { padding: 28px 20px 28px; }
     .tfc-chart-title { font-size: 1.55rem; }
