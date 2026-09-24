@@ -1,200 +1,123 @@
-<!-- What Taxes Pay For Section from home_page_squarespace.html -->
-<!-- Transparent background, no blur - paste into Squarespace code block -->
+<!-- "What Taxes Pay For" cards — homepage code block (hitaxfairness.org).
+     Paste everything below into the Code Block under the "What Taxes Pay For"
+     text. The heading, intro paragraph and photo above it are ordinary
+     Squarespace blocks, not part of this file.
+     One icon set (inline SVG line icons, one color), fonts from Site Styles,
+     and figures in the logo blue (#3C73B9, 4.8:1 on white). Phones get
+     compact rows instead of four stacked cards. -->
 
 <style>
-.tfc-taxes-section {
-    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: transparent;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 40px;
-}
-
-.tfc-taxes-intro {
-    display: flex;
-    align-items: flex-start;
-    gap: 60px;
-    margin-bottom: 60px;
-}
-
-.tfc-taxes-intro-image {
-    flex: 0 0 300px;
-}
-
-.tfc-taxes-intro-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 24px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.tfc-taxes-intro-text {
-    flex: 1;
-}
-
-.tfc-taxes-intro-text h3 {
-    font-family: 'Red Hat Display', sans-serif;
-    font-size: 2.25rem;
-    color: #2a3a4d;
-    margin-bottom: 16px;
-    margin-top: 0;
-    font-weight: 700;
-}
-
-.tfc-taxes-intro-text p {
-    color: #4a5568;
-    font-size: 1.25rem;
-    line-height: 1.6;
-    max-width: 800px;
-}
-
-.tfc-odometer-box {
-    display: inline-flex;
-    align-items: baseline;
-    background: rgba(49, 151, 149, 0.1);
-    border: 1px solid rgba(49, 151, 149, 0.3);
-    border-radius: 6px;
-    padding: 2px 8px;
-    font-weight: 700;
-    color: #2c7a7b;
-}
-
 .tfc-icon-grid {
+    --tfc-navy: #253551;
+    --tfc-blue: #3c73b9;
+    --tfc-muted: #4a5568;
+    font-family: var(--body-font-font-family), sans-serif;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8px 0;
 }
 
 .tfc-icon-card {
-    text-align: center;
-    padding: 6px 8px;
     background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.tfc-icon-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(36, 53, 81, 0.15);
+    border: 1px solid #dfe3ea;
+    border-radius: 8px;
+    padding: 28px 22px 26px;
+    text-align: left;
 }
 
 .tfc-symbol {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 8px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--tfc-blue);
+    margin-bottom: 18px;
 }
 
-.tfc-symbol img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+.tfc-symbol svg {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 .tfc-card-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #2a3a4d;
-    margin-bottom: 4px;
-    font-family: 'Red Hat Display', sans-serif;
-}
-
-.tfc-card-cost-wrapper {
-    display: block;
-    text-align: center;
-    margin-bottom: 12px;
+    font-family: var(--heading-font-font-family), sans-serif;
+    font-weight: 400;
+    font-size: 1.15rem;
+    line-height: 1.3;
+    color: var(--tfc-navy);
 }
 
 .tfc-card-cost {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #8fbfaa;
-    display: inline-block;
-    margin-top: 4px;
+    font-family: var(--heading-font-font-family), sans-serif;
+    font-weight: 700;
+    font-size: 1.85rem;
+    line-height: 1.2;
+    color: var(--tfc-blue);
+    margin: 6px 0 12px;
+    white-space: nowrap;
 }
 
 .tfc-card-desc {
-    color: #4a5568;
-    font-size: 0.9rem;
-    background: #f7fafc;
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid #edf2f7;
-    margin-top: 6px;
+    color: var(--tfc-muted);
+    font-size: .95rem;
+    line-height: 1.5;
 }
 
-@media (max-width: 900px) {
-    .tfc-taxes-intro {
-        flex-direction: column;
-    }
-    
-    .tfc-taxes-intro-image {
-        flex: none;
-        width: 100%;
-    }
-    
-    .tfc-icon-grid {
-        grid-template-columns: 1fr 1fr;
-    }
+@media (max-width: 1100px) {
+    .tfc-icon-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 600px) {
-    .tfc-icon-grid {
-        grid-template-columns: 1fr;
+    .tfc-icon-grid { grid-template-columns: 1fr; gap: 12px; }
+    .tfc-icon-card {
+        display: grid;
+        grid-template-columns: 32px 1fr;
+        column-gap: 16px;
+        padding: 18px 18px 18px 16px;
     }
+    .tfc-symbol { width: 32px; height: 32px; margin: 2px 0 0; grid-row: span 3; }
+    .tfc-card-title { font-size: 1.05rem; }
+    .tfc-card-cost { font-size: 1.45rem; margin: 2px 0 6px; }
+    .tfc-card-desc { font-size: .9rem; }
 }
 </style>
 
-<div class="tfc-taxes-section">
-    <div class="tfc-taxes-intro">
-        <div class="tfc-taxes-intro-image">
-            <img src="https://images.squarespace-cdn.com/content/v1/63c215f8a268791349c9f04a/1766614142157-5E6H5Z3CR3TFB70S61X4/unsplash-image-zb7AuMaWqJQ.jpg?format=1500w" alt="Hawaii Scenery">
+<div class="tfc-icon-grid">
+    <div class="tfc-icon-card">
+        <div class="tfc-symbol" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg>
         </div>
-        <div class="tfc-taxes-intro-text">
-            <h3>What Taxes Pay For</h3>
-            <p>Hawaiʻi's <span class="tfc-odometer-box">$10.8+ billion</span> in tax revenue dollars are meant to support the things our communities depend on. But rising costs, federal budget cuts, and growing needs are stretching public budgets thin. At a moment when families need support the most, raising sufficient revenue is essential to protect and strengthen core public investments—things like:</p>
-        </div>
+        <div class="tfc-card-title">Healthcare</div>
+        <div class="tfc-card-cost">$1.83 billion</div>
+        <div class="tfc-card-desc">Health coverage for 441,000 children and adults</div>
     </div>
 
-    <div class="tfc-icon-grid">
-        <div class="tfc-icon-card">
-            <div class="tfc-symbol">
-                <img src="https://images.squarespace-cdn.com/content/v1/63c215f8a268791349c9f04a/5d9c3cf1-6bab-4db3-8f24-86cd6ed58a3b/generated-image+%289%29.png?format=2500w" alt="Healthcare Icon">
-            </div>
-            <div class="tfc-card-title">Healthcare</div>
-            <div class="tfc-card-cost-wrapper"><div class="tfc-card-cost">$1.83 billion</div></div>
-            <div class="tfc-card-desc">Health coverage for 441,000 children and adults</div>
+    <div class="tfc-icon-card">
+        <div class="tfc-symbol" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/></svg>
         </div>
+        <div class="tfc-card-title">Affordable Housing</div>
+        <div class="tfc-card-cost">$305+ million</div>
+        <div class="tfc-card-desc">Building affordable units, rental assistance, and homelessness programs</div>
+    </div>
 
-        <div class="tfc-icon-card">
-            <div class="tfc-symbol">
-                <img src="https://images.squarespace-cdn.com/content/v1/63c215f8a268791349c9f04a/c052bdbb-1660-4f88-b32b-936ad43a65ef/generated-image+%2814%29.png?format=1500w" alt="Housing Icon">
-            </div>
-            <div class="tfc-card-title">Affordable Housing</div>
-            <div class="tfc-card-cost-wrapper"><div class="tfc-card-cost">$305+ million</div></div>
-            <div class="tfc-card-desc">Building affordable units, rental assistance, and homelessness programs</div>
+    <div class="tfc-icon-card">
+        <div class="tfc-symbol" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
         </div>
+        <div class="tfc-card-title">Public K-12 Schools</div>
+        <div class="tfc-card-cost">$1.76 billion</div>
+        <div class="tfc-card-desc">Education for 165,000+ students across 296 schools</div>
+    </div>
 
-        <div class="tfc-icon-card">
-            <div class="tfc-symbol">
-                <img src="https://images.squarespace-cdn.com/content/v1/63c215f8a268791349c9f04a/fe9369a0-3681-47a9-a26d-803f7670b0d5/generated-image+%2810%29.png?format=1500w" alt="Education Icon">
-            </div>
-            <div class="tfc-card-title">Public K-12 Schools</div>
-            <div class="tfc-card-cost-wrapper"><div class="tfc-card-cost">$1.76 billion</div></div>
-            <div class="tfc-card-desc">Education for 165,000+ students across 296 schools</div>
+    <div class="tfc-icon-card">
+        <div class="tfc-symbol" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/></svg>
         </div>
-
-        <div class="tfc-icon-card">
-            <div class="tfc-symbol">
-                <img src="https://images.squarespace-cdn.com/content/v1/63c215f8a268791349c9f04a/3a6214a4-d3b6-47b7-b560-b3815fd78f7d/generated-image+%2813%29.png?format=1500w" alt="Food Security Icon">
-            </div>
-            <div class="tfc-card-title">Food Security</div>
-            <div class="tfc-card-cost-wrapper"><div class="tfc-card-cost">$30+ million</div></div>
-            <div class="tfc-card-desc">Free and reduced-price school meals for 78,000 students and SNAP administration for over 163,000 people.</div>
-        </div>
+        <div class="tfc-card-title">Food Security</div>
+        <div class="tfc-card-cost">$30+ million</div>
+        <div class="tfc-card-desc">Free and reduced-price school meals for 78,000 students and SNAP administration for over 163,000 people.</div>
     </div>
 </div>

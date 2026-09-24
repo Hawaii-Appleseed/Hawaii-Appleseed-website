@@ -1,0 +1,71 @@
+/* hitaxfairness.org — Squarespace Custom CSS (Website > Website Tools > Custom CSS).
+   This file is the source of truth; paste the whole thing over what's there. */
+
+/* ---- ʻokina -----------------------------------------------------------
+   Neither Halyard Display nor Open Sans, as Squarespace serves them, has
+   the ʻokina (U+02BB), so browsers borrowed a system glyph and left a gap
+   ("Hawai ʻi"). "TFC Okina" supplies only that one character, from Public
+   Sans, whose ʻokina matches Halyard's quote marks. The variables are Site
+   Styles' own font values with it appended as a fallback: if a font is
+   changed in Site Styles, change it here too (or delete this block). */
+@font-face {
+    font-family: "TFC Okina";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/publicsans/v21/ijwRs572Xtc6ZYQws9YVwnNGfJ7QwOk1.woff2) format("woff2");
+    unicode-range: U+02BB;
+}
+@font-face {
+    font-family: "TFC Okina";
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/publicsans/v21/ijwTs572Xtc6ZYQws9YVwnNDTJzax8s3Jik.woff2) format("woff2");
+    unicode-range: U+02BB;
+}
+:root {
+    --heading-font-font-family: "halyard-display", "TFC Okina";
+    --meta-font-font-family: "halyard-display", "TFC Okina";
+    --site-navigation-font-font-family: "halyard-display", "TFC Okina";
+    --header-button-font-font-family: "halyard-display", "TFC Okina";
+    --primary-button-font-font-family: "halyard-display", "TFC Okina";
+    --secondary-button-font-font-family: "halyard-display", "TFC Okina";
+    --tertiary-button-font-font-family: "halyard-display", "TFC Okina";
+    --blog-basic-grid-list-meta-font-font-family: "halyard-display", "TFC Okina";
+    --blog-basic-grid-list-title-font-font-family: "halyard-display", "TFC Okina";
+    --body-font-font-family: "Open Sans", "TFC Okina";
+}
+
+/* ---- Header -----------------------------------------------------------
+   Navy bar with white links on every page, so the white-text logo shows.
+   Older code injections (Settings > Developer Tools > Code Injection >
+   Header, plus several pages' own Page Header Code Injection) force the
+   header transparent and its links white or #2A3A4D with !important.
+   These selectors are more specific, so they win; those injections are
+   now inert and can be deleted. */
+html body header.header {
+    background-color: #253551 !important;
+}
+html body header.header .header-nav-item > a,
+html body header.header .header-nav-folder-title,
+html body header.header .header-title-text a {
+    color: #ffffff !important;
+}
+html body header.header .header-burger .burger-inner div {
+    background-color: #ffffff !important;
+}
+html body header.header .header-nav-folder-content {
+    background-color: #253551 !important;
+    border: 0 !important;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25) !important;
+}
+html body header.header .header-nav-folder-content a,
+html body header.header .header-nav-folder-item a {
+    color: #ffffff !important;
+}
+html body header.header .header-nav-folder-content a:hover,
+html body header.header .header-nav-folder-item a:hover {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+}
