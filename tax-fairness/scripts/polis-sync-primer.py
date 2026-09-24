@@ -36,8 +36,26 @@ text or inline `style="width:…"` — not slotted in content.md at all, so no
 content.md-level tool can reach them. Check for these separately; the
 project's own map file should say so if any exist.
 
+DATA MODE (--data) — for a report whose bars are charts
+-------------------------------------------------------------
+A report whose vote bars are editor charts (docsync blocks.meter — the
+tfc-2027-priorities page since 2026-09-24) has no tally slots to write: every
+tally and total is computed from the bars, and the bars start from a data file
+the renderer reads. --data writes THAT file (the project's votes.json) and
+leaves content.md alone:
+
+  python3 polis-sync-primer.py POLIS_JSON VOTES_JSON --data [--check]
+
+It keeps what Pol.is cannot know (the invited count, the ideas listed under
+"excluded" — a stray statement that is not an idea), and warns about two
+things no file write can settle: a bar someone edited in the Chart panel
+(its override in layout.json wins over the fresh counts until it is cleared),
+and an idea Pol.is has that the page does not show yet (it has to be placed
+in a tier and a family/bucket by hand, or excluded).
+
 Usage:
   python3 polis-sync-primer.py POLIS_JSON CONTENT_MD MAP_JSON [-o OUT] [--check]
+  python3 polis-sync-primer.py POLIS_JSON VOTES_JSON --data [--check]
 
   --check   report drift only (each slot whose fresh value differs from
             what's currently in content.md), write nothing, exit 1 if
@@ -102,18 +120,79 @@ def compute_new_values(polis, mapping):
     return new_values
 
 
+def sync_data(polis, votes_path, check):
+    """--data: refresh the project's votes.json from a Pol.is pull."""
+    from pathlib import Path
+    vp = Path(votes_path)
+    old = json.loads(vp.read_text()) if vp.exists() else {}
+    excluded = old.get("excluded", {})
+    ideas = {str(i["tid"]): {"agree": i["agree"], "pass": i["pass"],
+                              "disagree": i["disagree"]}
+             for i in polis["ideas"] if str(i["tid"]) not in excluded}
+    new = dict(old)
+    new.update({"source": polis.get("source"),
+                "conversation_id": polis.get("conversation_id"),
+                "fetched_at": polis.get("fetched_at"),
+                "voters": polis["participant_count"], "ideas": ideas})
+    changes = []
+    if old.get("voters") != new["voters"]:
+        changes.append(f"voters: {old.get('voters')} -> {new['voters']}")
+    for tid, v in ideas.items():
+        was = (old.get("ideas") or {}).get(tid)
+        if was != v:
+            changes.append(f"idea {tid}: {was} -> {v}")
+    fresh = sorted(set(ideas) - set(old.get("ideas") or {}), key=int)
+    if old and fresh:
+        texts = {str(i["tid"]): i.get("text", "") for i in polis["ideas"]}
+        print("warning: Pol.is has idea(s) the page does not show yet — place "
+              "each in a tier (body.slotted.html) and a family/bucket "
+              "(render_report.py), or list it under \"excluded\" in "
+              f"{vp.name}:", file=sys.stderr)
+        for t in fresh:
+            print(f"  tid {t}: {texts.get(t, '')[:90]}", file=sys.stderr)
+    lay = vp.with_name("layout.json")
+    if lay.exists():
+        charts = (json.loads(lay.read_text()).get("charts") or {})
+        held = sorted(k for k, v in charts.items()
+                      if isinstance(v, dict) and "series" in v)
+        if held:
+            print("warning: these bars were edited in the Chart panel, and "
+                  "their numbers override votes.json until the edit is undone "
+                  f"(or 'series' is removed from layout.json charts): "
+                  f"{', '.join(held)}", file=sys.stderr)
+    if check:
+        if not changes:
+            print("no drift — votes.json already matches the fresh pull",
+                  file=sys.stderr)
+            return
+        print("\n".join(changes), file=sys.stderr)
+        sys.exit(1)
+    vp.write_text(json.dumps(new, indent=2, ensure_ascii=False) + "\n")
+    print(f"wrote {vp} ({len(changes)} change(s))", file=sys.stderr)
+    for c in changes:
+        print(f"  {c}", file=sys.stderr)
+
+
 def main():
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("polis_json", help="output of fetch-polis-report.py")
     ap.add_argument("content_md", help="the primer-editor project's content.md")
-    ap.add_argument("map_json", help="tid -> slot-key correspondence (see header)")
+    ap.add_argument("map_json", nargs="?",
+                    help="tid -> slot-key correspondence (see header); not with --data")
+    ap.add_argument("--data", action="store_true",
+                    help="second argument is the project's votes.json: refresh it "
+                         "instead of content.md slots (see DATA MODE)")
     ap.add_argument("-o", "--out", help="write here instead of back to content_md")
     ap.add_argument("--check", action="store_true",
                      help="report drift only; write nothing")
     args = ap.parse_args()
 
     polis = json.load(open(args.polis_json))
+    if args.data:
+        return sync_data(polis, args.content_md, args.check)
+    if not args.map_json:
+        ap.error("map_json is required unless --data")
     mapping = json.load(open(args.map_json))
     new_values = compute_new_values(polis, mapping)
 
