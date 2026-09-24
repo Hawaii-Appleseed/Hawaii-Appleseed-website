@@ -151,13 +151,15 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             }
         }
 
-        /* Header: sticky, so the track switch and the date map stay in reach */
+        /* Header: sticky, so the track switch and the date map stay in reach.
+           One layout at every width: Medicaid | SNAP switch, the active
+           track's dates (filled up to where you are), and the current date. */
         #snap-medicaid-timeline .timeline-header {
             position: sticky;
             top: 0;
             z-index: 100;
             width: 100%;
-            padding: 12px 0 24px; /* bottom room for the active date under the dots */
+            padding: 10px 0;
             background: rgba(243, 245, 242, 0.94);
             box-shadow: 0 1px 0 rgba(47,62,70,0.08);
             backdrop-filter: blur(12px);
@@ -170,70 +172,61 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             padding: 0 var(--gutter);
         }
 
+        #snap-medicaid-timeline .mini-timeline-rows {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+        }
+
+        #snap-medicaid-timeline .track-switch {
+            display: flex;
+            flex-shrink: 0;
+        }
+
         #snap-medicaid-timeline .toggle-btn {
-            padding: 6px 20px;
-            border: none;
-            background: white;
-            color: var(--ink-muted);
-            border-radius: 30px;
+            min-height: 38px;
+            padding: 0 18px;
+            background: #fff;
+            border: 2px solid;
             cursor: pointer;
             font-family: var(--font-head);
             font-size: 0.85rem;
-            font-weight: 600;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            font-weight: 700;
+            transition: background 0.2s ease, color 0.2s ease;
         }
-
-        @media (hover: hover) {
-            #snap-medicaid-timeline .toggle-btn:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            }
+        #snap-medicaid-timeline #btn-medicaid {
+            color: var(--medicaid-ink);
+            border-color: var(--accent-medicaid);
+            border-right-width: 1px;
+            border-radius: 999px 0 0 999px;
         }
-
-        #snap-medicaid-timeline .toggle-btn.active {
-            color: white;
+        #snap-medicaid-timeline #btn-snap {
+            color: var(--snap-ink);
+            border-color: var(--accent-snap);
+            border-left-width: 1px;
+            border-radius: 0 999px 999px 0;
         }
-
         #snap-medicaid-timeline #btn-medicaid.active {
             background: var(--accent-medicaid);
+            color: #fff;
         }
-
         #snap-medicaid-timeline #btn-snap.active {
             background: var(--accent-snap);
+            color: #fff;
         }
 
-        /* Mini Timeline Navigation: one column per date, one row per track */
-        #snap-medicaid-timeline .mini-timeline-rows {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-        }
-        #snap-medicaid-timeline .mini-timeline-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        #snap-medicaid-timeline .mini-timeline-row .toggle-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 96px; /* equal widths keep the two rows' columns aligned */
-            padding: 4px 14px;
-            font-size: 0.8rem;
-            flex-shrink: 0;
-        }
+        /* Date map: only the active track's row, only its own dates */
         #snap-medicaid-timeline .mini-dots-group {
             display: flex;
             align-items: center;
         }
-        #snap-medicaid-timeline .now-chip {
+        #snap-medicaid-timeline:not(.snap-active) #mini-dots-snap,
+        #snap-medicaid-timeline.snap-active #mini-dots-med,
+        #snap-medicaid-timeline .mini-dot:disabled {
             display: none;
         }
 
-        /* Each date is a button: a small mark with a finger-sized hit area */
         #snap-medicaid-timeline .mini-dot {
             -webkit-appearance: none;
             appearance: none;
@@ -241,97 +234,76 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 22px;
-            height: 24px;
+            width: 24px;
+            height: 28px;
             padding: 0;
             border: 0;
             background: none;
             cursor: pointer;
         }
-        #snap-medicaid-timeline .mini-dot:disabled {
-            cursor: default;
-        }
 
-        #snap-medicaid-timeline .mini-dot-med {
+        #snap-medicaid-timeline .mini-dot-med,
+        #snap-medicaid-timeline .mini-dot-snap {
             display: block;
+            flex-shrink: 0;
+            opacity: 0.3;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        #snap-medicaid-timeline .mini-dot-med {
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: var(--accent);
-            opacity: 0.35;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
+            background: var(--accent-medicaid);
         }
-
         #snap-medicaid-timeline .mini-dot-snap {
-            display: block;
             width: 9px;
             height: 9px;
             border-radius: 2px;
             background: var(--accent-snap);
-            opacity: 0.35;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
         }
-
-        /* Medicaid active view: Medicaid dots bright, SNAP dots dimmed */
-        #snap-medicaid-timeline:not(.snap-active) .mini-dot-med {
+        #snap-medicaid-timeline .mini-dot.reached > span,
+        #snap-medicaid-timeline .mini-dot:hover > span {
             opacity: 1;
         }
-        #snap-medicaid-timeline:not(.snap-active) .mini-dot-snap {
-            opacity: 0.3;
-        }
-        #snap-medicaid-timeline:not(.snap-active) .mini-dot.active .mini-dot-med {
+        #snap-medicaid-timeline .mini-dot.active > span {
             transform: scale(1.5);
         }
 
-        /* SNAP active view: SNAP dots bright, Medicaid dots dimmed */
-        #snap-medicaid-timeline.snap-active .mini-dot-snap {
-            opacity: 1;
-        }
-        #snap-medicaid-timeline.snap-active .mini-dot-med {
-            opacity: 0.3;
-        }
-        #snap-medicaid-timeline.snap-active .mini-dot.active .mini-dot-snap {
-            transform: scale(1.5);
-        }
-
-        #snap-medicaid-timeline .mini-dot:not(:disabled):hover .mini-dot-med,
-        #snap-medicaid-timeline .mini-dot:not(:disabled):hover .mini-dot-snap {
-            opacity: 1;
-        }
-
-        /* The current date's label always hangs under the SNAP row, so it
-           never lands on the other row. Hovering a dot in either row shows
-           that column's date instead. */
+        /* Hover/focus label with that dot's month */
         #snap-medicaid-timeline .mini-dot::after {
             content: attr(data-date);
             position: absolute;
-            top: calc(100% + 1px);
+            top: calc(100% + 2px);
             left: 50%;
             transform: translateX(-50%);
-            font-size: 11px;
-            line-height: 1.4;
-            color: var(--ink);
-            background: rgba(255,255,255,0.92);
-            border: 1px solid #ddd;
+            padding: 1px 6px;
             border-radius: 4px;
-            padding: 1px 5px;
-            opacity: 0;
-            transition: opacity 0.2s;
-            pointer-events: none;
+            background: var(--ink);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1.5;
             white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s;
             z-index: 10;
         }
-        #snap-medicaid-timeline #mini-dots-med .mini-dot::after {
-            display: none;
-        }
-        #snap-medicaid-timeline #mini-dots-snap .mini-dot.active::after,
-        #snap-medicaid-timeline #mini-dots-snap .mini-dot.peek::after {
+        #snap-medicaid-timeline .mini-dot.peek::after {
             opacity: 1;
         }
-        #snap-medicaid-timeline #mini-dots-snap.peeking .mini-dot.active:not(.peek)::after {
-            opacity: 0;
+
+        #snap-medicaid-timeline .now-chip {
+            display: block;
+            flex-shrink: 0;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(47,62,70,0.08);
+            color: var(--ink);
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 700;
+            white-space: nowrap;
         }
 
         /* === 2D TIMELINE === */
@@ -987,8 +959,15 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             white-space: nowrap;
         }
         #snap-medicaid-timeline .status-chip.is-past {
-            background: var(--ink);
-            color: #fff;
+            padding-left: 2px;
+            padding-right: 2px;
+            color: var(--ink-muted);
+        }
+        #snap-medicaid-timeline .status-chip .p-icon {
+            display: inline-block;
+            margin-right: 4px;
+            vertical-align: -1px;
+            stroke-width: 3;
         }
         #snap-medicaid-timeline .status-chip.is-future {
             border: 1px dashed rgba(47,62,70,0.55);
@@ -1428,7 +1407,7 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
         }
 
         #snap-medicaid-timeline .total-cost-medicaid {
-            left: calc(50% - 10px);
+            left: calc(50% - 21px);
             transform: translateX(-100%);
             background: var(--accent-medicaid);
             border-color: var(--accent-medicaid);
@@ -1436,7 +1415,7 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
         }
 
         #snap-medicaid-timeline .total-cost-snap {
-            left: calc(50% + 54px);
+            left: calc(50% + 43px);
             background: var(--accent-snap);
             border-color: var(--accent-snap);
             box-shadow: 0 10px 28px rgba(82,121,111,0.28);
@@ -1498,60 +1477,24 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
                 margin-right: calc(50% - 50vw);
             }
 
-            /* Header becomes a Medicaid | SNAP switch plus the current date */
+            /* Header: switch + current date; the date map needs more room */
             #snap-medicaid-timeline .timeline-header {
                 padding: 8px 0;
             }
             #snap-medicaid-timeline .mini-timeline-rows {
-                flex-direction: row;
                 justify-content: flex-start;
                 gap: 0;
             }
-            #snap-medicaid-timeline .mini-dots-group {
+            #snap-medicaid-timeline .mini-dots-group,
+            #snap-medicaid-timeline:not(.snap-active) #mini-dots-med {
                 display: none;
             }
-            #snap-medicaid-timeline .mini-timeline-row .toggle-btn {
-                min-width: 0;
+            #snap-medicaid-timeline .toggle-btn {
                 min-height: 44px;
-                padding: 0 18px;
                 font-size: 0.9rem;
-                font-weight: 700;
-                background: white;
-                border: 2px solid;
-                box-shadow: none;
-                transform: none;
-            }
-            #snap-medicaid-timeline #btn-medicaid {
-                color: var(--accent-medicaid);
-                border-color: var(--accent-medicaid);
-                border-right-width: 1px;
-                border-radius: 999px 0 0 999px;
-            }
-            #snap-medicaid-timeline #btn-snap {
-                color: var(--accent-snap);
-                border-color: var(--accent-snap);
-                border-left-width: 1px;
-                border-radius: 0 999px 999px 0;
-            }
-            #snap-medicaid-timeline #btn-medicaid.active {
-                background: var(--accent-medicaid);
-                color: white;
-            }
-            #snap-medicaid-timeline #btn-snap.active {
-                background: var(--accent-snap);
-                color: white;
             }
             #snap-medicaid-timeline .now-chip {
-                display: block;
                 margin-left: auto;
-                padding: 6px 12px;
-                border-radius: 999px;
-                background: rgba(44,62,80,0.07);
-                color: var(--primary);
-                font-family: var(--font-head);
-                font-size: 0.85rem;
-                font-weight: 700;
-                white-space: nowrap;
             }
 
             #snap-medicaid-timeline .timeline-container {
@@ -1740,14 +1683,12 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
     <div class="timeline-header">
         <div class="container">
             <div class="mini-timeline-rows">
-                <div class="mini-timeline-row">
+                <div class="track-switch" role="group" aria-label="Program">
                     <button type="button" class="toggle-btn active" id="btn-medicaid" aria-pressed="true">Medicaid</button>
-                    <div class="mini-dots-group" id="mini-dots-med"></div>
-                </div>
-                <div class="mini-timeline-row">
                     <button type="button" class="toggle-btn" id="btn-snap" aria-pressed="false">SNAP</button>
-                    <div class="mini-dots-group" id="mini-dots-snap"></div>
                 </div>
+                <div class="mini-dots-group" id="mini-dots-med" role="group" aria-label="Medicaid dates"></div>
+                <div class="mini-dots-group" id="mini-dots-snap" role="group" aria-label="SNAP dates"></div>
                 <span class="now-chip" id="now-chip" aria-hidden="true"></span>
             </div>
         </div>
@@ -2022,7 +1963,7 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
 
         function statusChip(date) {
             return date <= TODAY
-                ? '<span class="status-chip is-past">In effect</span>'
+                ? `<span class="status-chip is-past">${icon('yes', 12)}In effect</span>`
                 : '<span class="status-chip is-future">Upcoming</span>';
         }
 
@@ -2059,6 +2000,8 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             miniDotElements.forEach(({ medDot, snapDot }, i) => {
                 medDot.classList.toggle('active', i === activeIndex);
                 snapDot.classList.toggle('active', i === activeIndex);
+                medDot.classList.toggle('reached', i <= activeIndex);
+                snapDot.classList.toggle('reached', i <= activeIndex);
             });
 
             const nowChip = document.getElementById('now-chip');
@@ -2168,13 +2111,9 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             updateScrollProgress();
         }
 
-        // Header date map: while a dot is hovered or focused, the label under
-        // the SNAP row shows that column's date.
-        function peek(index, on) {
-            const pair = miniDotElements[index];
-            if (!pair) return;
-            pair.snapDot.classList.toggle('peek', on);
-            document.getElementById('mini-dots-snap').classList.toggle('peeking', on);
+        // Header date map: a hovered or focused dot shows its month
+        function peek(button, on) {
+            button.classList.toggle('peek', on);
         }
 
         function miniDot(track, date, index, items) {
@@ -2189,15 +2128,14 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
                 // No event on this track that day
                 button.disabled = true;
                 button.setAttribute('aria-hidden', 'true');
-                mark.style.opacity = '0.15';
                 return button;
             }
             const more = items.length > 1 ? ` and ${items.length - 1} more` : '';
             button.setAttribute('aria-label',
                 `${track === 'medicaid' ? 'Medicaid' : 'SNAP'}, ${formatDate(date)}: ${items[0].title}${more}`);
             button.onclick = () => { setActiveTimeline(track, false); scrollToItem(index); };
-            button.onmouseenter = button.onfocus = () => peek(index, true);
-            button.onmouseleave = button.onblur = () => peek(index, false);
+            button.onmouseenter = button.onfocus = () => peek(button, true);
+            button.onmouseleave = button.onblur = () => peek(button, false);
             return button;
         }
 
