@@ -474,22 +474,33 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             padding: 28px 30px;
             background: var(--card-bg);
             border-radius: 16px;
+            position: relative;
             box-shadow: var(--shadow-card);
             border: 1px solid rgba(28,37,46,.06);
-            border-left: 4px solid var(--accent);
-            opacity: 0.3;
-            transform: translateX(-20px);
-            transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.5s ease;
+            /* Scroll-in: a short fade-up */
+            opacity: 0.2;
+            transform: translateY(14px);
+            transition: transform 0.5s cubic-bezier(.2,.7,.2,1), box-shadow 0.25s ease, opacity 0.5s ease;
         }
 
         #snap-medicaid-timeline .timeline-card.visible {
             opacity: 1;
-            transform: translateX(0);
+            transform: none;
         }
 
-
-        #snap-medicaid-timeline .timeline-card.snap-card {
-            border-left: 4px solid var(--accent-snap);
+        /* Track color as a straight inset bar, not a border bent round the corners */
+        #snap-medicaid-timeline .timeline-card:not(.second-card)::before {
+            content: '';
+            position: absolute;
+            left: -1px;
+            top: 22px;
+            bottom: 22px;
+            width: 4px;
+            border-radius: 0 4px 4px 0;
+            background: var(--accent);
+        }
+        #snap-medicaid-timeline .timeline-card.snap-card:not(.second-card)::before {
+            background: var(--accent-snap);
         }
 
         /* Detail panels: beside the card on desktop, below it on mobile.
@@ -515,8 +526,9 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             font-weight: 400;
             text-align: left;
             box-shadow: 0 12px 36px rgba(28,37,46,0.22);
-            opacity: 0.3;
-            transform: translateX(20px);
+            opacity: 0.2;
+            transform: translateY(14px);
+            transition-delay: 0.08s; /* lands just after its card */
         }
 
         #snap-medicaid-timeline .timeline-card.second-card.snap-card {
@@ -527,7 +539,7 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
 
         #snap-medicaid-timeline .timeline-card.second-card.visible {
             opacity: 1;
-            transform: translateX(0);
+            transform: none;
         }
 
         /* Panel parts */
@@ -1229,10 +1241,13 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             text-align: center;
         }
         #snap-medicaid-timeline .intro-text {
-            max-width: 640px;
-            margin: 0 auto 12px;
-            font-size: 1.05rem;
-            line-height: 1.6;
+            max-width: 680px;
+            margin: 0 auto 14px;
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            font-weight: 600;
+            line-height: 1.5;
+            letter-spacing: -0.005em;
             color: var(--ink);
         }
         #snap-medicaid-timeline .intro-legend {
@@ -1262,14 +1277,24 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             position: relative;
             z-index: 12;
             order: -1; /* after the year marker, before the event */
-            align-self: center;
+            align-self: stretch;
             margin-bottom: 22px;
+            text-align: center;
+        }
+        #snap-medicaid-timeline .today-marker::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            border-top: 1.5px dashed rgba(47,62,70,0.35);
+            z-index: -1;
         }
         #snap-medicaid-timeline .timeline-container:not(.snap-active) .today-marker.for-med,
         #snap-medicaid-timeline .timeline-container.snap-active .today-marker.for-snap {
             display: block;
         }
-        #snap-medicaid-timeline .timeline-container.snap-active .today-marker {
+        #snap-medicaid-timeline .timeline-container.snap-active .today-marker span {
             transform: translateX(22px);
         }
         #snap-medicaid-timeline .today-marker span {
@@ -1578,12 +1603,12 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
                 width: calc(100% - var(--card-inset));
                 max-width: none;
                 margin-left: var(--card-inset);
-                padding: 16px;
-                border-left-width: 4px;
+                padding: 16px 16px 16px 18px;
                 font-size: 0.95rem;
             }
-            #snap-medicaid-timeline .timeline-card.snap-card {
-                border-left-width: 4px;
+            #snap-medicaid-timeline .timeline-card:not(.second-card)::before {
+                top: 18px;
+                bottom: 18px;
             }
             #snap-medicaid-timeline .timeline-card h3 {
                 font-size: 1.3rem;
@@ -1644,11 +1669,14 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
             #snap-medicaid-timeline .p-columns {
                 gap: 4px;
             }
-            #snap-medicaid-timeline .today-marker,
-            #snap-medicaid-timeline .timeline-container.snap-active .today-marker {
-                align-self: flex-start;
-                margin: 0 0 16px calc(var(--rail-x) - var(--gutter));
-                transform: translateX(-24px);
+            #snap-medicaid-timeline .today-marker {
+                margin-bottom: 16px;
+                text-align: left;
+            }
+            #snap-medicaid-timeline .today-marker span,
+            #snap-medicaid-timeline .timeline-container.snap-active .today-marker span {
+                margin-left: calc(var(--rail-x) - var(--gutter) - 24px);
+                transform: none;
             }
             #snap-medicaid-timeline {
                 border-radius: 0;
@@ -1658,7 +1686,7 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
                 text-align: left;
             }
             #snap-medicaid-timeline .intro-text {
-                font-size: 1rem;
+                font-size: 1.05rem;
                 margin-left: 0;
             }
             #snap-medicaid-timeline .intro-legend {
@@ -2067,9 +2095,19 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
         function scrollToItem(index, instant) {
             const el = itemElements[index];
             if (!isShown(el)) return;
-            const top = el.getBoundingClientRect().top + window.pageYOffset - headerOffset() - 12;
+            const top = Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - headerOffset() - 12);
             const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            window.scrollTo({ top: Math.max(0, top), behavior: (instant || reduced) ? 'auto' : 'smooth' });
+            if (instant || reduced) {
+                // Squarespace sets html { scroll-behavior: smooth }, which turns even
+                // an 'auto' scrollTo into a long animated sweep after a track switch.
+                const root = document.documentElement;
+                const previous = root.style.scrollBehavior;
+                root.style.scrollBehavior = 'auto';
+                window.scrollTo(0, top);
+                root.style.scrollBehavior = previous;
+            } else {
+                window.scrollTo({ top: top, behavior: 'smooth' });
+            }
         }
 
         function setActiveTimeline(timeline, keepPlace) {
