@@ -1,0 +1,21 @@
+<!-- Hawaiʻi's Tax System (/hawaiis-tax-system-2): the script appended to the page's
+     Page Settings > Advanced > Page Header Code Injection. (That injection also still
+     holds an old <style> block forcing a transparent header with dark links; custom.css
+     overrides it, so it is inert. This file keeps only the part added 2026-09-24.)
+
+     Squarespace's chart block draws its axis labels in a hard-coded #666, set inside
+     its own bundled copy of Chart.js 1.x, so no Site Styles colour, block setting or
+     Chart.js default reaches it. On this page's navy section that grey was ~2:1.
+     This recolours that one grey, only on chart canvases, as it is drawn. -->
+<script>
+(function () {
+    var fillText = CanvasRenderingContext2D.prototype.fillText;
+    CanvasRenderingContext2D.prototype.fillText = function () {
+        var c = this.canvas;
+        if (c && c.closest && c.closest('.sqs-block-chart') && this.fillStyle === '#666666') {
+            this.fillStyle = '#e3e8f0';
+        }
+        return fillText.apply(this, arguments);
+    };
+})();
+</script>
