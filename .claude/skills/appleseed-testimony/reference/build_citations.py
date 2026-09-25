@@ -11,7 +11,7 @@ from __future__ import annotations
 import argparse, os, re, sys, glob, collections
 from pathlib import Path
 
-CORPUS = Path(os.path.expanduser("~/HawaiiAppleseed/writing-bot/testimony"))
+CORPUS = Path(os.path.expanduser(os.environ.get("APPLESEED_WEBSITE", "~/HawaiiAppleseed") + "/writing-bot/testimony"))
 RULE = re.compile(r"_{6,}")
 
 

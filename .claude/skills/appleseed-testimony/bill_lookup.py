@@ -19,7 +19,7 @@ from __future__ import annotations
 import argparse, json, os, re, sys
 from pathlib import Path
 
-WB = Path(os.path.expanduser("~/HawaiiAppleseed/writing-bot"))
+WB = Path(os.path.expanduser(os.environ.get("APPLESEED_WEBSITE", "~/HawaiiAppleseed") + "/writing-bot"))
 sys.path.insert(0, str(WB))
 
 DRAFT_RE = re.compile(r"\b((?:[HS]D)\s?\d|CD\s?\d)\b", re.I)
