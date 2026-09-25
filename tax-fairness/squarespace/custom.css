@@ -65,6 +65,9 @@ html body header.header .header-nav-folder-content {
     background-color: #253551 !important;
     border: 0 !important;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25) !important;
+    /* Squarespace's 200px minimum left the short labels in a wide box */
+    min-width: 0 !important;
+    width: max-content !important;
 }
 html body header.header .header-nav-folder-content a,
 html body header.header .header-nav-folder-item a {
