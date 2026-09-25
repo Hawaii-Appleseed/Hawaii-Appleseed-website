@@ -127,6 +127,26 @@ html body header.header .header-nav-folder-item a:hover {
     .fe-block-736d8ba8f6ca674135ab p { font-size: 3.25rem; }
 }
 
+/* The hero headline was sized for one width. At 1440px it only just fit on
+   two lines; on tablets it wrapped to three and on phones to seven, where the
+   last line ran into the paragraph below (Squarespace's phone layout also
+   overlapped the two blocks by a grid row). Scale it with the viewport, sit it
+   at the bottom of its area on phones, and start the paragraph a row lower. */
+@media (min-width: 768px) {
+    .fe-block-e0d2241c43d97a928ba1 h1 { font-size: ~"min(7.2vw, 116.8px)" !important; }
+}
+@media (max-width: 767px) {
+    .fe-block-e0d2241c43d97a928ba1 h1 { font-size: 12vw !important; }
+    body:not(.sqs-edit-mode) .fe-block-e0d2241c43d97a928ba1 .sqs-block {
+        justify-content: flex-end;
+        padding-bottom: 14px;
+    }
+    body:not(.sqs-edit-mode) .fe-block-ba96c7326d51189d828e {
+        grid-row-start: 15 !important;
+        grid-row-end: 20 !important;
+    }
+}
+
 /* ---- Who We Are (/who-we-are) ------------------------------------------
    - Member organisations: quieter underlines, a little air between items.
    - The desktop grid had 29 rows but its last block ends on row 22, so ~250px
