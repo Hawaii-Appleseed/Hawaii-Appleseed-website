@@ -191,3 +191,14 @@ html body header.header .header-nav-folder-item a:hover {
         grid-row-end: 37 !important;
     }
 }
+
+/* ---- In The News (/in-the-news) ----------------------------------------
+   Thumbnail shape is set in the blog section's own settings (Edit Section >
+   Aspect Ratio: 3:2 Standard; it was 1:1 Square, which cropped every wide
+   photo and chart and made each post ~540px tall). Here: the site's 8px card
+   corners, and a hairline edge so white-background images don't dissolve
+   into the white page. */
+.blog-side-by-side-wrapper .image-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(37, 53, 81, 0.12);
+}
