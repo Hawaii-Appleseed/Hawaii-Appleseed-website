@@ -1,5 +1,7 @@
 /* hitaxfairness.org — Squarespace Custom CSS (Website > Website Tools > Custom CSS).
-   This file is the source of truth; paste the whole thing over what's there. */
+   This file is the source of truth; paste the whole thing over what's there.
+   Squarespace compiles it as LESS and strips comments: avoid bare "a / b"
+   values (LESS divides them) and don't grep the live file for comments. */
 
 /* ---- ʻokina -----------------------------------------------------------
    Neither Halyard Display nor Open Sans, as Squarespace serves them, has
@@ -97,5 +99,10 @@ html body header.header .header-nav-folder-item a:hover {
     .fe-block-c2323ccf5d8ef36761d6,
     .fe-block-6c97759c5b692c004347,
     .fe-block-1b82d43329394a20ccea,
-    .fe-block-332f1404d52accc83636 { grid-column: 2 / 10 !important; }
+    .fe-block-332f1404d52accc83636 {
+        /* Longhands on purpose: Squarespace runs this file through LESS,
+           which turns "grid-column: 2 / 10" into "grid-column: .2". */
+        grid-column-start: 2 !important;
+        grid-column-end: 10 !important;
+    }
 }
