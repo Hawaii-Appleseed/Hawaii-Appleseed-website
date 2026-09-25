@@ -4,8 +4,9 @@
 /* ---- ʻokina -----------------------------------------------------------
    Neither Halyard Display nor Open Sans, as Squarespace serves them, has
    the ʻokina (U+02BB), so browsers borrowed a system glyph and left a gap
-   ("Hawai ʻi"). "TFC Okina" supplies only that one character, from Public
-   Sans, whose ʻokina matches Halyard's quote marks. The variables are Site
+   ("Hawai ʻi"). "TFC Okina" supplies only that one character, from Noto
+   Sans: of 26 Google fonts measured, its ʻokina comes closest to Halyard's
+   own quote mark in width and shape. The variables are Site
    Styles' own font values with it appended as a fallback: if a font is
    changed in Site Styles, change it here too (or delete this block). */
 @font-face {
@@ -13,7 +14,7 @@
     font-style: normal;
     font-weight: 100 900;
     font-display: swap;
-    src: url(https://fonts.gstatic.com/s/publicsans/v21/ijwRs572Xtc6ZYQws9YVwnNGfJ7QwOk1.woff2) format("woff2");
+    src: url(https://fonts.gstatic.com/s/notosans/v42/o-0bIpQlx3QUlC5A4PNB6Ryti20_6n1iPHjc5a7du3mhPy0.woff2) format("woff2");
     unicode-range: U+02BB;
 }
 @font-face {
@@ -21,7 +22,7 @@
     font-style: italic;
     font-weight: 100 900;
     font-display: swap;
-    src: url(https://fonts.gstatic.com/s/publicsans/v21/ijwTs572Xtc6ZYQws9YVwnNDTJzax8s3Jik.woff2) format("woff2");
+    src: url(https://fonts.gstatic.com/s/notosans/v42/o-0ZIpQlx3QUlC5A4PNr4C5OaxRsfNNlKbCePevtuXOmHS91iw.woff2) format("woff2");
     unicode-range: U+02BB;
 }
 :root {
@@ -68,4 +69,17 @@ html body header.header .header-nav-folder-content a:hover,
 html body header.header .header-nav-folder-item a:hover {
     background-color: rgba(255, 255, 255, 0.12) !important;
     color: #ffffff !important;
+}
+
+/* ---- Secondary buttons on dark sections ------------------------------
+   The dark ("black") section theme gave secondary buttons the same white
+   fill as primary ones, so the hero's two buttons looked identical. Make
+   them outlines there, so the primary action reads first. */
+.page-section[data-section-theme="black"] .sqs-button-element--secondary {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+.page-section[data-section-theme="black"] .sqs-button-element--secondary:hover {
+    background-color: rgba(255, 255, 255, 0.14) !important;
 }
