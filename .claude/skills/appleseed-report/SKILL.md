@@ -115,7 +115,7 @@ Creates `~/primer-editor/projects/<slug>/` with `content.md`, `layout.json`, `re
 - **Never start or kill `serve.py` yourself.** "Budget Primer Editor.app" owns it. Ask the user to relaunch the app.
 - Save is pre-authorized at checkpoints. **Push publishes the live site and needs an explicit per-message go-ahead.**
 
-**→ Google Doc** (funders, coalition markup, anyone who will comment on it): file the rendered brand HTML straight into the shared drive.
+**→ Google Doc** (funders, coalition markup, anyone who will comment on it): file the rendered brand HTML straight into the shared drive. **Needs `~/internal-tools/appleseed-drive/`** and its Drive credential (`internal-tools` repo); if it isn't on this machine, ship `.docx` instead and say why.
 
 ```bash
 ~/internal-tools/appleseed-drive/.venv/bin/python \
