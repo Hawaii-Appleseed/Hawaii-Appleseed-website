@@ -7,13 +7,13 @@ description: Draft or revise legislative testimony submitted under Hawaiʻi Appl
 
 Testimony is a **document with fixed furniture**, not an essay. The scaffold is more rigid than the prose, and getting the scaffold wrong is more visible to a committee clerk than any sentence-level choice. Accuracy and faithfulness matter more than fluency.
 
-> **Where things live.** This skill's own files (`reference/`, scripts) are in `${CLAUDE_SKILL_DIR}`. The corpus and `positions.md` are in the `Hawaii-Appleseed-website` repo, and every `writing-bot/…` path below is relative to its root. Before Step 1, go there:
+> **Where things live.** This skill's own files (`reference/`, scripts) are in `${CLAUDE_SKILL_DIR}`. The corpus and `positions.md` are in a clone of the `Hawaii-Appleseed-website` repo, written **`$W`** below; every `writing-bot/…` path is relative to it. Find it before Step 1:
 >
 > ```bash
-> W="${APPLESEED_WEBSITE:-$HOME/HawaiiAppleseed}"; cd "$W" && test -f writing-bot/positions.md
+> W="${APPLESEED_WEBSITE:-$HOME/HawaiiAppleseed}"; test -f "$W/writing-bot/positions.md" && echo "$W"
 > ```
 >
-> If that fails, the repo isn't cloned (or lives elsewhere — ask, and set `APPLESEED_WEBSITE`). Offer to clone it with `gh repo clone Hawaii-Appleseed/Hawaii-Appleseed-website ~/HawaiiAppleseed`; don't draft without positions.md.
+> Use the absolute path it prints wherever `$W` appears below, in commands **and** file reads. Shell variables and `cd` don't carry over between tool calls, so don't rely on either. If the test fails, the repo isn't cloned (or is somewhere else: ask, and have them set `APPLESEED_WEBSITE`). Offer to clone it with `gh repo clone Hawaii-Appleseed/Hawaii-Appleseed-website ~/HawaiiAppleseed` (about 110 MB), and don't draft without positions.md.
 
 > Every measured claim below comes from the 37 real testimonies in `writing-bot/testimony/` (13,255 body words, 561 sentences, 2025–2026). The numbers behind them live in `reference/testimony-profile.md`.
 
@@ -21,7 +21,7 @@ Testimony is a **document with fixed furniture**, not an essay. The scaffold is 
 
 Read, in order:
 
-1. **`writing-bot/positions.md`** — HA's curated stances, maintained by policy staff. **Authoritative on positions.** Read it fresh on every use. Never take a position it doesn't cover; `[REVIEW]` means unconfirmed, `[ADD]` means known gap — both mean *ask*.
+1. **`$W/writing-bot/positions.md`** — HA's curated stances, maintained by policy staff. **Authoritative on positions.** Read it fresh on every use. Never take a position it doesn't cover; `[REVIEW]` means unconfirmed, `[ADD]` means known gap — both mean *ask*.
 2. **`reference/testimony-profile.md`** (in this skill) — the measured corpus statistics.
 3. **`reference/citations.md`** (in this skill) — 58 citations from the corpus footnotes, each paired with the claim it supports. Check it before writing `CITATION NEEDED`.
 
@@ -43,7 +43,7 @@ positions.md §153 prescribes a testimony format written before the corpus was m
 Don't write from these rules alone. Pull 2–3 testimonies on the nearest subject and read them whole:
 
 ```bash
-grep -rl "<topic keyword>" writing-bot/testimony/ | grep -v /sample_
+grep -rl "<topic keyword>" "$W/writing-bot/testimony/" | grep -v /sample_
 ```
 
 Corpus layout: `testimony/{food-equity,housing,labor,tax-and-budget,transportation}/`.
@@ -170,7 +170,7 @@ Hedge **magnitudes** ("approximately 87 percent"), never the judgment.
 Strip both, and the corpus body is **100 percent clean** on ʻokina. So:
 
 ```bash
-body() { sed '/^_\{6,\}/,$d' "$1" | grep -v '^\[[0-9]\]' | grep -v 'http' \
+body() { sed '/^_\{6,\}/,$d' "$@" | grep -v '^\[[0-9]\]' | grep -v 'http' \
          | grep -v 'Hawaii Appleseed Center'; }
 
 body draft.md | grep -nE "Hawaii([^ʻa]|$)"   # bare Hawaii — "Hawaiian" correctly excluded
@@ -192,9 +192,10 @@ Then read once for: the header block's four lines present and correct; the posit
 Write the draft as plain text in the shape above (header block, `Dear Chair…`, body paragraphs one per line, closing, signature, `________________`, then `[n]` footnotes), then render it. Do not hand-build the letterhead.
 
 ```bash
-S="${CLAUDE_SKILL_DIR}"
-.venv/bin/python $S/render_testimony.py draft.txt -o out/HB1884
+"$W/.venv/bin/python" "${CLAUDE_SKILL_DIR}/render_testimony.py" draft.txt -o out/HB1884
 ```
+
+`$W/.venv` is the website repo's own venv; the renderer needs only `python-docx` from it. A fresh clone doesn't have one, so make it once: `python3 -m venv "$W/.venv" && "$W/.venv/bin/pip" install -q python-docx`.
 
 That emits **`HB1884.docx`** and **`HB1884.html`** from one source, and adds the furniture automatically:
 
@@ -255,7 +256,7 @@ Three things to know:
 <details>
 <summary>Fallback: the old clipboard route (no credentials needed)</summary>
 
-If the API credential is unavailable, `$S/to_gdoc.sh out/HB1884.html` still puts
+If the API credential is unavailable, `"${CLAUDE_SKILL_DIR}/to_gdoc.sh" out/HB1884.html` still puts
 the rendered HTML on the clipboard as HTML flavor and prints the manual steps:
 in Chrome, signed into your Appleseed Google account, open the target folder, **New ▸ Google Docs ▸
 Blank**, `Cmd+V`, rename. Watch for a missing logo and for hyperlink styling

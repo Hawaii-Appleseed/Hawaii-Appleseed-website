@@ -9,7 +9,13 @@ Builds a report in the house structure and brand system, then hands off to which
 
 **For the prose itself, use the `appleseed-voice` skill** — it carries the voice rules, positions.md integrity checks, and the corpus. This skill governs *structure and format*. Both apply to a report.
 
-> **Paths in this skill are relative to the repo root** (`Hawaii-Appleseed-website`) — run from there. **One exception:** Step 6's primer-editor output needs a *separate* repo cloned; everything else resolves inside this one.
+> **Where things live.** `reference/` is in `${CLAUDE_SKILL_DIR}`. Every other repo path in this skill and its reference files (`positions.md` in `writing-bot/`, `assets/okina.css`, the exemplar files `reference/report-architecture.md` cites) is in a clone of the `Hawaii-Appleseed-website` repo, written **`$W`** below. Step 6's primer-editor output needs a *separate* repo. Find `$W` before Step 1:
+>
+> ```bash
+> W="${APPLESEED_WEBSITE:-$HOME/HawaiiAppleseed}"; test -f "$W/writing-bot/positions.md" && echo "$W"
+> ```
+>
+> Use the absolute path it prints wherever `$W` appears below, in commands **and** file reads. Shell variables and `cd` don't carry over between tool calls, so don't rely on either. If the test fails, the repo isn't cloned (or is somewhere else: ask, and have them set `APPLESEED_WEBSITE`). Offer to clone it with `gh repo clone Hawaii-Appleseed/Hawaii-Appleseed-website ~/HawaiiAppleseed` (about 110 MB), and don't draft without positions.md.
 
 ## Step 1 — Pick the tier
 
