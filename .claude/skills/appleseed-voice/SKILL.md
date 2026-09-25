@@ -7,7 +7,15 @@ description: Draft or revise writing in Hawaiʻi Appleseed's house voice — blo
 
 Writing that goes out under HA's name. Accuracy and faithfulness matter more than fluency.
 
-> Paths are relative to the repo root (`Hawaii-Appleseed-website`) — run from there. Every measured claim below comes from the full blog corpus (112 posts, ~100,500 words, 2021–2026); the numbers behind them live in `reference/style-profile.md`.
+> **Where things live.** This skill's own files (`reference/`, scripts) are in `${CLAUDE_SKILL_DIR}`. The corpus and `positions.md` are in the `Hawaii-Appleseed-website` repo, and every `writing-bot/…` path below is relative to its root. Before Step 1, go there:
+>
+> ```bash
+> W="${APPLESEED_WEBSITE:-$HOME/HawaiiAppleseed}"; cd "$W" && test -f writing-bot/positions.md
+> ```
+>
+> If that fails, the repo isn't cloned (or lives elsewhere — ask, and set `APPLESEED_WEBSITE`). Offer to clone it with `gh repo clone Hawaii-Appleseed/Hawaii-Appleseed-website ~/HawaiiAppleseed`; don't draft without positions.md.
+
+> Every measured claim below comes from the full blog corpus (112 posts, ~100,500 words, 2021–2026); the numbers behind them live in `reference/style-profile.md`.
 
 ## Step 1 — Load the authority (always, before drafting)
 
@@ -23,7 +31,7 @@ Read, in order:
 Don't write from these rules alone. Pull 2–4 actual posts on the nearest topic and read them. **Use the writing bot's own hybrid retrieval** (dense + BM25 + rerank over the whole corpus, testimony and publications included), not a bare grep, which misses same-argument posts that use different words:
 
 ```bash
-cd ~/HawaiiAppleseed/writing-bot && unset OPENAI_API_KEY
+cd "$W/writing-bot" && unset OPENAI_API_KEY
 .venv/bin/python bot.py --reindex          # first, whenever the corpus has changed since the last build
 .venv/bin/python -c "
 import bot; c=bot.index_documents()
@@ -32,7 +40,7 @@ for q in ['<topic in plain words>', '<bill number + program name>']:
         print(m.get('source'), '|', t[:150].replace(chr(10),' '))"
 ```
 
-`writing-bot/.venv` holds the bot's requirements (chromadb, sentence-transformers, rank-bm25); the repo-root `.venv` does **not** and fails with `No module named 'chromadb'`. The `.chroma/` index is gitignored and goes stale silently: if the index's chunk count is below the corpus's (or a document you know exists never surfaces), rebuild with `--reindex`. Open the files it returns and read them. `grep -rl` remains fine for an exact bill number.
+`writing-bot/.venv` holds the bot's requirements (chromadb, sentence-transformers, rank-bm25); the repo-root `.venv` does **not** and fails with `No module named 'chromadb'`. The `.chroma/` index is gitignored and goes stale silently: if the index's chunk count is below the corpus's (or a document you know exists never surfaces), rebuild with `--reindex`. Open the files it returns and read them. `grep -rl` remains fine for an exact bill number. If `writing-bot/.venv` doesn't exist on this machine, fall back to `grep -rl "<topic keyword>" writing-bot/blog-posts/2026/ writing-bot/blog-posts/2025/` and say in the handoff that retrieval was keyword-only.
 
 Corpus layout: `blog-posts/<year>/`, `testimony/<topic>/`, `publications/`, `reference/`.
 

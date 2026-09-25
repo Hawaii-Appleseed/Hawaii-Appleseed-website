@@ -7,7 +7,15 @@ description: Draft or revise legislative testimony submitted under Hawaiʻi Appl
 
 Testimony is a **document with fixed furniture**, not an essay. The scaffold is more rigid than the prose, and getting the scaffold wrong is more visible to a committee clerk than any sentence-level choice. Accuracy and faithfulness matter more than fluency.
 
-> Paths are relative to the repo root (`Hawaii-Appleseed-website`) — run from there. Every measured claim below comes from the 37 real testimonies in `writing-bot/testimony/` (13,255 body words, 561 sentences, 2025–2026). The numbers behind them live in `reference/testimony-profile.md`.
+> **Where things live.** This skill's own files (`reference/`, scripts) are in `${CLAUDE_SKILL_DIR}`. The corpus and `positions.md` are in the `Hawaii-Appleseed-website` repo, and every `writing-bot/…` path below is relative to its root. Before Step 1, go there:
+>
+> ```bash
+> W="${APPLESEED_WEBSITE:-$HOME/HawaiiAppleseed}"; cd "$W" && test -f writing-bot/positions.md
+> ```
+>
+> If that fails, the repo isn't cloned (or lives elsewhere — ask, and set `APPLESEED_WEBSITE`). Offer to clone it with `gh repo clone Hawaii-Appleseed/Hawaii-Appleseed-website ~/HawaiiAppleseed`; don't draft without positions.md.
+
+> Every measured claim below comes from the 37 real testimonies in `writing-bot/testimony/` (13,255 body words, 561 sentences, 2025–2026). The numbers behind them live in `reference/testimony-profile.md`.
 
 ## Step 1 — Load the authority (always, before drafting)
 
@@ -49,7 +57,7 @@ Good exemplars: `labor/HB2367_2026_Pay_Transparency.txt` (long, subheaded, heavy
 Get the bill's real title, current draft suffix, committee, and hearing time from LegiScan rather than asking the user to supply them:
 
 ```bash
-python .claude/skills/appleseed-testimony/bill_lookup.py HB1884
+python "${CLAUDE_SKILL_DIR}/bill_lookup.py" HB1884
 ```
 
 It prints a ready header block. **It needs `LEGISCAN_API_KEY`** (free tier, 30K queries/month, https://legiscan.com/user/register). Without the key it exits 2 with instructions — in that case leave the header bracketed and tell the user exactly which details are unverified. Never guess a committee, date, or room.
@@ -184,7 +192,7 @@ Then read once for: the header block's four lines present and correct; the posit
 Write the draft as plain text in the shape above (header block, `Dear Chair…`, body paragraphs one per line, closing, signature, `________________`, then `[n]` footnotes), then render it. Do not hand-build the letterhead.
 
 ```bash
-S=.claude/skills/appleseed-testimony
+S="${CLAUDE_SKILL_DIR}"
 .venv/bin/python $S/render_testimony.py draft.txt -o out/HB1884
 ```
 
@@ -204,7 +212,7 @@ sips -s format png --resampleWidth 1000 out/HB1884.pdf --out out/page1.png   # t
 
 ### Into a Google Doc
 
-The Drive API writes directly — no clipboard, no manual steps:
+**Only if `~/internal-tools/appleseed-drive/` exists on this machine** (it needs its own Drive credential — see the `internal-tools` repo). Without it, hand back the `.docx` and use the clipboard fallback below if the user wants a Doc. With it, the Drive API writes directly — no clipboard, no manual steps:
 
 ```bash
 ~/internal-tools/appleseed-drive/.venv/bin/python \
@@ -241,15 +249,15 @@ Three things to know:
   styling onto neighbouring text. Emitting real markup fixes both problems.
 - **The base64 logo survives the API import**, which it never reliably did
   through the clipboard. No Insert ▸ Image fallback needed.
-- **Log the new Doc to the "Google Docs in progress" memory list** as soon as it
-  exists, and never remove an entry unless the user says so in chat.
+- **Give the user the new Doc's URL** as soon as it exists, so the link isn't
+  lost in the transcript.
 
 <details>
 <summary>Fallback: the old clipboard route (no credentials needed)</summary>
 
 If the API credential is unavailable, `$S/to_gdoc.sh out/HB1884.html` still puts
 the rendered HTML on the clipboard as HTML flavor and prints the manual steps:
-in Chrome as devin@hibudget.org, open the target folder, **New ▸ Google Docs ▸
+in Chrome, signed into your Appleseed Google account, open the target folder, **New ▸ Google Docs ▸
 Blank**, `Cmd+V`, rename. Watch for a missing logo and for hyperlink styling
 bleeding onto adjacent text.
 

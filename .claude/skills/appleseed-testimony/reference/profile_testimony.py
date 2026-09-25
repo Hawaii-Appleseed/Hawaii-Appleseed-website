@@ -1,7 +1,7 @@
 import re, glob, statistics as st, collections, os
 
 FILES = sorted(f for f in glob.glob(os.path.expanduser(
-    '~/HawaiiAppleseed/writing-bot/testimony/*/*.txt'))
+    os.environ.get('APPLESEED_WEBSITE', '~/HawaiiAppleseed') + '/writing-bot/testimony/*/*.txt'))
     if not os.path.basename(f).startswith('sample_'))
 
 GREET  = re.compile(r'^(dear|aloha|to the honorable|good (morning|afternoon))', re.I)
