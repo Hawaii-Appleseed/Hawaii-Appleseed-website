@@ -67,9 +67,9 @@
 /* Align the cards with the photo's left edge and the text's right edge
    (the block was placed in columns 5-26). The class is this block's
    Squarespace id, so re-check it if the block is ever recreated. It skips
-   body.sqs-edit-mode so the editor still shows Squarespace's own layout. */
+   body.sqs-is-page-editing so the editor still shows Squarespace's own layout. */
 @media (min-width: 768px) {
-    body:not(.sqs-edit-mode) .fe-block-yui_3_17_2_1_1770159925603_6545 { grid-column: 2 / 26 !important; }
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1770159925603_6545 { grid-column: 2 / 26 !important; }
 }
 
 @media (max-width: 1100px) {

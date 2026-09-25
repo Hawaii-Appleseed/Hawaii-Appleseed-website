@@ -131,9 +131,9 @@
    off-centre, and its resize handles are fiddly. Span the full content
    width instead; .tfc-chart centres itself at 880px. The class is this
    block's Squarespace id, so re-check it if the block is ever recreated. It skips
-   body.sqs-edit-mode so the editor still shows Squarespace's own layout. */
+   body.sqs-is-page-editing so the editor still shows Squarespace's own layout. */
 @media (min-width: 768px) {
-    body:not(.sqs-edit-mode) .fe-block-yui_3_17_2_1_1770159740777_5942 { grid-column: 2 / 26 !important; }
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1770159740777_5942 { grid-column: 2 / 26 !important; }
 }
 
 @media (max-width: 767px) {

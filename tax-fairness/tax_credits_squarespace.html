@@ -202,18 +202,18 @@
    wherever the editor dropped it. The editor also sized its rows to the content as it
    looked in the editor's narrow default column (137 desktop rows, ~5,500px, for ~1,800px
    of content), so it gets one row that grows to fit; it is the only block in its
-   section. Layout rules skip body.sqs-edit-mode so the editor keeps showing
+   section. Layout rules skip body.sqs-is-page-editing so the editor keeps showing
    Squarespace's own layout. */
-body:not(.sqs-edit-mode) .fluid-engine:has(> .fe-block .tfc-credits) { grid-template-rows: auto !important; }
-body:not(.sqs-edit-mode) .fe-block:has(.tfc-credits) { grid-row: 1 / 2 !important; }
+body:not(.sqs-is-page-editing) .fluid-engine:has(> .fe-block .tfc-credits) { grid-template-rows: auto !important; }
+body:not(.sqs-is-page-editing) .fe-block:has(.tfc-credits) { grid-row: 1 / 2 !important; }
 @media (min-width: 768px) {
-    body:not(.sqs-edit-mode) .fe-block:has(.tfc-credits) { grid-column: 2 / 26 !important; }
+    body:not(.sqs-is-page-editing) .fe-block:has(.tfc-credits) { grid-column: 2 / 26 !important; }
 }
 @media (max-width: 767px) {
-    body:not(.sqs-edit-mode) .fe-block:has(.tfc-credits) { grid-column: 2 / 10 !important; }
+    body:not(.sqs-is-page-editing) .fe-block:has(.tfc-credits) { grid-column: 2 / 10 !important; }
 }
 /* The newsletter section: its form has no storage, so sign-ups were lost. */
-body:not(.sqs-edit-mode) section[data-section-id="691b795a3409972cbc5443fa"] { display: none !important; }
+body:not(.sqs-is-page-editing) section[data-section-id="691b795a3409972cbc5443fa"] { display: none !important; }
 </style>
 
 <div class="tfc-credits">
