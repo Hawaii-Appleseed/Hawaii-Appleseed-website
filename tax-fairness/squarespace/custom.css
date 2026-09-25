@@ -83,3 +83,19 @@ html body header.header .header-nav-folder-item a:hover {
 .page-section[data-section-theme="black"] .sqs-button-element--secondary:hover {
     background-color: rgba(255, 255, 255, 0.14) !important;
 }
+
+/* ---- Homepage, phones ------------------------------------------------
+   Fluid Engine's phone layout is edited separately from desktop and its
+   drag handles don't respond reliably, so two small fixes live here. The
+   classes are Squarespace block ids; re-check them if a block is rebuilt.
+   - The hero paragraph sat flush against the headline above it.
+   - "Our Priorities" was laid out one column narrower than every other
+     section, which squeezed the text and cropped the Capitol panorama
+     to a thin portrait. */
+@media (max-width: 767px) {
+    .fe-block-6b8a2d4b1c6aa1dda008 { padding-top: 18px; }
+    .fe-block-c2323ccf5d8ef36761d6,
+    .fe-block-6c97759c5b692c004347,
+    .fe-block-1b82d43329394a20ccea,
+    .fe-block-332f1404d52accc83636 { grid-column: 2 / 10 !important; }
+}
