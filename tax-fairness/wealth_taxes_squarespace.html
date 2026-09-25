@@ -566,37 +566,37 @@
    automation, so the rows are re-laid here: this block gets one row that grows to fit,
    and the PDF blocks move up under it. Row numbers are Squarespace's; if anything in this
    section is moved in the editor, re-check them (or delete these rules and resize the
-   block by hand instead). Every rule skips body.sqs-edit-mode, so Squarespace's editor
+   block by hand instead). Every rule skips body.sqs-is-page-editing, so Squarespace's editor
    shows and edits its own layout rather than this one. */
 @media (min-width: 768px) {
-    body:not(.sqs-edit-mode) .fe-69239a2e4e64d707c9527811 {
+    body:not(.sqs-is-page-editing) .fe-69239a2e4e64d707c9527811 {
         grid-template-rows: repeat(19, minmax(calc(var(--container-width) * var(--row-height-scaling-factor)), auto)) !important;
     }
     /* Same columns as the page title (4-24) instead of edge to edge. */
-    body:not(.sqs-edit-mode) .fe-block-yui_3_17_2_1_1764208887783_4735 { grid-column: 4 / 24 !important; grid-row: 3 / 4 !important; }
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1764208887783_4735 { grid-column: 4 / 24 !important; grid-row: 3 / 4 !important; }
     /* PDF headings, covers, buttons. The headings used to share a row with the cover,
        so a heading that wrapped (768-1024px) ran into it; now they don't overlap. */
-    body:not(.sqs-edit-mode) .fe-block-yui_3_17_2_1_1772051568067_1235,
-    body:not(.sqs-edit-mode) .fe-block-47aed08b7f15ad17c68c { grid-row: 4 / 6 !important; }
-    body:not(.sqs-edit-mode) .fe-block-yui_3_17_2_1_1772051449514_915,
-    body:not(.sqs-edit-mode) .fe-block-yui_3_17_2_1_1772137212236_2072 { grid-row: 6 / 18 !important; }
-    body:not(.sqs-edit-mode) .fe-block-yui_3_17_2_1_1772051568067_3101,
-    body:not(.sqs-edit-mode) .fe-block-5e8e502c46df15314637 { grid-row: 18 / 20 !important; }
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1772051568067_1235,
+    body:not(.sqs-is-page-editing) .fe-block-47aed08b7f15ad17c68c { grid-row: 4 / 6 !important; }
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1772051449514_915,
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1772137212236_2072 { grid-row: 6 / 18 !important; }
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1772051568067_3101,
+    body:not(.sqs-is-page-editing) .fe-block-5e8e502c46df15314637 { grid-row: 18 / 20 !important; }
     /* Messaging Guide: columns 17-23 -> 18-24, mirroring the Priorities PDF (4-10) so
        the pair lines up with the title's edges. */
-    body:not(.sqs-edit-mode) .fe-block-47aed08b7f15ad17c68c,
-    body:not(.sqs-edit-mode) .fe-block-yui_3_17_2_1_1772137212236_2072,
-    body:not(.sqs-edit-mode) .fe-block-5e8e502c46df15314637 { grid-column: 18 / 24 !important; }
+    body:not(.sqs-is-page-editing) .fe-block-47aed08b7f15ad17c68c,
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1772137212236_2072,
+    body:not(.sqs-is-page-editing) .fe-block-5e8e502c46df15314637 { grid-column: 18 / 24 !important; }
 }
 @media (max-width: 767px) {
-    body:not(.sqs-edit-mode) .fe-69239a2e4e64d707c9527811 { grid-template-rows: repeat(43, minmax(24px, auto)) !important; }
-    body:not(.sqs-edit-mode) .fe-block-yui_3_17_2_1_1764208887783_4735 { grid-row: 5 / 6 !important; }
-    body:not(.sqs-edit-mode) .fe-block-yui_3_17_2_1_1772051568067_1235 { grid-row: 7 / 9 !important; }
-    body:not(.sqs-edit-mode) .fe-block-yui_3_17_2_1_1772051449514_915 { grid-row: 9 / 23 !important; }
-    body:not(.sqs-edit-mode) .fe-block-yui_3_17_2_1_1772051568067_3101 { grid-row: 23 / 25 !important; }
-    body:not(.sqs-edit-mode) .fe-block-47aed08b7f15ad17c68c { grid-row: 26 / 28 !important; }
-    body:not(.sqs-edit-mode) .fe-block-yui_3_17_2_1_1772137212236_2072 { grid-row: 28 / 42 !important; }
-    body:not(.sqs-edit-mode) .fe-block-5e8e502c46df15314637 { grid-row: 42 / 44 !important; }
+    body:not(.sqs-is-page-editing) .fe-69239a2e4e64d707c9527811 { grid-template-rows: repeat(43, minmax(24px, auto)) !important; }
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1764208887783_4735 { grid-row: 5 / 6 !important; }
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1772051568067_1235 { grid-row: 7 / 9 !important; }
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1772051449514_915 { grid-row: 9 / 23 !important; }
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1772051568067_3101 { grid-row: 23 / 25 !important; }
+    body:not(.sqs-is-page-editing) .fe-block-47aed08b7f15ad17c68c { grid-row: 26 / 28 !important; }
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1772137212236_2072 { grid-row: 28 / 42 !important; }
+    body:not(.sqs-is-page-editing) .fe-block-5e8e502c46df15314637 { grid-row: 42 / 44 !important; }
 }
 </style>
 

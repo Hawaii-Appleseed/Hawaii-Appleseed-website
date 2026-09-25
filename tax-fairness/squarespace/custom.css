@@ -86,8 +86,8 @@ html body header.header .header-nav-folder-item a:hover {
     background-color: rgba(255, 255, 255, 0.14) !important;
 }
 
-/* Layout overrides below (grid-column/grid-row) skip body.sqs-edit-mode, the
-   class Squarespace's editor puts on the page, so the editor keeps showing and
+/* Layout overrides below (grid-column/grid-row) skip body.sqs-is-page-editing, the
+   class Squarespace's editor adds while a page is being edited, so the editor keeps showing and
    editing its own layout. */
 
 /* ---- Homepage, phones ------------------------------------------------
@@ -100,10 +100,10 @@ html body header.header .header-nav-folder-item a:hover {
      to a thin portrait. */
 @media (max-width: 767px) {
     .fe-block-6b8a2d4b1c6aa1dda008 { padding-top: 18px; }
-    body:not(.sqs-edit-mode) .fe-block-c2323ccf5d8ef36761d6,
-    body:not(.sqs-edit-mode) .fe-block-6c97759c5b692c004347,
-    body:not(.sqs-edit-mode) .fe-block-1b82d43329394a20ccea,
-    body:not(.sqs-edit-mode) .fe-block-332f1404d52accc83636 {
+    body:not(.sqs-is-page-editing) .fe-block-c2323ccf5d8ef36761d6,
+    body:not(.sqs-is-page-editing) .fe-block-6c97759c5b692c004347,
+    body:not(.sqs-is-page-editing) .fe-block-1b82d43329394a20ccea,
+    body:not(.sqs-is-page-editing) .fe-block-332f1404d52accc83636 {
         /* Longhands on purpose: Squarespace runs this file through LESS,
            which turns "grid-column: 2 / 10" into "grid-column: .2". */
         grid-column-start: 2 !important;
@@ -137,11 +137,11 @@ html body header.header .header-nav-folder-item a:hover {
 }
 @media (max-width: 767px) {
     .fe-block-e0d2241c43d97a928ba1 h1 { font-size: 12vw !important; }
-    body:not(.sqs-edit-mode) .fe-block-e0d2241c43d97a928ba1 .sqs-block {
+    body:not(.sqs-is-page-editing) .fe-block-e0d2241c43d97a928ba1 .sqs-block {
         justify-content: flex-end;
         padding-bottom: 14px;
     }
-    body:not(.sqs-edit-mode) .fe-block-ba96c7326d51189d828e {
+    body:not(.sqs-is-page-editing) .fe-block-ba96c7326d51189d828e {
         grid-row-start: 15 !important;
         grid-row-end: 20 !important;
     }
@@ -159,7 +159,7 @@ html body header.header .header-nav-folder-item a:hover {
 }
 .fe-block-0466dd0fb6cf78b25791 li a:hover { text-decoration-color: currentColor; }
 @media (min-width: 768px) {
-    body:not(.sqs-edit-mode) .fe-63c229687a853b73c36e5afd {
+    body:not(.sqs-is-page-editing) .fe-63c229687a853b73c36e5afd {
         grid-template-rows: ~"repeat(22, minmax(calc(var(--container-width) * var(--row-height-scaling-factor)), auto))" !important;
     }
 }
