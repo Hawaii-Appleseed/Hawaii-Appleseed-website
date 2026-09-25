@@ -199,15 +199,16 @@
 }
 
 /* This block spans the full content width (the content centres itself at 880px),
-   wherever the editor dropped it. */
+   wherever the editor dropped it. Layout rules skip body.sqs-edit-mode so the editor
+   keeps showing Squarespace's own layout. */
 @media (min-width: 768px) {
-    .fe-block:has(.tfc-credits) { grid-column: 2 / 26 !important; }
+    body:not(.sqs-edit-mode) .fe-block:has(.tfc-credits) { grid-column: 2 / 26 !important; }
 }
 @media (max-width: 767px) {
-    .fe-block:has(.tfc-credits) { grid-column: 2 / 10 !important; }
+    body:not(.sqs-edit-mode) .fe-block:has(.tfc-credits) { grid-column: 2 / 10 !important; }
 }
 /* The newsletter section: its form has no storage, so sign-ups were lost. */
-section[data-section-id="691b795a3409972cbc5443fa"] { display: none !important; }
+body:not(.sqs-edit-mode) section[data-section-id="691b795a3409972cbc5443fa"] { display: none !important; }
 </style>
 
 <div class="tfc-credits">
