@@ -6,7 +6,16 @@
      (not in the editor: body.sqs-edit-mode keeps Squarespace's own layout).
      The form's own colours (the green) are set in Quorum, not here. -->
 <style>
+/* Squarespace's embed wrapper is a fixed-ratio box with the iframe absolutely
+   positioned inside it, so the frame's height never reached the layout and the
+   footer drew over the form on phones. Put the iframe back in normal flow. */
+.fe-block-yui_3_17_2_1_1748978753969_4667 .intrinsic,
+.fe-block-yui_3_17_2_1_1748978753969_4667 .embed-block-wrapper {
+    height: auto !important;
+    padding: 0 !important;
+}
 .tfc-quorum iframe {
+    position: static !important;
     display: block;
     width: 100%;
     height: 820px;
