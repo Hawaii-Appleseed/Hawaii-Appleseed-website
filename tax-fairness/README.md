@@ -162,8 +162,9 @@ Edits will be overwritten within 30 minutes.
 - `wealth_taxes.html` (the non-Squarespace standalone version) still has a
   dead search box: the JS wires up `#searchInput` but no such element exists
   in that file's markup. Search silently does nothing.
-- Card revenue figures, descriptions, and the revenue-comparison bar chart
-  widths are still hand-typed HTML/CSS, not generated from data. Only the
+- Card revenue figures, descriptions, and the chart's values are still
+  hand-typed HTML, not generated from data. (Bar lengths are no longer typed:
+  CSS computes each one from the bar's `--v` value on a $600M axis.) Only the
   bill-status pipeline has been rebuilt to be config-free.
 
 ## Unrelated: `scripts/generate_departmental_reports.py`
