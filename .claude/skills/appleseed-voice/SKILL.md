@@ -20,11 +20,19 @@ Read, in order:
 
 ## Step 2 — Retrieve real examples
 
-Don't write from these rules alone. Pull 2–4 actual posts on the nearest topic and read them:
+Don't write from these rules alone. Pull 2–4 actual posts on the nearest topic and read them. **Use the writing bot's own hybrid retrieval** (dense + BM25 + rerank over the whole corpus, testimony and publications included), not a bare grep, which misses same-argument posts that use different words:
 
 ```bash
-grep -rl "<topic keyword>" writing-bot/blog-posts/2026/ writing-bot/blog-posts/2025/
+cd ~/HawaiiAppleseed/writing-bot && unset OPENAI_API_KEY
+.venv/bin/python bot.py --reindex          # first, whenever the corpus has changed since the last build
+.venv/bin/python -c "
+import bot; c=bot.index_documents()
+for q in ['<topic in plain words>', '<bill number + program name>']:
+    for t,m in bot.retrieve(c, q, 6, bot.build_where_filter(None, None, 2025)):
+        print(m.get('source'), '|', t[:150].replace(chr(10),' '))"
 ```
+
+`writing-bot/.venv` holds the bot's requirements (chromadb, sentence-transformers, rank-bm25); the repo-root `.venv` does **not** and fails with `No module named 'chromadb'`. The `.chroma/` index is gitignored and goes stale silently: if the index's chunk count is below the corpus's (or a document you know exists never surfaces), rebuild with `--reindex`. Open the files it returns and read them. `grep -rl` remains fine for an exact bill number.
 
 Corpus layout: `blog-posts/<year>/`, `testimony/<topic>/`, `publications/`, `reference/`.
 
