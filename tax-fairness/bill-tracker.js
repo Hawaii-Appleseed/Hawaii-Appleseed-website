@@ -55,28 +55,28 @@ const BillTracker = (function () {
 
   // ---------- Per-proposal mini trackers ----------
 
-  function generateTrackerHTML(trackerId, hbNumbers, sbNumbers, year) {
+  function generateTrackerHTML(trackerId, hbNumbers, sbNumbers, year, activeType) {
     const link = (type, num) =>
       `<a href="https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=${type}&billnumber=${num}&year=${year}" target="_blank" onclick="event.stopPropagation()">${num}</a>`;
     const hbDisplay = hbNumbers.length ? `HB <span class="hb-numbers">${hbNumbers.map((n) => link('HB', n)).join(', ')}</span>` : 'No Bill';
     const sbDisplay = sbNumbers.length ? `SB <span class="sb-numbers">${sbNumbers.map((n) => link('SB', n)).join(', ')}</span>` : 'No Bill';
     return `
-      <div class="tfc-legislation-header" onclick="BillTracker.toggleTracker('${trackerId}')">
+      <div class="tfc-legislation-header" role="button" tabindex="0" aria-expanded="false" onclick="BillTracker.toggleTracker('${trackerId}')" onkeydown="BillTracker.keyToggle(event, 'toggleTracker', '${trackerId}')">
         Legislation <span class="tfc-legislation-toggle-icon"></span>
       </div>
       <div class="tfc-tracker-content" id="${trackerId}-content">
         <div class="tfc-bill-columns">
-          <div class="tfc-bill-col ${hbNumbers.length ? 'active' : ''}" data-bill-type="hb" onclick="BillTracker.switchFeed('${trackerId}', 'hb')">
+          <div class="tfc-bill-col ${activeType === 'hb' ? 'active' : ''}" data-bill-type="hb" onclick="BillTracker.switchFeed('${trackerId}', 'hb')">
             <h4>House Bill${hbNumbers.length > 1 ? 's' : ''}</h4>
             <div class="tfc-bill-number">${hbDisplay}</div>
           </div>
-          <div class="tfc-bill-col ${!hbNumbers.length && sbNumbers.length ? 'active' : ''}" data-bill-type="sb" onclick="BillTracker.switchFeed('${trackerId}', 'sb')">
+          <div class="tfc-bill-col ${activeType === 'sb' ? 'active' : ''}" data-bill-type="sb" onclick="BillTracker.switchFeed('${trackerId}', 'sb')">
             <h4>Senate Bill${sbNumbers.length > 1 ? 's' : ''}</h4>
             <div class="tfc-bill-number">${sbDisplay}</div>
           </div>
         </div>
         <div class="tfc-status-section" id="${trackerId}-status">
-          <div class="tfc-status-header" onclick="BillTracker.toggleHistory('${trackerId}')">
+          <div class="tfc-status-header" role="button" tabindex="0" onclick="BillTracker.toggleHistory('${trackerId}')" onkeydown="BillTracker.keyToggle(event, 'toggleHistory', '${trackerId}')">
             <span class="tfc-status-title">Latest Status <span class="tfc-status-badge" id="${trackerId}-badge">Loading...</span></span>
             <span class="tfc-status-toggle">History</span>
           </div>
@@ -117,7 +117,10 @@ const BillTracker = (function () {
       } else if (bill.updates && bill.updates.length) {
         anyUpdates = true;
         const latest = bill.updates[0];
-        if (latest.badge.class !== 'update') overallBadge = latest.badge;
+        // Headline badge: the most recent step that means something (a bill that died in
+        // conference ends on a run of generic "Update" notices).
+        const lastStep = bill.updates.find((u) => u.badge.class !== 'update');
+        if (lastStep) overallBadge = lastStep.badge;
         section.innerHTML = `<div class="tfc-bill-status-header"><strong>${type} ${num}</strong><span class="tfc-status-badge tfc-badge-${latest.badge.class}">${latest.badge.text}</span></div><div class="tfc-bill-latest"><span class="tfc-status-date">${formatDate(latest.date)}</span>${escapeHtml(latest.description)}</div>`;
         if (historyEl && bill.updates.length > 1 && numbers.length === 1) {
           for (let i = 1; i < bill.updates.length; i++) {
@@ -140,6 +143,21 @@ const BillTracker = (function () {
     }
   }
 
+  // Which chamber's bill a tracker opens on: the one whose status changed most recently,
+  // i.e. the bill that got furthest. For a bill that became law that's the enacted one
+  // (SB 3125 -> Act 24), not its companion that stalled at first reading.
+  function defaultType(hbNumbers, sbNumbers, billsData) {
+    if (!hbNumbers.length) return 'sb';
+    if (!sbNumbers.length) return 'hb';
+    const latest = (type, numbers) =>
+      Math.max(0, ...numbers.map((n) => {
+        const bill = billsData && billsData[`${type}${n}`];
+        const u = bill && bill.updates && bill.updates[0];
+        return u ? Date.parse(u.date) || 0 : 0;
+      }));
+    return latest('SB', sbNumbers) > latest('HB', hbNumbers) ? 'sb' : 'hb';
+  }
+
   class Tracker {
     constructor(el, billsData) {
       this.id = el.dataset.trackerId;
@@ -148,10 +166,12 @@ const BillTracker = (function () {
       this.sbNumbers = (el.dataset.sb || '').split(',').map((s) => s.trim()).filter(Boolean);
       this.year = el.dataset.year || '2026';
       this.billsData = billsData;
-      this.currentType = this.hbNumbers.length ? 'hb' : 'sb';
+      this.currentType = defaultType(this.hbNumbers, this.sbNumbers, billsData);
     }
     render() {
-      this.element.innerHTML = generateTrackerHTML(this.id, this.hbNumbers, this.sbNumbers, this.year);
+      this.element.innerHTML = generateTrackerHTML(this.id, this.hbNumbers, this.sbNumbers, this.year, this.currentType);
+      const header = this.element.querySelector('.tfc-legislation-header');
+      if (header) header.setAttribute('aria-expanded', this.element.classList.contains('expanded'));
       this.updateDisplay();
     }
     updateDisplay() {
@@ -289,7 +309,16 @@ const BillTracker = (function () {
     toggleTracker: (id) => {
       const content = document.getElementById(`${id}-content`);
       const el = document.querySelector(`[data-tracker-id="${id}"]`);
-      if (content && el) el.classList.toggle('expanded');
+      if (!content || !el) return;
+      el.classList.toggle('expanded');
+      const header = el.querySelector('.tfc-legislation-header');
+      if (header) header.setAttribute('aria-expanded', el.classList.contains('expanded'));
+    },
+    // Enter/Space on the role="button" headers above.
+    keyToggle(event, action, id) {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      this[action](id);
     },
     toggleBillStatusWidget,
     filterBillStatus,

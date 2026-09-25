@@ -1,1466 +1,850 @@
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+<!-- Revenue page ("Revenue Options to Fund Our Future", /wealth-taxes) - the page's Code Block.
+     Paste everything in this file into that block. The page title above it and the two PDF
+     downloads below it are ordinary Squarespace blocks; the .fe-block-* rules at the end of
+     the <style> line those blocks up with this one (the ids are Squarespace's, so re-check
+     them if a block is ever recreated).
+     Fonts come from Site Styles (the --*-font-family variables) and the buttons use
+     Squarespace's own button classes, so Site Styles changes carry through. Colours match
+     the homepage: navy #253551, logo blue #3c73b9 (text on white only; 3.6:1 on the grey page).
+     bill-tracker.js (loaded from GitHub Pages at the bottom) fills each card's "Legislation"
+     drawer from tax-fairness/data/bill-status.json. fetch-bill-status.mjs finds the bills by
+     scanning THIS file for tfc-bill-tracker divs (class attribute first) and for the
+     hbNumbers/sbNumbers pairs in the option scripts, so keep both formats.
+     The session-wide "Bill Status Tracker" table came off after the 2026 session. For 2027,
+     restore its markup and CSS from git history; bill-tracker.js still renders it into
+     #bill-status-content whenever that element exists. -->
 
-/* ========== BILL TRACKER WIDGET STYLES (INLINE) ========== */
-.tfc-bill-tracker {
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    border: 1px solid #e2e8f0;
-    border-top: none;
-    border-radius: 0 0 16px 16px;
-    padding: 20px;
-    margin-top: -1px;
+<style>
+.tfc-container {
+    --tfc-navy: #253551;
+    --tfc-blue: #3c73b9;
+    --tfc-muted: #4a5568;
+    --tfc-slate: #6b778c;
+    --tfc-line: #dfe3ea;
+    --tfc-soft: #f5f7fa;
+    --tfc-reserve: 8.5rem;
+    container-type: inline-size;
+    width: 100%;
+    margin: 0 0 40px;
+    font-family: var(--body-font-font-family), sans-serif;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--tfc-navy);
+}
+
+.tfc-container *,
+.tfc-container *::before,
+.tfc-container *::after { box-sizing: border-box; }
+
+.tfc-container h2,
+.tfc-container h3 {
+    font-family: var(--heading-font-font-family), sans-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--tfc-navy);
+}
+
+.tfc-panel {
+    background: #fff;
+    border: 1px solid var(--tfc-line);
+    border-radius: 8px;
+}
+
+.tfc-container a.tfc-btn {
+    display: inline-block;
+    text-decoration: none;
+}
+
+/* ---------- Status badges ---------- */
+.tfc-status {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: .72rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+.tfc-status--passed { background: var(--tfc-blue); color: #fff; }
+.tfc-status--failed { background: #eceef2; color: var(--tfc-muted); }
+
+/* ---------- What passed (SB 3125 / Act 24) ---------- */
+.tfc-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 44px;
+    padding: 40px 44px;
+    margin: 0 0 28px;
+}
+.tfc-container .tfc-summary-title {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 14px 0 4px;
+}
+.tfc-summary-bill {
+    margin: 0 0 22px;
+    font-size: .95rem;
+    color: var(--tfc-muted);
+}
+.tfc-summary-figure {
+    font-family: var(--heading-font-font-family), sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 1.05;
+    color: var(--tfc-blue);
+    white-space: nowrap;
+}
+.tfc-summary-label {
+    margin: 6px 0 26px;
+    font-size: .95rem;
+    color: var(--tfc-muted);
+}
+.tfc-summary-body p {
+    margin: 0 0 14px;
+    font-size: 1.02rem;
+}
+.tfc-summary-body ul {
+    margin: 0;
+    padding: 0 0 0 20px;
+    list-style: disc;
+}
+.tfc-summary-body li { margin: 0 0 10px; }
+.tfc-summary-body li:last-child { margin-bottom: 0; }
+
+/* ---------- The 2026 proposals chart ---------- */
+.tfc-chart {
+    padding: 40px 44px 32px;
+    margin: 0 0 28px;
+}
+.tfc-container .tfc-chart-title {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 6px;
+}
+.tfc-chart-sub {
+    margin: 0 0 28px;
+    font-size: 1.02rem;
+    color: var(--tfc-muted);
+}
+.tfc-chart-rows {
+    display: grid;
+    gap: 18px;
+}
+.tfc-row {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    column-gap: 24px;
+    align-items: center;
+}
+.tfc-row-label strong {
+    display: block;
+    font-weight: 600;
+    font-size: .98rem;
+    line-height: 1.3;
+}
+.tfc-row-label span {
+    display: block;
+    margin-top: 2px;
+    font-size: .85rem;
+    color: var(--tfc-muted);
+}
+.tfc-row--passed .tfc-row-label b { color: #2f62a3; }
+.tfc-row-label b { font-weight: 700; }
+.tfc-row-track {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 34px;
+}
+/* Bar length = value / $600M of the space left after the value label, so every bar
+   is to the same scale as the axis below. Ranges draw the low end solid and the
+   rest lighter. */
+.tfc-row-bar {
+    --bar: var(--tfc-slate);
+    flex: none;
+    height: 100%;
+    width: calc((100% - var(--tfc-reserve)) * var(--v) / 600);
+    min-width: 3px;
+    border-radius: 0 4px 4px 0;
+    background: var(--bar);
+}
+.tfc-row--passed .tfc-row-bar { --bar: var(--tfc-blue); }
+.tfc-row-bar--range {
+    background: linear-gradient(90deg, var(--bar) var(--lo), rgba(107, 119, 140, .35) var(--lo));
+}
+.tfc-row-value {
+    font-family: var(--heading-font-font-family), sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    white-space: nowrap;
+}
+.tfc-axis {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    column-gap: 24px;
+    margin-top: 10px;
+}
+.tfc-axis-scale {
     position: relative;
+    height: 22px;
+    margin-right: var(--tfc-reserve);
+    border-top: 1px solid #c4c9d2;
+    font-size: .8rem;
+    color: var(--tfc-muted);
+}
+.tfc-axis-scale span {
+    position: absolute;
+    top: 4px;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+.tfc-axis-scale span:first-child { transform: none; }
+.tfc-chart-note {
+    margin: 22px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--tfc-line);
+    font-size: .9rem;
+    color: var(--tfc-muted);
+}
+
+/* ---------- Proposal cards ---------- */
+/* Flex, not grid, so a short last row (5 cards in rows of 3) sits centred. */
+.tfc-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+}
+.tfc-card-wrapper {
+    flex: 0 1 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--tfc-line);
+    border-radius: 8px;
+    overflow: hidden;
+}
+@container (min-width: 680px) {
+    .tfc-card-wrapper { flex-basis: calc((100% - 24px) / 2); }
+}
+@container (min-width: 1040px) {
+    .tfc-card-wrapper { flex-basis: calc((100% - 48px) / 3); }
+}
+.tfc-card {
+    flex: 1 1 auto;
+    padding: 24px 24px 22px;
+}
+.tfc-container .tfc-card-title {
+    font-size: 1.35rem;
+    line-height: 1.25;
+    margin: 12px 0 14px;
+}
+.tfc-options {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: -4px 0 16px;
+}
+.tfc-options-label {
+    flex-basis: 100%;
+    margin-bottom: 2px;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--tfc-muted);
+}
+.tfc-container button.tfc-option {
+    padding: 5px 12px;
+    border: 1px solid #c4c9d2;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--tfc-navy);
+    font: 600 .8rem/1.3 var(--body-font-font-family), sans-serif;
+    cursor: pointer;
+}
+.tfc-container button.tfc-option:hover { border-color: var(--tfc-navy); }
+.tfc-container button.tfc-option.is-active {
+    background: var(--tfc-navy);
+    border-color: var(--tfc-navy);
+    color: #fff;
+}
+.tfc-card-revenue { margin: 0 0 12px; }
+.tfc-card-revenue-label {
+    display: block;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--tfc-muted);
+}
+.tfc-card-figure {
+    display: block;
+    font-family: var(--heading-font-font-family), sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    color: var(--tfc-blue);
+}
+.tfc-card-figure.is-unknown { color: var(--tfc-muted); }
+.tfc-card-figure small {
+    display: block;
+    margin-top: 2px;
+    line-height: 1.4;
+    font-family: var(--body-font-font-family), sans-serif;
+    font-weight: 400;
+    font-size: .85rem;
+    color: var(--tfc-muted);
+}
+.tfc-card-desc {
+    margin: 0;
+    font-size: .95rem;
+    color: var(--tfc-muted);
+}
+
+/* "Legislation" drawer: markup comes from bill-tracker.js */
+.tfc-bill-tracker {
+    border-top: 1px solid var(--tfc-line);
+    padding: 0 24px;
+}
+.tfc-legislation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--tfc-navy);
+    cursor: pointer;
+    user-select: none;
+}
+.tfc-legislation-header:hover,
+.tfc-legislation-header:focus-visible { color: var(--tfc-blue); }
+.tfc-legislation-toggle-icon::after {
+    content: '\25BE';
+    display: inline-block;
+    font-size: .9rem;
+    transition: transform .3s ease;
+}
+.tfc-bill-tracker.expanded .tfc-legislation-toggle-icon::after { transform: rotate(180deg); }
+.tfc-tracker-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height .4s ease-out, opacity .3s ease;
+}
+.tfc-bill-tracker.expanded .tfc-tracker-content {
+    max-height: 900px;
+    opacity: 1;
+    padding-bottom: 18px;
 }
 .tfc-bill-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin: 0 0 14px;
 }
 .tfc-bill-col {
+    padding: 10px 12px;
+    border: 1px solid var(--tfc-line);
+    border-radius: 6px;
     cursor: pointer;
-    padding: 12px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    border: 1px solid transparent;
 }
-.tfc-bill-col:hover {
-    background: rgba(36, 53, 81, 0.05);
-}
+.tfc-bill-col:hover { border-color: #b8c0cc; }
 .tfc-bill-col.active {
-    background: rgba(36, 53, 81, 0.1);
-    border: 1px solid rgba(36, 53, 81, 0.2);
+    border-color: var(--tfc-navy);
+    box-shadow: inset 0 0 0 1px var(--tfc-navy);
+    background: var(--tfc-soft);
 }
-.tfc-bill-col h4 {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #718096;
+.tfc-container .tfc-bill-col h4 {
+    margin: 0 0 4px;
+    font-family: var(--body-font-font-family), sans-serif;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .06em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0 0 8px 0;
-    border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 4px;
+    color: var(--tfc-muted);
 }
 .tfc-bill-number {
-    font-size: 1.5rem;
+    font-family: var(--heading-font-font-family), sans-serif;
     font-weight: 700;
-    color: #243551;
+    font-size: 1.05rem;
+    color: var(--tfc-navy);
 }
-.tfc-bill-number a {
-    color: #243551;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-.tfc-bill-number a:hover {
-    color: #3b82f6;
+.tfc-container .tfc-bill-number a {
+    color: var(--tfc-navy);
     text-decoration: underline;
+    text-decoration-color: rgba(37, 53, 81, .35);
+    text-underline-offset: 3px;
 }
 .tfc-status-section {
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border-top: 1px solid var(--tfc-line);
+    padding-top: 12px;
 }
-.tfc-bill-status-section {
-    padding: 12px 0;
-    border-bottom: 1px solid #e2e8f0;
+.tfc-status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
 }
-.tfc-bill-status-section:last-child {
-    border-bottom: none;
+.tfc-status-title {
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--tfc-muted);
+}
+.tfc-status-toggle {
+    font-size: .8rem;
+    color: var(--tfc-blue);
+}
+.tfc-status-toggle::after {
+    content: '\25BE';
+    display: inline-block;
+    margin-left: 4px;
+    transition: transform .3s ease;
+}
+.tfc-status-section.expanded .tfc-status-toggle::after { transform: rotate(180deg); }
+.tfc-latest-update {
+    margin-top: 10px;
+    font-size: .88rem;
+}
+.tfc-bill-status-section + .tfc-bill-status-section {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--tfc-line);
 }
 .tfc-bill-status-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
-    font-size: 0.85rem;
+    gap: 8px;
+    margin-bottom: 4px;
 }
-.tfc-bill-status-header strong {
-    color: #243551;
-    font-weight: 700;
-}
-.tfc-bill-latest {
-    font-size: 0.85rem;
-    line-height: 1.5;
-    color: #4a5568;
-}
-.tfc-status-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
-    background: #f8fafc;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-.tfc-status-header:hover {
-    background: #f1f5f9;
-}
-.tfc-status-title {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #4a5568;
-}
-.tfc-status-toggle {
-    font-size: 0.75rem;
-    color: #3a5278;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-.tfc-status-toggle::after {
-    content: '\25BC';
-    font-size: 0.6rem;
-    transition: transform 0.3s ease;
-}
-.tfc-status-section.expanded .tfc-status-toggle::after {
-    transform: rotate(180deg);
-}
-.tfc-status-badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 0.65rem;
-    font-weight: 600;
-    background: #ebf8ff;
-    color: #2b6cb0;
-    margin-left: 8px;
-}
-.tfc-badge-enacted { background: #c6f6d5; color: #22543d; }
-.tfc-badge-passed { background: #c6f6d5; color: #276749; }
-.tfc-badge-progress { background: #bee3f8; color: #ffffff; }
-.tfc-badge-hearing { background: #feebc8; color: #c05621; }
-.tfc-badge-referred { background: #e9d8fd; color: #6b46c1; }
-.tfc-badge-deferred { background: #fed7d7; color: #c53030; }
-.tfc-badge-new { background: #e2e8f0; color: #4a5568; }
-.tfc-badge-update { background: #ebf8ff; color: #2b6cb0; }
-.tfc-latest-update {
-    padding: 16px;
-    font-size: 0.85rem;
-    color: #2d3748;
-    line-height: 1.5;
-    border-top: 1px solid #e2e8f0;
-}
+.tfc-bill-latest { line-height: 1.45; }
 .tfc-status-date {
     display: block;
-    font-size: 0.7rem;
-    color: #718096;
-    margin-bottom: 4px;
-    font-weight: 500;
-}
-.tfc-loading {
-    color: #718096;
-    font-style: italic;
-}
-.tfc-status-history {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-out;
-    padding: 0 16px;
-}
-.tfc-status-section.expanded .tfc-status-history {
-    max-height: 400px;
-    padding: 0 16px 16px;
-    overflow-y: auto;
-}
-.tfc-history-item {
-    padding: 12px;
-    border-left: 2px solid #cbd5e0;
-    margin-left: 8px;
-    position: relative;
-    font-size: 0.8rem;
-    color: #4a5568;
-    margin-bottom: 8px;
-    line-height: 1.4;
-}
-.tfc-history-item::before {
-    content: '';
-    position: absolute;
-    left: -7px;
-    top: 14px;
-    width: 10px;
-    height: 10px;
-    background: #fff;
-    border: 2px solid #cbd5e0;
-    border-radius: 50%;
-}
-.tfc-history-item:last-child {
-    border-left-color: transparent;
-    margin-bottom: 0;
-}
-.tfc-tracker-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid #e2e8f0;
-}
-.tfc-last-updated {
-    font-size: 0.65rem;
-    color: #a0aec0;
-}
-.tfc-refresh-btn {
-    background: none;
-    border: 1px solid #e2e8f0;
-    border-radius: 4px;
-    padding: 4px 8px;
-    font-size: 0.8rem;
-    color: #718096;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-.tfc-refresh-btn:hover {
-    background: #f7fafc;
-    border-color: #cbd5e0;
-    color: #4a5568;
-}
-.tfc-card-wrapper {
-    display: flex;
-    flex-direction: column;
-}
-.tfc-card-wrapper .tfc-card {
-    border-radius: 16px 16px 0 0;
-    margin-bottom: 0;
-}
-.tfc-card-wrapper .tfc-bill-tracker {
-    border-radius: 0 0 16px 16px;
-}
-.tfc-legislation-header {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #243551;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 12px 0;
-    border-bottom: 2px solid #e2e8f0;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.2s ease;
-    user-select: none;
-}
-.tfc-legislation-header:hover {
-    color: #3a5278;
-    background: rgba(36, 53, 81, 0.03);
-    margin: 0 -20px;
-    padding: 12px 20px;
-    border-radius: 8px;
-}
-.tfc-legislation-toggle-icon::after {
-    content: '\25BC';
-    font-size: 0.7rem;
-    transition: transform 0.3s ease;
-    display: inline-block;
-}
-.tfc-bill-tracker.expanded .tfc-legislation-toggle-icon::after {
-    transform: rotate(180deg);
-}
-.tfc-tracker-content {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.4s ease-out, opacity 0.3s ease, margin-top 0.3s ease;
-    margin-top: 0;
-}
-.tfc-bill-tracker.expanded .tfc-tracker-content {
-    max-height: 800px;
-    opacity: 1;
-    margin-top: 16px;
-}
-.tfc-status-history::-webkit-scrollbar { width: 6px; }
-.tfc-status-history::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 3px; }
-.tfc-status-history::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 3px; }
-.tfc-status-history::-webkit-scrollbar-thumb:hover { background: #a0aec0; }
-.tfc-sample-testimony {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 20px;
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-top: 1px solid #f1f5f9;
-    border-radius: 0 0 16px 16px;
-    margin-top: -1px;
-    transition: background 0.2s ease;
-    gap: 16px;
-}
-.tfc-sample-testimony:hover { background: #f8fafc; }
-.tfc-sample-testimony-content {
-    display: flex;
-    flex-direction: column;
-}
-.tfc-sample-testimony-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
     margin-bottom: 2px;
-}
-.tfc-sample-testimony a.tfc-testimony-link {
-    color: #3a5278;
-    text-decoration: none;
-    font-size: 0.9rem;
+    font-size: .75rem;
     font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: color 0.2s ease;
+    color: var(--tfc-muted);
 }
-.tfc-sample-testimony a.tfc-testimony-link:hover { color: #243551; }
-.tfc-sample-testimony a.tfc-testimony-link::after {
-    content: '\2192';
-    font-size: 1rem;
-    transition: transform 0.2s ease;
-}
-.tfc-sample-testimony a.tfc-testimony-link:hover::after { transform: translateX(4px); }
-.tfc-sample-testimony .tfc-more-btn {
-    padding: 10px 20px;
-    background: linear-gradient(90deg, #243551 0%, #3a5278 100%);
-    color: #fff !important;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-decoration: none !important;
-    border-radius: 8px;
-    text-align: center;
-    border: none;
-    transition: all 0.25s ease;
-    white-space: nowrap;
-}
-.tfc-sample-testimony .tfc-more-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(36, 53, 81, 0.3);
-}
-.tfc-card-wrapper .tfc-bill-tracker.has-testimony {
-    border-radius: 0;
-    border-bottom: none;
-}
-.tfc-policy-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-left: 16px;
-    padding-left: 16px;
-    border-left: 1px solid #e2e8f0;
-}
-.tfc-policy-label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #64748b;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-.tfc-policy-toggle {
-    display: inline-flex;
-    background: #f1f5f9;
-    padding: 4px;
-    border-radius: 8px;
-    border: 1px solid #cbd5e0;
-}
-.tfc-policy-toggle-btn {
-    padding: 8px 16px;
-    border: none;
-    background: transparent;
-    color: #475569;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 700;
-    transition: all 0.2s ease;
-}
-.tfc-policy-toggle-btn:hover:not(.active) {
-    color: #475569;
-    background: rgba(255, 255, 255, 0.5);
-}
-.tfc-policy-toggle-btn.active {
-    background: #fff;
-    color: #243551;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.tfc-card-title-row {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 8px;
-}
-.tfc-card-title-row .tfc-card-title { margin-bottom: 0; }
-.tfc-hearings-widget {
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    width: 480px;
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05);
-    z-index: 1000;
-    max-height: calc(100vh - 120px);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-.tfc-hearings-header {
-    padding: 16px;
-    background: linear-gradient(135deg, #243551 0%, #3a5278 100%);
-    color: #fff;
-    border-radius: 12px 12px 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.tfc-hearings-title { font-size: 1.1rem; font-weight: 700; margin: 0; color: #fff; }
-.tfc-hearings-toggle {
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 1.2rem;
-    padding: 0;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-}
-.tfc-hearings-widget.collapsed .tfc-hearings-toggle { transform: rotate(180deg); }
-.tfc-hearings-content {
-    max-height: 500px;
-    overflow-y: auto;
-    transition: max-height 0.3s ease;
-}
-.tfc-hearings-widget.collapsed .tfc-hearings-content { max-height: 0; overflow: hidden; }
-.tfc-hearing-item {
-    padding: 16px 20px;
-    border-bottom: 1px solid #f1f5f9;
-    transition: background 0.2s ease;
-}
-.tfc-hearing-item:hover { background: #f8fafc; }
-.tfc-hearing-item:last-child { border-bottom: none; }
-.tfc-hearing-bill { font-size: 0.95rem; font-weight: 700; color: #243551; margin-bottom: 6px; }
-.tfc-hearing-bill a {
-    color: #243551;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-.tfc-hearing-bill a:hover {
-    color: #3b82f6;
-    text-decoration: underline;
-}
-.tfc-hearing-date {
-    font-size: 0.85rem;
-    color: #64748b;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-.tfc-hearing-date::before { content: '\1F4C5'; font-size: 0.8rem; }
-.tfc-hearing-desc { font-size: 0.9rem; color: #475569; line-height: 1.5; }
-.tfc-hearings-empty { padding: 24px 16px; text-align: center; color: #94a3b8; font-size: 0.8rem; }
-.tfc-hearings-loading { padding: 24px 16px; text-align: center; color: #94a3b8; font-size: 0.8rem; font-style: italic; }
-.tfc-hearings-content::-webkit-scrollbar { width: 6px; }
-.tfc-hearings-content::-webkit-scrollbar-track { background: #f1f5f9; }
-.tfc-hearings-content::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 3px; }
-.tfc-hearings-content::-webkit-scrollbar-thumb:hover { background: #a0aec0; }
-
-/* Bill Status Table Styles */
-.tfc-bill-status-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-}
-.tfc-bill-status-table thead {
-    background: #f8fafc;
-    border-bottom: 2px solid #e2e8f0;
-}
-.tfc-bill-status-table th {
-    padding: 12px 16px;
-    text-align: left;
-    font-weight: 600;
-    color: #475569;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-.tfc-bill-status-table tbody tr {
-    border-bottom: 1px solid #f1f5f9;
-    transition: background 0.2s ease;
-}
-.tfc-bill-status-table tbody tr:hover {
-    background: #f8fafc;
-}
-.tfc-bill-status-table tbody tr.has-hearing {
-    background: #fef3c7;
-    border-left: 4px solid #f59e0b;
-}
-.tfc-bill-status-table tbody tr.has-hearing:hover {
-    background: #fde68a;
-}
-.tfc-bill-status-table td {
-    padding: 14px 16px;
-    color: #334155;
-    vertical-align: top;
-}
-.tfc-bill-status-table td.bill-number {
-    font-weight: 600;
-    color: #243551;
-    white-space: nowrap;
-}
-.tfc-bill-status-table td.bill-number a {
-    color: #243551;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-.tfc-bill-status-table td.bill-number a:hover {
-    color: #3b82f6;
-    text-decoration: underline;
-}
-.tfc-bill-status-table td.issue-area {
-    font-weight: 500;
-    color: #475569;
-}
-.tfc-bill-status-table td.latest-status {
-    font-size: 0.85rem;
-    color: #64748b;
-    line-height: 1.5;
-}
-.tfc-bill-status-table td.latest-status .status-date {
-    font-weight: 600;
-    color: #475569;
-    margin-right: 6px;
-}
-.tfc-bill-status-table .hearing-indicator {
-    display: inline-block;
-    background: #f59e0b;
-    color: white;
-    font-size: 0.7rem;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-left: 8px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-@media (max-width: 768px) {
-    .tfc-bill-status-table {
-        font-size: 0.8rem;
-    }
-    .tfc-bill-status-table th,
-    .tfc-bill-status-table td {
-        padding: 10px 12px;
-    }
-    .tfc-bill-status-table td.latest-status {
-        font-size: 0.75rem;
-    }
-}
-@media (max-width: 600px) {
-    .tfc-policy-wrapper {
-        margin-left: 0;
-        padding-left: 0;
-        border-left: none;
-        margin-top: 8px;
-        width: 100%;
-        justify-content: flex-start;
-    }
-}
-@media (max-width: 1024px) {
-    .tfc-hearings-widget {
-        position: static;
-        width: 100%;
-        margin: 20px auto;
-        max-width: 95%;
-    }
-}
-@media (max-width: 480px) {
-    .tfc-container {
-        padding: 12px;
-    }
-    .tfc-bill-columns { grid-template-columns: 1fr; gap: 8px; }
-    .tfc-bill-col { padding: 10px; }
-    .tfc-bill-tracker { padding: 16px; margin-left: 0; margin-right: 0; }
-    .tfc-card-title-row { flex-direction: column; align-items: flex-start; }
-    .tfc-card {
-        padding: 16px;
-        padding-top: 20px;
-    }
-    .tfc-policy-toggle {
-        width: 100%;
-    }
-    .tfc-policy-toggle-btn {
-        padding: 6px 12px;
-        font-size: 0.75rem;
-    }
-}
-/* ========== END BILL TRACKER WIDGET STYLES ========== */
-
-/* Squarespace Header Fix - Black font for light background pages */
-header.header,
-.header {
-    position: absolute !important;
-    background-color: transparent !important;
-    background: transparent !important;
-    box-shadow: none !important;
-}
-
-header .header-title-text a,
-header .header-nav-item a,
-header .header-nav-folder-title,
-.header .header-title-text a,
-.header .header-nav-item a,
-.header .header-nav-wrapper a {
-    color: #2A3A4D !important;
-}
-
-header .header-burger .burger-inner div,
-.header .header-burger .burger-inner div {
-    background-color: #2A3A4D !important;
-}
-
-.header-nav-folder-content,
-.header .header-nav-folder-content,
-header .header-nav-folder-content {
-    background-color: rgba(255, 255, 255, 0.95) !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    border: 1px solid rgba(42, 58, 77, 0.1) !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-}
-
-.header-nav-folder-content a,
-.header .header-nav-folder-content a,
-header .header-nav-folder-content a,
-.header-nav-folder-item a {
-    color: #2A3A4D !important;
-}
-
-.header-nav-folder-content a:hover,
-.header-nav-folder-item a:hover {
-    background-color: rgba(42, 58, 77, 0.05) !important;
-    color: #2A3A4D !important;
-}
-
-
-.tfc-container {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    max-width: 2400px;
-    margin: 0 auto;
-    padding: 20px;
-    line-height: 1.6;
-    color: #1a202c;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    width: 100%;
-}
-
-.tfc-header {
-    text-align: center;
-    margin-bottom: 32px;
-}
-
-.tfc-header h1 {
-    color: #1a202c;
-    margin: 0 0 12px 0;
-    font-size: 2.5rem;
-    font-weight: 700;
-    letter-spacing: -0.025em;
-}
-
-.tfc-header p {
-    color: #4a5568;
-    font-size: 1.125rem;
-    font-weight: 400;
-    margin: 0;
-}
-
-.tfc-summary {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 32px;
-}
-
-.tfc-summary-card {
-    background: linear-gradient(135deg, #f0f4f8 0%, #e1e7ef 100%);
-    border-radius: 16px;
-    padding: 24px 32px;
-    box-shadow: 0 4px 16px rgba(36, 53, 81, 0.12);
-    border: 1px solid rgba(36, 53, 81, 0.12);
-    text-align: center;
-    max-width: 320px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.tfc-summary-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(36, 53, 81, 0.2);
-}
-
-/* Particle container */
-.tfc-particle-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.tfc-particle {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: rgba(72, 187, 120, 0.7);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: particleFloat 1.5s ease-out forwards;
-}
-
-@keyframes particleFloat {
-    0% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-60px) scale(0.3);
-    }
-}
-
-.tfc-summary-card h3 {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #4a5568;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0 0 8px 0;
-}
-
-.tfc-summary-card .value {
-    font-size: 2.25rem;
-    font-weight: 700;
-    color: #1a202c;
-    line-height: 1;
-    margin-bottom: 4px;
-}
-
-.tfc-summary-card .label {
-    font-size: 0.875rem;
-    color: #718096;
-    font-weight: 500;
-}
-
-.tfc-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 24px;
-    margin: 32px 0;
-    position: relative;
-    min-height: 600px;
-    perspective: 1500px; /* Increased perspective for 3D peel effect */
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.tfc-card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 28px;
-    padding-top: 32px; /* Extra space for top bar */
-    box-shadow: 0 4px 20px rgba(36, 53, 81, 0.08);
-    border: 1px solid rgba(36, 53, 81, 0.12);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.5s ease-out, box-shadow 0.5s ease-out;
-    opacity: 1;
-    /* Paper texture */
-    background-image: 
-        linear-gradient(90deg, rgba(0,0,0,0.01) 1px, transparent 1px),
-        linear-gradient(rgba(0,0,0,0.01) 1px, transparent 1px),
-        linear-gradient(to bottom, #ffffff 0%, #fafafa 100%);
-    background-size: 20px 20px, 20px 20px, 100% 100%;
-    box-sizing: border-box;
-    width: 100%;
-}
-
-
-/* Top accent bar - conforms to rounded corners */
-.tfc-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: linear-gradient(90deg, #243551 0%, #3a5278 100%);
-    border-radius: 16px 16px 0 0;
-}
-
-.tfc-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(36, 53, 81, 0.15);
-}
-
-.tfc-card-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #1a202c;
-    margin: 0 0 10px 0;
-    line-height: 1.3;
-}
-
-.tfc-card-tag {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #243551;
-    background: #eef2f7;
-    padding: 5px 10px;
-    border-radius: 6px;
-    display: inline-block;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.tfc-card-revenue {
-    display: inline-block;
-    color: #38a169;
-    font-weight: 700;
-    font-size: 1rem;
-    margin-bottom: 12px;
-    padding: 6px 12px;
-    background: rgba(56, 161, 105, 0.1);
-    border: 1px solid rgba(56, 161, 105, 0.3);
-    border-radius: 20px;
-}
-
-.tfc-card-revenue.unknown {
-    color: #9f7aea;
-    background: rgba(159, 122, 234, 0.1);
-    border: 1px solid rgba(159, 122, 234, 0.3);
-}
-
-.tfc-card-desc {
-    font-size: 0.95rem;
-    color: #4a5568;
-    margin-bottom: 50px; /* Space for bottom-right button */
-    flex-grow: 1;
-}
-
-/* Button positioned in bottom-right, revealed by peel */
-.tfc-card-btn {
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
-    padding: 8px 16px;
-    background: transparent;
-    color: #243551 !important;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-decoration: none !important;
-    border-radius: 6px;
-    text-align: center;
-    border: 1px solid #243551;
-    transition: all 0.25s ease;
-    z-index: 5;
-}
-
-.tfc-card-btn:hover {
-    background: linear-gradient(90deg, #243551 0%, #3a5278 100%);
-    color: #fff !important;
-    border-color: transparent;
-    transform: scale(1.05);
-}
-
-/* When card is hovered, emphasize the button */
-.tfc-card:hover .tfc-card-btn {
-    background: linear-gradient(90deg, #243551 0%, #3a5278 100%);
-    color: #fff !important;
-    border-color: transparent;
-}
-
-/* Bar Chart Styles */
-.tfc-chart-container {
-    max-width: 700px;
-    margin: 0 auto 32px auto;
-    padding: 24px;
-    background: transparent;
-}
-
-.tfc-chart {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.tfc-bar-row {
-    display: grid;
-    grid-template-columns: 140px 1fr 70px;
-    align-items: center;
-    gap: 12px;
-}
-
-.tfc-bar-label {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: #4a5568;
-    text-align: right;
-}
-
-.tfc-bar-track {
-    height: 28px;
-    background: #eef2f7;
-    border-radius: 6px;
-    overflow: visible;
-}
-
-.tfc-bar {
-    height: 100%;
-    width: 0;
-    background: linear-gradient(90deg, #243551 0%, #3a5278 100%);
-    border-radius: 6px;
-    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-    cursor: pointer;
-    position: relative;
-}
-
-.tfc-bar:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(36, 53, 81, 0.3);
-    filter: brightness(1.15);
-}
-
-.tfc-bar::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    border-radius: 6px;
-}
-
-.tfc-bar:hover::after {
-    opacity: 1;
-}
-
-.tfc-bar-value {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #48bb78;
-}
-
-@media (max-width: 600px) {
-    .tfc-bar-row {
-        grid-template-columns: 1fr;
-        gap: 4px;
-    }
-    .tfc-bar-label {
-        text-align: left;
-    }
-    .tfc-bar-track {
-        height: 24px;
-    }
-}
-
-.tfc-footer {
-    margin-top: 40px;
-    text-align: center;
-    color: #718096;
-    font-size: 0.85rem;
-}
-
-@media (max-width: 768px) {
-    .tfc-container {
-        padding: 16px;
-    }
-    .tfc-header h1 {
-        font-size: 2rem;
-    }
-    .tfc-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    .tfc-card {
-        padding: 20px;
-        padding-top: 24px;
-    }
-    .tfc-card-wrapper {
-        width: 100%;
-        box-sizing: border-box;
-    }
-}
-/* Bill Tracker Styles */
-.tfc-card-wrapper {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-
-.tfc-bill-tracker {
-    background: #f8fafc;
-    border: 1px solid rgba(36, 53, 81, 0.12);
-    border-top: none;
-    border-radius: 0 0 16px 16px;
-    padding: 20px;
-    margin-top: -20px; /* Overlap with card above */
-    padding-top: 36px; /* Extra padding to account for overlap */
-    position: relative;
-    z-index: 0; /* Below the main card */
-    font-family: 'Inter', sans-serif;
-    margin-left: 10px; /* Slight inset to look like it's sliding out */
-    margin-right: 10px;
-}
-
-/* Ensure main card stays on top */
-.tfc-card {
-    z-index: 2;
-    position: relative;
-}
-
-.tfc-bill-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 20px;
-}
-
-.tfc-bill-col {
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 8px;
-    transition: background 0.2s ease;
-}
-
-.tfc-bill-col:hover {
-    background: rgba(36, 53, 81, 0.05);
-}
-
-.tfc-bill-col.active {
-    background: rgba(36, 53, 81, 0.1);
-    border: 1px solid rgba(36, 53, 81, 0.2);
-}
-
-.tfc-bill-col h4 {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #718096;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0 0 8px 0;
-    border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 4px;
-}
-
-.tfc-bill-number {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #243551;
-}
-
-.tfc-status-section {
-    border-top: 1px solid #e2e8f0;
-    padding-top: 16px;
-}
-
-.tfc-status-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-}
-
-.tfc-status-title {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #4a5568;
-}
-
-.tfc-status-toggle {
-    font-size: 0.75rem;
-    color: #3a5278;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.tfc-status-toggle::after {
-    content: '\25BC';
-    font-size: 0.6rem;
-    transition: transform 0.3s ease;
-}
-
-.tfc-status-section.expanded .tfc-status-toggle::after {
-    transform: rotate(180deg);
-}
-
-.tfc-latest-update {
-    margin-top: 12px;
-    padding: 12px;
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    color: #2d3748;
-    position: relative;
-}
-
-.tfc-status-date {
-    display: block;
-    font-size: 0.7rem;
-    color: #718096;
-    margin-bottom: 4px;
-    font-weight: 500;
-}
-
+.tfc-loading { color: var(--tfc-muted); font-style: italic; }
 .tfc-status-history {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-out;
-    margin-top: 0;
+    transition: max-height .4s ease-out;
 }
-
 .tfc-status-section.expanded .tfc-status-history {
-    max-height: 400px;
+    max-height: 320px;
     margin-top: 12px;
     overflow-y: auto;
 }
-
 .tfc-history-item {
-    padding: 12px;
-    border-left: 2px solid #cbd5e0;
-    margin-left: 8px;
     position: relative;
-    font-size: 0.8rem;
-    color: #4a5568;
-    padding-bottom: 16px;
+    margin-left: 5px;
+    padding: 0 0 12px 18px;
+    border-left: 2px solid var(--tfc-line);
+    font-size: .82rem;
+    line-height: 1.45;
+    color: var(--tfc-muted);
 }
-
 .tfc-history-item::before {
     content: '';
     position: absolute;
     left: -6px;
-    top: 16px;
+    top: 3px;
     width: 10px;
     height: 10px;
-    background: #fff;
-    border: 2px solid #cbd5e0;
+    border: 2px solid #b8c0cc;
     border-radius: 50%;
+    background: #fff;
 }
-
-.tfc-history-item:last-child {
-    border-left-color: transparent;
-}
-
+.tfc-history-item:last-child { padding-bottom: 0; border-left-color: transparent; }
+.tfc-tracker-meta { display: none; }
 .tfc-status-badge {
     display: inline-block;
+    margin-left: 6px;
     padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 0.65rem;
+    border-radius: 999px;
+    background: #eceef2;
+    color: var(--tfc-muted);
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .03em;
+    text-transform: none;
+    vertical-align: middle;
+}
+.tfc-badge-enacted { background: var(--tfc-blue); color: #fff; }
+.tfc-badge-passed,
+.tfc-badge-progress,
+.tfc-badge-update { background: #dbe7f6; color: #1f4f8f; }
+.tfc-badge-hearing { background: #fbe3d6; color: #9a3412; }
+.tfc-badge-deferred { background: #f8dcdc; color: #9b1c1c; }
+.tfc-badge-referred,
+.tfc-badge-new { background: #eceef2; color: var(--tfc-muted); }
+
+/* Card footer: sample testimony + More info */
+.tfc-sample-testimony {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 14px 16px;
+    padding: 16px 24px 20px;
+    border-top: 1px solid var(--tfc-line);
+    background: var(--tfc-soft);
+}
+.tfc-sample-testimony-label {
+    margin-bottom: 4px;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--tfc-muted);
+}
+.tfc-container a.tfc-testimony-link {
+    display: block;
+    font-size: .88rem;
     font-weight: 600;
-    background: #ebf8ff;
-    color: #2b6cb0;
-    margin-left: 8px;
+    line-height: 1.5;
+    color: var(--tfc-navy);
+    text-decoration: underline;
+    text-decoration-color: rgba(37, 53, 81, .35);
+    text-underline-offset: 3px;
+}
+.tfc-container a.tfc-testimony-link:hover { color: var(--tfc-blue); }
+/* Site button colours and font, at a size that suits a card footer. */
+.tfc-container a.tfc-more-btn {
+    margin-left: auto;
+    padding: 10px 18px !important;
+    font-size: .9rem !important;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.tfc-container .tfc-section-title {
+    margin: 56px 0 20px;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* ---------- Narrow containers (phones) ---------- */
+@container (max-width: 720px) {
+    .tfc-summary { grid-template-columns: minmax(0, 1fr); gap: 22px; padding: 28px 22px; }
+    .tfc-chart { padding: 28px 20px 24px; }
+    .tfc-container .tfc-summary-title,
+    .tfc-container .tfc-chart-title { font-size: 1.55rem; }
+    .tfc-summary-figure { font-size: 2.4rem; }
+    .tfc-row,
+    .tfc-axis { grid-template-columns: minmax(0, 1fr); }
+    .tfc-row-label { margin-bottom: 6px; }
+    .tfc-axis > :first-child { display: none; }
+}
+@container (max-width: 420px) {
+    .tfc-container { --tfc-reserve: 7.25rem; }
+    .tfc-row-track { height: 28px; }
+    .tfc-row-value { font-size: .95rem; }
+    .tfc-card { padding: 20px 20px 18px; }
+    .tfc-bill-tracker { padding: 0 20px; }
+    .tfc-sample-testimony { padding: 14px 20px 18px; }
+    .tfc-container .tfc-section-title { margin-top: 44px; font-size: 1.5rem; }
+}
+
+/* ---------- The Squarespace blocks around this one ---------- */
+/* This page's section (.fe-69239a2e...) holds the title, this block and the two PDF
+   downloads. Squarespace gave this block a fixed run of grid rows sized for the old,
+   longer page (desktop rows 3-90, phone 5-115), and each row has a minimum height, so the
+   shorter content left ~900px of empty grid above the PDFs. Its resize handles ignore
+   automation, so the rows are re-laid here: this block gets one row that grows to fit,
+   and the PDF blocks move up under it. Row numbers are Squarespace's; if anything in this
+   section is moved in the editor, re-check them (or delete these rules and resize the
+   block by hand instead). */
+@media (min-width: 768px) {
+    .fe-69239a2e4e64d707c9527811 {
+        grid-template-rows: repeat(19, minmax(calc(var(--container-width) * var(--row-height-scaling-factor)), auto)) !important;
+    }
+    /* Same columns as the page title (4-24) instead of edge to edge. */
+    .fe-block-yui_3_17_2_1_1764208887783_4735 { grid-column: 4 / 24 !important; grid-row: 3 / 4 !important; }
+    /* PDF headings, covers, buttons. The headings used to share a row with the cover,
+       so a heading that wrapped (768-1024px) ran into it; now they don't overlap. */
+    .fe-block-yui_3_17_2_1_1772051568067_1235,
+    .fe-block-47aed08b7f15ad17c68c { grid-row: 4 / 6 !important; }
+    .fe-block-yui_3_17_2_1_1772051449514_915,
+    .fe-block-yui_3_17_2_1_1772137212236_2072 { grid-row: 6 / 18 !important; }
+    .fe-block-yui_3_17_2_1_1772051568067_3101,
+    .fe-block-5e8e502c46df15314637 { grid-row: 18 / 20 !important; }
+    /* Messaging Guide: columns 17-23 -> 18-24, mirroring the Priorities PDF (4-10) so
+       the pair lines up with the title's edges. */
+    .fe-block-47aed08b7f15ad17c68c,
+    .fe-block-yui_3_17_2_1_1772137212236_2072,
+    .fe-block-5e8e502c46df15314637 { grid-column: 18 / 24 !important; }
+}
+@media (max-width: 767px) {
+    .fe-69239a2e4e64d707c9527811 { grid-template-rows: repeat(43, minmax(24px, auto)) !important; }
+    .fe-block-yui_3_17_2_1_1764208887783_4735 { grid-row: 5 / 6 !important; }
+    .fe-block-yui_3_17_2_1_1772051568067_1235 { grid-row: 7 / 9 !important; }
+    .fe-block-yui_3_17_2_1_1772051449514_915 { grid-row: 9 / 23 !important; }
+    .fe-block-yui_3_17_2_1_1772051568067_3101 { grid-row: 23 / 25 !important; }
+    .fe-block-47aed08b7f15ad17c68c { grid-row: 26 / 28 !important; }
+    .fe-block-yui_3_17_2_1_1772137212236_2072 { grid-row: 28 / 42 !important; }
+    .fe-block-5e8e502c46df15314637 { grid-row: 42 / 44 !important; }
 }
 </style>
 
 <div class="tfc-container">
-    <div class="tfc-header">
-        <h1></h1>
-        <p></p>
-    </div>
 
-    <div class="tfc-summary">
-        <div class="tfc-summary-card" style="max-width: 420px; border-color: rgba(56, 161, 105, 0.45); background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);">
-            <div style="display:inline-block; margin-bottom:10px; padding:4px 12px; border-radius:999px; background:#38a169; color:#fff; font-size:0.72rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;">Passed &mdash; 2026 Session</div>
-            <h3>Projected Revenue &mdash; SB 3125 CD1</h3>
-            <div class="value">$680 million</div>
-            <div class="label">estimated savings over the next five years (initial projections)</div>
+    <section class="tfc-panel tfc-summary" aria-labelledby="tfc-summary-title">
+        <div class="tfc-summary-lead">
+            <span class="tfc-status tfc-status--passed">Passed &middot; 2026 session</span>
+            <h2 class="tfc-summary-title" id="tfc-summary-title">Stop Tax Cuts for the Wealthy</h2>
+            <p class="tfc-summary-bill">SB 3125, signed into law as Act 24 on May 21, 2026</p>
+            <div class="tfc-summary-figure" data-count-to="680">$680 million</div>
+            <p class="tfc-summary-label">estimated savings over the next five years (initial projections)</p>
+            <a class="tfc-btn sqs-block-button-element--medium sqs-button-element--primary sqs-block-button-element" href="/sb-3125">Read the SB 3125 FAQ</a>
         </div>
-    </div>
+        <div class="tfc-summary-body">
+            <p>In total, all of the changes in SB 3125 could save Hawai&#699;i an estimated <strong>$680 million over the next five years</strong> (according to initial projections). This revenue will be crucial for preserving the common goods in our state budget&mdash;priorities like Medicaid and SNAP. Here are a few of the specific provisions in the bill:</p>
+            <ul>
+                <li><strong>Halts planned income tax cuts for the highest-income households.</strong></li>
+                <li><strong>Preserves the income tax cut schedule from Act 46 (2024)</strong> for joint filers under about $350,000 in income, heads of household under about $262,500, and single filers under about $175,000.</li>
+                <li><strong>Adds a new marginal tax rate of 13 percent</strong> on high-income single filers earning over $500,000 and married couples earning over $1 million.</li>
+            </ul>
+        </div>
+    </section>
 
-    <!-- SB 3125 CD1 — what passed -->
-    <div style="max-width: 820px; margin: 28px auto 8px; background: #ffffff; border: 1px solid rgba(36, 53, 81, 0.12); border-left: 4px solid #38a169; border-radius: 12px; padding: 24px 28px; box-shadow: 0 4px 16px rgba(36, 53, 81, 0.08);">
-        <p style="margin: 0 0 14px; color: #2A3A4D; line-height: 1.6;">In total, all of the changes in SB 3125 could save Hawai&#699;i an estimated <strong>$680 million over the next five years</strong> (according to initial projections). This revenue will be crucial for preserving the common goods in our state budget&mdash;priorities like Medicaid and SNAP. Here are a few of the specific provisions in the bill:</p>
-        <ul style="margin: 0; padding-left: 20px; color: #2A3A4D; line-height: 1.6;">
-            <li style="margin-bottom: 10px;"><strong>Halts planned income tax cuts for the highest-income households.</strong></li>
-            <li style="margin-bottom: 10px;"><strong>Preserves the income tax cut schedule from Act 46 (2024)</strong> for joint filers under about $350,000 in income, heads of household under about $262,500, and single filers under about $175,000.</li>
-            <li style="margin-bottom: 0;"><strong>Adds a new marginal tax rate of 13 percent</strong> on high-income single filers earning over $500,000 and married couples earning over $1 million.</li>
-        </ul>
-    </div>
+    <section class="tfc-panel tfc-chart" aria-labelledby="tfc-chart-title">
+        <h2 class="tfc-chart-title" id="tfc-chart-title">The 2026 proposals</h2>
+        <p class="tfc-chart-sub">Estimated revenue from each proposal the coalition tracked during the 2026 session. Only SB 3125 passed.</p>
 
-    <!-- FAQ link -->
-    <div style="text-align:center; margin: 24px auto 4px;">
-        <a href="https://www.hitaxfairness.org/frequently-asked-questions" style="display:inline-flex; align-items:center; gap:8px; background: linear-gradient(140deg,#16314e,#1c4a73); color:#fff; text-decoration:none; font-weight:700; font-size:1rem; padding:13px 26px; border-radius:999px; box-shadow:0 8px 18px rgba(22,49,78,.25);">Read the full SB&nbsp;3125 FAQ &rarr;</a>
-    </div>
-
-    <!-- 2026 proposals context -->
-    <h3 style="text-align: center; margin: 48px 0 6px; color: #4a5568; font-weight: 600;">The 2026 Proposals</h3>
-    <p style="text-align: center; max-width: 720px; margin: 0 auto 8px; color: #64748b; font-size: 0.95rem; line-height: 1.55;">These were the revenue proposals the coalition tracked during the 2026 session. Of these, only <strong>SB 3125 CD1</strong> (Stop Tax Cuts for the Wealthy) passed.</p>
-
-    <!-- Revenue Comparison Bar Chart -->
-    <div class="tfc-chart-container">
-        <div class="tfc-chart">
-            <div class="tfc-bar-row">
-                <span class="tfc-bar-label">Stop Tax Cuts for the Wealthy <span style="font-size: 0.7rem; color: #64748b;">(SB 3125)</span></span>
-                <div class="tfc-bar-track">
-                    <div class="tfc-bar" data-value="588.3" style="--bar-width: 100%;"></div>
-                </div>
-                <span class="tfc-bar-value">Up to $588.3M</span>
+        <div class="tfc-chart-rows">
+            <div class="tfc-row tfc-row--passed">
+                <div class="tfc-row-label"><strong>Stop Tax Cuts for the Wealthy</strong><span>SB 3125 &middot; <b>Passed</b></span></div>
+                <div class="tfc-row-track"><div class="tfc-row-bar" style="--v: 588.3"></div><span class="tfc-row-value">Up to $588.3M</span></div>
             </div>
-            <div class="tfc-bar-row">
-                <span class="tfc-bar-label">Tax Wealth Like Work</span>
-                <div class="tfc-bar-track">
-                    <div class="tfc-bar" data-value="84" style="--bar-width: 28.38%;"></div>
-                </div>
-                <span class="tfc-bar-value">$84M</span>
+            <div class="tfc-row">
+                <div class="tfc-row-label"><strong>Tweak the Conveyance Tax</strong><span>HD3 SD1 draft &middot; <b>Did not pass</b></span></div>
+                <div class="tfc-row-track"><div class="tfc-row-bar tfc-row-bar--range" style="--v: 302.6; --lo: 89.49%"></div><span class="tfc-row-value">$270.8M&ndash;$302.6M</span></div>
             </div>
-            <div class="tfc-bar-row">
-                <span class="tfc-bar-label">Millionaire's Income Tax</span>
-                <div class="tfc-bar-track">
-                    <div class="tfc-bar" data-value="71" style="--bar-width: 23.98%;"></div>
-                </div>
-                <span class="tfc-bar-value">$71M</span>
+            <div class="tfc-row">
+                <div class="tfc-row-label"><strong>Tax Wealth Like Work</strong><span><b>Did not pass</b></span></div>
+                <div class="tfc-row-track"><div class="tfc-row-bar" style="--v: 84"></div><span class="tfc-row-value">$84M</span></div>
             </div>
-            <div class="tfc-bar-row">
-                <span class="tfc-bar-label">Tweak the Conveyance Tax <span style="font-size: 0.7rem; color: #64748b;">(HD3 SD1)</span></span>
-                <div class="tfc-bar-track">
-                    <div class="tfc-bar" data-value="286.7" style="--bar-width: 96.86%;"></div>
-                </div>
-                <span class="tfc-bar-value">$270.8M - $302.6M</span>
+            <div class="tfc-row">
+                <div class="tfc-row-label"><strong>Millionaire&rsquo;s Income Tax</strong><span><b>Did not pass</b></span></div>
+                <div class="tfc-row-track"><div class="tfc-row-bar" style="--v: 71"></div><span class="tfc-row-value">$71M</span></div>
             </div>
-            <div class="tfc-bar-row">
-                <span class="tfc-bar-label">Closing the Real Estate Investment Trust Loophole</span>
-                <div class="tfc-bar-track">
-                    <div class="tfc-bar" data-value="48" style="--bar-width: 16.22%;"></div>
-                </div>
-                <span class="tfc-bar-value">$36-60M</span>
+            <div class="tfc-row">
+                <div class="tfc-row-label"><strong>Closing the Real Estate Investment Trust Loophole</strong><span><b>Did not pass</b></span></div>
+                <div class="tfc-row-track"><div class="tfc-row-bar tfc-row-bar--range" style="--v: 60; --lo: 60%"></div><span class="tfc-row-value">$36M&ndash;$60M</span></div>
             </div>
         </div>
-    </div>
 
-    <!-- Bill Status Table Widget -->
-    <div class="tfc-hearings-widget" id="bill-status-widget" style="position: static; margin: 40px auto; max-width: 1800px;">
-        <div class="tfc-hearings-header">
-            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                <h3 class="tfc-hearings-title">Bill Status Tracker</h3>
-                <button class="tfc-hearings-toggle" onclick="BillTracker.toggleBillStatusWidget()" aria-label="Toggle bill status">&#9660;</button>
-            </div>
-            <div style="margin-top: 12px; padding: 8px 12px; background: rgba(255, 255, 255, 0.1); border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.2);">
-                <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #fbbf24; cursor: pointer; font-weight: 500;">
-                    <input type="checkbox" id="alive-filter" checked onchange="BillTracker.filterBillStatus()" style="cursor: pointer; transform: scale(1.1);">
-                    <span>Alive Only</span>
-                </label>
+        <div class="tfc-axis" aria-hidden="true">
+            <div></div>
+            <div class="tfc-axis-scale">
+                <span style="left: 0">$0</span><span style="left: 33.333%">$200M</span><span style="left: 66.667%">$400M</span><span style="left: 100%">$600M</span>
             </div>
         </div>
-        <div class="tfc-hearings-content" id="bill-status-content">
-            <div class="tfc-hearings-loading">Loading bill statuses...</div>
-        </div>
-    </div>
+
+        <p class="tfc-chart-note">Bars show each bill&rsquo;s estimate during the session. SB 3125 was amended before it passed; the final version (Act 24) is projected to save about $680 million over five years.</p>
+    </section>
 
     <div class="tfc-grid">
         <div class="tfc-card-wrapper">
             <div class="tfc-card">
-                <div class="tfc-card-title">Stop Tax Cuts for the Wealthy <span style="display:inline-block; padding:2px 9px; border-radius:999px; background:#38a169; color:#fff; font-size:0.7rem; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; vertical-align:middle;">Passed</span></div>
-                <div class="tfc-card-revenue">$680M over 5 years <span style="font-size: 0.75rem; color: #38a169; font-weight: 600;">(SB 3125 CD1 &mdash; enacted)</span></div>
-                <div class="tfc-card-desc">The State passed huge tax breaks with Act 46 in 2024, and the top 1% of taxpayers would have benefited the most. SB 3125 CD1 halts those planned cuts for the highest-income households and adds a new 13% rate on the very top earners. </div>
+                <span class="tfc-status tfc-status--passed">Passed</span>
+                <h3 class="tfc-card-title">Stop Tax Cuts for the Wealthy</h3>
+                <div class="tfc-card-revenue">
+                    <span class="tfc-card-revenue-label">Projected savings</span>
+                    <span class="tfc-card-figure">$680M <small>over 5 years (Act 24)</small></span>
+                </div>
+                <p class="tfc-card-desc">The State passed huge tax breaks with Act 46 in 2024, and the top 1% of taxpayers would have benefited the most. SB 3125 halts those planned cuts for the highest-income households and adds a new 13% rate on the very top earners.</p>
             </div>
-            <!-- Bill Tracker Component - Auto-updating Widget -->
-            <div class="tfc-bill-tracker has-testimony" 
+            <div class="tfc-bill-tracker"
                  data-tracker-id="freezing-act-46"
                  data-issue-area="Stop Tax Cuts for the Wealthy"
                  data-hb="2306"
                  data-sb="3125"
                  data-year="2026">
             </div>
-            <!-- Sample Testimony -->
             <div class="tfc-sample-testimony">
                 <div class="tfc-sample-testimony-content">
-                    <div class="tfc-sample-testimony-label">Sample Testimony</div>
-                    <a class="tfc-testimony-link" href="https://docs.google.com/document/d/1x6RC45EZWsuJ635lJxaelMWXOJXjL4imspQuKxo7UdM/edit?tab=t.0" target="_blank">View Testimony Template (HB 2306)</a>
-                    <a class="tfc-testimony-link" href="https://docs.google.com/document/d/1c8cL2kAzi3CDyqd_QxMfWaBNRp8ChXOHcHx6cmlxv34/edit?tab=t.0" target="_blank" style="margin-top: 4px; display: block;">View Testimony Template (SB 3125)</a>
+                    <div class="tfc-sample-testimony-label">Sample testimony</div>
+                    <a class="tfc-testimony-link" href="https://docs.google.com/document/d/1x6RC45EZWsuJ635lJxaelMWXOJXjL4imspQuKxo7UdM/edit?tab=t.0" target="_blank" rel="noopener">Testimony template (HB 2306)</a>
+                    <a class="tfc-testimony-link" href="https://docs.google.com/document/d/1c8cL2kAzi3CDyqd_QxMfWaBNRp8ChXOHcHx6cmlxv34/edit?tab=t.0" target="_blank" rel="noopener">Testimony template (SB 3125)</a>
                 </div>
-                <a href="https://www.hitaxfairness.org/act-46" class="tfc-more-btn" target="_blank">More Info</a>
-            </div>
-        </div>
-
-        <div class="tfc-card-wrapper">
-            <div class="tfc-card" id="capital-gains-card">
-                <div class="tfc-card-title-row">
-                    <div class="tfc-card-title">Tax Wealth Like Work <span style="display:inline-block; padding:2px 9px; border-radius:999px; background:#94a3b8; color:#fff; font-size:0.7rem; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; vertical-align:middle;">Did Not Pass</span></div>
-                    <div class="tfc-policy-wrapper">
-                        <span class="tfc-policy-label">Options</span>
-                        <div class="tfc-policy-toggle">
-                            <button class="tfc-policy-toggle-btn active" data-policy="ordinary" onclick="switchCapGainsPolicy('ordinary')">Ordinary Income</button>
-                            <button class="tfc-policy-toggle-btn" data-policy="9pct" onclick="switchCapGainsPolicy('9pct')">Max 9%</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="tfc-card-revenue" id="capgains-revenue">$84M Revenue</div>
-                <div class="tfc-card-desc" id="capgains-desc">Income from investments should not be taxed at lower rates than income from regular work. This proposal would tax capital gains fairly, at the same rate as ordinary income from a job.</div>
-            </div>
-            <!-- Bill Tracker Component -->
-            <div class="tfc-bill-tracker has-testimony" 
-                 id="capgains-tracker"
-                 data-tracker-id="capital-gains"
-                 data-issue-area="Tax Wealth Like Work"
-                 data-hb="1850"
-                 data-sb="2441"
-                 data-year="2026">
-            </div>
-            <!-- Sample Testimony -->
-            <div class="tfc-sample-testimony" id="capgains-testimony">
-                <div class="tfc-sample-testimony-content">
-                    <div class="tfc-sample-testimony-label">Sample Testimony</div>
-                    <a class="tfc-testimony-link" href="https://docs.google.com/document/d/1Gea0SlVUz4dDqaGdZP8acSZ6Z1f1BsoN/template/preview" target="_blank">View Testimony Template</a>
-                </div>
-                <a href="https://www.hitaxfairness.org/capital-gains" class="tfc-more-btn" target="_blank">More Info</a>
+                <a href="/act-46" class="tfc-more-btn sqs-block-button-element--small sqs-button-element--primary sqs-block-button-element">More info</a>
             </div>
         </div>
 
         <div class="tfc-card-wrapper">
             <div class="tfc-card">
-                <div class="tfc-card-title">Tweak the Conveyance Tax <span style="display:inline-block; padding:2px 9px; border-radius:999px; background:#94a3b8; color:#fff; font-size:0.7rem; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; vertical-align:middle;">Did Not Pass</span></div>
-                <div class="tfc-card-revenue">$270.8M - $302.6M Revenue <span style="font-size: 0.75rem; color: #64748b; font-weight: 400;">(HD3 SD1 Draft)</span></div>
-                <div class="tfc-card-desc">Luxury homes and second homes should be taxed at higher rates when they're sold. This proposal would make the conveyance tax lower for middle-class Hawaii residents, while making it higher for the ultra-wealthy.</div>
+                <span class="tfc-status tfc-status--failed">Did not pass</span>
+                <h3 class="tfc-card-title">Tweak the Conveyance Tax</h3>
+                <div class="tfc-card-revenue">
+                    <span class="tfc-card-revenue-label">Estimated revenue</span>
+                    <span class="tfc-card-figure">$270.8M&ndash;$302.6M <small>(HD3 SD1 draft)</small></span>
+                </div>
+                <p class="tfc-card-desc">Luxury homes and second homes should be taxed at higher rates when they&rsquo;re sold. This proposal would make the conveyance tax lower for middle-class Hawai&#699;i residents, while making it higher for the ultra-wealthy.</p>
             </div>
-            <!-- Bill Tracker Component -->
-            <div class="tfc-bill-tracker has-testimony" 
+            <div class="tfc-bill-tracker"
                  data-tracker-id="conveyance-tax"
                  data-issue-area="Tweak the Conveyance Tax"
                  data-hb="2049"
                  data-sb="3028"
                  data-year="2026">
             </div>
-            <!-- Bottom section with More button -->
             <div class="tfc-sample-testimony">
                 <div class="tfc-sample-testimony-content">
-                    <div class="tfc-sample-testimony-label">Sample Testimony</div>
-                    <a class="tfc-testimony-link" href="https://docs.google.com/document/d/17ooYF8NjTNidJQRBrFeu70JLmuv5vk9g1fWoPRQPbx8/edit?tab=t.0" target="_blank">View Testimony Template (HB 2049)</a>
-                    <a class="tfc-testimony-link" href="https://docs.google.com/document/d/1DwZA4jxgptWjw6I8_FZVvm_fFLKM7OybF319XHKoiO4/edit?tab=t.0" target="_blank" style="margin-top: 4px; display: block;">View Testimony Template (SB 3028)</a>
+                    <div class="tfc-sample-testimony-label">Sample testimony</div>
+                    <a class="tfc-testimony-link" href="https://docs.google.com/document/d/17ooYF8NjTNidJQRBrFeu70JLmuv5vk9g1fWoPRQPbx8/edit?tab=t.0" target="_blank" rel="noopener">Testimony template (HB 2049)</a>
+                    <a class="tfc-testimony-link" href="https://docs.google.com/document/d/1DwZA4jxgptWjw6I8_FZVvm_fFLKM7OybF319XHKoiO4/edit?tab=t.0" target="_blank" rel="noopener">Testimony template (SB 3028)</a>
                 </div>
-                <a href="https://www.hitaxfairness.org/conveyance-tax" class="tfc-more-btn" target="_blank">More Info</a>
+                <a href="/conveyance-tax" class="tfc-more-btn sqs-block-button-element--small sqs-button-element--primary sqs-block-button-element">More info</a>
             </div>
         </div>
 
-        <div class="tfc-card-wrapper" style="background: linear-gradient(135deg, rgba(254, 226, 226, 0.3), rgba(252, 231, 243, 0.3)); border-radius: 12px; padding: 2px;">
+        <div class="tfc-card-wrapper" id="capital-gains-card">
             <div class="tfc-card">
-                <div class="tfc-card-title">Closing the Real Estate Investment Trust Loophole <span style="display:inline-block; padding:2px 9px; border-radius:999px; background:#94a3b8; color:#fff; font-size:0.7rem; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; vertical-align:middle;">Did Not Pass</span></div>
-                <div class="tfc-card-revenue">$36M - $60M Revenue</div>
-                <div class="tfc-card-desc">REITs make millions of dollars off real estate but pay no corporate income tax to our state.</div>
+                <span class="tfc-status tfc-status--failed">Did not pass</span>
+                <h3 class="tfc-card-title">Tax Wealth Like Work</h3>
+                <div class="tfc-options" role="group" aria-label="Bill options">
+                    <span class="tfc-options-label">Options</span>
+                    <button type="button" class="tfc-option is-active" data-policy="ordinary" aria-pressed="true" onclick="switchCapGainsPolicy('ordinary')">Ordinary income</button>
+                    <button type="button" class="tfc-option" data-policy="9pct" aria-pressed="false" onclick="switchCapGainsPolicy('9pct')">Max 9%</button>
+                </div>
+                <div class="tfc-card-revenue">
+                    <span class="tfc-card-revenue-label">Estimated revenue</span>
+                    <span class="tfc-card-figure">$84M</span>
+                </div>
+                <p class="tfc-card-desc">Income from investments should not be taxed at lower rates than income from regular work. This proposal would tax capital gains fairly, at the same rate as ordinary income from a job.</p>
             </div>
-            <!-- Bill Tracker Component -->
-            <div class="tfc-bill-tracker has-testimony" 
-                 data-tracker-id="reits"
-                 data-issue-area="Closing the Real Estate Investment Trust Loophole"
-                 data-hb="2150"
-                 data-sb="2362"
+            <div class="tfc-bill-tracker"
+                 data-tracker-id="capital-gains"
+                 data-issue-area="Tax Wealth Like Work"
+                 data-hb="1850"
+                 data-sb="2441"
                  data-year="2026">
             </div>
-            <!-- Sample Testimony -->
             <div class="tfc-sample-testimony">
                 <div class="tfc-sample-testimony-content">
-                    <div class="tfc-sample-testimony-label">Sample Testimony</div>
-                    <a class="tfc-testimony-link" href="https://docs.google.com/document/d/1uUbeScmkPPU8D25iyVKX3GrAwvq3n1qdmr26jfMbzEs/template/preview" target="_blank">View Testimony Template</a>
+                    <div class="tfc-sample-testimony-label">Sample testimony</div>
+                    <a class="tfc-testimony-link" href="https://docs.google.com/document/d/1Gea0SlVUz4dDqaGdZP8acSZ6Z1f1BsoN/template/preview" target="_blank" rel="noopener">Testimony template</a>
                 </div>
-                <a href="https://www.hitaxfairness.org/real-estate-investment-trust-reform" class="tfc-more-btn" target="_blank">More Info</a>
+                <a href="/capital-gains" class="tfc-more-btn sqs-block-button-element--small sqs-button-element--primary sqs-block-button-element">More info</a>
             </div>
         </div>
 
-        <div class="tfc-card-wrapper" style="background: linear-gradient(135deg, rgba(254, 226, 226, 0.3), rgba(252, 231, 243, 0.3)); border-radius: 12px; padding: 2px;">
-            <div class="tfc-card" id="millionaires-tax-card">
-                <div class="tfc-card-title-row">
-                    <div class="tfc-card-title">Millionaire's Income Tax <span style="display:inline-block; padding:2px 9px; border-radius:999px; background:#94a3b8; color:#fff; font-size:0.7rem; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; vertical-align:middle;">Did Not Pass</span></div>
-                    <div class="tfc-policy-wrapper">
-                        <span class="tfc-policy-label">Bill Options</span>
-                        <div class="tfc-policy-toggle">
-                            <button class="tfc-policy-toggle-btn active" data-policy="hb2010" onclick="switchMillionairesTaxPolicy('hb2010')">Income >$1M</button>
-                            <button class="tfc-policy-toggle-btn" data-policy="hb1807" onclick="switchMillionairesTaxPolicy('hb1807')">High-Income Earner</button>
-                            <button class="tfc-policy-toggle-btn" data-policy="hb2008" onclick="switchMillionairesTaxPolicy('hb2008')">High Income Earners (Starting 2030)</button>
-                        </div>
-                    </div>
+        <div class="tfc-card-wrapper" id="millionaires-tax-card">
+            <div class="tfc-card">
+                <span class="tfc-status tfc-status--failed">Did not pass</span>
+                <h3 class="tfc-card-title">Millionaire&rsquo;s Income Tax</h3>
+                <div class="tfc-options" role="group" aria-label="Bill options">
+                    <span class="tfc-options-label">Options</span>
+                    <button type="button" class="tfc-option is-active" data-policy="hb2010" aria-pressed="true" onclick="switchMillionairesTaxPolicy('hb2010')">Over $1M</button>
+                    <button type="button" class="tfc-option" data-policy="hb1807" aria-pressed="false" onclick="switchMillionairesTaxPolicy('hb1807')">High earners</button>
+                    <button type="button" class="tfc-option" data-policy="hb2008" aria-pressed="false" onclick="switchMillionairesTaxPolicy('hb2008')">Starting 2030</button>
                 </div>
-                <div class="tfc-card-revenue" id="millionaires-revenue">$71M Revenue</div>
-                <div class="tfc-card-desc" id="millionaires-desc">Tax on income over $1 million. The State's top 1 percent can afford to pay more to help secure our state's future.</div>
+                <div class="tfc-card-revenue">
+                    <span class="tfc-card-revenue-label">Estimated revenue</span>
+                    <span class="tfc-card-figure">$71M</span>
+                </div>
+                <p class="tfc-card-desc">Tax on income over $1 million. The State&rsquo;s top 1 percent can afford to pay more to help secure our state&rsquo;s future.</p>
             </div>
-            <!-- Bill Tracker Component -->
-            <div class="tfc-bill-tracker has-testimony" 
-                 id="millionaires-tracker"
+            <div class="tfc-bill-tracker"
                  data-tracker-id="millionaires-tax"
                  data-issue-area="Millionaire's Income Tax"
                  data-hb="2010"
                  data-sb="2468"
                  data-year="2026">
             </div>
-            <!-- Sample Testimony -->
-            <div class="tfc-sample-testimony" id="millionaires-testimony">
+            <div class="tfc-sample-testimony">
                 <div class="tfc-sample-testimony-content">
-                    <div class="tfc-sample-testimony-label">Sample Testimony</div>
-                    <a class="tfc-testimony-link" href="https://docs.google.com/document/d/1NoC90rJSm6lpOzB575frU6ag0W7bs0zgcS1aB1j4dpY/template/preview" target="_blank">View Testimony Template</a>
+                    <div class="tfc-sample-testimony-label">Sample testimony</div>
+                    <a class="tfc-testimony-link" href="https://docs.google.com/document/d/1NoC90rJSm6lpOzB575frU6ag0W7bs0zgcS1aB1j4dpY/template/preview" target="_blank" rel="noopener">Testimony template</a>
                 </div>
-                <a href="https://www.hitaxfairness.org/income-tax" class="tfc-more-btn" target="_blank">More Info</a>
+                <a href="/income-tax" class="tfc-more-btn sqs-block-button-element--small sqs-button-element--primary sqs-block-button-element">More info</a>
+            </div>
+        </div>
+
+        <div class="tfc-card-wrapper">
+            <div class="tfc-card">
+                <span class="tfc-status tfc-status--failed">Did not pass</span>
+                <h3 class="tfc-card-title">Closing the Real Estate Investment Trust Loophole</h3>
+                <div class="tfc-card-revenue">
+                    <span class="tfc-card-revenue-label">Estimated revenue</span>
+                    <span class="tfc-card-figure">$36M&ndash;$60M</span>
+                </div>
+                <p class="tfc-card-desc">REITs make millions of dollars off real estate but pay no corporate income tax to our state.</p>
+            </div>
+            <div class="tfc-bill-tracker"
+                 data-tracker-id="reits"
+                 data-issue-area="Closing the Real Estate Investment Trust Loophole"
+                 data-hb="2150"
+                 data-sb="2362"
+                 data-year="2026">
+            </div>
+            <div class="tfc-sample-testimony">
+                <div class="tfc-sample-testimony-content">
+                    <div class="tfc-sample-testimony-label">Sample testimony</div>
+                    <a class="tfc-testimony-link" href="https://docs.google.com/document/d/1uUbeScmkPPU8D25iyVKX3GrAwvq3n1qdmr26jfMbzEs/template/preview" target="_blank" rel="noopener">Testimony template</a>
+                </div>
+                <a href="/real-estate-investment-trust-reform" class="tfc-more-btn sqs-block-button-element--small sqs-button-element--primary sqs-block-button-element">More info</a>
             </div>
         </div>
     </div>
 
-    <!-- Other Priorities -->
-    <h3 style="text-align: center; margin: 60px 0 20px; color: #4a5568; font-weight: 600;">Other Priorities</h3>
-    
-    <div class="tfc-grid" style="min-height: auto; margin-top: 0;">
+    <h2 class="tfc-section-title">Other priorities</h2>
+
+    <div class="tfc-grid">
         <div class="tfc-card-wrapper">
-            <div class="tfc-card" style="background: linear-gradient(to bottom, #f0fff4 0%, #e6fffa 100%); border-color: rgba(56, 161, 105, 0.2);">
-                <div class="tfc-card-title">Wealth Proceeds Tax <span style="display:inline-block; padding:2px 9px; border-radius:999px; background:#94a3b8; color:#fff; font-size:0.7rem; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; vertical-align:middle;">Did Not Pass</span></div>
-                <div class="tfc-card-revenue">$53.9M Revenue</div>
-                <div class="tfc-card-desc">Investors should be fairly taxed on all of their income from investments, including passive income.</div>
+            <div class="tfc-card">
+                <span class="tfc-status tfc-status--failed">Did not pass</span>
+                <h3 class="tfc-card-title">Wealth Proceeds Tax</h3>
+                <div class="tfc-card-revenue">
+                    <span class="tfc-card-revenue-label">Estimated revenue</span>
+                    <span class="tfc-card-figure">$53.9M</span>
+                </div>
+                <p class="tfc-card-desc">Investors should be fairly taxed on all of their income from investments, including passive income.</p>
             </div>
-            <!-- Bill Tracker Component -->
-            <div class="tfc-bill-tracker has-testimony" 
+            <div class="tfc-bill-tracker"
                  data-tracker-id="wealth-proceeds"
                  data-issue-area="Wealth Proceeds Tax"
                  data-hb="2623"
                  data-sb=""
                  data-year="2026">
             </div>
-            <!-- Sample Testimony -->
             <div class="tfc-sample-testimony">
-                <div class="tfc-sample-testimony-content">
-                    <div class="tfc-sample-testimony-label">Sample Testimony</div>
-                    <a class="tfc-testimony-link" href="#" target="_blank">View Testimony Template</a>
-                </div>
-                <a href="https://www.hitaxfairness.org/wealth-proceeds-tax" class="tfc-more-btn" target="_blank">More Info</a>
+                <a href="/wealth-proceeds-tax" class="tfc-more-btn sqs-block-button-element--small sqs-button-element--primary sqs-block-button-element">More info</a>
             </div>
         </div>
-    </div>
-
-    <div class="tfc-footer">
-        <p>Data source: Hawai&#699;i Tax Fairness Coalition (hitaxfairness.org)</p>
     </div>
 </div>
 
 <script src="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/bill-tracker.js"></script>
 
 <script>
-// Capital Gains Policy Toggle Configuration
+// Cards with more than one version of the bill: each option swaps the revenue figure,
+// description, tracked bills and testimony link. fetch-bill-status.mjs reads the
+// hbNumbers/sbNumbers pairs below, so keep each pair on adjacent lines.
 const capGainsPolicies = {
     ordinary: {
-        revenue: '$84M Revenue',
-        description: 'Income from investments should not be taxed at lower rates than income from regular work. This proposal would tax capital gains fairly&mdash;at the same rate as ordinary income from a job.',
+        revenue: '$84M',
+        description: 'Income from investments should not be taxed at lower rates than income from regular work. This proposal would tax capital gains fairly, at the same rate as ordinary income from a job.',
         hbNumbers: '1850',
         sbNumbers: '2441',
         testimonyUrl: 'https://docs.google.com/document/d/1weY-NTvH7Ljl6eAn7_LQVv7gHS5a9nFIjqW7il-3XuE/edit?tab=t.0'
     },
     '9pct': {
-        revenue: '$44M Revenue',
+        revenue: '$44M',
         description: 'Income from investments should not be taxed at lower rates than income from regular work. This proposal would raise the maximum capital gains rate from 7.25% to 9%, making sure that investment income receives less preferential treatment.',
         hbNumbers: '',
         sbNumbers: '2587',
@@ -1468,201 +852,79 @@ const capGainsPolicies = {
     }
 };
 
-function switchCapGainsPolicy(policy) {
-    const config = capGainsPolicies[policy];
-    if (!config) return;
-    
-    // Update toggle button states
-    document.querySelectorAll('.tfc-policy-toggle-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    document.querySelector(`[data-policy="${policy}"]`).classList.add('active');
-    
-    // Update revenue
-    const revenueEl = document.getElementById('capgains-revenue');
-    if (revenueEl) {
-        revenueEl.textContent = config.revenue;
-    }
-    
-    // Update description using innerHTML for HTML entities
-    const descEl = document.getElementById('capgains-desc');
-    if (descEl) {
-        descEl.innerHTML = config.description;
-    }
-    
-    // Update bill tracker
-    const trackerEl = document.getElementById('capgains-tracker');
-    if (trackerEl && typeof BillTracker !== 'undefined') {
-        trackerEl.setAttribute('data-hb', config.hbNumbers);
-        trackerEl.setAttribute('data-sb', config.sbNumbers);
-        // Reinitialize tracker with new bills
-        BillTracker.reinit('capital-gains');
-    }
-    
-    // Update testimony link
-    const testimonyEl = document.getElementById('capgains-testimony');
-    if (testimonyEl) {
-        const link = testimonyEl.querySelector('a');
-        if (link) {
-            link.href = config.testimonyUrl;
-        }
-    }
-}
-
-// Millionaire's Tax Policy Toggle Configuration
 const millionairesTaxPolicies = {
     hb2010: {
-        revenue: '$71M Revenue',
-        description: 'Tax on income over $1 million. The State\'s top 1 percent can afford to pay more to help secure our state\'s future.',
+        revenue: '$71M',
+        description: 'Tax on income over $1 million. The State&rsquo;s top 1 percent can afford to pay more to help secure our state&rsquo;s future.',
         hbNumbers: '2010',
         sbNumbers: '2468',
         testimonyUrl: 'https://docs.google.com/document/d/1NoC90rJSm6lpOzB575frU6ag0W7bs0zgcS1aB1j4dpY/template/preview'
     },
     hb1807: {
-        revenue: 'Revenue Unknown',
-        description: 'Tax on high-income earners (joint filers over $1 million). The State\'s top 1 percent can afford to pay more to help secure our state\'s future.',
+        revenue: 'Unknown',
+        description: 'Tax on high-income earners (joint filers over $1 million). The State&rsquo;s top 1 percent can afford to pay more to help secure our state&rsquo;s future.',
         hbNumbers: '1807',
         sbNumbers: '',
         testimonyUrl: 'https://docs.google.com/document/d/1NoC90rJSm6lpOzB575frU6ag0W7bs0zgcS1aB1j4dpY/template/preview'
     },
     hb2008: {
-        revenue: 'Revenue Unknown',
-        description: 'Tax on high-income earners starting in 2030. The State\'s top 1 percent can afford to pay more to help secure our state\'s future.',
+        revenue: 'Unknown',
+        description: 'Tax on high-income earners starting in 2030. The State&rsquo;s top 1 percent can afford to pay more to help secure our state&rsquo;s future.',
         hbNumbers: '2008',
         sbNumbers: '',
         testimonyUrl: 'https://docs.google.com/document/d/1NoC90rJSm6lpOzB575frU6ag0W7bs0zgcS1aB1j4dpY/template/preview'
     }
 };
 
-function switchMillionairesTaxPolicy(policy) {
-    const config = millionairesTaxPolicies[policy];
-    if (!config) return;
-    
-    // Update toggle button states
-    document.querySelectorAll('#millionaires-tax-card .tfc-policy-toggle-btn').forEach(btn => {
-        btn.classList.remove('active');
+function tfcSwitchOption(cardId, policies, key, trackerId) {
+    const card = document.getElementById(cardId);
+    const config = policies[key];
+    if (!card || !config) return;
+    card.querySelectorAll('.tfc-option').forEach(function (btn) {
+        const on = btn.dataset.policy === key;
+        btn.classList.toggle('is-active', on);
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
-    document.querySelector(`#millionaires-tax-card [data-policy="${policy}"]`).classList.add('active');
-    
-    // Update revenue
-    const revenueEl = document.getElementById('millionaires-revenue');
-    if (revenueEl) {
-        revenueEl.textContent = config.revenue;
+    const figure = card.querySelector('.tfc-card-figure');
+    figure.textContent = config.revenue;
+    figure.classList.toggle('is-unknown', config.revenue.indexOf('$') === -1);
+    card.querySelector('.tfc-card-desc').innerHTML = config.description;
+    const tracker = card.querySelector('.tfc-bill-tracker');
+    if (tracker && typeof BillTracker !== 'undefined') {
+        tracker.setAttribute('data-hb', config.hbNumbers);
+        tracker.setAttribute('data-sb', config.sbNumbers);
+        BillTracker.reinit(trackerId);
     }
-    
-    // Update description using innerHTML for HTML entities
-    const descEl = document.getElementById('millionaires-desc');
-    if (descEl) {
-        descEl.innerHTML = config.description;
-    }
-    
-    // Update bill tracker
-    const trackerEl = document.getElementById('millionaires-tracker');
-    if (trackerEl && typeof BillTracker !== 'undefined') {
-        trackerEl.setAttribute('data-hb', config.hbNumbers);
-        trackerEl.setAttribute('data-sb', config.sbNumbers);
-        // Reinitialize tracker with new bills
-        BillTracker.reinit('millionaires-tax');
-    }
-    
-    // Update testimony link
-    const testimonyEl = document.getElementById('millionaires-testimony');
-    if (testimonyEl) {
-        const link = testimonyEl.querySelector('a');
-        if (link) {
-            link.href = config.testimonyUrl;
-        }
-    }
+    const link = card.querySelector('.tfc-testimony-link');
+    if (link) link.href = config.testimonyUrl;
 }
 
+function switchCapGainsPolicy(policy) {
+    tfcSwitchOption('capital-gains-card', capGainsPolicies, policy, 'capital-gains');
+}
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Particle effect that follows cursor on summary card hover
-    const summaryCard = document.querySelector('.tfc-summary-card');
-    if (summaryCard) {
-        // Create particle container
-        const particleContainer = document.createElement('div');
-        particleContainer.className = 'tfc-particle-container';
-        summaryCard.appendChild(particleContainer);
-        
-        let isHovering = false;
-        let particleInterval;
-        
-        summaryCard.addEventListener('mouseenter', () => {
-            isHovering = true;
-        });
-        
-        summaryCard.addEventListener('mouseleave', () => {
-            isHovering = false;
-        });
-        
-        summaryCard.addEventListener('mousemove', (e) => {
-            if (isHovering) {
-                const rect = summaryCard.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                createParticle(particleContainer, x, y);
-            }
-        });
-    }
-    
-    function createParticle(container, x, y) {
-        const particle = document.createElement('div');
-        particle.className = 'tfc-particle';
-        // Position at cursor with slight random offset
-        particle.style.left = (x + (Math.random() - 0.5) * 20) + 'px';
-        particle.style.top = (y + (Math.random() - 0.5) * 20) + 'px';
-        particle.style.background = `rgba(${72 + Math.random() * 30}, ${160 + Math.random() * 40}, ${100 + Math.random() * 40}, 0.7)`;
-        container.appendChild(particle);
-        
-        // Remove particle after animation
-        setTimeout(() => {
-            particle.remove();
-        }, 1500);
-    }
-    
-    const valueElement = document.querySelector('.tfc-summary-card .value');
-    if (!valueElement) return;
+function switchMillionairesTaxPolicy(policy) {
+    tfcSwitchOption('millionaires-tax-card', millionairesTaxPolicies, policy, 'millionaires-tax');
+}
 
-    // Set initial value to 0
-    valueElement.textContent = '$0 million';
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateValue(valueElement, 0, 680, 1500);
-                // Also animate bars when summary card is visible
-                animateBars();
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    observer.observe(valueElement);
-    
-    // Bar chart animation - sequential rising bars
-    function animateBars() {
-        const bars = document.querySelectorAll('.tfc-bar');
-        bars.forEach((bar, index) => {
-            setTimeout(() => {
-                bar.style.width = bar.style.getPropertyValue('--bar-width');
-            }, 200 + (index * 150)); // Stagger each bar by 150ms
-        });
-    }
-
-    function animateValue(obj, start, end, duration) {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            const currentVal = Math.floor(progress * (end - start) + start);
-            obj.textContent = '$' + currentVal + ' million';
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            }
+// Count the headline figure up from $0 the first time it scrolls into view.
+(function () {
+    const figure = document.querySelector('.tfc-summary-figure[data-count-to]');
+    if (!figure || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const end = Number(figure.dataset.countTo);
+    const finalText = figure.textContent;
+    const observer = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        observer.disconnect();
+        const start = performance.now();
+        const step = function (now) {
+            const p = Math.min((now - start) / 1200, 1);
+            figure.textContent = p < 1 ? '$' + Math.round(end * (1 - Math.pow(1 - p, 3))) + ' million' : finalText;
+            if (p < 1) requestAnimationFrame(step);
         };
-        window.requestAnimationFrame(step);
-    }
-    
-});
+        requestAnimationFrame(step);
+    }, { threshold: 0.6 });
+    observer.observe(figure);
+})();
 </script>
