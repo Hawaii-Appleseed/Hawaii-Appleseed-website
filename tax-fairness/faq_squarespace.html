@@ -615,6 +615,84 @@
     color: #253551 !important;
 }
 
+/* ---------- Site design alignment ----------
+   The FAQ was built as its own "factsheet" look (gradient hero, 20-24px corners,
+   heavy shadows, bold headings, amber/green accents). These rules bring it in
+   line with the rest of hitaxfairness.org (homepage, revenue and tax credits
+   pages): flat navy, 8px corners with a hairline border, Halyard 400 headings,
+   figures in the heading font, and the homepage's orange for "costs more".
+   Layout, charts and the print/PDF rules below are unchanged. */
+.tfc-faq {
+    --amber: #d4541e;
+    --amber-ink: #b3431a;
+    --green: #3c73b9;
+    --green-ink: #2f62a3;
+    --red: #b42318;
+    --line: #dfe3ea;
+    --shadow-sm: none;
+    --shadow-md: none;
+}
+.tfc-faq .tfc-faq-hero {
+    background: #253551 !important;
+    border-radius: 8px;
+    box-shadow: none;
+    padding: 48px 44px;
+}
+.tfc-faq .tfc-faq-hero::after { display: none; }
+.tfc-faq .tfc-faq-hero h1 { font-weight: 400; font-size: 2.6rem; line-height: 1.12; }
+.tfc-faq .tfc-faq-kicker { backdrop-filter: none; }
+.tfc-faq .tfc-faq-kicker .dot { background: #9fc1ea; box-shadow: 0 0 0 4px rgba(159,193,234,.2); }
+.tfc-faq .tfc-faq-pdf { backdrop-filter: none; border-radius: 6px !important; }
+.tfc-faq-section { border-radius: 8px; }
+.tfc-faq .tfc-faq-q { font-weight: 400; font-size: 1.6rem; line-height: 1.25; }
+.tfc-faq-qnum {
+    border-radius: 6px;
+    background: #253551;
+    box-shadow: none;
+    font-family: var(--heading-font-font-family), sans-serif;
+}
+.tfc-faq-stat { border-radius: 8px; }
+.tfc-faq-stat .num,
+.tfc-faq-bar-val,
+.tfc-faq-dval,
+.tfc-faq-tl-step .yr { font-family: var(--heading-font-font-family), sans-serif; }
+.tfc-faq-tldr,
+.tfc-faq-nav,
+.tfc-faq-callout,
+.tfc-faq-table-wrap { border-radius: 8px; }
+.tfc-faq-callout { background: #f5f7fa; }
+.tfc-faq-bar-track, .tfc-faq-bar { border-radius: 4px; }
+.tfc-faq-bar { background: #253551; }
+.tfc-faq-bar.lite { background: #b8c4d6; }
+.tfc-faq-dtrack, .tfc-faq-dbar { border-radius: 4px; }
+.tfc-faq-dbar.cut { background: #3c73b9; }
+.tfc-faq-dbar.inc { background: #d4541e; }
+.tfc-faq-cbadge { color: var(--amber-ink); background: rgba(212,84,30,.08); border-color: rgba(212,84,30,.3); }
+.tfc-faq-spot {
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: none;
+}
+.tfc-faq-spot-icon,
+.tfc-faq-spot .ico {
+    border-radius: 6px;
+    background: #d4541e;
+    box-shadow: none;
+}
+.tfc-faq-tl-step.ret::after, .tfc-faq-tl-step.end::after { box-shadow: 0 0 0 4px rgba(212,84,30,.16); }
+.tfc-faq-table .cstatus.a { background: rgba(212,84,30,.1); }
+.tfc-faq-table .cstatus.r { background: rgba(180,35,24,.1); }
+/* Same grey page as the revenue, tax credits and tax system pages, with the
+   white cards sitting on it. */
+section:has(.tfc-faq) .section-background { background-color: #e0e0db !important; }
+.tfc-faq-tldr,
+.tfc-faq-nav { background: #fff; }
+@media (max-width: 700px) {
+    .tfc-faq .tfc-faq-hero { padding: 32px 24px; }
+    .tfc-faq .tfc-faq-hero h1 { font-size: 2rem; }
+    .tfc-faq .tfc-faq-q { font-size: 1.3rem; }
+}
+
 /* ============================================================
    Print / "Download PDF"  — MUST STAY LAST IN THIS STYLESHEET
    ------------------------------------------------------------
