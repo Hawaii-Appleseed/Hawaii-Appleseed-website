@@ -1,0 +1,34 @@
+<!-- Contact Your Legislator (/contact-your-legislator) - the page's Embed block (Embed > Code). Quorum campaign 126777.
+     Quorum posts its content height to the parent page ("quorum-campaign-resize"); the
+     script sizes the frame to it, so the form is never cut off (it needs ~960-1,120px on
+     tablets and phones) or left with empty space below it. The grid rule gives the
+     block a single row, so Squarespace's row minimums don't pad the section either.
+     The form's own colours (the green) are set in Quorum, not here. -->
+<style>
+.tfc-quorum iframe {
+    display: block;
+    width: 100%;
+    height: 820px;
+    border: 1px solid #dfe3ea;
+    border-radius: 8px;
+    background: #fff;
+}
+.fe-683f4ec1b1556b128fe03811 { grid-template-rows: auto !important; }
+.fe-block-yui_3_17_2_1_1748978753969_4667 { grid-row: 1 / 2 !important; }
+</style>
+<div class="tfc-quorum">
+    <iframe src="https://hiappleseed.quorum.us/campaign/126777/?embedded=true&" title="Email your legislators" data-campaign="126777"></iframe>
+</div>
+<script>
+(function () {
+    var frame = document.querySelector('.tfc-quorum iframe[data-campaign="126777"]');
+    if (!frame) return;
+    window.addEventListener('message', function (e) {
+        if (e.origin !== 'https://hiappleseed.quorum.us') return;
+        var d = e.data;
+        if (typeof d === 'string') { try { d = JSON.parse(d); } catch (err) { return; } }
+        if (!d || d.type !== 'quorum-campaign-resize' || String(d.campaignId) !== '126777') return;
+        if (d.height > 100) frame.style.height = Math.ceil(d.height) + 2 + 'px';
+    });
+})();
+</script>
