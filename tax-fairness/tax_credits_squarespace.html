@@ -199,8 +199,13 @@
 }
 
 /* This block spans the full content width (the content centres itself at 880px),
-   wherever the editor dropped it. Layout rules skip body.sqs-edit-mode so the editor
-   keeps showing Squarespace's own layout. */
+   wherever the editor dropped it. The editor also sized its rows to the content as it
+   looked in the editor's narrow default column (137 desktop rows, ~5,500px, for ~1,800px
+   of content), so it gets one row that grows to fit; it is the only block in its
+   section. Layout rules skip body.sqs-edit-mode so the editor keeps showing
+   Squarespace's own layout. */
+body:not(.sqs-edit-mode) .fluid-engine:has(> .fe-block .tfc-credits) { grid-template-rows: auto !important; }
+body:not(.sqs-edit-mode) .fe-block:has(.tfc-credits) { grid-row: 1 / 2 !important; }
 @media (min-width: 768px) {
     body:not(.sqs-edit-mode) .fe-block:has(.tfc-credits) { grid-column: 2 / 26 !important; }
 }
