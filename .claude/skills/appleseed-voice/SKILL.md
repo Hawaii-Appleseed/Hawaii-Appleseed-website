@@ -7,24 +7,40 @@ description: Draft or revise writing in Hawaiʻi Appleseed's house voice — blo
 
 Writing that goes out under HA's name. Accuracy and faithfulness matter more than fluency.
 
-> Paths are relative to the repo root (`Hawaii-Appleseed-website`) — run from there. Every measured claim below comes from the full blog corpus (112 posts, ~100,500 words, 2021–2026); the numbers behind them live in `reference/style-profile.md`.
+> **Where things live.** This skill's own files (`reference/`, scripts) are in `${CLAUDE_SKILL_DIR}`. The corpus and `positions.md` are in a clone of the `Hawaii-Appleseed-website` repo, written **`$W`** below; every `writing-bot/…` path is relative to it. Find it before Step 1:
+>
+> ```bash
+> W="${APPLESEED_WEBSITE:-$HOME/HawaiiAppleseed}"; test -f "$W/writing-bot/positions.md" && echo "$W"
+> ```
+>
+> Use the absolute path it prints wherever `$W` appears below, in commands **and** file reads. Shell variables and `cd` don't carry over between tool calls, so don't rely on either. If the test fails, the repo isn't cloned (or is somewhere else: ask, and have them set `APPLESEED_WEBSITE`). Offer to clone it with `gh repo clone Hawaii-Appleseed/Hawaii-Appleseed-website ~/HawaiiAppleseed` (about 110 MB), and don't draft without positions.md.
+
+> Every measured claim below comes from the full blog corpus (112 posts, ~100,500 words, 2021–2026); the numbers behind them live in `reference/style-profile.md`.
 
 ## Step 1 — Load the authority (always, before drafting)
 
 Read, in order:
 
-1. **`writing-bot/positions.md`** — HA's curated stances + voice guide, maintained by policy staff. **Authoritative**: where it conflicts with anything below or with retrieved examples, positions.md wins. Read it fresh on every use.
+1. **`$W/writing-bot/positions.md`** — HA's curated stances + voice guide, maintained by policy staff. **Authoritative**: where it conflicts with anything below or with retrieved examples, positions.md wins. Read it fresh on every use.
 2. **`reference/style-profile.md`** (in this skill) — measured corpus statistics, for calibration when a judgment call comes up.
 
 **Position integrity — non-negotiable:** ground every factual claim in positions.md or a retrieved corpus document. Never invent statistics, bill numbers, hearing dates, committee names, or dollar figures. If the task needs a position positions.md doesn't cover — or contradicts one it does — stop and ask; inventing a stance is worse than an incomplete draft. Items marked `[REVIEW]` are unconfirmed extractions and `[ADD]` are known gaps: both mean "check with the user."
 
 ## Step 2 — Retrieve real examples
 
-Don't write from these rules alone. Pull 2–4 actual posts on the nearest topic and read them:
+Don't write from these rules alone. Pull 2–4 actual posts on the nearest topic and read them. **Use the writing bot's own hybrid retrieval** (dense + BM25 + rerank over the whole corpus, testimony and publications included), not a bare grep, which misses same-argument posts that use different words:
 
 ```bash
-grep -rl "<topic keyword>" writing-bot/blog-posts/2026/ writing-bot/blog-posts/2025/
+# only when the corpus has changed since the last build:
+cd "$W/writing-bot" && unset OPENAI_API_KEY && .venv/bin/python bot.py --reindex
+cd "$W/writing-bot" && unset OPENAI_API_KEY && .venv/bin/python -c "
+import bot; c=bot.index_documents()
+for q in ['<topic in plain words>', '<bill number + program name>']:
+    for t,m in bot.retrieve(c, q, 6, bot.build_where_filter(None, None, 2025)):
+        print(m.get('source'), '|', t[:150].replace(chr(10),' '))"
 ```
+
+`writing-bot/.venv` holds the bot's requirements (chromadb, sentence-transformers, rank-bm25); the repo-root `.venv` does **not** and fails with `No module named 'chromadb'`. The `.chroma/` index is gitignored and goes stale silently: if the index's chunk count is below the corpus's (or a document you know exists never surfaces), rebuild with `--reindex`. Open the files it returns and read them. `grep -rl` remains fine for an exact bill number. If `$W/writing-bot/.venv` doesn't exist on this machine, fall back to `grep -rl "<topic keyword>" "$W/writing-bot/blog-posts/2026/" "$W/writing-bot/blog-posts/2025/"` and say in the handoff that retrieval was keyword-only. Building the venv is a large one-time install (sentence-transformers pulls in PyTorch), so offer it rather than running it unasked: `python3 -m venv "$W/writing-bot/.venv" && "$W/writing-bot/.venv/bin/pip" install -r "$W/writing-bot/requirements.txt"`.
 
 Corpus layout: `blog-posts/<year>/`, `testimony/<topic>/`, `publications/`, `reference/`.
 

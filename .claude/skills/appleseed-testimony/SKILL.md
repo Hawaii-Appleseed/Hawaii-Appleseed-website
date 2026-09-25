@@ -7,13 +7,21 @@ description: Draft or revise legislative testimony submitted under Hawaiʻi Appl
 
 Testimony is a **document with fixed furniture**, not an essay. The scaffold is more rigid than the prose, and getting the scaffold wrong is more visible to a committee clerk than any sentence-level choice. Accuracy and faithfulness matter more than fluency.
 
-> Paths are relative to the repo root (`Hawaii-Appleseed-website`) — run from there. Every measured claim below comes from the 37 real testimonies in `writing-bot/testimony/` (13,255 body words, 561 sentences, 2025–2026). The numbers behind them live in `reference/testimony-profile.md`.
+> **Where things live.** This skill's own files (`reference/`, scripts) are in `${CLAUDE_SKILL_DIR}`. The corpus and `positions.md` are in a clone of the `Hawaii-Appleseed-website` repo, written **`$W`** below; every `writing-bot/…` path is relative to it. Find it before Step 1:
+>
+> ```bash
+> W="${APPLESEED_WEBSITE:-$HOME/HawaiiAppleseed}"; test -f "$W/writing-bot/positions.md" && echo "$W"
+> ```
+>
+> Use the absolute path it prints wherever `$W` appears below, in commands **and** file reads. Shell variables and `cd` don't carry over between tool calls, so don't rely on either. If the test fails, the repo isn't cloned (or is somewhere else: ask, and have them set `APPLESEED_WEBSITE`). Offer to clone it with `gh repo clone Hawaii-Appleseed/Hawaii-Appleseed-website ~/HawaiiAppleseed` (about 110 MB), and don't draft without positions.md.
+
+> Every measured claim below comes from the 37 real testimonies in `writing-bot/testimony/` (13,255 body words, 561 sentences, 2025–2026). The numbers behind them live in `reference/testimony-profile.md`.
 
 ## Step 1 — Load the authority (always, before drafting)
 
 Read, in order:
 
-1. **`writing-bot/positions.md`** — HA's curated stances, maintained by policy staff. **Authoritative on positions.** Read it fresh on every use. Never take a position it doesn't cover; `[REVIEW]` means unconfirmed, `[ADD]` means known gap — both mean *ask*.
+1. **`$W/writing-bot/positions.md`** — HA's curated stances, maintained by policy staff. **Authoritative on positions.** Read it fresh on every use. Never take a position it doesn't cover; `[REVIEW]` means unconfirmed, `[ADD]` means known gap — both mean *ask*.
 2. **`reference/testimony-profile.md`** (in this skill) — the measured corpus statistics.
 3. **`reference/citations.md`** (in this skill) — 58 citations from the corpus footnotes, each paired with the claim it supports. Check it before writing `CITATION NEEDED`.
 
@@ -35,7 +43,7 @@ positions.md §153 prescribes a testimony format written before the corpus was m
 Don't write from these rules alone. Pull 2–3 testimonies on the nearest subject and read them whole:
 
 ```bash
-grep -rl "<topic keyword>" writing-bot/testimony/ | grep -v /sample_
+grep -rl "<topic keyword>" "$W/writing-bot/testimony/" | grep -v /sample_
 ```
 
 Corpus layout: `testimony/{food-equity,housing,labor,tax-and-budget,transportation}/`.
@@ -49,7 +57,7 @@ Good exemplars: `labor/HB2367_2026_Pay_Transparency.txt` (long, subheaded, heavy
 Get the bill's real title, current draft suffix, committee, and hearing time from LegiScan rather than asking the user to supply them:
 
 ```bash
-python .claude/skills/appleseed-testimony/bill_lookup.py HB1884
+python "${CLAUDE_SKILL_DIR}/bill_lookup.py" HB1884
 ```
 
 It prints a ready header block. **It needs `LEGISCAN_API_KEY`** (free tier, 30K queries/month, https://legiscan.com/user/register). Without the key it exits 2 with instructions — in that case leave the header bracketed and tell the user exactly which details are unverified. Never guess a committee, date, or room.
@@ -162,7 +170,7 @@ Hedge **magnitudes** ("approximately 87 percent"), never the judgment.
 Strip both, and the corpus body is **100 percent clean** on ʻokina. So:
 
 ```bash
-body() { sed '/^_\{6,\}/,$d' "$1" | grep -v '^\[[0-9]\]' | grep -v 'http' \
+body() { sed '/^_\{6,\}/,$d' "$@" | grep -v '^\[[0-9]\]' | grep -v 'http' \
          | grep -v 'Hawaii Appleseed Center'; }
 
 body draft.md | grep -nE "Hawaii([^ʻa]|$)"   # bare Hawaii — "Hawaiian" correctly excluded
@@ -184,9 +192,10 @@ Then read once for: the header block's four lines present and correct; the posit
 Write the draft as plain text in the shape above (header block, `Dear Chair…`, body paragraphs one per line, closing, signature, `________________`, then `[n]` footnotes), then render it. Do not hand-build the letterhead.
 
 ```bash
-S=.claude/skills/appleseed-testimony
-.venv/bin/python $S/render_testimony.py draft.txt -o out/HB1884
+"$W/.venv/bin/python" "${CLAUDE_SKILL_DIR}/render_testimony.py" draft.txt -o out/HB1884
 ```
+
+`$W/.venv` is the website repo's own venv; the renderer needs only `python-docx` from it. A fresh clone doesn't have one, so make it once: `python3 -m venv "$W/.venv" && "$W/.venv/bin/pip" install -q python-docx`.
 
 That emits **`HB1884.docx`** and **`HB1884.html`** from one source, and adds the furniture automatically:
 
@@ -204,7 +213,7 @@ sips -s format png --resampleWidth 1000 out/HB1884.pdf --out out/page1.png   # t
 
 ### Into a Google Doc
 
-The Drive API writes directly — no clipboard, no manual steps:
+**Only if `~/internal-tools/appleseed-drive/` exists on this machine** (it needs its own Drive credential — see the `internal-tools` repo). Without it, hand back the `.docx` and use the clipboard fallback below if the user wants a Doc. With it, the Drive API writes directly — no clipboard, no manual steps:
 
 ```bash
 ~/internal-tools/appleseed-drive/.venv/bin/python \
@@ -241,15 +250,15 @@ Three things to know:
   styling onto neighbouring text. Emitting real markup fixes both problems.
 - **The base64 logo survives the API import**, which it never reliably did
   through the clipboard. No Insert ▸ Image fallback needed.
-- **Log the new Doc to the "Google Docs in progress" memory list** as soon as it
-  exists, and never remove an entry unless the user says so in chat.
+- **Give the user the new Doc's URL** as soon as it exists, so the link isn't
+  lost in the transcript.
 
 <details>
 <summary>Fallback: the old clipboard route (no credentials needed)</summary>
 
-If the API credential is unavailable, `$S/to_gdoc.sh out/HB1884.html` still puts
+If the API credential is unavailable, `"${CLAUDE_SKILL_DIR}/to_gdoc.sh" out/HB1884.html` still puts
 the rendered HTML on the clipboard as HTML flavor and prints the manual steps:
-in Chrome as devin@hibudget.org, open the target folder, **New ▸ Google Docs ▸
+in Chrome, signed into your Appleseed Google account, open the target folder, **New ▸ Google Docs ▸
 Blank**, `Cmd+V`, rename. Watch for a missing logo and for hyperlink styling
 bleeding onto adjacent text.
 
