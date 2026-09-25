@@ -149,17 +149,45 @@ html body header.header .header-nav-folder-item a:hover {
 
 /* ---- Who We Are (/who-we-are) ------------------------------------------
    - Member organisations: quieter underlines, a little air between items.
-   - The desktop grid had 29 rows but its last block ends on row 22, so ~250px
-     of empty grid sat above the footer. Same row minimum as Squarespace's
-     own rule, just fewer rows. The ~"" keeps LESS from doing arithmetic on it. */
+   - Photo: it sat alone at the top right, vertically centred in a box taller
+     than the picture, beside a much longer text column. Now it's pinned to the
+     top of its column with the "We are a welcoming group!" paragraph under it,
+     so the two columns balance. On phones it comes straight after the heading
+     (it used to be last, and wider than the text).
+   - Row counts are Squarespace's grid rows; the ~"" keeps LESS from doing
+     arithmetic on the row-height expression. */
 .fe-block-0466dd0fb6cf78b25791 li { margin-bottom: 4px; }
 .fe-block-0466dd0fb6cf78b25791 li a {
     text-decoration-color: rgba(37, 53, 81, 0.35);
     text-underline-offset: 3px;
 }
 .fe-block-0466dd0fb6cf78b25791 li a:hover { text-decoration-color: currentColor; }
+.fe-block-yui_3_17_2_1_1766611705312_500040 .fluid-image-animation-wrapper { align-items: flex-start !important; }
 @media (min-width: 768px) {
     body:not(.sqs-is-page-editing) .fe-63c229687a853b73c36e5afd {
-        grid-template-rows: ~"repeat(22, minmax(calc(var(--container-width) * var(--row-height-scaling-factor)), auto))" !important;
+        grid-template-rows: ~"repeat(18, minmax(calc(var(--container-width) * var(--row-height-scaling-factor)), auto))" !important;
+    }
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1766611705312_500558 {
+        grid-column-start: 15 !important;
+        grid-column-end: 26 !important;
+        grid-row-start: 14 !important;
+        grid-row-end: 17 !important;
+    }
+}
+@media (max-width: 767px) {
+    body:not(.sqs-is-page-editing) .fe-63c229687a853b73c36e5afd { grid-template-rows: repeat(36, minmax(24px, auto)) !important; }
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1766611705312_500040 {
+        grid-column-start: 2 !important;
+        grid-column-end: 10 !important;
+        grid-row-start: 3 !important;
+        grid-row-end: 11 !important;
+    }
+    body:not(.sqs-is-page-editing) .fe-block-0466dd0fb6cf78b25791 {
+        grid-row-start: 11 !important;
+        grid-row-end: 33 !important;
+    }
+    body:not(.sqs-is-page-editing) .fe-block-yui_3_17_2_1_1766611705312_500558 {
+        grid-row-start: 33 !important;
+        grid-row-end: 37 !important;
     }
 }
