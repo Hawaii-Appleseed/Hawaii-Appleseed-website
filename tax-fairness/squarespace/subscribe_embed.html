@@ -2,7 +2,8 @@
      Quorum posts its content height to the parent page ("quorum-campaign-resize"); the
      script sizes the frame to it, so the form is never cut off (it needs ~960-1,120px on
      tablets and phones) or left with empty space below it. The grid rule gives the
-     block a single row, so Squarespace's row minimums don't pad the section either.
+     block a single row, so Squarespace's row minimums don't pad the section either
+     (not in the editor: body.sqs-edit-mode keeps Squarespace's own layout).
      The form's own colours (the green) are set in Quorum, not here. -->
 <style>
 .tfc-quorum iframe {
@@ -13,8 +14,8 @@
     border-radius: 8px;
     background: #fff;
 }
-.fe-683f4adfa0c23e1a1b4ede43 { grid-template-rows: auto !important; }
-.fe-block-yui_3_17_2_1_1748976801804_3218 { grid-row: 1 / 2 !important; }
+body:not(.sqs-edit-mode) .fe-683f4adfa0c23e1a1b4ede43 { grid-template-rows: auto !important; }
+body:not(.sqs-edit-mode) .fe-block-yui_3_17_2_1_1748976801804_3218 { grid-row: 1 / 2 !important; }
 </style>
 <div class="tfc-quorum">
     <iframe src="https://hiappleseed.quorum.us/campaign/126460/?embedded=true&" title="Sign up for Hawai&#699;i Tax Fairness updates" data-campaign="126460"></iframe>
