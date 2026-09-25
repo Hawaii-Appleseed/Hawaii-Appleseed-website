@@ -1,513 +1,303 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax Credits</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Halyard+Display:wght@700&display=swap');
+<!-- Tax Credits page (/tax-credits-2) - the Code Block in the page's first section.
+     Paste everything in this file into that block. (Until 2026-09-24 this lived in the
+     page's Header Code Injection, which rendered it outside the site's <main>, above an
+     empty 594px section. It is a normal block now; the injection should stay empty.)
+     Fonts come from Site Styles (the --*-font-family variables), the button uses
+     Squarespace's button classes, and the colours match the homepage and revenue page:
+     navy #253551, logo blue #3c73b9 (text on white only).
+     The page's newsletter section is hidden below: its form had no storage connected, so
+     sign-ups went nowhere. The panel at the end sends people to /subscribe (Quorum). -->
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Open Sans', sans-serif;
-            background-color: #E8E6E1; /* Darker beige to match wealth taxes page */
-            color: #2A3A4D;
-            line-height: 1.6;
-        }
+<style>
+.tfc-credits {
+    --tfc-navy: #253551;
+    --tfc-blue: #3c73b9;
+    --tfc-muted: #4a5568;
+    --tfc-line: #dfe3ea;
+    --tfc-soft: #f5f7fa;
+    container-type: inline-size;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 8px 0 32px;
+    font-family: var(--body-font-font-family), sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--tfc-navy);
+}
+.tfc-credits *,
+.tfc-credits *::before,
+.tfc-credits *::after { box-sizing: border-box; }
+.tfc-credits h1,
+.tfc-credits h2 {
+    font-family: var(--heading-font-font-family), sans-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--tfc-navy);
+}
+.tfc-credits p { margin: 0 0 14px; }
 
-        /* Squarespace Header Fix - Black font for light background pages */
-        header.header,
-        .header {
-            position: absolute !important;
-            background-color: transparent !important;
-            background: transparent !important;
-            box-shadow: none !important;
-        }
+.tfc-credits-head {
+    max-width: 720px;
+    margin: 0 auto 36px;
+    text-align: center;
+}
+.tfc-credits-eyebrow {
+    display: block;
+    margin-bottom: 10px;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--tfc-muted);
+}
+.tfc-credits .tfc-credits-title {
+    margin: 0 0 14px;
+    font-size: 3.2rem;
+    line-height: 1.1;
+}
+.tfc-credits-head p {
+    margin: 0;
+    font-size: 1.12rem;
+    color: var(--tfc-muted);
+}
 
-        header .header-title-text a,
-        header .header-nav-item a,
-        header .header-nav-folder-title,
-        .header .header-title-text a,
-        .header .header-nav-item a,
-        .header .header-nav-wrapper a {
-            color: #2A3A4D !important;
-        }
+.tfc-credit {
+    margin: 0 0 24px;
+    padding: 36px 40px;
+    background: #fff;
+    border: 1px solid var(--tfc-line);
+    border-radius: 8px;
+}
+.tfc-credit-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 96px;
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 18px;
+}
+.tfc-credit-top img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+.tfc-credits .tfc-credit-title {
+    margin: 0 0 6px;
+    font-size: 2rem;
+    line-height: 1.2;
+}
+.tfc-credit-tagline {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #2f62a3;
+}
+.tfc-credits .tfc-credit-tagline { margin: 0; }
+.tfc-credit-body p { color: var(--tfc-muted); }
+.tfc-credit-body p:last-child { margin-bottom: 0; }
 
-        header .header-burger .burger-inner div,
-        .header .header-burger .burger-inner div {
-            background-color: #2A3A4D !important;
-        }
+.tfc-callout {
+    margin: 22px 0;
+    padding: 16px 20px;
+    border-left: 4px solid var(--tfc-blue);
+    border-radius: 0 6px 6px 0;
+    background: var(--tfc-soft);
+    font-weight: 600;
+}
 
-        .header-nav-folder-content,
-        .header .header-nav-folder-content,
-        header .header-nav-folder-content {
-            background-color: rgba(255, 255, 255, 0.95) !important;
-            background: rgba(255, 255, 255, 0.95) !important;
-            border: 1px solid rgba(42, 58, 77, 0.1) !important;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-        }
+.tfc-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+}
+.tfc-stat {
+    padding: 20px;
+    border-radius: 8px;
+    background: var(--tfc-soft);
+    text-align: center;
+}
+.tfc-stat-num {
+    font-family: var(--heading-font-font-family), sans-serif;
+    font-weight: 700;
+    font-size: 2.2rem;
+    line-height: 1.15;
+    color: var(--tfc-blue);
+}
+.tfc-stat-label {
+    margin-top: 6px;
+    font-size: .92rem;
+    line-height: 1.45;
+    color: var(--tfc-muted);
+}
 
-        .header-nav-folder-content a,
-        .header .header-nav-folder-content a,
-        header .header-nav-folder-content a,
-        .header-nav-folder-item a {
-            color: #2A3A4D !important;
-        }
+/* "More" sections: native <details>, so they open from the keyboard too. */
+.tfc-more { border-top: 1px solid var(--tfc-line); }
+.tfc-more summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    list-style: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+.tfc-more summary::-webkit-details-marker { display: none; }
+.tfc-more summary::after {
+    content: '\25BE';
+    font-size: 1rem;
+    transition: transform .25s ease;
+}
+.tfc-more[open] summary::after { transform: rotate(180deg); }
+.tfc-more summary:hover { color: var(--tfc-blue); }
+.tfc-more ul {
+    margin: 0 0 20px;
+    padding: 0 0 0 22px;
+    list-style: disc;
+    color: var(--tfc-muted);
+}
+.tfc-more li { margin: 0 0 10px; }
+.tfc-more li:last-child { margin-bottom: 0; }
 
-        .header-nav-folder-content a:hover,
-        .header-nav-folder-item a:hover {
-            background-color: rgba(42, 58, 77, 0.05) !important;
-            color: #2A3A4D !important;
-        }
+.tfc-credit--dark {
+    background: var(--tfc-navy);
+    border-color: var(--tfc-navy);
+}
+.tfc-credits .tfc-credit--dark .tfc-credit-title { color: #fff; }
+.tfc-credit--dark .tfc-credit-tagline { color: #c9d6ea; }
+.tfc-credit--dark .tfc-credit-body p { color: #e3e8f0; }
 
-        h1, h2, h3 {
-            font-family: 'Halyard Display', 'Oswald', 'Impact', sans-serif;
-            font-weight: 700;
-            margin-top: 0;
-        }
+.tfc-credits-cta {
+    margin-top: 40px;
+    text-align: center;
+}
+.tfc-credits .tfc-credits-cta h2 {
+    margin: 0 0 8px;
+    font-size: 1.75rem;
+    line-height: 1.2;
+}
+.tfc-credits-cta p {
+    max-width: 560px;
+    margin: 0 auto 22px;
+    color: var(--tfc-muted);
+}
+.tfc-credits a.tfc-btn {
+    display: inline-block;
+    text-decoration: none;
+}
 
-        /* Main Container */
-        .tfc-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 120px 24px 60px;
-        }
+@container (max-width: 600px) {
+    .tfc-credits .tfc-credits-title { font-size: 2.4rem; }
+    .tfc-credit { padding: 26px 22px; }
+    .tfc-credit-top { grid-template-columns: minmax(0, 1fr) 64px; gap: 16px; }
+    .tfc-credit-top img { width: 64px; height: 64px; }
+    .tfc-credits .tfc-credit-title { font-size: 1.6rem; }
+    .tfc-stats { grid-template-columns: minmax(0, 1fr); }
+    .tfc-stat-num { font-size: 1.9rem; }
+}
 
-        /* Title Section */
-        .tfc-page-header {
-            text-align: center;
-            margin-bottom: 60px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+/* This block spans the full content width (the content centres itself at 880px),
+   wherever the editor dropped it. */
+@media (min-width: 768px) {
+    .fe-block:has(.tfc-credits) { grid-column: 2 / 26 !important; }
+}
+@media (max-width: 767px) {
+    .fe-block:has(.tfc-credits) { grid-column: 2 / 10 !important; }
+}
+/* The newsletter section: its form has no storage, so sign-ups were lost. */
+section[data-section-id="691b795a3409972cbc5443fa"] { display: none !important; }
+</style>
 
-        .tfc-page-title {
-            font-size: 3.5rem;
-            margin-bottom: 16px;
-            color: #2A3A4D;
-        }
+<div class="tfc-credits">
+    <header class="tfc-credits-head">
+        <span class="tfc-credits-eyebrow">Supporting working families</span>
+        <h1 class="tfc-credits-title">Tax Credits</h1>
+        <p>Tax credits put money back in the pockets of Hawai&#699;i&rsquo;s working families, helping them afford basic necessities and invest in their children&rsquo;s futures.</p>
+    </header>
 
-        .tfc-page-subtitle {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #E57373;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .tfc-intro-text {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            color: #4a5568;
-        }
-
-        /* Section Styles */
-        .tfc-section {
-            margin-bottom: 80px;
-        }
-
-        .tfc-section-title {
-            font-size: 2.5rem;
-            margin-bottom: 32px;
-            text-align: center;
-        }
-
-        .tfc-text-block {
-            max-width: 800px;
-            margin: 0 auto 32px;
-            font-size: 1.1rem;
-            text-align: center;
-        }
-
-        /* Credit Card Styles */
-        .tfc-credit-card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 48px;
-            box-shadow: 0 4px 20px rgba(42, 58, 77, 0.05);
-            max-width: 900px;
-            margin: 0 auto 48px;
-            position: relative;
-        }
-
-        .tfc-credit-header {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 24px;
-        }
-
-        .tfc-credit-icon {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 112px;
-            height: 112px;
-            background: linear-gradient(135deg, #5D8F92, #4A7A7D);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(93, 143, 146, 0.2);
-        }
-        .tfc-credit-icon img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .tfc-credit-title {
-            font-size: 2rem;
-            margin: 0;
-            color: #2A3A4D;
-        }
-
-        .tfc-credit-tagline {
-            font-size: 1.15rem;
-            color: #5D8F92;
-            font-weight: 600;
-            margin-bottom: 24px;
-        }
-
-        .tfc-credit-description {
-            font-size: 1.05rem;
-            color: #4a5568;
-            margin-bottom: 24px;
-        }
-
-        .tfc-credit-description p {
-            margin: 0 0 16px;
-        }
-
-        .tfc-credit-description p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Highlight Box */
-        .tfc-highlight-box {
-            background: #F0F7F7;
-            border-left: 4px solid #5D8F92;
-            padding: 20px 24px;
-            border-radius: 0 8px 8px 0;
-            margin: 24px 0;
-        }
-
-        .tfc-highlight-box.red-theme {
-            background: #FDF5F5;
-            border-left-color: #C0504D;
-        }
-
-        .tfc-highlight-box p {
-            margin: 0;
-            font-weight: 600;
-            color: #2A3A4D;
-        }
-
-        /* Dropdown/Accordion Styles */
-        .tfc-dropdown {
-            border-top: 1px solid #e2e8f0;
-            margin-top: 24px;
-        }
-
-        .tfc-dropdown-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 0;
-            cursor: pointer;
-            user-select: none;
-            transition: color 0.2s ease;
-        }
-
-        .tfc-dropdown-toggle:hover {
-            color: #5D8F92;
-        }
-
-        .tfc-dropdown-toggle h4 {
-            margin: 0;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: inherit;
-        }
-
-        .tfc-dropdown-icon {
-            width: 24px;
-            height: 24px;
-            transition: transform 0.3s ease;
-        }
-
-        .tfc-dropdown.open .tfc-dropdown-icon {
-            transform: rotate(180deg);
-        }
-
-        .tfc-dropdown-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-        }
-
-        .tfc-dropdown.open .tfc-dropdown-content {
-            max-height: 2000px;
-        }
-
-        .tfc-dropdown-inner {
-            padding-bottom: 24px;
-        }
-
-        .tfc-dropdown-inner ul {
-            margin: 0;
-            padding-left: 24px;
-            color: #4a5568;
-        }
-
-        .tfc-dropdown-inner li {
-            margin-bottom: 12px;
-        }
-
-        .tfc-dropdown-inner li:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Key Stats */
-        .tfc-stats-row {
-            display: flex;
-            gap: 24px;
-            margin: 32px 0;
-        }
-
-        .tfc-stat-box {
-            flex: 1;
-            background: #F7F6F2;
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-        }
-
-        .tfc-stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #5D8F92;
-            line-height: 1.2;
-        }
-
-        .tfc-stat-label {
-            font-size: 0.9rem;
-            color: #718096;
-            margin-top: 8px;
-        }
-
-        /* RxKids Section */
-        .tfc-rxkids-card {
-            background: linear-gradient(135deg, #5D8F92 0%, #4A7A7D 100%);
-            color: white;
-        }
-
-        .tfc-rxkids-card .tfc-credit-title,
-        .tfc-rxkids-card .tfc-credit-tagline,
-        .tfc-rxkids-card .tfc-credit-description {
-            color: white;
-        }
-
-        .tfc-rxkids-card .tfc-credit-tagline {
-            opacity: 0.9;
-        }
-
-        .tfc-rxkids-card .tfc-credit-icon {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .tfc-page-title {
-                font-size: 2.5rem;
-            }
-
-            .tfc-section-title {
-                font-size: 2rem;
-            }
-
-            .tfc-credit-card {
-                padding: 32px 24px;
-            }
-
-            .tfc-credit-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .tfc-credit-title {
-                font-size: 1.75rem;
-            }
-
-            .tfc-stats-row {
-                flex-direction: column;
-            }
-
-            .tfc-stat-number {
-                font-size: 2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="tfc-container">
-        <!-- Page Header -->
-        <header class="tfc-page-header">
-            <h1 class="tfc-page-title">Tax Credits</h1>
-            <p class="tfc-page-subtitle">Supporting Working Families</p>
-            <p class="tfc-intro-text">
-                Tax credits put money back in the pockets of Hawai&#699;i's working families, helping them afford basic necessities and invest in their children's futures.
-            </p>
-        </header>
-
-        <!-- Child Tax Credit Section -->
-        <div class="tfc-section">
-            <div class="tfc-credit-card">
-                <div class="tfc-credit-icon">
-                    <img src="https://images.squarespace-cdn.com/content/v1/63c215f8a268791349c9f04a/b3c7b18b-1e4d-4401-b54f-1ffea7b61feb/Gemini_Generated_Image_skt2csskt2csskt2.png?format=750w" alt="Child Tax Credit icon">
-                </div>
-                <div class="tfc-credit-header">
-                    <h2 class="tfc-credit-title">Child Tax Credit</h2>
-                </div>
-                
+    <section class="tfc-credit" aria-labelledby="tfc-ctc">
+        <div class="tfc-credit-top">
+            <div>
+                <h2 class="tfc-credit-title" id="tfc-ctc">Child Tax Credit</h2>
                 <p class="tfc-credit-tagline">Helping local families with children afford the high cost of living.</p>
-                
-                <div class="tfc-credit-description">
-                    <p>The federal child tax credit helps offset the costs of raising kids and is worth up to $2,000 for each qualifying child.</p>
-                    <p>Raising children is expensive—recent reports show that the cost of raising a child is over $200,000 throughout the child's lifetime. The American Rescue Plan Act of 2021 temporarily increased the federal credit to $3,600 for children under 6 and $3,000 for children under 18, bringing millions of families out of poverty.</p>
-                </div>
+            </div>
+            <img src="https://images.squarespace-cdn.com/content/v1/63c215f8a268791349c9f04a/b3c7b18b-1e4d-4401-b54f-1ffea7b61feb/Gemini_Generated_Image_skt2csskt2csskt2.png?format=300w" alt="">
+        </div>
+        <div class="tfc-credit-body">
+            <p>The federal child tax credit helps offset the costs of raising kids and is worth up to $2,000 for each qualifying child.</p>
+            <p>Raising children is expensive&mdash;recent reports show that the cost of raising a child is over $200,000 throughout the child&rsquo;s lifetime. The American Rescue Plan Act of 2021 temporarily increased the federal credit to $3,600 for children under 6 and $3,000 for children under 18, bringing millions of families out of poverty.</p>
+        </div>
+        <p class="tfc-callout">Our proposal: a refundable state child tax credit of $650 for each child aged 0&ndash;18.</p>
+        <details class="tfc-more">
+            <summary>Why Hawai&#699;i needs a state child tax credit</summary>
+            <ul>
+                <li>The provisions of the American Rescue Plan that strengthened the child tax credit expired at the end of 2021, despite lifting millions of families and their children out of poverty.</li>
+                <li>In the face of federal spending cuts, states have a responsibility to enact policies that assist working families with children.</li>
+                <li>Twelve other states (and the District of Columbia) have their own, separate child tax credit.</li>
+            </ul>
+        </details>
+    </section>
 
-                <div class="tfc-highlight-box">
-                    <p>Our proposal: A refundable state child tax credit of $650 for each child aged 0-18.</p>
-                </div>
-
-                <!-- Dropdown for more details -->
-                <div class="tfc-dropdown">
-                    <div class="tfc-dropdown-toggle">
-                        <h4>Why Hawai&#699;i Needs a State Child Tax Credit</h4>
-                        <svg class="tfc-dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
-                    <div class="tfc-dropdown-content">
-                        <div class="tfc-dropdown-inner">
-                            <ul>
-                                <li>The provisions of the American Rescue Plan that strengthened the child tax credit expired at the end of 2021, despite lifting millions of families and their children out of poverty.</li>
-                                <li>In the face of federal spending cuts, states have a responsibility to enact policies that assist working families with children.</li>
-                                <li>Twelve other states (and the District of Columbia) have their own, separate child tax credit.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+    <section class="tfc-credit" aria-labelledby="tfc-eitc">
+        <div class="tfc-credit-top">
+            <div>
+                <h2 class="tfc-credit-title" id="tfc-eitc">Earned Income Tax Credit</h2>
+                <p class="tfc-credit-tagline">Helping Hawai&#699;i&rsquo;s working families keep more of what they earn.</p>
+            </div>
+            <img src="https://images.squarespace-cdn.com/content/v1/63c215f8a268791349c9f04a/b32f9d2e-8fe7-4769-ae87-b0dbfd5da766/Gemini_Generated_Image_n22b1cn22b1cn22b.png?format=300w" alt="">
+        </div>
+        <div class="tfc-credit-body">
+            <p>The Earned Income Tax Credit (EITC) is a special tax credit for people who are employed. It allows families to keep more of what they earn, helping them put food on the table.</p>
+            <p>The state EITC for Hawai&#699;i mirrors the federal credit, and it&rsquo;s refundable. Most EITC recipients are raising children.</p>
+        </div>
+        <div class="tfc-stats">
+            <div class="tfc-stat">
+                <div class="tfc-stat-num">100,000+</div>
+                <div class="tfc-stat-label">Children in Hawai&#699;i benefit from the state EITC</div>
+            </div>
+            <div class="tfc-stat">
+                <div class="tfc-stat-num">18,000</div>
+                <div class="tfc-stat-label">Children kept out of poverty by the federal EITC each year</div>
             </div>
         </div>
+        <p class="tfc-callout">Hawai&#699;i&rsquo;s EITC is worth 40% of the federal credit, and it was last expanded in 2023.</p>
+        <details class="tfc-more">
+            <summary>Benefits for families</summary>
+            <ul>
+                <li>The EITC is a lifeline for low-income people, giving them the financial security they need to stay employed while caring for their family.</li>
+                <li>Children in families receiving the EITC experience financial, educational, and health benefits that strengthen their foundations for future success.</li>
+                <li>Children whose families receive the EITC have higher test scores, graduation rates, and college enrollment.</li>
+                <li>The EITC is linked to healthier mothers and infants, including increased birth weight for newborns.</li>
+            </ul>
+        </details>
+        <details class="tfc-more">
+            <summary>Economic impact</summary>
+            <ul>
+                <li>For every dollar given as part of an EITC, up to two dollars is spent in the local economy.</li>
+                <li>Workers who can pay for basic necessities are more dependable employees&mdash;as much as 36 cents of every EITC dollar ultimately flows to employers.</li>
+                <li>A California study showed that for every $150,000 of tax credit claimed, an additional job was created.</li>
+                <li>When workers keep more of what they earn, they put those dollars back into the economy, benefiting local businesses.</li>
+            </ul>
+        </details>
+    </section>
 
-        <!-- Earned Income Tax Credit Section -->
-        <div class="tfc-section">
-            <div class="tfc-credit-card">
-                <div class="tfc-credit-icon">
-                    <img src="https://images.squarespace-cdn.com/content/v1/63c215f8a268791349c9f04a/b32f9d2e-8fe7-4769-ae87-b0dbfd5da766/Gemini_Generated_Image_n22b1cn22b1cn22b.png?format=1000w" alt="Earned Income Tax Credit icon">
-                </div>
-                <div class="tfc-credit-header">
-                    <h2 class="tfc-credit-title">Earned Income Tax Credit</h2>
-                </div>
-                
-                <p class="tfc-credit-tagline">Helping Hawai&#699;i's working families keep more of what they earn.</p>
-                
-                <div class="tfc-credit-description">
-                    <p>The Earned Income Tax Credit (EITC) is a special tax credit for people that are employed. It allows families keep more of what they earn, helping them put food on the table.</p>
-                    <p>The state EITC for Hawai&#699;i mirrors the federal credit, and it's refundable. Most EITC recipients are raising children.</p>
-                </div>
-
-                <div class="tfc-stats-row">
-                    <div class="tfc-stat-box">
-                        <div class="tfc-stat-number">100,000+</div>
-                        <div class="tfc-stat-label">Children in Hawai&#699;i benefit from the state EITC</div>
-                    </div>
-                    <div class="tfc-stat-box">
-                        <div class="tfc-stat-number">18,000</div>
-                        <div class="tfc-stat-label">Children kept out of poverty by federal EITC each year</div>
-                    </div>
-                </div>
-
-                <div class="tfc-highlight-box red-theme">
-                    <p>Hawai&#699;i's EITC is worth 40% of the federal credit, and it was last expanded in 2023.  </p>
-                </div>  ````
-
-                <!-- Dropdown for benefits -->
-                <div class="tfc-dropdown">
-                    <div class="tfc-dropdown-toggle">
-                        <h4>Benefits for Families</h4>
-                        <svg class="tfc-dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
-                    <div class="tfc-dropdown-content">
-                        <div class="tfc-dropdown-inner">
-                            <ul>
-                                <li>The EITC is a lifeline for low-income people, giving them the financial security they need to stay employed while caring for their family. </li>
-                                <li>Children in families receiving the EITC experience financial, educational, and health benefits that strengthen their foundations for future success.</li>
-                                <li>Children whose families receive the EITC have higher test scores, graduation rates, and college enrollment.</li>
-                                <li>The EITC is linked to healthier mothers and infants, including increased birth weight for newborns.</li>
-                            
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Dropdown for economic impact -->
-                <div class="tfc-dropdown">
-                    <div class="tfc-dropdown-toggle">
-                        <h4>Economic Impact</h4>
-                        <svg class="tfc-dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
-                    <div class="tfc-dropdown-content">
-                        <div class="tfc-dropdown-inner">
-                            <ul>
-                                <li>For every dollar given as part of an EITC, up to two dollars is spent in the local economy.</li>
-                                <li>Workers who can pay for basic necessities are more dependable employees—as much as 36 cents of every EITC dollar ultimately flows to employers.</li>
-                                <li>A California study showed that for every $150,000 of tax credit claimed, an additional job was created.</li>
-                                <li>When workers keep more of what they earn, they put those dollars back into the economy, benefiting local businesses.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- RxKids Section -->
-        <div class="tfc-section">
-            <div class="tfc-credit-card tfc-rxkids-card">
-                <div class="tfc-credit-header">
-                    <h2 class="tfc-credit-title">RxKids</h2>
-                </div>
-                
+    <section class="tfc-credit tfc-credit--dark" aria-labelledby="tfc-rxkids">
+        <div class="tfc-credit-top">
+            <div>
+                <h2 class="tfc-credit-title" id="tfc-rxkids">RxKids</h2>
                 <p class="tfc-credit-tagline">Supporting mothers through direct cash payments.</p>
-                
-                <div class="tfc-credit-description">
-                    <p>It is extremely expensive for mothers in Hawai&#699;i to have children. RxKids would provide direct cash payments to help families during the critical early months of a child's life.</p>
-                </div>
             </div>
         </div>
-    </div>
+        <div class="tfc-credit-body">
+            <p>It is extremely expensive for mothers in Hawai&#699;i to have children. RxKids would provide direct cash payments to help families during the critical early months of a child&rsquo;s life.</p>
+        </div>
+    </section>
 
-    <script>
-        // Dropdown toggle functionality
-        document.querySelectorAll('.tfc-dropdown-toggle').forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                const dropdown = toggle.parentElement;
-                dropdown.classList.toggle('open');
-            });
-        });
-    </script>
-</body>
-</html>
+    <div class="tfc-credits-cta">
+        <h2>Stay up to date</h2>
+        <p>Sign up for updates and we&rsquo;ll let you know when tax credit bills are moving and when to submit testimony.</p>
+        <a class="tfc-btn sqs-block-button-element--medium sqs-button-element--primary sqs-block-button-element" href="/subscribe">Sign up for updates</a>
+    </div>
+</div>

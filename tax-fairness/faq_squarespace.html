@@ -2,19 +2,21 @@
      into the implicit <head>). Harmless inside Squarespace, which supplies its own. -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 /* ============================================================
    SB 3125 / Act 24 - Frequently Asked Questions
    Self-contained Squarespace injection. Scoped under .tfc-faq
+   Fonts come from Site Styles (--body-font-font-family, --heading-font-font-family)
+   and the navy/blue match the rest of the site (#253551, #3c73b9); --muted is dark
+   enough for small text on white (4.5:1).
    ============================================================ */
 .tfc-faq {
-    --navy: #16314e;
-    --navy-deep: #0e2236;
-    --blue: #2f6fb0;
+    --navy: #253551;
+    --navy-deep: #1a263b;
+    --blue: #3c73b9;
     --ink: #1a2433;
     --ink-soft: #566476;
-    --muted: #8a98a8;
+    --muted: #6b778c;
     --line: #e7ecf2;
     --line-strong: #d7dee7;
     --bg: #f6f8fb;
@@ -26,7 +28,7 @@
     --shadow-sm: 0 1px 2px rgba(16,40,60,.05);
     --shadow-md: 0 10px 30px rgba(16,40,60,.07);
 
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--body-font-font-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: var(--ink);
     line-height: 1.62;
     max-width: 940px;
@@ -42,6 +44,7 @@
     scroll-behavior: smooth;
 }
 .tfc-faq *, .tfc-faq *::before, .tfc-faq *::after { box-sizing: border-box; }
+.tfc-faq h1, .tfc-faq h2, .tfc-faq h3, .tfc-faq h4 { font-family: var(--heading-font-font-family), sans-serif; }
 .tfc-faq p { margin: 0 0 14px; }
 .tfc-faq p:last-child { margin-bottom: 0; }
 
@@ -53,9 +56,9 @@
     padding: 56px 46px;
     color: #fff;
     background:
-        radial-gradient(115% 130% at 88% -15%, rgba(47,111,176,.55) 0%, rgba(47,111,176,0) 55%),
-        linear-gradient(135deg, #0e2236 0%, #16314e 52%, #1c4a73 100%);
-    box-shadow: 0 24px 60px rgba(14,34,54,.30);
+        radial-gradient(115% 130% at 88% -15%, rgba(60,115,185,.55) 0%, rgba(60,115,185,0) 55%),
+        linear-gradient(135deg, #1a263b 0%, #253551 52%, #2b4d7e 100%);
+    box-shadow: 0 24px 60px rgba(26,38,59,.30);
 }
 .tfc-faq-hero::after {
     content: '';
@@ -88,9 +91,9 @@
 .tfc-faq-hero h1 {
     margin: 20px 0 0;
     font-size: 2.6rem;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.08;
-    letter-spacing: -0.032em;
+    letter-spacing: 0;
 }
 .tfc-faq-hero p {
     margin: 16px 0 0;
@@ -102,8 +105,8 @@
        of the site theme's heading/text color rules --- */
 .tfc-faq .tfc-faq-hero {
     background:
-        radial-gradient(115% 130% at 88% -15%, rgba(47,111,176,.55) 0%, rgba(47,111,176,0) 55%),
-        linear-gradient(135deg, #0e2236 0%, #16314e 52%, #1c4a73 100%) !important;
+        radial-gradient(115% 130% at 88% -15%, rgba(60,115,185,.55) 0%, rgba(60,115,185,0) 55%),
+        linear-gradient(135deg, #1a263b 0%, #253551 52%, #2b4d7e 100%) !important;
     color: #ffffff !important;
 }
 .tfc-faq .tfc-faq-hero h1 { color: #ffffff !important; }
@@ -170,12 +173,12 @@
     flex: 0 0 auto;
     width: 44px; height: 44px;
     border-radius: 13px;
-    background: linear-gradient(140deg, #16314e, #1c4a73);
+    background: linear-gradient(140deg, #253551, #2b4d7e);
     color: #fff;
     font-weight: 700;
     font-size: 1.12rem;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 8px 18px rgba(22,49,78,.30);
+    box-shadow: 0 8px 18px rgba(37,53,81,.30);
 }
 .tfc-faq-qkick {
     font-size: 0.68rem;
@@ -191,7 +194,7 @@
     font-weight: 700;
     color: var(--navy);
     line-height: 1.22;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
 }
 .tfc-faq-body { font-size: 1.04rem; color: var(--ink-soft); }
 .tfc-faq-body strong { color: var(--ink); font-weight: 700; }
@@ -227,10 +230,10 @@
 .tfc-faq-stat.green::before { background: var(--green); }
 .tfc-faq-stat .num {
     font-size: 1.85rem;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--navy);
     line-height: 1;
-    letter-spacing: -0.025em;
+    letter-spacing: 0;
     font-variant-numeric: tabular-nums;
 }
 .tfc-faq-stat.amber .num { color: var(--amber-ink); }
@@ -277,7 +280,7 @@
     flex: 0 0 auto;
     width: 26px; height: 26px;
     border-radius: 8px;
-    background: linear-gradient(140deg, #16314e, #1c4a73);
+    background: linear-gradient(140deg, #253551, #2b4d7e);
     color: #fff;
     font-size: 0.85rem;
     display: flex; align-items: center; justify-content: center;
@@ -305,7 +308,7 @@
 
 /* ---------- Charts ---------- */
 .tfc-faq-chart { margin: 26px 0 8px; }
-.tfc-faq-chart-title { font-size: 1.06rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; letter-spacing: -0.01em; }
+.tfc-faq-chart-title { font-size: 1.06rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; letter-spacing: 0; }
 .tfc-faq-cbadge { display: inline-flex; align-items: center; gap: 7px; margin: 0 0 16px; padding: 7px 13px; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.01em; color: var(--amber-ink, #8a5a00); background: rgba(214,158,46,0.12); border: 1px solid rgba(214,158,46,0.32); border-radius: 999px; line-height: 1.3; }
 .tfc-faq-cbadge::before { content: ''; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
 .tfc-faq-chart-sub { font-size: 0.92rem; color: var(--muted); margin-bottom: 20px; }
@@ -316,9 +319,9 @@
 .tfc-faq-bar-row { display: grid; grid-template-columns: 132px 1fr 68px; align-items: center; gap: 14px; }
 .tfc-faq-bar-label { font-size: 0.9rem; font-weight: 600; color: var(--ink-soft); text-align: right; line-height: 1.25; }
 .tfc-faq-bar-track { height: 30px; background: #eef2f7; border-radius: 8px; overflow: hidden; }
-.tfc-faq-bar { height: 100%; width: 0; border-radius: 8px; background: linear-gradient(90deg, #1c4a73, #16314e); transition: width 1s cubic-bezier(.22,.61,.36,1); }
+.tfc-faq-bar { height: 100%; width: 0; border-radius: 8px; background: linear-gradient(90deg, #2b4d7e, #253551); transition: width 1s cubic-bezier(.22,.61,.36,1); }
 .tfc-faq-bar.lite { background: linear-gradient(90deg, #aebfd4, #c8d4e4); }
-.tfc-faq-bar-val { font-size: 0.98rem; font-weight: 800; color: var(--navy); white-space: nowrap; font-variant-numeric: tabular-nums; text-align: right; }
+.tfc-faq-bar-val { font-size: 0.98rem; font-weight: 700; color: var(--navy); white-space: nowrap; font-variant-numeric: tabular-nums; text-align: right; }
 
 /* diverging-from-zero bars (Q3) */
 .tfc-faq-dbar-row { display: grid; grid-template-columns: 152px 1fr 66px; align-items: center; gap: 14px; }
@@ -328,9 +331,9 @@
 .tfc-faq-dtrack { position: relative; height: 27px; background: #f1f5f9; border-radius: 7px; }
 .tfc-faq-zero { position: absolute; top: -5px; bottom: -5px; width: 2px; background: var(--line-strong); z-index: 2; }
 .tfc-faq-dbar { position: absolute; top: 0; height: 100%; width: 0; border-radius: 6px; transition: width 1s cubic-bezier(.22,.61,.36,1); z-index: 1; }
-.tfc-faq-dbar.cut { background: linear-gradient(90deg, #2f6fb0, #16314e); }
+.tfc-faq-dbar.cut { background: linear-gradient(90deg, #3c73b9, #253551); }
 .tfc-faq-dbar.inc { background: linear-gradient(90deg, #f7b733, #e8870b); }
-.tfc-faq-dval { font-size: 0.92rem; font-weight: 800; text-align: left; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tfc-faq-dval { font-size: 0.92rem; font-weight: 700; text-align: left; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .tfc-faq-dval.cut { color: var(--green-ink); }
 .tfc-faq-dval.inc { color: var(--amber-ink); }
 .tfc-faq-axis { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-top: 14px; padding: 0 66px 0 152px; }
@@ -365,7 +368,7 @@
     text-transform: uppercase; color: var(--amber-ink); margin-bottom: 3px;
 }
 .tfc-faq-spot .tag::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
-.tfc-faq-spot h4 { margin: 0; font-size: 1.14rem; color: var(--navy); font-weight: 700; letter-spacing: -0.01em; }
+.tfc-faq-spot h4 { margin: 0; font-size: 1.14rem; color: var(--navy); font-weight: 700; letter-spacing: 0; }
 .tfc-faq-spot .ssub { font-size: 0.94rem; color: var(--ink-soft); margin: 0; }
 .tfc-faq-spot .tfc-faq-stats { margin: 18px 0 4px; }
 .tfc-faq-spot .tfc-faq-does { margin: 14px 0 0; }
@@ -388,7 +391,7 @@
 
 /* ---------- Q4: sunset glide-path timeline ---------- */
 .tfc-faq-tl-head { margin-bottom: 20px; }
-.tfc-faq-tl-title { font-size: 1.02rem; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; margin: 0 0 3px; }
+.tfc-faq-tl-title { font-size: 1.02rem; font-weight: 700; color: var(--navy); letter-spacing: 0; margin: 0 0 3px; }
 .tfc-faq-tl-sub { font-size: 0.9rem; color: var(--muted); margin: 0; }
 .tfc-faq-timeline { position: relative; display: flex; }
 .tfc-faq-timeline::before { content: ''; position: absolute; top: 13px; left: 10%; right: 10%; height: 2px; background: var(--line-strong); }
@@ -396,10 +399,10 @@
 .tfc-faq-tl-step::after {
     content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
     width: 15px; height: 15px; border-radius: 50%; background: #fff; border: 3px solid var(--blue);
-    box-shadow: 0 0 0 4px rgba(47,111,176,.12);
+    box-shadow: 0 0 0 4px rgba(60,115,185,.12);
 }
 .tfc-faq-tl-step.ret::after, .tfc-faq-tl-step.end::after { border-color: var(--amber); box-shadow: 0 0 0 4px rgba(232,146,12,.16); }
-.tfc-faq-tl-step .yr { font-size: 1.08rem; font-weight: 800; color: var(--navy); }
+.tfc-faq-tl-step .yr { font-size: 1.08rem; font-weight: 700; color: var(--navy); }
 .tfc-faq-tl-step.ret .yr, .tfc-faq-tl-step.end .yr { color: var(--amber-ink); }
 .tfc-faq-tl-step .ev { font-size: 0.84rem; color: var(--ink-soft); margin-top: 5px; padding: 0 8px; line-height: 1.35; }
 
@@ -456,7 +459,7 @@
     font-size: 0.96rem;
     color: var(--ink-soft);
 }
-.tfc-faq-tldr .tl { flex: 0 0 auto; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); padding-top: 3px; }
+.tfc-faq-tldr .tl { flex: 0 0 auto; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); padding-top: 3px; }
 .tfc-faq-tldr strong { color: var(--navy); }
 .tfc-faq-nav {
     /* Non-sticky: a sticky bar collides with Squarespace's own fixed site header. */
@@ -481,7 +484,7 @@
     transition: background .15s ease, color .15s ease;
 }
 .tfc-faq-nav a:hover { background: var(--navy); color: #fff; }
-.tfc-faq-nav a .qn { color: var(--blue); font-weight: 800; margin-right: 6px; }
+.tfc-faq-nav a .qn { color: var(--blue); font-weight: 700; margin-right: 6px; }
 .tfc-faq-nav a:hover .qn { color: #bcd0ec; }
 .tfc-faq-section { scroll-margin-top: 96px; }
 
@@ -609,7 +612,7 @@
 }
 .header-display-desktop .header-nav-item a:hover,
 .Header-nav .Header-nav-item:hover {
-    color: #16314e !important;
+    color: #253551 !important;
 }
 
 /* ============================================================
