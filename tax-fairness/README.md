@@ -60,7 +60,14 @@ Static HTML/CSS/JS for the Hawaiʻi Tax Fairness Coalition site
 - **Squarespace paste-in**: `*_squarespace.html` files are self-contained
   fragments (no `<html>`/`<head>`/`<body>`) pasted into Squarespace's code
   injection blocks. `wealth_taxes_squarespace.html` is the live wealth-taxes
-  page.
+  page. The homepage's two code blocks (the tax-share chart and the "What
+  Taxes Pay For" cards) are `home_page_sections/treemap_section.html` and
+  `home_page_sections/taxes_pay_for_section.html`.
+- **Squarespace Custom CSS**: `squarespace/custom.css` is the site-wide
+  Custom CSS (ʻokina fallback font, navy header, button and phone-layout
+  fixes). Paste the whole file over Website Tools > Custom CSS; its header
+  comment covers the LESS-compilation gotcha. Logo originals and the social
+  share image are in `assets/brand/`.
 - **GitHub Pages**: this whole repo is also published at
   `https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/`. The
   wealth-taxes page itself isn't served from there — Squarespace is — but
