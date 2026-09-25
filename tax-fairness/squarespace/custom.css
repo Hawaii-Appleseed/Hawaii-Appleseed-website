@@ -45,9 +45,12 @@
    Older code injections (Settings > Developer Tools > Code Injection >
    Header, plus several pages' own Page Header Code Injection) force the
    header transparent and its links white or #2A3A4D with !important.
-   These selectors are more specific, so they win; those injections are
-   now inert and can be deleted. */
+   Those injections were removed 2026-09-25. They had also pinned the header
+   with position: absolute, overriding Squarespace's own fixed (sticky)
+   header setting; that one rule is kept here so the header still scrolls
+   away with the page. Delete it to get the sticky header back. */
 html body header.header {
+    position: absolute !important;
     background-color: #253551 !important;
 }
 html body header.header .header-nav-item > a,
