@@ -63,6 +63,21 @@ Static HTML/CSS/JS for the Hawaiʻi Tax Fairness Coalition site
   page. The homepage's two code blocks (the tax-share chart and the "What
   Taxes Pay For" cards) are `home_page_sections/treemap_section.html` and
   `home_page_sections/taxes_pay_for_section.html`.
+- **Other live Squarespace sources**: `tax_credits_squarespace.html` is the
+  Tax Credits page's Code Block (/tax-credits-2; it used to be in the page's
+  header code injection, which should stay empty), `faq_squarespace.html` is
+  the SB 3125 FAQ (/sb-3125), and `squarespace/contact_embed.html` /
+  `squarespace/subscribe_embed.html` are the Embed blocks on
+  /contact-your-legislator and /subscribe (they size the Quorum frame from
+  Quorum's `quorum-campaign-resize` messages).
+- **Layout overrides skip the editor**: several of these files, and
+  custom.css, re-place Fluid Engine blocks (`grid-column` / `grid-row` /
+  `grid-template-rows`) because the editor's resize handles don't respond to
+  automation. Every such rule is prefixed `body:not(.sqs-is-page-editing)`,
+  so while a page is being edited Squarespace shows its own layout (which can
+  look narrow or oddly spaced there); the preview and the public site show
+  the fixed one. If you resize a block by hand in the editor, delete the
+  matching override.
 - **Squarespace Custom CSS**: `squarespace/custom.css` is the site-wide
   Custom CSS (ʻokina fallback font, navy header, button and phone-layout
   fixes). Paste the whole file over Website Tools > Custom CSS; its header
