@@ -106,3 +106,36 @@ html body header.header .header-nav-folder-item a:hover {
         grid-column-end: 10 !important;
     }
 }
+
+/* ---- Hawaiʻi's Tax System (/hawaiis-tax-system-2) ---------------------
+   The big "1" and "2" beside the two recommendations were Heading 1s,
+   which gave the page three top-level headings (the real one plus two
+   numerals). They are plain paragraphs now; this keeps them large. */
+.fe-block-yui_3_17_2_1_1769379037529_45438 p,
+.fe-block-736d8ba8f6ca674135ab p {
+    margin: 0;
+    font-family: var(--heading-font-font-family);
+    font-size: 4.5rem;
+    line-height: 1;
+}
+@media (max-width: 767px) {
+    .fe-block-yui_3_17_2_1_1769379037529_45438 p,
+    .fe-block-736d8ba8f6ca674135ab p { font-size: 3.25rem; }
+}
+
+/* ---- Who We Are (/who-we-are) ------------------------------------------
+   - Member organisations: quieter underlines, a little air between items.
+   - The desktop grid had 29 rows but its last block ends on row 22, so ~250px
+     of empty grid sat above the footer. Same row minimum as Squarespace's
+     own rule, just fewer rows. The ~"" keeps LESS from doing arithmetic on it. */
+.fe-block-0466dd0fb6cf78b25791 li { margin-bottom: 4px; }
+.fe-block-0466dd0fb6cf78b25791 li a {
+    text-decoration-color: rgba(37, 53, 81, 0.35);
+    text-underline-offset: 3px;
+}
+.fe-block-0466dd0fb6cf78b25791 li a:hover { text-decoration-color: currentColor; }
+@media (min-width: 768px) {
+    .fe-63c229687a853b73c36e5afd {
+        grid-template-rows: ~"repeat(22, minmax(calc(var(--container-width) * var(--row-height-scaling-factor)), auto))" !important;
+    }
+}
