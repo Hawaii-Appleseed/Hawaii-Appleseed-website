@@ -43,7 +43,7 @@ positions.md §153 prescribes a testimony format written before the corpus was m
 Don't write from these rules alone. Pull 2–3 testimonies on the nearest subject and read them whole:
 
 ```bash
-grep -rl "<topic keyword>" "$W/writing-bot/testimony/" | grep -v /sample_
+grep -rli "<topic keyword>" "$W/writing-bot/testimony/" | grep -v /sample_
 ```
 
 Corpus layout: `testimony/{food-equity,housing,labor,tax-and-budget,transportation}/`.
