@@ -1,0 +1,47 @@
+name: Skills evals
+
+# Behavioural evals (evals/skills/, scripts/run_skill_evals.sh): runs Claude
+# with the skills on 4 cases × 3 runs and grades what it does. Costs real
+# usage (~$1 a run), so it is NOT a required check, runs only on release PRs
+# into skills-stable and on demand, and only when a credential is configured:
+# add ANTHROPIC_API_KEY as a repository secret to turn it on.
+
+on:
+  pull_request:
+    branches: [skills-stable]
+  workflow_dispatch:
+    inputs:
+      runs:
+        description: "Runs per case"
+        default: "3"
+
+permissions:
+  contents: read
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - name: Skip without a credential
+        if: env.ANTHROPIC_API_KEY == ''
+        run: echo "::notice::ANTHROPIC_API_KEY secret not set; skills evals skipped."
+      - uses: actions/checkout@v4
+        if: env.ANTHROPIC_API_KEY != ''
+      - uses: actions/setup-node@v4
+        if: env.ANTHROPIC_API_KEY != ''
+        with:
+          node-version: "22"
+      - name: Run evals
+        if: env.ANTHROPIC_API_KEY != ''
+        run: |
+          npm install -g --silent @anthropic-ai/claude-code
+          # 0.75: today's floor is 0.83, and a single flaky judge vote shouldn't block a release.
+          scripts/run_skill_evals.sh --runs "${{ inputs.runs || '3' }}" --threshold 0.75
+      - uses: actions/upload-artifact@v4
+        if: always() && env.ANTHROPIC_API_KEY != ''
+        with:
+          name: skills-evals
+          path: evals/results/
