@@ -40,7 +40,7 @@
     },
     {
       "name": "KITV4",
-      "url": "https://www.kitv.com/search/?f=rss"
+      "url": "https://www.kitv.com/search/?f=rss&t=article&l=50&s=start_time&sd=desc"
     },
     {
       "name": "The Garden Island",
