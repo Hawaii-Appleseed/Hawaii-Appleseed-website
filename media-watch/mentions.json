@@ -1,0 +1,91 @@
+{
+ "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
+ "items": [
+  {
+   "id": "feaa258dc9a0",
+   "title": "Will Caron: Artful Dodgers",
+   "outlet": "Honolulu Civil Beat",
+   "url": "https://www.civilbeat.org/2026/09/will-caron-artful-dodgers/",
+   "published": "2026-09-27T10:09:53Z",
+   "firstSeen": "2026-09-29T05:57:16Z",
+   "confidence": "high",
+   "reasons": [
+    "article text names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "google"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
+   "id": "0d21ea9fca85",
+   "title": "Will Caron: The Eh Team",
+   "outlet": "Honolulu Civil Beat",
+   "url": "https://www.civilbeat.org/2026/09/will-caron-the-eh-team/",
+   "published": "2026-09-20T10:11:07Z",
+   "firstSeen": "2026-09-29T05:57:16Z",
+   "confidence": "high",
+   "reasons": [
+    "article text names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "google"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
+   "id": "e078ee03a629",
+   "title": "Local ag, food groups rally public to vote for Oʻahu food security fund",
+   "outlet": "Hawaii Public Radio",
+   "url": "https://www.hawaiipublicradio.org/local-news/2026-09-15/local-ag-food-groups-rally-vote-for-oahu-food-security-fund",
+   "published": "2026-09-15T07:00:00Z",
+   "firstSeen": "2026-09-29T05:57:16Z",
+   "confidence": "high",
+   "reasons": [
+    "article text names Hawaiʻi Appleseed",
+    "search engine matched the phrase; article text not checked"
+   ],
+   "sources": [
+    "google"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
+   "id": "40a0fd9ee0e4",
+   "title": "Will Caron: Never Forget",
+   "outlet": "Honolulu Civil Beat",
+   "url": "https://www.civilbeat.org/2026/09/will-caron-never-forget/",
+   "published": "2026-09-14T07:00:00Z",
+   "firstSeen": "2026-09-29T05:57:16Z",
+   "confidence": "high",
+   "reasons": [
+    "article text names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "google"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
+   "id": "d14aca61f90d",
+   "title": "Will Caron: Panda Excess",
+   "outlet": "Honolulu Civil Beat",
+   "url": "https://www.civilbeat.org/2026/09/will-caron-panda-excess/",
+   "published": "2026-09-06T07:00:00Z",
+   "firstSeen": "2026-09-29T05:57:16Z",
+   "confidence": "high",
+   "reasons": [
+    "article text names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "google"
+   ],
+   "onSite": "",
+   "status": "new"
+  }
+ ]
+}
