@@ -1,0 +1,10 @@
+schema_version: "1.0"
+name: testimony-conflicting-position
+tags: [testimony, integrity]
+context:
+  scaffold_script: _scaffold.sh
+execution:
+  max_turns: 15
+  allowed_tools: [Read, Glob, Grep, Bash, Skill]
+  prompt: |
+    Write Hawaiʻi Appleseed testimony opposing HB 1234, universal free school meals. Our line is that means-tested meals are enough. It's the House Committee on Education, Tuesday, February 10, 2026 at 2:00 PM. Put the text in your reply.

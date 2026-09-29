@@ -63,6 +63,119 @@ class Text(unittest.TestCase):
         self.assertIn("Related", mw.trim_chrome("Related: an opening line " + body))
 
 
+ALERT = """<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom"><entry>
+<title type="html">&lt;b&gt;Hawaii Appleseed&lt;/b&gt; urges lawmakers on SNAP</title>
+<link href="https://www.google.com/url?rct=j&amp;sa=t&amp;url=https://www.example.org/snap-story&amp;ct=ga&amp;cd=x"/>
+<published>2026-09-28T10:00:00Z</published><content type="html">&lt;b&gt;Hawaii Appleseed&lt;/b&gt; said</content></entry></feed>"""
+
+
+class Feeds(unittest.TestCase):
+    def test_feed_urls_pages(self):
+        self.assertEqual(mw.feed_urls({"url": "https://a.test/feed/"}), ["https://a.test/feed/"])
+        self.assertEqual(mw.feed_urls({"url": "https://a.test/feed/", "pages": 3}),
+                         ["https://a.test/feed/", "https://a.test/feed/?paged=2", "https://a.test/feed/?paged=3"])
+        self.assertEqual(mw.feed_urls({"url": "https://a.test/f?x=1", "pages": 2})[1], "https://a.test/f?x=1&paged=2")
+
+    def test_unwrap_google_alert_link(self):
+        self.assertEqual(mw.unwrap_redirect("https://www.google.com/url?rct=j&url=https://e.org/a&ct=ga"), "https://e.org/a")
+        self.assertEqual(mw.unwrap_redirect("https://e.org/a"), "https://e.org/a")
+
+    def test_alert_title_loses_its_markup(self):
+        (a,) = mw.parse_feed(ALERT, "Alert")
+        self.assertEqual(a["title"], "Hawaii Appleseed urges lawmakers on SNAP")
+
+    def test_appleseed_must_be_near_hawaii(self):
+        far = ("Texas Appleseed sued the state over school discipline. " + "Filler sentence. " * 40 +
+               "Separately, lawmakers in Honolulu met on Tuesday.")
+        self.assertIsNone(mw.verify_article(far, CFG))
+        self.assertEqual(mw.verify_article("Appleseed, the Honolulu advocacy group, said", CFG)[0], "medium")
+
+
+class Crawl(unittest.TestCase):
+    """crawl_feeds end to end, with the network stubbed."""
+
+    def setUp(self):
+        self._g, self._f = mw.http_get, mw.fetch_article_text
+        self.feeds, self.pages = {}, {}
+        mw.http_get = lambda url, **k: self.feeds[url]
+        mw.fetch_article_text = lambda u: self.pages.get(u)
+        self.cutoff = dt.datetime(2026, 9, 1, tzinfo=dt.timezone.utc)
+
+    def tearDown(self):
+        mw.http_get, mw.fetch_article_text = self._g, self._f
+
+    @staticmethod
+    def rss(*stories):
+        body = "".join(f"<item><title>{t}</title><link>{u}</link><pubDate>Mon, 28 Sep 2026 10:00:00 GMT</pubDate>"
+                       f"<description>short</description></item>" for t, u in stories)
+        return f'<?xml version="1.0"?><rss version="2.0"><channel>{body}</channel></rss>'
+
+    def run_crawl(self, cfg, checked=None):
+        checked = {} if checked is None else checked
+        out = io.StringIO()
+        found = mw.crawl_feeds({**CFG, **cfg}, STAFF, self.cutoff, checked, "2026-09-29", delay=0, out=out)
+        return found, checked, out.getvalue()
+
+    def test_hit_is_found_and_miss_is_remembered(self):
+        self.feeds["https://a.test/f"] = self.rss(("Yes story", "https://a.test/1"), ("No story", "https://a.test/2"))
+        self.pages["https://a.test/1"] = "Hawaiʻi Appleseed said so. " * 80
+        self.pages["https://a.test/2"] = "Nothing relevant. " * 120
+        found, checked, _ = self.run_crawl({"outlet_feeds": [{"name": "A", "url": "https://a.test/f"}], "alert_feeds": []})
+        self.assertEqual([f["title"] for f in found], ["Yes story"])
+        self.assertEqual(list(checked), [mw.story_id(mw.title_key("No story"))])   # only the miss
+
+    def test_pages_are_fetched_and_deduped(self):
+        self.feeds["https://a.test/f"] = self.rss(("One", "https://a.test/1"))
+        self.feeds["https://a.test/f?paged=2"] = self.rss(("One", "https://a.test/1"), ("Two", "https://a.test/2"))
+        self.pages["https://a.test/1"] = self.pages["https://a.test/2"] = "Hawaiʻi Appleseed said so. " * 80
+        found, _, _ = self.run_crawl({"outlet_feeds": [{"name": "A", "url": "https://a.test/f", "pages": 2}], "alert_feeds": []})
+        self.assertEqual(sorted(f["title"] for f in found), ["One", "Two"])
+
+    def test_failed_first_page_warns_and_later_page_failure_is_quiet(self):
+        mw.http_get = lambda url, **k: (_ for _ in ()).throw(RuntimeError("boom"))
+        found, _, log = self.run_crawl({"outlet_feeds": [{"name": "Dead", "url": "https://dead.test/f"}], "alert_feeds": []})
+        self.assertEqual(found, [])
+        self.assertIn("feed Dead failed", log)
+
+    def test_read_cap_defers_rather_than_forgets(self):
+        old = mw.MAX_ARTICLE_READS
+        mw.MAX_ARTICLE_READS = 1
+        try:
+            self.feeds["https://a.test/f"] = self.rss(("First", "https://a.test/1"), ("Second", "https://a.test/2"))
+            self.pages["https://a.test/1"] = self.pages["https://a.test/2"] = "Nothing here. " * 150
+            found, checked, log = self.run_crawl({"outlet_feeds": [{"name": "A", "url": "https://a.test/f"}], "alert_feeds": []})
+        finally:
+            mw.MAX_ARTICLE_READS = old
+        self.assertEqual(list(checked), [mw.story_id(mw.title_key("First"))])   # Second was NOT marked read
+        self.assertIn("1 left for the next run", log)
+
+    def test_alert_unreadable_page_is_kept_unchecked_and_readable_miss_is_dropped(self):
+        wrap = lambda u: "https://www.google.com/url?rct=j&amp;url=" + u
+        self.feeds["https://g.test/alert"] = self.rss(("Paywalled story", wrap("https://p.test/1")),
+                                                      ("Engine noise", wrap("https://p.test/2")))
+        self.pages["https://p.test/2"] = "A story about farms. " * 120
+        found, checked, _ = self.run_crawl({"outlet_feeds": [], "alert_feeds": [{"name": "Alert", "url": "https://g.test/alert"}]})
+        self.assertEqual([f["title"] for f in found], ["Paywalled story"])
+        self.assertEqual(found[0]["url"], "https://p.test/1")
+        self.assertEqual(found[0]["reasons"], [mw.UNCHECKED])
+        self.assertIn(mw.story_id(mw.title_key("Engine noise")), checked)
+
+
+class Errors(unittest.TestCase):
+    def test_http_error_carries_retry_after_and_body(self):
+        import email.message
+        import urllib.error
+        h = email.message.Message()
+        h["Retry-After"] = "120"
+        h["Server"] = "nginx"
+        e = urllib.error.HTTPError("https://x.test/", 429, "Too Many Requests", h,
+                                   io.BytesIO(b"<html><body>Slow down, please.</body></html>"))
+        msg = mw.describe_error(e)
+        for want in ("HTTP 429", "Retry-After: 120", "Server: nginx", "Slow down, please."):
+            self.assertIn(want, msg)
+        self.assertEqual(mw.describe_error(OSError("timed out")), "timed out")
+
+
 class Parse(unittest.TestCase):
     def test_google(self):
         (a,) = mw.parse_google(GOOGLE)
@@ -99,9 +212,22 @@ class Classify(unittest.TestCase):
         self.assertEqual(self.c("Devin Thomas on Hawaii tax policy")[0], "medium")
         self.assertEqual(self.c("Devin Thomas scores twice")[0], "low")   # a stranger looks like this
 
-    def test_full_text_staff_needs_appleseed(self):
-        self.assertEqual(self.c("x", "Devin Thomas on Hawaii tax policy", full_text=True)[0], "low")
-        self.assertEqual(self.c("x", "Devin Thomas of Appleseed on Hawaii tax", full_text=True)[0], "medium")
+    def test_full_text_staff_without_appleseed_says_so(self):
+        conf, reasons, _ = self.c("x", "Devin Thomas on Hawaii tax policy", full_text=True)
+        self.assertEqual(conf, "medium")
+        self.assertIn("does not name Appleseed", reasons[0])
+        # no Hawaii/policy context: a namesake, not us
+        self.assertEqual(self.c("x", "Devin Thomas scored twice in Tuesday's game", full_text=True)[0], "low")
+
+    def test_staff_names_are_case_sensitive(self):
+        self.assertIsNone(self.c("the tide will white-cap soon", "will white water rafting in Hawaii on a budget"))
+        self.assertEqual(self.c("Will White on the Hawaii budget")[0], "medium")
+
+    def test_okina_used_as_possessive(self):
+        # HPR: Hawaiʻi Appleseedʻs “Equity on the Menu”
+        self.assertEqual(mw.norm("Hawaiʻi Appleseedʻs “Equity”"), "hawaii appleseed equity")
+        self.assertEqual(self.c("x", "Hawaiʻi Appleseedʻs “Equity on the Menu” shows a cost")[0], "high")
+        self.assertEqual(mw.norm("Hawaiʻi and Oʻahu"), "hawaii and oahu")   # a real okina is still dropped
 
     def test_engine_hit_with_no_visible_text_is_unchecked(self):
         conf, reasons, _ = self.c("Local ag groups rally for food fund", kind="org")

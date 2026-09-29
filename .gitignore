@@ -11,3 +11,6 @@ writing-bot/.venv/
 
 # media-watch: outlet stories already read (kept in the Actions cache, not the repo)
 media-watch/.cache/
+
+# skill eval run output (scripts/run_skill_evals.sh)
+evals/results/
