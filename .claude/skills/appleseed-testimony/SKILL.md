@@ -148,7 +148,7 @@ Hedge **magnitudes** ("approximately 87 percent"), never the judgment.
 
 27 numerals per 1,000 words · 1.3 dollar figures per testimony · a bill reference in 84 percent of docs. Every statistic footnoted.
 
-**Sourcing order:** (1) `reference/citations.md` — a source HA has already stood behind; (2) a citation carried by a retrieved corpus document; (3) a source the user supplies. If none of those covers the figure, write `CITATION NEEDED` and say so in the handoff. positions.md carries many figures *without* their sources — reusing a number from it does not give you a citation. Never attach the nearest-looking source: a citation that does not support the number is worse than a visible gap. Testimony is measurably more numeric than the blog voice — but the numbers arrive *after* a claim, never as the opening.
+**Sourcing order:** (1) `reference/citations.md` — a source HA has already stood behind; (2) a citation carried by a retrieved corpus document; (3) a source the user supplies. If none of those covers the figure, write `CITATION NEEDED` and say so in the handoff. **Never cite from memory.** A report you know of, but did not find in one of those three places, gets `CITATION NEEDED` however sure you are that it exists and says what you need. The title, year and URL you remember are exactly what goes wrong, and a plausible fake footnote in testimony on the record is worse than a visible gap. positions.md carries many figures *without* their sources — reusing a number from it does not give you a citation. Never attach the nearest-looking source: a citation that does not support the number is worse than a visible gap. Testimony is measurably more numeric than the blog voice — but the numbers arrive *after* a claim, never as the opening.
 
 ## Anti-patterns — verified zeros across the corpus
 
@@ -161,6 +161,8 @@ Hedge **magnitudes** ("approximately 87 percent"), never the judgment.
 7. A statistic as the opening sentence; the ask anywhere before the final two paragraphs; paragraphs of 5+ sentences.
 
 ## Before delivering
+
+**Check every footnote's provenance.** For each `[n]`, grep a distinctive phrase of its title in `${CLAUDE_SKILL_DIR}/reference/citations.md`, and if it isn't there, in the corpus you retrieved (`$W/writing-bot/`). If it is in neither and the user didn't give it to you, replace it with `CITATION NEEDED` and list it in the handoff. Say in the handoff which footnotes came from where.
 
 **Scope every orthography check to the prose body.** Two zones are exempt and must not be "corrected":
 
