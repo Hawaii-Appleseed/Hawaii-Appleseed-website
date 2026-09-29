@@ -38,7 +38,7 @@ HARD CONSTRAINTS on inputs (these are the real widget limits — violating them 
 CORPUS ORIENTATION (filenames are descriptive slugs — use them to judge whether a result is on-topic):
 - publications/ are dated PDFs e.g. 2026-01-28_fair-tax-code-thriving-hawaii.txt, 2024-09-09_empty-homes-tax-honolulu.txt
 - blog-posts/<year>/<title-slug>.txt e.g. millionaires-taxes-are-having-a-moment-..., when-disaster-strikes-who-feeds-us
-- testimony/<topic>/ e.g. testimony/labor/HB2360_2026_Paid_Family_Medical_Leave.txt, testimony/housing/sample_HB2049_2026.txt
+- testimony/<topic>/ e.g. testimony/labor/HB2360_2026_Paid_Family_Medical_Leave.txt, testimony/tax-and-budget/HB2006_Testimony.txt
 - Topics map: labor & wages, tax fairness & budget, housing & renters, food equity, transportation.
 
 JUDGMENT: a result is "good" if the top sources are plausibly on-topic for the query (judge by the slug).
