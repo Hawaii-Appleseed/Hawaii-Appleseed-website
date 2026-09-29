@@ -31,6 +31,7 @@ on:
       - "Build Content Search bundle"
       - "Live site drift check"
       - "Skills check"      # scheduled/push runs only; a PR shows its own red X
+      - "Media watch"
     types: [completed]
 
 permissions:

@@ -143,6 +143,9 @@ jobs:
           check "site-drift.yml"          1800
           # weekly, Sundays 15:00 UTC
           check "refresh-corpus.yml"      11520
+          # four times a day (04:17 10:17 16:17 22:17 UTC). Like site-drift, this
+          # reports stale until its first run ever — dispatch it once by hand.
+          check "media-watch.yml"         1200
 
           existing=$(gh issue list --repo "$REPO" --label canary-alert --state open --json number -q '.[0].number // empty')
 
