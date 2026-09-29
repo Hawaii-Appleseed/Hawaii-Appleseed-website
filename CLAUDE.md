@@ -58,6 +58,14 @@ Skills must work from any directory on anyone's machine:
 `python scripts/check_skills.py --smoke` checks all of that and runs the bundled
 scripts from outside the repo; the **Skills check** workflow runs it on every PR.
 
+**Reference files follow the corpus on their own.** After each corpus refresh,
+the *Refresh skill reference files* workflow rebuilds `citations.md` (generated,
+committed to `main`) and opens one issue when `testimony-profile.md` or
+`style-profile.md` has drifted 10% from the corpus size it measured. Those two
+are hand-written around measured numbers, so a person re-measures them; don't
+overwrite them with script output. `python scripts/refresh_skill_reference.py`
+runs the same check locally.
+
 **Shipping a skill change:** merge to `main` as usual, then open a PR from `main`
 into `skills-stable` and merge it with a merge commit once Skills check passes.
 That branch is protected — no direct pushes, the check can't be skipped — so a

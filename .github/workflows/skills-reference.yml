@@ -1,0 +1,90 @@
+name: Refresh skill reference files
+
+# The skills cite corpus-derived reference files; see
+# scripts/refresh_skill_reference.py. After the corpus changes:
+#   - citations.md (generated) is rebuilt and committed to main
+#   - testimony-profile.md / style-profile.md (hand-written around measured
+#     numbers) get one open issue when the corpus has drifted >=10% from the
+#     size they measured, so a person re-measures them
+# Nothing here reaches staff directly: the next main -> skills-stable release
+# PR ships it, after Skills check.
+
+on:
+  workflow_run:
+    workflows: ["Refresh writing-bot corpus"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - "writing-bot/testimony/**"
+      - "writing-bot/blog-posts/**"
+      - "scripts/refresh_skill_reference.py"
+      - ".claude/skills/appleseed-testimony/reference/build_citations.py"
+  workflow_dispatch:
+
+concurrency:
+  group: skills-reference
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  refresh:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main # workflow_run would otherwise check out the triggering sha
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Rebuild and measure
+        id: r
+        run: |
+          python scripts/refresh_skill_reference.py
+          python scripts/refresh_skill_reference.py --json > "$RUNNER_TEMP/report.json"
+
+      - name: Commit citations.md
+        run: |
+          f=.claude/skills/appleseed-testimony/reference/citations.md
+          if git diff --quiet -- "$f"; then echo "citations.md current"; exit 0; fi
+          python scripts/check_skills.py   # never commit a reference file that breaks the lint
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$f"
+          git commit -m "skills: rebuild citations.md from the testimony corpus"
+          git pull --rebase -q origin main
+          git push origin HEAD:main
+
+      - name: Flag stale profiles
+        run: |
+          title="Skills: re-measure the corpus style profiles"
+          body=$(python - "$RUNNER_TEMP/report.json" <<'PY'
+          import json, sys
+          r = json.load(open(sys.argv[1]))
+          stale = [p for p in r["profiles"] if p["stale"]]
+          if not stale:
+              sys.exit(0)
+          print("The writing-bot corpus has drifted at least 10% from the size these skill profiles measured. "
+                "Their numbers (sentence length, openings, share of docs with subheads, ...) are what the "
+                "skills calibrate against, so re-measure and update the prose, including the stated corpus size.\n")
+          for p in stale:
+              print(f"- `{p['file']}`: measured {p['measured']} docs, corpus now {p['now']} ({p['change']:+.0%})")
+          print("\nTestimony numbers: `python .claude/skills/appleseed-testimony/reference/profile_testimony.py`. "
+                "Ship the update through a main -> skills-stable PR. This issue closes itself once the stated "
+                "sizes are back within 10%.")
+          PY
+          )
+          open=$(gh issue list --state open --search "\"$title\" in:title" --json number -q '.[0].number')
+          if [ -z "$body" ]; then
+            [ -n "$open" ] && gh issue close "$open" -c "Profiles are back within 10% of the corpus."
+            exit 0
+          fi
+          if [ -n "$open" ]; then gh issue edit "$open" --body "$body"; else gh issue create --title "$title" --body "$body"; fi
