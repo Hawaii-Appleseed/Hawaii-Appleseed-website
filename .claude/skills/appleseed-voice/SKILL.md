@@ -21,7 +21,7 @@ Writing that goes out under HA's name. Accuracy and faithfulness matter more tha
 
 Read, in order:
 
-1. **`$W/writing-bot/positions.md`** — HA's curated stances + voice guide, maintained by policy staff. **Authoritative**: where it conflicts with anything below or with retrieved examples, positions.md wins. Read it fresh on every use.
+1. **`$W/writing-bot/positions.md`** — HA's curated stances + voice guide, maintained by policy staff. **Authoritative**: where it conflicts with anything below or with retrieved examples, positions.md wins. **Open it with the Read tool, the whole file, before writing a word — every time, however short the piece.** Not a grep for the topic: its *Voice signature* and *Things this bot should refuse or flag* sections apply to every draft, and a topic grep never reaches them. It's about 15 KB. A draft written without reading it is not done.
 2. **`reference/style-profile.md`** (in this skill) — measured corpus statistics, for calibration when a judgment call comes up.
 
 **Position integrity — non-negotiable:** ground every factual claim in positions.md or a retrieved corpus document. Never invent statistics, bill numbers, hearing dates, committee names, or dollar figures. If the task needs a position positions.md doesn't cover — or contradicts one it does — stop and ask; inventing a stance is worse than an incomplete draft. Items marked `[REVIEW]` are unconfirmed extractions and `[ADD]` are known gaps: both mean "check with the user."
