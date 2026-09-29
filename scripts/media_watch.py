@@ -226,9 +226,27 @@ def http_get(url, timeout=25, retries=2):
             with urllib.request.urlopen(req, timeout=timeout) as r:
                 return r.read().decode("utf-8", "replace")
         except (urllib.error.URLError, TimeoutError, OSError) as e:
-            last = e
+            last = describe_error(e)
             time.sleep(2 * (attempt + 1))
     raise RuntimeError(f"{url[:90]}… : {last}")
+
+
+def describe_error(e):
+    """An HTTP failure with what the server said about it. A bare "429" cannot
+    tell a throttle from a block; Retry-After and the first words of the body
+    usually can (a bot wall names itself, a rate limit says when to return)."""
+    if not isinstance(e, urllib.error.HTTPError):
+        return str(e)
+    try:
+        raw = e.read(4000).decode("utf-8", "replace")
+        raw = re.sub(r"(?is)<(head|script|style)[^>]*>.*?(</\1>|$)", " ", raw)   # error pages are mostly <head>
+        body = re.sub(r"\s+", " ", strip_tags(raw))[:120]
+    except (OSError, ValueError):
+        body = ""
+    extra = [f"Retry-After: {e.headers['Retry-After']}"] if e.headers.get("Retry-After") else []
+    if e.headers.get("Server"):
+        extra.append(f"Server: {e.headers['Server']}")
+    return f"HTTP {e.code} {e.reason}" + (f" [{', '.join(extra)}]" if extra else "") + (f" body: {body!r}" if body else "")
 
 
 def google_url(query, days):

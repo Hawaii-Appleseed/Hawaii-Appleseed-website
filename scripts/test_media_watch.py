@@ -63,6 +63,21 @@ class Text(unittest.TestCase):
         self.assertIn("Related", mw.trim_chrome("Related: an opening line " + body))
 
 
+class Errors(unittest.TestCase):
+    def test_http_error_carries_retry_after_and_body(self):
+        import email.message
+        import urllib.error
+        h = email.message.Message()
+        h["Retry-After"] = "120"
+        h["Server"] = "nginx"
+        e = urllib.error.HTTPError("https://x.test/", 429, "Too Many Requests", h,
+                                   io.BytesIO(b"<html><body>Slow down, please.</body></html>"))
+        msg = mw.describe_error(e)
+        for want in ("HTTP 429", "Retry-After: 120", "Server: nginx", "Slow down, please."):
+            self.assertIn(want, msg)
+        self.assertEqual(mw.describe_error(OSError("timed out")), "timed out")
+
+
 class Parse(unittest.TestCase):
     def test_google(self):
         (a,) = mw.parse_google(GOOGLE)
