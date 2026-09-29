@@ -66,6 +66,12 @@ are hand-written around measured numbers, so a person re-measures them; don't
 overwrite them with script output. `python scripts/refresh_skill_reference.py`
 runs the same check locally.
 
+**Behaviour, not just plumbing:** `scripts/run_skill_evals.sh` runs Claude with
+the skills on the cases in `evals/skills/` (placeholders for unknown hearing
+details, refusing to argue against positions.md, ʻokina, subject-named report
+sections) and grades the result. It costs real usage, so run it before a release
+that changes skill wording; see `evals/skills/README.md`.
+
 **Shipping a skill change:** merge to `main` as usual, then open a PR from `main`
 into `skills-stable` and merge it with a merge commit once Skills check passes.
 That branch is protected — no direct pushes, the check can't be skipped — so a
