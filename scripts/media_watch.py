@@ -99,6 +99,19 @@ def has_phrase(text, phrase):
     return bool(p) and re.search(r"(?<![a-z0-9])" + re.escape(p) + r"(?![a-z0-9])", text) is not None
 
 
+def near(text, anchor, terms, window=150):
+    """True if any of `terms` sits within `window` characters of `anchor`, on
+    already-normalised text. A national article that names Texas Appleseed in
+    one paragraph and Hawaii in another is not about us; one that puts them in
+    the same sentence is."""
+    a = norm(anchor)
+    for m in re.finditer(r"(?<![a-z0-9])" + re.escape(a) + r"(?![a-z0-9])", text):
+        seg = text[max(0, m.start() - window): m.end() + window]
+        if any(has_phrase(seg, w) for w in terms):
+            return True
+    return False
+
+
 def has_name(raw, name):
     """A person's full name as a capitalised proper name. Case matters here:
     "will white" is ordinary English, "Will White" is a person. Accents and
@@ -328,7 +341,7 @@ def parse_feed(xml_text, outlet):
         for c in e:
             tag = c.tag.split("}")[-1].lower()
             if tag == "title":
-                title = (c.text or "").strip()
+                title = strip_tags(c.text or "")
             elif tag == "link":
                 link = link or (c.get("href") or (c.text or "")).strip()
             elif tag in ("pubdate", "published", "updated", "date"):
@@ -355,7 +368,51 @@ def parse_any_date(s):
     return d if d.tzinfo else d.replace(tzinfo=dt.timezone.utc)
 
 
-MAX_ARTICLE_READS = 400  # first run reads a few hundred; later runs read only what is new
+MAX_ARTICLE_READS = 600  # a first run after adding feeds reads several hundred; later runs read only what is new
+
+
+def feed_urls(feed):
+    """The pages to fetch for one feed. A WordPress feed holds only its newest
+    10 or so stories, which for a busy outlet is a few hours; `pages: 3`
+    reaches back three times as far via ?paged=N."""
+    url = feed["url"]
+    sep = "&" if "?" in url else "?"
+    return [url] + [f"{url}{sep}paged={n}" for n in range(2, int(feed.get("pages", 1)) + 1)]
+
+
+def unwrap_redirect(url):
+    """Google Alerts links go through google.com/url?...&url=<article>."""
+    u = urllib.parse.urlsplit(url)
+    if host_of(url) == "google.com" and u.path == "/url":
+        q = urllib.parse.parse_qs(u.query)
+        for key in ("url", "q"):
+            if q.get(key):
+                return q[key][0]
+    return url
+
+
+def fetch_feed(feed, alert, delay, out):
+    """All items from one feed, or None if its first page failed."""
+    items = []
+    for n, url in enumerate(feed_urls(feed), 1):
+        try:
+            got = parse_feed(http_get(url, timeout=20, retries=1), feed["name"])
+        except (RuntimeError, ET.ParseError) as e:
+            if n == 1:
+                print(f"::warning::feed {feed['name']} failed: {e}", file=out)
+                return None
+            break   # a later page that will not load just ends the paging
+        finally:
+            time.sleep(delay)
+        items += got
+        if not got:
+            break
+    if alert:
+        for it in items:
+            it["url"] = unwrap_redirect(it["url"])
+            it["outlet"] = host_of(it["url"])          # an alert names no outlet
+            it["outlet_url"] = "https://" + it["outlet"]
+    return items
 
 
 def crawl_feeds(cfg, staff, cutoff, checked, today, delay=0.3, out=sys.stdout):
@@ -366,45 +423,58 @@ def crawl_feeds(cfg, staff, cutoff, checked, today, delay=0.3, out=sys.stdout):
     Hawaiʻi Appleseed"), which the news search engines never index. Each story
     is read once: `checked` remembers it (id -> date). A story whose page will
     not load is remembered too, and counted per outlet in the run report, so a
-    paywalled outlet shows up as blind rather than as quiet."""
-    found, reads = [], 0
-    blind, seen_total = {}, 0
-    for feed in cfg.get("outlet_feeds", []):
+    paywalled outlet shows up as blind rather than as quiet.
+
+    Two kinds of feed, same reading. `outlet_feeds` are an outlet's newest
+    stories. `alert_feeds` are Google Alerts RSS feeds: Google has already
+    matched the phrase somewhere in the page (any site on the web), so a hit
+    whose page will not load is kept as an unchecked match rather than
+    dropped, exactly as for a search-engine hit."""
+    found, reads, deferred = [], 0, 0
+    blind, seen_total, seen_ids = {}, 0, set()
+    feeds = [(f, False) for f in cfg.get("outlet_feeds", [])] + [(f, True) for f in cfg.get("alert_feeds", [])]
+    for feed, alert in feeds:
         name = feed["name"]
-        try:
-            items = parse_feed(http_get(feed["url"], timeout=20, retries=1), name)
-        except (RuntimeError, ET.ParseError) as e:
-            print(f"::warning::feed {name} failed: {e}", file=out)
+        items = fetch_feed(feed, alert, delay, out)
+        if items is None:
             continue
-        finally:
-            time.sleep(delay)
         for it in items:
             d = parse_any_date(it["published"])
             if d is not None and d < cutoff:
                 continue
             iid = story_id(title_key(it["title"]))
-            if iid in checked or is_own(it, cfg):
+            if iid in checked or iid in seen_ids or is_own(it, cfg):
                 continue
+            seen_ids.add(iid)
             seen_total += 1
-            text = it["snippet"]
-            if len(text) < 1500 and reads < MAX_ARTICLE_READS:   # an excerpt, not the story
+            text, unread = it["snippet"], False
+            if len(text) < 1500:                       # an excerpt, not the story
+                if reads >= MAX_ARTICLE_READS:
+                    deferred += 1                      # not read, so not remembered: next run reads it
+                    continue
                 reads += 1
                 page = fetch_article_text(it["url"])
                 time.sleep(delay)
                 if page is None:
                     blind[name] = blind.get(name, 0) + 1
+                    unread = True
                 else:
                     text = page
-            verdict = classify({"title": it["title"], "snippet": text}, cfg, staff, full_text=len(text) >= 1500)
+            verdict = classify({"title": it["title"], "snippet": text}, cfg, staff,
+                               kind="org" if alert and unread else "", full_text=len(text) >= 1500)
             if verdict is None or verdict[0] == "low":
                 checked[iid] = today   # a miss is remembered; a hit is remembered by mentions.json
                 continue
             it["confidence"], it["reasons"], it["matched"] = verdict
-            it["query"] = f"feed: {name}"
+            it["query"] = f"{'alert' if alert else 'feed'}: {name}"
             it["published_iso"] = d.strftime("%Y-%m-%dT%H:%M:%SZ") if d else ""
             found.append(it)
-    note = f" · could not read: {', '.join(f'{k} ×{v}' for k, v in blind.items())}" if blind else ""
-    print(f"feeds: {seen_total} new stories read{note}", file=out)
+    notes = []
+    if blind:
+        notes.append("could not read: " + ", ".join(f"{k} ×{v}" for k, v in blind.items()))
+    if deferred:
+        notes.append(f"{deferred} left for the next run (read cap)")
+    print(f"feeds: {seen_total} new stories" + "".join(" · " + n for n in notes), file=out)
     return found
 
 
@@ -487,7 +557,7 @@ def classify(item, cfg, staff, kind="", full_text=False):
 
     if org:
         bump("high", "names Hawaiʻi Appleseed")
-    elif appleseed and hawaii:
+    elif appleseed and near(text, "appleseed", cfg.get("hawaii_context", [])):
         bump("medium", "“Appleseed” with Hawaiʻi context")
     raw = (item["title"] + " " + item.get("snippet", ""))
     for name in staff:
@@ -525,7 +595,7 @@ def verify_article(text, cfg):
     t = norm(text)
     if has_phrase(t, "hawaii appleseed") or has_phrase(t, "appleseed center for law and economic justice"):
         return "high", "article text names Hawaiʻi Appleseed"
-    if has_phrase(t, "appleseed") and any(has_phrase(t, w) for w in cfg.get("hawaii_context", [])):
+    if near(t, "appleseed", cfg.get("hawaii_context", [])):
         return "medium", "article text mentions Appleseed, with Hawaiʻi context"
     return None
 

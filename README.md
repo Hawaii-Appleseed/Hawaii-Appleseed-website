@@ -383,16 +383,29 @@ holds coverage somebody already noticed. `scripts/media_watch.py` looks for the 
 stories that mention Hawaiʻi Appleseed, its work (`work_terms` in the config), or a
 staff member, that are not on that page yet.
 
-It looks in two places, because each has a blind spot the other covers:
+It looks in three places, because each has a blind spot the others cover:
 
 - **News search** (Google News and Bing News RSS) for the org name, the coalition,
   and each staff name. Fast, but the engines index headline and lede, not the story,
   so they miss "said Devin Thomas of Hawaiʻi Appleseed" in paragraph nine, and they
   do not index some outlets at all (the Star-Advertiser's op-eds, Maui Now).
-- **The outlets' own feeds** (`outlet_feeds` in the config): every new story is
-  fetched and read in full, once. This is what finds a body-only mention. The run
-  report names any outlet whose pages would not load (KHON2 blocks it), so a blind
-  outlet shows up as blind rather than as quiet.
+- **The outlets' own feeds** (`outlet_feeds` in the config, 24 of them: the daily
+  papers and TV stations, HPR including *The Conversation*, Aloha State Daily, Kauaʻi
+  Now, Ka Wai Ola, Honolulu Magazine, Streetsblog, Stateline and others): every new
+  story is fetched and read in full, once. This is what finds a body-only mention.
+  The run report names any outlet whose pages would not load (KHON2 blocks it), so a
+  blind outlet shows up as blind rather than as quiet. The list was chosen from where
+  In the News's own 126 stories of the last two years came from.
+- **Google Alerts** (`alert_feeds`, empty until someone adds one): the only source that
+  searches the whole web, so it finds outlets nobody listed. To add one, go to
+  google.com/alerts, create an alert for "Hawaii Appleseed" (or a staff name), set
+  *Deliver to* to *RSS feed*, and paste the feed link into `alert_feeds`. Google has
+  matched the phrase somewhere in the page; this script reads the page to confirm,
+  and keeps the story as an unchecked match if the page will not load.
+
+Measured against those 126 stories, the reader recognises 119 of the 125 whose pages
+it can read; the misses are two KITV TV segments that name no one in text. Video and
+audio are the gap text cannot close.
 
 Staff names are read from `our-team.html` on every run, so the watch follows the team
 page. **Confidence** is what keeps it honest: `high` names the org; `medium` is
@@ -415,8 +428,16 @@ Things that will bite you:
 - **The "already read" list is in the Actions cache, not the repo**
   (`media-watch/.cache/`, gitignored). Losing it costs one re-read of the last three
   days' stories, not duplicate alerts — `mentions.json` is what prevents those.
-- **It runs four times a day** because a feed holds only the latest 10–50 stories.
+- **It runs four times a day** because a feed holds only the latest 10–50 stories,
+  and Maui Now and Hawaii News Now only about six hours' worth: their config asks for
+  three pages (`pages: 3`) and `size=100`, which reach back about 26 and 63 hours.
+  A new busy outlet needs the same check — compare its newest and oldest item.
   It is idempotent: run it twice in a row and the second finds nothing new.
+- **A read cap (600 stories a run)** keeps a first run bounded. Stories past it are
+  left for the next run, not marked read.
+- **"Appleseed" must be near a Hawaiʻi word** (within ~150 characters) on a full
+  article, so a national piece that names Texas Appleseed and, elsewhere, Hawaiʻi does
+  not count.
 - **Google's opaque article links** are resolved with an undocumented call
   (`resolve_google`). If Google changes it, links stay opaque (they still redirect
   for a person) and URL matching against In the News falls back to headline matching.
