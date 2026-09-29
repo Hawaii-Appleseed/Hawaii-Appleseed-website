@@ -38,13 +38,18 @@ ships to every staff member. `_scaffold.sh` copies the corpus to
 | testimony-hearing-placeholders | 1.00 | 0.73 |
 | voice-house-style | 0.83 | 0.61 |
 
-Open issues this surfaced:
-- **appleseed-voice skipped positions.md in 2 of 3 runs**, despite Step 1 saying
-  to read it on every use.
-- In one earlier run, testimony cited a source ("ALICE in the Crosscurrents",
-  United for ALICE, 2024) that is in neither `citations.md` nor the corpus. The
-  skill's sourcing order forbids that, and no grader can see the citation
-  library, so check footnotes by hand.
+Fixed since (2026-09-29, 3 runs each, same graders, before → after):
+- **appleseed-voice skipped a full read of positions.md** (it grepped for the
+  topic, or skipped the file): 0/3 → 3/3 after Step 1 was made explicit
+  (Read tool, whole file). voice-house-style 0.83 → 1.00.
+- **Footnote provenance.** The testimony skill now forbids citing from memory
+  and checks each footnote against `citations.md` before delivering.
+  Provenance stated in the handoff went from 2/3 to 3/3; testimony-hearing-placeholders
+  went from 0.96 to 1.00. All 12 footnotes across the 3 runs are in the library.
+  (An earlier note here called an "ALICE in the Crosscurrents" footnote
+  fabricated. It isn't: `citations.md` carries it as "Crosscur**e**nts", a typo
+  from HA's original footnote, which Claude silently corrected. When checking
+  provenance by hand, match loosely.)
 
 ## Writing a grader
 
