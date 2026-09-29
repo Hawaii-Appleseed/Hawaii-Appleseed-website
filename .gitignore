@@ -8,3 +8,6 @@ writing-bot/.chroma/
 writing-bot/tools/node_modules/
 writing-bot/.venv/
 .venv/
+
+# media-watch: outlet stories already read (kept in the Actions cache, not the repo)
+media-watch/.cache/

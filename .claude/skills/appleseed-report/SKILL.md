@@ -129,7 +129,7 @@ Creates `~/primer-editor/projects/<slug>/` with `content.md`, `layout.json`, `re
   --route tax-budget-research --name "<Title>"
 ```
 
-Routes and folder ids are in `~/.claude/drive-routes.yml`. Use `--update <docId>` to revise in place — the file id survives, so the link you shared, its comments and its version history all do too. Prefer this over `.docx` when the point is markup: comments in a Doc beat tracked changes in a file emailed around.
+Routes and folder ids are in `~/internal-tools/appleseed-drive/routes.yml`. Use `--update <docId>` to revise in place — the file id survives, so the link you shared, its comments and its version history all do too. Prefer this over `.docx` when the point is markup: comments in a Doc beat tracked changes in a file emailed around.
 
 What survives the conversion, measured on a real report: headings, Poppins/Manrope, the `--ha-*` text colours, bold, hyperlinks, bullets, and figures. What does **not** survive: page layout, backgrounds, and anything positional — a Doc is a flowing document, not the designed artifact. If the design *is* the deliverable, ship primer-editor or PDF instead.
 
