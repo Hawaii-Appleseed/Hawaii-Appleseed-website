@@ -10,11 +10,22 @@
 //   static-search/data/embeddings.bin       Float32 LE, row-major [n x 384]
 //   static-search/data/embeddings.meta.json {model, dtype, dim, count, sha256, version}
 //
-// Usage:  node tools/embed_corpus.mjs
+// Reuse (storage-audit item 14): rows are keyed by sha256(chunk text). Chunks
+// whose text is unchanged keep their previous vector byte for byte; only new
+// text is embedded (see embed_reuse.mjs). The previous bundle is read from git
+// HEAD of the repo that holds content-search/data (in CI: the `hub` checkout,
+// reached through the content-search symlink), NOT from the working tree,
+// because build_static.py has already overwritten chunks.json there. Reuse is
+// off for a forced run (EMBED_FORCE=1 or --force) and whenever the previous
+// meta's model/dtype/dim/max_tokens/transformers.js version differ.
+//
+// Usage:  node tools/embed_corpus.mjs [--force]
+// Test:   node tools/embed_reuse.test.mjs   (model-free)
 
-import { pipeline } from "@huggingface/transformers";
 import { createHash } from "node:crypto";
-import { readFileSync, writeFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
+import { readFileSync, realpathSync, writeFileSync } from "node:fs";
+import { cacheKey, parsePrev, reuseOrEmbed } from "./embed_reuse.mjs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 
@@ -40,27 +51,75 @@ const TJS_VERSION = "3.7.5";
 
 const BATCH = 64;
 
+// Read one file of the previous bundle from git HEAD of the repo containing
+// DATA. Returns null if anything goes wrong (not a repo, no such commit, ...).
+function gitShow(name, encoding) {
+  try {
+    const buf = execFileSync(
+      "git",
+      ["-C", realpathSync(DATA), "show", `HEAD:./${name}`],
+      { maxBuffer: 256 * 1024 * 1024, stdio: ["ignore", "pipe", "ignore"] }
+    );
+    return encoding ? buf.toString(encoding) : buf;
+  } catch {
+    return null;
+  }
+}
+
 async function main() {
+  const force =
+    process.argv.includes("--force") ||
+    ["1", "true"].includes(String(process.env.EMBED_FORCE || "").toLowerCase());
   const chunks = JSON.parse(readFileSync(resolve(DATA, "chunks.json"), "utf-8"));
   const texts = chunks.map((c) => c.text);
+
+  const key = {
+    model: MODEL,
+    dtype: DTYPE,
+    dim: DIM,
+    max_tokens: MAX_TOKENS,
+    transformersjs_version: TJS_VERSION,
+  };
+  let prev = null;
+  let reason;
+  if (!force) {
+    ({ prev, reason } = parsePrev(
+      {
+        metaText: gitShow("embeddings.meta.json", "utf-8"),
+        chunksText: gitShow("chunks.json", "utf-8"),
+        binBuf: gitShow("embeddings.bin"),
+      },
+      key
+    ));
+  }
   console.log(`Embedding ${texts.length} chunks with ${MODEL} (${DTYPE})…`);
 
-  const extractor = await pipeline("feature-extraction", MODEL, { dtype: DTYPE });
-  // Force the 256-token cap (Chroma/sentence-transformers parity).
-  extractor.tokenizer.model_max_length = MAX_TOKENS;
-
-  const out = new Float32Array(texts.length * DIM);
-  for (let i = 0; i < texts.length; i += BATCH) {
-    const batch = texts.slice(i, i + BATCH);
-    const res = await extractor(batch, { pooling: "mean", normalize: true });
-    // res.data is a flat Float32Array of [batch.length x DIM].
-    const data = res.data;
-    out.set(data, i * DIM);
-    if (i % (BATCH * 8) === 0) {
-      process.stdout.write(`  ${Math.min(i + BATCH, texts.length)}/${texts.length}\r`);
+  // Loaded lazily: a run that reuses every row never touches the model.
+  let extractor = null;
+  const embedFn = async (todo) => {
+    const { pipeline } = await import("@huggingface/transformers");
+    extractor = await pipeline("feature-extraction", MODEL, { dtype: DTYPE });
+    // Force the 256-token cap (Chroma/sentence-transformers parity).
+    extractor.tokenizer.model_max_length = MAX_TOKENS;
+    const o = new Float32Array(todo.length * DIM);
+    for (let i = 0; i < todo.length; i += BATCH) {
+      const batch = todo.slice(i, i + BATCH);
+      const res = await extractor(batch, { pooling: "mean", normalize: true });
+      // res.data is a flat Float32Array of [batch.length x DIM].
+      o.set(res.data, i * DIM);
+      if (i % (BATCH * 8) === 0) {
+        process.stdout.write(`  ${Math.min(i + BATCH, todo.length)}/${todo.length}\r`);
+      }
     }
-  }
-  console.log(`\n  done embedding.`);
+    return o;
+  };
+
+  const res = await reuseOrEmbed({ texts, key, prev, force, embedFn, reason });
+  const out = res.out;
+  console.log(
+    `\n  done: reused ${res.reused}, embedded ${res.embedded}` +
+      (res.reused === 0 && res.reason ? ` (no reuse: ${res.reason})` : "")
+  );
 
   const buf = Buffer.from(out.buffer, out.byteOffset, out.byteLength);
   writeFileSync(resolve(DATA, "embeddings.bin"), buf);
@@ -73,7 +132,9 @@ async function main() {
     count: texts.length,
     sha256,
     transformersjs_version: TJS_VERSION,
+    max_tokens: MAX_TOKENS,
   };
+  if (cacheKey(meta) !== cacheKey(key)) throw new Error("meta/cache-key drift");
   writeFileSync(
     resolve(DATA, "embeddings.meta.json"),
     JSON.stringify(meta, null, 2)

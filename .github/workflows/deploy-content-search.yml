@@ -123,9 +123,13 @@ jobs:
         working-directory: website/writing-bot/tools
         run: npm ci
 
+      # Unchanged chunks keep their previous vectors (read from the hub's git
+      # HEAD; see embed_reuse.mjs). A forced run re-embeds everything.
       - name: Embed corpus q8 (retry on transient HF 429)
         if: steps.gate.outputs.go == 'true'
         working-directory: website/writing-bot/tools
+        env:
+          EMBED_FORCE: ${{ inputs.force == true && '1' || '' }}
         run: |
           for attempt in 1 2 3 4 5; do
             echo "Embedding attempt $attempt…"
