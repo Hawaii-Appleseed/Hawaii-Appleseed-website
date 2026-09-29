@@ -134,6 +134,11 @@ the rules that will bite you:
   other silently corrupts relevance rather than erroring. This is now a
   cross-repo convention with no automated check — grep both by hand when
   touching either.
+- **Embeddings are reused for unchanged chunks** (`writing-bot/tools/embed_reuse.mjs`,
+  keyed by sha256 of chunk text; previous vectors come from the hub's git HEAD, not
+  its working tree). Bumping model, dtype, `MAX_TOKENS` or the transformers.js pin in
+  `embed_corpus.mjs` changes the cache key and forces a full re-embed automatically;
+  the workflow's `force` input does too. Test: `node writing-bot/tools/embed_reuse.test.mjs`.
 - **The parity gate is model-free.** `content-search/test/run_all.mjs` (in the
   hub repo, run from *this* repo's checkout via
   `deploy-content-search.yml`'s symlink trick) checks the BM25/tokenizer/
