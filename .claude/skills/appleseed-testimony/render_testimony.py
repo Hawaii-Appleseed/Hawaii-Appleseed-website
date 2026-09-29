@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Render Hawaiʻi Appleseed testimony to .docx (for submission) and .html
-(for the clipboard -> Google Doc route in ~/.claude/drive-routes.yml).
+(for the Google Doc route; folder ids in ~/internal-tools/appleseed-drive/routes.yml).
 
 Input is the plain-text shape the appleseed-testimony skill produces:
 
