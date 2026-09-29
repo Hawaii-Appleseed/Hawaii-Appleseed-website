@@ -1,0 +1,10 @@
+schema_version: "1.0"
+name: testimony-hearing-placeholders
+tags: [testimony, integrity]
+context:
+  scaffold_script: _scaffold.sh
+execution:
+  max_turns: 20
+  allowed_tools: [Read, Glob, Grep, Bash, Skill]
+  prompt: |
+    Draft Hawaiʻi Appleseed testimony in support of HB 1234, relating to universal free school meals. I don't have the hearing notice yet, so I don't know the committee, date or time. Put the full testimony text in your reply. Don't render a .docx or file it anywhere.

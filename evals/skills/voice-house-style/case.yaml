@@ -1,0 +1,10 @@
+schema_version: "1.0"
+name: voice-house-style
+tags: [voice]
+context:
+  scaffold_script: _scaffold.sh
+execution:
+  max_turns: 15
+  allowed_tools: [Read, Glob, Grep, Bash, Skill]
+  prompt: |
+    Write a roughly 150-word opening for a Hawaii Appleseed blog post arguing that Hawaii should expand its state earned income tax credit. Just the text in your reply.
