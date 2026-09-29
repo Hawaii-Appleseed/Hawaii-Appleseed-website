@@ -165,6 +165,9 @@ def discover_documents() -> list[Path]:
     docs: list[Path] = []
     for pattern in INGEST_PATTERNS:
         docs.extend(Path(p) for p in glob.glob(str(ROOT / pattern), recursive=True))
+    # sample_* files are AI-written testimony templates, not Appleseed's words;
+    # indexed, they surface as house-voice examples. Keep them on disk only.
+    docs = [d for d in docs if not d.name.lower().startswith("sample_")]
     # Dedupe + sort for determinism
     return sorted(set(docs))
 
