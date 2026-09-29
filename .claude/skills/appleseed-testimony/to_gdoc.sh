@@ -25,7 +25,7 @@ osascript -e "set the clipboard to «data HTML${hex}»"
 cat <<EOF
 HTML on the clipboard (${bytes} bytes).
 
-Next, in Chrome signed in as devin@hibudget.org:
+Next, in Chrome signed into your Appleseed Google account:
   1. Open the target Drive folder (see the 'testimony' route in ~/.claude/drive-routes.yml).
   2. New ▸ Google Docs ▸ Blank document.
   3. Cmd+V.
