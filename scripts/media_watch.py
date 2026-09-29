@@ -87,7 +87,7 @@ def norm(s):
     s = unicodedata.normalize("NFKD", s)
     s = "".join(c for c in s if not unicodedata.combining(c))
     s = s.lower()
-    s = re.sub(r"[’'‘`]s\b", "", s)
+    s = re.sub(r"[ʻʼ’'‘`]s\b", "", s)   # HPR writes "Appleseedʻs": the ʻokina used as an apostrophe
     s = re.sub(r"[ʻʼ’'‘`]", "", s)
     s = re.sub(r"[^a-z0-9]+", " ", s)
     return s.strip()
@@ -97,6 +97,16 @@ def has_phrase(text, phrase):
     """Whole-word phrase test on already-normalised text."""
     p = norm(phrase)
     return bool(p) and re.search(r"(?<![a-z0-9])" + re.escape(p) + r"(?![a-z0-9])", text) is not None
+
+
+def has_name(raw, name):
+    """A person's full name as a capitalised proper name. Case matters here:
+    "will white" is ordinary English, "Will White" is a person. Accents and
+    the okina are folded so "Kamakani Albano" matches either way."""
+    t = unicodedata.normalize("NFKD", html.unescape(raw or ""))
+    t = re.sub(r"[ʻʼ]", "", "".join(c for c in t if not unicodedata.combining(c)))
+    pat = r"(?<![A-Za-z])" + r"\s+".join(re.escape(w) for w in name.split()) + r"(?![A-Za-z])"
+    return re.search(pat, t) is not None
 
 
 def strip_tags(s):
@@ -452,9 +462,11 @@ def classify(item, cfg, staff, kind="", full_text=False):
     settled by verify_article().
 
     full_text=True means `snippet` is the whole article rather than a headline
-    and lede. Then a staff name proves nothing without the word Appleseed: an
-    article that merely says "Devin Thomas" near "tax" is far more likely to
-    be about someone else than a headline that does."""
+    and lede. A full article names people in passing, so the bar for a staff
+    name is the same as for a headline (Hawaiʻi and policy context around it)
+    but the reason says the org was not named, so a person can check it is
+    them. That rule needs trim_chrome(): a "Read this next" widget promoting
+    one of our columnists once made an unrelated story look like a mention."""
     text = norm(item["title"] + " " + item.get("snippet", ""))
     org = has_phrase(text, "hawaii appleseed") or has_phrase(text, "appleseed center for law and economic justice")
     if not org and any(has_phrase(text, p) for p in cfg.get("ignore_phrases", [])):
@@ -477,13 +489,15 @@ def classify(item, cfg, staff, kind="", full_text=False):
         bump("high", "names Hawaiʻi Appleseed")
     elif appleseed and hawaii:
         bump("medium", "“Appleseed” with Hawaiʻi context")
+    raw = (item["title"] + " " + item.get("snippet", ""))
     for name in staff:
-        if not has_phrase(text, name):
+        if not has_name(raw, name):
             continue
         if appleseed:
             bump("medium", f"staff: {name}, with Appleseed", name)
-        elif hawaii and policy and not full_text:
-            bump("medium", f"staff: {name}, with Hawaiʻi policy context", name)
+        elif hawaii and policy:
+            bump("medium", f"staff: {name}, with Hawaiʻi policy context; the text does not name Appleseed"
+                 if full_text else f"staff: {name}, with Hawaiʻi policy context", name)
         else:
             bump("low", f"staff: {name} only", name)
     for term in cfg.get("work_terms", []):

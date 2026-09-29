@@ -114,9 +114,22 @@ class Classify(unittest.TestCase):
         self.assertEqual(self.c("Devin Thomas on Hawaii tax policy")[0], "medium")
         self.assertEqual(self.c("Devin Thomas scores twice")[0], "low")   # a stranger looks like this
 
-    def test_full_text_staff_needs_appleseed(self):
-        self.assertEqual(self.c("x", "Devin Thomas on Hawaii tax policy", full_text=True)[0], "low")
-        self.assertEqual(self.c("x", "Devin Thomas of Appleseed on Hawaii tax", full_text=True)[0], "medium")
+    def test_full_text_staff_without_appleseed_says_so(self):
+        conf, reasons, _ = self.c("x", "Devin Thomas on Hawaii tax policy", full_text=True)
+        self.assertEqual(conf, "medium")
+        self.assertIn("does not name Appleseed", reasons[0])
+        # no Hawaii/policy context: a namesake, not us
+        self.assertEqual(self.c("x", "Devin Thomas scored twice in Tuesday's game", full_text=True)[0], "low")
+
+    def test_staff_names_are_case_sensitive(self):
+        self.assertIsNone(self.c("the tide will white-cap soon", "will white water rafting in Hawaii on a budget"))
+        self.assertEqual(self.c("Will White on the Hawaii budget")[0], "medium")
+
+    def test_okina_used_as_possessive(self):
+        # HPR: Hawaiʻi Appleseedʻs “Equity on the Menu”
+        self.assertEqual(mw.norm("Hawaiʻi Appleseedʻs “Equity”"), "hawaii appleseed equity")
+        self.assertEqual(self.c("x", "Hawaiʻi Appleseedʻs “Equity on the Menu” shows a cost")[0], "high")
+        self.assertEqual(mw.norm("Hawaiʻi and Oʻahu"), "hawaii and oahu")   # a real okina is still dropped
 
     def test_engine_hit_with_no_visible_text_is_unchecked(self):
         conf, reasons, _ = self.c("Local ag groups rally for food fund", kind="org")
