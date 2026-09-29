@@ -39,23 +39,31 @@ Things that file will tell you and are easy to get wrong:
 
 ## Skills
 
-`.claude/skills/` ships two project skills. They load automatically for anyone who
-opens this repo in Claude Code — no install step, no copying into `~/.claude/`:
+`.claude/skills/` holds the three house skills — **`appleseed-voice`**,
+**`appleseed-testimony`**, **`appleseed-report`**. They load automatically when
+Claude is opened in this repo, and every staff member gets them everywhere else
+as the `appleseed-writing` plugin: `Hawaii-Appleseed/claude-skills` is a
+marketplace that points at this folder **on the `skills-stable` branch**. There
+is no second copy anywhere; this folder is the source of truth.
 
-- **`appleseed-voice`** — house voice for anything going out under HA's name
-  (blog posts, testimony, op-eds, web copy). Reads `writing-bot/positions.md`
-  fresh on every use; that file is authoritative and policy-staff-maintained.
-- **`appleseed-report`** — house structure and brand system for reports and
-  briefs (cover, exec summary, recommendations, endnotes, figures).
+Skills must work from any directory on anyone's machine:
 
-Paths inside them are **repo-root-relative**, so launch Claude from the repo
-root. Everything they read (`positions.md`, the 112-post corpus, the brand
-tokens) lives in this repo, so a fresh clone works with no setup. The single
-external dependency is `appleseed-report`'s primer-editor output step, which
-needs `Hawaii-Appleseed/primer-editor` cloned separately — the skill gives the
-clone command inline.
+- the skill's own files via `${CLAUDE_SKILL_DIR}`, never `.claude/skills/...`
+- this repo via `$W` = `${APPLESEED_WEBSITE:-$HOME/HawaiiAppleseed}`, spelled out
+  as an absolute path in each command (cd and shell variables don't persist
+  between Claude's tool calls)
+- no `$1`/`$ARGUMENTS` in SKILL.md code blocks (Claude Code substitutes them)
+- nothing from one laptop: no `/Users/...`, no personal accounts
 
-**Edit them here, not in `~/.claude/skills/`.** A personal copy silently drifts
+`python scripts/check_skills.py --smoke` checks all of that and runs the bundled
+scripts from outside the repo; the **Skills check** workflow runs it on every PR.
+
+**Shipping a skill change:** merge to `main` as usual, then open a PR from `main`
+into `skills-stable` and merge it with a merge commit once Skills check passes.
+That branch is protected — no direct pushes, the check can't be skipped — so a
+commit to `main` never reaches staff on its own.
+
+**Edit skills here, not in `~/.claude/skills/`.** A personal copy silently drifts
 from what everyone else is running.
 
 ## Issue deep-dive pages — MIRROR FORMAT
