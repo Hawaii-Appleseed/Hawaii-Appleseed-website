@@ -1,0 +1,53 @@
+name: Skills check
+
+# Guards .claude/skills/, which every staff member gets as the
+# `appleseed-writing` Claude Code plugin (Hawaii-Appleseed/claude-skills points
+# at this folder on the `skills-stable` branch). See scripts/check_skills.py
+# for what it catches. `skills-stable` is protected: nothing reaches it without
+# a PR that passes this job.
+#
+# Runs on every PR (unfiltered, so it can be a required check on
+# skills-stable), on pushes that touch the skills or the corpus they read, and
+# weekly — bot commits to writing-bot/ use GITHUB_TOKEN, which triggers no
+# workflows, so the schedule is what notices a corpus change that breaks a skill.
+
+on:
+  pull_request:
+  push:
+    branches: [main, skills-stable]
+    paths:
+      - ".claude/**"
+      - "writing-bot/positions.md"
+      - "writing-bot/testimony/**"
+      - "writing-bot/blog-posts/**"
+      - "writing-bot/requirements.txt"
+      - "assets/okina.css"
+      - "scripts/check_skills.py"
+      - ".github/workflows/skills-check.yml"
+  schedule:
+    - cron: "0 16 * * 1" # Mondays 6 AM Hawaii
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  skills-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Lint, shape, corpus, smoke
+        run: python scripts/check_skills.py --smoke
+      - name: Compile bundled Python
+        run: python -m py_compile $(find .claude/skills -name '*.py' -not -path '*/__pycache__/*')
+      - name: Validate as a Claude Code plugin
+        run: |
+          npm install -g --silent @anthropic-ai/claude-code
+          CLAUDE_CONFIG_DIR="$RUNNER_TEMP/claude" claude plugin validate .claude
