@@ -1,0 +1,117 @@
+{
+  "_readme": "Search terms for scripts/media_watch.py. Data, not code: edit here. Staff names are NOT listed here — they are read from our-team.html on every run, so a new hire is watched the day the team page lists them. Add people who are not on that page (a former director, a board chair) under staff_extra. outlet_feeds are read in full every run — the only way to catch a body-only mention (\"said X of Hawaii Appleseed\"), which news search does not index. A feed that starts failing prints a warning; add or drop outlets here.",
+  "lookback_days": 3,
+  "org_queries": [
+    "\"Hawaii Appleseed\"",
+    "\"Hawaiʻi Appleseed\"",
+    "\"Appleseed Center for Law and Economic Justice\" Hawaii"
+  ],
+  "work_terms": [
+    "Hawaii Tax Fairness Coalition"
+  ],
+  "outlet_feeds": [
+    {
+      "name": "Honolulu Civil Beat",
+      "url": "https://www.civilbeat.org/feed/"
+    },
+    {
+      "name": "Hawaiʻi Public Radio",
+      "url": "https://www.hawaiipublicradio.org/local-news.rss"
+    },
+    {
+      "name": "Honolulu Star-Advertiser",
+      "url": "https://www.staradvertiser.com/feed/"
+    },
+    {
+      "name": "Maui Now",
+      "url": "https://mauinow.com/feed/"
+    },
+    {
+      "name": "Big Island Now",
+      "url": "https://bigislandnow.com/feed/"
+    },
+    {
+      "name": "KHON2",
+      "url": "https://www.khon2.com/feed/"
+    },
+    {
+      "name": "Hawaii News Now",
+      "url": "https://www.hawaiinewsnow.com/arc/outboundfeeds/rss/?outputType=xml"
+    },
+    {
+      "name": "KITV4",
+      "url": "https://www.kitv.com/search/?f=rss"
+    },
+    {
+      "name": "The Garden Island",
+      "url": "https://www.thegardenisland.com/feed/"
+    },
+    {
+      "name": "Hawaii Tribune-Herald",
+      "url": "https://www.hawaiitribune-herald.com/feed/"
+    },
+    {
+      "name": "West Hawaii Today",
+      "url": "https://www.westhawaiitoday.com/feed/"
+    },
+    {
+      "name": "The Maui News",
+      "url": "https://www.mauinews.com/feed/"
+    },
+    {
+      "name": "PBS Hawaiʻi",
+      "url": "https://www.pbshawaii.org/feed/"
+    },
+    {
+      "name": "Hawaii Business Magazine",
+      "url": "https://www.hawaiibusiness.com/feed/"
+    }
+  ],
+  "staff_from": "our-team.html",
+  "staff_extra": [],
+  "staff_query_suffix": "(Appleseed OR Hawaii OR Honolulu)",
+  "hawaii_context": [
+    "hawaii",
+    "honolulu",
+    "oahu",
+    "maui",
+    "kauai",
+    "big island",
+    "kona",
+    "hilo",
+    "legislature",
+    "hawaii state",
+    "aloha state"
+  ],
+  "policy_context": [
+    "tax",
+    "taxes",
+    "budget",
+    "housing",
+    "policy",
+    "nonprofit",
+    "research",
+    "food",
+    "transportation",
+    "wages",
+    "poverty",
+    "equity",
+    "advocates",
+    "advocacy",
+    "report",
+    "snap",
+    "medicaid",
+    "revenue",
+    "affordable"
+  ],
+  "own_domains": [
+    "hiappleseed.org",
+    "hibudget.org",
+    "hitaxfairness.org",
+    "hawaii-appleseed.github.io"
+  ],
+  "ignore_phrases": [
+    "johnny appleseed"
+  ],
+  "min_confidence": "medium"
+}

@@ -1,0 +1,97 @@
+name: Media watch
+
+# Finds news stories that mention Hawaiʻi Appleseed, its work, or its staff and
+# are not on /in-the-news yet. What it searches, and why the outlet feeds are
+# read in full as well as searched, is in scripts/media_watch.py's docstring and
+# media-watch/config.json.
+#
+# Four times a day rather than once: the outlets' feeds hold only their latest
+# 10-50 stories, so a busy newsroom scrolls a story off within hours. Each story
+# is read once (media-watch/.cache/checked.json, kept in the Actions cache and
+# not the repo), so the extra runs cost almost nothing. Quiet runs commit and
+# notify nothing.
+#
+# The repo is public and Pages serves the whole tree, so mentions.json, the
+# digest and the issue are all public. Only medium/high-confidence matches are
+# ever written — see the docstring for why a bare staff name is not enough.
+
+on:
+  schedule:
+    # 04:17 10:17 16:17 22:17 UTC = 6:17pm 12:17am 6:17am 12:17pm Hawaii (UTC-10)
+    - cron: "17 4,10,16,22 * * *"
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Lookback window in days (blank = config default; use 30 to backfill)"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: media-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore the list of stories already read
+        uses: actions/cache@v4
+        with:
+          path: media-watch/.cache
+          key: media-watch-${{ github.run_id }}
+          restore-keys: media-watch-
+
+      - name: Self-test
+        run: python3 scripts/test_media_watch.py
+
+      - name: Search and read
+        id: watch
+        env:
+          DAYS: ${{ inputs.days }}
+        run: python3 scripts/media_watch.py ${DAYS:+--days "$DAYS"}
+
+      - name: Commit the new mentions
+        if: steps.watch.outputs.changed == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add media-watch/mentions.json
+          [ -f media-watch/latest.md ] && git add media-watch/latest.md
+          git commit -m "media-watch: update mentions (${{ steps.watch.outputs.new }} to review)"
+          # sync-publications pushes to main too; rebase over it rather than fail.
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && break
+            sleep $((i * 5))
+          done
+
+      - name: Open an issue with the digest
+        if: steps.watch.outputs.new != '0' && steps.watch.outputs.new != ''
+        run: |
+          gh label create media-watch --color 5F8575 \
+            --description "New press mentions of Hawaiʻi Appleseed" 2>/dev/null || true
+          gh issue create \
+            --title "Media watch: ${{ steps.watch.outputs.new }} new mention(s) — $(date -u +%F)" \
+            --label media-watch --body-file media-watch/latest.md
+
+      - name: Push notification
+        if: steps.watch.outputs.new != '0' && steps.watch.outputs.new != ''
+        run: |
+          if [ -z "${NTFY_TOPIC:-}" ]; then
+            echo "ntfy: no NTFY_TOPIC set — no push sent"
+            exit 0
+          fi
+          body=$(grep -E '^- \[' media-watch/latest.md | sed -E 's/^- \[([^]]*)\]\([^)]*\)/\1/' | head -8)
+          curl -s -m 10 -o /dev/null \
+            -H "Title: Appleseed: ${{ steps.watch.outputs.new }} new media mention(s)" \
+            -H "Priority: default" \
+            -d "$body" "https://ntfy.sh/$NTFY_TOPIC" || true

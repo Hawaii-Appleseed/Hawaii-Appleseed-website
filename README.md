@@ -294,6 +294,7 @@ CLAUDE.md before making any structural change to one of them.
 | --- | --- |
 | `assets/` | Shared images, fonts, `okina.css`. Referenced by absolute Pages URLs after the Squarespace build. |
 | `writing-bot/` | RAG writing assistant + **the corpus** (testimony, blog posts, publications) that Content Search indexes. See its [README](writing-bot/README.md). Content Search itself moved to `Hawaii-Appleseed/staff-updates-internal` (`content-search/`) 2026-08-29 — this repo builds its data bundle but no longer serves the app. |
+| `media-watch/` | Output and search terms for the daily press monitor (`scripts/media_watch.py`, run by `media-watch.yml`). `config.json` is hand-edited (queries, outlet feeds, work terms); `mentions.json` and `latest.md` are generated. See "Media watch" below. |
 | `tax-fairness/` | Tax Fairness Coalition sub-site (`/tax-fairness/`). Formerly its own repo. |
 | `tax-timeline/` | Hawaiʻi tax history timeline (`/tax-timeline/`). |
 | `millionaire-report/` | Millionaire tax report page (`/millionaire-report/`). |
@@ -322,6 +323,7 @@ href resolves against the Squarespace slug and 404s.
 | `deploy-content-search.yml` | push touching `writing-bot/**`, or dispatch | Rebuilds the search bundle, runs the parity gate, and pushes it straight into `Hawaii-Appleseed/staff-updates-internal` (private) — nothing lands in this repo. |
 | `fetch-bill-status.yml` | every 30 min (cron), or dispatch | Fetches bill RSS from capitol.hawaii.gov into `tax-fairness/data/bill-status.json`. Bill list is discovered from `data-hb`/`data-sb` attributes in the tracked pages — adding a bill is a content edit, not a workflow edit. |
 | `site-drift.yml` | nightly 23:40 UTC, or dispatch | Checks the **published** site against this repo: every live page still carries its `squarespace-ready/` payload, every `github.io` URL those pages reference still resolves, and `publications.json` / `news.json` on Pages still fetch and parse. Fails loudly; `triage.yml` turns that into an issue plus an ntfy push. Checks and rationale in `scripts/check-live-site.py`. |
+| `media-watch.yml` | 4×/day, or dispatch (`days: 30` backfills) | Finds news stories that mention Hawaiʻi Appleseed, its work or its staff and are not on `/in-the-news` yet. Commits `media-watch/mentions.json`, opens a `media-watch` issue with the digest, and pushes to ntfy — only when there is something new. See "Media watch" below. |
 | `canary.yml` | hourly, or dispatch | Watches the other scheduled workflows for a **silently dropped trigger**. Opens/updates a `canary-alert` issue and fails when one goes quiet; comments and auto-closes when it recovers. |
 
 **None of this depends on a personal machine** — the whole chain runs in Actions.
@@ -374,6 +376,60 @@ external pinger, which we've deliberately not built.
 
 ---
 
+## Media watch
+
+`In the News` (`news.json`, 625 items) is curated by hand in Squarespace, so it only
+holds coverage somebody already noticed. `scripts/media_watch.py` looks for the rest:
+stories that mention Hawaiʻi Appleseed, its work (`work_terms` in the config), or a
+staff member, that are not on that page yet.
+
+It looks in two places, because each has a blind spot the other covers:
+
+- **News search** (Google News and Bing News RSS) for the org name, the coalition,
+  and each staff name. Fast, but the engines index headline and lede, not the story,
+  so they miss "said Devin Thomas of Hawaiʻi Appleseed" in paragraph nine, and they
+  do not index some outlets at all (the Star-Advertiser's op-eds, Maui Now).
+- **The outlets' own feeds** (`outlet_feeds` in the config): every new story is
+  fetched and read in full, once. This is what finds a body-only mention. The run
+  report names any outlet whose pages would not load (KHON2 blocks it), so a blind
+  outlet shows up as blind rather than as quiet.
+
+Staff names are read from `our-team.html` on every run, so the watch follows the team
+page. **Confidence** is what keeps it honest: `high` names the org; `medium` is
+Appleseed with Hawaiʻi context, a staff name with Appleseed, or a work term; a bare
+staff name is `low` and is **never written down**, because a namesake looks exactly
+like that (`Devin Thomas scores twice`). Weak matches are settled by reading the
+article; a page that loads and never says Appleseed is a rejection.
+
+Each story is checked against `news.json`'s `press` items by URL and by headline, so
+the digest lists only what is missing. Stories from our own domains are ignored.
+
+**The repo is public** and Pages serves the whole tree, so `mentions.json`, the digest
+and the `media-watch` issues are public too. Only public news links go in them.
+
+Things that will bite you:
+
+- **Nothing here posts to In the News.** That collection lives in Squarespace; adding
+  a story is a person's job. Set a story's `status` to `ignore` in `mentions.json` to
+  stop it resurfacing (the script never overwrites `status`).
+- **The "already read" list is in the Actions cache, not the repo**
+  (`media-watch/.cache/`, gitignored). Losing it costs one re-read of the last three
+  days' stories, not duplicate alerts — `mentions.json` is what prevents those.
+- **It runs four times a day** because a feed holds only the latest 10–50 stories.
+  It is idempotent: run it twice in a row and the second finds nothing new.
+- **Google's opaque article links** are resolved with an undocumented call
+  (`resolve_google`). If Google changes it, links stay opaque (they still redirect
+  for a person) and URL matching against In the News falls back to headline matching.
+- GDELT is deliberately not a source: from a shared CI IP its rate limiter answers
+  with a plain-text notice that reads as "zero results". See
+  `Legislative-Research-Tool/testimony/media.py`.
+- After first adding `media-watch.yml`, dispatch it once by hand: `canary.yml` reports
+  it stale until it has run at least once.
+
+Tests: `python3 scripts/test_media_watch.py` (offline; also run first by the workflow).
+
+---
+
 ## Generated files — do not hand-edit
 
 Edits to these are silently overwritten on the next run.
@@ -384,6 +440,7 @@ Edits to these are silently overwritten on the next run.
 | `news.json` | `sync-publications.yml` (nightly) |
 | `news-tags.json` | `sync-publications.yml` (nightly) — the Squarespace tags for `news.json`, keyed by item id |
 | `publications.json` | `sync-publications.yml` (nightly) |
+| `media-watch/mentions.json`, `media-watch/latest.md` | `media-watch.yml` — except each story's `status`, which staff may set by hand |
 | `writing-bot/blog-posts/`, `writing-bot/publications/` | `refresh-corpus.yml` (weekly scrape) |
 
 To change what lands in these, change the generator — not the output.
@@ -398,6 +455,9 @@ python3 scripts/build_squarespace.py
 
 # Refresh blog/press data by hand (normally nightly in CI)
 python3 scripts/sync-news.py
+
+# See what the press monitor would find, writing nothing (add --days 30 to look back)
+python3 scripts/media_watch.py --dry-run
 
 # Force a Content Search rebuild (e.g. after a model change)
 gh workflow run deploy-content-search.yml --ref main
