@@ -1,0 +1,3 @@
+# Skill changes ship to every staff member (see .github/workflows/skills-check.yml).
+/.claude/skills/ @dtomkatsu
+/scripts/check_skills.py @dtomkatsu
