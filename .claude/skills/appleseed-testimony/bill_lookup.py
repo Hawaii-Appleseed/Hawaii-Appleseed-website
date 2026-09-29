@@ -66,8 +66,10 @@ def lookup(bill_number: str, window_days: int) -> dict:
     if not os.environ.get("LEGISCAN_API_KEY"):
         die(
             "LEGISCAN_API_KEY is not set.\n"
-            "  Get a free key at https://legiscan.com/user/register (30K queries/month), then:\n"
-            "      export LEGISCAN_API_KEY=...\n"
+            "  Each person gets their own free key at https://legiscan.com/user/register\n"
+            "  (30K queries/month) and sets it once in ~/.claude/settings.json:\n"
+            "      \"env\": {\"LEGISCAN_API_KEY\": \"...\"}\n"
+            "  then restarts Claude. (Never paste the key into chat.)\n"
             "  Until then, leave the header block bracketed and tell the user which\n"
             "  hearing details you could not verify. Do not guess them.",
             2,

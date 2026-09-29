@@ -32,6 +32,8 @@ RULES = [
     (re.compile(r"/Users/[A-Za-z]"), "absolute home path — only exists on one machine", None),
     (re.compile(r"~/\.claude/skills|\$HOME/\.claude/skills"),
      "path into one person's ~/.claude/skills — use ${CLAUDE_SKILL_DIR}", None),
+    (re.compile(r"~/\.claude/(?!skills|settings\.json)"),
+     "file in one person's ~/.claude — shared config belongs in a repo", None),
     (re.compile(r"(?<![\w/])\.claude/skills/"),
      "repo-relative call to a skill file — use ${CLAUDE_SKILL_DIR}", {".md"}),
     (re.compile(r"[\w.+-]+@(hibudget\.org|gmail\.com)"), "personal email address", None),
