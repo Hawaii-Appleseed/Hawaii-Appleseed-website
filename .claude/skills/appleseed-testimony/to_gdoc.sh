@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Put rendered testimony HTML on the macOS clipboard as HTML flavor, ready to
 # paste into a blank Google Doc. This is the `backend: chrome` route documented
-# in ~/.claude/drive-routes.yml — the Drive API routes are blocked by Workspace
+# in ~/internal-tools/appleseed-drive/routes.yml — the Drive API routes are blocked by Workspace
 # policy (service account refused by the shared drive; gcloud OAuth not
 # allowlisted), so paste is the working path.
 #
@@ -26,7 +26,7 @@ cat <<EOF
 HTML on the clipboard (${bytes} bytes).
 
 Next, in Chrome signed into your Appleseed Google account:
-  1. Open the target Drive folder (see the 'testimony' route in ~/.claude/drive-routes.yml).
+  1. Open the target Drive folder (see the 'testimony' route in ~/internal-tools/appleseed-drive/routes.yml).
   2. New ▸ Google Docs ▸ Blank document.
   3. Cmd+V.
   4. Rename the doc to the testimony title.

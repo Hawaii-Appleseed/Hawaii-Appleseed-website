@@ -60,7 +60,7 @@ Get the bill's real title, current draft suffix, committee, and hearing time fro
 python "${CLAUDE_SKILL_DIR}/bill_lookup.py" HB1884
 ```
 
-It prints a ready header block. **It needs `LEGISCAN_API_KEY`** (free tier, 30K queries/month, https://legiscan.com/user/register). Without the key it exits 2 with instructions — in that case leave the header bracketed and tell the user exactly which details are unverified. Never guess a committee, date, or room.
+It prints a ready header block. **It needs `LEGISCAN_API_KEY`** — each person's own free key (30K queries/month, https://legiscan.com/user/register), set once in `~/.claude/settings.json` as `"env": {"LEGISCAN_API_KEY": "…"}` so every Claude session sees it (a shell `export` doesn't reach sessions started from the app). Never paste the key into chat or commit it. Without the key it exits 2 with instructions — in that case leave the header bracketed and tell the user exactly which details are unverified. Never guess a committee, date, or room.
 
 Two things the lookup will not resolve on its own:
 
@@ -229,7 +229,7 @@ arrive intact — verified end to end 2026-09-01.
 `--area` is required and picks the issue-area subfolder under Legislative ▸
 Testimony (State): **Tax and Budget**, **Housing**, **Food Equity**,
 **Transportation Equity**, **Labor & Other**. The ids are in
-`~/.claude/drive-routes.yml`; pick the area from the bill's subject, and ask if
+`~/internal-tools/appleseed-drive/routes.yml`; pick the area from the bill's subject, and ask if
 it is genuinely ambiguous rather than defaulting.
 
 To revise a Doc that already exists, update it in place — this keeps the file
