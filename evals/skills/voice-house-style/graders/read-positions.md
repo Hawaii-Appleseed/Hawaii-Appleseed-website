@@ -1,6 +1,6 @@
 ---
-type: regex
-target: trace
-pattern: "\"name\":\"(Read|Bash|Grep)\",\"input\":\\{[^}]*positions\\.md"
+type: tool_used
+tool: Read
+input_match: "positions\\.md"
 ---
-Consulted positions.md (the authority on HA stances) with Read, Grep or Bash before drafting. `tool_used` takes one tool name, so this matches tool calls in the trace instead.
+Opened positions.md in full with the Read tool before drafting, as appleseed-voice Step 1 requires. A topic grep doesn't count: it never reaches the voice and refuse-or-flag sections.
