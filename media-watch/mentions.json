@@ -2,6 +2,23 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "cabbf42c1dea",
+   "title": "UH Mānoa grad students honored for character, integrity and commitment to harmony",
+   "outlet": "hawaii.edu",
+   "url": "https://www.hawaii.edu/news/2026/10/01/ping-yip-and-jong-hung-chan-award/",
+   "published": "2026-10-02T00:23:24Z",
+   "firstSeen": "2026-10-02T01:41:54Z",
+   "confidence": "medium",
+   "reasons": [
+    "search engine matched the phrase; article text not checked"
+   ],
+   "sources": [
+    "google"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
    "id": "feaa258dc9a0",
    "title": "Will Caron: Artful Dodgers",
    "outlet": "Honolulu Civil Beat",
