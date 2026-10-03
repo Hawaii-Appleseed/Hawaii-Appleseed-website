@@ -1,0 +1,34 @@
+/* Hawaiʻi Appleseed design tokens — single source of truth.
+   Spec: DESIGN.md. Link before page styles: <link rel="stylesheet" href="assets/tokens.css">
+   Rule: no raw hex/rgba in page CSS — use var(--ha-*). Add new tokens here, not per page.
+   Note: squarespace-ready/ and *squarespace* snippets are pasted into Squarespace and
+   keep an inline copy of these values; update them by hand if a value here changes. */
+:root {
+  /* Palette */
+  --ha-charcoal:   #2F3E46;  /* text, dark backgrounds, nav/footer */
+  --ha-slate:      #354F52;  /* gradient partner to charcoal */
+  --ha-teal-deep:  #52796F;  /* PRIMARY accent — links, eyebrows, rules (the darker teal) */
+  --ha-teal:       #84A98C;  /* highlights, buttons on dark */
+  --ha-ash:        #CAD2C5;  /* text on dark backgrounds */
+  --ha-ash-light:  #E5E9E2;  /* light fills, callout backgrounds */
+  --ha-bg:         #F4F7F4;  /* page tint */
+  --ha-white:      #FFFFFF;
+
+  /* Rules / hairlines */
+  --ha-rule:       rgba(53,79,82,.14);   /* Slate @ 14%, on light */
+  --ha-rule-dark:  rgba(202,210,197,.18); /* Ash @ 18%, on dark */
+  --ha-rule-light: rgba(202,210,197,.30); /* Ash @ 30%, on dark, stronger */
+
+  /* Issue-section tints (issues.html) */
+  --ha-tint-tax:     #F2F4EF;
+  --ha-tint-food:    #E6EFE9;
+  --ha-tint-housing: #D9E2D8;
+  --ha-tint-transit: #E2E8E8;
+  --ha-tint-wages:   #EDEDE5;
+
+  /* Motion */
+  --ha-ease-out:  cubic-bezier(.22,.61,.36,1);
+  --ha-dur-fast:  .2s;
+  --ha-dur-base:  .4s;
+  --ha-dur-slow:  .6s;
+}

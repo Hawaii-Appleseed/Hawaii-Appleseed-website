@@ -9,21 +9,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"/>
 
+  <link rel="stylesheet" href="assets/tokens.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    :root{
-      --ash:#CAD2C5; --teal:#84A98C; --teal-deep:#52796F; --slate:#354F52; --charcoal:#2F3E46; --white:#fff;
-    }
     html{scroll-behavior:smooth;}
-    body{font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-serif;background:var(--charcoal);color:var(--white);overflow-x:hidden;}
+    body{font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-serif;background:var(--ha-charcoal);color:var(--ha-white);overflow-x:hidden;}
 
     .proto-ribbon{
       position:fixed; bottom:16px; left:16px; z-index:200;
-      background:var(--teal); color:var(--charcoal);
+      background:var(--ha-teal); color:var(--ha-charcoal);
       font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:11px; letter-spacing:.12em; text-transform:uppercase;
       padding:8px 14px; border-radius:3px; box-shadow:0 8px 24px rgba(47,62,70,.35);
     }
-    .proto-ribbon a{ color:var(--charcoal); }
+    .proto-ribbon a{ color:var(--ha-charcoal); }
     .proto-controls{
       position:fixed; bottom:16px; right:16px; z-index:200; display:flex; gap:8px;
     }
@@ -32,7 +30,7 @@
       font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:12px; padding:8px 12px; border-radius:4px; cursor:pointer;
       backdrop-filter:blur(6px);
     }
-    .proto-controls button:hover{ border-color:var(--teal); }
+    .proto-controls button:hover{ border-color:var(--ha-teal); }
 
     /* Our Story hero (mirrors our-story.html) */
     .story-hero{
@@ -41,13 +39,13 @@
       display:flex; flex-direction:column; justify-content:center;
       background:
         radial-gradient(ellipse 100% 60% at 50% 0%, rgba(132,169,140,.18), transparent 70%),
-        linear-gradient(180deg, var(--charcoal) 0%, var(--slate) 100%);
+        linear-gradient(180deg, var(--ha-charcoal) 0%, var(--ha-slate) 100%);
       color:#fff;
     }
     /* SVG poster (fallback if WebGL is off) + WebGL canvas, both behind the text */
     .seedling-poster{
       position:absolute; z-index:0; right:6vw; bottom:-4vh; width:min(40vw,440px); height:auto;
-      color:var(--teal); opacity:.5; pointer-events:none; transition:opacity .8s ease;
+      color:var(--ha-teal); opacity:.5; pointer-events:none; transition:opacity .8s ease;
       filter:drop-shadow(0 0 26px rgba(132,169,140,.18));
     }
     .seed-canvas{
@@ -65,20 +63,20 @@
 
     .eyebrow{
       font-family:OkinaPoppins, 'Poppins',sans-serif; text-transform:uppercase; letter-spacing:.32em;
-      font-size:16px; font-weight:500; color:var(--ash);
+      font-size:16px; font-weight:500; color:var(--ha-ash);
       display:flex; align-items:center; gap:14px; margin-bottom:36px;
     }
-    .eyebrow::before{ content:""; width:48px; height:1px; background:var(--teal); }
+    .eyebrow::before{ content:""; width:48px; height:1px; background:var(--ha-teal); }
     .hero-quote{
       font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:500;
       font-size:clamp(28px,3.4vw,52px); line-height:1.18; letter-spacing:-0.015em;
       color:#fff; max-width:24ch; margin:0;
     }
-    .hero-quote .open-q{ color:var(--teal); font-weight:300; font-size:1.4em; line-height:0; margin-right:.08em; vertical-align:-0.1em; }
-    .hero-quote .accent{ color:var(--teal); }
-    .hero-meta{ position:relative; z-index:2; margin-top:44px; display:flex; flex-wrap:wrap; gap:40px 72px; color:var(--ash); font-size:14px; }
+    .hero-quote .open-q{ color:var(--ha-teal); font-weight:300; font-size:1.4em; line-height:0; margin-right:.08em; vertical-align:-0.1em; }
+    .hero-quote .accent{ color:var(--ha-teal); }
+    .hero-meta{ position:relative; z-index:2; margin-top:44px; display:flex; flex-wrap:wrap; gap:40px 72px; color:var(--ha-ash); font-size:14px; }
     .hero-meta .num{ font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:38px; color:#fff; line-height:1; margin-bottom:4px; }
-    .hero-meta .lbl{ text-transform:uppercase; letter-spacing:.18em; font-size:11px; color:var(--ash); }
+    .hero-meta .lbl{ text-transform:uppercase; letter-spacing:.18em; font-size:11px; color:var(--ha-ash); }
 
     @media (max-width:900px){ .story-hero{ padding:96px 6vw 64px; } }
     @media (max-width:600px){
