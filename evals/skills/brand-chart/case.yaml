@@ -1,0 +1,8 @@
+schema_version: "1.0"
+name: brand-chart
+tags: [brand, charts]
+execution:
+  max_turns: 12
+  allowed_tools: [Read, Glob, Grep, Bash, Skill]
+  prompt: |
+    Write matplotlib code for a Hawaii Appleseed report chart: grouped bar chart of the share of households below the ALICE threshold in 2018, 2020, 2022 and 2024 for four counties (Honolulu 42, 45, 44, 41; Hawaii 50, 54, 52, 49; Maui 46, 49, 51, 47; Kauai 47, 50, 48, 46). Source: Aloha United Way ALICE reports. Put the full script in your reply.

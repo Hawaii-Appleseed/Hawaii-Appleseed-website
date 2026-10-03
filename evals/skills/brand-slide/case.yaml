@@ -1,0 +1,8 @@
+schema_version: "1.0"
+name: brand-slide
+tags: [brand, slides]
+execution:
+  max_turns: 12
+  allowed_tools: [Read, Glob, Grep, Bash, Skill]
+  prompt: |
+    I need a 3-slide PowerPoint for the Hawaii Appleseed board: a title slide ("2027 Legislative Priorities"), one slide listing three priorities (renters' tax credit, universal school meals, minimum wage indexing), and a closing slide. Write the python-pptx script that builds it and put the full script in your reply; don't run it.

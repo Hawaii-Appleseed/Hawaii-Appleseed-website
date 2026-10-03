@@ -1,0 +1,8 @@
+schema_version: "1.0"
+name: brand-flyer
+tags: [brand]
+execution:
+  max_turns: 12
+  allowed_tools: [Read, Glob, Grep, Bash, Skill]
+  prompt: |
+    Make a one-page flyer for a free Hawaii Appleseed workshop on claiming the state earned income tax credit: Saturday, Feb 7, 10am-noon, Kalihi-Palama Public Library. Give me the complete HTML (inline CSS, print-ready letter size) in your reply.

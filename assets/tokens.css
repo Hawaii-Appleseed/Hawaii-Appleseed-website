@@ -1,6 +1,7 @@
 /* Hawaiʻi Appleseed design tokens — single source of truth.
    Spec: DESIGN.md. Link before page styles: <link rel="stylesheet" href="assets/tokens.css">
-   Rule: no raw hex/rgba in page CSS — use var(--ha-*). Add new tokens here, not per page.
+   Rule: no raw hex/rgba and no px font-size in page CSS — use var(--ha-*). Add new tokens
+   here, not per page. CI (scripts/lint_design_tokens.py) fails on new violations.
    Note: squarespace-ready/ and *squarespace* snippets are pasted into Squarespace and
    keep an inline copy of these values; update them by hand if a value here changes. */
 :root {
@@ -13,6 +14,10 @@
   --ha-ash-light:  #E5E9E2;  /* light fills, callout backgrounds */
   --ha-bg:         #F4F7F4;  /* page tint */
   --ha-white:      #FFFFFF;
+
+  /* Text tints (Charcoal at reduced opacity, composited on light) */
+  --ha-ink-muted:  rgba(47,62,70,.78);  /* lede paragraphs */
+  --ha-ink-subtle: rgba(47,62,70,.65);  /* stat labels, source notes — FAILS AA for small text, see DESIGN.md Contrast */
 
   /* Rules / hairlines */
   --ha-rule:       rgba(53,79,82,.14);   /* Slate @ 14%, on light */
@@ -31,4 +36,103 @@
   --ha-dur-fast:  .2s;
   --ha-dur-base:  .4s;
   --ha-dur-slow:  .6s;
+
+  /* Type — families */
+  --ha-font-display: OkinaManrope, 'Manrope', Arial, sans-serif;
+  --ha-font-body:    OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif;
+
+  /* Type scale (desktop; the ≤700px block below shrinks the display sizes) */
+  --ha-fs-micro:     10.5px; /* cite labels, chart annotations */
+  --ha-fs-eyebrow:   11px;   /* ALL-CAPS eyebrow, .22em tracking */
+  --ha-fs-caption:   13px;   /* source notes, captions, stat labels */
+  --ha-fs-small:     14px;   /* card body, buttons */
+  --ha-fs-body:      15.5px; /* body copy */
+  --ha-fs-lead:      17px;   /* lede paragraph */
+  --ha-fs-h5:        18px;   /* pillar H3 */
+  --ha-fs-stat-sm:   22px;   /* pillar stat number */
+  --ha-fs-h4:        24px;   /* callout heading, pull-quote */
+  --ha-fs-h3:        26px;   /* card H3 */
+  --ha-fs-stat:      28px;   /* priority stat number */
+  --ha-fs-h2:        38px;   /* section H2 */
+  --ha-fs-h2-lg:     44px;   /* vision H2 */
+  --ha-fs-cta:       clamp(30px, 4.2vw, 48px);
+  --ha-fs-display:   54px;   /* big stat headline */
+  --ha-fs-hero:      78px;   /* hero H1 */
+
+  --ha-lh-display: 1;
+  --ha-lh-heading: 1.15;
+  --ha-lh-snug:    1.3;
+  --ha-lh-small:   1.55;
+  --ha-lh-body:    1.65;
+
+  --ha-track-hero:    -.035em;
+  --ha-track-display: -.02em;
+  --ha-track-tight:   -.01em;
+  --ha-track-button:  .04em;
+  --ha-track-eyebrow: .22em;
+
+  /* Spacing scale */
+  --ha-space-3xs: 4px;
+  --ha-space-2xs: 8px;
+  --ha-space-xs:  12px;  /* eyebrow → h2 */
+  --ha-space-sm:  16px;  /* grid gap */
+  --ha-space-md:  20px;  /* mobile side padding */
+  --ha-space-lg:  28px;  /* desktop side padding (hero, CTA) */
+  --ha-space-xl:  36px;  /* desktop section side padding */
+  --ha-space-2xl: 48px;  /* section head → content */
+  --ha-space-3xl: 56px;  /* mobile section padding */
+  --ha-space-4xl: 72px;
+  --ha-space-5xl: 80px;  /* desktop section padding */
+  --ha-space-6xl: 96px;  /* CTA padding */
+
+  /* Layout (semantic; responsive below) */
+  --ha-gutter:    var(--ha-space-xl);   /* section side padding: 36 → 20 */
+  --ha-section-y: var(--ha-space-5xl);  /* section top/bottom: 80 → 56 */
+  --ha-container: 1200px;
+  --ha-measure:   680px;
+
+  --ha-radius-pill:    999px;
+  --ha-radius-card:    8px;
+  --ha-radius-panel:   6px;
+  --ha-radius-callout: 4px;
+
+  /* Chart palettes — colour-vision-deficiency checked (scripts/check_design_tokens.py).
+     Categorical: use in order; 1–3 are brand family, 4–6 extend it. Label series directly. */
+  --ha-chart-cat-1: #52796F;  /* Deep Teal */
+  --ha-chart-cat-2: #2F3E46;  /* Charcoal */
+  --ha-chart-cat-3: #BF8A30;  /* Ochre */
+  --ha-chart-cat-4: #6A8CC4;  /* Harbor blue */
+  --ha-chart-cat-5: #A85A45;  /* Clay */
+  --ha-chart-cat-6: #84A98C;  /* Teal */
+  /* Sequential (low → high), Ash Light → Charcoal through the brand teals */
+  --ha-chart-seq-1: #E5E9E2;
+  --ha-chart-seq-2: #B4C9B6;
+  --ha-chart-seq-3: #84A98C;
+  --ha-chart-seq-4: #6B917D;
+  --ha-chart-seq-5: #52796F;
+  --ha-chart-seq-6: #405B5A;
+  --ha-chart-seq-7: #2F3E46;
+  /* Diverging: teal (1, "good"/above) ← neutral 4 → ochre-brown (7, "bad"/below) */
+  --ha-chart-div-1: #2B4A45;
+  --ha-chart-div-2: #52796F;
+  --ha-chart-div-3: #A9C3B3;
+  --ha-chart-div-4: #F2F0EA;
+  --ha-chart-div-5: #E0BF85;
+  --ha-chart-div-6: #B07A35;
+  --ha-chart-div-7: #6E4524;
+  --ha-chart-muted: #CAD2C5;  /* de-emphasised series (= Ash) */
+  --ha-chart-grid:  rgba(53,79,82,.14);  /* gridlines (= --ha-rule) */
+}
+
+@media (max-width: 700px) {
+  :root {
+    --ha-fs-body:    15px;
+    --ha-fs-lead:    15px;
+    --ha-fs-h2:      28px;
+    --ha-fs-h2-lg:   28px;
+    --ha-fs-display: 30px;
+    --ha-fs-hero:    48px;
+    --ha-gutter:     var(--ha-space-md);
+    --ha-section-y:  var(--ha-space-3xl);
+  }
 }
