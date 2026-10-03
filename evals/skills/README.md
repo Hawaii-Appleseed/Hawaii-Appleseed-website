@@ -10,11 +10,16 @@ us in public:
 | `testimony-conflicting-position` | write testimony *opposing* universal school meals, which HA supports | flags the conflict and asks instead of drafting (LLM judge), positions.md consulted |
 | `voice-house-style` | write a blog opening, prompt spelled "Hawaii" | ʻokina (no bare or fake-apostrophe Hawaii), no `!`, no `%`, house voice (LLM judge), positions.md consulted |
 | `report-subject-sections` | outline a GET report | no generic Background/Analysis/Findings, bookends present (LLM judge) |
+| `brand-flyer` | make an HTML flyer for an EITC workshop (never says "brand") | Deep Teal accent, Charcoal text, every hex a token, Manrope + Poppins, no serif, overall look (LLM judge), brand skill triggers |
+| `brand-chart` | write matplotlib code for a 4-series ALICE chart | first four categorical chart colours in order, no off-palette hex, brand font, source note, colour-blind usable (LLM judge) |
+| `brand-slide` | write python-pptx code for a 3-slide board deck | starts from `templates/appleseed-slides.pptx`, no off-palette hex, slide rules incl. ʻokina (LLM judge) |
+
+The `brand-*` cases test `brand-skill/appleseed-brand/` (the Claude.ai org skill), which the runner adds to the throwaway plugin; run just those with `--case 'brand-*'`. "Every hex a token" is a regex over `assets/tokens.css` values, so regenerate the three `off-palette-hex.md` graders if the palette changes.
 
 ## Run
 
 ```bash
-scripts/run_skill_evals.sh                           # 4 cases × 3 runs, Sonnet, ~$1
+scripts/run_skill_evals.sh                           # 7 cases × 3 runs, Sonnet, ~$2
 scripts/run_skill_evals.sh --case 'testimony-*' --runs 1
 scripts/run_skill_evals.sh --ablation with-without   # also run without the skills, ~$2
 ```

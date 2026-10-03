@@ -1,8 +1,8 @@
 # Hawaiʻi Appleseed design system
 
-The brand spec for the site and anything Appleseed-branded. **Tokens live in [`assets/tokens.css`](assets/tokens.css)** on `:root`; every page links it before its own `<style>`. Page CSS uses `var(--ha-*)` only — **no raw hex/rgba**. Need a new value? Add a token there, then use it. Best single exemplar of components: **`taxes-budget.html`**.
+The brand spec for the site and anything Appleseed-branded. **Tokens live in [`assets/tokens.css`](assets/tokens.css)** on `:root`; every page links it before its own `<style>`. Page CSS uses `var(--ha-*)` only — **no raw hex/rgba and no px `font-size`** (CI lints changed lines; see [Checks](#checks)). Need a new value? Add a token there, then use it. Best single exemplar of components: **`taxes-budget.html`**.
 
-Source of truth upstream: *Hawaiʻi Appleseed Brand Guide (April 2026 v1.0)*. A portable copy of this guide for Claude.ai lives in `brand-skill/appleseed-brand/` (rebuild the zip if you change values here).
+Source of truth upstream: *Hawaiʻi Appleseed Brand Guide (April 2026 v1.0)*. A portable copy of this guide for Claude.ai lives in `brand-skill/appleseed-brand/`; `python3 scripts/build_brand_skill.py` copies this file and `tokens.css` into it and rebuilds the zip (CI fails if you forget).
 
 ## Palette
 
@@ -18,6 +18,8 @@ Source of truth upstream: *Hawaiʻi Appleseed Brand Guide (April 2026 v1.0)*. A 
 --ha-rule:       rgba(53,79,82,.14);    /* hairline borders on light — Slate @ 14% */
 --ha-rule-dark:  rgba(202,210,197,.18); /* hairlines on dark — Ash @ 18% */
 --ha-rule-light: rgba(202,210,197,.30); /* stronger hairlines on dark */
+--ha-ink-muted:  rgba(47,62,70,.78);    /* lede paragraphs */
+--ha-ink-subtle: rgba(47,62,70,.65);    /* stat labels, source notes — fails AA small text, see Contrast */
 /* Issue tints: --ha-tint-tax #F2F4EF · -food #E6EFE9 · -housing #D9E2D8 · -transit #E2E8E8 · -wages #EDEDE5 */
 /* Motion: --ha-ease-out cubic-bezier(.22,.61,.36,1) · --ha-dur-fast .2s · --ha-dur-base .4s · --ha-dur-slow .6s */
 ```
@@ -69,6 +71,31 @@ font-family: OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-seri
 
 ## Type scale
 
+**Tokens** (in `tokens.css`; the `≤700px` block on `:root` swaps in the mobile size, so pages don't need their own media query for these):
+
+| Token | Desktop | ≤700px | Role |
+|---|---|---|---|
+| `--ha-fs-hero` | 78px | 48px | Hero H1 |
+| `--ha-fs-display` | 54px | 30px | Big stat headline |
+| `--ha-fs-cta` | `clamp(30px,4.2vw,48px)` | — | CTA H2 |
+| `--ha-fs-h2-lg` | 44px | 28px | Vision H2 |
+| `--ha-fs-h2` | 38px | 28px | Section H2 |
+| `--ha-fs-stat` | 28px | — | Priority stat number |
+| `--ha-fs-h3` | 26px | — | Card H3 |
+| `--ha-fs-h4` | 24px | — | Callout heading, pull-quote |
+| `--ha-fs-stat-sm` | 22px | — | Pillar stat number |
+| `--ha-fs-h5` | 18px | — | Pillar H3 |
+| `--ha-fs-lead` | 17px | 15px | Lede |
+| `--ha-fs-body` | 15.5px | 15px | Body |
+| `--ha-fs-small` | 14px | — | Card body, buttons |
+| `--ha-fs-caption` | 13px | — | Captions, source notes, stat labels |
+| `--ha-fs-eyebrow` | 11px | — | Eyebrow |
+| `--ha-fs-micro` | 10.5px | — | Cite labels, chart annotations |
+
+Also `--ha-font-display` / `--ha-font-body` (the Okina-first stacks below), line-heights `--ha-lh-display 1 · -heading 1.15 · -snug 1.3 · -small 1.55 · -body 1.65`, tracking `--ha-track-hero -.035em · -display -.02em · -tight -.01em · -button .04em · -eyebrow .22em`. A size the scale doesn't have (the `13.5px` button, `19px` mobile pull-quote) means pick the nearest token or add one here — not a literal in the page.
+
+**Measured usage** (existing pages, before the tokens; kept as the record of where the scale came from):
+
 | Role | Class | Desktop | ≤700px | Weight | Tracking | LH |
 |---|---|---|---|---|---|---|
 | Hero H1 | `__hero h1` | 78px | 48px | 800 | -.035em → -.03em | 1 |
@@ -90,7 +117,9 @@ Line-heights: `1` display · `1.1–1.18` headings · `1.3–1.45` card titles �
 
 ## Spacing
 
-**There are no named spacing tokens** — no `--space-*` or scale variables. Literal px, but highly regular.
+**Tokens:** `--ha-space-3xs 4 · -2xs 8 · -xs 12 · -sm 16 · -md 20 · -lg 28 · -xl 36 · -2xl 48 · -3xl 56 · -4xl 72 · -5xl 80 · -6xl 96` (px). Semantic, responsive: `--ha-gutter` (section side padding, 36→20 at ≤700px) and `--ha-section-y` (section top/bottom, 80→56). Layout: `--ha-container 1200px`, `--ha-measure 680px`. Radii: `--ha-radius-pill 999px · -card 8px · -panel 6px · -callout 4px`. The standard section is `padding: var(--ha-section-y) var(--ha-gutter)` — no media query needed.
+
+Existing pages still use the literal px below (the lint only blocks *new* px font-sizes and colours, not spacing); move them to the tokens when you touch them.
 
 | Section type | Desktop | ≤700px |
 |---|---|---|
@@ -109,6 +138,84 @@ Line-heights: `1` display · `1.1–1.18` headings · `1.3–1.45` card titles �
 **Radii:** `999px` ×65 — pills, tabs, buttons, the dominant shape · `8px` cards · `6px` panels · `4px` callouts · `3px` swatches · `2px` donate button.
 
 **Rhythm:** eyebrow→h2 12px · h2→rule 22px · rule→lede 22px · head→content 48px · grid gaps 16–22px.
+
+## Chart palette
+
+Colour-vision-deficiency safe: `scripts/check_design_tokens.py` simulates protanopia, deuteranopia and tritanopia and fails CI if any categorical pair drops below ΔE2000 10, the sequential ramp stops being monotonic in lightness, or the diverging arms converge. Use the tokens (`var(--ha-chart-*)`, or read them with `getComputedStyle` for canvas libraries); the brand skill carries the same hex values for non-web charts.
+
+| Kind | Tokens | Values | Use |
+|---|---|---|---|
+| Categorical | `--ha-chart-cat-1…6` | `#52796F` Deep Teal · `#2F3E46` Charcoal · `#BF8A30` Ochre · `#6A8CC4` Harbor blue · `#A85A45` Clay · `#84A98C` Teal | Series in this order. 1–3 alone stay in the brand family; 4–6 extend it for more series. Never more than 6 — group the rest as "Other" in `--ha-chart-muted`. |
+| Sequential | `--ha-chart-seq-1…7` | `#E5E9E2 #B4C9B6 #84A98C #6B917D #52796F #405B5A #2F3E46` | Ordered magnitude (maps, heat tables), low → high. Use 3–7 evenly spaced steps. |
+| Diverging | `--ha-chart-div-1…7` | `#2B4A45 #52796F #A9C3B3` · `#F2F0EA` · `#E0BF85 #B07A35 #6E4524` | Above/below a meaningful midpoint (change vs. last year, gap vs. state average). Teal arm = above/better, ochre-brown = below/worse; 4 is the neutral midpoint. |
+| Support | `--ha-chart-muted` `#CAD2C5` · `--ha-chart-grid` | Ash · Slate @ 14% | De-emphasised series ("grey the rest"); gridlines. |
+
+Rules: **label series directly** (end-of-line labels, in-bar values) rather than relying on a legend — colour is never the only cue (WCAG 1.4.1). `--ha-chart-cat-6` (Teal, 2.6:1 on white) and `--ha-chart-muted` are below the 3:1 non-text contrast line, so they need a direct label or a Charcoal outline. One-story charts: highlight the series in `--ha-chart-cat-1`, everything else `--ha-chart-muted`.
+
+## Contrast
+
+WCAG 2.2 AA, measured from the tokens by `python3 scripts/check_design_tokens.py` (alpha tokens composited on the background). Normal text needs 4.5:1; large text (≥24px, or ≥18.66px bold) and non-text UI/chart marks need 3:1. **Approved** = every `pass` row below for its role. The table is generated (`--write`); CI's `--check` fails if a token change moves a ratio or verdict, so an approval can't lapse silently.
+
+**Flagged, not fixed.** These are current brand usages that fail; colours were deliberately left alone because changing a brand value is a brand decision:
+- **Charcoal on Teal** pill buttons (4.23:1) — the 13.5px label is not "large". Options: 18.66px bold label, or a darker fill.
+- **`--ha-ink-subtle` (Charcoal @ 65%)** stat labels and source notes (3.95 on white, 3.82 on tint), and the `.55` source notes on the issue pages are lower still. `--ha-ink-muted` (.78) passes; use it for anything small.
+- **Deep Teal small text on Ash Light and the food/housing/wages tints** (3.66–4.14). Fine for headlines ≥24px; eyebrows on those fills should use Charcoal or Slate.
+- **Teal (`#84A98C`) on dark** for eyebrows: passes on nothing as small text (4.23 on Charcoal, 3.36 on Slate). Large text on Charcoal is fine; small eyebrows on dark should use Ash.
+- **Teal on white** fails even as a non-text mark (2.61) — chart series need a label or outline (see Chart palette); never use it for text on light.
+- **Deep Teal on Charcoal** (2.28) — never.
+
+<!-- contrast-table:start -->
+| Foreground | Background | Role | Ratio | AA | Used for |
+|---|---|---|---|---|---|
+| `--ha-ash` | `--ha-charcoal` | normal text | 7.13:1 | pass | body text on dark |
+| `--ha-ash` | `--ha-slate` | normal text | 5.66:1 | pass | body text on dark gradient end |
+| `--ha-charcoal` | `--ha-ash` | normal text | 7.13:1 | pass | primary button hover |
+| `--ha-charcoal` | `--ha-ash-light` | normal text | 9.00:1 | pass | callout text |
+| `--ha-charcoal` | `--ha-bg` | normal text | 10.25:1 | pass | body text on page tint |
+| `--ha-charcoal` | `--ha-tint-food` | normal text | 9.42:1 | pass | issue hub card |
+| `--ha-charcoal` | `--ha-tint-housing` | normal text | 8.33:1 | pass | issue hub card |
+| `--ha-charcoal` | `--ha-tint-tax` | normal text | 9.99:1 | pass | issue hub card |
+| `--ha-charcoal` | `--ha-tint-transit` | normal text | 8.92:1 | pass | issue hub card |
+| `--ha-charcoal` | `--ha-tint-wages` | normal text | 9.40:1 | pass | issue hub card |
+| `--ha-charcoal` | `--ha-white` | normal text | 11.06:1 | pass | body text |
+| `--ha-ink-muted` | `--ha-bg` | normal text | 5.43:1 | pass | lede on page tint |
+| `--ha-ink-muted` | `--ha-white` | normal text | 5.69:1 | pass | lede paragraph |
+| `--ha-slate` | `--ha-bg` | normal text | 8.14:1 | pass | secondary text on tint |
+| `--ha-slate` | `--ha-tint-tax` | normal text | 7.93:1 | pass | accent on tax card |
+| `--ha-slate` | `--ha-tint-transit` | normal text | 7.08:1 | pass | accent on transit card |
+| `--ha-slate` | `--ha-white` | normal text | 8.78:1 | pass | secondary text |
+| `--ha-teal-deep` | `--ha-bg` | normal text | 4.50:1 | pass | links/eyebrows on page tint |
+| `--ha-teal-deep` | `--ha-white` | large text | 4.86:1 | pass | headline accent |
+| `--ha-teal-deep` | `--ha-white` | normal text | 4.86:1 | pass | links, eyebrows, key numbers |
+| `--ha-teal-deep` | `--ha-white` | non-text / UI | 4.86:1 | pass | primary chart series, focus ring |
+| `--ha-white` | `--ha-charcoal` | normal text | 11.06:1 | pass | text on dark section |
+| `--ha-white` | `--ha-slate` | normal text | 8.78:1 | pass | text on dark gradient end |
+| `--ha-white` | `--ha-teal-deep` | normal text | 4.86:1 | pass | white on deep-teal fill |
+| `--ha-ash` | `--ha-white` | non-text / UI | 1.55:1 | **FAIL** (needs 3.0:1) | tertiary chart series (avoid alone) |
+| `--ha-charcoal` | `--ha-teal` | normal text | 4.23:1 | **FAIL** (needs 4.5:1) | primary pill button label |
+| `--ha-ink-subtle` | `--ha-bg` | normal text | 3.82:1 | **FAIL** (needs 4.5:1) | stat labels on tint |
+| `--ha-ink-subtle` | `--ha-white` | normal text | 3.95:1 | **FAIL** (needs 4.5:1) | stat labels, source notes |
+| `--ha-teal` | `--ha-charcoal` | normal text | 4.23:1 | **FAIL** (needs 4.5:1) | eyebrow on dark |
+| `--ha-teal` | `--ha-slate` | normal text | 3.36:1 | **FAIL** (needs 4.5:1) | eyebrow on dark gradient end |
+| `--ha-teal` | `--ha-white` | large text | 2.61:1 | **FAIL** (needs 3.0:1) | teal headline on light |
+| `--ha-teal` | `--ha-white` | normal text | 2.61:1 | **FAIL** (needs 4.5:1) | teal text on light (avoid) |
+| `--ha-teal` | `--ha-white` | non-text / UI | 2.61:1 | **FAIL** (needs 3.0:1) | secondary chart series, rules |
+| `--ha-teal-deep` | `--ha-ash-light` | normal text | 3.95:1 | **FAIL** (needs 4.5:1) | eyebrow in callout |
+| `--ha-teal-deep` | `--ha-charcoal` | normal text | 2.28:1 | **FAIL** (needs 4.5:1) | deep teal on dark (avoid) |
+| `--ha-teal-deep` | `--ha-tint-food` | normal text | 4.14:1 | **FAIL** (needs 4.5:1) | accent on food card |
+| `--ha-teal-deep` | `--ha-tint-housing` | normal text | 3.66:1 | **FAIL** (needs 4.5:1) | accent on housing card |
+| `--ha-teal-deep` | `--ha-tint-wages` | normal text | 4.13:1 | **FAIL** (needs 4.5:1) | accent on wages card |
+| `--ha-white` | `--ha-teal` | normal text | 2.61:1 | **FAIL** (needs 4.5:1) | white on teal button (avoid) |
+<!-- contrast-table:end -->
+
+## Checks
+
+| Command | What it guards | CI |
+|---|---|---|
+| `python3 scripts/lint_design_tokens.py [--base origin/main]` | New raw hex/rgba/hsl colours or px `font-size` in **changed lines** of `*.html`/`*.css` (excludes `tokens.css`, `squarespace-ready/`, `*squarespace*` snippets). Silence a deliberate exception with `/* design-lint: allow */` on the line. | `design-system.yml`, every PR |
+| `python3 scripts/check_design_tokens.py --check` | Contrast table above is current; chart palettes stay CVD-safe. | `design-system.yml` |
+| `python3 scripts/build_brand_skill.py --check` | `brand-skill/appleseed-brand/` and its zip match this file + `tokens.css`; every hex in its `SKILL.md` is a token. | `design-system.yml` |
+| `uv run --with python-pptx --with python-docx scripts/build_brand_templates.py` | Regenerates the branded `.pptx`/`.docx` templates in the skill from the tokens. | — (run by hand after a palette change) |
 
 ## Components
 

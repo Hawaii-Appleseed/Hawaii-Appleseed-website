@@ -117,7 +117,7 @@ hub cards (`--section-bg` / `--section-accent`). If you want an issue to read as
 
 ## Design
 
-Spec: [`DESIGN.md`](DESIGN.md). Tokens: [`assets/tokens.css`](assets/tokens.css), linked from every page before its `<style>`. **No raw hex/rgba in page CSS — use `var(--ha-*)`;** add missing values to `tokens.css`, never per page. Exception: `squarespace-ready/` and `*squarespace*` snippets keep inline copies (Squarespace can't load the file).
+Spec: [`DESIGN.md`](DESIGN.md). Tokens: [`assets/tokens.css`](assets/tokens.css), linked from every page before its `<style>`. **No raw hex/rgba in page CSS — use `var(--ha-*)`;** add missing values to `tokens.css`, never per page. Exception: `squarespace-ready/` and `*squarespace*` snippets keep inline copies (Squarespace can't load the file). Type sizes and spacing have tokens too (`--ha-fs-*`, `--ha-space-*`); px `font-size` is out. The **Design system** workflow lints changed lines for new raw colours/px font sizes, checks WCAG contrast and chart palettes, and fails if `brand-skill/` is stale — run `python3 scripts/build_brand_skill.py` after editing `DESIGN.md` or `tokens.css` (DESIGN.md → Checks).
 
 ## When touching layout / type / padding
 
