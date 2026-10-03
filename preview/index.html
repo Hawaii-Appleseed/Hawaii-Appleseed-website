@@ -10,33 +10,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"/>
 
+  <link rel="stylesheet" href="../assets/tokens.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      /* Brand palette — Hawaiʻi Appleseed Brand Guide (Ash/Teal/Slate/Charcoal). */
-      --teal:       #84A98C;   /* Muted Teal — primary brand color */
-      --deep-teal:  #52796F;
-      --dark-slate: #354F52;
-      --charcoal:   #2F3E46;
-      --ash:        #CAD2C5;
-      --ash-light:  #E8EDE6;
-      --cream:      #F4F7F5;
-      --white:      #FFFFFF;
-
-      /* Motion tokens (shared system) */
-      --ease-out: cubic-bezier(.22, .61, .36, 1);
-      --dur-fast: .2s;
-      --dur-base: .4s;
-      --dur-slow: .6s;
-    }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family:OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif;
-      background: var(--white);
-      color: var(--charcoal);
+      background: var(--ha-white);
+      color: var(--ha-charcoal);
       overflow-x: hidden;
     }
 
@@ -97,12 +81,12 @@
       letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;
       padding:0.95rem 2rem;cursor:pointer;border:none;transition:all 0.28s ease;
     }
-    .btn-solid { background:var(--teal); color:var(--charcoal); }
-    .btn-solid:hover { background:var(--ash); }
-    .btn-ghost { background:transparent; color:var(--white); border:1px solid rgba(255,255,255,0.28); }
-    .btn-ghost:hover { border-color:var(--teal); color:var(--teal); }
-    .btn-dark { background:var(--charcoal); color:var(--white); }
-    .btn-dark:hover { background:var(--dark-slate); }
+    .btn-solid { background:var(--ha-teal); color:var(--ha-charcoal); }
+    .btn-solid:hover { background:var(--ha-ash); }
+    .btn-ghost { background:transparent; color:var(--ha-white); border:1px solid rgba(255,255,255,0.28); }
+    .btn-ghost:hover { border-color:var(--ha-teal); color:var(--ha-teal); }
+    .btn-dark { background:var(--ha-charcoal); color:var(--ha-white); }
+    .btn-dark:hover { background:var(--ha-slate); }
 
     /* Touch press feedback (rec E) — hover never fires on touch. */
     a, button { -webkit-tap-highlight-color: transparent; }
@@ -115,31 +99,31 @@
 
     .eyebrow {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-size:0.7rem;font-weight:600;
-      letter-spacing:0.28em;text-transform:uppercase;color:var(--teal);
+      letter-spacing:0.28em;text-transform:uppercase;color:var(--ha-teal);
       display:flex;align-items:center;gap:0.85rem;margin-bottom:2rem;
     }
-    .eyebrow::before { content:''; width:36px; height:1px; background:var(--teal); flex-shrink:0; }
+    .eyebrow::before { content:''; width:36px; height:1px; background:var(--ha-teal); flex-shrink:0; }
 
     .section-label {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-size:0.68rem;font-weight:600;
-      letter-spacing:0.28em;text-transform:uppercase;color:var(--teal);
+      letter-spacing:0.28em;text-transform:uppercase;color:var(--ha-teal);
       display:flex;align-items:center;gap:0.85rem;margin-bottom:1.1rem;
     }
-    .section-label::before { content:''; width:28px; height:1px; background:var(--teal); }
+    .section-label::before { content:''; width:28px; height:1px; background:var(--ha-teal); }
     .section-label.light { color:rgba(202,210,197,0.72); }
     .section-label.light::before { background:rgba(202,210,197,0.5); }
 
     .section-title {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:300;
-      font-size:clamp(2.2rem, 4vw, 3.5rem);line-height:1.15;color:var(--charcoal);
+      font-size:clamp(2.2rem, 4vw, 3.5rem);line-height:1.15;color:var(--ha-charcoal);
     }
-    .section-title.on-dark { color:var(--white); }
+    .section-title.on-dark { color:var(--ha-white); }
 
     .ways-header { display:flex; flex-direction:column; margin-bottom:4rem; }
 
     .way-link {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-size:0.72rem;font-weight:600;
-      letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);
+      letter-spacing:0.15em;text-transform:uppercase;color:var(--ha-teal);
       text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:gap 0.3s ease;
     }
     .way-link::after { content:'→'; }
@@ -149,7 +133,7 @@
        SECTION 1 — HERO (full-screen video)
     ───────────────────────────────────── */
     .ha-home__hero {
-      min-height:100vh;background:var(--charcoal);
+      min-height:100vh;background:var(--ha-charcoal);
       display:flex;flex-direction:column;justify-content:center;
       position:relative;overflow:hidden;
     }
@@ -182,9 +166,9 @@
     .ha-home__hero h1 {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:300;
       font-size:clamp(3.2rem, 7.5vw, 6.5rem);line-height:1.04;
-      color:var(--white);margin-bottom:2rem;
+      color:var(--ha-white);margin-bottom:2rem;
     }
-    .ha-home__hero h1 em { font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; color:var(--teal); }
+    .ha-home__hero h1 em { font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; color:var(--ha-teal); }
     .hero-sub {
       font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:1.05rem;font-weight:300;line-height:1.75;
       color:rgba(255,255,255,0.7);max-width:540px;margin-bottom:3rem;
@@ -194,7 +178,7 @@
     /* ─────────────────────────────────────
        SECTION 2 — MISSION BAND
     ───────────────────────────────────── */
-    .ha-home__mission { position:relative; background:var(--teal); padding:7rem 8% 6.5rem; text-align:center; }
+    .ha-home__mission { position:relative; background:var(--ha-teal); padding:7rem 8% 6.5rem; text-align:center; }
     /* organic curved top edge — the teal rises up out of the hero landscape */
     .ha-home__mission::before{
       content:""; position:absolute; left:-2%; right:-2%; top:-76px; height:78px;
@@ -204,64 +188,64 @@
     /* faint sprout watermark for depth (parallaxes behind the text) */
     .ha-home__mission-mark{
       position:absolute; left:50%; top:50%; width:min(52vw,400px); height:auto;
-      transform:translate(-50%,-50%); color:var(--deep-teal); opacity:.14;
+      transform:translate(-50%,-50%); color:var(--ha-teal-deep); opacity:.14;
       pointer-events:none; z-index:0; will-change:transform;
     }
     .ha-home__mission h2 {
       position:relative; z-index:1;
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:400;
-      font-size:clamp(2rem, 3.6vw, 3rem);line-height:1.3;color:var(--charcoal);
+      font-size:clamp(2rem, 3.6vw, 3rem);line-height:1.3;color:var(--ha-charcoal);
       max-width:26ch;margin:0 auto;
     }
     .ha-home__mission h2.reveal{ opacity:1; transform:none; }       /* h2 stays put; lines animate in */
     .ha-home__mission h2 .ln{ display:inline-block; opacity:0; transform:translateY(20px);
-      transition:opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+      transition:opacity .7s var(--ha-ease-out), transform .7s var(--ha-ease-out); }
     .ha-home__mission h2.is-in .ln{ opacity:1; transform:none; }
     .ha-home__mission h2.is-in .ln:nth-child(2){ transition-delay:.12s; }
     .ha-home__mission h2.is-in .ln:nth-child(3){ transition-delay:.24s; }
-    .ha-home__mission h2 em { font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; color:var(--dark-slate); position:relative; }
+    .ha-home__mission h2 em { font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; color:var(--ha-slate); position:relative; }
     .ha-home__mission h2 em::after{ content:""; position:absolute; left:0; right:0; bottom:-.04em; height:2px;
-      background:var(--dark-slate); transform:scaleX(0); transform-origin:left; transition:transform .7s var(--ease-out) .3s; }
+      background:var(--ha-slate); transform:scaleX(0); transform-origin:left; transition:transform .7s var(--ha-ease-out) .3s; }
     .ha-home__mission h2.is-in em::after{ transform:scaleX(1); }
 
     /* ─────────────────────────────────────
        SECTION 3 — ISSUE AREAS OVERVIEW (all five)
     ───────────────────────────────────── */
-    .ha-home__issues { background:var(--white); padding:7rem 8%; }
+    .ha-home__issues { background:var(--ha-white); padding:7rem 8%; }
     .ha-home__issue-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
     .ha-home__issue-card {
-      --accent:var(--deep-teal);
+      --accent:var(--ha-teal-deep);
       position:relative;display:flex;flex-direction:column;
-      background:var(--white);border:1px solid var(--ash-light);border-radius:4px;
+      background:var(--ha-white);border:1px solid var(--ha-ash-light);border-radius:4px;
       padding:2.5rem 2rem;text-decoration:none;overflow:hidden;
       transition:background .35s ease, border-color .35s ease, transform .25s ease;
     }
-    .ha-home__issue-card[data-accent="slate"] { --accent:var(--dark-slate); }
+    .ha-home__issue-card[data-accent="slate"] { --accent:var(--ha-slate); }
     .ha-home__issue-card::after {
       content:'';position:absolute;left:0;bottom:0;height:3px;width:0;
       background:var(--accent);transition:width .4s ease;
     }
-    .ha-home__issue-card:hover { background:var(--cream); border-color:var(--accent); }
+    .ha-home__issue-card:hover { background:var(--ha-bg); border-color:var(--accent); }
     .ha-home__issue-card:hover::after { width:100%; }
     .ha-home__issue-icon {
       display:inline-flex;width:50px;height:50px;align-items:center;justify-content:center;
-      background:var(--ash-light);border-radius:8px;color:var(--accent);margin-bottom:1.4rem;
+      background:var(--ha-ash-light);border-radius:8px;color:var(--accent);margin-bottom:1.4rem;
     }
     .ha-home__issue-icon svg { width:26px; height:26px; }
     .ha-home__issue-card h3 {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:500;font-size:1.5rem;
-      color:var(--charcoal);margin-bottom:0.6rem;line-height:1.2;
+      color:var(--ha-charcoal);margin-bottom:0.6rem;line-height:1.2;
     }
     .ha-home__issue-card p {
       font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:0.9rem;line-height:1.65;
-      color:var(--deep-teal);margin-bottom:1.4rem;flex:1;
+      color:var(--ha-teal-deep);margin-bottom:1.4rem;flex:1;
     }
     .ha-home__issue-card .way-link { color:var(--accent); }
 
     /* ─────────────────────────────────────
        SECTION 4 — IMPACT / DATA FEATURE
     ───────────────────────────────────── */
-    .ha-home__impact { background:var(--charcoal); padding:7rem 8%; position:relative; overflow:hidden; }
+    .ha-home__impact { background:var(--ha-charcoal); padding:7rem 8%; position:relative; overflow:hidden; }
     .ha-home__impact::before, .ha-home__impact::after {
       content:'';position:absolute;border-radius:50%;border:1px solid rgba(132,169,140,0.08);
     }
@@ -280,7 +264,7 @@
     .ha-home__stat-num {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:800;
       font-size:clamp(2.6rem, 4vw, 3.6rem);line-height:1;letter-spacing:-0.03em;
-      color:var(--ash);display:block;margin-bottom:0.4rem;
+      color:var(--ha-ash);display:block;margin-bottom:0.4rem;
     }
     .ha-home__stat-lbl {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-size:0.7rem;font-weight:600;
@@ -293,66 +277,66 @@
     .ha-home__dash:hover { border-color:rgba(132,169,140,0.55); transform:translateY(-3px); }
     .ha-home__dash img { width:100%; display:block; }
     .ha-home__dash-cta {
-      display:block;text-align:center;padding:1rem;background:var(--teal);color:var(--charcoal);
+      display:block;text-align:center;padding:1rem;background:var(--ha-teal);color:var(--ha-charcoal);
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;
     }
-    .ha-home__dash:hover .ha-home__dash-cta { background:var(--ash); }
+    .ha-home__dash:hover .ha-home__dash-cta { background:var(--ha-ash); }
 
     /* ─────────────────────────────────────
        SECTION 5 — STORY / WHO WE ARE
     ───────────────────────────────────── */
-    .ha-home__story { background:var(--cream); padding:7rem 8%; }
+    .ha-home__story { background:var(--ha-bg); padding:7rem 8%; }
     .ha-home__story-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
     .ha-home__story-media img {
       width:100%;height:100%;object-fit:cover;border-radius:4px;aspect-ratio:4/3;display:block;
     }
     .ha-home__story-text p {
       font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:1rem;line-height:1.85;
-      color:var(--deep-teal);margin:1.5rem 0 2rem;max-width:48ch;
+      color:var(--ha-teal-deep);margin:1.5rem 0 2rem;max-width:48ch;
     }
 
     /* ─────────────────────────────────────
        SECTION 6 — LATEST FROM HAWAIʻI APPLESEED
     ───────────────────────────────────── */
-    .ha-home__latest { background:var(--white); padding:7rem 8%; }
+    .ha-home__latest { background:var(--ha-white); padding:7rem 8%; }
     .ha-home__latest-head {
       display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;
       flex-wrap:wrap;margin-bottom:3rem;
     }
     .ha-home__latest-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
     .ha-home__latest-card {
-      display:flex;flex-direction:column;background:var(--white);
-      border:1px solid var(--ash-light);border-radius:4px;overflow:hidden;text-decoration:none;
+      display:flex;flex-direction:column;background:var(--ha-white);
+      border:1px solid var(--ha-ash-light);border-radius:4px;overflow:hidden;text-decoration:none;
       transition:transform .25s ease, box-shadow .25s ease;
     }
     .ha-home__latest-card:hover { transform:translateY(-4px); box-shadow:0 14px 36px rgba(47,62,70,0.1); }
-    .ha-home__latest-thumb { aspect-ratio:16/10; overflow:hidden; background:var(--ash-light); }
+    .ha-home__latest-thumb { aspect-ratio:16/10; overflow:hidden; background:var(--ha-ash-light); }
     .ha-home__latest-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
     .ha-home__latest-body { display:flex; flex-direction:column; flex:1; padding:1.6rem 1.5rem 1.8rem; }
     .ha-home__latest-meta { display:flex; align-items:center; gap:0.75rem; margin-bottom:0.8rem; flex-wrap:wrap; }
     .ha-home__latest-cat {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-size:0.65rem;font-weight:600;
-      letter-spacing:0.14em;text-transform:uppercase;color:var(--deep-teal);
+      letter-spacing:0.14em;text-transform:uppercase;color:var(--ha-teal-deep);
     }
     .ha-home__latest-date { font-family:OkinaManrope, 'Manrope',sans-serif;font-size:0.7rem;color:rgba(47,62,70,0.5); }
     .ha-home__latest-card h3 {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.25;
-      color:var(--charcoal);margin-bottom:0.6rem;
+      color:var(--ha-charcoal);margin-bottom:0.6rem;
     }
     .ha-home__latest-card p {
       font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:0.85rem;line-height:1.6;
-      color:var(--deep-teal);margin-bottom:1.2rem;flex:1;
+      color:var(--ha-teal-deep);margin-bottom:1.2rem;flex:1;
     }
     .ha-home__latest-loading {
       grid-column:1 / -1;padding:1.5rem 0;font-family:OkinaPoppins, 'Poppins',sans-serif;
-      font-size:0.92rem;color:var(--deep-teal);
+      font-size:0.92rem;color:var(--ha-teal-deep);
     }
-    .ha-home__latest-loading a { color:var(--deep-teal); }
+    .ha-home__latest-loading a { color:var(--ha-teal-deep); }
 
     /* ─────────────────────────────────────
        SECTION 7 — GET INVOLVED
     ───────────────────────────────────── */
-    .ha-home__involve { background:var(--dark-slate); padding:7rem 8%; }
+    .ha-home__involve { background:var(--ha-slate); padding:7rem 8%; }
     .ha-home__involve-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
     .ha-home__involve-card {
       position:relative;display:flex;flex-direction:column;
@@ -363,20 +347,20 @@
       content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background .35s ease;
     }
     .ha-home__involve-card:hover { background:rgba(132,169,140,0.08); border-color:rgba(132,169,140,0.5); }
-    .ha-home__involve-card:hover::before { background:var(--teal); }
+    .ha-home__involve-card:hover::before { background:var(--ha-teal); }
     .ha-home__involve-num {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:300;font-size:2.6rem;
       color:rgba(202,210,197,0.6);line-height:1;margin-bottom:1rem;
     }
     .ha-home__involve-card h3 {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:500;font-size:1.5rem;
-      color:var(--white);margin-bottom:0.7rem;
+      color:var(--ha-white);margin-bottom:0.7rem;
     }
     .ha-home__involve-card p {
       font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:0.9rem;line-height:1.7;
       color:rgba(255,255,255,0.55);margin-bottom:1.4rem;flex:1;
     }
-    .ha-home__involve-card .way-link { color:var(--teal); }
+    .ha-home__involve-card .way-link { color:var(--ha-teal); }
 
     /* ─────────────────────────────────────
        SECTION 8 — FOOTER (px-footer pattern)
@@ -435,7 +419,7 @@
     .ha-home__hero h1 em { position:relative; }
     .ha-home__hero h1 em::after{
       content:""; position:absolute; right:-.54em; top:.04em; width:.42em; height:.62em;
-      background-color:var(--teal); pointer-events:none;
+      background-color:var(--ha-teal); pointer-events:none;
       -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 40'><path d='M12 40 C3 28 3 12 12 0 C21 12 21 28 12 40 Z' fill='%23000'/></svg>") no-repeat center/contain;
               mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 40'><path d='M12 40 C3 28 3 12 12 0 C21 12 21 28 12 40 Z' fill='%23000'/></svg>") no-repeat center/contain;
       transform:scale(0) rotate(-28deg); transform-origin:bottom left;
@@ -463,11 +447,11 @@
        Hidden by default; <noscript> + reduced-motion force visible.
     ───────────────────────────────────── */
     .reveal { opacity:0; transform:translateY(18px);
-      transition:opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+      transition:opacity var(--ha-dur-slow) var(--ha-ease-out), transform var(--ha-dur-slow) var(--ha-ease-out); }
     .reveal.is-in { opacity:1; transform:none; }
     /* staggered group — direct children cascade in */
     .reveal-group > * { opacity:0; transform:translateY(18px);
-      transition:opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+      transition:opacity var(--ha-dur-slow) var(--ha-ease-out), transform var(--ha-dur-slow) var(--ha-ease-out); }
     .reveal-group.is-in > * { opacity:1; transform:none; }
     .reveal-group.is-in > *:nth-child(2){ transition-delay:.07s; }
     .reveal-group.is-in > *:nth-child(3){ transition-delay:.14s; }
@@ -485,7 +469,7 @@
     }
     .section-title.ha-linemask .lm-i{
       display:inline-block; transform:translateY(115%); opacity:0;
-      transition:transform .85s var(--ease-out), opacity .85s var(--ease-out);
+      transition:transform .85s var(--ha-ease-out), opacity .85s var(--ha-ease-out);
       will-change:transform;
     }
     .ways-header.is-in .section-title.ha-linemask .lm-i{ transform:none; opacity:1; }
@@ -555,11 +539,11 @@
   .px-scroll-progress{
     position:fixed;left:0;top:0;height:3px;width:100%;z-index:60;
     transform:scaleX(0);transform-origin:0 50%;will-change:transform;pointer-events:none;
-    background:linear-gradient(90deg,var(--teal),var(--deep-teal));
+    background:linear-gradient(90deg,var(--ha-teal),var(--ha-teal-deep));
   }
 
   /* 2 — Glass nav once the page scrolls */
-  .px-nav{transition:padding .3s var(--ease-out), background .3s var(--ease-out), box-shadow .3s var(--ease-out);}
+  .px-nav{transition:padding .3s var(--ha-ease-out), background .3s var(--ha-ease-out), box-shadow .3s var(--ha-ease-out);}
   .px-nav.is-scrolled{
     background:rgba(255,255,255,.82);
     -webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);
@@ -571,7 +555,7 @@
   }
 
   /* 3 — Issue-card cursor spotlight + per-card accent tint */
-  .ha-home__issue-card[data-accent="charcoal"]{ --accent:var(--charcoal); }
+  .ha-home__issue-card[data-accent="charcoal"]{ --accent:var(--ha-charcoal); }
   .ha-home__issue-card::before{
     content:'';position:absolute;inset:0;z-index:0;border-radius:inherit;
     opacity:0;pointer-events:none;transition:opacity .35s ease;
@@ -583,14 +567,14 @@
   .ha-home__issue-card > *{ position:relative; z-index:1; }
 
   /* 4 — Latest: thumbnail zoom on hover + skeleton shimmer loaders */
-  .ha-home__latest-thumb img{ transition:transform .5s var(--ease-out); }
+  .ha-home__latest-thumb img{ transition:transform .5s var(--ha-ease-out); }
   .ha-home__latest-card:hover .ha-home__latest-thumb img{ transform:scale(1.06); }
 
   .ha-home__latest-skel{
-    display:flex;flex-direction:column;background:var(--white);
-    border:1px solid var(--ash-light);border-radius:4px;overflow:hidden;
+    display:flex;flex-direction:column;background:var(--ha-white);
+    border:1px solid var(--ha-ash-light);border-radius:4px;overflow:hidden;
   }
-  .ha-home__latest-skel .sk{ position:relative;overflow:hidden;background:var(--ash-light); }
+  .ha-home__latest-skel .sk{ position:relative;overflow:hidden;background:var(--ha-ash-light); }
   .ha-home__latest-skel .sk::after{
     content:'';position:absolute;inset:0;transform:translateX(-100%);
     background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);
@@ -613,7 +597,7 @@
     pointer-events:none;transition:opacity .5s ease;animation:heroFade .8s ease 1.25s both;
   }
   .ha-home__hero-cue.is-hidden{ opacity:0; }
-  .ha-home__hero-cue svg{ width:22px;height:22px;animation:cueBounce 2s var(--ease-out) infinite; }
+  .ha-home__hero-cue svg{ width:22px;height:22px;animation:cueBounce 2s var(--ha-ease-out) infinite; }
   @keyframes cueBounce{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
   @media (max-width:700px){ .ha-home__hero-cue{ bottom:20px; } }
 </style>

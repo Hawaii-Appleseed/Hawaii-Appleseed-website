@@ -86,7 +86,7 @@ Pattern: `N. Author Last, First[, others], "Title," Publishing Org, Month DD, YY
 
 ## Step 5 — Render in the brand system
 
-Read `reference/brand.md` for exact tokens, type scale, spacing, and component CSS. Non-negotiables:
+Read `DESIGN.md` (repo root; tokens in `assets/tokens.css`) for exact tokens, type scale, spacing, and component CSS. Non-negotiables:
 
 - **Tokens are `--ha-*`, declared on a page namespace class, never on `:root`** — so the block can be pasted into Squarespace without leaking. New components must live inside the namespace or they get no tokens.
 - **`--ha-teal-deep: #52796F` is the workhorse accent** (not `--ha-teal: #84A98C`, which is lighter despite the name).

@@ -9,6 +9,7 @@
      PREVIEW-ONLY chrome (announce / nav / footer).
      Skip this block when copying into Squarespace.
      =========================================================== -->
+<link rel="stylesheet" href="assets/tokens.css">
 <style>
   html,body{margin:0;padding:0;background:#fff;}
   body{font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-serif;color:#2F3E46;}
@@ -173,15 +174,6 @@
 <style>
   /* ===== Brand-guide palette (scoped) ===== */
   .ha-issues{
-    --ha-ash:        #CAD2C5;
-    --ha-ash-light:  #E5E9E2;
-    --ha-teal:       #84A98C;
-    --ha-teal-deep:  #52796F;
-    --ha-slate:      #354F52;
-    --ha-charcoal:   #2F3E46;
-    --ha-white:      #FFFFFF;
-    --ha-rule:       rgba(53,79,82,.18);
-    --ha-rule-dark:  rgba(202,210,197,.18);
 
     font-family:OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif;
     color:var(--ha-charcoal);
@@ -352,23 +344,23 @@
     position:relative;
   }
   .ha-issues .ha-deep[data-color="tax-budget"]{
-    --section-bg: #F2F4EF;           /* very light ash — neutral, foundational */
+    --section-bg: var(--ha-tint-tax);           /* very light ash — neutral, foundational */
     --section-accent: var(--ha-slate);
   }
   .ha-issues .ha-deep[data-color="food"]{
-    --section-bg: #E6EFE9;           /* pale sage — organic, fresh */
+    --section-bg: var(--ha-tint-food);           /* pale sage — organic, fresh */
     --section-accent: var(--ha-teal-deep);
   }
   .ha-issues .ha-deep[data-color="housing"]{
-    --section-bg: #D9E2D8;           /* deeper ash-sage — grounded, home-like */
+    --section-bg: var(--ha-tint-housing);           /* deeper ash-sage — grounded, home-like */
     --section-accent: var(--ha-teal-deep);
   }
   .ha-issues .ha-deep[data-color="transit"]{
-    --section-bg: #E2E8E8;           /* pale slate — cool, infrastructural */
+    --section-bg: var(--ha-tint-transit);           /* pale slate — cool, infrastructural */
     --section-accent: var(--ha-slate);
   }
   .ha-issues .ha-deep[data-color="wages-labor"]{
-    --section-bg: #EDEDE5;           /* warm neutral — work, dignity */
+    --section-bg: var(--ha-tint-wages);           /* warm neutral — work, dignity */
     --section-accent: var(--ha-teal-deep);
   }
   /* Section-accent color cascades to eyebrow underline + focus number */

@@ -115,6 +115,10 @@ hub cards (`--section-bg` / `--section-accent`). If you want an issue to read as
 
 **When in doubt about a format change:** ask "would this make sense if applied to all five pages?" If no, the change probably belongs in a *content* block (where pages diverge), not the *structure*.
 
+## Design
+
+Spec: [`DESIGN.md`](DESIGN.md). Tokens: [`assets/tokens.css`](assets/tokens.css), linked from every page before its `<style>`. **No raw hex/rgba in page CSS — use `var(--ha-*)`;** add missing values to `tokens.css`, never per page. Exception: `squarespace-ready/` and `*squarespace*` snippets keep inline copies (Squarespace can't load the file).
+
 ## When touching layout / type / padding
 
 1. Open the page in a browser at **375px wide** (Chrome DevTools device emulation → iPhone SE or custom 375).
