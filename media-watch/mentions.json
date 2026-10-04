@@ -11,9 +11,11 @@
    "confidence": "high",
    "reasons": [
     "names Hawaiʻi Appleseed",
-    "staff: Will Caron, with Appleseed"
+    "staff: Will Caron, with Appleseed",
+    "staff: Will Caron only"
    ],
    "sources": [
+    "bing",
     "feed"
    ],
    "onSite": "",
@@ -28,10 +30,12 @@
    "firstSeen": "2026-10-04T10:35:28Z",
    "confidence": "high",
    "reasons": [
-    "names Hawaiʻi Appleseed"
+    "names Hawaiʻi Appleseed",
+    "search engine matched the phrase; article text not checked"
    ],
    "sources": [
-    "feed"
+    "feed",
+    "google"
    ],
    "onSite": "",
    "status": "new"
