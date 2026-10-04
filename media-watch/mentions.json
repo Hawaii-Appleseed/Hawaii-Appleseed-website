@@ -2,6 +2,41 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "e03b244fd00e",
+   "title": "Will Caron: Let There Be Irony",
+   "outlet": "Honolulu Civil Beat",
+   "url": "https://www.civilbeat.org/2026/10/will-caron-cartoon-heco/",
+   "published": "2026-10-04T10:01:00Z",
+   "firstSeen": "2026-10-04T10:35:28Z",
+   "confidence": "high",
+   "reasons": [
+    "names Hawaiʻi Appleseed",
+    "staff: Will Caron, with Appleseed"
+   ],
+   "sources": [
+    "feed"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
+   "id": "b1bfbbbe0aa5",
+   "title": "Underdog Gov Candidate Takes On The Democratic Machine — Again",
+   "outlet": "Honolulu Civil Beat",
+   "url": "https://www.civilbeat.org/2026/10/cordery-runs-against-hawaii-gov-josh-green/",
+   "published": "2026-10-04T10:01:00Z",
+   "firstSeen": "2026-10-04T10:35:28Z",
+   "confidence": "high",
+   "reasons": [
+    "names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "feed"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
    "id": "cabbf42c1dea",
    "title": "UH Mānoa grad students honored for character, integrity and commitment to harmony",
    "outlet": "hawaii.edu",
