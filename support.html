@@ -10,33 +10,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"/>
 
+  <link rel="stylesheet" href="assets/tokens.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      /* Brand palette — Hawaiʻi Appleseed Brand Guide (Ash/Teal/Slate/Charcoal). */
-      --teal:       #84A98C;   /* Muted Teal — primary brand color (was mockup #6B9E78) */
-      --deep-teal:  #52796F;
-      --dark-slate: #354F52;
-      --charcoal:   #2F3E46;
-      --ash:        #CAD2C5;
-      --ash-light:  #E8EDE6;
-      --cream:      #F4F7F5;
-      --white:      #FFFFFF;
-
-      /* Motion tokens (shared system) */
-      --ease-out: cubic-bezier(.22, .61, .36, 1);
-      --dur-fast: .2s;
-      --dur-base: .4s;
-      --dur-slow: .6s;
-    }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family:OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif;
-      background: var(--white);
-      color: var(--charcoal);
+      background: var(--ha-white);
+      color: var(--ha-charcoal);
       overflow-x: hidden;
     }
 
@@ -97,7 +81,7 @@
     ───────────────────────────────────── */
     .hero {
       min-height: 100vh;
-      background: var(--charcoal);
+      background: var(--ha-charcoal);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -217,7 +201,7 @@
       font-weight: 600;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--teal);
+      color: var(--ha-teal);
       display: flex;
       align-items: center;
       gap: 0.85rem;
@@ -226,7 +210,7 @@
     .eyebrow::before {
       content: '';
       width: 36px; height: 1px;
-      background: var(--teal);
+      background: var(--ha-teal);
       flex-shrink: 0;
     }
 
@@ -235,10 +219,10 @@
       font-size: clamp(3.2rem, 7.5vw, 6.5rem);
       font-weight: 300;
       line-height: 1.02;
-      color: var(--white);
+      color: var(--ha-white);
       margin-bottom: 2rem;
     }
-    .hero h1 em { font-style: italic; color: var(--teal); }
+    .hero h1 em { font-style: italic; color: var(--ha-teal); }
 
     .hero-sub {
       font-size: 1.05rem;
@@ -272,21 +256,21 @@
       transition: all 0.28s ease;
     }
     .btn-solid {
-      background: var(--teal);
-      color: var(--charcoal);
+      background: var(--ha-teal);
+      color: var(--ha-charcoal);
     }
-    .btn-solid:hover { background: var(--ash); }
+    .btn-solid:hover { background: var(--ha-ash); }
     .btn-ghost {
       background: transparent;
-      color: var(--white);
+      color: var(--ha-white);
       border: 1px solid rgba(255,255,255,0.28);
     }
-    .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+    .btn-ghost:hover { border-color: var(--ha-teal); color: var(--ha-teal); }
     .btn-dark {
-      background: var(--charcoal);
-      color: var(--white);
+      background: var(--ha-charcoal);
+      color: var(--ha-white);
     }
-    .btn-dark:hover { background: var(--dark-slate); }
+    .btn-dark:hover { background: var(--ha-slate); }
 
     /* Touch press feedback (rec E) — hover never fires on touch. */
     a, button { -webkit-tap-highlight-color: transparent; }
@@ -298,7 +282,7 @@
        MISSION BAND
     ───────────────────────────────────── */
     .mission-band {
-      background: var(--teal);
+      background: var(--ha-teal);
       padding: 5rem 8%;
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -311,13 +295,13 @@
       font-size: clamp(2rem, 3.5vw, 2.9rem);
       font-weight: 400;
       line-height: 1.25;
-      color: var(--charcoal);
+      color: var(--ha-charcoal);
     }
 
     .mission-band p {
       font-size: 0.98rem;
       line-height: 1.85;
-      color: var(--charcoal);
+      color: var(--ha-charcoal);
       font-weight: 300;
       opacity: 0.85;
     }
@@ -331,7 +315,7 @@
       font-weight: 600;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--teal);
+      color: var(--ha-teal);
       display: flex;
       align-items: center;
       gap: 0.85rem;
@@ -340,7 +324,7 @@
     .section-label::before {
       content: '';
       width: 28px; height: 1px;
-      background: var(--teal);
+      background: var(--ha-teal);
     }
     .section-label.light { color: rgba(202,210,197,0.7); }
     .section-label.light::before { background: rgba(202,210,197,0.5); }
@@ -350,16 +334,16 @@
       font-size: clamp(2.2rem, 4vw, 3.5rem);
       font-weight: 300;
       line-height: 1.15;
-      color: var(--charcoal);
+      color: var(--ha-charcoal);
     }
-    .section-title.on-dark { color: var(--white); }
+    .section-title.on-dark { color: var(--ha-white); }
 
     /* ─────────────────────────────────────
        WAYS TO SUPPORT (4 cards, 2x2)
     ───────────────────────────────────── */
     .ways-section {
       padding: 7rem 8%;
-      background: var(--white);
+      background: var(--ha-white);
     }
 
     .ways-header {
@@ -372,11 +356,11 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1.5px;
-      background: var(--ash-light);
+      background: var(--ha-ash-light);
     }
 
     .way-card {
-      background: var(--white);
+      background: var(--ha-white);
       padding: 3rem 2.8rem 3rem;
       position: relative;
       overflow: hidden;
@@ -387,17 +371,17 @@
       position: absolute;
       left: 0; bottom: 0;
       width: 0; height: 3px;
-      background: var(--teal);
+      background: var(--ha-teal);
       transition: width 0.4s ease;
     }
-    .way-card:hover { background: var(--cream); }
+    .way-card:hover { background: var(--ha-bg); }
     .way-card:hover::after { width: 100%; }
 
     .way-num {
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 3.5rem;
       font-weight: 300;
-      color: var(--ash);
+      color: var(--ha-ash);
       line-height: 1;
       margin-bottom: 1.2rem;
       display: block;
@@ -407,7 +391,7 @@
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 1.55rem;
       font-weight: 500;
-      color: var(--charcoal);
+      color: var(--ha-charcoal);
       margin-bottom: 0.9rem;
       line-height: 1.2;
     }
@@ -415,7 +399,7 @@
     .way-card p {
       font-size: 0.9rem;
       line-height: 1.75;
-      color: var(--deep-teal);
+      color: var(--ha-teal-deep);
       font-weight: 400;
       margin-bottom: 1.6rem;
     }
@@ -426,7 +410,7 @@
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--teal);
+      color: var(--ha-teal);
       text-decoration: none;
       display: inline-flex;
       align-items: center;
@@ -440,7 +424,7 @@
        IMPACT / GIVING
     ───────────────────────────────────── */
     .giving-section {
-      background: var(--charcoal);
+      background: var(--ha-charcoal);
       padding: 7rem 8%;
       position: relative;
       overflow: hidden;
@@ -497,7 +481,7 @@
       background: rgba(132,169,140,0.07);
     }
     .giving-card:hover::before,
-    .giving-card.featured::before { background: var(--teal); }
+    .giving-card.featured::before { background: var(--ha-teal); }
 
     .giving-card.featured .badge {
       display: block;
@@ -511,8 +495,8 @@
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--charcoal);
-      background: var(--teal);
+      color: var(--ha-charcoal);
+      background: var(--ha-teal);
       padding: 0.2rem 0.55rem;
     }
 
@@ -520,7 +504,7 @@
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 2.6rem;
       font-weight: 300;
-      color: var(--white);
+      color: var(--ha-white);
       line-height: 1;
       margin-bottom: 0.2rem;
     }
@@ -528,7 +512,7 @@
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 0.7rem;
       font-weight: 500;
-      color: var(--teal);
+      color: var(--ha-teal);
       letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-bottom: 1.2rem;
@@ -538,7 +522,7 @@
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 1.1rem;
       font-style: italic;
-      color: var(--ash);
+      color: var(--ha-ash);
       margin-bottom: 0.9rem;
     }
     .giving-desc {
@@ -554,7 +538,7 @@
       font-family:OkinaManrope, 'Manrope', sans-serif;
       padding: 0.65rem;
       border: 1px solid rgba(132,169,140,0.38);
-      color: var(--ash);
+      color: var(--ha-ash);
       font-size: 0.72rem;
       font-weight: 600;
       letter-spacing: 0.1em;
@@ -564,18 +548,17 @@
     }
     .giving-card.featured .giving-btn,
     .giving-card:hover .giving-btn {
-      background: var(--teal);
-      border-color: var(--teal);
-      color: var(--charcoal);
+      background: var(--ha-teal);
+      border-color: var(--ha-teal);
+      color: var(--ha-charcoal);
     }
-
 
     /* ─────────────────────────────────────
        POLICY PRIORITIES
     ───────────────────────────────────── */
     .policy-section {
       padding: 7rem 8%;
-      background: var(--cream);
+      background: var(--ha-bg);
     }
 
     .policy-header {
@@ -589,7 +572,7 @@
     .policy-header p {
       font-size: 0.98rem;
       line-height: 1.8;
-      color: var(--deep-teal);
+      color: var(--ha-teal-deep);
       font-weight: 400;
       margin-bottom: 2rem;
     }
@@ -617,7 +600,7 @@
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--teal);
+      color: var(--ha-teal);
       padding-top: 0.2rem;
       line-height: 1.5;
     }
@@ -626,7 +609,7 @@
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 1.3rem;
       font-weight: 500;
-      color: var(--charcoal);
+      color: var(--ha-charcoal);
       margin-bottom: 0.4rem;
       line-height: 1.25;
     }
@@ -634,7 +617,7 @@
     .issue-item p {
       font-size: 0.88rem;
       line-height: 1.7;
-      color: var(--deep-teal);
+      color: var(--ha-teal-deep);
       font-weight: 400;
     }
 
@@ -642,7 +625,7 @@
        COMMUNITY VOICE / QUOTE
     ───────────────────────────────────── */
     .voice-section {
-      background: var(--dark-slate);
+      background: var(--ha-slate);
       padding: 8rem 8%;
       position: relative;
       overflow: hidden;
@@ -674,15 +657,15 @@
       font-weight: 300;
       font-style: italic;
       line-height: 1.5;
-      color: var(--white);
+      color: var(--ha-white);
       margin-bottom: 2rem;
     }
 
-    .voice-inner blockquote em { color: var(--teal); font-style: normal; }
+    .voice-inner blockquote em { color: var(--ha-teal); font-style: normal; }
 
     .voice-rule {
       width: 48px; height: 1px;
-      background: var(--teal);
+      background: var(--ha-teal);
       margin: 0 auto 1.2rem;
     }
 
@@ -699,7 +682,7 @@
        FOOTER (mockup's own — kept per design)
     ───────────────────────────────────── */
     .site-footer {
-      background: var(--charcoal);
+      background: var(--ha-charcoal);
       padding: 2.8rem 8%;
       display: flex;
       justify-content: space-between;
@@ -712,7 +695,7 @@
     .footer-name {
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 1.05rem;
-      color: var(--teal);
+      color: var(--ha-teal);
       letter-spacing: 0.02em;
     }
 
@@ -730,7 +713,7 @@
       text-decoration: none;
       transition: color 0.25s;
     }
-    .footer-nav a:hover { color: var(--teal); }
+    .footer-nav a:hover { color: var(--ha-teal); }
 
     /* ─────────────────────────────────────
        ANIMATIONS
@@ -749,10 +732,10 @@
        Hidden by default; <noscript> + reduced-motion force visible.
     ───────────────────────────────────── */
     .reveal { opacity:0; transform:translateY(18px);
-      transition:opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+      transition:opacity var(--ha-dur-slow) var(--ha-ease-out), transform var(--ha-dur-slow) var(--ha-ease-out); }
     .reveal.is-in { opacity:1; transform:none; }
     .reveal-group > * { opacity:0; transform:translateY(18px);
-      transition:opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+      transition:opacity var(--ha-dur-slow) var(--ha-ease-out), transform var(--ha-dur-slow) var(--ha-ease-out); }
     .reveal-group.is-in > * { opacity:1; transform:none; }
     .reveal-group.is-in > *:nth-child(2){ transition-delay:.07s; }
     .reveal-group.is-in > *:nth-child(3){ transition-delay:.14s; }

@@ -36,6 +36,8 @@ mkdir -p "$P/corpus/writing-bot" "$P/corpus/assets"
 mkdir -p "$P/.claude-plugin"   # without a manifest the folder isn't loaded as a plugin
 printf '{"name": "appleseed-writing", "description": "House voice, testimony and report skills (eval build)"}\n' > "$P/.claude-plugin/plugin.json"
 rsync -a --exclude __pycache__ "$REPO/.claude/skills/" "$P/skills/"
+# The org brand skill (uploaded to Claude.ai as a zip, not shipped in the plugin) for the brand-* cases.
+rsync -a --exclude .DS_Store "$REPO/brand-skill/appleseed-brand" "$P/skills/"
 rsync -a --exclude results --exclude README.md --exclude _scaffold.sh "$REPO/evals/skills/" "$P/evals/"
 for c in "$P"/evals/*/; do install -m 755 "$REPO/evals/skills/_scaffold.sh" "$c/_scaffold.sh"; done
 cp "$REPO/writing-bot/positions.md" "$REPO/writing-bot/requirements.txt" "$P/corpus/writing-bot/"

@@ -1,0 +1,56 @@
+name: Design system
+
+# Guards DESIGN.md / assets/tokens.css and the brand skill built from them:
+#  - lint: no NEW raw hex/rgba/hsl colours or px font-sizes in changed lines of
+#    *.html / *.css (tokens.css and Squarespace paste-ins excluded) —
+#    scripts/lint_design_tokens.py
+#  - tokens: WCAG AA contrast table in DESIGN.md is current, chart palettes stay
+#    colour-blind safe — scripts/check_design_tokens.py
+#  - brand skill: brand-skill/appleseed-brand/ + .zip rebuilt from DESIGN.md and
+#    tokens.css, SKILL.md hexes are tokens — scripts/build_brand_skill.py
+# All stdlib Python, no installs. Fix locally with the same commands (DESIGN.md → Checks).
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    paths:
+      - "**.html"
+      - "**.css"
+      - "DESIGN.md"
+      - "brand-skill/**"
+      - "evals/skills/brand-*/**"
+      - "scripts/lint_design_tokens.py"
+      - "scripts/check_design_tokens.py"
+      - "scripts/build_brand_skill.py"
+      - ".github/workflows/design-system.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  design-system:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Lint changed lines for raw colours / px font sizes
+        env:
+          # PR: diff against the base branch. Push: against the previous tip
+          # (all-zeros on a new branch, so fall back to main).
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ -z "$BASE" ] || ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then BASE=origin/main; fi
+          python scripts/lint_design_tokens.py --base "$BASE" --committed
+      - name: Contrast table + chart palettes
+        if: always()
+        run: python scripts/check_design_tokens.py --check
+      - name: Brand skill + zip are current
+        if: always()
+        run: python scripts/build_brand_skill.py --check
