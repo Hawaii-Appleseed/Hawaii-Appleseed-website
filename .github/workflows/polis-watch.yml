@@ -55,18 +55,15 @@ jobs:
             *)  echo "::error::polis_watch.py failed (exit $code)"; exit 1 ;;
           esac
 
+      - name: Date
+        id: today
+        run: echo "d=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
       - name: Commit the snapshot
-        run: |
-          git config user.name  "polis-watch[bot]"
-          git config user.email "polis-watch@users.noreply.github.com"
-          git add tax-fairness/data/polis
-          if git diff --cached --quiet; then
-            echo "snapshot unchanged"
-            exit 0
-          fi
-          git commit -m "polis: refresh TFC poll snapshot $(date -u +%Y-%m-%d)"
-          git pull --rebase --autostash origin main || true
-          git push origin HEAD:main
+        uses: ./.github/actions/commit-push
+        with:
+          paths: tax-fairness/data/polis
+          message: "polis: refresh TFC poll snapshot ${{ steps.today.outputs.d }}"
 
       - name: Report
         if: steps.watch.outputs.changed == 'true'

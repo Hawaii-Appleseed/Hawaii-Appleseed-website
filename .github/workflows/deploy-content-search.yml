@@ -156,26 +156,8 @@ jobs:
 
       - name: Push bundle to staff-updates-internal
         if: steps.gate.outputs.go == 'true'
-        working-directory: hub
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add content-search/data content-search/api.json content-search/test/fixtures.json
-          if git diff --cached --quiet; then
-            echo "nothing to commit (force run reproduced an identical bundle)"
-          else
-            git commit -m "content-search: rebuild data bundle"
-            pushed=false
-            for attempt in 1 2 3; do
-              if git pull --rebase --autostash origin main && git push; then
-                pushed=true
-                break
-              fi
-              echo "push attempt $attempt failed; retrying"
-              sleep 5
-            done
-            if [ "$pushed" != "true" ]; then
-              echo "::error::could not push the rebuilt bundle after 3 attempts"
-              exit 1
-            fi
-          fi
+        uses: ./website/.github/actions/commit-push
+        with:
+          working-directory: hub
+          paths: content-search/data content-search/api.json content-search/test/fixtures.json
+          message: "content-search: rebuild data bundle"
