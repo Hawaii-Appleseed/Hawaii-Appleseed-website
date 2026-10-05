@@ -103,24 +103,10 @@ jobs:
       - name: Commit new corpus files
         id: commit
         if: steps.scrape.outputs.new_files != '0'
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add writing-bot/
-          if git diff --cached --quiet; then
-            echo "scraper reported new files but tree is unchanged — nothing to commit"
-            echo "pushed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          git commit -m "corpus: ingest ${{ steps.scrape.outputs.new_files }} new file(s) from hiappleseed.org"
-          # sync-publications.yml commits news.json/publications.json on its own
-          # nightly schedule; rebase rather than fail if it landed first.
-          for attempt in 1 2 3; do
-            git pull --rebase --autostash origin main && git push && break
-            echo "push attempt $attempt failed; retrying"
-            sleep 5
-          done
-          echo "pushed=true" >> "$GITHUB_OUTPUT"
+        uses: ./.github/actions/commit-push
+        with:
+          paths: writing-bot/
+          message: "corpus: ingest ${{ steps.scrape.outputs.new_files }} new file(s) from hiappleseed.org"
 
       # GITHUB_TOKEN pushes don't fire deploy-content-search.yml's `on: push`.
       # Dispatch it so the search bundle actually rebuilds; it handles the

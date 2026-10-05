@@ -1,0 +1,53 @@
+name: Commit and push
+description: >
+  Commit the given paths if they changed and push to the checked-out branch,
+  rebasing over pushes that landed meanwhile (other scheduled jobs push to main
+  too). Fails the job if the push never lands.
+inputs:
+  paths:
+    description: Space-separated paths to stage. Missing ones are skipped.
+    required: true
+  message:
+    description: Commit message.
+    required: true
+  working-directory:
+    description: Repository to commit in.
+    default: "."
+outputs:
+  pushed:
+    description: "'true' if a commit was pushed, 'false' if nothing changed."
+    value: ${{ steps.push.outputs.pushed }}
+runs:
+  using: composite
+  steps:
+    - id: push
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        PATHS: ${{ inputs.paths }}
+        MESSAGE: ${{ inputs.message }}
+      run: |
+        git config user.name  "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        for p in $PATHS; do
+          if [ -e "$p" ] || git ls-files --error-unmatch -- "$p" >/dev/null 2>&1; then
+            git add -A -- "$p"
+          fi
+        done
+        if git diff --cached --quiet; then
+          echo "nothing to commit"
+          echo "pushed=false" >> "$GITHUB_OUTPUT"
+          exit 0
+        fi
+        git commit -q -m "$MESSAGE"
+        branch=$(git symbolic-ref --short HEAD)
+        for attempt in 1 2 3; do
+          if git pull -q --rebase --autostash origin "$branch" && git push -q origin "HEAD:$branch"; then
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "push attempt $attempt failed; retrying"
+          sleep $((attempt * 5))
+        done
+        echo "::error::could not push to $branch after 3 attempts"
+        exit 1
