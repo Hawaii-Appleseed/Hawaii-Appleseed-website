@@ -13,8 +13,8 @@
 - **Static hosting**: GitHub Pages or drop-in to existing site.
 - **Publishing to Squarespace goes through `--go`**, always:
   `python3 scripts/squarespace.py <target> --go`. It is the preferred and only
-  route — it rebuilds, commits, pushes, waits for the Pages deploy, checks the
-  live page first, and hands you a snippet that drives the editor. Do **not**
+  route — it rebuilds, checks the live page first, commits, pushes, drives
+  Chrome to the page's Code Block and pastes with a real Cmd+V. Do **not**
   hand-run the strip/encode/pbcopy recipe, hand-paste from `squarespace-ready/`,
   or drive the editor ad hoc; those are how stale and half-published pages
   happen. `--status` shows which live pages have drifted from the repo.

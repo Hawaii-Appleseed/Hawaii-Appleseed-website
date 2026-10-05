@@ -48,18 +48,10 @@ Output cites sources inline (`[1]`, `[2]`) and lists them at the end. The bot is
 
 ## Daily use
 
-### Source search UI (no API key, $0)
+### Source search
 
-A local search tool over the whole corpus — semantic + keyword, with links back
-to the source. No AI generation, so it needs no API key and costs nothing per
-query. Good when you want to *find the right prior passage and write it yourself*.
-
-```bash
-./run_search.sh          # opens localhost:8501
-```
-
-Runs on local MiniLM embeddings + BM25 + a local cross-encoder rerank. The
-launcher unsets `OPENAI_API_KEY` so it always uses the local (free) index.
+The search UI is Content Search, in `Hawaii-Appleseed/staff-updates-internal`
+(built from this folder by `deploy-content-search.yml`).
 
 ### Build the index (first run, and after adding new docs)
 

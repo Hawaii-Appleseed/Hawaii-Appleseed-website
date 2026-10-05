@@ -52,34 +52,6 @@ through the CLI — no per-page code needed.
 (`python3 scripts/build_squarespace.py` alone still works and only rebuilds
 `squarespace-ready/`.)
 
-### Fully automated publish (no clipboard, no DevTools)
-
-`scripts/publish_squarespace.py` does the whole thing — rebuild, open the
-editor, replace the Code Block, click SAVE:
-
-```bash
-.venv/bin/python scripts/publish_squarespace.py --login          # once, ever
-.venv/bin/python scripts/publish_squarespace.py our-team --dry-run
-.venv/bin/python scripts/publish_squarespace.py our-team
-```
-
-`--login` opens Chrome so you can sign in to Squarespace once; the session
-lives in `.sqs-profile/` (gitignored) and is reused from then on. It drives
-the Google Chrome already installed on the machine, in its own profile
-directory, so it never fights your running browser.
-
-After that, one command per page. `--dry-run` does everything except the
-final SAVE click and leaves the window open to inspect. The payload is
-injected straight from the local file, so this needs **no push and no Pages
-round trip** — unlike `--snippet` below.
-
-If SAVE comes back greyed out, that is not a failure: the live page already
-matched the payload byte for byte.
-
-Page targets map to sidebar titles in `PAGE_TITLES` (filename != slug !=
-title — `our-story` is "Our History", `food-security` is "Food Equity"); an
-unknown target falls back to the live site's own title for that slug.
-
 ### One command: `--go`
 
 ```bash
@@ -195,7 +167,7 @@ There is no per-page URL to open instead, which is why the snippet does the
 navigating: Squarespace 7.1 keeps the URL at `/config/pages` no matter which
 page is selected, and `/config/<slug>` redirects to Home — both verified live.
 The snippet finds the page by its **sidebar title**, which comes from
-`PAGE_TITLES` in `publish_squarespace.py` (filename ≠ live slug ≠ sidebar
+`PAGE_TITLES` in `squarespace.py` (filename ≠ live slug ≠ sidebar
 title), falling back to the live site's own title for the slug. A target with no
 known title still works — open the page yourself first, and the snippet skips
 straight to the EDIT/paste steps.
@@ -204,44 +176,6 @@ Every step it can't do it names, so you do that one by hand and re-run the
 snippet; the later steps still run. The two cases worth knowing: more than one
 Code Block on the page, or a sidebar title that matches more than one row
 (*Media* and *Blog* each appear twice — under Main Navigation and Not Linked).
-
-### Pasting from the browser (no manual copy/paste)
-
-Payloads run 15–126 KB, which is miserable to hand-paste. `--snippet` skips it:
-
-```bash
-python3 scripts/squarespace.py our-team --snippet
-```
-
-That puts a one-line **console snippet** on the clipboard which pulls the
-payload straight from GitHub Pages and drops it into the open Code Block
-editor. Then:
-
-1. Squarespace → the page → **EDIT** → double-click the Code Block. Its editor
-   opens on the right; leave **Display Source Code OFF**.
-2. DevTools (`Cmd+Opt+I`) → Console → paste the snippet → Enter. It prints
-   `pasted N chars` and the **SAVE** button lights up.
-3. Eyeball it, then click **SAVE** yourself.
-
-Because the snippet reads from Pages, **push first** — `--snippet` checks the
-served bytes against your local file and warns loudly if Pages is stale, so a
-forgotten push can't silently re-paste the old payload.
-
-Two things that look broken but aren't: the block renders a grey *"embedded
-scripts are disabled"* placeholder while you're logged in and editing (use
-Preview or a logged-out window), and pasting identical content leaves SAVE
-greyed out — that means the page already matches the repo.
-
-Mechanics, in case it ever breaks: the editor is **CodeMirror 6** and exposes
-no `EditorView` on the DOM, so the snippet drives the two events CM6 itself
-listens for — a synthetic `Mod-A` keydown (its keymap selects the whole
-*state*; a DOM Selection can't, since CM6 only renders visible lines) then a
-synthetic `paste` carrying a `DataTransfer`. Squarespace's change tracking
-does observe that paste. Three things that do **not** work: a real `Cmd+V`
-(automation key events don't drive a native paste), `navigator.clipboard.
-readText()` (needs a focused tab plus a one-time permission grant, and hangs
-the tab while the prompt is up), and `fetch` to a `localhost` server (Private
-Network Access blocks it and the promise never settles).
 
 ### 2. GitHub Pages sub-sites
 
