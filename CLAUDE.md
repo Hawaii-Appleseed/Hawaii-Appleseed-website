@@ -18,7 +18,8 @@
   hand-run the strip/encode/pbcopy recipe, hand-paste from `squarespace-ready/`,
   or drive the editor ad hoc; those are how stale and half-published pages
   happen. `--status` shows which live pages have drifted from the repo.
-  The final **SAVE click stays human** — that click is the publish.
+  `--go` clicks SAVE itself and then checks the live page; running it is the
+  publish, so only run it when the page should go live.
 
 ## Orientation
 
