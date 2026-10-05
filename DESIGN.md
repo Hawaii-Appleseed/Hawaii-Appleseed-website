@@ -26,7 +26,7 @@ Source of truth upstream: *Hawaiʻi Appleseed Brand Guide (April 2026 v1.0)*. A 
 
 **Naming trap:** `--ha-teal-deep` (#52796F) is the *darker* one and the workhorse — it outnumbers `--ha-teal` about 4:1.
 
-**Squarespace exception:** `squarespace-ready/` and the `*squarespace*` inject snippets are pasted into Squarespace, which can't load `assets/tokens.css`, so they keep an inline token block scoped to the page namespace class (`.ha-tax { --ha-charcoal: … }`). Keep those copies in step with `tokens.css` by hand.
+**Squarespace exception:** Squarespace can't load `assets/tokens.css`, so `scripts/build_squarespace.py` inlines it into every `squarespace-ready/` payload — nothing to keep in step by hand. The hand-authored `*squarespace*` inject snippets still carry their own inline copies.
 
 **Consolidation (Oct 2026, branch `design-tokens`):** the per-page pasted blocks were deleted. Drift resolved to the values above: `--ha-rule` .18→.14 (board, issues, our-mission(-light), our-story(-light), our-team); `--ha-bg` #F6F8F5→#F4F7F4 (publications, addon-policies). `index.html`, `support.html`, `preview/` and the hero prototypes moved from the old unprefixed names (`--teal --deep-teal --dark-slate --charcoal --ash --ash-light --cream --white --ease-out --dur-*`) to `--ha-*`; `--cream` #F4F7F5→`--ha-bg` #F4F7F4 and `--ash-light` #E8EDE6→#E5E9E2.
 
@@ -219,9 +219,9 @@ WCAG 2.2 AA, measured from the tokens by `python3 scripts/check_design_tokens.py
 
 ## Components
 
-**Naming:** BEM with a per-page namespace — `.ha-{slug}__{block}[-{element}][--{modifier}]`. Namespaces: `ha-tax` `ha-housing` `ha-food` `ha-transit` `ha-wages` `ha-issues` `ha-pub`. Shared chrome uses flat `px-*` (`px-announce`, `px-nav`, `px-links`, `px-dropdown`, `px-donate-btn`, `px-footer`).
+**Naming:** BEM with a per-page namespace — `.ha-{slug}__{block}[-{element}][--{modifier}]`. Namespaces: `ha-topic` (all five issue deep-dives, styled by `assets/issue-page.css`) `ha-issues` `ha-pub`. Shared chrome uses flat `px-*` (`px-announce`, `px-nav`, `px-links`, `px-dropdown`, `px-donate-btn`, `px-footer`).
 
-Anchor rules need a specificity boost to survive Squarespace: `.ha-tax a.ha-tax__cta-btn`, not `.ha-tax__cta-btn`.
+Anchor rules need a specificity boost to survive Squarespace: `.ha-topic a.ha-topic__cta-btn`, not `.ha-topic__cta-btn`.
 
 **Eyebrow** — the most repeated pattern (8 variants):
 ```css
@@ -266,7 +266,7 @@ __bar-note, __compare-source {
   text-align:center; font-size:13–14px; font-style:italic;
   color:rgba(47,62,70,.55–.7); max-width:560px; margin:0 auto; }
 ```
-Real markup: `<p class="ha-tax__bar-note">Source: Institute on Taxation and Economic Policy, <em>Who Pays?</em> — Hawaiʻi state and local taxes, 2024.</p>`
+Real markup: `<p class="ha-topic__bar-note">Source: Institute on Taxation and Economic Policy, <em>Who Pays?</em> — Hawaiʻi state and local taxes, 2024.</p>`
 
 **Glossary tooltip** — `__term` (`border-bottom:1px dotted; cursor:help`) + `__term-tip` (charcoal bubble, 260px → 220px mobile, 12.5px → 12px), on hover **and** `:focus` with `tabindex="0"`. Copy this accessibility pattern.
 

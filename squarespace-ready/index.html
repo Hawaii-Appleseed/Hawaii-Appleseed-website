@@ -6,6 +6,114 @@
           make sure "Display Source" is OFF > Save.
      NOTE: the real homepage hero (big headline + parallax) with a Squarespace-fit height override; everything below is the live homepage. Video controls sit bottom-left with a seek scrubber.
      ===================================================================== -->
+<style>
+:root {
+  --ha-charcoal:   #2F3E46;  
+  --ha-slate:      #354F52;  
+  --ha-teal-deep:  #52796F;  
+  --ha-teal:       #84A98C;  
+  --ha-ash:        #CAD2C5;  
+  --ha-ash-light:  #E5E9E2;  
+  --ha-bg:         #F4F7F4;  
+  --ha-white:      #FFFFFF;
+  --ha-ink-muted:  rgba(47,62,70,.78);  
+  --ha-ink-subtle: rgba(47,62,70,.65);  
+  --ha-rule:       rgba(53,79,82,.14);   
+  --ha-rule-dark:  rgba(202,210,197,.18); 
+  --ha-rule-light: rgba(202,210,197,.30); 
+  --ha-tint-tax:     #F2F4EF;
+  --ha-tint-food:    #E6EFE9;
+  --ha-tint-housing: #D9E2D8;
+  --ha-tint-transit: #E2E8E8;
+  --ha-tint-wages:   #EDEDE5;
+  --ha-ease-out:  cubic-bezier(.22,.61,.36,1);
+  --ha-dur-fast:  .2s;
+  --ha-dur-base:  .4s;
+  --ha-dur-slow:  .6s;
+  --ha-font-display: OkinaManrope, 'Manrope', Arial, sans-serif;
+  --ha-font-body:    OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif;
+  --ha-fs-micro:     10.5px; 
+  --ha-fs-eyebrow:   11px;   
+  --ha-fs-caption:   13px;   
+  --ha-fs-small:     14px;   
+  --ha-fs-body:      15.5px; 
+  --ha-fs-lead:      17px;   
+  --ha-fs-h5:        18px;   
+  --ha-fs-stat-sm:   22px;   
+  --ha-fs-h4:        24px;   
+  --ha-fs-h3:        26px;   
+  --ha-fs-stat:      28px;   
+  --ha-fs-h2:        38px;   
+  --ha-fs-h2-lg:     44px;   
+  --ha-fs-cta:       clamp(30px, 4.2vw, 48px);
+  --ha-fs-display:   54px;   
+  --ha-fs-hero:      78px;   
+  --ha-lh-display: 1;
+  --ha-lh-heading: 1.15;
+  --ha-lh-snug:    1.3;
+  --ha-lh-small:   1.55;
+  --ha-lh-body:    1.65;
+  --ha-track-hero:    -.035em;
+  --ha-track-display: -.02em;
+  --ha-track-tight:   -.01em;
+  --ha-track-button:  .04em;
+  --ha-track-eyebrow: .22em;
+  --ha-space-3xs: 4px;
+  --ha-space-2xs: 8px;
+  --ha-space-xs:  12px;  
+  --ha-space-sm:  16px;  
+  --ha-space-md:  20px;  
+  --ha-space-lg:  28px;  
+  --ha-space-xl:  36px;  
+  --ha-space-2xl: 48px;  
+  --ha-space-3xl: 56px;  
+  --ha-space-4xl: 72px;
+  --ha-space-5xl: 80px;  
+  --ha-space-6xl: 96px;  
+  --ha-gutter:    var(--ha-space-xl);   
+  --ha-section-y: var(--ha-space-5xl);  
+  --ha-container: 1200px;
+  --ha-measure:   680px;
+  --ha-radius-pill:    999px;
+  --ha-radius-card:    8px;
+  --ha-radius-panel:   6px;
+  --ha-radius-callout: 4px;
+  --ha-chart-cat-1: #52796F;  
+  --ha-chart-cat-2: #2F3E46;  
+  --ha-chart-cat-3: #BF8A30;  
+  --ha-chart-cat-4: #6A8CC4;  
+  --ha-chart-cat-5: #A85A45;  
+  --ha-chart-cat-6: #84A98C;  
+  --ha-chart-seq-1: #E5E9E2;
+  --ha-chart-seq-2: #B4C9B6;
+  --ha-chart-seq-3: #84A98C;
+  --ha-chart-seq-4: #6B917D;
+  --ha-chart-seq-5: #52796F;
+  --ha-chart-seq-6: #405B5A;
+  --ha-chart-seq-7: #2F3E46;
+  --ha-chart-div-1: #2B4A45;
+  --ha-chart-div-2: #52796F;
+  --ha-chart-div-3: #A9C3B3;
+  --ha-chart-div-4: #F2F0EA;
+  --ha-chart-div-5: #E0BF85;
+  --ha-chart-div-6: #B07A35;
+  --ha-chart-div-7: #6E4524;
+  --ha-chart-muted: #CAD2C5;  
+  --ha-chart-grid:  rgba(53,79,82,.14);  
+}
+@media (max-width: 700px) {
+  :root {
+    --ha-fs-body:    15px;
+    --ha-fs-lead:    15px;
+    --ha-fs-h2:      28px;
+    --ha-fs-h2-lg:   28px;
+    --ha-fs-display: 30px;
+    --ha-fs-hero:    48px;
+    --ha-gutter:     var(--ha-space-md);
+    --ha-section-y:  var(--ha-space-3xl);
+  }
+}
+</style>
 <!-- BEGIN ha-home -->
 <div id="ha-home-embed">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,30 +132,13 @@
 
     :where(#ha-home-embed, #ha-home-embed *, #ha-home-embed *::before, #ha-home-embed *::after) { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      /* Brand palette \2014  Hawai\2bb i Appleseed Brand Guide (Ash/Teal/Slate/Charcoal). */
-      --teal:       #84A98C;   /* Muted Teal \2014  primary brand color */
-      --deep-teal:  #52796F;
-      --dark-slate: #354F52;
-      --charcoal:   #2F3E46;
-      --ash:        #CAD2C5;
-      --ash-light:  #E8EDE6;
-      --cream:      #F4F7F5;
-      --white:      #FFFFFF;
-
-      /* Motion tokens (shared system) */
-      --ease-out: cubic-bezier(.22, .61, .36, 1);
-      --dur-fast: .2s;
-      --dur-base: .4s;
-      --dur-slow: .6s;
-    }
 
     
 
     #ha-home-embed {
       font-family:OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif;
-      background: var(--white);
-      color: var(--charcoal);
+      background: var(--ha-white);
+      color: var(--ha-charcoal);
       overflow-x: hidden;
     }
 
@@ -108,12 +199,12 @@
       letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;
       padding:0.95rem 2rem;cursor:pointer;border:none;transition:all 0.28s ease;
     }
-    .btn-solid { background:var(--teal); color:var(--charcoal); }
-    .btn-solid:hover { background:var(--ash); }
-    .btn-ghost { background:transparent; color:var(--white); border:1px solid rgba(255,255,255,0.28); }
-    .btn-ghost:hover { border-color:var(--teal); color:var(--teal); }
-    .btn-dark { background:var(--charcoal); color:var(--white); }
-    .btn-dark:hover { background:var(--dark-slate); }
+    .btn-solid { background:var(--ha-teal); color:var(--ha-charcoal); }
+    .btn-solid:hover { background:var(--ha-ash); }
+    .btn-ghost { background:transparent; color:var(--ha-white); border:1px solid rgba(255,255,255,0.28); }
+    .btn-ghost:hover { border-color:var(--ha-teal); color:var(--ha-teal); }
+    .btn-dark { background:var(--ha-charcoal); color:var(--ha-white); }
+    .btn-dark:hover { background:var(--ha-slate); }
 
     /* Touch press feedback (rec E) \2014  hover never fires on touch. */
     #ha-home-embed a, #ha-home-embed button { -webkit-tap-highlight-color: transparent; }
@@ -126,31 +217,31 @@
 
     .eyebrow {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-size:0.7rem;font-weight:600;
-      letter-spacing:0.28em;text-transform:uppercase;color:var(--teal);
+      letter-spacing:0.28em;text-transform:uppercase;color:var(--ha-teal);
       display:flex;align-items:center;gap:0.85rem;margin-bottom:2rem;
     }
-    .eyebrow::before { content:''; width:36px; height:1px; background:var(--teal); flex-shrink:0; }
+    .eyebrow::before { content:''; width:36px; height:1px; background:var(--ha-teal); flex-shrink:0; }
 
     .section-label {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-size:0.8rem;font-weight:600;
-      letter-spacing:0.28em;text-transform:uppercase;color:var(--teal);
+      letter-spacing:0.28em;text-transform:uppercase;color:var(--ha-teal);
       display:flex;align-items:center;gap:0.85rem;margin-bottom:1.1rem;
     }
-    .section-label::before { content:''; width:28px; height:1px; background:var(--teal); }
+    .section-label::before { content:''; width:28px; height:1px; background:var(--ha-teal); }
     .section-label.light { color:rgba(202,210,197,0.72); }
     .section-label.light::before { background:rgba(202,210,197,0.5); }
 
     .section-title {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:300;
-      font-size:clamp(2.2rem, 4vw, 3.5rem);line-height:1.15;color:var(--charcoal);
+      font-size:clamp(2.2rem, 4vw, 3.5rem);line-height:1.15;color:var(--ha-charcoal);
     }
-    .section-title.on-dark { color:var(--white); }
+    .section-title.on-dark { color:var(--ha-white); }
 
     .ways-header { display:flex; flex-direction:column; margin-bottom:4rem; }
 
     .way-link {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-size:0.72rem;font-weight:600;
-      letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);
+      letter-spacing:0.15em;text-transform:uppercase;color:var(--ha-teal);
       text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:gap 0.3s ease;
     }
     .way-link::after { content:'\2192 '; }
@@ -161,15 +252,15 @@
     .ha-home__issues .ways-header.reveal{ opacity:1; transform:none; }   /* children animate, not the block */
     .ha-home__issues .ways-header .section-label{
       opacity:0; transform:translateY(10px);
-      transition:opacity .5s var(--ease-out), transform .5s var(--ease-out);
+      transition:opacity .5s var(--ha-ease-out), transform .5s var(--ha-ease-out);
     }
     .ha-home__issues .ways-header.is-in .section-label{ opacity:1; transform:none; }
     .ha-home__issues .section-title em{
-      font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:400; color:var(--deep-teal);
+      font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:400; color:var(--ha-teal-deep);
     }
     .ha-home__issues .section-title .ha-ways-w{
       display:inline-block; opacity:0; transform:translateY(.5em);
-      transition:opacity .55s var(--ease-out), transform .55s var(--ease-out);
+      transition:opacity .55s var(--ha-ease-out), transform .55s var(--ha-ease-out);
     }
     .ha-home__issues .ways-header.is-in .section-title .ha-ways-w{ opacity:1; transform:none; }
 
@@ -262,15 +353,15 @@
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:400;
       /* Tall; tuned so it wraps to four lines across desktop widths. */
       font-size:clamp(2.5rem, 5vw, 5rem);line-height:1.08;letter-spacing:-0.012em;
-      color:var(--white);margin-bottom:0;
+      color:var(--ha-white);margin-bottom:0;
       text-shadow:0 2px 28px rgba(18,26,30,0.32);
     }
     .ha-home__hero h1 em {
-      font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; color:var(--teal);
+      font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; color:var(--ha-teal);
       text-shadow:0 2px 22px rgba(132,169,140,0.45);
       background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 226 34' preserveAspectRatio='none'%3E%3Cpath d='M8 26 C 58 18 116 30 166 23 C 198 19 216 22 220 25' fill='none' stroke='%2384A98C' stroke-width='4' stroke-linecap='round'/%3E%3Cg transform='translate(62,24) rotate(-48) scale(0.95)'%3E%3Cpath d='M0 0 L 3 0' stroke='%2384A98C' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M3 0 C 7 -3 13 -4 20 0 C 13 4 7 3 3 0 Z' fill='%2384A98C' fill-opacity='0.78'/%3E%3Cpath d='M5 0 Q 12 0.6 19 0' fill='none' stroke='%2333453a' stroke-width='0.7' opacity='0.32'/%3E%3C/g%3E%3Cg transform='translate(150,22) rotate(-32) scale(0.8)'%3E%3Cpath d='M0 0 L 3 0' stroke='%2384A98C' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M3 0 C 7 -3 13 -4 20 0 C 13 4 7 3 3 0 Z' fill='%2384A98C' fill-opacity='0.78'/%3E%3Cpath d='M5 0 Q 12 0.6 19 0' fill='none' stroke='%2333453a' stroke-width='0.7' opacity='0.32'/%3E%3C/g%3E%3C/svg%3E") no-repeat left bottom / 0% 0.42em;
       padding-bottom:.1em;
-      animation:thriveUnderline .7s var(--ease-out) 1.05s both;
+      animation:thriveUnderline .7s var(--ha-ease-out) 1.05s both;
     }
     @keyframes thriveUnderline { from { background-size:0% 0.42em; } to { background-size:100% 0.42em; } }
     .hero-sub {
@@ -284,7 +375,7 @@
        Desktop: absolute on the right with a big arc carved into its left edge. */
     .ha-home__hero-media{
       position:relative; width:100%; height:44vh; z-index:1;
-      background:var(--dark-slate); overflow:hidden;
+      background:var(--ha-slate); overflow:hidden;
     }
     /* Stacked (mobile) band: exact 16:9 so the full video frame is visible.
        The 44vh height above stays as the fallback for older browsers. */
@@ -335,7 +426,7 @@
           0 0 72px rgba(132,169,140,.26),
           0 0 0 1px rgba(132,169,140,.14);
         transition:box-shadow .9s ease, border-color .9s ease;
-        animation:heroMediaFade 1s var(--ease-out) both;
+        animation:heroMediaFade 1s var(--ha-ease-out) both;
       }
       .ha-home__hero-media .ha-home__hero-ctrls{ bottom:16px; }
       .ha-home__hero-arc-wrap, .ha-home__hero-arc{ display:none; }
@@ -366,7 +457,7 @@
        viewport. Fades in only once the player is actually playing, so the
        rainbow poster covers the brief YouTube load. */
     .ha-home__hero-media .ha-home__hero-video{
-      z-index:1; overflow:hidden; background:var(--dark-slate);
+      z-index:1; overflow:hidden; background:var(--ha-slate);
       opacity:0; transition:opacity .6s ease;
     }
     .ha-home__hero-media .ha-home__hero-video.is-playing{ opacity:1; }
@@ -406,7 +497,7 @@
     }
     .ha-home__hero-scrub.is-visible{ opacity:1; visibility:visible; }
     .ha-home__hero-scrub:hover{ height:9px; }
-    .ha-home__hero-scrub-fill{ height:100%; width:0%; background:var(--teal); transition:width .2s linear; }
+    .ha-home__hero-scrub-fill{ height:100%; width:0%; background:var(--ha-teal); transition:width .2s linear; }
     .ha-home__hero-ctrls.is-visible{ opacity:1; visibility:visible; }
     /* Watermark-like by default: dimmed pill (opacity + lighter background/
        border/shadow alpha) so the controls read as unobtrusive overlays
@@ -417,7 +508,7 @@
       display:inline-flex; align-items:center; gap:.5rem;
       padding:.5rem .8rem;
       font-family:OkinaManrope, 'Manrope',sans-serif; font-size:.8rem; font-weight:600; letter-spacing:.01em;
-      color:var(--white);
+      color:var(--ha-white);
       background:rgba(24,34,39,0.32);
       -webkit-backdrop-filter:blur(8px) saturate(1.2); backdrop-filter:blur(8px) saturate(1.2);
       border:1px solid rgba(255,255,255,0.18); border-radius:999px;
@@ -428,7 +519,7 @@
     .ha-home__hero-pause, .ha-home__hero-audio{ padding:.5rem .55rem; }
     .ha-home__hero-audio:hover, .ha-home__hero-pause:hover{ background:rgba(24,34,39,0.55); transform:translateY(-1px); opacity:1; }
     .ha-home__hero-audio:focus-visible, .ha-home__hero-pause:focus-visible{ opacity:1; }
-    .ha-home__hero-audio:focus-visible, .ha-home__hero-pause:focus-visible{ outline:2px solid var(--teal); outline-offset:2px; }
+    .ha-home__hero-audio:focus-visible, .ha-home__hero-pause:focus-visible{ outline:2px solid var(--ha-teal); outline-offset:2px; }
     .ha-home__hero-audio svg, .ha-home__hero-pause svg{ width:18px; height:18px; display:block; flex:none; }
     .ha-home__hero-audio .icon-on{ display:none; }
     .ha-home__hero-audio.is-on .icon-muted{ display:none; }
@@ -446,7 +537,7 @@
       position:absolute; z-index:3; top:16px; right:16px;
       display:inline-flex; align-items:center; justify-content:center;
       padding:.5rem .55rem;
-      color:var(--white);
+      color:var(--ha-white);
       background:rgba(24,34,39,0.32);
       -webkit-backdrop-filter:blur(8px) saturate(1.2); backdrop-filter:blur(8px) saturate(1.2);
       border:1px solid rgba(255,255,255,0.18); border-radius:999px;
@@ -455,7 +546,7 @@
       transition:background .2s ease, transform .2s ease, opacity .2s ease;
     }
     .ha-home__hero-open:hover{ background:rgba(24,34,39,0.55); transform:translateY(-1px); opacity:1; }
-    .ha-home__hero-open:focus-visible{ outline:2px solid var(--teal); outline-offset:2px; opacity:1; }
+    .ha-home__hero-open:focus-visible{ outline:2px solid var(--ha-teal); outline-offset:2px; opacity:1; }
     .ha-home__hero-open svg{ width:18px; height:18px; display:block; flex:none; }
     @media (max-width:700px){
       /* Pin to the actual bottom-left corner. The old 60px lifted them to
@@ -496,7 +587,7 @@
     /* faint sprout watermark for depth (parallaxes behind the text) */
     .ha-home__mission-mark{
       position:absolute; left:50%; top:50%; width:min(52vw,400px); height:auto;
-      transform:translate(-50%,-50%); color:var(--teal); opacity:.08;
+      transform:translate(-50%,-50%); color:var(--ha-teal); opacity:.08;
       pointer-events:none; z-index:0; will-change:transform;
     }
     .ha-home__mission h2 {
@@ -508,13 +599,13 @@
     }
     .ha-home__mission h2.reveal{ opacity:1; transform:none; }       /* h2 stays put; lines animate in */
     .ha-home__mission h2 .ln{ display:inline-block; opacity:0; transform:translateY(20px);
-      transition:opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+      transition:opacity .7s var(--ha-ease-out), transform .7s var(--ha-ease-out); }
     .ha-home__mission h2.is-in .ln{ opacity:1; transform:none; }
     .ha-home__mission h2.is-in .ln:nth-child(2){ transition-delay:.12s; }
     .ha-home__mission h2.is-in .ln:nth-child(3){ transition-delay:.24s; }
-    .ha-home__mission h2 em { font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; color:var(--ash); position:relative; }
+    .ha-home__mission h2 em { font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; color:var(--ha-ash); position:relative; }
     .ha-home__mission h2 em::after{ content:""; position:absolute; left:0; right:0; bottom:-.04em; height:2px;
-      background:var(--ash); transform:scaleX(0); transform-origin:left; transition:transform .7s var(--ease-out) .3s; }
+      background:var(--ha-ash); transform:scaleX(0); transform-origin:left; transition:transform .7s var(--ha-ease-out) .3s; }
     .ha-home__mission h2.is-in em::after{ transform:scaleX(1); }
     /* gentle liquid float \2014  each word drifts on a slow traveling wave */
     .ha-home__mission h2 .wv{ display:inline-block; animation:missionFloat 4.5s ease-in-out infinite; will-change:transform; }
@@ -524,51 +615,51 @@
     /* \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 
        SECTION 3 \2014  ISSUE AREAS OVERVIEW (all five)
     \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500  */
-    .ha-home__issues { background:var(--white); padding:5.5rem 8%; }
+    .ha-home__issues { background:var(--ha-white); padding:5.5rem 8%; }
     /* 6-col base so 5 cards lay out as a centered 3 + 2 (each card spans 2). */
     .ha-home__issue-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:1.5rem; }
     .ha-home__issue-card {
-      --accent:var(--deep-teal);
+      --accent:var(--ha-teal-deep);
       grid-column:span 2;
       position:relative;display:flex;flex-direction:column;
-      background:var(--white);border:1px solid var(--ash-light);border-radius:18px;
+      background:var(--ha-white);border:1px solid var(--ha-ash-light);border-radius:18px;
       padding:2.4rem 2rem 2rem;text-decoration:none;overflow:hidden;
       box-shadow:0 1px 2px rgba(47,62,70,.04);
-      transition:background .35s ease, border-color .35s ease, box-shadow .4s var(--ease-out), transform .25s ease;
+      transition:background .35s ease, border-color .35s ease, box-shadow .4s var(--ha-ease-out), transform .25s ease;
     }
     .ha-home__issue-card:nth-child(4){ grid-column:2 / span 2; }   /* centre the second row */
-    .ha-home__issue-card[data-accent="slate"] { --accent:var(--dark-slate); }
+    .ha-home__issue-card[data-accent="slate"] { --accent:var(--ha-slate); }
     .ha-home__issue-card::after {
       content:'';position:absolute;left:0;bottom:0;height:3px;width:0;z-index:1;
-      background:var(--accent);transition:width .5s var(--ease-out);
+      background:var(--accent);transition:width .5s var(--ha-ease-out);
     }
-    .ha-home__issue-card:hover { background:var(--cream); border-color:var(--accent); box-shadow:0 18px 40px rgba(47,62,70,.14); }
+    .ha-home__issue-card:hover { background:var(--ha-bg); border-color:var(--accent); box-shadow:0 18px 40px rgba(47,62,70,.14); }
     .ha-home__issue-card:hover::after { width:100%; }
     .ha-home__issue-icon {
       display:inline-flex;width:56px;height:56px;align-items:center;justify-content:center;
-      background:var(--ash-light);
-      background:color-mix(in srgb, var(--accent) 13%, var(--white));
+      background:var(--ha-ash-light);
+      background:color-mix(in srgb, var(--accent) 13%, var(--ha-white));
       border-radius:15px;color:var(--accent);margin-bottom:1.4rem;
-      transition:background .35s var(--ease-out), color .35s ease, transform .45s var(--ease-out);
+      transition:background .35s var(--ha-ease-out), color .35s ease, transform .45s var(--ha-ease-out);
     }
-    .ha-home__issue-icon svg { width:27px; height:27px; transition:transform .45s var(--ease-out); }
+    .ha-home__issue-icon svg { width:27px; height:27px; transition:transform .45s var(--ha-ease-out); }
     .ha-home__issue-card:hover .ha-home__issue-icon{ background:var(--accent); color:#fff; transform:translateY(-3px) scale(1.07); }
     .ha-home__issue-card:hover .ha-home__issue-icon svg{ transform:scale(1.05); }
     .ha-home__issue-card h3 {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;font-size:1.5rem;
-      color:var(--charcoal);margin-bottom:0.6rem;line-height:1.2;transition:color .3s ease;
+      color:var(--ha-charcoal);margin-bottom:0.6rem;line-height:1.2;transition:color .3s ease;
     }
     .ha-home__issue-card:hover h3{ color:var(--accent); }
     .ha-home__issue-card p {
       font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:1.02rem;line-height:1.65;
-      color:var(--deep-teal);margin-bottom:1.4rem;flex:1;
+      color:var(--ha-teal-deep);margin-bottom:1.4rem;flex:1;
     }
     .ha-home__issue-card .way-link { color:var(--accent); }
 
     /* \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 
        SECTION 4 \2014  IMPACT / DATA FEATURE
     \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500  */
-    .ha-home__impact { background:var(--charcoal); padding:5.5rem 8%; position:relative; overflow:hidden; }
+    .ha-home__impact { background:var(--ha-charcoal); padding:5.5rem 8%; position:relative; overflow:hidden; }
     .ha-home__impact::before, .ha-home__impact::after {
       content:'';position:absolute;border-radius:50%;border:1px solid rgba(132,169,140,0.08);
     }
@@ -614,10 +705,10 @@
     .ha-home__dash:hover { border-color:rgba(132,169,140,0.55); transform:translateY(-3px); }
     .ha-home__dash img { width:100%; display:block; }
     .ha-home__dash-cta {
-      display:block;text-align:center;padding:1rem;background:var(--teal);color:var(--charcoal);
+      display:block;text-align:center;padding:1rem;background:var(--ha-teal);color:var(--ha-charcoal);
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;
     }
-    .ha-home__dash:hover .ha-home__dash-cta { background:var(--ash); }
+    .ha-home__dash:hover .ha-home__dash-cta { background:var(--ha-ash); }
 
     /* Secondary tool \2014  deliberately subordinate to the Budget Tracker card
        above: horizontal layout with a small thumb (not a full-bleed preview),
@@ -647,7 +738,7 @@
       font-family:OkinaPoppins, 'Poppins',sans-serif; font-weight:300; font-size:0.85rem;
       color:rgba(255,255,255,0.45); text-decoration:none; transition:color .3s ease;
     }
-    .ha-home__more-all:hover { color:var(--teal); }
+    .ha-home__more-all:hover { color:var(--ha-teal); }
     .ha-home__more-card {
       display:flex; gap:1rem; align-items:center; padding:0.85rem;
       border:1px solid rgba(132,169,140,0.2); border-radius:4px;
@@ -677,9 +768,9 @@
     }
     .ha-home__more-link {
       font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600; font-size:0.7rem;
-      letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-top:0.15rem;
+      letter-spacing:0.1em; text-transform:uppercase; color:var(--ha-teal); margin-top:0.15rem;
     }
-    .ha-home__more-card:hover .ha-home__more-link { color:var(--ash); }
+    .ha-home__more-card:hover .ha-home__more-link { color:var(--ha-ash); }
 
     @media (min-width:1081px){
       /* Asymmetric on purpose \2014  equal columns read as "two columns, one of them
@@ -712,7 +803,7 @@
       }
       .ha-home__more-card:hover{ background:none; transform:none; }
       .ha-home__more-card:active{ transform:none; }
-      .ha-home__more-card:hover .ha-home__more-title{ color:var(--ash); }
+      .ha-home__more-card:hover .ha-home__more-title{ color:var(--ha-ash); }
       .ha-home__more-thumb{ flex:0 0 124px; width:124px; }
       /* Unboxed here, so the cards need more air than the boxed stack does. */
       .ha-home__more-card + .ha-home__more-card { margin-top:1.6rem; }
@@ -735,58 +826,58 @@
     /* \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 
        SECTION 5 \2014  STORY / WHO WE ARE
     \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500  */
-    .ha-home__story { background:var(--cream); padding:5.5rem 8%; }
+    .ha-home__story { background:var(--ha-bg); padding:5.5rem 8%; }
     .ha-home__story-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
     .ha-home__story-media img {
       width:100%;height:100%;object-fit:cover;border-radius:4px;aspect-ratio:4/3;display:block;
     }
     .ha-home__story-text p {
       font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:1rem;line-height:1.85;
-      color:var(--deep-teal);margin:1.5rem 0 2rem;max-width:48ch;
+      color:var(--ha-teal-deep);margin:1.5rem 0 2rem;max-width:48ch;
     }
 
     /* \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 
        SECTION 6 \2014  LATEST FROM HAWAI\2bb I APPLESEED
     \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500  */
-    .ha-home__latest { background:var(--ash-light); padding:5.5rem 8%; }
+    .ha-home__latest { background:var(--ha-ash-light); padding:5.5rem 8%; }
     .ha-home__latest-head {
       display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;
       flex-wrap:wrap;margin-bottom:3rem;
     }
     .ha-home__latest-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
     .ha-home__latest-card {
-      display:flex;flex-direction:column;background:var(--white);
-      border:1px solid var(--ash-light);border-radius:4px;overflow:hidden;text-decoration:none;
+      display:flex;flex-direction:column;background:var(--ha-white);
+      border:1px solid var(--ha-ash-light);border-radius:4px;overflow:hidden;text-decoration:none;
       transition:transform .25s ease, box-shadow .25s ease;
     }
     .ha-home__latest-card:hover { transform:translateY(-4px); box-shadow:0 14px 36px rgba(47,62,70,0.1); }
-    .ha-home__latest-thumb { aspect-ratio:16/10; overflow:hidden; background:var(--ash-light); }
+    .ha-home__latest-thumb { aspect-ratio:16/10; overflow:hidden; background:var(--ha-ash-light); }
     .ha-home__latest-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
     .ha-home__latest-body { display:flex; flex-direction:column; flex:1; padding:1.6rem 1.5rem 1.8rem; }
     .ha-home__latest-meta { display:flex; align-items:center; gap:0.75rem; margin-bottom:0.8rem; flex-wrap:wrap; }
     .ha-home__latest-cat {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-size:0.74rem;font-weight:600;
-      letter-spacing:0.14em;text-transform:uppercase;color:var(--deep-teal);
+      letter-spacing:0.14em;text-transform:uppercase;color:var(--ha-teal-deep);
     }
     .ha-home__latest-date { font-family:OkinaManrope, 'Manrope',sans-serif;font-size:0.8rem;color:rgba(47,62,70,0.5); }
     .ha-home__latest-card h3 {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:500;font-size:1.3rem;line-height:1.25;
-      color:var(--charcoal);margin-bottom:0.6rem;
+      color:var(--ha-charcoal);margin-bottom:0.6rem;
     }
     .ha-home__latest-card p {
       font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:0.98rem;line-height:1.6;
-      color:var(--deep-teal);margin-bottom:1.2rem;flex:1;
+      color:var(--ha-teal-deep);margin-bottom:1.2rem;flex:1;
     }
     .ha-home__latest-loading {
       grid-column:1 / -1;padding:1.5rem 0;font-family:OkinaPoppins, 'Poppins',sans-serif;
-      font-size:0.92rem;color:var(--deep-teal);
+      font-size:0.92rem;color:var(--ha-teal-deep);
     }
-    .ha-home__latest-loading a { color:var(--deep-teal); }
+    .ha-home__latest-loading a { color:var(--ha-teal-deep); }
 
     /* \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 
        SECTION 7 \2014  GET INVOLVED
     \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500  */
-    .ha-home__involve { background:var(--dark-slate); padding:5.5rem 8%; }
+    .ha-home__involve { background:var(--ha-slate); padding:5.5rem 8%; }
     .ha-home__involve-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
     .ha-home__involve-card {
       position:relative;display:flex;flex-direction:column;
@@ -797,20 +888,20 @@
       content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background .35s ease;
     }
     .ha-home__involve-card:hover { background:rgba(132,169,140,0.08); border-color:rgba(132,169,140,0.5); }
-    .ha-home__involve-card:hover::before { background:var(--teal); }
+    .ha-home__involve-card:hover::before { background:var(--ha-teal); }
     .ha-home__involve-num {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:300;font-size:2.6rem;
       color:rgba(202,210,197,0.6);line-height:1;margin-bottom:1rem;
     }
     .ha-home__involve-card h3 {
       font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:500;font-size:1.58rem;
-      color:var(--white);margin-bottom:0.7rem;
+      color:var(--ha-white);margin-bottom:0.7rem;
     }
     .ha-home__involve-card p {
       font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:1.02rem;line-height:1.7;
       color:rgba(255,255,255,0.55);margin-bottom:1.4rem;flex:1;
     }
-    .ha-home__involve-card .way-link { color:var(--teal); }
+    .ha-home__involve-card .way-link { color:var(--ha-teal); }
 
     /* \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 
        SECTION 8 \2014  FOOTER (px-footer pattern)
@@ -871,7 +962,7 @@
     .ha-home__hero h1 em { position:relative; }
     .ha-home__hero h1 em::after{
       content:""; position:absolute; right:-.78em; top:.16em; width:.5em; height:.54em;
-      background-color:var(--teal); pointer-events:none;
+      background-color:var(--ha-teal); pointer-events:none;
       -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 30'><path d='M14 28 C 14 20 14 14 14 8' stroke='%23000' stroke-width='1.8' fill='none' stroke-linecap='round'/><path d='M14 12 C 6 11 3 5 7 1 C 12 3 15 7 14 12 Z' fill='%23000'/><path d='M14 16 C 21 15 25 10 22 5 C 17 7 14 11 14 16 Z' fill='%23000' fill-opacity='0.75'/></svg>") no-repeat center/contain;
               mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 30'><path d='M14 28 C 14 20 14 14 14 8' stroke='%23000' stroke-width='1.8' fill='none' stroke-linecap='round'/><path d='M14 12 C 6 11 3 5 7 1 C 12 3 15 7 14 12 Z' fill='%23000'/><path d='M14 16 C 21 15 25 10 22 5 C 17 7 14 11 14 16 Z' fill='%23000' fill-opacity='0.75'/></svg>") no-repeat center/contain;
       transform:scale(0) rotate(-28deg); transform-origin:bottom left;
@@ -879,10 +970,10 @@
     }
 
     /* Hero CTA buttons: sliding arrow + a snappy transform for the magnetic tilt (JS). */
-    .ha-home__hero .hero-actions .btn{ border-radius:7px; transition:transform .18s var(--ease-out), background .28s ease, border-color .28s ease, color .28s ease, box-shadow .3s var(--ease-out); will-change:transform; }
-    .ha-home__hero .btn-solid:hover{ background:var(--teal); transform:translateY(-2px); box-shadow:0 12px 28px rgba(132,169,140,.34); }
+    .ha-home__hero .hero-actions .btn{ border-radius:7px; transition:transform .18s var(--ha-ease-out), background .28s ease, border-color .28s ease, color .28s ease, box-shadow .3s var(--ha-ease-out); will-change:transform; }
+    .ha-home__hero .btn-solid:hover{ background:var(--ha-teal); transform:translateY(-2px); box-shadow:0 12px 28px rgba(132,169,140,.34); }
     .ha-home__hero .btn-ghost{ border-color:rgba(255,255,255,.34); }
-    .ha-home__hero .btn-ghost:hover{ background:rgba(255,255,255,.07); border-color:var(--teal); color:var(--teal); transform:translateY(-2px); }
+    .ha-home__hero .btn-ghost:hover{ background:rgba(255,255,255,.07); border-color:var(--ha-teal); color:var(--ha-teal); transform:translateY(-2px); }
     .ha-home__hero .btn-arr{ display:inline-block; margin-left:.45em; transition:transform .25s ease; }
     .ha-home__hero .btn-ghost:hover .btn-arr{ transform:translateX(5px); }
 
@@ -900,10 +991,10 @@
        it promptly \2014  the .5s dashoffset retract happens invisibly behind the
        faded stroke \2014  which keeps moving cursor between the two buttons snappy. */
     .ha-home__hero .ha-btn-vine .vine-stem{
-      fill:none; stroke:var(--deep-teal); stroke-width:1.5; stroke-linecap:round;
+      fill:none; stroke:var(--ha-teal-deep); stroke-width:1.5; stroke-linecap:round;
       vector-effect:non-scaling-stroke;
       opacity:0; stroke-dasharray:1; stroke-dashoffset:1;
-      transition:stroke-dashoffset .5s var(--ease-out), opacity .2s ease;
+      transition:stroke-dashoffset .5s var(--ha-ease-out), opacity .2s ease;
     }
     /* leaves \2014  inner <g> scales from its own base so the outer positioning
        transform (translate+rotate on the wrapper <g>) is preserved. */
@@ -912,14 +1003,14 @@
       transform-box:fill-box; transform-origin:0 50%;
       transition:opacity .2s ease, transform .34s cubic-bezier(.34,1.4,.5,1);
     }
-    .ha-home__hero .ha-btn-vine .vine-leaf path{ fill:var(--deep-teal); }
+    .ha-home__hero .ha-btn-vine .vine-leaf path{ fill:var(--ha-teal-deep); }
     /* central leaf vein \2014  a hairline that reads the shape as a leaf, not a blob */
     .ha-home__hero .ha-btn-vine .vine-leaf .vine-vein{
       fill:none; stroke:rgba(255,255,255,.5); stroke-width:.7;
       vector-effect:non-scaling-stroke; stroke-linecap:round;
     }
-    .ha-home__hero .btn-ghost .ha-btn-vine .vine-stem{ stroke:var(--teal); }
-    .ha-home__hero .btn-ghost .ha-btn-vine .vine-leaf path{ fill:var(--teal); }
+    .ha-home__hero .btn-ghost .ha-btn-vine .vine-stem{ stroke:var(--ha-teal); }
+    .ha-home__hero .btn-ghost .ha-btn-vine .vine-leaf path{ fill:var(--ha-teal); }
     .ha-home__hero .hero-actions .btn:hover .ha-btn-vine .vine-stem{ opacity:.62; stroke-dashoffset:0; }
     .ha-home__hero .hero-actions .btn:hover .ha-btn-vine .vine-leaf{ opacity:.62; transform:scale(1); }
     @media (prefers-reduced-motion: reduce){
@@ -981,11 +1072,11 @@
         position:absolute; z-index:1; pointer-events:none; overflow:visible; display:none;
       }
       .ha-home__hero-trace rect{
-        fill:none; stroke:var(--teal); stroke-width:2.6;
+        fill:none; stroke:var(--ha-teal); stroke-width:2.6;
         vector-effect:non-scaling-stroke;
         filter:drop-shadow(0 0 7px rgba(132,169,140,.95));
         opacity:0; stroke-dasharray:1; stroke-dashoffset:1;
-        transition:stroke-dashoffset 1.7s var(--ease-out), opacity .6s ease;
+        transition:stroke-dashoffset 1.7s var(--ha-ease-out), opacity .6s ease;
       }
       .ha-home__hero-trace.is-drawn rect{ opacity:.9; stroke-dashoffset:0; }
 
@@ -1015,11 +1106,11 @@
        Hidden by default; <noscript> + reduced-motion force visible.
     \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500  */
     .reveal { opacity:0; transform:translateY(18px);
-      transition:opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+      transition:opacity var(--ha-dur-slow) var(--ha-ease-out), transform var(--ha-dur-slow) var(--ha-ease-out); }
     .reveal.is-in { opacity:1; transform:none; }
     /* staggered group \2014  direct children cascade in */
     .reveal-group > * { opacity:0; transform:translateY(18px);
-      transition:opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+      transition:opacity var(--ha-dur-slow) var(--ha-ease-out), transform var(--ha-dur-slow) var(--ha-ease-out); }
     .reveal-group.is-in > * { opacity:1; transform:none; }
     .reveal-group.is-in > *:nth-child(2){ transition-delay:.07s; }
     .reveal-group.is-in > *:nth-child(3){ transition-delay:.14s; }
@@ -1031,14 +1122,14 @@
     /* B \2014  richer entrance: rise + slight scale with a soft overshoot */
     .ha-home__issue-grid.reveal-group > *{
       transform:translateY(32px) scale(.94);
-      transition:opacity .55s var(--ease-out), transform .7s cubic-bezier(.34,1.32,.5,1);
+      transition:opacity .55s var(--ha-ease-out), transform .7s cubic-bezier(.34,1.32,.5,1);
     }
     .ha-home__issue-grid.reveal-group.is-in > *{ transform:none; }
     /* A \2014  icons draw themselves in (JS sets each shape's dash to its own length; the dash
        is applied instantly, then the reveal transitions the offset back to 0 = "drawing"). */
     .ha-home__issue-grid.is-in .ha-home__issue-icon svg [data-draw]{
       stroke-dashoffset:0 !important;
-      transition:stroke-dashoffset .9s var(--ease-out) .15s;
+      transition:stroke-dashoffset .9s var(--ha-ease-out) .15s;
     }
     .ha-home__issue-grid.is-in > *:nth-child(2) .ha-home__issue-icon svg [data-draw]{ transition-delay:.22s; }
     .ha-home__issue-grid.is-in > *:nth-child(3) .ha-home__issue-icon svg [data-draw]{ transition-delay:.29s; }
@@ -1047,7 +1138,7 @@
     /* A \2014  themed hover motion: the tax bars grow from their baseline */
     .ha-home__issue-card[href="/taxes-budget"] .ha-home__issue-icon rect{
       transform-box:fill-box; transform-origin:50% 100%;
-      transition:transform .45s var(--ease-out);
+      transition:transform .45s var(--ha-ease-out);
     }
     .ha-home__issue-card[href="/taxes-budget"]:hover .ha-home__issue-icon rect{ transform:scaleY(1.16); }
 
@@ -1120,11 +1211,11 @@
   .px-scroll-progress{
     position:fixed;left:0;top:0;height:3px;width:100%;z-index:60;
     transform:scaleX(0);transform-origin:0 50%;will-change:transform;pointer-events:none;
-    background:linear-gradient(90deg,var(--teal),var(--deep-teal));
+    background:linear-gradient(90deg,var(--ha-teal),var(--ha-teal-deep));
   }
 
   /* 2 \2014  Glass nav once the page scrolls */
-  .px-nav{transition:padding .3s var(--ease-out), background .3s var(--ease-out), box-shadow .3s var(--ease-out);}
+  .px-nav{transition:padding .3s var(--ha-ease-out), background .3s var(--ha-ease-out), box-shadow .3s var(--ha-ease-out);}
   .px-nav.is-scrolled{
     background:rgba(255,255,255,.82);
     -webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);
@@ -1136,7 +1227,7 @@
   }
 
   /* 3 \2014  Issue-card cursor spotlight + per-card accent tint */
-  .ha-home__issue-card[data-accent="charcoal"]{ --accent:var(--charcoal); }
+  .ha-home__issue-card[data-accent="charcoal"]{ --accent:var(--ha-charcoal); }
   .ha-home__issue-card::before{
     content:'';position:absolute;inset:0;z-index:0;border-radius:inherit;
     opacity:0;pointer-events:none;transition:opacity .35s ease;
@@ -1148,14 +1239,14 @@
   .ha-home__issue-card > *{ position:relative; z-index:1; }
 
   /* 4 \2014  Latest: thumbnail zoom on hover + skeleton shimmer loaders */
-  .ha-home__latest-thumb img{ transition:transform .5s var(--ease-out); }
+  .ha-home__latest-thumb img{ transition:transform .5s var(--ha-ease-out); }
   .ha-home__latest-card:hover .ha-home__latest-thumb img{ transform:scale(1.06); }
 
   .ha-home__latest-skel{
-    display:flex;flex-direction:column;background:var(--white);
-    border:1px solid var(--ash-light);border-radius:4px;overflow:hidden;
+    display:flex;flex-direction:column;background:var(--ha-white);
+    border:1px solid var(--ha-ash-light);border-radius:4px;overflow:hidden;
   }
-  .ha-home__latest-skel .sk{ position:relative;overflow:hidden;background:var(--ash-light); }
+  .ha-home__latest-skel .sk{ position:relative;overflow:hidden;background:var(--ha-ash-light); }
   .ha-home__latest-skel .sk::after{
     content:'';position:absolute;inset:0;transform:translateX(-100%);
     background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);

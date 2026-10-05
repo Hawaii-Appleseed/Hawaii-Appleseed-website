@@ -90,26 +90,32 @@ The five issue deep-dive pages share a single canonical format:
 - `transportation.html`
 - `wages-labor.html`
 
+**Styles and behaviour are shared, not copied:** all five use one class prefix,
+`ha-topic`, and link `assets/issue-page.css` + `assets/issue-page.js` from inside
+their BEGIN/END block (`build_squarespace.py` inlines both into the payloads).
+Change those files once and every page follows. Per-page settings sit on the root
+element — `<section class="ha-topic" data-category="housing" data-pubs="6">`:
+the category regex for the publications/news lists and how many publications to
+show. The only page-specific script is the revenue pie inline in `taxes-budget.html`.
+
 **Structural mirror requirement:** any structural change (tabs added/removed/renamed, section reorder, hero treatment, CTA placement, footer columns) made to *one* issue page must be applied to *all five* in the same commit. The pages should always share:
 
 1. **Same nav + announcement bar** (the `px-*` chrome at top)
 2. **Same hero structure**: eyebrow + h1 + lead paragraph + tabs row
 3. **Same two tabs in the same order**: `Overview`, `Priorities` — panels
-   `#ha-{ns}-panel-overview` and `#ha-{ns}-panel-priorities`. ("Vision" is not a
-   tab; it's the `.ha-{ns}__vision` sub-block that opens the Overview panel.)
-4. **Same sticky-tabs behavior** (`.ha-{slug}__stuck-tabs` reveals on scroll)
+   `#ha-topic-panel-overview` and `#ha-topic-panel-priorities`. ("Vision" is not a
+   tab; it's the `.ha-topic__vision` sub-block that opens the Overview panel.)
+4. **Same sticky-tabs behavior** (`.ha-topic__stuck-tabs` reveals on scroll)
 5. **Same panel skeleton** inside each tab (heading, body, supporting blocks)
 6. **Same trailing sections**: Research & News → CTA → Footer
 7. **Same brand palette + fonts + spacing tokens**
 
 What *differs* between pages (and SHOULD differ):
 
-- The CSS namespace prefix (`.ha-tax__*` → `.ha-housing__*` etc.)
 - Per-page copy, stats, and pull-quotes
 - SVG icons / charts specific to the issue
 
-All five pages are **token-identical** — same eight `--ha-*` custom properties,
-no per-page accent. The per-issue tint lives one level up, in `issues.html`'s
+All five pages are **token-identical** — no per-page accent. The per-issue tint lives one level up, in `issues.html`'s
 hub cards (`--section-bg` / `--section-accent`). If you want an issue to read as
 "its" color, set it there, not in the deep-dive page.
 
@@ -117,7 +123,7 @@ hub cards (`--section-bg` / `--section-accent`). If you want an issue to read as
 
 ## Design
 
-Spec: [`DESIGN.md`](DESIGN.md). Tokens: [`assets/tokens.css`](assets/tokens.css), linked from every page before its `<style>`. **No raw hex/rgba in page CSS — use `var(--ha-*)`;** add missing values to `tokens.css`, never per page. Exception: `squarespace-ready/` and `*squarespace*` snippets keep inline copies (Squarespace can't load the file). Type sizes and spacing have tokens too (`--ha-fs-*`, `--ha-space-*`); px `font-size` is out. The **Design system** workflow lints changed lines for new raw colours/px font sizes, checks WCAG contrast and chart palettes, and fails if `brand-skill/` is stale — run `python3 scripts/build_brand_skill.py` after editing `DESIGN.md` or `tokens.css` (DESIGN.md → Checks).
+Spec: [`DESIGN.md`](DESIGN.md). Tokens: [`assets/tokens.css`](assets/tokens.css), linked from every page before its `<style>`. **No raw hex/rgba in page CSS — use `var(--ha-*)`;** add missing values to `tokens.css`, never per page. Squarespace can't load the file, so `build_squarespace.py` inlines `tokens.css` into every `squarespace-ready/` payload; the hand-authored `*squarespace*` snippets keep their own inline copies. Type sizes and spacing have tokens too (`--ha-fs-*`, `--ha-space-*`); px `font-size` is out. The **Design system** workflow lints changed lines for new raw colours/px font sizes, checks WCAG contrast and chart palettes, and fails if `brand-skill/` is stale — run `python3 scripts/build_brand_skill.py` after editing `DESIGN.md` or `tokens.css` (DESIGN.md → Checks).
 
 ## When touching layout / type / padding
 

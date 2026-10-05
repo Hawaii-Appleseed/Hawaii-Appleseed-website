@@ -5,13 +5,121 @@
      HOW: Wages & Labor page > Edit > add a Code Block > paste ALL of this >
           make sure "Display Source" is OFF > Save.
      ===================================================================== -->
-<!-- Glossary tooltip styles. These lived OUTSIDE the BEGIN/END markers, so
-     the builder never shipped them. Without .ha-term-tip{position:absolute;
-     opacity:0}, every tooltip rendered as inline text right after its term &#8212;
-     which is what produced "SNAPSNAP", "cost-burdenedCost-burdened",
-     "fare-freeFare-free" and "paycheckPaycheck to paycheck" on the live site.
-     Keep them inside the markers. -->
-<style id="ha-term-css">
+<style>
+:root {
+  --ha-charcoal:   #2F3E46;  
+  --ha-slate:      #354F52;  
+  --ha-teal-deep:  #52796F;  
+  --ha-teal:       #84A98C;  
+  --ha-ash:        #CAD2C5;  
+  --ha-ash-light:  #E5E9E2;  
+  --ha-bg:         #F4F7F4;  
+  --ha-white:      #FFFFFF;
+  --ha-ink-muted:  rgba(47,62,70,.78);  
+  --ha-ink-subtle: rgba(47,62,70,.65);  
+  --ha-rule:       rgba(53,79,82,.14);   
+  --ha-rule-dark:  rgba(202,210,197,.18); 
+  --ha-rule-light: rgba(202,210,197,.30); 
+  --ha-tint-tax:     #F2F4EF;
+  --ha-tint-food:    #E6EFE9;
+  --ha-tint-housing: #D9E2D8;
+  --ha-tint-transit: #E2E8E8;
+  --ha-tint-wages:   #EDEDE5;
+  --ha-ease-out:  cubic-bezier(.22,.61,.36,1);
+  --ha-dur-fast:  .2s;
+  --ha-dur-base:  .4s;
+  --ha-dur-slow:  .6s;
+  --ha-font-display: OkinaManrope, 'Manrope', Arial, sans-serif;
+  --ha-font-body:    OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif;
+  --ha-fs-micro:     10.5px; 
+  --ha-fs-eyebrow:   11px;   
+  --ha-fs-caption:   13px;   
+  --ha-fs-small:     14px;   
+  --ha-fs-body:      15.5px; 
+  --ha-fs-lead:      17px;   
+  --ha-fs-h5:        18px;   
+  --ha-fs-stat-sm:   22px;   
+  --ha-fs-h4:        24px;   
+  --ha-fs-h3:        26px;   
+  --ha-fs-stat:      28px;   
+  --ha-fs-h2:        38px;   
+  --ha-fs-h2-lg:     44px;   
+  --ha-fs-cta:       clamp(30px, 4.2vw, 48px);
+  --ha-fs-display:   54px;   
+  --ha-fs-hero:      78px;   
+  --ha-lh-display: 1;
+  --ha-lh-heading: 1.15;
+  --ha-lh-snug:    1.3;
+  --ha-lh-small:   1.55;
+  --ha-lh-body:    1.65;
+  --ha-track-hero:    -.035em;
+  --ha-track-display: -.02em;
+  --ha-track-tight:   -.01em;
+  --ha-track-button:  .04em;
+  --ha-track-eyebrow: .22em;
+  --ha-space-3xs: 4px;
+  --ha-space-2xs: 8px;
+  --ha-space-xs:  12px;  
+  --ha-space-sm:  16px;  
+  --ha-space-md:  20px;  
+  --ha-space-lg:  28px;  
+  --ha-space-xl:  36px;  
+  --ha-space-2xl: 48px;  
+  --ha-space-3xl: 56px;  
+  --ha-space-4xl: 72px;
+  --ha-space-5xl: 80px;  
+  --ha-space-6xl: 96px;  
+  --ha-gutter:    var(--ha-space-xl);   
+  --ha-section-y: var(--ha-space-5xl);  
+  --ha-container: 1200px;
+  --ha-measure:   680px;
+  --ha-radius-pill:    999px;
+  --ha-radius-card:    8px;
+  --ha-radius-panel:   6px;
+  --ha-radius-callout: 4px;
+  --ha-chart-cat-1: #52796F;  
+  --ha-chart-cat-2: #2F3E46;  
+  --ha-chart-cat-3: #BF8A30;  
+  --ha-chart-cat-4: #6A8CC4;  
+  --ha-chart-cat-5: #A85A45;  
+  --ha-chart-cat-6: #84A98C;  
+  --ha-chart-seq-1: #E5E9E2;
+  --ha-chart-seq-2: #B4C9B6;
+  --ha-chart-seq-3: #84A98C;
+  --ha-chart-seq-4: #6B917D;
+  --ha-chart-seq-5: #52796F;
+  --ha-chart-seq-6: #405B5A;
+  --ha-chart-seq-7: #2F3E46;
+  --ha-chart-div-1: #2B4A45;
+  --ha-chart-div-2: #52796F;
+  --ha-chart-div-3: #A9C3B3;
+  --ha-chart-div-4: #F2F0EA;
+  --ha-chart-div-5: #E0BF85;
+  --ha-chart-div-6: #B07A35;
+  --ha-chart-div-7: #6E4524;
+  --ha-chart-muted: #CAD2C5;  
+  --ha-chart-grid:  rgba(53,79,82,.14);  
+}
+@media (max-width: 700px) {
+  :root {
+    --ha-fs-body:    15px;
+    --ha-fs-lead:    15px;
+    --ha-fs-h2:      28px;
+    --ha-fs-h2-lg:   28px;
+    --ha-fs-display: 30px;
+    --ha-fs-hero:    48px;
+    --ha-gutter:     var(--ha-space-md);
+    --ha-section-y:  var(--ha-space-3xl);
+  }
+}
+</style>
+<style>
+/* Shared styles for the five issue deep-dive pages (taxes-budget, housing,
+   food-security, transportation, wages-labor). Each page links this from inside
+   its BEGIN/END block; scripts/build_squarespace.py inlines it into the
+   Squarespace payload. Page-specific content stays in the page. */
+
+/* ===== Glossary tooltips ===== */
 .ha-term{position:relative;display:inline;border-bottom:1px dotted #52796F;cursor:help;color:inherit;font-style:inherit;}
 .ha-term:focus{outline:2px solid #84A98C;outline-offset:2px;border-radius:2px;}
 .ha-term-tip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);z-index:80;width:250px;max-width:76vw;background:#2F3E46;color:#fff;padding:10px 14px;border-radius:6px;font-family:OkinaPoppins, 'Poppins',sans-serif;font-style:normal;font-weight:400;font-size:12.5px;letter-spacing:.01em;line-height:1.5;text-align:left;text-transform:none;opacity:0;pointer-events:none;box-shadow:0 10px 26px rgba(47,62,70,.28);transition:opacity .2s,transform .2s;white-space:normal;}
@@ -19,13 +127,8 @@
 .ha-term:hover .ha-term-tip,.ha-term:focus .ha-term-tip{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
 .ha-term-tip strong{color:#84A98C;font-weight:700;}
 @media (max-width:700px){.ha-term-tip{width:210px;font-size:12px;}}
-</style>
 
-<!-- Accordion (Policy details / Show more) styles. These lived OUTSIDE the
-     BEGIN/END markers, so the builder never shipped them: on Squarespace the
-     chevrons rendered at default SVG size and the panels were permanently
-     open (no 0fr collapse, no toggle JS). Keep them inside the markers. -->
-<style id="ha-acc-css">
+/* ===== Accordions (Policy details / Show more) ===== */
 .ha-acc-btn{display:inline-flex;align-items:center;gap:7px;margin-top:10px;background:none;border:0;cursor:pointer;font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#52796F;padding:6px 0;}
 .ha-acc-btn:hover{color:#2F3E46;}
 .ha-acc-chev{width:13px;height:13px;flex:none;transition:transform .25s ease;}
@@ -34,33 +137,20 @@
 .ha-acc-btn[aria-expanded="true"]+.ha-acc-panel{grid-template-rows:1fr;}
 .ha-acc-panel>.ha-acc-inner{overflow:hidden;min-height:0;}
 @media (prefers-reduced-motion:reduce){.ha-acc-panel{transition:none;}}
-</style>
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap">
-<link rel="stylesheet" href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/assets/okina.css">
-
-<style>
-.ha-wages {
-  --ha-charcoal:  #2F3E46;
-  --ha-slate:     #354F52;
-  --ha-teal-deep: #52796F;
-  --ha-teal:      #84A98C;
-  --ha-ash:       #CAD2C5;
-  --ha-bg:        #F4F7F4;
-  --ha-white:     #FFFFFF;
-  --ha-rule:      rgba(53,79,82,.14);
+/* ===== Page ===== */
+.ha-topic {
 
   font-family:OkinaPoppins, 'Poppins',sans-serif;
   color:var(--ha-charcoal);
   line-height:1.6;
 }
-.ha-wages a { color:inherit; }
-.ha-wages * { box-sizing:border-box; }
-.ha-wages img { max-width:100%; }
+.ha-topic a { color:inherit; }
+.ha-topic * { box-sizing:border-box; }
+.ha-topic img { max-width:100%; }
 
 /* ===== Hero + tab-bar wrapper (single continuous gradient) ===== */
-.ha-wages__top {
+.ha-topic__top {
   background:
     url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600' width='600' height='600'%3E%3Cg fill='none' stroke='%2384A98C' stroke-width='0.8'%3E%3Cpath d='M0 100 Q150 50 300 100 T600 100' opacity='0.10'/%3E%3Cpath d='M0 180 Q150 130 300 180 T600 180' opacity='0.09'/%3E%3Cpath d='M0 280 Q150 230 300 280 T600 280' opacity='0.08'/%3E%3Cpath d='M0 380 Q150 330 300 380 T600 380' opacity='0.07'/%3E%3Cpath d='M0 480 Q150 430 300 480 T600 480' opacity='0.06'/%3E%3Cpath d='M0 560 Q150 510 300 560 T600 560' opacity='0.05'/%3E%3C/g%3E%3C/svg%3E"),
     linear-gradient(135deg, var(--ha-charcoal) 0%, var(--ha-slate) 100%);
@@ -68,7 +158,7 @@
   background-size:700px auto, cover;
   position:relative;
 }
-.ha-wages__top::after {
+.ha-topic__top::after {
   content:"";
   position:absolute;
   left:0; right:0; bottom:-1px;
@@ -83,7 +173,7 @@
 }
 
 /* ===== Hero (compact) ===== */
-.ha-wages__hero {
+.ha-topic__hero {
   background:transparent;
   color:#fff;
   padding:72px 28px 56px;
@@ -92,28 +182,28 @@
   overflow:hidden;
 }
 @media (max-width:700px) {
-  .ha-wages__hero { padding:40px 20px 36px; }
+  .ha-topic__hero { padding:40px 20px 36px; }
 }
-.ha-wages__hero-inner { max-width:900px; margin:0 auto; position:relative; z-index:1; }
-.ha-wages__hero h1 {
+.ha-topic__hero-inner { max-width:900px; margin:0 auto; position:relative; z-index:1; }
+.ha-topic__hero h1 {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:78px; line-height:1; letter-spacing:-.035em;
   margin:0 0 22px;
   color:#fff;
 }
-.ha-wages__hero h1 .ha-wages__hero-amp {
+.ha-topic__hero h1 .ha-topic__hero-amp {
   font-weight:400;
   color:rgba(255,255,255,.78);
   letter-spacing:-.025em;
   margin-left:.12em;
 }
-.ha-wages__hero-rule {
+.ha-topic__hero-rule {
   width:56px; height:3px;
   background:var(--ha-teal);
   border-radius:2px;
   margin:0 auto 22px;
 }
-.ha-wages__hero-sub {
+.ha-topic__hero-sub {
   font-size:17px; line-height:1.6;
   color:rgba(202,210,197,.86);
   max-width:600px; margin:0 auto;
@@ -121,7 +211,7 @@
 }
 
 /* ===== Tab bar (extends hero, dark) ===== */
-.ha-wages__tab-bar {
+.ha-topic__tab-bar {
   background:transparent;
   padding:0 28px 32px;
   display:flex; justify-content:center; align-items:flex-start;
@@ -129,7 +219,7 @@
 }
 
 /* Research & News pill anchored to right of tab bar \2014  glassy to match tab pill */
-.ha-wages a.ha-wages__bar-pill {
+.ha-topic a.ha-topic__bar-pill {
   position:absolute;
   right:28px; top:0;
   height:56px;
@@ -148,22 +238,22 @@
   white-space:nowrap;
   transition:color .22s, border-color .22s, background .22s, gap .22s;
 }
-.ha-wages a.ha-wages__bar-pill:hover {
+.ha-topic a.ha-topic__bar-pill:hover {
   color:#fff;
   border-color:rgba(255,255,255,.28);
   background:rgba(0,0,0,.28);
   gap:10px;
 }
-.ha-wages a.ha-wages__bar-pill svg {
+.ha-topic a.ha-topic__bar-pill svg {
   width:13px; height:13px;
   fill:none; stroke:currentColor;
   stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;
   opacity:.85;
 }
 @media (max-width:700px) {
-  .ha-wages a.ha-wages__bar-pill { display:none; }
+  .ha-topic a.ha-topic__bar-pill { display:none; }
 }
-.ha-wages__tabs {
+.ha-topic__tabs {
   --tab-w: 150px;
   position:relative;
   display:inline-flex; align-items:center;
@@ -174,7 +264,7 @@
   backdrop-filter:blur(4px);
   -webkit-backdrop-filter:blur(4px);
 }
-.ha-wages__tabs-indicator {
+.ha-topic__tabs-indicator {
   position:absolute;
   top:4px; bottom:4px; left:4px;
   width:var(--tab-w);
@@ -184,7 +274,7 @@
   z-index:0;
   box-shadow:0 10px 28px rgba(82,121,111,.45), 0 2px 8px rgba(82,121,111,.3);
 }
-.ha-wages button.ha-wages__tab {
+.ha-topic button.ha-topic__tab {
   position:relative; z-index:1;
   background:none; border:none; padding:0;
   width:var(--tab-w); height:46px;
@@ -196,10 +286,10 @@
   transition:color .22s;
   white-space:nowrap;
 }
-.ha-wages button.ha-wages__tab.active { color:#fff; cursor:default; }
-.ha-wages button.ha-wages__tab:not(.active):hover { color:rgba(255,255,255,.92); }
+.ha-topic button.ha-topic__tab.active { color:#fff; cursor:default; }
+.ha-topic button.ha-topic__tab:not(.active):hover { color:rgba(255,255,255,.92); }
 
-.ha-wages a.ha-wages__hero-subscribe {
+.ha-topic a.ha-topic__hero-subscribe {
   position:absolute; top:18px; right:24px;
   display:inline-flex; align-items:center; gap:7px;
   padding:6px 12px 6px 10px;
@@ -213,13 +303,13 @@
   transition:color .18s, border-color .18s, background .18s;
   z-index:3;
 }
-.ha-wages a.ha-wages__hero-subscribe:hover {
+.ha-topic a.ha-topic__hero-subscribe:hover {
   color:#fff; border-color:rgba(202,210,197,.5);
   background:rgba(255,255,255,.05);
 }
-.ha-wages a.ha-wages__hero-subscribe svg { width:13px; height:13px; opacity:.8; }
+.ha-topic a.ha-topic__hero-subscribe svg { width:13px; height:13px; opacity:.8; }
 
-.ha-wages a.ha-wages__hero-pill {
+.ha-topic a.ha-topic__hero-pill {
   display:inline-flex; align-items:center; gap:8px;
   padding:8px 18px 8px 14px;
   background:transparent;
@@ -232,13 +322,13 @@
   text-decoration:none;
   transition:color .18s, border-color .18s, background .18s, gap .18s;
 }
-.ha-wages a.ha-wages__hero-pill:hover {
+.ha-topic a.ha-topic__hero-pill:hover {
   color:#fff;
   border-color:rgba(202,210,197,.55);
   background:rgba(255,255,255,.05);
   gap:10px;
 }
-.ha-wages a.ha-wages__hero-pill svg {
+.ha-topic a.ha-topic__hero-pill svg {
   width:13px; height:13px;
   fill:none; stroke:currentColor;
   stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;
@@ -246,7 +336,7 @@
 }
 
 /* Back to Issues link (top-left of hero) */
-.ha-wages a.ha-wages__back {
+.ha-topic a.ha-topic__back {
   position:absolute; top:18px; left:24px;
   display:inline-flex; align-items:center; gap:6px;
   font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:12.5px; font-weight:500;
@@ -259,44 +349,44 @@
   transition:color .18s, border-color .18s, background .18s, gap .18s;
   z-index:3;
 }
-.ha-wages a.ha-wages__back:hover {
+.ha-topic a.ha-topic__back:hover {
   color:#fff; border-color:rgba(202,210,197,.5);
   background:rgba(255,255,255,.05); gap:8px;
 }
-.ha-wages a.ha-wages__back svg {
+.ha-topic a.ha-topic__back svg {
   width:14px; height:14px;
   fill:none; stroke:currentColor; stroke-width:1.8;
   stroke-linecap:round; stroke-linejoin:round;
 }
 
 @media (max-width:700px) {
-  .ha-wages a.ha-wages__back { top:12px; left:14px; font-size:11.5px; padding:5px 10px 5px 7px; }
-  .ha-wages a.ha-wages__hero-subscribe { top:12px; right:14px; font-size:11.5px; padding:5px 10px 5px 8px; }
+  .ha-topic a.ha-topic__back { top:12px; left:14px; font-size:11.5px; padding:5px 10px 5px 7px; }
+  .ha-topic a.ha-topic__hero-subscribe { top:12px; right:14px; font-size:11.5px; padding:5px 10px 5px 8px; }
 }
 
 @media (max-width:700px) {
-  .ha-wages__tabs {
+  .ha-topic__tabs {
     --tab-w: 112px; flex-wrap:nowrap;
     max-width:100%; overflow-x:auto;
     -webkit-overflow-scrolling:touch; scrollbar-width:none;
   }
-  .ha-wages__tabs::-webkit-scrollbar { display:none; }
-  .ha-wages button.ha-wages__tab { font-size:13px; height:40px; flex-shrink:0; }
-  .ha-wages__tab-bar { padding-left:16px; padding-right:16px; }
+  .ha-topic__tabs::-webkit-scrollbar { display:none; }
+  .ha-topic button.ha-topic__tab { font-size:13px; height:40px; flex-shrink:0; }
+  .ha-topic__tab-bar { padding-left:16px; padding-right:16px; }
 }
 
 /* ===== Hub strip (3-up command center under hero) ===== */
-.ha-wages__hub {
+.ha-topic__hub {
   max-width:1100px;
   margin:0 auto;
   padding:56px 36px 24px;
   display:grid; grid-template-columns:repeat(2, 1fr); gap:24px;
 }
 @media (max-width:900px) {
-  .ha-wages__hub { grid-template-columns:1fr; padding:48px 20px 16px; }
+  .ha-topic__hub { grid-template-columns:1fr; padding:48px 20px 16px; }
 }
-.ha-wages a.ha-wages__hub-card,
-.ha-wages__hub-card {
+.ha-topic a.ha-topic__hub-card,
+.ha-topic__hub-card {
   background:#fff;
   border:1px solid var(--ha-rule);
   border-radius:6px;
@@ -306,61 +396,61 @@
   transition:transform .2s, box-shadow .2s;
   text-decoration:none; color:inherit;
 }
-.ha-wages a.ha-wages__hub-card:hover,
-.ha-wages__hub-card:hover {
+.ha-topic a.ha-topic__hub-card:hover,
+.ha-topic__hub-card:hover {
   transform:translateY(-2px);
   box-shadow:0 16px 40px rgba(47,62,70,.14);
 }
-.ha-wages__hub-card-icon {
+.ha-topic__hub-card-icon {
   width:38px; height:38px; border-radius:8px;
   background:rgba(82,121,111,.12);
   display:flex; align-items:center; justify-content:center;
   margin-bottom:2px; flex:none;
 }
-.ha-wages__hub-card-icon svg {
+.ha-topic__hub-card-icon svg {
   width:20px; height:20px; stroke:var(--ha-teal-deep);
   fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;
 }
-.ha-wages__hub-card-eyebrow {
+.ha-topic__hub-card-eyebrow {
   font-size:10.5px; font-weight:700;
   letter-spacing:.2em; text-transform:uppercase;
   color:var(--ha-teal-deep);
 }
-.ha-wages__hub-card-title {
+.ha-topic__hub-card-title {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:18px; line-height:1.3;
   color:var(--ha-charcoal); margin:0;
 }
-.ha-wages__hub-card-meta {
+.ha-topic__hub-card-meta {
   font-size:13px; line-height:1.5;
   color:rgba(47,62,70,.7); margin:0;
 }
-.ha-wages__hub-card-link {
+.ha-topic__hub-card-link {
   margin-top:auto; padding-top:6px;
   font-size:13.5px; font-weight:600;
   color:var(--ha-teal-deep);
   display:inline-flex; align-items:center; gap:5px;
   transition:gap .18s;
 }
-.ha-wages__hub-card:hover .ha-wages__hub-card-link { gap:8px; }
-.ha-wages__hub-card-link svg { width:12px; height:12px; }
+.ha-topic__hub-card:hover .ha-topic__hub-card-link { gap:8px; }
+.ha-topic__hub-card-link svg { width:12px; height:12px; }
 
 /* Action card variant */
-.ha-wages a.ha-wages__hub-card--action,
-.ha-wages__hub-card--action {
+.ha-topic a.ha-topic__hub-card--action,
+.ha-topic__hub-card--action {
   background:var(--ha-teal-deep);
   border-color:var(--ha-teal-deep);
   color:#fff;
 }
-.ha-wages__hub-card--action .ha-wages__hub-card-icon { background:rgba(255,255,255,.18); }
-.ha-wages__hub-card--action .ha-wages__hub-card-icon svg { stroke:#fff; }
-.ha-wages__hub-card--action .ha-wages__hub-card-eyebrow { color:rgba(255,255,255,.78); }
-.ha-wages__hub-card--action .ha-wages__hub-card-title { color:#fff; }
-.ha-wages__hub-card--action .ha-wages__hub-card-meta { color:rgba(255,255,255,.82); }
-.ha-wages__hub-card--action .ha-wages__hub-card-link { color:#fff; }
+.ha-topic__hub-card--action .ha-topic__hub-card-icon { background:rgba(255,255,255,.18); }
+.ha-topic__hub-card--action .ha-topic__hub-card-icon svg { stroke:#fff; }
+.ha-topic__hub-card--action .ha-topic__hub-card-eyebrow { color:rgba(255,255,255,.78); }
+.ha-topic__hub-card--action .ha-topic__hub-card-title { color:#fff; }
+.ha-topic__hub-card--action .ha-topic__hub-card-meta { color:rgba(255,255,255,.82); }
+.ha-topic__hub-card--action .ha-topic__hub-card-link { color:#fff; }
 
 /* ===== Drawer / panels ===== */
-.ha-wages__panels {
+.ha-topic__panels {
   background:var(--ha-bg);
   background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 480' width='480' height='480'%3E%3Cg fill='none' stroke='%2352796F' stroke-width='0.7'%3E%3Cpath d='M0 80 Q120 30 240 80 T480 80' opacity='0.16'/%3E%3Cpath d='M0 150 Q120 110 240 150 T480 150' opacity='0.13'/%3E%3Cpath d='M0 240 Q120 200 240 240 T480 240' opacity='0.11'/%3E%3Cpath d='M0 330 Q120 290 240 330 T480 330' opacity='0.09'/%3E%3Cpath d='M0 410 Q120 370 240 410 T480 410' opacity='0.07'/%3E%3C/g%3E%3C/svg%3E");
   background-repeat:repeat;
@@ -368,24 +458,24 @@
   position:relative;
   box-shadow:inset 0 8px 18px -10px rgba(47,62,70,.18);
 }
-.ha-wages__panel {
+.ha-topic__panel {
   display:none;
-  animation:ha-wages-fade .35s ease;
+  animation:ha-topic-fade .35s ease;
 }
-.ha-wages__panel.active { display:block; }
-@keyframes ha-wages-fade {
+.ha-topic__panel.active { display:block; }
+@keyframes ha-topic-fade {
   from { opacity:0; transform:translateY(6px); }
   to   { opacity:1; transform:translateY(0); }
 }
 
 /* ===== Vision panel (manifesto treatment) ===== */
-.ha-wages__vision {
+.ha-topic__vision {
   max-width:1000px; margin:0 auto;
   padding:64px 36px 80px;
   text-align:center;
   position:relative;
 }
-.ha-wages__vision-eyebrow {
+.ha-topic__vision-eyebrow {
   display:inline-block;
   font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase;
@@ -393,24 +483,24 @@
   background:rgba(82,121,111,.1); padding:5px 12px; border-radius:3px;
   margin-bottom:22px;
 }
-.ha-wages__vision-quote {
+.ha-topic__vision-quote {
   font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:600;
   font-size:120px; line-height:.6; letter-spacing:-.02em;
   color:rgba(82,121,111,.18);
   margin:0 auto 4px;
   user-select:none;
 }
-.ha-wages__vision h2 {
+.ha-topic__vision h2 {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:44px; line-height:1.12; letter-spacing:-.02em;
   color:var(--ha-charcoal);
   max-width:880px; margin:0 auto 18px;
 }
-.ha-wages__vision h2 em {
+.ha-topic__vision h2 em {
   font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:600;
   color:var(--ha-teal-deep);
 }
-.ha-wages__vision-rule {
+.ha-topic__vision-rule {
   width:120px; height:8px;
   margin:0 auto 26px;
   position:relative;
@@ -421,7 +511,7 @@
       var(--ha-teal-deep) 72px, var(--ha-teal-deep) 120px)
     center / 100% 1.5px no-repeat;
 }
-.ha-wages__vision-rule::after {
+.ha-topic__vision-rule::after {
   content:"";
   position:absolute;
   top:50%; left:50%;
@@ -430,11 +520,11 @@
   transform:translate(-50%, -50%) rotate(45deg);
   border-radius:1px;
 }
-.ha-wages__vision p {
+.ha-topic__vision p {
   font-size:17px; line-height:1.7; color:rgba(47,62,70,.82);
   max-width:680px; margin:0 auto 18px;
 }
-.ha-wages__vision-pullquote {
+.ha-topic__vision-pullquote {
   font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:500;
   font-size:24px; line-height:1.45; letter-spacing:-.01em;
   color:var(--ha-teal-deep);
@@ -444,7 +534,7 @@
   text-align:left;
   position:relative;
 }
-.ha-wages__vision-pullquote::before {
+.ha-topic__vision-pullquote::before {
   content:"\201C";
   position:absolute;
   left:14px; top:-6px;
@@ -453,136 +543,142 @@
   font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 @media (max-width:700px) {
-  .ha-wages__vision-pullquote { font-size:19px; padding-left:22px; margin:28px auto; }
+  .ha-topic__vision-pullquote { font-size:19px; padding-left:22px; margin:28px auto; }
 }
-.ha-wages__vision-pillars {
+.ha-topic__vision-pillars {
   display:grid; grid-template-columns:repeat(3,1fr);
   gap:22px; margin-top:52px; text-align:left;
 }
 @media (max-width:800px) {
-  .ha-wages__vision-pillars { grid-template-columns:1fr; gap:18px; }
+  .ha-topic__vision-pillars { grid-template-columns:1fr; gap:18px; }
 }
-.ha-wages__vision-pillar {
+.ha-topic__vision-pillar {
   position:relative;
   background:rgba(132,169,140,.07);
   border:1px solid var(--ha-rule);
   border-radius:6px; padding:28px 26px 26px;
   transition:transform .25s, box-shadow .25s, background .25s, border-color .25s;
   opacity:0;
-  animation:ha-wages-pillar-in .6s ease forwards;
+  animation:ha-topic-pillar-in .6s ease forwards;
 }
-.ha-wages__vision-pillar:nth-child(1) { animation-delay:.08s; }
-.ha-wages__vision-pillar:nth-child(2) { animation-delay:.20s; }
-.ha-wages__vision-pillar:nth-child(3) { animation-delay:.32s; }
-@keyframes ha-wages-pillar-in {
+.ha-topic__vision-pillar:nth-child(1) { animation-delay:.08s; }
+.ha-topic__vision-pillar:nth-child(2) { animation-delay:.20s; }
+.ha-topic__vision-pillar:nth-child(3) { animation-delay:.32s; }
+@keyframes ha-topic-pillar-in {
   from { opacity:0; transform:translateY(14px); }
   to   { opacity:1; transform:translateY(0); }
 }
-.ha-wages__vision-pillar::before {
+.ha-topic__vision-pillar::before {
   content:""; position:absolute; top:0; left:0; right:0;
   height:4px; background:var(--ha-teal-deep); border-radius:6px 6px 0 0;
 }
-.ha-wages__vision-pillar:hover {
+.ha-topic__vision-pillar:hover {
   transform:translateY(-3px);
   box-shadow:0 14px 36px rgba(82,121,111,.20), 0 4px 12px rgba(47,62,70,.06);
   background:rgba(132,169,140,.13);
   border-color:rgba(82,121,111,.28);
 }
-.ha-wages__vision-pillar-icon {
+.ha-topic__vision-pillar-icon {
   width:42px; height:42px;
   background:#fff; border:1px solid rgba(82,121,111,.18);
   border-radius:10px;
   display:flex; align-items:center; justify-content:center;
   margin-bottom:16px;
 }
-.ha-wages__vision-pillar-icon svg {
+.ha-topic__vision-pillar-icon svg {
   width:22px; height:22px; stroke:var(--ha-teal-deep);
   fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round;
 }
-.ha-wages__vision-pillar-eyebrow {
+.ha-topic__vision-pillar-eyebrow {
   font-size:10.5px; font-weight:700;
   letter-spacing:.18em; text-transform:uppercase;
   color:var(--ha-teal-deep); margin-bottom:8px;
 }
-.ha-wages__vision-pillar h3 {
+.ha-topic__vision-pillar h3 {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:18px; line-height:1.25; color:var(--ha-charcoal);
   margin:0 0 10px;
 }
-.ha-wages__vision-pillar p {
+.ha-topic__vision-pillar p {
   font-size:14px; line-height:1.6; color:rgba(47,62,70,.78);
   margin:0 0 16px; text-align:left;
   max-width:none;
 }
-.ha-wages__vision-pillar-stat {
+.ha-topic__vision-pillar-stat {
   border-top:1px solid var(--ha-rule);
   padding-top:14px;
   margin-top:auto;
 }
-.ha-wages__vision-pillar-stat-num {
+.ha-topic__vision-pillar-stat-num {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:22px; line-height:1.1; color:var(--ha-charcoal);
   letter-spacing:-.01em; margin-bottom:3px;
 }
-.ha-wages__vision-pillar-stat-label {
+.ha-topic__vision-pillar-stat-label {
   font-size:12px; line-height:1.45; color:rgba(47,62,70,.65);
 }
-.ha-wages__vision-pillar-stat-label strong {
+.ha-topic__vision-pillar-stat-label strong {
   color:var(--ha-teal-deep); font-weight:600;
 }
 
 /* ===== Stat headline (Overview top) ===== */
-.ha-wages__stat-headline {
+.ha-topic__stat-headline {
   padding:48px 28px 16px;
   text-align:center;
 }
-.ha-wages__stat-headline-fy {
+.ha-topic__stat-headline-fy {
   display:inline-block;
   font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase; color:var(--ha-teal-deep);
   background:rgba(82,121,111,.1); padding:5px 12px; border-radius:3px;
   margin-bottom:18px;
 }
-.ha-wages__stat-headline h2 {
+.ha-topic__stat-headline h2 {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:54px; line-height:1.1; letter-spacing:-.02em;
   color:var(--ha-charcoal); margin:0;
 }
-.ha-wages__stat-headline strong {
+.ha-topic__stat-headline strong {
   color:var(--ha-teal-deep); font-weight:800;
 }
 
 /* ===== Priorities panel ===== */
-.ha-wages__opps {
+.ha-topic__opps {
   max-width:1200px; margin:0 auto;
   padding:56px 36px;
 }
-.ha-wages__opps-head {
+.ha-topic__opps-head {
   text-align:center; max-width:760px; margin:0 auto 48px;
 }
+.ha-topic__opps-note {
+  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:14px; line-height:1.6;
+  color:rgba(47,62,70,.62); max-width:660px; margin:20px auto 0;
+  padding-top:18px; border-top:1px solid var(--ha-rule);
+}
+.ha-topic__opps-note strong { color:var(--ha-teal-deep); font-weight:700; }
 
 /* ===== Impact panel \2014  timeline ===== */
-.ha-wages__impact {
+.ha-topic__impact {
   max-width:1200px; margin:0 auto;
   padding:56px 36px;
 }
-.ha-wages__timeline {
+.ha-topic__timeline {
   max-width:720px; margin:0 auto;
   position:relative;
   padding-left:42px;
 }
-.ha-wages__timeline::before {
+.ha-topic__timeline::before {
   content:""; position:absolute;
   left:8px; top:8px; bottom:8px; width:2px;
   background:linear-gradient(to bottom,
     var(--ha-teal-deep) 0%, rgba(82,121,111,.22) 100%);
 }
-.ha-wages__milestone {
+.ha-topic__milestone {
   position:relative;
   padding-bottom:34px;
 }
-.ha-wages__milestone:last-child { padding-bottom:0; }
-.ha-wages__milestone::before {
+.ha-topic__milestone:last-child { padding-bottom:0; }
+.ha-topic__milestone::before {
   content:""; position:absolute;
   left:-42px; top:3px;
   width:18px; height:18px; border-radius:50%;
@@ -590,18 +686,18 @@
   border:3px solid var(--ha-teal-deep);
   box-sizing:border-box;
 }
-.ha-wages__milestone--current::before {
+.ha-topic__milestone--current::before {
   background:var(--ha-teal-deep);
   box-shadow:0 0 0 5px rgba(132,169,140,.28);
 }
-.ha-wages__milestone-year {
+.ha-topic__milestone-year {
   display:block;
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:13px; letter-spacing:.12em; text-transform:uppercase;
   color:var(--ha-teal-deep);
   margin-bottom:8px;
 }
-.ha-wages__milestone-card {
+.ha-topic__milestone-card {
   background:#fff;
   border:1px solid var(--ha-rule);
   border-left:4px solid var(--ha-teal-deep);
@@ -609,63 +705,63 @@
   padding:20px 24px;
   transition:box-shadow .2s, transform .2s;
 }
-.ha-wages__milestone-card:hover {
+.ha-topic__milestone-card:hover {
   box-shadow:0 8px 24px rgba(47,62,70,.09);
   transform:translateY(-2px);
 }
-.ha-wages__milestone-title {
+.ha-topic__milestone-title {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:18px; line-height:1.32; letter-spacing:-.01em;
   color:var(--ha-charcoal);
   margin:0 0 8px;
 }
-.ha-wages__milestone-desc {
+.ha-topic__milestone-desc {
   font-size:15px; line-height:1.66; color:rgba(47,62,70,.8);
   margin:0;
 }
-.ha-wages__milestone-desc strong {
+.ha-topic__milestone-desc strong {
   font-weight:700; color:var(--ha-teal-deep);
 }
 
 @media (max-width:700px) {
-  .ha-wages__hero { padding:56px 20px 48px; }
-  .ha-wages__hero h1 { font-size:48px; letter-spacing:-.03em; margin-bottom:18px; }
-  .ha-wages__hero-rule { margin-bottom:18px; }
-  .ha-wages__hero-sub { font-size:15px; }
-  .ha-wages__vision { padding:56px 20px 56px; }
-  .ha-wages__vision h2 { font-size:28px; }
-  .ha-wages__vision p { font-size:15px; }
-  .ha-wages__stat-headline { padding:48px 20px 16px; }
-  .ha-wages__stat-headline h2 { font-size:30px; }
-  .ha-wages__opps { padding:56px 20px; }
-  .ha-wages__impact { padding:56px 20px; }
-  .ha-wages__timeline { padding-left:32px; }
-  .ha-wages__timeline::before { left:7px; }
-  .ha-wages__milestone::before { left:-32px; width:15px; height:15px; }
-  .ha-wages__milestone-card { padding:16px 18px; }
-  .ha-wages__milestone-title { font-size:16.5px; }
+  .ha-topic__hero { padding:56px 20px 48px; }
+  .ha-topic__hero h1 { font-size:48px; letter-spacing:-.03em; margin-bottom:18px; }
+  .ha-topic__hero-rule { margin-bottom:18px; }
+  .ha-topic__hero-sub { font-size:15px; }
+  .ha-topic__vision { padding:56px 20px 56px; }
+  .ha-topic__vision h2 { font-size:28px; }
+  .ha-topic__vision p { font-size:15px; }
+  .ha-topic__stat-headline { padding:48px 20px 16px; }
+  .ha-topic__stat-headline h2 { font-size:30px; }
+  .ha-topic__opps { padding:56px 20px; }
+  .ha-topic__impact { padding:56px 20px; }
+  .ha-topic__timeline { padding-left:32px; }
+  .ha-topic__timeline::before { left:7px; }
+  .ha-topic__milestone::before { left:-32px; width:15px; height:15px; }
+  .ha-topic__milestone-card { padding:16px 18px; }
+  .ha-topic__milestone-title { font-size:16.5px; }
 }
 
 /* ===== Section frame ===== */
-.ha-wages__section {
+.ha-topic__section {
   max-width:1200px; margin:0 auto;
   padding:80px 36px;
 }
-.ha-wages__section--tight { padding:48px 36px; }
-.ha-wages__section-head {
+.ha-topic__section--tight { padding:48px 36px; }
+.ha-topic__section-head {
   text-align:center; max-width:760px; margin:0 auto 48px;
 }
-.ha-wages__eyebrow {
+.ha-topic__eyebrow {
   font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase;
   color:var(--ha-teal-deep); margin-bottom:12px;
 }
-.ha-wages__h2 {
+.ha-topic__h2 {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:38px; line-height:1.15; letter-spacing:-.02em;
   color:var(--ha-charcoal); margin:0 0 16px;
 }
-.ha-wages__h2-rule {
+.ha-topic__h2-rule {
   width:108px; height:8px;
   margin:0 auto 22px;
   position:relative;
@@ -676,7 +772,7 @@
       var(--ha-teal-deep) 66px, var(--ha-teal-deep) 108px)
     center / 100% 1.5px no-repeat;
 }
-.ha-wages__h2-rule::after {
+.ha-topic__h2-rule::after {
   content:"";
   position:absolute;
   top:50%; left:50%;
@@ -685,38 +781,38 @@
   transform:translate(-50%, -50%) rotate(45deg);
   border-radius:1px;
 }
-.ha-wages__lede {
+.ha-topic__lede {
   font-size:17px; line-height:1.65; color:rgba(47,62,70,.78);
   margin:0 auto; max-width:620px;
 }
 @media (max-width:700px) {
-  .ha-wages__section { padding:56px 20px; }
-  .ha-wages__h2 { font-size:28px; }
-  .ha-wages__lede { font-size:15px; }
+  .ha-topic__section { padding:56px 20px; }
+  .ha-topic__h2 { font-size:28px; }
+  .ha-topic__lede { font-size:15px; }
 }
 
 /* ===== Revenue Section: pie + legend + description ===== */
-.ha-wages__revenue {
+.ha-topic__revenue {
   background:var(--ha-bg);
   padding:80px 0;
 }
-.ha-wages__revenue-grid {
+.ha-topic__revenue-grid {
   max-width:1200px; margin:0 auto;
   padding:0 36px;
   display:grid; grid-template-columns:minmax(0,420px) 1fr;
   gap:48px; align-items:start;
 }
 @media (max-width:900px) {
-  .ha-wages__revenue-grid { grid-template-columns:1fr; gap:36px; padding:0 20px; }
+  .ha-topic__revenue-grid { grid-template-columns:1fr; gap:36px; padding:0 20px; }
 }
-.ha-wages__chart-wrap {
+.ha-topic__chart-wrap {
   position:relative; height:380px;
 }
-.ha-wages__legend {
+.ha-topic__legend {
   margin-top:24px;
   display:flex; flex-direction:column; gap:8px;
 }
-.ha-wages__legend-item {
+.ha-topic__legend-item {
   display:flex; align-items:center; gap:12px;
   padding:10px 14px; border-radius:4px;
   cursor:pointer;
@@ -724,45 +820,45 @@
   border:1px solid var(--ha-rule);
   transition:background .15s, border-color .15s;
 }
-.ha-wages__legend-item:hover { background:rgba(132,169,140,.08); border-color:var(--ha-teal); }
-.ha-wages__legend-item.active {
+.ha-topic__legend-item:hover { background:rgba(132,169,140,.08); border-color:var(--ha-teal); }
+.ha-topic__legend-item.active {
   background:rgba(132,169,140,.14);
   border-color:var(--ha-teal-deep);
 }
-.ha-wages__legend-swatch {
+.ha-topic__legend-swatch {
   width:14px; height:14px; border-radius:3px; flex:none;
 }
-.ha-wages__legend-label {
+.ha-topic__legend-label {
   font-size:14px; font-weight:500; flex:1;
 }
-.ha-wages__legend-pct {
+.ha-topic__legend-pct {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:15px; color:var(--ha-teal-deep);
 }
-.ha-wages__desc {
+.ha-topic__desc {
   background:#fff;
   border:1px solid var(--ha-rule);
   border-left:4px solid var(--ha-teal-deep);
   border-radius:4px; padding:32px;
   min-height:280px;
 }
-.ha-wages__desc-name {
+.ha-topic__desc-name {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:22px; color:var(--ha-charcoal); margin:0 0 4px;
 }
-.ha-wages__desc-pct {
+.ha-topic__desc-pct {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:36px; line-height:1; margin-bottom:6px;
   letter-spacing:-.02em;
 }
-.ha-wages__desc-amount {
+.ha-topic__desc-amount {
   font-size:15px; font-weight:600; color:rgba(47,62,70,.6); margin-bottom:18px;
 }
-.ha-wages__desc-text {
+.ha-topic__desc-text {
   font-size:15px; line-height:1.65; color:rgba(47,62,70,.85);
 }
-.ha-wages__desc-text strong { color:var(--ha-charcoal); }
-.ha-wages__rate-chip {
+.ha-topic__desc-text strong { color:var(--ha-charcoal); }
+.ha-topic__rate-chip {
   display:inline-block;
   background:rgba(82,121,111,.12);
   color:var(--ha-teal-deep);
@@ -772,53 +868,53 @@
 }
 
 /* ===== Services Grid ===== */
-.ha-wages__services {
+.ha-topic__services {
   display:grid; grid-template-columns:repeat(2, 1fr);
   gap:20px; max-width:900px; margin:48px auto 0;
 }
 @media (max-width:700px) {
-  .ha-wages__services { grid-template-columns:1fr; }
+  .ha-topic__services { grid-template-columns:1fr; }
 }
-.ha-wages__service {
+.ha-topic__service {
   background:#fff; border:1px solid var(--ha-rule);
   border-radius:4px; padding:28px;
   display:flex; gap:18px; align-items:flex-start;
   transition:transform .2s, box-shadow .2s;
 }
-.ha-wages__service:hover {
+.ha-topic__service:hover {
   transform:translateY(-3px);
   box-shadow:0 14px 36px rgba(82,121,111,.20), 0 4px 12px rgba(47,62,70,.06);
   border-color:rgba(82,121,111,.28);
 }
-.ha-wages__service { transition:transform .25s, box-shadow .25s, border-color .25s; }
-.ha-wages__service-icon { transition:transform .25s, background .25s; }
-.ha-wages__service:hover .ha-wages__service-icon {
+.ha-topic__service { transition:transform .25s, box-shadow .25s, border-color .25s; }
+.ha-topic__service-icon { transition:transform .25s, background .25s; }
+.ha-topic__service:hover .ha-topic__service-icon {
   background:rgba(132,169,140,.28);
   transform:scale(1.06) rotate(-3deg);
 }
-.ha-wages__service-icon {
+.ha-topic__service-icon {
   flex:none; width:48px; height:48px;
   background:rgba(132,169,140,.16);
   border-radius:8px;
   display:flex; align-items:center; justify-content:center;
 }
-.ha-wages__service-icon svg { width:24px; height:24px; stroke:var(--ha-teal-deep); }
-.ha-wages__service-body { flex:1; }
-.ha-wages__service-title {
+.ha-topic__service-icon svg { width:24px; height:24px; stroke:var(--ha-teal-deep); }
+.ha-topic__service-body { flex:1; }
+.ha-topic__service-title {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:15px; color:var(--ha-charcoal);
   text-transform:uppercase; letter-spacing:.05em;
   margin:0 0 6px;
 }
-.ha-wages__service-cost {
+.ha-topic__service-cost {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:24px; color:var(--ha-teal-deep);
   letter-spacing:-.01em; line-height:1.1; margin:0 0 8px;
 }
-.ha-wages__service-desc {
+.ha-topic__service-desc {
   font-size:14px; line-height:1.55; color:rgba(47,62,70,.72); margin:0 0 12px;
 }
-.ha-wages__service-pc {
+.ha-topic__service-pc {
   display:inline-flex; align-items:center; gap:8px;
   margin-top:4px;
   padding:6px 12px;
@@ -828,20 +924,20 @@
   font-size:11.5px; font-weight:700; letter-spacing:.04em;
   color:var(--ha-teal-deep);
 }
-.ha-wages__service-pc::before {
+.ha-topic__service-pc::before {
   content:""; width:5px; height:5px; border-radius:50%; background:var(--ha-teal-deep);
 }
 
 /* ===== Equity bar chart ===== */
-.ha-wages__equity {
+.ha-topic__equity {
   background:var(--ha-bg);
   padding:80px 0;
 }
-.ha-wages__equity-inner {
+.ha-topic__equity-inner {
   max-width:960px; margin:0 auto;
   padding:0 36px;
 }
-.ha-wages__bars {
+.ha-topic__bars {
   display:grid; grid-template-columns:repeat(5, 1fr);
   gap:16px; align-items:end;
   height:340px;
@@ -850,11 +946,11 @@
   border-bottom:1px solid var(--ha-rule);
   position:relative;
 }
-.ha-wages__bar-col {
+.ha-topic__bar-col {
   display:flex; flex-direction:column; align-items:center;
   height:100%; justify-content:flex-end;
 }
-.ha-wages__bar {
+.ha-topic__bar {
   width:100%; max-width:80px;
   background:var(--ha-teal-deep);
   border-radius:4px 4px 0 0;
@@ -864,37 +960,37 @@
   /* Scroll-reveal start state */
   transform:scaleY(0);
 }
-.ha-wages__bars.is-in .ha-wages__bar {
+.ha-topic__bars.is-in .ha-topic__bar {
   transform:scaleY(1);
 }
-.ha-wages__bars.is-in .ha-wages__bar-col:nth-child(1) .ha-wages__bar { transition-delay:.05s; }
-.ha-wages__bars.is-in .ha-wages__bar-col:nth-child(2) .ha-wages__bar { transition-delay:.13s; }
-.ha-wages__bars.is-in .ha-wages__bar-col:nth-child(3) .ha-wages__bar { transition-delay:.21s; }
-.ha-wages__bars.is-in .ha-wages__bar-col:nth-child(4) .ha-wages__bar { transition-delay:.29s; }
-.ha-wages__bars.is-in .ha-wages__bar-col:nth-child(5) .ha-wages__bar { transition-delay:.37s; }
-.ha-wages__bars.is-in .ha-wages__bar { transition:transform .55s cubic-bezier(.22,.61,.36,1), opacity .3s; }
+.ha-topic__bars.is-in .ha-topic__bar-col:nth-child(1) .ha-topic__bar { transition-delay:.05s; }
+.ha-topic__bars.is-in .ha-topic__bar-col:nth-child(2) .ha-topic__bar { transition-delay:.13s; }
+.ha-topic__bars.is-in .ha-topic__bar-col:nth-child(3) .ha-topic__bar { transition-delay:.21s; }
+.ha-topic__bars.is-in .ha-topic__bar-col:nth-child(4) .ha-topic__bar { transition-delay:.29s; }
+.ha-topic__bars.is-in .ha-topic__bar-col:nth-child(5) .ha-topic__bar { transition-delay:.37s; }
+.ha-topic__bars.is-in .ha-topic__bar { transition:transform .55s cubic-bezier(.22,.61,.36,1), opacity .3s; }
 
-.ha-wages__bar-value {
+.ha-topic__bar-value {
   position:absolute; top:-30px; left:50%; transform:translateX(-50%);
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:16px; color:var(--ha-charcoal); white-space:nowrap;
   opacity:0; transition:opacity .3s ease .5s;
 }
-.ha-wages__bars.is-in .ha-wages__bar-value { opacity:1; }
-.ha-wages__bars.is-in .ha-wages__bar-col:nth-child(1) .ha-wages__bar-value { transition-delay:.6s; }
-.ha-wages__bars.is-in .ha-wages__bar-col:nth-child(5) .ha-wages__bar-value { transition-delay:.92s; }
+.ha-topic__bars.is-in .ha-topic__bar-value { opacity:1; }
+.ha-topic__bars.is-in .ha-topic__bar-col:nth-child(1) .ha-topic__bar-value { transition-delay:.6s; }
+.ha-topic__bars.is-in .ha-topic__bar-col:nth-child(5) .ha-topic__bar-value { transition-delay:.92s; }
 
 /* Highlight the most regressive bar (lowest 20%) \2014  teal-deep saturation; mute others */
-.ha-wages__bar-col:nth-child(1) .ha-wages__bar { background:var(--ha-teal-deep); box-shadow:0 8px 24px rgba(82,121,111,.28); }
-.ha-wages__bar-col:nth-child(2) .ha-wages__bar { background:var(--ha-teal); opacity:.55; }
-.ha-wages__bar-col:nth-child(3) .ha-wages__bar { background:var(--ha-teal); opacity:.55; }
-.ha-wages__bar-col:nth-child(4) .ha-wages__bar { background:var(--ha-teal); opacity:.55; }
-.ha-wages__bar-col:nth-child(5) .ha-wages__bar { background:var(--ha-teal); opacity:.55; }
-.ha-wages__bar-col:nth-child(1) .ha-wages__bar-value { color:var(--ha-teal-deep); }
-.ha-wages__bar-col:nth-child(1) .ha-wages__bar-label { color:var(--ha-teal-deep); font-weight:800; }
+.ha-topic__bar-col:nth-child(1) .ha-topic__bar { background:var(--ha-teal-deep); box-shadow:0 8px 24px rgba(82,121,111,.28); }
+.ha-topic__bar-col:nth-child(2) .ha-topic__bar { background:var(--ha-teal); opacity:.55; }
+.ha-topic__bar-col:nth-child(3) .ha-topic__bar { background:var(--ha-teal); opacity:.55; }
+.ha-topic__bar-col:nth-child(4) .ha-topic__bar { background:var(--ha-teal); opacity:.55; }
+.ha-topic__bar-col:nth-child(5) .ha-topic__bar { background:var(--ha-teal); opacity:.55; }
+.ha-topic__bar-col:nth-child(1) .ha-topic__bar-value { color:var(--ha-teal-deep); }
+.ha-topic__bar-col:nth-child(1) .ha-topic__bar-label { color:var(--ha-teal-deep); font-weight:800; }
 
 /* Annotation arrow + callout pointing at the lowest-20% bar */
-.ha-wages__bars-annotation {
+.ha-topic__bars-annotation {
   position:absolute;
   top:8px; left:14%; max-width:200px;
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
@@ -907,16 +1003,16 @@
   transition:opacity .4s ease 1.1s, transform .4s ease 1.1s;
   pointer-events:none;
 }
-.ha-wages__bars.is-in .ha-wages__bars-annotation {
+.ha-topic__bars.is-in .ha-topic__bars-annotation {
   opacity:1; transform:translateY(0);
 }
-.ha-wages__bars-annotation::after {
+.ha-topic__bars-annotation::after {
   content:"";
   position:absolute; left:-2px; top:100%; margin-top:6px;
   width:1px; height:38px;
   background:var(--ha-teal-deep);
 }
-.ha-wages__bars-annotation::before {
+.ha-topic__bars-annotation::before {
   content:"";
   position:absolute; left:-6px; bottom:-48px;
   width:0; height:0;
@@ -925,40 +1021,40 @@
   border-top:6px solid var(--ha-teal-deep);
 }
 @media (max-width:700px) {
-  .ha-wages__bars-annotation { display:none; }
+  .ha-topic__bars-annotation { display:none; }
 }
-.ha-wages__bar-label {
+.ha-topic__bar-label {
   margin-top:14px; text-align:center;
   font-size:13px; font-weight:600; color:var(--ha-charcoal);
 }
-.ha-wages__bar-range {
+.ha-topic__bar-range {
   font-size:11px; color:rgba(47,62,70,.55); margin-top:2px;
 }
-.ha-wages__bar-yaxis {
+.ha-topic__bar-yaxis {
   font-size:11px; color:rgba(47,62,70,.45);
   margin-bottom:8px; text-transform:uppercase; letter-spacing:.1em;
   font-weight:600;
 }
-.ha-wages__bar-note {
+.ha-topic__bar-note {
   text-align:center; font-size:14px; color:rgba(47,62,70,.7);
   font-style:italic; max-width:560px; margin:0 auto;
 }
 @media (max-width:700px) {
-  .ha-wages__bars { height:240px; gap:8px; }
-  .ha-wages__bar-value { font-size:13px; top:-24px; }
-  .ha-wages__bar-label { font-size:11px; }
-  .ha-wages__bar-range { display:none; }
+  .ha-topic__bars { height:240px; gap:8px; }
+  .ha-topic__bar-value { font-size:13px; top:-24px; }
+  .ha-topic__bar-label { font-size:11px; }
+  .ha-topic__bar-range { display:none; }
 }
 
 /* ===== State Comparison (Hawai\2bb i vs peer states) ===== */
-.ha-wages__compare {
+.ha-topic__compare {
   max-width:880px; margin:64px auto 0;
   padding:0;
 }
-.ha-wages__compare-head {
+.ha-topic__compare-head {
   text-align:center; max-width:680px; margin:0 auto 32px;
 }
-.ha-wages__compare-eyebrow {
+.ha-topic__compare-eyebrow {
   display:inline-block;
   font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:11px; font-weight:600;
@@ -966,79 +1062,79 @@
   color:var(--ha-teal-deep);
   margin-bottom:14px;
 }
-.ha-wages__compare h3 {
+.ha-topic__compare h3 {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:26px; line-height:1.18; letter-spacing:-.015em;
   color:var(--ha-charcoal); margin:0 0 12px;
 }
-.ha-wages__compare-lede {
+.ha-topic__compare-lede {
   font-size:15px; line-height:1.6; color:rgba(47,62,70,.78);
   margin:0 auto; max-width:600px;
 }
-.ha-wages__compare-rows {
+.ha-topic__compare-rows {
   display:flex; flex-direction:column; gap:14px;
   background:#fff;
   border:1px solid var(--ha-rule);
   border-radius:6px;
   padding:28px 32px;
 }
-.ha-wages__compare-row {
+.ha-topic__compare-row {
   display:grid;
   grid-template-columns:120px 1fr 80px;
   gap:18px; align-items:center;
 }
-.ha-wages__compare-state {
+.ha-topic__compare-state {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:13.5px; letter-spacing:.02em;
   color:rgba(47,62,70,.70);
   text-align:right;
 }
-.ha-wages__compare-row[data-state="hi"] .ha-wages__compare-state {
+.ha-topic__compare-row[data-state="hi"] .ha-topic__compare-state {
   color:var(--ha-teal-deep);
   font-weight:800;
   letter-spacing:.04em;
 }
-.ha-wages__compare-track {
+.ha-topic__compare-track {
   position:relative;
   height:14px;
   background:rgba(82,121,111,.06);
   border-radius:7px;
   overflow:visible;
 }
-.ha-wages__compare-track::before {
+.ha-topic__compare-track::before {
   content:""; position:absolute;
   left:50%; top:-4px; bottom:-4px;
   width:1px; background:rgba(47,62,70,.18);
 }
-.ha-wages__compare-fill {
+.ha-topic__compare-fill {
   position:absolute; top:0; bottom:0;
   background:rgba(82,121,111,.35);
   border-radius:7px;
   width:0;
   transition:width .8s cubic-bezier(.22,.61,.36,1);
 }
-.ha-wages__compare.is-in .ha-wages__compare-fill {
+.ha-topic__compare.is-in .ha-topic__compare-fill {
   width:var(--w, 0);
 }
-.ha-wages__compare-row:nth-child(1) .ha-wages__compare-fill { transition-delay:.10s; }
-.ha-wages__compare-row:nth-child(2) .ha-wages__compare-fill { transition-delay:.20s; }
-.ha-wages__compare-row:nth-child(3) .ha-wages__compare-fill { transition-delay:.30s; }
-.ha-wages__compare-row:nth-child(4) .ha-wages__compare-fill { transition-delay:.40s; }
-.ha-wages__compare-row[data-state="hi"] .ha-wages__compare-fill {
+.ha-topic__compare-row:nth-child(1) .ha-topic__compare-fill { transition-delay:.10s; }
+.ha-topic__compare-row:nth-child(2) .ha-topic__compare-fill { transition-delay:.20s; }
+.ha-topic__compare-row:nth-child(3) .ha-topic__compare-fill { transition-delay:.30s; }
+.ha-topic__compare-row:nth-child(4) .ha-topic__compare-fill { transition-delay:.40s; }
+.ha-topic__compare-row[data-state="hi"] .ha-topic__compare-fill {
   background:var(--ha-teal-deep);
   box-shadow:0 4px 16px rgba(82,121,111,.30);
 }
-.ha-wages__compare-row[data-side="left"] .ha-wages__compare-fill { right:50%; left:auto; }
-.ha-wages__compare-row[data-side="right"] .ha-wages__compare-fill { left:50%; right:auto; }
-.ha-wages__compare-val {
+.ha-topic__compare-row[data-side="left"] .ha-topic__compare-fill { right:50%; left:auto; }
+.ha-topic__compare-row[data-side="right"] .ha-topic__compare-fill { left:50%; right:auto; }
+.ha-topic__compare-val {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:13.5px; color:rgba(47,62,70,.65);
   text-align:left;
 }
-.ha-wages__compare-row[data-state="hi"] .ha-wages__compare-val {
+.ha-topic__compare-row[data-state="hi"] .ha-topic__compare-val {
   color:var(--ha-teal-deep); font-weight:800;
 }
-.ha-wages__compare-axis {
+.ha-topic__compare-axis {
   display:flex; justify-content:space-between;
   margin:18px 0 0;
   font-family:OkinaManrope, 'Manrope',sans-serif;
@@ -1046,57 +1142,57 @@
   letter-spacing:.14em; text-transform:uppercase;
   color:rgba(47,62,70,.55);
 }
-.ha-wages__compare-source {
+.ha-topic__compare-source {
   font-size:13px; color:rgba(47,62,70,.55);
   font-style:italic; text-align:center;
   margin:18px auto 0; max-width:560px;
 }
 @media (max-width:700px) {
-  .ha-wages__compare-rows { padding:20px 18px; }
-  .ha-wages__compare-row { grid-template-columns:80px 1fr 60px; gap:10px; }
-  .ha-wages__compare-state { font-size:11.5px; }
-  .ha-wages__compare-val { font-size:11.5px; }
-  .ha-wages__compare-axis { font-size:9.5px; letter-spacing:.10em; }
+  .ha-topic__compare-rows { padding:20px 18px; }
+  .ha-topic__compare-row { grid-template-columns:80px 1fr 60px; gap:10px; }
+  .ha-topic__compare-state { font-size:11.5px; }
+  .ha-topic__compare-val { font-size:11.5px; }
+  .ha-topic__compare-axis { font-size:9.5px; letter-spacing:.10em; }
 }
 
 /* ===== Callout ===== */
-.ha-wages__callout {
+.ha-topic__callout {
   background:#fff;
   border:1px solid var(--ha-rule);
   border-left:4px solid var(--ha-teal-deep);
   border-radius:4px; padding:32px 36px;
   max-width:880px; margin:48px auto 0;
 }
-.ha-wages__callout-eyebrow {
+.ha-topic__callout-eyebrow {
   font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase;
   color:var(--ha-teal-deep); margin-bottom:10px;
 }
-.ha-wages__callout-q {
+.ha-topic__callout-q {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:24px; color:var(--ha-charcoal);
   margin:0 0 14px; line-height:1.3;
 }
-.ha-wages__callout-body { font-size:15.5px; line-height:1.65; color:rgba(47,62,70,.85); }
-.ha-wages__callout-body em { font-style:normal; color:var(--ha-teal-deep); font-weight:600; }
+.ha-topic__callout-body { font-size:15.5px; line-height:1.65; color:rgba(47,62,70,.85); }
+.ha-topic__callout-body em { font-style:normal; color:var(--ha-teal-deep); font-weight:600; }
 
 /* ===== Policy priorities (3-col with bill links) ===== */
-.ha-wages__priorities {
+.ha-topic__priorities {
   display:grid; grid-template-columns:repeat(3, 1fr);
   gap:40px; max-width:1200px; margin:0 auto;
 }
 @media (max-width:900px) {
-  .ha-wages__priorities { grid-template-columns:1fr; gap:36px; }
+  .ha-topic__priorities { grid-template-columns:1fr; gap:36px; }
 }
-.ha-wages__priority { position:relative; overflow:visible; }
-.ha-wages__priority:nth-child(n+2) {
+.ha-topic__priority { position:relative; overflow:visible; }
+.ha-topic__priority:nth-child(n+2) {
   border-left:1px solid var(--ha-rule); padding-left:40px;
 }
 @media (max-width:900px) {
-  .ha-wages__priority:nth-child(n+2) { border-left:none; padding-left:0; border-top:1px solid var(--ha-rule); padding-top:36px; }
+  .ha-topic__priority:nth-child(n+2) { border-left:none; padding-left:0; border-top:1px solid var(--ha-rule); padding-top:36px; }
 }
-.ha-wages__priority-head { display:block; margin-bottom:18px; position:relative; z-index:1; }
-.ha-wages__priority-num {
+.ha-topic__priority-head { display:block; margin-bottom:18px; position:relative; z-index:1; }
+.ha-topic__priority-num {
   position:absolute;
   top:-32px; right:-4px;
   font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:600;
@@ -1107,43 +1203,43 @@
   z-index:0;
 }
 @media (max-width:900px) {
-  .ha-wages__priority-num { font-size:128px; top:-18px; }
+  .ha-topic__priority-num { font-size:128px; top:-18px; }
 }
-.ha-wages__priority-desc,
-.ha-wages__priority-stat,
-.ha-wages__priority-bills { position:relative; z-index:1; }
-.ha-wages__priority-title {
+.ha-topic__priority-desc,
+.ha-topic__priority-stat,
+.ha-topic__priority-bills { position:relative; z-index:1; }
+.ha-topic__priority-title {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:22px; color:var(--ha-charcoal);
   letter-spacing:-.01em; line-height:1.15; margin:0 0 4px;
 }
-.ha-wages__priority-sub {
+.ha-topic__priority-sub {
   font-size:11px; font-weight:600; letter-spacing:.12em;
   text-transform:uppercase; color:var(--ha-teal-deep);
 }
-.ha-wages__priority-desc {
+.ha-topic__priority-desc {
   font-size:15px; line-height:1.7; color:rgba(47,62,70,.8);
   margin:0 0 20px;
 }
-.ha-wages__priority-stat {
+.ha-topic__priority-stat {
   border-left:3px solid var(--ha-teal-deep);
   padding:14px 18px;
   margin-bottom:18px;
 }
-.ha-wages__priority-stat-num {
+.ha-topic__priority-stat-num {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:28px; color:var(--ha-charcoal);
   line-height:1.1; letter-spacing:-.01em;
   margin-bottom:4px;
 }
-.ha-wages__priority-stat-label {
+.ha-topic__priority-stat-label {
   font-size:13px; color:rgba(47,62,70,.7); line-height:1.45;
 }
-.ha-wages__priority-bills {
+.ha-topic__priority-bills {
   display:flex; flex-wrap:wrap; gap:6px;
   margin-top:14px;
 }
-.ha-wages__priority-bill {
+.ha-topic__priority-bill {
   display:inline-flex; align-items:center; gap:4px;
   background:rgba(82,121,111,.1);
   color:var(--ha-teal-deep);
@@ -1152,28 +1248,28 @@
   text-decoration:none;
   transition:background .15s;
 }
-.ha-wages__priority-bill:hover { background:rgba(82,121,111,.2); }
+.ha-topic__priority-bill:hover { background:rgba(82,121,111,.2); }
 
-/* Bulleted policy list inside a priority card \2014  mirrors the same
-   pattern across housing, food-security, and transportation. */
-.ha-wages__priority-list {
+/* Bulleted policy list inside a priority card \2014  used when a single
+   thematic card carries multiple specific policies. */
+.ha-topic__priority-list {
   list-style:none; padding:0; margin:18px 0 0;
   position:relative; z-index:1;
 }
-.ha-wages__priority-list li {
+.ha-topic__priority-list li {
   padding:14px 0 14px 24px;
   border-bottom:1px solid rgba(53,79,82,.10);
   font-size:14px; line-height:1.55;
   color:rgba(47,62,70,.85);
   position:relative;
 }
-.ha-wages__priority-list li:last-child { border-bottom:none; }
-.ha-wages__priority-list li::before {
+.ha-topic__priority-list li:last-child { border-bottom:none; }
+.ha-topic__priority-list li::before {
   content:""; position:absolute; left:0; top:24px;
   width:12px; height:1px;
   background:var(--ha-teal);
 }
-.ha-wages__priority-list strong {
+.ha-topic__priority-list strong {
   display:block;
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:14.5px; color:var(--ha-charcoal);
@@ -1181,28 +1277,28 @@
 }
 
 /* ===== Combined Research & News (two-column hybrid) ===== */
-.ha-wages__combined {
+.ha-topic__combined {
   display:grid; grid-template-columns:1fr 1fr;
   gap:64px;
   max-width:1200px; margin:0 auto;
 }
 @media (max-width:900px) {
-  .ha-wages__combined { grid-template-columns:1fr; gap:56px; }
+  .ha-topic__combined { grid-template-columns:1fr; gap:56px; }
 }
-.ha-wages__combined-col-head {
+.ha-topic__combined-col-head {
   display:flex; align-items:center; gap:14px;
   font-family:OkinaManrope, 'Manrope',sans-serif; font-size:11px; font-weight:700;
   letter-spacing:.24em; text-transform:uppercase;
   color:var(--ha-teal-deep);
   margin-bottom:6px;
 }
-.ha-wages__combined-col-head::after {
+.ha-topic__combined-col-head::after {
   content:""; flex:1; height:1px; background:rgba(82,121,111,.32);
 }
 
 /* ----- Publications list (left column) ----- */
-.ha-wages__pub-list { display:flex; flex-direction:column; }
-.ha-wages a.ha-wages__pub-list-item {
+.ha-topic__pub-list { display:flex; flex-direction:column; }
+.ha-topic a.ha-topic__pub-list-item {
   position:relative;
   display:grid; grid-template-columns:96px 1fr;
   gap:20px; align-items:center;
@@ -1211,20 +1307,20 @@
   text-decoration:none; color:inherit;
   transition:padding .2s;
 }
-.ha-wages a.ha-wages__pub-list-item:last-child { border-bottom:none; }
-.ha-wages a.ha-wages__pub-list-item:hover { padding-left:8px; }
-.ha-wages__pub-list-thumb {
+.ha-topic a.ha-topic__pub-list-item:last-child { border-bottom:none; }
+.ha-topic a.ha-topic__pub-list-item:hover { padding-left:8px; }
+.ha-topic__pub-list-thumb {
   aspect-ratio:1/1; flex:none;
   background:var(--ha-bg);
   border-radius:4px; overflow:hidden;
   position:relative;
 }
-.ha-wages__pub-list-thumb img {
+.ha-topic__pub-list-thumb img {
   width:100%; height:100%; object-fit:cover;
   transition:transform .35s;
 }
-.ha-wages a.ha-wages__pub-list-item:hover .ha-wages__pub-list-thumb img { transform:scale(1.05); }
-.ha-wages__pub-list-badge {
+.ha-topic a.ha-topic__pub-list-item:hover .ha-topic__pub-list-thumb img { transform:scale(1.05); }
+.ha-topic__pub-list-badge {
   position:absolute; top:6px; left:6px;
   display:inline-flex; align-items:center; gap:4px;
   background:var(--ha-teal-deep); color:#fff;
@@ -1233,29 +1329,29 @@
   letter-spacing:.14em; text-transform:uppercase;
   box-shadow:0 3px 10px rgba(47,62,70,.22);
 }
-.ha-wages__pub-list-badge::before {
+.ha-topic__pub-list-badge::before {
   content:""; width:4px; height:4px; border-radius:50%; background:#fff;
 }
-.ha-wages__pub-list-body {
+.ha-topic__pub-list-body {
   display:flex; flex-direction:column; gap:6px; min-width:0;
 }
-.ha-wages__pub-list-meta {
+.ha-topic__pub-list-meta {
   font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:10.5px; font-weight:700;
   letter-spacing:.18em; text-transform:uppercase;
   color:var(--ha-teal-deep);
   line-height:1;
 }
-.ha-wages__pub-list-title {
+.ha-topic__pub-list-title {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:15.5px; line-height:1.34; letter-spacing:-.005em;
   color:var(--ha-charcoal); margin:0;
   transition:color .18s;
 }
-.ha-wages a.ha-wages__pub-list-item:hover .ha-wages__pub-list-title {
+.ha-topic a.ha-topic__pub-list-item:hover .ha-topic__pub-list-title {
   color:var(--ha-teal-deep);
 }
-.ha-wages__pub-list-all {
+.ha-topic__pub-list-all {
   margin-top:18px;
   font-family:OkinaManrope, 'Manrope',sans-serif; font-size:12.5px; font-weight:700;
   letter-spacing:.06em;
@@ -1267,20 +1363,20 @@
   border-bottom:1px solid rgba(82,121,111,.3);
   transition:gap .18s, color .18s, border-color .18s;
 }
-.ha-wages__pub-list-all:hover { gap:10px; color:var(--ha-charcoal); border-bottom-color:var(--ha-charcoal); }
+.ha-topic__pub-list-all:hover { gap:10px; color:var(--ha-charcoal); border-bottom-color:var(--ha-charcoal); }
 
 /* ----- News clippings (right column, editorial) ----- */
-.ha-wages__news-stack { display:flex; flex-direction:column; }
-.ha-wages__news-clipping {
+.ha-topic__news-stack { display:flex; flex-direction:column; }
+.ha-topic__news-clipping {
   position:relative;
   display:grid; grid-template-columns:48px 1fr;
   gap:18px; align-items:flex-start;
   padding:22px 0;
   border-bottom:1px solid var(--ha-rule);
 }
-.ha-wages__news-clipping:last-child { border-bottom:none; }
-.ha-wages__news-clipping:first-child { padding-top:0; }
-.ha-wages__news-anchor {
+.ha-topic__news-clipping:last-child { border-bottom:none; }
+.ha-topic__news-clipping:first-child { padding-top:0; }
+.ha-topic__news-anchor {
   width:48px; height:48px;
   border-radius:6px;
   display:flex; align-items:center; justify-content:center;
@@ -1291,18 +1387,18 @@
   position:relative;
   overflow:hidden;
 }
-.ha-wages__news-anchor--press {
+.ha-topic__news-anchor--press {
   background:var(--ha-charcoal);
 }
-.ha-wages__news-anchor::after {
+.ha-topic__news-anchor::after {
   content:""; position:absolute; inset:0;
   background:linear-gradient(135deg, rgba(255,255,255,.10) 0%, transparent 40%);
   pointer-events:none;
 }
-.ha-wages__news-body {
+.ha-topic__news-body {
   display:flex; flex-direction:column; min-width:0;
 }
-.ha-wages__news-source {
+.ha-topic__news-source {
   font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:10.5px; font-weight:700;
   letter-spacing:.18em; text-transform:uppercase;
@@ -1311,42 +1407,42 @@
   margin-bottom:8px;
   display:flex; align-items:center; gap:8px; flex-wrap:wrap;
 }
-.ha-wages__news-source-tag {
+.ha-topic__news-source-tag {
   background:rgba(82,121,111,.12);
   color:var(--ha-teal-deep);
   padding:3px 8px; border-radius:999px;
   font-size:9px; letter-spacing:.16em; font-weight:700;
   display:inline-flex; align-items:center; gap:4px;
 }
-.ha-wages__news-source-tag::before {
+.ha-topic__news-source-tag::before {
   content:""; width:4px; height:4px; border-radius:50%; background:var(--ha-teal-deep);
 }
-.ha-wages__news-title {
+.ha-topic__news-title {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
   font-size:16px; line-height:1.32; letter-spacing:-.005em;
   color:var(--ha-charcoal); margin:0 0 8px;
   transition:color .18s;
 }
-.ha-wages__news-excerpt {
+.ha-topic__news-excerpt {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:400;
   font-size:14px; line-height:1.55;
   color:rgba(47,62,70,.75);
   margin:0 0 12px;
 }
-.ha-wages__news-byline {
+.ha-topic__news-byline {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-size:10.5px; font-weight:700;
   letter-spacing:.16em; text-transform:uppercase;
   color:rgba(47,62,70,.55);
   margin-bottom:12px;
   line-height:1;
 }
-.ha-wages__news-byline strong { color:var(--ha-teal-deep); font-weight:700; }
-.ha-wages__news-byline-sep {
+.ha-topic__news-byline strong { color:var(--ha-teal-deep); font-weight:700; }
+.ha-topic__news-byline-sep {
   display:inline-block; margin:0 8px;
   color:rgba(47,62,70,.35);
 }
-.ha-wages__news-byline-sep::before { content:"\b7 "; }
-.ha-wages__news-link {
+.ha-topic__news-byline-sep::before { content:"\b7 "; }
+.ha-topic__news-link {
   font-family:OkinaManrope, 'Manrope',sans-serif;
   font-size:12.5px; font-weight:700; color:var(--ha-teal-deep);
   letter-spacing:.04em;
@@ -1357,16 +1453,16 @@
   padding-bottom:2px;
   border-bottom:1px solid rgba(82,121,111,.3);
 }
-.ha-wages__news-link:hover { gap:10px; color:var(--ha-charcoal); border-bottom-color:var(--ha-charcoal); }
-.ha-wages__news-link svg { width:13px; height:13px; }
-.ha-wages__news-clipping:hover .ha-wages__news-title { color:var(--ha-teal-deep); }
+.ha-topic__news-link:hover { gap:10px; color:var(--ha-charcoal); border-bottom-color:var(--ha-charcoal); }
+.ha-topic__news-link svg { width:13px; height:13px; }
+.ha-topic__news-clipping:hover .ha-topic__news-title { color:var(--ha-teal-deep); }
 
 /* ===== Panel close button ===== */
-.ha-wages__panel-close-wrap {
+.ha-topic__panel-close-wrap {
   display:flex; justify-content:center;
   padding:28px 0 52px;
 }
-.ha-wages button.ha-wages__panel-close {
+.ha-topic button.ha-topic__panel-close {
   display:inline-flex; align-items:center; gap:8px;
   background:none;
   border:1px solid rgba(53,79,82,.2);
@@ -1377,23 +1473,23 @@
   cursor:pointer;
   transition:color .18s, border-color .18s, background .18s;
 }
-.ha-wages button.ha-wages__panel-close:hover {
+.ha-topic button.ha-topic__panel-close:hover {
   color:var(--ha-charcoal);
   border-color:rgba(53,79,82,.4);
   background:rgba(53,79,82,.04);
 }
-.ha-wages button.ha-wages__panel-close svg {
+.ha-topic button.ha-topic__panel-close svg {
   width:14px; height:14px;
   stroke:currentColor; fill:none;
   stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
   transition:transform .2s;
 }
-.ha-wages button.ha-wages__panel-close:hover svg {
+.ha-topic button.ha-topic__panel-close:hover svg {
   transform:translateY(-2px);
 }
 
 /* ===== TIER 2: Glossary term tooltips ===== */
-.ha-wages__term {
+.ha-topic__term {
   position:relative;
   display:inline;
   border-bottom:1px dotted var(--ha-teal-deep);
@@ -1401,8 +1497,8 @@
   color:inherit;
   font-style:inherit;
 }
-.ha-wages__term:focus { outline:2px solid var(--ha-teal); outline-offset:2px; border-radius:2px; }
-.ha-wages__term-tip {
+.ha-topic__term:focus { outline:2px solid var(--ha-teal); outline-offset:2px; border-radius:2px; }
+.ha-topic__term-tip {
   position:absolute;
   bottom:calc(100% + 10px); left:50%;
   transform:translateX(-50%) translateY(4px);
@@ -1423,24 +1519,24 @@
   transition:opacity .2s, transform .2s;
   white-space:normal;
 }
-.ha-wages__term-tip::after {
+.ha-topic__term-tip::after {
   content:""; position:absolute;
   bottom:-5px; left:50%; transform:translateX(-50%) rotate(45deg);
   width:10px; height:10px;
   background:var(--ha-charcoal);
 }
-.ha-wages__term:hover .ha-wages__term-tip,
-.ha-wages__term:focus .ha-wages__term-tip {
+.ha-topic__term:hover .ha-topic__term-tip,
+.ha-topic__term:focus .ha-topic__term-tip {
   opacity:1; pointer-events:auto;
   transform:translateX(-50%) translateY(0);
 }
-.ha-wages__term-tip strong { color:var(--ha-teal); font-weight:700; }
+.ha-topic__term-tip strong { color:var(--ha-teal); font-weight:700; }
 @media (max-width:700px) {
-  .ha-wages__term-tip { width:220px; font-size:12px; }
+  .ha-topic__term-tip { width:220px; font-size:12px; }
 }
 
 /* ===== TIER 1: Sticky tab bar (compact, appears after main tab bar scrolls out) ===== */
-.ha-wages__stuck-bar {
+.ha-topic__stuck-bar {
   position:fixed;
   top:107px; left:0; right:0;
   z-index:40;
@@ -1455,10 +1551,10 @@
   transform:translateY(-8px);
   transition:opacity .26s, transform .26s;
 }
-.ha-wages__stuck-bar.is-visible {
+.ha-topic__stuck-bar.is-visible {
   opacity:1; pointer-events:auto; transform:translateY(0);
 }
-.ha-wages button.ha-wages__stuck-tab {
+.ha-topic button.ha-topic__stuck-tab {
   display:inline-flex; align-items:center;
   padding:7px 22px; border-radius:999px;
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:13.5px;
@@ -1470,22 +1566,22 @@
   transition:background .22s, color .22s, border-color .22s;
   -webkit-tap-highlight-color:transparent;
 }
-.ha-wages button.ha-wages__stuck-tab:hover {
+.ha-topic button.ha-topic__stuck-tab:hover {
   background:rgba(132,169,140,.10);
   border-color:var(--ha-teal);
 }
-.ha-wages button.ha-wages__stuck-tab.active {
+.ha-topic button.ha-topic__stuck-tab.active {
   background:var(--ha-charcoal);
   color:#fff;
   border-color:var(--ha-charcoal);
 }
 @media (max-width:700px) {
-  .ha-wages__stuck-bar { top:111px; padding:8px 12px; gap:4px; }
-  .ha-wages button.ha-wages__stuck-tab { padding:6px 14px; font-size:12.5px; }
+  .ha-topic__stuck-bar { top:111px; padding:8px 12px; gap:4px; }
+  .ha-topic button.ha-topic__stuck-tab { padding:6px 14px; font-size:12.5px; }
 }
 
 /* ===== TIER 1: Priority pull-quote (human voice) ===== */
-.ha-wages__priority-quote {
+.ha-topic__priority-quote {
   font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:500;
   font-size:15.5px; line-height:1.5;
   color:var(--ha-teal-deep);
@@ -1495,7 +1591,7 @@
   position:relative;
   z-index:1;
 }
-.ha-wages__priority-quote cite {
+.ha-topic__priority-quote cite {
   display:block;
   font-family:OkinaManrope, 'Manrope',sans-serif; font-style:normal; font-weight:600;
   font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
@@ -1504,7 +1600,7 @@
 }
 
 /* ===== TIER 1: Take-Action CTA section (end of page) ===== */
-.ha-wages__cta {
+.ha-topic__cta {
   background:linear-gradient(135deg, var(--ha-charcoal) 0%, var(--ha-slate) 100%);
   padding:96px 28px;
   text-align:center;
@@ -1512,34 +1608,34 @@
   overflow:hidden;
   color:#fff;
 }
-.ha-wages__cta::before {
+.ha-topic__cta::before {
   content:""; position:absolute; inset:0; z-index:0;
   background:
     radial-gradient(circle at 88% 12%, rgba(132,169,140,.18), transparent 50%),
     radial-gradient(circle at 12% 88%, rgba(82,121,111,.22), transparent 55%);
   pointer-events:none;
 }
-.ha-wages__cta-inner { max-width:760px; margin:0 auto; position:relative; z-index:1; }
-.ha-wages__cta-eyebrow {
+.ha-topic__cta-inner { max-width:760px; margin:0 auto; position:relative; z-index:1; }
+.ha-topic__cta-eyebrow {
   display:inline-block;
   font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase;
   color:var(--ha-teal);
   margin-bottom:18px;
 }
-.ha-wages__cta h2 {
+.ha-topic__cta h2 {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
   font-size:clamp(30px, 4.2vw, 48px); line-height:1.12; letter-spacing:-.02em;
   color:#fff; margin:0 0 18px;
 }
-.ha-wages__cta p {
+.ha-topic__cta p {
   font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:17px; line-height:1.65;
   color:rgba(202,210,197,.86);
   margin:0 auto 32px; max-width:580px;
 }
-.ha-wages__cta-actions { display:inline-flex; flex-wrap:wrap; gap:14px; justify-content:center; }
-.ha-wages a.ha-wages__cta-btn {
+.ha-topic__cta-actions { display:inline-flex; flex-wrap:wrap; gap:14px; justify-content:center; }
+.ha-topic a.ha-topic__cta-btn {
   display:inline-flex; align-items:center;
   padding:14px 28px; border-radius:999px;
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
@@ -1547,181 +1643,186 @@
   text-decoration:none;
   transition:transform .25s, background .25s, color .25s, border-color .25s;
 }
-.ha-wages a.ha-wages__cta-btn--primary {
+.ha-topic a.ha-topic__cta-btn--primary {
   background:var(--ha-teal); color:var(--ha-charcoal);
   border:1px solid var(--ha-teal);
 }
-.ha-wages a.ha-wages__cta-btn--primary:hover {
+.ha-topic a.ha-topic__cta-btn--primary:hover {
   background:var(--ha-ash); border-color:var(--ha-ash);
   transform:translateY(-2px);
 }
-.ha-wages a.ha-wages__cta-btn--ghost {
+.ha-topic a.ha-topic__cta-btn--ghost {
   background:transparent; color:#fff;
   border:1px solid rgba(202,210,197,.40);
 }
-.ha-wages a.ha-wages__cta-btn--ghost:hover {
+.ha-topic a.ha-topic__cta-btn--ghost:hover {
   border-color:var(--ha-teal); color:var(--ha-teal);
   transform:translateY(-2px);
 }
 @media (max-width:700px) {
-  .ha-wages__cta { padding:64px 20px; }
-  .ha-wages__cta-actions { flex-direction:column; width:100%; align-items:stretch; }
-  .ha-wages a.ha-wages__cta-btn { justify-content:center; }
+  .ha-topic__cta { padding:64px 20px; }
+  .ha-topic__cta-actions { flex-direction:column; width:100%; align-items:stretch; }
+  .ha-topic a.ha-topic__cta-btn { justify-content:center; }
 }
 
 /* ===== Explore other issues \2014  cross-issue nav (mirrored on all 5 pages) ===== */
-.ha-wages__more { background:var(--ha-bg); padding:72px 28px 80px; border-top:1px solid var(--ha-rule); }
-.ha-wages__more-inner { max-width:1180px; margin:0 auto; }
-.ha-wages__more-eyebrow {
+.ha-topic__more { background:var(--ha-bg); padding:72px 28px 80px; border-top:1px solid var(--ha-rule); }
+.ha-topic__more-inner { max-width:1180px; margin:0 auto; }
+.ha-topic__more-eyebrow {
   display:inline-block; font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase; color:var(--ha-teal-deep); margin-bottom:10px;
 }
-.ha-wages__more h2 {
+.ha-topic__more h2 {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:clamp(24px,2.6vw,34px);
   line-height:1.15; letter-spacing:-.02em; color:var(--ha-charcoal); margin:0;
 }
-.ha-wages__more-grid {
+.ha-topic__more-grid {
   display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
   list-style:none; padding:0; margin:30px 0 0;
 }
-@media (max-width:1000px) { .ha-wages__more-grid { grid-template-columns:repeat(2,1fr); } }
-@media (max-width:600px)  { .ha-wages__more-grid { grid-template-columns:1fr; } }
-.ha-wages__more-card {
+@media (max-width:1000px) { .ha-topic__more-grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:600px)  { .ha-topic__more-grid { grid-template-columns:1fr; } }
+.ha-topic__more-card {
   display:flex; flex-direction:column; gap:8px; height:100%;
   padding:20px 20px 18px; background:var(--ha-white);
   border:1px solid var(--ha-rule); border-radius:8px;
   text-decoration:none; color:inherit;
   transition:border-color .25s, transform .25s, box-shadow .25s;
 }
-.ha-wages__more-card:hover {
+.ha-topic__more-card:hover {
   border-color:var(--ha-teal); transform:translateY(-2px);
   box-shadow:0 10px 26px rgba(47,62,70,.08);
 }
-.ha-wages__more-card:focus-visible { outline:2px solid var(--ha-teal-deep); outline-offset:3px; }
-.ha-wages__more-name {
+.ha-topic__more-card:focus-visible { outline:2px solid var(--ha-teal-deep); outline-offset:3px; }
+.ha-topic__more-name {
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:16px;
   line-height:1.3; color:var(--ha-charcoal);
 }
-.ha-wages__more-desc { font-size:13.5px; line-height:1.55; color:var(--ha-teal-deep); flex:1; margin:0; }
-.ha-wages__more-go {
+.ha-topic__more-desc { font-size:13.5px; line-height:1.55; color:var(--ha-teal-deep); flex:1; margin:0; }
+.ha-topic__more-go {
   display:inline-flex; align-items:center; gap:6px; margin-top:4px;
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600; font-size:12.5px;
   letter-spacing:.04em; color:var(--ha-teal-deep);
 }
-.ha-wages__more-card:hover .ha-wages__more-go { color:var(--ha-charcoal); gap:9px; }
-.ha-wages__more-go svg { width:13px; height:13px; transition:transform .25s; }
+.ha-topic__more-card:hover .ha-topic__more-go { color:var(--ha-charcoal); gap:9px; }
+.ha-topic__more-go svg { width:13px; height:13px; transition:transform .25s; }
 </style>
 
-<section class="ha-wages">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap">
+<link rel="stylesheet" href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/assets/okina.css">
+
+
+<section class="ha-topic" data-category="wage|labor" data-pubs="3">
 
   <!-- Sticky tab bar (appears when main tab bar scrolls out) -->
-  <div class="ha-wages__stuck-bar" role="tablist" aria-label="Section (sticky)">
-    <button class="ha-wages__stuck-tab active" data-panel="overview" role="tab" aria-selected="true">Overview</button>
-    <button class="ha-wages__stuck-tab" data-panel="priorities" role="tab" aria-selected="false">Priorities</button>
+  <div class="ha-topic__stuck-bar" role="tablist" aria-label="Section (sticky)">
+    <button class="ha-topic__stuck-tab active" data-panel="overview" role="tab" aria-selected="true">Overview</button>
+    <button class="ha-topic__stuck-tab" data-panel="priorities" role="tab" aria-selected="false">Priorities</button>
   </div>
 
   <!-- ===================================
        TOP &#8212; hero + tab bar wrapper (single dark gradient)
        =================================== -->
-  <div class="ha-wages__top">
+  <div class="ha-topic__top">
 
   <!-- ===================================
        HERO (compact: eyebrow + title + intro + quick-pills)
        =================================== -->
-  <header class="ha-wages__hero" id="ha-wages-hero">
-    <a class="ha-wages__back" href="/issues" aria-label="Back to Issues">
+  <header class="ha-topic__hero" id="ha-topic-hero">
+    <a class="ha-topic__back" href="/issues" aria-label="Back to Issues">
       <svg viewBox="0 0 14 14"><path d="M9 2l-5 5 5 5"/></svg>
       Back to Issues
     </a>
-    <a class="ha-wages__hero-subscribe" href="https://hiappleseed.quorum.us/campaign/raiseuphisubscribe/" target="_blank" rel="noopener" aria-label="Get email alerts">
+    <a class="ha-topic__hero-subscribe" href="https://hiappleseed.quorum.us/campaign/raiseuphisubscribe/" target="_blank" rel="noopener" aria-label="Get email alerts">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><polyline points="22,6 12,13 2,6"/></svg>
       Get alerts
     </a>
-    <div class="ha-wages__hero-inner">
-      <h1>Wages <span class="ha-wages__hero-amp">&amp; Labor</span></h1>
-      <div class="ha-wages__hero-rule" aria-hidden="true"></div>
-      <p class="ha-wages__hero-sub">
+    <div class="ha-topic__hero-inner">
+      <h1>Wages <span class="ha-topic__hero-amp">&amp; Labor</span></h1>
+      <div class="ha-topic__hero-rule" aria-hidden="true"></div>
+      <p class="ha-topic__hero-sub">
         If you work hard and play by the rules, you should be able to afford a decent life and a roof over your head.
       </p>
     </div>
   </header>
 
-    <div class="ha-wages__tab-bar">
-      <div class="ha-wages__tabs" role="tablist" aria-label="Section">
-        <span class="ha-wages__tabs-indicator" aria-hidden="true"></span>
-        <button class="ha-wages__tab active" data-panel="overview" role="tab" aria-selected="true" aria-controls="ha-wages-panel-overview">Overview</button>
-        <button class="ha-wages__tab" data-panel="priorities" role="tab" aria-selected="false" aria-controls="ha-wages-panel-priorities">Priorities</button>
+    <div class="ha-topic__tab-bar">
+      <div class="ha-topic__tabs" role="tablist" aria-label="Section">
+        <span class="ha-topic__tabs-indicator" aria-hidden="true"></span>
+        <button class="ha-topic__tab active" data-panel="overview" role="tab" aria-selected="true" aria-controls="ha-topic-panel-overview">Overview</button>
+        <button class="ha-topic__tab" data-panel="priorities" role="tab" aria-selected="false" aria-controls="ha-topic-panel-priorities">Priorities</button>
       </div>
-      <a class="ha-wages__bar-pill" href="#ha-wages-research-news">
+      <a class="ha-topic__bar-pill" href="#ha-topic-research-news">
         Research &amp; News
         <svg viewBox="0 0 14 14"><path d="M7 2v10M2 7l5 5 5-5"/></svg>
       </a>
     </div>
 
-  </div><!-- /.ha-wages__top -->
+  </div><!-- /.ha-topic__top -->
 
   <!-- ===================================
        DRAWER &#8212; Vision / Overview / Priorities panels
        =================================== -->
-  <div class="ha-wages__panels">
+  <div class="ha-topic__panels">
 
   
 
   <!-- =========== OVERVIEW PANEL =========== -->
-  <section class="ha-wages__panel active" id="ha-wages-panel-overview" role="tabpanel">
+  <section class="ha-topic__panel active" id="ha-topic-panel-overview" role="tabpanel">
 
-    <div class="ha-wages__vision">
-      <span class="ha-wages__vision-eyebrow">Our Vision</span>
-      <div class="ha-wages__vision-quote" aria-hidden="true">&ldquo;</div>
+    <div class="ha-topic__vision">
+      <span class="ha-topic__vision-eyebrow">Our Vision</span>
+      <div class="ha-topic__vision-quote" aria-hidden="true">&ldquo;</div>
       <h2>Pay and protections that match the cost of <em>living here</em>.</h2>
-      <div class="ha-wages__vision-rule"></div>
+      <div class="ha-topic__vision-rule"></div>
       <p>
         More than half of Hawai&#x02BB;i&rsquo;s households live <span class="ha-term" tabindex="0">paycheck to paycheck<span class="ha-term-tip" role="tooltip"><strong>Paycheck to paycheck</strong> &#8212; little or no savings to absorb an unexpected expense; one financial shock away from crisis.</span></span>; one financial hardship away from slipping into poverty. But the cost of living keeps rising and the gaps our safety net is meant to close keep widening.
       </p>
-      <blockquote class="ha-wages__vision-pullquote">
+      <blockquote class="ha-topic__vision-pullquote">
         If you work hard and play by the rules, you should be able to afford a decent life and a roof over your head. That is not a radical idea. It is the bare minimum.
       </blockquote>
       <p>
         Our wages and labor work sits at the foundation of economic justice. Without fair pay and basic protections, you cannot afford housing, food, transportation, or health care. Everything else depends on it. Hawai&#x02BB;i&rsquo;s 2022 minimum-wage increase &mdash; which will reach <strong>$18 by 2028</strong> &mdash; will deliver $1 billion in additional wages annually to over 200,000 workers. But the cost of living keeps rising, and the gaps stronger safety nets are meant to close are widening.
       </p>
-      <div class="ha-wages__vision-pillars">
+      <div class="ha-topic__vision-pillars">
 
-        <article class="ha-wages__vision-pillar">
-          <div class="ha-wages__vision-pillar-icon">
+        <article class="ha-topic__vision-pillar">
+          <div class="ha-topic__vision-pillar-icon">
             <svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 8h14"/><path d="M5 8l-2 6h7l-2-6"/><path d="M19 8l-2 6h7l-2-6"/><path d="M9 21h6"/></svg>
           </div>
-          <div class="ha-wages__vision-pillar-eyebrow">Lift</div>
+          <div class="ha-topic__vision-pillar-eyebrow">Lift</div>
           <h3>Lift the wage floor with cost of living.</h3>
           <p>Hawai&#x02BB;i&rsquo;s $18 minimum wage by 2028 is a major step forward. But costs keep rising. Lock in cost-of-living adjustments now so the floor doesn&rsquo;t fall behind again the moment the 2022 law sunsets.</p>
-          <div class="ha-wages__vision-pillar-stat">
-            <div class="ha-wages__vision-pillar-stat-num">$1B+</div>
-            <div class="ha-wages__vision-pillar-stat-label">in additional annual wages delivered by the <strong>2022 wage hike</strong></div>
+          <div class="ha-topic__vision-pillar-stat">
+            <div class="ha-topic__vision-pillar-stat-num">$1B+</div>
+            <div class="ha-topic__vision-pillar-stat-label">in additional annual wages delivered by the <strong>2022 wage hike</strong></div>
           </div>
         </article>
 
-        <article class="ha-wages__vision-pillar">
-          <div class="ha-wages__vision-pillar-icon">
+        <article class="ha-topic__vision-pillar">
+          <div class="ha-topic__vision-pillar-icon">
             <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/><path d="M9 11h.01M15 11h.01"/></svg>
           </div>
-          <div class="ha-wages__vision-pillar-eyebrow">Protect</div>
+          <div class="ha-topic__vision-pillar-eyebrow">Protect</div>
           <h3>Workers shouldn&rsquo;t choose between a paycheck and care.</h3>
           <p>A statewide paid family and medical leave program means workers can care for a newborn, a sick parent, or their own illness without losing income or risking their job. Good for workers. Good for businesses. Long overdue.</p>
-          <div class="ha-wages__vision-pillar-stat">
-            <div class="ha-wages__vision-pillar-stat-num">~50%</div>
-            <div class="ha-wages__vision-pillar-stat-label">of Hawai&#x02BB;i households live <strong>paycheck to paycheck</strong></div>
+          <div class="ha-topic__vision-pillar-stat">
+            <div class="ha-topic__vision-pillar-stat-num">~50%</div>
+            <div class="ha-topic__vision-pillar-stat-label">of Hawai&#x02BB;i households live <strong>paycheck to paycheck</strong></div>
           </div>
         </article>
 
-        <article class="ha-wages__vision-pillar">
-          <div class="ha-wages__vision-pillar-icon">
+        <article class="ha-topic__vision-pillar">
+          <div class="ha-topic__vision-pillar-icon">
             <svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M3 12c2-1 3-1 5 0 1.5.7 2.5.7 4 0 1.5-.7 2.5-.7 4 0 2 1 3 1 5 0"/><path d="M3 6c2-1 3-1 5 0 1.5.7 2.5.7 4 0 1.5-.7 2.5-.7 4 0 2 1 3 1 5 0"/><path d="M3 18c2-1 3-1 5 0 1.5.7 2.5.7 4 0 1.5-.7 2.5-.7 4 0 2 1 3 1 5 0"/></svg>
           </div>
-          <div class="ha-wages__vision-pillar-eyebrow">Sustain</div>
+          <div class="ha-topic__vision-pillar-eyebrow">Sustain</div>
           <h3>Close the 40-year wage-cost gap.</h3>
           <p>For four decades, costs have outpaced wages for most workers. Sustained wage growth paired with strong safety-net programs is the only way to keep one financial shock from pushing families into poverty.</p>
-          <div class="ha-wages__vision-pillar-stat">
-            <div class="ha-wages__vision-pillar-stat-num">$6,100</div>
-            <div class="ha-wages__vision-pillar-stat-label">net annual loss for low-wage workers, 1980&ndash;2018, when <strong>rents outpaced raises</strong></div>
+          <div class="ha-topic__vision-pillar-stat">
+            <div class="ha-topic__vision-pillar-stat-num">$6,100</div>
+            <div class="ha-topic__vision-pillar-stat-label">net annual loss for low-wage workers, 1980&ndash;2018, when <strong>rents outpaced raises</strong></div>
           </div>
         </article>
 
@@ -1730,8 +1831,8 @@
 
 
   <!-- Big headline stat above the pie -->
-  <div class="ha-wages__stat-headline">
-    <div class="ha-wages__stat-headline-fy">2024 statewide</div>
+  <div class="ha-topic__stat-headline">
+    <div class="ha-topic__stat-headline-fy">2024 statewide</div>
     <h2>More than<br><strong data-count-to="50" data-count-prefix="" data-count-suffix="% of households" data-count-decimals="0">50% of households</strong> live paycheck to paycheck.</h2>
   </div>
 
@@ -1742,58 +1843,58 @@
   <!-- ===================================
        WHO FEELS THE SQUEEZE (services grid)
        =================================== -->
-  <section class="ha-wages__section">
-    <div class="ha-wages__section-head">
-      <div class="ha-wages__eyebrow">Who&rsquo;s squeezed</div>
-      <h2 class="ha-wages__h2">The squeeze touches every working family</h2>
-      <div class="ha-wages__h2-rule"></div>
-      <p class="ha-wages__lede">
+  <section class="ha-topic__section">
+    <div class="ha-topic__section-head">
+      <div class="ha-topic__eyebrow">Who&rsquo;s squeezed</div>
+      <h2 class="ha-topic__h2">The squeeze touches every working family</h2>
+      <div class="ha-topic__h2-rule"></div>
+      <p class="ha-topic__lede">
         Low-wage workers feel the pinch most acutely, but it&rsquo;s spread across the workforce: caregivers without paid leave, parents priced out by child-care costs, and young people leaving the islands because the math no longer works.
       </p>
     </div>
-    <div class="ha-wages__services">
-      <div class="ha-wages__service">
-        <div class="ha-wages__service-icon">
+    <div class="ha-topic__services">
+      <div class="ha-topic__service">
+        <div class="ha-topic__service-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 21V7l6-4 6 4v14M9 21v-6h6v6"/></svg>
         </div>
-        <div class="ha-wages__service-body">
-          <p class="ha-wages__service-title">Low-wage workers</p>
-          <p class="ha-wages__service-cost">200K+ workers</p>
-          <p class="ha-wages__service-desc">More than 200,000 Hawai&#x02BB;i workers benefit from the 2022 minimum-wage law &mdash; but housing &amp; basics keep outpacing the floor.</p>
-          <span class="ha-wages__service-pc">$18/hr floor by 2028</span>
+        <div class="ha-topic__service-body">
+          <p class="ha-topic__service-title">Low-wage workers</p>
+          <p class="ha-topic__service-cost">200K+ workers</p>
+          <p class="ha-topic__service-desc">More than 200,000 Hawai&#x02BB;i workers benefit from the 2022 minimum-wage law &mdash; but housing &amp; basics keep outpacing the floor.</p>
+          <span class="ha-topic__service-pc">$18/hr floor by 2028</span>
         </div>
       </div>
-      <div class="ha-wages__service">
-        <div class="ha-wages__service-icon">
+      <div class="ha-topic__service">
+        <div class="ha-topic__service-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M3 8l9-6 9 6v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3"/></svg>
         </div>
-        <div class="ha-wages__service-body">
-          <p class="ha-wages__service-title">Working parents</p>
-          <p class="ha-wages__service-cost">44% of low-wage pay</p>
-          <p class="ha-wages__service-desc">The average preschool tuition in Honolulu takes up 44% of a low-wage worker&rsquo;s full-time earnings &mdash; the biggest expense after rent.</p>
-          <span class="ha-wages__service-pc">Child care is unaffordable</span>
+        <div class="ha-topic__service-body">
+          <p class="ha-topic__service-title">Working parents</p>
+          <p class="ha-topic__service-cost">44% of low-wage pay</p>
+          <p class="ha-topic__service-desc">The average preschool tuition in Honolulu takes up 44% of a low-wage worker&rsquo;s full-time earnings &mdash; the biggest expense after rent.</p>
+          <span class="ha-topic__service-pc">Child care is unaffordable</span>
         </div>
       </div>
-      <div class="ha-wages__service">
-        <div class="ha-wages__service-icon">
+      <div class="ha-topic__service">
+        <div class="ha-topic__service-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11a8 8 0 1 0-16 0 8 8 0 0 0 16 0z"/><path d="M12 7v4l3 2"/></svg>
         </div>
-        <div class="ha-wages__service-body">
-          <p class="ha-wages__service-title">Caregivers</p>
-          <p class="ha-wages__service-cost">No statewide leave</p>
-          <p class="ha-wages__service-desc">Hawai&#x02BB;i has no statewide paid family or medical leave program. Workers must choose between a paycheck and caring for a newborn or sick parent.</p>
-          <span class="ha-wages__service-pc">13 states already do it</span>
+        <div class="ha-topic__service-body">
+          <p class="ha-topic__service-title">Caregivers</p>
+          <p class="ha-topic__service-cost">No statewide leave</p>
+          <p class="ha-topic__service-desc">Hawai&#x02BB;i has no statewide paid family or medical leave program. Workers must choose between a paycheck and caring for a newborn or sick parent.</p>
+          <span class="ha-topic__service-pc">13 states already do it</span>
         </div>
       </div>
-      <div class="ha-wages__service">
-        <div class="ha-wages__service-icon">
+      <div class="ha-topic__service">
+        <div class="ha-topic__service-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l-2 2 8 8 2-2-8-8zM12 5l7 7M19 12l2-2-8-8-2 2 8 8z"/></svg>
         </div>
-        <div class="ha-wages__service-body">
-          <p class="ha-wages__service-title">Young people leaving</p>
-          <p class="ha-wages__service-cost">66% of 18&ndash;34</p>
-          <p class="ha-wages__service-desc">Two-thirds of young adults have considered leaving Hawai&#x02BB;i or have a household member who already left &mdash; chasing affordability and opportunity elsewhere.</p>
-          <span class="ha-wages__service-pc">The brain drain accelerates</span>
+        <div class="ha-topic__service-body">
+          <p class="ha-topic__service-title">Young people leaving</p>
+          <p class="ha-topic__service-cost">66% of 18&ndash;34</p>
+          <p class="ha-topic__service-desc">Two-thirds of young adults have considered leaving Hawai&#x02BB;i or have a household member who already left &mdash; chasing affordability and opportunity elsewhere.</p>
+          <span class="ha-topic__service-pc">The brain drain accelerates</span>
         </div>
       </div>
     </div>
@@ -1803,92 +1904,92 @@
        structural carryovers from the tax page's regressivity charts.
        The Overview now lands cleanly on the services grid above.) -->
 
-    <div class="ha-wages__panel-close-wrap">
-      <button class="ha-wages__panel-close" aria-label="Close section">
+    <div class="ha-topic__panel-close-wrap">
+      <button class="ha-topic__panel-close" aria-label="Close section">
         <svg viewBox="0 0 14 9"><path d="M1 8l6-7 6 7"/></svg>
         Close
       </button>
     </div>
-  </section><!-- /#ha-wages-panel-overview -->
+  </section><!-- /#ha-topic-panel-overview -->
 
   <!-- =========== PRIORITIES PANEL =========== -->
-  <section class="ha-wages__panel" id="ha-wages-panel-priorities" role="tabpanel" hidden>
-    <div class="ha-wages__opps">
-    <div class="ha-wages__opps-head">
-      <div class="ha-wages__eyebrow">Legislative Priorities</div>
-      <h2 class="ha-wages__h2">Lift, protect, sustain</h2>
-      <div class="ha-wages__h2-rule"></div>
-      <p class="ha-wages__lede">
+  <section class="ha-topic__panel" id="ha-topic-panel-priorities" role="tabpanel" hidden>
+    <div class="ha-topic__opps">
+    <div class="ha-topic__opps-head">
+      <div class="ha-topic__eyebrow">Legislative Priorities</div>
+      <h2 class="ha-topic__h2">Lift, protect, sustain</h2>
+      <div class="ha-topic__h2-rule"></div>
+      <p class="ha-topic__lede">
         Two explicit legislative priorities &mdash; a continuing wage-floor increase and a statewide paid-leave program &mdash; backed by a sustained push to close the 40-year gap between wages and the cost of living.
       </p>
     </div>
-    <div class="ha-wages__priorities">
-      <article class="ha-wages__priority">
-        <div class="ha-wages__priority-head">
-          <span class="ha-wages__priority-num">1</span>
+    <div class="ha-topic__priorities">
+      <article class="ha-topic__priority">
+        <div class="ha-topic__priority-head">
+          <span class="ha-topic__priority-num">1</span>
           <div>
-            <h3 class="ha-wages__priority-title">Lift</h3>
-            <div class="ha-wages__priority-sub">Wage floor that rises with cost of living</div>
+            <h3 class="ha-topic__priority-title">Lift</h3>
+            <div class="ha-topic__priority-sub">Wage floor that rises with cost of living</div>
           </div>
         </div>
-        <p class="ha-wages__priority-desc">
+        <p class="ha-topic__priority-desc">
           Hawai&#x02BB;i&rsquo;s current minimum-wage law reaches its final scheduled increase to <strong>$18/hour in 2028</strong>. Without new legislation, the floor flatlines while the cost of living keeps climbing. Lock in cost-of-living adjustments now so the next 40 years don&rsquo;t repeat the last 40.
         </p>
-        <button class="ha-acc-btn" type="button" aria-expanded="false">Policy details<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><ul class="ha-wages__priority-list">
+        <button class="ha-acc-btn" type="button" aria-expanded="false">Policy details<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><ul class="ha-topic__priority-list">
           <li>
             <strong>Raise the minimum wage after 2028</strong>
             Secure legislation ahead of time to ensure Hawai&#x02BB;i&rsquo;s minimum wage continues to rise to account for cost-of-living increases &mdash; rather than waiting and having to fight the same fight all over again every few years.
           </li>
         </ul></div></div>
-        <div class="ha-wages__priority-stat">
-          <div class="ha-wages__priority-stat-num">$1B+</div>
-          <div class="ha-wages__priority-stat-label">in additional annual wages delivered by the <strong>2022 wage hike</strong></div>
+        <div class="ha-topic__priority-stat">
+          <div class="ha-topic__priority-stat-num">$1B+</div>
+          <div class="ha-topic__priority-stat-label">in additional annual wages delivered by the <strong>2022 wage hike</strong></div>
         </div>
-        <blockquote class="ha-wages__priority-quote">
+        <blockquote class="ha-topic__priority-quote">
           &ldquo;Every minimum-wage law I&rsquo;ve seen in my career has done what it was designed to do &mdash; lift workers up, with no meaningful hit to employment.&rdquo;
           <cite>&mdash; Hawai&#x02BB;i economist</cite>
         </blockquote>
       </article>
 
-      <article class="ha-wages__priority">
-        <div class="ha-wages__priority-head">
-          <span class="ha-wages__priority-num">2</span>
+      <article class="ha-topic__priority">
+        <div class="ha-topic__priority-head">
+          <span class="ha-topic__priority-num">2</span>
           <div>
-            <h3 class="ha-wages__priority-title">Protect</h3>
-            <div class="ha-wages__priority-sub">Paid family and medical leave</div>
+            <h3 class="ha-topic__priority-title">Protect</h3>
+            <div class="ha-topic__priority-sub">Paid family and medical leave</div>
           </div>
         </div>
-        <p class="ha-wages__priority-desc">
+        <p class="ha-topic__priority-desc">
           Workers shouldn&rsquo;t have to choose between caring for a newborn or a sick parent and keeping their job. A statewide paid leave program supports families, reduces turnover, and creates a more stable workforce. It is good for workers. It is good for businesses. And it is long overdue &mdash; 13 states have already enacted programs; Hawai&#x02BB;i has not.
         </p>
-        <button class="ha-acc-btn" type="button" aria-expanded="false">Policy details<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><ul class="ha-wages__priority-list">
+        <button class="ha-acc-btn" type="button" aria-expanded="false">Policy details<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><ul class="ha-topic__priority-list">
           <li>
             <strong>Establish statewide paid family &amp; medical leave</strong>
             A program funded through small employer/employee contributions that lets workers take time off for childbirth, caregiving, or their own serious illness without losing income or risking their job. Wage replacement is partial and capped &mdash; designed to be self-sustaining at modest contribution rates.
           </li>
         </ul></div></div>
-        <div class="ha-wages__priority-stat">
-          <div class="ha-wages__priority-stat-num">13 states</div>
-          <div class="ha-wages__priority-stat-label">plus DC have a <strong>statewide paid-leave program</strong>. Hawai&#x02BB;i does not.</div>
+        <div class="ha-topic__priority-stat">
+          <div class="ha-topic__priority-stat-num">13 states</div>
+          <div class="ha-topic__priority-stat-label">plus DC have a <strong>statewide paid-leave program</strong>. Hawai&#x02BB;i does not.</div>
         </div>
-        <blockquote class="ha-wages__priority-quote">
+        <blockquote class="ha-topic__priority-quote">
           &ldquo;My mother needed care after surgery. Without paid leave, I had to choose between her recovery and my rent. No one should have to make that choice.&rdquo;
           <cite>&mdash; Honolulu caregiver</cite>
         </blockquote>
       </article>
 
-      <article class="ha-wages__priority">
-        <div class="ha-wages__priority-head">
-          <span class="ha-wages__priority-num">3</span>
+      <article class="ha-topic__priority">
+        <div class="ha-topic__priority-head">
+          <span class="ha-topic__priority-num">3</span>
           <div>
-            <h3 class="ha-wages__priority-title">Sustain</h3>
-            <div class="ha-wages__priority-sub">Beyond the wage floor</div>
+            <h3 class="ha-topic__priority-title">Sustain</h3>
+            <div class="ha-topic__priority-sub">Beyond the wage floor</div>
           </div>
         </div>
-        <p class="ha-wages__priority-desc">
+        <p class="ha-topic__priority-desc">
           The wage floor and paid leave are essential but not sufficient. Closing Hawai&#x02BB;i&rsquo;s 40-year wage-cost gap requires a sustained policy push &mdash; on child care, on cost-of-living protections for working families, and on the broader workforce supports that turn wage gains into lasting economic security.
         </p>
-        <button class="ha-acc-btn" type="button" aria-expanded="false">Policy details<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><ul class="ha-wages__priority-list">
+        <button class="ha-acc-btn" type="button" aria-expanded="false">Policy details<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><ul class="ha-topic__priority-list">
           <li>
             <strong>Child-care affordability</strong>
             Preschool in Honolulu costs ~44% of a low-wage worker&rsquo;s full-time earnings &mdash; the biggest expense after rent. Expanded subsidies and workforce supports for early-childhood educators keep working parents in the workforce.
@@ -1903,57 +2004,57 @@
             <a href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/rxkids/" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-weight:700;color:#52796F;text-decoration:none;border-bottom:2px solid #52796F;padding-bottom:1px;">Explore the RxKids Hawai&#x02BB;i proposal &rarr;</a>
           </li>
         </ul></div></div>
-        <div class="ha-wages__priority-stat">
-          <div class="ha-wages__priority-stat-num">66%</div>
-          <div class="ha-wages__priority-stat-label">of Hawai&#x02BB;i adults 18&ndash;34 have considered <strong>leaving the islands</strong></div>
+        <div class="ha-topic__priority-stat">
+          <div class="ha-topic__priority-stat-num">66%</div>
+          <div class="ha-topic__priority-stat-label">of Hawai&#x02BB;i adults 18&ndash;34 have considered <strong>leaving the islands</strong></div>
         </div>
-        <blockquote class="ha-wages__priority-quote">
+        <blockquote class="ha-topic__priority-quote">
           &ldquo;Hawai&#x02BB;i&rsquo;s seeming prosperity has been built on an economic model that failed too many working families. We can build a different one.&rdquo;
           <cite>&mdash; Hawai&#x02BB;i Appleseed</cite>
         </blockquote>
       </article>
     </div>
     </div>
-    <div class="ha-wages__impact">
-    <div class="ha-wages__opps-head">
-      <div class="ha-wages__eyebrow">A Record of Results</div>
-      <h2 class="ha-wages__h2">Our Impact</h2>
-      <div class="ha-wages__h2-rule"></div>
-      <p class="ha-wages__lede">
+    <div class="ha-topic__impact">
+    <div class="ha-topic__opps-head">
+      <div class="ha-topic__eyebrow">A Record of Results</div>
+      <h2 class="ha-topic__h2">Our Impact</h2>
+      <div class="ha-topic__h2-rule"></div>
+      <p class="ha-topic__lede">
         A decade of wage and labor wins &mdash; from the 2014 minimum-wage increase, to the historic $18 wage hike, to today&rsquo;s fight for statewide paid family and medical leave.
       </p>
     </div>
-    <div class="ha-wages__timeline">
+    <div class="ha-topic__timeline">
 
-      <article class="ha-wages__milestone">
-        <span class="ha-wages__milestone-year">2014</span>
-        <div class="ha-wages__milestone-card">
-          <h3 class="ha-wages__milestone-title">Won Hawai&#x02BB;i&rsquo;s first minimum-wage increase in 7 years</h3>
-          <p class="ha-wages__milestone-desc">After the federal minimum had been frozen at $7.25 since 2009, helped pass a state minimum-wage increase that raised the floor to <strong>$10.10/hour</strong> by 2018 &mdash; the first step in a decade-long push to align Hawai&#x02BB;i&rsquo;s wage floor with its cost of living.</p>
+      <article class="ha-topic__milestone">
+        <span class="ha-topic__milestone-year">2014</span>
+        <div class="ha-topic__milestone-card">
+          <h3 class="ha-topic__milestone-title">Won Hawai&#x02BB;i&rsquo;s first minimum-wage increase in 7 years</h3>
+          <p class="ha-topic__milestone-desc">After the federal minimum had been frozen at $7.25 since 2009, helped pass a state minimum-wage increase that raised the floor to <strong>$10.10/hour</strong> by 2018 &mdash; the first step in a decade-long push to align Hawai&#x02BB;i&rsquo;s wage floor with its cost of living.</p>
         </div>
       </article>
 
-      <article class="ha-wages__milestone">
-        <span class="ha-wages__milestone-year">2020 &ndash; 2022</span>
-        <div class="ha-wages__milestone-card">
-          <h3 class="ha-wages__milestone-title">Defended workers through the pandemic shock</h3>
-          <p class="ha-wages__milestone-desc">When more than 200,000 people suddenly lost their jobs and Hawai&#x02BB;i unemployment ranked among the worst in the nation, advocated for unemployment expansions, emergency rental assistance, and the safety-net response that kept families afloat &mdash; and surfaced the depth of the underlying economic insecurity.</p>
+      <article class="ha-topic__milestone">
+        <span class="ha-topic__milestone-year">2020 &ndash; 2022</span>
+        <div class="ha-topic__milestone-card">
+          <h3 class="ha-topic__milestone-title">Defended workers through the pandemic shock</h3>
+          <p class="ha-topic__milestone-desc">When more than 200,000 people suddenly lost their jobs and Hawai&#x02BB;i unemployment ranked among the worst in the nation, advocated for unemployment expansions, emergency rental assistance, and the safety-net response that kept families afloat &mdash; and surfaced the depth of the underlying economic insecurity.</p>
         </div>
       </article>
 
-      <article class="ha-wages__milestone">
-        <span class="ha-wages__milestone-year">2022</span>
-        <div class="ha-wages__milestone-card">
-          <h3 class="ha-wages__milestone-title">Helped pass the historic $18 minimum wage</h3>
-          <p class="ha-wages__milestone-desc">Raised Hawai&#x02BB;i&rsquo;s minimum wage from $10.10 to <strong>$18/hour</strong> over six years &mdash; delivering <strong>$1 billion in additional wages annually</strong> to more than 200,000 low-wage workers. The largest single boost to take-home pay for working families in Hawai&#x02BB;i&rsquo;s history.</p>
+      <article class="ha-topic__milestone">
+        <span class="ha-topic__milestone-year">2022</span>
+        <div class="ha-topic__milestone-card">
+          <h3 class="ha-topic__milestone-title">Helped pass the historic $18 minimum wage</h3>
+          <p class="ha-topic__milestone-desc">Raised Hawai&#x02BB;i&rsquo;s minimum wage from $10.10 to <strong>$18/hour</strong> over six years &mdash; delivering <strong>$1 billion in additional wages annually</strong> to more than 200,000 low-wage workers. The largest single boost to take-home pay for working families in Hawai&#x02BB;i&rsquo;s history.</p>
         </div>
       </article>
 
-      <button class="ha-acc-btn" type="button" aria-expanded="false">Show 1 more milestone<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><article class="ha-wages__milestone ha-wages__milestone--current">
-        <span class="ha-wages__milestone-year">2023 &ndash; Present</span>
-        <div class="ha-wages__milestone-card">
-          <h3 class="ha-wages__milestone-title">Fighting for paid leave &amp; the next wage increase</h3>
-          <p class="ha-wages__milestone-desc">Leading the campaign to establish a <strong>statewide paid family and medical leave program</strong>, so workers don&rsquo;t have to choose between caregiving and a paycheck. Also pushing for legislation to continue raising the minimum wage past 2028, so the floor keeps pace with the cost of living instead of flatlining once the current law expires.</p>
+      <button class="ha-acc-btn" type="button" aria-expanded="false">Show 1 more milestone<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><article class="ha-topic__milestone ha-topic__milestone--current">
+        <span class="ha-topic__milestone-year">2023 &ndash; Present</span>
+        <div class="ha-topic__milestone-card">
+          <h3 class="ha-topic__milestone-title">Fighting for paid leave &amp; the next wage increase</h3>
+          <p class="ha-topic__milestone-desc">Leading the campaign to establish a <strong>statewide paid family and medical leave program</strong>, so workers don&rsquo;t have to choose between caregiving and a paycheck. Also pushing for legislation to continue raising the minimum wage past 2028, so the floor keeps pace with the cost of living instead of flatlining once the current law expires.</p>
         </div>
       </article></div></div>
 
@@ -1963,37 +2064,37 @@
     <div style="text-align:center;margin-top:48px;">
       <a href="https://raiseuphawaii.org" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-weight:700;color:#52796F;text-decoration:none;border-bottom:2px solid #52796F;padding-bottom:2px;font-size:1.05rem;">Explore Raise Up Hawai&#x02BB;i &rarr;</a>
     </div>
-    <div class="ha-wages__panel-close-wrap">
-      <button class="ha-wages__panel-close" aria-label="Close section">
+    <div class="ha-topic__panel-close-wrap">
+      <button class="ha-topic__panel-close" aria-label="Close section">
         <svg viewBox="0 0 14 9"><path d="M1 8l6-7 6 7"/></svg>
         Close
       </button>
     </div>
-  </section><!-- /#ha-wages-panel-priorities -->
+  </section><!-- /#ha-topic-panel-priorities -->
 
-  </div><!-- /.ha-wages__panels -->
+  </div><!-- /.ha-topic__panels -->
 
   <!-- ===================================
        RESEARCH & NEWS (combined two-column)
        =================================== -->
-  <section class="ha-wages__section" id="ha-wages-research-news">
-    <div class="ha-wages__section-head">
-      <div class="ha-wages__eyebrow">Stay informed</div>
-      <h2 class="ha-wages__h2">Research &amp; News</h2>
-      <div class="ha-wages__h2-rule"></div>
-      <p class="ha-wages__lede">
+  <section class="ha-topic__section" id="ha-topic-research-news">
+    <div class="ha-topic__section-head">
+      <div class="ha-topic__eyebrow">Stay informed</div>
+      <h2 class="ha-topic__h2">Research &amp; News</h2>
+      <div class="ha-topic__h2-rule"></div>
+      <p class="ha-topic__lede">
         Reports from our Wages &amp; Labor team, plus news coverage and analysis from around Hawai&#x02BB;i.
       </p>
     </div>
 
-    <div class="ha-wages__combined">
+    <div class="ha-topic__combined">
       <!-- LEFT: Publications -->
       <div>
-        <div class="ha-wages__combined-col-head">Publications</div>
-        <div class="ha-wages__pub-list" id="ha-wages-pubs">
+        <div class="ha-topic__combined-col-head">Publications</div>
+        <div class="ha-topic__pub-list" id="ha-topic-pubs">
           <!-- Filled in by JS once publications.json loads -->
         </div>
-        <a class="ha-wages__pub-list-all" href="/publications?cat=Wages+%26+Labor">
+        <a class="ha-topic__pub-list-all" href="/publications?cat=Wages+%26+Labor">
           See all publications
           <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
         </a>
@@ -2001,9 +2102,9 @@
 
       <!-- RIGHT: Press & Blog (auto-synced from news.json &#8212; see
            scripts/sync-news.py and the loadNews() function below) -->
-      <div id="ha-wages-news-col">
-        <div class="ha-wages__combined-col-head">Press &amp; Blog</div>
-        <div class="ha-wages__news-stack" id="ha-wages-news-stack">
+      <div id="ha-topic-news-col">
+        <div class="ha-topic__combined-col-head">Press &amp; Blog</div>
+        <div class="ha-topic__news-stack" id="ha-topic-news-stack">
           <!-- Populated dynamically by loadNews() from news.json,
                filtered to this page's category predicate. -->
         </div>
@@ -2014,14 +2115,14 @@
   <!-- ===================================
        TAKE ACTION CTA
        =================================== -->
-  <section class="ha-wages__cta" aria-labelledby="ha-wages-cta-heading">
-    <div class="ha-wages__cta-inner">
-      <span class="ha-wages__cta-eyebrow">Take action</span>
-      <h2 id="ha-wages-cta-heading">Build an economy that works for working families.</h2>
+  <section class="ha-topic__cta" aria-labelledby="ha-topic-cta-heading">
+    <div class="ha-topic__cta-inner">
+      <span class="ha-topic__cta-eyebrow">Take action</span>
+      <h2 id="ha-topic-cta-heading">Build an economy that works for working families.</h2>
       <p>If you work hard and play by the rules, you should be able to afford a decent life. Sign up for email alerts on wage and paid-leave bills moving at the Capitol, read our latest research, or reach out to your legislator &mdash; every voice helps shape a more equitable economy.</p>
-      <div class="ha-wages__cta-actions">
-        <a class="ha-wages__cta-btn ha-wages__cta-btn--primary" href="https://hiappleseed.quorum.us/campaign/raiseuphisubscribe/" target="_blank" rel="noopener">Get email alerts</a>
-        <a class="ha-wages__cta-btn ha-wages__cta-btn--ghost" href="/publications?cat=Wages+%26+Labor">Read our wages research</a>
+      <div class="ha-topic__cta-actions">
+        <a class="ha-topic__cta-btn ha-topic__cta-btn--primary" href="https://hiappleseed.quorum.us/campaign/raiseuphisubscribe/" target="_blank" rel="noopener">Get email alerts</a>
+        <a class="ha-topic__cta-btn ha-topic__cta-btn--ghost" href="/publications?cat=Wages+%26+Labor">Read our wages research</a>
       </div>
     </div>
   </section>
@@ -2029,43 +2130,43 @@
   <!-- Explore other issues &#8212; quick nav to the other four issue pages, so a
        reader who finishes one issue can move straight to another. Same-tab
        (unlike the Issues landing links) since this IS the cross-issue menu. -->
-  <section class="ha-wages__more" aria-labelledby="ha-wages-more-heading">
-    <div class="ha-wages__more-inner">
-      <span class="ha-wages__more-eyebrow">Explore another issue</span>
-      <h2 id="ha-wages-more-heading">Our work is connected.</h2>
-      <ul class="ha-wages__more-grid">
+  <section class="ha-topic__more" aria-labelledby="ha-topic-more-heading">
+    <div class="ha-topic__more-inner">
+      <span class="ha-topic__more-eyebrow">Explore another issue</span>
+      <h2 id="ha-topic-more-heading">Our work is connected.</h2>
+      <ul class="ha-topic__more-grid">
         <li>
-          <a class="ha-wages__more-card" href="/food-equity">
-            <span class="ha-wages__more-name">Food Equity</span>
-            <p class="ha-wages__more-desc">Healthy, culturally rooted food for every Hawai&#x02BB;i family.</p>
-            <span class="ha-wages__more-go">Explore
+          <a class="ha-topic__more-card" href="/food-equity">
+            <span class="ha-topic__more-name">Food Equity</span>
+            <p class="ha-topic__more-desc">Healthy, culturally rooted food for every Hawai&#x02BB;i family.</p>
+            <span class="ha-topic__more-go">Explore
               <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
             </span>
           </a>
         </li>
         <li>
-          <a class="ha-wages__more-card" href="/affordable-housing">
-            <span class="ha-wages__more-name">Affordable Housing</span>
-            <p class="ha-wages__more-desc">Homes Hawai&#x02BB;i&rsquo;s families can actually afford.</p>
-            <span class="ha-wages__more-go">Explore
+          <a class="ha-topic__more-card" href="/affordable-housing">
+            <span class="ha-topic__more-name">Affordable Housing</span>
+            <p class="ha-topic__more-desc">Homes Hawai&#x02BB;i&rsquo;s families can actually afford.</p>
+            <span class="ha-topic__more-go">Explore
               <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
             </span>
           </a>
         </li>
         <li>
-          <a class="ha-wages__more-card" href="/transportation-equity">
-            <span class="ha-wages__more-name">Transportation Equity</span>
-            <p class="ha-wages__more-desc">Safer streets, smarter transit, lower costs.</p>
-            <span class="ha-wages__more-go">Explore
+          <a class="ha-topic__more-card" href="/transportation-equity">
+            <span class="ha-topic__more-name">Transportation Equity</span>
+            <p class="ha-topic__more-desc">Safer streets, smarter transit, lower costs.</p>
+            <span class="ha-topic__more-go">Explore
               <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
             </span>
           </a>
         </li>
         <li>
-          <a class="ha-wages__more-card" href="/taxes-budget">
-            <span class="ha-wages__more-name">Taxes &amp; Budget</span>
-            <p class="ha-wages__more-desc">A fairer tax code for a thriving Hawai&#x02BB;i.</p>
-            <span class="ha-wages__more-go">Explore
+          <a class="ha-topic__more-card" href="/taxes-budget">
+            <span class="ha-topic__more-name">Taxes &amp; Budget</span>
+            <p class="ha-topic__more-desc">A fairer tax code for a thriving Hawai&#x02BB;i.</p>
+            <span class="ha-topic__more-go">Explore
               <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
             </span>
           </a>
@@ -2078,10 +2179,18 @@
 </section>
 
 <script>
+// Shared behaviour for the five issue deep-dive pages: tabs, sticky tab bar,
+// count-ups, publications + news loaders, accordions. Each page loads this
+// from inside its BEGIN/END block; scripts/build_squarespace.py inlines it into
+// the Squarespace payload.
 (function() {
-  // Pie chart data + init/legend/showDesc removed \u2014 the tax-revenue
-  // breakdown didn't apply to this issue area. See git history if
-  // you need the original block.
+  // Per-page settings live on the root element:
+  //   data-category  regex (case-insensitive) matched against Squarespace
+  //                  categories \u2014 feeds both loadPubs and loadNews
+  //   data-pubs      how many publications to list
+  const root = document.querySelector('.ha-topic');
+  const CATEGORY = new RegExp(root.dataset.category, 'i');
+  const PUBS_SHOWN = parseInt(root.dataset.pubs, 10) || 3;
 
   // ===== Publications loader =====
   function formatDate(ts) {
@@ -2089,9 +2198,7 @@
     const d = new Date(ts);
     return d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
   }
-  // ===== Per-page category filter (single source of truth used by
-  // both loadPubs and loadNews). =====
-  function matchesCategory(c) { return /wage/i.test(c) || /labor/i.test(c); }
+  function matchesCategory(c) { return CATEGORY.test(c); }
 
   async function loadPubs() {
     try {
@@ -2104,21 +2211,21 @@
 
       if (!items.length) return;
 
-      // Vertical list: 3 most-recent publications, first marked "Latest"
-      const grid = document.getElementById('ha-wages-pubs');
-      grid.innerHTML = items.slice(0, 3).map((i, idx) => {
+      // Vertical list: the most recent publications, first marked "Latest".
+      const grid = document.getElementById('ha-topic-pubs');
+      grid.innerHTML = items.slice(0, PUBS_SHOWN).map((i, idx) => {
         const url = i.fullUrl ? 'https://hiappleseed.org' + i.fullUrl : '#';
         const img = i.assetUrl ? `${i.assetUrl}?format=300w` : '';
-        const badge = idx === 0 ? `<span class="ha-wages__pub-list-badge">Latest</span>` : '';
+        const badge = idx === 0 ? `<span class="ha-topic__pub-list-badge">Latest</span>` : '';
         return `
-          <a class="ha-wages__pub-list-item" href="${url}" target="_blank" rel="noopener">
-            <div class="ha-wages__pub-list-thumb">
+          <a class="ha-topic__pub-list-item" href="${url}" target="_blank" rel="noopener">
+            <div class="ha-topic__pub-list-thumb">
               ${badge}
               ${img ? `<img src="${img}" alt="">` : ''}
             </div>
-            <div class="ha-wages__pub-list-body">
-              <div class="ha-wages__pub-list-meta">${formatDate(i.publishOn)}</div>
-              <h3 class="ha-wages__pub-list-title">${i.title || 'Untitled'}</h3>
+            <div class="ha-topic__pub-list-body">
+              <div class="ha-topic__pub-list-meta">${formatDate(i.publishOn)}</div>
+              <h3 class="ha-topic__pub-list-title">${i.title || 'Untitled'}</h3>
             </div>
           </a>
         `;
@@ -2132,8 +2239,8 @@
   // Pulls from news.json (auto-synced nightly from hiappleseed.org/blog
   // and hiappleseed.org/in-the-news via scripts/sync-news.py). Renders
   // the newest blog post + newest press mention tagged with this page's
-  // issue area into #ha-wages-news-stack. Markup matches the original
-  // hardcoded clippings so the existing .ha-wages__news-* CSS applies.
+  // issue area into #ha-topic-news-stack. Markup matches the original
+  // hardcoded clippings so the existing .ha-topic__news-* CSS applies.
   const NEWS_OUTLET_CODE = {
     'Honolulu Civil Beat':       'CB',
     'Hawai\u02bbi Public Radio':      'HP',
@@ -2159,21 +2266,21 @@
     const author = stripNewsHtml((b.author && b.author.displayName) || '') || 'Hawai\u02bbi Appleseed';
     const url = b.fullUrl ? 'https://hiappleseed.org' + b.fullUrl : 'https://hiappleseed.org/in-the-news';
     return `
-      <article class="ha-wages__news-clipping">
-        <div class="ha-wages__news-anchor" aria-hidden="true">HA</div>
-        <div class="ha-wages__news-body">
-          <div class="ha-wages__news-source">
-            <span class="ha-wages__news-source-tag">Blog</span>
+      <article class="ha-topic__news-clipping">
+        <div class="ha-topic__news-anchor" aria-hidden="true">HA</div>
+        <div class="ha-topic__news-body">
+          <div class="ha-topic__news-source">
+            <span class="ha-topic__news-source-tag">Blog</span>
             Hawai\u02bbi Appleseed
           </div>
-          <h3 class="ha-wages__news-title">${stripNewsHtml(b.title)}</h3>
-          <p class="ha-wages__news-excerpt">${stripNewsHtml(b.excerpt)}</p>
-          <div class="ha-wages__news-byline">
+          <h3 class="ha-topic__news-title">${stripNewsHtml(b.title)}</h3>
+          <p class="ha-topic__news-excerpt">${stripNewsHtml(b.excerpt)}</p>
+          <div class="ha-topic__news-byline">
             ${formatDate(b.publishOn)}
-            <span class="ha-wages__news-byline-sep"></span>
+            <span class="ha-topic__news-byline-sep"></span>
             <strong>${author}</strong>
           </div>
-          <a class="ha-wages__news-link" href="${url}" target="_blank" rel="noopener">
+          <a class="ha-topic__news-link" href="${url}" target="_blank" rel="noopener">
             Read the full post
             <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
           </a>
@@ -2185,21 +2292,21 @@
     const code   = newsAnchorFor(p.outlet || (p.author && p.author.bio) || '');
     const url    = p.sourceUrl || (p.fullUrl ? 'https://hiappleseed.org' + p.fullUrl : '#');
     return `
-      <article class="ha-wages__news-clipping">
-        <div class="ha-wages__news-anchor ha-wages__news-anchor--press" aria-hidden="true">${code}</div>
-        <div class="ha-wages__news-body">
-          <div class="ha-wages__news-source">
-            <span class="ha-wages__news-source-tag">Press</span>
+      <article class="ha-topic__news-clipping">
+        <div class="ha-topic__news-anchor ha-topic__news-anchor--press" aria-hidden="true">${code}</div>
+        <div class="ha-topic__news-body">
+          <div class="ha-topic__news-source">
+            <span class="ha-topic__news-source-tag">Press</span>
             ${outlet}
           </div>
-          <h3 class="ha-wages__news-title">${stripNewsHtml(p.title)}</h3>
-          <p class="ha-wages__news-excerpt">${stripNewsHtml(p.excerpt)}</p>
-          <div class="ha-wages__news-byline">
+          <h3 class="ha-topic__news-title">${stripNewsHtml(p.title)}</h3>
+          <p class="ha-topic__news-excerpt">${stripNewsHtml(p.excerpt)}</p>
+          <div class="ha-topic__news-byline">
             ${formatDate(p.publishOn)}
-            <span class="ha-wages__news-byline-sep"></span>
+            <span class="ha-topic__news-byline-sep"></span>
             <strong>${outlet}</strong>
           </div>
-          <a class="ha-wages__news-link" href="${url}" target="_blank" rel="noopener">
+          <a class="ha-topic__news-link" href="${url}" target="_blank" rel="noopener">
             Read on ${outlet}
             <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
           </a>
@@ -2216,7 +2323,7 @@
         .sort((a,b) => (b.publishOn||0) - (a.publishOn||0))[0];
       const blog  = pickFirst(data.blog);
       const press = pickFirst(data.press);
-      const stack = document.getElementById('ha-wages-news-stack');
+      const stack = document.getElementById('ha-topic-news-stack');
       if (!stack) return;
       stack.innerHTML = (blog ? newsBlogHtml(blog) : '') + (press ? newsPressHtml(press) : '');
     } catch (e) {
@@ -2226,10 +2333,10 @@
 
   // ===== Tab panel switcher =====
   function initTabs() {
-    const tabs = document.querySelectorAll('.ha-wages__tab');
-    const stuckTabs = document.querySelectorAll('.ha-wages__stuck-tab');
-    const panels = document.querySelectorAll('.ha-wages__panel');
-    const indicator = document.querySelector('.ha-wages__tabs-indicator');
+    const tabs = document.querySelectorAll('.ha-topic__tab');
+    const stuckTabs = document.querySelectorAll('.ha-topic__stuck-tab');
+    const panels = document.querySelectorAll('.ha-topic__panel');
+    const indicator = document.querySelector('.ha-topic__tabs-indicator');
     if (!tabs.length || !panels.length) return;
 
     const VALID_TABS = ['overview', 'priorities'];
@@ -2260,7 +2367,7 @@
         t.setAttribute('aria-selected', active ? 'true' : 'false');
       });
       panels.forEach(p => {
-        const active = p.id === `ha-wages-panel-${name}`;
+        const active = p.id === `ha-topic-panel-${name}`;
         p.classList.toggle('active', active);
         if (active) p.removeAttribute('hidden');
         else p.setAttribute('hidden', '');
@@ -2336,7 +2443,7 @@
       t.addEventListener('click', () => {
         setTab(t.dataset.panel);
         // Scroll to the panel top so the new content is visible
-        const panel = document.getElementById('ha-wages-panel-' + t.dataset.panel);
+        const panel = document.getElementById('ha-topic-panel-' + t.dataset.panel);
         if (panel) {
           panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -2361,7 +2468,7 @@
 
     // Re-sync the scrollable tab pill once fonts/layout settle (mobile deep-link)
     window.addEventListener('load', () => {
-      const active = document.querySelector('.ha-wages__tab.active');
+      const active = document.querySelector('.ha-topic__tab.active');
       if (!active) return;
       const pill = active.parentElement;
       if (pill.scrollWidth > pill.clientWidth) {
@@ -2370,8 +2477,8 @@
     });
 
     // Sticky tab bar: show stuck bar when main tab bar scrolls out
-    const stuckBar = document.querySelector('.ha-wages__stuck-bar');
-    const mainTabBar = document.querySelector('.ha-wages__tab-bar');
+    const stuckBar = document.querySelector('.ha-topic__stuck-bar');
+    const mainTabBar = document.querySelector('.ha-topic__tab-bar');
     if (stuckBar && mainTabBar && 'IntersectionObserver' in window) {
       const stickyIO = new IntersectionObserver((entries) => {
         entries.forEach(e => {
@@ -2393,24 +2500,24 @@
           }
         });
       }, { threshold: 0.25 });
-      ['.ha-wages__bars', '.ha-wages__compare'].forEach(sel => {
+      ['.ha-topic__bars', '.ha-topic__compare'].forEach(sel => {
         document.querySelectorAll(sel).forEach(el => revealIO.observe(el));
       });
     } else {
-      document.querySelectorAll('.ha-wages__bars, .ha-wages__compare').forEach(el => el.classList.add('is-in'));
+      document.querySelectorAll('.ha-topic__bars, .ha-topic__compare').forEach(el => el.classList.add('is-in'));
     }
 
-    document.querySelectorAll('.ha-wages__panel-close').forEach(btn => {
+    document.querySelectorAll('.ha-topic__panel-close').forEach(btn => {
       btn.addEventListener('click', () => {
         closeAll();
         // Scroll smoothly back up to the tab bar
-        document.querySelector('.ha-wages__tab-bar').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        document.querySelector('.ha-topic__tab-bar').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       });
     });
 
     // Position indicator on initial active tab + window resize
     function positionIndicator() {
-      const active = document.querySelector('.ha-wages__tab.active');
+      const active = document.querySelector('.ha-topic__tab.active');
       if (active && indicator) {
         indicator.style.transform = `translateX(${active.offsetLeft - 4}px)`;
       }
@@ -2431,9 +2538,8 @@
     initTabs(); loadPubs(); loadNews();
   }
 })();
-</script>
 
-<script id="ha-acc-js">
+// ===== Accordions =====
 document.addEventListener('click',function(e){var b=e.target.closest('.ha-acc-btn');if(!b)return;b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')==='true'?'false':'true');});
 </script>
 <style>
@@ -2441,7 +2547,7 @@ document.addEventListener('click',function(e){var b=e.target.closest('.ha-acc-bt
    inside a code block. Hide the progress line; rebuild the pill/tab
    nav as a sticky overlay (see build_squarespace.py). */
 .ha-progress { display: none !important; }
-.ha-issues, .ha-tax, .ha-food, .ha-housing, .ha-transit, .ha-wages { overflow: clip !important; }
+.ha-issues, .ha-topic { overflow: clip !important; }
 /* absolute at FIRST PAINT so the (invisible) bar contributes zero
    flow height from the very first frame \2014  the script below converts
    it to sticky + negative margin, which also nets to zero flow, so
@@ -2481,8 +2587,7 @@ document.addEventListener('click',function(e){var b=e.target.closest('.ha-acc-bt
    desktop already spans full width. */
 @media (max-width:1080px){
   .ha-mission, .ha-story, .ha-issues, .ha-team, .ha-board,
-  .ha-tax, .ha-food, .ha-housing, .ha-transit, .ha-wages,
-  .ha-pub, .ha-news {
+  .ha-topic, .ha-pub, .ha-news {
     width: 100vw !important;
     max-width: 100vw !important;
     margin-left: calc(50% - 50vw) !important;

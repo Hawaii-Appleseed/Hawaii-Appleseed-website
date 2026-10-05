@@ -6,6 +6,114 @@
           make sure "Display Source" is OFF > Save.
      NOTE: this page predates the .ha-xxx namespacing convention (plain global classes like .hero/.btn/.form) &#8212; every CSS selector is auto-scoped under #ha-support-embed by the builder so it can't collide with the Squarespace template or other pages
      ===================================================================== -->
+<style>
+:root {
+  --ha-charcoal:   #2F3E46;  
+  --ha-slate:      #354F52;  
+  --ha-teal-deep:  #52796F;  
+  --ha-teal:       #84A98C;  
+  --ha-ash:        #CAD2C5;  
+  --ha-ash-light:  #E5E9E2;  
+  --ha-bg:         #F4F7F4;  
+  --ha-white:      #FFFFFF;
+  --ha-ink-muted:  rgba(47,62,70,.78);  
+  --ha-ink-subtle: rgba(47,62,70,.65);  
+  --ha-rule:       rgba(53,79,82,.14);   
+  --ha-rule-dark:  rgba(202,210,197,.18); 
+  --ha-rule-light: rgba(202,210,197,.30); 
+  --ha-tint-tax:     #F2F4EF;
+  --ha-tint-food:    #E6EFE9;
+  --ha-tint-housing: #D9E2D8;
+  --ha-tint-transit: #E2E8E8;
+  --ha-tint-wages:   #EDEDE5;
+  --ha-ease-out:  cubic-bezier(.22,.61,.36,1);
+  --ha-dur-fast:  .2s;
+  --ha-dur-base:  .4s;
+  --ha-dur-slow:  .6s;
+  --ha-font-display: OkinaManrope, 'Manrope', Arial, sans-serif;
+  --ha-font-body:    OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif;
+  --ha-fs-micro:     10.5px; 
+  --ha-fs-eyebrow:   11px;   
+  --ha-fs-caption:   13px;   
+  --ha-fs-small:     14px;   
+  --ha-fs-body:      15.5px; 
+  --ha-fs-lead:      17px;   
+  --ha-fs-h5:        18px;   
+  --ha-fs-stat-sm:   22px;   
+  --ha-fs-h4:        24px;   
+  --ha-fs-h3:        26px;   
+  --ha-fs-stat:      28px;   
+  --ha-fs-h2:        38px;   
+  --ha-fs-h2-lg:     44px;   
+  --ha-fs-cta:       clamp(30px, 4.2vw, 48px);
+  --ha-fs-display:   54px;   
+  --ha-fs-hero:      78px;   
+  --ha-lh-display: 1;
+  --ha-lh-heading: 1.15;
+  --ha-lh-snug:    1.3;
+  --ha-lh-small:   1.55;
+  --ha-lh-body:    1.65;
+  --ha-track-hero:    -.035em;
+  --ha-track-display: -.02em;
+  --ha-track-tight:   -.01em;
+  --ha-track-button:  .04em;
+  --ha-track-eyebrow: .22em;
+  --ha-space-3xs: 4px;
+  --ha-space-2xs: 8px;
+  --ha-space-xs:  12px;  
+  --ha-space-sm:  16px;  
+  --ha-space-md:  20px;  
+  --ha-space-lg:  28px;  
+  --ha-space-xl:  36px;  
+  --ha-space-2xl: 48px;  
+  --ha-space-3xl: 56px;  
+  --ha-space-4xl: 72px;
+  --ha-space-5xl: 80px;  
+  --ha-space-6xl: 96px;  
+  --ha-gutter:    var(--ha-space-xl);   
+  --ha-section-y: var(--ha-space-5xl);  
+  --ha-container: 1200px;
+  --ha-measure:   680px;
+  --ha-radius-pill:    999px;
+  --ha-radius-card:    8px;
+  --ha-radius-panel:   6px;
+  --ha-radius-callout: 4px;
+  --ha-chart-cat-1: #52796F;  
+  --ha-chart-cat-2: #2F3E46;  
+  --ha-chart-cat-3: #BF8A30;  
+  --ha-chart-cat-4: #6A8CC4;  
+  --ha-chart-cat-5: #A85A45;  
+  --ha-chart-cat-6: #84A98C;  
+  --ha-chart-seq-1: #E5E9E2;
+  --ha-chart-seq-2: #B4C9B6;
+  --ha-chart-seq-3: #84A98C;
+  --ha-chart-seq-4: #6B917D;
+  --ha-chart-seq-5: #52796F;
+  --ha-chart-seq-6: #405B5A;
+  --ha-chart-seq-7: #2F3E46;
+  --ha-chart-div-1: #2B4A45;
+  --ha-chart-div-2: #52796F;
+  --ha-chart-div-3: #A9C3B3;
+  --ha-chart-div-4: #F2F0EA;
+  --ha-chart-div-5: #E0BF85;
+  --ha-chart-div-6: #B07A35;
+  --ha-chart-div-7: #6E4524;
+  --ha-chart-muted: #CAD2C5;  
+  --ha-chart-grid:  rgba(53,79,82,.14);  
+}
+@media (max-width: 700px) {
+  :root {
+    --ha-fs-body:    15px;
+    --ha-fs-lead:    15px;
+    --ha-fs-h2:      28px;
+    --ha-fs-h2-lg:   28px;
+    --ha-fs-display: 30px;
+    --ha-fs-hero:    48px;
+    --ha-gutter:     var(--ha-space-md);
+    --ha-section-y:  var(--ha-space-3xl);
+  }
+}
+</style>
 <!-- BEGIN ha-support -->
 <div id="ha-support-embed">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,30 +122,13 @@
 <style>
     #ha-support-embed :where(#ha-support-embed, #ha-support-embed *, #ha-support-embed *::before, #ha-support-embed *::after){ box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      /* Brand palette \2014  Hawai\2bb i Appleseed Brand Guide (Ash/Teal/Slate/Charcoal). */
-      --teal:       #84A98C;   /* Muted Teal \2014  primary brand color (was mockup #6B9E78) */
-      --deep-teal:  #52796F;
-      --dark-slate: #354F52;
-      --charcoal:   #2F3E46;
-      --ash:        #CAD2C5;
-      --ash-light:  #E8EDE6;
-      --cream:      #F4F7F5;
-      --white:      #FFFFFF;
-
-      /* Motion tokens (shared system) */
-      --ease-out: cubic-bezier(.22, .61, .36, 1);
-      --dur-fast: .2s;
-      --dur-base: .4s;
-      --dur-slow: .6s;
-    }
 
     
 
     #ha-support-embed{
       font-family:OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif;
-      background: var(--white);
-      color: var(--charcoal);
+      background: var(--ha-white);
+      color: var(--ha-charcoal);
       overflow-x: hidden;
     }
 
@@ -98,7 +189,7 @@
     \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500  */
     #ha-support-embed .hero{
       min-height: 100vh;
-      background: var(--charcoal);
+      background: var(--ha-charcoal);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -218,7 +309,7 @@
       font-weight: 600;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--teal);
+      color: var(--ha-teal);
       display: flex;
       align-items: center;
       gap: 0.85rem;
@@ -227,7 +318,7 @@
     #ha-support-embed .eyebrow::before{
       content: '';
       width: 36px; height: 1px;
-      background: var(--teal);
+      background: var(--ha-teal);
       flex-shrink: 0;
     }
 
@@ -236,10 +327,10 @@
       font-size: clamp(3.2rem, 7.5vw, 6.5rem);
       font-weight: 300;
       line-height: 1.02;
-      color: var(--white);
+      color: var(--ha-white);
       margin-bottom: 2rem;
     }
-    #ha-support-embed .hero h1 em{ font-style: italic; color: var(--teal); }
+    #ha-support-embed .hero h1 em{ font-style: italic; color: var(--ha-teal); }
 
     #ha-support-embed .hero-sub{
       font-size: 1.05rem;
@@ -273,21 +364,21 @@
       transition: all 0.28s ease;
     }
     #ha-support-embed .btn-solid{
-      background: var(--teal);
-      color: var(--charcoal);
+      background: var(--ha-teal);
+      color: var(--ha-charcoal);
     }
-    #ha-support-embed .btn-solid:hover{ background: var(--ash); }
+    #ha-support-embed .btn-solid:hover{ background: var(--ha-ash); }
     #ha-support-embed .btn-ghost{
       background: transparent;
-      color: var(--white);
+      color: var(--ha-white);
       border: 1px solid rgba(255,255,255,0.28);
     }
-    #ha-support-embed .btn-ghost:hover{ border-color: var(--teal); color: var(--teal); }
+    #ha-support-embed .btn-ghost:hover{ border-color: var(--ha-teal); color: var(--ha-teal); }
     #ha-support-embed .btn-dark{
-      background: var(--charcoal);
-      color: var(--white);
+      background: var(--ha-charcoal);
+      color: var(--ha-white);
     }
-    #ha-support-embed .btn-dark:hover{ background: var(--dark-slate); }
+    #ha-support-embed .btn-dark:hover{ background: var(--ha-slate); }
 
     /* Touch press feedback (rec E) \2014  hover never fires on touch. */
     #ha-support-embed a, #ha-support-embed button{ -webkit-tap-highlight-color: transparent; }
@@ -299,7 +390,7 @@
        MISSION BAND
     \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500  */
     #ha-support-embed .mission-band{
-      background: var(--teal);
+      background: var(--ha-teal);
       padding: 5rem 8%;
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -312,13 +403,13 @@
       font-size: clamp(2rem, 3.5vw, 2.9rem);
       font-weight: 400;
       line-height: 1.25;
-      color: var(--charcoal);
+      color: var(--ha-charcoal);
     }
 
     #ha-support-embed .mission-band p{
       font-size: 0.98rem;
       line-height: 1.85;
-      color: var(--charcoal);
+      color: var(--ha-charcoal);
       font-weight: 300;
       opacity: 0.85;
     }
@@ -332,7 +423,7 @@
       font-weight: 600;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--teal);
+      color: var(--ha-teal);
       display: flex;
       align-items: center;
       gap: 0.85rem;
@@ -341,7 +432,7 @@
     #ha-support-embed .section-label::before{
       content: '';
       width: 28px; height: 1px;
-      background: var(--teal);
+      background: var(--ha-teal);
     }
     #ha-support-embed .section-label.light{ color: rgba(202,210,197,0.7); }
     #ha-support-embed .section-label.light::before{ background: rgba(202,210,197,0.5); }
@@ -351,16 +442,16 @@
       font-size: clamp(2.2rem, 4vw, 3.5rem);
       font-weight: 300;
       line-height: 1.15;
-      color: var(--charcoal);
+      color: var(--ha-charcoal);
     }
-    #ha-support-embed .section-title.on-dark{ color: var(--white); }
+    #ha-support-embed .section-title.on-dark{ color: var(--ha-white); }
 
     /* \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 
        WAYS TO SUPPORT (4 cards, 2x2)
     \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500  */
     #ha-support-embed .ways-section{
       padding: 7rem 8%;
-      background: var(--white);
+      background: var(--ha-white);
     }
 
     #ha-support-embed .ways-header{
@@ -373,11 +464,11 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1.5px;
-      background: var(--ash-light);
+      background: var(--ha-ash-light);
     }
 
     #ha-support-embed .way-card{
-      background: var(--white);
+      background: var(--ha-white);
       padding: 3rem 2.8rem 3rem;
       position: relative;
       overflow: hidden;
@@ -388,17 +479,17 @@
       position: absolute;
       left: 0; bottom: 0;
       width: 0; height: 3px;
-      background: var(--teal);
+      background: var(--ha-teal);
       transition: width 0.4s ease;
     }
-    #ha-support-embed .way-card:hover{ background: var(--cream); }
+    #ha-support-embed .way-card:hover{ background: var(--ha-bg); }
     #ha-support-embed .way-card:hover::after{ width: 100%; }
 
     #ha-support-embed .way-num{
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 3.5rem;
       font-weight: 300;
-      color: var(--ash);
+      color: var(--ha-ash);
       line-height: 1;
       margin-bottom: 1.2rem;
       display: block;
@@ -408,7 +499,7 @@
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 1.55rem;
       font-weight: 500;
-      color: var(--charcoal);
+      color: var(--ha-charcoal);
       margin-bottom: 0.9rem;
       line-height: 1.2;
     }
@@ -416,7 +507,7 @@
     #ha-support-embed .way-card p{
       font-size: 0.9rem;
       line-height: 1.75;
-      color: var(--deep-teal);
+      color: var(--ha-teal-deep);
       font-weight: 400;
       margin-bottom: 1.6rem;
     }
@@ -427,7 +518,7 @@
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--teal);
+      color: var(--ha-teal);
       text-decoration: none;
       display: inline-flex;
       align-items: center;
@@ -441,7 +532,7 @@
        IMPACT / GIVING
     \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500  */
     #ha-support-embed .giving-section{
-      background: var(--charcoal);
+      background: var(--ha-charcoal);
       padding: 7rem 8%;
       position: relative;
       overflow: hidden;
@@ -495,7 +586,7 @@
       border-color: rgba(132,169,140,0.50);
       background: rgba(132,169,140,0.07);
     }
-    #ha-support-embed .giving-card:hover::before, #ha-support-embed .giving-card.featured::before{ background: var(--teal); }
+    #ha-support-embed .giving-card:hover::before, #ha-support-embed .giving-card.featured::before{ background: var(--ha-teal); }
 
     #ha-support-embed .giving-card.featured .badge{
       display: block;
@@ -509,8 +600,8 @@
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--charcoal);
-      background: var(--teal);
+      color: var(--ha-charcoal);
+      background: var(--ha-teal);
       padding: 0.2rem 0.55rem;
     }
 
@@ -518,7 +609,7 @@
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 2.6rem;
       font-weight: 300;
-      color: var(--white);
+      color: var(--ha-white);
       line-height: 1;
       margin-bottom: 0.2rem;
     }
@@ -526,7 +617,7 @@
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 0.7rem;
       font-weight: 500;
-      color: var(--teal);
+      color: var(--ha-teal);
       letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-bottom: 1.2rem;
@@ -536,7 +627,7 @@
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 1.1rem;
       font-style: italic;
-      color: var(--ash);
+      color: var(--ha-ash);
       margin-bottom: 0.9rem;
     }
     #ha-support-embed .giving-desc{
@@ -552,7 +643,7 @@
       font-family:OkinaManrope, 'Manrope', sans-serif;
       padding: 0.65rem;
       border: 1px solid rgba(132,169,140,0.38);
-      color: var(--ash);
+      color: var(--ha-ash);
       font-size: 0.72rem;
       font-weight: 600;
       letter-spacing: 0.1em;
@@ -561,18 +652,17 @@
       transition: all 0.3s ease;
     }
     #ha-support-embed .giving-card.featured .giving-btn, #ha-support-embed .giving-card:hover .giving-btn{
-      background: var(--teal);
-      border-color: var(--teal);
-      color: var(--charcoal);
+      background: var(--ha-teal);
+      border-color: var(--ha-teal);
+      color: var(--ha-charcoal);
     }
-
 
     /* \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 
        POLICY PRIORITIES
     \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500  */
     #ha-support-embed .policy-section{
       padding: 7rem 8%;
-      background: var(--cream);
+      background: var(--ha-bg);
     }
 
     #ha-support-embed .policy-header{
@@ -586,7 +676,7 @@
     #ha-support-embed .policy-header p{
       font-size: 0.98rem;
       line-height: 1.8;
-      color: var(--deep-teal);
+      color: var(--ha-teal-deep);
       font-weight: 400;
       margin-bottom: 2rem;
     }
@@ -614,7 +704,7 @@
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--teal);
+      color: var(--ha-teal);
       padding-top: 0.2rem;
       line-height: 1.5;
     }
@@ -623,7 +713,7 @@
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 1.3rem;
       font-weight: 500;
-      color: var(--charcoal);
+      color: var(--ha-charcoal);
       margin-bottom: 0.4rem;
       line-height: 1.25;
     }
@@ -631,7 +721,7 @@
     #ha-support-embed .issue-item p{
       font-size: 0.88rem;
       line-height: 1.7;
-      color: var(--deep-teal);
+      color: var(--ha-teal-deep);
       font-weight: 400;
     }
 
@@ -639,7 +729,7 @@
        COMMUNITY VOICE / QUOTE
     \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500  */
     #ha-support-embed .voice-section{
-      background: var(--dark-slate);
+      background: var(--ha-slate);
       padding: 8rem 8%;
       position: relative;
       overflow: hidden;
@@ -671,15 +761,15 @@
       font-weight: 300;
       font-style: italic;
       line-height: 1.5;
-      color: var(--white);
+      color: var(--ha-white);
       margin-bottom: 2rem;
     }
 
-    #ha-support-embed .voice-inner blockquote em{ color: var(--teal); font-style: normal; }
+    #ha-support-embed .voice-inner blockquote em{ color: var(--ha-teal); font-style: normal; }
 
     #ha-support-embed .voice-rule{
       width: 48px; height: 1px;
-      background: var(--teal);
+      background: var(--ha-teal);
       margin: 0 auto 1.2rem;
     }
 
@@ -696,7 +786,7 @@
        FOOTER (mockup's own \2014  kept per design)
     \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500  */
     #ha-support-embed .site-footer{
-      background: var(--charcoal);
+      background: var(--ha-charcoal);
       padding: 2.8rem 8%;
       display: flex;
       justify-content: space-between;
@@ -709,7 +799,7 @@
     #ha-support-embed .footer-name{
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 1.05rem;
-      color: var(--teal);
+      color: var(--ha-teal);
       letter-spacing: 0.02em;
     }
 
@@ -727,7 +817,7 @@
       text-decoration: none;
       transition: color 0.25s;
     }
-    #ha-support-embed .footer-nav a:hover{ color: var(--teal); }
+    #ha-support-embed .footer-nav a:hover{ color: var(--ha-teal); }
 
     /* \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 
        ANIMATIONS
@@ -746,10 +836,10 @@
        Hidden by default; <noscript> + reduced-motion force visible.
     \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500  */
     #ha-support-embed .reveal{ opacity:0; transform:translateY(18px);
-      transition:opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+      transition:opacity var(--ha-dur-slow) var(--ha-ease-out), transform var(--ha-dur-slow) var(--ha-ease-out); }
     #ha-support-embed .reveal.is-in{ opacity:1; transform:none; }
     #ha-support-embed .reveal-group > *{ opacity:0; transform:translateY(18px);
-      transition:opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+      transition:opacity var(--ha-dur-slow) var(--ha-ease-out), transform var(--ha-dur-slow) var(--ha-ease-out); }
     #ha-support-embed .reveal-group.is-in > *{ opacity:1; transform:none; }
     #ha-support-embed .reveal-group.is-in > *:nth-child(2){ transition-delay:.07s; }
     #ha-support-embed .reveal-group.is-in > *:nth-child(3){ transition-delay:.14s; }
