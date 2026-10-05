@@ -14,3 +14,6 @@ media-watch/.cache/
 
 # skill eval run output (scripts/run_skill_evals.sh)
 evals/results/
+
+# Squarespace browser session (scripts/publish_squarespace.py --login) — cookies and saved logins
+.sqs-profile/
