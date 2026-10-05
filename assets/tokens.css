@@ -2,8 +2,8 @@
    Spec: DESIGN.md. Link before page styles: <link rel="stylesheet" href="assets/tokens.css">
    Rule: no raw hex/rgba and no px font-size in page CSS — use var(--ha-*). Add new tokens
    here, not per page. CI (scripts/lint_design_tokens.py) fails on new violations.
-   Note: squarespace-ready/ and *squarespace* snippets are pasted into Squarespace and
-   keep an inline copy of these values; update them by hand if a value here changes. */
+   Note: build_squarespace.py inlines this file into every squarespace-ready/ payload;
+   the hand-authored *squarespace* snippets keep their own copies. */
 :root {
   /* Palette */
   --ha-charcoal:   #2F3E46;  /* text, dark backgrounds, nav/footer */
