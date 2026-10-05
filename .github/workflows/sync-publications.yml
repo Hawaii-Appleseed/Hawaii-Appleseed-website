@@ -16,19 +16,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch publications from Squarespace
-        run: python3 scripts/sync-publications.py
-
-      - name: Fetch blog posts and press mentions from Squarespace
+      - name: Fetch publications, blog posts and press mentions from Squarespace
         run: python3 scripts/sync-news.py
 
-      # Must run AFTER the two syncs above — it reads news.json and
+      # Must run AFTER the sync above — it reads news.json and
       # publications.json, and adds the ~43 static pages from sitemap.xml.
       # Feeds the header search typeahead.
       - name: Build the search index
         run: python3 scripts/build-search-index.py
 
-      # All three scripts unconditionally restamp lastSynced to "now", so a raw
+      # Both scripts unconditionally restamp lastSynced to "now", so a raw
       # `git diff` is never quiet — every run would look "changed" even when
       # Squarespace returned byte-identical content. Compare with lastSynced
       # stripped so a real content change is what actually gates commit +
