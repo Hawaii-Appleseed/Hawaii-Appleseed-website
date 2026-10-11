@@ -2,6 +2,26 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "7ec56fd4b480",
+   "title": "Will Caron: Don Of The Dead",
+   "outlet": "Honolulu Civil Beat",
+   "url": "https://www.civilbeat.org/2026/10/will-caron-don-of-the-dead/",
+   "published": "2026-10-11T10:05:29Z",
+   "firstSeen": "2026-10-11T10:49:58Z",
+   "confidence": "high",
+   "reasons": [
+    "staff: Will Caron only",
+    "names Hawaiʻi Appleseed",
+    "staff: Will Caron, with Appleseed"
+   ],
+   "sources": [
+    "google",
+    "feed"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
    "id": "4a264c5f2391",
    "title": "Kaua‘i Wildfire Resilience Bill Has Turned Into A ‘Fight Over Numbers’",
    "outlet": "Honolulu Civil Beat",
