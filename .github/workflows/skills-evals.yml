@@ -1,9 +1,9 @@
 name: Skills evals
 
 # Behavioural evals (evals/skills/, scripts/run_skill_evals.sh): runs Claude
-# with the skills on 7 cases × 3 runs (incl. the brand-* cases for
-# .claude/skills/appleseed-brand) and grades what it does. Costs real
-# usage (~$1 a run), so it is NOT a required check, runs only on release PRs
+# with the skills and grades what it does. On a release PR it runs only the
+# cases whose skill or eval files changed vs skills-stable, 3 runs each.
+# Costs real usage (~$0.10-0.20 per agent run), so it is NOT a required check, runs only on release PRs
 # into skills-stable and on demand, and only when a credential is configured:
 # add ANTHROPIC_API_KEY as a repository secret to turn it on.
 
@@ -34,6 +34,8 @@ jobs:
         run: echo "::notice::ANTHROPIC_API_KEY secret not set; skills evals skipped."
       - uses: actions/checkout@v4
         if: env.ANTHROPIC_API_KEY != ''
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         if: env.ANTHROPIC_API_KEY != ''
         with:
@@ -43,7 +45,11 @@ jobs:
         run: |
           npm install -g --silent @anthropic-ai/claude-code
           # 0.75: today's floor is 0.83, and a single flaky judge vote shouldn't block a release.
-          scripts/run_skill_evals.sh --runs "${{ inputs.runs || '3' }}" --case "${{ inputs.case || '*' }}" --threshold 0.75
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            scripts/run_skill_evals.sh --changed "origin/${{ github.base_ref }}" --release --threshold 0.75
+          else
+            scripts/run_skill_evals.sh --runs "${{ inputs.runs }}" --case "${{ inputs.case }}" --threshold 0.75
+          fi
       - uses: actions/upload-artifact@v4
         if: always() && env.ANTHROPIC_API_KEY != ''
         with:
