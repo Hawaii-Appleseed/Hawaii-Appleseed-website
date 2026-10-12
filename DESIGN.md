@@ -2,7 +2,7 @@
 
 The brand spec for the site and anything Appleseed-branded. **Tokens live in [`assets/tokens.css`](assets/tokens.css)** on `:root`; every page links it before its own `<style>`. Page CSS uses `var(--ha-*)` only — **no raw hex/rgba and no px `font-size`** (CI lints changed lines; see [Checks](#checks)). Need a new value? Add a token there, then use it. Best single exemplar of components: **`taxes-budget.html`**.
 
-Source of truth upstream: *Hawaiʻi Appleseed Brand Guide (April 2026 v1.0)*. A portable copy of this guide for Claude.ai lives in `brand-skill/appleseed-brand/`; `python3 scripts/build_brand_skill.py` copies this file and `tokens.css` into it and rebuilds the zip (CI fails if you forget).
+Source of truth upstream: *Hawaiʻi Appleseed Brand Guide (April 2026 v1.0)*. A portable copy of this guide for Claude lives in the `appleseed-brand` skill (shipped with the house skills; `brand-skill/appleseed-brand.zip` is the Claude.ai upload); `python3 scripts/build_brand_skill.py` copies this file and `tokens.css` into it and rebuilds the zip (CI fails if you forget).
 
 ## Palette
 
@@ -235,7 +235,7 @@ Brand teals at 24px and up (headlines, pull-quotes, big stats) are fine as they 
 |---|---|---|
 | `python3 scripts/lint_design_tokens.py [--base origin/main]` | New raw hex/rgba/hsl colours or px `font-size` in **changed lines** of `*.html`/`*.css` (excludes `tokens.css`, `squarespace-ready/`, `*squarespace*` snippets). Silence a deliberate exception with `/* design-lint: allow */` on the line. | `design-system.yml`, every PR |
 | `python3 scripts/check_design_tokens.py --check` | Contrast table above is current; chart palettes stay CVD-safe. | `design-system.yml` |
-| `python3 scripts/build_brand_skill.py --check` | `brand-skill/appleseed-brand/` and its zip match this file + `tokens.css`; every hex in its `SKILL.md` is a token. | `design-system.yml` |
+| `python3 scripts/build_brand_skill.py --check` | The `appleseed-brand` skill and its zip match this file + `tokens.css`; every hex in its `SKILL.md` is a token. | `design-system.yml` |
 | `uv run --with python-pptx --with python-docx scripts/build_brand_templates.py` | Regenerates the branded `.pptx`/`.docx` templates in the skill from the tokens. | — (run by hand after a palette change) |
 
 ## Components

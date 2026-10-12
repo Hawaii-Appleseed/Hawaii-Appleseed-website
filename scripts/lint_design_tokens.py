@@ -13,7 +13,7 @@ prefix) was moved, not added, so it is skipped too.
 Flags in an added line:
   - raw colours: #rgb/#rrggbb(aa) hex, rgb()/rgba()/hsl()/hsla() with literal numbers
   - px font sizes: `font-size: …px`, a px size in the `font:` shorthand, `fontSize: '12px'`
-Excluded: assets/tokens.css (where the values live) and its copy in brand-skill/, squarespace-ready/ and
+Excluded: assets/tokens.css (where the values live) and its copy in the brand skill, squarespace-ready/ and
 *squarespace* snippets (pasted into Squarespace, which can't load tokens.css, so
 they carry inline copies). A line ending in `design-lint: allow` (in any
 comment syntax) is skipped, for the rare deliberate exception — say why next to it.
@@ -30,7 +30,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 INCLUDE = ("*.html", "*.css")
-EXCLUDE = ("assets/tokens.css", "brand-skill/*/reference/tokens.css", "squarespace-ready/*", "*squarespace*")
+EXCLUDE = ("assets/tokens.css", ".claude/skills/appleseed-brand/reference/tokens.css", "squarespace-ready/*", "*squarespace*")
 ALLOW = re.compile(r"design-lint:\s*allow")
 
 # Hex: not part of an entity (&#123;), a URL fragment (href="#cafe", url(#fade)) or an identifier.

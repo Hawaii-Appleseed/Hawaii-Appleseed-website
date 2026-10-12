@@ -20,8 +20,22 @@ Apply this to anything carrying the Appleseed name. Calm, credible, grounded: de
 | Page tint | `#F4F7F4` | Light background |
 | White | `#FFFFFF` | Background, text on dark |
 | Hairline | Slate at 14% (`rgba(53,79,82,.14)`) | Thin divider lines |
+| Teal Ink | `#3F5F57` | Small teal text on Ash, Ash Light or an issue tint (see Small text) |
+| Teal Bright | `#B0C8B4` | Small teal text on Charcoal or Slate (see Small text) |
 
 Deep Teal (`#52796F`) is the *darker* teal and the workhorse; use plain Teal sparingly. Issue tints (light backgrounds per topic): Tax/budget `#F2F4EF` · Food `#E6EFE9` · Housing `#D9E2D8` · Transportation `#E2E8E8` · Wages/labor `#EDEDE5`.
+
+## Small text (under 24px): pick the colour by background
+
+The brand teals are too faint for small text on some fills. Labels, eyebrows, dates, tags and captions use:
+
+| Background | Small text | Never |
+|---|---|---|
+| White, Page tint | Charcoal, Slate, Deep Teal | Teal, Ash |
+| Ash, Ash Light, issue tints, pale teal chips | Charcoal, Slate, **Teal Ink** | Deep Teal, Teal |
+| Charcoal, Slate | White, Ash, **Teal Bright** | Teal, Deep Teal |
+
+Muted text: Charcoal at 74% or more on light, White at 70% or more on dark. Don't fade small text with transparency or `opacity` below that. Headlines and big numbers (24px and up) can use Deep Teal or Teal as before. Buttons: Charcoal label on a Teal fill is the current site style but falls just short (4.2:1); for new work make the label 19px bold, or use a Deep Teal fill with a White label.
 
 ## Fonts
 
@@ -34,7 +48,7 @@ Deep Teal (`#52796F`) is the *darker* teal and the workhorse; use plain Teal spa
 
 - Headlines: tight and heavy (Manrope 800, slightly negative letter-spacing). Small teal ALL-CAPS "eyebrow" label above section titles, widely letter-spaced.
 - Lots of white space; left-aligned text; thin hairline dividers instead of boxes. Rounded corners kept small (≈6–12px).
-- Dark sections: Charcoal→Slate gradient with Ash/White text and Teal accents.
+- Dark sections: Charcoal→Slate gradient with Ash/White text; Teal accents on large type, Teal Bright on small labels.
 - Plain, confident language; lead with the number or the finding.
 
 ## By medium
@@ -50,7 +64,7 @@ Deep Teal (`#52796F`) is the *darker* teal and the workhorse; use plain Teal spa
 - **Sequential** (low → high, e.g. a map shaded by rate): `#E5E9E2` `#B4C9B6` `#84A98C` `#6B917D` `#52796F` `#405B5A` `#2F3E46`. Use 3–7 evenly spaced steps.
 - **Diverging** (above/below a midpoint, e.g. change since last year): `#2B4A45` `#52796F` `#A9C3B3` · neutral `#F2F0EA` · `#E0BF85` `#B07A35` `#6E4524`. Teal side = above/better, brown side = below/worse.
 
-These were checked under simulated red-, green- and blue-blindness; don't substitute other greens and reds. Text on light backgrounds: Charcoal, Slate or Deep Teal only — never Teal or Ash (too faint to read). Approved text/background pairs: `reference/web-design-guide.md` → Contrast.
+These were checked under simulated red-, green- and blue-blindness; don't substitute other greens and reds. For which text colours pass on which background, see **Small text** above; the measured table is `reference/web-design-guide.md` → Contrast.
 
 ## Templates
 
@@ -62,6 +76,16 @@ If you generate a .pptx/.docx with code (python-pptx, python-docx), open the tem
 ## Logo
 
 `assets/logo.png` (color, for light backgrounds), `assets/logo-white.png` (for dark backgrounds), `assets/logo-mark.png` (the mark alone). Keep proportions; give it clear space; don't recolor or put the color logo on dark.
+
+## Check before you hand it over
+
+Run the bundled checker on every file you made (HTML, CSS, SVG, Markdown, or chart/slide code):
+
+```bash
+python3 "${CLAUDE_SKILL_DIR}/scripts/check_brand.py" path/to/file.html
+```
+
+On Claude.ai, run `scripts/check_brand.py` from this skill's folder the same way. It flags off-palette colours, the old sage-green, non-brand or serif fonts, small text that fails contrast (including faded text and Teal under 24px), italic Manrope, and "Hawaii" without the ʻokina. Fix every ERROR before you deliver; a WARN is a judgement call (a proper name or a URL may be spelled as-is). If you deliberately keep a flagged line, end it with a `brand-check: allow` comment and say why.
 
 ## Quick on-brand check
 

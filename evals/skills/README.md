@@ -14,7 +14,7 @@ us in public:
 | `brand-chart` | write matplotlib code for a 4-series ALICE chart | first four categorical chart colours in order, no off-palette hex, brand font, source note, colour-blind usable (LLM judge) |
 | `brand-slide` | write python-pptx code for a 3-slide board deck | starts from `templates/appleseed-slides.pptx`, no off-palette hex, slide rules incl. ʻokina (LLM judge) |
 
-The `brand-*` cases test `brand-skill/appleseed-brand/` (the Claude.ai org skill), which the runner adds to the throwaway plugin; run just those with `--case 'brand-*'`. "Every hex a token" is a regex over `assets/tokens.css` values, so regenerate the three `off-palette-hex.md` graders if the palette changes.
+The `brand-*` cases test `.claude/skills/appleseed-brand/`, shipped with the other house skills (and to Claude.ai as `brand-skill/appleseed-brand.zip`); run just those with `--case 'brand-*'`. "Every hex a token" is a regex over `assets/tokens.css` values, so regenerate the three `off-palette-hex.md` graders if the palette changes.
 
 ## Run
 
