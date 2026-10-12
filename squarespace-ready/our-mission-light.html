@@ -16,8 +16,11 @@
   --ha-ash-light:  #E5E9E2;  
   --ha-bg:         #F4F7F4;  
   --ha-white:      #FFFFFF;
+  --ha-teal-ink:    #3F5F57;  
+  --ha-teal-bright: #B0C8B4;  
   --ha-ink-muted:  rgba(47,62,70,.78);  
-  --ha-ink-subtle: rgba(47,62,70,.65);  
+  --ha-ink-subtle: rgba(47,62,70,.74);  
+  --ha-ink-on-dark-muted: rgba(255,255,255,.7);  
   --ha-rule:       rgba(53,79,82,.14);   
   --ha-rule-dark:  rgba(202,210,197,.18); 
   --ha-rule-light: rgba(202,210,197,.30); 
@@ -113,6 +116,21 @@
     --ha-section-y:  var(--ha-space-3xl);
   }
 }
+:where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]),
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::before,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 </style>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap">
@@ -140,10 +158,10 @@
     display:inline-flex;align-items:center;gap:14px;
     font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:600;
     font-size:12px;letter-spacing:.28em;text-transform:uppercase;
-    color:var(--ha-teal-deep);
+    color:var(--ha-teal-ink);
   }
   .ha-mission .ha-eyebrow::before{content:"";width:42px;height:1px;background:var(--ha-teal);}
-  .ha-mission .ha-eyebrow.on-dark{color:var(--ha-teal);}
+  .ha-mission .ha-eyebrow.on-dark{color:var(--ha-teal-bright);}
   .ha-mission .ha-eyebrow.on-dark::before{background:var(--ha-teal);}
 
   /* ===== HERO (light variant) ===== */
@@ -175,7 +193,7 @@
   }
   .ha-mission .ha-hero-eyebrow{margin-bottom:28px;}
   /* Eyebrow inside light hero: override the .on-dark variant for contrast */
-  .ha-mission .ha-hero .ha-eyebrow.on-dark{color:var(--ha-teal-deep);}
+  .ha-mission .ha-hero .ha-eyebrow.on-dark{color:var(--ha-teal-ink);}
   .ha-mission .ha-hero .ha-eyebrow.on-dark::before{background:var(--ha-teal-deep);}
   .ha-mission .ha-hero h1{
     font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;
@@ -205,7 +223,7 @@
     color:var(--ha-charcoal);max-width:24ch;margin:18px auto 0;
   }
   .ha-mission .ha-statement-body em{
-    color:var(--ha-teal-deep);font-style:italic;font-weight:600;
+    color:var(--ha-teal-ink);font-style:italic;font-weight:600;
   }
   .ha-mission .ha-statement .ha-eyebrow{justify-content:center;}
 
@@ -236,7 +254,7 @@
   .ha-mission .ha-step .ha-step-num{
     font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:700;
     font-size:clamp(22px, 2.4vw, 28px);
-    color:var(--ha-teal);letter-spacing:-0.02em;line-height:1;
+    color:var(--ha-teal-deep);letter-spacing:-0.02em;line-height:1;
   }
   .ha-mission .ha-step h3{
     font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;

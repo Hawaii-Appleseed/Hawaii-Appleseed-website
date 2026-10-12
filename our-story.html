@@ -261,7 +261,7 @@
   .ha-story .scroll-cue{
     position:absolute;bottom:32px;left:8vw;
     font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:11px;letter-spacing:.3em;
-    text-transform:uppercase;color:rgba(202,210,197,.7);
+    text-transform:uppercase;color:var(--ha-ash);
     display:flex;align-items:center;gap:12px;
   }
   .ha-story .scroll-cue::after{
@@ -296,9 +296,9 @@
   .ha-story .era-header .era-num{
     font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:800;
     font-size:14px;letter-spacing:.32em;text-transform:uppercase;
-    color:var(--ha-teal-deep);
+    color:var(--ha-teal-ink);
     display:flex;align-items:center;gap:14px;
-    opacity:.95;
+    
   }
   .ha-story .era-header .era-num::before{content:"";width:36px;height:1px;background:var(--ha-teal-deep);}
   .ha-story .era-header h2{
@@ -310,7 +310,7 @@
   }
   .ha-story .era-header .era-years{
     font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:300;
-    font-size:18px;color:var(--ha-teal-deep);margin-top:6px;letter-spacing:.04em;
+    font-size:var(--ha-fs-h5);color:var(--ha-teal-ink);margin-top:6px;letter-spacing:.04em;
   }
 
   /* Timeline rail + items */
@@ -466,7 +466,7 @@
     background:var(--ha-slate); color:var(--ha-ash);
   }
   .ha-story .era.dark .era-header h2{ color:#fff; }
-  .ha-story .era.dark .era-header .era-num{ color:var(--ha-teal); }
+  .ha-story .era.dark .era-header .era-num{ color:var(--ha-teal-bright); }
   .ha-story .era.dark .era-header .era-num::before{ background:var(--ha-teal); }
   .ha-story .era.dark .era-header .era-years{ color:var(--ha-ash); }
   .ha-story .era.dark .milestone h3{ color:#fff; }

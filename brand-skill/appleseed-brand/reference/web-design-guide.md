@@ -15,11 +15,14 @@ Source of truth upstream: *Hawaiʻi Appleseed Brand Guide (April 2026 v1.0)*. A 
 --ha-ash-light:  #E5E9E2;   /* light fills, callouts */
 --ha-bg:         #F4F7F4;   /* page tint */
 --ha-white:      #FFFFFF;
+--ha-teal-ink:    #3F5F57;  /* Deep Teal darkened — small text on Ash, Ash Light, issue tints */
+--ha-teal-bright: #B0C8B4;  /* Teal lightened — small eyebrows/labels on Charcoal or Slate */
 --ha-rule:       rgba(53,79,82,.14);    /* hairline borders on light — Slate @ 14% */
 --ha-rule-dark:  rgba(202,210,197,.18); /* hairlines on dark — Ash @ 18% */
 --ha-rule-light: rgba(202,210,197,.30); /* stronger hairlines on dark */
 --ha-ink-muted:  rgba(47,62,70,.78);    /* lede paragraphs */
---ha-ink-subtle: rgba(47,62,70,.65);    /* stat labels, source notes — fails AA small text, see Contrast */
+--ha-ink-subtle: rgba(47,62,70,.74);    /* stat labels, source notes, dates — lightest text that passes AA */
+--ha-ink-on-dark-muted: rgba(255,255,255,.7); /* secondary text on Charcoal/Slate */
 /* Issue tints: --ha-tint-tax #F2F4EF · -food #E6EFE9 · -housing #D9E2D8 · -transit #E2E8E8 · -wages #EDEDE5 */
 /* Motion: --ha-ease-out cubic-bezier(.22,.61,.36,1) · --ha-dur-fast .2s · --ha-dur-base .4s · --ha-dur-slow .6s */
 ```
@@ -156,13 +159,21 @@ Rules: **label series directly** (end-of-line labels, in-bar values) rather than
 
 WCAG 2.2 AA, measured from the tokens by `python3 scripts/check_design_tokens.py` (alpha tokens composited on the background). Normal text needs 4.5:1; large text (≥24px, or ≥18.66px bold) and non-text UI/chart marks need 3:1. **Approved** = every `pass` row below for its role. The table is generated (`--write`); CI's `--check` fails if a token change moves a ratio or verdict, so an approval can't lapse silently.
 
-**Flagged, not fixed.** These are current brand usages that fail; colours were deliberately left alone because changing a brand value is a brand decision:
-- **Charcoal on Teal** pill buttons (4.23:1) — the 13.5px label is not "large". Options: 18.66px bold label, or a darker fill.
-- **`--ha-ink-subtle` (Charcoal @ 65%)** stat labels and source notes (3.95 on white, 3.82 on tint), and the `.55` source notes on the issue pages are lower still. `--ha-ink-muted` (.78) passes; use it for anything small.
-- **Deep Teal small text on Ash Light and the food/housing/wages tints** (3.66–4.14). Fine for headlines ≥24px; eyebrows on those fills should use Charcoal or Slate.
-- **Teal (`#84A98C`) on dark** for eyebrows: passes on nothing as small text (4.23 on Charcoal, 3.36 on Slate). Large text on Charcoal is fine; small eyebrows on dark should use Ash.
-- **Teal on white** fails even as a non-text mark (2.61) — chart series need a label or outline (see Chart palette); never use it for text on light.
-- **Deep Teal on Charcoal** (2.28) — never.
+**Text under 24px uses a text-safe token.** The brand teals fail AA as small text on several fills, so the brand values stay as they are and two derived shades carry small text instead (2026-10-11):
+
+| Small text on… | Use | Not |
+|---|---|---|
+| White, `--ha-bg` | `--ha-teal-deep` | `--ha-teal` (2.61) |
+| Ash, Ash Light, issue tints, pale teal chips | `--ha-teal-ink` | `--ha-teal-deep` (3.1–4.3) |
+| Charcoal, Slate | `--ha-teal-bright` or `--ha-ash` | `--ha-teal` (3.4–4.2) |
+| Secondary text on dark | `--ha-ink-on-dark-muted` / `--ha-ash` | white below 70% |
+| Labels, dates, source notes on light | `--ha-ink-subtle` (.74) | Charcoal below 74% |
+
+Brand teals at 24px and up (headlines, pull-quotes, big stats) are fine as they are. Don't fade small text with `opacity`; it multiplies into the contrast just like an alpha colour.
+
+**Still flagged:** **Charcoal on Teal** pill buttons (4.23:1). The 13–14px label isn't "large"; the fixes (an 18.66px bold label, or a different fill) change how the primary button looks, so they're a brand decision. The remaining rows below are the raw brand pairs the table above routes around.
+
+**Focus and motion baseline.** `tokens.css` ends with a site-wide `:focus-visible` ring (2px `currentColor`, 3px offset) and a `prefers-reduced-motion` rule that cuts CSS animations and transitions. Both are scoped to `ha-`/`px-` roots at zero specificity, so a component's own focus style still wins and Squarespace's chrome is untouched. JS-driven motion still needs its own `matchMedia('(prefers-reduced-motion: reduce)')` check.
 
 <!-- contrast-table:start -->
 | Foreground | Background | Role | Ratio | AA | Used for |
@@ -180,21 +191,31 @@ WCAG 2.2 AA, measured from the tokens by `python3 scripts/check_design_tokens.py
 | `--ha-charcoal` | `--ha-white` | normal text | 11.06:1 | pass | body text |
 | `--ha-ink-muted` | `--ha-bg` | normal text | 5.43:1 | pass | lede on page tint |
 | `--ha-ink-muted` | `--ha-white` | normal text | 5.69:1 | pass | lede paragraph |
+| `--ha-ink-on-dark-muted` | `--ha-charcoal` | normal text | 6.36:1 | pass | secondary text on dark |
+| `--ha-ink-on-dark-muted` | `--ha-slate` | normal text | 5.28:1 | pass | secondary text on dark gradient end |
+| `--ha-ink-subtle` | `--ha-bg` | normal text | 4.86:1 | pass | stat labels on tint |
+| `--ha-ink-subtle` | `--ha-white` | normal text | 5.07:1 | pass | stat labels, source notes |
 | `--ha-slate` | `--ha-bg` | normal text | 8.14:1 | pass | secondary text on tint |
 | `--ha-slate` | `--ha-tint-tax` | normal text | 7.93:1 | pass | accent on tax card |
 | `--ha-slate` | `--ha-tint-transit` | normal text | 7.08:1 | pass | accent on transit card |
 | `--ha-slate` | `--ha-white` | normal text | 8.78:1 | pass | secondary text |
+| `--ha-teal-bright` | `--ha-charcoal` | normal text | 6.20:1 | pass | eyebrow on dark |
+| `--ha-teal-bright` | `--ha-slate` | normal text | 4.92:1 | pass | eyebrow on dark gradient end |
 | `--ha-teal-deep` | `--ha-bg` | normal text | 4.50:1 | pass | links/eyebrows on page tint |
 | `--ha-teal-deep` | `--ha-white` | large text | 4.86:1 | pass | headline accent |
 | `--ha-teal-deep` | `--ha-white` | normal text | 4.86:1 | pass | links, eyebrows, key numbers |
 | `--ha-teal-deep` | `--ha-white` | non-text / UI | 4.86:1 | pass | primary chart series, focus ring |
+| `--ha-teal-ink` | `--ha-ash` | normal text | 4.53:1 | pass | eyebrow on Ash |
+| `--ha-teal-ink` | `--ha-ash-light` | normal text | 5.72:1 | pass | eyebrow in callout |
+| `--ha-teal-ink` | `--ha-tint-food` | normal text | 5.99:1 | pass | accent on food card |
+| `--ha-teal-ink` | `--ha-tint-housing` | normal text | 5.30:1 | pass | accent on housing card |
+| `--ha-teal-ink` | `--ha-tint-wages` | normal text | 5.98:1 | pass | accent on wages card |
+| `--ha-teal-ink` | `--ha-white` | normal text | 7.03:1 | pass | small teal text (any light fill) |
 | `--ha-white` | `--ha-charcoal` | normal text | 11.06:1 | pass | text on dark section |
 | `--ha-white` | `--ha-slate` | normal text | 8.78:1 | pass | text on dark gradient end |
 | `--ha-white` | `--ha-teal-deep` | normal text | 4.86:1 | pass | white on deep-teal fill |
 | `--ha-ash` | `--ha-white` | non-text / UI | 1.55:1 | **FAIL** (needs 3.0:1) | tertiary chart series (avoid alone) |
 | `--ha-charcoal` | `--ha-teal` | normal text | 4.23:1 | **FAIL** (needs 4.5:1) | primary pill button label |
-| `--ha-ink-subtle` | `--ha-bg` | normal text | 3.82:1 | **FAIL** (needs 4.5:1) | stat labels on tint |
-| `--ha-ink-subtle` | `--ha-white` | normal text | 3.95:1 | **FAIL** (needs 4.5:1) | stat labels, source notes |
 | `--ha-teal` | `--ha-charcoal` | normal text | 4.23:1 | **FAIL** (needs 4.5:1) | eyebrow on dark |
 | `--ha-teal` | `--ha-slate` | normal text | 3.36:1 | **FAIL** (needs 4.5:1) | eyebrow on dark gradient end |
 | `--ha-teal` | `--ha-white` | large text | 2.61:1 | **FAIL** (needs 3.0:1) | teal headline on light |

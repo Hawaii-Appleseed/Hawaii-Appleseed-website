@@ -15,8 +15,11 @@
   --ha-ash-light:  #E5E9E2;  
   --ha-bg:         #F4F7F4;  
   --ha-white:      #FFFFFF;
+  --ha-teal-ink:    #3F5F57;  
+  --ha-teal-bright: #B0C8B4;  
   --ha-ink-muted:  rgba(47,62,70,.78);  
-  --ha-ink-subtle: rgba(47,62,70,.65);  
+  --ha-ink-subtle: rgba(47,62,70,.74);  
+  --ha-ink-on-dark-muted: rgba(255,255,255,.7);  
   --ha-rule:       rgba(53,79,82,.14);   
   --ha-rule-dark:  rgba(202,210,197,.18); 
   --ha-rule-light: rgba(202,210,197,.30); 
@@ -112,6 +115,21 @@
     --ha-section-y:  var(--ha-space-3xl);
   }
 }
+:where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]),
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::before,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 </style>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:wght@300;400;500;600;700&display=swap">
@@ -157,7 +175,7 @@
     color:var(--ha-teal-deep);
   }
   .ha-mission .ha-eyebrow::before{content:"";width:42px;height:1px;background:var(--ha-teal);}
-  .ha-mission .ha-eyebrow.on-dark{color:var(--ha-teal);}
+  .ha-mission .ha-eyebrow.on-dark{color:var(--ha-teal-bright);}
   .ha-mission .ha-eyebrow.on-dark::before{background:var(--ha-teal);}
 
   /* ===== HERO ===== */
@@ -207,7 +225,7 @@
   }
   .ha-mission .ha-hero-lead em{
     font-family:OkinaPoppins, 'Poppins',sans-serif;
-    color:var(--ha-teal);font-style:italic;font-weight:600;
+    color:var(--ha-teal-bright);font-style:italic;font-weight:600;
   }
   .ha-mission .ha-word{
     display:inline-block;opacity:0;transform:translateY(24px);
@@ -744,7 +762,7 @@
   }
   /* .ha-five-phase is a <button> now \2014  strip the UA chrome, keep the look. */
   .ha-mission .ha-five-phase{
-    opacity:.34;
+    opacity:.8;
     padding:0 0 3px;border:0;border-bottom:2px solid transparent;
     background:none;cursor:pointer;
     font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;
@@ -752,7 +770,7 @@
                color .35s cubic-bezier(.22,.61,.36,1),
                border-color .35s cubic-bezier(.22,.61,.36,1);
   }
-  .ha-mission .ha-five-phase:hover{ opacity:.7; }
+  .ha-mission .ha-five-phase:hover{ opacity:1; }
   .ha-mission .ha-five-phase:focus-visible{
     outline:2px solid var(--ha-teal-deep);outline-offset:3px;
   }
