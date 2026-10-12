@@ -6,7 +6,7 @@ name: Design system
 #    scripts/lint_design_tokens.py
 #  - tokens: WCAG AA contrast table in DESIGN.md is current, chart palettes stay
 #    colour-blind safe — scripts/check_design_tokens.py
-#  - brand skill: brand-skill/appleseed-brand/ + .zip rebuilt from DESIGN.md and
+#  - brand skill: .claude/skills/appleseed-brand/ + brand-skill/ zip rebuilt from DESIGN.md and
 #    tokens.css, SKILL.md hexes are tokens — scripts/build_brand_skill.py
 # All stdlib Python, no installs. Fix locally with the same commands (DESIGN.md → Checks).
 
@@ -19,6 +19,7 @@ on:
       - "**.css"
       - "DESIGN.md"
       - "brand-skill/**"
+      - ".claude/skills/appleseed-brand/**"
       - "evals/skills/brand-*/**"
       - "scripts/lint_design_tokens.py"
       - "scripts/check_design_tokens.py"

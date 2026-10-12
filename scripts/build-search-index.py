@@ -31,7 +31,7 @@ they come from the JSON files above, which carry categories and dates the
 sitemap does not.
 
 Run locally or via .github/workflows/sync-publications.yml (nightly), after
-sync-news.py and sync-publications.py have refreshed their inputs.
+sync-news.py has refreshed its inputs.
 """
 import concurrent.futures
 import html

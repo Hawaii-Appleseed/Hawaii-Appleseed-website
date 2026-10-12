@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Rebuild the portable brand skill (brand-skill/appleseed-brand/ + .zip) from the repo's spec.
+"""Rebuild the brand skill (.claude/skills/appleseed-brand/ + brand-skill/appleseed-brand.zip) from the repo's spec.
 
     python3 scripts/build_brand_skill.py           # copy DESIGN.md + tokens.css in, rebuild the zip
     python3 scripts/build_brand_skill.py --check   # CI: fail if either is stale
 
-The skill is uploaded to Claude.ai (org skills) as the zip, so it can't read the
-repo: it carries copies. DESIGN.md -> reference/web-design-guide.md and
+The skill ships two ways: to Claude Code with the appleseed-writing plugin (it sits
+in .claude/skills/ with the house skills), and to Claude.ai org skills as the zip.
+Neither can read this repo, so it carries copies. DESIGN.md -> reference/web-design-guide.md and
 assets/tokens.css -> reference/tokens.css. SKILL.md itself is hand-written; the
 check makes sure every hex in it is a real token value, so a palette change
 can't leave the skill teaching the old colours, and that the brand-* eval
@@ -23,7 +24,7 @@ import zipfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-SKILL = REPO / "brand-skill" / "appleseed-brand"
+SKILL = REPO / ".claude" / "skills" / "appleseed-brand"
 ZIP = REPO / "brand-skill" / "appleseed-brand.zip"
 COPIES = {  # destination (in the skill) -> (source, transform)
     "reference/web-design-guide.md": (REPO / "DESIGN.md", lambda t: t.replace("](assets/tokens.css)", "](tokens.css)")),
@@ -99,7 +100,7 @@ def main() -> int:
         for dst, data in copies.items():
             cur = SKILL / dst
             if not cur.exists() or cur.read_bytes() != data:
-                probs.append(f"brand-skill/appleseed-brand/{dst} is stale vs {COPIES[dst][0].relative_to(REPO)}")
+                probs.append(f".claude/skills/appleseed-brand/{dst} is stale vs {COPIES[dst][0].relative_to(REPO)}")
         if not ZIP.exists() or ZIP.read_bytes() != want_zip:
             probs.append("brand-skill/appleseed-brand.zip is stale vs the skill folder")
         for g, data in graders.items():
@@ -108,7 +109,7 @@ def main() -> int:
         for p in probs:
             print("ERROR " + p)
         if probs:
-            print("Run: python3 scripts/build_brand_skill.py, then commit brand-skill/.")
+            print("Run: python3 scripts/build_brand_skill.py, then commit .claude/skills/appleseed-brand/ and brand-skill/.")
             return 1
         print(f"brand skill up to date ({len(files)} files)")
         return 0

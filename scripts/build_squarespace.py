@@ -63,8 +63,7 @@ STICKY_BAR_OVERRIDE = (
     "   inside a code block. Hide the progress line; rebuild the pill/tab\n"
     "   nav as a sticky overlay (see build_squarespace.py). */\n"
     ".ha-progress { display: none !important; }\n"
-    ".ha-issues, .ha-tax, .ha-food, .ha-housing, .ha-transit, .ha-wages "
-    "{ overflow: clip !important; }\n"
+    ".ha-issues, .ha-topic { overflow: clip !important; }\n"
     "/* absolute at FIRST PAINT so the (invisible) bar contributes zero\n"
     "   flow height from the very first frame — the script below converts\n"
     "   it to sticky + negative margin, which also nets to zero flow, so\n"
@@ -120,8 +119,7 @@ FULL_BLEED_OVERRIDE = (
     "   desktop already spans full width. */\n"
     "@media (max-width:1080px){\n"
     "  .ha-mission, .ha-story, .ha-issues, .ha-team, .ha-board,\n"
-    "  .ha-tax, .ha-food, .ha-housing, .ha-transit, .ha-wages,\n"
-    "  .ha-pub, .ha-news {\n"
+    "  .ha-topic, .ha-pub, .ha-news {\n"
     "    width: 100vw !important;\n"
     "    max-width: 100vw !important;\n"
     "    margin-left: calc(50% - 50vw) !important;\n"
@@ -215,11 +213,11 @@ MARKER_PAGES = [
     ("issues.html",             "ha-issues",       "Issues",          ""),
     ("our-team.html",           "ha-team",         "Our Team",        ""),
     ("board-of-directors.html", "ha-board",        "Board",           ""),
-    ("taxes-budget.html",       "ha-tax",          "Taxes & Budget",  ""),
-    ("food-security.html",      "ha-food",         "Food Security",   ""),
-    ("housing.html",            "ha-housing",      "Housing",         ""),
-    ("transportation.html",     "ha-transit",      "Transportation",  ""),
-    ("wages-labor.html",        "ha-wages",        "Wages & Labor",   ""),
+    ("taxes-budget.html",       "ha-topic",        "Taxes & Budget",  ""),
+    ("food-security.html",      "ha-topic",        "Food Security",   ""),
+    ("housing.html",            "ha-topic",        "Housing",         ""),
+    ("transportation.html",     "ha-topic",        "Transportation",  ""),
+    ("wages-labor.html",        "ha-topic",        "Wages & Labor",   ""),
     ("publications.html",       "ha-publications", "Publications",    ""),
     ("in-the-news.html",        "ha-news",         "In the News",     ""),
     ("blog.html",               "ha-blog",         "Blog",            ""),
@@ -775,6 +773,39 @@ def ensure_okina(html):
     return html.replace("<style>", link + "\n<style>", 1)
 
 
+# Squarespace can't load the repo's stylesheets, so every payload carries an
+# inline copy of assets/tokens.css (the --ha-* custom properties), right after
+# its PASTE-READY header.
+def with_tokens(html):
+    with open(os.path.join(ROOT, "assets", "tokens.css"), encoding="utf-8") as f:
+        css = re.sub(r"/\*.*?\*/", "", f.read(), flags=re.S)
+    css = re.sub(r"\n\s*\n", "\n", css).strip()
+    i = html.find("-->") + 3
+    return html[:i] + "\n<style>\n" + css + "\n</style>" + html[i:]
+
+
+# Shared files a page links from inside its BEGIN/END block. They ship inline,
+# so a payload stays self-contained and only changes when someone publishes it.
+INLINE_ASSETS = ("assets/issue-page.css", "assets/issue-page.js")
+
+
+def inline_assets(html):
+    def body(path):
+        with open(os.path.join(ROOT, path), encoding="utf-8") as f:
+            return f.read().strip()
+    for path in INLINE_ASSETS:
+        html = html.replace('<link rel="stylesheet" href="%s">' % path,
+                            "<style>\n%s\n</style>" % body(path))
+        html = html.replace('<script src="%s"></script>' % path,
+                            "<script>\n%s\n</script>" % body(path))
+    return html
+
+
+def finish(html):
+    return entity_encode(ensure_okina(remap_internal_links(absolutize_assets(
+        inline_assets(with_tokens(html))))))
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     manifest = []
@@ -782,27 +813,23 @@ def main():
     for src, slug, page, note in MARKER_PAGES:
         block = extract_marker(read(src), slug)
         out_name = src  # keep the same stem so the mapping is obvious
-        body = entity_encode(ensure_okina(remap_internal_links(absolutize_assets(
-            header(page, note) + "\n".join(block).strip()
-            + STICKY_BAR_OVERRIDE + FULL_BLEED_OVERRIDE))))
+        body = finish(header(page, note) + "\n".join(block).strip()
+                      + STICKY_BAR_OVERRIDE + FULL_BLEED_OVERRIDE)
         with open(os.path.join(OUT, out_name), "w", encoding="utf-8") as f:
             f.write(body)
         manifest.append((out_name, page, len(body)))
 
-    home = entity_encode(ensure_okina(remap_internal_links(
-        absolutize_assets(build_homepage(read("index.html"))))))
+    home = finish(build_homepage(read("index.html")))
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
         f.write(home)
     manifest.append(("index.html", "Home", len(home)))
 
-    support = entity_encode(ensure_okina(remap_internal_links(
-        absolutize_assets(build_support(read("support.html"))))))
+    support = finish(build_support(read("support.html")))
     with open(os.path.join(OUT, "support.html"), "w", encoding="utf-8") as f:
         f.write(support)
     manifest.append(("support.html", "Support / Donate", len(support)))
 
-    ufsm = entity_encode(ensure_okina(remap_internal_links(
-        absolutize_assets(build_ufsm(read("ufsm/index.html"))))))
+    ufsm = finish(build_ufsm(read("ufsm/index.html")))
     with open(os.path.join(OUT, "ufsm.html"), "w", encoding="utf-8") as f:
         f.write(ufsm)
     manifest.append(("ufsm.html", "Universal Free School Meals (UFSM)", len(ufsm)))

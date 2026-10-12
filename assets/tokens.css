@@ -2,8 +2,8 @@
    Spec: DESIGN.md. Link before page styles: <link rel="stylesheet" href="assets/tokens.css">
    Rule: no raw hex/rgba and no px font-size in page CSS — use var(--ha-*). Add new tokens
    here, not per page. CI (scripts/lint_design_tokens.py) fails on new violations.
-   Note: squarespace-ready/ and *squarespace* snippets are pasted into Squarespace and
-   keep an inline copy of these values; update them by hand if a value here changes. */
+   Note: build_squarespace.py inlines this file into every squarespace-ready/ payload;
+   the hand-authored *squarespace* snippets keep their own copies. */
 :root {
   /* Palette */
   --ha-charcoal:   #2F3E46;  /* text, dark backgrounds, nav/footer */
@@ -15,9 +15,15 @@
   --ha-bg:         #F4F7F4;  /* page tint */
   --ha-white:      #FFFFFF;
 
+  /* Text-safe teals (derived, not new brand colours). Deep Teal and Teal fail AA as
+     small text on some fills — see DESIGN.md Contrast. Use these for text under 24px. */
+  --ha-teal-ink:    #3F5F57;  /* Deep Teal, darkened: small text on Ash, Ash Light, issue tints */
+  --ha-teal-bright: #B0C8B4;  /* Teal, lightened: small text (eyebrows, labels) on Charcoal/Slate */
+
   /* Text tints (Charcoal at reduced opacity, composited on light) */
   --ha-ink-muted:  rgba(47,62,70,.78);  /* lede paragraphs */
-  --ha-ink-subtle: rgba(47,62,70,.65);  /* stat labels, source notes — FAILS AA for small text, see DESIGN.md Contrast */
+  --ha-ink-subtle: rgba(47,62,70,.74);  /* stat labels, source notes, dates (lightest text that passes AA) */
+  --ha-ink-on-dark-muted: rgba(255,255,255,.7);  /* secondary text on Charcoal/Slate */
 
   /* Rules / hairlines */
   --ha-rule:       rgba(53,79,82,.14);   /* Slate @ 14%, on light */
@@ -134,5 +140,25 @@
     --ha-fs-hero:    48px;
     --ha-gutter:     var(--ha-space-md);
     --ha-section-y:  var(--ha-space-3xl);
+  }
+}
+
+/* Accessibility baseline. Lives here because this file reaches every page and every
+   Squarespace payload. Scoped to the site's own roots (ha- and px- classes, #ha-…-embed
+   wrappers) at zero specificity (:where), so any component focus style still wins and
+   Squarespace's own chrome is untouched. */
+:where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]),
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::before,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
   }
 }

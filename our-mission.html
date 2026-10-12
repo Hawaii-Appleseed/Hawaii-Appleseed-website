@@ -348,7 +348,7 @@
     color:var(--ha-teal-deep);
   }
   .ha-mission .ha-eyebrow::before{content:"";width:42px;height:1px;background:var(--ha-teal);}
-  .ha-mission .ha-eyebrow.on-dark{color:var(--ha-teal);}
+  .ha-mission .ha-eyebrow.on-dark{color:var(--ha-teal-bright);}
   .ha-mission .ha-eyebrow.on-dark::before{background:var(--ha-teal);}
 
   /* ===== HERO ===== */
@@ -398,7 +398,7 @@
   }
   .ha-mission .ha-hero-lead em{
     font-family:OkinaPoppins, 'Poppins',sans-serif;
-    color:var(--ha-teal);font-style:italic;font-weight:600;
+    color:var(--ha-teal-bright);font-style:italic;font-weight:600;
   }
   .ha-mission .ha-word{
     display:inline-block;opacity:0;transform:translateY(24px);
@@ -935,7 +935,7 @@
   }
   /* .ha-five-phase is a <button> now — strip the UA chrome, keep the look. */
   .ha-mission .ha-five-phase{
-    opacity:.34;
+    opacity:.8;
     padding:0 0 3px;border:0;border-bottom:2px solid transparent;
     background:none;cursor:pointer;
     font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;
@@ -943,7 +943,7 @@
                color .35s cubic-bezier(.22,.61,.36,1),
                border-color .35s cubic-bezier(.22,.61,.36,1);
   }
-  .ha-mission .ha-five-phase:hover{ opacity:.7; }
+  .ha-mission .ha-five-phase:hover{ opacity:1; }
   .ha-mission .ha-five-phase:focus-visible{
     outline:2px solid var(--ha-teal-deep);outline-offset:3px;
   }

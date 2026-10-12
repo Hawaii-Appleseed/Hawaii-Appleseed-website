@@ -7,16 +7,134 @@
      ===================================================================== -->
 <link rel="stylesheet" href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/assets/okina.css">
 <style>
+:root {
+  --ha-charcoal:   #2F3E46;  
+  --ha-slate:      #354F52;  
+  --ha-teal-deep:  #52796F;  
+  --ha-teal:       #84A98C;  
+  --ha-ash:        #CAD2C5;  
+  --ha-ash-light:  #E5E9E2;  
+  --ha-bg:         #F4F7F4;  
+  --ha-white:      #FFFFFF;
+  --ha-teal-ink:    #3F5F57;  
+  --ha-teal-bright: #B0C8B4;  
+  --ha-ink-muted:  rgba(47,62,70,.78);  
+  --ha-ink-subtle: rgba(47,62,70,.74);  
+  --ha-ink-on-dark-muted: rgba(255,255,255,.7);  
+  --ha-rule:       rgba(53,79,82,.14);   
+  --ha-rule-dark:  rgba(202,210,197,.18); 
+  --ha-rule-light: rgba(202,210,197,.30); 
+  --ha-tint-tax:     #F2F4EF;
+  --ha-tint-food:    #E6EFE9;
+  --ha-tint-housing: #D9E2D8;
+  --ha-tint-transit: #E2E8E8;
+  --ha-tint-wages:   #EDEDE5;
+  --ha-ease-out:  cubic-bezier(.22,.61,.36,1);
+  --ha-dur-fast:  .2s;
+  --ha-dur-base:  .4s;
+  --ha-dur-slow:  .6s;
+  --ha-font-display: OkinaManrope, 'Manrope', Arial, sans-serif;
+  --ha-font-body:    OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif;
+  --ha-fs-micro:     10.5px; 
+  --ha-fs-eyebrow:   11px;   
+  --ha-fs-caption:   13px;   
+  --ha-fs-small:     14px;   
+  --ha-fs-body:      15.5px; 
+  --ha-fs-lead:      17px;   
+  --ha-fs-h5:        18px;   
+  --ha-fs-stat-sm:   22px;   
+  --ha-fs-h4:        24px;   
+  --ha-fs-h3:        26px;   
+  --ha-fs-stat:      28px;   
+  --ha-fs-h2:        38px;   
+  --ha-fs-h2-lg:     44px;   
+  --ha-fs-cta:       clamp(30px, 4.2vw, 48px);
+  --ha-fs-display:   54px;   
+  --ha-fs-hero:      78px;   
+  --ha-lh-display: 1;
+  --ha-lh-heading: 1.15;
+  --ha-lh-snug:    1.3;
+  --ha-lh-small:   1.55;
+  --ha-lh-body:    1.65;
+  --ha-track-hero:    -.035em;
+  --ha-track-display: -.02em;
+  --ha-track-tight:   -.01em;
+  --ha-track-button:  .04em;
+  --ha-track-eyebrow: .22em;
+  --ha-space-3xs: 4px;
+  --ha-space-2xs: 8px;
+  --ha-space-xs:  12px;  
+  --ha-space-sm:  16px;  
+  --ha-space-md:  20px;  
+  --ha-space-lg:  28px;  
+  --ha-space-xl:  36px;  
+  --ha-space-2xl: 48px;  
+  --ha-space-3xl: 56px;  
+  --ha-space-4xl: 72px;
+  --ha-space-5xl: 80px;  
+  --ha-space-6xl: 96px;  
+  --ha-gutter:    var(--ha-space-xl);   
+  --ha-section-y: var(--ha-space-5xl);  
+  --ha-container: 1200px;
+  --ha-measure:   680px;
+  --ha-radius-pill:    999px;
+  --ha-radius-card:    8px;
+  --ha-radius-panel:   6px;
+  --ha-radius-callout: 4px;
+  --ha-chart-cat-1: #52796F;  
+  --ha-chart-cat-2: #2F3E46;  
+  --ha-chart-cat-3: #BF8A30;  
+  --ha-chart-cat-4: #6A8CC4;  
+  --ha-chart-cat-5: #A85A45;  
+  --ha-chart-cat-6: #84A98C;  
+  --ha-chart-seq-1: #E5E9E2;
+  --ha-chart-seq-2: #B4C9B6;
+  --ha-chart-seq-3: #84A98C;
+  --ha-chart-seq-4: #6B917D;
+  --ha-chart-seq-5: #52796F;
+  --ha-chart-seq-6: #405B5A;
+  --ha-chart-seq-7: #2F3E46;
+  --ha-chart-div-1: #2B4A45;
+  --ha-chart-div-2: #52796F;
+  --ha-chart-div-3: #A9C3B3;
+  --ha-chart-div-4: #F2F0EA;
+  --ha-chart-div-5: #E0BF85;
+  --ha-chart-div-6: #B07A35;
+  --ha-chart-div-7: #6E4524;
+  --ha-chart-muted: #CAD2C5;  
+  --ha-chart-grid:  rgba(53,79,82,.14);  
+}
+@media (max-width: 700px) {
+  :root {
+    --ha-fs-body:    15px;
+    --ha-fs-lead:    15px;
+    --ha-fs-h2:      28px;
+    --ha-fs-h2-lg:   28px;
+    --ha-fs-display: 30px;
+    --ha-fs-hero:    48px;
+    --ha-gutter:     var(--ha-space-md);
+    --ha-section-y:  var(--ha-space-3xl);
+  }
+}
+:where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]),
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::before,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+<style>
   /* ===== Brand-guide palette (scoped) ===== */
   .ha-team{
-    --ha-ash:        #CAD2C5;
-    --ha-teal:       #84A98C;
-    --ha-teal-deep:  #52796F;
-    --ha-slate:      #354F52;
-    --ha-charcoal:   #2F3E46;
-    --ha-white:      #FFFFFF;
-    --ha-rule:       rgba(53,79,82,.18);
-    --ha-rule-dark:  rgba(202,210,197,.18);
 
     font-family:OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif;
     color:var(--ha-charcoal);
@@ -38,10 +156,10 @@
     display:inline-flex;align-items:center;gap:14px;
     font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:600;
     font-size:12px;letter-spacing:.28em;text-transform:uppercase;
-    color:var(--ha-teal-deep);
+    color:var(--ha-teal-ink);
   }
   .ha-team .ha-eyebrow::before{content:"";width:42px;height:1px;background:var(--ha-teal);}
-  .ha-team .ha-eyebrow.on-dark{color:var(--ha-teal);}
+  .ha-team .ha-eyebrow.on-dark{color:var(--ha-ash);}
   .ha-team .ha-eyebrow.on-dark::before{background:var(--ha-teal);}
 
   /* ===== HERO ===== */
@@ -144,7 +262,7 @@
   .ha-team .ha-ed-role{
     font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:500;
     font-size:clamp(16px, 1.6vw, 19px);letter-spacing:.02em;
-    color:var(--ha-teal);margin-bottom:28px;
+    color:var(--ha-teal-bright);margin-bottom:28px;
   }
   .ha-team .ha-ed-bio{
     font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:16px;line-height:1.75;
@@ -433,7 +551,7 @@
   .ha-team .ha-ed .ha-eyebrow{
     display:inline-flex;align-items:center;gap:0;
     font-size:12.5px;letter-spacing:.26em;
-    color:var(--ha-teal);font-weight:700;
+    color:var(--ha-ash);font-weight:700;
     text-transform:uppercase;
     padding:10px 20px;
     border:1px solid rgba(132,169,140,.55);
@@ -939,7 +1057,7 @@
    inside a code block. Hide the progress line; rebuild the pill/tab
    nav as a sticky overlay (see build_squarespace.py). */
 .ha-progress { display: none !important; }
-.ha-issues, .ha-tax, .ha-food, .ha-housing, .ha-transit, .ha-wages { overflow: clip !important; }
+.ha-issues, .ha-topic { overflow: clip !important; }
 /* absolute at FIRST PAINT so the (invisible) bar contributes zero
    flow height from the very first frame \2014  the script below converts
    it to sticky + negative margin, which also nets to zero flow, so
@@ -979,8 +1097,7 @@
    desktop already spans full width. */
 @media (max-width:1080px){
   .ha-mission, .ha-story, .ha-issues, .ha-team, .ha-board,
-  .ha-tax, .ha-food, .ha-housing, .ha-transit, .ha-wages,
-  .ha-pub, .ha-news {
+  .ha-topic, .ha-pub, .ha-news {
     width: 100vw !important;
     max-width: 100vw !important;
     margin-left: calc(50% - 50vw) !important;

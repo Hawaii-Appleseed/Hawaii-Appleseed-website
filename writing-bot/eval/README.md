@@ -53,12 +53,3 @@ One JSON object per line:
 | 2026-05-30 | retrieval-only | 6/12 (50%) / 21/32 (66%) | After bill-number tokenization fix (`_BILL_SPACE_RE` + `_apply_bill_boost`). No general-eval regression; bill-number lookup now exact-match correct (verified separately via `ui_probe`). |
 | 2026-06-01 | retrieval-only | 8/16 (50%) / 28/41 (68%) | Golden expanded to 16 cases (added 2 alias + 2 ranking probes). Pre-A1 numbers under new harness. |
 | 2026-06-01 | retrieval-only | 9/16 (56%) / 29/41 (71%) | A1: bill-form normalization in `_tokenize` ("House Bill 1800" / "house-bill-1800" → "hb1800") + query-side acronym alias map (GET, SNAP, CTC, EITC, TAT, TANF, TOD, PFML, ADA, LIH, LIHTC). `alias-hb1800-housebill` now ranks canonical doc #1. `alias-get-grocery-tax` still fails on a `general-excise` substring that doesn't exist in any filename. |
-
-## UI testing (search.py)
-
-`eval/ui_probe.py` drives the real Streamlit app headlessly via `streamlit.testing.v1.AppTest`
-(simulates typed queries + filter/toggle changes, asserts on rendered elements). Single or batch mode;
-forces local embeddings. Two workflow harnesses exercise it across relevance / exact-match / filters /
-robustness / links-render dimensions (`eval/search_analysis_workflow.js` is the lean, contention-free
-variant — collect probe data once, fan out judgment). 2026-05-30 sweep: 0 exceptions across 36 edge-case
-scenarios; bill-number search bug found + fixed; all other dimensions clean.

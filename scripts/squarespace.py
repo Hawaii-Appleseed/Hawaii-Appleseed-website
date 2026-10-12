@@ -12,10 +12,9 @@ Usage:
   python3 scripts/squarespace.py our-team --no-copy rebuild only
   python3 scripts/squarespace.py --status           which live pages have drifted
   python3 scripts/squarespace.py our-team --status  just that one
-  python3 scripts/squarespace.py our-team --go      rebuild + push + wait for
-                                                    Pages + self-driving snippet
-                                                    on the clipboard + open the
-                                                    Squarespace editor in Chrome
+  python3 scripts/squarespace.py our-team --go      rebuild + push + paste into
+                                                    the open Squarespace editor
+                                                    + verify the live page
 
 Target resolution (first match wins):
 
@@ -326,87 +325,6 @@ def pbcopy(path):
     return len(data)
 
 
-# ---------------------------------------------------------------------------
-# --snippet: browser-console paste (see README "Pasting from the browser")
-# ---------------------------------------------------------------------------
-
-# One self-contained expression, pasted into the DevTools console (or run by
-# Claude via the Chrome MCP) while a Code Block editor is open. It pulls the
-# payload straight from GitHub Pages, so the bytes never travel through the
-# clipboard or a chat transcript, and size is irrelevant.
-#
-# Why it is built this way (all four verified live in the 7.1 editor):
-#   • Squarespace's code editor is CodeMirror 6 and exposes no EditorView on
-#     the DOM, so the document is replaced through the two events CM6 itself
-#     listens for: a synthetic Mod-A keydown (its keymap runs selectAll on the
-#     STATE, which a DOM Selection cannot do — CM6 only renders the visible
-#     lines) followed by a synthetic paste carrying a DataTransfer.
-#   • A synthetic paste does register with Squarespace's change tracking: the
-#     SAVE button lights up, so the edit is real and will persist.
-#   • A real Cmd+V does NOT work — the automation layer's key events do not
-#     drive a native clipboard paste.
-#   • navigator.clipboard.readText() is a dead end: it needs a focused tab AND
-#     a one-time permission grant, and hangs the tab while that prompt is up.
-SNIPPET_JS = (
-    "await (async () => {"
-    "const t = await fetch('%s?t=' + Date.now(), {cache:'no-store'})"
-    ".then(r => r.ok ? r.text() : Promise.reject('HTTP ' + r.status));"
-    "const c = document.querySelector('.cm-content');"
-    "if (!c) throw new Error('No code editor found - open the Code Block editor first');"
-    "c.focus();"
-    "c.dispatchEvent(new KeyboardEvent('keydown',{key:'a',code:'KeyA',metaKey:true,"
-    "keyCode:65,which:65,bubbles:true,cancelable:true}));"
-    "const d = new DataTransfer(); d.setData('text/plain', t);"
-    "c.dispatchEvent(new ClipboardEvent('paste',{clipboardData:d,bubbles:true,cancelable:true}));"
-    "return 'pasted ' + t.length + ' chars';})()"
-)
-
-
-def pages_url(rel_out):
-    return bs.ASSET_BASE + rel_out.replace(os.sep, "/")
-
-
-def check_pages_matches(rel_out):
-    """True if GitHub Pages already serves the local bytes. The snippet reads
-    from Pages, so an unpushed payload would silently paste the OLD content —
-    exactly the stale-paste failure this pipeline exists to prevent."""
-    import hashlib
-    import urllib.request
-    local = hashlib.sha256(open(os.path.join(ROOT, rel_out), "rb").read()).hexdigest()
-    try:
-        with urllib.request.urlopen(pages_url(rel_out) + "?t=check", timeout=20) as r:
-            remote = hashlib.sha256(r.read()).hexdigest()
-    except Exception as e:
-        return None, "could not reach GitHub Pages (%s)" % e
-    return local == remote, None
-
-
-def emit_snippet(rel_out):
-    """Console snippet — NAVIGATION ONLY.
-
-    This used to paste the payload as well, which was wrong: a synthetic paste
-    never survives the save (see the NAV_JS comment). It now only opens the
-    right Code Block; the paste itself must be a real Cmd+V from the keyboard.
-    Prefer `--go`, which does the whole thing."""
-    path, title = live_path(rel_out), None
-    for t, out in builder_targets().items():
-        if os.path.join("squarespace-ready", out) == rel_out:
-            title = page_title(t)
-            break
-    if not (path and title):
-        print("No known live path / sidebar title for %s." % rel_out, file=sys.stderr)
-        return
-    with open(os.path.join(ROOT, rel_out), "rb") as f:
-        payload = f.read()
-    subprocess.run(["pbcopy"], input=payload, check=True)
-    print("%s (%d KB) is on the clipboard." % (rel_out, len(payload) // 1024))
-    print("\nRun this in the DevTools console on %s/config/pages to open the"
-          " right Code Block:\n" % SITE)
-    print(NAV_JS % {"path": path, "title": title})
-    print("\nThen in the editor: Cmd+A, then a REAL Cmd+V, then SAVE.")
-    print("A scripted paste stages perfectly and SILENTLY FAILS to save.")
-
-
 def _payload_present(body, live):
     """Is *some* version of this payload on the page? Samples verbatim chunks
     from the payload's interior: a drifted paste still shares long stretches
@@ -601,24 +519,22 @@ def status(targets=None):
 #
 #   python3 scripts/squarespace.py our-team --go
 #
-# rebuild -> commit + push the payload -> wait until GitHub Pages actually
-# serves the new bytes -> self-driving console snippet on the clipboard ->
-# open Squarespace's Pages panel in your real Chrome. All that is left is to
-# paste the snippet in the console and click SAVE.
+# rebuild -> commit + push the payload -> payload on the clipboard -> drive
+# your real Chrome to the page's Code Block -> real Cmd+V -> SAVE -> check the
+# live page.
 #
 # There is no per-page deep link to open instead: Squarespace 7.1 keeps the URL
 # at /config/pages no matter which page is selected, and /config/<slug>
-# redirects to Home (both verified live). So the snippet navigates for you — it
+# redirects to Home (both verified live). So NAV_JS navigates for you — it
 # clicks the page in the Pages sidebar by title, presses EDIT, and opens the
 # Code Block. Any step it cannot do it names, and you do that one by hand and
-# re-run the snippet; every later step still runs.
+# re-run; every later step still runs.
 
 SITE = "https://hiappleseed.org"
 CONFIG_PAGES = SITE + "/config/pages"
 
-# Same paste mechanics as SNIPPET_JS (see the comment there for why CodeMirror
-# needs a synthetic Mod-A + paste), preceded by the three navigation steps that
-# used to be manual. All four are verified live in the 7.1 editor:
+# The three navigation steps that used to be manual. All verified live in the
+# 7.1 editor:
 #   • Sidebar rows respond to a synthetic pointer/mouse sequence (a bare
 #     .click() on the text node does NOT select the page).
 #   • The EDIT button responds to a plain .click().
@@ -857,17 +773,32 @@ def open_admin():
                    check=False)
 
 
+# Pages-sidebar title per target. Filename != live slug != sidebar title, so
+# this is the mapping; anything missing falls back to the live site's title.
+PAGE_TITLES = {
+    "index": "Home",
+    "home": "Home",
+    "our-mission": "Our Mission",
+    "our-story": "Our History",
+    "our-team": "Our Team",
+    "board-of-directors": "Board of Directors",
+    "issues": "Issues",
+    "taxes-budget": "Taxes & Budget",
+    "food-security": "Food Equity",
+    "housing": "Affordable Housing",
+    "transportation": "Transportation Equity",
+    "wages-labor": "Wages & Labor",
+    "publications": "Publications",
+    "in-the-news": "In the News",
+    "support": "Support",
+}
+
+
 def page_title(target):
-    """The page's title as it appears in the Pages sidebar. Filename != live
-    slug != sidebar title, so publish_squarespace.py's PAGE_TITLES is the
-    mapping; anything missing falls back to the live site's own title."""
+    """The page's title as it appears in the Pages sidebar."""
     stem = os.path.splitext(os.path.basename(target.rstrip("/")))[0]
-    try:
-        import publish_squarespace as ps
-        if stem in ps.PAGE_TITLES:
-            return ps.PAGE_TITLES[stem]
-    except Exception:
-        pass
+    if stem in PAGE_TITLES:
+        return PAGE_TITLES[stem]
     try:
         import urllib.request
         with urllib.request.urlopen("%s/%s?format=json" % (SITE, stem), timeout=15) as r:
@@ -882,8 +813,8 @@ def _git(*args):
 
 
 def ensure_pushed(rel_out, sources):
-    """Commit + push the payload (and the source it was built from) so that the
-    snippet, which reads from GitHub Pages, cannot paste stale content."""
+    """Commit + push the payload (and the source it was built from) so the repo
+    always holds what went live."""
     paths = [p for p in [rel_out] + list(sources)
              if p and os.path.exists(os.path.join(ROOT, p))]
     _git("add", "--", *paths)
@@ -902,7 +833,7 @@ def ensure_pushed(rel_out, sources):
         p = _git("push")
         if p.returncode:
             print(p.stdout + p.stderr, file=sys.stderr)
-            print("push failed — fix that first; the snippet reads from Pages.",
+            print("push failed — fix that first.",
                   file=sys.stderr)
             return False
         print("pushed.")
@@ -997,8 +928,6 @@ Then check it landed:  python3 scripts/squarespace.py %s --status""" % target)
     return 1
 
 
-
-
 def copy_and_report(rel_out):
     size = pbcopy(os.path.join(ROOT, rel_out))
     print("\n%s (%d KB) is on the clipboard." % (rel_out, round(size / 1024)))
@@ -1020,13 +949,12 @@ def list_targets():
 
 
 def main(argv):
-    snippet = "--snippet" in argv
     go_mode = "--go" in argv
     status_mode = "--status" in argv
     force = "--force" in argv
     push = "--no-push" not in argv
-    copy = "--no-copy" not in argv and not snippet and not go_mode
-    argv = [a for a in argv if a not in ("--no-copy", "--snippet", "--go",
+    copy = "--no-copy" not in argv and not go_mode
+    argv = [a for a in argv if a not in ("--no-copy", "--go",
                                          "--no-push", "--status", "--force")]
 
     if status_mode and (not argv or argv[0] == "--all"):
@@ -1076,9 +1004,7 @@ def main(argv):
         return status([target])
     if go_mode:
         return go(target, out, sources, push=push, force=force)
-    if snippet:
-        emit_snippet(out)
-    elif copy:
+    if copy:
         copy_and_report(out)
     else:
         print(out)

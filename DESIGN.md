@@ -2,7 +2,7 @@
 
 The brand spec for the site and anything Appleseed-branded. **Tokens live in [`assets/tokens.css`](assets/tokens.css)** on `:root`; every page links it before its own `<style>`. Page CSS uses `var(--ha-*)` only — **no raw hex/rgba and no px `font-size`** (CI lints changed lines; see [Checks](#checks)). Need a new value? Add a token there, then use it. Best single exemplar of components: **`taxes-budget.html`**.
 
-Source of truth upstream: *Hawaiʻi Appleseed Brand Guide (April 2026 v1.0)*. A portable copy of this guide for Claude.ai lives in `brand-skill/appleseed-brand/`; `python3 scripts/build_brand_skill.py` copies this file and `tokens.css` into it and rebuilds the zip (CI fails if you forget).
+Source of truth upstream: *Hawaiʻi Appleseed Brand Guide (April 2026 v1.0)*. A portable copy of this guide for Claude lives in the `appleseed-brand` skill (shipped with the house skills; `brand-skill/appleseed-brand.zip` is the Claude.ai upload); `python3 scripts/build_brand_skill.py` copies this file and `tokens.css` into it and rebuilds the zip (CI fails if you forget).
 
 ## Palette
 
@@ -15,18 +15,21 @@ Source of truth upstream: *Hawaiʻi Appleseed Brand Guide (April 2026 v1.0)*. A 
 --ha-ash-light:  #E5E9E2;   /* light fills, callouts */
 --ha-bg:         #F4F7F4;   /* page tint */
 --ha-white:      #FFFFFF;
+--ha-teal-ink:    #3F5F57;  /* Deep Teal darkened — small text on Ash, Ash Light, issue tints */
+--ha-teal-bright: #B0C8B4;  /* Teal lightened — small eyebrows/labels on Charcoal or Slate */
 --ha-rule:       rgba(53,79,82,.14);    /* hairline borders on light — Slate @ 14% */
 --ha-rule-dark:  rgba(202,210,197,.18); /* hairlines on dark — Ash @ 18% */
 --ha-rule-light: rgba(202,210,197,.30); /* stronger hairlines on dark */
 --ha-ink-muted:  rgba(47,62,70,.78);    /* lede paragraphs */
---ha-ink-subtle: rgba(47,62,70,.65);    /* stat labels, source notes — fails AA small text, see Contrast */
+--ha-ink-subtle: rgba(47,62,70,.74);    /* stat labels, source notes, dates — lightest text that passes AA */
+--ha-ink-on-dark-muted: rgba(255,255,255,.7); /* secondary text on Charcoal/Slate */
 /* Issue tints: --ha-tint-tax #F2F4EF · -food #E6EFE9 · -housing #D9E2D8 · -transit #E2E8E8 · -wages #EDEDE5 */
 /* Motion: --ha-ease-out cubic-bezier(.22,.61,.36,1) · --ha-dur-fast .2s · --ha-dur-base .4s · --ha-dur-slow .6s */
 ```
 
 **Naming trap:** `--ha-teal-deep` (#52796F) is the *darker* one and the workhorse — it outnumbers `--ha-teal` about 4:1.
 
-**Squarespace exception:** `squarespace-ready/` and the `*squarespace*` inject snippets are pasted into Squarespace, which can't load `assets/tokens.css`, so they keep an inline token block scoped to the page namespace class (`.ha-tax { --ha-charcoal: … }`). Keep those copies in step with `tokens.css` by hand.
+**Squarespace exception:** Squarespace can't load `assets/tokens.css`, so `scripts/build_squarespace.py` inlines it into every `squarespace-ready/` payload — nothing to keep in step by hand. The hand-authored `*squarespace*` inject snippets still carry their own inline copies.
 
 **Consolidation (Oct 2026, branch `design-tokens`):** the per-page pasted blocks were deleted. Drift resolved to the values above: `--ha-rule` .18→.14 (board, issues, our-mission(-light), our-story(-light), our-team); `--ha-bg` #F6F8F5→#F4F7F4 (publications, addon-policies). `index.html`, `support.html`, `preview/` and the hero prototypes moved from the old unprefixed names (`--teal --deep-teal --dark-slate --charcoal --ash --ash-light --cream --white --ease-out --dur-*`) to `--ha-*`; `--cream` #F4F7F5→`--ha-bg` #F4F7F4 and `--ash-light` #E8EDE6→#E5E9E2.
 
@@ -156,13 +159,21 @@ Rules: **label series directly** (end-of-line labels, in-bar values) rather than
 
 WCAG 2.2 AA, measured from the tokens by `python3 scripts/check_design_tokens.py` (alpha tokens composited on the background). Normal text needs 4.5:1; large text (≥24px, or ≥18.66px bold) and non-text UI/chart marks need 3:1. **Approved** = every `pass` row below for its role. The table is generated (`--write`); CI's `--check` fails if a token change moves a ratio or verdict, so an approval can't lapse silently.
 
-**Flagged, not fixed.** These are current brand usages that fail; colours were deliberately left alone because changing a brand value is a brand decision:
-- **Charcoal on Teal** pill buttons (4.23:1) — the 13.5px label is not "large". Options: 18.66px bold label, or a darker fill.
-- **`--ha-ink-subtle` (Charcoal @ 65%)** stat labels and source notes (3.95 on white, 3.82 on tint), and the `.55` source notes on the issue pages are lower still. `--ha-ink-muted` (.78) passes; use it for anything small.
-- **Deep Teal small text on Ash Light and the food/housing/wages tints** (3.66–4.14). Fine for headlines ≥24px; eyebrows on those fills should use Charcoal or Slate.
-- **Teal (`#84A98C`) on dark** for eyebrows: passes on nothing as small text (4.23 on Charcoal, 3.36 on Slate). Large text on Charcoal is fine; small eyebrows on dark should use Ash.
-- **Teal on white** fails even as a non-text mark (2.61) — chart series need a label or outline (see Chart palette); never use it for text on light.
-- **Deep Teal on Charcoal** (2.28) — never.
+**Text under 24px uses a text-safe token.** The brand teals fail AA as small text on several fills, so the brand values stay as they are and two derived shades carry small text instead (2026-10-11):
+
+| Small text on… | Use | Not |
+|---|---|---|
+| White, `--ha-bg` | `--ha-teal-deep` | `--ha-teal` (2.61) |
+| Ash, Ash Light, issue tints, pale teal chips | `--ha-teal-ink` | `--ha-teal-deep` (3.1–4.3) |
+| Charcoal, Slate | `--ha-teal-bright` or `--ha-ash` | `--ha-teal` (3.4–4.2) |
+| Secondary text on dark | `--ha-ink-on-dark-muted` / `--ha-ash` | white below 70% |
+| Labels, dates, source notes on light | `--ha-ink-subtle` (.74) | Charcoal below 74% |
+
+Brand teals at 24px and up (headlines, pull-quotes, big stats) are fine as they are. Don't fade small text with `opacity`; it multiplies into the contrast just like an alpha colour.
+
+**Still flagged:** **Charcoal on Teal** pill buttons (4.23:1). The 13–14px label isn't "large"; the fixes (an 18.66px bold label, or a different fill) change how the primary button looks, so they're a brand decision. The remaining rows below are the raw brand pairs the table above routes around.
+
+**Focus and motion baseline.** `tokens.css` ends with a site-wide `:focus-visible` ring (2px `currentColor`, 3px offset) and a `prefers-reduced-motion` rule that cuts CSS animations and transitions. Both are scoped to `ha-`/`px-` roots at zero specificity, so a component's own focus style still wins and Squarespace's chrome is untouched. JS-driven motion still needs its own `matchMedia('(prefers-reduced-motion: reduce)')` check.
 
 <!-- contrast-table:start -->
 | Foreground | Background | Role | Ratio | AA | Used for |
@@ -180,21 +191,31 @@ WCAG 2.2 AA, measured from the tokens by `python3 scripts/check_design_tokens.py
 | `--ha-charcoal` | `--ha-white` | normal text | 11.06:1 | pass | body text |
 | `--ha-ink-muted` | `--ha-bg` | normal text | 5.43:1 | pass | lede on page tint |
 | `--ha-ink-muted` | `--ha-white` | normal text | 5.69:1 | pass | lede paragraph |
+| `--ha-ink-on-dark-muted` | `--ha-charcoal` | normal text | 6.36:1 | pass | secondary text on dark |
+| `--ha-ink-on-dark-muted` | `--ha-slate` | normal text | 5.28:1 | pass | secondary text on dark gradient end |
+| `--ha-ink-subtle` | `--ha-bg` | normal text | 4.86:1 | pass | stat labels on tint |
+| `--ha-ink-subtle` | `--ha-white` | normal text | 5.07:1 | pass | stat labels, source notes |
 | `--ha-slate` | `--ha-bg` | normal text | 8.14:1 | pass | secondary text on tint |
 | `--ha-slate` | `--ha-tint-tax` | normal text | 7.93:1 | pass | accent on tax card |
 | `--ha-slate` | `--ha-tint-transit` | normal text | 7.08:1 | pass | accent on transit card |
 | `--ha-slate` | `--ha-white` | normal text | 8.78:1 | pass | secondary text |
+| `--ha-teal-bright` | `--ha-charcoal` | normal text | 6.20:1 | pass | eyebrow on dark |
+| `--ha-teal-bright` | `--ha-slate` | normal text | 4.92:1 | pass | eyebrow on dark gradient end |
 | `--ha-teal-deep` | `--ha-bg` | normal text | 4.50:1 | pass | links/eyebrows on page tint |
 | `--ha-teal-deep` | `--ha-white` | large text | 4.86:1 | pass | headline accent |
 | `--ha-teal-deep` | `--ha-white` | normal text | 4.86:1 | pass | links, eyebrows, key numbers |
 | `--ha-teal-deep` | `--ha-white` | non-text / UI | 4.86:1 | pass | primary chart series, focus ring |
+| `--ha-teal-ink` | `--ha-ash` | normal text | 4.53:1 | pass | eyebrow on Ash |
+| `--ha-teal-ink` | `--ha-ash-light` | normal text | 5.72:1 | pass | eyebrow in callout |
+| `--ha-teal-ink` | `--ha-tint-food` | normal text | 5.99:1 | pass | accent on food card |
+| `--ha-teal-ink` | `--ha-tint-housing` | normal text | 5.30:1 | pass | accent on housing card |
+| `--ha-teal-ink` | `--ha-tint-wages` | normal text | 5.98:1 | pass | accent on wages card |
+| `--ha-teal-ink` | `--ha-white` | normal text | 7.03:1 | pass | small teal text (any light fill) |
 | `--ha-white` | `--ha-charcoal` | normal text | 11.06:1 | pass | text on dark section |
 | `--ha-white` | `--ha-slate` | normal text | 8.78:1 | pass | text on dark gradient end |
 | `--ha-white` | `--ha-teal-deep` | normal text | 4.86:1 | pass | white on deep-teal fill |
 | `--ha-ash` | `--ha-white` | non-text / UI | 1.55:1 | **FAIL** (needs 3.0:1) | tertiary chart series (avoid alone) |
 | `--ha-charcoal` | `--ha-teal` | normal text | 4.23:1 | **FAIL** (needs 4.5:1) | primary pill button label |
-| `--ha-ink-subtle` | `--ha-bg` | normal text | 3.82:1 | **FAIL** (needs 4.5:1) | stat labels on tint |
-| `--ha-ink-subtle` | `--ha-white` | normal text | 3.95:1 | **FAIL** (needs 4.5:1) | stat labels, source notes |
 | `--ha-teal` | `--ha-charcoal` | normal text | 4.23:1 | **FAIL** (needs 4.5:1) | eyebrow on dark |
 | `--ha-teal` | `--ha-slate` | normal text | 3.36:1 | **FAIL** (needs 4.5:1) | eyebrow on dark gradient end |
 | `--ha-teal` | `--ha-white` | large text | 2.61:1 | **FAIL** (needs 3.0:1) | teal headline on light |
@@ -214,14 +235,14 @@ WCAG 2.2 AA, measured from the tokens by `python3 scripts/check_design_tokens.py
 |---|---|---|
 | `python3 scripts/lint_design_tokens.py [--base origin/main]` | New raw hex/rgba/hsl colours or px `font-size` in **changed lines** of `*.html`/`*.css` (excludes `tokens.css`, `squarespace-ready/`, `*squarespace*` snippets). Silence a deliberate exception with `/* design-lint: allow */` on the line. | `design-system.yml`, every PR |
 | `python3 scripts/check_design_tokens.py --check` | Contrast table above is current; chart palettes stay CVD-safe. | `design-system.yml` |
-| `python3 scripts/build_brand_skill.py --check` | `brand-skill/appleseed-brand/` and its zip match this file + `tokens.css`; every hex in its `SKILL.md` is a token. | `design-system.yml` |
+| `python3 scripts/build_brand_skill.py --check` | The `appleseed-brand` skill and its zip match this file + `tokens.css`; every hex in its `SKILL.md` is a token. | `design-system.yml` |
 | `uv run --with python-pptx --with python-docx scripts/build_brand_templates.py` | Regenerates the branded `.pptx`/`.docx` templates in the skill from the tokens. | — (run by hand after a palette change) |
 
 ## Components
 
-**Naming:** BEM with a per-page namespace — `.ha-{slug}__{block}[-{element}][--{modifier}]`. Namespaces: `ha-tax` `ha-housing` `ha-food` `ha-transit` `ha-wages` `ha-issues` `ha-pub`. Shared chrome uses flat `px-*` (`px-announce`, `px-nav`, `px-links`, `px-dropdown`, `px-donate-btn`, `px-footer`).
+**Naming:** BEM with a per-page namespace — `.ha-{slug}__{block}[-{element}][--{modifier}]`. Namespaces: `ha-topic` (all five issue deep-dives, styled by `assets/issue-page.css`) `ha-issues` `ha-pub`. Shared chrome uses flat `px-*` (`px-announce`, `px-nav`, `px-links`, `px-dropdown`, `px-donate-btn`, `px-footer`).
 
-Anchor rules need a specificity boost to survive Squarespace: `.ha-tax a.ha-tax__cta-btn`, not `.ha-tax__cta-btn`.
+Anchor rules need a specificity boost to survive Squarespace: `.ha-topic a.ha-topic__cta-btn`, not `.ha-topic__cta-btn`.
 
 **Eyebrow** — the most repeated pattern (8 variants):
 ```css
@@ -266,7 +287,7 @@ __bar-note, __compare-source {
   text-align:center; font-size:13–14px; font-style:italic;
   color:rgba(47,62,70,.55–.7); max-width:560px; margin:0 auto; }
 ```
-Real markup: `<p class="ha-tax__bar-note">Source: Institute on Taxation and Economic Policy, <em>Who Pays?</em> — Hawaiʻi state and local taxes, 2024.</p>`
+Real markup: `<p class="ha-topic__bar-note">Source: Institute on Taxation and Economic Policy, <em>Who Pays?</em> — Hawaiʻi state and local taxes, 2024.</p>`
 
 **Glossary tooltip** — `__term` (`border-bottom:1px dotted; cursor:help`) + `__term-tip` (charcoal bubble, 260px → 220px mobile, 12.5px → 12px), on hover **and** `:focus` with `tabindex="0"`. Copy this accessibility pattern.
 

@@ -206,1725 +206,127 @@ body { font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-se
 <div class="px-spacer-top"></div>
 
 <!-- ============================================================
-     BEGIN ha-transit
-     Copy everything below this comment (up to END ha-transit)
+     BEGIN ha-topic
+     Copy everything below this comment (up to END ha-topic)
      into a Squarespace Code Block on the Transportation page.
      ============================================================ -->
 
-<!-- Glossary tooltip styles. These lived OUTSIDE the BEGIN/END markers, so
-     the builder never shipped them. Without .ha-term-tip{position:absolute;
-     opacity:0}, every tooltip rendered as inline text right after its term —
-     which is what produced "SNAPSNAP", "cost-burdenedCost-burdened",
-     "fare-freeFare-free" and "paycheckPaycheck to paycheck" on the live site.
-     Keep them inside the markers. -->
-<style id="ha-term-css">
-.ha-term{position:relative;display:inline;border-bottom:1px dotted #52796F;cursor:help;color:inherit;font-style:inherit;}
-.ha-term:focus{outline:2px solid #84A98C;outline-offset:2px;border-radius:2px;}
-.ha-term-tip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);z-index:80;width:250px;max-width:76vw;background:#2F3E46;color:#fff;padding:10px 14px;border-radius:6px;font-family:OkinaPoppins, 'Poppins',sans-serif;font-style:normal;font-weight:400;font-size:12.5px;letter-spacing:.01em;line-height:1.5;text-align:left;text-transform:none;opacity:0;pointer-events:none;box-shadow:0 10px 26px rgba(47,62,70,.28);transition:opacity .2s,transform .2s;white-space:normal;}
-.ha-term-tip::after{content:"";position:absolute;bottom:-5px;left:50%;transform:translateX(-50%) rotate(45deg);width:10px;height:10px;background:#2F3E46;}
-.ha-term:hover .ha-term-tip,.ha-term:focus .ha-term-tip{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
-.ha-term-tip strong{color:#84A98C;font-weight:700;}
-@media (max-width:700px){.ha-term-tip{width:210px;font-size:12px;}}
-</style>
-
-<!-- Accordion (Policy details / Show more) styles. These lived OUTSIDE the
-     BEGIN/END markers, so the builder never shipped them: on Squarespace the
-     chevrons rendered at default SVG size and the panels were permanently
-     open (no 0fr collapse, no toggle JS). Keep them inside the markers. -->
-<style id="ha-acc-css">
-.ha-acc-btn{display:inline-flex;align-items:center;gap:7px;margin-top:10px;background:none;border:0;cursor:pointer;font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#52796F;padding:6px 0;}
-.ha-acc-btn:hover{color:#2F3E46;}
-.ha-acc-chev{width:13px;height:13px;flex:none;transition:transform .25s ease;}
-.ha-acc-btn[aria-expanded="true"] .ha-acc-chev{transform:rotate(180deg);}
-.ha-acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease;}
-.ha-acc-btn[aria-expanded="true"]+.ha-acc-panel{grid-template-rows:1fr;}
-.ha-acc-panel>.ha-acc-inner{overflow:hidden;min-height:0;}
-@media (prefers-reduced-motion:reduce){.ha-acc-panel{transition:none;}}
-</style>
+<link rel="stylesheet" href="assets/issue-page.css">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap">
 
-<style>
-.ha-transit {
 
-  font-family:OkinaPoppins, 'Poppins',sans-serif;
-  color:var(--ha-charcoal);
-  line-height:1.6;
-}
-.ha-transit a { color:inherit; }
-.ha-transit * { box-sizing:border-box; }
-.ha-transit img { max-width:100%; }
-
-/* ===== Hero + tab-bar wrapper (single continuous gradient) ===== */
-.ha-transit__top {
-  background:
-    url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600' width='600' height='600'%3E%3Cg fill='none' stroke='%2384A98C' stroke-width='0.8'%3E%3Cpath d='M0 100 Q150 50 300 100 T600 100' opacity='0.10'/%3E%3Cpath d='M0 180 Q150 130 300 180 T600 180' opacity='0.09'/%3E%3Cpath d='M0 280 Q150 230 300 280 T600 280' opacity='0.08'/%3E%3Cpath d='M0 380 Q150 330 300 380 T600 380' opacity='0.07'/%3E%3Cpath d='M0 480 Q150 430 300 480 T600 480' opacity='0.06'/%3E%3Cpath d='M0 560 Q150 510 300 560 T600 560' opacity='0.05'/%3E%3C/g%3E%3C/svg%3E"),
-    linear-gradient(135deg, var(--ha-charcoal) 0%, var(--ha-slate) 100%);
-  background-repeat:repeat, no-repeat;
-  background-size:700px auto, cover;
-  position:relative;
-}
-.ha-transit__top::after {
-  content:"";
-  position:absolute;
-  left:0; right:0; bottom:-1px;
-  height:1px;
-  background:linear-gradient(to right,
-    transparent 0%,
-    rgba(132,169,140,.42) 22%,
-    rgba(132,169,140,.42) 78%,
-    transparent 100%);
-  z-index:2;
-  pointer-events:none;
-}
-
-/* ===== Hero (compact) ===== */
-.ha-transit__hero {
-  background:transparent;
-  color:#fff;
-  padding:72px 28px 56px;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-}
-@media (max-width:700px) {
-  .ha-transit__hero { padding:40px 20px 36px; }
-}
-.ha-transit__hero-inner { max-width:900px; margin:0 auto; position:relative; z-index:1; }
-.ha-transit__hero h1 {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
-  font-size:78px; line-height:1; letter-spacing:-.035em;
-  margin:0 0 22px;
-  color:#fff;
-}
-.ha-transit__hero h1 .ha-transit__hero-amp {
-  font-weight:400;
-  color:rgba(255,255,255,.78);
-  letter-spacing:-.025em;
-  margin-left:.12em;
-}
-.ha-transit__hero-rule {
-  width:56px; height:3px;
-  background:var(--ha-teal);
-  border-radius:2px;
-  margin:0 auto 22px;
-}
-.ha-transit__hero-sub {
-  font-size:17px; line-height:1.6;
-  color:rgba(202,210,197,.86);
-  max-width:600px; margin:0 auto;
-  text-align:center;
-}
-
-/* ===== Tab bar (extends hero, dark) ===== */
-.ha-transit__tab-bar {
-  background:transparent;
-  padding:0 28px 32px;
-  display:flex; justify-content:center; align-items:flex-start;
-  position:relative;
-}
-
-/* Research & News pill anchored to right of tab bar — glassy to match tab pill */
-.ha-transit a.ha-transit__bar-pill {
-  position:absolute;
-  right:28px; top:0;
-  height:56px;
-  display:inline-flex; align-items:center; gap:8px;
-  padding:0 22px 0 20px;
-  background:rgba(0,0,0,.18);
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:999px;
-  backdrop-filter:blur(4px);
-  -webkit-backdrop-filter:blur(4px);
-  font-family:OkinaManrope, 'Manrope',sans-serif;
-  font-size:13.5px; font-weight:600;
-  letter-spacing:.01em;
-  color:rgba(255,255,255,.78);
-  text-decoration:none;
-  white-space:nowrap;
-  transition:color .22s, border-color .22s, background .22s, gap .22s;
-}
-.ha-transit a.ha-transit__bar-pill:hover {
-  color:#fff;
-  border-color:rgba(255,255,255,.28);
-  background:rgba(0,0,0,.28);
-  gap:10px;
-}
-.ha-transit a.ha-transit__bar-pill svg {
-  width:13px; height:13px;
-  fill:none; stroke:currentColor;
-  stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;
-  opacity:.85;
-}
-@media (max-width:700px) {
-  .ha-transit a.ha-transit__bar-pill { display:none; }
-}
-.ha-transit__tabs {
-  --tab-w: 150px;
-  position:relative;
-  display:inline-flex; align-items:center;
-  padding:4px;
-  background:rgba(0,0,0,.18);
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:999px;
-  backdrop-filter:blur(4px);
-  -webkit-backdrop-filter:blur(4px);
-}
-.ha-transit__tabs-indicator {
-  position:absolute;
-  top:4px; bottom:4px; left:4px;
-  width:var(--tab-w);
-  background:var(--ha-teal-deep);
-  border-radius:999px;
-  transition:transform 340ms cubic-bezier(.4,0,.2,1), opacity 220ms ease;
-  z-index:0;
-  box-shadow:0 10px 28px rgba(82,121,111,.45), 0 2px 8px rgba(82,121,111,.3);
-}
-.ha-transit button.ha-transit__tab {
-  position:relative; z-index:1;
-  background:none; border:none; padding:0;
-  width:var(--tab-w); height:46px;
-  cursor:pointer;
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:15.5px; letter-spacing:.01em;
-  color:rgba(255,255,255,.6);
-  border-radius:999px;
-  transition:color .22s;
-  white-space:nowrap;
-}
-.ha-transit button.ha-transit__tab.active { color:#fff; cursor:default; }
-.ha-transit button.ha-transit__tab:not(.active):hover { color:rgba(255,255,255,.92); }
-
-.ha-transit a.ha-transit__hero-subscribe {
-  position:absolute; top:18px; right:24px;
-  display:inline-flex; align-items:center; gap:7px;
-  padding:6px 12px 6px 10px;
-  background:transparent;
-  border:1px solid rgba(202,210,197,.18);
-  border-radius:999px;
-  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:12.5px; font-weight:500;
-  letter-spacing:.02em;
-  color:rgba(202,210,197,.72);
-  text-decoration:none;
-  transition:color .18s, border-color .18s, background .18s;
-  z-index:3;
-}
-.ha-transit a.ha-transit__hero-subscribe:hover {
-  color:#fff; border-color:rgba(202,210,197,.5);
-  background:rgba(255,255,255,.05);
-}
-.ha-transit a.ha-transit__hero-subscribe svg { width:13px; height:13px; opacity:.8; }
-
-.ha-transit a.ha-transit__hero-pill {
-  display:inline-flex; align-items:center; gap:8px;
-  padding:8px 18px 8px 14px;
-  background:transparent;
-  border:1px solid rgba(202,210,197,.28);
-  border-radius:999px;
-  font-family:OkinaPoppins, 'Poppins',sans-serif;
-  font-size:13px; font-weight:500;
-  letter-spacing:.02em;
-  color:rgba(202,210,197,.85);
-  text-decoration:none;
-  transition:color .18s, border-color .18s, background .18s, gap .18s;
-}
-.ha-transit a.ha-transit__hero-pill:hover {
-  color:#fff;
-  border-color:rgba(202,210,197,.55);
-  background:rgba(255,255,255,.05);
-  gap:10px;
-}
-.ha-transit a.ha-transit__hero-pill svg {
-  width:13px; height:13px;
-  fill:none; stroke:currentColor;
-  stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;
-  opacity:.85;
-}
-
-/* Back to Issues link (top-left of hero) */
-.ha-transit a.ha-transit__back {
-  position:absolute; top:18px; left:24px;
-  display:inline-flex; align-items:center; gap:6px;
-  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:12.5px; font-weight:500;
-  letter-spacing:.02em;
-  color:rgba(202,210,197,.72);
-  text-decoration:none;
-  padding:6px 12px 6px 8px;
-  border:1px solid rgba(202,210,197,.18);
-  border-radius:999px;
-  transition:color .18s, border-color .18s, background .18s, gap .18s;
-  z-index:3;
-}
-.ha-transit a.ha-transit__back:hover {
-  color:#fff; border-color:rgba(202,210,197,.5);
-  background:rgba(255,255,255,.05); gap:8px;
-}
-.ha-transit a.ha-transit__back svg {
-  width:14px; height:14px;
-  fill:none; stroke:currentColor; stroke-width:1.8;
-  stroke-linecap:round; stroke-linejoin:round;
-}
-
-@media (max-width:700px) {
-  .ha-transit a.ha-transit__back { top:12px; left:14px; font-size:11.5px; padding:5px 10px 5px 7px; }
-  .ha-transit a.ha-transit__hero-subscribe { top:12px; right:14px; font-size:11.5px; padding:5px 10px 5px 8px; }
-}
-
-@media (max-width:700px) {
-  .ha-transit__tabs {
-    --tab-w: 112px; flex-wrap:nowrap;
-    max-width:100%; overflow-x:auto;
-    -webkit-overflow-scrolling:touch; scrollbar-width:none;
-  }
-  .ha-transit__tabs::-webkit-scrollbar { display:none; }
-  .ha-transit button.ha-transit__tab { font-size:13px; height:40px; flex-shrink:0; }
-  .ha-transit__tab-bar { padding-left:16px; padding-right:16px; }
-}
-
-/* ===== Hub strip (3-up command center under hero) ===== */
-.ha-transit__hub {
-  max-width:1100px;
-  margin:0 auto;
-  padding:56px 36px 24px;
-  display:grid; grid-template-columns:repeat(2, 1fr); gap:24px;
-}
-@media (max-width:900px) {
-  .ha-transit__hub { grid-template-columns:1fr; padding:48px 20px 16px; }
-}
-.ha-transit a.ha-transit__hub-card,
-.ha-transit__hub-card {
-  background:#fff;
-  border:1px solid var(--ha-rule);
-  border-radius:6px;
-  padding:26px 24px 22px;
-  display:flex; flex-direction:column; gap:9px;
-  box-shadow:0 12px 32px rgba(47,62,70,.10);
-  transition:transform .2s, box-shadow .2s;
-  text-decoration:none; color:inherit;
-}
-.ha-transit a.ha-transit__hub-card:hover,
-.ha-transit__hub-card:hover {
-  transform:translateY(-2px);
-  box-shadow:0 16px 40px rgba(47,62,70,.14);
-}
-.ha-transit__hub-card-icon {
-  width:38px; height:38px; border-radius:8px;
-  background:rgba(82,121,111,.12);
-  display:flex; align-items:center; justify-content:center;
-  margin-bottom:2px; flex:none;
-}
-.ha-transit__hub-card-icon svg {
-  width:20px; height:20px; stroke:var(--ha-teal-deep);
-  fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;
-}
-.ha-transit__hub-card-eyebrow {
-  font-size:10.5px; font-weight:700;
-  letter-spacing:.2em; text-transform:uppercase;
-  color:var(--ha-teal-deep);
-}
-.ha-transit__hub-card-title {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:18px; line-height:1.3;
-  color:var(--ha-charcoal); margin:0;
-}
-.ha-transit__hub-card-meta {
-  font-size:13px; line-height:1.5;
-  color:rgba(47,62,70,.7); margin:0;
-}
-.ha-transit__hub-card-link {
-  margin-top:auto; padding-top:6px;
-  font-size:13.5px; font-weight:600;
-  color:var(--ha-teal-deep);
-  display:inline-flex; align-items:center; gap:5px;
-  transition:gap .18s;
-}
-.ha-transit__hub-card:hover .ha-transit__hub-card-link { gap:8px; }
-.ha-transit__hub-card-link svg { width:12px; height:12px; }
-
-/* Action card variant */
-.ha-transit a.ha-transit__hub-card--action,
-.ha-transit__hub-card--action {
-  background:var(--ha-teal-deep);
-  border-color:var(--ha-teal-deep);
-  color:#fff;
-}
-.ha-transit__hub-card--action .ha-transit__hub-card-icon { background:rgba(255,255,255,.18); }
-.ha-transit__hub-card--action .ha-transit__hub-card-icon svg { stroke:#fff; }
-.ha-transit__hub-card--action .ha-transit__hub-card-eyebrow { color:rgba(255,255,255,.78); }
-.ha-transit__hub-card--action .ha-transit__hub-card-title { color:#fff; }
-.ha-transit__hub-card--action .ha-transit__hub-card-meta { color:rgba(255,255,255,.82); }
-.ha-transit__hub-card--action .ha-transit__hub-card-link { color:#fff; }
-
-/* ===== Drawer / panels ===== */
-.ha-transit__panels {
-  background:var(--ha-bg);
-  background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 480' width='480' height='480'%3E%3Cg fill='none' stroke='%2352796F' stroke-width='0.7'%3E%3Cpath d='M0 80 Q120 30 240 80 T480 80' opacity='0.16'/%3E%3Cpath d='M0 150 Q120 110 240 150 T480 150' opacity='0.13'/%3E%3Cpath d='M0 240 Q120 200 240 240 T480 240' opacity='0.11'/%3E%3Cpath d='M0 330 Q120 290 240 330 T480 330' opacity='0.09'/%3E%3Cpath d='M0 410 Q120 370 240 410 T480 410' opacity='0.07'/%3E%3C/g%3E%3C/svg%3E");
-  background-repeat:repeat;
-  background-size:560px auto;
-  position:relative;
-  box-shadow:inset 0 8px 18px -10px rgba(47,62,70,.18);
-}
-.ha-transit__panel {
-  display:none;
-  animation:ha-transit-fade .35s ease;
-}
-.ha-transit__panel.active { display:block; }
-@keyframes ha-transit-fade {
-  from { opacity:0; transform:translateY(6px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-
-/* ===== Vision panel (manifesto treatment) ===== */
-.ha-transit__vision {
-  max-width:1000px; margin:0 auto;
-  padding:64px 36px 80px;
-  text-align:center;
-  position:relative;
-}
-.ha-transit__vision-eyebrow {
-  display:inline-block;
-  font-size:11px; font-weight:600;
-  letter-spacing:.22em; text-transform:uppercase;
-  color:var(--ha-teal-deep);
-  background:rgba(82,121,111,.1); padding:5px 12px; border-radius:3px;
-  margin-bottom:22px;
-}
-.ha-transit__vision-quote {
-  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:600;
-  font-size:120px; line-height:.6; letter-spacing:-.02em;
-  color:rgba(82,121,111,.18);
-  margin:0 auto 4px;
-  user-select:none;
-}
-.ha-transit__vision h2 {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
-  font-size:44px; line-height:1.12; letter-spacing:-.02em;
-  color:var(--ha-charcoal);
-  max-width:880px; margin:0 auto 18px;
-}
-.ha-transit__vision h2 em {
-  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:600;
-  color:var(--ha-teal-deep);
-}
-.ha-transit__vision-rule {
-  width:120px; height:8px;
-  margin:0 auto 26px;
-  position:relative;
-  background:
-    linear-gradient(to right,
-      var(--ha-teal-deep) 0, var(--ha-teal-deep) 48px,
-      transparent 48px, transparent 72px,
-      var(--ha-teal-deep) 72px, var(--ha-teal-deep) 120px)
-    center / 100% 1.5px no-repeat;
-}
-.ha-transit__vision-rule::after {
-  content:"";
-  position:absolute;
-  top:50%; left:50%;
-  width:8px; height:8px;
-  background:var(--ha-teal-deep);
-  transform:translate(-50%, -50%) rotate(45deg);
-  border-radius:1px;
-}
-.ha-transit__vision p {
-  font-size:17px; line-height:1.7; color:rgba(47,62,70,.82);
-  max-width:680px; margin:0 auto 18px;
-}
-.ha-transit__vision-pullquote {
-  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:500;
-  font-size:24px; line-height:1.45; letter-spacing:-.01em;
-  color:var(--ha-teal-deep);
-  max-width:720px; margin:36px auto 36px;
-  padding:18px 0 18px 28px;
-  border-left:3px solid var(--ha-teal);
-  text-align:left;
-  position:relative;
-}
-.ha-transit__vision-pullquote::before {
-  content:"\201C";
-  position:absolute;
-  left:14px; top:-6px;
-  font-size:54px; line-height:1;
-  color:rgba(82,121,111,.18);
-  font-family:OkinaPoppins, 'Poppins',sans-serif;
-}
-@media (max-width:700px) {
-  .ha-transit__vision-pullquote { font-size:19px; padding-left:22px; margin:28px auto; }
-}
-.ha-transit__vision-pillars {
-  display:grid; grid-template-columns:repeat(3,1fr);
-  gap:22px; margin-top:52px; text-align:left;
-}
-@media (max-width:800px) {
-  .ha-transit__vision-pillars { grid-template-columns:1fr; gap:18px; }
-}
-.ha-transit__vision-pillar {
-  position:relative;
-  background:rgba(132,169,140,.07);
-  border:1px solid var(--ha-rule);
-  border-radius:6px; padding:28px 26px 26px;
-  transition:transform .25s, box-shadow .25s, background .25s, border-color .25s;
-  opacity:0;
-  animation:ha-transit-pillar-in .6s ease forwards;
-}
-.ha-transit__vision-pillar:nth-child(1) { animation-delay:.08s; }
-.ha-transit__vision-pillar:nth-child(2) { animation-delay:.20s; }
-.ha-transit__vision-pillar:nth-child(3) { animation-delay:.32s; }
-@keyframes ha-transit-pillar-in {
-  from { opacity:0; transform:translateY(14px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-.ha-transit__vision-pillar::before {
-  content:""; position:absolute; top:0; left:0; right:0;
-  height:4px; background:var(--ha-teal-deep); border-radius:6px 6px 0 0;
-}
-.ha-transit__vision-pillar:hover {
-  transform:translateY(-3px);
-  box-shadow:0 14px 36px rgba(82,121,111,.20), 0 4px 12px rgba(47,62,70,.06);
-  background:rgba(132,169,140,.13);
-  border-color:rgba(82,121,111,.28);
-}
-.ha-transit__vision-pillar-icon {
-  width:42px; height:42px;
-  background:#fff; border:1px solid rgba(82,121,111,.18);
-  border-radius:10px;
-  display:flex; align-items:center; justify-content:center;
-  margin-bottom:16px;
-}
-.ha-transit__vision-pillar-icon svg {
-  width:22px; height:22px; stroke:var(--ha-teal-deep);
-  fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round;
-}
-.ha-transit__vision-pillar-eyebrow {
-  font-size:10.5px; font-weight:700;
-  letter-spacing:.18em; text-transform:uppercase;
-  color:var(--ha-teal-deep); margin-bottom:8px;
-}
-.ha-transit__vision-pillar h3 {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:18px; line-height:1.25; color:var(--ha-charcoal);
-  margin:0 0 10px;
-}
-.ha-transit__vision-pillar p {
-  font-size:14px; line-height:1.6; color:rgba(47,62,70,.78);
-  margin:0 0 16px; text-align:left;
-  max-width:none;
-}
-.ha-transit__vision-pillar-stat {
-  border-top:1px solid var(--ha-rule);
-  padding-top:14px;
-  margin-top:auto;
-}
-.ha-transit__vision-pillar-stat-num {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
-  font-size:22px; line-height:1.1; color:var(--ha-charcoal);
-  letter-spacing:-.01em; margin-bottom:3px;
-}
-.ha-transit__vision-pillar-stat-label {
-  font-size:12px; line-height:1.45; color:rgba(47,62,70,.65);
-}
-.ha-transit__vision-pillar-stat-label strong {
-  color:var(--ha-teal-deep); font-weight:600;
-}
-
-/* ===== Stat headline (Overview top) ===== */
-.ha-transit__stat-headline {
-  padding:48px 28px 16px;
-  text-align:center;
-}
-.ha-transit__stat-headline-fy {
-  display:inline-block;
-  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:11px; font-weight:600;
-  letter-spacing:.22em; text-transform:uppercase; color:var(--ha-teal-deep);
-  background:rgba(82,121,111,.1); padding:5px 12px; border-radius:3px;
-  margin-bottom:18px;
-}
-.ha-transit__stat-headline h2 {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
-  font-size:54px; line-height:1.1; letter-spacing:-.02em;
-  color:var(--ha-charcoal); margin:0;
-}
-.ha-transit__stat-headline strong {
-  color:var(--ha-teal-deep); font-weight:800;
-}
-
-/* ===== Priorities panel ===== */
-.ha-transit__opps {
-  max-width:1200px; margin:0 auto;
-  padding:56px 36px;
-}
-.ha-transit__opps-head {
-  text-align:center; max-width:760px; margin:0 auto 48px;
-}
-.ha-transit__opps-note {
-  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:14px; line-height:1.6;
-  color:rgba(47,62,70,.62); max-width:660px; margin:20px auto 0;
-  padding-top:18px; border-top:1px solid var(--ha-rule);
-}
-.ha-transit__opps-note strong { color:var(--ha-teal-deep); font-weight:700; }
-
-/* ===== Impact panel — timeline ===== */
-.ha-transit__impact {
-  max-width:1200px; margin:0 auto;
-  padding:56px 36px;
-}
-.ha-transit__timeline {
-  max-width:720px; margin:0 auto;
-  position:relative;
-  padding-left:42px;
-}
-.ha-transit__timeline::before {
-  content:""; position:absolute;
-  left:8px; top:8px; bottom:8px; width:2px;
-  background:linear-gradient(to bottom,
-    var(--ha-teal-deep) 0%, rgba(82,121,111,.22) 100%);
-}
-.ha-transit__milestone {
-  position:relative;
-  padding-bottom:34px;
-}
-.ha-transit__milestone:last-child { padding-bottom:0; }
-.ha-transit__milestone::before {
-  content:""; position:absolute;
-  left:-42px; top:3px;
-  width:18px; height:18px; border-radius:50%;
-  background:#fff;
-  border:3px solid var(--ha-teal-deep);
-  box-sizing:border-box;
-}
-.ha-transit__milestone--current::before {
-  background:var(--ha-teal-deep);
-  box-shadow:0 0 0 5px rgba(132,169,140,.28);
-}
-.ha-transit__milestone-year {
-  display:block;
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
-  font-size:13px; letter-spacing:.12em; text-transform:uppercase;
-  color:var(--ha-teal-deep);
-  margin-bottom:8px;
-}
-.ha-transit__milestone-card {
-  background:#fff;
-  border:1px solid var(--ha-rule);
-  border-left:4px solid var(--ha-teal-deep);
-  border-radius:4px;
-  padding:20px 24px;
-  transition:box-shadow .2s, transform .2s;
-}
-.ha-transit__milestone-card:hover {
-  box-shadow:0 8px 24px rgba(47,62,70,.09);
-  transform:translateY(-2px);
-}
-.ha-transit__milestone-title {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
-  font-size:18px; line-height:1.32; letter-spacing:-.01em;
-  color:var(--ha-charcoal);
-  margin:0 0 8px;
-}
-.ha-transit__milestone-desc {
-  font-size:15px; line-height:1.66; color:rgba(47,62,70,.8);
-  margin:0;
-}
-.ha-transit__milestone-desc strong {
-  font-weight:700; color:var(--ha-teal-deep);
-}
-
-@media (max-width:700px) {
-  .ha-transit__hero { padding:56px 20px 48px; }
-  .ha-transit__hero h1 { font-size:48px; letter-spacing:-.03em; margin-bottom:18px; }
-  .ha-transit__hero-rule { margin-bottom:18px; }
-  .ha-transit__hero-sub { font-size:15px; }
-  .ha-transit__vision { padding:56px 20px 56px; }
-  .ha-transit__vision h2 { font-size:28px; }
-  .ha-transit__vision p { font-size:15px; }
-  .ha-transit__stat-headline { padding:48px 20px 16px; }
-  .ha-transit__stat-headline h2 { font-size:30px; }
-  .ha-transit__opps { padding:56px 20px; }
-  .ha-transit__impact { padding:56px 20px; }
-  .ha-transit__timeline { padding-left:32px; }
-  .ha-transit__timeline::before { left:7px; }
-  .ha-transit__milestone::before { left:-32px; width:15px; height:15px; }
-  .ha-transit__milestone-card { padding:16px 18px; }
-  .ha-transit__milestone-title { font-size:16.5px; }
-}
-
-/* ===== Section frame ===== */
-.ha-transit__section {
-  max-width:1200px; margin:0 auto;
-  padding:80px 36px;
-}
-.ha-transit__section--tight { padding:48px 36px; }
-.ha-transit__section-head {
-  text-align:center; max-width:760px; margin:0 auto 48px;
-}
-.ha-transit__eyebrow {
-  font-size:11px; font-weight:600;
-  letter-spacing:.22em; text-transform:uppercase;
-  color:var(--ha-teal-deep); margin-bottom:12px;
-}
-.ha-transit__h2 {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
-  font-size:38px; line-height:1.15; letter-spacing:-.02em;
-  color:var(--ha-charcoal); margin:0 0 16px;
-}
-.ha-transit__h2-rule {
-  width:108px; height:8px;
-  margin:0 auto 22px;
-  position:relative;
-  background:
-    linear-gradient(to right,
-      var(--ha-teal-deep) 0, var(--ha-teal-deep) 42px,
-      transparent 42px, transparent 66px,
-      var(--ha-teal-deep) 66px, var(--ha-teal-deep) 108px)
-    center / 100% 1.5px no-repeat;
-}
-.ha-transit__h2-rule::after {
-  content:"";
-  position:absolute;
-  top:50%; left:50%;
-  width:7px; height:7px;
-  background:var(--ha-teal-deep);
-  transform:translate(-50%, -50%) rotate(45deg);
-  border-radius:1px;
-}
-.ha-transit__lede {
-  font-size:17px; line-height:1.65; color:rgba(47,62,70,.78);
-  margin:0 auto; max-width:620px;
-}
-@media (max-width:700px) {
-  .ha-transit__section { padding:56px 20px; }
-  .ha-transit__h2 { font-size:28px; }
-  .ha-transit__lede { font-size:15px; }
-}
-
-/* ===== Revenue Section: pie + legend + description ===== */
-.ha-transit__revenue {
-  background:var(--ha-bg);
-  padding:80px 0;
-}
-.ha-transit__revenue-grid {
-  max-width:1200px; margin:0 auto;
-  padding:0 36px;
-  display:grid; grid-template-columns:minmax(0,420px) 1fr;
-  gap:48px; align-items:start;
-}
-@media (max-width:900px) {
-  .ha-transit__revenue-grid { grid-template-columns:1fr; gap:36px; padding:0 20px; }
-}
-.ha-transit__chart-wrap {
-  position:relative; height:380px;
-}
-.ha-transit__legend {
-  margin-top:24px;
-  display:flex; flex-direction:column; gap:8px;
-}
-.ha-transit__legend-item {
-  display:flex; align-items:center; gap:12px;
-  padding:10px 14px; border-radius:4px;
-  cursor:pointer;
-  background:#fff;
-  border:1px solid var(--ha-rule);
-  transition:background .15s, border-color .15s;
-}
-.ha-transit__legend-item:hover { background:rgba(132,169,140,.08); border-color:var(--ha-teal); }
-.ha-transit__legend-item.active {
-  background:rgba(132,169,140,.14);
-  border-color:var(--ha-teal-deep);
-}
-.ha-transit__legend-swatch {
-  width:14px; height:14px; border-radius:3px; flex:none;
-}
-.ha-transit__legend-label {
-  font-size:14px; font-weight:500; flex:1;
-}
-.ha-transit__legend-pct {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:15px; color:var(--ha-teal-deep);
-}
-.ha-transit__desc {
-  background:#fff;
-  border:1px solid var(--ha-rule);
-  border-left:4px solid var(--ha-teal-deep);
-  border-radius:4px; padding:32px;
-  min-height:280px;
-}
-.ha-transit__desc-name {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:22px; color:var(--ha-charcoal); margin:0 0 4px;
-}
-.ha-transit__desc-pct {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
-  font-size:36px; line-height:1; margin-bottom:6px;
-  letter-spacing:-.02em;
-}
-.ha-transit__desc-amount {
-  font-size:15px; font-weight:600; color:rgba(47,62,70,.6); margin-bottom:18px;
-}
-.ha-transit__desc-text {
-  font-size:15px; line-height:1.65; color:rgba(47,62,70,.85);
-}
-.ha-transit__desc-text strong { color:var(--ha-charcoal); }
-.ha-transit__rate-chip {
-  display:inline-block;
-  background:rgba(82,121,111,.12);
-  color:var(--ha-teal-deep);
-  padding:4px 10px; border-radius:4px;
-  font-size:13px; font-weight:600;
-  margin-top:12px;
-}
-
-/* ===== Services Grid ===== */
-.ha-transit__services {
-  display:grid; grid-template-columns:repeat(2, 1fr);
-  gap:20px; max-width:900px; margin:48px auto 0;
-}
-@media (max-width:700px) {
-  .ha-transit__services { grid-template-columns:1fr; }
-}
-.ha-transit__service {
-  background:#fff; border:1px solid var(--ha-rule);
-  border-radius:4px; padding:28px;
-  display:flex; gap:18px; align-items:flex-start;
-  transition:transform .2s, box-shadow .2s;
-}
-.ha-transit__service:hover {
-  transform:translateY(-3px);
-  box-shadow:0 14px 36px rgba(82,121,111,.20), 0 4px 12px rgba(47,62,70,.06);
-  border-color:rgba(82,121,111,.28);
-}
-.ha-transit__service { transition:transform .25s, box-shadow .25s, border-color .25s; }
-.ha-transit__service-icon { transition:transform .25s, background .25s; }
-.ha-transit__service:hover .ha-transit__service-icon {
-  background:rgba(132,169,140,.28);
-  transform:scale(1.06) rotate(-3deg);
-}
-.ha-transit__service-icon {
-  flex:none; width:48px; height:48px;
-  background:rgba(132,169,140,.16);
-  border-radius:8px;
-  display:flex; align-items:center; justify-content:center;
-}
-.ha-transit__service-icon svg { width:24px; height:24px; stroke:var(--ha-teal-deep); }
-.ha-transit__service-body { flex:1; }
-.ha-transit__service-title {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:15px; color:var(--ha-charcoal);
-  text-transform:uppercase; letter-spacing:.05em;
-  margin:0 0 6px;
-}
-.ha-transit__service-cost {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
-  font-size:24px; color:var(--ha-teal-deep);
-  letter-spacing:-.01em; line-height:1.1; margin:0 0 8px;
-}
-.ha-transit__service-desc {
-  font-size:14px; line-height:1.55; color:rgba(47,62,70,.72); margin:0 0 12px;
-}
-.ha-transit__service-pc {
-  display:inline-flex; align-items:center; gap:8px;
-  margin-top:4px;
-  padding:6px 12px;
-  background:rgba(82,121,111,.10);
-  border-radius:999px;
-  font-family:OkinaManrope, 'Manrope',sans-serif;
-  font-size:11.5px; font-weight:700; letter-spacing:.04em;
-  color:var(--ha-teal-deep);
-}
-.ha-transit__service-pc::before {
-  content:""; width:5px; height:5px; border-radius:50%; background:var(--ha-teal-deep);
-}
-
-/* ===== Equity bar chart ===== */
-.ha-transit__equity {
-  background:var(--ha-bg);
-  padding:80px 0;
-}
-.ha-transit__equity-inner {
-  max-width:960px; margin:0 auto;
-  padding:0 36px;
-}
-.ha-transit__bars {
-  display:grid; grid-template-columns:repeat(5, 1fr);
-  gap:16px; align-items:end;
-  height:340px;
-  padding:20px 0 0;
-  margin:48px 0 24px;
-  border-bottom:1px solid var(--ha-rule);
-  position:relative;
-}
-.ha-transit__bar-col {
-  display:flex; flex-direction:column; align-items:center;
-  height:100%; justify-content:flex-end;
-}
-.ha-transit__bar {
-  width:100%; max-width:80px;
-  background:var(--ha-teal-deep);
-  border-radius:4px 4px 0 0;
-  position:relative;
-  transition:opacity .3s, transform .3s;
-  transform-origin:bottom center;
-  /* Scroll-reveal start state */
-  transform:scaleY(0);
-}
-.ha-transit__bars.is-in .ha-transit__bar {
-  transform:scaleY(1);
-}
-.ha-transit__bars.is-in .ha-transit__bar-col:nth-child(1) .ha-transit__bar { transition-delay:.05s; }
-.ha-transit__bars.is-in .ha-transit__bar-col:nth-child(2) .ha-transit__bar { transition-delay:.13s; }
-.ha-transit__bars.is-in .ha-transit__bar-col:nth-child(3) .ha-transit__bar { transition-delay:.21s; }
-.ha-transit__bars.is-in .ha-transit__bar-col:nth-child(4) .ha-transit__bar { transition-delay:.29s; }
-.ha-transit__bars.is-in .ha-transit__bar-col:nth-child(5) .ha-transit__bar { transition-delay:.37s; }
-.ha-transit__bars.is-in .ha-transit__bar { transition:transform .55s cubic-bezier(.22,.61,.36,1), opacity .3s; }
-
-.ha-transit__bar-value {
-  position:absolute; top:-30px; left:50%; transform:translateX(-50%);
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:16px; color:var(--ha-charcoal); white-space:nowrap;
-  opacity:0; transition:opacity .3s ease .5s;
-}
-.ha-transit__bars.is-in .ha-transit__bar-value { opacity:1; }
-.ha-transit__bars.is-in .ha-transit__bar-col:nth-child(1) .ha-transit__bar-value { transition-delay:.6s; }
-.ha-transit__bars.is-in .ha-transit__bar-col:nth-child(5) .ha-transit__bar-value { transition-delay:.92s; }
-
-/* Highlight the most regressive bar (lowest 20%) — teal-deep saturation; mute others */
-.ha-transit__bar-col:nth-child(1) .ha-transit__bar { background:var(--ha-teal-deep); box-shadow:0 8px 24px rgba(82,121,111,.28); }
-.ha-transit__bar-col:nth-child(2) .ha-transit__bar { background:var(--ha-teal); opacity:.55; }
-.ha-transit__bar-col:nth-child(3) .ha-transit__bar { background:var(--ha-teal); opacity:.55; }
-.ha-transit__bar-col:nth-child(4) .ha-transit__bar { background:var(--ha-teal); opacity:.55; }
-.ha-transit__bar-col:nth-child(5) .ha-transit__bar { background:var(--ha-teal); opacity:.55; }
-.ha-transit__bar-col:nth-child(1) .ha-transit__bar-value { color:var(--ha-teal-deep); }
-.ha-transit__bar-col:nth-child(1) .ha-transit__bar-label { color:var(--ha-teal-deep); font-weight:800; }
-
-/* Annotation arrow + callout pointing at the lowest-20% bar */
-.ha-transit__bars-annotation {
-  position:absolute;
-  top:8px; left:14%; max-width:200px;
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:12px; line-height:1.35;
-  color:var(--ha-teal-deep);
-  text-align:left;
-  letter-spacing:.01em;
-  opacity:0;
-  transform:translateY(8px);
-  transition:opacity .4s ease 1.1s, transform .4s ease 1.1s;
-  pointer-events:none;
-}
-.ha-transit__bars.is-in .ha-transit__bars-annotation {
-  opacity:1; transform:translateY(0);
-}
-.ha-transit__bars-annotation::after {
-  content:"";
-  position:absolute; left:-2px; top:100%; margin-top:6px;
-  width:1px; height:38px;
-  background:var(--ha-teal-deep);
-}
-.ha-transit__bars-annotation::before {
-  content:"";
-  position:absolute; left:-6px; bottom:-48px;
-  width:0; height:0;
-  border-left:5px solid transparent;
-  border-right:5px solid transparent;
-  border-top:6px solid var(--ha-teal-deep);
-}
-@media (max-width:700px) {
-  .ha-transit__bars-annotation { display:none; }
-}
-.ha-transit__bar-label {
-  margin-top:14px; text-align:center;
-  font-size:13px; font-weight:600; color:var(--ha-charcoal);
-}
-.ha-transit__bar-range {
-  font-size:11px; color:rgba(47,62,70,.55); margin-top:2px;
-}
-.ha-transit__bar-yaxis {
-  font-size:11px; color:rgba(47,62,70,.45);
-  margin-bottom:8px; text-transform:uppercase; letter-spacing:.1em;
-  font-weight:600;
-}
-.ha-transit__bar-note {
-  text-align:center; font-size:14px; color:rgba(47,62,70,.7);
-  font-style:italic; max-width:560px; margin:0 auto;
-}
-@media (max-width:700px) {
-  .ha-transit__bars { height:240px; gap:8px; }
-  .ha-transit__bar-value { font-size:13px; top:-24px; }
-  .ha-transit__bar-label { font-size:11px; }
-  .ha-transit__bar-range { display:none; }
-}
-
-/* ===== State Comparison (Hawaiʻi vs peer states) ===== */
-.ha-transit__compare {
-  max-width:880px; margin:64px auto 0;
-  padding:0;
-}
-.ha-transit__compare-head {
-  text-align:center; max-width:680px; margin:0 auto 32px;
-}
-.ha-transit__compare-eyebrow {
-  display:inline-block;
-  font-family:OkinaPoppins, 'Poppins',sans-serif;
-  font-size:11px; font-weight:600;
-  letter-spacing:.22em; text-transform:uppercase;
-  color:var(--ha-teal-deep);
-  margin-bottom:14px;
-}
-.ha-transit__compare h3 {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
-  font-size:26px; line-height:1.18; letter-spacing:-.015em;
-  color:var(--ha-charcoal); margin:0 0 12px;
-}
-.ha-transit__compare-lede {
-  font-size:15px; line-height:1.6; color:rgba(47,62,70,.78);
-  margin:0 auto; max-width:600px;
-}
-.ha-transit__compare-rows {
-  display:flex; flex-direction:column; gap:14px;
-  background:#fff;
-  border:1px solid var(--ha-rule);
-  border-radius:6px;
-  padding:28px 32px;
-}
-.ha-transit__compare-row {
-  display:grid;
-  grid-template-columns:120px 1fr 80px;
-  gap:18px; align-items:center;
-}
-.ha-transit__compare-state {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:13.5px; letter-spacing:.02em;
-  color:rgba(47,62,70,.70);
-  text-align:right;
-}
-.ha-transit__compare-row[data-state="hi"] .ha-transit__compare-state {
-  color:var(--ha-teal-deep);
-  font-weight:800;
-  letter-spacing:.04em;
-}
-.ha-transit__compare-track {
-  position:relative;
-  height:14px;
-  background:rgba(82,121,111,.06);
-  border-radius:7px;
-  overflow:visible;
-}
-.ha-transit__compare-track::before {
-  content:""; position:absolute;
-  left:50%; top:-4px; bottom:-4px;
-  width:1px; background:rgba(47,62,70,.18);
-}
-.ha-transit__compare-fill {
-  position:absolute; top:0; bottom:0;
-  background:rgba(82,121,111,.35);
-  border-radius:7px;
-  width:0;
-  transition:width .8s cubic-bezier(.22,.61,.36,1);
-}
-.ha-transit__compare.is-in .ha-transit__compare-fill {
-  width:var(--w, 0);
-}
-.ha-transit__compare-row:nth-child(1) .ha-transit__compare-fill { transition-delay:.10s; }
-.ha-transit__compare-row:nth-child(2) .ha-transit__compare-fill { transition-delay:.20s; }
-.ha-transit__compare-row:nth-child(3) .ha-transit__compare-fill { transition-delay:.30s; }
-.ha-transit__compare-row:nth-child(4) .ha-transit__compare-fill { transition-delay:.40s; }
-.ha-transit__compare-row[data-state="hi"] .ha-transit__compare-fill {
-  background:var(--ha-teal-deep);
-  box-shadow:0 4px 16px rgba(82,121,111,.30);
-}
-.ha-transit__compare-row[data-side="left"] .ha-transit__compare-fill { right:50%; left:auto; }
-.ha-transit__compare-row[data-side="right"] .ha-transit__compare-fill { left:50%; right:auto; }
-.ha-transit__compare-val {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:13.5px; color:rgba(47,62,70,.65);
-  text-align:left;
-}
-.ha-transit__compare-row[data-state="hi"] .ha-transit__compare-val {
-  color:var(--ha-teal-deep); font-weight:800;
-}
-.ha-transit__compare-axis {
-  display:flex; justify-content:space-between;
-  margin:18px 0 0;
-  font-family:OkinaManrope, 'Manrope',sans-serif;
-  font-size:10.5px; font-weight:700;
-  letter-spacing:.14em; text-transform:uppercase;
-  color:rgba(47,62,70,.55);
-}
-.ha-transit__compare-source {
-  font-size:13px; color:rgba(47,62,70,.55);
-  font-style:italic; text-align:center;
-  margin:18px auto 0; max-width:560px;
-}
-@media (max-width:700px) {
-  .ha-transit__compare-rows { padding:20px 18px; }
-  .ha-transit__compare-row { grid-template-columns:80px 1fr 60px; gap:10px; }
-  .ha-transit__compare-state { font-size:11.5px; }
-  .ha-transit__compare-val { font-size:11.5px; }
-  .ha-transit__compare-axis { font-size:9.5px; letter-spacing:.10em; }
-}
-
-/* ===== Callout ===== */
-.ha-transit__callout {
-  background:#fff;
-  border:1px solid var(--ha-rule);
-  border-left:4px solid var(--ha-teal-deep);
-  border-radius:4px; padding:32px 36px;
-  max-width:880px; margin:48px auto 0;
-}
-.ha-transit__callout-eyebrow {
-  font-size:11px; font-weight:600;
-  letter-spacing:.22em; text-transform:uppercase;
-  color:var(--ha-teal-deep); margin-bottom:10px;
-}
-.ha-transit__callout-q {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:24px; color:var(--ha-charcoal);
-  margin:0 0 14px; line-height:1.3;
-}
-.ha-transit__callout-body { font-size:15.5px; line-height:1.65; color:rgba(47,62,70,.85); }
-.ha-transit__callout-body em { font-style:normal; color:var(--ha-teal-deep); font-weight:600; }
-
-/* ===== Policy priorities (3-col with bill links) ===== */
-.ha-transit__priorities {
-  display:grid; grid-template-columns:repeat(3, 1fr);
-  gap:40px; max-width:1200px; margin:0 auto;
-}
-@media (max-width:900px) {
-  .ha-transit__priorities { grid-template-columns:1fr; gap:36px; }
-}
-.ha-transit__priority { position:relative; overflow:visible; }
-.ha-transit__priority:nth-child(n+2) {
-  border-left:1px solid var(--ha-rule); padding-left:40px;
-}
-@media (max-width:900px) {
-  .ha-transit__priority:nth-child(n+2) { border-left:none; padding-left:0; border-top:1px solid var(--ha-rule); padding-top:36px; }
-}
-.ha-transit__priority-head { display:block; margin-bottom:18px; position:relative; z-index:1; }
-.ha-transit__priority-num {
-  position:absolute;
-  top:-32px; right:-4px;
-  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:600;
-  font-size:160px; line-height:1;
-  color:rgba(82,121,111,.10);
-  pointer-events:none;
-  user-select:none;
-  z-index:0;
-}
-@media (max-width:900px) {
-  .ha-transit__priority-num { font-size:128px; top:-18px; }
-}
-.ha-transit__priority-desc,
-.ha-transit__priority-stat,
-.ha-transit__priority-bills { position:relative; z-index:1; }
-.ha-transit__priority-title {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
-  font-size:22px; color:var(--ha-charcoal);
-  letter-spacing:-.01em; line-height:1.15; margin:0 0 4px;
-}
-.ha-transit__priority-sub {
-  font-size:11px; font-weight:600; letter-spacing:.12em;
-  text-transform:uppercase; color:var(--ha-teal-deep);
-}
-.ha-transit__priority-desc {
-  font-size:15px; line-height:1.7; color:rgba(47,62,70,.8);
-  margin:0 0 20px;
-}
-.ha-transit__priority-stat {
-  border-left:3px solid var(--ha-teal-deep);
-  padding:14px 18px;
-  margin-bottom:18px;
-}
-.ha-transit__priority-stat-num {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
-  font-size:28px; color:var(--ha-charcoal);
-  line-height:1.1; letter-spacing:-.01em;
-  margin-bottom:4px;
-}
-.ha-transit__priority-stat-label {
-  font-size:13px; color:rgba(47,62,70,.7); line-height:1.45;
-}
-.ha-transit__priority-bills {
-  display:flex; flex-wrap:wrap; gap:6px;
-  margin-top:14px;
-}
-.ha-transit__priority-bill {
-  display:inline-flex; align-items:center; gap:4px;
-  background:rgba(82,121,111,.1);
-  color:var(--ha-teal-deep);
-  padding:4px 10px; border-radius:3px;
-  font-size:12px; font-weight:600;
-  text-decoration:none;
-  transition:background .15s;
-}
-.ha-transit__priority-bill:hover { background:rgba(82,121,111,.2); }
-
-/* Bulleted policy list inside a priority card — same pattern as
-   .ha-housing__priority-list and .ha-food__priority-list. */
-.ha-transit__priority-list {
-  list-style:none; padding:0; margin:18px 0 0;
-  position:relative; z-index:1;
-}
-.ha-transit__priority-list li {
-  padding:14px 0 14px 24px;
-  border-bottom:1px solid rgba(53,79,82,.10);
-  font-size:14px; line-height:1.55;
-  color:rgba(47,62,70,.85);
-  position:relative;
-}
-.ha-transit__priority-list li:last-child { border-bottom:none; }
-.ha-transit__priority-list li::before {
-  content:""; position:absolute; left:0; top:24px;
-  width:12px; height:1px;
-  background:var(--ha-teal);
-}
-.ha-transit__priority-list strong {
-  display:block;
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:14.5px; color:var(--ha-charcoal);
-  margin-bottom:4px; letter-spacing:-0.005em;
-}
-
-/* ===== Combined Research & News (two-column hybrid) ===== */
-.ha-transit__combined {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:64px;
-  max-width:1200px; margin:0 auto;
-}
-@media (max-width:900px) {
-  .ha-transit__combined { grid-template-columns:1fr; gap:56px; }
-}
-.ha-transit__combined-col-head {
-  display:flex; align-items:center; gap:14px;
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-size:11px; font-weight:700;
-  letter-spacing:.24em; text-transform:uppercase;
-  color:var(--ha-teal-deep);
-  margin-bottom:6px;
-}
-.ha-transit__combined-col-head::after {
-  content:""; flex:1; height:1px; background:rgba(82,121,111,.32);
-}
-
-/* ----- Publications list (left column) ----- */
-.ha-transit__pub-list { display:flex; flex-direction:column; }
-.ha-transit a.ha-transit__pub-list-item {
-  position:relative;
-  display:grid; grid-template-columns:96px 1fr;
-  gap:20px; align-items:center;
-  padding:22px 0;
-  border-bottom:1px solid var(--ha-rule);
-  text-decoration:none; color:inherit;
-  transition:padding .2s;
-}
-.ha-transit a.ha-transit__pub-list-item:last-child { border-bottom:none; }
-.ha-transit a.ha-transit__pub-list-item:hover { padding-left:8px; }
-.ha-transit__pub-list-thumb {
-  aspect-ratio:1/1; flex:none;
-  background:var(--ha-bg);
-  border-radius:4px; overflow:hidden;
-  position:relative;
-}
-.ha-transit__pub-list-thumb img {
-  width:100%; height:100%; object-fit:cover;
-  transition:transform .35s;
-}
-.ha-transit a.ha-transit__pub-list-item:hover .ha-transit__pub-list-thumb img { transform:scale(1.05); }
-.ha-transit__pub-list-badge {
-  position:absolute; top:6px; left:6px;
-  display:inline-flex; align-items:center; gap:4px;
-  background:var(--ha-teal-deep); color:#fff;
-  padding:3px 7px; border-radius:999px;
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-size:8.5px; font-weight:700;
-  letter-spacing:.14em; text-transform:uppercase;
-  box-shadow:0 3px 10px rgba(47,62,70,.22);
-}
-.ha-transit__pub-list-badge::before {
-  content:""; width:4px; height:4px; border-radius:50%; background:#fff;
-}
-.ha-transit__pub-list-body {
-  display:flex; flex-direction:column; gap:6px; min-width:0;
-}
-.ha-transit__pub-list-meta {
-  font-family:OkinaManrope, 'Manrope',sans-serif;
-  font-size:10.5px; font-weight:700;
-  letter-spacing:.18em; text-transform:uppercase;
-  color:var(--ha-teal-deep);
-  line-height:1;
-}
-.ha-transit__pub-list-title {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:15.5px; line-height:1.34; letter-spacing:-.005em;
-  color:var(--ha-charcoal); margin:0;
-  transition:color .18s;
-}
-.ha-transit a.ha-transit__pub-list-item:hover .ha-transit__pub-list-title {
-  color:var(--ha-teal-deep);
-}
-.ha-transit__pub-list-all {
-  margin-top:18px;
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-size:12.5px; font-weight:700;
-  letter-spacing:.06em;
-  color:var(--ha-teal-deep);
-  display:inline-flex; align-items:center; gap:6px;
-  text-decoration:none;
-  align-self:flex-start;
-  padding-bottom:2px;
-  border-bottom:1px solid rgba(82,121,111,.3);
-  transition:gap .18s, color .18s, border-color .18s;
-}
-.ha-transit__pub-list-all:hover { gap:10px; color:var(--ha-charcoal); border-bottom-color:var(--ha-charcoal); }
-
-/* ----- News clippings (right column, editorial) ----- */
-.ha-transit__news-stack { display:flex; flex-direction:column; }
-.ha-transit__news-clipping {
-  position:relative;
-  display:grid; grid-template-columns:48px 1fr;
-  gap:18px; align-items:flex-start;
-  padding:22px 0;
-  border-bottom:1px solid var(--ha-rule);
-}
-.ha-transit__news-clipping:last-child { border-bottom:none; }
-.ha-transit__news-clipping:first-child { padding-top:0; }
-.ha-transit__news-anchor {
-  width:48px; height:48px;
-  border-radius:6px;
-  display:flex; align-items:center; justify-content:center;
-  background:var(--ha-teal-deep);
-  color:#fff;
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
-  font-size:11px; letter-spacing:.12em; text-transform:uppercase;
-  position:relative;
-  overflow:hidden;
-}
-.ha-transit__news-anchor--press {
-  background:var(--ha-charcoal);
-}
-.ha-transit__news-anchor::after {
-  content:""; position:absolute; inset:0;
-  background:linear-gradient(135deg, rgba(255,255,255,.10) 0%, transparent 40%);
-  pointer-events:none;
-}
-.ha-transit__news-body {
-  display:flex; flex-direction:column; min-width:0;
-}
-.ha-transit__news-source {
-  font-family:OkinaManrope, 'Manrope',sans-serif;
-  font-size:10.5px; font-weight:700;
-  letter-spacing:.18em; text-transform:uppercase;
-  color:var(--ha-teal-deep);
-  line-height:1;
-  margin-bottom:8px;
-  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
-}
-.ha-transit__news-source-tag {
-  background:rgba(82,121,111,.12);
-  color:var(--ha-teal-deep);
-  padding:3px 8px; border-radius:999px;
-  font-size:9px; letter-spacing:.16em; font-weight:700;
-  display:inline-flex; align-items:center; gap:4px;
-}
-.ha-transit__news-source-tag::before {
-  content:""; width:4px; height:4px; border-radius:50%; background:var(--ha-teal-deep);
-}
-.ha-transit__news-title {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:16px; line-height:1.32; letter-spacing:-.005em;
-  color:var(--ha-charcoal); margin:0 0 8px;
-  transition:color .18s;
-}
-.ha-transit__news-excerpt {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:400;
-  font-size:14px; line-height:1.55;
-  color:rgba(47,62,70,.75);
-  margin:0 0 12px;
-}
-.ha-transit__news-byline {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-size:10.5px; font-weight:700;
-  letter-spacing:.16em; text-transform:uppercase;
-  color:rgba(47,62,70,.55);
-  margin-bottom:12px;
-  line-height:1;
-}
-.ha-transit__news-byline strong { color:var(--ha-teal-deep); font-weight:700; }
-.ha-transit__news-byline-sep {
-  display:inline-block; margin:0 8px;
-  color:rgba(47,62,70,.35);
-}
-.ha-transit__news-byline-sep::before { content:"·"; }
-.ha-transit__news-link {
-  font-family:OkinaManrope, 'Manrope',sans-serif;
-  font-size:12.5px; font-weight:700; color:var(--ha-teal-deep);
-  letter-spacing:.04em;
-  text-decoration:none;
-  display:inline-flex; align-items:center; gap:7px;
-  transition:gap .18s, color .18s, border-color .18s;
-  align-self:flex-start;
-  padding-bottom:2px;
-  border-bottom:1px solid rgba(82,121,111,.3);
-}
-.ha-transit__news-link:hover { gap:10px; color:var(--ha-charcoal); border-bottom-color:var(--ha-charcoal); }
-.ha-transit__news-link svg { width:13px; height:13px; }
-.ha-transit__news-clipping:hover .ha-transit__news-title { color:var(--ha-teal-deep); }
-
-/* ===== Panel close button ===== */
-.ha-transit__panel-close-wrap {
-  display:flex; justify-content:center;
-  padding:28px 0 52px;
-}
-.ha-transit button.ha-transit__panel-close {
-  display:inline-flex; align-items:center; gap:8px;
-  background:none;
-  border:1px solid rgba(53,79,82,.2);
-  border-radius:999px;
-  padding:9px 22px;
-  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:13px; font-weight:500;
-  color:rgba(47,62,70,.55);
-  cursor:pointer;
-  transition:color .18s, border-color .18s, background .18s;
-}
-.ha-transit button.ha-transit__panel-close:hover {
-  color:var(--ha-charcoal);
-  border-color:rgba(53,79,82,.4);
-  background:rgba(53,79,82,.04);
-}
-.ha-transit button.ha-transit__panel-close svg {
-  width:14px; height:14px;
-  stroke:currentColor; fill:none;
-  stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
-  transition:transform .2s;
-}
-.ha-transit button.ha-transit__panel-close:hover svg {
-  transform:translateY(-2px);
-}
-
-/* ===== TIER 2: Glossary term tooltips ===== */
-.ha-transit__term {
-  position:relative;
-  display:inline;
-  border-bottom:1px dotted var(--ha-teal-deep);
-  cursor:help;
-  color:inherit;
-  font-style:inherit;
-}
-.ha-transit__term:focus { outline:2px solid var(--ha-teal); outline-offset:2px; border-radius:2px; }
-.ha-transit__term-tip {
-  position:absolute;
-  bottom:calc(100% + 10px); left:50%;
-  transform:translateX(-50%) translateY(4px);
-  z-index:30;
-  width:260px;
-  background:var(--ha-charcoal);
-  color:#fff;
-  padding:10px 14px;
-  border-radius:6px;
-  font-family:OkinaPoppins, 'Poppins',sans-serif;
-  font-style:normal;
-  font-size:12.5px; font-weight:400;
-  letter-spacing:.01em;
-  line-height:1.5;
-  text-align:left;
-  box-shadow:0 8px 24px rgba(47,62,70,.18);
-  opacity:0; pointer-events:none;
-  transition:opacity .2s, transform .2s;
-  white-space:normal;
-}
-.ha-transit__term-tip::after {
-  content:""; position:absolute;
-  bottom:-5px; left:50%; transform:translateX(-50%) rotate(45deg);
-  width:10px; height:10px;
-  background:var(--ha-charcoal);
-}
-.ha-transit__term:hover .ha-transit__term-tip,
-.ha-transit__term:focus .ha-transit__term-tip {
-  opacity:1; pointer-events:auto;
-  transform:translateX(-50%) translateY(0);
-}
-.ha-transit__term-tip strong { color:var(--ha-teal); font-weight:700; }
-@media (max-width:700px) {
-  .ha-transit__term-tip { width:220px; font-size:12px; }
-}
-
-/* ===== TIER 1: Sticky tab bar (compact, appears after main tab bar scrolls out) ===== */
-.ha-transit__stuck-bar {
-  position:fixed;
-  top:107px; left:0; right:0;
-  z-index:40;
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--ha-rule);
-  padding:10px 28px;
-  display:flex; justify-content:center; gap:6px;
-  flex-wrap:wrap;
-  opacity:0; pointer-events:none;
-  transform:translateY(-8px);
-  transition:opacity .26s, transform .26s;
-}
-.ha-transit__stuck-bar.is-visible {
-  opacity:1; pointer-events:auto; transform:translateY(0);
-}
-.ha-transit button.ha-transit__stuck-tab {
-  display:inline-flex; align-items:center;
-  padding:7px 22px; border-radius:999px;
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:13.5px;
-  letter-spacing:.01em;
-  color:var(--ha-charcoal);
-  background:transparent;
-  border:1px solid var(--ha-rule);
-  cursor:pointer;
-  transition:background .22s, color .22s, border-color .22s;
-  -webkit-tap-highlight-color:transparent;
-}
-.ha-transit button.ha-transit__stuck-tab:hover {
-  background:rgba(132,169,140,.10);
-  border-color:var(--ha-teal);
-}
-.ha-transit button.ha-transit__stuck-tab.active {
-  background:var(--ha-charcoal);
-  color:#fff;
-  border-color:var(--ha-charcoal);
-}
-@media (max-width:700px) {
-  .ha-transit__stuck-bar { top:111px; padding:8px 12px; gap:4px; }
-  .ha-transit button.ha-transit__stuck-tab { padding:6px 14px; font-size:12.5px; }
-}
-
-/* ===== TIER 1: Priority pull-quote (human voice) ===== */
-.ha-transit__priority-quote {
-  font-family:OkinaPoppins, 'Poppins',sans-serif; font-style:italic; font-weight:500;
-  font-size:15.5px; line-height:1.5;
-  color:var(--ha-teal-deep);
-  margin:18px 0 0;
-  padding:14px 0 14px 20px;
-  border-left:3px solid var(--ha-teal);
-  position:relative;
-  z-index:1;
-}
-.ha-transit__priority-quote cite {
-  display:block;
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-style:normal; font-weight:600;
-  font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
-  color:rgba(47,62,70,.55);
-  margin-top:10px;
-}
-
-/* ===== TIER 1: Take-Action CTA section (end of page) ===== */
-.ha-transit__cta {
-  background:linear-gradient(135deg, var(--ha-charcoal) 0%, var(--ha-slate) 100%);
-  padding:96px 28px;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-  color:#fff;
-}
-.ha-transit__cta::before {
-  content:""; position:absolute; inset:0; z-index:0;
-  background:
-    radial-gradient(circle at 88% 12%, rgba(132,169,140,.18), transparent 50%),
-    radial-gradient(circle at 12% 88%, rgba(82,121,111,.22), transparent 55%);
-  pointer-events:none;
-}
-.ha-transit__cta-inner { max-width:760px; margin:0 auto; position:relative; z-index:1; }
-.ha-transit__cta-eyebrow {
-  display:inline-block;
-  font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:11px; font-weight:600;
-  letter-spacing:.22em; text-transform:uppercase;
-  color:var(--ha-teal);
-  margin-bottom:18px;
-}
-.ha-transit__cta h2 {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:800;
-  font-size:clamp(30px, 4.2vw, 48px); line-height:1.12; letter-spacing:-.02em;
-  color:#fff; margin:0 0 18px;
-}
-.ha-transit__cta p {
-  font-family:OkinaPoppins, 'Poppins',sans-serif;
-  font-size:17px; line-height:1.65;
-  color:rgba(202,210,197,.86);
-  margin:0 auto 32px; max-width:580px;
-}
-.ha-transit__cta-actions { display:inline-flex; flex-wrap:wrap; gap:14px; justify-content:center; }
-.ha-transit a.ha-transit__cta-btn {
-  display:inline-flex; align-items:center;
-  padding:14px 28px; border-radius:999px;
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700;
-  font-size:13.5px; letter-spacing:.04em;
-  text-decoration:none;
-  transition:transform .25s, background .25s, color .25s, border-color .25s;
-}
-.ha-transit a.ha-transit__cta-btn--primary {
-  background:var(--ha-teal); color:var(--ha-charcoal);
-  border:1px solid var(--ha-teal);
-}
-.ha-transit a.ha-transit__cta-btn--primary:hover {
-  background:var(--ha-ash); border-color:var(--ha-ash);
-  transform:translateY(-2px);
-}
-.ha-transit a.ha-transit__cta-btn--ghost {
-  background:transparent; color:#fff;
-  border:1px solid rgba(202,210,197,.40);
-}
-.ha-transit a.ha-transit__cta-btn--ghost:hover {
-  border-color:var(--ha-teal); color:var(--ha-teal);
-  transform:translateY(-2px);
-}
-@media (max-width:700px) {
-  .ha-transit__cta { padding:64px 20px; }
-  .ha-transit__cta-actions { flex-direction:column; width:100%; align-items:stretch; }
-  .ha-transit a.ha-transit__cta-btn { justify-content:center; }
-}
-
-/* ===== Explore other issues — cross-issue nav (mirrored on all 5 pages) ===== */
-.ha-transit__more { background:var(--ha-bg); padding:72px 28px 80px; border-top:1px solid var(--ha-rule); }
-.ha-transit__more-inner { max-width:1180px; margin:0 auto; }
-.ha-transit__more-eyebrow {
-  display:inline-block; font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:11px; font-weight:600;
-  letter-spacing:.22em; text-transform:uppercase; color:var(--ha-teal-deep); margin-bottom:10px;
-}
-.ha-transit__more h2 {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:clamp(24px,2.6vw,34px);
-  line-height:1.15; letter-spacing:-.02em; color:var(--ha-charcoal); margin:0;
-}
-.ha-transit__more-grid {
-  display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
-  list-style:none; padding:0; margin:30px 0 0;
-}
-@media (max-width:1000px) { .ha-transit__more-grid { grid-template-columns:repeat(2,1fr); } }
-@media (max-width:600px)  { .ha-transit__more-grid { grid-template-columns:1fr; } }
-.ha-transit__more-card {
-  display:flex; flex-direction:column; gap:8px; height:100%;
-  padding:20px 20px 18px; background:var(--ha-white);
-  border:1px solid var(--ha-rule); border-radius:8px;
-  text-decoration:none; color:inherit;
-  transition:border-color .25s, transform .25s, box-shadow .25s;
-}
-.ha-transit__more-card:hover {
-  border-color:var(--ha-teal); transform:translateY(-2px);
-  box-shadow:0 10px 26px rgba(47,62,70,.08);
-}
-.ha-transit__more-card:focus-visible { outline:2px solid var(--ha-teal-deep); outline-offset:3px; }
-.ha-transit__more-name {
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:700; font-size:16px;
-  line-height:1.3; color:var(--ha-charcoal);
-}
-.ha-transit__more-desc { font-size:13.5px; line-height:1.55; color:var(--ha-teal-deep); flex:1; margin:0; }
-.ha-transit__more-go {
-  display:inline-flex; align-items:center; gap:6px; margin-top:4px;
-  font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600; font-size:12.5px;
-  letter-spacing:.04em; color:var(--ha-teal-deep);
-}
-.ha-transit__more-card:hover .ha-transit__more-go { color:var(--ha-charcoal); gap:9px; }
-.ha-transit__more-go svg { width:13px; height:13px; transition:transform .25s; }
-</style>
-
-<section class="ha-transit">
+<section class="ha-topic" data-category="transportation" data-pubs="3">
 
   <!-- Sticky tab bar (appears when main tab bar scrolls out) -->
-  <div class="ha-transit__stuck-bar" role="tablist" aria-label="Section (sticky)">
-    <button class="ha-transit__stuck-tab active" data-panel="overview" role="tab" aria-selected="true">Overview</button>
-    <button class="ha-transit__stuck-tab" data-panel="priorities" role="tab" aria-selected="false">Priorities</button>
+  <div class="ha-topic__stuck-bar" role="tablist" aria-label="Section (sticky)">
+    <button class="ha-topic__stuck-tab active" data-panel="overview" role="tab" aria-selected="true">Overview</button>
+    <button class="ha-topic__stuck-tab" data-panel="priorities" role="tab" aria-selected="false">Priorities</button>
   </div>
 
   <!-- ===================================
        TOP — hero + tab bar wrapper (single dark gradient)
        =================================== -->
-  <div class="ha-transit__top">
+  <div class="ha-topic__top">
 
   <!-- ===================================
        HERO (compact: eyebrow + title + intro + quick-pills)
        =================================== -->
-  <header class="ha-transit__hero" id="ha-transit-hero">
-    <a class="ha-transit__back" href="issues.html" aria-label="Back to Issues">
+  <header class="ha-topic__hero" id="ha-topic-hero">
+    <a class="ha-topic__back" href="issues.html" aria-label="Back to Issues">
       <svg viewBox="0 0 14 14"><path d="M9 2l-5 5 5 5"/></svg>
       Back to Issues
     </a>
-    <a class="ha-transit__hero-subscribe" href="https://hiappleseed.quorum.us/campaign/safestreetssubscribe/" target="_blank" rel="noopener" aria-label="Get email alerts">
+    <a class="ha-topic__hero-subscribe" href="https://hiappleseed.quorum.us/campaign/safestreetssubscribe/" target="_blank" rel="noopener" aria-label="Get email alerts">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><polyline points="22,6 12,13 2,6"/></svg>
       Get alerts
     </a>
-    <div class="ha-transit__hero-inner">
-      <h1>Transportation <span class="ha-transit__hero-amp">Equity</span></h1>
-      <div class="ha-transit__hero-rule" aria-hidden="true"></div>
-      <p class="ha-transit__hero-sub">
+    <div class="ha-topic__hero-inner">
+      <h1>Transportation <span class="ha-topic__hero-amp">Equity</span></h1>
+      <div class="ha-topic__hero-rule" aria-hidden="true"></div>
+      <p class="ha-topic__hero-sub">
         Getting where you need to go should not be a barrier to opportunity.
       </p>
     </div>
   </header>
 
-    <div class="ha-transit__tab-bar">
-      <div class="ha-transit__tabs" role="tablist" aria-label="Section">
-        <span class="ha-transit__tabs-indicator" aria-hidden="true"></span>
-        <button class="ha-transit__tab active" data-panel="overview" role="tab" aria-selected="true" aria-controls="ha-transit-panel-overview">Overview</button>
-        <button class="ha-transit__tab" data-panel="priorities" role="tab" aria-selected="false" aria-controls="ha-transit-panel-priorities">Priorities</button>
+    <div class="ha-topic__tab-bar">
+      <div class="ha-topic__tabs" role="tablist" aria-label="Section">
+        <span class="ha-topic__tabs-indicator" aria-hidden="true"></span>
+        <button class="ha-topic__tab active" data-panel="overview" role="tab" aria-selected="true" aria-controls="ha-topic-panel-overview">Overview</button>
+        <button class="ha-topic__tab" data-panel="priorities" role="tab" aria-selected="false" aria-controls="ha-topic-panel-priorities">Priorities</button>
       </div>
-      <a class="ha-transit__bar-pill" href="#ha-transit-research-news">
+      <a class="ha-topic__bar-pill" href="#ha-topic-research-news">
         Research &amp; News
         <svg viewBox="0 0 14 14"><path d="M7 2v10M2 7l5 5 5-5"/></svg>
       </a>
     </div>
 
-  </div><!-- /.ha-transit__top -->
+  </div><!-- /.ha-topic__top -->
 
   <!-- ===================================
        DRAWER — Vision / Overview / Priorities panels
        =================================== -->
-  <div class="ha-transit__panels">
+  <div class="ha-topic__panels">
 
   
 
   <!-- =========== OVERVIEW PANEL =========== -->
-  <section class="ha-transit__panel active" id="ha-transit-panel-overview" role="tabpanel">
+  <section class="ha-topic__panel active" id="ha-topic-panel-overview" role="tabpanel">
 
-    <div class="ha-transit__vision">
-      <span class="ha-transit__vision-eyebrow">Our Vision</span>
-      <div class="ha-transit__vision-quote" aria-hidden="true">&ldquo;</div>
+    <div class="ha-topic__vision">
+      <span class="ha-topic__vision-eyebrow">Our Vision</span>
+      <div class="ha-topic__vision-quote" aria-hidden="true">&ldquo;</div>
       <h2>Put people <em>over pavement</em>.</h2>
-      <div class="ha-transit__vision-rule"></div>
+      <div class="ha-topic__vision-rule"></div>
       <p>
         All residents &mdash; regardless of age, race, ethnicity, ability, or income &mdash; should be able to navigate our islands safely using modes that build healthier individuals and communities: walking, rolling, biking, and riding transit. Yet our transportation system continues to prioritize cars over people, directing resources toward expanding vehicle capacity while sidewalks, bike lanes, and transit go underfunded.
       </p>
-      <blockquote class="ha-transit__vision-pullquote">
+      <blockquote class="ha-topic__vision-pullquote">
         For many of our residents, this is not just a minor inconvenience. It is a daily barrier and a matter of equity.
       </blockquote>
       <p>
         Transportation connects us to jobs, school, health care, and each other. When that connection is unsafe, unaffordable, inaccessible, or simply absent, opportunity shrinks. Keiki lose independence. Lower-income households spend an outsized share of their budget on car payments, gas, and parking. And those who cannot drive &mdash; whether due to age, disability, or income &mdash; are left behind entirely. Our transportation equity work centers the experiences of communities most affected by an inequitable system.
       </p>
-      <div class="ha-transit__vision-pillars">
+      <div class="ha-topic__vision-pillars">
 
-        <article class="ha-transit__vision-pillar">
-          <div class="ha-transit__vision-pillar-icon">
+        <article class="ha-topic__vision-pillar">
+          <div class="ha-topic__vision-pillar-icon">
             <svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 8h14"/><path d="M5 8l-2 6h7l-2-6"/><path d="M19 8l-2 6h7l-2-6"/><path d="M9 21h6"/></svg>
           </div>
-          <div class="ha-transit__vision-pillar-eyebrow">Move</div>
+          <div class="ha-topic__vision-pillar-eyebrow">Move</div>
           <h3>Free access for those who can&rsquo;t drive.</h3>
           <p>Keiki Ride Free &mdash; year-round, fare-free youth transit for everyone 18 and under. Fare-free programs increase ridership, lower household costs, and reconnect young people to school, work, recreation, and each other.</p>
-          <div class="ha-transit__vision-pillar-stat">
-            <div class="ha-transit__vision-pillar-stat-num">18 &amp; under</div>
-            <div class="ha-transit__vision-pillar-stat-label">would ride <strong><span class="ha-term" tabindex="0">fare-free<span class="ha-term-tip" role="tooltip"><strong>Fare-free</strong> — riders pay no fare to board; the service is funded publicly instead of per ride.</span></span></strong> year-round under Keiki Ride Free</div>
+          <div class="ha-topic__vision-pillar-stat">
+            <div class="ha-topic__vision-pillar-stat-num">18 &amp; under</div>
+            <div class="ha-topic__vision-pillar-stat-label">would ride <strong><span class="ha-term" tabindex="0">fare-free<span class="ha-term-tip" role="tooltip"><strong>Fare-free</strong> — riders pay no fare to board; the service is funded publicly instead of per ride.</span></span></strong> year-round under Keiki Ride Free</div>
           </div>
         </article>
 
-        <article class="ha-transit__vision-pillar">
-          <div class="ha-transit__vision-pillar-icon">
+        <article class="ha-topic__vision-pillar">
+          <div class="ha-topic__vision-pillar-icon">
             <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/><path d="M9 11h.01M15 11h.01"/></svg>
           </div>
-          <div class="ha-transit__vision-pillar-eyebrow">Safe</div>
+          <div class="ha-topic__vision-pillar-eyebrow">Safe</div>
           <h3>Make every crossing safer.</h3>
           <p>Leading Pedestrian Intervals (LPIs) and Accessible Pedestrian Signals (APS) are low-cost, proven solutions used by cities worldwide &mdash; and almost entirely absent in Hawai&#x02BB;i. Required installation at state intersections saves lives.</p>
-          <div class="ha-transit__vision-pillar-stat">
-            <div class="ha-transit__vision-pillar-stat-num">43%</div>
-            <div class="ha-transit__vision-pillar-stat-label">of Hawai&#x02BB;i traffic deaths are <strong>pedestrians or cyclists</strong></div>
+          <div class="ha-topic__vision-pillar-stat">
+            <div class="ha-topic__vision-pillar-stat-num">43%</div>
+            <div class="ha-topic__vision-pillar-stat-label">of Hawai&#x02BB;i traffic deaths are <strong>pedestrians or cyclists</strong></div>
           </div>
         </article>
 
-        <article class="ha-transit__vision-pillar">
-          <div class="ha-transit__vision-pillar-icon">
+        <article class="ha-topic__vision-pillar">
+          <div class="ha-topic__vision-pillar-icon">
             <svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M3 12c2-1 3-1 5 0 1.5.7 2.5.7 4 0 1.5-.7 2.5-.7 4 0 2 1 3 1 5 0"/><path d="M3 6c2-1 3-1 5 0 1.5.7 2.5.7 4 0 1.5-.7 2.5-.7 4 0 2 1 3 1 5 0"/><path d="M3 18c2-1 3-1 5 0 1.5.7 2.5.7 4 0 1.5-.7 2.5-.7 4 0 2 1 3 1 5 0"/></svg>
           </div>
-          <div class="ha-transit__vision-pillar-eyebrow">Reform</div>
+          <div class="ha-topic__vision-pillar-eyebrow">Reform</div>
           <h3>Stop tying shelter to car storage.</h3>
           <p>Parking mandates inflate housing costs by adding $55,000+ per unit for podium parking in urban Honolulu. Eliminating mandates is one of the most proven ways to lower housing costs &mdash; and gives residents real choices beyond car ownership.</p>
-          <div class="ha-transit__vision-pillar-stat">
-            <div class="ha-transit__vision-pillar-stat-num">$55K+</div>
-            <div class="ha-transit__vision-pillar-stat-label">added to each new unit by urban Honolulu <strong>parking mandates</strong></div>
+          <div class="ha-topic__vision-pillar-stat">
+            <div class="ha-topic__vision-pillar-stat-num">$55K+</div>
+            <div class="ha-topic__vision-pillar-stat-label">added to each new unit by urban Honolulu <strong>parking mandates</strong></div>
           </div>
         </article>
 
@@ -1933,8 +335,8 @@ body { font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-se
 
 
   <!-- Big headline stat — Keiki Ride Free opportunity (leads positive; replaces the HDOT-spending call-out) -->
-  <div class="ha-transit__stat-headline">
-    <div class="ha-transit__stat-headline-fy">Keiki Ride Free</div>
+  <div class="ha-topic__stat-headline">
+    <div class="ha-topic__stat-headline-fy">Keiki Ride Free</div>
     <h2><strong>Free bus rides</strong> for every keiki <strong>18 and under</strong>.</h2>
   </div>
 
@@ -1945,58 +347,58 @@ body { font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-se
   <!-- ===================================
        WHO FEELS THE SQUEEZE (services grid)
        =================================== -->
-  <section class="ha-transit__section">
-    <div class="ha-transit__section-head">
-      <div class="ha-transit__eyebrow">Who pays the price</div>
-      <h2 class="ha-transit__h2">A car-centric system has casualties</h2>
-      <div class="ha-transit__h2-rule"></div>
-      <p class="ha-transit__lede">
+  <section class="ha-topic__section">
+    <div class="ha-topic__section-head">
+      <div class="ha-topic__eyebrow">Who pays the price</div>
+      <h2 class="ha-topic__h2">A car-centric system has casualties</h2>
+      <div class="ha-topic__h2-rule"></div>
+      <p class="ha-topic__lede">
         The cost of a system built for cars is paid most heavily by those who can&rsquo;t or don&rsquo;t drive &mdash; keiki, kūpuna, people with disabilities, and lower-income residents. These are the communities most affected when sidewalks are absent, transit is sparse, and enforcement falls disproportionately on pedestrians.
       </p>
     </div>
-    <div class="ha-transit__services">
-      <div class="ha-transit__service">
-        <div class="ha-transit__service-icon">
+    <div class="ha-topic__services">
+      <div class="ha-topic__service">
+        <div class="ha-topic__service-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><path d="M5 21v-4a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v4M9 21v-5M15 21v-5"/></svg>
         </div>
-        <div class="ha-transit__service-body">
-          <p class="ha-transit__service-title">Keiki without cars</p>
-          <p class="ha-transit__service-cost">Largest non-driver group</p>
-          <p class="ha-transit__service-desc">Young people are the largest demographic of non-drivers &mdash; transit is their direct connection to school, work, recreation, and friends.</p>
-          <span class="ha-transit__service-pc">Keiki Ride Free is the unlock</span>
+        <div class="ha-topic__service-body">
+          <p class="ha-topic__service-title">Keiki without cars</p>
+          <p class="ha-topic__service-cost">Largest non-driver group</p>
+          <p class="ha-topic__service-desc">Young people are the largest demographic of non-drivers &mdash; transit is their direct connection to school, work, recreation, and friends.</p>
+          <span class="ha-topic__service-pc">Keiki Ride Free is the unlock</span>
         </div>
       </div>
-      <div class="ha-transit__service">
-        <div class="ha-transit__service-icon">
+      <div class="ha-topic__service">
+        <div class="ha-topic__service-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l-2 3-4 1 3 3-1 4 4-2 4 2-1-4 3-3-4-1-2-3z"/><path d="M5 22l3-6M19 22l-3-6"/></svg>
         </div>
-        <div class="ha-transit__service-body">
-          <p class="ha-transit__service-title">Pedestrians &amp; cyclists</p>
-          <p class="ha-transit__service-cost">43% of traffic deaths</p>
-          <p class="ha-transit__service-desc">Signalized intersections are among the most dangerous places &mdash; yet low-cost solutions like LPIs and APS are almost entirely absent here.</p>
-          <span class="ha-transit__service-pc">Fatalities are on the rise</span>
+        <div class="ha-topic__service-body">
+          <p class="ha-topic__service-title">Pedestrians &amp; cyclists</p>
+          <p class="ha-topic__service-cost">43% of traffic deaths</p>
+          <p class="ha-topic__service-desc">Signalized intersections are among the most dangerous places &mdash; yet low-cost solutions like LPIs and APS are almost entirely absent here.</p>
+          <span class="ha-topic__service-pc">Fatalities are on the rise</span>
         </div>
       </div>
-      <div class="ha-transit__service">
-        <div class="ha-transit__service-icon">
+      <div class="ha-topic__service">
+        <div class="ha-topic__service-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
         </div>
-        <div class="ha-transit__service-body">
-          <p class="ha-transit__service-title">People who walk</p>
-          <p class="ha-transit__service-cost">349 cited per 100K residents</p>
-          <p class="ha-transit__service-desc">Hawai&#x02BB;i issues jaywalking tickets at 58&times; the rate of Washington state &mdash; disproportionately impacting the lower-income, kūpuna, keiki, and disabled residents who walk out of necessity.</p>
-          <span class="ha-transit__service-pc">A cycle of debt, not safety</span>
+        <div class="ha-topic__service-body">
+          <p class="ha-topic__service-title">People who walk</p>
+          <p class="ha-topic__service-cost">349 cited per 100K residents</p>
+          <p class="ha-topic__service-desc">Hawai&#x02BB;i issues jaywalking tickets at 58&times; the rate of Washington state &mdash; disproportionately impacting the lower-income, kūpuna, keiki, and disabled residents who walk out of necessity.</p>
+          <span class="ha-topic__service-pc">A cycle of debt, not safety</span>
         </div>
       </div>
-      <div class="ha-transit__service">
-        <div class="ha-transit__service-icon">
+      <div class="ha-topic__service">
+        <div class="ha-topic__service-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M4 10h16M8 22V10M16 22V10"/></svg>
         </div>
-        <div class="ha-transit__service-body">
-          <p class="ha-transit__service-title">Renters &amp; buyers</p>
-          <p class="ha-transit__service-cost">+$55K per unit</p>
-          <p class="ha-transit__service-desc">Parking mandates tie shelter costs to car storage. Podium parking in urban Honolulu adds over $55,000 to each new unit &mdash; pricing families out of homes.</p>
-          <span class="ha-transit__service-pc">Mandates make housing scarcer</span>
+        <div class="ha-topic__service-body">
+          <p class="ha-topic__service-title">Renters &amp; buyers</p>
+          <p class="ha-topic__service-cost">+$55K per unit</p>
+          <p class="ha-topic__service-desc">Parking mandates tie shelter costs to car storage. Podium parking in urban Honolulu adds over $55,000 to each new unit &mdash; pricing families out of homes.</p>
+          <span class="ha-topic__service-pc">Mandates make housing scarcer</span>
         </div>
       </div>
     </div>
@@ -2006,71 +408,71 @@ body { font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-se
        structural carryovers from the tax page's regressivity charts.
        The Overview now lands cleanly on the services grid above.) -->
 
-    <div class="ha-transit__panel-close-wrap">
-      <button class="ha-transit__panel-close" aria-label="Close section">
+    <div class="ha-topic__panel-close-wrap">
+      <button class="ha-topic__panel-close" aria-label="Close section">
         <svg viewBox="0 0 14 9"><path d="M1 8l6-7 6 7"/></svg>
         Close
       </button>
     </div>
-  </section><!-- /#ha-transit-panel-overview -->
+  </section><!-- /#ha-topic-panel-overview -->
 
   <!-- =========== PRIORITIES PANEL =========== -->
-  <section class="ha-transit__panel" id="ha-transit-panel-priorities" role="tabpanel" hidden>
-    <div class="ha-transit__opps">
-    <div class="ha-transit__opps-head">
-      <div class="ha-transit__eyebrow">Legislative Priorities</div>
-      <h2 class="ha-transit__h2">Move, walk safely, reform</h2>
-      <div class="ha-transit__h2-rule"></div>
-      <p class="ha-transit__lede">
+  <section class="ha-topic__panel" id="ha-topic-panel-priorities" role="tabpanel" hidden>
+    <div class="ha-topic__opps">
+    <div class="ha-topic__opps-head">
+      <div class="ha-topic__eyebrow">Legislative Priorities</div>
+      <h2 class="ha-topic__h2">Move, walk safely, reform</h2>
+      <div class="ha-topic__h2-rule"></div>
+      <p class="ha-topic__lede">
         Five transportation-equity priorities, grouped into three areas where Hawai&#x02BB;i can expand access, protect vulnerable road users, and shift away from car-centric development.
       </p>
-      <p class="ha-transit__opps-note">
+      <p class="ha-topic__opps-note">
         Recent state transportation funding put <strong>66.3%</strong> toward expanding road capacity and <strong>1.5%</strong> toward walking, biking, and transit &mdash; a balance we have a real opportunity to shift, together.
       </p>
     </div>
-    <div class="ha-transit__priorities">
-      <article class="ha-transit__priority">
-        <div class="ha-transit__priority-head">
-          <span class="ha-transit__priority-num">1</span>
+    <div class="ha-topic__priorities">
+      <article class="ha-topic__priority">
+        <div class="ha-topic__priority-head">
+          <span class="ha-topic__priority-num">1</span>
           <div>
-            <h3 class="ha-transit__priority-title">Move</h3>
-            <div class="ha-transit__priority-sub">Expand transit access for those who can&rsquo;t drive</div>
+            <h3 class="ha-topic__priority-title">Move</h3>
+            <div class="ha-topic__priority-sub">Expand transit access for those who can&rsquo;t drive</div>
           </div>
         </div>
-        <p class="ha-transit__priority-desc">
+        <p class="ha-topic__priority-desc">
           Young people are the largest demographic of non-drivers, and lower-income households spend the largest share of their budget on transportation. Fare-free programs in cities across the country have increased ridership, boosted local economies, and lowered emissions &mdash; while reconnecting people to jobs, school, and each other.
         </p>
-        <button class="ha-acc-btn" type="button" aria-expanded="false">Policy details<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><ul class="ha-transit__priority-list">
+        <button class="ha-acc-btn" type="button" aria-expanded="false">Policy details<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><ul class="ha-topic__priority-list">
           <li>
             <strong>Keiki Ride Free</strong>
             Establish a year-round, fare-free youth transit program for individuals 18 and under across the state. Fare-free transit lowers household costs, increases youth access to education and recreation, and reduces emissions and congestion.
           </li>
         </ul></div></div>
-        <div class="ha-transit__priority-stat">
-          <div class="ha-transit__priority-stat-num">18 &amp; under</div>
-          <div class="ha-transit__priority-stat-label">would ride <strong>fare-free</strong> year-round under Keiki Ride Free</div>
+        <div class="ha-topic__priority-stat">
+          <div class="ha-topic__priority-stat-num">18 &amp; under</div>
+          <div class="ha-topic__priority-stat-label">would ride <strong>fare-free</strong> year-round under Keiki Ride Free</div>
         </div>
-        <blockquote class="ha-transit__priority-quote">
+        <blockquote class="ha-topic__priority-quote">
           &ldquo;I missed three job interviews because the bus came every hour. If it came every fifteen minutes, I&rsquo;d still be working at that company.&rdquo;
           <cite>&mdash; Honolulu jobseeker</cite>
         </blockquote>
-        <div class="ha-transit__priority-bills">
-          <a class="ha-transit__priority-bill" href="https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=HB&billnumber=2008&year=2026" target="_blank" rel="noopener">HB 2008 →</a>
+        <div class="ha-topic__priority-bills">
+          <a class="ha-topic__priority-bill" href="https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=HB&billnumber=2008&year=2026" target="_blank" rel="noopener">HB 2008 →</a>
         </div>
       </article>
 
-      <article class="ha-transit__priority">
-        <div class="ha-transit__priority-head">
-          <span class="ha-transit__priority-num">2</span>
+      <article class="ha-topic__priority">
+        <div class="ha-topic__priority-head">
+          <span class="ha-topic__priority-num">2</span>
           <div>
-            <h3 class="ha-transit__priority-title">Walk Safely</h3>
-            <div class="ha-transit__priority-sub">Protect vulnerable road users</div>
+            <h3 class="ha-topic__priority-title">Walk Safely</h3>
+            <div class="ha-topic__priority-sub">Protect vulnerable road users</div>
           </div>
         </div>
-        <p class="ha-transit__priority-desc">
+        <p class="ha-topic__priority-desc">
           Pedestrian fatalities are on the rise, and signalized intersections are among the most dangerous places for people walking, biking, and rolling. Low-cost solutions used worldwide are almost entirely absent in Hawai&#x02BB;i. Meanwhile, jaywalking enforcement falls disproportionately on the people who walk out of necessity &mdash; without making streets any safer.
         </p>
-        <button class="ha-acc-btn" type="button" aria-expanded="false">Policy details<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><ul class="ha-transit__priority-list">
+        <button class="ha-acc-btn" type="button" aria-expanded="false">Policy details<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><ul class="ha-topic__priority-list">
           <li>
             <strong>Fund pedestrian head-start upgrades</strong>
             Require the installation of Leading Pedestrian Intervals (LPIs) and Accessible Pedestrian Signals (APS) at state-owned intersections. These low-cost improvements reduce pedestrian fatalities and serious injuries while making crossings inclusive for people with disabilities.
@@ -2080,32 +482,32 @@ body { font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-se
             Decrease jaywalking fines to end the cycle of debt imposed on pedestrians &mdash; a policy that disproportionately impacts people who depend on walking and does little to improve safety. Six other states and cities have already decriminalized jaywalking.
           </li>
         </ul></div></div>
-        <div class="ha-transit__priority-stat">
-          <div class="ha-transit__priority-stat-num">349 per 100K residents</div>
-          <div class="ha-transit__priority-stat-label">Hawai&#x02BB;i jaywalking citation rate &mdash; <strong>58&times;</strong> Washington state&rsquo;s</div>
+        <div class="ha-topic__priority-stat">
+          <div class="ha-topic__priority-stat-num">349 per 100K residents</div>
+          <div class="ha-topic__priority-stat-label">Hawai&#x02BB;i jaywalking citation rate &mdash; <strong>58&times;</strong> Washington state&rsquo;s</div>
         </div>
-        <blockquote class="ha-transit__priority-quote">
+        <blockquote class="ha-topic__priority-quote">
           &ldquo;My daughter wants to bike to school. I won&rsquo;t let her until there&rsquo;s a protected lane. So I drive her. That&rsquo;s an extra car on the road we don&rsquo;t want.&rdquo;
           <cite>&mdash; Kāne&#x02BB;ohe parent</cite>
         </blockquote>
-        <div class="ha-transit__priority-bills">
-          <a class="ha-transit__priority-bill" href="https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=HB&billnumber=1850&year=2026" target="_blank" rel="noopener">HB 1850 →</a>
-          <a class="ha-transit__priority-bill" href="https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=SB&billnumber=2587&year=2026" target="_blank" rel="noopener">SB 2587 →</a>
+        <div class="ha-topic__priority-bills">
+          <a class="ha-topic__priority-bill" href="https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=HB&billnumber=1850&year=2026" target="_blank" rel="noopener">HB 1850 →</a>
+          <a class="ha-topic__priority-bill" href="https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=SB&billnumber=2587&year=2026" target="_blank" rel="noopener">SB 2587 →</a>
         </div>
       </article>
 
-      <article class="ha-transit__priority">
-        <div class="ha-transit__priority-head">
-          <span class="ha-transit__priority-num">3</span>
+      <article class="ha-topic__priority">
+        <div class="ha-topic__priority-head">
+          <span class="ha-topic__priority-num">3</span>
           <div>
-            <h3 class="ha-transit__priority-title">Reform</h3>
-            <div class="ha-transit__priority-sub">End car-centric mandates &amp; biased enforcement</div>
+            <h3 class="ha-topic__priority-title">Reform</h3>
+            <div class="ha-topic__priority-sub">End car-centric mandates &amp; biased enforcement</div>
           </div>
         </div>
-        <p class="ha-transit__priority-desc">
+        <p class="ha-topic__priority-desc">
           Outdated parking mandates tie the cost of shelter to the storage of cars &mdash; making housing scarcer and more expensive. Honolulu&rsquo;s Ordinance 20-41 already eliminated mandates in transit-oriented districts, and the early data is striking: rental projects there now average just 0.75 parking spaces per unit. Pair this reform with transparency in traffic enforcement to surface the biases that shape who gets stopped.
         </p>
-        <button class="ha-acc-btn" type="button" aria-expanded="false">Policy details<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><ul class="ha-transit__priority-list">
+        <button class="ha-acc-btn" type="button" aria-expanded="false">Policy details<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><ul class="ha-topic__priority-list">
           <li>
             <strong>Eliminate or reduce parking mandates</strong>
             Reduce the amount of parking counties can require on new development &mdash; statewide, in urban districts, and in TOD areas. Eliminating costly parking mandates is one of the most proven ways to lower housing costs and give residents choices beyond car ownership.
@@ -2115,97 +517,97 @@ body { font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-se
             Require police to collect socio-demographic data for all traffic stops and provide yearly reports. Transparency reveals biases in local policing and is the foundation for any meaningful enforcement reform.
           </li>
         </ul></div></div>
-        <div class="ha-transit__priority-stat">
-          <div class="ha-transit__priority-stat-num">$55K+</div>
-          <div class="ha-transit__priority-stat-label">added to each new urban-Honolulu unit by <strong>parking mandates</strong></div>
+        <div class="ha-topic__priority-stat">
+          <div class="ha-topic__priority-stat-num">$55K+</div>
+          <div class="ha-topic__priority-stat-label">added to each new urban-Honolulu unit by <strong>parking mandates</strong></div>
         </div>
-        <blockquote class="ha-transit__priority-quote">
+        <blockquote class="ha-topic__priority-quote">
           &ldquo;Selling the second car was the biggest raise our family ever got. But it only works because we live close to the rail.&rdquo;
           <cite>&mdash; &#x02BB;Aiea family</cite>
         </blockquote>
-        <div class="ha-transit__priority-bills">
-          <a class="ha-transit__priority-bill" href="https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=HB&billnumber=2306&year=2026" target="_blank" rel="noopener">HB 2306 →</a>
+        <div class="ha-topic__priority-bills">
+          <a class="ha-topic__priority-bill" href="https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=HB&billnumber=2306&year=2026" target="_blank" rel="noopener">HB 2306 →</a>
         </div>
       </article>
     </div>
     </div>
-    <div class="ha-transit__impact">
-    <div class="ha-transit__opps-head">
-      <div class="ha-transit__eyebrow">A Record of Results</div>
-      <h2 class="ha-transit__h2">Our Impact</h2>
-      <div class="ha-transit__h2-rule"></div>
-      <p class="ha-transit__lede">
+    <div class="ha-topic__impact">
+    <div class="ha-topic__opps-head">
+      <div class="ha-topic__eyebrow">A Record of Results</div>
+      <h2 class="ha-topic__h2">Our Impact</h2>
+      <div class="ha-topic__h2-rule"></div>
+      <p class="ha-topic__lede">
         Litigation to win language access, and a growing slate of 2023-and-beyond campaigns to expand transit, protect pedestrians, reform parking mandates, and bring transparency to traffic enforcement.
       </p>
     </div>
-    <div class="ha-transit__timeline">
+    <div class="ha-topic__timeline">
 
-      <article class="ha-transit__milestone">
-        <span class="ha-transit__milestone-year">2013 &ndash; 2015</span>
-        <div class="ha-transit__milestone-card">
-          <h3 class="ha-transit__milestone-title">Won language access on driver&rsquo;s license tests</h3>
-          <p class="ha-transit__milestone-desc">Sued to force the state to provide language translation on driver&rsquo;s license forms and tests. The litigation opened the path to driving and the economic opportunity that comes with it for thousands of residents with limited English proficiency.</p>
+      <article class="ha-topic__milestone">
+        <span class="ha-topic__milestone-year">2013 &ndash; 2015</span>
+        <div class="ha-topic__milestone-card">
+          <h3 class="ha-topic__milestone-title">Won language access on driver&rsquo;s license tests</h3>
+          <p class="ha-topic__milestone-desc">Sued to force the state to provide language translation on driver&rsquo;s license forms and tests. The litigation opened the path to driving and the economic opportunity that comes with it for thousands of residents with limited English proficiency.</p>
         </div>
       </article>
 
-      <article class="ha-transit__milestone">
-        <span class="ha-transit__milestone-year">2023 &ndash; Present</span>
-        <div class="ha-transit__milestone-card">
-          <h3 class="ha-transit__milestone-title">Launching Keiki Ride Free &amp; pedestrian safety upgrades</h3>
-          <p class="ha-transit__milestone-desc">Leading the fight to establish <strong>Keiki Ride Free</strong> &mdash; a year-round, fare-free youth transit program across the state &mdash; and to fund pedestrian head-start upgrades (Leading Pedestrian Intervals and Accessible Pedestrian Signals) at dangerous intersections.</p>
+      <article class="ha-topic__milestone">
+        <span class="ha-topic__milestone-year">2023 &ndash; Present</span>
+        <div class="ha-topic__milestone-card">
+          <h3 class="ha-topic__milestone-title">Launching Keiki Ride Free &amp; pedestrian safety upgrades</h3>
+          <p class="ha-topic__milestone-desc">Leading the fight to establish <strong>Keiki Ride Free</strong> &mdash; a year-round, fare-free youth transit program across the state &mdash; and to fund pedestrian head-start upgrades (Leading Pedestrian Intervals and Accessible Pedestrian Signals) at dangerous intersections.</p>
         </div>
       </article>
 
-      <article class="ha-transit__milestone">
-        <span class="ha-transit__milestone-year">2023 &ndash; Present</span>
-        <div class="ha-transit__milestone-card">
-          <h3 class="ha-transit__milestone-title">Reforming parking mandates statewide</h3>
-          <p class="ha-transit__milestone-desc">Advocating for the elimination or reduction of parking mandates to make housing more affordable and give residents choices beyond car ownership. Building on the early results of Honolulu&rsquo;s Ordinance 20-41 &mdash; which eliminated mandates in transit-oriented areas and is already producing projects at <strong>0.75 spaces per unit</strong>.</p>
+      <article class="ha-topic__milestone">
+        <span class="ha-topic__milestone-year">2023 &ndash; Present</span>
+        <div class="ha-topic__milestone-card">
+          <h3 class="ha-topic__milestone-title">Reforming parking mandates statewide</h3>
+          <p class="ha-topic__milestone-desc">Advocating for the elimination or reduction of parking mandates to make housing more affordable and give residents choices beyond car ownership. Building on the early results of Honolulu&rsquo;s Ordinance 20-41 &mdash; which eliminated mandates in transit-oriented areas and is already producing projects at <strong>0.75 spaces per unit</strong>.</p>
         </div>
       </article>
 
-      <button class="ha-acc-btn" type="button" aria-expanded="false">Show 1 more milestone<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><article class="ha-transit__milestone ha-transit__milestone--current">
-        <span class="ha-transit__milestone-year">2023 &ndash; Present</span>
-        <div class="ha-transit__milestone-card">
-          <h3 class="ha-transit__milestone-title">Equity in traffic enforcement</h3>
-          <p class="ha-transit__milestone-desc">Championing policies to reduce pedestrian fines and standardize police data collection to increase transparency and reduce bias in traffic enforcement. Hawai&#x02BB;i issues jaywalking tickets at <strong>349 per 100,000 residents</strong> &mdash; nearly 60&times; Washington state&rsquo;s rate &mdash; with no demonstrated safety benefit.</p>
+      <button class="ha-acc-btn" type="button" aria-expanded="false">Show 1 more milestone<svg class="ha-acc-chev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="ha-acc-panel"><div class="ha-acc-inner"><article class="ha-topic__milestone ha-topic__milestone--current">
+        <span class="ha-topic__milestone-year">2023 &ndash; Present</span>
+        <div class="ha-topic__milestone-card">
+          <h3 class="ha-topic__milestone-title">Equity in traffic enforcement</h3>
+          <p class="ha-topic__milestone-desc">Championing policies to reduce pedestrian fines and standardize police data collection to increase transparency and reduce bias in traffic enforcement. Hawai&#x02BB;i issues jaywalking tickets at <strong>349 per 100,000 residents</strong> &mdash; nearly 60&times; Washington state&rsquo;s rate &mdash; with no demonstrated safety benefit.</p>
         </div>
       </article></div></div>
 
     </div>
     </div>
 
-    <div class="ha-transit__panel-close-wrap">
-      <button class="ha-transit__panel-close" aria-label="Close section">
+    <div class="ha-topic__panel-close-wrap">
+      <button class="ha-topic__panel-close" aria-label="Close section">
         <svg viewBox="0 0 14 9"><path d="M1 8l6-7 6 7"/></svg>
         Close
       </button>
     </div>
-  </section><!-- /#ha-transit-panel-priorities -->
+  </section><!-- /#ha-topic-panel-priorities -->
 
-  </div><!-- /.ha-transit__panels -->
+  </div><!-- /.ha-topic__panels -->
 
   <!-- ===================================
        RESEARCH & NEWS (combined two-column)
        =================================== -->
-  <section class="ha-transit__section" id="ha-transit-research-news">
-    <div class="ha-transit__section-head">
-      <div class="ha-transit__eyebrow">Stay informed</div>
-      <h2 class="ha-transit__h2">Research &amp; News</h2>
-      <div class="ha-transit__h2-rule"></div>
-      <p class="ha-transit__lede">
+  <section class="ha-topic__section" id="ha-topic-research-news">
+    <div class="ha-topic__section-head">
+      <div class="ha-topic__eyebrow">Stay informed</div>
+      <h2 class="ha-topic__h2">Research &amp; News</h2>
+      <div class="ha-topic__h2-rule"></div>
+      <p class="ha-topic__lede">
         Reports from our Transportation Equity team, plus news coverage and analysis from around Hawaiʻi.
       </p>
     </div>
 
-    <div class="ha-transit__combined">
+    <div class="ha-topic__combined">
       <!-- LEFT: Publications -->
       <div>
-        <div class="ha-transit__combined-col-head">Publications</div>
-        <div class="ha-transit__pub-list" id="ha-transit-pubs">
+        <div class="ha-topic__combined-col-head">Publications</div>
+        <div class="ha-topic__pub-list" id="ha-topic-pubs">
           <!-- Filled in by JS once publications.json loads -->
         </div>
-        <a class="ha-transit__pub-list-all" href="publications.html?cat=Transportation+Equity">
+        <a class="ha-topic__pub-list-all" href="publications.html?cat=Transportation+Equity">
           See all publications
           <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
         </a>
@@ -2213,9 +615,9 @@ body { font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-se
 
       <!-- RIGHT: Press & Blog (auto-synced from news.json — see
            scripts/sync-news.py and the loadNews() function below) -->
-      <div id="ha-transit-news-col">
-        <div class="ha-transit__combined-col-head">Press &amp; Blog</div>
-        <div class="ha-transit__news-stack" id="ha-transit-news-stack">
+      <div id="ha-topic-news-col">
+        <div class="ha-topic__combined-col-head">Press &amp; Blog</div>
+        <div class="ha-topic__news-stack" id="ha-topic-news-stack">
           <!-- Populated dynamically by loadNews() from news.json,
                filtered to this page's category predicate. -->
         </div>
@@ -2226,14 +628,14 @@ body { font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-se
   <!-- ===================================
        TAKE ACTION CTA
        =================================== -->
-  <section class="ha-transit__cta" aria-labelledby="ha-transit-cta-heading">
-    <div class="ha-transit__cta-inner">
-      <span class="ha-transit__cta-eyebrow">Take action</span>
-      <h2 id="ha-transit-cta-heading">Help us build a Hawai&#x02BB;i where everyone can move.</h2>
+  <section class="ha-topic__cta" aria-labelledby="ha-topic-cta-heading">
+    <div class="ha-topic__cta-inner">
+      <span class="ha-topic__cta-eyebrow">Take action</span>
+      <h2 id="ha-topic-cta-heading">Help us build a Hawai&#x02BB;i where everyone can move.</h2>
       <p>How we move through our communities reflects who we value. Sign up for email alerts on transportation-equity bills moving at the Capitol, read our latest research, or reach out to your legislator &mdash; every voice helps build safer streets and a system that works for everyone.</p>
-      <div class="ha-transit__cta-actions">
-        <a class="ha-transit__cta-btn ha-transit__cta-btn--primary" href="https://hiappleseed.quorum.us/campaign/safestreetssubscribe/" target="_blank" rel="noopener">Get email alerts</a>
-        <a class="ha-transit__cta-btn ha-transit__cta-btn--ghost" href="publications.html?cat=Transportation+Equity">Read our transit research</a>
+      <div class="ha-topic__cta-actions">
+        <a class="ha-topic__cta-btn ha-topic__cta-btn--primary" href="https://hiappleseed.quorum.us/campaign/safestreetssubscribe/" target="_blank" rel="noopener">Get email alerts</a>
+        <a class="ha-topic__cta-btn ha-topic__cta-btn--ghost" href="publications.html?cat=Transportation+Equity">Read our transit research</a>
       </div>
     </div>
   </section>
@@ -2241,43 +643,43 @@ body { font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-se
   <!-- Explore other issues — quick nav to the other four issue pages, so a
        reader who finishes one issue can move straight to another. Same-tab
        (unlike the Issues landing links) since this IS the cross-issue menu. -->
-  <section class="ha-transit__more" aria-labelledby="ha-transit-more-heading">
-    <div class="ha-transit__more-inner">
-      <span class="ha-transit__more-eyebrow">Explore another issue</span>
-      <h2 id="ha-transit-more-heading">Our work is connected.</h2>
-      <ul class="ha-transit__more-grid">
+  <section class="ha-topic__more" aria-labelledby="ha-topic-more-heading">
+    <div class="ha-topic__more-inner">
+      <span class="ha-topic__more-eyebrow">Explore another issue</span>
+      <h2 id="ha-topic-more-heading">Our work is connected.</h2>
+      <ul class="ha-topic__more-grid">
         <li>
-          <a class="ha-transit__more-card" href="food-security.html">
-            <span class="ha-transit__more-name">Food Equity</span>
-            <p class="ha-transit__more-desc">Healthy, culturally rooted food for every Hawai&#x02BB;i family.</p>
-            <span class="ha-transit__more-go">Explore
+          <a class="ha-topic__more-card" href="food-security.html">
+            <span class="ha-topic__more-name">Food Equity</span>
+            <p class="ha-topic__more-desc">Healthy, culturally rooted food for every Hawai&#x02BB;i family.</p>
+            <span class="ha-topic__more-go">Explore
               <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
             </span>
           </a>
         </li>
         <li>
-          <a class="ha-transit__more-card" href="housing.html">
-            <span class="ha-transit__more-name">Affordable Housing</span>
-            <p class="ha-transit__more-desc">Homes Hawai&#x02BB;i&rsquo;s families can actually afford.</p>
-            <span class="ha-transit__more-go">Explore
+          <a class="ha-topic__more-card" href="housing.html">
+            <span class="ha-topic__more-name">Affordable Housing</span>
+            <p class="ha-topic__more-desc">Homes Hawai&#x02BB;i&rsquo;s families can actually afford.</p>
+            <span class="ha-topic__more-go">Explore
               <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
             </span>
           </a>
         </li>
         <li>
-          <a class="ha-transit__more-card" href="taxes-budget.html">
-            <span class="ha-transit__more-name">Taxes &amp; Budget</span>
-            <p class="ha-transit__more-desc">A fairer tax code for a thriving Hawai&#x02BB;i.</p>
-            <span class="ha-transit__more-go">Explore
+          <a class="ha-topic__more-card" href="taxes-budget.html">
+            <span class="ha-topic__more-name">Taxes &amp; Budget</span>
+            <p class="ha-topic__more-desc">A fairer tax code for a thriving Hawai&#x02BB;i.</p>
+            <span class="ha-topic__more-go">Explore
               <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
             </span>
           </a>
         </li>
         <li>
-          <a class="ha-transit__more-card" href="wages-labor.html">
-            <span class="ha-transit__more-name">Wages &amp; Labor</span>
-            <p class="ha-transit__more-desc">Pay and protections that match the cost of living here.</p>
-            <span class="ha-transit__more-go">Explore
+          <a class="ha-topic__more-card" href="wages-labor.html">
+            <span class="ha-topic__more-name">Wages &amp; Labor</span>
+            <p class="ha-topic__more-desc">Pay and protections that match the cost of living here.</p>
+            <span class="ha-topic__more-go">Explore
               <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
             </span>
           </a>
@@ -2289,367 +691,10 @@ body { font-family:OkinaPoppins, 'Poppins',system-ui,-apple-system,Arial,sans-se
 
 </section>
 
-<script>
-(function() {
-  // Pie chart data + init/legend/showDesc removed — the tax-revenue
-  // breakdown didn't apply to this issue area. See git history if
-  // you need the original block.
+<script src="assets/issue-page.js"></script>
 
-  // ===== Publications loader =====
-  function formatDate(ts) {
-    if (!ts) return '';
-    const d = new Date(ts);
-    return d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
-  }
-  // ===== Per-page category filter (single source of truth used by
-  // both loadPubs and loadNews). =====
-  function matchesCategory(c) { return /transportation/i.test(c); }
 
-  async function loadPubs() {
-    try {
-      const r = await fetch('publications.json');
-      if (!r.ok) throw new Error('fetch failed');
-      const data = await r.json();
-      const items = (data.items || []).filter(i =>
-        (i.categories || []).some(matchesCategory)
-      ).sort((a,b) => (b.publishOn||0) - (a.publishOn||0));
-
-      if (!items.length) return;
-
-      // Vertical list: 3 most-recent publications, first marked "Latest"
-      const grid = document.getElementById('ha-transit-pubs');
-      grid.innerHTML = items.slice(0, 3).map((i, idx) => {
-        const url = i.fullUrl ? 'https://hiappleseed.org' + i.fullUrl : '#';
-        const img = i.assetUrl ? `${i.assetUrl}?format=300w` : '';
-        const badge = idx === 0 ? `<span class="ha-transit__pub-list-badge">Latest</span>` : '';
-        return `
-          <a class="ha-transit__pub-list-item" href="${url}" target="_blank" rel="noopener">
-            <div class="ha-transit__pub-list-thumb">
-              ${badge}
-              ${img ? `<img src="${img}" alt="">` : ''}
-            </div>
-            <div class="ha-transit__pub-list-body">
-              <div class="ha-transit__pub-list-meta">${formatDate(i.publishOn)}</div>
-              <h3 class="ha-transit__pub-list-title">${i.title || 'Untitled'}</h3>
-            </div>
-          </a>
-        `;
-      }).join('');
-    } catch (e) {
-      console.warn('publications.json load failed:', e);
-    }
-  }
-
-  // ===== News loader (Press & Blog right column) =====
-  // Pulls from news.json (auto-synced nightly from hiappleseed.org/blog
-  // and hiappleseed.org/in-the-news via scripts/sync-news.py). Renders
-  // the newest blog post + newest press mention tagged with this page's
-  // issue area into #ha-transit-news-stack. Markup matches the original
-  // hardcoded clippings so the existing .ha-transit__news-* CSS applies.
-  const NEWS_OUTLET_CODE = {
-    'Honolulu Civil Beat':       'CB',
-    'Hawaiʻi Public Radio':      'HP',
-    'Hawaii Public Radio':       'HP',
-    'Honolulu Star-Advertiser':  'SA',
-    'PBS Hawaiʻi':               'PB',
-    'PBS Hawaii':                'PB',
-    'KHON2':                     'KH',
-    'Hawaii News Now':           'HN',
-  };
-  function stripNewsHtml(s) {
-    const d = document.createElement('div');
-    d.innerHTML = s || '';
-    return (d.textContent || d.innerText || '').trim();
-  }
-  function newsAnchorFor(bio) {
-    const name = stripNewsHtml(bio);
-    if (NEWS_OUTLET_CODE[name]) return NEWS_OUTLET_CODE[name];
-    const words = name.split(/\s+/).filter(Boolean);
-    return (words.slice(-2).map(w => w[0]).join('') || 'XX').toUpperCase();
-  }
-  function newsBlogHtml(b) {
-    const author = stripNewsHtml((b.author && b.author.displayName) || '') || 'Hawaiʻi Appleseed';
-    const url = b.fullUrl ? 'https://hiappleseed.org' + b.fullUrl : 'https://hiappleseed.org/in-the-news';
-    return `
-      <article class="ha-transit__news-clipping">
-        <div class="ha-transit__news-anchor" aria-hidden="true">HA</div>
-        <div class="ha-transit__news-body">
-          <div class="ha-transit__news-source">
-            <span class="ha-transit__news-source-tag">Blog</span>
-            Hawaiʻi Appleseed
-          </div>
-          <h3 class="ha-transit__news-title">${stripNewsHtml(b.title)}</h3>
-          <p class="ha-transit__news-excerpt">${stripNewsHtml(b.excerpt)}</p>
-          <div class="ha-transit__news-byline">
-            ${formatDate(b.publishOn)}
-            <span class="ha-transit__news-byline-sep"></span>
-            <strong>${author}</strong>
-          </div>
-          <a class="ha-transit__news-link" href="${url}" target="_blank" rel="noopener">
-            Read the full post
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
-          </a>
-        </div>
-      </article>`;
-  }
-  function newsPressHtml(p) {
-    const outlet = p.outlet || stripNewsHtml((p.author && p.author.bio) || '') || 'Press';
-    const code   = newsAnchorFor(p.outlet || (p.author && p.author.bio) || '');
-    const url    = p.sourceUrl || (p.fullUrl ? 'https://hiappleseed.org' + p.fullUrl : '#');
-    return `
-      <article class="ha-transit__news-clipping">
-        <div class="ha-transit__news-anchor ha-transit__news-anchor--press" aria-hidden="true">${code}</div>
-        <div class="ha-transit__news-body">
-          <div class="ha-transit__news-source">
-            <span class="ha-transit__news-source-tag">Press</span>
-            ${outlet}
-          </div>
-          <h3 class="ha-transit__news-title">${stripNewsHtml(p.title)}</h3>
-          <p class="ha-transit__news-excerpt">${stripNewsHtml(p.excerpt)}</p>
-          <div class="ha-transit__news-byline">
-            ${formatDate(p.publishOn)}
-            <span class="ha-transit__news-byline-sep"></span>
-            <strong>${outlet}</strong>
-          </div>
-          <a class="ha-transit__news-link" href="${url}" target="_blank" rel="noopener">
-            Read on ${outlet}
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
-          </a>
-        </div>
-      </article>`;
-  }
-  async function loadNews() {
-    try {
-      const r = await fetch('news.json');
-      if (!r.ok) throw new Error('fetch failed');
-      const data = await r.json();
-      const pickFirst = items => (items || [])
-        .filter(i => (i.categories || []).some(matchesCategory))
-        .sort((a,b) => (b.publishOn||0) - (a.publishOn||0))[0];
-      const blog  = pickFirst(data.blog);
-      const press = pickFirst(data.press);
-      const stack = document.getElementById('ha-transit-news-stack');
-      if (!stack) return;
-      stack.innerHTML = (blog ? newsBlogHtml(blog) : '') + (press ? newsPressHtml(press) : '');
-    } catch (e) {
-      console.warn('news.json load failed:', e);
-    }
-  }
-
-  // ===== Tab panel switcher =====
-  function initTabs() {
-    const tabs = document.querySelectorAll('.ha-transit__tab');
-    const stuckTabs = document.querySelectorAll('.ha-transit__stuck-tab');
-    const panels = document.querySelectorAll('.ha-transit__panel');
-    const indicator = document.querySelector('.ha-transit__tabs-indicator');
-    if (!tabs.length || !panels.length) return;
-
-    const VALID_TABS = ['overview', 'priorities'];
-
-    function setTab(name, opts) {
-      opts = opts || {};
-      if (indicator) indicator.style.opacity = '1';
-      tabs.forEach((t, i) => {
-        const active = t.dataset.panel === name;
-        t.classList.toggle('active', active);
-        t.setAttribute('aria-selected', active ? 'true' : 'false');
-        if (active && indicator) {
-          indicator.style.transform = `translateX(${t.offsetLeft - 4}px)`;
-          // Keep the active tab visible when the pill scrolls (mobile)
-          const pill = t.parentElement;
-          if (pill.scrollWidth > pill.clientWidth) {
-            pill.scrollTo({
-              left: t.offsetLeft - (pill.clientWidth - t.offsetWidth) / 2,
-              behavior: 'smooth'
-            });
-          }
-        }
-      });
-      // Sync stuck-bar tabs
-      stuckTabs.forEach(t => {
-        const active = t.dataset.panel === name;
-        t.classList.toggle('active', active);
-        t.setAttribute('aria-selected', active ? 'true' : 'false');
-      });
-      panels.forEach(p => {
-        const active = p.id === `ha-transit-panel-${name}`;
-        p.classList.toggle('active', active);
-        if (active) p.removeAttribute('hidden');
-        else p.setAttribute('hidden', '');
-      });
-      if (name === 'overview') {
-        runCountUps();
-      }
-      // Update URL hash for deep-linking (unless suppressed)
-      if (!opts.silent) {
-        const newHash = '#' + name;
-        if (location.hash !== newHash) {
-          history.replaceState(null, '', newHash);
-        }
-      }
-    }
-
-    // ===== Count-up animation for stat headlines =====
-    const countedEls = new WeakSet();
-    function runCountUps() {
-      document.querySelectorAll('[data-count-to]').forEach(el => {
-        if (countedEls.has(el)) return;
-        // Only animate if visible (the panel is shown)
-        if (!el.offsetParent) return;
-        countedEls.add(el);
-        const target = parseFloat(el.dataset.countTo);
-        const prefix = el.dataset.countPrefix || '';
-        const suffix = el.dataset.countSuffix || '';
-        const decimals = parseInt(el.dataset.countDecimals || '0', 10);
-        const duration = 1400;
-        const start = performance.now();
-        function frame(now) {
-          const t = Math.min(1, (now - start) / duration);
-          const eased = 1 - Math.pow(1 - t, 3);
-          const current = (eased * target).toFixed(decimals);
-          el.textContent = `${prefix}${current}${suffix}`;
-          if (t < 1) requestAnimationFrame(frame);
-        }
-        requestAnimationFrame(frame);
-      });
-    }
-
-    function closeAll() {
-      tabs.forEach(t => {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-      });
-      stuckTabs.forEach(t => {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-      });
-      panels.forEach(p => {
-        p.classList.remove('active');
-        p.setAttribute('hidden', '');
-      });
-      if (indicator) indicator.style.opacity = '0';
-      // Clear hash when all panels closed
-      if (location.hash) history.replaceState(null, '', location.pathname + location.search);
-    }
-
-    tabs.forEach(t => {
-      t.addEventListener('click', () => {
-        // Clicking the already-active tab closes the panel
-        if (t.classList.contains('active')) {
-          closeAll();
-        } else {
-          setTab(t.dataset.panel);
-        }
-      });
-    });
-
-    // Stuck-bar tab clicks (no-toggle: always set, never close, since the user is already scrolled past)
-    stuckTabs.forEach(t => {
-      t.addEventListener('click', () => {
-        setTab(t.dataset.panel);
-        // Scroll to the panel top so the new content is visible
-        const panel = document.getElementById('ha-transit-panel-' + t.dataset.panel);
-        if (panel) {
-          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    // Apply URL hash on load + on hashchange (back/forward navigation)
-    function applyHash() {
-      const hash = (location.hash || '').replace(/^#/, '');
-      if (VALID_TABS.indexOf(hash) !== -1) {
-        setTab(hash, { silent: true });
-      }
-    }
-    applyHash();
-    // On a fresh load there is usually no #hash, so applyHash() never calls
-    // setTab() — yet the default panel is already `active` in the markup. Any
-    // one-time init that lives inside setTab (the Chart.js pie, the stat
-    // count-ups) therefore never ran. Drive the default tab explicitly.
-    const _h = (location.hash || '').replace(/^#/, '');
-    if (VALID_TABS.indexOf(_h) === -1) setTab(VALID_TABS[0], { silent: true });
-    window.addEventListener('hashchange', applyHash);
-
-    // Re-sync the scrollable tab pill once fonts/layout settle (mobile deep-link)
-    window.addEventListener('load', () => {
-      const active = document.querySelector('.ha-transit__tab.active');
-      if (!active) return;
-      const pill = active.parentElement;
-      if (pill.scrollWidth > pill.clientWidth) {
-        pill.scrollTo({ left: active.offsetLeft - (pill.clientWidth - active.offsetWidth) / 2 });
-      }
-    });
-
-    // Sticky tab bar: show stuck bar when main tab bar scrolls out
-    const stuckBar = document.querySelector('.ha-transit__stuck-bar');
-    const mainTabBar = document.querySelector('.ha-transit__tab-bar');
-    if (stuckBar && mainTabBar && 'IntersectionObserver' in window) {
-      const stickyIO = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          // Show stuck bar when main tab bar is out of view AND scrolled past (above viewport)
-          const scrolledPast = e.boundingClientRect.top < 0;
-          stuckBar.classList.toggle('is-visible', !e.isIntersecting && scrolledPast);
-        });
-      }, { threshold: 0, rootMargin: '-80px 0px 0px 0px' });
-      stickyIO.observe(mainTabBar);
-    }
-
-    // ===== Equity bars + state comparison reveal on scroll-into-view =====
-    if ('IntersectionObserver' in window) {
-      const revealIO = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('is-in');
-            revealIO.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.25 });
-      ['.ha-transit__bars', '.ha-transit__compare'].forEach(sel => {
-        document.querySelectorAll(sel).forEach(el => revealIO.observe(el));
-      });
-    } else {
-      document.querySelectorAll('.ha-transit__bars, .ha-transit__compare').forEach(el => el.classList.add('is-in'));
-    }
-
-    document.querySelectorAll('.ha-transit__panel-close').forEach(btn => {
-      btn.addEventListener('click', () => {
-        closeAll();
-        // Scroll smoothly back up to the tab bar
-        document.querySelector('.ha-transit__tab-bar').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      });
-    });
-
-    // Position indicator on initial active tab + window resize
-    function positionIndicator() {
-      const active = document.querySelector('.ha-transit__tab.active');
-      if (active && indicator) {
-        indicator.style.transform = `translateX(${active.offsetLeft - 4}px)`;
-      }
-    }
-    // Run after fonts/layout settle
-    requestAnimationFrame(() => requestAnimationFrame(positionIndicator));
-    window.addEventListener('load', positionIndicator);
-    window.addEventListener('resize', positionIndicator);
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(positionIndicator);
-    }
-  }
-
-  // ===== Init =====
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => { initTabs(); loadPubs(); loadNews(); });
-  } else {
-    initTabs(); loadPubs(); loadNews();
-  }
-})();
-</script>
-
-<script id="ha-acc-js">
-document.addEventListener('click',function(e){var b=e.target.closest('.ha-acc-btn');if(!b)return;b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')==='true'?'false':'true');});
-</script>
-
-<!-- END ha-transit -->
+<!-- END ha-topic -->
 
 <!-- PREVIEW-ONLY: footer -->
 <footer class="px-footer">
