@@ -19,10 +19,16 @@ The `brand-*` cases test `.claude/skills/appleseed-brand/`, shipped with the oth
 ## Run
 
 ```bash
-scripts/run_skill_evals.sh                           # 7 cases × 3 runs, Sonnet, ~$2
-scripts/run_skill_evals.sh --case 'testimony-*' --runs 1
-scripts/run_skill_evals.sh --ablation with-without   # also run without the skills, ~$2
+scripts/run_skill_evals.sh --changed                 # only cases for what you changed vs origin/main, 1 run each
+scripts/run_skill_evals.sh --case 'testimony-*'      # one group, 1 run each
+scripts/run_skill_evals.sh --release                 # all 7 cases × 3 runs, ~$2–3
+scripts/run_skill_evals.sh --ablation with-without   # also run without the skills
 ```
+
+Iterate with 1 run; use `--release` (3 runs) before shipping. Each agent run
+costs about $0.08–0.20 (flyer is the dearest), and a run is capped at $5 total
+(`--max-cost-usd` overrides). A release PR into `skills-stable` runs
+`--changed origin/skills-stable --release` in CI when the API key secret is set.
 
 Needs a Claude Code build with `plugin eval` out of early access (`claude update`,
 or `CLAUDE_BIN=` pointing at a newer binary). It uses your Claude login and
@@ -87,5 +93,10 @@ Things `plugin eval` actually accepts (found by testing, 2026-09):
   `"name":"(Read|Bash)","input":{…}`, as `read-positions.md` does.
 - `flags` is a string (`"im"`). An unscored indicator is `arm: with-only`.
 - `scaffold_script` is a path to a script, and paths must stay inside the case directory.
+- Prefer regex graders whenever the rule is checkable in the text (a palette,
+  a layout index, the ʻokina, a banned font). They're free and give the same
+  verdict every time; the Haiku judge splits on identical-looking output, and
+  chasing its votes cost more than the runs themselves (2026-10-11). Keep an
+  LLM judge for what a pattern can't see (overall look, argument, tone).
 - Give the LLM judge the rule, not the vibe: it can't see the skill's reference
   files, so say exactly what to check and what not to.
