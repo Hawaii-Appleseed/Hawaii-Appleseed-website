@@ -16,8 +16,11 @@
   --ha-ash-light:  #E5E9E2;  
   --ha-bg:         #F4F7F4;  
   --ha-white:      #FFFFFF;
+  --ha-teal-ink:    #3F5F57;  
+  --ha-teal-bright: #B0C8B4;  
   --ha-ink-muted:  rgba(47,62,70,.78);  
-  --ha-ink-subtle: rgba(47,62,70,.65);  
+  --ha-ink-subtle: rgba(47,62,70,.74);  
+  --ha-ink-on-dark-muted: rgba(255,255,255,.7);  
   --ha-rule:       rgba(53,79,82,.14);   
   --ha-rule-dark:  rgba(202,210,197,.18); 
   --ha-rule-light: rgba(202,210,197,.30); 
@@ -113,6 +116,21 @@
     --ha-section-y:  var(--ha-space-3xl);
   }
 }
+:where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]),
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::before,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 </style>
 <style>
   /* ===== Brand-guide palette (scoped) ===== */
@@ -138,10 +156,10 @@
     display:inline-flex;align-items:center;gap:14px;
     font-family:OkinaPoppins, 'Poppins',sans-serif;font-weight:600;
     font-size:12px;letter-spacing:.28em;text-transform:uppercase;
-    color:var(--ha-teal-deep);
+    color:var(--ha-teal-ink);
   }
   .ha-team .ha-eyebrow::before{content:"";width:42px;height:1px;background:var(--ha-teal);}
-  .ha-team .ha-eyebrow.on-dark{color:var(--ha-teal);}
+  .ha-team .ha-eyebrow.on-dark{color:var(--ha-ash);}
   .ha-team .ha-eyebrow.on-dark::before{background:var(--ha-teal);}
 
   /* ===== HERO ===== */
@@ -244,7 +262,7 @@
   .ha-team .ha-ed-role{
     font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:500;
     font-size:clamp(16px, 1.6vw, 19px);letter-spacing:.02em;
-    color:var(--ha-teal);margin-bottom:28px;
+    color:var(--ha-teal-bright);margin-bottom:28px;
   }
   .ha-team .ha-ed-bio{
     font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:16px;line-height:1.75;
@@ -533,7 +551,7 @@
   .ha-team .ha-ed .ha-eyebrow{
     display:inline-flex;align-items:center;gap:0;
     font-size:12.5px;letter-spacing:.26em;
-    color:var(--ha-teal);font-weight:700;
+    color:var(--ha-ash);font-weight:700;
     text-transform:uppercase;
     padding:10px 20px;
     border:1px solid rgba(132,169,140,.55);

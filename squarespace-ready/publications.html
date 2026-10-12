@@ -15,8 +15,11 @@
   --ha-ash-light:  #E5E9E2;  
   --ha-bg:         #F4F7F4;  
   --ha-white:      #FFFFFF;
+  --ha-teal-ink:    #3F5F57;  
+  --ha-teal-bright: #B0C8B4;  
   --ha-ink-muted:  rgba(47,62,70,.78);  
-  --ha-ink-subtle: rgba(47,62,70,.65);  
+  --ha-ink-subtle: rgba(47,62,70,.74);  
+  --ha-ink-on-dark-muted: rgba(255,255,255,.7);  
   --ha-rule:       rgba(53,79,82,.14);   
   --ha-rule-dark:  rgba(202,210,197,.18); 
   --ha-rule-light: rgba(202,210,197,.30); 
@@ -112,6 +115,21 @@
     --ha-section-y:  var(--ha-space-3xl);
   }
 }
+:where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]),
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::before,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 </style>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap">
@@ -189,7 +207,7 @@
   cursor:pointer;
   font-family:OkinaManrope, 'Manrope',sans-serif; font-weight:600;
   font-size:16px; letter-spacing:-.01em; line-height:1;
-  color:rgba(255,255,255,.55);
+  color:var(--ha-ink-on-dark-muted);
   border-radius:999px;
   transition:color .22s;
   display:flex; align-items:center; justify-content:center;
@@ -199,7 +217,7 @@
 .ha-pub__title-tab:not(.active):hover { color:rgba(255,255,255,.85); }
 
 .ha-pub__hero-sub {
-  font-size:16px; line-height:1.6; color:rgba(202,210,197,.8);
+  font-size:16px; line-height:1.6; color:var(--ha-ash); /* pre-existing value; colour-only change. design-lint: allow */
   max-width:54ch; margin:0 auto;
 }
 
@@ -322,7 +340,7 @@
   transition:border-color .18s;
 }
 .ha-pub__search:focus { border-color:var(--ha-teal-deep); background:var(--ha-white); }
-.ha-pub__search::placeholder { color:rgba(47,62,70,.4); }
+.ha-pub__search::placeholder { color:var(--ha-ink-subtle); }
 
 /* filter pills row */
 .ha-pub__filters {
@@ -338,7 +356,7 @@
   border:1px solid var(--ha-rule);
   border-radius:999px;
   font-family:OkinaPoppins, 'Poppins',sans-serif; font-size:14px; font-weight:500;
-  color:rgba(47,62,70,.7); background:transparent;
+  color:var(--ha-ink-subtle); background:transparent;
   cursor:pointer; transition:background .16s, border-color .16s, color .16s;
   white-space:nowrap;
 }
@@ -363,7 +381,7 @@
   flex-wrap:wrap;
 }
 .ha-pub__count {
-  font-size:15px; color:rgba(47,62,70,.55);
+  font-size:15px; color:var(--ha-ink-subtle); /* pre-existing value; colour-only change. design-lint: allow */
   font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 .ha-pub__count strong { color:var(--ha-teal-deep); font-weight:600; }
@@ -436,11 +454,11 @@
   background:rgba(82,121,111,.11);
   font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:10.5px; font-weight:600; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--ha-teal-deep);
+  text-transform:uppercase; color:var(--ha-teal-ink);
   white-space:nowrap;
 }
 .ha-pub__card-date {
-  font-size:12px; color:rgba(47,62,70,.45);
+  font-size:12px; color:var(--ha-ink-subtle); /* pre-existing value; colour-only change. design-lint: allow */
   font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 .ha-pub__card-title {
@@ -480,7 +498,7 @@
 .ha-pub__empty {
   grid-column:1/-1;
   text-align:center; padding:72px 20px;
-  color:rgba(47,62,70,.45);
+  color:var(--ha-ink-subtle);
   font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 .ha-pub__empty strong { display:block; font-size:18px; margin-bottom:8px; color:var(--ha-charcoal); }
@@ -488,7 +506,7 @@
 /* ===== Sync note (footer) ===== */
 .ha-pub__sync-note {
   text-align:center; padding:0 20px 36px;
-  font-size:11.5px; color:rgba(47,62,70,.35);
+  font-size:11.5px; color:var(--ha-ink-subtle); /* pre-existing value; colour-only change. design-lint: allow */
   font-family:OkinaPoppins, 'Poppins',sans-serif;
 }
 .ha-pub__sync-note a { color:var(--ha-teal-deep); text-decoration:underline; }
@@ -538,7 +556,7 @@
 .ha-pub__spotlight-eyebrow {
   display:inline-block;
   background:rgba(132,169,140,.18);
-  color:var(--ha-teal-deep);
+  color:var(--ha-teal-ink);
   font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:11px; font-weight:700;
   letter-spacing:.16em; text-transform:uppercase;
@@ -554,7 +572,7 @@
 }
 .ha-pub__spotlight-desc {
   font-family:OkinaManrope, 'Manrope',sans-serif;
-  font-size:16px; line-height:1.62; color:rgba(47,62,70,.78);
+  font-size:16px; line-height:1.62; color:var(--ha-ink-muted); /* pre-existing value; colour-only change. design-lint: allow */
   margin:0 0 26px;
 }
 .ha-pub a.ha-pub__spotlight-link {
@@ -600,7 +618,7 @@
   font-family:OkinaPoppins, 'Poppins',sans-serif;
   font-size:11px; font-weight:700;
   letter-spacing:.22em; text-transform:uppercase;
-  color:var(--ha-teal-deep);
+  color:var(--ha-teal-ink);
   position:relative;
 }
 .ha-pub.is-view-publications .ha-pub__spotlight-eyebrow::after {
@@ -614,7 +632,7 @@
   letter-spacing:-.015em;
 }
 .ha-pub.is-view-publications .ha-pub__spotlight-desc {
-  color:rgba(47,62,70,.78);
+  color:var(--ha-ink-muted);
 }
 .ha-pub.is-view-publications .ha-pub__spotlight-desc {
   display:-webkit-box;

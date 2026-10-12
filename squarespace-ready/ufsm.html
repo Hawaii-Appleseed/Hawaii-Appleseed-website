@@ -16,8 +16,11 @@
   --ha-ash-light:  #E5E9E2;  
   --ha-bg:         #F4F7F4;  
   --ha-white:      #FFFFFF;
+  --ha-teal-ink:    #3F5F57;  
+  --ha-teal-bright: #B0C8B4;  
   --ha-ink-muted:  rgba(47,62,70,.78);  
-  --ha-ink-subtle: rgba(47,62,70,.65);  
+  --ha-ink-subtle: rgba(47,62,70,.74);  
+  --ha-ink-on-dark-muted: rgba(255,255,255,.7);  
   --ha-rule:       rgba(53,79,82,.14);   
   --ha-rule-dark:  rgba(202,210,197,.18); 
   --ha-rule-light: rgba(202,210,197,.30); 
@@ -111,6 +114,21 @@
     --ha-fs-hero:    48px;
     --ha-gutter:     var(--ha-space-md);
     --ha-section-y:  var(--ha-space-3xl);
+  }
+}
+:where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]),
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::before,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 </style>

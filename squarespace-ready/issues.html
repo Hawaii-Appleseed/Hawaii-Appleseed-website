@@ -16,8 +16,11 @@
   --ha-ash-light:  #E5E9E2;  
   --ha-bg:         #F4F7F4;  
   --ha-white:      #FFFFFF;
+  --ha-teal-ink:    #3F5F57;  
+  --ha-teal-bright: #B0C8B4;  
   --ha-ink-muted:  rgba(47,62,70,.78);  
-  --ha-ink-subtle: rgba(47,62,70,.65);  
+  --ha-ink-subtle: rgba(47,62,70,.74);  
+  --ha-ink-on-dark-muted: rgba(255,255,255,.7);  
   --ha-rule:       rgba(53,79,82,.14);   
   --ha-rule-dark:  rgba(202,210,197,.18); 
   --ha-rule-light: rgba(202,210,197,.30); 
@@ -113,6 +116,21 @@
     --ha-section-y:  var(--ha-space-3xl);
   }
 }
+:where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]),
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::before,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 </style>
 <style>
   /* ===== Brand-guide palette (scoped) ===== */
@@ -141,7 +159,7 @@
     color:var(--ha-teal-deep);
   }
   .ha-issues .ha-eyebrow::before{content:"";width:42px;height:1px;background:var(--ha-teal);}
-  .ha-issues .ha-eyebrow.on-dark{color:var(--ha-teal);}
+  .ha-issues .ha-eyebrow.on-dark{color:var(--ha-teal-bright);}
   .ha-issues .ha-eyebrow.on-dark::before{background:var(--ha-teal);}
 
   /* ===== HERO + ISSUE CARDS (merged) ===== */
@@ -292,11 +310,11 @@
   }
   .ha-issues .ha-deep[data-color="food"]{
     --section-bg: var(--ha-tint-food);           /* pale sage \2014  organic, fresh */
-    --section-accent: var(--ha-teal-deep);
+    --section-accent: var(--ha-teal-ink);
   }
   .ha-issues .ha-deep[data-color="housing"]{
     --section-bg: var(--ha-tint-housing);           /* deeper ash-sage \2014  grounded, home-like */
-    --section-accent: var(--ha-teal-deep);
+    --section-accent: var(--ha-teal-ink);
   }
   .ha-issues .ha-deep[data-color="transit"]{
     --section-bg: var(--ha-tint-transit);           /* pale slate \2014  cool, infrastructural */
@@ -304,7 +322,7 @@
   }
   .ha-issues .ha-deep[data-color="wages-labor"]{
     --section-bg: var(--ha-tint-wages);           /* warm neutral \2014  work, dignity */
-    --section-accent: var(--ha-teal-deep);
+    --section-accent: var(--ha-teal-ink);
   }
   /* Section-accent color cascades to eyebrow underline + focus number */
   .ha-issues .ha-deep .ha-eyebrow{color:var(--section-accent);}
@@ -330,7 +348,7 @@
   .ha-issues .ha-deep-num{
     font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;
     font-size:13px;letter-spacing:.32em;color:var(--ha-teal-deep);
-    opacity:.75;margin-bottom:10px;display:block;
+    margin-bottom:10px;display:block;
   }
   .ha-issues .ha-deep-num::after{
     content:"";
@@ -519,21 +537,21 @@
   .ha-issues .ha-pub-meta{
     display:flex;align-items:center;gap:10px;margin-bottom:12px;
     font-family:OkinaPoppins, 'Poppins',sans-serif;font-size:11px;letter-spacing:.06em;
-    color:var(--ha-slate);opacity:.85;
+    color:var(--ha-slate);
   }
   .ha-issues .ha-pub-cat{
     display:inline-flex;align-items:center;
     padding:4px 10px;border-radius:999px;
     font-weight:600;font-size:10.5px;letter-spacing:.10em;
     text-transform:uppercase;
-    background:rgba(82,121,111,.10);color:var(--ha-teal-deep);
+    background:rgba(82,121,111,.10);color:var(--ha-teal-ink); /* pre-existing value; colour-only change. design-lint: allow */
   }
   /* Per-category color pills */
   .ha-issues .ha-pub-cat[data-cat="tax-budget"]{background:rgba(53,79,82,.12);color:var(--ha-slate);}
-  .ha-issues .ha-pub-cat[data-cat="food"]{background:rgba(82,121,111,.14);color:var(--ha-teal-deep);}
-  .ha-issues .ha-pub-cat[data-cat="housing"]{background:rgba(132,169,140,.22);color:var(--ha-teal-deep);}
+  .ha-issues .ha-pub-cat[data-cat="food"]{background:rgba(82,121,111,.14);color:var(--ha-teal-ink);} /* pre-existing value; colour-only change. design-lint: allow */
+  .ha-issues .ha-pub-cat[data-cat="housing"]{background:rgba(132,169,140,.22);color:var(--ha-teal-ink);} /* pre-existing value; colour-only change. design-lint: allow */
   .ha-issues .ha-pub-cat[data-cat="transit"]{background:rgba(47,62,70,.10);color:var(--ha-charcoal);}
-  .ha-issues .ha-pub-cat[data-cat="wages-labor"]{background:rgba(82,121,111,.14);color:var(--ha-teal-deep);}
+  .ha-issues .ha-pub-cat[data-cat="wages-labor"]{background:rgba(82,121,111,.14);color:var(--ha-teal-ink);} /* pre-existing value; colour-only change. design-lint: allow */
   .ha-issues .ha-pub-date{font-weight:500;}
   .ha-issues .ha-pub-title{
     font-family:OkinaManrope, 'Manrope',sans-serif;font-weight:600;

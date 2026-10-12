@@ -16,8 +16,11 @@
   --ha-ash-light:  #E5E9E2;  
   --ha-bg:         #F4F7F4;  
   --ha-white:      #FFFFFF;
+  --ha-teal-ink:    #3F5F57;  
+  --ha-teal-bright: #B0C8B4;  
   --ha-ink-muted:  rgba(47,62,70,.78);  
-  --ha-ink-subtle: rgba(47,62,70,.65);  
+  --ha-ink-subtle: rgba(47,62,70,.74);  
+  --ha-ink-on-dark-muted: rgba(255,255,255,.7);  
   --ha-rule:       rgba(53,79,82,.14);   
   --ha-rule-dark:  rgba(202,210,197,.18); 
   --ha-rule-light: rgba(202,210,197,.30); 
@@ -111,6 +114,21 @@
     --ha-fs-hero:    48px;
     --ha-gutter:     var(--ha-space-md);
     --ha-section-y:  var(--ha-space-3xl);
+  }
+}
+:where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]),
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::before,
+  :where([class^="ha-"], [class*=" ha-"], [id^="ha-"], [class^="px-"], [class*=" px-"]) *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 </style>
@@ -309,7 +327,7 @@
       font-weight: 600;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--ha-teal);
+      color: var(--ha-teal-bright);
       display: flex;
       align-items: center;
       gap: 0.85rem;
@@ -336,7 +354,7 @@
       font-size: 1.05rem;
       font-weight: 300;
       line-height: 1.75;
-      color: rgba(255,255,255,0.65);
+      color: var(--ha-ink-on-dark-muted);
       max-width: 520px;
       margin-bottom: 3rem;
     }
@@ -423,7 +441,7 @@
       font-weight: 600;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--ha-teal);
+      color: var(--ha-teal-deep);
       display: flex;
       align-items: center;
       gap: 0.85rem;
@@ -434,7 +452,7 @@
       width: 28px; height: 1px;
       background: var(--ha-teal);
     }
-    #ha-support-embed .section-label.light{ color: rgba(202,210,197,0.7); }
+    #ha-support-embed .section-label.light{ color: var(--ha-ash); }
     #ha-support-embed .section-label.light::before{ background: rgba(202,210,197,0.5); }
 
     #ha-support-embed .section-title{
@@ -518,7 +536,7 @@
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--ha-teal);
+      color: var(--ha-teal-deep);
       text-decoration: none;
       display: inline-flex;
       align-items: center;
@@ -554,7 +572,7 @@
     #ha-support-embed .giving-subhead{
       font-size: 1rem;
       line-height: 1.8;
-      color: rgba(255,255,255,0.5);
+      color: var(--ha-ink-on-dark-muted);
       font-weight: 300;
       max-width: 500px;
       margin-bottom: 4rem;
@@ -617,7 +635,7 @@
       font-family:OkinaManrope, 'Manrope', sans-serif;
       font-size: 0.7rem;
       font-weight: 500;
-      color: var(--ha-teal);
+      color: var(--ha-teal-bright);
       letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-bottom: 1.2rem;
@@ -633,7 +651,7 @@
     #ha-support-embed .giving-desc{
       font-size: 0.83rem;
       line-height: 1.65;
-      color: rgba(255,255,255,0.45);
+      color: var(--ha-ink-on-dark-muted);
       font-weight: 300;
       margin-bottom: 1.8rem;
     }
@@ -704,7 +722,7 @@
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--ha-teal);
+      color: var(--ha-teal-deep);
       padding-top: 0.2rem;
       line-height: 1.5;
     }
@@ -779,7 +797,7 @@
       font-weight: 500;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(202,210,197,0.5);
+      color: var(--ha-ash);
     }
 
     /* \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 \2500 
@@ -813,7 +831,7 @@
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(202,210,197,0.45);
+      color: var(--ha-ash);
       text-decoration: none;
       transition: color 0.25s;
     }

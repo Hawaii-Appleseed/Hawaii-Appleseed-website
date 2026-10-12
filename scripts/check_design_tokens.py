@@ -81,6 +81,16 @@ PAIRS = [
     ("--ha-teal-deep", "--ha-charcoal", "text", "deep teal on dark (avoid)"),
     ("--ha-teal-deep", "--ha-white", "ui", "primary chart series, focus ring"),
     ("--ha-ash", "--ha-white", "ui", "tertiary chart series (avoid alone)"),
+    ("--ha-teal-ink", "--ha-white", "text", "small teal text (any light fill)"),
+    ("--ha-teal-ink", "--ha-ash", "text", "eyebrow on Ash"),
+    ("--ha-teal-ink", "--ha-ash-light", "text", "eyebrow in callout"),
+    ("--ha-teal-ink", "--ha-tint-housing", "text", "accent on housing card"),
+    ("--ha-teal-ink", "--ha-tint-food", "text", "accent on food card"),
+    ("--ha-teal-ink", "--ha-tint-wages", "text", "accent on wages card"),
+    ("--ha-teal-bright", "--ha-charcoal", "text", "eyebrow on dark"),
+    ("--ha-teal-bright", "--ha-slate", "text", "eyebrow on dark gradient end"),
+    ("--ha-ink-on-dark-muted", "--ha-charcoal", "text", "secondary text on dark"),
+    ("--ha-ink-on-dark-muted", "--ha-slate", "text", "secondary text on dark gradient end"),
 ]
 THRESHOLD = {"text": 4.5, "large": 3.0, "ui": 3.0}
 ROLE_LABEL = {"text": "normal text", "large": "large text", "ui": "non-text / UI"}
