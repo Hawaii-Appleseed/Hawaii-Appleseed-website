@@ -40,8 +40,8 @@ Things that file will tell you and are easy to get wrong:
 
 ## Skills
 
-`.claude/skills/` holds the three house skills — **`appleseed-voice`**,
-**`appleseed-testimony`**, **`appleseed-report`**. They load automatically when
+`.claude/skills/` holds the four house skills — **`appleseed-voice`**,
+**`appleseed-testimony`**, **`appleseed-report`**, **`appleseed-brand`**. They load automatically when
 Claude is opened in this repo, and every staff member gets them everywhere else
 as the `appleseed-writing` plugin: `Hawaii-Appleseed/claude-skills` is a
 marketplace that points at this folder **on the `skills-stable` branch**. There
@@ -124,7 +124,7 @@ hub cards (`--section-bg` / `--section-accent`). If you want an issue to read as
 
 ## Design
 
-Spec: [`DESIGN.md`](DESIGN.md). Tokens: [`assets/tokens.css`](assets/tokens.css), linked from every page before its `<style>`. **No raw hex/rgba in page CSS — use `var(--ha-*)`;** add missing values to `tokens.css`, never per page. Squarespace can't load the file, so `build_squarespace.py` inlines `tokens.css` into every `squarespace-ready/` payload; the hand-authored `*squarespace*` snippets keep their own inline copies. Type sizes and spacing have tokens too (`--ha-fs-*`, `--ha-space-*`); px `font-size` is out. The **Design system** workflow lints changed lines for new raw colours/px font sizes, checks WCAG contrast and chart palettes, and fails if `brand-skill/` is stale — run `python3 scripts/build_brand_skill.py` after editing `DESIGN.md` or `tokens.css` (DESIGN.md → Checks).
+Spec: [`DESIGN.md`](DESIGN.md). Tokens: [`assets/tokens.css`](assets/tokens.css), linked from every page before its `<style>`. **No raw hex/rgba in page CSS — use `var(--ha-*)`;** add missing values to `tokens.css`, never per page. Squarespace can't load the file, so `build_squarespace.py` inlines `tokens.css` into every `squarespace-ready/` payload; the hand-authored `*squarespace*` snippets keep their own inline copies. Type sizes and spacing have tokens too (`--ha-fs-*`, `--ha-space-*`); px `font-size` is out. The **Design system** workflow lints changed lines for new raw colours/px font sizes, checks WCAG contrast and chart palettes, and fails if the `appleseed-brand` skill (or its Claude.ai zip in `brand-skill/`) is stale — run `python3 scripts/build_brand_skill.py` after editing `DESIGN.md` or `tokens.css` (DESIGN.md → Checks).
 
 ## When touching layout / type / padding
 

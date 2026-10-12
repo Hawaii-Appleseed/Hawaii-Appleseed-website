@@ -2,7 +2,7 @@ name: Skills evals
 
 # Behavioural evals (evals/skills/, scripts/run_skill_evals.sh): runs Claude
 # with the skills on 7 cases × 3 runs (incl. the brand-* cases for
-# brand-skill/appleseed-brand) and grades what it does. Costs real
+# .claude/skills/appleseed-brand) and grades what it does. Costs real
 # usage (~$1 a run), so it is NOT a required check, runs only on release PRs
 # into skills-stable and on demand, and only when a credential is configured:
 # add ANTHROPIC_API_KEY as a repository secret to turn it on.

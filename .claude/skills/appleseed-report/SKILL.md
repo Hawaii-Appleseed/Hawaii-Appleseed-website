@@ -86,13 +86,13 @@ Pattern: `N. Author Last, First[, others], "Title," Publishing Org, Month DD, YY
 
 ## Step 5 — Render in the brand system
 
-Read `DESIGN.md` (repo root; tokens in `assets/tokens.css`) for exact tokens, type scale, spacing, and component CSS. Non-negotiables:
+Load the **`appleseed-brand`** skill first: it holds the palette, fonts, chart palette and which text colours pass contrast, and its `reference/web-design-guide.md` and `reference/tokens.css` hold the type scale, spacing and component CSS. Don't restate brand values from memory. On top of that, reports have these non-negotiables:
 
 - **Tokens are `--ha-*`, declared on a page namespace class, never on `:root`** — so the block can be pasted into Squarespace without leaking. New components must live inside the namespace or they get no tokens.
 - **`--ha-teal-deep: #52796F` is the workhorse accent** (not `--ha-teal: #84A98C`, which is lighter despite the name).
 - **Font stacks must start with the ʻokina face:** `OkinaManrope, 'Manrope', sans-serif` and `OkinaPoppins, 'Poppins', system-ui, -apple-system, Arial, sans-serif`. Neither Manrope nor Poppins ships U+02BB, and Google's latin face claims the codepoint without providing the glyph — omit the Okina face and ~300 ʻokina fall back to the OS UI font.
 - **Manrope = headings/display/buttons/stat numbers/eyebrows. Poppins = body, nav, small labels, and all italics.** Manrope has no true italic on Google Fonts — never set `font-style:italic` on it.
-- **Body text is never solid charcoal** — it's charcoal at 65–85% alpha. `rgba(47,62,70,.78)` is the standard.
+- **Body text is never solid charcoal** — use `var(--ha-ink-muted)` (charcoal at 78%). Labels, dates and source notes use `var(--ha-ink-subtle)` (74%); never go fainter, it fails contrast.
 - **Verify at 375px before desktop.** The primary breakpoint is `max-width:700px`; 375px also exercises the 800px, 600px, and 1000px queries. Mobile side padding is universally 20px; section padding `56px 20px`. CTA buttons stack full-width.
 
 ## Step 6 — Ship it

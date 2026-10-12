@@ -142,6 +142,16 @@ def smoke() -> list[str]:
         for ext in ("docx", "html"):
             if not (Path(tmp) / "out" / f"HB1.{ext}").exists():
                 errs.append(f"render_testimony.py produced no HB1.{ext}")
+
+        # The brand checker: passes an on-brand file, fails an off-brand one.
+        chk = SKILLS / "appleseed-brand" / "scripts" / "check_brand.py"
+        (Path(tmp) / "on.html").write_text(
+            "<style>.a{font-family:'Manrope',sans-serif;color:var(--ha-teal-ink);background:var(--ha-ash-light);font-size:11px}</style>"
+            "<h1 class=a>Hawaiʻi Appleseed</h1>", encoding="utf-8")
+        (Path(tmp) / "off.html").write_text(
+            "<style>.a{font-family:Georgia,serif;color:#52796F;background:#E5E9E2;font-size:11px}</style>", encoding="utf-8")
+        run(sys.executable, chk, "on.html")
+        run(sys.executable, chk, "off.html", expect=1)
     return errs
 
 

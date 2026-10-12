@@ -4,7 +4,7 @@
     uv run --with python-pptx --with python-docx scripts/build_brand_templates.py
     python3 scripts/build_brand_skill.py      # then refresh the zip
 
-Writes brand-skill/appleseed-brand/templates/appleseed-slides.pptx and
+Writes .claude/skills/appleseed-brand/templates/appleseed-slides.pptx and
 appleseed-document.docx. Both carry an Office theme built from the tokens —
 Charcoal/Slate text colours, the categorical chart palette as Accent 1–6 (so a
 chart inserted in PowerPoint or Word is on-brand by default), Manrope headings
@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from check_design_tokens import TOKENS, parse_tokens, hexof  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
-SKILL = REPO / "brand-skill" / "appleseed-brand"
+SKILL = REPO / ".claude" / "skills" / "appleseed-brand"
 OUT = SKILL / "templates"
 LOGO, LOGO_WHITE = SKILL / "assets" / "logo.png", SKILL / "assets" / "logo-white.png"
 TOK = {k: hexof(v)[1:] for k, v in parse_tokens(TOKENS.read_text()).items() if v[3] == 1}
