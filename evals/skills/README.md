@@ -56,6 +56,29 @@ Fixed since (2026-09-29, 3 runs each, same graders, before → after):
   from HA's original footnote, which Claude silently corrected. When checking
   provenance by hand, match loosely.)
 
+## Brand baseline — 2026-10-11, Sonnet, 3 runs, with skills only
+
+| Case | first run | after fixes |
+|---|---|---|
+| brand-chart | 0.89 | 1.00 |
+| brand-flyer | 1.00 | 0.96 |
+| brand-slide | 0.93 | 0.87 |
+
+What changed between the two columns:
+- **Charts drew years as separate lines in the light sequential greens** (faint
+  on white, hard to tell apart). The skill now says any per-series line/bar
+  uses the categorical order, sequential is for shading only.
+- **Slide scripts guessed layout names** and one hard-coded the eval sandbox's
+  template path. The skill now lists the template's layouts by index and says
+  to copy the template or take its path as an argument.
+- **Graders:** `palette-in-order` also accepts the four colours as named
+  constants in order (it only matched hex literals); `on-brand-slides` no
+  longer asks for colours/fonts restated in code when the script builds on the
+  template's layouts, which is what the skill tells it to do.
+
+The remaining flyer/slide misses are the Haiku judge splitting on output that
+follows every stated rule (read the evidence before "fixing" the skill for them).
+
 ## Writing a grader
 
 Things `plugin eval` actually accepts (found by testing, 2026-09):

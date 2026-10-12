@@ -60,8 +60,8 @@ Muted text: Charcoal at 74% or more on light, White at 70% or more on dark. Don'
 
 ## Chart palette (colour-blind safe — use exactly these)
 
-- **Categories** (series, in this order; never more than 6 — group the rest as "Other" in Ash `#CAD2C5`): Deep Teal `#52796F` · Charcoal `#2F3E46` · Ochre `#BF8A30` · Harbor blue `#6A8CC4` · Clay `#A85A45` · Teal `#84A98C`. Teal is light, so give it a direct label or a thin Charcoal outline.
-- **Sequential** (low → high, e.g. a map shaded by rate): `#E5E9E2` `#B4C9B6` `#84A98C` `#6B917D` `#52796F` `#405B5A` `#2F3E46`. Use 3–7 evenly spaced steps.
+- **Categories** — any chart where each line, bar group or slice is its own series, **including years or other ordered groups drawn as separate lines/bars** (in this order; never more than 6 — group the rest as "Other" in Ash `#CAD2C5`): Deep Teal `#52796F` · Charcoal `#2F3E46` · Ochre `#BF8A30` · Harbor blue `#6A8CC4` · Clay `#A85A45` · Teal `#84A98C`. Teal is light, so give it a direct label or a thin Charcoal outline.
+- **Sequential** (low → high, for **shading only**: a map or heatmap shaded by rate, never separate lines or bars — its light steps vanish on white): `#E5E9E2` `#B4C9B6` `#84A98C` `#6B917D` `#52796F` `#405B5A` `#2F3E46`. Use 3–7 evenly spaced steps.
 - **Diverging** (above/below a midpoint, e.g. change since last year): `#2B4A45` `#52796F` `#A9C3B3` · neutral `#F2F0EA` · `#E0BF85` `#B07A35` `#6E4524`. Teal side = above/better, brown side = below/worse.
 
 These were checked under simulated red-, green- and blue-blindness; don't substitute other greens and reds. For which text colours pass on which background, see **Small text** above; the measured table is `reference/web-design-guide.md` → Contrast.
@@ -71,7 +71,7 @@ These were checked under simulated red-, green- and blue-blindness; don't substi
 - **PowerPoint:** `templates/appleseed-slides.pptx` — 16:9, dark title/section layouts with the white logo, content layouts with the logo and a Deep Teal rule, theme colours = the chart palette (so inserted charts come out on brand), Manrope/Poppins theme fonts. Start decks from it: delete the sample slides, keep the layouts.
 - **Word:** `templates/appleseed-document.docx` — Title, Heading 1–3, Eyebrow, Callout (Ash Light fill, Deep Teal rule), Quote, Source Note styles; logo header; footer with org name and page number.
 
-If you generate a .pptx/.docx with code (python-pptx, python-docx), open the template file as the starting document rather than a blank one. Where Manrope/Poppins aren't installed, Office falls back to Arial — say so.
+If you generate a .pptx/.docx with code (python-pptx, python-docx), open the template file as the starting document rather than a blank one. Point the script at the template with a path the user can run it from (copy `templates/appleseed-slides.pptx` next to the script, or take the path as an argument); never hard-code the path to this skill's folder. Its layouts, by index and name (python-pptx `prs.slide_layouts[i]`): **0 Title Slide** (dark Charcoal, white logo; title + subtitle) · **1 Title and Content** (light; title + body) · **2 Section Header** (dark, white logo; use it for section breaks and the closing slide) · **3 Two Content** · **4 Comparison** · **5 Title Only** (light; for a chart or table you add) · **6 Blank**. Pick layouts by these indexes rather than guessing names, and let the theme colours and fonts carry the look instead of overriding them on every run. Where Manrope/Poppins aren't installed, Office falls back to Arial — say so.
 
 ## Logo
 
