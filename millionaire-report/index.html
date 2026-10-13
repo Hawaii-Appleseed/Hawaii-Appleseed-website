@@ -120,6 +120,7 @@
         .chart-total-value,
         .narrative-stat-figure,
         .revenue-callout-range,
+        .revenue-callout-basis,
         .revenue-callout-prompt strong,
         .revenue-callout-context,
         .tier-tip-amt,
@@ -297,10 +298,6 @@
             border-radius: var(--r-xs);
             white-space: nowrap;
         }
-        .revenue-callout-prompt #revenueTierLabel {
-            color: rgba(255,255,255,0.9);
-            font-weight: 500;
-        }
         /* No pill. The figure now sits directly on the dark field, the same
            way $292.7 billion does in the banner above — one visual language
            instead of a dark chip stranded on a light band. Dropping the pill
@@ -322,15 +319,52 @@
             line-height: 1.15;
             text-shadow: 0 0 26px rgba(var(--money-rgb), 0.32);
         }
-        /* Not italic: only the weight axis of Nunito is loaded, so italic
-           would be a synthetic slant (same reason the house rule forbids it
-           on Manrope). Letter-spacing carries the aside instead. */
-        .revenue-callout-connector {
-            color: rgba(var(--mint-rgb), 0.62);
-            font-size: 0.46em;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            padding: 0 0.1em;
+        .revenue-controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem 1rem;
+            margin: 1.1rem 0 0;
+        }
+        .revenue-seg {
+            display: inline-flex;
+            padding: 3px;
+            gap: 2px;
+            border-radius: var(--r-sm);
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(var(--mint-rgb), 0.2);
+        }
+        .revenue-seg button {
+            font: inherit;
+            font-size: 0.9rem;
+            font-weight: 700;
+            min-width: 3.4rem;
+            min-height: 2.4rem;
+            padding: 0 0.85rem;
+            border: 0;
+            border-radius: var(--r-xs);
+            background: transparent;
+            color: rgba(255,255,255,0.74);
+            cursor: pointer;
+            font-variant-numeric: tabular-nums;
+        }
+        .revenue-seg button:hover { color: #fff; }
+        .revenue-seg button[aria-checked="true"] {
+            background: rgba(var(--mint-rgb), 0.9);
+            color: #12372a;
+        }
+        .revenue-seg button:focus-visible {
+            outline: 2px solid var(--mint-bright);
+            outline-offset: 2px;
+        }
+        .revenue-callout-basis {
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.62);
+            font-weight: 500;
+            max-width: 38em;
+            margin: 0.5rem auto 0;
+            text-wrap: balance;
         }
         /* Unit stays welded to the number it modifies */
         .revenue-callout-per {
@@ -1214,21 +1248,31 @@
         </div>
     </div>
 
-    <!-- Wealth-tax revenue callout -->
+    <!-- Wealth-tax revenue callout: the report's scenarios (Table 1 / Figure 4) -->
     <div class="revenue-callout">
         <p class="revenue-callout-prompt">
-            A <strong>0.1%&ndash;0.2%</strong> wealth tax on <span id="revenueTierLabel">these 81,814 millionaires</span> could raise
+            A <strong id="revenueRateLabel">2%</strong> wealth tax on wealth above <span id="revenueThresholdLabel">$50 million</span> could raise
         </p>
         <div class="revenue-callout-figure">
-            <span class="revenue-callout-range">
-                <span id="revenueLow">$293M</span>
-                <span class="revenue-callout-connector">to</span>
-                <span id="revenueHigh">$585M</span>
-            </span>
+            <span class="revenue-callout-range" id="revenueValue">$1.02B</span>
             <span class="revenue-callout-per">/ year</span>
         </div>
+        <div class="revenue-controls">
+            <div class="revenue-seg" role="radiogroup" aria-label="Wealth threshold" id="thresholdSeg">
+                <button type="button" role="radio" aria-checked="false" data-threshold="20">$20M+</button>
+                <button type="button" role="radio" aria-checked="true" data-threshold="50">$50M+</button>
+            </div>
+            <div class="revenue-seg" role="radiogroup" aria-label="Tax rate" id="rateSeg">
+                <button type="button" role="radio" aria-checked="false" data-rate="1">1%</button>
+                <button type="button" role="radio" aria-checked="true" data-rate="2">2%</button>
+                <button type="button" role="radio" aria-checked="false" data-rate="3">3%</button>
+            </div>
+        </div>
         <p class="revenue-callout-context">
-            &asymp; <span id="revenueBudgetPct">1.2% &ndash; 2.5%</span> of Hawaiʻi&rsquo;s annual state budget
+            &asymp; <span id="revenueBudgetPct">4.3%</span> of Hawaiʻi&rsquo;s annual state budget
+        </p>
+        <p class="revenue-callout-basis" id="revenueBasis">
+            Applied only to the $51.1B held above $50M by 365 residents. Static estimate: no avoidance or out-migration.
         </p>
     </div>
 
@@ -2004,25 +2048,40 @@
                 concBarEl.innerHTML = '<span class="conc-bar-fill" style="width:' + share.toFixed(1) + '%;background:' + color + '"></span>';
                 concLabelEl.textContent = 'held by the ' + tierKey + ' tier';
             }
-
-            // Wealth-tax revenue: 0.1% – 0.2% on info.wealth (in $B)
-            const revLowB = info.wealth * 0.001;
-            const revHighB = info.wealth * 0.002;
-            const fmtRev = (b) => b >= 1 ? '$' + b.toFixed(1) + 'B' : '$' + Math.round(b * 1000) + 'M';
-            document.getElementById('revenueLow').textContent = fmtRev(revLowB);
-            document.getElementById('revenueHigh').textContent = fmtRev(revHighB);
-
-            const budgetPctLow = (revLowB / STATE_BUDGET) * 100;
-            const budgetPctHigh = (revHighB / STATE_BUDGET) * 100;
-            document.getElementById('revenueBudgetPct').textContent =
-                budgetPctLow.toFixed(1) + '% – ' + budgetPctHigh.toFixed(1) + '%';
-
-            const tierCountStr = info.count.toLocaleString();
-            const labelMain = info.label.split('(')[0].trim();
-            const labelParen = info.label.match(/\(([^)]+)\)/)?.[1];
-            document.getElementById('revenueTierLabel').textContent =
-                'these ' + tierCountStr + ' ' + labelMain + (labelParen ? ' (' + labelParen + ')' : '');
         }
+
+        // ── Wealth-tax revenue callout: the report's scenarios (Table 1 / Figure 4) ──
+        // Wealth-X/Altrata 2024 cumulative tiers; the rate applies only to wealth ABOVE the threshold.
+        const REVENUE_TIERS = {
+            20: { people: 1245, totalB: 95.6 },
+            50: { people: 365,  totalB: 69.3 }
+        };
+        let revThreshold = 50, revRate = 2;
+        function updateRevenue() {
+            const t = REVENUE_TIERS[revThreshold];
+            const baseB = t.totalB - t.people * revThreshold / 1000;
+            const revB = baseB * revRate / 100;
+            document.getElementById('revenueRateLabel').textContent = revRate + '%';
+            document.getElementById('revenueThresholdLabel').textContent = '$' + revThreshold + ' million';
+            document.getElementById('revenueValue').textContent = '$' + revB.toFixed(2) + 'B';
+            document.getElementById('revenueBudgetPct').textContent = (revB / STATE_BUDGET * 100).toFixed(1) + '%';
+            document.getElementById('revenueBasis').textContent =
+                'Applied only to the $' + (Math.round(baseB * 10 + 1e-6) / 10).toFixed(1) + 'B held above $' + revThreshold + 'M by '
+                + t.people.toLocaleString() + ' residents. Static estimate: no avoidance or out-migration.';
+        }
+        function bindSeg(id, attr, setter) {
+            const seg = document.getElementById(id);
+            seg.addEventListener('click', (e) => {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                seg.querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', b === btn ? 'true' : 'false'));
+                setter(Number(btn.dataset[attr]));
+                updateRevenue();
+            });
+        }
+        bindSeg('thresholdSeg', 'threshold', v => { revThreshold = v; });
+        bindSeg('rateSeg', 'rate', v => { revRate = v; });
+        updateRevenue();
 
         // Initial animation on load
         updateSummary(summaryMapping['all']);
