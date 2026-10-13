@@ -1274,7 +1274,7 @@
             <div class="chart-totals-row">
                 <span class="chart-total is-past">
                     <span class="chart-total-label">2010 Total</span>
-                    <span class="chart-total-value" id="aggregate2010">$141.3B</span>
+                    <span class="chart-total-value" id="aggregate2010">$105.7B</span>
                 </span>
                 <span class="chart-total is-current">
                     <span class="chart-total-label">2024 Total</span>
@@ -1603,7 +1603,7 @@
                 
                 const x = meta.data[dataIndex].x;
                 const yBottom = area.bottom;
-                const yMiddle = area.top + (area.bottom - area.top) / 2;
+                const yMiddle = Math.max(area.top + 14, chart.scales.y.getPixelForValue(255));
                 
                 // Draw dotted vertical line
                 ctx.save();
@@ -1619,7 +1619,7 @@
                 ctx.fillStyle = '#2a6b4f';
                 ctx.font = 'bold 12px Nunito, sans-serif';
                 ctx.textAlign = 'center';
-                ctx.fillText('tax increase', x, yMiddle - 25);
+                ctx.fillText('tax increase', x, yMiddle - 8);
                 ctx.restore();
                 
                 // Store position for interaction
@@ -1684,10 +1684,10 @@
                     y: {
                         stacked: true,
                         min: 0,
-                        max: 500,
+                        max: 300,
                         grid: { color: 'rgba(0,0,0,0.05)' },
                         ticks: {
-                            stepSize: 150,
+                            stepSize: 100,
                             font: { size: 13 },
                             color: '#8fa89a',
                             callback: function(v) { return '$' + v + 'B'; }
