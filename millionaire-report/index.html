@@ -68,6 +68,7 @@
 
             /* Triplets for alpha composition */
             --mint-rgb:   168, 230, 176;
+            --white-rgb:  255, 255, 255;
             --money-rgb:  106, 188, 122;
             --field-rgb:  26, 60, 52;
             --shadow-rgb: 15, 41, 34;
@@ -331,7 +332,7 @@
             padding: 3px;
             gap: 2px;
             border-radius: var(--r-sm);
-            background: rgba(255,255,255,0.07);
+            background: rgba(var(--white-rgb), 0.07);
             border: 1px solid rgba(var(--mint-rgb), 0.2);
         }
         .revenue-seg button {
@@ -344,14 +345,14 @@
             border: 0;
             border-radius: var(--r-xs);
             background: transparent;
-            color: rgba(255,255,255,0.74);
+            color: rgba(var(--white-rgb), 0.74);
             cursor: pointer;
             font-variant-numeric: tabular-nums;
         }
-        .revenue-seg button:hover { color: #fff; }
+        .revenue-seg button:hover { color: var(--surface); }
         .revenue-seg button[aria-checked="true"] {
             background: rgba(var(--mint-rgb), 0.9);
-            color: #12372a;
+            color: rgb(var(--field-rgb));
         }
         .revenue-seg button:focus-visible {
             outline: 2px solid var(--mint-bright);
@@ -360,7 +361,7 @@
         .revenue-callout-basis {
             font-size: 0.82rem;
             line-height: 1.5;
-            color: rgba(255,255,255,0.62);
+            color: rgba(var(--white-rgb), 0.62);
             font-weight: 500;
             max-width: 38em;
             margin: 0.5rem auto 0;
