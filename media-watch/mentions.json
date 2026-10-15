@@ -2,6 +2,25 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "986d81441d44",
+   "title": "5 ballot questions for Oʻahu voters aim to improve island's housing supply",
+   "outlet": "Hawaii Public Radio",
+   "url": "https://www.hawaiipublicradio.org/local-news/2026-10-14/five-charter-amendment-questions-for-oahu-voters-aim-to-improve-islands-housing-supply",
+   "published": "2026-10-14T22:43:00Z",
+   "firstSeen": "2026-10-15T00:32:17Z",
+   "confidence": "high",
+   "reasons": [
+    "search engine matched the phrase; article text not checked",
+    "names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "google",
+    "feed"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
    "id": "7ec56fd4b480",
    "title": "Will Caron: Don Of The Dead",
    "outlet": "Honolulu Civil Beat",
