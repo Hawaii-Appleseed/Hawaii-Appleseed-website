@@ -235,6 +235,17 @@ body:not(.homepage) .sqs-announcement-bar-dropzone {
     text-decoration: underline;
     text-underline-offset: 3px;
 }
+@media (max-width: 767px) {
+    .sqs-announcement-bar-text {
+        padding-top: 9px !important;
+        padding-bottom: 9px !important;
+    }
+    .sqs-announcement-bar-text-inner,
+    .sqs-announcement-bar-text-inner p {
+        font-size: .88rem !important;
+        line-height: 1.35;
+    }
+}
 .sqs-announcement-bar-close,
 .sqs-announcement-bar-close::after {
     color: #ffffff !important;
