@@ -2,6 +2,23 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "dfec6abf61a9",
+   "title": "Voting explainer: 2026 Honolulu charter amendment ballot questions",
+   "outlet": "Hawaiʻi Public Radio",
+   "url": "https://www.hawaiipublicradio.org/local-news/2026-10-15/voting-explainer-2026-honolulu-charter-amendment-ballot-questions",
+   "published": "2026-10-16T01:37:49Z",
+   "firstSeen": "2026-10-16T09:02:01Z",
+   "confidence": "high",
+   "reasons": [
+    "names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "feed"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
    "id": "986d81441d44",
    "title": "5 ballot questions for Oʻahu voters aim to improve island's housing supply",
    "outlet": "Hawaii Public Radio",
