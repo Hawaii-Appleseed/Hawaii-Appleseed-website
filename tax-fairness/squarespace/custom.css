@@ -235,10 +235,7 @@ body:not(.homepage) .sqs-announcement-bar-dropzone {
     text-decoration: underline;
     text-underline-offset: 3px;
 }
-.sqs-announcement-bar-close::before,
+.sqs-announcement-bar-close,
 .sqs-announcement-bar-close::after {
-    background-color: #ffffff !important;
-}
-.sqs-announcement-bar-close {
     color: #ffffff !important;
 }
