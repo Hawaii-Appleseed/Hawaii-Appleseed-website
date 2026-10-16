@@ -62,6 +62,22 @@
     padding-bottom: 2px;
 }
 .tfc-p27-banner-cta::after { content: " \2192"; }
+/* The block sits alone in a thin section of its own above the hero. Same :has() pattern
+   as priorities_2027_squarespace.html: one auto row, the page's content columns, and a
+   tighter section padding than Squarespace's minimum. Skipped while editing. */
+body:not(.sqs-is-page-editing) .fluid-engine:has(.tfc-p27-banner) { grid-template-rows: auto !important; }
+body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27-banner) { grid-row: 1 / 2 !important; }
+body:not(.sqs-is-page-editing) section:has(.tfc-p27-banner) .content-wrapper {
+    padding-top: 22px !important;
+    padding-bottom: 22px !important;
+}
+body:not(.sqs-is-page-editing) section:has(.tfc-p27-banner) { min-height: 0 !important; }
+@media (min-width: 768px) {
+    body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27-banner) { grid-column: 4 / 24 !important; }
+}
+@media (max-width: 767px) {
+    body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27-banner) { grid-column: 2 / 10 !important; }
+}
 @container (max-width: 560px) {
     .tfc-p27-banner a.tfc-p27-banner-link { padding: 18px 20px; }
     .tfc-p27-banner-text { flex-basis: 100%; }
