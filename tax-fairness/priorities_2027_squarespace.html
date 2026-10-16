@@ -132,6 +132,20 @@
 .tfc-p27-past { margin: 22px 0 0; font-size: .95rem; color: var(--tfc-muted); }
 .tfc-p27-past a { color: #2f62a3; }
 
+/* ---------- The Squarespace block around this one ---------- */
+/* This block is alone in its section. The editor gave it a small default box, so it gets
+   the page title's columns (4-24 desktop, 2-10 phone) and one row that grows to fit.
+   Keyed with :has() so no Squarespace ids are needed; skipped while editing so the
+   editor shows its own layout. */
+body:not(.sqs-is-page-editing) .fluid-engine:has(.tfc-p27) { grid-template-rows: auto !important; }
+body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27) { grid-row: 1 / 2 !important; }
+@media (min-width: 768px) {
+    body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27) { grid-column: 4 / 24 !important; }
+}
+@media (max-width: 767px) {
+    body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27) { grid-column: 2 / 10 !important; }
+}
+
 @container (max-width: 760px) {
     .tfc-p27 .tfc-p27-title { font-size: 2rem; }
     .tfc-p27-item { grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 26px 22px; }
