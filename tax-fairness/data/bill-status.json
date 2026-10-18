@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T08:42:33.312Z",
+  "generatedAt": "2026-10-18T13:05:18.800Z",
   "source": "capitol.hawaii.gov RSS, fetched via GitHub Actions",
   "trackers": [
     {
@@ -1023,7 +1023,426 @@
       "type": "SB",
       "number": "3028",
       "year": "2026",
-      "error": "This operation was aborted"
+      "updates": [
+        {
+          "title": "5/1/26 SB3028: Conference Committee Meeting will reconvene on Friday, 05-01-26 at 5:50PM in Conference Room 016.",
+          "description": "Conference Committee Meeting will reconvene on Friday, 05-01-26 at 5:50PM in Conference Room 016.",
+          "date": "2026-05-02T03:47:18.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/1/26 SB3028: Conference Committee Meeting will reconvene on Friday, 05-01-26 at 5:21PM in Conference Room 016.",
+          "description": "Conference Committee Meeting will reconvene on Friday, 05-01-26 at 5:21PM in Conference Room 016.",
+          "date": "2026-05-02T03:13:17.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/1/26 SB3028: Conference Committee Meeting will reconvene on Friday, 05-01-26 at 5:00PM in Conference Room 016.",
+          "description": "Conference Committee Meeting will reconvene on Friday, 05-01-26 at 5:00PM in Conference Room 016.",
+          "date": "2026-05-02T01:35:01.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "5/1/26 SB3028: Conference committee meeting to reconvene on 05-01-26 2:42 PM; Conference Room 329.",
+          "description": "Conference committee meeting to reconvene on 05-01-26 2:42 PM; Conference Room 329.",
+          "date": "2026-05-01T21:22:36.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/30/26 SB3028: Conference Committee Meeting will reconvene on Friday 05-01-26 10:45AM in conference room 224.",
+          "description": "Conference Committee Meeting will reconvene on Friday 05-01-26 10:45AM in conference room 224.",
+          "date": "2026-04-30T22:13:43.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/30/26 SB3028: Received notice of change in Senate conferees (Sen. Com. No. 797).",
+          "description": "Received notice of change in Senate conferees (Sen. Com. No. 797).",
+          "date": "2026-04-30T19:06:28.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/30/26 SB3028: Senate Conferees Changed: Senator Dela Cruz added as Co-Chair. Senator Kim discharged as Co-Chair.",
+          "description": "Senate Conferees Changed: Senator Dela Cruz added as Co-Chair. Senator Kim discharged as Co-Chair.",
+          "date": "2026-04-30T17:24:19.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/29/26 SB3028: Conference Committee Meeting will reconvene on Thursday 04-30-26 10:45AM in conference room 224.",
+          "description": "Conference Committee Meeting will reconvene on Thursday 04-30-26 10:45AM in conference room 224.",
+          "date": "2026-04-29T23:01:31.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/28/26 SB3028: Conference Committee Meeting will reconvene on Wednesday 04-29-26 10:45AM in conference room 224.",
+          "description": "Conference Committee Meeting will reconvene on Wednesday 04-29-26 10:45AM in conference room 224.",
+          "date": "2026-04-28T22:58:33.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/27/26 SB3028: Bill scheduled for Conference Committee Meeting on Tuesday, 04-28-26 10:45AM in conference room 224.",
+          "description": "Bill scheduled for Conference Committee Meeting on Tuesday, 04-28-26 10:45AM in conference room 224.",
+          "date": "2026-04-27T19:37:56.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/27/26 SB3028: Received notice of Senate conferees (Sen. Com. No. 762).",
+          "description": "Received notice of Senate conferees (Sen. Com. No. 762).",
+          "date": "2026-04-27T18:45:58.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/24/26 SB3028: Senate Conferees Appointed: Lee, C. Chairs; Wakai, Kim Co-Chairs.",
+          "description": "Senate Conferees Appointed: Lee, C. Chairs; Wakai, Kim Co-Chairs.",
+          "date": "2026-04-24T21:15:13.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/20/26 SB3028: Received notice of appointment of House conferees (Hse. Com. No. 787).",
+          "description": "Received notice of appointment of House conferees (Hse. Com. No. 787).",
+          "date": "2026-04-20T19:50:17.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/20/26 SB3028: House Conferees Appointed: Evslin, Todd Co-Chairs; Muraoka.",
+          "description": "House Conferees Appointed: Evslin, Todd Co-Chairs; Muraoka.",
+          "date": "2026-04-20T19:00:28.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/16/26 SB3028: Received notice of disagreement (Sen. Com. No. 710).",
+          "description": "Received notice of disagreement (Sen. Com. No. 710).",
+          "date": "2026-04-16T23:49:51.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/16/26 SB3028: Senate disagrees with House amendments.",
+          "description": "Senate disagrees with House amendments.",
+          "date": "2026-04-16T21:43:26.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/16/26 SB3028: Received from House (Hse. Com. No. 729).",
+          "description": "Received from House (Hse. Com. No. 729).",
+          "date": "2026-04-15T22:18:09.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/14/26 SB3028: Passed Third Reading as amended in HD 2 with none voting aye with reservations; Representative(s) Alcos, Cochran, Garcia, Gedeon, Kong, Lee, M., Matsumoto, Muraoka, Pierick, Reyes Oda voting no (10) and none excused (0).  Transmitted to Senate.",
+          "description": "Passed Third Reading as amended in HD 2 with none, Matsumoto, Muraoka, Pierick, Reyes Oda Transmitted to Senate.",
+          "date": "2026-04-14T21:21:57.000Z",
+          "badge": {
+            "text": "Passed Chamber",
+            "class": "passed"
+          }
+        },
+        {
+          "title": "4/9/26 SB3028: Forty-eight (48) hours notice Tuesday,  04-14-26.",
+          "description": "Forty-eight (48) hours notice Tuesday, 04-14-26.",
+          "date": "2026-04-09T06:49:45.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/9/26 SB3028: Reported from FIN (Stand. Com. Rep. No. 2020-26) as amended in HD 2, recommending passage on Third Reading.",
+          "description": "Reported from FIN (Stand. Com. Rep. No. 2020-26) as amended in HD 2, recommending passage on Third Reading.",
+          "date": "2026-04-09T06:49:45.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "4/7/26 SB3028: The committee on FIN recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 14 Ayes: Representative(s) Todd, Takenouchi, Hartsfield, Hussey, Keohokapu-Lee Loy, Kitagawa, Kusch, Miyake, Morikawa, Perruso, Templo, Yamashita; Ayes with reservations: Representative(s) Lee, M., Gedeon; 2 Noes: Representative(s) Alcos, Reyes Oda; and  Excused: none.",
+          "description": "The committee on FIN recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 14 Ayes: Representative(s) Todd, Takenouchi, Hartsfield, Hussey, Keohokapu-Lee Loy, Kitagawa, Kusch, Miyake, Morikawa, Perruso, Templo, Yamashita; Ayes with reservations: Representative(s) Lee, M., Gedeon; 2 Noes: Representative(s) Alcos, Reyes Oda; and Excused: none.",
+          "date": "2026-04-07T22:43:46.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/2/26 SB3028: Bill scheduled for decision making on Tuesday, 04-07-26 10:10AM in conference room 308 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled for decision making on Tuesday, 04-07-26 10:10AM in conference room 308 VIA VIDEOCONFERENCE.",
+          "date": "2026-04-03T05:20:03.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "4/2/26 SB3028: The committee(s) on FIN recommend(s) that the measure be deferred until 04-07-26.",
+          "description": "The committee(s) on FIN recommend(s) that the measure be deferred until 04-07-26.",
+          "date": "2026-04-03T04:37:33.000Z",
+          "badge": {
+            "text": "Deferred",
+            "class": "deferred"
+          }
+        },
+        {
+          "title": "3/31/26 SB3028: Bill scheduled to be heard by FIN on Thursday, 04-02-26 2:00PM in House conference room 308 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled to be heard by FIN on Thursday, 04-02-26 2:00PM in House conference room 308 VIA VIDEOCONFERENCE.",
+          "date": "2026-03-31T20:32:42.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/25/26 SB3028: Re-referred to HSG, FIN, referral sheet 21",
+          "description": "Re-referred to HSG, FIN, referral sheet 21",
+          "date": "2026-03-26T03:25:18.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "3/20/26 SB3028: Passed Second Reading as amended in HD 1 and referred to the committee(s) on WAL with none voting aye with reservations; Representative(s) Alcos, Cochran, Garcia, Gedeon, Matsumoto, Muraoka, Pierick, Reyes Oda voting no (8) and Representative(s) Quinlan excused (1).",
+          "description": "Passed Second Reading as amended in HD 1 and referred to the committee(s) on WAL with none",
+          "date": "2026-03-20T23:21:04.000Z",
+          "badge": {
+            "text": "Second Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/20/26 SB3028: Reported from HSG (Stand. Com. Rep. No. 1310-26) as amended in HD 1, recommending passage on Second Reading and referral to WAL.",
+          "description": "Reported from HSG (Stand. Com. Rep. No. 1310-26) as amended in HD 1, recommending passage on Second Reading and referral to WAL.",
+          "date": "2026-03-20T04:27:12.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/18/26 SB3028: The committee on HSG recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 6 Ayes: Representative(s) Evslin, Miyake, Grandinetti, Kila, Kitagawa, La Chica; Ayes with reservations: none; 3 Noes: Representative(s) Cochran, Muraoka, Pierick; and  Excused: none.",
+          "description": "The committee on HSG recommend that the measure be PASSED, WITH AMENDMENTS. The votes were as follows: 6 Ayes: Representative(s) Evslin, Miyake, Grandinetti, Kila, Kitagawa, La Chica; Ayes with reservations: none; 3 Noes: Representative(s) Cochran, Muraoka, Pierick; and Excused: none.",
+          "date": "2026-03-18T21:52:51.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/16/26 SB3028: Bill scheduled to be heard by HSG on Wednesday, 03-18-26 9:00AM in House conference room 430 VIA VIDEOCONFERENCE.",
+          "description": "Bill scheduled to be heard by HSG on Wednesday, 03-18-26 9:00AM in House conference room 430 VIA VIDEOCONFERENCE.",
+          "date": "2026-03-16T19:04:57.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/12/26 SB3028: Referred to HSG, WAL, FIN, referral sheet 17",
+          "description": "Referred to HSG, WAL, FIN, referral sheet 17",
+          "date": "2026-03-12T22:09:27.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "3/12/26 SB3028: Pass First Reading",
+          "description": "Pass First Reading",
+          "date": "2026-03-12T22:08:58.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/10/26 SB3028: Received from Senate (Sen. Com. No. 345) in amended form (SD 2).",
+          "description": "Received from Senate (Sen. Com. No. 345) in amended form (SD 2).",
+          "date": "2026-03-11T04:10:52.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/10/26 SB3028: Report adopted; Passed Third Reading, as amended (SD  2). Ayes, 25; Aye(s) with reservations: none .  Noes, 0 (none). Excused, 0 (none).  Transmitted to House.",
+          "description": "Report adopted; Passed Third Reading, as amended (SD 2). Ayes, 25; Aye(s) with reservations: none . Noes, 0 (none). Excused, 0 (none). Transmitted to House.",
+          "date": "2026-03-10T19:43:55.000Z",
+          "badge": {
+            "text": "Passed Chamber",
+            "class": "passed"
+          }
+        },
+        {
+          "title": "3/6/26 SB3028: 48 Hrs. Notice 03-10-26.",
+          "description": "48 Hrs. Notice 03-10-26.",
+          "date": "2026-03-07T01:15:01.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "3/6/26 SB3028: Reported from WAM (Stand. Com. Rep. No. 2999) with recommendation of passage on Third Reading, as amended (SD 2).",
+          "description": "Reported from WAM (Stand. Com. Rep. No. 2999) with recommendation of passage on Third Reading, as amended (SD 2).",
+          "date": "2026-03-07T01:15:01.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "3/3/26 SB3028: The committee(s) on  WAM recommend(s) that the measure be PASSED, WITH AMENDMENTS.  The votes in WAM were as follows: 12 Aye(s): Senator(s) Dela Cruz, Moriwaki, DeCoite, Elefante, Hashimoto, Inouye, Kanuha, Kidani, Kim, Lee, C., Richards, Wakai; Aye(s) with reservations: none ; 0 No(es): none; and 1 Excused: Senator(s) Fevella.",
+          "description": "The committee(s) on WAM recommend(s) that the measure be PASSED, WITH AMENDMENTS. The votes in WAM were as follows: 12 Aye(s): Senator(s) Dela Cruz, Moriwaki, DeCoite, Elefante, Hashimoto, Inouye, Kanuha, Kidani, Kim, Lee, C., Richards, Wakai; Aye(s) with reservations: none ; 0 No(es): none; and 1 Excused: Senator(s) Fevella.",
+          "date": "2026-03-04T01:00:49.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/25/26 SB3028: The committee(s) on WAM deferred the measure until 03-03-26 10:15AM; Conference Room 211 & Videoconference.",
+          "description": "The committee(s) on WAM deferred the measure until 03-03-26 10:15AM; Conference Room 211 & Videoconference.",
+          "date": "2026-02-26T00:07:15.000Z",
+          "badge": {
+            "text": "Deferred",
+            "class": "deferred"
+          }
+        },
+        {
+          "title": "2/23/26 SB3028: The committee(s) on WAM will hold a public decision making on 02-25-26 10:57AM; Conference Room 211 & Videoconference.",
+          "description": "The committee(s) on WAM will hold a public decision making on 02-25-26 10:57AM; Conference Room 211 & Videoconference.",
+          "date": "2026-02-23T21:15:18.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/20/26 SB3028: Report adopted; Passed Second Reading, as amended (SD 1) and referred to WAM.",
+          "description": "Report adopted; Passed Second Reading, as amended (SD 1) and referred to WAM.",
+          "date": "2026-02-20T21:39:59.000Z",
+          "badge": {
+            "text": "Second Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "2/20/26 SB3028: Reported from WLA/EIG (Stand. Com. Rep. No. 2596) with recommendation of passage on Second Reading, as amended (SD 1) and referral to WAM.",
+          "description": "Reported from WLA/EIG (Stand. Com. Rep. No. 2596) with recommendation of passage on Second Reading, as amended (SD 1) and referral to WAM.",
+          "date": "2026-02-20T03:09:40.000Z",
+          "badge": {
+            "text": "Reported",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "2/17/26 SB3028: The committee(s) on  WLA recommend(s) that the measure be PASSED, WITH AMENDMENTS.  The votes in WLA were as follows: 4 Aye(s): Senator(s) Lee, C., Chang, Lamosao, DeCorte; Aye(s) with reservations: none ; 0 No(es): none; and 1 Excused: Senator(s) Inouye.",
+          "description": "The committee(s) on WLA recommend(s) that the measure be PASSED, WITH AMENDMENTS. The votes in WLA were as follows: 4 Aye(s): Senator(s) Lee, C., Chang, Lamosao, DeCorte; Aye(s) with reservations: none ; 0 No(es): none; and 1 Excused: Senator(s) Inouye.",
+          "date": "2026-02-18T20:19:21.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/17/26 SB3028: The committee(s) on  EIG recommend(s) that the measure be PASSED, WITH AMENDMENTS.  The votes in EIG were as follows: 5 Aye(s): Senator(s) Wakai, Chang, DeCoite, Richards, Fevella; Aye(s) with reservations: none ; 0 No(es): none; and 0 Excused: none.",
+          "description": "The committee(s) on EIG recommend(s) that the measure be PASSED, WITH AMENDMENTS. The votes in EIG were as follows: 5 Aye(s): Senator(s) Wakai, Chang, DeCoite, Richards, Fevella; Aye(s) with reservations: none ; 0 No(es): none; and 0 Excused: none.",
+          "date": "2026-02-18T03:17:40.000Z",
+          "badge": {
+            "text": "Update",
+            "class": "update"
+          }
+        },
+        {
+          "title": "2/13/26 SB3028: The committee(s) on WLA/EIG has scheduled a public hearing on 02-17-26 3:03PM; Conference Room 224 & Videoconference.",
+          "description": "The committee(s) on WLA/EIG has scheduled a public hearing on 02-17-26 3:03PM; Conference Room 224 & Videoconference.",
+          "date": "2026-02-13T20:32:03.000Z",
+          "badge": {
+            "text": "Hearing",
+            "class": "hearing"
+          }
+        },
+        {
+          "title": "1/30/26 SB3028: Referred to WLA/EIG, WAM.",
+          "description": "Referred to WLA/EIG, WAM.",
+          "date": "2026-01-31T03:14:50.000Z",
+          "badge": {
+            "text": "Referred",
+            "class": "referred"
+          }
+        },
+        {
+          "title": "1/26/26 SB3028: Passed First Reading.",
+          "description": "Passed First Reading.",
+          "date": "2026-01-26T19:38:09.000Z",
+          "badge": {
+            "text": "First Reading",
+            "class": "progress"
+          }
+        },
+        {
+          "title": "1/23/26 SB3028: Introduced.",
+          "description": "Introduced.",
+          "date": "2026-01-24T06:38:55.000Z",
+          "badge": {
+            "text": "Introduced",
+            "class": "new"
+          }
+        }
+      ],
+      "hasScheduledHearing": false,
+      "hasHadHearing": true,
+      "isDeferred": false,
+      "isAlive": true
     },
     "HB1850": {
       "type": "HB",
