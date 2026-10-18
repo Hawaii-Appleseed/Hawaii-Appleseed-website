@@ -2,6 +2,26 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "eda7f7ef86dd",
+   "title": "Will Caron: Zip Pact",
+   "outlet": "Honolulu Civil Beat",
+   "url": "https://www.civilbeat.org/2026/10/will-caron-zip-pact/",
+   "published": "2026-10-18T10:09:35Z",
+   "firstSeen": "2026-10-18T14:01:35Z",
+   "confidence": "high",
+   "reasons": [
+    "staff: Will Caron only",
+    "names Hawaiʻi Appleseed",
+    "staff: Will Caron, with Appleseed"
+   ],
+   "sources": [
+    "google",
+    "feed"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
    "id": "dfec6abf61a9",
    "title": "Voting explainer: 2026 Honolulu charter amendment ballot questions",
    "outlet": "Hawaiʻi Public Radio",
