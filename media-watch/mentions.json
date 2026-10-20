@@ -19,7 +19,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "dfec6abf61a9",
@@ -36,7 +36,7 @@
     "feed"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "986d81441d44",
@@ -55,7 +55,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "7ec56fd4b480",
@@ -75,7 +75,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "4a264c5f2391",
@@ -92,7 +92,7 @@
     "feed"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "e03b244fd00e",
@@ -112,7 +112,7 @@
     "feed"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "b1bfbbbe0aa5",
@@ -131,7 +131,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "cabbf42c1dea",
@@ -148,7 +148,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "feaa258dc9a0",
@@ -165,7 +165,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "0d21ea9fca85",
@@ -182,7 +182,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "e078ee03a629",
@@ -200,7 +200,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "40a0fd9ee0e4",
@@ -217,7 +217,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "d14aca61f90d",
@@ -234,7 +234,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   }
  ]
 }
