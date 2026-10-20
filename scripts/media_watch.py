@@ -326,6 +326,9 @@ def url_date(url):
     return dt.datetime(y, mo, day, tzinfo=dt.timezone.utc)
 
 
+LAST_FAILURE = {}   # url -> why the last fetch_article(url) returned no text; read by Reader to say what it could not read
+
+
 def ascii_url(url):
     """`url` with any non-ASCII in its path/query percent-encoded. urllib cannot
     send a raw ʻokina (hawaiʻi-…); it raises before any request and the page
@@ -340,16 +343,30 @@ def fetch_article(url, limit=1_500_000):
     """(visible text, published ISO date) of an article page. Either is None if
     it could not be had. A paywall or bot wall returns None or a shell; callers
     must treat "no mention found" as evidence only when the page really loaded."""
-    try:
-        req = urllib.request.Request(ascii_url(url), headers={"User-Agent": UA, "Accept": "text/html,*/*"})
-        with urllib.request.urlopen(req, timeout=20) as r:
-            raw = r.read(limit).decode("utf-8", "replace")
-    except (urllib.error.URLError, TimeoutError, OSError, ValueError):
-        return None, None
+    raw = None
+    for attempt in range(2):                         # one retry, for a timeout or a server hiccup only
+        try:
+            req = urllib.request.Request(ascii_url(url), headers={"User-Agent": UA, "Accept": "text/html,*/*"})
+            with urllib.request.urlopen(req, timeout=20) as r:
+                raw = r.read(limit).decode("utf-8", "replace")
+            break
+        except urllib.error.HTTPError as e:
+            LAST_FAILURE[url] = f"HTTP {e.code}"
+            if not (e.code in (429, 500, 502, 503, 504) and attempt == 0):
+                return None, None
+        except (urllib.error.URLError, TimeoutError, OSError, ValueError) as e:
+            LAST_FAILURE[url] = "timeout" if isinstance(e, TimeoutError) or "timed out" in str(e) else f"{type(e).__name__}: {e}"[:80]
+            if isinstance(e, ValueError) or attempt == 1:
+                return None, None
+        time.sleep(2)
     published = page_date(raw)                       # before scripts go: JSON-LD lives in one
     raw = re.sub(r"(?is)<(script|style|noscript)[^>]*>.*?</\1>", " ", raw)
     text = trim_chrome(strip_tags(raw))
-    return (text if len(text) > 400 else None), published
+    if len(text) <= 400:
+        LAST_FAILURE[url] = f"too short ({len(text)} chars of text)"
+        return None, published
+    LAST_FAILURE.pop(url, None)
+    return text, published
 
 
 def fetch_article_text(url, limit=None):
@@ -667,6 +684,10 @@ class Reader:
         if text is None:
             who = it.get("outlet") or host_of(it["url"])
             self.blind[who] = self.blind.get(who, 0) + 1
+            self.logged = getattr(self, "logged", 0) + 1
+            if self.logged <= 10:                    # name the page; the per-outlet count alone cannot be chased
+                print(f"::notice::could not read {it['url']} ({LAST_FAILURE.get(it['url'], 'no text')})"
+                      + (" — more not listed" if self.logged == 10 else ""), file=self.out)
         return text, published
 
     def evaluate(self, items, label, alert=False):

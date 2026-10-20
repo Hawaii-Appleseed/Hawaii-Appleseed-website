@@ -460,6 +460,66 @@ class Urls(unittest.TestCase):
         self.assertIn("Appleseed", text)
 
 
+class ArticleFailures(unittest.TestCase):
+    def setUp(self):
+        self._o, self._s = mw.urllib.request.urlopen, mw.time.sleep
+        self.slept, self.calls = [], 0
+        mw.time.sleep = self.slept.append
+
+    def tearDown(self):
+        mw.urllib.request.urlopen, mw.time.sleep = self._o, self._s
+
+    def script(self, *steps):
+        steps = list(steps)
+
+        def urlopen(req, timeout=0):
+            self.calls += 1
+            st = steps.pop(0)
+            if isinstance(st, Exception):
+                raise st
+            return io.BytesIO(st.encode())
+        mw.urllib.request.urlopen = urlopen
+
+    PAGE = "<p>" + "Appleseed story text. " * 40 + "</p>"
+
+    def test_a_timeout_is_retried_once(self):
+        self.script(TimeoutError("timed out"), self.PAGE)
+        text, _ = mw.fetch_article("https://a.test/1")
+        self.assertIn("Appleseed", text)
+        self.assertEqual(self.calls, 2)
+        self.assertNotIn("https://a.test/1", mw.LAST_FAILURE)
+
+    def test_a_second_timeout_gives_up_and_says_why(self):
+        self.script(TimeoutError("timed out"), TimeoutError("timed out"))
+        self.assertEqual(mw.fetch_article("https://a.test/2"), (None, None))
+        self.assertEqual(self.calls, 2)
+        self.assertEqual(mw.LAST_FAILURE["https://a.test/2"], "timeout")
+
+    def test_a_refusal_is_not_retried(self):
+        self.script(mw.urllib.error.HTTPError("https://a.test/3", 403, "Forbidden", {}, io.BytesIO(b"")))
+        self.assertEqual(mw.fetch_article("https://a.test/3"), (None, None))
+        self.assertEqual(self.calls, 1)
+        self.assertEqual(mw.LAST_FAILURE["https://a.test/3"], "HTTP 403")
+
+    def test_a_503_is_retried_and_a_thin_page_is_named(self):
+        self.script(mw.urllib.error.HTTPError("https://a.test/4", 503, "x", {}, io.BytesIO(b"")), "<p>tiny</p>")
+        text, _ = mw.fetch_article("https://a.test/4")
+        self.assertIsNone(text)
+        self.assertEqual(self.calls, 2)
+        self.assertIn("too short", mw.LAST_FAILURE["https://a.test/4"])
+
+    def test_reader_prints_the_unreadable_url_and_reason(self):
+        _f, mw.fetch_article = mw.fetch_article, lambda u: (mw.LAST_FAILURE.__setitem__(u, "HTTP 403"), (None, None))[1]
+        try:
+            out = io.StringIO()
+            r = mw.Reader(CFG, STAFF, dt.datetime(2026, 9, 20, tzinfo=dt.timezone.utc), {}, "2026-09-29", delay=0, out=out)
+            r._read({"url": "https://b.test/story", "outlet": "B"})
+        finally:
+            mw.fetch_article = _f
+        self.assertIn("could not read https://b.test/story (HTTP 403)", out.getvalue())
+        self.assertEqual(r.blind, {"B": 1})
+
+
 class Throttle(unittest.TestCase):
     def setUp(self):
         self._o, self._s = mw.urllib.request.urlopen, mw.time.sleep
