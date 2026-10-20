@@ -801,9 +801,20 @@ def inline_assets(html):
     return html
 
 
+def preload_hints(html):
+    """Warm the cross-origin connection to the Pages host and preload the
+    image marked fetchpriority="high" (the page's LCP photo), so it starts
+    downloading before the parser reaches the <img>."""
+    hints = '<link rel="preconnect" href="%s" crossorigin>\n' % ASSET_BASE.rstrip("/").rsplit("/", 1)[0]
+    m = re.search(r'<img[^>]*\bsrc="([^"]+)"[^>]*\bfetchpriority="high"', html)
+    if m:
+        hints += '<link rel="preload" as="image" href="%s" fetchpriority="high">\n' % m.group(1)
+    return hints + html
+
+
 def finish(html):
     return entity_encode(ensure_okina(remap_internal_links(absolutize_assets(
-        inline_assets(with_tokens(html))))))
+        preload_hints(inline_assets(with_tokens(html)))))))
 
 
 def main():
