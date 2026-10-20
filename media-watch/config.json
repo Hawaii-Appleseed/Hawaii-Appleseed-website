@@ -58,7 +58,8 @@
     },
     {
       "name": "The Maui News",
-      "url": "https://www.mauinews.com/feed/"
+      "url": "https://www.mauinews.com/feed/",
+      "pages": 5
     },
     {
       "name": "PBS Hawaiʻi",

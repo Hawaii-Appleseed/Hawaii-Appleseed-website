@@ -368,6 +368,23 @@ class Reading(unittest.TestCase):
         self.assertIn("2/3 outlets answered", out.getvalue())
         self.assertIn("failed: Dead", out.getvalue())
 
+    def test_one_failed_term_does_not_cost_the_outlets_later_terms(self):
+        def fake_get(url, **k):
+            if "search=Appleseed" in url:
+                raise RuntimeError("HTTP 429 Too Many Requests")
+            return json.dumps([{"date_gmt": "2026-09-28T00:00:00", "link": "https://wp.test/2026/09/a-story",
+                                "title": {"rendered": "A Hawaii story"},
+                                "content": {"rendered": "<p>Said Hawaiʻi Appleseed. </p>" * 3}}])
+        mw.http_get = fake_get
+        cfg = {**CFG, "search_terms": ["Appleseed"], "work_terms": ["Other Term"], "search_staff": False,
+               "outlet_search": [{"name": "WP", "type": "wp-rest", "base": "https://wp.test"}]}
+        out = io.StringIO()
+        r = mw.Reader(cfg, STAFF, self.cutoff, {}, "2026-09-29", delay=0, out=out)
+        found = mw.search_sites(cfg, STAFF, self.cutoff, r, delay=0, out=out)
+        self.assertEqual([f["title"] for f in found], ["A Hawaii story"])
+        self.assertIn("1 of 2 queries failed ('Appleseed')", out.getvalue())
+        self.assertIn("failed: WP", out.getvalue())
+
     def test_deep_reads_pages_deep_and_html_outlets_get_only_the_org_term(self):
         urls = []
         mw.http_get = lambda url, **k: (urls.append(url), "<html></html>")[1]
@@ -398,6 +415,50 @@ class Reading(unittest.TestCase):
         found = mw.crawl_feeds(cfg, STAFF, self.cutoff, {}, "2026-09-29", delay=0, out=io.StringIO())
         self.assertEqual([f["confidence"] for f in found], ["high"])
         self.assertEqual(self.fetched, [])
+
+
+class Throttle(unittest.TestCase):
+    def setUp(self):
+        self._o, self._s = mw.urllib.request.urlopen, mw.time.sleep
+        self.slept = []
+        mw.time.sleep = self.slept.append
+
+    def tearDown(self):
+        mw.urllib.request.urlopen, mw.time.sleep = self._o, self._s
+
+    def fake(self, codes, headers=None):
+        codes = list(codes)
+
+        def urlopen(req, timeout=0):
+            c = codes.pop(0)
+            if c == 200:
+                return io.BytesIO(b"ok")
+            raise mw.urllib.error.HTTPError(req.full_url, c, "x", headers or {}, io.BytesIO(b""))
+        mw.urllib.request.urlopen = urlopen
+
+    def test_429_waits_out_retry_after_then_succeeds(self):
+        self.fake([429, 200], {"Retry-After": "7"})
+        self.assertEqual(mw.http_get("https://x.test/", retries=0, throttle_retries=2), "ok")
+        self.assertEqual(self.slept, [7])
+
+    def test_wait_is_capped_and_defaults_without_a_header(self):
+        self.fake([429, 429, 200], {"Retry-After": "9999"})
+        mw.http_get("https://x.test/", retries=0, throttle_retries=2)
+        self.assertEqual(self.slept, [mw.THROTTLE_WAIT_CAP] * 2)
+        self.slept.clear()
+        self.fake([503, 200])
+        mw.http_get("https://x.test/", retries=0, throttle_retries=1)
+        self.assertEqual(self.slept, [5])
+
+    def test_gives_up_after_the_throttle_retries_and_default_never_waits(self):
+        self.fake([429, 429, 429])
+        with self.assertRaises(RuntimeError):
+            mw.http_get("https://x.test/", retries=0, throttle_retries=2)
+        self.slept.clear()
+        self.fake([429])
+        with self.assertRaises(RuntimeError):
+            mw.http_get("https://x.test/", retries=0)
+        self.assertEqual(self.slept, [2])
 
 
 class Alerts(unittest.TestCase):

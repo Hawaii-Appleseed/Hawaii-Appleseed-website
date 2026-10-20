@@ -366,15 +366,34 @@ def trim_chrome(text):
 # -------------------------------------------------------------------- sources
 
 
-def http_get(url, timeout=25, retries=2):
-    last = None
-    for attempt in range(retries + 1):
+THROTTLE_WAIT_CAP = 30   # seconds; the longest a 429/503 Retry-After is honoured
+
+
+def throttle_wait(e, attempt):
+    """Seconds to sit out a 429/503: what Retry-After asks (seconds form), else
+    5s, 10s...; never more than THROTTLE_WAIT_CAP."""
+    try:
+        asked = float(e.headers.get("Retry-After", ""))
+    except (TypeError, ValueError):
+        asked = 5 * (attempt + 1)
+    return min(max(asked, 0), THROTTLE_WAIT_CAP)
+
+
+def http_get(url, timeout=25, retries=2, throttle_retries=0):
+    """`throttle_retries` are extra attempts spent only on 429/503, after waiting
+    out Retry-After; the ordinary `retries` back-off does not honour it."""
+    last, throttled = None, 0
+    for attempt in range(retries + throttle_retries + 1):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/rss+xml, text/xml, */*"})
             with urllib.request.urlopen(req, timeout=timeout) as r:
                 return r.read().decode("utf-8", "replace")
         except (urllib.error.URLError, TimeoutError, OSError) as e:
             last = describe_error(e)
+            if isinstance(e, urllib.error.HTTPError) and e.code in (429, 503) and throttled < throttle_retries:
+                time.sleep(throttle_wait(e, throttled))
+                throttled += 1
+                continue
             if isinstance(e, urllib.error.HTTPError) and e.code in (400, 401, 403, 404, 410):
                 break                                # retrying a refusal only wastes time
             time.sleep(2 * (attempt + 1))
@@ -757,7 +776,7 @@ def search_wp_rest(outlet, term, cutoff, delay, max_pages=5):
         url = (f"{base}/wp-json/wp/v2/posts?search={urllib.parse.quote(term)}&per_page=100&page={page}"
                f"&orderby=date&order=desc&after={after}&_fields=date_gmt,link,title,content")
         try:
-            rows = json.loads(http_get(url, timeout=outlet.get("timeout", 30), retries=0))
+            rows = json.loads(http_get(url, timeout=outlet.get("timeout", 30), retries=0, throttle_retries=2))
         except RuntimeError:
             if page == 1:
                 raise
@@ -849,16 +868,21 @@ DRIVERS = {"wp-rest": search_wp_rest, "blox-rss": search_blox_rss, "html": searc
 
 
 def _gather_outlet(outlet, terms, cutoff, delay):
-    """All of one outlet's results for `terms`, or what came back before it
-    failed. One request at a time per outlet, so it stays polite."""
-    driver, got = DRIVERS[outlet["type"]], []
-    try:
-        for term in terms:
+    """All of one outlet's results for `terms`. One request at a time per outlet,
+    so it stays polite. A term that fails is skipped, not fatal: the rest are
+    still asked, and the error names what was lost (a single 429 used to cost
+    every later term, including every staff name)."""
+    driver, got, lost = DRIVERS[outlet["type"]], [], []
+    for term in terms:
+        try:
             got += driver(outlet, term, cutoff, delay)
-            time.sleep(delay)
-    except Exception as e:                            # one outlet's odd reply must not cost the others
-        return outlet, got, e
-    return outlet, got, None
+        except Exception as e:                        # one outlet's odd reply must not cost the others
+            lost.append((term, str(e) if isinstance(e, RuntimeError) else f"{type(e).__name__}: {e}"))
+        time.sleep(delay)
+    if not lost:
+        return outlet, got, None
+    names = ", ".join(repr(t) for t, _ in lost[:5]) + (f" +{len(lost) - 5} more" if len(lost) > 5 else "")
+    return outlet, got, RuntimeError(f"{len(lost)} of {len(terms)} queries failed ({names}); first: {lost[0][1]}")
 
 
 def search_sites(cfg, staff, cutoff, reader, delay=0.3, out=sys.stdout, deep=False):
