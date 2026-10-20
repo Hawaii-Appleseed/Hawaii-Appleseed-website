@@ -42,7 +42,6 @@ jobs:
     timeout-minutes: 45
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
       # Google Alerts RSS links, one per line. A secret, not config.json: each
       # URL embeds the owner's Google account id and this repo is public.
       MEDIA_WATCH_ALERT_FEEDS: ${{ secrets.MEDIA_WATCH_ALERT_FEEDS }}
@@ -72,6 +71,8 @@ jobs:
           paths: media-watch/mentions.json media-watch/latest.md
           message: "media-watch: update mentions (${{ steps.watch.outputs.new }} to review)"
 
+      # The issue IS the email: GitHub mails everyone watching the repo when it opens.
+      # (There is no separate push; the ntfy step was dropped 2026-10-20.)
       - name: Open an issue with the digest
         if: steps.watch.outputs.new != '0' && steps.watch.outputs.new != ''
         run: |
@@ -80,19 +81,6 @@ jobs:
           gh issue create \
             --title "Media watch: ${{ steps.watch.outputs.new }} new mention(s) — $(date -u +%F)" \
             --label media-watch --body-file media-watch/latest.md
-
-      - name: Push notification
-        if: steps.watch.outputs.new != '0' && steps.watch.outputs.new != ''
-        run: |
-          if [ -z "${NTFY_TOPIC:-}" ]; then
-            echo "ntfy: no NTFY_TOPIC set — no push sent"
-            exit 0
-          fi
-          body=$(grep -E '^- \[' media-watch/latest.md | sed -E 's/^- \[([^]]*)\]\([^)]*\)/\1/' | head -8)
-          curl -s -m 10 -o /dev/null \
-            -H "Title: Appleseed: ${{ steps.watch.outputs.new }} new media mention(s)" \
-            -H "Priority: default" \
-            -d "$body" "https://ntfy.sh/$NTFY_TOPIC" || true
 
       # Last on purpose. The steps above must run first so that what the
       # working stages found is committed and announced; only then does a stage
