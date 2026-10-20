@@ -37,10 +37,15 @@ concurrency:
 jobs:
   watch:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # A warm run takes ~6 minutes. A cold one (empty cache: the first run, or after
+    # GitHub evicts it) reads several hundred pages, ~15 minutes on a fast link.
+    timeout-minutes: 45
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      # Google Alerts RSS links, one per line. A secret, not config.json: each
+      # URL embeds the owner's Google account id and this repo is public.
+      MEDIA_WATCH_ALERT_FEEDS: ${{ secrets.MEDIA_WATCH_ALERT_FEEDS }}
     steps:
       - uses: actions/checkout@v4
 
@@ -88,3 +93,14 @@ jobs:
             -H "Title: Appleseed: ${{ steps.watch.outputs.new }} new media mention(s)" \
             -H "Priority: default" \
             -d "$body" "https://ntfy.sh/$NTFY_TOPIC" || true
+
+      # Last on purpose. The steps above must run first so that what the
+      # working stages found is committed and announced; only then does a stage
+      # that answered nothing at all fail the job, which is what makes
+      # triage.yml open an issue. Without this, every outlet blocking the
+      # runner's IP would read as a quiet news day.
+      - name: Fail if a source stage was dead
+        if: steps.watch.outputs.dead != ''
+        run: |
+          echo "::error::no answer from any source in: ${{ steps.watch.outputs.dead }}"
+          exit 1
