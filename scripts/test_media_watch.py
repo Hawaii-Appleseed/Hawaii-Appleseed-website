@@ -437,6 +437,29 @@ class Reading(unittest.TestCase):
         self.assertEqual(self.fetched, [])
 
 
+class Urls(unittest.TestCase):
+    def test_okina_is_percent_encoded_and_everything_else_is_left_alone(self):
+        self.assertEqual(mw.ascii_url("https://www.h.test/hawaiʻi-chamber-music-festival"),
+                         "https://www.h.test/hawai%CA%BBi-chamber-music-festival")
+        plain = "https://h.test/a/b-c_d.html?x=1&y=a%20b#frag"
+        self.assertEqual(mw.ascii_url(plain), plain)
+        self.assertEqual(mw.ascii_url("https://h.test/a?q=hawaiʻi"), "https://h.test/a?q=hawai%CA%BBi")
+
+    def test_fetch_article_requests_the_encoded_url(self):
+        seen, o = [], mw.urllib.request.urlopen
+
+        def fake(req, timeout=0):
+            seen.append(req.full_url)
+            return io.BytesIO(("<p>" + "Appleseed story text. " * 40 + "</p>").encode())
+        mw.urllib.request.urlopen = fake
+        try:
+            text, _ = mw.fetch_article("https://www.h.test/hawaiʻi-symphony")
+        finally:
+            mw.urllib.request.urlopen = o
+        self.assertEqual(seen, ["https://www.h.test/hawai%CA%BBi-symphony"])
+        self.assertIn("Appleseed", text)
+
+
 class Throttle(unittest.TestCase):
     def setUp(self):
         self._o, self._s = mw.urllib.request.urlopen, mw.time.sleep

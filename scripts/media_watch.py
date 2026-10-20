@@ -326,12 +326,22 @@ def url_date(url):
     return dt.datetime(y, mo, day, tzinfo=dt.timezone.utc)
 
 
+def ascii_url(url):
+    """`url` with any non-ASCII in its path/query percent-encoded. urllib cannot
+    send a raw ʻokina (hawaiʻi-…); it raises before any request and the page
+    looked unreadable. Existing %-escapes are left alone."""
+    s = urllib.parse.urlsplit(url)
+    keep = "/%:@!$&'()*+,;=-._~"
+    return urllib.parse.urlunsplit(s._replace(path=urllib.parse.quote(s.path, safe=keep),
+                                              query=urllib.parse.quote(s.query, safe=keep + "?")))
+
+
 def fetch_article(url, limit=1_500_000):
     """(visible text, published ISO date) of an article page. Either is None if
     it could not be had. A paywall or bot wall returns None or a shell; callers
     must treat "no mention found" as evidence only when the page really loaded."""
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html,*/*"})
+        req = urllib.request.Request(ascii_url(url), headers={"User-Agent": UA, "Accept": "text/html,*/*"})
         with urllib.request.urlopen(req, timeout=20) as r:
             raw = r.read(limit).decode("utf-8", "replace")
     except (urllib.error.URLError, TimeoutError, OSError, ValueError):
@@ -385,7 +395,7 @@ def http_get(url, timeout=25, retries=2, throttle_retries=0):
     last, throttled = None, 0
     for attempt in range(retries + throttle_retries + 1):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/rss+xml, text/xml, */*"})
+            req = urllib.request.Request(ascii_url(url), headers={"User-Agent": UA, "Accept": "application/rss+xml, text/xml, */*"})
             with urllib.request.urlopen(req, timeout=timeout) as r:
                 return r.read().decode("utf-8", "replace")
         except (urllib.error.URLError, TimeoutError, OSError) as e:
