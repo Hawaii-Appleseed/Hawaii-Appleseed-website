@@ -623,6 +623,28 @@ class Reader:
             notes.append(f"{self.deferred - deferred} left for the next run (read cap)")
         return " · ".join(notes)
 
+    def _read_via_rest(self, url):
+        """The page would not load (a bot wall: KHON2 answers every article with a
+        403), but a WordPress outlet in `outlet_search` still serves the post's text
+        through its REST API. Look it up by slug; (None, None) if it is not one."""
+        host = host_of(url)
+        base = next((o["base"].rstrip("/") for o in self.cfg.get("outlet_search", [])
+                     if o.get("type") == "wp-rest" and host_of(o.get("base", "")) == host), None)
+        slug = urllib.parse.urlsplit(url).path.rstrip("/").rsplit("/", 1)[-1]
+        if not (base and slug):
+            return None, None
+        try:
+            rows = json.loads(http_get(f"{base}/wp-json/wp/v2/posts?slug={urllib.parse.quote(slug)}"
+                                       "&_fields=date_gmt,content", timeout=30, retries=0, throttle_retries=1))
+            time.sleep(self.delay)
+        except (RuntimeError, ValueError):
+            return None, None
+        if not (isinstance(rows, list) and rows):
+            return None, None
+        text = strip_tags((rows[0].get("content") or {}).get("rendered", ""))
+        gmt = rows[0].get("date_gmt") or ""
+        return (text if len(text) > 400 else None), (gmt + "Z" if gmt else None)
+
     def _read(self, it):
         if self.reads >= MAX_ARTICLE_READS:
             self.deferred += 1
@@ -630,6 +652,8 @@ class Reader:
         self.reads += 1
         text, published = fetch_article(it["url"])
         time.sleep(self.delay)
+        if text is None:
+            text, published = self._read_via_rest(it["url"])
         if text is None:
             who = it.get("outlet") or host_of(it["url"])
             self.blind[who] = self.blind.get(who, 0) + 1

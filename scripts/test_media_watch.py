@@ -385,6 +385,26 @@ class Reading(unittest.TestCase):
         self.assertIn("1 of 2 queries failed ('Appleseed')", out.getvalue())
         self.assertIn("failed: WP", out.getvalue())
 
+    def test_unreadable_page_falls_back_to_the_outlets_rest_api(self):
+        mw.fetch_article = lambda url, **k: (None, None)
+        seen = []
+
+        def fake_get(url, **k):
+            seen.append(url)
+            return json.dumps([{"date_gmt": "2026-09-28T00:00:00", "content": {"rendered": "<p>Said Hawaiʻi Appleseed. </p>" * 30}}])
+        mw.http_get = fake_get
+        cfg = {**CFG, "outlet_search": [{"name": "WP", "type": "wp-rest", "base": "https://www.wp.test"}]}
+        r = mw.Reader(cfg, STAFF, self.cutoff, {}, "2026-09-29", delay=0, out=io.StringIO())
+        text, published = r._read({"url": "https://www.wp.test/local-news/a-story/", "outlet": "WP"})
+        self.assertIn("Appleseed", text)
+        self.assertEqual(published, "2026-09-28T00:00:00Z")
+        self.assertIn("slug=a-story", seen[0])
+        self.assertEqual(r.blind, {})
+        # an outlet that is not a wp-rest one stays blind, and makes no extra request
+        seen.clear()
+        self.assertEqual(r._read({"url": "https://other.test/x/", "outlet": "Other"}), (None, None))
+        self.assertEqual((seen, r.blind), ([], {"Other": 1}))
+
     def test_deep_reads_pages_deep_and_html_outlets_get_only_the_org_term(self):
         urls = []
         mw.http_get = lambda url, **k: (urls.append(url), "<html></html>")[1]
