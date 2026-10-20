@@ -82,6 +82,33 @@ jobs:
             --title "Media watch: ${{ steps.watch.outputs.new }} new mention(s) — $(date -u +%F)" \
             --label media-watch --body-file media-watch/latest.md
 
+      # Posts to #communications through an incoming webhook kept in the
+      # MEDIA_WATCH_SLACK_WEBHOOK secret. No secret, no post (and no failure).
+      # Only public news links go in it: the repo and this digest are public.
+      - name: Post to Slack #communications
+        if: steps.watch.outputs.new != '0' && steps.watch.outputs.new != ''
+        env:
+          SLACK_WEBHOOK: ${{ secrets.MEDIA_WATCH_SLACK_WEBHOOK }}
+          NEW: ${{ steps.watch.outputs.new }}
+        run: |
+          if [ -z "${SLACK_WEBHOOK:-}" ]; then
+            echo "slack: no MEDIA_WATCH_SLACK_WEBHOOK set — no post sent"
+            exit 0
+          fi
+          python3 - <<'PY' > slack.json
+          import json, os, re
+          lines = [l for l in open("media-watch/latest.md", encoding="utf-8") if l.startswith("- [")]
+          rows = []
+          for l in lines[:8]:
+              m = re.match(r"- \[([^\]]*)\]\(([^)]*)\)(.*)", l.strip())
+              rows.append(f"• <{m.group(2)}|{m.group(1)}>{m.group(3)}" if m else l.strip())
+          n = os.environ["NEW"]
+          head = f":newspaper: *{n} new media mention(s)* not on In the News yet"
+          print(json.dumps({"text": head + "\n" + "\n".join(rows)}))
+          PY
+          curl -s -m 10 -o /dev/null -w "slack: HTTP %{http_code}\n" -H 'Content-type: application/json' \
+            --data @slack.json "$SLACK_WEBHOOK" || true
+
       # Last on purpose. The steps above must run first so that what the
       # working stages found is committed and announced; only then does a stage
       # that answered nothing at all fail the job, which is what makes
