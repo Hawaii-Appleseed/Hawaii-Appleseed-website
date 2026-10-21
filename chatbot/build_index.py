@@ -229,6 +229,21 @@ def load_faq(core_urls: set[str], fact_text: str) -> list[dict]:
     return out
 
 
+# -------------------------------------------------------------------- contact
+def contact_block(core: list[dict]) -> dict:
+    """How a visitor reaches the office, from the "Contact the office" section of practical.md (which came from the live
+    Contact page): the page, email, and phone the "ask a person" button offers. One source, so the button cannot drift
+    from what the assistant tells people in words."""
+    sec = next((c for c in core if c["title"] == "Contact the office"), None)
+    if not sec:
+        raise SystemExit('content/practical.md has no "Contact the office" section')
+    email = re.search(r"[\w.+-]+@hiappleseed\.org", sec["text"])
+    phone = re.search(r"\((\d{3})\) (\d{3})-(\d{4})", sec["text"])
+    if not (email and phone and sec.get("url")):
+        raise SystemExit('"Contact the office" needs an @hiappleseed.org email, a (808) 555-0100 style phone, and a url')
+    return {"email": email.group(0), "phone": phone.group(0), "tel": "+1" + "".join(phone.groups()), "page": sec["url"]}
+
+
 # ------------------------------------------------------------------ graphics
 _NUM = re.compile(r"\d[\d,]*(?:\.\d+)?")
 _GRAPHIC_TYPES = {"bars", "stats", "timeline", "scoreboard", "slices"}
@@ -650,6 +665,7 @@ def build(public: bool) -> dict:
         "core": core,
         "faq": faq,
         "graphics": graphics,
+        "contact": contact_block(core),
         "pubs": catalog,
         "chunks": chunks,
         "bm25": {"n": n, "avgdl": round(sum(dl) / max(n, 1), 3), "dl": dl, "post": post},

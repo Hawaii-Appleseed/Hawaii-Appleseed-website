@@ -1,5 +1,6 @@
 """Guards for the public assistant's index. Run: python3 -m unittest discover -s chatbot/tests"""
 import json
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -353,6 +354,25 @@ class Graphics(unittest.TestCase):
         some = self._load(lambda gs: None, public_text=self.about + "\n" + next(c["text"] for c in self.idx["core"] if c["title"] == "Empty homes tax (Honolulu)"),
                           public_titles={"Empty homes tax (Honolulu)"})
         self.assertEqual({g["id"] for g in some}, {"appleseed-history", "eht-revenue"})
+
+
+class Contact(unittest.TestCase):
+    """The "ask a person" button's email, phone and page come from practical.md's "Contact the office", one source."""
+
+    def test_contact_block_is_built_from_the_office_section(self):
+        idx = b.build(public=False)
+        c = idx["contact"]
+        self.assertEqual(sorted(c), ["email", "page", "phone", "tel"])
+        sec = next(x for x in idx["core"] if x["title"] == "Contact the office")
+        self.assertIn(c["email"], sec["text"])
+        self.assertIn(c["phone"], sec["text"])
+        self.assertEqual(c["tel"], "+1" + re.sub(r"\D", "", c["phone"]))
+        self.assertTrue(c["email"].endswith("@hiappleseed.org") and c["page"].startswith("https://hiappleseed.org/"))
+
+    def test_a_contact_section_without_an_email_breaks_the_build(self):
+        core = [{"title": "Contact the office", "text": "Phone: (808) 587-7605.", "url": "https://hiappleseed.org/contact"}]
+        with self.assertRaises(SystemExit):
+            b.contact_block(core)
 
 
 class BillFeed(unittest.TestCase):

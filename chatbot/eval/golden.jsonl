@@ -141,3 +141,12 @@
 {"id": "chart-m-single", "cat": "graphic-model", "q": "What is the income level where the millionaire surcharge starts?", "drawn": false, "include_any": [["$1 million"]]}
 {"id": "chart-m-practical", "cat": "graphic-model", "q": "How can I submit written testimony on a bill?", "drawn": false}
 {"id": "chart-m-curated", "cat": "graphic-model", "q": "Compare the 3 percent and 5 percent versions of the empty homes tax.", "drawn": false, "graphic_any": ["eht-revenue"]}
+{"id": "ho-defer", "cat": "handoff", "q": "What is your position on cryptocurrency?", "stance": "defer", "handoff": true}
+{"id": "ho-none-position", "cat": "handoff", "q": "What's your stance on the conveyance tax?", "stance": "position", "position": "Conveyance tax modernization", "handoff": false}
+{"id": "ho-none-canned", "cat": "handoff", "q": "What is your mission?", "canned": "mission", "handoff": false}
+{"id": "ho-m-hours", "cat": "handoff-model", "q": "Is the office open on Saturdays?", "handoff": true}
+{"id": "ho-m-press", "cat": "handoff-model", "q": "I'm a reporter writing about the empty homes tax. Who can I talk to?", "handoff": true}
+{"id": "ho-m-intern", "cat": "handoff-model", "q": "Do you have internships for college students?", "handoff": true}
+{"id": "ho-m-partner", "cat": "handoff-model", "q": "My organization wants to partner with you on a report. How do we start?", "handoff": true}
+{"id": "ho-m-answered", "cat": "handoff-model", "q": "Where can I find your latest research on housing?", "handoff": false}
+{"id": "ho-m-explain", "cat": "handoff-model", "q": "What does the conveyance tax pay for under HB2049?", "handoff": false}

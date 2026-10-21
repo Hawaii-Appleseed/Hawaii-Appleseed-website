@@ -131,6 +131,15 @@
   #ha-ask .ha-ask__chipst--died { background: var(--ha-white); color: var(--ha-charcoal); border-style: dashed; }
   #ha-ask .ha-ask__sbwhat { display: block; font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-charcoal); }
   #ha-ask .ha-ask__sbout { display: block; font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); }
+
+  /* "Ask a person": offered under an answer the assistant could not give. A mailto: link the visitor sends themselves. */
+  #ha-ask .ha-ask__person { margin: var(--ha-space-xs) 0 0; padding: var(--ha-space-xs) var(--ha-space-sm); background: var(--ha-white); border: 1px solid var(--ha-rule); border-left: 4px solid var(--ha-teal-deep); border-radius: var(--ha-radius-callout); }
+  #ha-ask .ha-ask__bubble .ha-ask__person-label { font-family: var(--ha-font-display); font-size: var(--ha-fs-small); font-weight: 700; line-height: var(--ha-lh-snug); letter-spacing: var(--ha-track-tight); color: var(--ha-charcoal); margin: 0 0 var(--ha-space-2xs); }
+  #ha-ask .ha-ask__bubble .ha-ask__person-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ha-space-3xs) var(--ha-space-sm); margin: 0; }
+  #ha-ask .ha-ask__person-btn { display: inline-flex; align-items: center; min-height: var(--ha-space-2xl); padding: 0 var(--ha-space-md); font-family: var(--ha-font-display); font-size: var(--ha-fs-small); font-weight: 700; letter-spacing: var(--ha-track-button); color: var(--ha-white); background: var(--ha-teal-deep); border-radius: var(--ha-radius-pill); text-decoration: none; }
+  #ha-ask .ha-ask__person-btn:hover { background: var(--ha-slate); }
+  #ha-ask .ha-ask__person-link { display: inline-flex; align-items: center; min-height: var(--ha-space-xl); font-size: var(--ha-fs-small); color: var(--ha-teal-ink); text-decoration: underline; }
+  #ha-ask .ha-ask__bubble .ha-ask__person-help { font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); margin: var(--ha-space-2xs) 0 0; }
   #ha-ask [hidden] { display: none; }
   @media (max-width: 700px) {
     #ha-ask .ha-ask__log { padding: var(--ha-space-sm); max-height: 55vh; }
@@ -346,7 +355,24 @@
     return fig;
   }
 
-  function renderAnswer(text, sources, related, graphics) {
+  // "Ask a person": the wording is data so the sign-off review can quote it (signoff_doc.py reads this line).
+  var PERSON = {"label": "Want a person to look at this?", "button": "Email our team", "call": "Call", "page": "Contact page", "help": "The button opens your email app with your question filled in. Nothing is sent until you send it.", "subject": "Question from the Ask Hawai\u02bbi Appleseed assistant", "body": "Hello,\n\nI asked the Hawai\u02bbi Appleseed website assistant this question, and it could not answer it:\n\n\u201c{question}\u201d\n\nI would like someone on the team to take a look.\n\nThank you,\n"};
+  function personBox(h, question) {
+    if (!h || !/^[^\s@<>"]+@[^\s@<>"]+$/.test(h.email || '') || !/^\+?\d+$/.test(h.tel || '') || !/^[\d()\s-]+$/.test(h.phone || '') || !pageUrl(h.page)) return null;
+    var q = String(question || '').replace(/\s+/g, ' ').trim().slice(0, 500);
+    var box = el('div', 'ha-ask__person'), row = el('p', 'ha-ask__person-row');
+    box.appendChild(el('p', 'ha-ask__person-label', PERSON.label));
+    var mail = el('a', 'ha-ask__person-btn', PERSON.button);
+    mail.href = 'mailto:' + h.email + '?subject=' + encodeURIComponent(PERSON.subject) + '&body=' + encodeURIComponent(PERSON.body.replace('{question}', q));
+    mail.setAttribute('aria-label', PERSON.button + ': opens your email app with your question filled in');
+    var call = el('a', 'ha-ask__person-link', PERSON.call + ' ' + h.phone); call.href = 'tel:' + h.tel;
+    var page = el('a', 'ha-ask__person-link', PERSON.page); page.href = h.page; page.target = '_blank'; page.rel = 'noopener';
+    row.appendChild(mail); row.appendChild(call); row.appendChild(page);
+    box.appendChild(row); box.appendChild(el('p', 'ha-ask__person-help', PERSON.help));
+    return box;
+  }
+
+  function renderAnswer(text, sources, related, graphics, handoff, question) {
     var box = document.createDocumentFragment();
     text.split(/\n{2,}/).forEach(function (block) {
       var lines = block.split('\n').filter(Boolean);
@@ -361,6 +387,7 @@
       }
     });
     (graphics || []).slice(0, 2).forEach(function (g) { var f = drawGraphic(g, sources); if (f) box.appendChild(f); });
+    var person = personBox(handoff, question); if (person) box.appendChild(person);
     if (sources.length) box.appendChild(refList('Sources', sources, true));
     if (related && related.length) box.appendChild(refList('Related research', related, false));
     return box;
@@ -432,7 +459,7 @@
       var d = r.data || {};
       var text = d.answer || 'Something went wrong. Please try again, or browse hiappleseed.org.';
       tli.remove();
-      var shown = renderAnswer(text, d.sources || [], d.related || [], d.graphics || []);
+      var shown = renderAnswer(text, d.sources || [], d.related || [], d.graphics || [], d.handoff || null, question);
       if (feedbackOn && r.ok && d.answer) shown.appendChild(feedbackRow(question, d));
       var wide = !!shown.querySelector('.ha-ask__gfx'); // a fragment is emptied by add(), so look first
       var botli = add('bot', shown);

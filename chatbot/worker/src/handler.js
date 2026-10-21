@@ -5,6 +5,7 @@ import { matchCanned } from "./canned.js";
 import { resolveStance } from "./stance.js";
 import { resolver, takeChart } from "./charts.js";
 import { pickGraphics, takeMarkers } from "./graphics.js";
+import { handoffFor, takeStaffMarker } from "./handoff.js";
 import { isLegalHelpRequest, LEGAL_REPLY, LEGAL_SENTINEL, LEGAL_SOURCES } from "./legal.js";
 import { buildExcerpts, buildSystem } from "./prompt.js";
 import { suggestResearch } from "./research.js";
@@ -75,7 +76,7 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
   const last = messages[messages.length - 1].content;
 
   if (isLegalHelpRequest(last)) {
-    return { status: 200, body: { answer: LEGAL_REPLY, sources: LEGAL_SOURCES, related: [], flags: { legal: true } } };
+    return { status: 200, body: { answer: LEGAL_REPLY, sources: LEGAL_SOURCES, related: [], handoff: null, flags: { legal: true } } };
   }
 
   // The questions asked most get a reviewed answer straight away: no model, no cost, the same words every time.
@@ -83,7 +84,7 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
   if (canned) {
     console.log(JSON.stringify({ event: "canned", id: canned.id }));
     const graphics = pickGraphics(index, { attached: canned.graphic ? [canned.graphic] : [] });
-    return { status: 200, body: { answer: canned.answer, sources: canned.sources, related: [], graphics, flags: { canned: canned.id } } };
+    return { status: 200, body: { answer: canned.answer, sources: canned.sources, related: [], graphics, handoff: handoffFor(index, { cannedId: canned.id }), flags: { canned: canned.id } } };
   }
 
   // "What is your stance on X?": a position we hold is stated as written, a topic our work never touches is deferred
@@ -94,13 +95,13 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
     const related = (sec.research ?? []).map((u) => index.pubs?.[u] && { title: index.pubs[u].t, url: u, year: index.pubs[u].y, pdf: index.pubs[u].p || null }).filter(Boolean).slice(0, 3);
     console.log(JSON.stringify({ event: "stance", kind: "position", id: sec.id }));
     const graphics = pickGraphics(index, { attached: sec.graphics ?? [] });
-    return { status: 200, body: { answer: `${sec.text.trim()} [1]`, sources: [{ n: 1, title: sec.title, url: sec.url, year: null, pdf: null }], related, graphics, flags: { canned: "stance", position: sec.title } } };
+    return { status: 200, body: { answer: `${sec.text.trim()} [1]`, sources: [{ n: 1, title: sec.title, url: sec.url, year: null, pdf: null }], related, graphics, handoff: null, flags: { canned: "stance", position: sec.title } } };
   }
   if (stance?.kind === "defer") {
     const d = (index.faq ?? []).find((e) => e.id === "no-position");
     if (d) {
       console.log(JSON.stringify({ event: "stance", kind: "defer" }));
-      return { status: 200, body: { answer: d.answer, sources: d.sources, related: [], flags: { canned: "no-position" } } };
+      return { status: 200, body: { answer: d.answer, sources: d.sources, related: [], handoff: handoffFor(index, { cannedId: "no-position" }), flags: { canned: "no-position" } } };
     }
   }
 
@@ -143,7 +144,8 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
   if (text.startsWith(LEGAL_SENTINEL) || text.includes(LEGAL_SENTINEL)) {
     return { status: 200, body: { answer: LEGAL_REPLY, sources: LEGAL_SOURCES, related: [], flags: { legal: true } } };
   }
-  const marked = takeMarkers(text, index);
+  const staff = takeStaffMarker(text); // [[staff]]: the model says a person should look at this
+  const marked = takeMarkers(staff.text, index);
   // A chart the model drew itself is shown only when no vetted graphic covers the question, and only if every figure in it
   // is quoted from the text the model was given (charts.js).
   const drawn = takeChart(marked.text, resolver(index.core, hits, index.pubs));
@@ -155,5 +157,6 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
   });
   // Counts only, never message text: "uncited" answers are where the knowledge base may have a gap.
   console.log(JSON.stringify({ event: "answer", cited: sources.length, related: related.length, graphics: graphics.length, drawn: Boolean(graphics[0]?.generated), uncited: sources.length === 0 }));
-  return { status: 200, body: { answer, sources, related, graphics, flags: {} }, usage, model };
+  const handoff = handoffFor(index, { asked: staff.asked, answer });
+  return { status: 200, body: { answer, sources, related, graphics, handoff, flags: {} }, usage, model };
 }

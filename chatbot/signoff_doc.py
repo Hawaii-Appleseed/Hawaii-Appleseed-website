@@ -199,18 +199,28 @@ def fixed_part(idx: dict) -> str:
     privacy = re.search(r'<p class="ha-ask__note">(.*?)</p>', (HERE / "index.html").read_text(encoding="utf-8"), re.S).group(1)
     privacy = html.unescape(re.sub(r"<[^>]+>", "", privacy)).strip()
     welcome = re.search(r"add\('bot', '(Hello\..*?)'\);", (HERE / "index.html").read_text(encoding="utf-8")).group(1)
+    page_src = (HERE / "index.html").read_text(encoding="utf-8")
+    person = json.loads(re.search(r"var PERSON = (\{.*?\});", page_src).group(1))
+    c = idx["contact"]
+    hand = "<br/>".join(e(x) for x in [
+        f"{person['label']}  [{person['button']}]  [{person['call']} {c['phone']}]  [{person['page']}: {c['page']}]", person["help"], "",
+        f"When the visitor clicks the button, their email app opens, addressed to {c['email']}, with this subject and message (they can edit it, and nothing is sent until they send it):", "",
+        "Subject: " + person["subject"], "", *person["body"].replace("{question}", "<the visitor’s question>").split("\n")])
     items = [
         ("legal-help", "Reply to any request for legal help", "Always this exact text, never model-written. Triggered by a clear request for legal advice, a lawyer, or help with a personal case.",
          fx["legal"].replace(" [1]", "") + "  [link: " + fx["sources"][0]["title"] + "]"),
         ("no-position", "Reply when our work never covers a topic", "Used when a visitor asks where Hawaiʻi Appleseed stands on something its published work never touches. It never repeats the visitor’s words.", nopos["answer"]),
         ("cannot-answer", "Reply when the model declines", "", fx["declined"]),
         ("unavailable", "Reply when the assistant is down or out of budget", "", fx["unavailable"]),
+        ("ask-a-person", "“Ask a person” button and prefilled email",
+         "Shown under an answer when the assistant could not answer (it says it lacks the information, or the question is about the visitor’s own situation, or only staff could decide), and under the no-position reply. Never shown on a legal-help reply. The assistant never contacts anyone; the visitor sends the email from their own mail app.", {"html": hand}),
         ("welcome", "First message on the page", "", welcome),
         ("privacy-note", "Note under the chat box", "What visitors are told about AI, accuracy, legal advice, and privacy. Someone with authority over the organization’s public statements should approve this one.", privacy),
     ]
     out = [f'<h2 style="{HEAD}">Part 3. Fixed replies and page text ({len(items)})</h2>', p("Words the page or the Worker always uses, however a question is phrased.")]
     for n, (ref, title, why, text) in enumerate(items, 1):
-        rows = [["<b>Exact text</b>", p(cited(text), "margin:0")]]
+        body_html = text["html"] if isinstance(text, dict) else cited(text)
+        rows = [["<b>Exact text</b>", p(body_html, "margin:0")]]
         if why:
             rows.append(["<b>When it is used</b>", e(why)])
         out.append(f'<h3 style="{HEAD}">{n}. {e(title)}</h3>' + table(rows, [20, 80]) + '<p style="margin:6pt 0 2pt"></p>' + decision(f"fixed/{ref}", "this text"))
@@ -240,7 +250,7 @@ def build_html() -> str:
 <h2 style="{HEAD}">What gets approved</h2>
 {table([[e(x), e(y)] for x, y in (("Part 1: positions", f"{len(summary)} stated positions. Each is shown with its chart, research links, and figures."),
                                       ("Part 2: ready-made answers", "Questions asked most, answered with fixed text."),
-                                      ("Part 3: fixed replies and page text", "The legal-help reply, the no-position reply, error messages, the welcome line, and the privacy note."))], [30, 70])}
+                                      ("Part 3: fixed replies and page text", "The legal-help reply, the no-position reply, the “ask a person” button and its prefilled email, error messages, the welcome line, and the privacy note."))], [30, 70])}
 {small("Everything else the assistant says comes from a model working only from our publications under strict rules (it must cite, may not invent a position or number, and may not give legal advice). That part is tested separately.")}
 <h2 style="{HEAD}">Positions at a glance</h2>
 {table(rows, [5, 28, 17, 28, 22], head=["#", "Position", "Area", "Chart", "Figures"])}

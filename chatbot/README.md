@@ -20,7 +20,8 @@ widget (index.html, on hiappleseed.org)
       6. research links (research.js): sources get year + PDF; "Related research" is added
       7. graphics (graphics.js): a position or ready-made answer brings its graphic; a question that asks
          for a chart finds one by name; a [[graphic: id]] marker from the model is checked and stripped
-  ← { answer, sources[], related[], graphics[], flags }
+      8. hand-off (handoff.js): if the assistant could not answer, say so to the page so it can offer "Ask a person"
+  ← { answer, sources[], related[], graphics[], handoff, flags }
 ```
 
 | Path | What it is |
@@ -169,6 +170,15 @@ Accept a figure in `content/figures.json` with the source and a reason; the test
 **What it found the first time.** The conveyance tax position said revenue would go to "affordable housing (20 percent), DHHL (30 percent), DURF (20 percent), conservation (5 percent)". The published post says *up to* 20 percent (or $40 million, whichever is less), *up to* 30 percent (capped at $60 million a year), 20 percent for DURF, and *up to* 5 percent (or $10 million): the shares are maximums. The position and its chart now say so. It also caught "about 70 percent" (published: over 70), "$900 million" (published: more than $900 million), and "5 percent of income or more" (published: at least). And it showed that the staff file's "DHHL waitlist is 6,000 families ($800M backlog)" ran two published figures together: nearly 30,000 families are on the waitlist (*Policy in Perspective 2026*), while $800 million is DHHL's estimate for building homes for nearly 6,000 families (the conveyance tax post). The position now says both.
 
 **What it cannot do.** It shows that a figure was published in a similar context, not that our sentence means what the published one means: "waitlist is 6,000 families" would still pass, because the same published sentence holds both 6,000 and $800 million. That is why `--matches` prints the published sentence beside ours; staff sign-off should read those pairs (roadmap item 2 builds the page for it).
+
+## Ask a person
+
+When the assistant cannot answer, the page offers a way to reach the team instead of leaving a dead end: **Email our team** (a `mailto:` link to the office address with the visitor's question already in the message), **Call (808) 587-7605**, and a **Contact page** link. The visitor sends the email from their own mail app, so nothing goes anywhere unless they choose to send it, and the assistant still never contacts anyone or collects anything.
+
+- **When it appears** (`worker/src/handoff.js`): the model ends its answer with `[[staff]]` (the prompt asks for it when it says it lacks the information, when the question is about the visitor's own situation, or when only a staff member could decide: a press interview, a partnership, a volunteer role); or the answer plainly says it has nothing ("I don't have that", "no stated position"); or the reply is the fixed "no published position" one. **Never** on a legal-help reply (the bar association's list is the answer there; the office does not take cases), and not on a stated position or a ready-made answer.
+- **Where the details come from:** `index.contact`, built from the "Contact the office" section of `content/practical.md` (the build fails if it has no email, phone, or page), so the button cannot drift from what the assistant says in words.
+- **The wording** (`PERSON` in `index.html`) is quoted in the sign-off review, Part 3, so staff approve the button text and the prefilled email.
+- The marker is stripped from the answer; a half-typed one is stripped too. The page checks the email, phone, and link before drawing anything.
 
 ## Research links
 

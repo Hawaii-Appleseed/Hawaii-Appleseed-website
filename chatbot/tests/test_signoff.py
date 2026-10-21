@@ -28,7 +28,7 @@ class Rendered(unittest.TestCase):
         self.assertEqual(len(refs), len(set(refs)), "refs are unique")
         self.assertEqual(sum(r.startswith("position/") for r in refs), len(pos))
         self.assertEqual(sum(r.startswith("answer/") for r in refs), len(faq))
-        self.assertEqual({r for r in refs if r.startswith("fixed/")}, {"fixed/legal-help", "fixed/no-position", "fixed/cannot-answer", "fixed/unavailable", "fixed/welcome", "fixed/privacy-note"})
+        self.assertEqual({r for r in refs if r.startswith("fixed/")}, {"fixed/legal-help", "fixed/no-position", "fixed/cannot-answer", "fixed/unavailable", "fixed/ask-a-person", "fixed/welcome", "fixed/privacy-note"})
         self.assertEqual(self.page.count("☐ Approve"), len(refs) * 2, "two approve lines in every decision box")
 
     def test_a_position_is_shown_word_for_word_with_its_chart_and_figures(self):
@@ -42,6 +42,13 @@ class Rendered(unittest.TestCase):
         fx = sd.node_json("({legal: L.LEGAL_REPLY, declined: H.FRIENDLY.declined})")
         self.assertIn(sd.e(fx["legal"].replace(" [1]", "")), self.page)
         self.assertIn(sd.e(fx["declined"]), self.page)
+
+    def test_the_ask_a_person_wording_is_shown_exactly_as_the_page_has_it(self):
+        import json as _json
+        person = _json.loads(re.search(r"var PERSON = (\{.*?\});", (HERE / "index.html").read_text(encoding="utf-8")).group(1))
+        for k in ("label", "button", "help", "subject"):
+            self.assertIn(sd.e(person[k]), self.page, k)
+        self.assertIn(self.idx["contact"]["email"], self.page)
 
     def test_table_widths_are_declared_for_every_table_and_no_script_gets_in(self):
         tables = self.page.count("<table")
