@@ -1,0 +1,23 @@
+name = "ha-ask"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Run `python3 chatbot/build_index.py` first: src/index.json is generated and committed.
+
+[vars]
+ALLOWED_ORIGINS = "https://hiappleseed.org,https://www.hiappleseed.org"
+# MODEL = "claude-sonnet-5-5"
+PER_MINUTE = "8"
+PER_DAY = "60"
+DAILY_CAP = "2000"
+
+# Secrets (never in this file):
+#   wrangler secret put ANTHROPIC_API_KEY
+#   wrangler secret put TURNSTILE_SECRET
+#   wrangler secret put RATE_SALT
+
+# Per-visitor rate limits. Create once: `wrangler kv namespace create RATE`, then paste the id.
+# [[kv_namespaces]]
+# binding = "RATE"
+# id = "<id from wrangler kv namespace create>"

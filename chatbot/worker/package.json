@@ -1,0 +1,24 @@
+{
+  "name": "ha-ask-worker",
+  "private": true,
+  "type": "module",
+  "description": "Hawai\u02bbi Appleseed public Q&A assistant: Cloudflare Worker backend",
+  "scripts": {
+    "index": "python3 ../build_index.py",
+    "index:public": "python3 ../build_index.py --public",
+    "pretest": "python3 ../build_index.py",
+    "test": "node --test test/unit.test.mjs",
+    "dev": "node dev-server.mjs",
+    "dev:mock": "node dev-server.mjs --mock",
+    "eval": "node ../eval/run_eval.mjs",
+    "eval:offline": "node ../eval/run_eval.mjs --offline",
+    "deploy": "npm run index && wrangler deploy",
+    "deploy:public": "npm run index:public && wrangler deploy"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.137.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

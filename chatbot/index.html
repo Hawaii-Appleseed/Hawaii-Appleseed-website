@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ask Hawai&#699;i Appleseed</title>
+  <meta name="description" content="Ask questions about Hawai&#699;i Appleseed's work, research, and policy positions. Answers come from our own published writing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/okina.css">
+  <link rel="stylesheet" href="../assets/tokens.css">
+</head>
+<body style="margin: 0"> <!-- attribute, not a <style>: the Squarespace build lifts head styles -->
+<div id="ha-ask" data-endpoint="" data-turnstile-sitekey="">
+<style>
+  /* Every rule is scoped to #ha-ask: this block is pasted into a Squarespace page,
+     where an unscoped rule restyles the site's own chrome and the site's
+     button/input/p rules restyle us. Colours, type, and spacing are tokens only. */
+  #ha-ask { font-family: var(--ha-font-body); color: var(--ha-charcoal); background: var(--ha-bg); padding: var(--ha-section-y) var(--ha-gutter); box-sizing: border-box; }
+  #ha-ask *, #ha-ask *::before, #ha-ask *::after { box-sizing: border-box; }
+  #ha-ask .ha-ask { max-width: var(--ha-measure); margin: 0 auto; }
+  #ha-ask .ha-ask__eyebrow { font-family: var(--ha-font-display); font-size: var(--ha-fs-eyebrow); font-weight: 700; letter-spacing: var(--ha-track-eyebrow); text-transform: uppercase; color: var(--ha-teal-ink); margin: 0 0 var(--ha-space-xs); }
+  #ha-ask .ha-ask__title { font-family: var(--ha-font-display); font-size: var(--ha-fs-h2); font-weight: 800; line-height: var(--ha-lh-heading); letter-spacing: var(--ha-track-display); color: var(--ha-charcoal); margin: 0 0 var(--ha-space-xs); }
+  #ha-ask .ha-ask__lede { font-size: var(--ha-fs-lead); line-height: var(--ha-lh-body); color: var(--ha-ink-muted); margin: 0 0 var(--ha-space-lg); }
+
+  #ha-ask .ha-ask__panel { background: var(--ha-white); border: 1px solid var(--ha-rule); border-radius: var(--ha-radius-card); overflow: hidden; }
+  #ha-ask .ha-ask__log { list-style: none; margin: 0; padding: var(--ha-space-md); min-height: 260px; max-height: min(60vh, 560px); overflow-y: auto; display: flex; flex-direction: column; gap: var(--ha-space-sm); }
+  #ha-ask .ha-ask__msg { margin: 0; padding: 0; display: flex; }
+  #ha-ask .ha-ask__msg--me { justify-content: flex-end; }
+  #ha-ask .ha-ask__bubble { max-width: 92%; padding: var(--ha-space-xs) var(--ha-space-sm); border-radius: var(--ha-radius-card); font-size: var(--ha-fs-body); line-height: var(--ha-lh-small); overflow-wrap: anywhere; }
+  #ha-ask .ha-ask__msg--me .ha-ask__bubble { background: var(--ha-charcoal); color: var(--ha-white); }
+  #ha-ask .ha-ask__msg--bot .ha-ask__bubble { background: var(--ha-ash-light); color: var(--ha-charcoal); }
+  #ha-ask .ha-ask__bubble p { margin: 0 0 var(--ha-space-2xs); }
+  #ha-ask .ha-ask__bubble p:last-child { margin-bottom: 0; }
+  #ha-ask .ha-ask__bubble ul, #ha-ask .ha-ask__bubble ol { margin: 0 0 var(--ha-space-2xs); padding-left: var(--ha-space-md); }
+  #ha-ask .ha-ask__bubble li { margin: 0 0 var(--ha-space-3xs); }
+  #ha-ask .ha-ask__bubble strong { font-weight: 600; }
+  #ha-ask .ha-ask__cite { font-size: var(--ha-fs-caption); font-weight: 600; color: var(--ha-teal-ink); text-decoration: none; margin-left: 1px; }
+  #ha-ask .ha-ask__cite:hover { text-decoration: underline; }
+  #ha-ask .ha-ask__sources { margin: var(--ha-space-xs) 0 0; padding: var(--ha-space-xs) 0 0; border-top: 1px solid var(--ha-rule); font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); }
+  #ha-ask .ha-ask__sources-label { font-family: var(--ha-font-display); font-weight: 700; letter-spacing: var(--ha-track-tight); color: var(--ha-teal-ink); margin: 0 0 var(--ha-space-3xs); }
+  #ha-ask .ha-ask__sources ol { list-style: none; margin: 0; padding: 0; }
+  #ha-ask .ha-ask__sources li { margin: 0 0 var(--ha-space-3xs); }
+  #ha-ask .ha-ask__sources a { color: var(--ha-teal-ink); text-decoration: underline; }
+  #ha-ask .ha-ask__typing { color: var(--ha-ink-subtle); font-size: var(--ha-fs-caption); }
+  #ha-ask .ha-ask__dots { display: inline-flex; gap: var(--ha-space-3xs); margin-left: var(--ha-space-2xs); vertical-align: middle; }
+  #ha-ask .ha-ask__dots i { width: var(--ha-space-3xs); height: var(--ha-space-3xs); border-radius: var(--ha-radius-pill); background: var(--ha-teal-deep); animation: ha-ask-pulse 1.2s var(--ha-ease-out) infinite; }
+  #ha-ask .ha-ask__dots i:nth-child(2) { animation-delay: .15s; }
+  #ha-ask .ha-ask__dots i:nth-child(3) { animation-delay: .3s; }
+  @keyframes ha-ask-pulse { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+
+  #ha-ask .ha-ask__chips { display: flex; flex-wrap: wrap; gap: var(--ha-space-2xs); padding: 0 var(--ha-space-md) var(--ha-space-md); }
+  #ha-ask .ha-ask__chip { font: inherit; font-family: var(--ha-font-body); font-size: var(--ha-fs-small); line-height: var(--ha-lh-snug); color: var(--ha-teal-ink); background: var(--ha-white); border: 1px solid var(--ha-teal-deep); border-radius: var(--ha-radius-pill); padding: var(--ha-space-2xs) var(--ha-space-sm); cursor: pointer; text-align: left; }
+  #ha-ask .ha-ask__chip:hover { background: var(--ha-ash-light); }
+
+  #ha-ask .ha-ask__form { display: flex; gap: var(--ha-space-2xs); align-items: flex-end; padding: var(--ha-space-sm) var(--ha-space-md); border-top: 1px solid var(--ha-rule); background: var(--ha-bg); }
+  #ha-ask .ha-ask__input { flex: 1; min-width: 0; font: inherit; font-family: var(--ha-font-body); font-size: var(--ha-fs-body); line-height: var(--ha-lh-small); color: var(--ha-charcoal); background: var(--ha-white); border: 1px solid var(--ha-teal-deep); border-radius: var(--ha-radius-card); padding: var(--ha-space-xs) var(--ha-space-sm); resize: none; max-height: calc(var(--ha-space-4xl) * 2); margin: 0; }
+  #ha-ask .ha-ask__input::placeholder { color: var(--ha-ink-subtle); opacity: 1; }
+  #ha-ask .ha-ask__send { font-family: var(--ha-font-display); font-size: var(--ha-fs-small); font-weight: 700; letter-spacing: var(--ha-track-button); color: var(--ha-white); background: var(--ha-charcoal); border: 0; border-radius: var(--ha-radius-pill); padding: var(--ha-space-xs) var(--ha-space-md); cursor: pointer; margin: 0; }
+  #ha-ask .ha-ask__send:hover { background: var(--ha-teal-deep); }
+  #ha-ask .ha-ask__send[disabled] { background: var(--ha-ink-subtle); cursor: not-allowed; }
+  #ha-ask .ha-ask__reset { font: inherit; font-family: var(--ha-font-body); font-size: var(--ha-fs-caption); color: var(--ha-teal-ink); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
+  #ha-ask .ha-ask__bar { display: flex; justify-content: space-between; align-items: center; gap: var(--ha-space-sm); padding: var(--ha-space-2xs) var(--ha-space-md); background: var(--ha-bg); font-size: var(--ha-fs-caption); color: var(--ha-ink-subtle); border-top: 1px solid var(--ha-rule); }
+  #ha-ask .ha-ask__note { font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); margin: var(--ha-space-sm) 0 0; }
+  #ha-ask .ha-ask__note a { color: var(--ha-teal-ink); }
+  #ha-ask .ha-ask__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  #ha-ask [hidden] { display: none; }
+  @media (max-width: 700px) {
+    #ha-ask .ha-ask__log { padding: var(--ha-space-sm); max-height: 55vh; }
+    #ha-ask .ha-ask__bubble { max-width: 96%; }
+    #ha-ask .ha-ask__chips { padding: 0 var(--ha-space-sm) var(--ha-space-sm); }
+    #ha-ask .ha-ask__chip { width: 100%; border-radius: var(--ha-radius-card); }
+    #ha-ask .ha-ask__form { padding: var(--ha-space-xs) var(--ha-space-sm); }
+  }
+</style>
+
+<section class="ha-ask" aria-labelledby="ha-ask-title">
+  <p class="ha-ask__eyebrow">Ask Hawai&#699;i Appleseed</p>
+  <h2 class="ha-ask__title" id="ha-ask-title">Questions about our work and positions</h2>
+  <p class="ha-ask__lede">Ask about our research, our policy positions, or how the 2026 session went. Answers come from our own published writing, with links to the source.</p>
+
+  <div class="ha-ask__panel">
+    <ol class="ha-ask__log" role="log" aria-live="polite" aria-label="Conversation"></ol>
+    <div class="ha-ask__chips" role="group" aria-label="Example questions">
+      <button type="button" class="ha-ask__chip">What does Hawai&#699;i Appleseed work on?</button>
+      <button type="button" class="ha-ask__chip">What is your position on the conveyance tax?</button>
+      <button type="button" class="ha-ask__chip">What happened with the school meals bills in 2026?</button>
+      <button type="button" class="ha-ask__chip">How can I support this work?</button>
+    </div>
+    <form class="ha-ask__form" novalidate>
+      <label class="ha-ask__sr" for="ha-ask-input">Your question</label>
+      <textarea class="ha-ask__input" id="ha-ask-input" rows="1" maxlength="800" placeholder="Ask a question" autocomplete="off"></textarea>
+      <button type="submit" class="ha-ask__send">Send</button>
+    </form>
+    <div class="ha-ask__bar"><span class="ha-ask__status" aria-live="polite"></span><button type="button" class="ha-ask__reset" hidden>Start over</button></div>
+  </div>
+
+  <p class="ha-ask__note">This assistant uses AI and can make mistakes, so check anything important against <a href="https://hiappleseed.org/publications">our publications</a>. It cannot give legal advice or help with a personal legal situation. Your messages are sent to Anthropic to generate answers, and Hawai&#699;i Appleseed does not keep a copy. Please do not share personal information.</p>
+  <div class="ha-ask__turnstile"></div>
+</section>
+
+<script>
+(function () {
+  var root = document.getElementById('ha-ask');
+  if (!root || root.getAttribute('data-ready')) return;
+  root.setAttribute('data-ready', '1');
+  var $ = function (s) { return root.querySelector(s); };
+  var log = $('.ha-ask__log'), form = $('.ha-ask__form'), input = $('.ha-ask__input'),
+      send = $('.ha-ask__send'), chips = $('.ha-ask__chips'), reset = $('.ha-ask__reset'),
+      status = $('.ha-ask__status');
+  var endpoint = root.getAttribute('data-endpoint') || '';
+  var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  if (local) { var o = new URLSearchParams(location.search).get('endpoint'); if (o) endpoint = o; }
+  var sitekey = root.getAttribute('data-turnstile-sitekey') || '';
+  var history = [], busy = false, token = null, widgetId = null;
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  // Inline text: **bold** and [n] citation markers, built as DOM nodes (never innerHTML).
+  function inline(parent, text, sources) {
+    text.split(/(\*\*[^*]+\*\*|\[\d+\])/).forEach(function (part) {
+      if (!part) return;
+      var cite = /^\[(\d+)\]$/.exec(part);
+      if (cite) {
+        var s = sources.filter(function (x) { return x.n === Number(cite[1]); })[0];
+        if (s) {
+          var a = el('a', 'ha-ask__cite', '[' + s.n + ']');
+          a.href = s.url; a.target = '_blank'; a.rel = 'noopener'; a.setAttribute('aria-label', 'Source ' + s.n + ': ' + s.title);
+          parent.appendChild(a);
+        }
+      } else if (/^\*\*.+\*\*$/.test(part)) {
+        parent.appendChild(el('strong', null, part.slice(2, -2)));
+      } else {
+        parent.appendChild(document.createTextNode(part));
+      }
+    });
+  }
+
+  function renderAnswer(text, sources) {
+    var box = document.createDocumentFragment();
+    text.split(/\n{2,}/).forEach(function (block) {
+      var lines = block.split('\n').filter(Boolean);
+      if (!lines.length) return;
+      var bullets = lines.every(function (l) { return /^\s*([-*•]|\d+[.)])\s+/.test(l); });
+      if (bullets) {
+        var list = el(/^\s*\d/.test(lines[0]) ? 'ol' : 'ul');
+        lines.forEach(function (l) { var li = el('li'); inline(li, l.replace(/^\s*([-*•]|\d+[.)])\s+/, ''), sources); list.appendChild(li); });
+        box.appendChild(list);
+      } else {
+        var p = el('p'); inline(p, lines.join(' '), sources); box.appendChild(p);
+      }
+    });
+    if (sources.length) {
+      var s = el('div', 'ha-ask__sources');
+      s.appendChild(el('p', 'ha-ask__sources-label', 'Sources'));
+      var ol = el('ol');
+      sources.forEach(function (x) {
+        var li = el('li'); li.appendChild(document.createTextNode(x.n + '. '));
+        var a = el('a', null, x.title); a.href = x.url; a.target = '_blank'; a.rel = 'noopener';
+        li.appendChild(a); ol.appendChild(li);
+      });
+      s.appendChild(ol); box.appendChild(s);
+    }
+    return box;
+  }
+
+  function add(role, content) {
+    var li = el('li', 'ha-ask__msg ha-ask__msg--' + (role === 'user' ? 'me' : 'bot'));
+    var b = el('div', 'ha-ask__bubble');
+    b.appendChild(el('span', 'ha-ask__sr', role === 'user' ? 'You: ' : 'Hawaiʻi Appleseed assistant: '));
+    b.appendChild(typeof content === 'string' ? document.createTextNode(content) : content);
+    li.appendChild(b); log.appendChild(li);
+    log.scrollTop = log.scrollHeight;
+    return li;
+  }
+
+  function setBusy(v) { busy = v; send.disabled = v; input.disabled = v; if (!v) input.focus(); }
+
+  function waitForToken() {
+    if (!sitekey) return Promise.resolve(null);
+    return new Promise(function (res) {
+      var t0 = Date.now();
+      (function poll() { if (token || Date.now() - t0 > 6000) res(token); else setTimeout(poll, 150); })();
+    });
+  }
+
+  function ask(question) {
+    if (busy || !question.trim()) return;
+    if (!endpoint) { status.textContent = 'The assistant is not connected yet.'; return; }
+    chips.hidden = true; reset.hidden = false;
+    add('user', question);
+    history.push({ role: 'user', content: question });
+    input.value = ''; input.style.height = 'auto';
+    var typing = el('span', 'ha-ask__typing', 'Looking through our publications');
+    var dots = el('span', 'ha-ask__dots'); dots.setAttribute('aria-hidden', 'true');
+    for (var i = 0; i < 3; i++) dots.appendChild(el('i'));
+    typing.appendChild(dots);
+    var tli = add('bot', typing);
+    setBusy(true); status.textContent = '';
+    var ctl = new AbortController(), timer = setTimeout(function () { ctl.abort(); }, 45000);
+    waitForToken().then(function (tk) {
+      return fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: ctl.signal,
+        body: JSON.stringify({ messages: history.slice(-8), turnstileToken: tk }) });
+    }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, data: d }; }); })
+    .then(function (r) {
+      var d = r.data || {};
+      var text = d.answer || 'Something went wrong. Please try again, or browse hiappleseed.org.';
+      tli.remove();
+      add('bot', renderAnswer(text, d.sources || []));
+      if (r.ok && d.answer) history.push({ role: 'assistant', content: d.answer });
+      else history.pop();
+    }).catch(function () {
+      tli.remove();
+      add('bot', 'The assistant could not be reached. Please check your connection and try again.');
+      history.pop();
+    }).then(function () {
+      clearTimeout(timer); setBusy(false);
+      if (window.turnstile && widgetId !== null) { token = null; try { window.turnstile.reset(widgetId); } catch (e) {} }
+    });
+  }
+
+  form.addEventListener('submit', function (e) { e.preventDefault(); ask(input.value); });
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ask(input.value); } });
+  input.addEventListener('input', function () { input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 160) + 'px'; });
+  Array.prototype.forEach.call(chips.querySelectorAll('.ha-ask__chip'), function (c) { c.addEventListener('click', function () { ask(c.textContent); }); });
+  reset.addEventListener('click', function () { log.textContent = ''; history = []; chips.hidden = false; reset.hidden = true; status.textContent = ''; seed(); input.focus(); });
+
+  function seed() {
+    add('bot', 'Hello. I can answer questions about Hawaiʻi Appleseed, our research, and our policy positions. What would you like to know?');
+  }
+  seed();
+  if (!endpoint) { status.textContent = 'Preview only: the assistant is not connected yet.'; }
+
+  if (sitekey) {
+    var s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'; s.async = true;
+    s.onload = function () {
+      widgetId = window.turnstile.render($('.ha-ask__turnstile'), { sitekey: sitekey, appearance: 'interaction-only',
+        callback: function (t) { token = t; }, 'expired-callback': function () { token = null; } });
+    };
+    document.head.appendChild(s);
+  }
+})();
+</script>
+</div>
+</body>
+</html>
