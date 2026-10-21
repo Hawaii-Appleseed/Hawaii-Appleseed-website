@@ -153,3 +153,36 @@ class Vendoring(unittest.TestCase):
             self.assertIn(victim.name, r.stdout)
         finally:
             victim.write_text(original, encoding="utf-8")
+
+
+class Embed(unittest.TestCase):
+    """build_embed.py: one self-contained, ASCII-only widget payload."""
+
+    @classmethod
+    def setUpClass(cls):
+        sys.path.insert(0, str(HERE))
+        import build_embed as be
+        cls.be = be
+        cls.html = be.build(endpoint="https://ha-ask.example.workers.dev/chat", sitekey="0x4AAAtest")
+
+    def test_self_contained(self):
+        import re
+        self.assertEqual(re.findall(r'<link[^>]*stylesheet[^>]*(?:\.\./assets|github\.io)', self.html), [])
+        for needle in ("--ha-charcoal", "OkinaManrope", 'id="ha-ask"', "<script>"):
+            self.assertIn(needle, self.html)
+
+    def test_ascii_only_because_squarespace_mangles_utf8(self):
+        self.assertTrue(all(ord(c) < 128 for c in self.html))
+        self.assertIn("Hawai\\u02BBi", self.html)   # the okina survives inside script strings as an escape
+
+    def test_endpoint_and_sitekey_are_written_into_the_wrapper(self):
+        self.assertIn('data-endpoint="https://ha-ask.example.workers.dev/chat"', self.html)
+        self.assertIn('data-turnstile-sitekey="0x4AAAtest"', self.html)
+        self.assertIn('data-endpoint=""', self.be.build())
+
+    def test_squarespace_mobile_breakout_is_present(self):
+        self.assertIn("margin-left: calc(50% - 50vw) !important", self.html)
+
+    def test_no_internal_content_leaks_into_the_widget(self):
+        for needle in ("positions.md", "Coalition Meeting Notes", "ANTHROPIC_API_KEY", "sk-ant"):
+            self.assertNotIn(needle, self.html)

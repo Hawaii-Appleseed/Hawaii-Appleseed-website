@@ -49,6 +49,14 @@ def _source_roots():
     base = VENDOR if mode == "vendor" else ROOT
     if not (base / "writing-bot" / "sources.py").exists():
         raise SystemExit(f"{mode} source has no writing-bot/sources.py under {base}; run chatbot/vendor.py")
+    if mode == "vendor" and (ROOT / "writing-bot" / "sources.py").exists():
+        # A live tree is visible too: say so if the vendored copy has fallen behind it, rather than build stale quietly.
+        sys.path.insert(0, str(HERE))
+        import vendor as _vendor
+        behind = _vendor.check(ROOT, VENDOR)
+        if behind:
+            print(f"WARNING: vendor/ is behind the live tree ({len(behind)} differences, e.g. {behind[0]}). "
+                  "Run python3 chatbot/vendor.py, or CHATBOT_SOURCE=live to build from the live files.", file=sys.stderr)
     return mode, base / "writing-bot", base / "tax-fairness" / "data" / "bill-status.json"
 
 

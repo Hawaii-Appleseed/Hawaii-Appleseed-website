@@ -11,7 +11,7 @@ website repo, so writing-bot/sources.py runs unmodified.
 
 build_index.py uses vendor/ when it has a MANIFEST.json, and the live tree otherwise (override with
 CHATBOT_SOURCE=live|vendor). What is copied is exactly what the builder can read: the three corpus folders,
-sources.py with its blog URL map, and the bill-status feed. writing-bot/reference/ (internal meeting notes)
+sources.py with its blog URL map, the bill-status feed, and the two stylesheets the widget needs. writing-bot/reference/ (internal meeting notes)
 is never copied.
 """
 from __future__ import annotations
@@ -38,6 +38,8 @@ SINGLES = [
     "writing-bot/sources.py",
     "writing-bot/content-monitor/blog-sources.json",
     "tax-fairness/data/bill-status.json",
+    "assets/tokens.css",  # the widget's design tokens and ʻokina fonts, inlined by build_embed.py
+    "assets/okina.css",
 ]
 
 

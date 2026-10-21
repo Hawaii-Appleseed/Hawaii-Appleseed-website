@@ -3,3 +3,4 @@
 vendor/
 vendor.tmp/
 vendor.old/
+dist/

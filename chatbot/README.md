@@ -30,7 +30,9 @@ widget (index.html, on hiappleseed.org)
 | `content/positions.md` | Public positions, each tagged `<!-- status: draft -->` or `approved by …`. |
 | `build_index.py` | Builds `worker/src/index.json` (core text + BM25 index over publications, blog, testimony). Generates the bill-outcomes section from `tax-fairness/data/bill-status.json`. |
 | `worker/src/` | `index.js` Worker entry · `handler.js` one chat turn · `legal.js` the gate · `prompt.js` rules · `retrieve.js` BM25 · `tokenize.js` |
-| `index.html` | The embeddable widget (own wrapper, tokens only, DOM-built rendering). `squarespace-inject.html` is its generated paste payload. |
+| `index.html` | The embeddable widget (own wrapper, tokens only, DOM-built rendering). |
+| `build_embed.py` | Builds the widget into one self-contained, ASCII-only file (`dist/embed.html`) with the design tokens and ʻokina fonts inlined, and the Worker URL and Turnstile key written in. Works with no website repo. |
+| `squarespace-inject.html` | The same widget built by the website repo's `scripts/squarespace.py` (the `--go` publish route). Only used while `chatbot/` sits inside the website repo. |
 | `worker/src/research.js` | Picks the "Related research" list shown under each answer (see below). |
 | `eval/` | `golden.jsonl` (82 cases, including multi-turn follow-ups) + `run_eval.mjs`. |
 | `tokenizer_vectors.json` | Shared test vectors keeping the Python and JS tokenizers identical. |
@@ -73,7 +75,9 @@ The offline pass is in CI-able shape today. The live pass is the one that tells 
 - A test proves a build from the vendored copy is identical to a build from the live tree (core text, report catalog, chunks, search index).
 - `vendor/` is git-ignored here, because these files already live in `writing-bot/` in this public repo. Delete `chatbot/.gitignore` when `chatbot/` moves to its own repo and commit `vendor/` there.
 
-**Moving `chatbot/` to its own (private) repo.** Everything except the widget builds on its own: `git subtree split --prefix=chatbot -b chatbot-standalone` keeps the history; in the new repo remove the `vendor/` ignore, run `python3 vendor.py --from <website checkout>`, and commit `vendor/`. Keep `index.html` and `squarespace-inject.html` in the website repo: they are the public widget (no positions in them) and depend on `assets/tokens.css` and `scripts/squarespace.py`. Refresh the snapshot after each weekly corpus refresh, the way `deploy-content-search.yml` pushes to the private hub repo. A copy of `chatbot/` with no website repo around it was verified to pass every suite (Worker, workerd runtime, Python, offline eval).
+**Everything lives in one repo, widget included.** `vendor.py` also copies `assets/tokens.css` and `assets/okina.css` (13 KB), and `build_embed.py` inlines them, so the widget needs nothing from the website repo or its Pages host. To publish: `python3 build_embed.py --endpoint https://<worker>/chat --sitekey <turnstile key>` and paste `dist/embed.html` into a Squarespace Code Block on the page (while `chatbot/` is inside the website repo, `python3 scripts/squarespace.py chatbot --go` does the same through the usual route).
+
+**Moving `chatbot/` to its own (private) repo.** `git subtree split --prefix=chatbot -b chatbot-standalone` keeps the history. In the new repo delete `.gitignore`'s `vendor/` line, run `python3 vendor.py --from <website checkout>`, and commit `vendor/`. Drop `squarespace-inject.html` (the website repo's generated copy) and use `build_embed.py` instead. Refresh the snapshot after each weekly corpus refresh, the way `deploy-content-search.yml` pushes to the private hub repo. `build_index.py` warns if `vendor/` has fallen behind a live tree it can see. A copy of `chatbot/` with no website repo around it was verified to pass every suite (Worker, workerd runtime, Python, offline eval) and to build the widget.
 
 ## Research links
 
