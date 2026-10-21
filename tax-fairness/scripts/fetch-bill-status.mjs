@@ -13,6 +13,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { toDescription, getStatusBadge, isHearingTitle, isDeferredTitle, extractHearingDate } from './status-rules.mjs';
+import { reconcile } from './reconcile-bill-status.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
@@ -33,6 +34,9 @@ const RSS_URL_TEMPLATE = ({ year, type, number }) =>
 // ---------------------------------------------------------------
 
 const FETCH_TIMEOUT_MS = 15000;
+// capitol.hawaii.gov sometimes refuses a run (HTTP 403 from GitHub's runners), and sometimes only for a few minutes.
+const RETRIES = 2;
+const RETRY_DELAY_MS = Number(process.env.BILL_STATUS_RETRY_DELAY_MS ?? 5000); // the env var is for tests
 
 function discoverTrackers(html) {
   const trackers = [];
@@ -195,6 +199,29 @@ async function fetchBillStatus(type, number, year) {
   }
 }
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Worth another try: the site said no or was busy (403, 408, 429, 5xx) or the request itself failed or timed out.
+// Not worth one: a 404 (no such bill yet) or a reply that is not RSS.
+function isTransient(error) {
+  if (error === 'invalid RSS response') return false;
+  const m = /^HTTP (\d+)$/.exec(error);
+  return m ? [403, 408, 429].includes(Number(m[1])) || Number(m[1]) >= 500 : true;
+}
+
+async function fetchBillStatusWithRetry(type, number, year) {
+  let result;
+  for (let attempt = 0; attempt <= RETRIES; attempt++) {
+    result = await fetchBillStatus(type, number, year);
+    if (!result.error || !isTransient(result.error)) return result;
+    if (attempt < RETRIES) {
+      console.log(`  ${type}${number}: ${result.error}; trying again in ${(RETRY_DELAY_MS * (attempt + 1)) / 1000}s`);
+      await sleep(RETRY_DELAY_MS * (attempt + 1));
+    }
+  }
+  return result;
+}
+
 async function readExistingContent() {
   try {
     const parsed = JSON.parse(await readFile(OUTPUT_PATH, 'utf8'));
@@ -219,12 +246,26 @@ async function main() {
     process.exit(1);
   }
 
-  const billStatus = {};
+  const fetched = {};
   for (const bill of bills) {
     const key = `${bill.type}${bill.number}`;
     console.log(`Fetching ${key} (${bill.year})...`);
-    billStatus[key] = { type: bill.type, number: bill.number, year: bill.year, ...(await fetchBillStatus(bill.type, bill.number, bill.year)) };
+    fetched[key] = { type: bill.type, number: bill.number, year: bill.year, ...(await fetchBillStatusWithRetry(bill.type, bill.number, bill.year)) };
   }
+
+  // A failed fetch must never turn good data into an error, and a run where every fetch failed is not a data point at
+  // all. See reconcile-bill-status.mjs for the rules (and for what went wrong on 2026-10-21 without them).
+  const previous = (await readExistingContent())?.bills;
+  const result = reconcile(previous, fetched, new Date().toISOString());
+  if (result.failed.length) {
+    console.error(`::warning::${result.failed.length} of ${bills.length} fetches failed: ${result.failed.join(', ')}.` +
+      (result.stale.length ? ` Kept the last good data for ${result.stale.join(', ')} (flagged staleError).` : ''));
+  }
+  if (result.abort) {
+    console.error(`::error::Every one of ${bills.length} fetches failed (${result.failed[0]}). Leaving bill-status.json untouched.`);
+    process.exit(1);
+  }
+  const billStatus = result.bills;
 
   const content = {
     trackers: trackers.map((t) => ({

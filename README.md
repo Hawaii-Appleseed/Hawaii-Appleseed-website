@@ -256,6 +256,7 @@ href resolves against the Squarespace slug and 404s.
 | `refresh-corpus.yml` | Sundays 15:00 UTC (5 AM HST), or dispatch | Scrapes hiappleseed.org for new posts/publications into `writing-bot/`, then dispatches the Content Search rebuild. |
 | `deploy-content-search.yml` | push touching `writing-bot/**`, or dispatch | Rebuilds the search bundle, runs the parity gate, and pushes it straight into `Hawaii-Appleseed/staff-updates-internal` (private) — nothing lands in this repo. |
 | `fetch-bill-status.yml` | every 30 min (cron), or dispatch | Fetches bill RSS from capitol.hawaii.gov into `tax-fairness/data/bill-status.json`. Bill list is discovered from `data-hb`/`data-sb` attributes in the tracked pages — adding a bill is a content edit, not a workflow edit. |
+| `tax-fairness-tests.yml` | PRs and pushes touching `tax-fairness/scripts/**` | Unit tests for how a bill-status refresh is folded into `bill-status.json` (a failed fetch keeps the last good data; an all-failed run leaves the file alone). |
 | `chatbot-corpus.yml` | Mondays 20:00 UTC, or dispatch | Runs `chatbot/corpus_check.sh` against `main` (new reports without a topic, unbacked figures in the assistant's positions, tests, links, how stale the deployed assistant is) and keeps one `chatbot-drift` issue open while it fails. Deploys nothing. |
 | `chatbot-live-eval.yml` | nightly 09:30 UTC, or dispatch | Runs every chatbot golden case through the real model and keeps one `chatbot-eval` issue open while any fails. Does nothing until the `ANTHROPIC_API_KEY` secret exists. |
 | `site-drift.yml` | nightly 23:40 UTC, or dispatch | Checks the **published** site against this repo: every live page still carries its `squarespace-ready/` payload, every `github.io` URL those pages reference still resolves, and `publications.json` / `news.json` on Pages still fetch and parse. Fails loudly; `triage.yml` turns that into an issue plus an ntfy push. Checks and rationale in `scripts/check-live-site.py`. |
@@ -348,11 +349,19 @@ picks some):
   finds a guest introduced as "…of Hawaiʻi Appleseed" and correctly ignores Oklahoma,
   Georgia and Texas Appleseed. Audio is not transcribed.
 - **Google Alerts** (`alert_feeds`, or the `MEDIA_WATCH_ALERT_FEEDS` secret): the only
-  source that searches the whole web, so it finds outlets nobody listed. Empty until
-  someone adds one. Go to google.com/alerts, create an alert for "Hawaii Appleseed"
-  (or a staff name), set *Deliver to* to *RSS feed*, and put the link in the secret,
-  one per line. It is a secret and not config because the URL embeds the owner's
-  Google account id and this repo is public; a failing alert feed never prints it.
+  source that searches the whole web, national outlets included, so it finds outlets
+  nobody listed. Five alerts have run since 2026-10-21, on the org Google account
+  (Region: Any, How many: All results, Deliver to: RSS feed): `"Hawaii Appleseed"`;
+  `"Appleseed Center for Law and Economic Justice" Hawaii`; `"Hawaii Tax Fairness
+  Coalition"`; and two staff alerts, the six names that are rarely ambiguous plus
+  Appleseed/Hawaii/Honolulu, and the six `staff_ambiguous` names plus Appleseed. **The
+  staff alerts hold names, not the team page**: when `our-team.html` changes, edit them
+  at google.com/alerts. To add one, create an alert, set *Deliver to* to *RSS feed*, and
+  add the link to the secret, one per line. It is a secret and not config because the
+  URL embeds the owner's Google account id and this repo is public; a failing alert feed
+  never prints it. An alert only holds stories published after it was made, so it
+  cannot backfill; the other stages cover the back catalogue. Its stories join the
+  same digest, issue and Slack post as the rest.
   Google has matched the phrase somewhere in the page; this script reads the page to
   confirm, and keeps the story as an unchecked match if the page will not load.
 
