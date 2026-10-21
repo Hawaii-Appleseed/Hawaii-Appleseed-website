@@ -11,6 +11,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { handleChat } from "../worker/src/handler.js";
 import { isLegalHelpRequest } from "../worker/src/legal.js";
+import { suggestResearch } from "../worker/src/research.js";
 import { queryFor, search } from "../worker/src/retrieve.js";
 
 const args = process.argv.slice(2);
@@ -46,7 +47,20 @@ function checkOffline(c) {
     const blob = lc(hits.map((h) => `${h.t} ${h.u ?? ""}`).join(" | "));
     if (!c.retrieve_any.some((s) => blob.includes(lc(s)))) fails.push(`retrieval missed [${c.retrieve_any}] in: ${hits.map((h) => h.t.slice(0, 40)).join(" | ")}`);
   }
+  if (c.related_any || c.related_none) {
+    // Offline there is no model citation, so a topical question is assumed to cite an excerpt.
+    const hits = search(index, queryFor(messages));
+    const rel = suggestResearch({ index, query: c.q, hits, fromHits: !c.related_none });
+    fails.push(...relatedProblems(c, rel));
+  }
   return fails;
+}
+
+function relatedProblems(c, rel) {
+  const out = [];
+  if (c.related_any && !c.related_any.some((s) => rel.some((r) => r.url.includes(s)))) out.push(`no related research with [${c.related_any}]; got: ${rel.map((r) => r.title).join(" | ") || "none"}`);
+  if (c.related_none && rel.length) out.push(`related research on a non-research question: ${rel.map((r) => r.title).join(" | ")}`);
+  return out;
 }
 
 function checkLive(c, body) {
@@ -58,6 +72,10 @@ function checkLive(c, body) {
   for (const group of c.include_any ?? []) if (!group.some((s) => has(text, s))) fails.push(`none of [${group.slice(0, 4)}]`);
   for (const s of c.exclude ?? []) if (has(text, s)) fails.push(`contains "${s}"`);
   for (const r of c.regex_exclude ?? []) if (new RegExp(r).test(text)) fails.push(`matches /${r}/`);
+  const links = [...(body.sources ?? []), ...(body.related ?? [])];
+  if (c.related_any && !c.related_any.some((s) => links.some((x) => x.url.includes(s)))) fails.push(`no source or related research with [${c.related_any}]`);
+  if (c.related_none && (body.related ?? []).length) fails.push(`related research on a non-research question: ${body.related.map((r) => r.title).join(" | ")}`);
+  if (["position", "outcome"].includes(c.cat) && !links.length) fails.push("research question answered with no source or research link");
   if (c.source_any && !c.source_any.some((s) => body.sources.some((x) => x.url.includes(s)))) fails.push(`no source url with [${c.source_any}]`);
   fails.push(...voiceProblems(text).map((p) => `voice: ${p}`));
   return fails;
@@ -77,7 +95,7 @@ let tokens = { in: 0, out: 0, cacheRead: 0, cacheWrite: 0 };
 const quiet = console.log;
 async function run(c) {
   if (offline) {
-    if (!("legal" in c) && !c.retrieve_any) return { c, fails: [], skipped: true };
+    if (!("legal" in c) && !c.retrieve_any && !c.related_any && !c.related_none) return { c, fails: [], skipped: true };
     return { c, fails: checkOffline(c) };
   }
   console.log = () => {}; // the handler logs one line per request

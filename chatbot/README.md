@@ -17,7 +17,8 @@ widget (index.html, on hiappleseed.org)
       4. Claude: rules + positions + org facts (cached) + excerpts (per question)
       5. cleanup: [C12]/[2] markers → numbered links we built; raw URLs stripped;
          a [[LEGAL]] reply from the model becomes the same fixed text
-  ← { answer, sources[], flags }
+      6. research links (research.js): sources get year + PDF; "Related research" is added
+  ← { answer, sources[], related[], flags }
 ```
 
 | Path | What it is |
@@ -27,6 +28,7 @@ widget (index.html, on hiappleseed.org)
 | `build_index.py` | Builds `worker/src/index.json` (core text + BM25 index over publications, blog, testimony). Generates the bill-outcomes section from `tax-fairness/data/bill-status.json`. |
 | `worker/src/` | `index.js` Worker entry · `handler.js` one chat turn · `legal.js` the gate · `prompt.js` rules · `retrieve.js` BM25 · `tokenize.js` |
 | `index.html` | The embeddable widget (own wrapper, tokens only, DOM-built rendering). `squarespace-inject.html` is its generated paste payload. |
+| `worker/src/research.js` | Picks the "Related research" list shown under each answer (see below). |
 | `eval/` | `golden.jsonl` (56 cases) + `run_eval.mjs`. |
 | `tokenizer_vectors.json` | Shared test vectors keeping the Python and JS tokenizers identical. |
 
@@ -51,6 +53,16 @@ node chatbot/eval/run_eval.mjs --model claude-haiku-5-5   # compare models
 ```
 
 The offline pass is in CI-able shape today. The live pass is the one that tells you whether answers are right; run it before any launch and again after any change to `prompt.js` or the content files.
+
+## Research links
+
+Every answer links to Hawaiʻi Appleseed's research in three ways, none of which depends on the model remembering to:
+
+1. **Citations.** The model cites what it uses as `[C12]` (a position or fact) or `[2]` (a report, blog, or testimony excerpt). The Worker turns those into numbered links, each shown in a **Sources** list with the report year and a **PDF** link. Links are built from the index, never from model text, and raw URLs in an answer are stripped.
+2. **Curated reports per position.** Each position in `content/positions.md` has a `<!-- research: slug, slug -->` line naming the reports behind it (checked against the publication text, not just titles). The builder fails if a slug is not a real report. When a position is cited, or is the best match for the question, its reports appear under **Related research**.
+3. **Search.** If the answer cited a retrieved excerpt, the best-scoring other reports from the search are added too (at most three in all).
+
+Related research is left off for questions that cite no research ("who is the executive director?"), and for legal or refused replies. Testimony has no public URL, so it informs answers but cannot be linked.
 
 ## Positions: sign-off
 

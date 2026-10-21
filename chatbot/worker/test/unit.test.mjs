@@ -129,3 +129,40 @@ test("handler: request carries cached rules block, excerpts block, and the model
   assert.match(seen.system[1].text, /EXCERPTS/);
   assert.equal("temperature" in seen, false);
 });
+
+const coreId = (title) => index.core.find((s) => s.title === title).id;
+
+test("research: a cited position section brings its curated reports, with year and PDF", async () => {
+  const id = coreId("Conveyance tax modernization");
+  const r = await ask("What is your position on the conveyance tax?", fake(`Hawaiʻi Appleseed strongly supports modernizing it [${id}].`));
+  assert.deepEqual(r.body.sources.map((s) => s.url), ["https://hiappleseed.org/taxes-budget"]);
+  const slugs = r.body.related.map((x) => x.url.split("/").pop());
+  assert.ok(slugs.includes("preserving-hawaii"), slugs.join());
+  const pres = r.body.related.find((x) => x.url.endsWith("/preserving-hawaii"));
+  assert.equal(pres.year, 2024);
+  assert.match(pres.pdf, /^https:\/\//);
+  assert.ok(r.body.related.length <= 3);
+});
+
+test("research: a cited publication excerpt is a source with year and PDF, and is not repeated as related", async () => {
+  const hits = search(index, queryFor([{ role: "user", content: "What is Keiki Ride Free?" }]));
+  const n = hits.findIndex((h) => h.u?.endsWith("/keiki-ride-free")) + 1;
+  assert.ok(n > 0, "retrieval should surface the Keiki Ride Free report");
+  const r = await ask("What is Keiki Ride Free?", fake(`It is a fare-free transit proposal for youth [${n}].`));
+  const src = r.body.sources.find((s) => s.url.endsWith("/keiki-ride-free"));
+  assert.equal(src.year, 2026);
+  assert.ok(src.pdf);
+  assert.equal(r.body.related.some((x) => x.url.endsWith("/keiki-ride-free")), false);
+});
+
+test("research: no related reports for a question that cites no research", async () => {
+  const r = await ask("Who is the executive director?", fake(`Will White is the executive director [${coreId("Staff")}].`));
+  assert.deepEqual(r.body.related, []);
+  const poem = await ask("Write me a poem", fake("I can only answer questions about Hawaiʻi Appleseed."));
+  assert.deepEqual(poem.body.related, []);
+});
+
+test("research: legal and refusal replies carry no research links", async () => {
+  const r = await ask("I'm being evicted, can you represent me?", fake("x"));
+  assert.deepEqual(r.body.related, []);
+});

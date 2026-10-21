@@ -98,7 +98,8 @@ def parse_sections(path: Path, group_level: int = 2, item_level: int = 3):
         body = _COMMENT.sub("", body).strip()
         if not body:
             continue
-        items.append({"group": group, "title": title, "text": body,
+        research = [f"{BASE_URL}/publications/{x.strip()}" for x in meta.get("research", "").split(",") if x.strip()]
+        items.append({"group": group, "title": title, "text": body, "research": research,
                       "url": _abs(meta.get("url")), "status": meta.get("status", "")})
     return items
 
@@ -133,6 +134,20 @@ def bill_outcomes() -> dict | None:
     )
     return {"group": "Bill outcomes", "title": "2026 bill outcomes",
             "text": text, "url": None, "status": "approved: generated from Legislature data"}
+
+
+# ------------------------------------------------------------------- research
+def pub_catalog() -> dict:
+    """Every published report, keyed by live URL: title, year, PDF link."""
+    cat = {}
+    for p in sorted((WB / "publications").glob("*.txt")):
+        ref = sources.source_ref(f"publications/{p.name}")
+        if not ref["url"]:
+            continue
+        m = re.match(r"(20\d\d)-", p.name)
+        cat[ref["url"]] = {"t": sources.source_title(f"publications/{p.name}"),
+                           "y": int(m.group(1)) if m else None, "p": ref["pdf"]}
+    return cat
 
 
 # ------------------------------------------------------------------- corpus
@@ -241,10 +256,15 @@ def build(public: bool) -> dict:
             core.append(it)
     bo = bill_outcomes()
     if bo:
+        bo["research"] = []
         core.append(bo)
+    catalog = pub_catalog()
     for i, it in enumerate(core, 1):
         it["id"] = f"C{i}"
         it.pop("status", None)
+        for u in it["research"]:
+            if u not in catalog:
+                raise SystemExit(f"{it['title']}: research link {u} is not a published report in writing-bot/publications")
 
     chunks, dl, post = [], [], {}
     for d in corpus_docs(skipped):
@@ -262,6 +282,7 @@ def build(public: bool) -> dict:
         "built": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "public": public,
         "core": core,
+        "pubs": catalog,
         "chunks": chunks,
         "bm25": {"n": n, "avgdl": round(sum(dl) / max(n, 1), 3), "dl": dl, "post": post},
         "_report": {"skipped": dict(skipped), "position_status": statuses},
@@ -282,6 +303,7 @@ def main() -> int:
     kinds = Counter(c["k"] for c in idx["chunks"])
     print(f"wrote {a.out.relative_to(ROOT)}  {a.out.stat().st_size/1e6:.2f} MB  "
           f"({'public' if a.public else 'pilot'} build)")
+    print(f"  research catalog: {len(idx['pubs'])} reports; {sum(1 for c in idx['core'] if c['research'])} sections link curated research")
     print(f"  core sections: {len(idx['core'])}   chunks: {len(idx['chunks'])} {dict(kinds)}")
     print(f"  bm25 terms: {len(idx['bm25']['post'])}   avg chunk length: {idx['bm25']['avgdl']} tokens")
     for k, v in rep["skipped"].items():

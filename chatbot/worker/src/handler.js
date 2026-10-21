@@ -3,6 +3,7 @@
 // the same code the Worker does. `client` is an Anthropic SDK client (or a fake).
 import { isLegalHelpRequest, LEGAL_REPLY, LEGAL_SENTINEL } from "./legal.js";
 import { buildExcerpts, buildSystem } from "./prompt.js";
+import { suggestResearch } from "./research.js";
 import { queryFor, search } from "./retrieve.js";
 
 export const LIMITS = { turns: 8, userChars: 800, assistantChars: 2400 };
@@ -33,28 +34,33 @@ export function cleanMessages(raw) {
 }
 
 /** Resolve [C12] / [2] markers to numbered footnotes that point only at links we built. */
-export function finalize(text, core, hits) {
+export function finalize(text, core, hits, pubs = {}) {
   const byId = new Map(core.map((s) => [s.id, s]));
   const order = [];
   const sources = [];
+  const citedCore = [];
+  const citedHits = new Set();
   const answer = text
     .replace(/https?:\/\/\S+/g, "")
     .replace(/\[(C\d+|\d+)\]/g, (_, id) => {
       const ref = id.startsWith("C") ? byId.get(id) : hits[Number(id) - 1];
+      if (ref && !id.startsWith("C")) citedHits.add(id);
       const url = ref?.url ?? ref?.u; // core sections say url/title; retrieved chunks say u/t
       if (!url) return "";
+      if (id.startsWith("C") && !citedCore.includes(id)) citedCore.push(id);
       let n = order.indexOf(url) + 1;
       if (!n) {
         order.push(url);
         n = order.length;
-        sources.push({ n, title: ref.title ?? ref.t, url });
+        const pub = pubs[url];
+        sources.push({ n, title: pub?.t ?? ref.title ?? ref.t, url, year: pub?.y ?? null, pdf: pub?.p || null });
       }
       return `[${n}]`;
     })
     .replace(/[ \t]+([.,;:])/g, "$1")
     .replace(/[ \t]{2,}/g, " ")
     .trim();
-  return { answer, sources };
+  return { answer, sources, citedCore, citedHits: citedHits.size };
 }
 
 export async function handleChat({ messages: raw, index, client, env = {} }) {
@@ -63,7 +69,7 @@ export async function handleChat({ messages: raw, index, client, env = {} }) {
   const last = messages[messages.length - 1].content;
 
   if (isLegalHelpRequest(last)) {
-    return { status: 200, body: { answer: LEGAL_REPLY, sources: [], flags: { legal: true } } };
+    return { status: 200, body: { answer: LEGAL_REPLY, sources: [], related: [], flags: { legal: true } } };
   }
 
   const hits = search(index, queryFor(messages));
@@ -97,13 +103,16 @@ export async function handleChat({ messages: raw, index, client, env = {} }) {
   }));
 
   if (resp.stop_reason === "refusal") {
-    return { status: 200, body: { answer: FRIENDLY.declined, sources: [], flags: { refusal: true } } };
+    return { status: 200, body: { answer: FRIENDLY.declined, sources: [], related: [], flags: { refusal: true } } };
   }
   const text = (resp.content ?? []).filter((b) => b.type === "text").map((b) => b.text).join("\n").trim();
   if (!text) return { status: 502, body: { error: "empty", answer: FRIENDLY.unavailable, sources: [] } };
   if (text.startsWith(LEGAL_SENTINEL) || text.includes(LEGAL_SENTINEL)) {
-    return { status: 200, body: { answer: LEGAL_REPLY, sources: [], flags: { legal: true } } };
+    return { status: 200, body: { answer: LEGAL_REPLY, sources: [], related: [], flags: { legal: true } } };
   }
-  const { answer, sources } = finalize(text, index.core, hits);
-  return { status: 200, body: { answer, sources, flags: {} }, usage };
+  const { answer, sources, citedCore, citedHits } = finalize(text, index.core, hits, index.pubs);
+  const related = suggestResearch({
+    index, query: queryFor(messages), hits, citedCoreIds: citedCore, fromHits: citedHits > 0, exclude: sources.map((s) => s.url),
+  });
+  return { status: 200, body: { answer, sources, related, flags: {} }, usage };
 }

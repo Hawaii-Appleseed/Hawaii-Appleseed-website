@@ -71,3 +71,19 @@ class Corpus(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Research(unittest.TestCase):
+    def test_catalog_covers_every_publication_with_a_pdf(self):
+        cat = b.pub_catalog()
+        self.assertGreaterEqual(len(cat), 43)
+        self.assertTrue(all(u.startswith("https://hiappleseed.org/publications/") for u in cat))
+        self.assertTrue(all(v["p"] for v in cat.values()), "every published report has a PDF link")
+
+    def test_curated_research_links_resolve(self):
+        idx = b.build(public=False)  # build() exits if a curated slug is not a real report
+        tagged = [c for c in idx["core"] if c["research"]]
+        self.assertGreaterEqual(len(tagged), 13)
+        for c in tagged:
+            for u in c["research"]:
+                self.assertIn(u, idx["pubs"], c["title"])

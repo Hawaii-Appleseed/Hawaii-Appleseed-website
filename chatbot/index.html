@@ -42,6 +42,9 @@
   #ha-ask .ha-ask__sources ol { list-style: none; margin: 0; padding: 0; }
   #ha-ask .ha-ask__sources li { margin: 0 0 var(--ha-space-3xs); }
   #ha-ask .ha-ask__sources a { color: var(--ha-teal-ink); text-decoration: underline; }
+  #ha-ask .ha-ask__sources + .ha-ask__sources { margin-top: var(--ha-space-2xs); }
+  #ha-ask .ha-ask__meta { color: var(--ha-ink-subtle); white-space: nowrap; }
+  #ha-ask .ha-ask__pdf { font-family: var(--ha-font-display); font-weight: 700; font-size: var(--ha-fs-micro); letter-spacing: var(--ha-track-button); margin-left: var(--ha-space-2xs); }
   #ha-ask .ha-ask__typing { color: var(--ha-ink-subtle); font-size: var(--ha-fs-caption); }
   #ha-ask .ha-ask__dots { display: inline-flex; gap: var(--ha-space-3xs); margin-left: var(--ha-space-2xs); vertical-align: middle; }
   #ha-ask .ha-ask__dots i { width: var(--ha-space-3xs); height: var(--ha-space-3xs); border-radius: var(--ha-radius-pill); background: var(--ha-teal-deep); animation: ha-ask-pulse 1.2s var(--ha-ease-out) infinite; }
@@ -70,6 +73,7 @@
     #ha-ask .ha-ask__bubble { max-width: 96%; }
     #ha-ask .ha-ask__chips { padding: 0 var(--ha-space-sm) var(--ha-space-sm); }
     #ha-ask .ha-ask__chip { width: 100%; border-radius: var(--ha-radius-card); }
+    #ha-ask .ha-ask__pdf { display: inline-block; padding: var(--ha-space-2xs); margin: calc(var(--ha-space-2xs) * -1) 0 calc(var(--ha-space-2xs) * -1) var(--ha-space-3xs); }
     #ha-ask .ha-ask__form { padding: var(--ha-space-xs) var(--ha-space-sm); }
   }
 </style>
@@ -141,31 +145,45 @@
     });
   }
 
-  function renderAnswer(text, sources) {
+  // One list item: "[n. ]Title (year)" linking to the page, plus a PDF link when we have one.
+  function refItem(x, numbered) {
+    var li = el('li');
+    if (numbered) li.appendChild(document.createTextNode(x.n + '. '));
+    var a = el('a', null, x.title); a.href = x.url; a.target = '_blank'; a.rel = 'noopener';
+    li.appendChild(a);
+    if (x.year) li.appendChild(el('span', 'ha-ask__meta', ' (' + x.year + ')'));
+    if (x.pdf) {
+      var pdf = el('a', 'ha-ask__pdf', 'PDF'); pdf.href = x.pdf; pdf.target = '_blank'; pdf.rel = 'noopener';
+      pdf.setAttribute('aria-label', 'PDF of ' + x.title);
+      li.appendChild(pdf);
+    }
+    return li;
+  }
+  function refList(label, items, numbered) {
+    var box = el('div', 'ha-ask__sources');
+    box.appendChild(el('p', 'ha-ask__sources-label', label));
+    var ol = el('ol');
+    items.forEach(function (x) { ol.appendChild(refItem(x, numbered)); });
+    box.appendChild(ol);
+    return box;
+  }
+
+  function renderAnswer(text, sources, related) {
     var box = document.createDocumentFragment();
     text.split(/\n{2,}/).forEach(function (block) {
       var lines = block.split('\n').filter(Boolean);
       if (!lines.length) return;
-      var bullets = lines.every(function (l) { return /^\s*([-*•]|\d+[.)])\s+/.test(l); });
+      var bullets = lines.every(function (l) { return /^\s*([-*\u2022]|\d+[.)])\s+/.test(l); });
       if (bullets) {
         var list = el(/^\s*\d/.test(lines[0]) ? 'ol' : 'ul');
-        lines.forEach(function (l) { var li = el('li'); inline(li, l.replace(/^\s*([-*•]|\d+[.)])\s+/, ''), sources); list.appendChild(li); });
+        lines.forEach(function (l) { var li = el('li'); inline(li, l.replace(/^\s*([-*\u2022]|\d+[.)])\s+/, ''), sources); list.appendChild(li); });
         box.appendChild(list);
       } else {
         var p = el('p'); inline(p, lines.join(' '), sources); box.appendChild(p);
       }
     });
-    if (sources.length) {
-      var s = el('div', 'ha-ask__sources');
-      s.appendChild(el('p', 'ha-ask__sources-label', 'Sources'));
-      var ol = el('ol');
-      sources.forEach(function (x) {
-        var li = el('li'); li.appendChild(document.createTextNode(x.n + '. '));
-        var a = el('a', null, x.title); a.href = x.url; a.target = '_blank'; a.rel = 'noopener';
-        li.appendChild(a); ol.appendChild(li);
-      });
-      s.appendChild(ol); box.appendChild(s);
-    }
+    if (sources.length) box.appendChild(refList('Sources', sources, true));
+    if (related && related.length) box.appendChild(refList('Related research', related, false));
     return box;
   }
 
@@ -211,7 +229,7 @@
       var d = r.data || {};
       var text = d.answer || 'Something went wrong. Please try again, or browse hiappleseed.org.';
       tli.remove();
-      add('bot', renderAnswer(text, d.sources || []));
+      add('bot', renderAnswer(text, d.sources || [], d.related || []));
       if (r.ok && d.answer) history.push({ role: 'assistant', content: d.answer });
       else history.pop();
     }).catch(function () {
