@@ -24,7 +24,9 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
 import re
+import subprocess
 import sys
 import unicodedata
 from collections import Counter
@@ -33,10 +35,24 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-WB = ROOT / "writing-bot"
 BASE_URL = "https://hiappleseed.org"
+VENDOR = Path(os.environ.get("CHATBOT_VENDOR_DIR", HERE / "vendor"))
 OUT_DEFAULT = HERE / "worker" / "src" / "index.json"
-BILL_STATUS = ROOT / "tax-fairness" / "data" / "bill-status.json"
+
+
+def _source_roots():
+    """Where the corpus comes from: the vendored copy when there is one (vendor.py), else the live repo tree.
+    CHATBOT_SOURCE=live|vendor forces one."""
+    mode = os.environ.get("CHATBOT_SOURCE") or ("vendor" if (VENDOR / "MANIFEST.json").exists() else "live")
+    if mode not in ("live", "vendor"):
+        raise SystemExit(f"CHATBOT_SOURCE must be live or vendor, not {mode!r}")
+    base = VENDOR if mode == "vendor" else ROOT
+    if not (base / "writing-bot" / "sources.py").exists():
+        raise SystemExit(f"{mode} source has no writing-bot/sources.py under {base}; run chatbot/vendor.py")
+    return mode, base / "writing-bot", base / "tax-fairness" / "data" / "bill-status.json"
+
+
+SOURCE_MODE, WB, BILL_STATUS = _source_roots()
 
 sys.path.insert(0, str(WB))
 import sources  # noqa: E402  (writing-bot/sources.py: titles, URLs, stances)
@@ -243,6 +259,18 @@ def corpus_docs(skipped: Counter):
 
 
 # -------------------------------------------------------------------- build
+def _source_info() -> dict:
+    """Which corpus snapshot this index was built from, shown by the Worker's /health."""
+    if SOURCE_MODE == "vendor":
+        m = json.loads((VENDOR / "MANIFEST.json").read_text(encoding="utf-8"))
+        return {"mode": "vendor", "commit": m.get("source_commit"), "vendored_at": m.get("vendored_at")}
+    try:
+        sha = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"], capture_output=True, text=True, check=True).stdout.strip()
+    except Exception:  # noqa: BLE001
+        sha = None
+    return {"mode": "live", "commit": sha, "vendored_at": None}
+
+
 def build(public: bool) -> dict:
     skipped: Counter = Counter()
     core, statuses = [], []
@@ -279,6 +307,7 @@ def build(public: bool) -> dict:
     n = len(chunks)
     return {
         "version": 1,
+        "source": _source_info(),
         "built": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "public": public,
         "core": core,
@@ -301,8 +330,12 @@ def main() -> int:
     tmp.write_text(json.dumps(idx, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     tmp.replace(a.out)
     kinds = Counter(c["k"] for c in idx["chunks"])
-    print(f"wrote {a.out.relative_to(ROOT)}  {a.out.stat().st_size/1e6:.2f} MB  "
-          f"({'public' if a.public else 'pilot'} build)")
+    try:
+        shown = a.out.resolve().relative_to(ROOT)
+    except ValueError:
+        shown = a.out
+    print(f"wrote {shown}  {a.out.stat().st_size/1e6:.2f} MB  "
+          f"({'public' if a.public else 'pilot'} build, corpus from {SOURCE_MODE})")
     print(f"  research catalog: {len(idx['pubs'])} reports; {sum(1 for c in idx['core'] if c['research'])} sections link curated research")
     print(f"  core sections: {len(idx['core'])}   chunks: {len(idx['chunks'])} {dict(kinds)}")
     print(f"  bm25 terms: {len(idx['bm25']['post'])}   avg chunk length: {idx['bm25']['avgdl']} tokens")

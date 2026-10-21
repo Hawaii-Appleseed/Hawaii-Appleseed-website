@@ -101,3 +101,55 @@ class Practical(unittest.TestCase):
         for c in b.build(public=False)["core"]:
             if c["url"]:
                 self.assertTrue(c["url"].startswith("https://"), c["title"])
+
+
+@unittest.skipUnless((HERE.parent / "writing-bot" / "sources.py").exists(), "needs the website repo checkout around chatbot/")
+class Vendoring(unittest.TestCase):
+    """vendor.py copies exactly what the builder reads, and building from the copy changes nothing."""
+
+    @classmethod
+    def setUpClass(cls):
+        import subprocess
+        import tempfile
+        cls.tmp = Path(tempfile.mkdtemp(prefix="ha-vendor-"))
+        cls.vdir = cls.tmp / "vendor"
+        env = {**__import__("os").environ, "CHATBOT_VENDOR_DIR": str(cls.vdir)}
+        cls.py = staticmethod(lambda *a, **k: subprocess.run([sys.executable, *a], capture_output=True, text=True, env={**env, **k.get("env", {})}))
+        r = cls.py(str(HERE / "vendor.py"))
+        assert r.returncode == 0, r.stderr
+        cls.manifest = json.loads((cls.vdir / "MANIFEST.json").read_text(encoding="utf-8"))
+
+    def test_manifest_records_the_snapshot(self):
+        m = self.manifest
+        self.assertTrue(m["source_commit"])
+        self.assertEqual(m["counts"], {"publications": 43, "blog-posts": m["counts"]["blog-posts"], "testimony": m["counts"]["testimony"]})
+        self.assertGreater(len(m["files"]), 200)
+
+    def test_internal_notes_are_never_vendored(self):
+        self.assertFalse((self.vdir / "writing-bot" / "reference").exists())
+        self.assertFalse((self.vdir / "writing-bot" / "relationship-memory").exists())
+        self.assertFalse(any("reference" in f or "relationship" in f for f in self.manifest["files"]))
+
+    def test_vendored_build_equals_live_build(self):
+        outs = {}
+        for mode in ("live", "vendor"):
+            out = self.tmp / f"{mode}.json"
+            r = self.py(str(HERE / "build_index.py"), "--out", str(out), env={"CHATBOT_SOURCE": mode})
+            self.assertEqual(r.returncode, 0, r.stderr)
+            d = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(d["source"]["mode"], mode)
+            outs[mode] = d
+        for k in ("core", "pubs", "chunks", "bm25"):
+            self.assertEqual(outs["live"][k], outs["vendor"][k], f"{k} differs between live and vendored builds")
+
+    def test_check_detects_drift(self):
+        self.assertEqual(self.py(str(HERE / "vendor.py"), "--check").returncode, 0)
+        victim = next(self.vdir.glob("writing-bot/publications/*.txt"))
+        original = victim.read_text(encoding="utf-8")
+        victim.write_text(original + "\ntampered\n", encoding="utf-8")
+        try:
+            r = self.py(str(HERE / "vendor.py"), "--check")
+            self.assertEqual(r.returncode, 1)
+            self.assertIn(victim.name, r.stdout)
+        finally:
+            victim.write_text(original, encoding="utf-8")

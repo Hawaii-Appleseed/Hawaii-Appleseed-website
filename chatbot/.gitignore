@@ -1,0 +1,5 @@
+# The vendored corpus (vendor.py) is committed in a standalone chatbot repo, not in the website repo,
+# where the same files already live in writing-bot/. Delete this file when moving chatbot/ to its own repo.
+vendor/
+vendor.tmp/
+vendor.old/

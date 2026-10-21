@@ -55,7 +55,7 @@ export async function handleRequest(request, env, deps = {}) {
   const url = new URL(request.url);
   const cors = corsHeaders(request, env);
   if (request.method === "OPTIONS") return new Response(null, { status: cors ? 204 : 403, headers: cors ?? {} });
-  if (url.pathname === "/health") return json({ ok: true, built: index.built, public: index.public, chunks: index.chunks.length }, 200);
+  if (url.pathname === "/health") return json({ ok: true, built: index.built, public: index.public, chunks: index.chunks.length, source: index.source }, 200);
   if (url.pathname !== "/chat" || request.method !== "POST") return json({ error: "not_found" }, 404);
   if (!cors) return json({ error: "forbidden" }, 403);
 

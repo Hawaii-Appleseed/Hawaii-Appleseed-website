@@ -25,6 +25,7 @@ widget (index.html, on hiappleseed.org)
 |---|---|
 | `content/about.md` | Organization facts, written from the site pages. Edit and rebuild. |
 | `content/practical.md` | How to subscribe, give, contact, apply, follow bills. Each section carries the live page it came from, checked 2026-10-20. |
+| `vendor.py` | Copies the few files the assistant reads from the rest of the website repo into `vendor/` (see *Vendoring* below). |
 | `check_links.py` | Fetches every link the assistant can show (pages, reports, PDFs) and reports any that fail. Run before each deploy. |
 | `content/positions.md` | Public positions, each tagged `<!-- status: draft -->` or `approved by …`. |
 | `build_index.py` | Builds `worker/src/index.json` (core text + BM25 index over publications, blog, testimony). Generates the bill-outcomes section from `tax-fairness/data/bill-status.json`. |
@@ -62,6 +63,17 @@ node chatbot/eval/run_eval.mjs --replay answers.json
 ```
 
 The offline pass is in CI-able shape today. The live pass is the one that tells you whether answers are right; run it before any launch and again after any change to `prompt.js` or the content files.
+
+## Vendoring: building without the website repo
+
+`build_index.py` reads only four things from outside `chatbot/`: `writing-bot/{publications,blog-posts,testimony}`, `writing-bot/sources.py` with its blog URL map, and `tax-fairness/data/bill-status.json` (about 3 MB). `python3 chatbot/vendor.py` copies exactly those into `chatbot/vendor/`, in the same layout, and writes `vendor/MANIFEST.json` (source commit, per-file hashes). When a manifest exists the builder uses the copy; `CHATBOT_SOURCE=live` forces the live tree. The Worker's `/health` reports which snapshot an index came from.
+
+- `python3 chatbot/vendor.py --check` exits 1 if the copy has drifted from the source (for CI in the repo that owns the corpus).
+- `writing-bot/reference/` (internal meeting notes) is never copied; a test enforces it.
+- A test proves a build from the vendored copy is identical to a build from the live tree (core text, report catalog, chunks, search index).
+- `vendor/` is git-ignored here, because these files already live in `writing-bot/` in this public repo. Delete `chatbot/.gitignore` when `chatbot/` moves to its own repo and commit `vendor/` there.
+
+**Moving `chatbot/` to its own (private) repo.** Everything except the widget builds on its own: `git subtree split --prefix=chatbot -b chatbot-standalone` keeps the history; in the new repo remove the `vendor/` ignore, run `python3 vendor.py --from <website checkout>`, and commit `vendor/`. Keep `index.html` and `squarespace-inject.html` in the website repo: they are the public widget (no positions in them) and depend on `assets/tokens.css` and `scripts/squarespace.py`. Refresh the snapshot after each weekly corpus refresh, the way `deploy-content-search.yml` pushes to the private hub repo. A copy of `chatbot/` with no website repo around it was verified to pass every suite (Worker, workerd runtime, Python, offline eval).
 
 ## Research links
 
