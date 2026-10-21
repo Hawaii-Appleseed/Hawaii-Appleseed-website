@@ -30,6 +30,7 @@ widget (index.html, on hiappleseed.org)
 | `vendor.py` | Copies the few files the assistant reads from the rest of the website repo into `vendor/` (see *Vendoring* below). |
 | `check_links.py` | Fetches every link the assistant can show (pages, reports, PDFs) and reports any that fail. Run before each deploy. |
 | `content/faq.json` | Ready-made answers to the 23 questions asked most (mission, history, leadership, how to give, contact, jobs, ...). The quickest file for staff to review. |
+| `figures.py`, `check_figures.py` | The figure cross-check (see below) and its command-line report; `content/figures.json` lists figures a person has accepted. |
 | `ROADMAP.md` | What to do next, in order, what is blocked on people, and what is parked. |
 | `content/graphics.json` | The explainer graphics (see *Graphics* below). Every figure carries a quoted proof from the approved text; the build fails without it. |
 | `content/topics.json` | Which issue area(s) each report belongs to; drives "latest research" and "research on housing". |
@@ -139,6 +140,33 @@ When none of the vetted graphics fits (a comparison, breakdown, or change over t
 - any failure drops the chart and keeps the answer. A vetted graphic that fits wins, so a drawn chart appears only when no vetted one does, and never on a ready-made or legal reply.
 
 The page marks these **Drawn by the assistant**, says to check them against the sources, and the *Show the numbers* section lists the quoted passage behind each figure. The checks catch invented numbers, wrong scale, and mixed units; they cannot judge whether two real numbers *should* be compared, so the pilot's feedback buttons matter here. Turn it off with `DYNAMIC_GRAPHICS = "0"` in `wrangler.toml` (the prompt then omits the instructions and any marker is stripped). Staff should read a sample of drawn charts before the public launch and decide whether to keep it.
+
+## Figure cross-check
+
+The positions are adapted from a staff file whose entries are marked `[REVIEW]`, and the stance answers repeat them word for word with no model in between, so a wrong figure in `positions.md` goes out as fact. `figures.py` ties every figure to something Hawaiʻi Appleseed has published.
+
+```
+python3 chatbot/check_figures.py              the positions (also runs in every build_index.py)
+python3 chatbot/check_figures.py --matches    also show, beside each figure, the published sentence it was matched to
+python3 chatbot/check_figures.py --all        also about.md and practical.md (those come from site pages, not the corpus)
+python3 chatbot/check_figures.py --strict     exit 1 on anything unexplained (for CI)
+```
+
+It pulls out dollar amounts, percents, counts of 1,000 or more, and bill and Act numbers (spelled-out "sixty-six percent" counts), and compares each with the reports, blog posts, and testimony in the corpus and the Legislature's bill feed. A figure is only **backed** when a published sentence states it *about the same thing*: the words around it overlap ours (the label right before it counts double), or it shares a bill number or another of our figures. A bare "6,000" proves nothing, because with 43 reports some unrelated page always says it. Each figure ends up as:
+
+| Status | Meaning | `--public` build |
+|---|---|---|
+| backed | a published sentence says this about this | passes |
+| qualifier | the published wording is qualified (*up to*, *capped at*, *at least*) and ours is not | **fails** |
+| topic | only a report on the same subject states it; read it against the source | passes, listed |
+| none | no published source | **fails** |
+| accepted | a person read the source and said it is fine | passes |
+
+Accept a figure in `content/figures.json` with the source and a reason; the tests fail if an accepted entry no longer matches any figure (so the list cannot rot). A pilot build only prints the counts. The public build checks the positions it is about to ship, so approving a position is also where its figures get cleared.
+
+**What it found the first time.** The conveyance tax position said revenue would go to "affordable housing (20 percent), DHHL (30 percent), DURF (20 percent), conservation (5 percent)". The published post says *up to* 20 percent (or $40 million, whichever is less), *up to* 30 percent (capped at $60 million a year), 20 percent for DURF, and *up to* 5 percent (or $10 million): the shares are maximums. The position and its chart now say so. It also caught "about 70 percent" (published: over 70), "$900 million" (published: more than $900 million), and "5 percent of income or more" (published: at least). And it showed that the staff file's "DHHL waitlist is 6,000 families ($800M backlog)" ran two published figures together: nearly 30,000 families are on the waitlist (*Policy in Perspective 2026*), while $800 million is DHHL's estimate for building homes for nearly 6,000 families (the conveyance tax post). The position now says both.
+
+**What it cannot do.** It shows that a figure was published in a similar context, not that our sentence means what the published one means: "waitlist is 6,000 families" would still pass, because the same published sentence holds both 6,000 and $800 million. That is why `--matches` prints the published sentence beside ours; staff sign-off should read those pairs (roadmap item 2 builds the page for it).
 
 ## Research links
 

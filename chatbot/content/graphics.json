@@ -4,14 +4,14 @@
     {
       "id": "conveyance-allocation",
       "type": "bars",
-      "title": "Where the conveyance tax revenue would go under HB2049",
-      "unit": "share of revenue",
-      "note": "These are the four shares Hawaiʻi Appleseed's position names. Its material does not say where the rest of the revenue would go.",
+      "title": "Where conveyance tax revenue would go under HB2049",
+      "unit": "share of conveyance tax revenue (the most each can receive)",
+      "note": "Each fund's share is a percent of conveyance tax revenue, and the dollar caps limit what it can receive. Hawaiʻi Appleseed's material does not say where any remainder would go.",
       "rows": [
-        {"label": "Department of Hawaiian Home Lands (DHHL)", "value": 30, "display": "30%", "proof": "the Department of Hawaiian Home Lands (30 percent)"},
-        {"label": "Affordable housing", "value": 20, "display": "20%", "proof": "affordable housing (20 percent)"},
-        {"label": "Dwelling Unit Revolving Fund (DURF)", "value": 20, "display": "20%", "proof": "DURF (20 percent)"},
-        {"label": "Conservation", "value": 5, "display": "5%", "proof": "conservation (5 percent)"}
+        {"label": "Department of Hawaiian Home Lands (up to $60 million a year)", "value": 30, "display": "up to 30%", "proof": "the Department of Hawaiian Home Lands (up to 30 percent, capped at $60 million a year)"},
+        {"label": "Affordable housing, Rental Housing Revolving Fund (up to $40 million)", "value": 20, "display": "up to 20%", "proof": "affordable housing through the Rental Housing Revolving Fund (up to 20 percent, or $40 million if less)"},
+        {"label": "Housing infrastructure, Dwelling Unit Revolving Fund (DURF)", "value": 20, "display": "20%", "proof": "the Dwelling Unit Revolving Fund for housing infrastructure (20 percent)"},
+        {"label": "Land conservation (up to $10 million)", "value": 5, "display": "up to 5%", "proof": "land conservation (up to 5 percent, or $10 million if less)"}
       ],
       "source": {"title": "Hawaiʻi Appleseed's position on conveyance tax modernization", "url": "https://hiappleseed.org/taxes-budget"},
       "aliases": ["conveyance tax revenue", "where conveyance tax money goes", "hb2049 revenue", "conveyance tax allocation", "conveyance tax spending"],
@@ -48,8 +48,8 @@
       "title": "Real estate investment trusts (REITs) and Hawaiʻi's income tax",
       "items": [
         {"value": "$17 billion+", "label": "Hawaiʻi assets held by REITs", "proof": "REITs hold more than $17 billion in Hawaiʻi assets"},
-        {"value": "$900 million", "label": "Hawaiʻi income REITs reported in 2014", "proof": "in 2014, REITs reported $900 million in Hawaiʻi income and paid $0 in state corporate income tax"},
-        {"value": "$0", "label": "state corporate income tax they paid on it", "proof": "in 2014, REITs reported $900 million in Hawaiʻi income and paid $0 in state corporate income tax"}
+        {"value": "$900 million+", "label": "Hawaiʻi income REITs reported in 2014", "proof": "in 2014, REITs reported more than $900 million in Hawaiʻi income and paid $0 in state corporate income tax"},
+        {"value": "$0", "label": "state corporate income tax they paid on it", "proof": "in 2014, REITs reported more than $900 million in Hawaiʻi income and paid $0 in state corporate income tax"}
       ],
       "source": {"title": "Hawaiʻi Appleseed's position on taxing REITs", "url": "https://hiappleseed.org/taxes-budget"},
       "aliases": ["reit loophole", "reit tax", "reits tax", "reit taxes", "real estate investment trusts"]

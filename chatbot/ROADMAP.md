@@ -13,14 +13,13 @@ These gate everything else; none can be done from here.
 
 ## Recommended next (in this order)
 
-### 1. Fact cross-check at build time (S, high value)
-While testing drawn charts I found the staff positions file saying the Hawaiian Home Lands waitlist is "6,000 families ($800M backlog)" while *Policy in Perspective 2026* says nearly 30,000. A canned answer had been repeating the 6,000. Nothing in the build would have caught it.
-- Add a build report listing every figure (dollar amounts, percents, counts) in `positions.md` and `about.md` that appears in **no** published report, blog post, or testimony in the corpus, and every figure that appears with a *different* value next to the same noun phrase.
-- Print it on every build; fail the `--public` build on unexplained ones unless a figure is listed in an allowlist with a reason ("from staff; unpublished").
-- Why first: positions are the part going out unreviewed (stance answers are canned), and sign-off is where mistakes like this should be caught.
+### 1. Fact cross-check at build time: DONE 2026-10-21
+`figures.py` / `check_figures.py`, run in every build and gating `--public` (see the README, *Figure cross-check*). First run found the conveyance allocation missing its "up to" and dollar caps, three loosened qualifiers, and a mix-up of the DHHL waitlist (nearly 30,000) with DHHL's build-out estimate ($800 million for nearly 6,000 families). Correction to an earlier note in this file: I first reported the staff file's "6,000 families ($800M backlog)" as unpublished; both figures *are* published, as the build-out estimate, and the fix is to say what each one measures.
+- **Next on this item:** it checks that a figure was published in a similar context, not that our sentence means the same thing. Item 2 closes that by showing each figure's published sentence beside ours for a person to read.
+- Not covered yet: `about.md` / `practical.md` (they come from live site pages; `check_figures.py --all` lists what it cannot tie to the corpus), years, and small counts.
 
 ### 2. Sign-off review page for staff (S–M, unblocks launch)
-Sign-off today means editing `status:` tags in markdown. Generate one page (HTML, or a Google Doc through the existing Drive route) with a row per position: the exact canned answer, its graphic, its sources and related research, the figures flagged by item 1, and an approved / needs-change column. The Worker already knows all of it; this is a template over `index.json`. Output a patch to `positions.md` from the ticked rows so approving is not hand-editing.
+Sign-off today means editing `status:` tags in markdown. Generate one page (HTML, or a Google Doc through the existing Drive route) with a row per position: the exact canned answer, its graphic, its sources and related research, each figure beside the published sentence it was matched to (`check_figures.py --json` has it), and an approved / needs-change column. The Worker already knows all of it; this is a template over `index.json`. Output a patch to `positions.md` from the ticked rows so approving is not hand-editing.
 
 ### 3. "Ask a person" hand-off (S, practical value)
 When the assistant says "I don't have that", or a question is about a specific situation, offer a button that opens a prefilled email to info@hiappleseed.org (a `mailto:` the visitor sends themselves; the assistant still never contacts anyone). Include the question text only if the visitor clicks. Add the phone number and contact page beside it. Closes the biggest dead end in the current answers.

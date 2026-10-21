@@ -46,7 +46,7 @@ Hawaiʻi Appleseed strongly supports state bridge coverage as federal Medicaid i
 <!-- aliases: capital gains; capital gains tax; tax on investment income; taxing investment income -->
 <!-- graphic: capital-gains-rates -->
 
-Hawaiʻi Appleseed supports raising the capital gains rate, with the ultimate goal of equalizing it with the ordinary income rate of 11 percent. In 2026 it supported HB1850, a raise to 9 percent as a step toward equalization. Hawaiʻi taxes capital gains at 7.25 percent versus 11 percent for ordinary income, a loophole that benefits the wealthy. About 70 percent of Hawaiʻi capital gains go to filers with more than $400,000 in income, and the rate mainly affects those above $783,000. The raise would generate about $55 million. 2026 outcome: the capital gains proposals did not pass. HB1850 stalled in the Senate Committee on Ways & Means, and Policy in Perspective 2026 reports that bold proposals to close the capital gains loophole did not cross the finish line.
+Hawaiʻi Appleseed supports raising the capital gains rate, with the ultimate goal of equalizing it with the ordinary income rate of 11 percent. In 2026 it supported HB1850, a raise to 9 percent as a step toward equalization. Hawaiʻi taxes capital gains at 7.25 percent versus 11 percent for ordinary income, a loophole that benefits the wealthy. Over 70 percent of Hawaiʻi capital gains go to filers with more than $400,000 in income, and the rate mainly affects those above $783,000. The raise would generate about $55 million. 2026 outcome: the capital gains proposals did not pass. HB1850 stalled in the Senate Committee on Ways & Means, and Policy in Perspective 2026 reports that bold proposals to close the capital gains loophole did not cross the finish line.
 
 ### Taxing real estate investment trusts (REITs)
 <!-- status: draft -->
@@ -55,7 +55,7 @@ Hawaiʻi Appleseed supports raising the capital gains rate, with the ultimate go
 <!-- aliases: reit; reits; real estate investment trust; real estate investment trusts; reit loophole -->
 <!-- graphic: reit-stats -->
 
-Hawaiʻi Appleseed supports actually taxing REITs rather than commissioning another study. In 2026 it supported SB2362 but asked that it be amended from a study to a tax. Hawaiʻi exempts REIT income even though REITs hold more than $17 billion in Hawaiʻi assets; in 2014, REITs reported $900 million in Hawaiʻi income and paid $0 in state corporate income tax. 2026 outcome: Policy in Perspective 2026 reports that proposals to close corporate tax loopholes did not cross the finish line, and SB2362 had been changed from a tax to a study.
+Hawaiʻi Appleseed supports actually taxing REITs rather than commissioning another study. In 2026 it supported SB2362 but asked that it be amended from a study to a tax. Hawaiʻi exempts REIT income even though REITs hold more than $17 billion in Hawaiʻi assets; in 2014, REITs reported more than $900 million in Hawaiʻi income and paid $0 in state corporate income tax. 2026 outcome: Policy in Perspective 2026 reports that proposals to close corporate tax loopholes did not cross the finish line, and SB2362 had been changed from a tax to a study.
 
 ### Millionaire's income surcharge
 <!-- status: draft -->
@@ -78,7 +78,7 @@ Hawaiʻi Appleseed strongly supports freezing the 2024 income tax cuts in Act 46
 <!-- url: /taxes-budget -->
 <!-- aliases: medical debt; medical debt relief; medical debt forgiveness; medical debt relief program; buying medical debt -->
 
-Hawaiʻi Appleseed strongly supports state-funded medical debt acquisition and forgiveness, and in 2026 supported SB3025. It would use the nonprofit acquisition model that 27 states and cities now use, forgiving medical debt for households at or below 400 percent of the federal poverty level, or with debt of 5 percent of income or more. Medical debt cascades into delayed care, housing instability, and worse health.
+Hawaiʻi Appleseed strongly supports state-funded medical debt acquisition and forgiveness, and in 2026 supported SB3025. It would use the nonprofit acquisition model that 27 states and cities now use, forgiving medical debt for households at or below 400 percent of the federal poverty level, or with debt of at least 5 percent of income. Medical debt cascades into delayed care, housing instability, and worse health.
 
 ### Conveyance tax modernization
 <!-- status: draft -->
@@ -87,7 +87,7 @@ Hawaiʻi Appleseed strongly supports state-funded medical debt acquisition and f
 <!-- aliases: conveyance tax; conveyance tax reform -->
 <!-- graphic: conveyance-allocation -->
 
-Hawaiʻi Appleseed strongly supports a marginal-rate conveyance tax with a progressive rate structure and dedicated revenue, and in 2026 supported HB2049. The conveyance tax has not been updated since 2009. The proposal protects owner-occupied homes under $2.2 million, raises rates on high-value investment properties, and indexes to inflation. Revenue would be dedicated to affordable housing (20 percent), the Department of Hawaiian Home Lands (30 percent), DURF (20 percent), and conservation (5 percent). Hawaiʻi needs more than 50,000 housing units, and Policy in Perspective 2026 reports that nearly 30,000 Native Hawaiian families sit on the DHHL waitlist. Hawaiʻi Appleseed's framing is that those who profit most from our islands also invest most in their future, and that housing should come ahead of handcuffs, contrasting a $300 million prison budget with $185 million for DHHL. 2026 outcome: HB2049 was deferred by the Senate Committee on Ways & Means, and SB3028, which would have given DHHL up to $60 million a year, died in conference committee, according to Policy in Perspective 2026.
+Hawaiʻi Appleseed strongly supports a marginal-rate conveyance tax with a progressive rate structure and dedicated revenue, and in 2026 supported HB2049. The conveyance tax has not been updated since 2009. The proposal protects owner-occupied homes under $2.2 million, raises rates on high-value investment properties, and indexes to inflation. Revenue would be dedicated to the Dwelling Unit Revolving Fund for housing infrastructure (20 percent), affordable housing through the Rental Housing Revolving Fund (up to 20 percent, or $40 million if less), the Department of Hawaiian Home Lands (up to 30 percent, capped at $60 million a year), and land conservation (up to 5 percent, or $10 million if less). Hawaiʻi needs more than 50,000 housing units. Policy in Perspective 2026 reports that nearly 30,000 Native Hawaiian families sit on the DHHL waitlist, and DHHL estimates it will require $800 million to build homes for nearly 6,000 Native Hawaiian families. Hawaiʻi Appleseed's framing is that those who profit most from our islands also invest most in their future, and that housing should come ahead of handcuffs, contrasting a $300 million prison budget with $185 million for DHHL. 2026 outcome: HB2049 was deferred by the Senate Committee on Ways & Means, and SB3028, which would have given DHHL up to $60 million a year, died in conference committee, according to Policy in Perspective 2026.
 
 ### Keiki Credit (state child tax credit)
 <!-- status: draft -->

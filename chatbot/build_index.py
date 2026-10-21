@@ -64,6 +64,8 @@ SOURCE_MODE, WB, BILL_STATUS = _source_roots()
 
 sys.path.insert(0, str(WB))
 import sources  # noqa: E402  (writing-bot/sources.py: titles, URLs, stances)
+sys.path.insert(0, str(HERE))
+import figures as fg  # noqa: E402  (cross-checks the figures in positions.md against the published corpus)
 
 # ---------------------------------------------------------------- tokenizer
 # Keep in lockstep with worker/src/tokenize.js (tokenizer_vectors.json tests both).
@@ -516,6 +518,28 @@ def corpus_docs(skipped: Counter):
 
 
 # -------------------------------------------------------------------- build
+_FIGURE_CORPORA: dict = {}
+
+
+def check_figures(core: list[dict], docs: list[dict], public: bool) -> dict:
+    """Cross-check the figures in the positions in this build against the published corpus (figures.py). A public build
+    refuses to ship an approved position with a figure nobody has accepted; a pilot build only reports."""
+    allow_path = HERE / "content" / "figures.json"
+    allow = json.loads(allow_path.read_text(encoding="utf-8")).get("allow", []) if allow_path.exists() else []
+    feed = BILL_STATUS.read_text(encoding="utf-8") if BILL_STATUS.exists() else ""
+    key = (hash(tuple(d["rel"] for d in docs)), len(feed))  # the corpus is the slow part; tests build many times
+    if key not in _FIGURE_CORPORA:
+        _FIGURE_CORPORA[key] = fg.Corpus(docs, feed)
+    report = fg.check([c for c in core if c.get("pos")], _FIGURE_CORPORA[key], allow)
+    bad = [(sec["title"], r) for sec in report["sections"] for r in sec["figures"] if r["status"] in ("none", "qualifier")]
+    if public and bad:
+        lines = "\n".join(f"  {t}: {r['figure']} ({r['status']})" for t, r in bad)
+        raise SystemExit(f"figures in approved positions that no published sentence backs, or that drop a published qualifier "
+                         f"(run python3 chatbot/check_figures.py; fix the wording or accept the figure in content/figures.json with a reason):\n{lines}")
+    report["unexplained"] = len(bad)
+    return report
+
+
 def _source_info() -> dict:
     """Which corpus snapshot this index was built from, shown by the Worker's /health."""
     if SOURCE_MODE == "vendor":
@@ -578,7 +602,9 @@ def build(public: bool) -> dict:
                 raise SystemExit(f"{it['title']}: research link {u} is not a published report in writing-bot/publications")
 
     chunks, dl, post = [], [], {}
+    docs = []
     for d in corpus_docs(skipped):
+        docs.append(d)
         for piece in chunk(d["lines"]):
             ci = len(chunks)
             chunks.append({"t": d["title"], "u": d["url"], "k": d["kind"],
@@ -588,6 +614,7 @@ def build(public: bool) -> dict:
             for term, tf in Counter(toks).items():
                 post.setdefault(term, []).extend([ci, tf])
     n = len(chunks)
+    figure_report = check_figures(core, docs, public)
     skipped["report without a topic in content/topics.json"] = sum(1 for p in catalog.values() if not p["a"])
     if not skipped["report without a topic in content/topics.json"]:
         del skipped["report without a topic in content/topics.json"]
@@ -602,7 +629,7 @@ def build(public: bool) -> dict:
         "pubs": catalog,
         "chunks": chunks,
         "bm25": {"n": n, "avgdl": round(sum(dl) / max(n, 1), 3), "dl": dl, "post": post},
-        "_report": {"skipped": dict(skipped), "position_status": statuses},
+        "_report": {"skipped": dict(skipped), "position_status": statuses, "figures": figure_report},
     }
 
 
@@ -631,6 +658,11 @@ def main() -> int:
     print(f"  bm25 terms: {len(idx['bm25']['post'])}   avg chunk length: {idx['bm25']['avgdl']} tokens")
     for k, v in rep["skipped"].items():
         print(f"  skipped {v}: {k}")
+    fr = rep["figures"]
+    print(f"  figures in positions: {fr['figures']} checked against the published corpus; {fr['sentence']} backed by a published sentence, "
+          f"{fr['accepted']} accepted by a person, {fr['topic']} only in a report on the subject, {fr['unexplained']} unexplained")
+    if fr["unexplained"]:
+        print("  WARNING: run python3 chatbot/check_figures.py (a --public build refuses these)")
     appr = sum(1 for _, s in rep["position_status"] if s.startswith("approved"))
     print(f"  positions: {appr} approved, {len(rep['position_status']) - appr} draft")
     return 0
