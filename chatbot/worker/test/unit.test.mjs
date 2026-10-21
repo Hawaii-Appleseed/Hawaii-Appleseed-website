@@ -194,3 +194,42 @@ test("practical sections are in the prompt with their own links, so citing them 
   assert.match(contact, /\(808\) 587-7605/);
   assert.match(contact, /info@hiappleseed\.org/);
 });
+
+test("history: citation numbers from earlier answers are stripped so they cannot collide with new ones", () => {
+  const msgs = cleanMessages([
+    { role: "user", content: "What is the conveyance tax?" },
+    { role: "assistant", content: "It is paid when property changes hands [1] and funds housing [C21][2]." },
+    { role: "user", content: "and who pays it?" },
+  ]);
+  assert.equal(msgs[1].content, "It is paid when property changes hands and funds housing.");
+});
+
+test("excerpts: stance labels read correctly and today's date is given to the model", async () => {
+  const { buildExcerpts } = await import("../src/prompt.js");
+  const hit = (s) => ({ t: "Testimony", k: "testimony", y: 2026, s, x: "text" });
+  const text = buildExcerpts([hit("support"), hit("oppose"), hit("comment")], "2026-10-21");
+  assert.match(text, /Today's date is 2026-10-21\./);
+  assert.match(text, /Hawaiʻi Appleseed supported\)/);
+  assert.match(text, /Hawaiʻi Appleseed opposed\)/);
+  assert.match(text, /Hawaiʻi Appleseed commented on\)/);
+  assert.equal(text.includes("opposeed"), false);
+  assert.match(buildExcerpts([], "2027-01-20"), /Today's date is 2027-01-20\./);
+});
+
+test("handler: the date reaches the model in the uncached block, and the cached block does not change daily", async () => {
+  let seen;
+  const client = { messages: { create: async (p) => { seen = p; return { stop_reason: "end_turn", usage: {}, content: [{ type: "text", text: "ok" }] }; } } };
+  await handleChat({ messages: [{ role: "user", content: "What is the Budget Primer?" }], index, client, today: "2027-02-03" });
+  assert.match(seen.system[1].text, /Today's date is 2027-02-03\./);
+  assert.equal(seen.system[0].text.includes("2027-02-03"), false);
+});
+
+test("research: a retrieved report is suggested only when its title shares a topic word with the question", async () => {
+  const { suggestResearch } = await import("../src/research.js");
+  const rel = (q, fromHits = true) => suggestResearch({ index, query: q, hits: search(index, queryFor([{ role: "user", content: q }])), fromHits });
+  assert.deepEqual(rel("Who should I vote for in the governor's race?"), []);
+  assert.deepEqual(rel("Write me a poem about the ocean"), []);
+  assert.deepEqual(rel("Who is the executive director?"), []);
+  assert.ok(rel("What does Appleseed want for renters?").some((r) => r.url.includes("renters-left-behind")));
+  assert.ok(rel("What is Keiki Ride Free?").some((r) => r.url.endsWith("/keiki-ride-free")));
+});

@@ -8,9 +8,11 @@ compatibility_flags = ["nodejs_compat"]
 [vars]
 ALLOWED_ORIGINS = "https://hiappleseed.org,https://www.hiappleseed.org"
 # MODEL = "claude-sonnet-5-5"
-PER_MINUTE = "8"
-PER_DAY = "60"
-DAILY_CAP = "2000"
+# Pilot limits (staff only). Raise them for a public launch.
+PER_MINUTE = "6"
+PER_DAY = "40"
+DAILY_CAP = "500"          # requests per day, whole site
+DAILY_BUDGET_USD = "3"     # spend per day, whole site, counted from real token usage
 
 # Secrets (never in this file):
 #   wrangler secret put ANTHROPIC_API_KEY

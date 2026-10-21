@@ -4,7 +4,7 @@
 // Candidates, in order: reports curated on the position sections the model cited, reports
 // curated on the sections that best match the question (the model may have cited none),
 // then publications the search found, but only when the answer itself cited a retrieved
-// excerpt (`fromHits`). A score alone cannot tell "who is the director?" from a research
+// excerpt (`fromHits`) and the report's title shares a topic word with the question. A score alone cannot tell "who is the director?" from a research
 // question; the model's own citation can. Anything already shown as a source is skipped.
 import { tokenize } from "./tokenize.js";
 
@@ -13,7 +13,16 @@ const B = 0.75;
 const MIN_SECTION_SCORE = 4; // below this a section is not really about the question
 const MIN_HIT_SCORE = 6; // same for a retrieved publication chunk
 
+// Words that appear in many report titles and say nothing about the topic of a question.
+const GENERIC = new Set(["hawaii", "appleseed", "state", "center", "law", "economic", "justice", "report", "brief", "help", "make", "want", "new"]);
+const isYear = (t) => /^20\d\d$/.test(t);
 const cache = new WeakMap();
+
+/** True when a report's title shares a topic word with the question ("renters" and "Renters left behind"). */
+function titleMatches(title, queryTokens) {
+  const q = new Set(queryTokens.filter((t) => !GENERIC.has(t) && !isYear(t)));
+  return tokenize(title).some((t) => q.has(t));
+}
 
 function sectionIndex(index) {
   let s = cache.get(index);
@@ -59,8 +68,10 @@ export function suggestResearch({ index, query, hits = [], citedCoreIds = [], fr
   for (const id of citedCoreIds) urls.push(...(byId.get(id)?.research ?? []));
   for (const m of matchSections(index, query)) urls.push(...m.section.research);
   const top = hits[0]?.score ?? 0;
+  const qt = tokenize(query);
   for (const h of fromHits ? hits : []) {
-    if (h.k === "publication" && h.u && h.score >= MIN_HIT_SCORE && h.score >= 0.65 * top) urls.push(h.u);
+    // A good score is not enough ("who should I vote for?" scores well against some report); the title must share a topic word too.
+    if (h.k === "publication" && h.u && h.score >= MIN_HIT_SCORE && h.score >= 0.65 * top && titleMatches(h.t, qt)) urls.push(h.u);
   }
   const skip = new Set(exclude);
   const out = [];

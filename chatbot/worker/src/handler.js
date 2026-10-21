@@ -7,7 +7,7 @@ import { suggestResearch } from "./research.js";
 import { queryFor, search } from "./retrieve.js";
 
 export const LIMITS = { turns: 8, userChars: 800, assistantChars: 2400 };
-const DEFAULT_MODEL = "claude-sonnet-5-5";
+export const DEFAULT_MODEL = "claude-sonnet-5-5";
 
 const FRIENDLY = {
   unavailable:
@@ -22,7 +22,9 @@ export function cleanMessages(raw) {
   const msgs = [];
   for (const m of raw.slice(-LIMITS.turns)) {
     if (!m || (m.role !== "user" && m.role !== "assistant") || typeof m.content !== "string") return null;
-    const text = m.content.replace(/\s+/g, " ").trim();
+    let text = m.content.replace(/\s+/g, " ").trim();
+    // Citation numbers restart with every answer; left in history they collide with the new answer's numbers.
+    if (m.role === "assistant") text = text.replace(/\s?\[(?:C\d+|\d+)\]/g, "").trim();
     const max = m.role === "user" ? LIMITS.userChars : LIMITS.assistantChars;
     if (!text || text.length > max) return null;
     msgs.push({ role: m.role, content: text });
@@ -63,7 +65,7 @@ export function finalize(text, core, hits, pubs = {}) {
   return { answer, sources, citedCore, citedHits: citedHits.size };
 }
 
-export async function handleChat({ messages: raw, index, client, env = {} }) {
+export async function handleChat({ messages: raw, index, client, env = {}, today = new Date().toISOString().slice(0, 10) }) {
   const messages = cleanMessages(raw);
   if (!messages) return { status: 400, body: { error: "bad_request" } };
   const last = messages[messages.length - 1].content;
@@ -73,15 +75,16 @@ export async function handleChat({ messages: raw, index, client, env = {} }) {
   }
 
   const hits = search(index, queryFor(messages));
+  const model = env.MODEL || DEFAULT_MODEL;
   let resp;
   try {
     const params = {
-      model: env.MODEL || DEFAULT_MODEL,
+      model,
       max_tokens: 700,
       output_config: { effort: env.EFFORT || "low" },
       system: [
         { type: "text", text: buildSystem(index.core), cache_control: { type: "ephemeral", ttl: "1h" } },
-        { type: "text", text: buildExcerpts(hits) },
+        { type: "text", text: buildExcerpts(hits, today) },
       ],
       messages,
     };
@@ -98,7 +101,7 @@ export async function handleChat({ messages: raw, index, client, env = {} }) {
 
   const usage = resp.usage ?? {};
   console.log(JSON.stringify({
-    event: "chat", stop: resp.stop_reason, hits: hits.length, in: usage.input_tokens,
+    event: "chat", model, stop: resp.stop_reason, hits: hits.length, in: usage.input_tokens,
     cacheRead: usage.cache_read_input_tokens, cacheWrite: usage.cache_creation_input_tokens, out: usage.output_tokens,
   }));
 
@@ -114,5 +117,7 @@ export async function handleChat({ messages: raw, index, client, env = {} }) {
   const related = suggestResearch({
     index, query: queryFor(messages), hits, citedCoreIds: citedCore, fromHits: citedHits > 0, exclude: sources.map((s) => s.url),
   });
-  return { status: 200, body: { answer, sources, related, flags: {} }, usage };
+  // Counts only, never message text: "uncited" answers are where the knowledge base may have a gap.
+  console.log(JSON.stringify({ event: "answer", cited: sources.length, related: related.length, uncited: sources.length === 0 }));
+  return { status: 200, body: { answer, sources, related, flags: {} }, usage, model };
 }

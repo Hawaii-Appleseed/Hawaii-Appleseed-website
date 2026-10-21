@@ -1,0 +1,16 @@
+# Local-only config for test/workerd.test.mjs: same Worker, a simulated KV store, low limits.
+name = "ha-ask-test"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+ALLOWED_ORIGINS = "https://hiappleseed.org"
+PER_MINUTE = "3"
+PER_DAY = "50"
+DAILY_CAP = "50"
+DAILY_BUDGET_USD = "5"
+
+[[kv_namespaces]]
+binding = "RATE"
+id = "local-test-only"

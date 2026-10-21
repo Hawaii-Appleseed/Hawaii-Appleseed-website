@@ -7,13 +7,14 @@
     "index": "python3 ../build_index.py",
     "index:public": "python3 ../build_index.py --public",
     "pretest": "python3 ../build_index.py",
-    "test": "node --test test/unit.test.mjs",
+    "test": "node --test test/unit.test.mjs test/budget.test.mjs",
     "dev": "node dev-server.mjs",
     "dev:mock": "node dev-server.mjs --mock",
     "eval": "node ../eval/run_eval.mjs",
     "eval:offline": "node ../eval/run_eval.mjs --offline",
     "deploy": "npm run index && wrangler deploy",
-    "deploy:public": "npm run index:public && wrangler deploy"
+    "deploy:public": "npm run index:public && wrangler deploy",
+    "test:workerd": "node --test test/workerd.test.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.137.0"

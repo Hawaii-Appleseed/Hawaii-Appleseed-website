@@ -16,8 +16,10 @@ let out = `# SYSTEM PROMPT (applies to every case)\n\n${buildSystem(index.core)}
 for (const id of ids) {
   const c = cases.find((x) => x.id === id);
   if (!c) throw new Error(`no case ${id}`);
-  const hits = search(index, queryFor([{ role: "user", content: c.q }]));
-  out += `\n=====================\n# CASE ${id}\n\n${buildExcerpts(hits)}\n\n# VISITOR QUESTION\n\n${c.q}\n`;
+  const msgs = c.turns ?? [{ role: "user", content: c.q }];
+  const hits = search(index, queryFor(msgs));
+  const before = msgs.slice(0, -1).map((m) => `${m.role === "user" ? "VISITOR" : "ASSISTANT"}: ${m.content}`).join("\n");
+  out += `\n=====================\n# CASE ${id}\n\n${buildExcerpts(hits, "2026-10-21")}\n\n${before ? `# CONVERSATION SO FAR\n\n${before}\n\n` : ""}# VISITOR QUESTION\n\n${msgs[msgs.length - 1].content}\n`;
 }
 writeFileSync(opt("out"), out);
 console.log(`wrote ${opt("out")}: ${ids.length} cases, ${Math.round(out.length / 4)} approx tokens`);

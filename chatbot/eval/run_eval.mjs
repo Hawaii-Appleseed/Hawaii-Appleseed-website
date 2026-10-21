@@ -15,6 +15,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { handleChat } from "../worker/src/handler.js";
 import { isLegalHelpRequest } from "../worker/src/legal.js";
+import { microDollars, PRICES } from "../worker/src/pricing.js";
 import { suggestResearch } from "../worker/src/research.js";
 import { queryFor, search } from "../worker/src/retrieve.js";
 
@@ -35,15 +36,11 @@ const cases = readFileSync(new URL("golden.jsonl", here), "utf8").trim().split("
   .filter((c) => !replayFile || c.id in replayAnswers())
   .filter((c) => !opt("cat") || opt("cat").split(",").includes(c.cat));
 
-// $ per million tokens, first-party list prices (API skill table, cached 2026-10-06; re-check before relying on them).
-// Cache reads are 0.1x input; cache writes use the 1-hour TTL the handler requests, 2x input.
-const PRICES = { "claude-sonnet-5-5": { in: 2, out: 10 }, "claude-haiku-5-5": { in: 0.1, out: 0.5 } };
 const priced = model ?? "claude-sonnet-5-5";
-function dollars(t) {
-  const p = PRICES[priced];
-  if (!p) return null;
-  return (t.in * p.in + t.cacheRead * p.in * 0.1 + t.cacheWrite * p.in * 2 + t.out * p.out) / 1e6;
-}
+const dollars = (t) =>
+  PRICES[priced]
+    ? microDollars({ input_tokens: t.in, output_tokens: t.out, cache_read_input_tokens: t.cacheRead, cache_creation_input_tokens: t.cacheWrite }, priced) / 1e6
+    : null;
 
 const lc = (s) => s.toLowerCase();
 const has = (text, needle) => lc(text).includes(lc(needle));
@@ -57,11 +54,13 @@ function voiceProblems(text) {
   return out;
 }
 
+const messagesFor = (c) => c.turns ?? [{ role: "user", content: c.q }];
+
 function checkOffline(c) {
   const fails = [];
-  const messages = [{ role: "user", content: c.q }];
-  if ("legal" in c && c.legal_gate !== false && isLegalHelpRequest(c.q) !== c.legal) fails.push(`legal gate said ${!c.legal}`);
-  if (c.legal_gate === false && isLegalHelpRequest(c.q)) fails.push("legal gate caught a case marked model-only");
+  const messages = messagesFor(c);
+  if ("legal" in c && c.legal_gate !== false && isLegalHelpRequest(messages[messages.length - 1].content) !== c.legal) fails.push(`legal gate said ${!c.legal}`);
+  if (c.legal_gate === false && isLegalHelpRequest(messages[messages.length - 1].content)) fails.push("legal gate caught a case marked model-only");
   if (c.retrieve_any) {
     const hits = search(index, queryFor(messages));
     const blob = lc(hits.map((h) => `${h.t} ${h.u ?? ""}`).join(" | "));
@@ -70,7 +69,7 @@ function checkOffline(c) {
   if (c.related_any || c.related_none) {
     // Offline there is no model citation, so a topical question is assumed to cite an excerpt.
     const hits = search(index, queryFor(messages));
-    const rel = suggestResearch({ index, query: c.q, hits, fromHits: !c.related_none });
+    const rel = suggestResearch({ index, query: queryFor(messages), hits, fromHits: !c.related_none });
     fails.push(...relatedProblems(c, rel));
   }
   return fails;
@@ -142,7 +141,7 @@ async function run(c) {
     return { c, fails: checkOffline(c) };
   }
   console.log = () => {}; // the handler logs one line per request
-  const r = await handleChat({ messages: [{ role: "user", content: c.q }], index, client, env: { MODEL: model } });
+  const r = await handleChat({ messages: messagesFor(c), index, client, env: { MODEL: model } });
   console.log = quiet;
   const u = r.usage ?? {};
   if (r.usage) {

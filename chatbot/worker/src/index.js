@@ -6,11 +6,14 @@
 //   ALLOWED_ORIGINS     comma-separated; defaults to the production site
 //   MODEL, EFFORT       optional model and effort overrides
 //   PER_MINUTE, PER_DAY per-visitor limits (KV binding RATE required); DAILY_CAP is the
-//                       whole-site daily ceiling that bounds spend
+//                       whole-site daily request ceiling
+//   DAILY_BUDGET_USD    whole-site daily spend ceiling (default 5), counted from real token usage;
+//                       needs the same KV binding. The Console workspace limit stays the hard stop.
 //   FALLBACKS           "default" turns on server-side refusal fallback (off by default)
 import Anthropic from "@anthropic-ai/sdk";
 import index from "./index.json" with { type: "json" };
-import { handleChat } from "./handler.js";
+import { DEFAULT_MODEL, handleChat } from "./handler.js";
+import { microDollars } from "./pricing.js";
 
 const DEFAULT_ORIGINS = "https://hiappleseed.org,https://www.hiappleseed.org";
 const MAX_BODY = 12_000;
@@ -80,8 +83,22 @@ export async function handleRequest(request, env, deps = {}) {
     }
   }
 
+  // Daily spend ceiling, counted from the usage each answer reports. Soft by design (KV is not atomic);
+  // it stops a busy day, and the Anthropic workspace spend limit is what stops everything.
+  const day = new Date().toISOString().slice(0, 10);
+  const budgetKey = `usd:${day}`;
+  const budget = Number(env.DAILY_BUDGET_USD ?? 5) * 1e6;
+  const spent = env.RATE ? Number((await env.RATE.get(budgetKey)) ?? 0) : 0;
+  if (env.RATE && spent >= budget) {
+    console.log(JSON.stringify({ event: "budget_reached", spentUsd: spent / 1e6 }));
+    return json({ error: "budget", answer: "The assistant has reached its limit for today. Please try again tomorrow, or browse hiappleseed.org.", sources: [], related: [] }, 429, cors);
+  }
+
   const client = deps.client ?? new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
-  const { status, body } = await handleChat({ messages: payload.messages, index, client, env });
+  const { status, body, usage, model } = await handleChat({ messages: payload.messages, index, client, env });
+  if (env.RATE && usage) {
+    await env.RATE.put(budgetKey, String(spent + microDollars(usage, model ?? env.MODEL ?? DEFAULT_MODEL)), { expirationTtl: 90000 });
+  }
   return json(body, status, cors);
 }
 

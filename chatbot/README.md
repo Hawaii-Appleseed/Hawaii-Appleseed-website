@@ -31,7 +31,7 @@ widget (index.html, on hiappleseed.org)
 | `worker/src/` | `index.js` Worker entry · `handler.js` one chat turn · `legal.js` the gate · `prompt.js` rules · `retrieve.js` BM25 · `tokenize.js` |
 | `index.html` | The embeddable widget (own wrapper, tokens only, DOM-built rendering). `squarespace-inject.html` is its generated paste payload. |
 | `worker/src/research.js` | Picks the "Related research" list shown under each answer (see below). |
-| `eval/` | `golden.jsonl` (56 cases) + `run_eval.mjs`. |
+| `eval/` | `golden.jsonl` (82 cases, including multi-turn follow-ups) + `run_eval.mjs`. |
 | `tokenizer_vectors.json` | Shared test vectors keeping the Python and JS tokenizers identical. |
 
 ## Run it locally
@@ -48,7 +48,9 @@ Serve the repo root (`python3 -m http.server`) and open `/chatbot/index.html?end
 
 ```bash
 python3 -m unittest discover -s chatbot/tests     # index builder: drafts, privacy guards
-cd chatbot/worker && npm test                     # tokenizer parity, legal gate, retrieval, handler
+cd chatbot/worker && npm test                     # tokenizer parity, legal gate, retrieval, handler, budget, rate limits
+cd chatbot/worker && npm run test:workerd         # the real Worker in Cloudflare's runtime (workerd) with simulated KV
+python3 chatbot/check_links.py                    # fetch every link the assistant can show (needs network)
 node chatbot/eval/run_eval.mjs --offline          # legal gate + retrieval on the golden set, no key
 node chatbot/eval/run_eval.mjs                    # LIVE: all 56 cases through the model (spends credits)
 node chatbot/eval/run_eval.mjs --model claude-haiku-5-5   # compare models (prints cost per question)
@@ -88,6 +90,18 @@ Lines starting "2026 outcome" were written from *Policy in Perspective 2026* (Au
 
 **Pilot placement:** an unlisted Squarespace page is not private. Serve the widget from the staff hub (behind Cloudflare Access) and set `ALLOWED_ORIGINS` to that origin. Move to the public site only after sign-off and a clean live eval.
 
+## Spend limits: what stops a runaway bill
+
+From the hardest stop to the softest:
+
+1. **Anthropic Console (cannot be bypassed by a code bug).** Give the bot its own workspace with its own spend limit, and lower the organization's monthly limit (it was $1,000, above the $400 credit). With no card on file, calls fail once the credit is gone and the widget says "unavailable".
+2. **Daily dollar budget in the Worker.** `DAILY_BUDGET_USD` (pilot: 3) is counted from the token usage each answer reports, priced in `worker/src/pricing.js`; once it is spent the Worker answers 429 until the next UTC day. Needs the `RATE` KV namespace, like the limits below.
+3. **Request limits.** Per visitor `PER_MINUTE` (6) and `PER_DAY` (40), whole site `DAILY_CAP` (500). A Cloudflare rate-limiting rule on `/chat` is the hard version of these; the KV counters are approximate.
+4. **Per-request size.** User messages ≤ 800 characters, ≤ 8 messages of history, ≤ 700 output tokens, effort `low`, six excerpts, prompt cached for an hour, and the legal gate answers without a model call.
+5. **Model choice.** Haiku 5.5 costs about 20 times less than Sonnet 5.5 for the same answers in the tests so far.
+
+These limits do nothing until the KV namespace exists (deploy step 2). Raise them for a public launch.
+
 ## Cost (estimates from prompt size; confirm with the first live eval)
 
 The cached prompt is about 8,300 tokens; excerpts add about 1,700 per question.
@@ -109,6 +123,10 @@ Cold-cache requests cost about three times as much. Set `MODEL` in `wrangler.tom
 - [ ] Decide who watches the Cloudflare logs and the Console spend dashboard, and what happens when credits run out (the assistant shows "unavailable" and stops; no card means no overage).
 - [ ] The promotional API credit expires 2026-11-12. Production needs a payment method or invoicing on the Console organization.
 - [ ] Optional: turn on server-side refusal fallback (`FALLBACKS=default`). Off by default: for Sonnet 5.5 it only reroutes cyber and frontier-AI declines, which this bot should not produce, and the beta request shape is untested here.
+
+## CI
+
+`.github/workflows/chatbot.yml` runs the Python and Worker tests, the offline eval, the design lint, a Wrangler bundling dry run, and the workerd runtime test on every pull request that touches `chatbot/` or the corpus. It needs no secrets and never deploys. The model-dependent eval and `check_links.py` are run by hand.
 
 ## Known limits
 
