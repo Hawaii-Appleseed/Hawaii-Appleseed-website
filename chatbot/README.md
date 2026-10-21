@@ -221,7 +221,15 @@ Related research is left off for questions that cite no research ("who is the ex
 
 ## Positions: sign-off
 
-Every position in `content/positions.md` has a status line. `python3 chatbot/build_index.py --public` (and `npm run deploy:public`) leaves out everything not marked `<!-- status: approved by NAME YYYY-MM-DD -->`, so a public launch can only say what staff have approved. A test enforces this. The pilot build includes drafts.
+Three kinds of words go out without a model checking them, and each has an approval status. A **public build** (`build_index.py --public`, `npm run deploy:public`) ships only what is approved; the pilot build includes drafts.
+
+| What | Where its status lives | Not approved means |
+|---|---|---|
+| a stated **position** | `<!-- status: ... -->` in `content/positions.md` | left out of the public build (a visitor's question about it goes to the model, which says there is no stated position) |
+| a **ready-made answer** | `status` in `content/faq.json` | left out (the question goes to the model, which answers from the organization's pages; more model calls, so more cost) |
+| a **fixed reply or page text** (legal-help reply, error messages, welcome line, privacy note, "ask a person" and chart-sharing wording) | `content/fixed.json` | **the public build refuses to run** until every one is approved: there is no fallback for words the page always uses |
+
+A status is `draft` or `approved by NAME YYYY-MM-DD`. **Approval is of the exact words** (`approval.py`): `signoff_doc.py --apply` also records a `reviewed` hash of the words the reviewer saw (`<!-- reviewed: ... -->` for a position), and the build treats an approved item whose words have changed since as not approved ("changed since it was approved" in the build's skipped list). `--apply` itself refuses an approval whose Doc fingerprint no longer matches the content, so refresh the Doc and approve again. Writing `approved by NAME DATE` by hand, with no hash, still works and is not bound to the words, so use the review. Fixed replies live in the Worker's JavaScript and in `index.html`; `fixed.py` is the one place that knows where, so the review and the build read the same words (it needs `node`).
 
 **The review lives in a Google Doc** ("Ask Hawaiʻi Appleseed: Sign-off Review (Draft)" in the shared Drive, Communications & Media › Website; this repo is public, so the link is not recorded here). It lists everything the assistant says without a model checking it: each position word for word with its chart, research links, aliases, and every figure beside the published sentence it was matched to; the ready-made answers; and the fixed replies and page text (legal-help reply, no-position reply, error messages, welcome line, privacy note). Each item has a decision box (change ☐ to ☒), a reviewer line, and a notes line, so reviewers can tick, edit, and comment in the Doc itself.
 
@@ -233,7 +241,7 @@ $P chatbot/signoff_doc.py --read <docId>                   list the decisions
 $P chatbot/signoff_doc.py --read <docId> --apply           mark ticked, named "Approve as written" positions approved in positions.md
 ```
 
-`--apply` writes `<!-- status: approved by NAME YYYY-MM-DD -->` for a position only when exactly one box is ticked, it is "Approve as written", and a reviewer name is filled in; edits, holds, removals, and double-ticks are listed for a person to handle. Ready-made answers and fixed replies are read and reported but not applied (they have no status line yet). An approved position still needs `build_index.py --public` and a deploy, and that build checks its figures against the published corpus again.
+`--apply` records an approval (and the hash of the words) for a position, ready-made answer or fixed reply only when exactly one box is ticked, it is "Approve as written", a reviewer name is filled in, and the words are still the ones in the Doc; edits, holds, removals, double-ticks and stale approvals are listed for a person to handle. An approved position still needs `build_index.py --public` and a deploy, and that build checks its figures against the published corpus again.
 
 Lines starting "2026 outcome" were written from *Policy in Perspective 2026* (Aug 13, 2026) and the Legislature's feed. Where a bill has no outcome line, nobody checked its final status, and the assistant is told to say so (paid family leave HB2360, pay transparency HB2367, bridge coverage HB1546, and medical debt SB3025 have none).
 

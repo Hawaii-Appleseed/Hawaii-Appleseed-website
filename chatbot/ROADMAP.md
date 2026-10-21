@@ -8,7 +8,7 @@ These gate everything else; none can be done from here.
 
 1. **Anthropic API key** in a dedicated Console workspace with a spend limit, then `wrangler secret put ANTHROPIC_API_KEY`. Until then the live model path has only been exercised by replaying Haiku and Sonnet answers through the real checks.
 2. **Cloudflare Access application** for `ha-ask.dtomkatsu.workers.dev`; send the Audience tag, set `ACCESS_AUD` in `worker/wrangler.toml`, redeploy. Until then every route answers 503 (on purpose).
-3. **Staff sign-off on the draft positions** (25, all `status: draft`). Nothing public ships without it, and approving a position also brings its graphic (`--public` build).
+3. **Staff sign-off in the review Doc**: 25 positions, 24 ready-made answers, 7 fixed replies and page texts, all draft. A public build ships only what is approved (approving a position also brings its graphic), and it refuses to run until all seven fixed replies are approved.
 4. **Credit expiry:** the Console promotional credit expires 2026-11-12; production needs a payment method.
 
 ## Recommended next (in this order)
@@ -20,7 +20,7 @@ These gate everything else; none can be done from here.
 
 ### 2. Sign-off review page for staff: DONE 2026-10-21, as a Google Doc
 `signoff_doc.py` builds it in Communications & Media › Website: 25 positions (word for word, with chart, research links, aliases, and each figure beside its published sentence), 23 ready-made answers, 6 fixed replies, each with a decision box. `--read` lists decisions and `--apply` marks positions approved in `positions.md` (see the README, *Positions: sign-off*).
-- **Next on this item:** ready-made answers and fixed replies have no status line, so approvals for them are read but not applied; add one (`faq.json` flag, a `fixed.json`) so the public build can leave out an unapproved ready-made answer the way it leaves out an unapproved position. Until then the public build ships all of them, so staff should approve Parts 2 and 3 before launch.
+- **Done since:** ready-made answers and fixed replies have statuses (`faq.json`, `fixed.json`), approvals are bound to the exact words (`approval.py`), and the public build leaves out unapproved ready-made answers and refuses to run until every fixed reply is approved. See the README, *Positions: sign-off*.
 
 ### 3. "Ask a person" hand-off: DONE 2026-10-21
 `worker/src/handoff.js` and the `PERSON` box in `index.html` (see the README, *Ask a person*). A `mailto:` with the visitor's question prefilled, the office phone, and the Contact page, under any answer the assistant could not give and under the no-position reply; never on legal help. Haiku and Sonnet each add `[[staff]]` where it fits (see the eval cases `ho-*`).

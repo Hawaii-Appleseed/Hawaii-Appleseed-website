@@ -366,7 +366,7 @@ class Graphics(unittest.TestCase):
     def test_the_public_build_ships_only_graphics_the_approved_text_backs(self):
         pub = b.build(public=True)  # no position is approved yet: only the history timeline rests on about.md alone
         self.assertEqual({g["id"] for g in pub["graphics"]}, {"appleseed-history"})
-        self.assertTrue(any(e.get("graphic") for e in pub["faq"]))
+        self.assertEqual(pub["faq"], [], "no ready-made answer is approved yet, so none ships (see test_approval.py)")
         # approve every position: now each graphic's figures are in approved text, so all of them ship
         every = self._load(lambda gs: None, public_text=self.vetted, public_titles=self.titles)
         self.assertEqual(len(every), len(self.idx["graphics"]))

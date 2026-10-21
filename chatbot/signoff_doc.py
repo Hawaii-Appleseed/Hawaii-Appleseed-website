@@ -32,7 +32,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
+import approval  # noqa: E402
 import build_index as b  # noqa: E402
+import fixed  # noqa: E402
 
 DRIVE_DIR = Path(os.environ.get("APPLESEED_DRIVE", Path.home() / "internal-tools" / "appleseed-drive"))
 WEBSITE_FOLDER = "1H7lGHOkqse73Qzl47wOSrZGnbdE54FqB"  # Communications & Media > Website
@@ -87,9 +89,16 @@ def node_json(expr: str):
 
 
 # ------------------------------------------------------------------- the three parts
-def decision(ref: str, what: str = "this") -> str:
-    left = "".join(p(f"{BOX} {t}") for t in (f"Approve {what} as written", "Approve with the edits in Notes", "Hold: not ready", "Remove it from the assistant")) + small(f"Ref: {ref}")
-    right = p("<b>Reviewed by</b> (name and date): ") + p("<b>Notes</b> (edit the text above directly, or say what to change here): ")
+def status_label(status: str | None, reviewed: str | None, current: str) -> str:
+    ok, why = approval.judge(status, reviewed, current)
+    if ok:
+        return f"{status}" + ("" if reviewed else " (no text hash recorded)")
+    return "draft" if why == "not approved" else f"{status}, but the words have changed since: approve again"
+
+
+def decision(ref: str, what: str, text_hash: str, status: str) -> str:
+    left = "".join(p(f"{BOX} {t}") for t in (f"Approve {what} as written", "Approve with the edits in Notes", "Hold: not ready", "Remove it from the assistant")) + small(f"Ref: {ref}") + small(f"Text: {text_hash}")
+    right = p(f"<b>Status now:</b> {e(status)}") + p("<b>Reviewed by</b> (name and date): ") + p("<b>Notes</b> (edit the text above directly, or say what to change here): ")
     return table([[left, right]], [45, 55], head=["Decision (change ☐ to ☒)", "Who and why"])
 
 
@@ -154,8 +163,11 @@ def positions_part(idx: dict, report: dict, allow: dict) -> tuple[str, list[dict
              "(for example, “What is your stance on the conveyance tax?”). No model is involved in that answer. The text comes from "
              "<code>positions.md</code>, adapted from the staff positions file, so approving a position means approving this wording.")]
     summary = []
+    raw = {x["title"]: x for x in b.parse_sections(HERE / "content" / "positions.md")}
     for n, c in enumerate(pos, 1):
         ref = f"position/{slug(c['title'])}"
+        h = approval.position_hash(c["title"], c["text"])
+        status = status_label(raw[c["title"]]["status"], raw[c["title"]]["reviewed"], h)
         srep = by_title.get(c["title"], {"figures": []})
         counts = {k: sum(1 for r in srep["figures"] if r["status"] == k and not r["key"].startswith(("bill:", "act:"))) for k in ("sentence", "accepted", "topic")}
         summary.append((n, c["title"], c["group"], ref, [gfx[g]["title"] for g in c.get("graphics", []) if g in gfx], counts))
@@ -168,15 +180,16 @@ def positions_part(idx: dict, report: dict, allow: dict) -> tuple[str, list[dict
             ["<b>How visitors reach it</b>", p(e("; ".join(c.get("aliases", []))) or "Its title only.") + small("A question about any of these topics gets this answer.")],
         ]
         figs, nfig = figure_rows(srep, allow, c["title"])
-        out.append(f'<h3 style="{HEAD}">{n}. {e(c["title"])}</h3>' + small(f"{e(c['group'])} · status: draft"))
+        out.append(f'<h3 style="{HEAD}">{n}. {e(c["title"])}</h3>' + small(f"{e(c['group'])} · status: {e(status)}"))
         out.append(table(details, [20, 80]))
         out.append(f'<p style="{BODY};margin:6pt 0 2pt"><b>Figures in this position and where they were found</b></p>' + (figs or p("No figures.")))
-        out.append(f'<p style="{BODY};margin:8pt 0 2pt"></p>' + decision(ref, "this position"))
+        out.append(f'<p style="{BODY};margin:8pt 0 2pt"></p>' + decision(ref, "this position", h, status))
     return "\n".join(out), summary
 
 
 def faq_part(idx: dict) -> str:
     entries = [f for f in idx["faq"] if f["variants"]]
+    raw = {x["id"]: x for x in json.loads((HERE / "content" / "faq.json").read_text(encoding="utf-8"))["entries"]}
     out = [f'<h2 style="{HEAD}">Part 2. Ready-made answers ({len(entries)})</h2>',
            p("These answer the questions asked most (mission, history, how to give, contact, jobs, “are you a bot?”, hello, thanks) "
              "instantly and identically, with no model. A question matches only when its topic words are exactly a listed phrasing’s, "
@@ -189,16 +202,17 @@ def faq_part(idx: dict) -> str:
                 ["<b>The assistant answers</b>", p(cited(f["answer"]), "margin:0") + srcs]]
         if f.get("graphic"):
             rows.append(["<b>Chart shown with it</b>", e(f["graphic"])])
-        out.append(f'<h3 style="{HEAD}">{n}. {e(f["id"].replace("-", " ").capitalize())}</h3>' + table(rows, [20, 80]) + '<p style="margin:6pt 0 2pt"></p>' + decision(f"answer/{f['id']}", "this answer"))
+        h = approval.faq_hash(f["answer"], [x["url"] for x in f["sources"]])
+        status = status_label(raw[f["id"]].get("status"), raw[f["id"]].get("reviewed"), h)
+        out.append(f'<h3 style="{HEAD}">{n}. {e(f["id"].replace("-", " ").capitalize())}</h3>' + small(f"status: {e(status)}") + table(rows, [20, 80]) + '<p style="margin:6pt 0 2pt"></p>' + decision(f"answer/{f['id']}", "this answer", h, status))
     return "\n".join(out)
 
 
 def fixed_part(idx: dict) -> str:
-    fx = node_json("({legal: L.LEGAL_REPLY, declined: H.FRIENDLY.declined, unavailable: H.FRIENDLY.unavailable, sources: L.LEGAL_SOURCES})")
+    fx = fixed.items()
+    fst = fixed.statuses()
     nopos = next(f for f in idx["faq"] if f["id"] == "no-position")
-    privacy = re.search(r'<p class="ha-ask__note">(.*?)</p>', (HERE / "index.html").read_text(encoding="utf-8"), re.S).group(1)
-    privacy = html.unescape(re.sub(r"<[^>]+>", "", privacy)).strip()
-    welcome = re.search(r"add\('bot', '(Hello\..*?)'\);", (HERE / "index.html").read_text(encoding="utf-8")).group(1)
+    nopos_raw = next(x for x in json.loads((HERE / "content" / "faq.json").read_text(encoding="utf-8"))["entries"] if x["id"] == "no-position")
     page_src = (HERE / "index.html").read_text(encoding="utf-8")
     person = json.loads(re.search(r"var PERSON = (\{.*?\});", page_src).group(1))
     c = idx["contact"]
@@ -215,26 +229,28 @@ def fixed_part(idx: dict) -> str:
         "On a made-up illustration, it says: " + share["illustration"], "",
         "“" + share["table"] + "” copies the chart's figures as tab-separated text (with the note and the source) for a spreadsheet or document.",
         "Messages: " + " / ".join([share["copied"], share["saved"], share["failed"], share["manual"]])])
-    items = [
-        ("legal-help", "Reply to any request for legal help", "Always this exact text, never model-written. Triggered by a clear request for legal advice, a lawyer, or help with a personal case.",
-         fx["legal"].replace(" [1]", "") + "  [link: " + fx["sources"][0]["title"] + "]"),
-        ("no-position", "Reply when our work never covers a topic", "Used when a visitor asks where Hawaiʻi Appleseed stands on something its published work never touches. It never repeats the visitor’s words.", nopos["answer"]),
-        ("cannot-answer", "Reply when the model declines", "", fx["declined"]),
-        ("unavailable", "Reply when the assistant is down or out of budget", "", fx["unavailable"]),
-        ("ask-a-person", "“Ask a person” button and prefilled email",
-         "Shown under an answer when the assistant could not answer (it says it lacks the information, or the question is about the visitor’s own situation, or only staff could decide), and under the no-position reply. Never shown on a legal-help reply. The assistant never contacts anyone; the visitor sends the email from their own mail app.", {"html": hand}),
-        ("share-chart", "Copy-a-chart buttons and the picture's footer",
-         "Under every chart, so reporters, legislative staff and partners can reuse it with its source attached.", {"html": share_html}),
-        ("welcome", "First message on the page", "", welcome),
-        ("privacy-note", "Note under the chat box", "What visitors are told about AI, accuracy, legal advice, and privacy. Someone with authority over the organization’s public statements should approve this one.", privacy),
-    ]
-    out = [f'<h2 style="{HEAD}">Part 3. Fixed replies and page text ({len(items)})</h2>', p("Words the page or the Worker always uses, however a question is phrased.")]
-    for n, (ref, title, why, text) in enumerate(items, 1):
-        body_html = text["html"] if isinstance(text, dict) else cited(text)
-        rows = [["<b>Exact text</b>", p(body_html, "margin:0")]]
+    html_for = {"ask-a-person": hand, "share-chart": share_html}
+    legal_source = "  [link: Hawaiʻi State Bar Association: legal assistance resources]"
+    order = ["legal-help", "no-position", "cannot-answer", "unavailable", "ask-a-person", "share-chart", "welcome", "privacy-note"]
+    out = [f'<h2 style="{HEAD}">Part 3. Fixed replies and page text ({len(order)})</h2>', p("Words the page or the Worker always uses, however a question is phrased. There is no fallback for these, so a public build waits until every one is approved.")]
+    for n, iid in enumerate(order, 1):
+        if iid == "no-position":
+            title, why = "Reply when our work never covers a topic", "Used when a visitor asks where Hawaiʻi Appleseed stands on something its published work never touches. It never repeats the visitor’s words."
+            body = cited(nopos["answer"])
+            h = approval.faq_hash(nopos["answer"], [x["url"] for x in nopos["sources"]])
+            status = status_label(nopos_raw.get("status"), nopos_raw.get("reviewed"), h)
+            ref = "answer/no-position"
+        else:
+            item = fx[iid]
+            title, why = item["title"], item["why"]
+            body = html_for.get(iid) or cited(" ".join(item["parts"]).replace(" [1]", "") + (legal_source if iid == "legal-help" else ""))
+            h = fixed.hash_of(item)
+            status = status_label(fst.get(iid, {}).get("status"), fst.get(iid, {}).get("reviewed"), h)
+            ref = f"fixed/{iid}"
+        rows = [["<b>Exact text</b>", p(body, "margin:0")]]
         if why:
             rows.append(["<b>When it is used</b>", e(why)])
-        out.append(f'<h3 style="{HEAD}">{n}. {e(title)}</h3>' + table(rows, [20, 80]) + '<p style="margin:6pt 0 2pt"></p>' + decision(f"fixed/{ref}", "this text"))
+        out.append(f'<h3 style="{HEAD}">{n}. {e(title)}</h3>' + small(f"status: {e(status)}") + table(rows, [20, 80]) + '<p style="margin:6pt 0 2pt"></p>' + decision(ref, "this text", h, status))
     return "\n".join(out)
 
 
@@ -256,7 +272,7 @@ def build_html() -> str:
 <li style="{BODY}">Read each item as a visitor would see it. The wording in the “What the assistant says” rows is exactly what the assistant will say, and it will say it without a model checking it.</li>
 <li style="{BODY}">For positions, read the figures table. Each number is shown beside the published sentence it was matched to; the check proves the number was published in a similar context, not that our sentence means the same thing, so please compare the two. Rows marked “Staff confirm” are figures a first read accepted and a person should verify.</li>
 <li style="{BODY}">In each decision box change ☐ to ☒ on one line, add your name and the date, and put edits or concerns in Notes. You can also edit the wording directly in the doc (use Suggesting mode so the change is visible).</li>
-<li style="{BODY}">Leave the “Ref:” lines alone. They are how the decisions get applied.</li>
+<li style="{BODY}">Leave the “Ref:” and “Text:” lines alone. They are how the decisions get applied, and “Text:” fingerprints the exact words you were shown: an approval counts only for those words, so if anyone edits the wording afterward, the item goes back to draft until it is approved again.</li>
 </ol>
 <h2 style="{HEAD}">What gets approved</h2>
 {table([[e(x), e(y)] for x, y in (("Part 1: positions", f"{len(summary)} stated positions. Each is shown with its chart, research links, and figures."),
@@ -268,7 +284,7 @@ def build_html() -> str:
 """
     body = intro + pos_html + faq_part(idx) + fixed_part(idx) + f"""
 <h2 style="{HEAD}">After review</h2>
-{p("Decisions are read back from this document by reference (<code>chatbot/signoff_doc.py --read</code>). A ticked “Approve as written” with a name marks that position approved in <code>positions.md</code>; edits, holds, and removals are listed for a person to handle. An approved position still has to be built into the public version and deployed before visitors see it, and a public build checks its figures against our published work again.")}
+{p("Decisions are read back from this document by reference (<code>chatbot/signoff_doc.py --read</code>). A ticked “Approve as written” with a name records the approval (in <code>positions.md</code>, <code>faq.json</code> or <code>fixed.json</code>) together with the fingerprint of the words you saw; edits, holds, and removals are listed for a person to handle. An approved position still has to be built into the public version and deployed before visitors see it, and a public build checks its figures against our published work again.")}
 """
     return f'<html><head><meta charset="utf-8"><title>{e(DOC_NAME)}</title></head><body style="{BODY}">{body}</body></html>'
 
@@ -378,12 +394,15 @@ def decisions(lines: list[str]) -> dict[str, dict]:
     for ln in lines:
         m = re.match(r"\s*Ref:\s*(\S+)", ln)
         if m:
-            cur = out.setdefault(m.group(1), {"ticked": [], "by": "", "notes": ""})
+            cur = out.setdefault(m.group(1), {"ticked": [], "by": "", "notes": "", "hash": ""})
             continue
         if cur is None:
             continue
         s = ln.strip()
-        if s[:1] in TICKED:
+        mh = re.match(r"Text:\s*([0-9a-f]{10})\b", s)
+        if mh:
+            cur["hash"] = mh.group(1)
+        elif s[:1] in TICKED:
             cur["ticked"].append(s[1:].strip())
         elif s.lower().startswith("reviewed by"):
             cur["by"] = s.split(":", 1)[1].strip() if ":" in s else ""
@@ -392,14 +411,31 @@ def decisions(lines: list[str]) -> dict[str, dict]:
     return out
 
 
+def _current_hashes() -> dict[str, str]:
+    """ref -> hash of the words as they are NOW in the content files, for every item a review can approve."""
+    out = {}
+    for it in b.parse_sections(HERE / "content" / "positions.md"):
+        out[f"position/{slug(it['title'])}"] = approval.position_hash(it["title"], it["text"])
+    for e_ in json.loads((HERE / "content" / "faq.json").read_text(encoding="utf-8"))["entries"]:
+        out[f"answer/{e_['id']}"] = approval.faq_hash(e_["answer"], [x["url"] for x in e_["sources"]])
+    for iid, item in fixed.items().items():
+        out[f"fixed/{iid}"] = fixed.hash_of(item)
+    return out
+
+
 def apply_approvals(found: dict[str, dict], write: bool) -> list[str]:
-    path = HERE / "content" / "positions.md"
-    text = path.read_text(encoding="utf-8")
-    log = []
-    for ref, d in found.items():
-        if not ref.startswith("position/") or not d["ticked"]:
-            continue
-        slug_ = ref.split("/", 1)[1]
+    """Record approvals for items whose single ticked box is "Approve ... as written", with a reviewer name, and whose words
+    are still the ones the reviewer saw (the Doc's Text: hash matches the content now). Anything else is reported, not applied."""
+    log: list[str] = []
+    ticked = {r: d for r, d in found.items() if d["ticked"]}
+    if not ticked:
+        return log
+    now = _current_hashes()
+    pos_path, faq_path, fix_path = HERE / "content" / "positions.md", HERE / "content" / "faq.json", fixed.STATUS_FILE
+    pos_text = pos_path.read_text(encoding="utf-8")
+    faq_doc = json.loads(faq_path.read_text(encoding="utf-8"))
+    fix_doc = json.loads(fix_path.read_text(encoding="utf-8")) if fix_path.exists() else {"items": {}}
+    for ref, d in ticked.items():
         if len(d["ticked"]) > 1:
             log.append(f"{ref}: more than one box ticked ({'; '.join(d['ticked'])}); not applied")
             continue
@@ -412,25 +448,37 @@ def apply_approvals(found: dict[str, dict], write: bool) -> list[str]:
         if not name:
             log.append(f"{ref}: approved but no reviewer name; not applied")
             continue
-        m = None
-        for h in re.finditer(r"^### (.+)$", text, re.M):
-            if slug(h.group(1)) == slug_:
-                m = h
-                break
-        if not m:
-            log.append(f"{ref}: no such position in positions.md")
+        if ref not in now:
+            log.append(f"{ref}: no such item in the content")
             continue
-        end = text.find("\n### ", m.end())
-        end = len(text) if end < 0 else end
-        block = text[m.end():end]
-        new, n = re.subn(r"<!--\s*status:.*?-->", f"<!-- status: approved by {name} {when} -->", block, count=1)
-        if not n:
-            log.append(f"{ref}: no status line to change")
+        if not d.get("hash"):
+            log.append(f"{ref}: the Doc has no Text: line for this item (it predates approvals bound to the words); refresh the Doc and approve again")
             continue
-        text = text[:m.end()] + new + text[end:]
-        log.append(f"{ref}: approved by {name} {when}")
+        if d["hash"] != now[ref]:
+            log.append(f"{ref}: the words changed after this review ({d['hash']} reviewed, {now[ref]} now); refresh the Doc and approve again")
+            continue
+        status = f"approved by {name} {when}"
+        kind, key = ref.split("/", 1)
+        if kind == "position":
+            m = next((h for h in re.finditer(r"^### (.+)$", pos_text, re.M) if slug(h.group(1)) == key), None)
+            end = pos_text.find("\n### ", m.end()) if m else -1
+            end = len(pos_text) if end < 0 else end
+            block = pos_text[m.end():end] if m else ""
+            new, n = re.subn(r"<!--\s*status:.*?-->(\n<!--\s*reviewed:.*?-->)?", f"<!-- status: {status} -->\n<!-- reviewed: {d['hash']} -->", block, count=1)
+            if not m or not n:
+                log.append(f"{ref}: no status line to change")
+                continue
+            pos_text = pos_text[:m.end()] + new + pos_text[end:]
+        elif kind == "answer":
+            entry = next(x for x in faq_doc["entries"] if x["id"] == key)
+            entry["status"], entry["reviewed"] = status, d["hash"]
+        else:
+            fix_doc["items"][key] = {"status": status, "reviewed": d["hash"]}
+        log.append(f"{ref}: {status}")
     if write:
-        path.write_text(text, encoding="utf-8")
+        pos_path.write_text(pos_text, encoding="utf-8")
+        faq_path.write_text(json.dumps(faq_doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        fix_path.write_text(json.dumps(fix_doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return log
 
 
@@ -440,7 +488,7 @@ def main() -> int:
     ap.add_argument("--file", action="store_true", help="create the Doc in Communications & Media > Website")
     ap.add_argument("--update", metavar="DOC_ID", help="replace an existing review's body (refuses if any box is ticked)")
     ap.add_argument("--read", metavar="DOC_ID", help="list the decisions made in the Doc")
-    ap.add_argument("--apply", action="store_true", help="with --read: write approvals into positions.md")
+    ap.add_argument("--apply", action="store_true", help="with --read: write approvals into positions.md, faq.json and fixed.json")
     ap.add_argument("--force", action="store_true", help="with --update: overwrite even if boxes are ticked")
     a_ = ap.parse_args()
 
@@ -451,7 +499,7 @@ def main() -> int:
             if d["ticked"]:
                 print(f"  {ref}: {'; '.join(d['ticked'])}  | by: {d['by'] or '-'}  | notes: {d['notes'] or '-'}")
         log = apply_approvals(found, write=a_.apply)
-        print(("\napplied to content/positions.md:" if a_.apply else "\nwould apply (dry run; add --apply):"))
+        print(("\napplied (content/positions.md, faq.json, fixed.json):" if a_.apply else "\nwould apply (dry run; add --apply):"))
         print("\n".join("  " + l for l in log) or "  nothing")
         return 0
 

@@ -1,8 +1,9 @@
 {
-  "_comment": "Ready-made answers to the questions visitors ask most. A question that matches one of an entry's `variants` (closely, not loosely) gets that answer at once, with no model call: instant, free, and word for word the same every time. Anything longer or more specific still goes to the model. Every fact here must already be in content/about.md or content/practical.md (build_index.py checks phones, emails, dollar amounts, and years). [1], [2] in an answer point at `sources`, in order. Staff: this short file is the quickest thing to review.",
+  "_comment": "Ready-made answers to the questions visitors ask most. A question that matches one of an entry's `variants` (closely, not loosely) gets that answer at once, with no model call: instant, free, and word for word the same every time. Anything longer or more specific still goes to the model. Every fact here must already be in content/about.md or content/practical.md (build_index.py checks phones, emails, dollar amounts, and years). [1], [2] in an answer point at `sources`, in order. Staff: this short file is the quickest thing to review. Each entry carries `status` (\"draft\" until staff approve these exact words: \"approved by NAME YYYY-MM-DD\") and, once approved through the sign-off review, `reviewed` (a hash of the answer and its sources, so a later edit un-approves it). A --public build ships only approved entries; the question otherwise goes to the model.",
   "entries": [
     {
       "id": "mission",
+      "status": "draft",
       "variants": [
         "what is your mission",
         "what is hawaii appleseed's mission",
@@ -46,6 +47,7 @@
     },
     {
       "id": "who-we-are",
+      "status": "draft",
       "variants": [
         "what is hawaii appleseed",
         "what is appleseed",
@@ -97,6 +99,7 @@
     },
     {
       "id": "issues",
+      "status": "draft",
       "variants": [
         "what issues do you work on",
         "what issues does hawaii appleseed work on",
@@ -139,6 +142,7 @@
     },
     {
       "id": "history",
+      "status": "draft",
       "variants": [
         "when was hawaii appleseed founded",
         "when were you founded",
@@ -183,6 +187,7 @@
     },
     {
       "id": "leadership",
+      "status": "draft",
       "variants": [
         "who is the executive director",
         "who is your executive director",
@@ -216,6 +221,7 @@
     },
     {
       "id": "staff",
+      "status": "draft",
       "variants": [
         "who works at hawaii appleseed",
         "who works for hawaii appleseed",
@@ -242,6 +248,7 @@
     },
     {
       "id": "board",
+      "status": "draft",
       "variants": [
         "who is on the board",
         "who is on your board",
@@ -269,6 +276,7 @@
     },
     {
       "id": "donate",
+      "status": "draft",
       "variants": [
         "how can i donate",
         "how do i donate",
@@ -322,6 +330,7 @@
     },
     {
       "id": "tax-deductible",
+      "status": "draft",
       "variants": [
         "is my donation tax deductible",
         "are donations tax deductible",
@@ -353,6 +362,7 @@
     },
     {
       "id": "get-involved",
+      "status": "draft",
       "variants": [
         "how can i get involved",
         "how do i get involved",
@@ -391,6 +401,7 @@
     },
     {
       "id": "volunteer",
+      "status": "draft",
       "variants": [
         "can i volunteer",
         "how can i volunteer",
@@ -431,6 +442,7 @@
     },
     {
       "id": "newsletter",
+      "status": "draft",
       "variants": [
         "how do i sign up for your newsletter",
         "how can i sign up for your newsletter",
@@ -478,6 +490,7 @@
     },
     {
       "id": "contact",
+      "status": "draft",
       "variants": [
         "how do i contact hawaii appleseed",
         "how can i contact hawaii appleseed",
@@ -529,6 +542,7 @@
     },
     {
       "id": "address",
+      "status": "draft",
       "variants": [
         "where are you located",
         "where is hawaii appleseed located",
@@ -566,6 +580,7 @@
     },
     {
       "id": "social",
+      "status": "draft",
       "variants": [
         "are you on social media",
         "are you on instagram",
@@ -604,6 +619,7 @@
     },
     {
       "id": "jobs",
+      "status": "draft",
       "variants": [
         "are you hiring",
         "is hawaii appleseed hiring",
@@ -647,6 +663,7 @@
     },
     {
       "id": "legislator",
+      "status": "draft",
       "variants": [
         "how do i contact my legislator",
         "how can i contact my legislator",
@@ -686,6 +703,7 @@
     },
     {
       "id": "tax-fairness-coalition",
+      "status": "draft",
       "variants": [
         "what is the tax fairness coalition",
         "what is the hawaii tax fairness coalition",
@@ -707,6 +725,7 @@
     },
     {
       "id": "service-provider",
+      "status": "draft",
       "variants": [
         "are you a legal aid provider",
         "is hawaii appleseed a legal aid provider",
@@ -737,6 +756,7 @@
     },
     {
       "id": "ai",
+      "status": "draft",
       "variants": [
         "are you a bot",
         "are you a robot",
@@ -785,6 +805,7 @@
     },
     {
       "id": "capabilities",
+      "status": "draft",
       "variants": [
         "what can you do",
         "what can you help with",
@@ -813,6 +834,7 @@
     },
     {
       "id": "greeting",
+      "status": "draft",
       "variants": [
         "hi",
         "hello",
@@ -835,6 +857,7 @@
     },
     {
       "id": "thanks",
+      "status": "draft",
       "variants": [
         "thanks",
         "thank you",
@@ -866,6 +889,7 @@
     },
     {
       "id": "no-position",
+      "status": "draft",
       "internal": true,
       "variants": [],
       "answer": "Hawaiʻi Appleseed has not published a position on that in the material I have, so I can't say where it stands. Its stated positions are on the Issues page [1]. If you want to know whether there is one that is not covered here, the office can say: (808) 587-7605 or info@hiappleseed.org [2].",

@@ -27,8 +27,8 @@ class Rendered(unittest.TestCase):
         refs = re.findall(r"Ref: ([a-z]+/[a-z0-9-]+)", self.page)
         self.assertEqual(len(refs), len(set(refs)), "refs are unique")
         self.assertEqual(sum(r.startswith("position/") for r in refs), len(pos))
-        self.assertEqual(sum(r.startswith("answer/") for r in refs), len(faq))
-        self.assertEqual({r for r in refs if r.startswith("fixed/")}, {"fixed/legal-help", "fixed/no-position", "fixed/cannot-answer", "fixed/unavailable", "fixed/ask-a-person", "fixed/share-chart", "fixed/welcome", "fixed/privacy-note"})
+        self.assertEqual(sum(r.startswith("answer/") for r in refs), len(faq) + 1, "the ready-made answers, and the no-position reply in Part 3")
+        self.assertEqual({r for r in refs if r.startswith("fixed/")}, {"fixed/legal-help", "fixed/cannot-answer", "fixed/unavailable", "fixed/ask-a-person", "fixed/share-chart", "fixed/welcome", "fixed/privacy-note"})
         self.assertEqual(self.page.count("☐ Approve"), len(refs) * 2, "two approve lines in every decision box")
 
     def test_a_position_is_shown_word_for_word_with_its_chart_and_figures(self):
@@ -66,42 +66,86 @@ class Rendered(unittest.TestCase):
 
 
 class Decisions(unittest.TestCase):
-    LINES = ["Ref: position/capital-gains-tax", "☐ Approve this position as written", "☒ Approve with the edits in Notes", "Reviewed by (name and date): Maria Lopez 2026-10-28",
-             "Notes (say what to change): drop the $55 million sentence", "Ref: position/minimum-wage", "☒ Approve this position as written", "Reviewed by (name and date): Kai Tanaka",
-             "Notes: ", "Ref: position/empty-homes-tax", "☒ Approve this position as written", "☒ Hold: not ready", "Reviewed by (name and date): Lee 2026-10-29",
-             "Ref: position/parking-mandates", "☒ Approve this position as written", "Reviewed by (name and date): ", "Ref: answer/mission", "☒ Approve this answer as written"]
+    """Reading decisions back, and applying only approvals of the exact words the reviewer saw."""
 
-    def test_decisions_are_read_by_ref(self):
-        d = sd.decisions(self.LINES)
+    def setUp(self):
+        import json as _json
+        import approval
+        import fixed
+        self.json, self.approval, self.fixed = _json, approval, fixed
+        self.tmp = Path(tempfile.mkdtemp(prefix="ha-signoff-"))
+        (self.tmp / "content").mkdir()
+        self.md = ("## Labor\n\n### Minimum wage\n<!-- status: draft -->\n<!-- url: /x -->\n\nText one.\n\n"
+                   "### Capital gains tax\n<!-- status: draft -->\n\nText two.\n\n### Empty homes tax (Honolulu)\n<!-- status: draft -->\n\nText three.\n\n"
+                   "### Parking mandates\n<!-- status: draft -->\n\nText four.\n")
+        (self.tmp / "content" / "positions.md").write_text(self.md, encoding="utf-8")
+        self.faq = {"_comment": "x", "entries": [{"id": "mission", "status": "draft", "variants": ["mission"], "answer": "Our mission. [1]", "sources": [{"title": "T", "url": "https://hiappleseed.org/a"}]}]}
+        (self.tmp / "content" / "faq.json").write_text(_json.dumps(self.faq), encoding="utf-8")
+        self.fixed_file = self.tmp / "content" / "fixed.json"
+        self.fixed_file.write_text(_json.dumps({"items": {"welcome": {"status": "draft"}}}), encoding="utf-8")
+        self.items = {"welcome": {"title": "Welcome", "why": "", "parts": ["Hello."]}}
+        self.h = {
+            "minimum": approval.position_hash("Minimum wage", "Text one."),
+            "capital": approval.position_hash("Capital gains tax", "Text two."),
+            "empty": approval.position_hash("Empty homes tax (Honolulu)", "Text three."),
+            "parking": approval.position_hash("Parking mandates", "Text four."),
+            "mission": approval.faq_hash("Our mission. [1]", ["https://hiappleseed.org/a"]),
+            "welcome": approval.fixed_hash(["Hello."]),
+        }
+
+    def lines(self, h=None):
+        h = h or self.h
+        return ["Ref: position/capital-gains-tax", f"Text: {h['capital']}", "☐ Approve this position as written", "☒ Approve with the edits in Notes", "Reviewed by (name and date): Maria Lopez 2026-10-28",
+                "Notes (say what to change): drop the $55 million sentence",
+                "Ref: position/minimum-wage", f"Text: {h['minimum']}", "☒ Approve this position as written", "Reviewed by (name and date): Kai Tanaka", "Notes: ",
+                "Ref: position/empty-homes-tax", f"Text: {h['empty']}", "☒ Approve this position as written", "☒ Hold: not ready", "Reviewed by (name and date): Lee 2026-10-29",
+                "Ref: position/parking-mandates", f"Text: {h['parking']}", "☒ Approve this position as written", "Reviewed by (name and date): ",
+                "Ref: answer/mission", f"Text: {h['mission']}", "☒ Approve this answer as written", "Reviewed by (name and date): Kai Tanaka 2026-10-30",
+                "Ref: fixed/welcome", f"Text: {h['welcome']}", "☒ Approve this text as written", "Reviewed by (name and date): Kai Tanaka"]
+
+    def apply(self, lines, write=True):
+        from unittest import mock
+        with mock.patch.object(sd, "HERE", self.tmp), mock.patch.object(self.fixed, "STATUS_FILE", self.fixed_file), mock.patch.object(self.fixed, "items", lambda root=None: self.items):
+            return sd.apply_approvals(sd.decisions(lines), write=write)
+
+    def test_decisions_are_read_by_ref_with_the_hash_of_the_words_seen(self):
+        d = sd.decisions(self.lines())
         self.assertEqual(d["position/capital-gains-tax"]["ticked"], ["Approve with the edits in Notes"])
         self.assertEqual(d["position/capital-gains-tax"]["by"], "Maria Lopez 2026-10-28")
+        self.assertEqual(d["position/capital-gains-tax"]["hash"], self.h["capital"])
         self.assertIn("drop the $55 million", d["position/capital-gains-tax"]["notes"])
-        self.assertEqual(d["position/minimum-wage"]["by"], "Kai Tanaka")
         self.assertEqual(len(d["position/empty-homes-tax"]["ticked"]), 2)
 
-    def test_only_a_clean_named_approve_as_written_is_applied(self):
-        tmp = Path(tempfile.mkdtemp(prefix="ha-signoff-"))
-        (tmp / "content").mkdir()
-        md = ("## Labor\n\n### Minimum wage\n<!-- status: draft -->\n<!-- url: /x -->\n\nText.\n\n"
-              "### Capital gains tax\n<!-- status: draft -->\n\nText.\n\n### Empty homes tax (Honolulu)\n<!-- status: draft -->\n\nText.\n\n"
-              "### Parking mandates\n<!-- status: draft -->\n\nText.\n")
-        (tmp / "content" / "positions.md").write_text(md, encoding="utf-8")
-        with mock.patch.object(sd, "HERE", tmp):
-            log = sd.apply_approvals(sd.decisions(self.LINES), write=True)
-            out = (tmp / "content" / "positions.md").read_text(encoding="utf-8")
-        self.assertIn("### Minimum wage\n<!-- status: approved by Kai Tanaka ", out)
-        self.assertIn("### Capital gains tax\n<!-- status: draft -->", out, "edits are for a person, not applied")
-        self.assertIn("### Empty homes tax (Honolulu)\n<!-- status: draft -->", out, "two boxes ticked: not applied")
-        self.assertIn("### Parking mandates\n<!-- status: draft -->", out, "no reviewer name: not applied")
+    def test_only_a_clean_named_approval_of_the_words_seen_is_applied_and_it_records_their_hash(self):
+        log = self.apply(self.lines())
+        pos = (self.tmp / "content" / "positions.md").read_text(encoding="utf-8")
+        self.assertIn(f"### Minimum wage\n<!-- status: approved by Kai Tanaka ", pos)
+        self.assertIn(f"<!-- reviewed: {self.h['minimum']} -->", pos)
+        self.assertIn("### Capital gains tax\n<!-- status: draft -->", pos, "edits are for a person, not applied")
+        self.assertIn("### Empty homes tax (Honolulu)\n<!-- status: draft -->", pos, "two boxes ticked: not applied")
+        self.assertIn("### Parking mandates\n<!-- status: draft -->", pos, "no reviewer name: not applied")
+        faq = self.json.loads((self.tmp / "content" / "faq.json").read_text(encoding="utf-8"))["entries"][0]
+        self.assertEqual((faq["status"], faq["reviewed"]), ("approved by Kai Tanaka 2026-10-30", self.h["mission"]))
+        fx = self.json.loads(self.fixed_file.read_text(encoding="utf-8"))["items"]["welcome"]
+        self.assertEqual(fx["reviewed"], self.h["welcome"])
         self.assertTrue(any("more than one box" in l for l in log) and any("no reviewer name" in l for l in log))
 
+    def test_words_that_changed_after_the_review_are_not_approved(self):
+        (self.tmp / "content" / "positions.md").write_text(self.md.replace("Text one.", "Text one, edited."), encoding="utf-8")
+        log = self.apply(self.lines())
+        self.assertTrue(any("minimum-wage" in l and "changed after this review" in l for l in log))
+        self.assertIn("### Minimum wage\n<!-- status: draft -->", (self.tmp / "content" / "positions.md").read_text(encoding="utf-8"))
+
+    def test_a_doc_that_predates_the_hashes_cannot_approve_anything(self):
+        lines = [l for l in self.lines() if not l.startswith("Text:")]
+        log = self.apply(lines)
+        self.assertTrue(all("no Text: line" in l or "for a person" in l or "more than one" in l or "no reviewer name" in l for l in log), log)
+        self.assertIn("draft", (self.tmp / "content" / "positions.md").read_text(encoding="utf-8"))
+
     def test_dry_run_changes_nothing(self):
-        tmp = Path(tempfile.mkdtemp(prefix="ha-signoff-"))
-        (tmp / "content").mkdir()
-        (tmp / "content" / "positions.md").write_text("### Minimum wage\n<!-- status: draft -->\n", encoding="utf-8")
-        with mock.patch.object(sd, "HERE", tmp):
-            sd.apply_approvals(sd.decisions(self.LINES), write=False)
-            self.assertIn("draft", (tmp / "content" / "positions.md").read_text(encoding="utf-8"))
+        self.apply(self.lines(), write=False)
+        self.assertEqual((self.tmp / "content" / "positions.md").read_text(encoding="utf-8"), self.md)
+        self.assertEqual(self.json.loads((self.tmp / "content" / "faq.json").read_text(encoding="utf-8")), self.faq)
 
 
 if __name__ == "__main__":

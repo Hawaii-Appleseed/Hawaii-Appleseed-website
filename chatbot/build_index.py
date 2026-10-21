@@ -66,6 +66,7 @@ sys.path.insert(0, str(WB))
 import sources  # noqa: E402  (writing-bot/sources.py: titles, URLs, stances)
 sys.path.insert(0, str(HERE))
 import figures as fg  # noqa: E402  (cross-checks the figures in positions.md against the published corpus)
+import approval  # noqa: E402  (approvals are of exact text)
 
 # ---------------------------------------------------------------- tokenizer
 # Keep in lockstep with worker/src/tokenize.js (tokenizer_vectors.json tests both).
@@ -132,7 +133,7 @@ def parse_sections(path: Path, group_level: int = 2, item_level: int = 3):
         research = [f"{BASE_URL}/publications/{x.strip()}" for x in meta.get("research", "").split(",") if x.strip()]
         graphics = [g.strip() for g in meta.get("graphic", "").split(",") if g.strip()]
         items.append({"group": group, "title": title, "text": body, "research": research, "aliases": aliases,
-                      "graphics": graphics, "url": _abs(meta.get("url")), "status": meta.get("status", "")})
+                      "graphics": graphics, "url": _abs(meta.get("url")), "status": meta.get("status", ""), "reviewed": meta.get("reviewed", "")})
     return items
 
 
@@ -230,6 +231,7 @@ def load_faq(core_urls: set[str], fact_text: str) -> list[dict]:
                 if m not in fact_text:
                     raise SystemExit(f"faq {i}: {m!r} is not in content/about.md or practical.md")
         out.append({"id": i, "variants": e["variants"], "answer": a, "graphic": e.get("graphic"),
+                    "status": e.get("status", "draft"), "reviewed": e.get("reviewed", ""), "hash": approval.faq_hash(a, [src["url"] for src in e["sources"]]),
                     "sources": [{"n": n, "title": src["title"], "url": src["url"], "year": None, "pdf": None} for n, src in enumerate(e["sources"], 1)]})
     return out
 
@@ -603,8 +605,9 @@ def build(public: bool) -> dict:
         for it in parse_sections(HERE / "content" / fname):
             if fname == "positions.md" and it["group"] != "Topics with no stated public position":
                 statuses.append((it["title"], it["status"] or "(none)"))
-                if public and not it["status"].startswith("approved"):
-                    skipped["position not approved (public build)"] += 1
+                ok, why = approval.judge(it["status"], it["reviewed"], approval.position_hash(it["title"], it["text"]))
+                if public and not ok:
+                    skipped[f"position {why} (public build)"] += 1
                     drafts.append(it)
                     continue
             it["src"] = fname
@@ -618,12 +621,21 @@ def build(public: bool) -> dict:
     catalog = pub_catalog()
     core += research_sections(catalog)
     facts = "\n".join(c["text"] for c in core if c.get("src") in ("about.md", "practical.md"))
-    faq = load_faq({c["url"] for c in core if c.get("src") in ("about.md", "practical.md") and c["url"]}, facts)
+    faq_all = load_faq({c["url"] for c in core if c.get("src") in ("about.md", "practical.md") and c["url"]}, facts)
+    faq = faq_all
+    if public:  # a ready-made answer ships only if staff approved these exact words; the question then goes to the model
+        faq = []
+        for e in faq_all:
+            ok, why = approval.judge(e["status"], e["reviewed"], e["hash"])
+            if ok:
+                faq.append(e)
+            else:
+                skipped[f"ready-made answer {why} (public build)"] += 1
     # Graphics are proven against ALL the position text (drafts included), so a bad graphic fails the pilot build too; a
     # public build then ships only the ones the approved text alone backs.
     prose = lambda items: "\n".join(c["text"] for c in items if c.get("src") in ("about.md", "practical.md", "positions.md"))
     everything = [c for c in core if c.get("src")] + [dict(d, src="positions.md", pos=True) for d in drafts]
-    wanted = {g for c in everything for g in c.get("graphics", [])} | {e["graphic"] for e in faq if e.get("graphic")}
+    wanted = {g for c in everything for g in c.get("graphics", [])} | {e["graphic"] for e in faq_all if e.get("graphic")}
     graphics = load_graphics({c["url"] for c in core + drafts if c["url"]}, catalog, prose(everything), wanted,
                              {c["title"] for c in everything if c.get("pos")},
                              public_text=prose(core) if public else None,
@@ -640,6 +652,7 @@ def build(public: bool) -> dict:
     for i, it in enumerate(core, 1):
         it["id"] = f"C{i}"
         it.pop("status", None)
+        it.pop("reviewed", None)
         it.pop("src", None)
         for u in it["research"]:
             if u not in catalog:
@@ -668,7 +681,7 @@ def build(public: bool) -> dict:
         "built": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "public": public,
         "core": core,
-        "faq": faq,
+        "faq": [{k: v for k, v in e.items() if k not in ("status", "reviewed", "hash")} for e in faq],
         "graphics": graphics,
         "session": {"covered": session_year()},
         "contact": contact_block(core),
@@ -687,6 +700,15 @@ def main() -> int:
     ap.add_argument("--strict", action="store_true",
                     help="exit 2 if a published report has no entry in content/topics.json or a position has an unexplained figure (the weekly corpus check)")
     a = ap.parse_args()
+    if a.public:
+        # The fixed replies and page text have no fallback (no model to hand them to), so a public build needs every one approved.
+        import fixed
+        bad = fixed.problems()
+        if bad:
+            print("A public build needs every fixed reply and page text approved (in the sign-off review, Part 3; content/fixed.json):", file=sys.stderr)
+            for line in bad:
+                print(f"  {line}", file=sys.stderr)
+            return 3
     idx = build(a.public)
     rep = idx.pop("_report")
     a.out.parent.mkdir(parents=True, exist_ok=True)
