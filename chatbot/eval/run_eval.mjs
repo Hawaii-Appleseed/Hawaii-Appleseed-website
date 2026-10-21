@@ -5,6 +5,9 @@
 //   node eval/run_eval.mjs --model claude-haiku-5-5   compare models
 //   node eval/run_eval.mjs --case legal       only cases whose id contains "legal"
 //   node eval/run_eval.mjs --show             print each live answer
+//   node eval/run_eval.mjs --cat org,position,outcome,nopos   only those categories (typical questions)
+//   node eval/run_eval.mjs --dry              no API call: builds every real prompt and ESTIMATES tokens and cost
+//                                             (chars/4, 260 output tokens); add --model to price a model
 //
 // Live runs spend credits: about 56 requests. The key comes from ANTHROPIC_API_KEY or ~/.anthropic_api_key.
 import { existsSync, readFileSync } from "node:fs";
@@ -18,12 +21,24 @@ const args = process.argv.slice(2);
 const flag = (n) => args.includes(`--${n}`);
 const opt = (n) => (args.includes(`--${n}`) ? args[args.indexOf(`--${n}`) + 1] : undefined);
 const offline = flag("offline");
+const dry = flag("dry");
 const only = opt("case");
 const model = opt("model");
 const here = new URL(".", import.meta.url);
 const index = JSON.parse(readFileSync(new URL("../worker/src/index.json", here), "utf8"));
 const cases = readFileSync(new URL("golden.jsonl", here), "utf8").trim().split("\n").map((l) => JSON.parse(l))
-  .filter((c) => !only || c.id.includes(only));
+  .filter((c) => !only || c.id.includes(only))
+  .filter((c) => !opt("cat") || opt("cat").split(",").includes(c.cat));
+
+// $ per million tokens, first-party list prices (API skill table, cached 2026-10-06; re-check before relying on them).
+// Cache reads are 0.1x input; cache writes use the 1-hour TTL the handler requests, 2x input.
+const PRICES = { "claude-sonnet-5-5": { in: 2, out: 10 }, "claude-haiku-5-5": { in: 0.1, out: 0.5 } };
+const priced = model ?? "claude-sonnet-5-5";
+function dollars(t) {
+  const p = PRICES[priced];
+  if (!p) return null;
+  return (t.in * p.in + t.cacheRead * p.in * 0.1 + t.cacheWrite * p.in * 2 + t.out * p.out) / 1e6;
+}
 
 const lc = (s) => s.toLowerCase();
 const has = (text, needle) => lc(text).includes(lc(needle));
@@ -82,7 +97,23 @@ function checkLive(c, body) {
 }
 
 let client;
-if (!offline) {
+let calls = 0, firstCallCost = null;
+if (dry) {
+  // Stand-in for the SDK: estimates usage from the real request, and models the 1-hour prompt cache
+  // (the first call writes the cached system block, later calls read it).
+  let cached = false;
+  client = {
+    messages: {
+      async create(params) {
+        const cacheable = Math.round(params.system[0].text.length / 4);
+        const rest = Math.round((params.system[1].text.length + params.messages.reduce((n, m) => n + m.content.length, 0)) / 4);
+        const usage = { input_tokens: rest, output_tokens: 260, cache_read_input_tokens: cached ? cacheable : 0, cache_creation_input_tokens: cached ? 0 : cacheable };
+        cached = true;
+        return { stop_reason: "end_turn", usage, content: [{ type: "text", text: "dry run" }] };
+      },
+    },
+  };
+} else if (!offline && !dry) {
   const key = process.env.ANTHROPIC_API_KEY ?? (existsSync(`${homedir()}/.anthropic_api_key`) ? readFileSync(`${homedir()}/.anthropic_api_key`, "utf8").trim() : null);
   if (!key) { console.error("No API key. Use --offline, or put a key in ~/.anthropic_api_key."); process.exit(2); }
   // Resolved from worker/node_modules: this folder has no package.json of its own.
@@ -102,13 +133,17 @@ async function run(c) {
   const r = await handleChat({ messages: [{ role: "user", content: c.q }], index, client, env: { MODEL: model } });
   console.log = quiet;
   const u = r.usage ?? {};
+  if (r.usage) {
+    calls++;
+    if (calls === 1) firstCallCost = dollars({ in: u.input_tokens ?? 0, out: u.output_tokens ?? 0, cacheRead: u.cache_read_input_tokens ?? 0, cacheWrite: u.cache_creation_input_tokens ?? 0 });
+  }
   tokens.in += u.input_tokens ?? 0; tokens.out += u.output_tokens ?? 0;
   tokens.cacheRead += u.cache_read_input_tokens ?? 0; tokens.cacheWrite += u.cache_creation_input_tokens ?? 0;
-  const fails = r.status === 200 ? checkLive(c, r.body) : [`HTTP ${r.status}`];
+  const fails = dry ? [] : r.status === 200 ? checkLive(c, r.body) : [`HTTP ${r.status}`];
   return { c, fails, answer: r.body.answer };
 }
 
-const pool = offline ? 1 : 3;
+const pool = 1; // one at a time: the prompt-cache cold/warm split in the cost line only means something sequentially
 const queue = [...cases];
 await Promise.all(Array.from({ length: pool }, async () => {
   for (let c; (c = queue.shift()); ) results.push(await run(c));
@@ -125,7 +160,14 @@ for (const { c, fails, answer, skipped: sk } of results) {
   if (fails.length) console.log(`FAIL ${c.id}: ${fails.join("; ")}${answer ? `\n     > ${answer.slice(0, 220).replace(/\n/g, " ")}` : ""}`);
   else if (flag("show")) console.log(`ok   ${c.id}\n     > ${(answer ?? "").slice(0, 300).replace(/\n/g, " ")}`);
 }
-console.log(`\n${offline ? "OFFLINE (gate + retrieval)" : `LIVE ${model ?? "default model"}`}: ${results.length - skipped - failed} passed, ${failed} failed${skipped ? `, ${skipped} not applicable offline` : ""}`);
+console.log(dry ? `\nDRY RUN, ESTIMATED (${priced}): ${results.length - skipped} questions priced, nothing graded` : `\n${offline ? "OFFLINE (gate + retrieval)" : dry ? `DRY RUN, ESTIMATED (${priced})` : `LIVE ${model ?? "default model"}`}: ${results.length - skipped - failed} passed, ${failed} failed${skipped ? `, ${skipped} not applicable offline` : ""}`);
 for (const [k, v] of Object.entries(byCat)) console.log(`  ${k.padEnd(11)} ${v.pass}/${v.total}`);
-if (!offline) console.log(`tokens: ${tokens.in} in (${tokens.cacheRead} cache-read, ${tokens.cacheWrite} cache-write), ${tokens.out} out`);
+if (!offline) {
+  console.log(`tokens: ${tokens.in} in (${tokens.cacheRead} cache-read, ${tokens.cacheWrite} cache-write), ${tokens.out} out`);
+  const total = dollars(tokens);
+  if (total != null && calls) {
+    const warm = calls > 1 ? (total - firstCallCost) / (calls - 1) : total;
+    console.log(`cost (${priced}${dry ? ", estimated" : ""}): $${total.toFixed(4)} over ${calls} model calls | first call (cache cold) $${firstCallCost.toFixed(4)} | later calls avg $${warm.toFixed(4)} | per 1,000 questions at warm rate $${(warm * 1000).toFixed(2)}`);
+  }
+}
 process.exit(failed ? 1 : 0);
