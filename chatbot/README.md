@@ -18,7 +18,9 @@ widget (index.html, on hiappleseed.org)
       5. cleanup: [C12]/[2] markers → numbered links we built; raw URLs stripped;
          a [[LEGAL]] reply from the model becomes the same fixed text
       6. research links (research.js): sources get year + PDF; "Related research" is added
-  ← { answer, sources[], related[], flags }
+      7. graphics (graphics.js): a position or ready-made answer brings its graphic; a question that asks
+         for a chart finds one by name; a [[graphic: id]] marker from the model is checked and stripped
+  ← { answer, sources[], related[], graphics[], flags }
 ```
 
 | Path | What it is |
@@ -28,6 +30,7 @@ widget (index.html, on hiappleseed.org)
 | `vendor.py` | Copies the few files the assistant reads from the rest of the website repo into `vendor/` (see *Vendoring* below). |
 | `check_links.py` | Fetches every link the assistant can show (pages, reports, PDFs) and reports any that fail. Run before each deploy. |
 | `content/faq.json` | Ready-made answers to the 23 questions asked most (mission, history, leadership, how to give, contact, jobs, ...). The quickest file for staff to review. |
+| `content/graphics.json` | The explainer graphics (see *Graphics* below). Every figure carries a quoted proof from the approved text; the build fails without it. |
 | `content/topics.json` | Which issue area(s) each report belongs to; drives "latest research" and "research on housing". |
 | `content/positions.md` | Public positions, each tagged `<!-- status: draft -->` or `approved by …`. |
 | `build_index.py` | Builds `worker/src/index.json` (core text + BM25 index over publications, blog, testimony). Generates the bill-outcomes section from `tax-fairness/data/bill-status.json`. |
@@ -35,8 +38,9 @@ widget (index.html, on hiappleseed.org)
 | `index.html` | The embeddable widget (own wrapper, tokens only, DOM-built rendering). |
 | `build_embed.py` | Builds the widget into one self-contained, ASCII-only file (`dist/embed.html`) with the design tokens and ʻokina fonts inlined, and the Worker URL and Turnstile key written in. Works with no website repo. |
 | `squarespace-inject.html` | The same widget built by the website repo's `scripts/squarespace.py` (the `--go` publish route). Only used while `chatbot/` sits inside the website repo. |
+| `worker/src/graphics.js` | Chooses which graphic (if any) goes under an answer. |
 | `worker/src/research.js` | Picks the "Related research" list shown under each answer (see below). |
-| `eval/` | `golden.jsonl` (82 cases, including multi-turn follow-ups) + `run_eval.mjs`. |
+| `eval/` | `golden.jsonl` (137 cases, including multi-turn follow-ups) + `run_eval.mjs`. |
 | `tokenizer_vectors.json` | Shared test vectors keeping the Python and JS tokenizers identical. |
 
 ## Run it locally
@@ -104,6 +108,24 @@ A question with a second question inside it ("... and what happened in 2026?"), 
 **How it did on wording it had not seen.** Two fresh sets: 73% and 50% of position questions got their position directly on the first try (the rest went to the model, which is safe), with **no wrong position and no wrong deferral** in either set; every uncertain topic reached the model. Both Sonnet and Haiku, run on the uncertain topics (stadium, bitcoin, gun control, school vouchers, charter schools, the death penalty), said there was no stated position and did not mistake passing mentions for one; on topics our work does cover but no position names (vaping taxes, rent control), they reported what the publication argues. After adding every miss as an alias or pattern both sets match nearly fully, which says nothing about the next set: expect to add aliases as real questions arrive.
 
 **When our work says it but no position does.** Two topics found this way, now positions (status `draft`): rent control (the 2026 blog "Unburden the burdened") and vaping and tobacco taxes (*Policy in Perspective 2022*). The positions file also now records the estate tax breaks stance, which an earlier version wrongly listed as "no stated position". When staff see the model reporting a publication's argument on a topic that deserves a position, promote it: add a section and its aliases.
+
+## Graphics
+
+The assistant shows small, plain charts under an answer when one explains the point better than words: where conveyance tax revenue would go, how a marginal rate works, capital gains versus ordinary income, REITs, the empty homes tax, the school meals income cliff, where Hawaiʻi's transportation money goes, the pay gap, the minimum wage law, the 2026 bill scoreboard, and a history timeline. Each has a **Show the numbers** table and links its source.
+
+**The model never draws anything.** It cannot write a number onto a chart or send markup. The library is `content/graphics.json`, plain data. A graphic reaches the page three ways:
+
+1. **A position or ready-made answer brings its own** (`<!-- graphic: id -->` in `positions.md`; `"graphic"` in `faq.json`). "What's your stance on the conveyance tax?" shows the revenue split; "When was Hawaiʻi Appleseed founded?" shows the timeline. No model, no cost.
+2. **A question that asks for a picture.** "Show me a chart of the empty homes tax revenue", "explain how marginal rates work". Each graphic lists `aliases`; all of one alias's words must be in the question, and the question must ask to see or have something explained (chart, graphic, diagram, visualize, explain, show me, timeline), except the two that go with their topic by themselves (`"auto": true`: the 2026 scoreboard and the history timeline). Aliases are two topic words at least, so "a timeline of the conveyance tax" does not pull up the organization's history.
+3. **The model names one.** The system prompt lists the available graphics; the model can end its answer with `[[graphic: id]]`. The Worker strips the marker, drops any id not in the library, and keeps it only if the answer says at least one of the graphic's figures. At most two graphics per answer.
+
+**Every number is traceable.** `build_index.py` refuses to build unless each row of a graphic quotes the phrase(s) from `about.md`, `practical.md` or `positions.md` it rests on (word for word), every number the row shows is in that quote, a bar's label says its value, the title, unit and note use only numbers from the graphic's own quotes, the source is a real page or report, and aliases belong to one graphic. The one made-up graphic, the marginal-rate illustration, is computed at build time so its total cannot disagree with its parts, is labeled **Illustration** with a note that the numbers are made-up and not HB2049's rates, and only ships if the conveyance position does.
+
+**Public build.** A `--public` build checks each graphic against the approved text alone and leaves out any that rests on a draft position (today that is everything except the history timeline). Approving a position brings its graphics with it, with no other change.
+
+The page draws bars, stat tiles, timelines, and the scoreboard from the data (`index.html`, `drawGraphic`), setting text only and bar widths: bars use the chart tokens (teal, ash for context), one series one color, thin with a rounded data end, every value printed on its bar, and the same numbers in a table. Verified at 375px and desktop.
+
+To add a graphic: add it to `content/graphics.json` with proofs, run `python3 chatbot/build_index.py`, and add a golden case (`eval/golden.jsonl`, category `graphic`).
 
 ## Research links
 

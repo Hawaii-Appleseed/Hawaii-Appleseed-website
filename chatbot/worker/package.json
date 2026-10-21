@@ -7,7 +7,7 @@
     "index": "python3 ../build_index.py",
     "index:public": "python3 ../build_index.py --public",
     "pretest": "python3 ../build_index.py && npm run widget",
-    "test": "node --test test/unit.test.mjs test/budget.test.mjs test/access.test.mjs test/feedback.test.mjs test/canned.test.mjs test/stance.test.mjs",
+    "test": "node --test test/unit.test.mjs test/budget.test.mjs test/access.test.mjs test/feedback.test.mjs test/canned.test.mjs test/stance.test.mjs test/graphics.test.mjs",
     "dev": "node dev-server.mjs",
     "dev:mock": "node dev-server.mjs --mock",
     "eval": "node ../eval/run_eval.mjs",

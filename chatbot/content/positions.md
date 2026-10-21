@@ -17,6 +17,7 @@ Hawaiʻi Appleseed strongly supports establishing a state paid family and medica
 <!-- status: draft -->
 <!-- url: /wages-labor -->
 <!-- aliases: pay transparency; pay equity; equal pay; salary transparency; wage transparency -->
+<!-- graphic: pay-gap -->
 
 Hawaiʻi Appleseed strongly supports closing the small-employer carve-out in pay transparency law, and in 2026 supported HB2367, which would eliminate the exemption for employers with fewer than 50 employees. Hawaiʻi women earn between 82.4 and 87 percent of what men earn, backsliding from 92.8 percent in 2014. With equal pay, overall poverty would fall from 5.4 percent to 2.5 percent, and single-mother poverty from 21.3 percent to 10.7 percent. Transparency is the precondition for accountability, so Hawaiʻi Appleseed asks that pay transparency apply to all employers.
 
@@ -25,6 +26,7 @@ Hawaiʻi Appleseed strongly supports closing the small-employer carve-out in pay
 <!-- url: /our-history -->
 <!-- research: high-cost-low-wages, policy-in-perspective-2022 -->
 <!-- aliases: minimum wage; minimum wage indexing; indexing the minimum wage; indexed minimum wage; living wage; minimum wage inflation; indexing the minimum wage to inflation; minimum wage cost of living -->
+<!-- graphic: minimum-wage -->
 
 Hawaiʻi Appleseed advocated for the 2022 law that phases the minimum wage up from $10.10 to $18 an hour, which is estimated to deliver $1 billion in additional wages each year to more than 200,000 workers. The Issues page notes that the floor still falls short of basic costs once illness or caregiving forces a missed paycheck. It also supports indexing the minimum wage: its 2023 report "The High Cost of Low Wages" argues that tying the wage to inflation or the consumer price index avoids the stagnation that follows each legislative increase, and "Policy in Perspective 2024" lists an indexed minimum wage that adjusts automatically to inflation among the measures that would help working families afford Hawaiʻi.
 
@@ -42,6 +44,7 @@ Hawaiʻi Appleseed strongly supports state bridge coverage as federal Medicaid i
 <!-- url: /taxes-budget -->
 <!-- research: closing-capital-gains-loophole, concentrating-wealth, fair-tax-code-thriving-hawaii -->
 <!-- aliases: capital gains; capital gains tax; tax on investment income; taxing investment income -->
+<!-- graphic: capital-gains-rates -->
 
 Hawaiʻi Appleseed supports raising the capital gains rate, with the ultimate goal of equalizing it with the ordinary income rate of 11 percent. In 2026 it supported HB1850, a raise to 9 percent as a step toward equalization. Hawaiʻi taxes capital gains at 7.25 percent versus 11 percent for ordinary income, a loophole that benefits the wealthy. About 70 percent of Hawaiʻi capital gains go to filers with more than $400,000 in income, and the rate mainly affects those above $783,000. The raise would generate about $55 million. 2026 outcome: the capital gains proposals did not pass. HB1850 stalled in the Senate Committee on Ways & Means, and Policy in Perspective 2026 reports that bold proposals to close the capital gains loophole did not cross the finish line.
 
@@ -50,6 +53,7 @@ Hawaiʻi Appleseed supports raising the capital gains rate, with the ultimate go
 <!-- url: /taxes-budget -->
 <!-- research: fair-tax-code-thriving-hawaii, policy-perspective-2026 -->
 <!-- aliases: reit; reits; real estate investment trust; real estate investment trusts; reit loophole -->
+<!-- graphic: reit-stats -->
 
 Hawaiʻi Appleseed supports actually taxing REITs rather than commissioning another study. In 2026 it supported SB2362 but asked that it be amended from a study to a tax. Hawaiʻi exempts REIT income even though REITs hold more than $17 billion in Hawaiʻi assets; in 2014, REITs reported $900 million in Hawaiʻi income and paid $0 in state corporate income tax. 2026 outcome: Policy in Perspective 2026 reports that proposals to close corporate tax loopholes did not cross the finish line, and SB2362 had been changed from a tax to a study.
 
@@ -81,6 +85,7 @@ Hawaiʻi Appleseed strongly supports state-funded medical debt acquisition and f
 <!-- url: /taxes-budget -->
 <!-- research: preserving-hawaii, policy-perspective-2026 -->
 <!-- aliases: conveyance tax; conveyance tax reform -->
+<!-- graphic: conveyance-allocation -->
 
 Hawaiʻi Appleseed strongly supports a marginal-rate conveyance tax with a progressive rate structure and dedicated revenue, and in 2026 supported HB2049. The conveyance tax has not been updated since 2009. The proposal protects owner-occupied homes under $2.2 million, raises rates on high-value investment properties, and indexes to inflation. Revenue would be dedicated to affordable housing (20 percent), the Department of Hawaiian Home Lands (30 percent), DURF (20 percent), and conservation (5 percent). Hawaiʻi needs more than 50,000 housing units, and the DHHL waitlist is 6,000 families with an $800 million backlog. Hawaiʻi Appleseed's framing is that those who profit most from our islands also invest most in their future, and that housing should come ahead of handcuffs, contrasting a $300 million prison budget with $185 million for DHHL. 2026 outcome: HB2049 was deferred by the Senate Committee on Ways & Means, and SB3028, which would have given DHHL up to $60 million a year, died in conference committee, according to Policy in Perspective 2026.
 
@@ -114,6 +119,7 @@ Hawaiʻi Appleseed argues that rental vouchers, not rent control, are the better
 <!-- url: /affordable-housing -->
 <!-- research: empty-homes-tax-honolulu -->
 <!-- aliases: empty homes tax; empty home tax; vacant homes tax; vacancy tax; tax on vacant homes; tax on empty homes; eht; vacant properties tax; tax on vacant properties; vacant property tax; tax on vacant homes in honolulu -->
+<!-- graphic: eht-revenue -->
 
 Hawaiʻi Appleseed recommends that the City & County of Honolulu adopt an empty homes tax to discourage speculative investment and raise revenue for city services. Its 2024 report, "Homes Without Residents," estimates that about 35,000 units sit empty across Honolulu, and that more than six in 10 Honolulu renters spend at least 30 percent of their income on housing. It recommends a flat tax of 3 to 5 percent, modeled on Vancouver's tax, which funds affordable housing; a mandatory annual declaration of occupancy status; limited exemptions (new units until the developer sells them, medical reasons, natural disasters, construction or renovation, and homes rented to long-term tenants); penalties for late or false declarations; and funding for administration. The report estimates that a 3 percent tax would raise about $183.4 million a year and a 5 percent tax about $305.67 million. At the time, the City Council was considering Bill 46 (2024), a 3 percent tax on properties vacant more than six months a year. The bill's final status has not been checked.
 
@@ -140,6 +146,7 @@ Hawaiʻi Appleseed supports strengthening the Working Families Tax Credit (WCTC)
 <!-- url: /food-equity -->
 <!-- research: equity-on-the-menu, feed-our-keiki, policy-perspective-2026 -->
 <!-- aliases: school meals; free school meals; universal school meals; school lunch; free school lunch; school breakfast -->
+<!-- graphic: school-meals-cliff -->
 
 Hawaiʻi Appleseed strongly supports universal free school meals. In 2026 it supported HB1779, universal meals by 2030, and HB2296, removing the revenue-requirement obstacle. Its framing is that school meals are essential school supplies. Three in 10 households with children face food insecurity. The means-tested system fails: a family of four earning $47,000 or more does not qualify, even though about $107,000 is needed to cover living costs in Hawaiʻi, and 34 percent of denied students are actually eligible but fall through the paperwork. For some keiki, school meals are the only balanced meals they receive. Hawaiʻi charter schools serve 14 percent more Native Hawaiian students than DOE schools and many incorporate local and canoe crops, so universal coverage matters for cultural reasons too. Hawaiʻi Appleseed opposes phase-ins that delay implementation past 2030. 2026 outcome: Policy in Perspective 2026 reports that lawmakers did not fund an expansion of free school meals to all students by 2030, and HB1779 did not advance past the Senate Committee on Education referral. HB2296 was signed into law (Act 236, July 13, 2026) and lowers the required charge for school meals from half to one-quarter of production cost, which the report called a small but significant win. Free school meals had already been expanded in 2025 under Act 139.
 
@@ -158,6 +165,7 @@ Hawaiʻi Appleseed strongly supports extending SNAP certification and adopting t
 <!-- url: /transportation-equity -->
 <!-- research: keiki-ride-free, policy-perspective-2026 -->
 <!-- aliases: fare free transit; free transit; free buses; free bus; keiki ride free; youth ride free; free public transit; free bus rides; free bus rides for kids; free rides for kids; free transit for youth -->
+<!-- graphic: transit-budget -->
 
 Hawaiʻi Appleseed supports fare-free transit for keiki and for state employees, and pursuit of universal fare-free transit. In 2026 it supported HB1879 (Keiki Ride Free, $9.87 million a year), SB2993 (state employees), and HB2451 (all users). Removing cost barriers expands youth and disability access. Maui has fare-free service for riders under 24 and Hawaiʻi County is fully fare-free; Washington state offers free transit under 18, and Kansas City saw ridership surge after going fare-free. Sixty-six percent of HDOT's $5.68 billion (FY19–24) went to vehicle capacity and only 1.5 percent to transit alternatives; Keiki Ride Free is 0.87 percent of the five-year budget. The work is tied to Navahine v. HDOT and the 2045 decarbonization mandate. 2026 outcome: Policy in Perspective 2026 reports that Keiki Ride Free (HB1879), subsidized transit for state employees (SB2993), and free transit for all (HB2451) were killed or failed to advance in 2026.
 

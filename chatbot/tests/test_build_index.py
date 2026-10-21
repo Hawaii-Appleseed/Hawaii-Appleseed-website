@@ -251,6 +251,110 @@ class ReadyMadeAnswers(unittest.TestCase):
         self.assertEqual(len(self._build_with(lambda es: None)), len(self.idx["faq"]))
 
 
+class Graphics(unittest.TestCase):
+    """content/graphics.json is drawn by the page with no model checking it, so the build is the checker: every figure
+    has to be in the organization's approved text, or the graphic has to say it is a made-up illustration."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.idx = b.build(public=False)
+        cls.path = HERE / "content" / "graphics.json"
+        cls.catalog = b.pub_catalog()
+        cls.vetted = "\n".join((HERE / "content" / f).read_text(encoding="utf-8") for f in ("about.md", "practical.md", "positions.md"))
+        cls.urls = {c["url"] for c in cls.idx["core"] if c["url"]}
+        cls.titles = {c["title"] for c in cls.idx["core"] if c.get("pos")}
+        cls.about = "\n".join((HERE / "content" / f).read_text(encoding="utf-8") for f in ("about.md", "practical.md"))
+
+    def _load(self, mutate, wanted=(), **kw):
+        import tempfile
+        from unittest import mock
+        d = json.loads(self.path.read_text(encoding="utf-8"))
+        mutate(d["graphics"])
+        tmp = Path(tempfile.mkdtemp(prefix="ha-gfx-"))
+        (tmp / "content").mkdir()
+        (tmp / "content" / "graphics.json").write_text(json.dumps(d), encoding="utf-8")
+        with mock.patch.object(b, "HERE", tmp):
+            return b.load_graphics(self.urls, self.catalog, self.vetted, set(wanted), self.titles, **kw)
+
+    def _g(self, gs, gid):
+        return next(g for g in gs if g["id"] == gid)
+
+    def test_built_into_the_index_clean_of_proofs_and_attached_to_positions(self):
+        ids = {g["id"] for g in self.idx["graphics"]}
+        self.assertGreaterEqual(len(ids), 11)
+        for g in self.idx["graphics"]:
+            self.assertNotIn("proof", json.dumps(g), g["id"])
+            self.assertTrue(g["source"]["url"].startswith("https://hiappleseed.org/"), g["id"])
+        for c in self.idx["core"]:
+            for gid in c.get("graphics", []):
+                self.assertIn(gid, ids, c["title"])
+        self.assertTrue(any(c.get("graphics") for c in self.idx["core"] if c["title"] == "Conveyance tax modernization"))
+
+    def test_the_marginal_illustration_is_computed_and_labeled_made_up(self):
+        g = self._g(self.idx["graphics"], "marginal-illustration")
+        self.assertTrue(g["illustration"])
+        self.assertIn("made-up", g["note"])
+        vals = [r["value"] for r in g["rows"]]
+        self.assertEqual(vals[:3], [5000, 10000, 10000])
+        self.assertEqual(vals[3], sum(vals[:3]))          # the total is the parts
+        self.assertEqual(vals[4], 50000)                  # the top rate on the whole price
+
+    def test_every_graphic_as_shipped_passes(self):
+        self.assertEqual(len(self._load(lambda gs: None)), len(self.idx["graphics"]))
+
+    def test_a_number_that_is_not_in_the_approved_text_breaks_the_build(self):
+        def row(gs): self._g(gs, "pay-gap")["items"][0]["label"] += " in 2031"
+        def note(gs): self._g(gs, "eht-revenue")["note"] = "About 41,000 units sit empty."
+        for t in (row, note):
+            with self.assertRaises(SystemExit, msg=t.__name__):
+                self._load(t)
+
+    def test_a_label_that_disagrees_with_its_bar_or_its_proof_breaks_the_build(self):
+        def value(gs): self._g(gs, "conveyance-allocation")["rows"][0]["value"] = 35
+        def display(gs): self._g(gs, "capital-gains-rates")["rows"][2]["display"] = "8%"
+        def proof(gs): self._g(gs, "reit-stats")["items"][0]["proof"] = "more than $20 billion in Hawaiʻi assets"
+        for t in (value, display, proof):
+            with self.assertRaises(SystemExit, msg=t.__name__):
+                self._load(t)
+
+    def test_a_spelled_out_number_in_our_text_counts(self):
+        # "Sixty-six percent of HDOT's $5.68 billion" proves a bar labeled 66%
+        self._load(lambda gs: None)
+        self.assertEqual(b._nums("Sixty-six percent, twenty, $1,000, 7.25"), {"66", "20", "1000", "7.25"})
+
+    def test_an_illustration_must_say_so_and_only_illustrations_may_be_computed(self):
+        def unlabeled(gs): self._g(gs, "marginal-illustration")["note"] = "An example for a $2.5 million sale."
+        def not_illustration(gs): self._g(gs, "marginal-illustration").pop("illustration")
+        def wrong_end(gs): self._g(gs, "marginal-illustration")["price"] = 3000000
+        for t in (unlabeled, not_illustration, wrong_end):
+            with self.assertRaises(SystemExit, msg=t.__name__):
+                self._load(t)
+
+    def test_sources_aliases_types_and_attachments_are_checked(self):
+        def source(gs): self._g(gs, "pay-gap")["source"]["url"] = "https://example.com/pay"
+        def general(gs): self._g(gs, "pay-gap")["aliases"].append("history")
+        def shared(gs): self._g(gs, "reit-stats")["aliases"].append("pay gap")
+        def kind(gs): self._g(gs, "pay-gap")["type"] = "pie"
+        def dup(gs): gs.append(dict(self._g(gs, "pay-gap")))
+        for t in (source, general, shared, kind, dup):
+            with self.assertRaises(SystemExit, msg=t.__name__):
+                self._load(t)
+        with self.assertRaises(SystemExit):
+            self._load(lambda gs: None, wanted={"no-such-graphic"})
+
+    def test_the_public_build_ships_only_graphics_the_approved_text_backs(self):
+        pub = b.build(public=True)  # no position is approved yet: only the history timeline rests on about.md alone
+        self.assertEqual({g["id"] for g in pub["graphics"]}, {"appleseed-history"})
+        self.assertTrue(any(e.get("graphic") for e in pub["faq"]))
+        # approve every position: now each graphic's figures are in approved text, so all of them ship
+        every = self._load(lambda gs: None, public_text=self.vetted, public_titles=self.titles)
+        self.assertEqual(len(every), len(self.idx["graphics"]))
+        # approve one position's worth of text: only what that text backs (and the history) ships
+        some = self._load(lambda gs: None, public_text=self.about + "\n" + next(c["text"] for c in self.idx["core"] if c["title"] == "Empty homes tax (Honolulu)"),
+                          public_titles={"Empty homes tax (Honolulu)"})
+        self.assertEqual({g["id"] for g in some}, {"appleseed-history", "eht-revenue"})
+
+
 class PositionAliases(unittest.TestCase):
     """Aliases are how a visitor's "where do you stand on X" finds a position, so they must be clean."""
 

@@ -86,10 +86,55 @@
   #ha-ask .ha-ask__note { font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); margin: var(--ha-space-sm) 0 0; }
   #ha-ask .ha-ask__note a { color: var(--ha-teal-ink); }
   #ha-ask .ha-ask__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Explainer graphics: drawn here from plain data the server sends (never markup), in chart tokens, one series one colour. */
+  #ha-ask .ha-ask__bubble--wide { width: 92%; }
+  #ha-ask .ha-ask__gfx { margin: var(--ha-space-xs) 0 0; padding: var(--ha-space-sm); background: var(--ha-white); border: 1px solid var(--ha-rule); border-radius: var(--ha-radius-card); }
+  #ha-ask .ha-ask__gfx-title { font-family: var(--ha-font-display); font-size: var(--ha-fs-small); font-weight: 700; line-height: var(--ha-lh-snug); letter-spacing: var(--ha-track-tight); color: var(--ha-charcoal); margin: 0 0 var(--ha-space-2xs); }
+  #ha-ask .ha-ask__gfx-tag { display: inline-block; font-size: var(--ha-fs-micro); letter-spacing: var(--ha-track-button); text-transform: uppercase; color: var(--ha-teal-ink); border: 1px dashed var(--ha-teal-deep); border-radius: var(--ha-radius-pill); padding: 0 var(--ha-space-2xs); margin-left: var(--ha-space-2xs); vertical-align: middle; white-space: nowrap; }
+  #ha-ask .ha-ask__bubble .ha-ask__gfx-unit { font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); margin: calc(var(--ha-space-3xs) * -1) 0 var(--ha-space-xs); }
+  #ha-ask .ha-ask__bubble .ha-ask__gfx-note { font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); margin: var(--ha-space-xs) 0 0; }
+  #ha-ask .ha-ask__bubble .ha-ask__gfx-src { font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); margin: var(--ha-space-2xs) 0 0; padding-top: var(--ha-space-2xs); border-top: 1px solid var(--ha-rule); }
+  #ha-ask .ha-ask__gfx-src a { color: var(--ha-teal-ink); text-decoration: underline; }
+  #ha-ask .ha-ask__bubble .ha-ask__bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--ha-space-xs); }
+  #ha-ask .ha-ask__bubble .ha-ask__brow { margin: 0; }
+  #ha-ask .ha-ask__bhead { display: flex; justify-content: space-between; align-items: baseline; gap: var(--ha-space-xs); margin: 0 0 var(--ha-space-3xs); }
+  #ha-ask .ha-ask__bubble .ha-ask__blabel { font-size: var(--ha-fs-caption); line-height: var(--ha-lh-snug); color: var(--ha-charcoal); margin: 0; }
+  #ha-ask .ha-ask__btrack { width: 100%; }
+  #ha-ask .ha-ask__bfill { height: var(--ha-space-sm); min-width: 2px; background: var(--ha-chart-cat-1); border-radius: 0 var(--ha-space-3xs) var(--ha-space-3xs) 0; }
+  #ha-ask .ha-ask__bfill--muted { background: var(--ha-chart-muted); box-shadow: inset 0 0 0 1px var(--ha-ink-subtle); }
+  #ha-ask .ha-ask__bval { flex: 0 0 auto; font-size: var(--ha-fs-small); font-weight: 700; font-variant-numeric: tabular-nums; color: var(--ha-charcoal); text-align: right; }
+  #ha-ask .ha-ask__gfx-tbl { margin: var(--ha-space-xs) 0 0; font-size: var(--ha-fs-caption); color: var(--ha-ink-subtle); }
+  #ha-ask .ha-ask__gfx-tbl summary { cursor: pointer; color: var(--ha-teal-ink); }
+  #ha-ask .ha-ask__gfx-tbl table { width: 100%; border-collapse: collapse; margin: var(--ha-space-2xs) 0 0; }
+  #ha-ask .ha-ask__gfx-tbl th, #ha-ask .ha-ask__gfx-tbl td { text-align: left; padding: var(--ha-space-3xs) var(--ha-space-2xs) var(--ha-space-3xs) 0; border-top: 1px solid var(--ha-rule); font-weight: 400; vertical-align: top; color: var(--ha-charcoal); }
+  #ha-ask .ha-ask__gfx-tbl thead th { color: var(--ha-ink-subtle); }
+  #ha-ask .ha-ask__bubble .ha-ask__stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); gap: var(--ha-space-xs) var(--ha-space-sm); }
+  #ha-ask .ha-ask__bubble .ha-ask__stat { margin: 0; padding: 0 0 0 var(--ha-space-xs); border-left: 4px solid var(--ha-chart-cat-1); }
+  #ha-ask .ha-ask__stat-n { display: block; font-family: var(--ha-font-display); font-size: var(--ha-fs-stat-sm); font-weight: 800; line-height: var(--ha-lh-snug); color: var(--ha-charcoal); overflow-wrap: anywhere; }
+  #ha-ask .ha-ask__stat-l { display: block; font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); }
+  #ha-ask .ha-ask__bubble .ha-ask__tl { list-style: none; margin: 0; padding: 0 0 0 var(--ha-space-sm); border-left: 2px solid var(--ha-teal-deep); }
+  #ha-ask .ha-ask__bubble .ha-ask__tl li { position: relative; margin: 0 0 var(--ha-space-xs); }
+  #ha-ask .ha-ask__bubble .ha-ask__tl li:last-child { margin-bottom: 0; }
+  #ha-ask .ha-ask__tl li::before { content: ""; position: absolute; left: calc(var(--ha-space-sm) * -1 - 6px); top: var(--ha-space-3xs); width: var(--ha-space-2xs); height: var(--ha-space-2xs); border-radius: var(--ha-radius-pill); background: var(--ha-teal-deep); box-shadow: 0 0 0 2px var(--ha-white); }
+  #ha-ask .ha-ask__tl-when { display: block; font-family: var(--ha-font-display); font-size: var(--ha-fs-caption); font-weight: 800; letter-spacing: var(--ha-track-tight); color: var(--ha-teal-ink); }
+  #ha-ask .ha-ask__tl-what { display: block; font-size: var(--ha-fs-small); line-height: var(--ha-lh-small); color: var(--ha-charcoal); }
+  #ha-ask .ha-ask__bubble .ha-ask__sbsum { font-size: var(--ha-fs-caption); color: var(--ha-ink-subtle); margin: 0 0 var(--ha-space-xs); }
+  #ha-ask .ha-ask__bubble .ha-ask__sb { list-style: none; margin: 0; padding: 0; }
+  #ha-ask .ha-ask__bubble .ha-ask__sbrow { margin: 0; padding: var(--ha-space-2xs) 0; border-top: 1px solid var(--ha-rule); }
+  #ha-ask .ha-ask__sbtop { display: flex; align-items: center; gap: var(--ha-space-2xs); margin: 0 0 var(--ha-space-3xs); font-size: var(--ha-fs-small); }
+  #ha-ask .ha-ask__chipst { display: inline-block; flex: 0 0 auto; font-size: var(--ha-fs-micro); font-weight: 700; letter-spacing: var(--ha-track-button); text-transform: uppercase; line-height: var(--ha-lh-snug); padding: var(--ha-space-3xs) var(--ha-space-2xs); border-radius: var(--ha-radius-callout); border: 1px solid var(--ha-teal-ink); white-space: nowrap; }
+  #ha-ask .ha-ask__chipst--law { background: var(--ha-teal-ink); color: var(--ha-white); }
+  #ha-ask .ha-ask__chipst--stalled { background: var(--ha-ash-light); color: var(--ha-charcoal); }
+  #ha-ask .ha-ask__chipst--died { background: var(--ha-white); color: var(--ha-charcoal); border-style: dashed; }
+  #ha-ask .ha-ask__sbwhat { display: block; font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-charcoal); }
+  #ha-ask .ha-ask__sbout { display: block; font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); }
   #ha-ask [hidden] { display: none; }
   @media (max-width: 700px) {
     #ha-ask .ha-ask__log { padding: var(--ha-space-sm); max-height: 55vh; }
     #ha-ask .ha-ask__bubble { max-width: 96%; }
+    #ha-ask .ha-ask__bubble--wide { width: 96%; }
+    #ha-ask .ha-ask__gfx { padding: var(--ha-space-xs); }
     #ha-ask .ha-ask__chips { padding: 0 var(--ha-space-sm) var(--ha-space-sm); }
     #ha-ask .ha-ask__chip { width: 100%; border-radius: var(--ha-radius-card); }
     #ha-ask .ha-ask__pdf { display: inline-block; padding: var(--ha-space-2xs); margin: calc(var(--ha-space-2xs) * -1) 0 calc(var(--ha-space-2xs) * -1) var(--ha-space-3xs); }
@@ -188,7 +233,94 @@
     return box;
   }
 
-  function renderAnswer(text, sources, related) {
+  // ---- Explainer graphics. Each is drawn from the plain data the server vetted (see worker/src/graphics.js); only
+  // text nodes and style widths are set, never HTML, and a spec that is not the shape we expect draws nothing.
+  function isText(v) { return typeof v === 'string' && v.length < 400; }
+  function pageUrl(u) { return typeof u === 'string' && /^https:\/\/(www\.)?hiappleseed\.org\//.test(u); }
+  function cell(tag, text, scope) { var c = el(tag, null, text); if (scope) c.setAttribute('scope', scope); return c; }
+
+  function drawBars(g) {
+    var rows = (g.rows || []).filter(function (r) { return r && isText(r.label) && isText(r.display) && isFinite(Number(r.value)) && Number(r.value) >= 0; });
+    var max = Math.max.apply(null, rows.map(function (r) { return Number(r.value); }));
+    if (!rows.length || !(max > 0)) return null;
+    var wrap = el('div'), ul = el('ul', 'ha-ask__bars');
+    rows.forEach(function (r) {
+      var li = el('li', 'ha-ask__brow'), head = el('div', 'ha-ask__bhead'), track = el('div', 'ha-ask__btrack');
+      head.appendChild(el('p', 'ha-ask__blabel', r.label)); head.appendChild(el('span', 'ha-ask__bval', r.display));
+      var fill = el('div', 'ha-ask__bfill' + (r.tone === 'muted' ? ' ha-ask__bfill--muted' : ''));
+      fill.style.width = Math.max(0.5, (Number(r.value) / max) * 100).toFixed(2) + '%';
+      fill.setAttribute('aria-hidden', 'true');
+      track.appendChild(fill); li.appendChild(head); li.appendChild(track); ul.appendChild(li);
+    });
+    wrap.appendChild(ul);
+    var det = el('details', 'ha-ask__gfx-tbl'), tbl = el('table'), head = el('tr');
+    det.appendChild(el('summary', null, 'Show the numbers'));
+    tbl.appendChild(el('caption', 'ha-ask__sr', g.title));
+    head.appendChild(cell('th', 'Item', 'col')); head.appendChild(cell('th', g.unit || 'Value', 'col'));
+    var thead = el('thead'); thead.appendChild(head); tbl.appendChild(thead);
+    var tb = el('tbody');
+    rows.forEach(function (r) { var tr = el('tr'); tr.appendChild(cell('th', r.label, 'row')); tr.appendChild(cell('td', r.display)); tb.appendChild(tr); });
+    tbl.appendChild(tb); det.appendChild(tbl); wrap.appendChild(det);
+    return wrap;
+  }
+
+  function drawStats(g) {
+    var items = (g.items || []).filter(function (r) { return r && isText(r.value) && isText(r.label); });
+    if (!items.length) return null;
+    var ul = el('ul', 'ha-ask__stats');
+    items.forEach(function (r) { var li = el('li', 'ha-ask__stat'); li.appendChild(el('span', 'ha-ask__stat-n', r.value)); li.appendChild(el('span', 'ha-ask__stat-l', r.label)); ul.appendChild(li); });
+    return ul;
+  }
+
+  function drawTimeline(g) {
+    var rows = (g.rows || []).filter(function (r) { return r && isText(r.when) && isText(r.what); });
+    if (!rows.length) return null;
+    var ol = el('ol', 'ha-ask__tl');
+    rows.forEach(function (r) { var li = el('li'); li.appendChild(el('span', 'ha-ask__tl-when', r.when)); li.appendChild(el('span', 'ha-ask__tl-what', r.what)); ol.appendChild(li); });
+    return ol;
+  }
+
+  var STATUS = { law: ['Became law', '\u2713 '], stalled: ['Stalled', '\u2026 '], died: ['Died', '\u2715 '] };
+  function drawScoreboard(g) {
+    var rows = (g.rows || []).filter(function (r) { return r && STATUS[r.status] && isText(r.item) && isText(r.what) && isText(r.outcome); });
+    if (!rows.length) return null;
+    var order = ['law', 'stalled', 'died'], n = { law: 0, stalled: 0, died: 0 };
+    rows.sort(function (a, b) { return order.indexOf(a.status) - order.indexOf(b.status); });
+    rows.forEach(function (r) { n[r.status]++; });
+    var wrap = el('div');
+    wrap.appendChild(el('p', 'ha-ask__sbsum', n.law + ' became law, ' + n.stalled + ' stalled, ' + n.died + ' died'));
+    var ul = el('ul', 'ha-ask__sb');
+    rows.forEach(function (r) {
+      var li = el('li', 'ha-ask__sbrow'), top = el('div', 'ha-ask__sbtop'), chip = el('span', 'ha-ask__chipst ha-ask__chipst--' + r.status);
+      var glyph = el('span', null, STATUS[r.status][1]); glyph.setAttribute('aria-hidden', 'true');
+      chip.appendChild(glyph); chip.appendChild(document.createTextNode(STATUS[r.status][0]));
+      top.appendChild(chip); top.appendChild(el('strong', null, r.item));
+      li.appendChild(top); li.appendChild(el('span', 'ha-ask__sbwhat', r.what)); li.appendChild(el('span', 'ha-ask__sbout', r.outcome)); ul.appendChild(li);
+    });
+    wrap.appendChild(ul);
+    return wrap;
+  }
+
+  var DRAW = { bars: drawBars, stats: drawStats, timeline: drawTimeline, scoreboard: drawScoreboard };
+  function drawGraphic(g, sources) {
+    if (!g || !isText(g.title) || !DRAW[g.type]) return null;
+    var body = DRAW[g.type](g);
+    if (!body) return null;
+    var fig = el('figure', 'ha-ask__gfx'), cap = el('figcaption', 'ha-ask__gfx-title', g.title);
+    if (g.illustration === true) cap.appendChild(el('span', 'ha-ask__gfx-tag', 'Illustration'));
+    fig.appendChild(cap);
+    if (isText(g.unit) && g.type === 'bars') fig.appendChild(el('p', 'ha-ask__gfx-unit', g.unit.charAt(0).toUpperCase() + g.unit.slice(1)));
+    fig.appendChild(body);
+    if (typeof g.note === 'string' && g.note.length < 800) fig.appendChild(el('p', 'ha-ask__gfx-note', g.note));
+    var cited = (sources || []).some(function (x) { return x.url === (g.source || {}).url; }); // the Sources list below already links it
+    if (g.source && !cited && pageUrl(g.source.url) && isText(g.source.title)) {
+      var src = el('p', 'ha-ask__gfx-src', g.illustration === true ? 'Learn more: ' : 'Source: '), a = el('a', null, g.source.title);
+      a.href = g.source.url; a.target = '_blank'; a.rel = 'noopener'; src.appendChild(a); fig.appendChild(src);
+    }
+    return fig;
+  }
+
+  function renderAnswer(text, sources, related, graphics) {
     var box = document.createDocumentFragment();
     text.split(/\n{2,}/).forEach(function (block) {
       var lines = block.split('\n').filter(Boolean);
@@ -202,6 +334,7 @@
         var p = el('p'); inline(p, lines.join(' '), sources); box.appendChild(p);
       }
     });
+    (graphics || []).slice(0, 2).forEach(function (g) { var f = drawGraphic(g, sources); if (f) box.appendChild(f); });
     if (sources.length) box.appendChild(refList('Sources', sources, true));
     if (related && related.length) box.appendChild(refList('Related research', related, false));
     return box;
@@ -273,9 +406,11 @@
       var d = r.data || {};
       var text = d.answer || 'Something went wrong. Please try again, or browse hiappleseed.org.';
       tli.remove();
-      var shown = renderAnswer(text, d.sources || [], d.related || []);
+      var shown = renderAnswer(text, d.sources || [], d.related || [], d.graphics || []);
       if (feedbackOn && r.ok && d.answer) shown.appendChild(feedbackRow(question, d));
-      add('bot', shown);
+      var wide = !!shown.querySelector('.ha-ask__gfx'); // a fragment is emptied by add(), so look first
+      var botli = add('bot', shown);
+      if (wide) botli.querySelector('.ha-ask__bubble').classList.add('ha-ask__bubble--wide');
       if (r.ok && d.answer) history.push({ role: 'assistant', content: d.answer });
       else history.pop();
     }).catch(function () {

@@ -13,7 +13,7 @@ const here = new URL(".", import.meta.url);
 const index = JSON.parse(readFileSync(new URL("../worker/src/index.json", here), "utf8"));
 const cases = readFileSync(new URL("golden.jsonl", here), "utf8").trim().split("\n").map((l) => JSON.parse(l));
 
-let out = `# SYSTEM PROMPT (applies to every case)\n\n${buildSystem(index.core)}\n\n`;
+let out = `# SYSTEM PROMPT (applies to every case)\n\n${buildSystem(index.core, index.graphics)}\n\n`;
 for (const id of ids) {
   const c = cases.find((x) => x.id === id);
   if (!c) throw new Error(`no case ${id}`);

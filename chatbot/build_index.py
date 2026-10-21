@@ -128,8 +128,9 @@ def parse_sections(path: Path, group_level: int = 2, item_level: int = 3):
             continue
         aliases = [a.strip() for a in meta.get("aliases", "").split(";") if a.strip()]
         research = [f"{BASE_URL}/publications/{x.strip()}" for x in meta.get("research", "").split(",") if x.strip()]
+        graphics = [g.strip() for g in meta.get("graphic", "").split(",") if g.strip()]
         items.append({"group": group, "title": title, "text": body, "research": research, "aliases": aliases,
-                      "url": _abs(meta.get("url")), "status": meta.get("status", "")})
+                      "graphics": graphics, "url": _abs(meta.get("url")), "status": meta.get("status", "")})
     return items
 
 
@@ -197,8 +198,168 @@ def load_faq(core_urls: set[str], fact_text: str) -> list[dict]:
             for m in re.findall(pat, a):
                 if m not in fact_text:
                     raise SystemExit(f"faq {i}: {m!r} is not in content/about.md or practical.md")
-        out.append({"id": i, "variants": e["variants"], "answer": a,
+        out.append({"id": i, "variants": e["variants"], "answer": a, "graphic": e.get("graphic"),
                     "sources": [{"n": n, "title": src["title"], "url": src["url"], "year": None, "pdf": None} for n, src in enumerate(e["sources"], 1)]})
+    return out
+
+
+# ------------------------------------------------------------------ graphics
+_NUM = re.compile(r"\d[\d,]*(?:\.\d+)?")
+_GRAPHIC_TYPES = {"bars", "stats", "timeline", "scoreboard", "slices"}
+_TONES = {"muted"}
+
+
+_TENS = {"twenty": 20, "thirty": 30, "forty": 40, "fifty": 50, "sixty": 60, "seventy": 70, "eighty": 80, "ninety": 90}
+_ONES = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9}
+_SPELLED = re.compile(r"\b(" + "|".join(_TENS) + r")(?:-(" + "|".join(_ONES) + r"))?\b", re.I)
+
+
+def _nums(s: str) -> set[str]:
+    """Numbers in a string, as digits: "$1,000" -> 1000, and a spelled-out "Sixty-six" -> 66 (the house style spells some
+    out). Single spelled digits and teens are left alone: "one" is in nearly every sentence and would prove nothing."""
+    out = {m.rstrip(",").replace(",", "") for m in _NUM.findall(s)}
+    for t, o in _SPELLED.findall(s):
+        out.add(str(_TENS[t.lower()] + (_ONES[o.lower()] if o else 0)))
+    return out
+
+
+def _norm(s: str) -> str:
+    return re.sub(r"\s+", " ", s.replace("\u2019", "'")).lower()
+
+
+def _slice_rows(g: dict) -> dict:
+    """A made-up marginal-rate example, computed here so no typed total can disagree with its parts."""
+    price, slices = g["price"], g["slices"]
+    rows, lo, total = [], 0, 0
+    money = lambda n: f"${n // 1_000_000:,} million" if n % 1_000_000 == 0 else f"${n:,}"
+    for i, sl in enumerate(slices):
+        seg = sl["to"] - lo
+        tax = seg * sl["rate"]
+        total += tax
+        word = "First" if i == 0 else "Last" if i == len(slices) - 1 else "Next"
+        rows.append({"label": f"{word} {money(seg)}, taxed at {sl['rate'] * 100:g}%", "value": round(tax), "display": f"${tax:,.0f}"})
+        lo = sl["to"]
+    if lo != price:
+        raise SystemExit(f"graphic {g['id']}: slices end at {lo}, not at the price {price}")
+    flat = price * slices[-1]["rate"]
+    rows.append({"label": "Total, taxed marginally", "value": round(total), "display": f"${total:,.0f}"})
+    rows.append({"label": f"Same sale, top rate on all {money(price)}", "value": round(flat), "display": f"${flat:,.0f}", "tone": "muted"})
+    return {**{k: v for k, v in g.items() if k not in ("slices", "price")}, "type": "bars",
+            "unit": f"tax owed on a {money(price)} sale", "rows": rows}
+
+
+def _proofs(r: dict) -> list[str]:
+    p = r.get("proof")
+    return [p] if isinstance(p, str) else list(p or [])
+
+
+def _unproven(g: dict, text: str) -> str | None:
+    """Why `text` (the approved prose, normalized) does not back this graphic, or None when it does. Every row quotes the
+    phrase(s) it rests on, and every number the row shows must be in those phrases; the title, unit and note may only use
+    numbers the graphic's own proofs carry. A bar's label must say its value."""
+    rows = g.get("rows") or g.get("items") or []
+    if not rows:
+        return "no rows"
+    pool: set[str] = set()
+    for r in rows:
+        name = r.get("label") or r.get("item") or r.get("when") or r.get("value")
+        ps = _proofs(r)
+        if not ps:
+            return f"row {name!r} has no proof"
+        for p in ps:
+            if _norm(p) not in text:
+                return f"proof {p!r} is not in the approved text"
+        allowed = set().union(*(_nums(p) for p in ps))
+        pool |= allowed
+        for k, v in r.items():
+            if k in ("proof", "tone") or isinstance(v, (int, float)):
+                continue
+            for n in _nums(str(v)):
+                if n not in allowed:
+                    return f"the number {n} in {v!r} is not in the proof for row {name!r}"
+        if "display" in r and "value" in r:
+            first = _NUM.search(r["display"])
+            if not first or float(first.group().rstrip(",").replace(",", "")) != float(r["value"]):
+                return f"label {r['display']!r} does not match value {r['value']}"
+    for p in g.get("proofs", []):
+        if _norm(p) not in text:
+            return f"proof {p!r} is not in the approved text"
+        pool |= _nums(p)
+    for k in ("title", "unit", "note"):
+        for n in _nums(g.get(k, "")):
+            if n not in pool:
+                return f"the number {n} in the {k} is in none of its proofs"
+    return None
+
+
+def load_graphics(known_urls: set[str], catalog: dict, vetted: str, position_ids: set[str], titles: set[str],
+                  public_text: str | None = None, public_titles: set[str] | None = None, skipped: Counter | None = None) -> list[dict]:
+    """content/graphics.json: the only graphics the assistant can show. They are data the page draws, never markup the
+    model writes. Checked hard against ALL the approved-or-draft position text (`vetted`): each figure needs `proof` phrases
+    that appear word for word, sources must be real pages, aliases (two topic words at least) belong to one graphic only,
+    and a made-up illustration must say so. A --public build then drops any graphic whose proofs are not in the text of
+    the APPROVED positions (`public_text`), or whose `needs` positions are not approved."""
+    graphics = json.loads((HERE / "content" / "graphics.json").read_text(encoding="utf-8"))["graphics"]
+    text = _norm(vetted)
+    seen, aliases, out = set(), {}, []
+    for g in graphics:
+        i = g["id"]
+        if i in seen:
+            raise SystemExit(f"graphic: duplicate id {i}")
+        seen.add(i)
+        if g["type"] not in _GRAPHIC_TYPES:
+            raise SystemExit(f"graphic {i}: unknown type {g['type']!r}")
+        if not g.get("title"):
+            raise SystemExit(f"graphic {i}: needs a title")
+        illus = bool(g.get("illustration"))
+        if illus and "made-up" not in g.get("note", ""):
+            raise SystemExit(f"graphic {i}: an illustration must say its numbers are made-up in its note")
+        if g["type"] == "slices" and not illus:
+            raise SystemExit(f"graphic {i}: slices are for made-up illustrations only")
+        for t in g.get("needs", []):
+            if t not in titles:
+                raise SystemExit(f"graphic {i}: needs a position titled {t!r}, which does not exist")
+        src = g.get("source") or {}
+        url = _abs(src.get("url"))
+        if url not in known_urls and url not in catalog:
+            raise SystemExit(f"graphic {i}: source {url} is not a page in the core content or a published report")
+        title = catalog[url]["t"] if url in catalog else src.get("title")
+        if not title:
+            raise SystemExit(f"graphic {i}: source needs a title")
+        al = g.get("aliases") or []
+        if not al:
+            raise SystemExit(f"graphic {i}: needs aliases")
+        for a in al:
+            toks = frozenset(tokenize(a))
+            if len(toks) < 2:
+                raise SystemExit(f"graphic {i}: alias {a!r} is too general (two topic words at least)")
+            if aliases.get(toks, i) != i:
+                raise SystemExit(f"graphic {i}: alias {a!r} also belongs to {aliases[toks]}")
+            aliases[toks] = i
+        for r in g.get("rows", []) + g.get("items", []):
+            if r.get("tone") not in (None, *_TONES):
+                raise SystemExit(f"graphic {i}: unknown tone {r['tone']!r}")
+        if not illus:
+            why = _unproven(g, text)
+            if why:
+                raise SystemExit(f"graphic {i}: {why}")
+        if public_text is not None:
+            gone = [t for t in g.get("needs", []) if t not in (public_titles or set())]
+            if gone or (not illus and _unproven(g, _norm(public_text))):
+                if skipped is not None:
+                    skipped["graphic resting on an unapproved position (public build)"] += 1
+                continue
+        spec = _slice_rows(g) if g["type"] == "slices" else dict(g)
+        for k in ("proofs", "needs", "_comment"):
+            spec.pop(k, None)
+        for r in spec.get("rows", []) + spec.get("items", []):
+            r.pop("proof", None)
+        spec["source"] = {"title": title, "url": url}
+        spec["auto"] = bool(g.get("auto"))
+        out.append(spec)
+    for pid in position_ids:
+        if pid not in seen:
+            raise SystemExit(f"a position or ready-made answer points at graphic {pid!r}, which is not in content/graphics.json")
     return out
 
 
@@ -369,13 +530,14 @@ def _source_info() -> dict:
 
 def build(public: bool) -> dict:
     skipped: Counter = Counter()
-    core, statuses = [], []
+    core, statuses, drafts = [], [], []
     for fname in ("about.md", "practical.md", "positions.md"):
         for it in parse_sections(HERE / "content" / fname):
             if fname == "positions.md" and it["group"] != "Topics with no stated public position":
                 statuses.append((it["title"], it["status"] or "(none)"))
                 if public and not it["status"].startswith("approved"):
                     skipped["position not approved (public build)"] += 1
+                    drafts.append(it)
                     continue
             it["src"] = fname
             it["pos"] = fname == "positions.md" and it["group"] != "Topics with no stated public position"
@@ -389,6 +551,24 @@ def build(public: bool) -> dict:
     core += research_sections(catalog)
     facts = "\n".join(c["text"] for c in core if c.get("src") in ("about.md", "practical.md"))
     faq = load_faq({c["url"] for c in core if c.get("src") in ("about.md", "practical.md") and c["url"]}, facts)
+    # Graphics are proven against ALL the position text (drafts included), so a bad graphic fails the pilot build too; a
+    # public build then ships only the ones the approved text alone backs.
+    prose = lambda items: "\n".join(c["text"] for c in items if c.get("src") in ("about.md", "practical.md", "positions.md"))
+    everything = [c for c in core if c.get("src")] + [dict(d, src="positions.md", pos=True) for d in drafts]
+    wanted = {g for c in everything for g in c.get("graphics", [])} | {e["graphic"] for e in faq if e.get("graphic")}
+    graphics = load_graphics({c["url"] for c in core + drafts if c["url"]}, catalog, prose(everything), wanted,
+                             {c["title"] for c in everything if c.get("pos")},
+                             public_text=prose(core) if public else None,
+                             public_titles={c["title"] for c in core if c.get("pos")}, skipped=skipped)
+    if public:
+        shipped = {g["id"] for g in graphics}
+        for c in core:
+            for gid in c.get("graphics", []):
+                if gid not in shipped:
+                    raise SystemExit(f"{c['title']}: its graphic {gid!r} is not backed by the approved text alone")
+        for e in faq:
+            if e.get("graphic") and e["graphic"] not in shipped:
+                raise SystemExit(f"ready-made answer {e['id']}: its graphic {e['graphic']!r} is not backed by the approved text alone")
     for i, it in enumerate(core, 1):
         it["id"] = f"C{i}"
         it.pop("status", None)
@@ -418,6 +598,7 @@ def build(public: bool) -> dict:
         "public": public,
         "core": core,
         "faq": faq,
+        "graphics": graphics,
         "pubs": catalog,
         "chunks": chunks,
         "bm25": {"n": n, "avgdl": round(sum(dl) / max(n, 1), 3), "dl": dl, "post": post},
@@ -445,6 +626,7 @@ def main() -> int:
           f"({'public' if a.public else 'pilot'} build, corpus from {SOURCE_MODE})")
     print(f"  research catalog: {len(idx['pubs'])} reports; {sum(1 for c in idx['core'] if c['research'])} sections link curated research")
     print(f"  ready-made answers: {len(idx['faq'])} ({sum(len(e['variants']) for e in idx['faq'])} phrasings)")
+    print(f"  graphics: {len(idx['graphics'])} ({sum(1 for c in idx['core'] if c.get('graphics'))} positions attach one)")
     print(f"  core sections: {len(idx['core'])}   chunks: {len(idx['chunks'])} {dict(kinds)}")
     print(f"  bm25 terms: {len(idx['bm25']['post'])}   avg chunk length: {idx['bm25']['avgdl']} tokens")
     for k, v in rep["skipped"].items():

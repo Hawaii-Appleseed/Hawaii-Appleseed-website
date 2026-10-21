@@ -14,6 +14,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { matchCanned } from "../worker/src/canned.js";
+import { graphicFor } from "../worker/src/graphics.js";
 import { handleChat } from "../worker/src/handler.js";
 import { isLegalHelpRequest } from "../worker/src/legal.js";
 import { microDollars, PRICES } from "../worker/src/pricing.js";
@@ -68,6 +69,10 @@ function checkOffline(c) {
     if (!c.retrieve_any.some((s) => blob.includes(lc(s)))) fails.push(`retrieval missed [${c.retrieve_any}] in: ${hits.map((h) => h.t.slice(0, 40)).join(" | ")}`);
   }
   if ("canned" in c && (matchCanned(index, messages)?.id ?? null) !== c.canned) fails.push(`ready-made answer is ${matchCanned(index, messages)?.id ?? "none"}, expected ${c.canned ?? "none"}`);
+  if ("graphic" in c) {
+    const got = graphicFor(index, messages[messages.length - 1].content)?.id ?? null;
+    if (got !== c.graphic) fails.push(`graphic asked for by name is ${got ?? "none"}, expected ${c.graphic ?? "none"}`);
+  }
   if (c.related_any || c.related_none) {
     // Offline there is no model citation, so a topical question is assumed to cite an excerpt.
     const hits = search(index, queryFor(messages));
@@ -96,6 +101,10 @@ function checkLive(c, body) {
   const links = [...(body.sources ?? []), ...(body.related ?? [])];
   if (c.related_any && !c.related_any.some((s) => links.some((x) => x.url.includes(s)))) fails.push(`no source or related research with [${c.related_any}]`);
   if (c.related_none && (body.related ?? []).length) fails.push(`related research on a non-research question: ${body.related.map((r) => r.title).join(" | ")}`);
+  const shown = (body.graphics ?? []).map((g) => g.id);
+  if (c.graphic_any && !c.graphic_any.some((id) => shown.includes(id))) fails.push(`no graphic [${c.graphic_any}]; got ${shown.join(",") || "none"}`);
+  if (c.graphic_none && shown.length) fails.push(`graphic on a question that does not want one: ${shown.join(",")}`);
+  if (shown.length > 2) fails.push(`${shown.length} graphics, at most 2`);
   if (["position", "outcome"].includes(c.cat) && !links.length) fails.push("research question answered with no source or research link");
   if (c.source_any && !c.source_any.some((s) => body.sources.some((x) => x.url.includes(s)))) fails.push(`no source url with [${c.source_any}]`);
   fails.push(...voiceProblems(text).map((p) => `voice: ${p}`));
@@ -144,7 +153,7 @@ async function run(c) {
     const quietly = async () => { const log = console.log; console.log = () => {}; try { return await handleChat({ messages: messagesFor(c), index, client: throwing }); } finally { console.log = log; } };
     const probe = await quietly();
     const intercepted = probe.body?.flags?.canned ? { id: probe.body.flags.canned, body: probe.body } : null;
-    if (!("legal" in c) && !("canned" in c) && !("stance" in c) && !c.retrieve_any && !c.related_any && !c.related_none && !intercepted) return { c, fails: [], skipped: true };
+    if (!("legal" in c) && !("canned" in c) && !("stance" in c) && !("graphic" in c) && !c.retrieve_any && !c.related_any && !c.related_none && !intercepted) return { c, fails: [], skipped: true };
     const fails = checkOffline(c);
     if ("stance" in c) {
       const want = c.stance, got = intercepted ? (probe.body.flags.canned === "stance" ? "position" : "defer") : null;

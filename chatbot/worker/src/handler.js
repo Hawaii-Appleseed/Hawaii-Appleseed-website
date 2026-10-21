@@ -3,6 +3,7 @@
 // the same code the Worker does. `client` is an Anthropic SDK client (or a fake).
 import { matchCanned } from "./canned.js";
 import { resolveStance } from "./stance.js";
+import { pickGraphics, takeMarkers } from "./graphics.js";
 import { isLegalHelpRequest, LEGAL_REPLY, LEGAL_SENTINEL, LEGAL_SOURCES } from "./legal.js";
 import { buildExcerpts, buildSystem } from "./prompt.js";
 import { suggestResearch } from "./research.js";
@@ -80,7 +81,8 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
   const canned = env.CANNED === "off" ? null : matchCanned(index, messages);
   if (canned) {
     console.log(JSON.stringify({ event: "canned", id: canned.id }));
-    return { status: 200, body: { answer: canned.answer, sources: canned.sources, related: [], flags: { canned: canned.id } } };
+    const graphics = pickGraphics(index, { attached: canned.graphic ? [canned.graphic] : [] });
+    return { status: 200, body: { answer: canned.answer, sources: canned.sources, related: [], graphics, flags: { canned: canned.id } } };
   }
 
   // "What is your stance on X?": a position we hold is stated as written, a topic our work never touches is deferred
@@ -90,7 +92,8 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
     const sec = stance.section;
     const related = (sec.research ?? []).map((u) => index.pubs?.[u] && { title: index.pubs[u].t, url: u, year: index.pubs[u].y, pdf: index.pubs[u].p || null }).filter(Boolean).slice(0, 3);
     console.log(JSON.stringify({ event: "stance", kind: "position", id: sec.id }));
-    return { status: 200, body: { answer: `${sec.text.trim()} [1]`, sources: [{ n: 1, title: sec.title, url: sec.url, year: null, pdf: null }], related, flags: { canned: "stance", position: sec.title } } };
+    const graphics = pickGraphics(index, { attached: sec.graphics ?? [] });
+    return { status: 200, body: { answer: `${sec.text.trim()} [1]`, sources: [{ n: 1, title: sec.title, url: sec.url, year: null, pdf: null }], related, graphics, flags: { canned: "stance", position: sec.title } } };
   }
   if (stance?.kind === "defer") {
     const d = (index.faq ?? []).find((e) => e.id === "no-position");
@@ -109,7 +112,7 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
       max_tokens: 700,
       output_config: { effort: env.EFFORT || "low" },
       system: [
-        { type: "text", text: buildSystem(index.core), cache_control: { type: "ephemeral", ttl: "1h" } },
+        { type: "text", text: buildSystem(index.core, index.graphics), cache_control: { type: "ephemeral", ttl: "1h" } },
         { type: "text", text: buildExcerpts(hits, today, { stance: stance?.kind === "excerpts" }) },
       ],
       messages,
@@ -139,11 +142,13 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
   if (text.startsWith(LEGAL_SENTINEL) || text.includes(LEGAL_SENTINEL)) {
     return { status: 200, body: { answer: LEGAL_REPLY, sources: LEGAL_SOURCES, related: [], flags: { legal: true } } };
   }
-  const { answer, sources, citedCore, citedHits } = finalize(text, index.core, hits, index.pubs);
+  const marked = takeMarkers(text, index);
+  const { answer, sources, citedCore, citedHits } = finalize(marked.text, index.core, hits, index.pubs);
+  const graphics = pickGraphics(index, { question: last, marked: marked.ids, answer });
   const related = suggestResearch({
     index, query: queryFor(messages), hits, citedCoreIds: citedCore, fromHits: citedHits > 0, exclude: sources.map((s) => s.url),
   });
   // Counts only, never message text: "uncited" answers are where the knowledge base may have a gap.
-  console.log(JSON.stringify({ event: "answer", cited: sources.length, related: related.length, uncited: sources.length === 0 }));
-  return { status: 200, body: { answer, sources, related, flags: {} }, usage, model };
+  console.log(JSON.stringify({ event: "answer", cited: sources.length, related: related.length, graphics: graphics.length, uncited: sources.length === 0 }));
+  return { status: 200, body: { answer, sources, related, graphics, flags: {} }, usage, model };
 }

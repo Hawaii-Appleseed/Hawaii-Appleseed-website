@@ -178,7 +178,8 @@
           "title": "Our History",
           "url": "https://hiappleseed.org/our-history"
         }
-      ]
+      ],
+      "graphic": "appleseed-history"
     },
     {
       "id": "leadership",

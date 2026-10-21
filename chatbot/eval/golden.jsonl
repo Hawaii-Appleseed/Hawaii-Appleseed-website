@@ -95,8 +95,8 @@
 {"id": "canned-board", "cat": "canned", "q": "Who is on the board?", "canned": "board", "include": ["Kanoe Enos"], "source_any": ["board-of-directors"]}
 {"id": "canned-tax-deductible", "cat": "canned", "q": "Is my donation tax deductible?", "canned": "tax-deductible", "include_any": [["does not say"]], "regex_exclude": ["(?<!whether )(?<!if )\\b(yes|it is|it's|they are|gifts are|donations are|contributions are)\\b[^.?!]{0,20}\\btax[- ]deductible", "501\\(c\\)\\(3\\)"], "source_any": ["contact"]}
 {"id": "canned-position", "cat": "canned", "q": "What's your position?", "canned": null}
-{"id": "stance-conveyance", "cat": "stance", "q": "What's your stance on the conveyance tax?", "stance": "position", "position": "Conveyance tax modernization", "include_any": [["marginal-rate", "marginal rate"]], "source_any": ["taxes-budget"], "related_any": ["preserving-hawaii"]}
-{"id": "stance-eht", "cat": "stance", "q": "What is Hawaiʻi Appleseed's position on the empty homes tax?", "stance": "position", "position": "Empty homes tax (Honolulu)", "include": ["3 to 5 percent"], "include_any": [["183.4"]], "source_any": ["affordable-housing"], "related_any": ["empty-homes-tax-honolulu"]}
+{"id": "stance-conveyance", "cat": "stance", "q": "What's your stance on the conveyance tax?", "stance": "position", "position": "Conveyance tax modernization", "include_any": [["marginal-rate", "marginal rate"]], "source_any": ["taxes-budget"], "related_any": ["preserving-hawaii"], "graphic_any": ["conveyance-allocation"]}
+{"id": "stance-eht", "cat": "stance", "q": "What is Hawaiʻi Appleseed's position on the empty homes tax?", "stance": "position", "position": "Empty homes tax (Honolulu)", "include": ["3 to 5 percent"], "include_any": [["183.4"]], "source_any": ["affordable-housing"], "related_any": ["empty-homes-tax-honolulu"], "graphic_any": ["eht-revenue"]}
 {"id": "stance-jaywalking", "cat": "stance", "q": "Do you support decriminalizing jaywalking?", "stance": "position", "position": "Decriminalizing jaywalking", "include": ["291C"], "related_any": ["freedom-to-walk"]}
 {"id": "stance-parking", "cat": "stance", "q": "Where does Appleseed stand on parking mandates?", "stance": "position", "position": "Parking mandates", "include_any": [["one space per dwelling unit"]], "related_any": ["stalled"]}
 {"id": "stance-keiki-credit", "cat": "stance", "q": "Do you support a state child tax credit?", "stance": "position", "position": "Keiki Credit (state child tax credit)", "include_any": [["refundable"]], "related_any": ["investing-in-our-future"]}
@@ -120,3 +120,18 @@
 {"id": "sm-typo", "cat": "stance-model", "q": "What is your position on the conveyence tax?", "stance": null, "include": ["conveyance"], "include_any": [["support"]]}
 {"id": "sm-wealth-tax", "cat": "stance-model", "q": "Do you support a wealth tax?", "stance": null, "include_any": [["wealth"]]}
 {"id": "sm-rail", "cat": "stance-model", "q": "Where does Appleseed stand on the Honolulu rail project?", "stance": null}
+{"id": "gfx-eht", "cat": "graphic", "q": "Show me a chart of the empty homes tax revenue", "graphic": "eht-revenue"}
+{"id": "gfx-marginal", "cat": "graphic", "q": "Can you explain how marginal rates work?", "graphic": "marginal-illustration"}
+{"id": "gfx-school-meals", "cat": "graphic", "q": "Visualize the school meals income cliff", "graphic": "school-meals-cliff"}
+{"id": "gfx-capital-gains", "cat": "graphic", "q": "Make a graphic of the capital gains rate compared with ordinary income", "graphic": "capital-gains-rates"}
+{"id": "gfx-scoreboard", "cat": "graphic", "q": "Which bills passed in 2026?", "graphic": "session-2026-scoreboard"}
+{"id": "gfx-history", "cat": "graphic", "q": "What is the history of Hawaii Appleseed?", "canned": "history", "graphic_any": ["appleseed-history"]}
+{"id": "gfx-none-capital-gains", "cat": "graphic", "q": "What is the capital gains tax rate?", "graphic": null}
+{"id": "gfx-none-timeline", "cat": "graphic", "q": "Show me a timeline of the conveyance tax", "graphic": null}
+{"id": "gfx-none-signup", "cat": "graphic", "q": "How do I sign up for updates?", "graphic": null}
+{"id": "gfx-none-mission", "cat": "graphic", "q": "What is your mission?", "canned": "mission", "graphic_none": true}
+{"id": "gfx-m-eht", "cat": "graphic-model", "q": "How much money would an empty homes tax raise in Honolulu?", "include_any": [["183.4", "305.67"]], "graphic_any": ["eht-revenue"]}
+{"id": "gfx-m-cg", "cat": "graphic-model", "q": "How does Hawaii tax capital gains compared with income from work?", "include_any": [["7.25"]], "graphic_any": ["capital-gains-rates"]}
+{"id": "gfx-m-meals", "cat": "graphic-model", "q": "Why do so many Hawaii students miss out on free school meals?", "include_any": [["47,000", "34 percent"]], "graphic_any": ["school-meals-cliff"]}
+{"id": "gfx-m-explain", "cat": "graphic-model", "q": "Explain how a marginal conveyance tax rate differs from a flat rate.", "graphic_any": ["marginal-illustration"]}
+{"id": "gfx-m-none", "cat": "graphic-model", "q": "Where can I find your report on empty homes?", "graphic_none": true, "related_any": ["empty-homes"]}
