@@ -166,3 +166,31 @@ test("research: legal and refusal replies carry no research links", async () => 
   const r = await ask("I'm being evicted, can you represent me?", fake("x"));
   assert.deepEqual(r.body.related, []);
 });
+
+test("legal reply names the Bar Association referral and carries its link", async () => {
+  const r = await ask("I need a lawyer", fake("x"));
+  assert.equal(r.body.flags.legal, true);
+  assert.match(r.body.answer, /not a direct service provider/);
+  assert.match(r.body.answer, /\[1\]/);
+  assert.equal(r.body.sources[0].url, "https://hsba.org/HSBA_2020/Public/Legal_Assistance.aspx");
+  const viaModel = await ask("Is my lease valid?", fake("[[LEGAL]]"));
+  assert.deepEqual(viaModel.body.sources, r.body.sources);
+});
+
+test("practical sections are in the prompt with their own links, so citing them links the right page", () => {
+  const want = {
+    "Sign up for the newsletter and action alerts": "https://hiappleseed.org/subscribe",
+    "Contact your legislator": "https://hiappleseed.quorum.us/",
+    "Contact the office": "https://hiappleseed.org/contact",
+    "Jobs, requests for proposals, volunteering": "https://hiappleseed.org/opportunities",
+    "Legal help and referrals": "https://hsba.org/HSBA_2020/Public/Legal_Assistance.aspx",
+  };
+  for (const [title, url] of Object.entries(want)) {
+    const s = index.core.find((c) => c.title === title);
+    assert.ok(s, title);
+    assert.equal(s.url, url);
+  }
+  const contact = index.core.find((c) => c.title === "Contact the office").text;
+  assert.match(contact, /\(808\) 587-7605/);
+  assert.match(contact, /info@hiappleseed\.org/);
+});

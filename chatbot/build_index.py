@@ -2,7 +2,7 @@
 """Build the public Q&A bot's knowledge index -> chatbot/worker/src/index.json.
 
 What goes in (an allowlist, on purpose):
-  core    content/about.md + content/positions.md + generated bill outcomes.
+  core    content/about.md + practical.md + positions.md + generated bill outcomes.
           These ride in the system prompt, so they are always available.
   chunks  writing-bot/publications, blog-posts, testimony, chunked for BM25.
           Blog posts need a live URL (blog-sources.json); sample_ testimony and
@@ -246,7 +246,7 @@ def corpus_docs(skipped: Counter):
 def build(public: bool) -> dict:
     skipped: Counter = Counter()
     core, statuses = [], []
-    for fname in ("about.md", "positions.md"):
+    for fname in ("about.md", "practical.md", "positions.md"):
         for it in parse_sections(HERE / "content" / fname):
             if fname == "positions.md" and it["group"] != "Topics with no stated public position":
                 statuses.append((it["title"], it["status"] or "(none)"))

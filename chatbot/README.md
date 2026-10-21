@@ -24,6 +24,8 @@ widget (index.html, on hiappleseed.org)
 | Path | What it is |
 |---|---|
 | `content/about.md` | Organization facts, written from the site pages. Edit and rebuild. |
+| `content/practical.md` | How to subscribe, give, contact, apply, follow bills. Each section carries the live page it came from, checked 2026-10-20. |
+| `check_links.py` | Fetches every link the assistant can show (pages, reports, PDFs) and reports any that fail. Run before each deploy. |
 | `content/positions.md` | Public positions, each tagged `<!-- status: draft -->` or `approved by …`. |
 | `build_index.py` | Builds `worker/src/index.json` (core text + BM25 index over publications, blog, testimony). Generates the bill-outcomes section from `tax-fairness/data/bill-status.json`. |
 | `worker/src/` | `index.js` Worker entry · `handler.js` one chat turn · `legal.js` the gate · `prompt.js` rules · `retrieve.js` BM25 · `tokenize.js` |
@@ -88,7 +90,7 @@ Lines starting "2026 outcome" were written from *Policy in Perspective 2026* (Au
 
 ## Cost (estimates from prompt size; confirm with the first live eval)
 
-The cached prompt is about 6,700 tokens; excerpts add about 1,700 per question.
+The cached prompt is about 8,300 tokens; excerpts add about 1,700 per question.
 
 | Model | Per question, cache warm | Per 1,000 questions |
 |---|---|---|
@@ -101,7 +103,8 @@ Cold-cache requests cost about three times as much. Set `MODEL` in `wrangler.tom
 
 - [ ] Staff review and approve (or edit) each position; replace `draft` with `approved by …`.
 - [ ] Run the live eval; fix prompt or content for any failure; compare Sonnet and Haiku.
-- [ ] Confirm what the legal-help reply should say. It is generic ("a licensed attorney or a legal aid organization") and names no organization; naming one is a staff decision (`LEGAL_REPLY` in `worker/src/legal.js`).
+- [ ] Confirm the legal-help reply (`LEGAL_REPLY` in `worker/src/legal.js`). It says Hawaiʻi Appleseed is not a direct service provider and points to the Hawaiʻi State Bar Association's legal assistance list, which is the referral the organization's own Contact page gives.
+- [ ] Re-check `content/practical.md` against the live site before launch (`python3 chatbot/check_links.py`, then read the Contact, Subscribe, Support, and Opportunities pages): phone, email, giving levels, and the Quorum action center are copied from them.
 - [ ] Confirm the privacy note on the page. It says messages go to Anthropic and Hawaiʻi Appleseed keeps no copy: the Worker logs counts and flags only, never message text.
 - [ ] Decide who watches the Cloudflare logs and the Console spend dashboard, and what happens when credits run out (the assistant shows "unavailable" and stops; no card means no overage).
 - [ ] The promotional API credit expires 2026-11-12. Production needs a payment method or invoicing on the Console organization.

@@ -87,3 +87,17 @@ class Research(unittest.TestCase):
         for c in tagged:
             for u in c["research"]:
                 self.assertIn(u, idx["pubs"], c["title"])
+
+
+class Practical(unittest.TestCase):
+    def test_practical_sections_exist_with_links_and_survive_public_build(self):
+        titles = {c["title"]: c for c in b.build(public=True)["core"]}
+        for t in ("Sign up for the newsletter and action alerts", "Contact the office",
+                  "Jobs, requests for proposals, volunteering", "Legal help and referrals"):
+            self.assertIn(t, titles)
+            self.assertTrue(titles[t]["url"].startswith("https://"), t)
+
+    def test_every_core_link_is_absolute_https(self):
+        for c in b.build(public=False)["core"]:
+            if c["url"]:
+                self.assertTrue(c["url"].startswith("https://"), c["title"])

@@ -5,7 +5,7 @@ Public facts about the organization, written from the pages on hiappleseed.org. 
 ## Who we are
 <!-- url: /our-mission -->
 
-Hawaiʻi Appleseed Center for Law & Economic Justice is a Honolulu nonprofit that advances economic justice for and with the people of Hawaiʻi. Its office is at 733 Bishop St, Honolulu, HI. The organization is part of the national Appleseed Center network.
+Hawaiʻi Appleseed Center for Law & Economic Justice is a Honolulu nonprofit that advances economic justice for and with the people of Hawaiʻi. Its office is at 733 Bishop Street, Suite 1180, Honolulu, Hawaiʻi 96813. The organization is part of the national Appleseed Center network.
 
 Its vision is a more socially and economically just Hawaiʻi, where everyone has genuine opportunities to achieve economic security and fulfill their potential.
 
@@ -106,11 +106,11 @@ Board biographies are on the Board of Directors page.
 - **Legacy gifts:** including Hawaiʻi Appleseed in estate planning.
 
 ## Publications, blog, and news
-<!-- url: /publications -->
+<!-- url: /research -->
 
-Hawaiʻi Appleseed publishes research reports, policy briefs, and an annual Budget Primer (on /publications), blog posts (on /blog), and tracks media coverage of its work (on /in-the-news). The site's Research section collects publications by issue area.
+Hawaiʻi Appleseed publishes research reports, policy briefs, and an annual Budget Primer (on the Research page), blog posts (on the Blog page), and collects media coverage of its work (on the Media page). Each issue area page also lists its own publications.
 
 ## What this assistant can and cannot do
 <!-- url: /our-mission -->
 
-This assistant answers questions about Hawaiʻi Appleseed, its work, its research, and its published policy positions. It cannot give legal advice or legal help, take or discuss anyone's personal legal case, accept donations or personal information, or speak for other organizations. For anything it cannot answer, the website and the Our Team page are the best next step.
+This assistant answers questions about Hawaiʻi Appleseed, its work, its research, and its published policy positions. It cannot give legal advice or legal help, take or discuss anyone's personal legal case, sign anyone up for anything, accept donations or personal information, or speak for other organizations. For anything it cannot answer, the office's phone and email (on the Contact page) and the Our Team page are the best next step.

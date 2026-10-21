@@ -1,7 +1,7 @@
 // One chat turn: validate -> legal gate -> retrieve -> model -> clean up. Pure of
 // Cloudflare specifics, so the dev server, the tests, and the eval harness all run
 // the same code the Worker does. `client` is an Anthropic SDK client (or a fake).
-import { isLegalHelpRequest, LEGAL_REPLY, LEGAL_SENTINEL } from "./legal.js";
+import { isLegalHelpRequest, LEGAL_REPLY, LEGAL_SENTINEL, LEGAL_SOURCES } from "./legal.js";
 import { buildExcerpts, buildSystem } from "./prompt.js";
 import { suggestResearch } from "./research.js";
 import { queryFor, search } from "./retrieve.js";
@@ -69,7 +69,7 @@ export async function handleChat({ messages: raw, index, client, env = {} }) {
   const last = messages[messages.length - 1].content;
 
   if (isLegalHelpRequest(last)) {
-    return { status: 200, body: { answer: LEGAL_REPLY, sources: [], related: [], flags: { legal: true } } };
+    return { status: 200, body: { answer: LEGAL_REPLY, sources: LEGAL_SOURCES, related: [], flags: { legal: true } } };
   }
 
   const hits = search(index, queryFor(messages));
@@ -108,7 +108,7 @@ export async function handleChat({ messages: raw, index, client, env = {} }) {
   const text = (resp.content ?? []).filter((b) => b.type === "text").map((b) => b.text).join("\n").trim();
   if (!text) return { status: 502, body: { error: "empty", answer: FRIENDLY.unavailable, sources: [] } };
   if (text.startsWith(LEGAL_SENTINEL) || text.includes(LEGAL_SENTINEL)) {
-    return { status: 200, body: { answer: LEGAL_REPLY, sources: [], related: [], flags: { legal: true } } };
+    return { status: 200, body: { answer: LEGAL_REPLY, sources: LEGAL_SOURCES, related: [], flags: { legal: true } } };
   }
   const { answer, sources, citedCore, citedHits } = finalize(text, index.core, hits, index.pubs);
   const related = suggestResearch({

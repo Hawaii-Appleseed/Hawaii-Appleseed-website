@@ -91,7 +91,7 @@ function checkLive(c, body) {
   for (const s of c.include ?? []) if (!has(text, s)) fails.push(`missing "${s}"`);
   for (const group of c.include_any ?? []) if (!group.some((s) => has(text, s))) fails.push(`none of [${group.slice(0, 4)}]`);
   for (const s of c.exclude ?? []) if (has(text, s)) fails.push(`contains "${s}"`);
-  for (const r of c.regex_exclude ?? []) if (new RegExp(r).test(text)) fails.push(`matches /${r}/`);
+  for (const r of c.regex_exclude ?? []) if (new RegExp(r, "i").test(text)) fails.push(`matches /${r}/`);
   const links = [...(body.sources ?? []), ...(body.related ?? [])];
   if (c.related_any && !c.related_any.some((s) => links.some((x) => x.url.includes(s)))) fails.push(`no source or related research with [${c.related_any}]`);
   if (c.related_none && (body.related ?? []).length) fails.push(`related research on a non-research question: ${body.related.map((r) => r.title).join(" | ")}`);

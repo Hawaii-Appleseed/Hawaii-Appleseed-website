@@ -4,10 +4,15 @@
 // [[LEGAL]] for the rest, and the handler swaps that for the same text.
 
 export const LEGAL_REPLY =
-  "I can't help with legal questions or give legal advice, and Hawaiʻi Appleseed can't take on " +
-  "anyone's case through this chat. If you need legal help, please contact a licensed attorney " +
-  "or a legal aid organization. I'm glad to answer questions about Hawaiʻi Appleseed's work, " +
-  "research, and policy positions.";
+  "I can't help with legal questions or give legal advice, and Hawaiʻi Appleseed is not a direct service " +
+  "provider, so it can't take on anyone's case through this chat. If you need legal help, the Hawaiʻi State Bar " +
+  "Association keeps a list of legal assistance resources [1]. I'm glad to answer questions about Hawaiʻi " +
+  "Appleseed's work, research, and policy positions.";
+
+// The referral Hawaiʻi Appleseed's own Contact page gives to people seeking legal assistance.
+export const LEGAL_SOURCES = [
+  { n: 1, title: "Hawaiʻi State Bar Association: legal assistance resources", url: "https://hsba.org/HSBA_2020/Public/Legal_Assistance.aspx", year: null, pdf: null },
+];
 
 export const LEGAL_SENTINEL = "[[LEGAL]]";
 
