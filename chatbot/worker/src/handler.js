@@ -3,6 +3,7 @@
 // the same code the Worker does. `client` is an Anthropic SDK client (or a fake).
 import { matchCanned } from "./canned.js";
 import { resolveStance } from "./stance.js";
+import { resolver, takeChart } from "./charts.js";
 import { pickGraphics, takeMarkers } from "./graphics.js";
 import { isLegalHelpRequest, LEGAL_REPLY, LEGAL_SENTINEL, LEGAL_SOURCES } from "./legal.js";
 import { buildExcerpts, buildSystem } from "./prompt.js";
@@ -109,10 +110,10 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
   try {
     const params = {
       model,
-      max_tokens: 700,
+      max_tokens: 1100,
       output_config: { effort: env.EFFORT || "low" },
       system: [
-        { type: "text", text: buildSystem(index.core, index.graphics), cache_control: { type: "ephemeral", ttl: "1h" } },
+        { type: "text", text: buildSystem(index.core, index.graphics, { draw: env.DYNAMIC_GRAPHICS !== "0" }), cache_control: { type: "ephemeral", ttl: "1h" } },
         { type: "text", text: buildExcerpts(hits, today, { stance: stance?.kind === "excerpts" }) },
       ],
       messages,
@@ -143,12 +144,16 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
     return { status: 200, body: { answer: LEGAL_REPLY, sources: LEGAL_SOURCES, related: [], flags: { legal: true } } };
   }
   const marked = takeMarkers(text, index);
-  const { answer, sources, citedCore, citedHits } = finalize(marked.text, index.core, hits, index.pubs);
+  // A chart the model drew itself is shown only when no vetted graphic covers the question, and only if every figure in it
+  // is quoted from the text the model was given (charts.js).
+  const drawn = takeChart(marked.text, resolver(index.core, hits, index.pubs));
+  const { answer, sources, citedCore, citedHits } = finalize(drawn.text, index.core, hits, index.pubs);
   const graphics = pickGraphics(index, { question: last, marked: marked.ids, answer });
+  if (!graphics.length && drawn.chart && env.DYNAMIC_GRAPHICS !== "0") graphics.push(drawn.chart);
   const related = suggestResearch({
     index, query: queryFor(messages), hits, citedCoreIds: citedCore, fromHits: citedHits > 0, exclude: sources.map((s) => s.url),
   });
   // Counts only, never message text: "uncited" answers are where the knowledge base may have a gap.
-  console.log(JSON.stringify({ event: "answer", cited: sources.length, related: related.length, graphics: graphics.length, uncited: sources.length === 0 }));
+  console.log(JSON.stringify({ event: "answer", cited: sources.length, related: related.length, graphics: graphics.length, drawn: Boolean(graphics[0]?.generated), uncited: sources.length === 0 }));
   return { status: 200, body: { answer, sources, related, graphics, flags: {} }, usage, model };
 }

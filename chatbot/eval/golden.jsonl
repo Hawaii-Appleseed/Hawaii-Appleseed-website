@@ -135,3 +135,9 @@
 {"id": "gfx-m-meals", "cat": "graphic-model", "q": "Why do so many Hawaii students miss out on free school meals?", "include_any": [["47,000", "34 percent"]], "graphic_any": ["school-meals-cliff"]}
 {"id": "gfx-m-explain", "cat": "graphic-model", "q": "Explain how a marginal conveyance tax rate differs from a flat rate.", "graphic_any": ["marginal-illustration"]}
 {"id": "gfx-m-none", "cat": "graphic-model", "q": "Where can I find your report on empty homes?", "graphic_none": true, "related_any": ["empty-homes"]}
+{"id": "chart-m-prison", "cat": "graphic-model", "q": "How does the prison budget compare with spending on Hawaiian Home Lands?", "drawn": true, "include_any": [["300"]]}
+{"id": "chart-m-housing", "cat": "graphic-model", "q": "How big is Hawaii's housing shortage, and how long is the Hawaiian Home Lands waitlist?", "include_any": [["50,000"]]}
+{"id": "chart-m-eitc", "cat": "graphic-model", "q": "How has Hawaii's earned income tax credit grown since it was created?", "drawn": true, "include_any": [["$40 million"]]}
+{"id": "chart-m-single", "cat": "graphic-model", "q": "What is the income level where the millionaire surcharge starts?", "drawn": false, "include_any": [["$1 million"]]}
+{"id": "chart-m-practical", "cat": "graphic-model", "q": "How can I submit written testimony on a bill?", "drawn": false}
+{"id": "chart-m-curated", "cat": "graphic-model", "q": "Compare the 3 percent and 5 percent versions of the empty homes tax.", "drawn": false, "graphic_any": ["eht-revenue"]}

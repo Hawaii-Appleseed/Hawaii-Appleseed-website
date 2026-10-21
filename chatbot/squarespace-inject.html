@@ -109,6 +109,8 @@
   #ha-ask .ha-ask__gfx-tbl table { width: 100%; border-collapse: collapse; margin: var(--ha-space-2xs) 0 0; }
   #ha-ask .ha-ask__gfx-tbl th, #ha-ask .ha-ask__gfx-tbl td { text-align: left; padding: var(--ha-space-3xs) var(--ha-space-2xs) var(--ha-space-3xs) 0; border-top: 1px solid var(--ha-rule); font-weight: 400; vertical-align: top; color: var(--ha-charcoal); }
   #ha-ask .ha-ask__gfx-tbl thead th { color: var(--ha-ink-subtle); }
+  #ha-ask .ha-ask__bubble .ha-ask__quotes { list-style: none; margin: var(--ha-space-2xs) 0 0; padding: 0; }
+  #ha-ask .ha-ask__bubble .ha-ask__quotes li { margin: 0 0 var(--ha-space-2xs); color: var(--ha-charcoal); line-height: var(--ha-lh-small); }
   #ha-ask .ha-ask__bubble .ha-ask__stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); gap: var(--ha-space-xs) var(--ha-space-sm); }
   #ha-ask .ha-ask__bubble .ha-ask__stat { margin: 0; padding: 0 0 0 var(--ha-space-xs); border-left: 4px solid var(--ha-chart-cat-1); }
   #ha-ask .ha-ask__stat-n { display: block; font-family: var(--ha-font-display); font-size: var(--ha-fs-stat-sm); font-weight: 800; line-height: var(--ha-lh-snug); color: var(--ha-charcoal); overflow-wrap: anywhere; }
@@ -155,6 +157,7 @@
       <button type="button" class="ha-ask__chip">How do I sign up for updates?</button>
       <button type="button" class="ha-ask__chip">What is your position on the conveyance tax?</button>
       <button type="button" class="ha-ask__chip">What happened with the school meals bills in 2026?</button>
+      <button type="button" class="ha-ask__chip">Show me how the 2026 session went</button>
     </div>
     <form class="ha-ask__form" novalidate>
       <label class="ha-ask__sr" for="ha-ask-input">Your question</label>
@@ -256,10 +259,12 @@
     var det = el('details', 'ha-ask__gfx-tbl'), tbl = el('table'), head = el('tr');
     det.appendChild(el('summary', null, 'Show the numbers'));
     tbl.appendChild(el('caption', 'ha-ask__sr', g.title));
+    var quoted = rows.some(function (r) { return isText(r.quote); });
     head.appendChild(cell('th', 'Item', 'col')); head.appendChild(cell('th', g.unit || 'Value', 'col'));
+    if (quoted) head.appendChild(cell('th', 'Quoted from the source', 'col'));
     var thead = el('thead'); thead.appendChild(head); tbl.appendChild(thead);
     var tb = el('tbody');
-    rows.forEach(function (r) { var tr = el('tr'); tr.appendChild(cell('th', r.label, 'row')); tr.appendChild(cell('td', r.display)); tb.appendChild(tr); });
+    rows.forEach(function (r) { var tr = el('tr'); tr.appendChild(cell('th', r.label, 'row')); tr.appendChild(cell('td', r.display)); if (quoted) tr.appendChild(cell('td', r.quote || '')); tb.appendChild(tr); });
     tbl.appendChild(tb); det.appendChild(tbl); wrap.appendChild(det);
     return wrap;
   }
@@ -301,21 +306,42 @@
     return wrap;
   }
 
+  // A chart the assistant drew itself shows the passage each figure was quoted from.
+  function quotesFor(items, name) {
+    var list = items.filter(function (r) { return isText(r.quote); });
+    if (!list.length) return null;
+    var det = el('details', 'ha-ask__gfx-tbl'), ul = el('ul', 'ha-ask__quotes');
+    det.appendChild(el('summary', null, 'Show the numbers'));
+    list.forEach(function (r) { var li = el('li'); li.appendChild(el('strong', null, name(r) + ': ')); li.appendChild(document.createTextNode('\u201c' + r.quote + '\u201d')); ul.appendChild(li); });
+    det.appendChild(ul);
+    return det;
+  }
+
   var DRAW = { bars: drawBars, stats: drawStats, timeline: drawTimeline, scoreboard: drawScoreboard };
   function drawGraphic(g, sources) {
     if (!g || !isText(g.title) || !DRAW[g.type]) return null;
     var body = DRAW[g.type](g);
     if (!body) return null;
+    if (g.generated === true && g.type !== 'bars') {
+      var q = quotesFor(g.type === 'stats' ? (g.items || []) : (g.rows || []), function (r) { return r.label || r.what || ''; });
+      if (q) { var both = el('div'); both.appendChild(body); both.appendChild(q); body = both; }
+    }
     var fig = el('figure', 'ha-ask__gfx'), cap = el('figcaption', 'ha-ask__gfx-title', g.title);
     if (g.illustration === true) cap.appendChild(el('span', 'ha-ask__gfx-tag', 'Illustration'));
+    if (g.generated === true) cap.appendChild(el('span', 'ha-ask__gfx-tag', 'Drawn by the assistant'));
     fig.appendChild(cap);
     if (isText(g.unit) && g.type === 'bars') fig.appendChild(el('p', 'ha-ask__gfx-unit', g.unit.charAt(0).toUpperCase() + g.unit.slice(1)));
     fig.appendChild(body);
     if (typeof g.note === 'string' && g.note.length < 800) fig.appendChild(el('p', 'ha-ask__gfx-note', g.note));
-    var cited = (sources || []).some(function (x) { return x.url === (g.source || {}).url; }); // the Sources list below already links it
-    if (g.source && !cited && pageUrl(g.source.url) && isText(g.source.title)) {
-      var src = el('p', 'ha-ask__gfx-src', g.illustration === true ? 'Learn more: ' : 'Source: '), a = el('a', null, g.source.title);
-      a.href = g.source.url; a.target = '_blank'; a.rel = 'noopener'; src.appendChild(a); fig.appendChild(src);
+    var mine = (g.sources || (g.source ? [g.source] : [])).filter(function (x) { return x && pageUrl(x.url) && isText(x.title); }).slice(0, 3);
+    var fresh = mine.filter(function (x) { return !(sources || []).some(function (y) { return y.url === x.url; }); }); // the Sources list below already links the rest
+    if (fresh.length) {
+      var src = el('p', 'ha-ask__gfx-src', g.illustration === true ? 'Learn more: ' : fresh.length > 1 ? 'Sources: ' : 'Source: ');
+      fresh.forEach(function (x, i) {
+        if (i) src.appendChild(document.createTextNode('; '));
+        var a = el('a', null, x.title); a.href = x.url; a.target = '_blank'; a.rel = 'noopener'; src.appendChild(a);
+      });
+      fig.appendChild(src);
     }
     return fig;
   }

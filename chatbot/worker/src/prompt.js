@@ -36,14 +36,24 @@ HOW TO ANSWER
 - If the message is only a greeting, greet briefly and say what you can help with.
 
 GRAPHICS
-Under an answer the site can show one of the small charts listed in GRAPHICS AVAILABLE below. You never draw or describe a chart yourself, and you never write numbers that are not in KNOWLEDGE or EXCERPTS. When a listed graphic shows the very figures or timeline you are explaining, or the person asks for a chart, graphic, diagram, or timeline, end your answer with its marker on its own last line, exactly like [[graphic: id]]. At most two. Never use an id that is not listed, and add none when no graphic fits: say the figures in words instead. A graphic marked as a made-up illustration only shows how an idea works; never present its numbers as real.`;
+Under an answer the site can show one of the small charts listed in GRAPHICS AVAILABLE below. Never describe a chart you did not add, and never write numbers that are not in KNOWLEDGE or EXCERPTS. When a listed graphic shows the very figures or timeline you are explaining, or the person asks for a chart, graphic, diagram, or timeline, end your answer with its marker on its own last line, exactly like [[graphic: id]]. At most two. Never use an id that is not listed, and add none when no graphic fits: say the figures in words instead. A graphic marked as a made-up illustration only shows how an idea works; never present its numbers as real.`;
+
+const CHARTS = `
+
+CHARTS YOU DRAW
+When no listed graphic fits, and the question is a comparison, a breakdown, a change over time, or a "how big", and KNOWLEDGE or EXCERPTS state at least two numbers that belong on one chart, you may draw one simple chart by ending your answer with a chart marker on its own last line: [[chart: {json}]]. Most answers need no chart. Never draw one for a single number, a practical question, a position without figures, or when a listed graphic fits (use its marker instead).
+One line of valid JSON, in one of three shapes:
+  {"type":"bars","title":"...","unit":"what the bars measure","rows":[{"label":"...","value":300,"display":"$300 million","quote":"...","ref":"C37"}]}
+  {"type":"stats","title":"...","items":[{"value":"6,000","label":"families on the waitlist","quote":"...","ref":"C33"}]}
+  {"type":"timeline","title":"...","rows":[{"when":"2017","what":"...","quote":"...","ref":"C2"}]}
+Rules: each quote is copied word for word from the one KNOWLEDGE section or EXCERPT named by ref (like C37, or 2 for excerpt [2]) and contains every number its row shows. Use only numbers the text states: never round, convert, add, estimate, or work one out. Bars compare only values that measure the same thing, in the same unit and scale ("$300 million" beside "$185 million" is fine; "66 percent" beside "$5.68 billion" is not), with the same unit word in every display, and "value" is the number in "display" (183.4 for "$183.4 million"). Two to six rows. Titles and labels are plain words, with no markup. If you cannot meet every rule exactly, draw no chart.`;
 
 const STANCE = { support: "supported", oppose: "opposed", comment: "commented on" };
 
-export function buildSystem(core, graphics = []) {
+export function buildSystem(core, graphics = [], { draw = true } = {}) {
   const knowledge = core.map((s) => `### [${s.id}] ${s.title}\n${s.text}`).join("\n\n");
   const menu = graphics.length ? `\n\n# GRAPHICS AVAILABLE\n\n${graphicMenu(graphics)}` : "";
-  return `${RULES}\n\n# KNOWLEDGE\n\n${knowledge}${menu}`;
+  return `${RULES}${draw ? CHARTS : ""}\n\n# KNOWLEDGE\n\n${knowledge}${menu}`;
 }
 
 export function buildExcerpts(hits, today = "", { stance = false } = {}) {

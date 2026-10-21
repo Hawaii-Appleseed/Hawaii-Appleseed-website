@@ -104,6 +104,7 @@ function checkLive(c, body) {
   const shown = (body.graphics ?? []).map((g) => g.id);
   if (c.graphic_any && !c.graphic_any.some((id) => shown.includes(id))) fails.push(`no graphic [${c.graphic_any}]; got ${shown.join(",") || "none"}`);
   if (c.graphic_none && shown.length) fails.push(`graphic on a question that does not want one: ${shown.join(",")}`);
+  if ("drawn" in c && (body.graphics ?? []).some((g) => g.generated) !== c.drawn) fails.push(`${c.drawn ? "no chart drawn by the assistant" : "a chart drawn by the assistant where none was wanted"}; graphics: ${shown.join(",") || "none"}`);
   if (shown.length > 2) fails.push(`${shown.length} graphics, at most 2`);
   if (["position", "outcome"].includes(c.cat) && !links.length) fails.push("research question answered with no source or research link");
   if (c.source_any && !c.source_any.some((s) => body.sources.some((x) => x.url.includes(s)))) fails.push(`no source url with [${c.source_any}]`);

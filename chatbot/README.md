@@ -127,6 +127,18 @@ The page draws bars, stat tiles, timelines, and the scoreboard from the data (`i
 
 To add a graphic: add it to `content/graphics.json` with proofs, run `python3 chatbot/build_index.py`, and add a golden case (`eval/golden.jsonl`, category `graphic`).
 
+### Charts the assistant draws itself
+
+When none of the vetted graphics fits (a comparison, breakdown, or change over time that the sources state in numbers), the model may end its answer with `[[chart: {json}]]`: bars, stat tiles, or a timeline. The Worker (`worker/src/charts.js`) shows it only if **every figure is quoted from the text the model was given**:
+
+- each row carries a `quote` copied word for word from the one KNOWLEDGE section or excerpt it names (`ref`: `C37`, or `2` for excerpt [2]); the quote must really be in that text (case, quote marks, okina, and dashes aside);
+- every number a row shows (label, display, year, value) must appear in that row's quote; a bar's value must be the number in its display, with the same scale word ("million") the quote uses;
+- bars must compare like with like: all dollars, all percents, or all counts, at one scale, so "$300 million" can sit beside "$185 million" and "66 percent" cannot sit beside "$5.68 billion";
+- 2–8 bars or timeline rows, 1–4 stat tiles, plain text only (anything with `<` or `>` is refused), and at least one source with a link;
+- any failure drops the chart and keeps the answer. A vetted graphic that fits wins, so a drawn chart appears only when no vetted one does, and never on a ready-made or legal reply.
+
+The page marks these **Drawn by the assistant**, says to check them against the sources, and the *Show the numbers* section lists the quoted passage behind each figure. The checks catch invented numbers, wrong scale, and mixed units; they cannot judge whether two real numbers *should* be compared, so the pilot's feedback buttons matter here. Turn it off with `DYNAMIC_GRAPHICS = "0"` in `wrangler.toml` (the prompt then omits the instructions and any marker is stripped). Staff should read a sample of drawn charts before the public launch and decide whether to keep it.
+
 ## Research links
 
 Every answer links to Hawaiʻi Appleseed's research in three ways, none of which depends on the model remembering to:

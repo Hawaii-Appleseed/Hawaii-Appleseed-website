@@ -17,6 +17,7 @@ ACCESS_TEAM_DOMAIN = "lively-wildflower-989d"   # the staff hub's Zero Trust tea
 ACCESS_AUD = ""                                 # fill in: this app's Audience tag (Zero Trust > Access > Applications)
 ALLOWED_ORIGINS = ""                            # none: the widget is served by this Worker, so calls are same-origin
 MODEL = "claude-haiku-5-5"                      # pilot default; claude-sonnet-5-5 for the higher-quality (about 20x dearer) option
+DYNAMIC_GRAPHICS = "1"                          # let the model draw a chart whose every figure is quoted from the sources ("0" turns it off)
 FEEDBACK = "1"                                  # save ratings (with the question and answer) for review; the page says so
 PER_MINUTE = "6"
 PER_DAY = "40"
