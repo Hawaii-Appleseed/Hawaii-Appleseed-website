@@ -26,6 +26,12 @@ test("canned: style differences do not matter, extra or missing topic words do",
   assert.equal(ask("who is"), null);
 });
 
+test("canned: asking who is not asking what: 'who should I ask' goes to the model, not to 'what can I ask'", () => {
+  for (const q of ["Who should I ask?", "Who's the best person to talk to?", "who can I ask about this", "Who can help me?"]) assert.equal(ask(q), null, q);
+  assert.equal(ask("what can I ask"), "capabilities");
+  assert.equal(ask("Who do I contact?"), "contact");
+});
+
 test("canned: greetings and thanks, however worded, but not stray words", () => {
   for (const q of ["Hi", "Aloha, good morning", "Hello there!", "Good evening"]) assert.equal(ask(q), "greeting", q);
   for (const q of ["Thanks!", "Thank you so much", "Thanks a ton", "Mahalo nui loa", "thanks that was helpful"]) assert.equal(ask(q), "thanks", q);

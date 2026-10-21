@@ -122,6 +122,7 @@
   #ha-ask .ha-ask__person { margin: var(--ha-space-xs) 0 0; padding: var(--ha-space-xs) var(--ha-space-sm); background: var(--ha-white); border: 1px solid var(--ha-rule); border-left: 4px solid var(--ha-teal-deep); border-radius: var(--ha-radius-callout); }
   #ha-ask .ha-ask__bubble .ha-ask__person-label { font-family: var(--ha-font-display); font-size: var(--ha-fs-small); font-weight: 700; line-height: var(--ha-lh-snug); letter-spacing: var(--ha-track-tight); color: var(--ha-charcoal); margin: 0 0 var(--ha-space-2xs); }
   #ha-ask .ha-ask__bubble .ha-ask__person-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ha-space-3xs) var(--ha-space-sm); margin: 0; }
+  #ha-ask .ha-ask__bubble .ha-ask__person-who { font-size: var(--ha-fs-small); line-height: var(--ha-lh-snug); color: var(--ha-charcoal); margin: var(--ha-space-2xs) 0 var(--ha-space-3xs); }
   #ha-ask .ha-ask__person-btn { display: inline-flex; align-items: center; min-height: var(--ha-space-2xl); padding: 0 var(--ha-space-md); font-family: var(--ha-font-display); font-size: var(--ha-fs-small); font-weight: 700; letter-spacing: var(--ha-track-button); color: var(--ha-white); background: var(--ha-teal-deep); border-radius: var(--ha-radius-pill); text-decoration: none; }
   #ha-ask .ha-ask__person-btn:hover { background: var(--ha-slate); }
   #ha-ask .ha-ask__person-link { display: inline-flex; align-items: center; min-height: var(--ha-space-xl); font-size: var(--ha-fs-small); color: var(--ha-teal-ink); text-decoration: underline; }
@@ -504,18 +505,32 @@
   }
 
   // "Ask a person": the wording is data so the sign-off review can quote it (signoff_doc.py reads this line).
-  var PERSON = {"label": "Want a person to look at this?", "button": "Email our team", "call": "Call", "page": "Contact page", "help": "The button opens your email app with your question filled in. Nothing is sent until you send it.", "subject": "Question from the Ask Hawai\u02bbi Appleseed assistant", "body": "Hello,\n\nI asked the Hawai\u02bbi Appleseed website assistant this question, and it could not answer it:\n\n\u201c{question}\u201d\n\nI would like someone on the team to take a look.\n\nThank you,\n"};
+  var PERSON = {"label": "Want a person to look at this?", "button": "Email our team", "call": "Call the office", "named": "Who to talk to", "mail": "Email", "page": "Contact page", "help": "The button opens your email app with your question filled in. Nothing is sent until you send it.", "subject": "Question from the Ask Hawai\u02bbi Appleseed assistant", "body": "Hello,\n\nI asked the Hawai\u02bbi Appleseed website assistant this question, and it could not answer it:\n\n\u201c{question}\u201d\n\nI would like someone on the team to take a look.\n\nThank you,\n"};
   function personBox(h, question) {
     if (!h || !/^[^\s@<>"]+@[^\s@<>"]+$/.test(h.email || '') || !/^\+?\d+$/.test(h.tel || '') || !/^[\d()\s-]+$/.test(h.phone || '') || !pageUrl(h.page)) return null;
     var q = String(question || '').replace(/\s+/g, ' ').trim().slice(0, 500);
+    var subject = encodeURIComponent(PERSON.subject), body = encodeURIComponent(PERSON.body.replace('{question}', q));
+    // Staff the assistant named from the "Who to talk to" list: one email button each, to that person's own published address.
+    var people = (h.people || []).filter(function (x) { return x && isText(x.name) && isText(x.title) && /^[\w.+-]+@hiappleseed\.org$/.test(x.email || ''); }).slice(0, 2);
     var box = el('div', 'ha-ask__person'), row = el('p', 'ha-ask__person-row');
-    box.appendChild(el('p', 'ha-ask__person-label', PERSON.label));
-    var mail = el('a', 'ha-ask__person-btn', PERSON.button);
-    mail.href = 'mailto:' + h.email + '?subject=' + encodeURIComponent(PERSON.subject) + '&body=' + encodeURIComponent(PERSON.body.replace('{question}', q));
-    mail.setAttribute('aria-label', PERSON.button + ': opens your email app with your question filled in');
+    box.appendChild(el('p', 'ha-ask__person-label', people.length ? PERSON.named : PERSON.label));
+    people.forEach(function (x) {
+      var who = el('p', 'ha-ask__person-who'); who.appendChild(el('strong', null, x.name)); who.appendChild(document.createTextNode(', ' + x.title));
+      var first = x.name.split(' ')[0], btn = el('a', 'ha-ask__person-btn', PERSON.mail + ' ' + first);
+      btn.href = 'mailto:' + x.email + '?subject=' + subject + '&body=' + body;
+      btn.setAttribute('aria-label', PERSON.mail + ' ' + x.name + ': opens your email app with your question filled in');
+      var line = el('p', 'ha-ask__person-row'); line.appendChild(btn);
+      box.appendChild(who); box.appendChild(line);
+    });
+    if (!people.length) {
+      var mail = el('a', 'ha-ask__person-btn', PERSON.button);
+      mail.href = 'mailto:' + h.email + '?subject=' + subject + '&body=' + body;
+      mail.setAttribute('aria-label', PERSON.button + ': opens your email app with your question filled in');
+      row.appendChild(mail);
+    }
     var call = el('a', 'ha-ask__person-link', PERSON.call + ' ' + h.phone); call.href = 'tel:' + h.tel;
     var page = el('a', 'ha-ask__person-link', PERSON.page); page.href = h.page; page.target = '_blank'; page.rel = 'noopener';
-    row.appendChild(mail); row.appendChild(call); row.appendChild(page);
+    row.appendChild(call); row.appendChild(page);
     box.appendChild(row); box.appendChild(el('p', 'ha-ask__person-help', PERSON.help));
     return box;
   }

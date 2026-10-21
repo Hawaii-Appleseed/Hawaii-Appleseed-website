@@ -33,7 +33,9 @@ class Judge(unittest.TestCase):
         self.assertEqual(approval.judge("approved by Kai 2026-10-28", "abc", "xyz"), (False, "changed since it was approved"))
 
 
-class PublicBuild(unittest.TestCase):
+class BuildInATempCopy(unittest.TestCase):
+    """The helpers the build tests share: a temp copy of content/ and a public build over it (no tests of its own)."""
+
     @classmethod
     def setUpClass(cls):
         cls.src = HERE / "content"
@@ -60,6 +62,8 @@ class PublicBuild(unittest.TestCase):
         e = next(x for x in json.loads(self.faq_path.read_text(encoding="utf-8"))["entries"] if x["id"] == entry_id)
         return approval.faq_hash(e["answer"], [s["url"] for s in e["sources"]])
 
+
+class PublicBuild(BuildInATempCopy):
     def test_nothing_is_shipped_until_it_is_approved_and_the_pilot_build_still_has_everything(self):
         idx, skipped = self.build()
         self.assertEqual(idx["faq"], [])
@@ -102,6 +106,62 @@ class PublicBuild(unittest.TestCase):
         idx, skipped = self.build()
         self.assertNotIn("Minimum wage", [c["title"] for c in idx["core"]])
         self.assertEqual(skipped["position changed since it was approved (public build)"], 1)
+
+
+class StaffRouting(BuildInATempCopy):
+    """Who to talk to: checked against the Staff list, and in a public build left out until staff approve it (people and routes)."""
+
+    def staff(self):
+        return json.loads((self.tmp / "content" / "staff.json").read_text(encoding="utf-8"))
+
+    def save(self, d):
+        (self.tmp / "content" / "staff.json").write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+
+    def test_the_pilot_build_has_the_section_and_the_index_names_twelve_people(self):
+        with mock.patch.object(b, "HERE", self.tmp):
+            idx = b.build(public=False)
+        self.assertEqual(len(idx["staff"]["people"]), 12)
+        sec = next(c for c in idx["core"] if c["title"] == "Who to talk to about what")
+        self.assertIn("arjuna-heim", sec["text"])
+        self.assertIn("devin@hiappleseed.org", sec["text"])
+        self.assertTrue(sec["url"].endswith("/our-team"))
+
+    def test_staff_json_and_the_staff_list_in_about_must_agree(self):
+        d = self.staff()
+        d["people"][2]["title"] = "Chief of Everything"
+        self.save(d)
+        with mock.patch.object(b, "HERE", self.tmp), self.assertRaises(SystemExit) as cm:
+            b.build(public=False)
+        self.assertIn("disagree", str(cm.exception))
+
+    def test_a_route_naming_nobody_who_exists_and_a_foreign_email_break_the_build(self):
+        d = self.staff()
+        d["routes"][0]["people"].append("ghost")
+        self.save(d)
+        with mock.patch.object(b, "HERE", self.tmp), self.assertRaises(SystemExit):
+            b.build(public=False)
+        d = self.staff()
+        d["people"][0]["email"] = "will@example.com"
+        self.save(d)
+        with mock.patch.object(b, "HERE", self.tmp), self.assertRaises(SystemExit):
+            b.build(public=False)
+
+    def test_a_public_build_leaves_it_out_until_approved_and_again_when_it_is_edited(self):
+        idx, skipped = self.build()
+        self.assertIsNone(idx["staff"])
+        self.assertNotIn("Who to talk to about what", [c["title"] for c in idx["core"]])
+        self.assertEqual(skipped["who-to-talk-to routing not approved (public build)"], 1)
+        d = self.staff()
+        d["status"], d["reviewed"] = "approved by Kai Tanaka 2026-10-28", approval.staff_hash(d)
+        self.save(d)
+        idx, _ = self.build()
+        self.assertEqual(len(idx["staff"]["people"]), 12)
+        self.assertIn("Who to talk to about what", [c["title"] for c in idx["core"]])
+        d["routes"][1]["about"] += " and more"
+        self.save(d)
+        idx, skipped = self.build()
+        self.assertIsNone(idx["staff"])
+        self.assertEqual(skipped["who-to-talk-to routing changed since it was approved (public build)"], 1)
 
 
 @unittest.skipUnless(shutil.which("node"), "the fixed replies live in the Worker's JavaScript")

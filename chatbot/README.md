@@ -28,6 +28,7 @@ widget (index.html, on hiappleseed.org)
 |---|---|
 | `content/about.md` | Organization facts, written from the site pages. Edit and rebuild. |
 | `content/practical.md` | How to subscribe, give, contact, apply, follow bills. Each section carries the live page it came from, checked 2026-10-20. |
+| `content/staff.json` | Who is on staff (name, title, work email, as on the Our Team page) and which topics go to whom, for "who's the best person to talk to about this?". Checked against the Staff list in `about.md` by the build. A draft until staff approve it (see *Ask a person*). |
 | `vendor.py` | Copies the few files the assistant reads from the rest of the website repo into `vendor/` (see *Vendoring* below). |
 | `check_links.py` | Fetches every link the assistant can show (pages, reports, PDFs) and reports any that fail. Run before each deploy. |
 | `content/faq.json` | Ready-made answers to the 23 questions asked most (mission, history, leadership, how to give, contact, jobs, ...). The quickest file for staff to review. |
@@ -187,6 +188,16 @@ When the assistant cannot answer, the page offers a way to reach the team instea
 - **The wording** (`PERSON` in `index.html`) is quoted in the sign-off review, Part 3, so staff approve the button text and the prefilled email.
 - The marker is stripped from the answer; a half-typed one is stripped too. The page checks the email, phone, and link before drawing anything.
 
+### Who to talk to about this
+
+Asked "who's the best person to talk to about this?" (or "who should I contact about housing?", "who works on transit?"), the assistant names the one or two staff whose titles match, says in a few words what their title covers, and the page puts an **Email {first name}** button under the answer for each, next to the office buttons. "About this" means the topic of the conversation so far.
+
+- **Where it comes from:** `content/staff.json`: the 12 people on the Our Team page (names, titles, work emails) and 10 `routes` from a topic to the people whose titles fit. `build_index.py` appends it to the knowledge as a "Who to talk to about what" section, and **the build fails** if a name or title disagrees with the Staff list in `content/about.md`, an email is not an `@hiappleseed.org` address, or a route names someone who is not listed. The routes are inferred from titles and bios, not a staff list of who handles what, so **they are a draft that staff review** (Part 4 of the sign-off Doc); where no title fits (wages and labor) the section says so and the assistant points to the office.
+- **How the page learns who:** the model ends its answer with `[[staff: arjuna-heim, kamakani-albano]]`, ids exactly as the section gives them. The Worker keeps only ids that are in `index.staff` (at most two), so a made-up name names no one and the button falls back to the office. A public build with no approved routing has no section and no `index.staff`, so the assistant says the Our Team page lists the staff.
+- **Only what is published:** the emails are the ones the Our Team page already shows, the prefilled message goes from the visitor's own mail app, and the assistant never promises that anyone will reply or when. Nothing about who was named is stored but the id, counted on `/stats` ("Staff the assistant pointed people to").
+- **Keeping it right:** a person joining, leaving, or changing title means editing `staff.json` and `about.md` together (the build checks they agree). Re-read the Our Team page every few months; the weekly corpus check does not look at it.
+- A question that asks *who* never matches a ready-made answer built from "what can I ask" (`worker/src/canned.js`); "Who do I contact?" still gets the office's details.
+
 ## Usage roll-up (counts only)
 
 `GET /stats` on the Worker (behind the same Cloudflare Access gate as everything else) shows what the assistant did each day, and `/stats.json?days=30` has the same numbers as data. It is for deciding things: is Haiku enough, are ready-made answers carrying the load, is it coming up empty, are drawn charts earning their keep.
@@ -221,17 +232,18 @@ Related research is left off for questions that cite no research ("who is the ex
 
 ## Positions: sign-off
 
-Three kinds of words go out without a model checking them, and each has an approval status. A **public build** (`build_index.py --public`, `npm run deploy:public`) ships only what is approved; the pilot build includes drafts.
+Four kinds of words go out without a model checking them, and each has an approval status. A **public build** (`build_index.py --public`, `npm run deploy:public`) ships only what is approved; the pilot build includes drafts.
 
 | What | Where its status lives | Not approved means |
 |---|---|---|
 | a stated **position** | `<!-- status: ... -->` in `content/positions.md` | left out of the public build (a visitor's question about it goes to the model, which says there is no stated position) |
 | a **ready-made answer** | `status` in `content/faq.json` | left out (the question goes to the model, which answers from the organization's pages; more model calls, so more cost) |
+| the **who-to-talk-to routing** (the people, titles, emails and which topics go to whom) | `status` in `content/staff.json` | left out (the assistant says the Our Team page lists the staff, and the page offers only the office) |
 | a **fixed reply or page text** (legal-help reply, error messages, welcome line, privacy note, "ask a person" and chart-sharing wording) | `content/fixed.json` | **the public build refuses to run** until every one is approved: there is no fallback for words the page always uses |
 
 A status is `draft` or `approved by NAME YYYY-MM-DD`. **Approval is of the exact words** (`approval.py`): `signoff_doc.py --apply` also records a `reviewed` hash of the words the reviewer saw (`<!-- reviewed: ... -->` for a position), and the build treats an approved item whose words have changed since as not approved ("changed since it was approved" in the build's skipped list). `--apply` itself refuses an approval whose Doc fingerprint no longer matches the content, so refresh the Doc and approve again. Writing `approved by NAME DATE` by hand, with no hash, still works and is not bound to the words, so use the review. Fixed replies live in the Worker's JavaScript and in `index.html`; `fixed.py` is the one place that knows where, so the review and the build read the same words (it needs `node`).
 
-**The review lives in a Google Doc** ("Ask Hawaiʻi Appleseed: Sign-off Review (Draft)" in the shared Drive, Communications & Media › Website; this repo is public, so the link is not recorded here). It lists everything the assistant says without a model checking it: each position word for word with its chart, research links, aliases, and every figure beside the published sentence it was matched to; the ready-made answers; and the fixed replies and page text (legal-help reply, no-position reply, error messages, welcome line, privacy note). Each item has a decision box (change ☐ to ☒), a reviewer line, and a notes line, so reviewers can tick, edit, and comment in the Doc itself.
+**The review lives in a Google Doc** ("Ask Hawaiʻi Appleseed: Sign-off Review (Draft)" in the shared Drive, Communications & Media › Website; this repo is public, so the link is not recorded here). It lists everything the assistant says without a model checking it: each position word for word with its chart, research links, aliases, and every figure beside the published sentence it was matched to; the ready-made answers; the fixed replies and page text (legal-help reply, no-position reply, error messages, welcome line, privacy note); and the who-to-talk-to routing (Part 4). Each item has a decision box (change ☐ to ☒), a reviewer line, and a notes line, so reviewers can tick, edit, and comment in the Doc itself.
 
 ```
 P=~/internal-tools/appleseed-drive/.venv/bin/python        # the Drive pipeline's Python (it has the Google libraries)

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { handleChat } from "../src/handler.js";
-import { handoffFor, takeStaffMarker } from "../src/handoff.js";
+import { handoffFor, peopleFor, takeStaffMarker } from "../src/handoff.js";
 
 const index = JSON.parse(readFileSync(new URL("../src/index.json", import.meta.url), "utf8"));
 const never = { messages: { create: async () => assert.fail("the model must not run for this question") } };
@@ -20,10 +20,11 @@ test("handoff: the contact details come from the Contact the office section, one
 });
 
 test("handoff: the [[staff]] marker is taken out wherever it sits, and a half-typed one too", () => {
-  assert.deepEqual(takeStaffMarker("I don't have that. [C3]\n[[staff]]"), { text: "I don't have that. [C3]", asked: true });
-  assert.deepEqual(takeStaffMarker("Text [[ Staff ]] more"), { text: "Text  more", asked: true });
-  assert.deepEqual(takeStaffMarker("Text\n[[staff"), { text: "Text", asked: true });
-  assert.deepEqual(takeStaffMarker("A full answer."), { text: "A full answer.", asked: false });
+  assert.deepEqual(takeStaffMarker("I don't have that. [C3]\n[[staff]]"), { text: "I don't have that. [C3]", asked: true, ids: [] });
+  assert.deepEqual(takeStaffMarker("Text [[ Staff ]] more"), { text: "Text  more", asked: true, ids: [] });
+  assert.deepEqual(takeStaffMarker("Text\n[[staff"), { text: "Text", asked: true, ids: [] });
+  assert.deepEqual(takeStaffMarker("A full answer."), { text: "A full answer.", asked: false, ids: [] });
+  assert.deepEqual(takeStaffMarker("Ask them. [[staff: Arjuna-Heim , kamakani-albano]]"), { text: "Ask them.", asked: true, ids: ["arjuna-heim", "kamakani-albano"] });
 });
 
 test("handoff: offered when the model asks, when the answer plainly has nothing, and on the fixed no-position reply; never on legal help", () => {
@@ -54,4 +55,27 @@ test("handoff: the handler offers it on the deferral, strips the marker, and nev
   assert.doesNotMatch(r.body.answer, /staff\]\]|\[\[/);
   r = await ask("What is the conveyance tax?", says("The conveyance tax is paid when property changes hands. [C1]"));
   assert.equal(r.body.handoff, null);
+});
+
+test("handoff: the people the model names are checked against the staff list, at most two, and an unknown name names no one", async () => {
+  assert.equal(index.staff.people.length, 12);
+  assert.deepEqual(peopleFor(index, ["arjuna-heim", "nobody-here", "kamakani-albano", "devin-thomas"]).map((p) => p.id), ["arjuna-heim", "kamakani-albano"]);
+  const p = peopleFor(index, ["devin-thomas"])[0];
+  assert.deepEqual(Object.keys(p).sort(), ["email", "id", "name", "title"]);
+  assert.match(p.email, /^[\w.+-]+@hiappleseed\.org$/);
+  assert.deepEqual(peopleFor({ ...index, staff: null }, ["devin-thomas"]), [], "a public build before the routing is approved names no one");
+  assert.deepEqual(handoffFor(index, { asked: true, ids: ["abbey-seitz"] }).people.map((x) => x.name), ["Abbey Seitz"]);
+  assert.equal(handoffFor(index, { asked: true, ids: ["invented"] }).people, undefined, "still the office, with no made-up person");
+  assert.equal(handoffFor(index, { asked: true, ids: ["abbey-seitz"], legal: true }), null);
+});
+
+test("handoff: a model answer that names who to talk to gets an email for each, and the handler strips the marker", async () => {
+  const text = "For housing policy, Arjuna Heim directs research and housing policy, and Kamakani Albano is the housing policy analyst. [C1]\n[[staff: arjuna-heim, kamakani-albano, will-white]]";
+  let r = await ask("Who's the best person to talk to about renters' rights?", says(text));
+  assert.deepEqual(r.body.handoff.people.map((x) => x.id), ["arjuna-heim", "kamakani-albano"]);
+  assert.doesNotMatch(r.body.answer, /\[\[|staff:/);
+  assert.equal(r.body.handoff.email, index.contact.email, "the office is still offered");
+  r = await ask("Who should I ask?", says("Ask the office. [[staff: not-a-person]]"));
+  assert.equal(r.body.handoff.people, undefined);
+  assert.ok(r.body.handoff);
 });

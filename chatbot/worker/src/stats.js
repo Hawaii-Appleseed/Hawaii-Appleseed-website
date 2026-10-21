@@ -17,7 +17,7 @@ export const statsKey = (day) => `stats:${day}`;
 
 export const emptyDay = () => ({
   n: 0, people: 0,
-  route: {}, canned: {}, position: {}, graphics: {}, drawn: {}, handoff: {}, blocked: {},
+  route: {}, canned: {}, position: {}, graphics: {}, drawn: {}, handoff: {}, routed: {}, blocked: {},
   model: { answers: 0, uncited: 0, noRelated: 0, tokensIn: 0, tokensOut: 0, cacheRead: 0, cacheWrite: 0, microUsd: 0 },
   feedback: { up: 0, down: 0 },
 });
@@ -40,6 +40,7 @@ export function tally(day, ev) {
   if (ev.route === "stance_position") bump(d.position, ev.position);
   for (const g of ev.graphics ?? []) bump(d.graphics, g);
   bump(d.handoff, ev.handoff);
+  for (const id of ev.routed ?? []) bump(d.routed, id);
   if (ev.usage) {
     const m = d.model, u = ev.usage;
     m.tokensIn += u.input_tokens ?? 0; m.tokensOut += u.output_tokens ?? 0;
@@ -121,7 +122,7 @@ export function summarize(days) {
     problems: asked("refusal") + asked("upstream_error") + asked("empty"),
     blocked: sumKeys(days, "blocked"), route,
     feedback: { up: sum(days, (d) => d.feedback.up), down: sum(days, (d) => d.feedback.down) },
-    canned: sumKeys(days, "canned"), position: sumKeys(days, "position"), graphics: sumKeys(days, "graphics"),
+    canned: sumKeys(days, "canned"), position: sumKeys(days, "position"), graphics: sumKeys(days, "graphics"), routed: sumKeys(days, "routed"),
   };
 }
 
@@ -182,6 +183,7 @@ ${rows.map((r) => `<tr>${r.map((c, i) => `<td${i ? ' class="r"' : ""}>${esc(c)}<
 ${list("Ready-made answers asked for", top(s.canned))}
 ${list("Positions asked for", top(s.position))}
 ${list("Charts shown with an answer", top(s.graphics))}
+${list("Staff the assistant pointed people to", top(s.routed), "Counts of who was named under an answer, by id; nothing about the question.")}
 ${list("Why charts the model drew were refused", rejected, "A refused chart is dropped and the answer stands without it.")}
 ${list("Turned away", blocked, "Over a limit, over the day's budget, or failed verification.")}
 ${list("Where answers came from", top(s.route, 12))}

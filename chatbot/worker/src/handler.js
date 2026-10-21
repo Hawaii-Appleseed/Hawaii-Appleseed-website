@@ -165,13 +165,13 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
   });
   // Counts only, never message text: "uncited" answers are where the knowledge base may have a gap.
   console.log(JSON.stringify({ event: "answer", cited: sources.length, related: related.length, graphics: graphics.length, drawn: Boolean(graphics[0]?.generated), uncited: sources.length === 0 }));
-  const handoff = handoffFor(index, { asked: staff.asked, answer });
+  const handoff = handoffFor(index, { asked: staff.asked, ids: staff.ids, answer });
   // For the daily roll-up (stats.js): counts and codes only, never any text. What became of a chart the model drew.
   const shownDrawn = Boolean(graphics[0]?.generated);
   const drawnStatus = !drawn.offered ? null : env.DYNAMIC_GRAPHICS === "0" ? "disabled" : !drawn.chart ? `rejected:${drawn.why ?? "unknown"}` : shownDrawn ? "accepted" : "unused";
   const meta = {
     route: "model", cited: sources.length, related: related.length, graphics: graphics.filter((g) => !g.generated).map((g) => g.id),
-    drawn: drawnStatus, handoff: handoffCause(index, { asked: staff.asked, answer }),
+    drawn: drawnStatus, handoff: handoffCause(index, { asked: staff.asked, answer }), routed: (handoff?.people ?? []).map((p) => p.id),
     ...(drawnStatus === "accepted" ? { chart: graphics[0] } : {}),
   };
   return { status: 200, body: { answer, sources, related, graphics, handoff, flags: {} }, usage, model, meta };

@@ -8,7 +8,7 @@ These gate everything else; none can be done from here.
 
 1. **Anthropic API key** in a dedicated Console workspace with a spend limit, then `wrangler secret put ANTHROPIC_API_KEY`. Until then the live model path has only been exercised by replaying Haiku and Sonnet answers through the real checks.
 2. **Cloudflare Access application** for `ha-ask.dtomkatsu.workers.dev`; send the Audience tag, set `ACCESS_AUD` in `worker/wrangler.toml`, redeploy. Until then every route answers 503 (on purpose).
-3. **Staff sign-off in the review Doc**: 25 positions, 24 ready-made answers, 7 fixed replies and page texts, all draft. A public build ships only what is approved (approving a position also brings its graphic), and it refuses to run until all seven fixed replies are approved.
+3. **Staff sign-off in the review Doc**: 25 positions, 24 ready-made answers, 7 fixed replies and page texts, and the who-to-talk-to routing (Part 4), all draft. A public build ships only what is approved (approving a position also brings its graphic), and it refuses to run until all seven fixed replies are approved.
 4. **Credit expiry:** the Console promotional credit expires 2026-11-12; production needs a payment method.
 
 ## Recommended next (in this order)
@@ -44,6 +44,11 @@ These gate everything else; none can be done from here.
 Seven new graphics (18 in all): prison budget beside Hawaiian Home Lands, Act 46's cost and the proposed fix, the millionaire's surcharge, medical debt, SNAP certification and ESAP, the rent control evidence, and renters in Hawaiʻi. Five attach to their positions; two are reachable by asking for a chart. Every figure is quoted from the positions text (the build refuses otherwise). Every chart has **Copy as image** and **Copy the table** (README, *Graphics*, "Sharing a chart").
 - **Not made:** the Keiki Credit has no numbers in the positions text to quote, and the SNAP/ESAP timeline became a stat chart for the same reason (no dated milestones beyond Act 193).
 - **Next on this item:** the clipboard path could only be exercised for the fallback in the in-app browser; try "Copy as image" once in Chrome and Safari and paste it into a doc. If reporters ask for it, a downloadable PNG of every chart in one go for a press kit would be a small step from `paintChart`.
+
+### 8. "Who's the best person to talk to about this?": DONE 2026-10-21
+`content/staff.json` (the 12 people on the Our Team page and 10 topic routes), a "Who to talk to about what" section in the knowledge, `[[staff: id, id]]` in the model's answer, and a named **Email {first name}** button for each (at most two) beside the office buttons. Ids are checked against the index, so a made-up name names no one; the routing has its own status and hash in the sign-off Doc (Part 4) and is left out of a public build until approved; `/stats` counts who was pointed to. A question that asks *who* no longer matches the "what can I ask" ready-made answer. See the README, *Ask a person*.
+- **Needs a person:** the routes are my inference from titles and bios (nobody on the Our Team page has a wages or labor title, for one); staff should say who really takes which kind of question, and whether they want to be named at all.
+- **Next on this item:** re-read the Our Team page on a schedule so a change of staff does not leave `staff.json` stale (the build only checks `staff.json` against `about.md`, which comes from the same page, not against the live page); if staff want routing by a short intake ("what is your question about?") rather than by topic, that is a follow-up.
 
 ## Before the public launch (checklist, not improvements)
 

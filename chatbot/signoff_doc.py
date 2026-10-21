@@ -254,6 +254,24 @@ def fixed_part(idx: dict) -> str:
     return "\n".join(out)
 
 
+def staff_part() -> str:
+    d = json.loads((HERE / "content" / "staff.json").read_text(encoding="utf-8"))
+    by = {x["id"]: x for x in d["people"]}
+    h = approval.staff_hash(d)
+    status = status_label(d.get("status"), d.get("reviewed"), h)
+    people = table([[e(x["name"]), e(x["title"]), e(x["email"])] for x in d["people"]], [28, 47, 25], head=["Name", "Title", "Work email (as on the Our Team page)"])
+    routes = table([[e(r["about"]), e("; ".join(by[i]["name"] for i in r["people"]) or "no one in particular") + (f"<br/>{e(r['note'])}" if r.get("note") else "")] for r in d["routes"]],
+                   [45, 55], head=["If the question is about", "The assistant suggests"])
+    return (f'<h2 style="{HEAD}">Part 4. Who to talk to (1)</h2>'
+            + p("When a visitor asks who the best person to talk to is (for example, “Who should I talk to about this?”), the assistant names up to two people from this list, says in a few words what their title covers, and the page offers an email button for each, addressed to that person’s own work email. "
+                "It never invents a person, a title, an address, or what someone works on beyond their title, and it never promises a reply. The people are exactly as the Our Team page lists them (checked 2026-10-21). "
+                "<b>The routes are a first draft</b> built from titles and bios by Claude: please correct who should be suggested for what, and say if anyone should not be named by the assistant.")
+            + f'<h3 style="{HEAD}">1. The people and the routes</h3>' + small(f"status: {e(status)}")
+            + f'<p style="{BODY};margin:6pt 0 2pt"><b>People</b></p>' + people
+            + f'<p style="{BODY};margin:10pt 0 2pt"><b>Routes</b></p>' + routes
+            + '<p style="margin:6pt 0 2pt"></p>' + decision("staff/routing", "these people and routes", h, status))
+
+
 def build_html() -> str:
     idx = b.build(public=False)
     report = idx["_report"]["figures"]
@@ -277,12 +295,13 @@ def build_html() -> str:
 <h2 style="{HEAD}">What gets approved</h2>
 {table([[e(x), e(y)] for x, y in (("Part 1: positions", f"{len(summary)} stated positions. Each is shown with its chart, research links, and figures."),
                                       ("Part 2: ready-made answers", "Questions asked most, answered with fixed text."),
-                                      ("Part 3: fixed replies and page text", "The legal-help reply, the no-position reply, the “ask a person” button and its prefilled email, the chart-sharing buttons, error messages, the welcome line, and the privacy note."))], [30, 70])}
+                                      ("Part 3: fixed replies and page text", "The legal-help reply, the no-position reply, the “ask a person” button and its prefilled email, the chart-sharing buttons, error messages, the welcome line, and the privacy note."),
+                                      ("Part 4: who to talk to", "Which staff the assistant suggests for which topic, and the work emails the page offers for them."))], [30, 70])}
 {small("Everything else the assistant says comes from a model working only from our publications under strict rules (it must cite, may not invent a position or number, and may not give legal advice). That part is tested separately.")}
 <h2 style="{HEAD}">Positions at a glance</h2>
 {table(rows, [5, 28, 17, 28, 22], head=["#", "Position", "Area", "Chart", "Figures"])}
 """
-    body = intro + pos_html + faq_part(idx) + fixed_part(idx) + f"""
+    body = intro + pos_html + faq_part(idx) + fixed_part(idx) + staff_part() + f"""
 <h2 style="{HEAD}">After review</h2>
 {p("Decisions are read back from this document by reference (<code>chatbot/signoff_doc.py --read</code>). A ticked “Approve as written” with a name records the approval (in <code>positions.md</code>, <code>faq.json</code> or <code>fixed.json</code>) together with the fingerprint of the words you saw; edits, holds, and removals are listed for a person to handle. An approved position still has to be built into the public version and deployed before visitors see it, and a public build checks its figures against our published work again.")}
 """
@@ -420,6 +439,7 @@ def _current_hashes() -> dict[str, str]:
         out[f"answer/{e_['id']}"] = approval.faq_hash(e_["answer"], [x["url"] for x in e_["sources"]])
     for iid, item in fixed.items().items():
         out[f"fixed/{iid}"] = fixed.hash_of(item)
+    out["staff/routing"] = approval.staff_hash(json.loads((HERE / "content" / "staff.json").read_text(encoding="utf-8")))
     return out
 
 
@@ -435,6 +455,8 @@ def apply_approvals(found: dict[str, dict], write: bool) -> list[str]:
     pos_text = pos_path.read_text(encoding="utf-8")
     faq_doc = json.loads(faq_path.read_text(encoding="utf-8"))
     fix_doc = json.loads(fix_path.read_text(encoding="utf-8")) if fix_path.exists() else {"items": {}}
+    staff_path = HERE / "content" / "staff.json"
+    staff_doc = json.loads(staff_path.read_text(encoding="utf-8"))
     for ref, d in ticked.items():
         if len(d["ticked"]) > 1:
             log.append(f"{ref}: more than one box ticked ({'; '.join(d['ticked'])}); not applied")
@@ -469,6 +491,8 @@ def apply_approvals(found: dict[str, dict], write: bool) -> list[str]:
                 log.append(f"{ref}: no status line to change")
                 continue
             pos_text = pos_text[:m.end()] + new + pos_text[end:]
+        elif kind == "staff":
+            staff_doc["status"], staff_doc["reviewed"] = status, d["hash"]
         elif kind == "answer":
             entry = next(x for x in faq_doc["entries"] if x["id"] == key)
             entry["status"], entry["reviewed"] = status, d["hash"]
@@ -478,6 +502,7 @@ def apply_approvals(found: dict[str, dict], write: bool) -> list[str]:
     if write:
         pos_path.write_text(pos_text, encoding="utf-8")
         faq_path.write_text(json.dumps(faq_doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        staff_path.write_text(json.dumps(staff_doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
         fix_path.write_text(json.dumps(fix_doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return log
 
@@ -499,7 +524,7 @@ def main() -> int:
             if d["ticked"]:
                 print(f"  {ref}: {'; '.join(d['ticked'])}  | by: {d['by'] or '-'}  | notes: {d['notes'] or '-'}")
         log = apply_approvals(found, write=a_.apply)
-        print(("\napplied (content/positions.md, faq.json, fixed.json):" if a_.apply else "\nwould apply (dry run; add --apply):"))
+        print(("\napplied (content/positions.md, faq.json, fixed.json, staff.json):" if a_.apply else "\nwould apply (dry run; add --apply):"))
         print("\n".join("  " + l for l in log) or "  nothing")
         return 0
 

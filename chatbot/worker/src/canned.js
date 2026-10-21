@@ -48,6 +48,9 @@ const norm = (s) =>
 const canon = (t) => SAME[t] ?? t;
 const topicWords = (s) => new Set(tokenize(prep(s)).map(canon).filter((t) => !FILLER.has(t)));
 const rawWords = (s) => norm(s).split(" ").filter(Boolean);
+// "who" is a stopword for retrieval, but it changes the question: "who should I ask?" is not "what can I ask?". A question that
+// asks about a person only matches a phrasing that does too.
+const asksWho = (s) => rawWords(s).some((w) => w === "who" || w === "whom" || w === "whose");
 
 const compiled = new WeakMap();
 function compile(index) {
@@ -56,7 +59,7 @@ function compile(index) {
     c = (index.faq ?? []).map((e) => ({
       entry: e,
       exact: new Set(e.variants.map(norm)),
-      sets: e.variants.map(topicWords).filter((s) => s.size > 0),
+      sets: e.variants.map((v) => ({ words: topicWords(v), who: asksWho(v) })).filter((s) => s.words.size > 0),
     }));
     compiled.set(index, c);
   }
@@ -70,6 +73,7 @@ export function matchCanned(index, messages) {
   const n = norm(last);
   if (!n) return null;
   const q = topicWords(last);
+  const who = asksWho(last);
   const words = rawWords(last);
   const byId = (id) => (index.faq ?? []).find((e) => e.id === id) ?? null;
   const only = (all, any) => words.length > 0 && words.length <= 7 && words.every((w) => all.has(w)) && words.some((w) => any.has(w));
@@ -78,8 +82,9 @@ export function matchCanned(index, messages) {
   for (const { entry, exact, sets } of compile(index)) {
     if (exact.has(n)) return entry;
     if (!q.size) continue;
-    for (const v of sets) {
-      if (q.size !== v.size) continue; // the same number of topic words ...
+    for (const { words: v, who: vWho } of sets) {
+      if (who !== vWho) continue; // asking about a person on both sides or neither ...
+      if (q.size !== v.size) continue; // ... the same number of topic words ...
       let inter = 0;
       for (const t of q) if (v.has(t)) inter++;
       if (inter !== q.size) continue; // ... and the same ones. (Allowing "one fewer" matched "what's your position?" to "open positions".)

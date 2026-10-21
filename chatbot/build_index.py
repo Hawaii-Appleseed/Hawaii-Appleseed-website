@@ -251,6 +251,39 @@ def contact_block(core: list[dict]) -> dict:
     return {"email": email.group(0), "phone": phone.group(0), "tel": "+1" + "".join(phone.groups()), "page": sec["url"]}
 
 
+# ----------------------------------------------------------------------- staff
+def load_staff(about_staff: str) -> dict:
+    """content/staff.json: who works on what, from the Our Team page. Checked against the Staff list in about.md (every name and
+    title in both, nothing in one only), each email an @hiappleseed.org address, every route naming people that exist."""
+    d = json.loads((HERE / "content" / "staff.json").read_text(encoding="utf-8"))
+    people = d["people"]
+    ids = [x["id"] for x in people]
+    if len(set(ids)) != len(ids):
+        raise SystemExit("staff.json: duplicate person id")
+    listed = {m.group(1).strip(): m.group(2).strip() for m in re.finditer(r"^- ([^,\n]+), (.+)$", about_staff, re.M)}
+    mine = {x["name"]: x["title"] for x in people}
+    if listed != mine:
+        raise SystemExit(f"staff.json and the Staff list in content/about.md disagree: only in about.md {sorted(set(listed.items()) - set(mine.items()))}, only in staff.json {sorted(set(mine.items()) - set(listed.items()))}")
+    for x in people:
+        if not re.fullmatch(r"[\w.+-]+@hiappleseed\.org", x["email"]) or not re.fullmatch(r"[a-z]+(-[a-z]+)*", x["id"]):
+            raise SystemExit(f"staff.json: {x['name']}: needs a lowercase-hyphen id and an @hiappleseed.org email")
+    for r in d["routes"]:
+        if not r.get("about") or any(i not in ids for i in r["people"]):
+            raise SystemExit(f"staff.json: route {r.get('about')!r} names someone who is not in `people`")
+    return d
+
+
+def staff_text(d: dict) -> str:
+    """The KNOWLEDGE section: who to point a visitor to for what, then the addresses the Our Team page publishes."""
+    by = {x["id"]: x for x in d["people"]}
+    lines = ["Who to talk to, from the Our Team page. For each topic, the staff whose titles match it. Suggest at most two people, say what they work on in a few words, and name them with their ids so the page can offer an email button. Nobody here is promised to reply."]
+    for r in d["routes"]:
+        who = "; ".join(f"{by[i]['name']}, {by[i]['title']} (id: {i})" for i in r["people"])
+        lines.append(f"- {r['about']}: {who or 'no one in particular'}." + (f" {r['note']}" if r.get("note") else ""))
+    lines.append("Work emails as published on the Our Team page (hiappleseed.org/our-team): " + "; ".join(f"{x['name']} {x['email']}" for x in d["people"]) + ". The office is info@hiappleseed.org or (808) 587-7605.")
+    return "\n".join(lines)
+
+
 # ------------------------------------------------------------------ graphics
 _NUM = re.compile(r"\d[\d,]*(?:\.\d+)?")
 _GRAPHIC_TYPES = {"bars", "stats", "timeline", "scoreboard", "slices"}
@@ -613,6 +646,15 @@ def build(public: bool) -> dict:
             it["src"] = fname
             it["pos"] = fname == "positions.md" and it["group"] != "Topics with no stated public position"
             core.append(it)
+    staff = None
+    staff_raw = load_staff(next(c["text"] for c in core if c["title"] == "Staff"))
+    ok, why = approval.judge(staff_raw.get("status"), staff_raw.get("reviewed"), approval.staff_hash(staff_raw))
+    if ok or not public:
+        staff = {"people": staff_raw["people"], "routes": staff_raw["routes"]}
+        core.append({"group": "Who to talk to", "title": "Who to talk to about what", "text": staff_text(staff_raw), "research": [], "aliases": [],
+                     "graphics": [], "url": f"{BASE_URL}/our-team", "pos": False, "src": "staff.json"})
+    else:
+        skipped[f"who-to-talk-to routing {why} (public build)"] += 1
     bo = bill_outcomes()
     if bo:
         bo["research"] = []
@@ -684,6 +726,7 @@ def build(public: bool) -> dict:
         "faq": [{k: v for k, v in e.items() if k not in ("status", "reviewed", "hash")} for e in faq],
         "graphics": graphics,
         "session": {"covered": session_year()},
+        "staff": staff,
         "contact": contact_block(core),
         "pubs": catalog,
         "chunks": chunks,

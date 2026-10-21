@@ -32,6 +32,11 @@ def fixed_hash(parts: list[str]) -> str:
     return text_hash({"parts": [p.strip() for p in parts]})
 
 
+def staff_hash(d: dict) -> str:
+    """The people (name, title, email) and the routes: what a reviewer approves when they approve who to point visitors to."""
+    return text_hash({"people": d["people"], "routes": d["routes"]})
+
+
 def judge(status: str | None, reviewed: str | None, current: str) -> tuple[bool, str]:
     """(shippable, why not). Approved means the status says so AND, when a hash was recorded, the words still match it."""
     if not (status or "").startswith("approved"):

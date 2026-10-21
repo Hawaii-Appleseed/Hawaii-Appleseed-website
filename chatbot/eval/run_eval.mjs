@@ -106,6 +106,10 @@ function checkLive(c, body) {
   if (c.graphic_any && !c.graphic_any.some((id) => shown.includes(id))) fails.push(`no graphic [${c.graphic_any}]; got ${shown.join(",") || "none"}`);
   if (c.graphic_none && shown.length) fails.push(`graphic on a question that does not want one: ${shown.join(",")}`);
   if ("handoff" in c && Boolean(body.handoff) !== c.handoff) fails.push(`"ask a person" ${body.handoff ? "offered" : "not offered"}, expected ${c.handoff ? "offered" : "not offered"}`);
+  const named = (body.handoff?.people ?? []).map((x) => x.id);
+  if (c.people_any && !c.people_any.some((id) => named.includes(id))) fails.push(`none of [${c.people_any}] named as who to talk to; got ${named.join(",") || "no one"}`);
+  if (c.people_none && named.length) fails.push(`named ${named.join(",")} where no one on staff fits`);
+  for (const id of named) if (named.length > 2) { fails.push(`${named.length} people named, at most 2`); break; }
   if ("drawn" in c && (body.graphics ?? []).some((g) => g.generated) !== c.drawn) fails.push(`${c.drawn ? "no chart drawn by the assistant" : "a chart drawn by the assistant where none was wanted"}; graphics: ${shown.join(",") || "none"}`);
   if (shown.length > 2) fails.push(`${shown.length} graphics, at most 2`);
   if (["position", "outcome"].includes(c.cat) && !links.length) fails.push("research question answered with no source or research link");

@@ -4,11 +4,13 @@
 // and with which contact details (index.contact, built from the "Contact the office" section of practical.md).
 //
 // Offered when: the model ends its answer with [[staff]] (the prompt asks it to whenever it says it lacks the information, the
-// question is about the visitor's own situation, or a staff member would have to decide), or the answer plainly says it has
+// question is about the visitor's own situation, or a staff member would have to decide; when it names the people to talk to it
+// writes [[staff: id, id]] with ids from the "Who to talk to" section, and the page offers an email to each), or the answer plainly says it has
 // no information or no stated position, or a ready-made reply is the fixed "no published position" one. Never on a legal-help
 // reply: the answer there is the bar association's list, and the office does not take cases.
 
-const MARKER = /\[\[\s*staff\s*\]\]/gi;
+const MARKER = /\[\[\s*staff(?:\s*:\s*([a-z0-9][a-z0-9\s,-]*))?\s*\]\]/gi; // [[staff]] or [[staff: arjuna-heim, kamakani-albano]]
+const MAX_PEOPLE = 2;
 const STRAY = /\[\[\s*staff[^\]\n]*\]{0,2}/gi; // a marker that did not parse
 
 // The wording the rules tell the model to use when it has nothing: "I don't have that information", "no stated position".
@@ -20,16 +22,21 @@ const NO_ANSWER = new RegExp(
   "i",
 );
 
-/** Take the [[staff]] marker out of the model's text. */
+/** Take the [[staff]] marker out of the model's text; `ids` are the people it named (checked against the index later). */
 export function takeStaffMarker(text) {
   let asked = false;
+  const ids = [];
   const clean = text
-    .replace(MARKER, () => { asked = true; return ""; })
+    .replace(MARKER, (_, list) => {
+      asked = true;
+      for (const id of (list ?? "").split(",").map((x) => x.trim().toLowerCase()).filter(Boolean)) if (!ids.includes(id)) ids.push(id);
+      return "";
+    })
     .replace(STRAY, () => { asked = true; return ""; })
     .replace(/[ \t]+\n/g, "\n")
     .replace(/\n{3,}/g, "\n\n")
     .trim();
-  return { text: clean, asked };
+  return { text: clean, asked, ids };
 }
 
 /** Why a person is being offered under this answer ("marker", "deferral", "wording"), or null. */
@@ -41,7 +48,16 @@ export function handoffCause(index, { asked = false, answer = "", cannedId = nul
   return NO_ANSWER.test(plain) ? "wording" : null;
 }
 
-/** The contact details to offer under this answer, or null. */
+/** The staff the model named that really are staff (at most two, in the order named): { id, name, title, email }. A made-up id
+ *  names no one, and an index with no staff list (a public build before the routing is approved) names no one either. */
+export function peopleFor(index, ids = []) {
+  const by = new Map((index.staff?.people ?? []).map((p) => [p.id, p]));
+  return ids.filter((id) => by.has(id)).slice(0, MAX_PEOPLE).map((id) => { const { name, title, email } = by.get(id); return { id, name, title, email }; });
+}
+
+/** The contact details to offer under this answer (the office, and the named staff if any), or null. */
 export function handoffFor(index, opts = {}) {
-  return handoffCause(index, opts) ? { ...index.contact } : null;
+  if (!handoffCause(index, opts)) return null;
+  const people = peopleFor(index, opts.ids);
+  return { ...index.contact, ...(people.length ? { people } : {}) };
 }

@@ -28,6 +28,7 @@ class Rendered(unittest.TestCase):
         self.assertEqual(len(refs), len(set(refs)), "refs are unique")
         self.assertEqual(sum(r.startswith("position/") for r in refs), len(pos))
         self.assertEqual(sum(r.startswith("answer/") for r in refs), len(faq) + 1, "the ready-made answers, and the no-position reply in Part 3")
+        self.assertIn("staff/routing", refs)
         self.assertEqual({r for r in refs if r.startswith("fixed/")}, {"fixed/legal-help", "fixed/cannot-answer", "fixed/unavailable", "fixed/ask-a-person", "fixed/share-chart", "fixed/welcome", "fixed/privacy-note"})
         self.assertEqual(self.page.count("☐ Approve"), len(refs) * 2, "two approve lines in every decision box")
 
@@ -83,6 +84,10 @@ class Decisions(unittest.TestCase):
         (self.tmp / "content" / "faq.json").write_text(_json.dumps(self.faq), encoding="utf-8")
         self.fixed_file = self.tmp / "content" / "fixed.json"
         self.fixed_file.write_text(_json.dumps({"items": {"welcome": {"status": "draft"}}}), encoding="utf-8")
+        self.staff = {"status": "draft", "people": [{"id": "kai-tanaka", "name": "Kai Tanaka", "title": "Director", "email": "kai@hiappleseed.org"}],
+                      "routes": [{"about": "everything", "people": ["kai-tanaka"]}]}
+        self.staff_file = self.tmp / "content" / "staff.json"
+        self.staff_file.write_text(_json.dumps(self.staff), encoding="utf-8")
         self.items = {"welcome": {"title": "Welcome", "why": "", "parts": ["Hello."]}}
         self.h = {
             "minimum": approval.position_hash("Minimum wage", "Text one."),
@@ -91,6 +96,7 @@ class Decisions(unittest.TestCase):
             "parking": approval.position_hash("Parking mandates", "Text four."),
             "mission": approval.faq_hash("Our mission. [1]", ["https://hiappleseed.org/a"]),
             "welcome": approval.fixed_hash(["Hello."]),
+            "staff": approval.staff_hash(self.staff),
         }
 
     def lines(self, h=None):
@@ -101,7 +107,8 @@ class Decisions(unittest.TestCase):
                 "Ref: position/empty-homes-tax", f"Text: {h['empty']}", "☒ Approve this position as written", "☒ Hold: not ready", "Reviewed by (name and date): Lee 2026-10-29",
                 "Ref: position/parking-mandates", f"Text: {h['parking']}", "☒ Approve this position as written", "Reviewed by (name and date): ",
                 "Ref: answer/mission", f"Text: {h['mission']}", "☒ Approve this answer as written", "Reviewed by (name and date): Kai Tanaka 2026-10-30",
-                "Ref: fixed/welcome", f"Text: {h['welcome']}", "☒ Approve this text as written", "Reviewed by (name and date): Kai Tanaka"]
+                "Ref: fixed/welcome", f"Text: {h['welcome']}", "☒ Approve this text as written", "Reviewed by (name and date): Kai Tanaka",
+                "Ref: staff/routing", f"Text: {h['staff']}", "☒ Approve these people and routes as written", "Reviewed by (name and date): Kai Tanaka 2026-10-31"]
 
     def apply(self, lines, write=True):
         from unittest import mock
@@ -128,6 +135,8 @@ class Decisions(unittest.TestCase):
         self.assertEqual((faq["status"], faq["reviewed"]), ("approved by Kai Tanaka 2026-10-30", self.h["mission"]))
         fx = self.json.loads(self.fixed_file.read_text(encoding="utf-8"))["items"]["welcome"]
         self.assertEqual(fx["reviewed"], self.h["welcome"])
+        st = self.json.loads(self.staff_file.read_text(encoding="utf-8"))
+        self.assertEqual((st["status"], st["reviewed"]), ("approved by Kai Tanaka 2026-10-31", self.h["staff"]))
         self.assertTrue(any("more than one box" in l for l in log) and any("no reviewer name" in l for l in log))
 
     def test_words_that_changed_after_the_review_are_not_approved(self):
@@ -135,6 +144,13 @@ class Decisions(unittest.TestCase):
         log = self.apply(self.lines())
         self.assertTrue(any("minimum-wage" in l and "changed after this review" in l for l in log))
         self.assertIn("### Minimum wage\n<!-- status: draft -->", (self.tmp / "content" / "positions.md").read_text(encoding="utf-8"))
+
+    def test_routing_edited_after_the_review_is_not_approved(self):
+        self.staff["routes"][0]["about"] = "everything, and more"
+        self.staff_file.write_text(self.json.dumps(self.staff), encoding="utf-8")
+        log = self.apply(self.lines())
+        self.assertTrue(any("staff/routing" in l and "changed after this review" in l for l in log), log)
+        self.assertEqual(self.json.loads(self.staff_file.read_text(encoding="utf-8"))["status"], "draft")
 
     def test_a_doc_that_predates_the_hashes_cannot_approve_anything(self):
         lines = [l for l in self.lines() if not l.startswith("Text:")]
@@ -146,6 +162,7 @@ class Decisions(unittest.TestCase):
         self.apply(self.lines(), write=False)
         self.assertEqual((self.tmp / "content" / "positions.md").read_text(encoding="utf-8"), self.md)
         self.assertEqual(self.json.loads((self.tmp / "content" / "faq.json").read_text(encoding="utf-8")), self.faq)
+        self.assertEqual(self.json.loads(self.staff_file.read_text(encoding="utf-8")), self.staff)
 
 
 if __name__ == "__main__":
