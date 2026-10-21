@@ -18,8 +18,9 @@ These gate everything else; none can be done from here.
 - **Next on this item:** it checks that a figure was published in a similar context, not that our sentence means the same thing. Item 2 closes that by showing each figure's published sentence beside ours for a person to read.
 - Not covered yet: `about.md` / `practical.md` (they come from live site pages; `check_figures.py --all` lists what it cannot tie to the corpus), years, and small counts.
 
-### 2. Sign-off review page for staff (S–M, unblocks launch)
-Sign-off today means editing `status:` tags in markdown. Generate one page (HTML, or a Google Doc through the existing Drive route) with a row per position: the exact canned answer, its graphic, its sources and related research, each figure beside the published sentence it was matched to (`check_figures.py --json` has it), and an approved / needs-change column. The Worker already knows all of it; this is a template over `index.json`. Output a patch to `positions.md` from the ticked rows so approving is not hand-editing.
+### 2. Sign-off review page for staff: DONE 2026-10-21, as a Google Doc
+`signoff_doc.py` builds it in Communications & Media › Website: 25 positions (word for word, with chart, research links, aliases, and each figure beside its published sentence), 23 ready-made answers, 6 fixed replies, each with a decision box. `--read` lists decisions and `--apply` marks positions approved in `positions.md` (see the README, *Positions: sign-off*).
+- **Next on this item:** ready-made answers and fixed replies have no status line, so approvals for them are read but not applied; add one (`faq.json` flag, a `fixed.json`) so the public build can leave out an unapproved ready-made answer the way it leaves out an unapproved position. Until then the public build ships all of them, so staff should approve Parts 2 and 3 before launch.
 
 ### 3. "Ask a person" hand-off (S, practical value)
 When the assistant says "I don't have that", or a question is about a specific situation, offer a button that opens a prefilled email to info@hiappleseed.org (a `mailto:` the visitor sends themselves; the assistant still never contacts anyone). Include the question text only if the visitor clicks. Add the phone number and contact page beside it. Closes the biggest dead end in the current answers.

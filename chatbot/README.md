@@ -31,6 +31,7 @@ widget (index.html, on hiappleseed.org)
 | `check_links.py` | Fetches every link the assistant can show (pages, reports, PDFs) and reports any that fail. Run before each deploy. |
 | `content/faq.json` | Ready-made answers to the 23 questions asked most (mission, history, leadership, how to give, contact, jobs, ...). The quickest file for staff to review. |
 | `figures.py`, `check_figures.py` | The figure cross-check (see below) and its command-line report; `content/figures.json` lists figures a person has accepted. |
+| `signoff_doc.py` | Builds the staff sign-off review as a Google Doc, and reads the decisions back (see *Positions: sign-off*). |
 | `ROADMAP.md` | What to do next, in order, what is blocked on people, and what is parked. |
 | `content/graphics.json` | The explainer graphics (see *Graphics* below). Every figure carries a quoted proof from the approved text; the build fails without it. |
 | `content/topics.json` | Which issue area(s) each report belongs to; drives "latest research" and "research on housing". |
@@ -181,6 +182,18 @@ Related research is left off for questions that cite no research ("who is the ex
 ## Positions: sign-off
 
 Every position in `content/positions.md` has a status line. `python3 chatbot/build_index.py --public` (and `npm run deploy:public`) leaves out everything not marked `<!-- status: approved by NAME YYYY-MM-DD -->`, so a public launch can only say what staff have approved. A test enforces this. The pilot build includes drafts.
+
+**The review lives in a Google Doc** ("Ask Hawaiʻi Appleseed: Sign-off Review (Draft)" in the shared Drive, Communications & Media › Website; this repo is public, so the link is not recorded here). It lists everything the assistant says without a model checking it: each position word for word with its chart, research links, aliases, and every figure beside the published sentence it was matched to; the ready-made answers; and the fixed replies and page text (legal-help reply, no-position reply, error messages, welcome line, privacy note). Each item has a decision box (change ☐ to ☒), a reviewer line, and a notes line, so reviewers can tick, edit, and comment in the Doc itself.
+
+```
+P=~/internal-tools/appleseed-drive/.venv/bin/python        # the Drive pipeline's Python (it has the Google libraries)
+$P chatbot/signoff_doc.py --html out.html                  render only (no Google needed)
+$P chatbot/signoff_doc.py --update <docId>                 refresh the Doc after content changes (refuses if anyone has ticked a box)
+$P chatbot/signoff_doc.py --read <docId>                   list the decisions
+$P chatbot/signoff_doc.py --read <docId> --apply           mark ticked, named "Approve as written" positions approved in positions.md
+```
+
+`--apply` writes `<!-- status: approved by NAME YYYY-MM-DD -->` for a position only when exactly one box is ticked, it is "Approve as written", and a reviewer name is filled in; edits, holds, removals, and double-ticks are listed for a person to handle. Ready-made answers and fixed replies are read and reported but not applied (they have no status line yet). An approved position still needs `build_index.py --public` and a deploy, and that build checks its figures against the published corpus again.
 
 Lines starting "2026 outcome" were written from *Policy in Perspective 2026* (Aug 13, 2026) and the Legislature's feed. Where a bill has no outcome line, nobody checked its final status, and the assistant is told to say so (paid family leave HB2360, pay transparency HB2367, bridge coverage HB1546, and medical debt SB3025 have none).
 

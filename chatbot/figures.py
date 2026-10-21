@@ -82,7 +82,8 @@ def extract(text: str) -> list[dict]:
         return all(b <= x or a >= y for x, y in taken)
 
     def sent(a, b):
-        s0 = max(text.rfind(". ", 0, a) + 2, text.rfind("\n", 0, a) + 1, 0)
+        dot = text.rfind(". ", 0, a)
+        s0 = max(dot + 2 if dot >= 0 else 0, text.rfind("\n", 0, a) + 1)
         e = text.find(". ", b)
         return text[s0:(len(text) if e < 0 else e + 1)].strip()
 
@@ -198,15 +199,17 @@ class Corpus:
         of our other figures and shares a word. A figure on its own proves nothing: with 43 reports in the corpus,
         "$999 million" and "6,000" each turn up somewhere unrelated."""
         mine, label = _tokens(ctx), _tokens(pre)
-        best, best_score, via = None, 0.0, None
+        ids = {k for k in others if k.startswith(("bill:", "act:"))}
+        best, best_score = None, 0.0
         for i, around, before, qual in self.by_key.get(key, []):
             text, title, url, toks = self.sents[i]
             shared = mine & around
-            score = sum(self.weight(t) for t in shared) + 1.5 * sum(self.weight(t) for t in label & before)
-            if len(shared) >= 2 and score >= MIN_TOPIC_SCORE and score > best_score:
-                best, best_score, via = {"sentence": text, "title": title, "url": url, "score": round(score, 1), "qual": qual}, score, "words"
-            elif via is None and others & self.sent_keys[i] and (any(k.startswith(("bill:", "act:")) for k in others & self.sent_keys[i]) or shared):
-                best, via = {"sentence": text, "title": title, "url": url, "score": 0.0, "qual": qual}, "figures"
+            words = sum(self.weight(t) for t in shared) + 1.5 * sum(self.weight(t) for t in label & before)
+            same_ids = ids & self.sent_keys[i]  # the same bill or Act named beside the figure: strong evidence
+            ok = (len(shared) >= 2 and words >= MIN_TOPIC_SCORE) or bool(same_ids) or bool(others & self.sent_keys[i] and shared)
+            score = words + 6.0 * len(same_ids) + (1.0 if others & self.sent_keys[i] else 0.0)
+            if ok and score > best_score:
+                best, best_score = {"sentence": text, "title": title, "url": url, "score": round(score, 1), "qual": qual}, score
         return best
 
     def on_topic(self, key: str, topics: list[set[str]]) -> dict | None:

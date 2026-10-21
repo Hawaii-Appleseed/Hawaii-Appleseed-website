@@ -13,7 +13,7 @@ import { queryFor, search } from "./retrieve.js";
 export const LIMITS = { turns: 8, userChars: 800, assistantChars: 2400 };
 export const DEFAULT_MODEL = "claude-sonnet-5-5";
 
-const FRIENDLY = {
+export const FRIENDLY = {
   unavailable:
     "The assistant is unavailable right now. Please try again in a little while, or browse hiappleseed.org.",
   declined:
