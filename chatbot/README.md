@@ -49,7 +49,12 @@ python3 -m unittest discover -s chatbot/tests     # index builder: drafts, priva
 cd chatbot/worker && npm test                     # tokenizer parity, legal gate, retrieval, handler
 node chatbot/eval/run_eval.mjs --offline          # legal gate + retrieval on the golden set, no key
 node chatbot/eval/run_eval.mjs                    # LIVE: all 56 cases through the model (spends credits)
-node chatbot/eval/run_eval.mjs --model claude-haiku-5-5   # compare models
+node chatbot/eval/run_eval.mjs --model claude-haiku-5-5   # compare models (prints cost per question)
+node chatbot/eval/run_eval.mjs --dry --model claude-haiku-5-5   # no key: build real prompts, ESTIMATE tokens and cost
+# No API key? Export the exact prompts, answer them with any model (e.g. subagents on a subscription),
+# then grade the saved answers with the real checks:
+node chatbot/eval/export_prompts.mjs --ids exec-director,pos-conveyance --out prompts.md
+node chatbot/eval/run_eval.mjs --replay answers.json
 ```
 
 The offline pass is in CI-able shape today. The live pass is the one that tells you whether answers are right; run it before any launch and again after any change to `prompt.js` or the content files.

@@ -6,6 +6,7 @@
 //   node eval/run_eval.mjs --case legal       only cases whose id contains "legal"
 //   node eval/run_eval.mjs --show             print each live answer
 //   node eval/run_eval.mjs --cat org,position,outcome,nopos   only those categories (typical questions)
+//   node eval/run_eval.mjs --replay answers.json   grade saved answers ({case id: text}) with the real checks; no API call
 //   node eval/run_eval.mjs --dry              no API call: builds every real prompt and ESTIMATES tokens and cost
 //                                             (chars/4, 260 output tokens); add --model to price a model
 //
@@ -22,12 +23,16 @@ const flag = (n) => args.includes(`--${n}`);
 const opt = (n) => (args.includes(`--${n}`) ? args[args.indexOf(`--${n}`) + 1] : undefined);
 const offline = flag("offline");
 const dry = flag("dry");
+const replayFile = opt("replay");
+let _replay;
+function replayAnswers() { return (_replay ??= JSON.parse(readFileSync(replayFile, "utf8"))); }
 const only = opt("case");
 const model = opt("model");
 const here = new URL(".", import.meta.url);
 const index = JSON.parse(readFileSync(new URL("../worker/src/index.json", here), "utf8"));
 const cases = readFileSync(new URL("golden.jsonl", here), "utf8").trim().split("\n").map((l) => JSON.parse(l))
   .filter((c) => !only || c.id.includes(only))
+  .filter((c) => !replayFile || c.id in replayAnswers())
   .filter((c) => !opt("cat") || opt("cat").split(",").includes(c.cat));
 
 // $ per million tokens, first-party list prices (API skill table, cached 2026-10-06; re-check before relying on them).
@@ -98,7 +103,14 @@ function checkLive(c, body) {
 
 let client;
 let calls = 0, firstCallCost = null;
-if (dry) {
+if (replayFile) {
+  // Answers produced elsewhere (no API): look up by the visitor's question.
+  const byQuestion = Object.fromEntries(cases.map((c) => [c.q.replace(/\s+/g, " ").trim(), replayAnswers()[c.id]]));
+  client = { messages: { async create(params) {
+    const q = params.messages[params.messages.length - 1].content;
+    return { stop_reason: "end_turn", usage: {}, content: [{ type: "text", text: byQuestion[q] ?? "" }] };
+  } } };
+} else if (dry) {
   // Stand-in for the SDK: estimates usage from the real request, and models the 1-hour prompt cache
   // (the first call writes the cached system block, later calls read it).
   let cached = false;
@@ -113,7 +125,7 @@ if (dry) {
       },
     },
   };
-} else if (!offline && !dry) {
+} else if (!offline && !dry && !replayFile) {
   const key = process.env.ANTHROPIC_API_KEY ?? (existsSync(`${homedir()}/.anthropic_api_key`) ? readFileSync(`${homedir()}/.anthropic_api_key`, "utf8").trim() : null);
   if (!key) { console.error("No API key. Use --offline, or put a key in ~/.anthropic_api_key."); process.exit(2); }
   // Resolved from worker/node_modules: this folder has no package.json of its own.
@@ -160,9 +172,9 @@ for (const { c, fails, answer, skipped: sk } of results) {
   if (fails.length) console.log(`FAIL ${c.id}: ${fails.join("; ")}${answer ? `\n     > ${answer.slice(0, 220).replace(/\n/g, " ")}` : ""}`);
   else if (flag("show")) console.log(`ok   ${c.id}\n     > ${(answer ?? "").slice(0, 300).replace(/\n/g, " ")}`);
 }
-console.log(dry ? `\nDRY RUN, ESTIMATED (${priced}): ${results.length - skipped} questions priced, nothing graded` : `\n${offline ? "OFFLINE (gate + retrieval)" : dry ? `DRY RUN, ESTIMATED (${priced})` : `LIVE ${model ?? "default model"}`}: ${results.length - skipped - failed} passed, ${failed} failed${skipped ? `, ${skipped} not applicable offline` : ""}`);
+console.log(dry ? `\nDRY RUN, ESTIMATED (${priced}): ${results.length - skipped} questions priced, nothing graded` : `\n${offline ? "OFFLINE (gate + retrieval)" : replayFile ? `REPLAY of ${replayFile.split("/").pop()}` : `LIVE ${model ?? "default model"}`}: ${results.length - skipped - failed} passed, ${failed} failed${skipped ? `, ${skipped} not applicable offline` : ""}`);
 for (const [k, v] of Object.entries(byCat)) console.log(`  ${k.padEnd(11)} ${v.pass}/${v.total}`);
-if (!offline) {
+if (!offline && !replayFile) {
   console.log(`tokens: ${tokens.in} in (${tokens.cacheRead} cache-read, ${tokens.cacheWrite} cache-write), ${tokens.out} out`);
   const total = dollars(tokens);
   if (total != null && calls) {
