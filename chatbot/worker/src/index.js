@@ -10,6 +10,8 @@
 //   DAILY_BUDGET_USD    whole-site daily spend ceiling (default 5), counted from real token usage;
 //                       needs the same KV binding. The Console workspace limit stays the hard stop.
 //   FALLBACKS           "default" turns on server-side refusal fallback (off by default)
+//   FEEDBACK "1"        turn on POST /feedback: a rating (and optional comment) on an answer is saved to KV with the
+//                       question, answer and the signed-in email for 90 days, for the team to review (internal pilot)
 //   REQUIRE_ACCESS "1", ACCESS_TEAM_DOMAIN, ACCESS_AUD   internal pilot: every route needs a valid Cloudflare Access
 //                       token and the Worker answers 503 until both are set (access.js). GET / serves the widget.
 import Anthropic from "@anthropic-ai/sdk";
@@ -69,6 +71,37 @@ async function overLimit(kv, key, limit, ttl) {
   return n > limit;
 }
 
+const FEEDBACK_TTL = 90 * 24 * 3600;
+const clip = (v, n) => (typeof v === "string" ? v.replace(/\s+/g, " ").trim().slice(0, n) : "");
+
+/** A thumbs up or down on one answer. Stores the rated Q&A (and the rater's email) so the team can see what went wrong. */
+async function handleFeedback(request, env, cors, who, url) {
+  if (env.FEEDBACK !== "1" || !env.RATE) return json({ error: "not_found" }, 404);
+  if (!cors) return json({ error: "forbidden" }, 403);
+  if (Number(request.headers.get("content-length") ?? 0) > MAX_BODY) return json({ error: "too_large" }, 413, cors);
+  let b;
+  try { b = await request.json(); } catch { return json({ error: "bad_request" }, 400, cors); }
+  const rating = b?.rating === "up" || b?.rating === "down" ? b.rating : null;
+  const question = clip(b?.question, 800);
+  const answer = clip(b?.answer, 2400);
+  if (!rating || !question || !answer) return json({ error: "bad_request" }, 400, cors);
+
+  const ip = request.headers.get("cf-connecting-ip") ?? "";
+  const visitor = await sha(`${who.email ?? ip}|${env.RATE_SALT ?? "ha"}`);
+  if (await overLimit(env.RATE, `f:${visitor}:${new Date().toISOString().slice(0, 10)}`, Number(env.FEEDBACK_PER_DAY ?? 60), 90000)) {
+    return json({ error: "rate_limited" }, 429, cors);
+  }
+  const now = new Date().toISOString();
+  const entry = {
+    ts: now, email: who.email, rating, comment: clip(b?.comment, 500), question, answer,
+    sources: Array.isArray(b?.sources) ? b.sources.slice(0, 6).map((u) => clip(u, 300)).filter(Boolean) : [],
+    model: env.MODEL ?? DEFAULT_MODEL, built: index.built,
+  };
+  await env.RATE.put(`fb:${now}:${crypto.randomUUID().slice(0, 8)}`, JSON.stringify(entry), { expirationTtl: FEEDBACK_TTL });
+  console.log(JSON.stringify({ event: "feedback", rating }));
+  return json({ ok: true }, 200, cors);
+}
+
 export async function handleRequest(request, env, deps = {}) {
   const url = new URL(request.url);
   // Internal pilot: nothing, not even /health, answers without a verified Access token. Fail closed.
@@ -79,6 +112,7 @@ export async function handleRequest(request, env, deps = {}) {
   const cors = corsHeaders(request, env);
   if (request.method === "OPTIONS") return new Response(null, { status: cors ? 204 : 403, headers: cors ?? {} });
   if (url.pathname === "/health") return json({ ok: true, built: index.built, public: index.public, chunks: index.chunks.length, source: index.source }, 200);
+  if (url.pathname === "/feedback" && request.method === "POST") return handleFeedback(request, env, cors, who, url);
   if (url.pathname !== "/chat" || request.method !== "POST") return json({ error: "not_found" }, 404);
   if (!cors) return json({ error: "forbidden" }, 403);
 

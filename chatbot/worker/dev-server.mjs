@@ -8,7 +8,10 @@ import Anthropic from "@anthropic-ai/sdk";
 import { handleRequest } from "./src/index.js";
 
 const PORT = Number(process.env.PORT ?? 8791);
+// An in-memory stand-in for the Worker's KV store, so rate limits, the budget, and feedback work locally.
+const memoryKv = () => { const m = new Map(); return { m, get: async (k) => m.get(k) ?? null, put: async (k, v) => void m.set(k, v) }; };
 const env = {
+  RATE: memoryKv(), FEEDBACK: "1", PER_MINUTE: "100", PER_DAY: "1000", DAILY_CAP: "5000", DAILY_BUDGET_USD: "50",
   ALLOWED_ORIGINS: process.env.ALLOWED_ORIGINS ?? "http://localhost:8742,http://127.0.0.1:8742,http://localhost:8790",
   MODEL: process.env.MODEL,
   EFFORT: process.env.EFFORT,

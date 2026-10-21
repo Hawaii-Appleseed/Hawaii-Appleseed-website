@@ -1,6 +1,7 @@
 // One chat turn: validate -> legal gate -> retrieve -> model -> clean up. Pure of
 // Cloudflare specifics, so the dev server, the tests, and the eval harness all run
 // the same code the Worker does. `client` is an Anthropic SDK client (or a fake).
+import { matchCanned } from "./canned.js";
 import { isLegalHelpRequest, LEGAL_REPLY, LEGAL_SENTINEL, LEGAL_SOURCES } from "./legal.js";
 import { buildExcerpts, buildSystem } from "./prompt.js";
 import { suggestResearch } from "./research.js";
@@ -72,6 +73,13 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
 
   if (isLegalHelpRequest(last)) {
     return { status: 200, body: { answer: LEGAL_REPLY, sources: LEGAL_SOURCES, related: [], flags: { legal: true } } };
+  }
+
+  // The questions asked most get a reviewed answer straight away: no model, no cost, the same words every time.
+  const canned = env.CANNED === "off" ? null : matchCanned(index, messages);
+  if (canned) {
+    console.log(JSON.stringify({ event: "canned", id: canned.id }));
+    return { status: 200, body: { answer: canned.answer, sources: canned.sources, related: [], flags: { canned: canned.id } } };
   }
 
   const hits = search(index, queryFor(messages));

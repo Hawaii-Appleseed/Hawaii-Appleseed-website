@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="../assets/tokens.css">
 </head>
 <body style="margin: 0"> <!-- attribute, not a <style>: the Squarespace build lifts head styles -->
-<div id="ha-ask" data-endpoint="" data-turnstile-sitekey="">
+<div id="ha-ask" data-endpoint="" data-turnstile-sitekey="" data-feedback="">
 <style>
   /* Every rule is scoped to #ha-ask: this block is pasted into a Squarespace page,
      where an unscoped rule restyles the site's own chrome and the site's
@@ -24,6 +24,10 @@
   #ha-ask .ha-ask__lede { font-size: var(--ha-fs-lead); line-height: var(--ha-lh-body); color: var(--ha-ink-muted); margin: 0 0 var(--ha-space-lg); }
 
   #ha-ask .ha-ask__notice { font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-charcoal); background: var(--ha-ash-light); border-left: 4px solid var(--ha-teal-deep); border-radius: var(--ha-radius-callout); padding: var(--ha-space-xs) var(--ha-space-sm); margin: 0 0 var(--ha-space-md); }
+  #ha-ask .ha-ask__fb { margin: var(--ha-space-xs) 0 0; padding: var(--ha-space-xs) 0 0; border-top: 1px solid var(--ha-rule); font-size: var(--ha-fs-caption); color: var(--ha-ink-subtle); display: flex; flex-wrap: wrap; gap: var(--ha-space-2xs); align-items: center; }
+  #ha-ask .ha-ask__fbtn { font: inherit; font-family: var(--ha-font-body); font-size: var(--ha-fs-caption); color: var(--ha-teal-ink); background: var(--ha-white); border: 1px solid var(--ha-teal-deep); border-radius: var(--ha-radius-pill); padding: var(--ha-space-2xs) var(--ha-space-sm); cursor: pointer; margin: 0; }
+  #ha-ask .ha-ask__fbtn:hover { background: var(--ha-ash-light); }
+  #ha-ask .ha-ask__fbtext { flex: 1 1 100%; font: inherit; font-family: var(--ha-font-body); font-size: var(--ha-fs-small); color: var(--ha-charcoal); background: var(--ha-white); border: 1px solid var(--ha-teal-deep); border-radius: var(--ha-radius-card); padding: var(--ha-space-2xs) var(--ha-space-xs); resize: vertical; min-height: calc(var(--ha-space-xl) * 2); margin: 0; }
   #ha-ask .ha-ask__panel { background: var(--ha-white); border: 1px solid var(--ha-rule); border-radius: var(--ha-radius-card); overflow: hidden; }
   #ha-ask .ha-ask__log { list-style: none; margin: 0; padding: var(--ha-space-md); min-height: 260px; max-height: min(60vh, 560px); overflow-y: auto; display: flex; flex-direction: column; gap: var(--ha-space-sm); }
   #ha-ask .ha-ask__msg { margin: 0; padding: 0; display: flex; }
@@ -189,6 +193,30 @@
     return box;
   }
 
+  // "Was this helpful?" under an answer, when the build turned feedback on. A "No" can say what was wrong.
+  var feedbackOn = root.getAttribute('data-feedback') === '1';
+  function sendFeedback(rating, comment, question, d) {
+    return fetch(endpoint.replace(/\/chat$/, '/feedback'), { method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ rating: rating, comment: comment, question: question, answer: d.answer, sources: (d.sources || []).map(function (x) { return x.url; }) }) })
+      .then(function (r) { return r.ok; }).catch(function () { return false; });
+  }
+  function feedbackRow(question, d) {
+    var row = el('div', 'ha-ask__fb'), label = el('span', null, 'Was this helpful?');
+    var yes = el('button', 'ha-ask__fbtn', 'Yes'), no = el('button', 'ha-ask__fbtn', 'No');
+    yes.type = no.type = 'button';
+    function done(ok) { row.textContent = ok ? 'Thanks, saved for the team.' : 'Could not save that. Please try again later.'; }
+    yes.addEventListener('click', function () { sendFeedback('up', '', question, d).then(done); });
+    no.addEventListener('click', function () {
+      row.textContent = '';
+      var box = el('textarea', 'ha-ask__fbtext'); box.maxLength = 500; box.setAttribute('aria-label', 'What was wrong or missing? (optional)'); box.placeholder = 'What was wrong or missing? (optional)';
+      var send = el('button', 'ha-ask__fbtn', 'Send'); send.type = 'button';
+      send.addEventListener('click', function () { sendFeedback('down', box.value, question, d).then(done); });
+      row.appendChild(box); row.appendChild(send); box.focus();
+    });
+    row.appendChild(label); row.appendChild(yes); row.appendChild(no);
+    return row;
+  }
+
   function add(role, content) {
     var li = el('li', 'ha-ask__msg ha-ask__msg--' + (role === 'user' ? 'me' : 'bot'));
     var b = el('div', 'ha-ask__bubble');
@@ -231,7 +259,9 @@
       var d = r.data || {};
       var text = d.answer || 'Something went wrong. Please try again, or browse hiappleseed.org.';
       tli.remove();
-      add('bot', renderAnswer(text, d.sources || [], d.related || []));
+      var shown = renderAnswer(text, d.sources || [], d.related || []);
+      if (feedbackOn && r.ok && d.answer) shown.appendChild(feedbackRow(question, d));
+      add('bot', shown);
       if (r.ok && d.answer) history.push({ role: 'assistant', content: d.answer });
       else history.pop();
     }).catch(function () {

@@ -186,3 +186,66 @@ class Embed(unittest.TestCase):
     def test_no_internal_content_leaks_into_the_widget(self):
         for needle in ("positions.md", "Coalition Meeting Notes", "ANTHROPIC_API_KEY", "sk-ant"):
             self.assertNotIn(needle, self.html)
+
+
+class EmbedDocument(unittest.TestCase):
+    def test_worker_page_is_a_full_document_with_a_viewport_and_noindex(self):
+        sys.path.insert(0, str(HERE))
+        import build_embed as be
+        doc = be.as_document(be.build())
+        self.assertTrue(doc.startswith("<!doctype html>"))
+        self.assertIn('name="viewport" content="width=device-width, initial-scale=1"', doc)
+        self.assertIn("noindex", doc)
+        self.assertIn('id="ha-ask"', doc)
+        self.assertTrue(all(ord(c) < 128 for c in doc))
+
+
+class ReadyMadeAnswers(unittest.TestCase):
+    """content/faq.json goes out without a model checking it, so the build is the checker."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.idx = b.build(public=False)
+        cls.faq_path = HERE / "content" / "faq.json"
+
+    def test_built_into_the_index_with_sources(self):
+        self.assertGreaterEqual(len(self.idx["faq"]), 20)
+        urls = {c["url"] for c in self.idx["core"]}
+        for e in self.idx["faq"]:
+            for s in e["sources"]:
+                self.assertIn(s["url"], urls, e["id"])
+
+    def _build_with(self, mutate):
+        import tempfile
+        from unittest import mock
+        d = json.loads(self.faq_path.read_text(encoding="utf-8"))
+        mutate(d["entries"])
+        tmp = Path(tempfile.mkdtemp(prefix="ha-faq-"))
+        (tmp / "content").mkdir()
+        (tmp / "content" / "faq.json").write_text(json.dumps(d), encoding="utf-8")
+        core = [c for c in self.idx["core"] if c["url"]]
+        facts = (HERE / "content" / "about.md").read_text(encoding="utf-8") + (HERE / "content" / "practical.md").read_text(encoding="utf-8")
+        with mock.patch.object(b, "HERE", tmp):
+            return b.load_faq({c["url"] for c in core}, facts)
+
+    def test_an_invented_phone_number_breaks_the_build(self):
+        def tamper(es): next(e for e in es if e["id"] == "contact")["answer"] += " Or call (808) 555-0100."
+        with self.assertRaises(SystemExit) as cm:
+            self._build_with(tamper)
+        self.assertIn("555-0100", str(cm.exception))
+
+    def test_a_source_that_is_not_a_page_in_the_content_breaks_the_build(self):
+        def tamper(es): next(e for e in es if e["id"] == "mission")["sources"][0]["url"] = "https://example.com/mission"
+        with self.assertRaises(SystemExit):
+            self._build_with(tamper)
+
+    def test_citation_markers_must_match_sources_and_voice_rules_hold(self):
+        def marker(es): next(e for e in es if e["id"] == "mission")["answer"] += " See also [2]."
+        def exclaim(es): next(e for e in es if e["id"] == "greeting")["answer"] = "Aloha! Ask away."
+        def bare(es): next(e for e in es if e["id"] == "greeting")["answer"] = "Welcome to Hawaii Appleseed."
+        for t in (marker, exclaim, bare):
+            with self.assertRaises(SystemExit, msg=t.__name__):
+                self._build_with(t)
+
+    def test_every_vetted_answer_passes_as_shipped(self):
+        self.assertEqual(len(self._build_with(lambda es: None)), len(self.idx["faq"]))

@@ -62,7 +62,36 @@ export function matchSections(index, query, k = 2) {
   return scored.slice(0, k);
 }
 
+// "What is your latest report?" and "what research do you have on housing?" are requests to browse, not to look
+// something up: answer with the newest reports (in that issue area when one is named), whatever the search found.
+const RESEARCH_NOUN = /\b(reports?|research|publications?|papers?|briefs?|studies|study|analys[ie]s)\b/;
+const RECENT = /\b(latest|newest|most recent|recent|recently|new)\b/;
+const PUBLISHED = /\b(what|which)\b.*\b(published|released|written)\b/;
+const AREA_WORDS = {
+  "Affordable Housing": /\b(housing|rents?|renters?|tenants?|evictions?|landlords?|homeless(ness)?|houseless)\b/,
+  "Food Equity": /\b(food|snap|hunger|hungry|meals?|nutrition|farms?)\b/,
+  "Wages & Labor": /\b(wages?|labor|workers?|jobs?|employment|paid leave)\b/,
+  "Transportation Equity": /\b(transit|transportation|bus(es)?|walking|pedestrians?|roads?|streets?|traffic|mobility)\b/,
+  "Taxes & Budget": /\b(tax(es)?|budget|revenue|credits?|wealth|spending)\b/,
+};
+
+export function browseResearch({ index, query, limit = 3, exclude = [] }) {
+  const q = query.toLowerCase();
+  const area = Object.keys(AREA_WORDS).find((a) => AREA_WORDS[a].test(q));
+  const recentAsk = RESEARCH_NOUN.test(q) && RECENT.test(q);
+  const topicAsk = RESEARCH_NOUN.test(q) && area && /\b(on|about|for|do you have|available|any)\b/.test(q);
+  if (!recentAsk && !topicAsk && !PUBLISHED.test(q)) return null;
+  const skip = new Set(exclude);
+  return Object.entries(index.pubs ?? {})
+    .filter(([u, p]) => !skip.has(u) && (!area || p.a?.includes(area)))
+    .sort(([, a], [, b]) => (b.d ?? "").localeCompare(a.d ?? "") || a.t.localeCompare(b.t))
+    .slice(0, limit)
+    .map(([url, p]) => ({ title: p.t, url, year: p.y, pdf: p.p || null }));
+}
+
 export function suggestResearch({ index, query, hits = [], citedCoreIds = [], fromHits = false, exclude = [], limit = 3 }) {
+  const browse = browseResearch({ index, query, limit, exclude });
+  if (browse) return browse;
   const urls = [];
   const byId = new Map(index.core.map((s) => [s.id, s]));
   for (const id of citedCoreIds) urls.push(...(byId.get(id)?.research ?? []));

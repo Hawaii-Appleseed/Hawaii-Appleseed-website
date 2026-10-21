@@ -6,6 +6,33 @@ import { tokenize } from "./tokenize.js";
 const K1 = 1.5;
 const B = 0.75;
 
+// Words that say nothing about which report a question is after.
+const GENERIC = new Set(["hawaii", "appleseed", "state", "center", "law", "economic", "justice", "report", "brief", "help", "make", "want", "new", "read", "know", "tell", "find", "look"]);
+const firstChunk = new WeakMap(); // index -> Map(report url -> chunk index of its opening passage)
+
+function openings(index) {
+  let m = firstChunk.get(index);
+  if (!m) {
+    m = new Map();
+    index.chunks.forEach((c, i) => { if (c.k === "publication" && c.u && !m.has(c.u)) m.set(c.u, i); });
+    firstChunk.set(index, m);
+  }
+  return m;
+}
+
+/** The report a question names, if exactly one family of reports does: every topic word of the question must be in
+ *  its title ("how do I read the state budget" -> the newest Budget Primer). Newest wins among a series. */
+export function reportNamedBy(index, queryTokens) {
+  const q = queryTokens.filter((t) => !GENERIC.has(t) && !/^20\d\d$/.test(t));
+  if (!q.length) return null;
+  let best = null;
+  for (const [url, p] of Object.entries(index.pubs ?? {})) {
+    const title = new Set(tokenize(p.t));
+    if (q.every((t) => title.has(t)) && (!best || (p.y ?? 0) > (best.p.y ?? 0) || ((p.y ?? 0) === (best.p.y ?? 0) && url > best.url))) best = { url, p };
+  }
+  return best?.url ?? null;
+}
+
 /** The text to search for: the latest question, plus the one before it when the
  *  latest is a short follow-up ("what about renters?"). */
 export function queryFor(messages) {
@@ -40,10 +67,17 @@ export function search(index, query, { k = 6, perDoc = 2 } = {}) {
     .sort((a, b) => b[1] - a[1]);
   const hits = [];
   const perDocCount = new Map();
+  // A question that names a report gets that report's opening passage first, even when body text outscores it.
+  const named = reportNamedBy(index, [...new Set(tokenize(query))]);
+  const lead = named ? openings(index).get(named) : undefined;
+  if (lead !== undefined) {
+    hits.push({ ...index.chunks[lead], score: ranked[0]?.[1] ?? 0 });
+    perDocCount.set(named, 1);
+  }
   for (const [ci, score] of ranked) {
     const c = index.chunks[ci];
     const key = c.u ?? c.t;
-    if ((perDocCount.get(key) ?? 0) >= perDoc) continue;
+    if (ci === lead || (perDocCount.get(key) ?? 0) >= perDoc) continue;
     perDocCount.set(key, (perDocCount.get(key) ?? 0) + 1);
     hits.push({ ...c, score });
     if (hits.length >= k) break;

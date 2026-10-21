@@ -160,18 +160,99 @@ def bill_outcomes() -> dict | None:
             "text": text, "url": None, "status": "approved: generated from Legislature data"}
 
 
+# ----------------------------------------------------------------------- faq
+_FACT = [r"\(\d{3}\) \d{3}-\d{4}", r"[\w.+-]+@[\w-]+\.[\w.-]+", r"\$\d[\d,]*", r"\b(?:19|20)\d\d\b", r"\b\d{5}\b"]
+
+
+def load_faq(core_urls: set[str], fact_text: str) -> list[dict]:
+    """content/faq.json: stock answers. Checked hard, because they go out unreviewed by a model: sources must be real
+    pages in the core content, citation numbers must line up, the voice rules must hold, and every phone number, email,
+    dollar amount, year, and zip code must already appear in about.md or practical.md."""
+    entries = json.loads((HERE / "content" / "faq.json").read_text(encoding="utf-8"))["entries"]
+    seen, out = set(), []
+    for e in entries:
+        i = e["id"]
+        if i in seen:
+            raise SystemExit(f"faq: duplicate id {i}")
+        seen.add(i)
+        if not e.get("variants") or not all(isinstance(v, str) and v.strip() for v in e["variants"]):
+            raise SystemExit(f"faq {i}: needs at least one non-empty variant")
+        a = e["answer"]
+        for src in e["sources"]:
+            if src["url"] not in core_urls:
+                raise SystemExit(f"faq {i}: source {src['url']} is not a page in content/about.md or practical.md")
+        used = {int(n) for n in re.findall(r"\[(\d+)\]", a)}
+        if used != set(range(1, len(e["sources"]) + 1)):
+            raise SystemExit(f"faq {i}: citation markers {sorted(used)} do not match its {len(e['sources'])} source(s)")
+        if "!" in a or "%" in a or re.search(r"\bHawaii\b(?!\.[A-Za-z])", a) or " \u2014 " in a:
+            raise SystemExit(f"faq {i}: voice rule broken (no exclamation points, 'percent' not %, ʻokina on Hawaiʻi, unspaced em dashes)")
+        for pat in _FACT:
+            for m in re.findall(pat, a):
+                if m not in fact_text:
+                    raise SystemExit(f"faq {i}: {m!r} is not in content/about.md or practical.md")
+        out.append({"id": i, "variants": e["variants"], "answer": a,
+                    "sources": [{"n": n, "title": src["title"], "url": src["url"], "year": None, "pdf": None} for n, src in enumerate(e["sources"], 1)]})
+    return out
+
+
 # ------------------------------------------------------------------- research
+AREAS = ["Affordable Housing", "Food Equity", "Wages & Labor", "Transportation Equity", "Taxes & Budget"]
+
+
+def _topics() -> dict:
+    """content/topics.json: which issue area(s) each report belongs to. Checked at build time."""
+    return json.loads((HERE / "content" / "topics.json").read_text(encoding="utf-8"))["reports"]
+
+
 def pub_catalog() -> dict:
-    """Every published report, keyed by live URL: title, year, PDF link."""
+    """Every published report, keyed by live URL: title, year, date, PDF link, issue areas, what it is about."""
+    topics = _topics()
     cat = {}
     for p in sorted((WB / "publications").glob("*.txt")):
         ref = sources.source_ref(f"publications/{p.name}")
         if not ref["url"]:
             continue
-        m = re.match(r"(20\d\d)-", p.name)
+        slug = ref["url"].rstrip("/").split("/")[-1]
+        t = topics.get(slug, {})
+        for a in t.get("areas", []):
+            if a not in AREAS:
+                raise SystemExit(f"content/topics.json: {slug}: unknown issue area {a!r}")
+        m = re.match(r"(20\d\d)-(\d\d)-(\d\d)", p.name)
         cat[ref["url"]] = {"t": sources.source_title(f"publications/{p.name}"),
-                           "y": int(m.group(1)) if m else None, "p": ref["pdf"]}
+                           "y": int(m.group(1)) if m else None,
+                           "d": f"{m.group(1)}-{m.group(2)}-{m.group(3)}" if m else None,
+                           "p": ref["pdf"], "a": t.get("areas", []), "w": t.get("about")}
+    unknown = sorted(set(topics) - {u.rstrip("/").split("/")[-1] for u in cat})
+    if unknown:
+        raise SystemExit(f"content/topics.json names reports that do not exist: {unknown}")
     return cat
+
+
+def _label(p: dict) -> str:
+    return f"{p['t']} ({p['w']})" if p.get("w") and p["w"] != "session review" else p["t"]
+
+
+def _month(d: str | None) -> str:
+    if not d:
+        return ""
+    return datetime.strptime(d, "%Y-%m-%d").strftime("%B %Y")
+
+
+def research_sections(catalog: dict) -> list[dict]:
+    """Generated 'Latest research' and 'Research by issue area' sections, so 'what is your newest report?' and
+    'what do you have on housing?' are answered from the real list, newest first, never from keyword luck."""
+    reports = sorted(catalog.values(), key=lambda p: (p["d"] or "", p["t"]), reverse=True)
+    latest = "\n".join(f"- {_label(p)}, {_month(p['d'])}" for p in reports[:8])
+    by_area = []
+    for area in AREAS:
+        rs = [p for p in reports if area in p["a"]][:5]
+        by_area.append(f"{area}: " + "; ".join(f"{_label(p)} ({p['y']})" for p in rs))
+    return [
+        {"group": "Research", "title": "Latest research", "url": f"{BASE_URL}/research", "research": [],
+         "text": "Hawaiʻi Appleseed's most recent reports, newest first. The Research page lists all of them, each with a PDF.\n" + latest},
+        {"group": "Research", "title": "Research by issue area", "url": f"{BASE_URL}/research", "research": [],
+         "text": "The newest reports in each issue area (Policy in Perspective, the annual look back at each legislative session, covers all five).\n" + "\n".join(f"- {a}" for a in by_area)},
+    ]
 
 
 # ------------------------------------------------------------------- corpus
@@ -289,15 +370,20 @@ def build(public: bool) -> dict:
                 if public and not it["status"].startswith("approved"):
                     skipped["position not approved (public build)"] += 1
                     continue
+            it["src"] = fname
             core.append(it)
     bo = bill_outcomes()
     if bo:
         bo["research"] = []
         core.append(bo)
     catalog = pub_catalog()
+    core += research_sections(catalog)
+    facts = "\n".join(c["text"] for c in core if c.get("src") in ("about.md", "practical.md"))
+    faq = load_faq({c["url"] for c in core if c.get("src") in ("about.md", "practical.md") and c["url"]}, facts)
     for i, it in enumerate(core, 1):
         it["id"] = f"C{i}"
         it.pop("status", None)
+        it.pop("src", None)
         for u in it["research"]:
             if u not in catalog:
                 raise SystemExit(f"{it['title']}: research link {u} is not a published report in writing-bot/publications")
@@ -313,12 +399,16 @@ def build(public: bool) -> dict:
             for term, tf in Counter(toks).items():
                 post.setdefault(term, []).extend([ci, tf])
     n = len(chunks)
+    skipped["report without a topic in content/topics.json"] = sum(1 for p in catalog.values() if not p["a"])
+    if not skipped["report without a topic in content/topics.json"]:
+        del skipped["report without a topic in content/topics.json"]
     return {
         "version": 1,
         "source": _source_info(),
         "built": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "public": public,
         "core": core,
+        "faq": faq,
         "pubs": catalog,
         "chunks": chunks,
         "bm25": {"n": n, "avgdl": round(sum(dl) / max(n, 1), 3), "dl": dl, "post": post},
@@ -345,6 +435,7 @@ def main() -> int:
     print(f"wrote {shown}  {a.out.stat().st_size/1e6:.2f} MB  "
           f"({'public' if a.public else 'pilot'} build, corpus from {SOURCE_MODE})")
     print(f"  research catalog: {len(idx['pubs'])} reports; {sum(1 for c in idx['core'] if c['research'])} sections link curated research")
+    print(f"  ready-made answers: {len(idx['faq'])} ({sum(len(e['variants']) for e in idx['faq'])} phrasings)")
     print(f"  core sections: {len(idx['core'])}   chunks: {len(idx['chunks'])} {dict(kinds)}")
     print(f"  bm25 terms: {len(idx['bm25']['post'])}   avg chunk length: {idx['bm25']['avgdl']} tokens")
     for k, v in rep["skipped"].items():

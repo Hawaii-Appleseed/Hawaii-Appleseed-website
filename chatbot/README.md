@@ -27,6 +27,8 @@ widget (index.html, on hiappleseed.org)
 | `content/practical.md` | How to subscribe, give, contact, apply, follow bills. Each section carries the live page it came from, checked 2026-10-20. |
 | `vendor.py` | Copies the few files the assistant reads from the rest of the website repo into `vendor/` (see *Vendoring* below). |
 | `check_links.py` | Fetches every link the assistant can show (pages, reports, PDFs) and reports any that fail. Run before each deploy. |
+| `content/faq.json` | Ready-made answers to the 23 questions asked most (mission, history, leadership, how to give, contact, jobs, ...). The quickest file for staff to review. |
+| `content/topics.json` | Which issue area(s) each report belongs to; drives "latest research" and "research on housing". |
 | `content/positions.md` | Public positions, each tagged `<!-- status: draft -->` or `approved by …`. |
 | `build_index.py` | Builds `worker/src/index.json` (core text + BM25 index over publications, blog, testimony). Generates the bill-outcomes section from `tax-fairness/data/bill-status.json`. |
 | `worker/src/` | `index.js` Worker entry · `handler.js` one chat turn · `legal.js` the gate · `prompt.js` rules · `retrieve.js` BM25 · `tokenize.js` |
@@ -78,6 +80,16 @@ The offline pass is in CI-able shape today. The live pass is the one that tells 
 **Everything lives in one repo, widget included.** `vendor.py` also copies `assets/tokens.css` and `assets/okina.css` (13 KB), and `build_embed.py` inlines them, so the widget needs nothing from the website repo or its Pages host. To publish: `python3 build_embed.py --endpoint https://<worker>/chat --sitekey <turnstile key>` and paste `dist/embed.html` into a Squarespace Code Block on the page (while `chatbot/` is inside the website repo, `python3 scripts/squarespace.py chatbot --go` does the same through the usual route).
 
 **Moving `chatbot/` to its own (private) repo.** `git subtree split --prefix=chatbot -b chatbot-standalone` keeps the history. In the new repo delete `.gitignore`'s `vendor/` line, run `python3 vendor.py --from <website checkout>`, and commit `vendor/`. Drop `squarespace-inject.html` (the website repo's generated copy) and use `build_embed.py` instead. Refresh the snapshot after each weekly corpus refresh, the way `deploy-content-search.yml` pushes to the private hub repo. `build_index.py` warns if `vendor/` has fallen behind a live tree it can see. A copy of `chatbot/` with no website repo around it was verified to pass every suite (Worker, workerd runtime, Python, offline eval) and to build the widget.
+
+## Ready-made answers
+
+The questions visitors ask most (*What is your mission?*, *Who is the executive director?*, *How do I donate?*, *What's your phone number?*, *Are you hiring?*, *Are you a bot?*, hello, thanks) are answered from `content/faq.json` with no model call: instant, free, and the same reviewed words every time. 23 answers, each with its own source links.
+
+**Matching is strict on purpose.** The question's topic words (with filler like the organization's name, "my", "please", "right now" set aside, and a few synonyms folded) must be *exactly* a listed phrasing's. So "What is the mission of Hawaiʻi Appleseed?" gets the stock mission answer, while "What is your mission regarding housing?", "What's your position?", or a bill number go to the model. Wrong stock answers are the failure to avoid; a model answer in their place costs a few tenths of a cent and is fine.
+
+**How well it recognizes phrasings.** On wording I had not seen, the first try matched 58% and 35% on two fresh sets, with one wrong answer (fixed by making matching exact). After adding each miss as a phrasing, both sets match 98 to 100%, which says nothing about the next set. So expect most, not all, common phrasings to hit; the rest are answered by the model. When staff see the model answering a common question, add its wording to that entry's `variants` and add the phrasing to `eval/canned_sets.json`.
+
+**Guarded at build time.** `build_index.py` fails the build if a stock answer cites a page that is not in the content, cites a number that does not match its sources, uses `%` or an unmarked `Hawaii` or an exclamation point, or quotes a phone number, email, dollar amount, year, or zip code that is not already in `about.md` or `practical.md`. The offline eval also checks that every stock answer satisfies the golden expectations of the questions it intercepts. `CANNED=off` (a var) sends everything to the model, for comparing.
 
 ## Research links
 

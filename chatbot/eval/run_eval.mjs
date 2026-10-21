@@ -13,6 +13,7 @@
 // Live runs spend credits: about 56 requests. The key comes from ANTHROPIC_API_KEY or ~/.anthropic_api_key.
 import { existsSync, readFileSync } from "node:fs";
 import { homedir } from "node:os";
+import { matchCanned } from "../worker/src/canned.js";
 import { handleChat } from "../worker/src/handler.js";
 import { isLegalHelpRequest } from "../worker/src/legal.js";
 import { microDollars, PRICES } from "../worker/src/pricing.js";
@@ -49,7 +50,7 @@ function voiceProblems(text) {
   const out = [];
   if (text.includes("!")) out.push("exclamation point");
   if (/\d\s?%/.test(text)) out.push("uses % instead of 'percent'");
-  if (/\bHawaii\b/.test(text)) out.push("Hawaii without ʻokina");
+  if (/\bHawaii\b(?!\.[A-Za-z])/.test(text)) out.push("Hawaii without ʻokina"); // a handle like Hawaii.Appleseed is not prose
   if (/https?:\/\//.test(text)) out.push("raw URL in answer");
   return out;
 }
@@ -66,6 +67,7 @@ function checkOffline(c) {
     const blob = lc(hits.map((h) => `${h.t} ${h.u ?? ""}`).join(" | "));
     if (!c.retrieve_any.some((s) => blob.includes(lc(s)))) fails.push(`retrieval missed [${c.retrieve_any}] in: ${hits.map((h) => h.t.slice(0, 40)).join(" | ")}`);
   }
+  if ("canned" in c && (matchCanned(index, messages)?.id ?? null) !== c.canned) fails.push(`ready-made answer is ${matchCanned(index, messages)?.id ?? "none"}, expected ${c.canned ?? "none"}`);
   if (c.related_any || c.related_none) {
     // Offline there is no model citation, so a topical question is assumed to cite an excerpt.
     const hits = search(index, queryFor(messages));
@@ -137,8 +139,17 @@ let tokens = { in: 0, out: 0, cacheRead: 0, cacheWrite: 0 };
 const quiet = console.log;
 async function run(c) {
   if (offline) {
-    if (!("legal" in c) && !c.retrieve_any && !c.related_any && !c.related_none) return { c, fails: [], skipped: true };
-    return { c, fails: checkOffline(c) };
+    const intercepted = matchCanned(index, messagesFor(c));
+    if (!("legal" in c) && !("canned" in c) && !c.retrieve_any && !c.related_any && !c.related_none && !intercepted) return { c, fails: [], skipped: true };
+    const fails = checkOffline(c);
+    if (intercepted && !c.legal && !c.related_any && !c.related_none) {
+      // A ready-made answer replaces the model for this question, so it must pass what the model was graded on.
+      console.log = () => {}; // the handler logs one line per request
+      const r = await handleChat({ messages: messagesFor(c), index, client: { messages: { create: async () => { throw new Error("a ready-made answer must not call the model"); } } } });
+      console.log = quiet;
+      fails.push(...checkLive(c, r.body).map((f) => `ready-made answer "${intercepted.id}": ${f}`));
+    }
+    return { c, fails };
   }
   console.log = () => {}; // the handler logs one line per request
   const r = await handleChat({ messages: messagesFor(c), index, client, env: { MODEL: model } });

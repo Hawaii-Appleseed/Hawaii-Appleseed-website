@@ -110,10 +110,10 @@ test("handler: a [[LEGAL]] reply from the model becomes the canned text", async 
 });
 
 test("handler: refusal and upstream failure give friendly fallbacks, not blanks", async () => {
-  const r1 = await ask("What does Appleseed do?", fake("", { stop_reason: "refusal", content: [] }));
+  const r1 = await ask("What happened with SB3125 in the 2026 session?", fake("", { stop_reason: "refusal", content: [] }));
   assert.equal(r1.body.flags.refusal, true);
   const boom = { messages: { create: async () => { throw Object.assign(new Error("x"), { status: 400 }); } } };
-  const r2 = await ask("What does Appleseed do?", boom);
+  const r2 = await ask("What happened with SB3125 in the 2026 session?", boom);
   assert.equal(r2.status, 502);
   assert.match(r2.body.answer, /unavailable/);
 });
@@ -232,4 +232,30 @@ test("research: a retrieved report is suggested only when its title shares a top
   assert.deepEqual(rel("Who is the executive director?"), []);
   assert.ok(rel("What does Appleseed want for renters?").some((r) => r.url.includes("renters-left-behind")));
   assert.ok(rel("What is Keiki Ride Free?").some((r) => r.url.endsWith("/keiki-ride-free")));
+});
+
+test("research: browsing questions get the newest reports, in the named issue area, whatever the search found", async () => {
+  const { suggestResearch } = await import("../src/research.js");
+  const rel = (q) => suggestResearch({ index, query: q, hits: [], fromHits: false });
+  const slugs = (q) => rel(q).map((r) => r.url.split("/").pop());
+  assert.deepEqual(slugs("What is your latest report?"), ["understanding-hawaii-landlord-tenant-code", "hawaii-budget-primer-2026-27", "policy-perspective-2026"]);
+  assert.equal(slugs("What research do you have on housing?")[0], "understanding-hawaii-landlord-tenant-code");
+  assert.ok(slugs("any recent reports on transit?").every((s) => ["oahu-mobility-needs", "pedestrian-head-start", "keiki-ride-free", "policy-perspective-2026"].includes(s)));
+  assert.ok(rel("What research do you have on food?").every((r) => r.title));
+  // ordinary questions are not browsing
+  const { browseResearch } = await import("../src/research.js");
+  for (const q of ["Where can I find your reports?", "What is the Budget Primer?", "What's the Budget Primer about?", "Who is the executive director?", "What happened with SB3125?", "What is the new minimum wage?"]) {
+    assert.equal(browseResearch({ index, query: q }), null, q);
+  }
+});
+
+test("retrieval: a question that names a report leads with that report's opening passage (newest in a series)", async () => {
+  const { reportNamedBy } = await import("../src/retrieve.js");
+  const { tokenize } = await import("../src/tokenize.js");
+  const named = (q) => reportNamedBy(index, tokenize(q));
+  assert.match(named("how do I read the state budget"), /hawaii-budget-primer-2026-27$/);
+  assert.match(search(index, "how do I read the state budget")[0].u, /budget-primer/);
+  assert.match(named("tell me about keiki ride free"), /keiki-ride-free$/);
+  assert.equal(named("billionaire tax"), null);
+  assert.equal(named("hello there"), null);
 });
