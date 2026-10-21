@@ -347,11 +347,19 @@ picks some):
   finds a guest introduced as "…of Hawaiʻi Appleseed" and correctly ignores Oklahoma,
   Georgia and Texas Appleseed. Audio is not transcribed.
 - **Google Alerts** (`alert_feeds`, or the `MEDIA_WATCH_ALERT_FEEDS` secret): the only
-  source that searches the whole web, so it finds outlets nobody listed. Empty until
-  someone adds one. Go to google.com/alerts, create an alert for "Hawaii Appleseed"
-  (or a staff name), set *Deliver to* to *RSS feed*, and put the link in the secret,
-  one per line. It is a secret and not config because the URL embeds the owner's
-  Google account id and this repo is public; a failing alert feed never prints it.
+  source that searches the whole web, national outlets included, so it finds outlets
+  nobody listed. Five alerts have run since 2026-10-21, on the org Google account
+  (Region: Any, How many: All results, Deliver to: RSS feed): `"Hawaii Appleseed"`;
+  `"Appleseed Center for Law and Economic Justice" Hawaii`; `"Hawaii Tax Fairness
+  Coalition"`; and two staff alerts, the six names that are rarely ambiguous plus
+  Appleseed/Hawaii/Honolulu, and the six `staff_ambiguous` names plus Appleseed. **The
+  staff alerts hold names, not the team page**: when `our-team.html` changes, edit them
+  at google.com/alerts. To add one, create an alert, set *Deliver to* to *RSS feed*, and
+  add the link to the secret, one per line. It is a secret and not config because the
+  URL embeds the owner's Google account id and this repo is public; a failing alert feed
+  never prints it. An alert only holds stories published after it was made, so it
+  cannot backfill; the other stages cover the back catalogue. Its stories join the
+  same digest, issue and Slack post as the rest.
   Google has matched the phrase somewhere in the page; this script reads the page to
   confirm, and keeps the story as an unchecked match if the page will not load.
 
