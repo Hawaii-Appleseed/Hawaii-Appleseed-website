@@ -862,6 +862,22 @@
       ],
       "answer": "You're welcome. Ask anything else about Hawaiʻi Appleseed whenever you like.",
       "sources": []
+    },
+    {
+      "id": "no-position",
+      "internal": true,
+      "variants": [],
+      "answer": "Hawaiʻi Appleseed has not published a position on that in the material I have, so I can't say where it stands. Its stated positions are on the Issues page [1]. If you want to know whether there is one that is not covered here, the office can say: (808) 587-7605 or info@hiappleseed.org [2].",
+      "sources": [
+        {
+          "title": "Issues",
+          "url": "https://hiappleseed.org/issues"
+        },
+        {
+          "title": "Contact",
+          "url": "https://hiappleseed.org/contact"
+        }
+      ]
     }
   ]
 }

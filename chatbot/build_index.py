@@ -86,7 +86,11 @@ def tokenize(text: str) -> list[str]:
     for w in re.findall(r"[a-z0-9]+", t):
         if len(w) < 2 or w in STOPWORDS:
             continue
-        if len(w) > 3 and w.endswith("s") and not w.endswith("ss"):
+        if len(w) > 4 and re.search(r"(xes|ches|shes|sses)$", w):
+            w = w[:-2]                      # taxes -> tax, branches -> branch
+        elif len(w) > 4 and w.endswith("ies"):
+            w = w[:-3] + "y"                # policies -> policy, priorities -> priority
+        elif len(w) > 3 and w.endswith("s") and not w.endswith("ss"):
             w = w[:-1]
         out.append(w)
     return out
@@ -122,8 +126,9 @@ def parse_sections(path: Path, group_level: int = 2, item_level: int = 3):
         body = _COMMENT.sub("", body).strip()
         if not body:
             continue
+        aliases = [a.strip() for a in meta.get("aliases", "").split(";") if a.strip()]
         research = [f"{BASE_URL}/publications/{x.strip()}" for x in meta.get("research", "").split(",") if x.strip()]
-        items.append({"group": group, "title": title, "text": body, "research": research,
+        items.append({"group": group, "title": title, "text": body, "research": research, "aliases": aliases,
                       "url": _abs(meta.get("url")), "status": meta.get("status", "")})
     return items
 
@@ -175,7 +180,9 @@ def load_faq(core_urls: set[str], fact_text: str) -> list[dict]:
         if i in seen:
             raise SystemExit(f"faq: duplicate id {i}")
         seen.add(i)
-        if not e.get("variants") or not all(isinstance(v, str) and v.strip() for v in e["variants"]):
+        if e.get("internal"):  # used by the Worker's own logic (e.g. the stance deferral), never matched by phrasing
+            e.setdefault("variants", [])
+        elif not e.get("variants") or not all(isinstance(v, str) and v.strip() for v in e["variants"]):
             raise SystemExit(f"faq {i}: needs at least one non-empty variant")
         a = e["answer"]
         for src in e["sources"]:
@@ -248,9 +255,9 @@ def research_sections(catalog: dict) -> list[dict]:
         rs = [p for p in reports if area in p["a"]][:5]
         by_area.append(f"{area}: " + "; ".join(f"{_label(p)} ({p['y']})" for p in rs))
     return [
-        {"group": "Research", "title": "Latest research", "url": f"{BASE_URL}/research", "research": [],
+        {"group": "Research", "title": "Latest research", "url": f"{BASE_URL}/research", "research": [], "pos": False,
          "text": "Hawaiʻi Appleseed's most recent reports, newest first. The Research page lists all of them, each with a PDF.\n" + latest},
-        {"group": "Research", "title": "Research by issue area", "url": f"{BASE_URL}/research", "research": [],
+        {"group": "Research", "title": "Research by issue area", "url": f"{BASE_URL}/research", "research": [], "pos": False,
          "text": "The newest reports in each issue area (Policy in Perspective, the annual look back at each legislative session, covers all five).\n" + "\n".join(f"- {a}" for a in by_area)},
     ]
 
@@ -371,10 +378,12 @@ def build(public: bool) -> dict:
                     skipped["position not approved (public build)"] += 1
                     continue
             it["src"] = fname
+            it["pos"] = fname == "positions.md" and it["group"] != "Topics with no stated public position"
             core.append(it)
     bo = bill_outcomes()
     if bo:
         bo["research"] = []
+        bo["pos"] = False
         core.append(bo)
     catalog = pub_catalog()
     core += research_sections(catalog)

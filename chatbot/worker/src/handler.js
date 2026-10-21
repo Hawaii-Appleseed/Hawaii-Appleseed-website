@@ -2,6 +2,7 @@
 // Cloudflare specifics, so the dev server, the tests, and the eval harness all run
 // the same code the Worker does. `client` is an Anthropic SDK client (or a fake).
 import { matchCanned } from "./canned.js";
+import { resolveStance } from "./stance.js";
 import { isLegalHelpRequest, LEGAL_REPLY, LEGAL_SENTINEL, LEGAL_SOURCES } from "./legal.js";
 import { buildExcerpts, buildSystem } from "./prompt.js";
 import { suggestResearch } from "./research.js";
@@ -82,6 +83,23 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
     return { status: 200, body: { answer: canned.answer, sources: canned.sources, related: [], flags: { canned: canned.id } } };
   }
 
+  // "What is your stance on X?": a position we hold is stated as written, a topic our work never touches is deferred
+  // on with fixed words, and a topic only the excerpts touch goes to the model under the stance rules in the prompt.
+  const stance = env.CANNED === "off" ? null : resolveStance(index, last);
+  if (stance?.kind === "position") {
+    const sec = stance.section;
+    const related = (sec.research ?? []).map((u) => index.pubs?.[u] && { title: index.pubs[u].t, url: u, year: index.pubs[u].y, pdf: index.pubs[u].p || null }).filter(Boolean).slice(0, 3);
+    console.log(JSON.stringify({ event: "stance", kind: "position", id: sec.id }));
+    return { status: 200, body: { answer: `${sec.text.trim()} [1]`, sources: [{ n: 1, title: sec.title, url: sec.url, year: null, pdf: null }], related, flags: { canned: "stance", position: sec.title } } };
+  }
+  if (stance?.kind === "defer") {
+    const d = (index.faq ?? []).find((e) => e.id === "no-position");
+    if (d) {
+      console.log(JSON.stringify({ event: "stance", kind: "defer" }));
+      return { status: 200, body: { answer: d.answer, sources: d.sources, related: [], flags: { canned: "no-position" } } };
+    }
+  }
+
   const hits = search(index, queryFor(messages));
   const model = env.MODEL || DEFAULT_MODEL;
   let resp;
@@ -92,7 +110,7 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
       output_config: { effort: env.EFFORT || "low" },
       system: [
         { type: "text", text: buildSystem(index.core), cache_control: { type: "ephemeral", ttl: "1h" } },
-        { type: "text", text: buildExcerpts(hits, today) },
+        { type: "text", text: buildExcerpts(hits, today, { stance: stance?.kind === "excerpts" }) },
       ],
       messages,
     };

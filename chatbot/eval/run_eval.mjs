@@ -139,15 +139,21 @@ let tokens = { in: 0, out: 0, cacheRead: 0, cacheWrite: 0 };
 const quiet = console.log;
 async function run(c) {
   if (offline) {
-    const intercepted = matchCanned(index, messagesFor(c));
-    if (!("legal" in c) && !("canned" in c) && !c.retrieve_any && !c.related_any && !c.related_none && !intercepted) return { c, fails: [], skipped: true };
+    // Does a ready-made answer (stock phrasing or a stance question) answer this without the model?
+    const throwing = { messages: { create: async () => { throw new Error("model reached"); } } };
+    const quietly = async () => { const log = console.log; console.log = () => {}; try { return await handleChat({ messages: messagesFor(c), index, client: throwing }); } finally { console.log = log; } };
+    const probe = await quietly();
+    const intercepted = probe.body?.flags?.canned ? { id: probe.body.flags.canned, body: probe.body } : null;
+    if (!("legal" in c) && !("canned" in c) && !("stance" in c) && !c.retrieve_any && !c.related_any && !c.related_none && !intercepted) return { c, fails: [], skipped: true };
     const fails = checkOffline(c);
+    if ("stance" in c) {
+      const want = c.stance, got = intercepted ? (probe.body.flags.canned === "stance" ? "position" : "defer") : null;
+      if (got !== want) fails.push(`stance answer is ${got ?? "the model"}, expected ${want ?? "the model"}`);
+      if (want === "position" && c.position && probe.body?.flags?.position !== c.position) fails.push(`position is "${probe.body?.flags?.position}", expected "${c.position}"`);
+    }
     if (intercepted && !c.legal && !c.related_any && !c.related_none) {
       // A ready-made answer replaces the model for this question, so it must pass what the model was graded on.
-      console.log = () => {}; // the handler logs one line per request
-      const r = await handleChat({ messages: messagesFor(c), index, client: { messages: { create: async () => { throw new Error("a ready-made answer must not call the model"); } } } });
-      console.log = quiet;
-      fails.push(...checkLive(c, r.body).map((f) => `ready-made answer "${intercepted.id}": ${f}`));
+      fails.push(...checkLive(c, intercepted.body).map((f) => `ready-made answer "${intercepted.id}": ${f}`));
     }
     return { c, fails };
   }

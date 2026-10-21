@@ -20,7 +20,9 @@ export function tokenize(text) {
   const out = [];
   for (let w of t.match(/[a-z0-9]+/g) ?? []) {
     if (w.length < 2 || STOPWORDS.has(w)) continue;
-    if (w.length > 3 && w.endsWith("s") && !w.endsWith("ss")) w = w.slice(0, -1);
+    if (w.length > 4 && /(xes|ches|shes|sses)$/.test(w)) w = w.slice(0, -2); // taxes -> tax, branches -> branch
+    else if (w.length > 4 && w.endsWith("ies")) w = w.slice(0, -3) + "y"; // policies -> policy, priorities -> priority
+    else if (w.length > 3 && w.endsWith("s") && !w.endsWith("ss")) w = w.slice(0, -1);
     out.push(w);
   }
   return out;

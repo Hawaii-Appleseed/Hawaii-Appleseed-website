@@ -249,3 +249,25 @@ class ReadyMadeAnswers(unittest.TestCase):
 
     def test_every_vetted_answer_passes_as_shipped(self):
         self.assertEqual(len(self._build_with(lambda es: None)), len(self.idx["faq"]))
+
+
+class PositionAliases(unittest.TestCase):
+    """Aliases are how a visitor's "where do you stand on X" finds a position, so they must be clean."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.pos = [c for c in b.build(public=False)["core"] if c.get("pos")]
+
+    def test_every_position_lists_aliases(self):
+        self.assertGreaterEqual(len(self.pos), 25)
+        for c in self.pos:
+            self.assertTrue(c["aliases"], f"{c['title']}: add an <!-- aliases: ... --> line")
+
+    def test_no_alias_names_two_positions(self):
+        seen = {}
+        for c in self.pos:
+            for a in c["aliases"]:
+                key = " ".join(b.tokenize(a))
+                if key in seen and seen[key] != c["title"]:
+                    self.fail(f"alias {a!r} is on both {seen[key]!r} and {c['title']!r}")
+                seen[key] = c["title"]

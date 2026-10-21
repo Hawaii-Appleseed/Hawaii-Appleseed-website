@@ -91,6 +91,20 @@ The questions visitors ask most (*What is your mission?*, *Who is the executive 
 
 **Guarded at build time.** `build_index.py` fails the build if a stock answer cites a page that is not in the content, cites a number that does not match its sources, uses `%` or an unmarked `Hawaii` or an exclamation point, or quotes a phone number, email, dollar amount, year, or zip code that is not already in `about.md` or `practical.md`. The offline eval also checks that every stock answer satisfies the golden expectations of the questions it intercepts. `CANNED=off` (a var) sends everything to the model, for comparing.
 
+## "Where do you stand on X?" (stance questions)
+
+A question like *What's your stance on the conveyance tax?*, *Do you support the empty homes tax?*, or *Where does Appleseed stand on rent control?* takes one of three routes, decided in `worker/src/stance.js` before any model call:
+
+1. **A position we hold** (any section of `content/positions.md`, 25 of them): the position is stated as written, with its report links and what happened in 2026. No model, no cost, same words every time. A topic names a position only by being one of its **aliases** (the `<!-- aliases: ... -->` line, the ways visitors name it) or most of its title. Position text is never searched: an early version let "charter schools" (mentioned in passing in the school meals position) return the school meals answer, so it no longer can.
+2. **Our work never uses a word of the topic** (and no near-typo of one): a fixed deferral, "Hawaiʻi Appleseed has not published a position on that in the material I have", pointing to the Issues page and the office. It never repeats the visitor's words. Deferral is deliberately rare: wrongly deferring on something we have written about is worse than asking the model.
+3. **Everything else**, including topics our work only touches: the model, told to report only what Hawaiʻi Appleseed's own publications argue, name the publication, say it is published work and not a vote of the board, and to say "no stated position" when the excerpts merely mention the topic or are about something else (rental vouchers are not school vouchers).
+
+A question with a second question inside it ("... and what happened in 2026?"), someone else's position ("the Governor's stance on ..."), or a topic too general to be one thing ("do you support taxes?") is not treated as a stance question.
+
+**How it did on wording it had not seen.** Two fresh sets: 73% and 50% of position questions got their position directly on the first try (the rest went to the model, which is safe), with **no wrong position and no wrong deferral** in either set; every uncertain topic reached the model. Both Sonnet and Haiku, run on the uncertain topics (stadium, bitcoin, gun control, school vouchers, charter schools, the death penalty), said there was no stated position and did not mistake passing mentions for one; on topics our work does cover but no position names (vaping taxes, rent control), they reported what the publication argues. After adding every miss as an alias or pattern both sets match nearly fully, which says nothing about the next set: expect to add aliases as real questions arrive.
+
+**When our work says it but no position does.** Two topics found this way, now positions (status `draft`): rent control (the 2026 blog "Unburden the burdened") and vaping and tobacco taxes (*Policy in Perspective 2022*). The positions file also now records the estate tax breaks stance, which an earlier version wrongly listed as "no stated position". When staff see the model reporting a publication's argument on a topic that deserves a position, promote it: add a section and its aliases.
+
 ## Research links
 
 Every answer links to Hawaiʻi Appleseed's research in three ways, none of which depends on the model remembering to:

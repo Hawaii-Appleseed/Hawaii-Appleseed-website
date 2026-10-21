@@ -14,7 +14,7 @@ import { tokenize } from "./tokenize.js";
 const MAX_QUESTION = 120;
 
 // Words that do not change which question is being asked.
-const FILLER = new Set([
+export const FILLER = new Set([
   "hawaii", "appleseed", "organization", "org", "center", "nonprofit",
   "my", "me", "us", "please", "kindly", "like", "want", "would", "could", "tell", "know", "just", "really", "actually",
   "right", "now", "currently", "today", "there", "here", "own", "anyone", "someone",
@@ -40,7 +40,7 @@ const THANKS_ANY = new Set(["thanks", "thank", "mahalo", "appreciate", "apprecia
 const THANKS_ALL = new Set([...THANKS_ANY, "you", "so", "much", "lot", "ton", "bunch", "nui", "loa", "very", "a", "ok", "okay", "great", "perfect", "awesome", "that", "was", "helpful", "helps", "it"]);
 
 // "what's" -> "what", "I'd" -> "i": the suffix carries no topic. (The tokenizer would turn "what's" into "whats".)
-const prep = (s) => s.replace(/[‘’ʻ`']\s*(s|d|ll|m|re|ve)\b/gi, "");
+export const prep = (s) => s.replace(/[‘’ʻ`']\s*(s|d|ll|m|re|ve)\b/gi, "");
 
 const norm = (s) =>
   prep(s).normalize("NFKD").toLowerCase().replace(/\p{M}/gu, "").replace(/[ʻ’‘'`]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
