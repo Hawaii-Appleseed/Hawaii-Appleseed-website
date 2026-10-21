@@ -206,6 +206,15 @@ def fixed_part(idx: dict) -> str:
         f"{person['label']}  [{person['button']}]  [{person['call']} {c['phone']}]  [{person['page']}: {c['page']}]", person["help"], "",
         f"When the visitor clicks the button, their email app opens, addressed to {c['email']}, with this subject and message (they can edit it, and nothing is sent until they send it):", "",
         "Subject: " + person["subject"], "", *person["body"].replace("{question}", "<the visitor’s question>").split("\n")])
+    share = json.loads(re.search(r"var SHARE = (\{.*?\});", page_src).group(1))
+    share_html = "<br/>".join(e(x) for x in [
+        f"Under every chart: [{share['image']}]  [{share['table']}]", "",
+        "“" + share["image"] + "” puts a picture of the chart on the clipboard (or saves it as a file when the browser will not allow that). The picture carries the chart, its unit and note, its source, and this footer, so it keeps its source wherever it is pasted:",
+        share["footer"],
+        "On a chart the assistant drew itself, the picture also says: " + share["drawn"],
+        "On a made-up illustration, it says: " + share["illustration"], "",
+        "“" + share["table"] + "” copies the chart's figures as tab-separated text (with the note and the source) for a spreadsheet or document.",
+        "Messages: " + " / ".join([share["copied"], share["saved"], share["failed"], share["manual"]])])
     items = [
         ("legal-help", "Reply to any request for legal help", "Always this exact text, never model-written. Triggered by a clear request for legal advice, a lawyer, or help with a personal case.",
          fx["legal"].replace(" [1]", "") + "  [link: " + fx["sources"][0]["title"] + "]"),
@@ -214,6 +223,8 @@ def fixed_part(idx: dict) -> str:
         ("unavailable", "Reply when the assistant is down or out of budget", "", fx["unavailable"]),
         ("ask-a-person", "“Ask a person” button and prefilled email",
          "Shown under an answer when the assistant could not answer (it says it lacks the information, or the question is about the visitor’s own situation, or only staff could decide), and under the no-position reply. Never shown on a legal-help reply. The assistant never contacts anyone; the visitor sends the email from their own mail app.", {"html": hand}),
+        ("share-chart", "Copy-a-chart buttons and the picture's footer",
+         "Under every chart, so reporters, legislative staff and partners can reuse it with its source attached.", {"html": share_html}),
         ("welcome", "First message on the page", "", welcome),
         ("privacy-note", "Note under the chat box", "What visitors are told about AI, accuracy, legal advice, and privacy. Someone with authority over the organization’s public statements should approve this one.", privacy),
     ]
@@ -250,7 +261,7 @@ def build_html() -> str:
 <h2 style="{HEAD}">What gets approved</h2>
 {table([[e(x), e(y)] for x, y in (("Part 1: positions", f"{len(summary)} stated positions. Each is shown with its chart, research links, and figures."),
                                       ("Part 2: ready-made answers", "Questions asked most, answered with fixed text."),
-                                      ("Part 3: fixed replies and page text", "The legal-help reply, the no-position reply, the “ask a person” button and its prefilled email, error messages, the welcome line, and the privacy note."))], [30, 70])}
+                                      ("Part 3: fixed replies and page text", "The legal-help reply, the no-position reply, the “ask a person” button and its prefilled email, the chart-sharing buttons, error messages, the welcome line, and the privacy note."))], [30, 70])}
 {small("Everything else the assistant says comes from a model working only from our publications under strict rules (it must cite, may not invent a position or number, and may not give legal advice). That part is tested separately.")}
 <h2 style="{HEAD}">Positions at a glance</h2>
 {table(rows, [5, 28, 17, 28, 22], head=["#", "Position", "Area", "Chart", "Figures"])}

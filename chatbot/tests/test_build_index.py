@@ -189,6 +189,26 @@ class Embed(unittest.TestCase):
             self.assertNotIn(needle, self.html)
 
 
+class ChartSharing(unittest.TestCase):
+    """Every chart carries Copy as image / Copy the table, drawn from the same data with its source baked in."""
+
+    def test_the_widget_has_both_buttons_and_the_picture_carries_its_source(self):
+        src = (HERE / "index.html").read_text(encoding="utf-8")
+        share = json.loads(re.search(r"var SHARE = (\{.*?\});", src).group(1))
+        self.assertEqual(sorted(share), sorted(["image", "table", "copied", "saved", "failed", "manual", "footer", "drawn", "illustration"]))
+        self.assertTrue(share["footer"].endswith("hiappleseed.org"))
+        for needle in ("function paintChart", "function tableText", "ClipboardItem", "fig.appendChild(shareRow(g))", "'Source: '"):
+            self.assertIn(needle, src)
+        # the picture is drawn on a canvas from the data: nothing is fetched and no library is loaded
+        self.assertNotIn("html2canvas", src)
+        self.assertNotIn("foreignObject", src)
+
+    def test_the_squarespace_payload_is_still_ascii_with_the_picture_code_in_it(self):
+        payload = (HERE / "squarespace-inject.html").read_text(encoding="utf-8")
+        payload.encode("ascii")
+        self.assertIn("paintChart", payload)
+
+
 class EmbedDocument(unittest.TestCase):
     def test_worker_page_is_a_full_document_with_a_viewport_and_noindex(self):
         sys.path.insert(0, str(HERE))

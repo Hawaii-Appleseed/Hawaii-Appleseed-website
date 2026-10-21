@@ -126,6 +126,13 @@
   #ha-ask .ha-ask__person-btn:hover { background: var(--ha-slate); }
   #ha-ask .ha-ask__person-link { display: inline-flex; align-items: center; min-height: var(--ha-space-xl); font-size: var(--ha-fs-small); color: var(--ha-teal-ink); text-decoration: underline; }
   #ha-ask .ha-ask__bubble .ha-ask__person-help { font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); margin: var(--ha-space-2xs) 0 0; }
+
+  /* Copy a chart as a picture or as a table, for a report, a slide, or a story. */
+  #ha-ask .ha-ask__share { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ha-space-2xs); margin: var(--ha-space-2xs) 0 0; }
+  #ha-ask .ha-ask__sharebtn { font: inherit; font-family: var(--ha-font-body); font-size: var(--ha-fs-caption); color: var(--ha-teal-ink); background: var(--ha-white); border: 1px solid var(--ha-teal-deep); border-radius: var(--ha-radius-pill); padding: var(--ha-space-3xs) var(--ha-space-xs); min-height: var(--ha-space-xl); cursor: pointer; margin: 0; }
+  #ha-ask .ha-ask__sharebtn:hover { background: var(--ha-ash-light); }
+  #ha-ask .ha-ask__sharebox { display: block; width: 100%; margin: var(--ha-space-2xs) 0 0; font: inherit; font-family: var(--ha-font-body); font-size: var(--ha-fs-caption); color: var(--ha-charcoal); background: var(--ha-white); border: 1px solid var(--ha-teal-deep); border-radius: var(--ha-radius-card); padding: var(--ha-space-2xs); resize: vertical; }
+  #ha-ask .ha-ask__sharestat { font-size: var(--ha-fs-caption); color: var(--ha-ink-subtle); }
   #ha-ask [hidden] { display: none; }
   @media (max-width: 700px) {
     #ha-ask .ha-ask__log { padding: var(--ha-space-sm); max-height: 55vh; }
@@ -312,6 +319,160 @@
     return det;
   }
 
+  // ---- Copy a chart as a picture or a table. The picture is drawn on a canvas from the same data (title, unit, bars, the source
+  // line and the organization's name baked in), so it needs no library and carries its source wherever it is pasted.
+  // The wording is data so the sign-off review can quote it (signoff_doc.py reads this line).
+  var SHARE = {"image": "Copy as image", "table": "Copy the table", "copied": "Copied", "saved": "Saved as a picture", "failed": "Could not copy that. Try “Copy the table”.", "manual": "Your browser would not copy it. Select the text below and copy it.", "footer": "Hawaiʻi Appleseed · hiappleseed.org", "drawn": "Drawn by the assistant from the quoted text. Check it against the sources.", "illustration": "An illustration with made-up numbers."};
+  function rowsOf(g) { return g.rows || g.items || []; }
+  function sourcesOf(g) { return (g.sources || (g.source ? [g.source] : [])).filter(function (x) { return x && isText(x.title) && pageUrl(x.url); }); }
+  function tableText(g) {
+    var out = [g.title];
+    if (isText(g.unit)) out.push(g.unit);
+    out.push('');
+    var quoted = rowsOf(g).some(function (r) { return isText(r.quote); });
+    rowsOf(g).forEach(function (r) {
+      var cells = g.type === 'bars' ? [r.label, r.display] : g.type === 'stats' ? [r.value, r.label] : g.type === 'timeline' ? [r.when, r.what]
+        : [r.item, STATUS[r.status] ? STATUS[r.status][0] : r.status, r.what, r.outcome];
+      if (quoted) cells.push(r.quote || '');
+      out.push(cells.join('\t'));
+    });
+    if (typeof g.note === 'string') { out.push(''); out.push(g.note); }
+    var src = sourcesOf(g);
+    if (src.length) { out.push(''); out.push((g.illustration === true ? 'Learn more: ' : 'Source: ') + src.map(function (x) { return x.title + ' (' + x.url + ')'; }).join('; ')); }
+    return out.join('\n');
+  }
+  function tokenColor(name, fallback) { var v = getComputedStyle(document.documentElement).getPropertyValue(name).trim(); return v || fallback; }
+  function paintChart(g) {
+    var col = { ink: tokenColor('--ha-charcoal', 'black'), muted: tokenColor('--ha-ink-subtle', 'gray'), teal: tokenColor('--ha-chart-cat-1', 'teal'), ash: tokenColor('--ha-chart-muted', 'silver'),
+      tealInk: tokenColor('--ha-teal-ink', 'teal'), rule: tokenColor('--ha-rule', 'silver'), white: tokenColor('--ha-white', 'white'), light: tokenColor('--ha-ash-light', 'gainsboro') };
+    var W = 1200, P = 56, X = W - 2 * P, y = P, items = [], m = document.createElement('canvas').getContext('2d');
+    function font(w, s, h) { return w + ' ' + s + 'px ' + (h ? 'Manrope, Arial, sans-serif' : 'Poppins, Arial, sans-serif'); }
+    function wrap(str, f, maxW) {
+      m.font = f; var out = [], cur = '';
+      String(str).split(/\s+/).forEach(function (w) { var t = cur ? cur + ' ' + w : w; if (cur && m.measureText(t).width > maxW) { out.push(cur); cur = w; } else cur = t; });
+      if (cur) out.push(cur);
+      return out;
+    }
+    function put(str, x, f, c, maxW, lh, align) {
+      var ls = wrap(str, f, maxW);
+      ls.forEach(function (l, i) { items.push({ k: 't', x: x, y: y + (i + 0.78) * lh, s: l, f: f, c: c, a: align || 'left' }); });
+      return ls.length * lh;
+    }
+    var width = function (str, f) { m.font = f; return m.measureText(str).width; };
+    items.push({ k: 't', x: P, y: y + 14, s: 'HAWAIʻI APPLESEED', f: font(800, 17, true), c: col.tealInk, a: 'left' }); y += 40;
+    y += put(g.title, P, font(800, 38, true), col.ink, X, 46) + 6;
+    if (g.illustration === true) y += put(SHARE.illustration, P, font(500, 20), col.tealInk, X, 28) + 4;
+    if (g.generated === true) y += put(SHARE.drawn, P, font(500, 20), col.tealInk, X, 28) + 4;
+    if (g.type === 'bars' && isText(g.unit)) y += put(g.unit.charAt(0).toUpperCase() + g.unit.slice(1), P, font(400, 22), col.muted, X, 30);
+    y += 22;
+    var rows = rowsOf(g);
+    if (g.type === 'bars') {
+      var max = Math.max.apply(null, rows.map(function (r) { return Number(r.value); }));
+      rows.forEach(function (r) {
+        var vw = width(r.display, font(700, 24));
+        var h = put(r.label, P, font(400, 24), col.ink, X - vw - 28, 32);
+        items.push({ k: 't', x: P + X, y: y + 0.78 * 32, s: r.display, f: font(700, 24), c: col.ink, a: 'right' });
+        y += h + 8;
+        items.push({ k: 'bar', x: P, y: y, w: Math.max(3, X * Number(r.value) / max), h: 22, c: r.tone === 'muted' ? col.ash : col.teal, b: r.tone === 'muted' ? col.muted : null });
+        y += 22 + 28;
+      });
+    } else if (g.type === 'stats') {
+      var cols = rows.length === 1 ? 1 : 2, cw = (X - 40 * (cols - 1)) / cols;
+      for (var i = 0; i < rows.length; i += cols) {
+        var rowH = 0, top = y;
+        rows.slice(i, i + cols).forEach(function (r, j) {
+          var x = P + j * (cw + 40), vf = width(r.value, font(800, 44, true)) > cw - 30 ? font(800, 32, true) : font(800, 44, true), save = y;
+          var vh = put(r.value, x + 22, vf, col.ink, cw - 22, 52);
+          y += vh + 2; var lh = put(r.label, x + 22, font(400, 22), col.muted, cw - 22, 30);
+          items.push({ k: 'r', x: x, y: save, w: 6, h: vh + lh + 2, c: col.teal });
+          rowH = Math.max(rowH, vh + lh + 2); y = save;
+        });
+        y = top + rowH + 30;
+      }
+    } else if (g.type === 'timeline') {
+      var first = y + 12;
+      rows.forEach(function (r) {
+        items.push({ k: 'dot', x: P + 8, y: y + 12, c: col.tealInk });
+        y += put(r.when, P + 40, font(800, 22, true), col.tealInk, X - 40, 30);
+        y += put(r.what, P + 40, font(400, 24), col.ink, X - 40, 32) + 22;
+      });
+      items.unshift({ k: 'r', x: P + 6, y: first, w: 4, h: Math.max(0, y - 22 - first - 12), c: col.tealInk });
+    } else if (g.type === 'scoreboard') {
+      var order = ['law', 'stalled', 'died'], n = { law: 0, stalled: 0, died: 0 };
+      rows = rows.filter(function (r) { return STATUS[r.status]; }).sort(function (a, b) { return order.indexOf(a.status) - order.indexOf(b.status); });
+      rows.forEach(function (r) { n[r.status]++; });
+      y += put(n.law + ' became law, ' + n.stalled + ' stalled, ' + n.died + ' died', P, font(400, 22), col.muted, X, 30) + 12;
+      rows.forEach(function (r) {
+        var label = STATUS[r.status][0].toUpperCase(), cwid = width(label, font(700, 16)) + 28;
+        items.push({ k: 'chip', x: P, y: y, w: cwid, h: 28, s: label, st: r.status, c: col });
+        y += put(r.item, P + cwid + 16, font(800, 24, true), col.ink, X - cwid - 16, 30) + 6;
+        y += put(r.what, P, font(400, 22), col.ink, X, 30);
+        y += put(r.outcome, P, font(400, 20), col.muted, X, 28) + 22;
+      });
+    }
+    if (typeof g.note === 'string') y += put(g.note, P, font(400, 20), col.muted, X, 28) + 6;
+    items.push({ k: 'r', x: P, y: y, w: X, h: 2, c: col.rule }); y += 16;
+    var src = sourcesOf(g);
+    if (src.length) y += put((g.illustration === true ? 'Learn more: ' : 'Source: ') + src.map(function (x) { return x.title; }).join('; '), P, font(400, 20), col.muted, X, 28);
+    y += put(SHARE.footer, P, font(700, 20, true), col.tealInk, X, 28);
+    var H = Math.ceil(y + P / 2), cv = document.createElement('canvas');
+    cv.width = W * 2; cv.height = H * 2;
+    var ctx = cv.getContext('2d'); ctx.scale(2, 2);
+    ctx.fillStyle = col.white; ctx.fillRect(0, 0, W, H);
+    items.forEach(function (it) {
+      if (it.k === 't') { ctx.font = it.f; ctx.fillStyle = it.c; ctx.textAlign = it.a; ctx.fillText(it.s, it.x, it.y); }
+      else if (it.k === 'r') { ctx.fillStyle = it.c; ctx.fillRect(it.x, it.y, it.w, it.h); }
+      else if (it.k === 'bar') {
+        var rr = Math.min(4, it.w / 2); ctx.fillStyle = it.c; ctx.beginPath();
+        ctx.moveTo(it.x, it.y); ctx.lineTo(it.x + it.w - rr, it.y); ctx.arcTo(it.x + it.w, it.y, it.x + it.w, it.y + rr, rr);
+        ctx.lineTo(it.x + it.w, it.y + it.h - rr); ctx.arcTo(it.x + it.w, it.y + it.h, it.x + it.w - rr, it.y + it.h, rr); ctx.lineTo(it.x, it.y + it.h); ctx.closePath(); ctx.fill();
+        if (it.b) { ctx.strokeStyle = it.b; ctx.lineWidth = 1; ctx.stroke(); }
+      } else if (it.k === 'dot') { ctx.fillStyle = it.c; ctx.beginPath(); ctx.arc(it.x, it.y, 8, 0, 6.2832); ctx.fill(); }
+      else if (it.k === 'chip') {
+        var law = it.st === 'law'; ctx.fillStyle = law ? it.c.tealInk : it.st === 'stalled' ? it.c.light : it.c.white; ctx.fillRect(it.x, it.y, it.w, it.h);
+        ctx.strokeStyle = it.c.tealInk; ctx.lineWidth = 1.5; if (it.st === 'died') ctx.setLineDash([5, 4]); ctx.strokeRect(it.x + 0.75, it.y + 0.75, it.w - 1.5, it.h - 1.5); ctx.setLineDash([]);
+        ctx.font = font(700, 16, true); ctx.fillStyle = law ? it.c.white : it.c.ink; ctx.textAlign = 'center'; ctx.fillText(it.s, it.x + it.w / 2, it.y + 19);
+      }
+    });
+    return cv;
+  }
+  function chartPicture(g) {
+    var ready = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    return ready.then(function () { return paintChart(g); }).then(function (cv) { return new Promise(function (res, rej) { cv.toBlob(function (b) { b ? res(b) : rej(new Error('no picture')); }, 'image/png'); }); });
+  }
+  function saveBlob(blob, name) { var a = el('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000); }
+  function copyText(str) {
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(str);
+    return new Promise(function (res, rej) { var t = el('textarea'); t.value = str; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select(); var ok = false; try { ok = document.execCommand('copy'); } catch (e) {} t.remove(); ok ? res() : rej(new Error('copy')); });
+  }
+  function shareRow(g) {
+    var row = el('div', 'ha-ask__share'), img = el('button', 'ha-ask__sharebtn', SHARE.image), tbl = el('button', 'ha-ask__sharebtn', SHARE.table), stat = el('span', 'ha-ask__sharestat');
+    img.type = tbl.type = 'button'; stat.setAttribute('role', 'status');
+    function say(t) { stat.textContent = t; setTimeout(function () { stat.textContent = ''; }, 6000); }
+    var name = String(g.title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'chart';
+    img.addEventListener('click', function () {
+      // The picture is passed to the clipboard as a promise while the click is still fresh (Safari insists); no clipboard, no picture: save a file.
+      var made = chartPicture(g);
+      if (navigator.clipboard && navigator.clipboard.write && window.ClipboardItem) {
+        navigator.clipboard.write([new ClipboardItem({ 'image/png': made })]).then(function () { say(SHARE.copied); }, function () { made.then(function (b) { saveBlob(b, name + '.png'); say(SHARE.saved); }, function () { say(SHARE.failed); }); });
+      } else made.then(function (b) { saveBlob(b, name + '.png'); say(SHARE.saved); }, function () { say(SHARE.failed); });
+    });
+    tbl.addEventListener('click', function () {
+      var text = tableText(g);
+      // Last resort when the browser refuses the clipboard (an embedded page, an old browser): show the text, selected, to copy by hand.
+      function byHand() {
+        var box = row.parentNode && row.parentNode.querySelector('.ha-ask__sharebox') || el('textarea', 'ha-ask__sharebox');
+        box.value = text; box.readOnly = true; box.rows = Math.min(10, text.split('\n').length); box.setAttribute('aria-label', SHARE.table);
+        if (!box.parentNode) row.parentNode.insertBefore(box, row.nextSibling);
+        box.focus(); box.select(); say(SHARE.manual);
+      }
+      copyText(text).then(function () { say(SHARE.copied); }, function () { try { var t = el('textarea'); t.value = text; t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select(); var ok = document.execCommand('copy'); t.remove(); ok ? say(SHARE.copied) : byHand(); } catch (e) { byHand(); } });
+    });
+    row.appendChild(img); row.appendChild(tbl); row.appendChild(stat);
+    return row;
+  }
+  if (local) window.__haShare = { paintChart: paintChart, tableText: tableText };
+
   var DRAW = { bars: drawBars, stats: drawStats, timeline: drawTimeline, scoreboard: drawScoreboard };
   function drawGraphic(g, sources) {
     if (!g || !isText(g.title) || !DRAW[g.type]) return null;
@@ -338,6 +499,7 @@
       });
       fig.appendChild(src);
     }
+    fig.appendChild(shareRow(g));
     return fig;
   }
 

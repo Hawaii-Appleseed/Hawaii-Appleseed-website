@@ -34,6 +34,7 @@ Hawaiʻi Appleseed advocated for the 2022 law that phases the minimum wage up fr
 <!-- status: draft -->
 <!-- url: /issues -->
 <!-- aliases: bridge coverage; medicaid cuts; health coverage; medicaid churn; medicaid coverage; bridge coverage for medicaid; medicaid bridge coverage; state bridge coverage -->
+<!-- graphic: medical-debt -->
 
 Hawaiʻi Appleseed strongly supports state bridge coverage as federal Medicaid is cut, and in 2026 supported HB1546. Federal cuts cause churn: eligible people lose coverage to paperwork, not because they are ineligible. The state would need to bridge coverage for undocumented, seasonal, and independent workers. A University of Hawaiʻi survey found 19 percent of residents carry medical debt of $500 or more and 20 percent delay care. Hawaiʻi Appleseed asks that eligibility depend on circumstance, not status.
 
@@ -62,6 +63,7 @@ Hawaiʻi Appleseed supports actually taxing REITs rather than commissioning anot
 <!-- url: /taxes-budget -->
 <!-- research: fair-tax-code-thriving-hawaii, policy-perspective-2026 -->
 <!-- aliases: millionaire tax; millionaires tax; millionaire surcharge; tax on millionaires; income surcharge; millionaires income tax -->
+<!-- graphic: millionaire-surcharge -->
 
 Hawaiʻi Appleseed strongly supports a 2 percent surcharge on income above $1 million, and in 2026 supported HB2010. It would generate roughly $71 million a year to help fund Medicaid, with the top 1 percent paying an additional 0.72 percent of income. Massachusetts adopted a similar surcharge and its wealth continued to grow afterward, which answers the "wealth flight" argument. Hawaiʻi Appleseed asks lawmakers not to water down the threshold or the rate. 2026 outcome: SB3125, signed into law as Act 24 on May 21, 2026, added a 2 percent surcharge on income over $1 million. HB2010 itself was deferred in committee.
 
@@ -70,6 +72,7 @@ Hawaiʻi Appleseed strongly supports a 2 percent surcharge on income above $1 mi
 <!-- url: /taxes-budget -->
 <!-- research: fair-tax-code-thriving-hawaii, policy-perspective-2026 -->
 <!-- aliases: act 46; freezing act 46; income tax cuts; 2024 tax cuts; act 46 tax cuts; freezing act 46 tax cuts; rolling back act 46 -->
+<!-- graphic: act46-cost -->
 
 Hawaiʻi Appleseed strongly supports freezing the 2024 income tax cuts in Act 46 and adjusting the top brackets upward. In 2026 it supported HB2306 and SB3125. The cuts are unevenly distributed and cost the state billions. Freezing the rollout and raising the top five brackets by 0.25 to 1 percentage point would generate about $69 million, 86 percent of it from the top 1 percent. Hawaiʻi Appleseed frames this as a measured fiscal correction, not an attack. 2026 outcome: SB3125 was signed into law as Act 24 on May 21, 2026. It rolled back some of the Act 46 tax cuts for the wealthy, which Policy in Perspective 2026 called a critical victory, but it did not undo them: Act 46 will still reduce state revenue by more than $1 billion a year by 2031. HB2306 did not advance.
 
@@ -111,6 +114,7 @@ Hawaiʻi Appleseed supports a comprehensive package of renter protections. From 
 <!-- status: draft -->
 <!-- url: https://hiappleseed.org/blog/unburden-hawaii-expand-rental-voucher-program -->
 <!-- aliases: rent control; rent regulation; rent stabilization; rent caps; rental vouchers; rental voucher program; housing vouchers; rent control vs vouchers -->
+<!-- graphic: rent-control-evidence -->
 
 Hawaiʻi Appleseed argues that rental vouchers, not rent control, are the better way to help rent-burdened families. In a 2026 blog post, "Unburden the burdened," it says price controls treat a symptom, not the disease: they protect current tenants rather than the rent-burdened families still searching for a home, do nothing to increase the housing supply Hawaiʻi needs, and often benefit middle- and high-income households more than the working families they are meant to help. It points to California, where 57 percent of rent-controlled units are occupied by middle- or higher-income renters, and to San Francisco, where rent control reduced the rent-controlled housing stock by 15 percent. It argues that Hawaiʻi should expand its rental voucher program: increase the State Rent Supplement Program amount to more than $500 a month, offer landlords who accept vouchers guaranteed rent payments, free inspections, and home improvement support in every county, and convert Housing Choice Vouchers to project-based vouchers. This is a published argument, not a vote of the board. The renter protections Hawaiʻi Appleseed does support, such as just-cause eviction, are described separately.
 
@@ -155,6 +159,7 @@ Hawaiʻi Appleseed strongly supports universal free school meals. In 2026 it sup
 <!-- url: /food-equity -->
 <!-- research: hawaii-snap, policy-perspective-2026 -->
 <!-- aliases: snap; food stamps; snap benefits; snap certification; esap -->
+<!-- graphic: snap-esap -->
 
 Hawaiʻi Appleseed strongly supports extending SNAP certification and adopting the federal ESAP waiver, and in 2026 supported SB3245. More than 160,000 Hawaiʻi residents depend on SNAP. Extending certification from 12 to 24 months, and adopting ESAP (up to 36 months for seniors), reduces churn, where eligible people lose benefits to paperwork. Twenty-three states already use ESAP. 2026 outcome: SB3245 was signed into law as Act 193 on July 7, 2026, according to the Policy in Perspective 2026 scorecard.
 

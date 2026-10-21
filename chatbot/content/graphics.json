@@ -121,6 +121,93 @@
       "aliases": ["minimum wage law", "minimum wage increase", "minimum wage raise", "minimum wage 2022", "how much is minimum wage"]
     },
     {
+      "id": "housing-vs-handcuffs",
+      "type": "bars",
+      "title": "The prison budget and the Hawaiian Home Lands budget",
+      "unit": "state budget, in millions of dollars",
+      "rows": [
+        {"label": "Prisons", "value": 300, "display": "$300 million", "proof": "a $300 million prison budget"},
+        {"label": "Department of Hawaiian Home Lands (DHHL)", "value": 185, "display": "$185 million", "proof": "$185 million for DHHL"}
+      ],
+      "note": "Hawaiʻi Appleseed's framing: housing should come ahead of handcuffs.",
+      "source": {"title": "Hawaiʻi Appleseed's position on conveyance tax modernization", "url": "https://hiappleseed.org/taxes-budget"},
+      "aliases": ["housing before handcuffs", "prison budget", "prison spending", "prisons hawaiian home lands"]
+    },
+    {
+      "id": "act46-cost",
+      "type": "stats",
+      "title": "Act 46's tax cuts and the fix Hawaiʻi Appleseed proposed",
+      "items": [
+        {"value": "$1 billion+", "label": "a year in lost state revenue by 2031, even after the 2026 rollback", "proof": ["Act 46 will still reduce state revenue by more than $1 billion a year by 2031", "SB3125 was signed into law as Act 24 on May 21, 2026"]},
+        {"value": "$69 million", "label": "what freezing the rollout and raising the top five brackets would raise", "proof": "would generate about $69 million, 86 percent of it from the top 1 percent"},
+        {"value": "86%", "label": "of that $69 million would come from the top 1 percent", "proof": "would generate about $69 million, 86 percent of it from the top 1 percent"}
+      ],
+      "source": {"title": "Hawaiʻi Appleseed's position on freezing and adjusting Act 46", "url": "https://hiappleseed.org/taxes-budget"},
+      "aliases": ["act 46 revenue", "act 46 cost", "act 46 tax cuts", "act 46 rollback"]
+    },
+    {
+      "id": "millionaire-surcharge",
+      "type": "stats",
+      "title": "The millionaire's income surcharge: what it would do",
+      "items": [
+        {"value": "$71 million", "label": "a year, roughly, to help fund Medicaid", "proof": "generate roughly $71 million a year to help fund Medicaid"},
+        {"value": "2%", "label": "surcharge on income above $1 million", "proof": "a 2 percent surcharge on income above $1 million"},
+        {"value": "0.72%", "label": "of income: the extra the top 1 percent would pay", "proof": "the top 1 percent paying an additional 0.72 percent of income"}
+      ],
+      "source": {"title": "Hawaiʻi Appleseed's position on the millionaire's income surcharge", "url": "https://hiappleseed.org/taxes-budget"},
+      "aliases": ["millionaire surcharge", "millionaire tax revenue", "income surcharge revenue", "millionaire income surcharge"]
+    },
+    {
+      "id": "medical-debt",
+      "type": "stats",
+      "title": "Medical debt and delayed care in Hawaiʻi",
+      "items": [
+        {"value": "19%", "label": "of residents carry medical debt of $500 or more", "proof": "A University of Hawaiʻi survey found 19 percent of residents carry medical debt of $500 or more and 20 percent delay care"},
+        {"value": "20%", "label": "of residents delay care", "proof": "A University of Hawaiʻi survey found 19 percent of residents carry medical debt of $500 or more and 20 percent delay care"}
+      ],
+      "note": "From a University of Hawaiʻi survey, as cited in Hawaiʻi Appleseed's position on health coverage.",
+      "source": {"title": "Hawaiʻi Appleseed's position on health coverage continuity", "url": "https://hiappleseed.org/issues"},
+      "aliases": ["medical debt survey", "medical debt hawaii", "medical debt delayed care"]
+    },
+    {
+      "id": "snap-esap",
+      "type": "stats",
+      "title": "SNAP certification and the ESAP waiver",
+      "items": [
+        {"value": "160,000+", "label": "Hawaiʻi residents depend on SNAP", "proof": "More than 160,000 Hawaiʻi residents depend on SNAP"},
+        {"value": "12 → 24 months", "label": "SNAP certification, as in SB3245", "proof": ["Extending certification from 12 to 24 months", "and in 2026 supported SB3245"]},
+        {"value": "up to 36 months", "label": "certification for seniors under ESAP", "proof": "ESAP (up to 36 months for seniors)"},
+        {"value": "23 states", "label": "already use ESAP", "proof": "Twenty-three states already use ESAP"}
+      ],
+      "note": "SB3245 became law as Act 193 on July 7, 2026.",
+      "proofs": ["SB3245 was signed into law as Act 193 on July 7, 2026"],
+      "source": {"title": "Hawaiʻi Appleseed's position on SNAP access", "url": "https://hiappleseed.org/food-equity"},
+      "aliases": ["snap certification", "esap waiver", "snap esap", "snap churn"]
+    },
+    {
+      "id": "rent-control-evidence",
+      "type": "stats",
+      "title": "The evidence Hawaiʻi Appleseed cites on rent control",
+      "items": [
+        {"value": "57%", "label": "of California's rent-controlled units are occupied by middle- or higher-income renters", "proof": "57 percent of rent-controlled units are occupied by middle- or higher-income renters"},
+        {"value": "15%", "label": "fewer rent-controlled homes in San Francisco after rent control", "proof": "rent control reduced the rent-controlled housing stock by 15 percent"}
+      ],
+      "note": "A published argument for rental vouchers over rent control, not a vote of the board.",
+      "source": {"title": "Hawaiʻi Appleseed's position on rent control and rental vouchers", "url": "https://hiappleseed.org/blog/unburden-hawaii-expand-rental-voucher-program"},
+      "aliases": ["rent control evidence", "rent control california", "rent control san francisco"]
+    },
+    {
+      "id": "renter-burden",
+      "type": "stats",
+      "title": "Renters in Hawaiʻi",
+      "items": [
+        {"value": "About 38%", "label": "of Hawaiʻi households rent", "proof": "About 38 percent of Hawaiʻi households rent"},
+        {"value": "More than six in 10", "label": "Honolulu renters spend at least 30 percent of their income on housing", "proof": "more than six in 10 Honolulu renters spend at least 30 percent of their income on housing"}
+      ],
+      "source": {"title": "Hawaiʻi Appleseed's position on renter protections", "url": "https://hiappleseed.org/affordable-housing"},
+      "aliases": ["renter cost burden", "renters rent burden", "how many households rent", "renters honolulu"]
+    },
+    {
       "id": "session-2026-scoreboard",
       "type": "scoreboard",
       "auto": true,

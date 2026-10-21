@@ -40,9 +40,10 @@ These gate everything else; none can be done from here.
 `worker/src/charts.js` now refuses bars whose rows are not side by side in the source (different sections or reports unless one sentence carries all the numbers; far apart within a section; no unit; a label with no word from its own quote; more than six bars). The five real charts Haiku and Sonnet drew earlier all still pass; a pair from different reports is refused (`different_sources`). The first 20 accepted charts a day are kept (chart only, no visitor text) and shown at `/stats/charts` for a person to read. See the README, *Charts the assistant draws itself*.
 - **The decision this feeds:** after a few weeks of pilot use, read `/stats/charts` and decide whether drawn charts stay on in the public build. Nothing can catch two real numbers from one paragraph that measure different things; reading a sample is the only check for that.
 
-### 7. More vetted graphics, and a way to share them (M)
-- Gaps by issue area: renter cost burden, SNAP/ESAP timeline, Act 46 revenue loss, the Keiki Credit, "housing before handcuffs" ($300 million prisons vs $185 million DHHL, now only drawn on demand). Each is a `graphics.json` entry with quotes; the build already refuses unquoted numbers.
-- Reporters and legislative staff are two of the audiences: add **Copy as image** and **Copy the table** to a chart, with the source line baked in.
+### 7. More vetted graphics, and a way to share them: DONE 2026-10-21
+Seven new graphics (18 in all): prison budget beside Hawaiian Home Lands, Act 46's cost and the proposed fix, the millionaire's surcharge, medical debt, SNAP certification and ESAP, the rent control evidence, and renters in Hawaiʻi. Five attach to their positions; two are reachable by asking for a chart. Every figure is quoted from the positions text (the build refuses otherwise). Every chart has **Copy as image** and **Copy the table** (README, *Graphics*, "Sharing a chart").
+- **Not made:** the Keiki Credit has no numbers in the positions text to quote, and the SNAP/ESAP timeline became a stat chart for the same reason (no dated milestones beyond Act 193).
+- **Next on this item:** the clipboard path could only be exercised for the fallback in the in-app browser; try "Copy as image" once in Chrome and Safari and paste it into a doc. If reporters ask for it, a downloadable PNG of every chart in one go for a press kit would be a small step from `paintChart`.
 
 ## Before the public launch (checklist, not improvements)
 

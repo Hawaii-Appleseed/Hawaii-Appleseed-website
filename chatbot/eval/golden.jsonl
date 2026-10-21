@@ -151,3 +151,14 @@
 {"id": "ho-m-answered", "cat": "handoff-model", "q": "Where can I find your latest research on housing?", "handoff": false}
 {"id": "ho-m-explain", "cat": "handoff-model", "q": "What does the conveyance tax pay for under HB2049?", "handoff": false}
 {"id": "chart-m-apples", "cat": "graphic-model", "q": "Compare the share of Hawaii's transportation money spent on vehicle capacity with the share of denied students who were actually eligible for school meals.", "drawn": false}
+{"id": "gfx7-prison", "cat": "graphic", "q": "Show me a chart of the prison budget compared to Hawaiian Home Lands", "graphic": "housing-vs-handcuffs"}
+{"id": "gfx7-act46", "cat": "graphic", "q": "Explain what Act 46 costs the state", "graphic": "act46-cost"}
+{"id": "gfx7-surcharge", "cat": "graphic", "q": "Chart the millionaire surcharge revenue", "graphic": "millionaire-surcharge"}
+{"id": "gfx7-medical", "cat": "graphic", "q": "Show me the medical debt survey", "graphic": "medical-debt"}
+{"id": "gfx7-snap", "cat": "graphic", "q": "Graph SNAP certification and the ESAP waiver", "graphic": "snap-esap"}
+{"id": "gfx7-rent-control", "cat": "graphic", "q": "Show me the rent control evidence", "graphic": "rent-control-evidence"}
+{"id": "gfx7-renters", "cat": "graphic", "q": "Show me how many households rent", "graphic": "renter-burden"}
+{"id": "gfx7-st-act46", "cat": "graphic", "q": "What is your stance on freezing Act 46?", "stance": "position", "position": "Freezing and adjusting Act 46", "graphic_any": ["act46-cost"]}
+{"id": "gfx7-st-snap", "cat": "graphic", "q": "What's your stance on SNAP?", "stance": "position", "position": "SNAP access", "graphic_any": ["snap-esap"]}
+{"id": "gfx7-st-surcharge", "cat": "graphic", "q": "Do you support the millionaire's tax?", "stance": "position", "position": "Millionaire's income surcharge", "graphic_any": ["millionaire-surcharge"]}
+{"id": "gfx7-none-snap", "cat": "graphic", "q": "How do I apply for SNAP?", "graphic": null}
