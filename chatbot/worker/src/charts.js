@@ -45,59 +45,61 @@ const text = (v, max) => typeof v === "string" && v.trim().length > 0 && v.trim(
 
 /** One row's evidence: the section or excerpt it names, and whether its quote is really in it. */
 function evidence(row, resolve) {
-  if (!text(row?.quote, LIMITS.quote) || row.quote.trim().length < LIMITS.minQuote) return null;
+  if (!text(row?.quote, LIMITS.quote) || row.quote.trim().length < LIMITS.minQuote) return { why: "quote_form" };
   const ref = String(row.ref ?? "").replace(/[[\]\s]/g, "").toUpperCase();
   const src = resolve(ref);
-  if (!src || !squash(src.text).includes(squash(row.quote))) return null;
+  if (!src) return { why: "ref" };
+  if (!squash(src.text).includes(squash(row.quote))) return { why: "quote_not_found" };
   return { quote: row.quote.trim(), src };
 }
 
 /** Check one drafted chart against the text the model was given. Returns the plain-data chart, or null. */
-export function checkChart(spec, resolve) {
-  if (!spec || typeof spec !== "object" || !["bars", "stats", "timeline"].includes(spec.type)) return null;
-  if (!text(spec.title, LIMITS.title)) return null;
-  if (spec.unit != null && !text(spec.unit, LIMITS.unit)) return null;
+function inspectChart(spec, resolve) {
+  const fail = (why) => ({ why });
+  if (!spec || typeof spec !== "object" || !["bars", "stats", "timeline"].includes(spec.type)) return fail("shape");
+  if (!text(spec.title, LIMITS.title)) return fail("title");
+  if (spec.unit != null && !text(spec.unit, LIMITS.unit)) return fail("unit");
   const list = spec.type === "stats" ? spec.items : spec.rows;
   const [lo, hi] = LIMITS[spec.type];
-  if (!Array.isArray(list) || list.length < lo || list.length > hi) return null;
+  if (!Array.isArray(list) || list.length < lo || list.length > hi) return fail("rows");
 
   const sources = new Map();
   const pool = new Set();
   const rows = [];
   for (const r of list) {
     const ev = evidence(r, resolve);
-    if (!ev) return null;
+    if (ev.why) return ev;
     const quoted = numbers(ev.quote);
     for (const n of quoted) pool.add(n);
     const within = (...fields) => fields.every((f) => [...numbers(f)].every((n) => quoted.has(n)));
     if (ev.src.url) sources.set(ev.src.url, { title: ev.src.title, url: ev.src.url, year: ev.src.year ?? null });
 
     if (spec.type === "bars") {
-      if (!text(r.label, LIMITS.label) || !text(r.display, LIMITS.display)) return null;
+      if (!text(r.label, LIMITS.label) || !text(r.display, LIMITS.display)) return fail("text");
       const first = String(r.display).match(NUM)?.[0];
       const value = Number(r.value);
-      if (!first || !Number.isFinite(value) || value < 0 || value !== Number(first.replace(/,/g, ""))) return null;
-      if (!within(r.label, r.display)) return null; // every number shown is in this row's quote
+      if (!first || !Number.isFinite(value) || value < 0 || value !== Number(first.replace(/,/g, ""))) return fail("value");
+      if (!within(r.label, r.display)) return fail("number_unquoted"); // every number shown is in this row's quote
       const scale = (String(r.display).match(/\b(thousand|million|billion|trillion)\b/i)?.[1] ?? "").toLowerCase();
-      if (!scalesAfter(ev.quote, first.replace(/,/g, "")).has(scale)) return null; // "$183.4" for "$183.4 million" would be a lie of scale
-      if (/%|percent/i.test(r.display) && !/%|percent/i.test(ev.quote)) return null;
+      if (!scalesAfter(ev.quote, first.replace(/,/g, "")).has(scale)) return fail("scale"); // "$183.4" for "$183.4 million" would be a lie of scale
+      if (/%|percent/i.test(r.display) && !/%|percent/i.test(ev.quote)) return fail("percent");
       rows.push({ label: r.label.trim(), value, display: r.display.trim(), quote: ev.quote, _kind: kindOf(r.display), _scale: scale });
     } else if (spec.type === "stats") {
-      if (!text(r.value, LIMITS.display) || !text(r.label, LIMITS.label) || !numbers(r.value).size) return null;
-      if (!within(r.value, r.label)) return null;
+      if (!text(r.value, LIMITS.display) || !text(r.label, LIMITS.label) || !numbers(r.value).size) return fail("text");
+      if (!within(r.value, r.label)) return fail("number_unquoted");
       rows.push({ value: r.value.trim(), label: r.label.trim(), quote: ev.quote });
     } else {
-      if (!text(r.when, 20) || !text(r.what, LIMITS.what) || !numbers(r.when).size) return null;
-      if (!within(r.when, r.what)) return null;
+      if (!text(r.when, 20) || !text(r.what, LIMITS.what) || !numbers(r.when).size) return fail("text");
+      if (!within(r.when, r.what)) return fail("number_unquoted");
       rows.push({ when: r.when.trim(), what: r.what.trim(), quote: ev.quote });
     }
   }
-  if (!sources.size) return null; // a chart nobody can trace to a page is not shown
-  if (![spec.title, spec.unit ?? ""].every((s) => [...numbers(s)].every((n) => pool.has(n)))) return null;
+  if (!sources.size) return fail("no_source"); // a chart nobody can trace to a page is not shown
+  if (![spec.title, spec.unit ?? ""].every((s) => [...numbers(s)].every((n) => pool.has(n)))) return fail("title_number");
 
   if (spec.type === "bars") {
-    if (new Set(rows.map((r) => r._kind)).size > 1 || new Set(rows.map((r) => r._scale)).size > 1) return null; // like with like
-    if (new Set(rows.map((r) => r.label.toLowerCase())).size < rows.length) return null;
+    if (new Set(rows.map((r) => r._kind)).size > 1 || new Set(rows.map((r) => r._scale)).size > 1) return fail("mixed_units"); // like with like
+    if (new Set(rows.map((r) => r.label.toLowerCase())).size < rows.length) return fail("duplicate_labels");
     for (const r of rows) { delete r._kind; delete r._scale; }
   }
   if (spec.type === "timeline" && rows.every((r) => /^\d{4}/.test(r.when))) rows.sort((a, b) => a.when.localeCompare(b.when));
@@ -111,19 +113,40 @@ export function checkChart(spec, resolve) {
   };
 }
 
+/** The checked chart, or null (the reason is `chartProblem`). */
+export function checkChart(spec, resolve) {
+  const r = inspectChart(spec, resolve);
+  return r.why ? null : r;
+}
+
+/** Why a drafted chart was refused, as a short code ("quote_not_found", "mixed_units", ...), or null if it checks out. */
+export function chartProblem(spec, resolve) {
+  return inspectChart(spec, resolve).why ?? null;
+}
+
 /** Take the chart markers out of the model's text; `chart` is the first one that checks out, or null. */
 export function takeChart(answer, resolve) {
   let chart = null;
+  let offered = false;
+  let why = null;
   const clean = answer
     .replace(MARK, (_, json) => {
-      if (!chart) { try { chart = checkChart(JSON.parse(json), resolve); } catch { chart = null; } }
+      offered = true;
+      if (chart) return "";
+      try {
+        const spec = JSON.parse(json);
+        const r = inspectChart(spec, resolve);
+        if (r.why) why ??= r.why; else chart = r;
+      } catch {
+        why ??= "json";
+      }
       return "";
     })
-    .replace(STRAY, "")
+    .replace(STRAY, () => { if (!offered) why = "cut_off"; offered = true; return ""; })
     .replace(/[ \t]+\n/g, "\n")
     .replace(/\n{3,}/g, "\n\n")
     .trim();
-  return { text: clean, chart };
+  return { text: clean, chart, offered, why: chart ? null : why };
 }
 
 /** Where a `ref` ("C37" or "2") points: the section or excerpt text, with a title and link for the source line. */

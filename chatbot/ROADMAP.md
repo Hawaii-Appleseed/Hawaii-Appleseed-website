@@ -26,9 +26,10 @@ These gate everything else; none can be done from here.
 `worker/src/handoff.js` and the `PERSON` box in `index.html` (see the README, *Ask a person*). A `mailto:` with the visitor's question prefilled, the office phone, and the Contact page, under any answer the assistant could not give and under the no-position reply; never on legal help. Haiku and Sonnet each add `[[staff]]` where it fits (see the eval cases `ho-*`).
 - **Next on this item:** the Contact page also has a form; a deep link that prefilled it would beat `mailto:` for visitors without a mail app, but that is Squarespace's form and cannot be prefilled today. Track how often the button is shown (item 4's roll-up) and, when feedback exists, whether the people it was shown to rated the answer "No".
 
-### 4. Measure, without keeping text (S–M)
-The Worker logs one counts-only line per request. Add a small daily roll-up (routes: ready-made / stance / model; drawn charts accepted vs rejected and why; uncited answers; deferrals; refusals; spend) written to KV and shown on the staff hub. This is how we find out whether drawn charts are earning their keep, whether Haiku is enough, and what to make a ready-made answer next. No question text is stored outside the opt-in feedback ratings.
-- Weekly: pull feedback (`eval/pull_feedback.mjs`) and turn each "No" into a golden eval case or an alias.
+### 4. Measure, without keeping text: DONE 2026-10-21
+`worker/src/stats.js` and `/stats` (see the README, *Usage roll-up*): per-day counts by route, spend, uncited answers, "ask a person" and why, drawn charts shown or refused with a reason code, turned-away requests, ratings, distinct people. No text, email, or IP is stored; a test checks.
+- **Next on this item:** (a) link `/stats` from the staff hub (that is the `staff-updates-internal` repo, so a separate change); (b) alert when a day's spend passes 80 percent of the budget or the "came up empty" rate jumps (a line in the daily digest or a Slack post is enough); (c) with a few weeks of data, decide Haiku vs Sonnet and whether to keep drawn charts on for the public build.
+- **Known limit:** the free Cloudflare plan allows 1,000 KV writes a day, about 200 requests with the limiters and this roll-up. Workers Paid before launch.
 
 ### 5. Keep the corpus current (M)
 - A scheduled workflow that re-vendors `chatbot/vendor/` when the website repo's corpus changes, rebuilds the index, runs the suites, and opens a PR. `vendor.py --check` already detects drift.

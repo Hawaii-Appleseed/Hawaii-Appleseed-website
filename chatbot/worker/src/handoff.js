@@ -32,10 +32,16 @@ export function takeStaffMarker(text) {
   return { text: clean, asked };
 }
 
-/** The contact details to offer under this answer, or null. */
-export function handoffFor(index, { asked = false, answer = "", cannedId = null, legal = false } = {}) {
+/** Why a person is being offered under this answer ("marker", "deferral", "wording"), or null. */
+export function handoffCause(index, { asked = false, answer = "", cannedId = null, legal = false } = {}) {
   if (legal || !index.contact) return null;
   const plain = answer.replace(/[‘’ʻ`]/g, "'");
-  if (asked || cannedId === "no-position" || NO_ANSWER.test(plain)) return { ...index.contact };
-  return null;
+  if (asked) return "marker";
+  if (cannedId === "no-position") return "deferral";
+  return NO_ANSWER.test(plain) ? "wording" : null;
+}
+
+/** The contact details to offer under this answer, or null. */
+export function handoffFor(index, opts = {}) {
+  return handoffCause(index, opts) ? { ...index.contact } : null;
 }

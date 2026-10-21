@@ -33,6 +33,7 @@ widget (index.html, on hiappleseed.org)
 | `content/faq.json` | Ready-made answers to the 23 questions asked most (mission, history, leadership, how to give, contact, jobs, ...). The quickest file for staff to review. |
 | `figures.py`, `check_figures.py` | The figure cross-check (see below) and its command-line report; `content/figures.json` lists figures a person has accepted. |
 | `content/bill-status-snapshot.json`, `snapshot_bills.py` | The last good copy of the Legislature bill feed's latest action per bill. The feed is refreshed every 30 minutes by `fetch-bill-status.yml`, and capitol.hawaii.gov sometimes answers 403; `build_index.py` uses the live feed for every bill that has data and this snapshot for the rest (and warns), so one bad refresh cannot crash a build or erase what the assistant knows. Re-save it with `python3 chatbot/snapshot_bills.py` (it refuses unless nearly every bill has data). |
+| `worker/src/stats.js` | The daily counts-only roll-up and the `/stats` page (see *Usage roll-up*). |
 | `signoff_doc.py` | Builds the staff sign-off review as a Google Doc, and reads the decisions back (see *Positions: sign-off*). |
 | `ROADMAP.md` | What to do next, in order, what is blocked on people, and what is parked. |
 | `content/graphics.json` | The explainer graphics (see *Graphics* below). Every figure carries a quoted proof from the approved text; the build fails without it. |
@@ -179,6 +180,16 @@ When the assistant cannot answer, the page offers a way to reach the team instea
 - **Where the details come from:** `index.contact`, built from the "Contact the office" section of `content/practical.md` (the build fails if it has no email, phone, or page), so the button cannot drift from what the assistant says in words.
 - **The wording** (`PERSON` in `index.html`) is quoted in the sign-off review, Part 3, so staff approve the button text and the prefilled email.
 - The marker is stripped from the answer; a half-typed one is stripped too. The page checks the email, phone, and link before drawing anything.
+
+## Usage roll-up (counts only)
+
+`GET /stats` on the Worker (behind the same Cloudflare Access gate as everything else) shows what the assistant did each day, and `/stats.json?days=30` has the same numbers as data. It is for deciding things: is Haiku enough, are ready-made answers carrying the load, is it coming up empty, are drawn charts earning their keep.
+
+- **What is counted** (`worker/src/stats.js`): answers per day and distinct people (a person is a hash of their Access email, counted once a day); where each answer came from (ready-made answer by id, stated position by title, no-position deferral, legal reply, model, refusal, error); model answers with no source ("came up empty"); how often "ask a person" was offered and why (marker, wording, deferral); charts shown with an answer (by id) and charts the model drew that were shown or refused, with the reason code (`quote_not_found`, `mixed_units`, `scale`, ...); tokens and spend per day; requests turned away (rate limit, budget, failed verification, malformed); and Yes/No ratings.
+- **What is never kept there:** any question or answer text, any email, any IP address. The tests assert it (`worker/test/stats.test.mjs` runs every route and checks the stored document for the question words, the IP, and any "@"). Rated answers with their text are the separate opt-in feedback entries in KV (90 days), pulled with `eval/pull_feedback.mjs`.
+- **How it is stored:** one small JSON document per day in the same KV namespace (`stats:YYYY-MM-DD`, kept 400 days), updated once per request. KV is not atomic, so two answers finishing together can lose a count: read the numbers as accurate to a few percent. A failed count never fails an answer.
+- **KV limits.** The Cloudflare account is on the free plan, whose KV allows 1,000 writes a day. Each request now writes about five times (three limiter counters, the day's spend, and this roll-up), which is roughly 200 requests a day before KV refuses. Fine for the staff pilot; **move to Workers Paid before the public launch**, or the limiters themselves start failing.
+- **Weekly routine:** open `/stats`, then pull the week's ratings (`eval/pull_feedback.mjs`) and turn each "No" into a golden eval case or an alias. A position asked for often that deferred, or a rejected-chart reason that keeps appearing, is the next thing to fix.
 
 ## Research links
 

@@ -5,7 +5,7 @@ import { matchCanned } from "./canned.js";
 import { resolveStance } from "./stance.js";
 import { resolver, takeChart } from "./charts.js";
 import { pickGraphics, takeMarkers } from "./graphics.js";
-import { handoffFor, takeStaffMarker } from "./handoff.js";
+import { handoffCause, handoffFor, takeStaffMarker } from "./handoff.js";
 import { isLegalHelpRequest, LEGAL_REPLY, LEGAL_SENTINEL, LEGAL_SOURCES } from "./legal.js";
 import { buildExcerpts, buildSystem } from "./prompt.js";
 import { suggestResearch } from "./research.js";
@@ -72,11 +72,11 @@ export function finalize(text, core, hits, pubs = {}) {
 
 export async function handleChat({ messages: raw, index, client, env = {}, today = new Date().toISOString().slice(0, 10) }) {
   const messages = cleanMessages(raw);
-  if (!messages) return { status: 400, body: { error: "bad_request" } };
+  if (!messages) return { status: 400, body: { error: "bad_request" }, meta: { route: "bad_request" } };
   const last = messages[messages.length - 1].content;
 
   if (isLegalHelpRequest(last)) {
-    return { status: 200, body: { answer: LEGAL_REPLY, sources: LEGAL_SOURCES, related: [], handoff: null, flags: { legal: true } } };
+    return { status: 200, body: { answer: LEGAL_REPLY, sources: LEGAL_SOURCES, related: [], handoff: null, flags: { legal: true } }, meta: { route: "legal" } };
   }
 
   // The questions asked most get a reviewed answer straight away: no model, no cost, the same words every time.
@@ -84,7 +84,7 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
   if (canned) {
     console.log(JSON.stringify({ event: "canned", id: canned.id }));
     const graphics = pickGraphics(index, { attached: canned.graphic ? [canned.graphic] : [] });
-    return { status: 200, body: { answer: canned.answer, sources: canned.sources, related: [], graphics, handoff: handoffFor(index, { cannedId: canned.id }), flags: { canned: canned.id } } };
+    return { status: 200, body: { answer: canned.answer, sources: canned.sources, related: [], graphics, handoff: handoffFor(index, { cannedId: canned.id }), flags: { canned: canned.id } }, meta: { route: "canned", id: canned.id, graphics: graphics.map((g) => g.id), handoff: handoffCause(index, { cannedId: canned.id }) } };
   }
 
   // "What is your stance on X?": a position we hold is stated as written, a topic our work never touches is deferred
@@ -95,13 +95,13 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
     const related = (sec.research ?? []).map((u) => index.pubs?.[u] && { title: index.pubs[u].t, url: u, year: index.pubs[u].y, pdf: index.pubs[u].p || null }).filter(Boolean).slice(0, 3);
     console.log(JSON.stringify({ event: "stance", kind: "position", id: sec.id }));
     const graphics = pickGraphics(index, { attached: sec.graphics ?? [] });
-    return { status: 200, body: { answer: `${sec.text.trim()} [1]`, sources: [{ n: 1, title: sec.title, url: sec.url, year: null, pdf: null }], related, graphics, handoff: null, flags: { canned: "stance", position: sec.title } } };
+    return { status: 200, body: { answer: `${sec.text.trim()} [1]`, sources: [{ n: 1, title: sec.title, url: sec.url, year: null, pdf: null }], related, graphics, handoff: null, flags: { canned: "stance", position: sec.title } }, meta: { route: "stance_position", position: sec.title, graphics: graphics.map((g) => g.id) } };
   }
   if (stance?.kind === "defer") {
     const d = (index.faq ?? []).find((e) => e.id === "no-position");
     if (d) {
       console.log(JSON.stringify({ event: "stance", kind: "defer" }));
-      return { status: 200, body: { answer: d.answer, sources: d.sources, related: [], handoff: handoffFor(index, { cannedId: "no-position" }), flags: { canned: "no-position" } } };
+      return { status: 200, body: { answer: d.answer, sources: d.sources, related: [], handoff: handoffFor(index, { cannedId: "no-position" }), flags: { canned: "no-position" } }, meta: { route: "stance_defer", handoff: "deferral" } };
     }
   }
 
@@ -127,7 +127,7 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
         : await client.messages.create(params);
   } catch (err) {
     console.log(JSON.stringify({ event: "upstream_error", status: err?.status ?? null, name: err?.name }));
-    return { status: 502, body: { error: "unavailable", answer: FRIENDLY.unavailable, sources: [] } };
+    return { status: 502, body: { error: "unavailable", answer: FRIENDLY.unavailable, sources: [] }, meta: { route: "upstream_error", upstream: err?.status ?? null } };
   }
 
   const usage = resp.usage ?? {};
@@ -137,12 +137,12 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
   }));
 
   if (resp.stop_reason === "refusal") {
-    return { status: 200, body: { answer: FRIENDLY.declined, sources: [], related: [], flags: { refusal: true } } };
+    return { status: 200, body: { answer: FRIENDLY.declined, sources: [], related: [], flags: { refusal: true } }, usage, model, meta: { route: "refusal" } };
   }
   const text = (resp.content ?? []).filter((b) => b.type === "text").map((b) => b.text).join("\n").trim();
-  if (!text) return { status: 502, body: { error: "empty", answer: FRIENDLY.unavailable, sources: [] } };
+  if (!text) return { status: 502, body: { error: "empty", answer: FRIENDLY.unavailable, sources: [] }, usage, model, meta: { route: "empty" } };
   if (text.startsWith(LEGAL_SENTINEL) || text.includes(LEGAL_SENTINEL)) {
-    return { status: 200, body: { answer: LEGAL_REPLY, sources: LEGAL_SOURCES, related: [], flags: { legal: true } } };
+    return { status: 200, body: { answer: LEGAL_REPLY, sources: LEGAL_SOURCES, related: [], handoff: null, flags: { legal: true } }, usage, model, meta: { route: "legal" } };
   }
   const staff = takeStaffMarker(text); // [[staff]]: the model says a person should look at this
   const marked = takeMarkers(staff.text, index);
@@ -158,5 +158,12 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
   // Counts only, never message text: "uncited" answers are where the knowledge base may have a gap.
   console.log(JSON.stringify({ event: "answer", cited: sources.length, related: related.length, graphics: graphics.length, drawn: Boolean(graphics[0]?.generated), uncited: sources.length === 0 }));
   const handoff = handoffFor(index, { asked: staff.asked, answer });
-  return { status: 200, body: { answer, sources, related, graphics, handoff, flags: {} }, usage, model };
+  // For the daily roll-up (stats.js): counts and codes only, never any text. What became of a chart the model drew.
+  const shownDrawn = Boolean(graphics[0]?.generated);
+  const drawnStatus = !drawn.offered ? null : env.DYNAMIC_GRAPHICS === "0" ? "disabled" : !drawn.chart ? `rejected:${drawn.why ?? "unknown"}` : shownDrawn ? "accepted" : "unused";
+  const meta = {
+    route: "model", cited: sources.length, related: related.length, graphics: graphics.filter((g) => !g.generated).map((g) => g.id),
+    drawn: drawnStatus, handoff: handoffCause(index, { asked: staff.asked, answer }),
+  };
+  return { status: 200, body: { answer, sources, related, graphics, handoff, flags: {} }, usage, model, meta };
 }
