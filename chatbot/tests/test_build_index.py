@@ -355,6 +355,48 @@ class Graphics(unittest.TestCase):
         self.assertEqual({g["id"] for g in some}, {"appleseed-history", "eht-revenue"})
 
 
+class BillFeed(unittest.TestCase):
+    """The bill-status feed is refreshed by a scheduled job from capitol.hawaii.gov, which sometimes answers 403. A refresh made of
+    errors must not crash the build or erase what the assistant knows (this broke CI on the PR on 2026-10-21)."""
+
+    def _feed(self, bills):
+        import tempfile
+        path = Path(tempfile.mkdtemp(prefix="ha-bills-")) / "bill-status.json"
+        path.write_text(json.dumps({"generatedAt": "2026-10-21T18:11:11Z", "trackers": [], "bills": bills}), encoding="utf-8")
+        return path
+
+    def test_a_feed_of_only_errors_falls_back_to_the_committed_snapshot(self):
+        from unittest import mock
+        bad = self._feed({"HB2306": {"type": "HB", "number": "2306", "year": "2026", "error": "HTTP 403"},
+                          "SB3125": {"type": "SB", "number": "3125", "year": "2026", "error": "HTTP 403"}})
+        with mock.patch.object(b, "BILL_STATUS", bad):
+            out = b.bill_outcomes()
+        self.assertIsNotNone(out)
+        self.assertIn("SB3125", out["text"])
+        self.assertIn("Act 024", out["text"])
+        self.assertIn("data pulled 2026-10-18", out["text"], "says the older date when it used the snapshot")
+
+    def test_live_data_wins_for_the_bills_it_has_and_the_snapshot_fills_the_rest(self):
+        from unittest import mock
+        feed = self._feed({"SB3125": {"type": "SB", "number": "3125", "year": "2026", "updates": [{"date": "2026-12-01T00:00:00Z", "description": "Newer action in the live feed"}]},
+                           "HB2306": {"type": "HB", "number": "2306", "year": "2026", "error": "HTTP 403"}})
+        with mock.patch.object(b, "BILL_STATUS", feed):
+            text = b.bill_outcomes()["text"]
+        self.assertIn("Newer action in the live feed", text)
+        self.assertIn("HB2306", text)
+
+    def test_no_feed_and_no_snapshot_means_no_section_not_a_crash(self):
+        from unittest import mock
+        with mock.patch.object(b, "BILL_STATUS", Path("/nonexistent/bill-status.json")), mock.patch.object(b, "BILL_SNAPSHOT", Path("/nonexistent/snap.json")):
+            self.assertIsNone(b.bill_outcomes())
+
+    def test_the_snapshot_is_complete_and_current(self):
+        snap = json.loads(b.BILL_SNAPSHOT.read_text(encoding="utf-8"))
+        self.assertGreaterEqual(len(snap["bills"]), 14)
+        for key, v in snap["bills"].items():
+            self.assertTrue(v["date"] and v["description"], key)
+
+
 class PositionAliases(unittest.TestCase):
     """Aliases are how a visitor's "where do you stand on X" finds a position, so they must be clean."""
 

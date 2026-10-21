@@ -136,29 +136,53 @@ def parse_sections(path: Path, group_level: int = 2, item_level: int = 3):
     return items
 
 
-def bill_outcomes() -> dict | None:
-    if not BILL_STATUS.exists():
-        return None
-    d = json.loads(BILL_STATUS.read_text(encoding="utf-8"))
+BILL_SNAPSHOT = HERE / "content" / "bill-status-snapshot.json"
+
+
+def _usable_bills(d: dict) -> tuple[dict, dict]:
+    """(bill -> {year, date, description} for its latest recorded action, bill -> issue area). A bill whose fetch failed has
+    no `updates` and is left out: the feed is refreshed by a scheduled job and capitol.hawaii.gov sometimes answers it 403."""
     area = {}
     for tr in d.get("trackers", []):
         for n in tr.get("hbNumbers", []):
             area[f"HB{n}"] = tr["issueArea"]
         for n in tr.get("sbNumbers", []):
             area[f"SB{n}"] = tr["issueArea"]
-    lines = []
-    for key, v in sorted(d["bills"].items()):
-        ups = sorted(v["updates"], key=lambda u: u["date"], reverse=True)
-        if not ups:
-            continue
-        last = ups[0]
-        desc = re.sub(r"\s+", " ", last["description"]).strip()
-        lines.append(f"- {key} ({v['year']}), tracked under \"{area.get(key, 'tax fairness')}\": "
-                     f"last recorded action {last['date'][:10]}: {desc}")
-    gen = d.get("generatedAt", "")[:10]
+    out = {}
+    for key, v in d.get("bills", {}).items():
+        ups = sorted(v.get("updates") or [], key=lambda u: u["date"], reverse=True)
+        if ups:
+            out[key] = {"year": v["year"], "date": ups[0]["date"][:10], "description": re.sub(r"\s+", " ", ups[0]["description"]).strip()}
+    return out, area
+
+
+def bill_outcomes() -> dict | None:
+    """The generated "2026 bill outcomes" section. Live feed where it has data; for any bill it has none for (a failed
+    fetch), the last good copy committed in content/bill-status-snapshot.json (snapshot_bills.py), so one bad refresh
+    does not erase what the assistant knows about a bill."""
+    live, area, gen = {}, {}, ""
+    if BILL_STATUS.exists():
+        d = json.loads(BILL_STATUS.read_text(encoding="utf-8"))
+        live, area = _usable_bills(d)
+        gen = d.get("generatedAt", "")[:10]
+    snap, snap_gen = {}, ""
+    if BILL_SNAPSHOT.exists():
+        sd_ = json.loads(BILL_SNAPSHOT.read_text(encoding="utf-8"))
+        snap, snap_gen = sd_["bills"], sd_.get("generatedAt", "")[:10]
+        area = {**sd_.get("areas", {}), **area}
+    merged = {**{k: v for k, v in snap.items() if k not in live}, **live}
+    if not merged:
+        return None
+    fallback = sorted(k for k in merged if k not in live)
+    if fallback:
+        print(f"WARNING: the bill-status feed has no data for {len(fallback)} bills ({', '.join(fallback[:4])}{'...' if len(fallback) > 4 else ''}); "
+              f"using the committed snapshot from {snap_gen}", file=sys.stderr)
+    lines = [f"- {key} ({v['year']}), tracked under \"{area.get(key, 'tax fairness')}\": last recorded action {v['date']}: {v['description']}"
+             for key, v in sorted(merged.items())]
+    pulled = snap_gen if fallback else gen  # when any bill is from the snapshot, say so with the older date
     text = (
         "Status of the bills Hawaiʻi Appleseed tracked in the 2026 session, from the "
-        f"Legislature's own feed (data pulled {gen}). The 2026 regular session has ended. "
+        f"Legislature's own feed (data pulled {pulled}). The 2026 regular session has ended. "
         "A bill whose last recorded action is a referral, a deferral, or a hearing notice "
         "shows no enactment in this data; an Act number means it became law. This feed can "
         "lag, so the Legislature's website (capitol.hawaii.gov) is the authority on final status.\n\n"

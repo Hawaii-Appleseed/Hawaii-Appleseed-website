@@ -31,6 +31,7 @@ widget (index.html, on hiappleseed.org)
 | `check_links.py` | Fetches every link the assistant can show (pages, reports, PDFs) and reports any that fail. Run before each deploy. |
 | `content/faq.json` | Ready-made answers to the 23 questions asked most (mission, history, leadership, how to give, contact, jobs, ...). The quickest file for staff to review. |
 | `figures.py`, `check_figures.py` | The figure cross-check (see below) and its command-line report; `content/figures.json` lists figures a person has accepted. |
+| `content/bill-status-snapshot.json`, `snapshot_bills.py` | The last good copy of the Legislature bill feed's latest action per bill. The feed is refreshed every 30 minutes by `fetch-bill-status.yml`, and capitol.hawaii.gov sometimes answers 403; `build_index.py` uses the live feed for every bill that has data and this snapshot for the rest (and warns), so one bad refresh cannot crash a build or erase what the assistant knows. Re-save it with `python3 chatbot/snapshot_bills.py` (it refuses unless nearly every bill has data). |
 | `signoff_doc.py` | Builds the staff sign-off review as a Google Doc, and reads the decisions back (see *Positions: sign-off*). |
 | `ROADMAP.md` | What to do next, in order, what is blocked on people, and what is parked. |
 | `content/graphics.json` | The explainer graphics (see *Graphics* below). Every figure carries a quoted proof from the approved text; the build fails without it. |
