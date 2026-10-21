@@ -95,7 +95,21 @@ Every position in `content/positions.md` has a status line. `python3 chatbot/bui
 
 Lines starting "2026 outcome" were written from *Policy in Perspective 2026* (Aug 13, 2026) and the Legislature's feed. Where a bill has no outcome line, nobody checked its final status, and the assistant is told to say so (paid family leave HB2360, pay transparency HB2367, bridge coverage HB1546, and medical debt SB3025 have none).
 
-## Deploy (Cloudflare)
+## Internal pilot (staff only): deployed, locked until Access is set
+
+Deployed 2026-10-21 as `https://ha-ask.dtomkatsu.workers.dev` (the same Cloudflare account as the staff hub). The page is served by the Worker itself (`GET /`), so one URL does everything, with no CORS and no Squarespace, and it runs on Haiku 5.5 with the staff-pilot notice on top.
+
+**It is locked by construction.** `REQUIRE_ACCESS=1` makes `src/access.js` demand a valid Cloudflare Access token on every route (signature, issuer, expiry, audience) and answer 503 until `ACCESS_AUD` is set. The staff hub's README records why the Worker checks the token itself and does not trust "it sits behind Access": per-deployment URLs sit outside the Access application. Preview URLs are off.
+
+To switch it on (about five minutes; 1 and 2 are yours):
+1. **Anthropic key.** Console, new workspace "ha-ask" with a spend limit, then an API key in that workspace. Store it with `cd chatbot/worker && npx wrangler secret put ANTHROPIC_API_KEY` and paste when prompted.
+2. **Access application.** Zero Trust > Access > Applications > Add > Self-hosted; domain `ha-ask.dtomkatsu.workers.dev`; policy Allow for your staff emails (reuse the hub's policy). Copy the application's **Audience tag**.
+3. Put the tag in `ACCESS_AUD` in `wrangler.toml` and run `npm run deploy` (or `wrangler deploy --var ACCESS_AUD:<tag>`).
+4. Open the URL, sign in, ask something. Spend is bounded by `DAILY_BUDGET_USD` ($3), `DAILY_CAP` (500), per-person `PER_DAY` (40), and the workspace limit.
+
+Switch models with `MODEL` (Haiku 5.5 now). `wrangler tail ha-ask` shows request counts, token usage and uncited answers, never message text.
+
+## Deploy (Cloudflare), the public launch version
 
 1. `cd chatbot/worker && npm install && npx wrangler login`
 2. `npx wrangler kv namespace create RATE`, then uncomment the `[[kv_namespaces]]` block in `wrangler.toml` with the id.

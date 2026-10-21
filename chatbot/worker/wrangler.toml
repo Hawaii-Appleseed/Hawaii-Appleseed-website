@@ -3,12 +3,20 @@ main = "src/index.js"
 compatibility_date = "2026-09-01"
 compatibility_flags = ["nodejs_compat"]
 
-# Run `python3 chatbot/build_index.py` first: src/index.json is generated and committed.
+# Per-deployment preview URLs sit outside any Access application, so there are none. The Worker also checks the
+# Access token itself (src/access.js) and answers 503 on every route until the two ACCESS_ values below are set.
+workers_dev = true
+preview_urls = false
+
+# Run `npm run deploy`: it builds src/index.json and src/widget.js first (both generated, both git-ignored).
 
 [vars]
-ALLOWED_ORIGINS = "https://hiappleseed.org,https://www.hiappleseed.org"
-# MODEL = "claude-sonnet-5-5"
-# Pilot limits (staff only). Raise them for a public launch.
+# ---- internal staff pilot ----
+REQUIRE_ACCESS = "1"
+ACCESS_TEAM_DOMAIN = "lively-wildflower-989d"   # the staff hub's Zero Trust team
+ACCESS_AUD = ""                                 # fill in: this app's Audience tag (Zero Trust > Access > Applications)
+ALLOWED_ORIGINS = ""                            # none: the widget is served by this Worker, so calls are same-origin
+MODEL = "claude-haiku-5-5"                      # pilot default; claude-sonnet-5-5 for the higher-quality (about 20x dearer) option
 PER_MINUTE = "6"
 PER_DAY = "40"
 DAILY_CAP = "500"          # requests per day, whole site
@@ -16,10 +24,10 @@ DAILY_BUDGET_USD = "3"     # spend per day, whole site, counted from real token 
 
 # Secrets (never in this file):
 #   wrangler secret put ANTHROPIC_API_KEY
-#   wrangler secret put TURNSTILE_SECRET
-#   wrangler secret put RATE_SALT
+#   wrangler secret put RATE_SALT          (any random string)
+#   wrangler secret put TURNSTILE_SECRET   (public launch only)
 
-# Per-visitor rate limits. Create once: `wrangler kv namespace create RATE`, then paste the id.
-# [[kv_namespaces]]
-# binding = "RATE"
-# id = "<id from wrangler kv namespace create>"
+# Per-person rate limits and the daily budget live here.
+[[kv_namespaces]]
+binding = "RATE"
+id = "934cd38016b74475a9b6209457466164"

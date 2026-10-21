@@ -2,19 +2,21 @@
   "name": "ha-ask-worker",
   "private": true,
   "type": "module",
-  "description": "Hawai\u02bbi Appleseed public Q&A assistant: Cloudflare Worker backend",
+  "description": "Hawaiʻi Appleseed public Q&A assistant: Cloudflare Worker backend",
   "scripts": {
     "index": "python3 ../build_index.py",
     "index:public": "python3 ../build_index.py --public",
-    "pretest": "python3 ../build_index.py",
-    "test": "node --test test/unit.test.mjs test/budget.test.mjs",
+    "pretest": "python3 ../build_index.py && npm run widget",
+    "test": "node --test test/unit.test.mjs test/budget.test.mjs test/access.test.mjs",
     "dev": "node dev-server.mjs",
     "dev:mock": "node dev-server.mjs --mock",
     "eval": "node ../eval/run_eval.mjs",
     "eval:offline": "node ../eval/run_eval.mjs --offline",
-    "deploy": "npm run index && wrangler deploy",
-    "deploy:public": "npm run index:public && wrangler deploy",
-    "test:workerd": "node --test test/workerd.test.mjs"
+    "deploy": "npm run index && npm run widget && wrangler deploy",
+    "deploy:public": "npm run index:public && python3 ../build_embed.py --worker-module src/widget.js --out ../dist/embed.html && wrangler deploy",
+    "test:workerd": "node --test test/workerd.test.mjs",
+    "widget": "python3 ../build_embed.py --endpoint /chat --worker-module src/widget.js --out ../dist/embed-internal.html --notice \"Staff pilot: this assistant's policy positions are drafts that staff have not approved yet. Please do not quote its answers outside the organization, and tell the policy team about anything that looks wrong.\"",
+    "pretest:workerd": "python3 ../build_index.py && npm run widget"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.137.0"

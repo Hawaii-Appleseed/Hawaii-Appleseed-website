@@ -55,3 +55,13 @@ test("rate limit: the fourth request in a minute from one visitor is refused (KV
   assert.equal(r.status, 429);
   assert.equal((await r.json()).error, "rate_limited");
 });
+
+test("page: GET / serves the widget with the staff notice and a locked-down CSP", async () => {
+  const r = await worker.fetch("/");
+  assert.equal(r.status, 200);
+  assert.match(r.headers.get("content-security-policy"), /frame-ancestors 'none'/);
+  const html = await r.text();
+  assert.match(html, /data-endpoint="\/chat"/);
+  assert.match(html, /Staff pilot/);
+  assert.equal(r.headers.get("cache-control"), "no-store");
+});
