@@ -11,6 +11,12 @@ import { buildExcerpts, buildSystem } from "./prompt.js";
 import { suggestResearch } from "./research.js";
 import { queryFor, search } from "./retrieve.js";
 
+/** The year of the session the content covers when the calendar has moved past it, else null (see content/session.json). */
+export function newerSession(index, today) {
+  const covered = Number(index.session?.covered);
+  return covered && Number(String(today).slice(0, 4)) > covered ? covered : null;
+}
+
 export const LIMITS = { turns: 8, userChars: 800, assistantChars: 2400 };
 export const DEFAULT_MODEL = "claude-sonnet-5-5";
 
@@ -95,7 +101,9 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
     const related = (sec.research ?? []).map((u) => index.pubs?.[u] && { title: index.pubs[u].t, url: u, year: index.pubs[u].y, pdf: index.pubs[u].p || null }).filter(Boolean).slice(0, 3);
     console.log(JSON.stringify({ event: "stance", kind: "position", id: sec.id }));
     const graphics = pickGraphics(index, { attached: sec.graphics ?? [] });
-    return { status: 200, body: { answer: `${sec.text.trim()} [1]`, sources: [{ n: 1, title: sec.title, url: sec.url, year: null, pdf: null }], related, graphics, handoff: null, flags: { canned: "stance", position: sec.title } }, meta: { route: "stance_position", position: sec.title, graphics: graphics.map((g) => g.id) } };
+    const later = newerSession(index, today);
+    const note = later ? `\n\nThis reflects the ${later} legislative session. The Legislature has met since, so check capitol.hawaii.gov for what has changed.` : "";
+    return { status: 200, body: { answer: `${sec.text.trim()} [1]${note}`, sources: [{ n: 1, title: sec.title, url: sec.url, year: null, pdf: null }], related, graphics, handoff: null, flags: { canned: "stance", position: sec.title } }, meta: { route: "stance_position", position: sec.title, graphics: graphics.map((g) => g.id) } };
   }
   if (stance?.kind === "defer") {
     const d = (index.faq ?? []).find((e) => e.id === "no-position");
@@ -114,8 +122,8 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
       max_tokens: 1100,
       output_config: { effort: env.EFFORT || "low" },
       system: [
-        { type: "text", text: buildSystem(index.core, index.graphics, { draw: env.DYNAMIC_GRAPHICS !== "0" }), cache_control: { type: "ephemeral", ttl: "1h" } },
-        { type: "text", text: buildExcerpts(hits, today, { stance: stance?.kind === "excerpts" }) },
+        { type: "text", text: buildSystem(index.core, index.graphics, { draw: env.DYNAMIC_GRAPHICS !== "0", covered: index.session?.covered }), cache_control: { type: "ephemeral", ttl: "1h" } },
+        { type: "text", text: buildExcerpts(hits, today, { stance: stance?.kind === "excerpts", newerSession: newerSession(index, today) }) },
       ],
       messages,
     };

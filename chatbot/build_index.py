@@ -139,6 +139,11 @@ def parse_sections(path: Path, group_level: int = 2, item_level: int = 3):
 BILL_SNAPSHOT = HERE / "content" / "bill-status-snapshot.json"
 
 
+def session_year() -> int:
+    """The legislative session this content covers (content/session.json); see freshness in the README."""
+    return int(json.loads((HERE / "content" / "session.json").read_text(encoding="utf-8"))["covered"])
+
+
 def _usable_bills(d: dict) -> tuple[dict, dict]:
     """(bill -> {year, date, description} for its latest recorded action, bill -> issue area). A bill whose fetch failed has
     no `updates` and is left out: the feed is refreshed by a scheduled job and capitol.hawaii.gov sometimes answers it 403."""
@@ -181,14 +186,14 @@ def bill_outcomes() -> dict | None:
              for key, v in sorted(merged.items())]
     pulled = snap_gen if fallback else gen  # when any bill is from the snapshot, say so with the older date
     text = (
-        "Status of the bills Hawaiʻi Appleseed tracked in the 2026 session, from the "
-        f"Legislature's own feed (data pulled {pulled}). The 2026 regular session has ended. "
+        f"Status of the bills Hawaiʻi Appleseed tracked in the {session_year()} session, from the "
+        f"Legislature's own feed (data pulled {pulled}). The {session_year()} regular session has ended. "
         "A bill whose last recorded action is a referral, a deferral, or a hearing notice "
         "shows no enactment in this data; an Act number means it became law. This feed can "
         "lag, so the Legislature's website (capitol.hawaii.gov) is the authority on final status.\n\n"
         + "\n".join(lines)
     )
-    return {"group": "Bill outcomes", "title": "2026 bill outcomes",
+    return {"group": "Bill outcomes", "title": f"{session_year()} bill outcomes",
             "text": text, "url": None, "status": "approved: generated from Legislature data"}
 
 
@@ -665,11 +670,13 @@ def build(public: bool) -> dict:
         "core": core,
         "faq": faq,
         "graphics": graphics,
+        "session": {"covered": session_year()},
         "contact": contact_block(core),
         "pubs": catalog,
         "chunks": chunks,
         "bm25": {"n": n, "avgdl": round(sum(dl) / max(n, 1), 3), "dl": dl, "post": post},
-        "_report": {"skipped": dict(skipped), "position_status": statuses, "figures": figure_report},
+        "_report": {"skipped": dict(skipped), "position_status": statuses, "figures": figure_report,
+                    "untopiced": sorted(p["t"] for p in catalog.values() if not p["a"])},
     }
 
 
@@ -677,6 +684,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--public", action="store_true", help="launch build: approved positions only")
     ap.add_argument("--out", type=Path, default=OUT_DEFAULT)
+    ap.add_argument("--strict", action="store_true",
+                    help="exit 2 if a published report has no entry in content/topics.json or a position has an unexplained figure (the weekly corpus check)")
     a = ap.parse_args()
     idx = build(a.public)
     rep = idx.pop("_report")
@@ -703,9 +712,11 @@ def main() -> int:
           f"{fr['accepted']} accepted by a person, {fr['topic']} only in a report on the subject, {fr['unexplained']} unexplained")
     if fr["unexplained"]:
         print("  WARNING: run python3 chatbot/check_figures.py (a --public build refuses these)")
+    if rep["untopiced"]:
+        print(f"  NEW REPORTS WITHOUT A TOPIC (add each to content/topics.json so it appears under its issue area): {'; '.join(rep['untopiced'])}")
     appr = sum(1 for _, s in rep["position_status"] if s.startswith("approved"))
     print(f"  positions: {appr} approved, {len(rep['position_status']) - appr} draft")
-    return 0
+    return 2 if a.strict and (rep["untopiced"] or fr["unexplained"]) else 0
 
 
 if __name__ == "__main__":

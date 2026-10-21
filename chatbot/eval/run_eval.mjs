@@ -7,6 +7,7 @@
 //   node eval/run_eval.mjs --show             print each live answer
 //   node eval/run_eval.mjs --cat org,position,outcome,nopos   only those categories (typical questions)
 //   node eval/run_eval.mjs --replay answers.json   grade saved answers ({case id: text}) with the real checks; no API call
+//   node eval/run_eval.mjs --max-usd 1       stop (and fail) once the running cost passes this many dollars; the nightly job uses it
 //   node eval/run_eval.mjs --dry              no API call: builds every real prompt and ESTIMATES tokens and cost
 //                                             (chars/4, 260 output tokens); add --model to price a model
 //
@@ -185,7 +186,15 @@ async function run(c) {
 const pool = 1; // one at a time: the prompt-cache cold/warm split in the cost line only means something sequentially
 const queue = [...cases];
 await Promise.all(Array.from({ length: pool }, async () => {
-  for (let c; (c = queue.shift()); ) results.push(await run(c));
+  const cap = Number(opt("max-usd") ?? Infinity);
+  for (let c; (c = queue.shift()); ) {
+    results.push(await run(c));
+    if (!dry && !offline && !replayFile && (dollars(tokens) ?? 0) > cap) {
+      console.error(`COST CAP: spent more than $${cap} after ${results.length} cases; stopping. ${queue.length} cases not run.`);
+      results.push({ c: { id: "cost-cap", cat: "cost" }, fails: [`stopped at the $${cap} cap with ${queue.length} cases left`] });
+      break;
+    }
+  }
 }));
 results.sort((a, b) => cases.indexOf(a.c) - cases.indexOf(b.c));
 

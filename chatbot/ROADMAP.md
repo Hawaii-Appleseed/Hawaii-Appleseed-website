@@ -31,10 +31,10 @@ These gate everything else; none can be done from here.
 - **Next on this item:** (a) link `/stats` from the staff hub (that is the `staff-updates-internal` repo, so a separate change); (b) alert when a day's spend passes 80 percent of the budget or the "came up empty" rate jumps (a line in the daily digest or a Slack post is enough); (c) with a few weeks of data, decide Haiku vs Sonnet and whether to keep drawn charts on for the public build.
 - **Known limit:** the free Cloudflare plan allows 1,000 KV writes a day, about 200 requests with the limiters and this roll-up. Workers Paid before launch.
 
-### 5. Keep the corpus current (M)
-- A scheduled workflow that re-vendors `chatbot/vendor/` when the website repo's corpus changes, rebuilds the index, runs the suites, and opens a PR. `vendor.py --check` already detects drift.
-- Bill status goes stale the moment the session ends; add a "session" switch (2027 opens in January) so answers say "I have not checked this session" instead of citing 2026 data.
-- Nightly **live** eval against the real model once the key exists (about 140 questions, roughly $0.05 on Haiku): catches drift when content or prompts change.
+### 5. Keep the corpus current: DONE 2026-10-21 (the workflows start once this is on main)
+`chatbot-corpus.yml` + `corpus_check.sh` (weekly), `freshness.py` + `record_deploy.py` + `deployed.json`, `content/session.json` and the covered-session switch, `chatbot-live-eval.yml` (nightly, dormant until the key exists). See the README, *Keeping it current*.
+- **Changed from the plan:** re-vendoring on a schedule is moot while `chatbot/` sits in this repo (`vendor/` is local and gitignored); the weekly check and the freshness record do that job. The session switch flips on January 1, not on the convening date, on purpose.
+- **Next on this item:** (a) set the `ANTHROPIC_API_KEY` repository secret so the nightly eval runs; (b) decide whether `npm run deploy` should run in Actions with a scoped Cloudflare token, so a weekly "behind" issue can become an automatic redeploy for the pilot (not for the public Worker); (c) when 2027 bills exist, update `covered` and the outcome text together.
 
 ### 6. Drawn-chart comparability guard (S)
 The quote checks catch invented numbers, wrong scale and mixed units. They cannot tell whether two real numbers *should* sit side by side. Cheap tightening: require a bar chart's rows to come from one source (one `ref`, or one report) unless the labels are explicitly paired in the quote; reject charts whose rows are different years of different measures. Then read a sample of accepted charts from the pilot before deciding whether to allow them in the public build (`DYNAMIC_GRAPHICS`).
