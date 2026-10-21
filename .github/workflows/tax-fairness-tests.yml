@@ -1,0 +1,28 @@
+name: Tax fairness script tests
+
+# Unit tests for the scripts behind tax-fairness/data/bill-status.json (how a refresh run is folded into the file, so one
+# bad run of fetch-bill-status.yml cannot turn good data into errors). No network, no secrets.
+
+on:
+  pull_request:
+    paths:
+      - "tax-fairness/scripts/**"
+      - ".github/workflows/tax-fairness-tests.yml"
+  push:
+    branches: [main]
+    paths:
+      - "tax-fairness/scripts/**"
+      - ".github/workflows/tax-fairness-tests.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run the script tests
+        run: node --test tax-fairness/scripts/*.test.mjs
