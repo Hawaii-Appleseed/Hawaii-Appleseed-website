@@ -30,6 +30,7 @@ widget (index.html, on hiappleseed.org)
 | `vendor.py` | Copies the few files the assistant reads from the rest of the website repo into `vendor/` (see *Vendoring* below). |
 | `check_links.py` | Fetches every link the assistant can show (pages, reports, PDFs) and reports any that fail. Run before each deploy. |
 | `content/faq.json` | Ready-made answers to the 23 questions asked most (mission, history, leadership, how to give, contact, jobs, ...). The quickest file for staff to review. |
+| `ROADMAP.md` | What to do next, in order, what is blocked on people, and what is parked. |
 | `content/graphics.json` | The explainer graphics (see *Graphics* below). Every figure carries a quoted proof from the approved text; the build fails without it. |
 | `content/topics.json` | Which issue area(s) each report belongs to; drives "latest research" and "research on housing". |
 | `content/positions.md` | Public positions, each tagged `<!-- status: draft -->` or `approved by …`. |
