@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { handleRequest } from "../src/index.js";
-import { emptyDay, readDays, record, statsPage, summarize, tally } from "../src/stats.js";
+import { CHART_SAMPLE_PER_DAY, chartsPage, emptyDay, readCharts, readDays, record, statsPage, summarize, tally } from "../src/stats.js";
 
 const index = JSON.parse(readFileSync(new URL("../src/index.json", import.meta.url), "utf8"));
 const kvStore = () => {
@@ -134,4 +134,40 @@ test("stats: the page and its data are served, escaped, behind the same gate, an
   const evil = statsPage([{ date: "2026-10-21", ...emptyDay(), n: 1, position: { "<img src=x onerror=alert(1)>": 3 } }]);
   assert.ok(!evil.includes("<img src=x"));
   assert.match(evil, /&lt;img src=x/);
+});
+
+test("stats: the first accepted charts of a day are kept for a person to read, with no visitor text, and shown on /stats/charts", async () => {
+  const RATE = kvStore();
+  const env = envFor(RATE);
+  const conv = index.core.find((c) => c.title === "Conveyance tax modernization").id;
+  const chart = JSON.stringify({ type: "bars", title: "Prison budget and Hawaiian Home Lands", unit: "annual budget, in millions of dollars", rows: [
+    { label: "Prison budget", value: 300, display: "$300 million", quote: "a $300 million prison budget", ref: conv },
+    { label: "Hawaiian Home Lands (DHHL)", value: 185, display: "$185 million", quote: "$185 million for DHHL", ref: conv }] });
+  const secret = "qqzz-visitor-words-about-prisons";
+  const r = await call(env, { client: says(`Prisons cost more. [${conv}]\n[[chart: ${chart}]]`) }, `${secret} How does it compare?`);
+  assert.equal(r.status, 200);
+  assert.equal((await r.json()).graphics[0].generated, true);
+  const sample = JSON.parse(RATE.m.get(`chart:${day}:1`));
+  assert.equal(sample.title, "Prison budget and Hawaiian Home Lands");
+  assert.equal(sample.rows[0].quote, "a $300 million prison budget");
+  assert.ok(!JSON.stringify(sample).includes(secret) && !JSON.stringify(sample).includes("203.0.113.9"));
+  const page = await (await handleRequest(new Request("https://worker.test/stats/charts"), env)).text();
+  assert.match(page, /Prison budget and Hawaiian Home Lands/);
+  assert.match(page, /\$185 million for DHHL/);
+  const data = await (await handleRequest(new Request("https://worker.test/stats/charts.json"), env)).json();
+  assert.equal(data.charts.length, 1);
+  assert.equal((await handleRequest(new Request("https://worker.test/stats/charts"), { ...env, RATE: undefined })).status, 404);
+  assert.equal((await handleRequest(new Request("https://worker.test/stats/charts"), { ...env, REQUIRE_ACCESS: "1" })).status, 503, "behind the same gate");
+});
+
+test("stats: no more than the day's quota of charts is kept, and a refused or unused chart is never kept", async () => {
+  const RATE = kvStore();
+  const ev = (drawn) => ({ route: "model", cited: 1, related: 1, drawn, chart: { title: "T", type: "bars", unit: "u", rows: [{ label: "a", display: "1", quote: "q" }], sources: [] } });
+  for (let i = 0; i < CHART_SAMPLE_PER_DAY + 5; i++) await record(RATE, ev("accepted"));
+  await record(RATE, ev("rejected:mixed_units"));
+  await record(RATE, ev("unused"));
+  const kept = [...RATE.m.keys()].filter((k) => k.startsWith("chart:"));
+  assert.equal(kept.length, CHART_SAMPLE_PER_DAY);
+  assert.equal((await readCharts(RATE, 3)).length, CHART_SAMPLE_PER_DAY);
+  assert.ok(!chartsPage([{ date: "2026-10-21", type: "bars", title: "<img src=x onerror=alert(1)>", rows: [{ label: "<b>", display: "1", quote: "q" }], sources: [] }]).includes("<img src=x"));
 });

@@ -11,6 +11,8 @@
 import { microDollars } from "./pricing.js";
 
 export const STATS_TTL = 400 * 24 * 3600;
+export const CHART_SAMPLE_PER_DAY = 20; // accepted model-drawn charts kept per day for a person to read
+export const CHART_SAMPLE_TTL = 45 * 24 * 3600;
 export const statsKey = (day) => `stats:${day}`;
 
 export const emptyDay = () => ({
@@ -53,16 +55,37 @@ export function tally(day, ev) {
   return d;
 }
 
-/** Save one event. Never throws: a failed count must not fail an answer. */
+/** Save one event; returns the day's counts, or null. Never throws: a failed count must not fail an answer. When a chart the
+ *  model drew is shown, the first CHART_SAMPLE_PER_DAY of the day are also kept (the chart only: its title, rows, quotes and
+ *  sources, all text from our own publications; nothing the visitor typed) so staff can judge whether they are sensible. */
 export async function record(kv, ev, now = new Date()) {
-  if (!kv) return;
+  if (!kv) return null;
   try {
-    const key = statsKey(now.toISOString().slice(0, 10));
+    const date = now.toISOString().slice(0, 10);
+    const key = statsKey(date);
     const have = await kv.get(key);
-    await kv.put(key, JSON.stringify(tally(have ? JSON.parse(have) : null, ev)), { expirationTtl: STATS_TTL });
+    const d = tally(have ? JSON.parse(have) : null, ev);
+    await kv.put(key, JSON.stringify(d), { expirationTtl: STATS_TTL });
+    if (ev.drawn === "accepted" && ev.chart && d.drawn.accepted <= CHART_SAMPLE_PER_DAY) {
+      const { title, unit, type, rows, items, sources } = ev.chart;
+      await kv.put(`chart:${date}:${d.drawn.accepted}`, JSON.stringify({ date, title, unit, type, rows, items, sources }), { expirationTtl: CHART_SAMPLE_TTL });
+    }
+    return d;
   } catch (err) {
     console.log(JSON.stringify({ event: "stats_error", name: err?.name }));
+    return null;
   }
+}
+
+/** The kept sample of accepted model-drawn charts, newest first. */
+export async function readCharts(kv, days = 7, now = new Date()) {
+  const keys = [];
+  for (let i = 0; i < days; i++) {
+    const date = new Date(now.getTime() - i * 86400000).toISOString().slice(0, 10);
+    for (let n = CHART_SAMPLE_PER_DAY; n >= 1; n--) keys.push(`chart:${date}:${n}`);
+  }
+  const got = await Promise.all(keys.map(async (k) => { try { const raw = await kv.get(k); return raw ? JSON.parse(raw) : null; } catch { return null; } }));
+  return got.filter(Boolean);
 }
 
 /** The last `n` days, newest first, each { date, ...counts } (an unrecorded day is all zeros). */
@@ -162,6 +185,26 @@ ${list("Charts shown with an answer", top(s.graphics))}
 ${list("Why charts the model drew were refused", rejected, "A refused chart is dropped and the answer stands without it.")}
 ${list("Turned away", blocked, "Over a limit, over the day's budget, or failed verification.")}
 ${list("Where answers came from", top(s.route, 12))}
-<p class="m" style="margin-top:28px">Raw data: <a href="/stats.json">/stats.json</a>. Source: chatbot/worker/src/stats.js.</p>
+<p class="m" style="margin-top:28px">Raw data: <a href="/stats.json">/stats.json</a>. <a href="/stats/charts">Read a sample of the charts the model drew</a>. Source: chatbot/worker/src/stats.js.</p>
+</main></body></html>`;
+}
+
+/** The staff page for reading the kept sample of model-drawn charts: are they sensible, or misleading? */
+export function chartsPage(charts) {
+  const one = (c) => {
+    const rows = c.rows ?? c.items ?? [];
+    const head = c.type === "bars" ? ["Item", "Value", "Quoted from the source"] : c.type === "stats" ? ["Figure", "What it is", "Quoted from the source"] : ["When", "What", "Quoted from the source"];
+    const cells = (r) => c.type === "bars" ? [r.label, r.display, r.quote] : c.type === "stats" ? [r.value, r.label, r.quote] : [r.when, r.what, r.quote];
+    return `<section><h2>${esc(c.title)}</h2><p class="m">${esc(c.date)} · ${esc(c.type)}${c.unit ? ` · ${esc(c.unit)}` : ""} · ${(c.sources ?? []).map((s) => esc(s.title)).join("; ")}</p>
+<div class="wrap"><table><thead><tr>${head.map((h) => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${rows.map((r) => `<tr>${cells(r).map((x) => `<td>${esc(x)}</td>`).join("")}</tr>`).join("")}</tbody></table></div></section>`;
+  };
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>Ask Hawaiʻi Appleseed: charts the model drew</title><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#F4F7F4;color:#2F3E46;font:15px/1.5 Poppins,Arial,sans-serif}main{max-width:1000px;margin:0 auto;padding:32px 20px 64px}
+h1,h2{font-family:Manrope,Arial,sans-serif;font-weight:800;margin:0 0 6px}h1{font-size:28px}h2{font-size:17px;margin-top:26px}.m{color:rgba(47,62,70,.74);font-size:13px;margin:2px 0 8px}
+table{border-collapse:collapse;width:100%;background:#fff;border:1px solid rgba(53,79,82,.14);font-size:13px}th,td{padding:6px 8px;border-top:1px solid rgba(53,79,82,.14);text-align:left;vertical-align:top}th{background:#E5E9E2;border-top:0}.wrap{overflow-x:auto}a{color:#3F5F57}</style></head><body><main>
+<h1>Charts the model drew</h1>
+<p class="m">The first ${CHART_SAMPLE_PER_DAY} a day that passed every check, kept 45 days. Each figure is quoted from our own publications; no visitor text is kept. For each, ask: would a reader take away something the sources do not say? If a pattern of misleading charts shows up, set DYNAMIC_GRAPHICS to "0" and tell the team what it was. <a href="/stats">Back to usage</a></p>
+${charts.length ? charts.map(one).join("\n") : '<p class="m">None kept yet.</p>'}
 </main></body></html>`;
 }

@@ -16,7 +16,8 @@ const ONES = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eig
 const SPELLED = new RegExp(`\\b(${Object.keys(TENS).join("|")})(?:-(${Object.keys(ONES).join("|")}))?\\b`, "gi");
 const SCALE = /^\s*(thousand|million|billion|trillion)\b/i;
 
-export const LIMITS = { title: 100, unit: 100, label: 120, display: 30, what: 140, quote: 400, minQuote: 12, bars: [2, 8], stats: [1, 4], timeline: [2, 8] };
+const LABEL_WINDOW = 300; // a label may spell out an acronym the quote abbreviates ("Hawaiian Home Lands" for DHHL), so look a few sentences either side
+export const LIMITS = { title: 100, unit: 100, label: 120, display: 30, what: 140, quote: 400, minQuote: 12, bars: [2, 6], maxSpan: 900, stats: [1, 4], timeline: [2, 8] };
 
 /** Numbers in a string, as digits ("$1,000" -> 1000; a spelled-out "Sixty-six" -> 66). */
 export function numbers(s) {
@@ -39,6 +40,32 @@ function scalesAfter(text, num) {
   return found;
 }
 
+/** Does one sentence of any of these sources carry every row's number? Then the source itself pairs them. */
+function pairedInOneSentence(rows, evs) {
+  const wanted = rows.map((r) => String(r.display).match(NUM)[0].replace(/,/g, ""));
+  const texts = new Map(evs.map((e) => [e.ref, e.flat]));
+  for (const flat of texts.values()) {
+    for (const sentence of flat.split(/(?<=[.!?])\s+/)) {
+      const have = numbers(sentence);
+      if (wanted.every((n) => have.has(n))) return true;
+    }
+  }
+  return false;
+}
+
+const GENERIC = new Set(["the", "and", "for", "with", "per", "total", "percent", "million", "billion", "thousand", "share", "rate", "number", "amount", "state", "hawaii"]);
+const stem = (w) => (w.length > 3 && w.endsWith("s") && !w.endsWith("ss") ? w.slice(0, -1) : w);
+const wordsOf = (s) => (squash(s).match(/[a-z]{3,}/g) ?? []).map(stem);
+
+/** A bar's label must come from the text around its own quote: at least one distinctive word of the label is in it. (A label of years or
+ *  numbers only has no such word and is held to the number check instead.) */
+function labelGrounded(label, quote) {
+  const mine = wordsOf(label).filter((w) => !GENERIC.has(w));
+  if (!mine.length) return true;
+  const theirs = new Set(wordsOf(quote));
+  return mine.some((w) => theirs.has(w));
+}
+
 const kindOf = (display) => (/%|percent/i.test(display) ? "percent" : /\$/.test(display) ? "dollars" : "count");
 
 const text = (v, max) => typeof v === "string" && v.trim().length > 0 && v.trim().length <= max && !/[<>]/.test(v);
@@ -49,8 +76,10 @@ function evidence(row, resolve) {
   const ref = String(row.ref ?? "").replace(/[[\]\s]/g, "").toUpperCase();
   const src = resolve(ref);
   if (!src) return { why: "ref" };
-  if (!squash(src.text).includes(squash(row.quote))) return { why: "quote_not_found" };
-  return { quote: row.quote.trim(), src };
+  const flat = squash(src.text);
+  const at = flat.indexOf(squash(row.quote));
+  if (at < 0) return { why: "quote_not_found" };
+  return { quote: row.quote.trim(), src, ref, at, end: at + squash(row.quote).length, flat };
 }
 
 /** Check one drafted chart against the text the model was given. Returns the plain-data chart, or null. */
@@ -66,9 +95,11 @@ function inspectChart(spec, resolve) {
   const sources = new Map();
   const pool = new Set();
   const rows = [];
+  const evs = []; // where each row's quote sits: which section or excerpt, and where in it
   for (const r of list) {
     const ev = evidence(r, resolve);
     if (ev.why) return ev;
+    evs.push(ev);
     const quoted = numbers(ev.quote);
     for (const n of quoted) pool.add(n);
     const within = (...fields) => fields.every((f) => [...numbers(f)].every((n) => quoted.has(n)));
@@ -100,6 +131,14 @@ function inspectChart(spec, resolve) {
   if (spec.type === "bars") {
     if (new Set(rows.map((r) => r._kind)).size > 1 || new Set(rows.map((r) => r._scale)).size > 1) return fail("mixed_units"); // like with like
     if (new Set(rows.map((r) => r.label.toLowerCase())).size < rows.length) return fail("duplicate_labels");
+    // Like with like is not only units. Two real numbers belong on one chart only when the source itself puts them side by side.
+    if (!spec.unit) return fail("no_unit"); // the viewer has to be told what the bar lengths measure
+    if (new Set(evs.map((e) => e.ref)).size > 1) {
+      if (!pairedInOneSentence(rows, evs)) return fail("different_sources"); // rows from different sections or reports
+    } else if (Math.max(...evs.map((e) => e.end)) - Math.min(...evs.map((e) => e.at)) > LIMITS.maxSpan) {
+      return fail("far_apart"); // one section, but different paragraphs of it
+    }
+    if (!rows.every((r, i) => labelGrounded(r.label, evs[i].flat.slice(Math.max(0, evs[i].at - LABEL_WINDOW), evs[i].end + LABEL_WINDOW)))) return fail("label_not_in_quote");
     for (const r of rows) { delete r._kind; delete r._scale; }
   }
   if (spec.type === "timeline" && rows.every((r) => /^\d{4}/.test(r.when))) rows.sort((a, b) => a.when.localeCompare(b.when));

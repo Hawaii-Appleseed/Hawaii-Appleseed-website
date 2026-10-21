@@ -150,3 +150,4 @@
 {"id": "ho-m-partner", "cat": "handoff-model", "q": "My organization wants to partner with you on a report. How do we start?", "handoff": true}
 {"id": "ho-m-answered", "cat": "handoff-model", "q": "Where can I find your latest research on housing?", "handoff": false}
 {"id": "ho-m-explain", "cat": "handoff-model", "q": "What does the conveyance tax pay for under HB2049?", "handoff": false}
+{"id": "chart-m-apples", "cat": "graphic-model", "q": "Compare the share of Hawaii's transportation money spent on vehicle capacity with the share of denied students who were actually eligible for school meals.", "drawn": false}

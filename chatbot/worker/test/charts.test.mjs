@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
-import { checkChart, numbers, resolver, takeChart } from "../src/charts.js";
+import { chartProblem, checkChart, numbers, resolver, takeChart } from "../src/charts.js";
 import { handleChat } from "../src/handler.js";
 import { buildSystem } from "../src/prompt.js";
 
@@ -34,12 +34,47 @@ test("charts: a chart whose every figure is quoted from the text it names is acc
 });
 
 test("charts: an excerpt can be the source, named by its number", () => {
+  const hit = { x: "In 2024 the report found that a 5 percent tax would raise about $305.67 million a year, and a 3 percent tax about $183.4 million.", u: "https://hiappleseed.org/publications/empty-homes-tax-honolulu", t: "Homes Without Residents" };
   const c = checkChart(bars([
     row("5 percent tax", 305.67, "$305.67 million", "a 5 percent tax would raise about $305.67 million a year", "1"),
-    row("Same, from the core", 300, "$300 million", "a $300 million prison budget"),
-  ]), resolve);
-  assert.ok(c, "two sources, same kind and scale");
-  assert.deepEqual(c.sources.map((s) => s.title).sort(), ["Homes Without Residents", CONV.title].sort());
+    row("3 percent tax", 183.4, "$183.4 million", "a 3 percent tax about $183.4 million", "1"),
+  ]), resolver(index.core, [hit], index.pubs));
+  assert.ok(c);
+  assert.deepEqual(c.sources.map((s) => s.title), ["Homes Without Residents"]);
+});
+
+test("charts: bars only compare numbers the source puts side by side", () => {
+  const A = { x: "In 2024 prisons cost $300 million while DHHL got $185 million. Elsewhere, housing needs are large.", u: "https://hiappleseed.org/a", t: "Report A" };
+  const B = { x: "DHHL's budget sits at $185 million this year.", u: "https://hiappleseed.org/b", t: "Report B" };
+  const r = resolver(index.core, [A, B], {});
+  const unit = { unit: "annual budget, in millions of dollars" };
+  const two = (q2, ref2) => bars([row("Prisons", 300, "$300 million", "prisons cost $300 million", "1"), row("DHHL", 185, "$185 million", q2, ref2)], unit);
+  // different reports, and no sentence holds both numbers: a $300 million and a $185 million that never met
+  const C = { x: "Prisons cost $300 million in 2019.", u: "https://hiappleseed.org/c", t: "Report C" };
+  assert.equal(chartProblem(two("DHHL's budget sits at $185 million", "2"), resolver(index.core, [C, B], {})), "different_sources");
+  // different refs, but one report's own sentence carries both numbers: the source pairs them
+  assert.equal(chartProblem(two("DHHL's budget sits at $185 million", "2"), r), null);
+  // the same ref
+  assert.equal(chartProblem(two("DHHL got $185 million", "1"), r), null);
+});
+
+test("charts: bars from one section but far apart, without a unit, or with a label the quote never uses are refused", () => {
+  const filler = "Housing remains a concern for many families across the islands. ".repeat(20);
+  const D = { x: `Prisons cost $300 million. ${filler}DHHL got $185 million.`, u: "https://hiappleseed.org/d", t: "Report D" };
+  const r = resolver(index.core, [D], {});
+  const unit = { unit: "annual budget, in millions of dollars" };
+  const mk = (extra = {}, labels = ["Prisons", "DHHL"], q = ["Prisons cost $300 million", "DHHL got $185 million"]) =>
+    bars([row(labels[0], 300, "$300 million", q[0], "1"), row(labels[1], 185, "$185 million", q[1], "1")], { ...unit, ...extra });
+  assert.equal(chartProblem(mk(), r), "far_apart", "one paragraph is fine, a page apart is not");
+  const near = resolver(index.core, [{ ...D, x: "Prisons cost $300 million and DHHL got $185 million." }], {});
+  assert.equal(chartProblem(mk(), near), null);
+  assert.equal(chartProblem(mk({ unit: undefined }), near), "no_unit");
+  assert.equal(chartProblem(mk({}, ["Housing", "DHHL"]), near), "label_not_in_quote");
+  const spelled = resolver(index.core, [{ ...D, x: "The Department of Hawaiian Home Lands (DHHL) got $185 million while prisons cost $300 million." }], {});
+  assert.equal(chartProblem(mk({}, ["Prisons", "Hawaiian Home Lands"], ["prisons cost $300 million", "DHHL) got $185 million"]), spelled), null, "a label may spell out an acronym that the text just before the quote spells out");
+  assert.equal(chartProblem(mk({}, ["Prison spending", "DHHL"]), near), null, "any distinctive word of the label in its own quote is enough");
+  const six = bars(Array.from({ length: 7 }, (_, i) => row(`Item ${i}`, 300, "$300 million", "Prisons cost $300 million", "1")), unit);
+  assert.equal(chartProblem(six, near), "rows");
 });
 
 test("charts: any figure the text does not carry sinks the chart", () => {

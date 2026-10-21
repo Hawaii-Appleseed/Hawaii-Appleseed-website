@@ -172,6 +172,7 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
   const meta = {
     route: "model", cited: sources.length, related: related.length, graphics: graphics.filter((g) => !g.generated).map((g) => g.id),
     drawn: drawnStatus, handoff: handoffCause(index, { asked: staff.asked, answer }),
+    ...(drawnStatus === "accepted" ? { chart: graphics[0] } : {}),
   };
   return { status: 200, body: { answer, sources, related, graphics, handoff, flags: {} }, usage, model, meta };
 }
