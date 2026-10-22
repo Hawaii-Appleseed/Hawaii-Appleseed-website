@@ -651,9 +651,34 @@ class ChromeJSUnavailable(Exception):
     pass
 
 
-def _osa(script):
-    p = subprocess.run(["osascript", "-"], input=script, text=True,
-                       capture_output=True)
+CHROME_EXE = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+
+
+def chrome_pid():
+    """pid of the Chrome the user actually browses with, or None.
+
+    `tell application "Google Chrome"` resolves to ONE of the running Chromes,
+    and not necessarily this one: a stray `--headless` instance (the Primer
+    editor's warm browser, a Playwright run) can win, and then the admin tab is
+    "not open". So address Chrome by pid, and never a headless one."""
+    out = subprocess.run(["ps", "-axo", "pid=,command="], text=True,
+                         capture_output=True).stdout
+    for line in out.splitlines():
+        pid, _, cmd = line.strip().partition(" ")
+        if cmd.startswith(CHROME_EXE) and "Helper" not in cmd \
+                and "--headless" not in cmd:
+            return int(pid)
+    return None
+
+
+def _osj(js):
+    """Run JXA against the user's Chrome. `chrome` and `pid` are predefined."""
+    pid = chrome_pid()
+    if pid is None:
+        return 1, "", "Chrome is not running (only headless instances, if any)"
+    pre = 'var pid = %d; var chrome = Application(pid);\n' % pid
+    p = subprocess.run(["osascript", "-l", "JavaScript", "-"], input=pre + js,
+                       text=True, capture_output=True)
     return p.returncode, p.stdout.strip(), p.stderr.strip()
 
 
@@ -685,27 +710,20 @@ def chrome_js(js, timeout=90):
 
 
 def _chrome_js_raw(js):
-    fd = os.path.join(ROOT, ".sqs-exec.js")
-    with open(fd, "w", encoding="utf-8") as f:
-        f.write(js)
-    try:
-        # Address the admin tab by URL, never "active tab of front window":
-        # the front tab can be anything, and running VERIFY_JS (which clicks
-        # SAVE) against the wrong page is not a mistake worth risking.
-        rc, out, err = _osa(
-            'set js to (read POSIX file "%s" as «class utf8»)\n'
-            'tell application "Google Chrome"\n'
-            '  repeat with w from 1 to (count of windows)\n'
-            '    repeat with t from 1 to (count of tabs of window w)\n'
-            '      if (URL of tab t of window w) contains "%s" then\n'
-            '        return execute tab t of window w javascript js\n'
-            '      end if\n'
-            '    end repeat\n'
-            '  end repeat\n'
-            '  return "NOTAB"\n'
-            'end tell' % (fd, ADMIN_MATCH))
-    finally:
-        os.remove(fd)
+    # Address the admin tab by URL, never "active tab of front window":
+    # the front tab can be anything, and running VERIFY_JS (which clicks
+    # SAVE) against the wrong page is not a mistake worth risking.
+    rc, out, err = _osj(
+        'var js = %s, hit = "NOTAB";\n'
+        'chrome.windows().forEach(function (win) {\n'
+        '  win.tabs().forEach(function (tab) {\n'
+        '    if (hit === "NOTAB" && tab.url().indexOf(%s) >= 0) {\n'
+        '      var r = tab.execute({javascript: js});\n'
+        '      hit = (r === null || r === undefined) ? "" : String(r);\n'
+        '    }\n'
+        '  });\n'
+        '});\n'
+        'hit' % (json.dumps(js), json.dumps(ADMIN_MATCH)))
     if rc != 0:
         if "Apple Events" in err or "not running" in err:
             raise ChromeJSUnavailable(err)
@@ -719,25 +737,24 @@ def focus_admin_tab():
     """Bring the Squarespace admin tab to the front. Returns its URL, or None.
     Find + focus + verify must stay in ONE osascript: any tool call in between
     hands focus back to the caller."""
-    rc, out, err = _osa('''
-tell application "Google Chrome"
-  activate
-  set found to false
-  repeat with w from 1 to (count of windows)
-    repeat with t from 1 to (count of tabs of window w)
-      if (URL of tab t of window w) contains "%s" then
-        set active tab index of window w to t
-        set index of window w to 1
-        set found to true
-        exit repeat
-      end if
-    end repeat
-    if found then exit repeat
-  end repeat
-  if not found then return ""
-  delay 1.5
-  return URL of active tab of front window
-end tell''' % ADMIN_MATCH)
+    rc, out, err = _osj('''
+var found = false;
+chrome.activate();
+chrome.windows().forEach(function (win) {
+  if (found) return;
+  var ts = win.tabs();
+  for (var t = 0; t < ts.length; t++) {
+    if (ts[t].url().indexOf(%s) >= 0) {
+      win.activeTabIndex = t + 1;
+      win.index = 1;
+      found = true;
+      break;
+    }
+  }
+});
+delay(1.5);
+found ? chrome.windows[0].activeTab.url() : "";
+''' % json.dumps(ADMIN_MATCH))
     return out or None
 
 
@@ -745,32 +762,37 @@ def send_real_paste():
     """Cmd+A then a REAL Cmd+V into whatever is focused in Chrome, guarded on
     the front tab so a stray focus change can't paste 100KB somewhere else.
     (It once went into a Google Form.)"""
-    rc, out, err = _osa('''
-tell application "Google Chrome"
-  activate
-  delay 1.5
-  set u to URL of active tab of front window
-end tell
-if u does not contain "%s" then
-  return "ABORT:" & u
-end if
-tell application "System Events"
-  tell process "Google Chrome"
-    keystroke "a" using command down
-    delay 0.6
-    keystroke "v" using command down
-  end tell
-end tell
-delay 5
-return "pasted"''' % ADMIN_MATCH)
+    rc, out, err = _osj('''
+chrome.activate();
+delay(1.5);
+var u = chrome.windows[0].activeTab.url();
+var se = Application("System Events");
+var front = se.processes.whose({frontmost: true})[0].unixId();
+if (u.indexOf(%s) < 0) {
+  "ABORT:" + u;
+} else if (front !== pid) {
+  "ABORT:front process " + front + " is not Chrome " + pid;
+} else {
+  se.keystroke("a", {using: "command down"});
+  delay(0.6);
+  se.keystroke("v", {using: "command down"});
+  delay(5);
+  "pasted";
+}
+''' % json.dumps(ADMIN_MATCH))
     if rc != 0:
         return "ERROR:" + err
     return out
 
 
 def open_admin():
-    subprocess.run(["open", "-a", "Google Chrome", SITE + "/config/pages"],
-                   check=False)
+    url = SITE + "/config/pages"
+    rc, out, err = _osj(
+        'chrome.activate();\n'
+        'if (chrome.windows().length === 0) chrome.Window().make();\n'
+        'chrome.windows[0].tabs.push(chrome.Tab({url: %s}));' % json.dumps(url))
+    if rc != 0:  # Chrome not running at all: plain launch
+        subprocess.run(["open", "-a", "Google Chrome", url], check=False)
 
 
 # Pages-sidebar title per target. Filename != live slug != sidebar title, so
