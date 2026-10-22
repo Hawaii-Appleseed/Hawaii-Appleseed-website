@@ -33,6 +33,7 @@ Things that file will tell you and are easy to get wrong:
   `food-security.html` → `/food-equity`). `INTERNAL_LINK_MAP` in
   `scripts/build_squarespace.py` is the source of truth.
 - Paste into Squarespace from `squarespace-ready/`, **never** the raw root file.
+- **Parked idea:** paste-once "hybrid loader" so edits go live without re-pasting (tested 2026-10-22, not rolled out): see `scripts/hybrid-loader/README.md`. Do not use it on live pages until that is revived.
 - The legacy sage-green `<style>` block is **gone** — `index.html` was migrated
   to the brand palette in `63ef507` / `422c211`. `--sage-*` and `#3a7811` now
   appear nowhere in the repo except the prohibition above. Don't "migrate" it

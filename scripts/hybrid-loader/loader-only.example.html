@@ -1,0 +1,29 @@
+<div id="ha-loader-root" data-src="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/squarespace-ready/food-security.html" style="min-height:100vh"></div>
+<script>
+(function () {
+  var root = document.getElementById("ha-loader-root");
+  var src = root.getAttribute("data-src");
+  var t0 = performance.now();
+  fetch(src, { cache: "no-cache" }).then(function (r) {
+    if (!r.ok) throw new Error(r.status);
+    return r.text();
+  }).then(function (html) {
+    var doc = new DOMParser().parseFromString(html, "text/html");
+    var nodes = Array.prototype.slice.call(doc.head.childNodes).concat(Array.prototype.slice.call(doc.body.childNodes));
+    nodes.forEach(function (n) {
+      if (n.nodeType !== 1) return;
+      if (n.tagName === "SCRIPT") {
+        var s = document.createElement("script");
+        if (n.src) s.src = n.src; else s.textContent = n.textContent;
+        root.appendChild(s);
+      } else {
+        root.appendChild(document.importNode(n, true));
+      }
+    });
+    root.style.minHeight = "";
+    root.setAttribute("data-loaded-ms", Math.round(performance.now() - t0));
+  }).catch(function (e) {
+    root.innerHTML = '<p style="padding:48px 24px;text-align:center"><a href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/food-security.html">Open this page</a></p>';
+  });
+})();
+</script>
