@@ -2,6 +2,23 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "cde02474a0f0",
+   "title": "A new ACLU report reveals that mass deportation breaks our democracy and directly ... - Facebook",
+   "outlet": "facebook.com",
+   "url": "https://www.facebook.com/acluhawaii/posts/a-new-aclu-report-reveals-that-mass-deportation-breaks-our-democracy-and-directl/1553137100186925/",
+   "published": "2026-10-22T20:09:24Z",
+   "firstSeen": "2026-10-23T15:04:36Z",
+   "confidence": "high",
+   "reasons": [
+    "names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "feed"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
    "id": "eda7f7ef86dd",
    "title": "Will Caron: Zip Pact",
    "outlet": "Honolulu Civil Beat",
