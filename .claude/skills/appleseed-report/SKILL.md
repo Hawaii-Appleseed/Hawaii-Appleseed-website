@@ -99,27 +99,28 @@ Load the **`appleseed-brand`** skill first: it holds the palette, fonts, chart p
 
 Both paths start from a self-contained brand HTML file.
 
-**→ Editable primer-editor project** (live editing, web publish):
+**→ Editable Cider project** (live editing on the staff hub, web publish):
 
-**This path needs a second repo.** `primer-editor` is not part of this one. Clone it if you don't have it:
-
-```bash
-git clone https://github.com/Hawaii-Appleseed/primer-editor.git ~/primer-editor
-```
-
-Then scaffold (adjust the path if you cloned it elsewhere):
+**This path needs a second repo.** Cider (the repo was `primer-editor`) is not part of this one; it is `~/primer-editor` on Devin's Mac. Clone it if you don't have it:
 
 ```bash
-python3 ~/primer-editor/docsync/scaffold.py <path-to-report.html> --id <slug> --title "<Title>"
+git clone https://github.com/Hawaii-Appleseed/Cider.git ~/primer-editor
 ```
 
-Creates `~/primer-editor/projects/<slug>/` with `content.md`, `layout.json`, `render_report.py`, `index.html`. Then:
+**Scaffold from the markdown, not from the HTML.** Save the report as markdown — `# Title`, then `Subtitle:` / `Date:` / `Author:` lines, the executive summary as the paragraphs before the first `##`, each `##` section, `###` subheadings, `> ` pull quotes, bullets, and `[^id]` citations with a `[^id]: Source — https://…` line per endnote — and one command lays it out on the house template's pages (cover, inside cover with contents, executive summary, a section page per `##`, sources filled), in a git worktree of Cider, never its main folder:
 
-- Any file `render_report.py` reads **must be listed under `docsync.yml` `editor.engine`** or Pyodide can't see it.
-- Every SVG/graphic must use `graphic(el_id, svg, w=…)` in `render_report.py` — a bare `<svg>` is frozen and can't be moved or resized in the editor.
-- **Never write `content.md`/`layout.json` while the editor is open** — use the `/__pilot` API instead; concurrent writes clash and changes go invisible.
-- **Never start or kill `serve.py` yourself.** "Budget Primer Editor.app" owns it. Ask the user to relaunch the app.
-- Save is pre-authorized at checkpoints. **Push publishes the live site and needs an explicit per-message go-ahead.**
+```bash
+python3 -m docsync.new --id <slug> --template appleseed-report --scheme blue --text <report.md> --build
+```
+
+`appleseed-brief` for a policy brief; schemes `blue | slate | teal | charcoal`. With the editor app running, `POST localhost:8010/__scaffold {slug, template, scheme, text}` or the local MCP server's `new_report` tool is the same call. Pagination is an estimate: open the project and run `audit()` (the pilot API) before calling it done. The brand HTML from Step 4 is for the Google Doc and `.docx` paths; `docsync/scaffold.py <page.html>` still exists for bringing in a finished web page, and its STAGE TWO wiring is a day's work — not the route for a new report.
+
+Rules in that repo (its `CLAUDE.md` and `report-editor` skill are the authority):
+
+- Work in a worktree (`tools/wt new <name>`); land by pull request (`tools/wt land <name>`). Edits in `~/primer-editor` itself are refused by a hook.
+- While an editor tab is open, change the report through the pilot API (`docsync.api.*` / `POST /__pilot`), not by writing `content.md` or `layout.json`.
+- **Never start or kill `serve.py` yourself.** The editor app owns it.
+- Save is pre-authorized at checkpoints. **Push, and shipping to the staff hub, stay with Devin.**
 
 **→ Google Doc** (funders, coalition markup, anyone who will comment on it): file the rendered brand HTML straight into the shared drive. **Needs `~/internal-tools/appleseed-drive/`** and its Drive credential (`internal-tools` repo); if it isn't on this machine, ship `.docx` instead and say why.
 
