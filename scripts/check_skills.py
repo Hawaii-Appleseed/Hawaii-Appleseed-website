@@ -128,6 +128,16 @@ def smoke() -> list[str]:
             return r
 
         run(sys.executable, t / "bill_lookup.py", "HB1884", expect=2)  # no key -> exit 2, no guessing
+        (Path(tmp) / "filing.txt").write_text(SAMPLE, encoding="utf-8")
+        hub = ["--bill", "HB1", "--hearing", "2026-03-05T10:15", "--committee", "FIN", "--position", "support",
+               "--author", "staff@hiappleseed.org"]
+        run(sys.executable, t / "file_to_hub.py", "filing.txt", *hub, "--dry-run")
+        # No service token here (the env drops it, and CI has no Keychain) -> exit 2, nothing sent.
+        env_no_token = {k: v for k, v in env.items() if not k.startswith("CF_ACCESS_")}
+        r = subprocess.run([sys.executable, t / "file_to_hub.py", "filing.txt", *hub, "--hub", "http://127.0.0.1:9"],
+                           cwd=tmp, env={**env_no_token, "PATH": "/nonexistent"}, capture_output=True, text=True)
+        if r.returncode != 2 or "service token" not in r.stderr:
+            errs.append(f"file_to_hub.py without a token: exit {r.returncode}, expected 2 and a word about the token\n    {r.stderr.strip()[-300:]}")
         run(sys.executable, t / "reference" / "build_citations.py", "-o", f"{tmp}/citations.md")
         r = run(sys.executable, t / "reference" / "profile_testimony.py")
         if "TESTIMONY STYLE PROFILE" not in r.stdout or " 0 documents" in r.stdout:
