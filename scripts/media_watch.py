@@ -1218,7 +1218,25 @@ def is_ignored(item, cfg):
     The default is "Candidate Q&A": an election guide lists every candidate, so a
     staff member who ran shows up on six rivals' pages as well as their own, in a
     public digest, for a reason that is not press coverage of the org."""
-    return any(re.search(pat, item["title"], re.I) for pat in cfg.get("ignore_titles", []))
+    return any(re.search(pat, item["title"], re.I) for pat in cfg.get("ignore_titles", [])) or is_blocked(item, cfg)
+
+
+def is_blocked(item, cfg):
+    """A source a person has said is junk (config block_sources). Each entry is a host
+    ("example.com", which also covers its subdomains) or a host plus path prefix
+    ("facebook.com/somepage", which blocks that page and leaves the rest of the host
+    alone). Matched against the story's own URL and its outlet URL, never the title."""
+    for u in (item.get("url", ""), item.get("outlet_url", "")):
+        if not u:
+            continue
+        host = host_of(u)
+        path = urllib.parse.urlsplit(u if "//" in u else "//" + u).path.strip("/").lower()
+        for entry in cfg.get("block_sources", []):
+            bhost, _, bpath = entry.lower().strip("/").partition("/")
+            if host and (host == bhost or host.endswith("." + bhost)) and (
+                    not bpath or path == bpath or path.startswith(bpath + "/")):
+                return True
+    return False
 
 
 def is_own(item, cfg):

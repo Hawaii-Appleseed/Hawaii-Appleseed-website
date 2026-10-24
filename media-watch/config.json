@@ -311,6 +311,9 @@
     "hitaxfairness.org",
     "hawaii-appleseed.github.io"
   ],
+  "block_sources": [
+    "facebook.com/citizenportalnews"
+  ],
   "ignore_phrases": [
     "johnny appleseed"
   ],

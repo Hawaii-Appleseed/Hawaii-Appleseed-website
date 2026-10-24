@@ -690,6 +690,17 @@ class Ignored(unittest.TestCase):
         self.assertEqual(r.seen, 1)                      # the ignored one was never even judged
         self.assertEqual(mw.is_ignored({"title": "Candidate Q&A: x"}, {**CFG, "ignore_titles": []}), False)
 
+    def test_block_sources_blocks_a_host_or_one_page_on_it(self):
+        cfg = {**CFG, "block_sources": ["junk.test", "facebook.com/citizenportalnews"]}
+        blocked = lambda url, **kw: mw.is_ignored(dict({"title": "x", "url": url}, **kw), cfg)
+        self.assertTrue(blocked("https://www.junk.test/a"))
+        self.assertTrue(blocked("https://sub.junk.test/a"))
+        self.assertTrue(blocked("https://www.facebook.com/citizenportalnews/posts/abc/1/"))
+        self.assertFalse(blocked("https://www.facebook.com/citizenportalnewsletter/posts/abc/1/"))   # prefix is a path segment
+        self.assertFalse(blocked("https://www.facebook.com/acluhawaii/posts/abc/1/"))
+        self.assertFalse(blocked("https://notjunk.test/a"))
+        self.assertFalse(mw.is_ignored({"title": "x", "url": "https://junk.test/a"}, CFG))
+
 
 class Columns(unittest.TestCase):
     def test_staff_column_is_recognised_by_its_title_prefix(self):
