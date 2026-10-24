@@ -1,0 +1,719 @@
+{
+ "_comment": "Phrasings for the ready-made answers. positives: [expected answer id, question]. negatives: questions that must go to the model, never a ready-made answer (precision is the point). Added to over time; a first-contact test on never-seen wording scored 58% and 35% on two fresh sets (and 0 wrong answers after the final fix), so these grow as real questions turn up.",
+ "positives": [
+  [
+   "mission",
+   "What's the mission of Hawaiʻi Appleseed?"
+  ],
+  [
+   "mission",
+   "what is your mission?"
+  ],
+  [
+   "mission",
+   "What is Appleseed's mission statement"
+  ],
+  [
+   "mission",
+   "Can you tell me your mission?"
+  ],
+  [
+   "mission",
+   "What is the purpose of this organization?"
+  ],
+  [
+   "mission",
+   "What are you all about"
+  ],
+  [
+   "mission",
+   "what's your goal"
+  ],
+  [
+   "who-we-are",
+   "What is Hawaii Appleseed?"
+  ],
+  [
+   "who-we-are",
+   "What does your organization do?"
+  ],
+  [
+   "who-we-are",
+   "tell me about Appleseed"
+  ],
+  [
+   "who-we-are",
+   "Who is Hawaiʻi Appleseed"
+  ],
+  [
+   "issues",
+   "What issues do you focus on?"
+  ],
+  [
+   "issues",
+   "what are your main priorities"
+  ],
+  [
+   "issues",
+   "What are your areas of focus?"
+  ],
+  [
+   "issues",
+   "what topics does Appleseed cover"
+  ],
+  [
+   "issues",
+   "What does Hawaii Appleseed advocate for?"
+  ],
+  [
+   "history",
+   "When was Appleseed founded?"
+  ],
+  [
+   "history",
+   "How old is your organization?"
+  ],
+  [
+   "history",
+   "when did Hawaiʻi Appleseed begin"
+  ],
+  [
+   "history",
+   "Who started this organization?"
+  ],
+  [
+   "leadership",
+   "Who is the Executive Director of Hawaii Appleseed?"
+  ],
+  [
+   "leadership",
+   "who runs this organization"
+  ],
+  [
+   "leadership",
+   "Who's in charge?"
+  ],
+  [
+   "board",
+   "Who is on the Board?"
+  ],
+  [
+   "board",
+   "who are the board of directors"
+  ],
+  [
+   "board",
+   "board members?"
+  ],
+  [
+   "donate",
+   "How do I donate to Hawaii Appleseed?"
+  ],
+  [
+   "donate",
+   "Where can I give money?"
+  ],
+  [
+   "donate",
+   "I'd like to make a donation"
+  ],
+  [
+   "donate",
+   "how can I support your work?"
+  ],
+  [
+   "donate",
+   "how do I give monthly"
+  ],
+  [
+   "contact",
+   "How can I contact you?"
+  ],
+  [
+   "contact",
+   "What's your phone number?"
+  ],
+  [
+   "contact",
+   "what is your email address"
+  ],
+  [
+   "contact",
+   "How do I get in touch with Hawaii Appleseed?"
+  ],
+  [
+   "address",
+   "Where is your office located?"
+  ],
+  [
+   "address",
+   "what's your address"
+  ],
+  [
+   "address",
+   "Where are you based?"
+  ],
+  [
+   "jobs",
+   "Are you hiring right now?"
+  ],
+  [
+   "jobs",
+   "Do you have any open positions?"
+  ],
+  [
+   "jobs",
+   "how do I apply for a job at Hawaii Appleseed"
+  ],
+  [
+   "newsletter",
+   "How do I subscribe to your newsletter?"
+  ],
+  [
+   "newsletter",
+   "How can I get on your email list?"
+  ],
+  [
+   "newsletter",
+   "Do you have a newsletter?"
+  ],
+  [
+   "volunteer",
+   "Can I volunteer?"
+  ],
+  [
+   "volunteer",
+   "Do you accept volunteers?"
+  ],
+  [
+   "volunteer",
+   "Are there volunteer opportunities?"
+  ],
+  [
+   "ai",
+   "Are you a real person?"
+  ],
+  [
+   "ai",
+   "Am I chatting with a bot?"
+  ],
+  [
+   "ai",
+   "are you AI"
+  ],
+  [
+   "ai",
+   "Is this a human?"
+  ],
+  [
+   "greeting",
+   "Hi!"
+  ],
+  [
+   "greeting",
+   "Hello"
+  ],
+  [
+   "greeting",
+   "Aloha!"
+  ],
+  [
+   "greeting",
+   "hey there"
+  ],
+  [
+   "greeting",
+   "Good morning"
+  ],
+  [
+   "thanks",
+   "Thanks!"
+  ],
+  [
+   "thanks",
+   "Thank you so much"
+  ],
+  [
+   "thanks",
+   "mahalo"
+  ],
+  [
+   "thanks",
+   "Thanks, that was helpful!"
+  ],
+  [
+   "mission",
+   "Could you explain what Hawaiʻi Appleseed is trying to accomplish?"
+  ],
+  [
+   "mission",
+   "What's the organization's mission?"
+  ],
+  [
+   "mission",
+   "Whats ur purpose"
+  ],
+  [
+   "mission",
+   "what is the point of Hawaii Appleseed"
+  ],
+  [
+   "who-we-are",
+   "I'm new here, what is Hawaii Appleseed?"
+  ],
+  [
+   "who-we-are",
+   "what does Appleseed do exactly"
+  ],
+  [
+   "who-we-are",
+   "Can you describe your organization?"
+  ],
+  [
+   "issues",
+   "Which issues does Appleseed work on?"
+  ],
+  [
+   "issues",
+   "what are the policy priorities of hawaii appleseed"
+  ],
+  [
+   "issues",
+   "What do you focus on?"
+  ],
+  [
+   "history",
+   "how long have you been operating"
+  ],
+  [
+   "history",
+   "what year was hawaii appleseed founded"
+  ],
+  [
+   "history",
+   "tell me about your history"
+  ],
+  [
+   "leadership",
+   "Who is the head of the organization?"
+  ],
+  [
+   "leadership",
+   "who's the executive director"
+  ],
+  [
+   "leadership",
+   "Who leads Hawaii Appleseed?"
+  ],
+  [
+   "board",
+   "who sits on your board"
+  ],
+  [
+   "board",
+   "Who are your board members?"
+  ],
+  [
+   "donate",
+   "How can I make a donation?"
+  ],
+  [
+   "donate",
+   "I'd like to give a gift to Hawaii Appleseed"
+  ],
+  [
+   "donate",
+   "Where do I donate online?"
+  ],
+  [
+   "donate",
+   "can I donate"
+  ],
+  [
+   "contact",
+   "What is the best phone number for Hawaii Appleseed?"
+  ],
+  [
+   "contact",
+   "how can I email you"
+  ],
+  [
+   "contact",
+   "What's your contact info?"
+  ],
+  [
+   "address",
+   "What is the address of your office?"
+  ],
+  [
+   "address",
+   "where is Hawaii Appleseed's office"
+  ],
+  [
+   "jobs",
+   "Do you have job openings?"
+  ],
+  [
+   "jobs",
+   "Is Hawaii Appleseed hiring?"
+  ],
+  [
+   "jobs",
+   "where do I find your career opportunities"
+  ],
+  [
+   "newsletter",
+   "How can I subscribe to Hawaii Appleseed's newsletter?"
+  ],
+  [
+   "newsletter",
+   "I want to get your email updates"
+  ],
+  [
+   "newsletter",
+   "how do i sign up for your emails"
+  ],
+  [
+   "volunteer",
+   "Can I volunteer for Hawaii Appleseed?"
+  ],
+  [
+   "volunteer",
+   "do you take interns"
+  ],
+  [
+   "ai",
+   "Is this a real person or AI?"
+  ],
+  [
+   "ai",
+   "are you a chatbot?"
+  ],
+  [
+   "ai",
+   "Are you a human being"
+  ],
+  [
+   "greeting",
+   "Hello there!"
+  ],
+  [
+   "greeting",
+   "Hi Hawaii Appleseed"
+  ],
+  [
+   "greeting",
+   "Aloha, good morning"
+  ],
+  [
+   "thanks",
+   "Thank you!"
+  ],
+  [
+   "thanks",
+   "thanks a ton"
+  ],
+  [
+   "thanks",
+   "Mahalo!"
+  ],
+  [
+   "social",
+   "do you have an instagram?"
+  ],
+  [
+   "social",
+   "Where can I follow Hawaii Appleseed on social media?"
+  ],
+  [
+   "legislator",
+   "How do I reach my state legislator?"
+  ],
+  [
+   "legislator",
+   "Can you help me find my representative?"
+  ],
+  [
+   "capabilities",
+   "What can I ask you?"
+  ],
+  [
+   "capabilities",
+   "What kinds of things can you help me with"
+  ],
+  [
+   "tax-deductible",
+   "are gifts to Hawaii Appleseed tax deductible?"
+  ],
+  [
+   "service-provider",
+   "Does Hawaii Appleseed offer legal services?"
+  ],
+  [
+   "mission",
+   "What is the overall mission of Hawaii Appleseed?"
+  ],
+  [
+   "mission",
+   "what are you working toward?"
+  ],
+  [
+   "mission",
+   "Why does Hawaii Appleseed exist?"
+  ],
+  [
+   "mission",
+   "what do you believe in"
+  ],
+  [
+   "who-we-are",
+   "What kind of group is Hawaii Appleseed?"
+  ],
+  [
+   "who-we-are",
+   "Who are you guys?"
+  ],
+  [
+   "who-we-are",
+   "tell me more about Hawaiʻi Appleseed"
+  ],
+  [
+   "issues",
+   "What are the main issues Hawaii Appleseed cares about?"
+  ],
+  [
+   "issues",
+   "what policy areas does hawaii appleseed cover"
+  ],
+  [
+   "issues",
+   "What are your issue areas?"
+  ],
+  [
+   "history",
+   "when did hawaii appleseed first open"
+  ],
+  [
+   "history",
+   "How did Hawaii Appleseed get started?"
+  ],
+  [
+   "history",
+   "what was hawaii appleseed called originally"
+  ],
+  [
+   "leadership",
+   "Who heads up Hawaii Appleseed?"
+  ],
+  [
+   "leadership",
+   "What's the name of the executive director?"
+  ],
+  [
+   "leadership",
+   "who is hawaii appleseed's executive director"
+  ],
+  [
+   "board",
+   "Who is on Hawaii Appleseed's board of directors?"
+  ],
+  [
+   "board",
+   "who is the president of the board"
+  ],
+  [
+   "donate",
+   "What's the best way to donate?"
+  ],
+  [
+   "donate",
+   "How do I give to Hawaii Appleseed online?"
+  ],
+  [
+   "donate",
+   "I'd like to support Hawaii Appleseed financially"
+  ],
+  [
+   "donate",
+   "can i make a donation?"
+  ],
+  [
+   "contact",
+   "What number can I call?"
+  ],
+  [
+   "contact",
+   "how do i email hawaii appleseed"
+  ],
+  [
+   "contact",
+   "what is the best way to reach hawaii appleseed"
+  ],
+  [
+   "address",
+   "What is your mailing address?"
+  ],
+  [
+   "address",
+   "where in honolulu is hawaii appleseed"
+  ],
+  [
+   "jobs",
+   "Are there any jobs at Hawaii Appleseed?"
+  ],
+  [
+   "jobs",
+   "Is Hawaii Appleseed hiring right now?"
+  ],
+  [
+   "jobs",
+   "do you have any job postings"
+  ],
+  [
+   "newsletter",
+   "Can I sign up for email updates?"
+  ],
+  [
+   "newsletter",
+   "How do I get your newsletter?"
+  ],
+  [
+   "newsletter",
+   "how do i get on the email list"
+  ],
+  [
+   "volunteer",
+   "Are you accepting volunteers?"
+  ],
+  [
+   "volunteer",
+   "Can I intern with you?"
+  ],
+  [
+   "ai",
+   "Is a person typing this?"
+  ],
+  [
+   "ai",
+   "Is this an automated chat?"
+  ],
+  [
+   "ai",
+   "Am I speaking with a robot?"
+  ],
+  [
+   "greeting",
+   "Hi, good afternoon!"
+  ],
+  [
+   "greeting",
+   "Hello Hawaii Appleseed!"
+  ],
+  [
+   "greeting",
+   "Good evening"
+  ],
+  [
+   "thanks",
+   "Thanks a lot!"
+  ],
+  [
+   "thanks",
+   "Thank you, that was very helpful"
+  ],
+  [
+   "thanks",
+   "Mahalo for your help"
+  ],
+  [
+   "social",
+   "Are you on Instagram or Facebook?"
+  ],
+  [
+   "social",
+   "What is your Bluesky?"
+  ],
+  [
+   "legislator",
+   "How do I find out who my legislator is?"
+  ],
+  [
+   "legislator",
+   "Where can I write to my state senator?"
+  ],
+  [
+   "capabilities",
+   "What kinds of questions can I ask?"
+  ],
+  [
+   "capabilities",
+   "What can you tell me?"
+  ],
+  [
+   "tax-deductible",
+   "Can I deduct my donation on my taxes?"
+  ],
+  [
+   "service-provider",
+   "Is Hawaii Appleseed a law firm?"
+  ]
+ ],
+ "negatives": [
+  "Are you hiring a lobbyist?",
+  "Are you hiring me to write testimony?",
+  "Can I volunteer at a food bank near me?",
+  "Do you have a position on the mayor?",
+  "Hello, what is your mission?",
+  "Hi, I need a lawyer",
+  "Hi, can you tell me about Act 24?",
+  "How can I contact a legislator who opposed HB1779?",
+  "How can I donate to the housing program?",
+  "How can I volunteer to testify at the Legislature?",
+  "How did the conveyance tax get started?",
+  "How do I apply for SNAP?",
+  "How do I contact my legislator about HB2049?",
+  "How do I donate blood?",
+  "How do I donate to the school meals campaign?",
+  "How do I get started with SNAP?",
+  "How much do donations help families?",
+  "Is Hawaiʻi Appleseed's executive director married?",
+  "Is the donation limit for political campaigns tax deductible?",
+  "Tell me the history of the conveyance tax",
+  "Thanks, but what about the REIT tax?",
+  "Thanks, can you also tell me about SNAP?",
+  "What can you tell me about Act 46?",
+  "What can you tell me about the Lahaina fire housing?",
+  "What does the board of education do?",
+  "What happened to HB2360?",
+  "What is the history of the minimum wage in Hawaii?",
+  "What is the mission of the Appleseed national network?",
+  "What is the mission of the Tax Fairness Coalition and how do I join?",
+  "What is the purpose of the conveyance tax?",
+  "What is your mission regarding housing?",
+  "What is your policy on privacy?",
+  "What is your position on paid family leave?",
+  "What is your position on rent control?",
+  "What is your position on the conveyance tax?",
+  "What jobs does the minimum wage cover?",
+  "What number is HB2049?",
+  "What's your position?",
+  "When did the Legislature first pass a minimum wage?",
+  "Where can I find the minimum wage law?",
+  "Where do I send my testimony?",
+  "Where is the nearest SNAP office?",
+  "Who founded the Appleseed Foundation in Washington?",
+  "Who is on the Senate Ways and Means committee?",
+  "Who is on the board of the Hawaii Housing Finance Corporation?",
+  "Who is the executive director of the Budget Primer project",
+  "Who is the executive director of the Honolulu Authority for Rapid Transportation?",
+  "Who is the executive director of the housing authority?",
+  "is hawaii appleseed's budget primer free",
+  "where is the conveyance tax collected",
+  "who is on the board of the Honolulu rail authority",
+  "Who should I ask?",
+  "Who's the best person to talk to about this?",
+  "Who can I talk to about housing?",
+  "Who can help me?",
+  "Who works on housing policy?"
+ ]
+}

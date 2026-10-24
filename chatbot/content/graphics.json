@@ -1,0 +1,248 @@
+{
+  "_comment": "The graphics the assistant can show. Each is DATA, never markup: the page draws it from this spec, so nothing here can run as code. Every row's `proof` (a phrase, or a list of phrases) must appear word for word in content/about.md, practical.md or positions.md, and every number the row shows must be in its proof; `proofs` at the top level covers numbers in the title, unit or note. build_index.py fails otherwise. `illustration: true` marks a made-up example, which is labeled as one, whose numbers are computed there, and which ships only if the positions in `needs` do. `aliases` are the ways a visitor names the topic (two topic words at least); an `auto: true` graphic shows when the topic alone is asked about, the rest only when someone asks for a chart, graphic, diagram, or explanation. Row tone: omit for the main color, \"muted\" for context.",
+  "graphics": [
+    {
+      "id": "conveyance-allocation",
+      "type": "bars",
+      "title": "Where conveyance tax revenue would go under HB2049",
+      "unit": "share of conveyance tax revenue (the most each can receive)",
+      "note": "Each fund's share is a percent of conveyance tax revenue, and the dollar caps limit what it can receive. Hawaiʻi Appleseed's material does not say where any remainder would go.",
+      "rows": [
+        {"label": "Department of Hawaiian Home Lands (up to $60 million a year)", "value": 30, "display": "up to 30%", "proof": "the Department of Hawaiian Home Lands (up to 30 percent, capped at $60 million a year)"},
+        {"label": "Affordable housing, Rental Housing Revolving Fund (up to $40 million)", "value": 20, "display": "up to 20%", "proof": "affordable housing through the Rental Housing Revolving Fund (up to 20 percent, or $40 million if less)"},
+        {"label": "Housing infrastructure, Dwelling Unit Revolving Fund (DURF)", "value": 20, "display": "20%", "proof": "the Dwelling Unit Revolving Fund for housing infrastructure (20 percent)"},
+        {"label": "Land conservation (up to $10 million)", "value": 5, "display": "up to 5%", "proof": "land conservation (up to 5 percent, or $10 million if less)"}
+      ],
+      "source": {"title": "Hawaiʻi Appleseed's position on conveyance tax modernization", "url": "https://hiappleseed.org/taxes-budget"},
+      "aliases": ["conveyance tax revenue", "where conveyance tax money goes", "hb2049 revenue", "conveyance tax allocation", "conveyance tax spending"],
+      "proofs": ["in 2026 supported HB2049"]
+    },
+    {
+      "id": "marginal-illustration",
+      "type": "slices",
+      "illustration": true,
+      "needs": ["Conveyance tax modernization"],
+      "title": "How a marginal rate works",
+      "note": "An illustration with made-up numbers for a $2.5 million sale. These are not HB2049's actual rates. In a marginal system only the part of the price above each threshold is taxed at the higher rate.",
+      "price": 2500000,
+      "slices": [{"to": 1000000, "rate": 0.005}, {"to": 2000000, "rate": 0.01}, {"to": 2500000, "rate": 0.02}],
+      "source": {"title": "Hawaiʻi Appleseed's position on conveyance tax modernization", "url": "https://hiappleseed.org/taxes-budget"},
+      "aliases": ["marginal tax rate", "marginal tax rates", "marginal rate", "marginal rates", "how marginal rates work", "marginal conveyance tax"]
+    },
+    {
+      "id": "capital-gains-rates",
+      "type": "bars",
+      "title": "Hawaiʻi's tax rates on investment gains and on work",
+      "unit": "state tax rate",
+      "rows": [
+        {"label": "Ordinary income", "value": 11, "display": "11%", "tone": "muted", "proof": "ordinary income rate of 11 percent"},
+        {"label": "Proposed in HB1850", "value": 9, "display": "9%", "proof": "HB1850, a raise to 9 percent"},
+        {"label": "Capital gains today", "value": 7.25, "display": "7.25%", "proof": "taxes capital gains at 7.25 percent"}
+      ],
+      "source": {"title": "Hawaiʻi Appleseed's position on the capital gains tax", "url": "https://hiappleseed.org/taxes-budget"},
+      "aliases": ["capital gains rate", "capital gains rates", "capital gains tax rate", "capital gains vs ordinary income", "capital gains loophole"]
+    },
+    {
+      "id": "reit-stats",
+      "type": "stats",
+      "title": "Real estate investment trusts (REITs) and Hawaiʻi's income tax",
+      "items": [
+        {"value": "$17 billion+", "label": "Hawaiʻi assets held by REITs", "proof": "REITs hold more than $17 billion in Hawaiʻi assets"},
+        {"value": "$900 million+", "label": "Hawaiʻi income REITs reported in 2014", "proof": "in 2014, REITs reported more than $900 million in Hawaiʻi income and paid $0 in state corporate income tax"},
+        {"value": "$0", "label": "state corporate income tax they paid on it", "proof": "in 2014, REITs reported more than $900 million in Hawaiʻi income and paid $0 in state corporate income tax"}
+      ],
+      "source": {"title": "Hawaiʻi Appleseed's position on taxing REITs", "url": "https://hiappleseed.org/taxes-budget"},
+      "aliases": ["reit loophole", "reit tax", "reits tax", "reit taxes", "real estate investment trusts"]
+    },
+    {
+      "id": "eht-revenue",
+      "type": "bars",
+      "title": "What an empty homes tax could raise in Honolulu each year",
+      "unit": "estimated yearly revenue, in millions of dollars",
+      "rows": [
+        {"label": "5 percent flat tax", "value": 305.67, "display": "$305.67 million", "proof": "a 5 percent tax about $305.67 million"},
+        {"label": "3 percent flat tax", "value": 183.4, "display": "$183.4 million", "proof": "a 3 percent tax would raise about $183.4 million a year"}
+      ],
+      "note": "About 35,000 units sit empty across Honolulu, by the report's estimate.",
+      "proofs": ["about 35,000 units sit empty across Honolulu"],
+      "source": {"title": "Homes Without Residents (2024)", "url": "https://hiappleseed.org/publications/empty-homes-tax-honolulu"},
+      "aliases": ["empty homes tax revenue", "empty homes tax", "empty home tax", "eht revenue", "vacant homes tax revenue"]
+    },
+    {
+      "id": "school-meals-cliff",
+      "type": "bars",
+      "title": "The school meals income cliff, for a family of four",
+      "unit": "household income",
+      "rows": [
+        {"label": "Income needed to cover living costs in Hawaiʻi", "value": 107000, "display": "about $107,000", "tone": "muted", "proof": "about $107,000 is needed to cover living costs in Hawaiʻi"},
+        {"label": "Earnings at which a family of four stops qualifying for school meals", "value": 47000, "display": "$47,000", "proof": "a family of four earning $47,000 or more does not qualify"}
+      ],
+      "note": "34 percent of denied students are actually eligible but fall through the paperwork.",
+      "proofs": ["34 percent of denied students are actually eligible"],
+      "source": {"title": "Hawaiʻi Appleseed's position on universal free school meals", "url": "https://hiappleseed.org/food-equity"},
+      "aliases": ["school meals income cliff", "income cliff", "school meal eligibility", "free school meals eligibility", "who qualifies for free school meals"]
+    },
+    {
+      "id": "transit-budget",
+      "type": "bars",
+      "title": "Where Hawaiʻi's transportation money goes",
+      "unit": "share of HDOT's $5.68 billion budget, FY19 to FY24",
+      "rows": [
+        {"label": "Vehicle capacity", "value": 66, "display": "66%", "tone": "muted", "proof": "Sixty-six percent of HDOT's $5.68 billion (FY19–24) went to vehicle capacity"},
+        {"label": "Transit alternatives", "value": 1.5, "display": "1.5%", "proof": "only 1.5 percent to transit alternatives"},
+        {"label": "Keiki Ride Free (a five-year cost)", "value": 0.87, "display": "0.87%", "proof": "Keiki Ride Free is 0.87 percent of the five-year budget"}
+      ],
+      "source": {"title": "Hawaiʻi Appleseed's position on transit equity", "url": "https://hiappleseed.org/transportation-equity"},
+      "aliases": ["transportation budget", "hdot budget", "transit budget", "transit spending", "transportation spending", "keiki ride free cost"]
+    },
+    {
+      "id": "pay-gap",
+      "type": "stats",
+      "title": "The gender pay gap in Hawaiʻi, and what closing it would do",
+      "items": [
+        {"value": "92.8%", "label": "Women's pay as a share of men's, 2014", "proof": "backsliding from 92.8 percent in 2014"},
+        {"value": "82.4–87%", "label": "Women's pay as a share of men's, now", "proof": "earn between 82.4 and 87 percent of what men earn"},
+        {"value": "5.4% → 2.5%", "label": "Overall poverty rate if the gap closed", "proof": "overall poverty would fall from 5.4 percent to 2.5 percent"},
+        {"value": "21.3% → 10.7%", "label": "Single-mother poverty rate if the gap closed", "proof": "single-mother poverty from 21.3 percent to 10.7 percent"}
+      ],
+      "source": {"title": "Hawaiʻi Appleseed's position on pay transparency", "url": "https://hiappleseed.org/wages-labor"},
+      "aliases": ["pay gap", "gender pay gap", "wage gap", "pay equity", "equal pay"]
+    },
+    {
+      "id": "minimum-wage",
+      "type": "stats",
+      "title": "Hawaiʻi's 2022 minimum wage law",
+      "items": [
+        {"value": "$10.10 → $18", "label": "an hour: the minimum wage the law phases in", "proof": "the 2022 law that phases the minimum wage up from $10.10 to $18 an hour"},
+        {"value": "$1 billion", "label": "more in wages each year, by the estimate", "proof": "$1 billion in additional wages each year"},
+        {"value": "200,000+", "label": "workers the estimate says would be paid more", "proof": "more than 200,000 workers"}
+      ],
+      "source": {"title": "Hawaiʻi Appleseed's position on the minimum wage", "url": "https://hiappleseed.org/our-history"},
+      "aliases": ["minimum wage law", "minimum wage increase", "minimum wage raise", "minimum wage 2022", "how much is minimum wage"]
+    },
+    {
+      "id": "housing-vs-handcuffs",
+      "type": "bars",
+      "title": "The prison budget and the Hawaiian Home Lands budget",
+      "unit": "state budget, in millions of dollars",
+      "rows": [
+        {"label": "Prisons", "value": 300, "display": "$300 million", "proof": "a $300 million prison budget"},
+        {"label": "Department of Hawaiian Home Lands (DHHL)", "value": 185, "display": "$185 million", "proof": "$185 million for DHHL"}
+      ],
+      "note": "Hawaiʻi Appleseed's framing: housing should come ahead of handcuffs.",
+      "source": {"title": "Hawaiʻi Appleseed's position on conveyance tax modernization", "url": "https://hiappleseed.org/taxes-budget"},
+      "aliases": ["housing before handcuffs", "prison budget", "prison spending", "prisons hawaiian home lands"]
+    },
+    {
+      "id": "act46-cost",
+      "type": "stats",
+      "title": "Act 46's tax cuts and the fix Hawaiʻi Appleseed proposed",
+      "items": [
+        {"value": "$1 billion+", "label": "a year in lost state revenue by 2031, even after the 2026 rollback", "proof": ["Act 46 will still reduce state revenue by more than $1 billion a year by 2031", "SB3125 was signed into law as Act 24 on May 21, 2026"]},
+        {"value": "$69 million", "label": "what freezing the rollout and raising the top five brackets would raise", "proof": "would generate about $69 million, 86 percent of it from the top 1 percent"},
+        {"value": "86%", "label": "of that $69 million would come from the top 1 percent", "proof": "would generate about $69 million, 86 percent of it from the top 1 percent"}
+      ],
+      "source": {"title": "Hawaiʻi Appleseed's position on freezing and adjusting Act 46", "url": "https://hiappleseed.org/taxes-budget"},
+      "aliases": ["act 46 revenue", "act 46 cost", "act 46 tax cuts", "act 46 rollback"]
+    },
+    {
+      "id": "millionaire-surcharge",
+      "type": "stats",
+      "title": "The millionaire's income surcharge: what it would do",
+      "items": [
+        {"value": "$71 million", "label": "a year, roughly, to help fund Medicaid", "proof": "generate roughly $71 million a year to help fund Medicaid"},
+        {"value": "2%", "label": "surcharge on income above $1 million", "proof": "a 2 percent surcharge on income above $1 million"},
+        {"value": "0.72%", "label": "of income: the extra the top 1 percent would pay", "proof": "the top 1 percent paying an additional 0.72 percent of income"}
+      ],
+      "source": {"title": "Hawaiʻi Appleseed's position on the millionaire's income surcharge", "url": "https://hiappleseed.org/taxes-budget"},
+      "aliases": ["millionaire surcharge", "millionaire tax revenue", "income surcharge revenue", "millionaire income surcharge"]
+    },
+    {
+      "id": "medical-debt",
+      "type": "stats",
+      "title": "Medical debt and delayed care in Hawaiʻi",
+      "items": [
+        {"value": "19%", "label": "of residents carry medical debt of $500 or more", "proof": "A University of Hawaiʻi survey found 19 percent of residents carry medical debt of $500 or more and 20 percent delay care"},
+        {"value": "20%", "label": "of residents delay care", "proof": "A University of Hawaiʻi survey found 19 percent of residents carry medical debt of $500 or more and 20 percent delay care"}
+      ],
+      "note": "From a University of Hawaiʻi survey, as cited in Hawaiʻi Appleseed's position on health coverage.",
+      "source": {"title": "Hawaiʻi Appleseed's position on health coverage continuity", "url": "https://hiappleseed.org/issues"},
+      "aliases": ["medical debt survey", "medical debt hawaii", "medical debt delayed care"]
+    },
+    {
+      "id": "snap-esap",
+      "type": "stats",
+      "title": "SNAP certification and the ESAP waiver",
+      "items": [
+        {"value": "160,000+", "label": "Hawaiʻi residents depend on SNAP", "proof": "More than 160,000 Hawaiʻi residents depend on SNAP"},
+        {"value": "12 → 24 months", "label": "SNAP certification, as in SB3245", "proof": ["Extending certification from 12 to 24 months", "and in 2026 supported SB3245"]},
+        {"value": "up to 36 months", "label": "certification for seniors under ESAP", "proof": "ESAP (up to 36 months for seniors)"},
+        {"value": "23 states", "label": "already use ESAP", "proof": "Twenty-three states already use ESAP"}
+      ],
+      "note": "SB3245 became law as Act 193 on July 7, 2026.",
+      "proofs": ["SB3245 was signed into law as Act 193 on July 7, 2026"],
+      "source": {"title": "Hawaiʻi Appleseed's position on SNAP access", "url": "https://hiappleseed.org/food-equity"},
+      "aliases": ["snap certification", "esap waiver", "snap esap", "snap churn"]
+    },
+    {
+      "id": "rent-control-evidence",
+      "type": "stats",
+      "title": "The evidence Hawaiʻi Appleseed cites on rent control",
+      "items": [
+        {"value": "57%", "label": "of California's rent-controlled units are occupied by middle- or higher-income renters", "proof": "57 percent of rent-controlled units are occupied by middle- or higher-income renters"},
+        {"value": "15%", "label": "fewer rent-controlled homes in San Francisco after rent control", "proof": "rent control reduced the rent-controlled housing stock by 15 percent"}
+      ],
+      "note": "A published argument for rental vouchers over rent control, not a vote of the board.",
+      "source": {"title": "Hawaiʻi Appleseed's position on rent control and rental vouchers", "url": "https://hiappleseed.org/blog/unburden-hawaii-expand-rental-voucher-program"},
+      "aliases": ["rent control evidence", "rent control california", "rent control san francisco"]
+    },
+    {
+      "id": "renter-burden",
+      "type": "stats",
+      "title": "Renters in Hawaiʻi",
+      "items": [
+        {"value": "About 38%", "label": "of Hawaiʻi households rent", "proof": "About 38 percent of Hawaiʻi households rent"},
+        {"value": "More than six in 10", "label": "Honolulu renters spend at least 30 percent of their income on housing", "proof": "more than six in 10 Honolulu renters spend at least 30 percent of their income on housing"}
+      ],
+      "source": {"title": "Hawaiʻi Appleseed's position on renter protections", "url": "https://hiappleseed.org/affordable-housing"},
+      "aliases": ["renter cost burden", "renters rent burden", "how many households rent", "renters honolulu"]
+    },
+    {
+      "id": "session-2026-scoreboard",
+      "type": "scoreboard",
+      "auto": true,
+      "title": "What happened to the bills Hawaiʻi Appleseed followed in 2026",
+      "rows": [
+        {"item": "SB3125", "what": "Roll back part of the Act 46 tax cuts; add a 2 percent surcharge on income over $1 million", "status": "law", "outcome": "Became law as Act 24, May 21, 2026", "proof": ["SB3125, signed into law as Act 24 on May 21, 2026, added a 2 percent surcharge on income over $1 million", "It rolled back some of the Act 46 tax cuts for the wealthy"]},
+        {"item": "SB3245", "what": "Longer SNAP certification; the federal ESAP waiver", "status": "law", "outcome": "Became law as Act 193, July 7, 2026", "proof": "SB3245 was signed into law as Act 193 on July 7, 2026"},
+        {"item": "HB2296", "what": "Lower the required charge for school meals", "status": "law", "outcome": "Became law as Act 236, July 13, 2026", "proof": "HB2296 was signed into law (Act 236, July 13, 2026)"},
+        {"item": "HB2049", "what": "Modernize the conveyance tax", "status": "stalled", "outcome": "Deferred in the Senate Ways & Means Committee", "proof": "HB2049 was deferred by the Senate Committee on Ways & Means"},
+        {"item": "SB3028", "what": "Conveyance tax revenue for Hawaiian Home Lands", "status": "died", "outcome": "Died in conference committee", "proof": "SB3028, which would have given DHHL up to $60 million a year, died in conference committee"},
+        {"item": "HB2010", "what": "A 2 percent surcharge on income over $1 million", "status": "stalled", "outcome": "Deferred in committee (the surcharge came through SB3125)", "proof": ["HB2010 itself was deferred in committee", "a 2 percent surcharge on income above $1 million", "SB3125, signed into law as Act 24 on May 21, 2026, added a 2 percent surcharge on income over $1 million"]},
+        {"item": "HB1850", "what": "Raise the capital gains tax", "status": "stalled", "outcome": "Stalled in the Senate Ways & Means Committee", "proof": "HB1850 stalled in the Senate Committee on Ways & Means"},
+        {"item": "HB1879", "what": "Keiki Ride Free: fare-free transit for youth", "status": "died", "outcome": "Killed or did not advance", "proof": "Keiki Ride Free (HB1879), subsidized transit for state employees (SB2993), and free transit for all (HB2451) were killed or failed to advance in 2026"},
+        {"item": "SB2470", "what": "Pedestrian Head Start", "status": "died", "outcome": "Died in conference committee; no conferees were assigned", "proof": "Pedestrian Head Start (SB2470) cleared its committee hearings and reached conference, but no conferees were ever assigned and it died in conference committee"}
+      ],
+      "source": {"title": "Policy in Perspective 2026", "url": "https://hiappleseed.org/publications/policy-perspective-2026"},
+      "aliases": ["2026 session", "2026 legislative session", "which bills passed", "bills passed in 2026", "what passed in 2026", "session results", "bill outcomes", "2026 scoreboard", "legislative scorecard"]
+    },
+    {
+      "id": "appleseed-history",
+      "type": "timeline",
+      "auto": true,
+      "title": "Hawaiʻi Appleseed's history",
+      "rows": [
+        {"when": "2004", "what": "Founded as Lawyers for Equal Justice by a group of attorneys and advocates", "proof": "founded in 2004 as Lawyers for Equal Justice"},
+        {"when": "2011", "what": "Becomes the Hawaiʻi Appleseed Center for Law and Economic Justice and joins the national Appleseed network", "proof": "In 2011 it became the Hawaiʻi Appleseed Center for Law and Economic Justice and joined the national Appleseed network"},
+        {"when": "2017", "what": "Hawaiʻi's first state Earned Income Tax Credit: $20 million a year in tax relief", "proof": "2017: Hawaiʻi's first state Earned Income Tax Credit, worth $20 million in tax relief each year"},
+        {"when": "2018", "what": "Founds the Hawaiʻi Budget & Policy Center", "proof": "2018: Joined the State Priorities Partnership and founded the Hawaiʻi Budget & Policy Center"},
+        {"when": "2019", "what": "Helps establish DA BUX, a SNAP doubling program", "proof": "2019: Helped establish DA BUX"},
+        {"when": "2020–2022", "what": "Hawaiʻi adopts Appleseed's proposal for an emergency rent relief and eviction mediation program", "proof": "2020–2022: During COVID-19, Hawaiʻi adopted Appleseed's proposal for an emergency rent relief and eviction mediation program"},
+        {"when": "2022", "what": "Minimum wage law passes: $10.10 to $18 an hour, about $1 billion more in wages a year; the EITC is expanded to $40 million", "proof": ["2022: The Legislature passed a phased increase of the minimum wage from $10.10 to $18 an hour, estimated to deliver $1 billion in additional wages a year", "expanded in 2022 to $40 million a year"]},
+        {"when": "2026", "what": "The Legislature and the Governor partly roll back the Act 46 tax cuts", "proof": "2026: The Legislature and the Governor agreed to partially roll back Act 46"}
+      ],
+      "source": {"title": "Our History", "url": "https://hiappleseed.org/our-history"},
+      "aliases": ["appleseed history", "appleseed timeline", "appleseed milestones", "appleseed wins", "appleseed accomplishments", "appleseed achievements", "history of hawaii appleseed", "organization history"]
+    }
+  ]
+}

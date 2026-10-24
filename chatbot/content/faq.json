@@ -1,0 +1,908 @@
+{
+  "_comment": "Ready-made answers to the questions visitors ask most. A question that matches one of an entry's `variants` (closely, not loosely) gets that answer at once, with no model call: instant, free, and word for word the same every time. Anything longer or more specific still goes to the model. Every fact here must already be in content/about.md or content/practical.md (build_index.py checks phones, emails, dollar amounts, and years). [1], [2] in an answer point at `sources`, in order. Staff: this short file is the quickest thing to review. Each entry carries `status` (\"draft\" until staff approve these exact words: \"approved by NAME YYYY-MM-DD\") and, once approved through the sign-off review, `reviewed` (a hash of the answer and its sources, so a later edit un-approves it). A --public build ships only approved entries; the question otherwise goes to the model.",
+  "entries": [
+    {
+      "id": "mission",
+      "status": "draft",
+      "variants": [
+        "what is your mission",
+        "what is hawaii appleseed's mission",
+        "what is the mission of hawaii appleseed",
+        "what is your mission statement",
+        "mission",
+        "what is your purpose",
+        "what is the purpose of hawaii appleseed",
+        "what is your organization's purpose",
+        "what is the purpose of your organization",
+        "purpose",
+        "what is your goal",
+        "what are your goals",
+        "what is your vision",
+        "what do you stand for",
+        "what is the mission",
+        "what are you all about",
+        "what is hawaii appleseed all about",
+        "what is the goal of hawaii appleseed",
+        "what is the mission of this organization",
+        "what are you trying to accomplish",
+        "what is hawaii appleseed trying to accomplish",
+        "what is the point of hawaii appleseed",
+        "what is your aim",
+        "what is the overall mission of hawaii appleseed",
+        "what are you working toward",
+        "why does hawaii appleseed exist",
+        "why do you exist",
+        "what do you believe in",
+        "what do you care about",
+        "what are your values",
+        "what does hawaii appleseed believe in"
+      ],
+      "answer": "Hawaiʻi Appleseed works to advance economic justice for and with the people of Hawaiʻi. Its vision is a more socially and economically just Hawaiʻi, where everyone has genuine opportunities to achieve economic security and fulfill their potential [1].\n\nIt works through five practices: community engagement to surface real barriers and solutions, data-driven research on inequities, education for policymakers and the public, coalition building, and advocacy for state, local, and federal systems change [1].",
+      "sources": [
+        {
+          "title": "Our Mission",
+          "url": "https://hiappleseed.org/our-mission"
+        }
+      ]
+    },
+    {
+      "id": "who-we-are",
+      "status": "draft",
+      "variants": [
+        "what is hawaii appleseed",
+        "what is appleseed",
+        "who is hawaii appleseed",
+        "what does hawaii appleseed do",
+        "what do you do",
+        "what does your organization do",
+        "tell me about hawaii appleseed",
+        "tell me about your organization",
+        "about hawaii appleseed",
+        "about you",
+        "what is this organization",
+        "what kind of organization is this",
+        "what is hawaii appleseed center for law and economic justice",
+        "what does appleseed do",
+        "what do you all do",
+        "what is hawaii appleseed about",
+        "what is this site about",
+        "tell me about appleseed",
+        "i am new here what is hawaii appleseed",
+        "what does appleseed do exactly",
+        "can you describe your organization",
+        "describe your organization",
+        "what is your organization",
+        "what is your organization about",
+        "what kind of group is hawaii appleseed",
+        "what kind of organization is hawaii appleseed",
+        "who are you guys",
+        "tell me more about hawaii appleseed",
+        "tell me more about appleseed",
+        "what is hawaii appleseed exactly",
+        "what sort of organization is this"
+      ],
+      "answer": "Hawaiʻi Appleseed Center for Law & Economic Justice is a Honolulu nonprofit that advances economic justice for and with the people of Hawaiʻi. It does research, policy advocacy, community organizing, and coalition building on five issue areas: affordable housing, food equity, wages and labor, transportation equity, and taxes and budget [1][2].\n\nIt began in 2004 as Lawyers for Equal Justice and has been part of the national Appleseed network since 2011 [3].",
+      "sources": [
+        {
+          "title": "Our Mission",
+          "url": "https://hiappleseed.org/our-mission"
+        },
+        {
+          "title": "Issues",
+          "url": "https://hiappleseed.org/issues"
+        },
+        {
+          "title": "Our History",
+          "url": "https://hiappleseed.org/our-history"
+        }
+      ]
+    },
+    {
+      "id": "issues",
+      "status": "draft",
+      "variants": [
+        "what issues do you work on",
+        "what issues does hawaii appleseed work on",
+        "what are your issues",
+        "what are your priorities",
+        "what are your focus areas",
+        "what are your issue areas",
+        "what areas do you work on",
+        "what topics do you cover",
+        "what do you advocate for",
+        "what do you work on",
+        "what does hawaii appleseed work on",
+        "what are hawaii appleseed's priorities",
+        "focus areas",
+        "issue areas",
+        "issues",
+        "priorities",
+        "what are your main priorities",
+        "what does hawaii appleseed advocate for",
+        "what policy areas do you work on",
+        "what does hawaii appleseed focus on",
+        "what are the issues you focus on",
+        "what are the policy priorities of hawaii appleseed",
+        "what are your policy priorities",
+        "which issues does hawaii appleseed work on",
+        "what do you focus on",
+        "what are the main issues hawaii appleseed cares about",
+        "what policy areas does hawaii appleseed cover",
+        "what policy areas do you cover",
+        "what issues does hawaii appleseed care about",
+        "what do you care about policy wise"
+      ],
+      "answer": "Hawaiʻi Appleseed works on five areas [1]:\n\n- **Affordable Housing:** tenant protections and housing stability, social housing and affordable supply, and reducing zoning and parking barriers.\n- **Food Equity:** SNAP, universal school meals, and access to culturally significant, nutritious food.\n- **Wages & Labor:** fair wages and protections that match the cost of living in Hawaiʻi.\n- **Transportation Equity:** safe, accessible, affordable transportation, including fare-free transit for keiki and safer streets.\n- **Taxes & Budget:** a fairer tax code, working family tax credits, and budget transparency.",
+      "sources": [
+        {
+          "title": "Issues",
+          "url": "https://hiappleseed.org/issues"
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "status": "draft",
+      "variants": [
+        "when was hawaii appleseed founded",
+        "when were you founded",
+        "when was your organization founded",
+        "when did hawaii appleseed start",
+        "when did you start",
+        "who founded hawaii appleseed",
+        "who started hawaii appleseed",
+        "who founded your organization",
+        "history",
+        "your history",
+        "what is your history",
+        "what is the history of hawaii appleseed",
+        "how long has hawaii appleseed been around",
+        "how old is hawaii appleseed",
+        "how long have you been around",
+        "how old is your organization",
+        "who started this organization",
+        "when did hawaii appleseed begin",
+        "when was the organization started",
+        "who created hawaii appleseed",
+        "how long have you been operating",
+        "what year was hawaii appleseed founded",
+        "what year were you founded",
+        "how long have you existed",
+        "when did hawaii appleseed first open",
+        "how did hawaii appleseed get started",
+        "what was hawaii appleseed called originally",
+        "what was hawaii appleseed's original name",
+        "what was your original name",
+        "what is your origin story",
+        "where did hawaii appleseed come from"
+      ],
+      "answer": "Hawaiʻi Appleseed was founded in 2004 as Lawyers for Equal Justice by a group of attorneys and advocates concerned about poverty and inequality in Hawaiʻi. Its first case challenged rent overcharges in subsidized housing [1].\n\nIn 2011 it became the Hawaiʻi Appleseed Center for Law and Economic Justice and joined the national Appleseed network, recognizing that enforcing existing laws was not enough: real change would need new laws, new budgets, and new public investment [1].",
+      "sources": [
+        {
+          "title": "Our History",
+          "url": "https://hiappleseed.org/our-history"
+        }
+      ],
+      "graphic": "appleseed-history"
+    },
+    {
+      "id": "leadership",
+      "status": "draft",
+      "variants": [
+        "who is the executive director",
+        "who is your executive director",
+        "who is the executive director of hawaii appleseed",
+        "who runs hawaii appleseed",
+        "who is in charge",
+        "who leads hawaii appleseed",
+        "who is the head of hawaii appleseed",
+        "who is the ceo",
+        "who is the director",
+        "who is the leader",
+        "executive director",
+        "who is the boss",
+        "who runs this organization",
+        "who is in charge of hawaii appleseed",
+        "who is the leader of hawaii appleseed",
+        "who heads up hawaii appleseed",
+        "what is the name of the executive director",
+        "who is hawaii appleseed's executive director",
+        "who is the president of hawaii appleseed",
+        "who is your leader",
+        "what is the executive director's name"
+      ],
+      "answer": "Will White is Hawaiʻi Appleseed's executive director, its third. Daniela Spoto is deputy director. The Our Team page has the full staff list with titles and bios [1].",
+      "sources": [
+        {
+          "title": "Our Team",
+          "url": "https://hiappleseed.org/our-team"
+        }
+      ]
+    },
+    {
+      "id": "staff",
+      "status": "draft",
+      "variants": [
+        "who works at hawaii appleseed",
+        "who works for hawaii appleseed",
+        "who works there",
+        "who is on your team",
+        "who is on the team",
+        "who is on the staff",
+        "who is on staff",
+        "meet the team",
+        "staff",
+        "your team",
+        "team",
+        "list of staff",
+        "who are the staff members",
+        "how many people work at hawaii appleseed"
+      ],
+      "answer": "The Our Team page lists the staff with titles and bios [1]. They include Will White (executive director), Daniela Spoto (deputy director), Arjuna Heim (director of research and of housing policy), Devin Thomas (director of tax and budget policy), Abbey Seitz (director of transportation equity), Christy MacPherson (director of community engagement), Will Caron (director of communications), and Anthony Amador (director of development), along with policy analysts and a community organizer.",
+      "sources": [
+        {
+          "title": "Our Team",
+          "url": "https://hiappleseed.org/our-team"
+        }
+      ]
+    },
+    {
+      "id": "board",
+      "status": "draft",
+      "variants": [
+        "who is on the board",
+        "who is on your board",
+        "who is on the board of directors",
+        "who is on your board of directors",
+        "board of directors",
+        "board members",
+        "who are the board members",
+        "who is the board president",
+        "who is the board chair",
+        "who is on the hawaii appleseed board",
+        "board",
+        "who sits on your board",
+        "who sits on the board",
+        "who serves on your board",
+        "who are your board members"
+      ],
+      "answer": "Hawaiʻi Appleseed's board of directors is led by president Kanoe Enos (ʻAʻaliʻi Alliance), with Patrick Byrne as treasurer (DAS42) and Kealoha Fox as secretary (City & County of Honolulu). Other members are Jennifer Chin, Ryan K. Kusumoto, Sharon Kaʻiulani Odom, Kerrie Urosevich, and Darcie Yukimura. Biographies are on the Board of Directors page [1].",
+      "sources": [
+        {
+          "title": "Board of Directors",
+          "url": "https://hiappleseed.org/board-of-directors"
+        }
+      ]
+    },
+    {
+      "id": "donate",
+      "status": "draft",
+      "variants": [
+        "how can i donate",
+        "how do i donate",
+        "how can i give",
+        "how do i give",
+        "where can i donate",
+        "where do i donate",
+        "donate",
+        "donation",
+        "i want to donate",
+        "i would like to donate",
+        "how do i make a donation",
+        "how can i make a donation",
+        "how can i support hawaii appleseed",
+        "how do i support hawaii appleseed",
+        "how can i support your work",
+        "how can i support your organization",
+        "ways to give",
+        "how do i make a monthly donation",
+        "how can i make a monthly gift",
+        "can i donate online",
+        "give",
+        "how can i give money",
+        "where can i give money",
+        "how do i give monthly",
+        "how can i give monthly",
+        "where do i send a donation",
+        "how do i give to hawaii appleseed",
+        "i would like to make a donation",
+        "how do i give a gift",
+        "what is the best way to donate",
+        "how do i give to hawaii appleseed online",
+        "i would like to support hawaii appleseed financially",
+        "how can i support hawaii appleseed financially",
+        "how do i donate online",
+        "where do i give online",
+        "how do i contribute money",
+        "how can i donate money"
+      ],
+      "answer": "The Donate button at the top of every page on hiappleseed.org opens Hawaiʻi Appleseed's online giving form [1]. Gifts can be one time or monthly. The Support page lists monthly levels of $10, $50, and $150, or an amount you choose, and describes legacy gifts through estate planning [2].\n\nThis assistant cannot take a donation or any payment details.",
+      "sources": [
+        {
+          "title": "Give online",
+          "url": "https://crm.bloomerang.co/HostedDonation?WidgetId=52224&ApiKey=pub_719d1ab5-5621-11f1-9ea1-06612d4c9559"
+        },
+        {
+          "title": "Support",
+          "url": "https://hiappleseed.org/support"
+        }
+      ]
+    },
+    {
+      "id": "tax-deductible",
+      "status": "draft",
+      "variants": [
+        "is my donation tax deductible",
+        "are donations tax deductible",
+        "are donations to hawaii appleseed tax deductible",
+        "is a gift to hawaii appleseed tax deductible",
+        "is my gift tax deductible",
+        "tax deductible",
+        "is hawaii appleseed a 501c3",
+        "is hawaii appleseed a 501(c)(3)",
+        "are you a 501c3",
+        "is hawaii appleseed tax exempt",
+        "can i write off my donation",
+        "can i deduct my donation on my taxes",
+        "can i deduct my donation",
+        "is my gift deductible",
+        "can i claim my donation on my taxes"
+      ],
+      "answer": "Hawaiʻi Appleseed is a Honolulu nonprofit [1], but its website does not say whether gifts are tax-deductible or describe its tax-exempt status. The office can answer that: call (808) 587-7605 or email info@hiappleseed.org [2].",
+      "sources": [
+        {
+          "title": "Our Mission",
+          "url": "https://hiappleseed.org/our-mission"
+        },
+        {
+          "title": "Contact",
+          "url": "https://hiappleseed.org/contact"
+        }
+      ]
+    },
+    {
+      "id": "get-involved",
+      "status": "draft",
+      "variants": [
+        "how can i get involved",
+        "how do i get involved",
+        "how can i help",
+        "how do i help",
+        "how can i help hawaii appleseed",
+        "how can i take action",
+        "how do i take action",
+        "ways to get involved",
+        "get involved",
+        "how can i join",
+        "how do i join",
+        "how can i participate",
+        "what can i do to help",
+        "how can i contribute"
+      ],
+      "answer": "There are a few ways to take part:\n\n- **Stay informed:** subscribe to the newsletter and action alerts [1].\n- **Join an issue coalition:** each issue area has its own, with action alerts on the legislation you care about most [2].\n- **Contact your legislator:** the action center helps you find them and send a message in your own words [3].\n- **Give:** gifts can be one time or monthly [4].",
+      "sources": [
+        {
+          "title": "Subscribe",
+          "url": "https://hiappleseed.org/subscribe"
+        },
+        {
+          "title": "Issues",
+          "url": "https://hiappleseed.org/issues"
+        },
+        {
+          "title": "Action center",
+          "url": "https://hiappleseed.quorum.us/"
+        },
+        {
+          "title": "Support",
+          "url": "https://hiappleseed.org/support"
+        }
+      ]
+    },
+    {
+      "id": "volunteer",
+      "status": "draft",
+      "variants": [
+        "can i volunteer",
+        "how can i volunteer",
+        "how do i volunteer",
+        "do you take volunteers",
+        "do you have volunteers",
+        "do you need volunteers",
+        "volunteer",
+        "volunteering",
+        "volunteer opportunities",
+        "do you have internships",
+        "do you take interns",
+        "internships",
+        "internship",
+        "intern",
+        "do you accept volunteers",
+        "are there volunteer opportunities",
+        "how can i volunteer with hawaii appleseed",
+        "are you looking for volunteers",
+        "are you accepting volunteers",
+        "can i intern with you",
+        "do you have volunteer opportunities",
+        "can i volunteer for hawaii appleseed",
+        "do you need help from volunteers",
+        "can i intern at hawaii appleseed"
+      ],
+      "answer": "The website does not describe volunteer or internship programs, so the office is the one to ask: call (808) 587-7605 or email info@hiappleseed.org [1]. Job openings and requests for proposals are posted on the Opportunities page [2].",
+      "sources": [
+        {
+          "title": "Contact",
+          "url": "https://hiappleseed.org/contact"
+        },
+        {
+          "title": "Opportunities",
+          "url": "https://hiappleseed.org/opportunities"
+        }
+      ]
+    },
+    {
+      "id": "newsletter",
+      "status": "draft",
+      "variants": [
+        "how do i sign up for your newsletter",
+        "how can i sign up for your newsletter",
+        "how do i sign up for updates",
+        "how can i sign up for updates",
+        "how do i subscribe",
+        "how can i subscribe",
+        "how do i subscribe to your newsletter",
+        "newsletter",
+        "subscribe",
+        "email list",
+        "how do i join your email list",
+        "how do i get updates",
+        "how do i get action alerts",
+        "how do i sign up for action alerts",
+        "action alerts",
+        "how do i stay informed",
+        "how can i stay informed",
+        "how do i get emails from you",
+        "how can i get on your email list",
+        "do you have a newsletter",
+        "how do i get on your mailing list",
+        "mailing list",
+        "how do i get your emails",
+        "i want to get your email updates",
+        "how do i sign up for your emails",
+        "how do i get your email updates",
+        "how can i receive your emails",
+        "how do i sign up for email updates",
+        "how do i get your newsletter",
+        "how can i get your newsletter",
+        "can i sign up for email updates",
+        "how do i get on the email list",
+        "how do i get on the mailing list",
+        "how do i receive updates",
+        "can i get updates from hawaii appleseed"
+      ],
+      "answer": "Hawaiʻi Appleseed's newsletter and action alerts tell people when their engagement matters most. The sign-up form is on the Subscribe page of hiappleseed.org, which is also in the site menu [1]. This assistant cannot sign anyone up or take an email address; the form on that page does it.",
+      "sources": [
+        {
+          "title": "Subscribe",
+          "url": "https://hiappleseed.org/subscribe"
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "status": "draft",
+      "variants": [
+        "how do i contact hawaii appleseed",
+        "how can i contact hawaii appleseed",
+        "how do i contact you",
+        "how can i contact you",
+        "how can i reach you",
+        "how do i reach you",
+        "how do i reach hawaii appleseed",
+        "contact",
+        "contact us",
+        "contact information",
+        "contact info",
+        "phone number",
+        "what is your phone number",
+        "what is your phone",
+        "what is your email",
+        "what is your email address",
+        "email address",
+        "email",
+        "what is the best way to contact you",
+        "how do i get in touch",
+        "how can i get in touch",
+        "can i call you",
+        "who do i contact",
+        "how do i get in touch with hawaii appleseed",
+        "what is your contact information",
+        "how do i call hawaii appleseed",
+        "phone",
+        "call",
+        "what is the best phone number for hawaii appleseed",
+        "what is the best way to reach you by phone",
+        "what is the best email to reach you",
+        "what is your contact info",
+        "what number can i call",
+        "what is the phone number",
+        "what is your phone number for hawaii appleseed",
+        "what number do i call",
+        "telephone number",
+        "how can i email hawaii appleseed",
+        "how do i email hawaii appleseed"
+      ],
+      "answer": "You can reach the office at (808) 587-7605 or info@hiappleseed.org, or use the form on the Contact page. The address is 733 Bishop Street, Suite 1180, Honolulu, Hawaiʻi 96813 [1]. Office hours are not listed on the website.",
+      "sources": [
+        {
+          "title": "Contact",
+          "url": "https://hiappleseed.org/contact"
+        }
+      ]
+    },
+    {
+      "id": "address",
+      "status": "draft",
+      "variants": [
+        "where are you located",
+        "where is hawaii appleseed located",
+        "where is your office",
+        "where is the office",
+        "where is hawaii appleseed's office",
+        "what is your address",
+        "what is the address",
+        "your address",
+        "address",
+        "location",
+        "where are you",
+        "where is hawaii appleseed",
+        "office address",
+        "office location",
+        "where can i find your office",
+        "can i visit your office",
+        "where are you based",
+        "where is your office located",
+        "what is your office address",
+        "where is hawaii appleseed based",
+        "what is your mailing address",
+        "where in honolulu is hawaii appleseed",
+        "what is hawaii appleseed's address",
+        "what street are you on",
+        "what is the mailing address"
+      ],
+      "answer": "Hawaiʻi Appleseed's office is at 733 Bishop Street, Suite 1180, Honolulu, Hawaiʻi 96813 [1]. Office hours are not listed on the website; call (808) 587-7605 or email info@hiappleseed.org to check before visiting.",
+      "sources": [
+        {
+          "title": "Contact",
+          "url": "https://hiappleseed.org/contact"
+        }
+      ]
+    },
+    {
+      "id": "social",
+      "status": "draft",
+      "variants": [
+        "are you on social media",
+        "are you on instagram",
+        "are you on facebook",
+        "do you have instagram",
+        "do you have facebook",
+        "do you have a facebook page",
+        "do you have social media",
+        "social media",
+        "instagram",
+        "facebook",
+        "youtube",
+        "bluesky",
+        "how do i follow you",
+        "how can i follow hawaii appleseed",
+        "where can i follow you",
+        "what are your social media accounts",
+        "twitter",
+        "where can i follow hawaii appleseed on social media",
+        "where can i find you on social media",
+        "are you on instagram or facebook",
+        "are you on facebook or instagram",
+        "what is your bluesky",
+        "what is your instagram",
+        "what is your facebook",
+        "do you have a youtube channel",
+        "are you on bluesky"
+      ],
+      "answer": "The Contact page links Hawaiʻi Appleseed's Instagram (@hiappleseed), Facebook (Hawaii.Appleseed), YouTube (@hiappleseed), and Bluesky (hiappleseed.bsky.social) [1].",
+      "sources": [
+        {
+          "title": "Contact",
+          "url": "https://hiappleseed.org/contact"
+        }
+      ]
+    },
+    {
+      "id": "jobs",
+      "status": "draft",
+      "variants": [
+        "are you hiring",
+        "is hawaii appleseed hiring",
+        "do you have any jobs",
+        "do you have job openings",
+        "do you have any job openings",
+        "job openings",
+        "jobs",
+        "careers",
+        "career opportunities",
+        "employment",
+        "work at hawaii appleseed",
+        "how do i work at hawaii appleseed",
+        "how do i apply for a job",
+        "how do i apply",
+        "open positions",
+        "are there any open positions",
+        "what jobs are available",
+        "are you hiring right now",
+        "how do i apply for a job at hawaii appleseed",
+        "do you have any open positions",
+        "is hawaii appleseed hiring right now",
+        "where do i find your career opportunities",
+        "where can i find job listings",
+        "where are your job postings",
+        "do you have any job postings",
+        "are there any jobs at hawaii appleseed",
+        "do you have job listings",
+        "are there any job listings",
+        "do you have any openings",
+        "any openings",
+        "how do i find job openings"
+      ],
+      "answer": "Hawaiʻi Appleseed posts job openings and requests for proposals on its Opportunities page. Openings change, so that page is the place to check what is open now [1].",
+      "sources": [
+        {
+          "title": "Opportunities",
+          "url": "https://hiappleseed.org/opportunities"
+        }
+      ]
+    },
+    {
+      "id": "legislator",
+      "status": "draft",
+      "variants": [
+        "how do i contact my legislator",
+        "how can i contact my legislator",
+        "how do i contact my representative",
+        "how do i contact my senator",
+        "how do i contact my lawmakers",
+        "how do i contact lawmakers",
+        "who is my legislator",
+        "who is my representative",
+        "who is my senator",
+        "find my legislator",
+        "find my representative",
+        "contact my legislator",
+        "contact my representative",
+        "contact my senator",
+        "how do i email my legislator",
+        "how do i tell my legislator what i think",
+        "how do i reach my state legislator",
+        "can you help me find my representative",
+        "can you help me find my legislator",
+        "how do i find my state representative",
+        "who represents me in the legislature",
+        "how do i find out who my legislator is",
+        "where can i write to my state senator",
+        "how do i find my state senator",
+        "how do i write to my legislator",
+        "how do i email my state representative",
+        "how do i find my district"
+      ],
+      "answer": "Hawaiʻi Appleseed's action center, hosted on Quorum, lets you find your legislators, see where they stand on the bills Hawaiʻi Appleseed is tracking, and send a message in your own words [1].",
+      "sources": [
+        {
+          "title": "Action center",
+          "url": "https://hiappleseed.quorum.us/"
+        }
+      ]
+    },
+    {
+      "id": "tax-fairness-coalition",
+      "status": "draft",
+      "variants": [
+        "what is the tax fairness coalition",
+        "what is the hawaii tax fairness coalition",
+        "tell me about the tax fairness coalition",
+        "how do i join the tax fairness coalition",
+        "how can i join the tax fairness coalition",
+        "tax fairness coalition",
+        "hawaii tax fairness coalition",
+        "hitaxfairness",
+        "what is hitaxfairness"
+      ],
+      "answer": "The Hawaiʻi Tax Fairness Coalition has its own website, hitaxfairness.org, with a Subscribe for Updates page and a Contact Your Legislator page focused on tax fairness [1].",
+      "sources": [
+        {
+          "title": "Hawaiʻi Tax Fairness Coalition",
+          "url": "https://www.hitaxfairness.org/"
+        }
+      ]
+    },
+    {
+      "id": "service-provider",
+      "status": "draft",
+      "variants": [
+        "are you a legal aid provider",
+        "is hawaii appleseed a legal aid provider",
+        "is hawaii appleseed a legal aid organization",
+        "are you a legal aid organization",
+        "do you provide legal services",
+        "does hawaii appleseed provide legal services",
+        "do you offer legal services",
+        "do you take cases",
+        "do you represent clients",
+        "do you provide direct services",
+        "are you a direct service provider",
+        "is hawaii appleseed a direct service provider",
+        "do you offer direct services",
+        "is hawaii appleseed a law firm",
+        "are you a law firm",
+        "are you lawyers",
+        "are you attorneys",
+        "do you have lawyers on staff"
+      ],
+      "answer": "Hawaiʻi Appleseed is not a direct service provider, and this assistant cannot give legal advice. People looking for legal assistance are directed to the list of resources maintained by the Hawaiʻi State Bar Association [1].",
+      "sources": [
+        {
+          "title": "Hawaiʻi State Bar Association: legal assistance resources",
+          "url": "https://hsba.org/HSBA_2020/Public/Legal_Assistance.aspx"
+        }
+      ]
+    },
+    {
+      "id": "ai",
+      "status": "draft",
+      "variants": [
+        "are you a bot",
+        "are you a robot",
+        "are you a real person",
+        "are you a person",
+        "are you human",
+        "are you a human",
+        "are you ai",
+        "are you an ai",
+        "are you artificial intelligence",
+        "who are you",
+        "what are you",
+        "am i talking to a person",
+        "am i talking to a human",
+        "am i talking to a bot",
+        "is this a real person",
+        "is this a bot",
+        "am i chatting with a bot",
+        "am i chatting with a real person",
+        "am i chatting with a human",
+        "is this a person",
+        "is this a human",
+        "am i speaking with a person",
+        "am i speaking to a human",
+        "are you a chatbot",
+        "is this a real person or ai",
+        "are you a human being",
+        "is this a real person or a bot",
+        "am i talking to a real person",
+        "is a person typing this",
+        "is this an automated chat",
+        "am i speaking with a robot",
+        "am i speaking with a bot",
+        "is a human typing this",
+        "is this automated",
+        "is this chat automated",
+        "are you automated"
+      ],
+      "answer": "I'm an AI assistant for the Hawaiʻi Appleseed website. I answer questions about the organization, its research, and its published policy positions from Hawaiʻi Appleseed's own writing, and I can make mistakes. To reach a person, call the office at (808) 587-7605 or email info@hiappleseed.org [1].",
+      "sources": [
+        {
+          "title": "Contact",
+          "url": "https://hiappleseed.org/contact"
+        }
+      ]
+    },
+    {
+      "id": "capabilities",
+      "status": "draft",
+      "variants": [
+        "what can you do",
+        "what can you help with",
+        "what can you help me with",
+        "what can i ask you",
+        "what can i ask",
+        "what questions can you answer",
+        "how can you help",
+        "how can you help me",
+        "how do you work",
+        "help",
+        "what do you know",
+        "what can i ask about",
+        "what kinds of things can you help me with",
+        "what kinds of questions can you answer",
+        "what are you able to do",
+        "what are you for",
+        "what kinds of questions can i ask",
+        "what can you tell me",
+        "what can i ask you about",
+        "what are you able to answer",
+        "what topics can you help with"
+      ],
+      "answer": "I can answer questions about Hawaiʻi Appleseed: its mission and history, its research and reports, its policy positions and what happened to the bills it followed in 2026, and how to subscribe, give, contact the office, or take action. I can't give legal advice, sign anyone up, or take a donation, and I only know what is in Hawaiʻi Appleseed's own published material.",
+      "sources": []
+    },
+    {
+      "id": "greeting",
+      "status": "draft",
+      "variants": [
+        "hi",
+        "hello",
+        "hey",
+        "hi there",
+        "hello there",
+        "hey there",
+        "aloha",
+        "good morning",
+        "good afternoon",
+        "good evening",
+        "howdy",
+        "greetings",
+        "yo",
+        "hi hawaii appleseed",
+        "hello hawaii appleseed"
+      ],
+      "answer": "Aloha. I can answer questions about Hawaiʻi Appleseed, its research and policy positions, and how to get involved. What would you like to know?",
+      "sources": []
+    },
+    {
+      "id": "thanks",
+      "status": "draft",
+      "variants": [
+        "thanks",
+        "thank you",
+        "thanks so much",
+        "thank you so much",
+        "thanks a lot",
+        "mahalo",
+        "mahalo nui loa",
+        "ok thanks",
+        "okay thanks",
+        "great thanks",
+        "perfect thanks",
+        "thanks that was helpful",
+        "thank you that was helpful",
+        "thanks that helps",
+        "that was helpful",
+        "that helps",
+        "thanks bye",
+        "goodbye",
+        "bye",
+        "mahalo for your help",
+        "thanks for your help",
+        "thank you for your help",
+        "thanks for the help",
+        "thanks for the info"
+      ],
+      "answer": "You're welcome. Ask anything else about Hawaiʻi Appleseed whenever you like.",
+      "sources": []
+    },
+    {
+      "id": "no-position",
+      "status": "draft",
+      "internal": true,
+      "variants": [],
+      "answer": "Hawaiʻi Appleseed has not published a position on that in the material I have, so I can't say where it stands. Its stated positions are on the Issues page [1]. If you want to know whether there is one that is not covered here, the office can say: (808) 587-7605 or info@hiappleseed.org [2].",
+      "sources": [
+        {
+          "title": "Issues",
+          "url": "https://hiappleseed.org/issues"
+        },
+        {
+          "title": "Contact",
+          "url": "https://hiappleseed.org/contact"
+        }
+      ]
+    }
+  ]
+}
