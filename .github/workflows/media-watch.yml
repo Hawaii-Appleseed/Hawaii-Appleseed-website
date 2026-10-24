@@ -44,7 +44,11 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # Google Alerts RSS links, one per line. A secret, not config.json: each
       # URL embeds the owner's Google account id and this repo is public.
-      MEDIA_WATCH_ALERT_FEEDS: ${{ secrets.MEDIA_WATCH_ALERT_FEEDS }}
+      # OFF since 2026-10-24: Alerts hands over Facebook posts the runner cannot
+      # open, and an alert match on an unread page was posted to Slack unchecked
+      # (two false positives in two days). The secret is still set; to turn the
+      # source back on, uncomment this line.
+      # MEDIA_WATCH_ALERT_FEEDS: ${{ secrets.MEDIA_WATCH_ALERT_FEEDS }}
     steps:
       - uses: actions/checkout@v4
 
