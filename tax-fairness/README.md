@@ -141,6 +141,24 @@ the workflow's git-diff-based "did anything change" check committed every
 ~30 minutes forever. If you're touching this script, preserve that
 comparison — don't go back to an unconditional write.
 
+### When capitol.hawaii.gov refuses a run
+
+The Legislature's site sometimes answers HTTP 403 to GitHub's runners (it did, for every bill at once, at 2026-10-21
+18:11 UTC). The first version wrote that straight into `bill-status.json`, and every tracker on hitaxfairness.org showed a
+red "Error" badge until a later run happened to succeed. `fetch-bill-status.mjs` now follows the rules in
+`reconcile-bill-status.mjs` (unit-tested by `node --test tax-fairness/scripts/*.test.mjs`, run by
+`tax-fairness-tests.yml`):
+
+- a refused request is tried again twice (after 5 s, then 10 s) before it counts as failed;
+- a bill that still fails **keeps its last good entry**, flagged `staleError` (and `staleSince`, the first run it went
+  stale), so the page keeps showing the last known status instead of an error. Only a bill that has never had data
+  shows an error;
+- if **every** fetch fails the file is left untouched and the job exits 1 (a red run, which `triage.yml` reports and
+  `canary.yml` escalates if it lasts), instead of recording a run that learned nothing;
+- when a bill fetches again, the flags disappear.
+
+If a bill is stale for a long time, check `staleSince` in the file and `gh run list --workflow=fetch-bill-status.yml`.
+
 ## Where the bill list lives — this is the part a partner edits day-to-day
 
 **There is no separate config file listing which bills to track.** The list

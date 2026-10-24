@@ -2,6 +2,79 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "cde02474a0f0",
+   "title": "A new ACLU report reveals that mass deportation breaks our democracy and directly ... - Facebook",
+   "outlet": "facebook.com",
+   "url": "https://www.facebook.com/acluhawaii/posts/a-new-aclu-report-reveals-that-mass-deportation-breaks-our-democracy-and-directl/1553137100186925/",
+   "published": "2026-10-22T20:09:24Z",
+   "firstSeen": "2026-10-23T15:04:36Z",
+   "confidence": "high",
+   "reasons": [
+    "names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "feed"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
+   "id": "eda7f7ef86dd",
+   "title": "Will Caron: Zip Pact",
+   "outlet": "Honolulu Civil Beat",
+   "url": "https://www.civilbeat.org/2026/10/will-caron-zip-pact/",
+   "published": "2026-10-18T10:09:35Z",
+   "firstSeen": "2026-10-18T14:01:35Z",
+   "confidence": "high",
+   "reasons": [
+    "staff: Will Caron only",
+    "names Hawaiʻi Appleseed",
+    "staff: Will Caron, with Appleseed"
+   ],
+   "sources": [
+    "feed",
+    "google"
+   ],
+   "onSite": "",
+   "status": "ignore"
+  },
+  {
+   "id": "dfec6abf61a9",
+   "title": "Voting explainer: 2026 Honolulu charter amendment ballot questions",
+   "outlet": "Hawaiʻi Public Radio",
+   "url": "https://www.hawaiipublicradio.org/local-news/2026-10-15/voting-explainer-2026-honolulu-charter-amendment-ballot-questions",
+   "published": "2026-10-16T01:37:49Z",
+   "firstSeen": "2026-10-16T09:02:01Z",
+   "confidence": "high",
+   "reasons": [
+    "names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "feed"
+   ],
+   "onSite": "",
+   "status": "ignore"
+  },
+  {
+   "id": "986d81441d44",
+   "title": "5 ballot questions for Oʻahu voters aim to improve island's housing supply",
+   "outlet": "Hawaii Public Radio",
+   "url": "https://www.hawaiipublicradio.org/local-news/2026-10-14/five-charter-amendment-questions-for-oahu-voters-aim-to-improve-islands-housing-supply",
+   "published": "2026-10-14T22:43:00Z",
+   "firstSeen": "2026-10-15T00:32:17Z",
+   "confidence": "high",
+   "reasons": [
+    "search engine matched the phrase; article text not checked",
+    "names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "feed",
+    "google"
+   ],
+   "onSite": "",
+   "status": "ignore"
+  },
+  {
    "id": "7ec56fd4b480",
    "title": "Will Caron: Don Of The Dead",
    "outlet": "Honolulu Civil Beat",
@@ -19,7 +92,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "4a264c5f2391",
@@ -36,7 +109,7 @@
     "feed"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "e03b244fd00e",
@@ -56,7 +129,7 @@
     "feed"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "b1bfbbbe0aa5",
@@ -75,7 +148,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "cabbf42c1dea",
@@ -92,7 +165,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "feaa258dc9a0",
@@ -109,7 +182,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "0d21ea9fca85",
@@ -126,7 +199,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "e078ee03a629",
@@ -144,7 +217,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "40a0fd9ee0e4",
@@ -161,7 +234,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   },
   {
    "id": "d14aca61f90d",
@@ -178,7 +251,7 @@
     "google"
    ],
    "onSite": "",
-   "status": "new"
+   "status": "ignore"
   }
  ]
 }

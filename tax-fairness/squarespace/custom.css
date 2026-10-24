@@ -208,3 +208,45 @@ html body header.header .header-nav-folder-item a:hover {
     border-radius: 8px;
     box-shadow: 0 0 0 1px rgba(37, 53, 81, 0.12);
 }
+
+/* ---- Announcement bar: 2027 priorities ----------------------------------
+   Text and link (/2027-priorities) are set in Pages > Marketing Tools >
+   Announcement Bar. Shown on the homepage only; logo-blue so it reads apart
+   from the navy header (white on #3c73b9 is 4.7:1). */
+body:not(.homepage) .sqs-announcement-bar-dropzone {
+    display: none !important;
+}
+.sqs-announcement-bar {
+    background: #3c73b9 !important;
+}
+.sqs-announcement-bar-text {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+}
+.sqs-announcement-bar-text-inner,
+.sqs-announcement-bar-text-inner p {
+    color: #ffffff !important;
+    font-family: var(--body-font-font-family), sans-serif;
+    font-size: 1rem !important;
+    font-weight: 600;
+    line-height: 1.4;
+}
+.sqs-announcement-bar-content:hover .sqs-announcement-bar-text-inner p {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+@media (max-width: 767px) {
+    .sqs-announcement-bar-text {
+        padding-top: 9px !important;
+        padding-bottom: 9px !important;
+    }
+    .sqs-announcement-bar-text-inner,
+    .sqs-announcement-bar-text-inner p {
+        font-size: .88rem !important;
+        line-height: 1.35;
+    }
+}
+.sqs-announcement-bar-close,
+.sqs-announcement-bar-close::after {
+    color: #ffffff !important;
+}

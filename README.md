@@ -256,8 +256,9 @@ href resolves against the Squarespace slug and 404s.
 | `refresh-corpus.yml` | Sundays 15:00 UTC (5 AM HST), or dispatch | Scrapes hiappleseed.org for new posts/publications into `writing-bot/`, then dispatches the Content Search rebuild. |
 | `deploy-content-search.yml` | push touching `writing-bot/**`, or dispatch | Rebuilds the search bundle, runs the parity gate, and pushes it straight into `Hawaii-Appleseed/staff-updates-internal` (private) — nothing lands in this repo. |
 | `fetch-bill-status.yml` | every 30 min (cron), or dispatch | Fetches bill RSS from capitol.hawaii.gov into `tax-fairness/data/bill-status.json`. Bill list is discovered from `data-hb`/`data-sb` attributes in the tracked pages — adding a bill is a content edit, not a workflow edit. |
+| `tax-fairness-tests.yml` | PRs and pushes touching `tax-fairness/scripts/**` | Unit tests for how a bill-status refresh is folded into `bill-status.json` (a failed fetch keeps the last good data; an all-failed run leaves the file alone). |
 | `site-drift.yml` | nightly 23:40 UTC, or dispatch | Checks the **published** site against this repo: every live page still carries its `squarespace-ready/` payload, every `github.io` URL those pages reference still resolves, and `publications.json` / `news.json` on Pages still fetch and parse. Fails loudly; `triage.yml` turns that into an issue plus an ntfy push. Checks and rationale in `scripts/check-live-site.py`. |
-| `media-watch.yml` | 4×/day, or dispatch (`days: 30` backfills) | Finds news stories that mention Hawaiʻi Appleseed, its work or its staff and are not on `/in-the-news` yet. Commits `media-watch/mentions.json`, opens a `media-watch` issue with the digest, and pushes to ntfy — only when there is something new. See "Media watch" below. |
+| `media-watch.yml` | 4×/day, or dispatch (`days: 30` backfills) | Finds news stories that mention Hawaiʻi Appleseed, its work or its staff and are not on `/in-the-news` yet. Commits `media-watch/mentions.json`, opens a `media-watch` issue with the digest (GitHub emails everyone watching the repo) — only when there is something new. See "Media watch" below. |
 | `canary.yml` | hourly, or dispatch | Watches the other scheduled workflows for a **silently dropped trigger**. Opens/updates a `canary-alert` issue and fails when one goes quiet; comments and auto-closes when it recovers. |
 
 **None of this depends on a personal machine** — the whole chain runs in Actions.
@@ -317,36 +318,96 @@ holds coverage somebody already noticed. `scripts/media_watch.py` looks for the 
 stories that mention Hawaiʻi Appleseed, its work (`work_terms` in the config), or a
 staff member, that are not on that page yet.
 
-It looks in three places, because each has a blind spot the others cover:
+Four stages, because each has a blind spot the others cover (`--only engines,feeds,search,podcasts`
+picks some):
 
-- **News search** (Google News and Bing News RSS) for the org name, the coalition,
-  and each staff name. Fast, but the engines index headline and lede, not the story,
-  so they miss "said Devin Thomas of Hawaiʻi Appleseed" in paragraph nine, and they
-  do not index some outlets at all (the Star-Advertiser's op-eds, Maui Now).
-- **The outlets' own feeds** (`outlet_feeds` in the config, 24 of them: the daily
-  papers and TV stations, HPR including *The Conversation*, Aloha State Daily, Kauaʻi
-  Now, Ka Wai Ola, Honolulu Magazine, Streetsblog, Stateline and others): every new
-  story is fetched and read in full, once. This is what finds a body-only mention.
-  The run report names any outlet whose pages would not load (KHON2 blocks it), so a
-  blind outlet shows up as blind rather than as quiet. The list was chosen from where
-  In the News's own 126 stories of the last two years came from.
-- **Google Alerts** (`alert_feeds`, empty until someone adds one): the only source that
-  searches the whole web, so it finds outlets nobody listed. To add one, go to
-  google.com/alerts, create an alert for "Hawaii Appleseed" (or a staff name), set
-  *Deliver to* to *RSS feed*, and paste the feed link into `alert_feeds`. Google has
-  matched the phrase somewhere in the page; this script reads the page to confirm,
-  and keeps the story as an unchecked match if the page will not load.
+- **`engines`: news search** (Google News and Bing News RSS) for the org name, the
+  coalition, and each staff name. Fast, but the engines index headline and lede, not
+  the story, so they miss "said Devin Thomas of Hawaiʻi Appleseed" in paragraph nine,
+  and they do not index some outlets at all (the Star-Advertiser's op-eds, Maui Now).
+- **`feeds`: the outlets' own feeds** (`outlet_feeds`, 27 of them: the daily papers and
+  TV stations, HPR including *The Conversation*, Aloha State Daily, Kauaʻi Now, Honolulu
+  Magazine, Streetsblog, Stateline and others, plus three YouTube channels judged on
+  their video descriptions). Every new story is fetched and read in full, once. **This
+  is what guarantees a new story is seen**, at any outlet whose feed reaches back
+  further than the gap between runs. The list was chosen from where In the News's own
+  126 stories of the last two years came from. The run report names any outlet whose
+  pages would not load, so a blind outlet shows up as blind rather than as quiet.
+- **`search`: each outlet's own search** (`outlet_search`, 19 outlets). Full text and
+  years deep, so it does not care how shallow a feed is, and it works where an outlet
+  bot-walls its article pages (KHON2's pages are blocked; its WordPress REST search is
+  not). Three drivers: `wp-rest` (WordPress REST, the best: the reply carries the whole
+  article, and each staff name is searched too), `blox-rss` (KITV) and `html` (a
+  site-search page: Star-Advertiser, HPR and a few small ones).
+  **`html` is best-effort.** Its results are relevance-ordered, Star-Advertiser stems
+  the term (its "Appleseed" also returns Apple iPhone stories), pagination differs per
+  site (`page_url`), and Star-Advertiser's REST API is locked. Use it for depth and
+  redundancy, not as a guarantee.
+- **`podcasts`: Apple's podcast directory**, which matches episode descriptions. It
+  finds a guest introduced as "…of Hawaiʻi Appleseed" and correctly ignores Oklahoma,
+  Georgia and Texas Appleseed. Audio is not transcribed.
+- **Google Alerts** (`alert_feeds`, or the `MEDIA_WATCH_ALERT_FEEDS` secret): the only
+  source that searches the whole web, national outlets included, so it finds outlets
+  nobody listed. Five alerts have run since 2026-10-21, on the org Google account
+  (Region: Any, How many: All results, Deliver to: RSS feed): `"Hawaii Appleseed"`;
+  `"Appleseed Center for Law and Economic Justice" Hawaii`; `"Hawaii Tax Fairness
+  Coalition"`; and two staff alerts, the six names that are rarely ambiguous plus
+  Appleseed/Hawaii/Honolulu, and the six `staff_ambiguous` names plus Appleseed. **The
+  staff alerts hold names, not the team page**: when `our-team.html` changes, edit them
+  at google.com/alerts. To add one, create an alert, set *Deliver to* to *RSS feed*, and
+  add the link to the secret, one per line. It is a secret and not config because the
+  URL embeds the owner's Google account id and this repo is public; a failing alert feed
+  never prints it. An alert only holds stories published after it was made, so it
+  cannot backfill; the other stages cover the back catalogue. Its stories join the
+  same digest, issue and Slack post as the rest.
+  Google has matched the phrase somewhere in the page; this script reads the page to
+  confirm, and keeps the story as an unchecked match if the page will not load.
 
-Measured against those 126 stories, the reader recognises 119 of the 125 whose pages
-it can read; the misses are two KITV TV segments that name no one in text. Video and
-audio are the gap text cannot close.
+**What has been measured.** Against the 126 stories on In the News from the last two
+years, the reader recognises **119 of the 125 whose pages it can read**; the misses are
+two KITV TV segments that name no one in text, and four pages it cannot fetch (KHON2,
+YouTube, Tax Notes, honolulu.gov: bot walls and a slow government server, none of which
+this script tries to disguise itself past). Watched outlets covered 88% of those 126,
+and the outlets added since cover 96%.
+
+`search` was tested on its own over twelve months against the 57 curated stories on
+outlets it can search: **54%** with one page of `html` results, **64%** with a few pages,
+**82% (47 of 57)** with `--deep`. The ten it still misses each have a cause and none is
+a bug: four are staff-written Civil Beat op-eds (the byline and bio are metadata, not
+text; the feed stage reads the whole page, bio included, and does catch them), three are
+Aloha State Daily (only the first page of its search is read; the `/page/2/` URL that
+works on other WordPress sites 404s there and no other pagination was found), two are KITV (a TV segment that never says
+the name, and a quote that never says the org) and one is an HPR story that quotes a
+staff member without naming the org. So the inventory count is a floor, and the daily
+guarantee comes from the feeds. Text cannot see a TV or radio segment that never says
+the name, and **YouTube captions are not available** (the caption tracks exist but the
+download needs a proof-of-origin token). Catching those takes a paid broadcast-monitoring
+service.
 
 Staff names are read from `our-team.html` on every run, so the watch follows the team
-page. **Confidence** is what keeps it honest: `high` names the org; `medium` is
-Appleseed with Hawaiʻi context, a staff name with Appleseed, or a work term; a bare
-staff name is `low` and is **never written down**, because a namesake looks exactly
-like that (`Devin Thomas scores twice`). Weak matches are settled by reading the
-article; a page that loads and never says Appleseed is a rejection.
+page. **Confidence** is what keeps it honest, and it is asymmetric on purpose:
+
+- `high` names the org. `medium` is Appleseed with a Hawaiʻi word within ~150
+  characters, a staff name beside Appleseed, or a work term.
+- A staff name **without** the org is where the noise is, so it depends on how
+  ambiguous the name is. A distinctive name (Genevieve Mumma, Abbey Seitz) with Hawaiʻi
+  and policy context is `medium`, marked "the text does not name Appleseed". A common
+  one (`staff_ambiguous`: Will White, Devin Thomas, Christy MacPherson, Will Caron…)
+  needs a job title beside it (`role_cues`), because a namesake looks exactly like it:
+  Civil Beat's candidate Q&A for a *Christy MacPherson* running for the state Senate,
+  or "Will White House officials". Otherwise it is `low`, which earns a page read for
+  the org name (a byline bio has it) and is **never written down** if the page does
+  not back it.
+- Columns that carry a staff name as the title prefix ("Will Caron: Artful Dodgers",
+  weekly at Civil Beat) are listed apart, under "Written by staff".
+- `ignore_titles` (regexes on the headline) drops a story outright. The defaults are
+  `Candidate Q&A` and `^\d{4} Election:`: an election guide lists every candidate, so a
+  staff member who ran appears on six rivals' pages as well as their own, and a *public*
+  digest is the wrong place for that. It is a title filter and not a smarter one on
+  purpose: a filter on words like "ballot" or "campaign" would also hide Appleseed's own
+  ballot-question work. Coverage of a candidacy that has no such title (a primary town
+  hall, a profile of a challenger) still gets through; mark it `status: ignore` in
+  `mentions.json`, or add a pattern. Set the list to `[]` to see everything.
 
 Each story is checked against `news.json`'s `press` items by URL and by headline, so
 the digest lists only what is missing. Stories from our own domains are ignored.
@@ -372,6 +433,25 @@ Things that will bite you:
 - **"Appleseed" must be near a Hawaiʻi word** (within ~150 characters) on a full
   article, so a national piece that names Texas Appleseed and, elsewhere, Hawaiʻi does
   not count.
+- **Outlet search can break silently, so it is made to say so.** An `html` outlet whose
+  results page mentions the term many times but yields no headline link prints a
+  warning ("its markup may have changed"); a failing outlet is named in the run log
+  with the status, `Retry-After` and the first words of the reply. Maui Now's search
+  takes ~30 s a query, so it has a longer `timeout` and skips the per-staff searches.
+- **An inventory** is one command and touches no state:
+  `python3 scripts/media_watch.py --only search,podcasts --days 365 --deep --report inventory.md`
+  lists everything found, split into what In the News lacks, what it already has, and
+  the staff-written columns. `--deep` reads each `html` outlet's `pages_deep` result
+  pages (20 for Star-Advertiser and HPR): their results are relevance-ordered, so a
+  story that names Appleseed once, in paragraph nine, sits on page 10 or 14. A daily
+  run does not need that depth because a feed sees every new story. Treat an
+  inventory's count as a **floor**, not a total.
+- **A source that answers nothing fails the job, after saving what the others found.**
+  If every feed, every outlet search, or every podcast query fails (outlets blocking
+  the runner's IP looks, in the digest, exactly like a quiet news day), the script
+  writes `dead=<stages>` to `$GITHUB_OUTPUT` and prints an `::error::`; the workflow's
+  last step then fails, which is what makes `triage.yml` open an issue. One failing
+  outlet is only a warning.
 - **Google's opaque article links** are resolved with an undocumented call
   (`resolve_google`). If Google changes it, links stay opaque (they still redirect
   for a person) and URL matching against In the News falls back to headline matching.

@@ -7,3 +7,6 @@
 # Synced verbatim from the live Squarespace site by sync-publications.yml.
 # Whatever glyph the CMS published is what belongs here; the fix goes upstream.
 news.json
+
+# Headlines scraped verbatim from news outlets by media_watch.py; the glyph is theirs.
+media-watch/mentions.json

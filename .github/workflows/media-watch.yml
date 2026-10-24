@@ -37,10 +37,14 @@ concurrency:
 jobs:
   watch:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # A warm run takes ~6 minutes. A cold one (empty cache: the first run, or after
+    # GitHub evicts it) reads several hundred pages, ~15 minutes on a fast link.
+    timeout-minutes: 45
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      # Google Alerts RSS links, one per line. A secret, not config.json: each
+      # URL embeds the owner's Google account id and this repo is public.
+      MEDIA_WATCH_ALERT_FEEDS: ${{ secrets.MEDIA_WATCH_ALERT_FEEDS }}
     steps:
       - uses: actions/checkout@v4
 
@@ -67,6 +71,8 @@ jobs:
           paths: media-watch/mentions.json media-watch/latest.md
           message: "media-watch: update mentions (${{ steps.watch.outputs.new }} to review)"
 
+      # The issue IS the email: GitHub mails everyone watching the repo when it opens.
+      # (There is no separate push; the ntfy step was dropped 2026-10-20.)
       - name: Open an issue with the digest
         if: steps.watch.outputs.new != '0' && steps.watch.outputs.new != ''
         run: |
@@ -76,15 +82,40 @@ jobs:
             --title "Media watch: ${{ steps.watch.outputs.new }} new mention(s) — $(date -u +%F)" \
             --label media-watch --body-file media-watch/latest.md
 
-      - name: Push notification
+      # Posts to #communications through an incoming webhook kept in the
+      # MEDIA_WATCH_SLACK_WEBHOOK secret. No secret, no post (and no failure).
+      # Only public news links go in it: the repo and this digest are public.
+      - name: Post to Slack #communications
         if: steps.watch.outputs.new != '0' && steps.watch.outputs.new != ''
+        env:
+          SLACK_WEBHOOK: ${{ secrets.MEDIA_WATCH_SLACK_WEBHOOK }}
+          NEW: ${{ steps.watch.outputs.new }}
         run: |
-          if [ -z "${NTFY_TOPIC:-}" ]; then
-            echo "ntfy: no NTFY_TOPIC set — no push sent"
+          if [ -z "${SLACK_WEBHOOK:-}" ]; then
+            echo "slack: no MEDIA_WATCH_SLACK_WEBHOOK set — no post sent"
             exit 0
           fi
-          body=$(grep -E '^- \[' media-watch/latest.md | sed -E 's/^- \[([^]]*)\]\([^)]*\)/\1/' | head -8)
-          curl -s -m 10 -o /dev/null \
-            -H "Title: Appleseed: ${{ steps.watch.outputs.new }} new media mention(s)" \
-            -H "Priority: default" \
-            -d "$body" "https://ntfy.sh/$NTFY_TOPIC" || true
+          python3 - <<'PY' > slack.json
+          import json, os, re
+          lines = [l for l in open("media-watch/latest.md", encoding="utf-8") if l.startswith("- [")]
+          rows = []
+          for l in lines[:8]:
+              m = re.match(r"- \[([^\]]*)\]\(([^)]*)\)(.*)", l.strip())
+              rows.append(f"• <{m.group(2)}|{m.group(1)}>{m.group(3)}" if m else l.strip())
+          n = os.environ["NEW"]
+          head = f":newspaper: *{n} new media mention(s)* not on In the News yet"
+          print(json.dumps({"text": head + "\n" + "\n".join(rows)}))
+          PY
+          curl -s -m 10 -o /dev/null -w "slack: HTTP %{http_code}\n" -H 'Content-type: application/json' \
+            --data @slack.json "$SLACK_WEBHOOK" || true
+
+      # Last on purpose. The steps above must run first so that what the
+      # working stages found is committed and announced; only then does a stage
+      # that answered nothing at all fail the job, which is what makes
+      # triage.yml open an issue. Without this, every outlet blocking the
+      # runner's IP would read as a quiet news day.
+      - name: Fail if a source stage was dead
+        if: steps.watch.outputs.dead != ''
+        run: |
+          echo "::error::no answer from any source in: ${{ steps.watch.outputs.dead }}"
+          exit 1
