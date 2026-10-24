@@ -615,7 +615,7 @@ class Interplay(unittest.TestCase):
         self.assertEqual(r3.evaluate([dict(feed_item)], "feed"), [])
         self.assertEqual(r3.reads, 0)
 
-    def test_settle_keeps_an_engine_hit_whose_page_was_blind_but_drops_a_judged_miss(self):
+    def test_settle_drops_an_engine_hit_whose_page_was_blind_and_a_judged_miss_alike(self):
         merged = {}
         for t in ("Blind story", "Judged story"):
             merged[mw.title_key(t)] = {**item(t, url="https://k.test/" + t[:3]), "confidence": "medium", "reasons": [mw.UNCHECKED],
@@ -623,7 +623,8 @@ class Interplay(unittest.TestCase):
         checked = {mw.story_id(mw.title_key("Blind story")): "2026-09-28" + mw.BLIND,
                    mw.story_id(mw.title_key("Judged story")): "2026-09-28"}
         mw.settle(merged, {"items": []}, CFG, checked, "2026-09-29", delay=0, out=io.StringIO())
-        self.assertEqual([m["title"] for m in merged.values()], ["Blind story"])
+        self.assertEqual(merged, {})   # nobody read the blind one, so it is not reported either; it is retried next run
+        self.assertEqual(checked[mw.story_id(mw.title_key("Blind story"))], "2026-09-28" + mw.BLIND)
 
     def test_atom_prefers_the_alternate_link(self):
         atom = ('<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><title>T</title>'
@@ -1089,10 +1090,35 @@ class Settle(unittest.TestCase):
         self.assertEqual(merged, {})
         self.assertEqual(len(checked), 1)
 
-    def test_unreadable_page_keeps_unchecked_medium_but_not_low(self):
+    def test_unreadable_page_drops_an_unchecked_match_and_does_not_remember_it(self):
+        # the Facebook false positives: Google said the phrase matched, the page was a login wall
         merged = self.make("Local ag rally", "medium", [mw.UNCHECKED])
+        checked = {}
+        mw.settle(merged, {"items": []}, CFG, checked, "2026-09-29", delay=0, out=io.StringIO())
+        self.assertEqual(merged, {})
+        self.assertEqual(checked, {})            # so the next run tries the page again
+
+    def test_a_headline_only_staff_match_needs_its_page_read_too(self):
+        reason = "staff: Will Caron, with Hawaiʻi policy context"
+        merged = self.make("Will Caron on the tax bill", "medium", [reason])
         mw.settle(merged, {"items": []}, CFG, {}, "2026-09-29", delay=0, out=io.StringIO())
-        self.assertEqual(list(merged.values())[0]["confidence"], "medium")
+        self.assertEqual(merged, {})             # unreadable: dropped
+        merged = self.make("Will Caron on the tax bill", "medium", [reason])
+        self.pages["https://example.org/a"] = "A tax column by someone else entirely. " * 60
+        mw.settle(merged, {"items": []}, CFG, {}, "2026-09-29", delay=0, out=io.StringIO())
+        self.assertEqual(merged, {})             # read, never says Appleseed: rejected
+        merged = self.make("Will Caron on the tax bill", "medium", [reason])
+        self.pages["https://example.org/a"] = "Will Caron of Hawaiʻi Appleseed said so. " * 40
+        mw.settle(merged, {"items": []}, CFG, {}, "2026-09-29", delay=0, out=io.StringIO())
+        (m,) = merged.values()
+        self.assertEqual((m["confidence"], m["reasons"]), ("high", ["article text names Hawaiʻi Appleseed"]))
+
+    def test_a_full_text_staff_match_and_a_headline_that_names_appleseed_are_not_guesses(self):
+        full = {"confidence": "medium", "reasons": ["staff: Will Caron, with Hawaiʻi policy context; the text does not name Appleseed"]}
+        named = {"confidence": "high", "reasons": ["names Hawaiʻi Appleseed"]}
+        self.assertFalse(mw.is_weak(full))
+        self.assertFalse(mw.is_weak(named))
+        self.assertTrue(mw.is_weak({"confidence": "medium", "reasons": [mw.UNCHECKED]}))
 
     def test_known_story_is_not_refetched(self):
         merged = self.make("Local ag rally", "medium", [mw.UNCHECKED])

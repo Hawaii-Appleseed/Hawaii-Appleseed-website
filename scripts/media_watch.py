@@ -1132,10 +1132,20 @@ def classify(item, cfg, staff, kind="", full_text=False):
 UNCHECKED = "search engine matched the phrase; article text not checked"
 
 
+HEADLINE_STAFF = re.compile(r"^staff: .+, with Hawaiʻi policy context$")   # no "; the text does not name Appleseed" tail
+
+
+def is_guess(reason):
+    """A reason nobody has read the article behind: the engine's phrase match
+    (UNCHECKED), or a staff name that sat near Hawaiʻi and policy words in a
+    headline or snippet. A namesake looks exactly like that."""
+    return reason == UNCHECKED or bool(HEADLINE_STAFF.match(reason))
+
+
 def is_weak(rec):
     """Needs the article read before it is believed: a bare staff name, or a
     match nobody has seen the words of."""
-    return rec["confidence"] == "low" or rec["reasons"] == [UNCHECKED]
+    return rec["confidence"] == "low" or (bool(rec["reasons"]) and all(is_guess(r) for r in rec["reasons"]))
 
 
 def verify_article(text, cfg):
@@ -1361,8 +1371,10 @@ def settle(merged, state, cfg, checked, today, delay=0.5, out=sys.stdout):
     match by URL), then reads the article behind every weak match. A page that
     loads and never says Appleseed is a rejection, remembered in
     `checked` so it is not fetched again tomorrow. A page that will not
-    load leaves the match as it was: an unchecked engine match stays, a bare
-    staff name is dropped by the confidence filter. Mutates `merged`."""
+    load (a Facebook post, a bot wall, a Google link that did not resolve, the
+    per-run read budget) settles nothing, and a story nobody has read is NOT
+    reported: it is dropped for this run and not remembered, so the next run
+    tries it again while it is inside the lookback window. Mutates `merged`."""
     known = {i["id"] for i in state["items"]}
     resolved = read = 0
     for key in list(merged):
@@ -1392,8 +1404,11 @@ def settle(merged, state, cfg, checked, today, delay=0.5, out=sys.stdout):
             continue
         m["confidence"] = verdict[0]
         # the weak reasons ("Will Caron only", "not checked") are settled now
-        m["reasons"] = [r for r in m["reasons"] if r != UNCHECKED and not r.endswith(" only")] + [verdict[1]]
-    print(f"resolved {resolved} links, read {read} articles", file=out)
+        m["reasons"] = [r for r in m["reasons"] if not is_guess(r) and not r.endswith(" only")] + [verdict[1]]
+    unread = [k for k, m in merged.items() if story_id(k) not in known and is_weak(m)]
+    for k in unread:
+        del merged[k]
+    print(f"resolved {resolved} links, read {read} articles, held back {len(unread)} nobody could read", file=out)
 
 
 STAGES = ("engines", "feeds", "search", "podcasts")
