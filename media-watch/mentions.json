@@ -2,6 +2,26 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "e7b1811a4f89",
+   "title": "Will Caron: Navel Superiority",
+   "outlet": "Honolulu Civil Beat",
+   "url": "https://www.civilbeat.org/2026/10/will-caron-navel-superiority/",
+   "published": "2026-10-25T10:05:39Z",
+   "firstSeen": "2026-10-25T14:23:27Z",
+   "confidence": "high",
+   "reasons": [
+    "staff: Will Caron only",
+    "names Hawaiʻi Appleseed",
+    "staff: Will Caron, with Appleseed"
+   ],
+   "sources": [
+    "google",
+    "feed"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
    "id": "837db905bb0c",
    "title": "At the recent Puahona orientation in Hawaii , financial representatives outlined the eligibility ...",
    "outlet": "facebook.com",

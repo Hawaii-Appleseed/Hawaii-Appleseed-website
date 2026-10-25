@@ -1,10 +1,10 @@
-# Media watch — 2026-10-24
+# Media watch — 2026-10-25
 
 1 new story mentioning Hawaiʻi Appleseed, its work, or its staff, not yet on [In the News](https://hiappleseed.org/in-the-news).
 
-## Names Hawaiʻi Appleseed
+## Written by staff
 
-- [At the recent Puahona orientation in Hawaii , financial representatives outlined the eligibility ...](https://www.facebook.com/citizenportalnews/posts/at-the-recent-puahona-orientation-in-hawaii-financial-representatives-outlined-t/122181715358723792/) — facebook.com, 2026-10-23  
-  _names Hawaiʻi Appleseed_
+- [Will Caron: Navel Superiority](https://www.civilbeat.org/2026/10/will-caron-navel-superiority/) — Honolulu Civil Beat, 2026-10-25  
+  _staff: Will Caron only; names Hawaiʻi Appleseed; staff: Will Caron, with Appleseed_
 
 To post one: add it to the Squarespace `/in-the-news` collection. To stop one resurfacing, set its `status` to `ignore` in `media-watch/mentions.json`.
