@@ -322,5 +322,11 @@
     "^\\d{4} Election:",
     "^Will Caron:"
   ],
+  "ignore_urls": [
+    "civilbeat\\.org/\\d{4}/\\d{2}/will-caron-"
+  ],
+  "ignore_content": [
+    {"host": "civilbeat.org", "contains": "Will Caron"}
+  ],
   "min_confidence": "medium"
 }

@@ -736,6 +736,14 @@ class Reader:
                 self.checked[iid] = self.today        # cannot show it is recent
                 continue
 
+            if needs_content_check(it, cfg):
+                if unread:                                # cannot rule it out, so it is not reported
+                    self.checked[iid] = blind_mark(self.today)
+                    continue
+                if content_excluded(it, text, cfg):
+                    self.checked[iid] = self.today
+                    continue
+
             def judge(t):
                 return classify({"title": it["title"], "snippet": t}, cfg, staff,
                                 kind="org" if alert and unread else "", full_text=len(t) >= 1500)
@@ -748,6 +756,9 @@ class Reader:
                     self.seen -= 1
                     continue
                 if page is not None:
+                    if content_excluded(it, page, cfg):
+                        self.checked[iid] = self.today
+                        continue
                     verdict = judge(page)
                     d = d or parse_any_date(published or "")
             if verdict is None or verdict[0] == "low":
@@ -1228,7 +1239,28 @@ def is_ignored(item, cfg):
     The default is "Candidate Q&A": an election guide lists every candidate, so a
     staff member who ran shows up on six rivals' pages as well as their own, in a
     public digest, for a reason that is not press coverage of the org."""
-    return any(re.search(pat, item["title"], re.I) for pat in cfg.get("ignore_titles", [])) or is_blocked(item, cfg)
+    return (any(re.search(pat, item["title"], re.I) for pat in cfg.get("ignore_titles", []))
+            or any(re.search(pat, item.get("url", ""), re.I) for pat in cfg.get("ignore_urls", []))
+            or is_blocked(item, cfg))
+
+
+def _content_rules(item, cfg):
+    """The config `ignore_content` rules that apply to this story's outlet: {host, contains}."""
+    hosts = {host_of(item.get("outlet_url", "")), host_of(item.get("url", ""))} - {""}
+    return [r for r in cfg.get("ignore_content", [])
+            if any(h == r["host"] or h.endswith("." + r["host"]) for h in hosts)]
+
+
+def needs_content_check(item, cfg):
+    """True when an `ignore_content` rule covers this story's outlet, so its text must be read."""
+    return bool(_content_rules(item, cfg))
+
+
+def content_excluded(item, text, cfg):
+    """A story from a rule's outlet whose text contains the rule's phrase (config
+    ignore_content: Civil Beat + "Will Caron"). Not about us, so never a mention."""
+    t = norm(text or "")
+    return any(has_phrase(t, r["contains"]) for r in _content_rules(item, cfg))
 
 
 def is_blocked(item, cfg):
@@ -1390,12 +1422,28 @@ def settle(merged, state, cfg, checked, today, delay=0.5, out=sys.stdout):
             time.sleep(delay)
             if real:
                 m["url"] = real
-        if not is_weak(m) or "news.google.com" in m["url"] or read >= MAX_VERIFY:
+        if is_ignored(m, cfg):                     # the real URL is known now
+            del merged[key]
+            continue
+        check, weak = needs_content_check(m, cfg), is_weak(m)
+        if "news.google.com" in m["url"] or read >= MAX_VERIFY:
+            if check:                              # cannot read it, cannot rule it out
+                del merged[key]
+            continue
+        if not (weak or check):
             continue
         read += 1
         text = fetch_article_text(m["url"])
         time.sleep(delay)
         if text is None:
+            if check:
+                del merged[key]
+            continue
+        if check and content_excluded(m, text, cfg):
+            checked[iid] = today
+            del merged[key]
+            continue
+        if not weak:
             continue
         verdict = verify_article(text, cfg)
         if verdict is None:

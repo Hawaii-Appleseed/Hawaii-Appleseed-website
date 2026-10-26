@@ -315,6 +315,19 @@ class Reading(unittest.TestCase):
         self.assertEqual(found, [])
         self.assertIn(mw.story_id(mw.title_key("Panda Excess, by Will Caron")), r.checked)
 
+    def test_content_rule_drops_a_civilbeat_page_naming_will_caron_and_remembers_it(self):
+        cfg = {**CFG, "ignore_content": [{"host": "civilbeat.org", "contains": "Will Caron"}]}
+        url = "https://www.civilbeat.org/2026/11/a/"
+        for body, kept in (("Will Caron of Hawaiʻi Appleseed said so. " * 40, 0), ("Hawaiʻi Appleseed said so. " * 40, 1)):
+            r = mw.Reader(cfg, STAFF, self.cutoff, {}, "2026-09-29", delay=0, out=io.StringIO())
+            self.pages[url] = body
+            found = r.evaluate([self.it("Wildfire bill", url, "", outlet_url="https://www.civilbeat.org")], "feed")
+            self.assertEqual(len(found), kept)
+            self.assertEqual(bool(r.checked), not kept)
+        r = mw.Reader(cfg, STAFF, self.cutoff, {}, "2026-09-29", delay=0, out=io.StringIO())
+        self.pages.pop(url)                                     # unreadable: cannot rule it out, so not reported
+        self.assertEqual(r.evaluate([self.it("Wildfire bill", url, "Hawaiʻi Appleseed said so. ", outlet_url="https://www.civilbeat.org")], "feed"), [])
+
     def test_no_read_never_fetches(self):
         r = self.reader()
         r.evaluate([self.it("Video", "https://y.test/v", "Guests: Will Caron", complete=True, no_read=True)], "t")
@@ -697,6 +710,27 @@ class Ignored(unittest.TestCase):
         self.assertTrue(mw.is_ignored({"title": "Will Caron: Navel Superiority", "url": "https://news.google.com/rss/articles/x"}, real))
         self.assertFalse(mw.is_ignored({"title": "Hawaiʻi Appleseed's Will Caron on the tax bill", "url": "https://www.civilbeat.org/2026/10/a/"}, real))
         self.assertFalse(mw.is_ignored({"title": "Kauaʻi wildfire bill", "url": "https://www.civilbeat.org/2026/10/b/"}, real))
+
+    def test_the_real_config_ignores_a_civilbeat_will_caron_url_whatever_the_title(self):
+        real = json.loads(mw.CONFIG_PATH.read_text(encoding="utf-8"))
+        self.assertTrue(mw.is_ignored({"title": "Some New Column Name", "url": "https://www.civilbeat.org/2026/11/will-caron-some-new-name/"}, real))
+        self.assertFalse(mw.is_ignored({"title": "Some Story", "url": "https://www.civilbeat.org/2026/11/kauai-wildfire-bill/"}, real))
+        self.assertFalse(mw.is_ignored({"title": "Some Story", "url": "https://www.example.com/2026/11/will-caron-fan-page/"}, real))
+
+    def test_content_excluded_only_for_the_rules_outlet(self):
+        cfg = {"ignore_content": [{"host": "civilbeat.org", "contains": "Will Caron"}]}
+        cb = {"title": "t", "url": "https://www.civilbeat.org/2026/11/a/", "outlet_url": "https://www.civilbeat.org"}
+        google = {"title": "t", "url": "https://news.google.com/rss/articles/x", "outlet_url": "https://www.civilbeat.org"}
+        other = {"title": "t", "url": "https://other.test/a", "outlet_url": "https://other.test"}
+        text = "Hawaiʻi Appleseed's communications director, Will Caron, said the bill is late."
+        self.assertTrue(mw.content_excluded(cb, text, cfg))
+        self.assertTrue(mw.content_excluded(google, text, cfg))          # outlet known from the Google source
+        self.assertTrue(mw.content_excluded(cb, "by WILL CARON", cfg))
+        self.assertFalse(mw.content_excluded(cb, "Hawaiʻi Appleseed said the bill is late.", cfg))
+        self.assertFalse(mw.content_excluded(cb, "Will Caroneo said so", cfg))   # whole words
+        self.assertFalse(mw.content_excluded(other, text, cfg))
+        self.assertFalse(mw.needs_content_check(other, cfg))
+        self.assertTrue(mw.needs_content_check(cb, cfg))
 
     def test_block_sources_blocks_a_host_or_one_page_on_it(self):
         cfg = {**CFG, "block_sources": ["junk.test", "facebook.com/citizenportalnews"]}
@@ -1082,7 +1116,7 @@ class Settle(unittest.TestCase):
         return {mw.title_key(title): m}
 
     def test_confirmed_low_is_upgraded_and_only_reason_removed(self):
-        merged = self.make("Will Caron: Column", "low", ["staff: Will Caron only"])
+        merged = self.make("A column by Will Caron", "low", ["staff: Will Caron only"])
         self.pages["https://example.org/a"] = "Will Caron is with Hawaiʻi Appleseed. " * 40
         mw.settle(merged, {"items": []}, CFG, {}, "2026-09-29", delay=0, out=io.StringIO())
         (m,) = merged.values()
@@ -1126,6 +1160,35 @@ class Settle(unittest.TestCase):
         self.assertFalse(mw.is_weak(full))
         self.assertFalse(mw.is_weak(named))
         self.assertTrue(mw.is_weak({"confidence": "medium", "reasons": [mw.UNCHECKED]}))
+
+    def test_civilbeat_story_naming_will_caron_is_dropped_even_when_it_names_appleseed(self):
+        cfg = {**CFG, "ignore_content": [{"host": "civilbeat.org", "contains": "Will Caron"}], "ignore_urls": [], "ignore_titles": []}
+        url = "https://www.civilbeat.org/2026/11/a/"
+        for body, kept in (("Will Caron of Hawaiʻi Appleseed said so. " * 40, False),
+                           ("Hawaiʻi Appleseed said so. " * 40, True)):
+            merged = self.make("Wildfire bill", "high", ["names Hawaiʻi Appleseed"], url=url)
+            self.pages[url] = body
+            checked = {}
+            mw.settle(merged, {"items": []}, cfg, checked, "2026-10-26", delay=0, out=io.StringIO())
+            self.assertEqual(bool(merged), kept)
+            self.assertEqual(bool(checked), not kept)
+
+    def test_civilbeat_story_that_cannot_be_read_is_not_reported_but_other_outlets_are_unaffected(self):
+        cfg = {**CFG, "ignore_content": [{"host": "civilbeat.org", "contains": "Will Caron"}], "ignore_urls": [], "ignore_titles": []}
+        merged = self.make("Wildfire bill", "high", ["names Hawaiʻi Appleseed"], url="https://www.civilbeat.org/2026/11/a/")
+        mw.settle(merged, {"items": []}, cfg, {}, "2026-10-26", delay=0, out=io.StringIO())
+        self.assertEqual(merged, {})
+        merged = self.make("Wildfire bill", "high", ["names Hawaiʻi Appleseed"], url="https://other.test/a")
+        mw.fetch_article_text = lambda u: self.fail("read an outlet with no content rule")
+        mw.settle(merged, {"items": []}, cfg, {}, "2026-10-26", delay=0, out=io.StringIO())
+        self.assertEqual(len(merged), 1)
+
+    def test_google_link_that_resolves_to_a_will_caron_url_is_dropped(self):
+        real = json.loads(mw.CONFIG_PATH.read_text(encoding="utf-8"))
+        mw.resolve_google = lambda u: "https://www.civilbeat.org/2026/11/will-caron-brand-new-name/"
+        merged = self.make("A Brand New Name", "high", ["names Hawaiʻi Appleseed"], url="https://news.google.com/rss/articles/x")
+        mw.settle(merged, {"items": []}, real, {}, "2026-10-26", delay=0, out=io.StringIO())
+        self.assertEqual(merged, {})
 
     def test_known_story_is_not_refetched(self):
         merged = self.make("Local ag rally", "medium", [mw.UNCHECKED])
