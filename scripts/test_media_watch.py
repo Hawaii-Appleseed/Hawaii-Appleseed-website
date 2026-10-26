@@ -304,16 +304,16 @@ class Reading(unittest.TestCase):
         r = self.reader()
         body = "Column body about panda excess and other things. " * 20
         self.pages["https://o.test/c"] = body + "Will Caron is communications director at Hawaiʻi Appleseed."
-        found = r.evaluate([self.it("Will Caron: Panda Excess", "https://o.test/c", body, complete=True)], "t")
+        found = r.evaluate([self.it("Panda Excess, by Will Caron", "https://o.test/c", body, complete=True)], "t")
         self.assertEqual(self.fetched, ["https://o.test/c"])
         self.assertEqual([f["confidence"] for f in found], ["high"])
 
     def test_weak_verdict_that_the_page_does_not_back_is_remembered_as_a_miss(self):
         r = self.reader()
         self.pages["https://o.test/w"] = "Nothing about us here. " * 60
-        found = r.evaluate([self.it("Will Caron: Panda Excess", "https://o.test/w", "Will Caron column body", complete=True)], "t")
+        found = r.evaluate([self.it("Panda Excess, by Will Caron", "https://o.test/w", "Will Caron column body", complete=True)], "t")
         self.assertEqual(found, [])
-        self.assertIn(mw.story_id(mw.title_key("Will Caron: Panda Excess")), r.checked)
+        self.assertIn(mw.story_id(mw.title_key("Panda Excess, by Will Caron")), r.checked)
 
     def test_no_read_never_fetches(self):
         r = self.reader()
@@ -690,6 +690,13 @@ class Ignored(unittest.TestCase):
         self.assertEqual(len(r.evaluate([dict(base, title="Election night in Honolulu", url="https://c.test/b")], "t")), 1)
         self.assertEqual(r.seen, 1)                      # the ignored one was never even judged
         self.assertEqual(mw.is_ignored({"title": "Candidate Q&A: x"}, {**CFG, "ignore_titles": []}), False)
+
+    def test_the_real_config_ignores_will_carons_weekly_column_and_nothing_that_merely_names_him(self):
+        real = json.loads(mw.CONFIG_PATH.read_text(encoding="utf-8"))
+        self.assertTrue(mw.is_ignored({"title": "Will Caron: Zip Pact", "url": "https://www.civilbeat.org/2026/10/will-caron-zip-pact/"}, real))
+        self.assertTrue(mw.is_ignored({"title": "Will Caron: Navel Superiority", "url": "https://news.google.com/rss/articles/x"}, real))
+        self.assertFalse(mw.is_ignored({"title": "Hawaiʻi Appleseed's Will Caron on the tax bill", "url": "https://www.civilbeat.org/2026/10/a/"}, real))
+        self.assertFalse(mw.is_ignored({"title": "Kauaʻi wildfire bill", "url": "https://www.civilbeat.org/2026/10/b/"}, real))
 
     def test_block_sources_blocks_a_host_or_one_page_on_it(self):
         cfg = {**CFG, "block_sources": ["junk.test", "facebook.com/citizenportalnews"]}

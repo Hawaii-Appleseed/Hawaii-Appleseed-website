@@ -319,7 +319,8 @@
   ],
   "ignore_titles": [
     "Candidate Q&A",
-    "^\\d{4} Election:"
+    "^\\d{4} Election:",
+    "^Will Caron:"
   ],
   "min_confidence": "medium"
 }
