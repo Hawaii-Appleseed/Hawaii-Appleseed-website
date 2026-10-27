@@ -35,6 +35,10 @@ jobs:
       NUM: ${{ github.event.issue.number }}
       COMMENT_BODY: ${{ github.event.comment.body }}
       SLACK_WEBHOOK: ${{ secrets.MEDIA_WATCH_SLACK_WEBHOOK }}
+      # An issue carrying the `dry-run` label never reaches Slack: the Slack step
+      # below is skipped outright, and the reply shows what it would have sent.
+      # That is how to try the reply flow without posting anything.
+      DRY_RUN: ${{ contains(github.event.issue.labels.*.name, 'dry-run') }}
     steps:
       - uses: actions/checkout@v4
 
@@ -56,7 +60,7 @@ jobs:
 
       - name: Post to Slack #communications
         id: slack
-        if: steps.decide.outputs.posted != ''
+        if: steps.decide.outputs.posted != '' && !contains(github.event.issue.labels.*.name, 'dry-run')
         run: |
           if [ -z "${SLACK_WEBHOOK:-}" ]; then
             echo "reply=No MEDIA_WATCH_SLACK_WEBHOOK secret is set, so nothing was posted." >> "$GITHUB_OUTPUT"
@@ -73,7 +77,16 @@ jobs:
 
       - name: Reply on the issue
         run: |
-          if [ "${{ steps.slack.outputs.ok }}" = "true" ]; then
+          if [ "$DRY_RUN" = "true" ]; then
+            if [ -n "${{ steps.decide.outputs.posted }}" ]; then
+              {
+                printf 'Dry run: nothing was sent to Slack. This is what stories %s would have posted:\n\n```\n' \
+                  "${{ steps.decide.outputs.posted }}"
+                jq -r .text slack.json
+                printf '```\n'
+              } > reply.txt
+            fi
+          elif [ "${{ steps.slack.outputs.ok }}" = "true" ]; then
             n="${{ steps.decide.outputs.posted }}"
             printf 'Posted to #communications: stories %s.\n\n<!-- posted:%s -->\n' "${n//,/, }" "$n" > reply.txt
           elif [ -n "${{ steps.slack.outputs.reply }}" ]; then
