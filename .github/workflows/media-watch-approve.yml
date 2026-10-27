@@ -106,6 +106,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}      # no checkout in this job, so gh cannot find the repo itself
     steps:
       - name: Open a dry-run test digest
         run: |
