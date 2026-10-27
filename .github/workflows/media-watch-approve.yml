@@ -12,6 +12,11 @@ name: Media watch approve
 on:
   issue_comment:
     types: [created]
+  # "Run workflow" (or `gh workflow run "Media watch approve"`) opens a dry-run
+  # test digest made by the Actions bot, so the email reaches Devin exactly as a
+  # real one does. An issue he opened himself would not email him: GitHub does
+  # not notify you about your own activity.
+  workflow_dispatch:
 
 permissions:
   issues: write
@@ -95,3 +100,29 @@ jobs:
           if [ -s reply.txt ]; then
             gh issue comment "$NUM" --repo "$REPO" --body-file reply.txt
           fi
+
+  test-digest:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Open a dry-run test digest
+        run: |
+          gh label create media-watch --color 5F8575 \
+            --description "New press mentions of Hawaiʻi Appleseed" 2>/dev/null || true
+          gh label create dry-run --color BFD4F2 \
+            --description "Approval workflow shows what it would post and never calls Slack" 2>/dev/null || true
+          {
+            printf '# Media watch — TEST (dry run)\n\n'
+            printf '2 new stories mentioning Hawaiʻi Appleseed, its work, or its staff, not yet on In the News.\n\n'
+            printf '## Names Hawaiʻi Appleseed\n\n'
+            printf -- '- [TEST story one: a fake headline for the approval flow](https://example.org/test-one) — Example Outlet, %s  \n' "$(date -u +%F)"
+            printf '  _names Hawaiʻi Appleseed_\n'
+            printf -- '- [TEST story two: another fake headline](https://example.org/test-two) — Example Outlet, %s  \n' "$(date -u +%F)"
+            printf '  _names Hawaiʻi Appleseed_\n\n---\n'
+            printf '**This is a dry-run test.** It carries the `dry-run` label, so nothing you do here can post to Slack.\n'
+            printf '**To send to #communications:** reply `post` to this email for every story above, or `post 2` for just the second.\n'
+          } > body.md
+          gh issue create --title "TEST (dry run): Media watch approval flow — safe to ignore" \
+            --label media-watch --label dry-run --assignee dtomkatsu --body-file body.md
