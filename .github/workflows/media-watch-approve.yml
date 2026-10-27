@@ -1,0 +1,84 @@
+name: Media watch approve
+
+# Posts a media-watch digest to Slack #communications only after Devin says so.
+# media-watch.yml opens an issue per digest and never posts to Slack itself;
+# replying "post" (or "post 2 3") to the notification email makes a comment on
+# that issue, and this runs on the comment. See scripts/media_watch_approve.py.
+#
+# The repo is public, so anyone can comment on an issue. The `if:` below lets
+# only the allowed login through, and the comment text is only ever read from a
+# file, never put in a shell command.
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+  contents: read
+
+concurrency:
+  group: media-watch-approve-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  post:
+    if: >
+      github.event.issue.pull_request == null &&
+      github.event.comment.user.login == 'dtomkatsu' &&
+      contains(github.event.issue.labels.*.name, 'media-watch') &&
+      (startsWith(github.event.comment.body, 'post') || startsWith(github.event.comment.body, 'Post'))
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO: ${{ github.repository }}
+      NUM: ${{ github.event.issue.number }}
+      COMMENT_BODY: ${{ github.event.comment.body }}
+      SLACK_WEBHOOK: ${{ secrets.MEDIA_WATCH_SLACK_WEBHOOK }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Decide what to post
+        id: decide
+        run: |
+          printf '%s' "$COMMENT_BODY" > comment.txt
+          gh api "repos/$REPO/issues/$NUM" --jq .body > issue.txt
+          gh api "repos/$REPO/issues/$NUM/comments" --paginate \
+            --jq '.[] | select(.user.login == "github-actions[bot]") | .body | @json' > posted.txt
+          python3 scripts/media_watch_approve.py --issue-body issue.txt --comment-body comment.txt \
+            --posted posted.txt --out slack.json > result.json
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          r = json.load(open("result.json"))
+          print("posted=" + ",".join(map(str, r["posted"])))
+          open("reply.txt", "w", encoding="utf-8").write(r["reply"])
+          PY
+
+      - name: Post to Slack #communications
+        id: slack
+        if: steps.decide.outputs.posted != ''
+        run: |
+          if [ -z "${SLACK_WEBHOOK:-}" ]; then
+            echo "reply=No MEDIA_WATCH_SLACK_WEBHOOK secret is set, so nothing was posted." >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          code=$(curl -s -m 15 -o /dev/null -w '%{http_code}' -H 'Content-type: application/json' \
+            --data @slack.json "$SLACK_WEBHOOK") || code=000
+          echo "slack: HTTP $code"
+          if [ "$code" = "200" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "reply=Slack answered HTTP $code, so nothing was recorded as posted. Reply again to retry." >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Reply on the issue
+        run: |
+          if [ "${{ steps.slack.outputs.ok }}" = "true" ]; then
+            n="${{ steps.decide.outputs.posted }}"
+            printf 'Posted to #communications: stories %s.\n\n<!-- posted:%s -->\n' "${n//,/, }" "$n" > reply.txt
+          elif [ -n "${{ steps.slack.outputs.reply }}" ]; then
+            printf '%s\n' "${{ steps.slack.outputs.reply }}" > reply.txt
+          fi
+          if [ -s reply.txt ]; then
+            gh issue comment "$NUM" --repo "$REPO" --body-file reply.txt
+          fi

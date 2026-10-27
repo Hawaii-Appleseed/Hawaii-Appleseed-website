@@ -60,7 +60,9 @@ jobs:
           restore-keys: media-watch-
 
       - name: Self-test
-        run: python3 scripts/test_media_watch.py
+        run: |
+          python3 scripts/test_media_watch.py
+          python3 scripts/test_media_watch_approve.py
 
       - name: Search and read
         id: watch
@@ -75,43 +77,25 @@ jobs:
           paths: media-watch/mentions.json media-watch/latest.md
           message: "media-watch: update mentions (${{ steps.watch.outputs.new }} to review)"
 
-      # The issue IS the email: GitHub mails everyone watching the repo when it opens.
-      # (There is no separate push; the ntfy step was dropped 2026-10-20.)
+      # The issue IS the email: GitHub mails everyone watching the repo when it
+      # opens, and it is assigned to Devin so he gets it regardless. Nothing is
+      # posted to Slack from here. Replying "post" to that email (or "post 2 3")
+      # comments on the issue, and media-watch-approve.yml then posts the stories
+      # to #communications. Until someone approves, Slack sees nothing.
       - name: Open an issue with the digest
         if: steps.watch.outputs.new != '0' && steps.watch.outputs.new != ''
         run: |
           gh label create media-watch --color 5F8575 \
             --description "New press mentions of Hawaiʻi Appleseed" 2>/dev/null || true
-          gh issue create \
-            --title "Media watch: ${{ steps.watch.outputs.new }} new mention(s) — $(date -u +%F)" \
-            --label media-watch --body-file media-watch/latest.md
-
-      # Posts to #communications through an incoming webhook kept in the
-      # MEDIA_WATCH_SLACK_WEBHOOK secret. No secret, no post (and no failure).
-      # Only public news links go in it: the repo and this digest are public.
-      - name: Post to Slack #communications
-        if: steps.watch.outputs.new != '0' && steps.watch.outputs.new != ''
-        env:
-          SLACK_WEBHOOK: ${{ secrets.MEDIA_WATCH_SLACK_WEBHOOK }}
-          NEW: ${{ steps.watch.outputs.new }}
-        run: |
-          if [ -z "${SLACK_WEBHOOK:-}" ]; then
-            echo "slack: no MEDIA_WATCH_SLACK_WEBHOOK set — no post sent"
-            exit 0
-          fi
-          python3 - <<'PY' > slack.json
-          import json, os, re
-          lines = [l for l in open("media-watch/latest.md", encoding="utf-8") if l.startswith("- [")]
-          rows = []
-          for l in lines[:8]:
-              m = re.match(r"- \[([^\]]*)\]\(([^)]*)\)(.*)", l.strip())
-              rows.append(f"• <{m.group(2)}|{m.group(1)}>{m.group(3)}" if m else l.strip())
-          n = os.environ["NEW"]
-          head = f":newspaper: *{n} new media mention(s)* not on In the News yet"
-          print(json.dumps({"text": head + "\n" + "\n".join(rows)}))
-          PY
-          curl -s -m 10 -o /dev/null -w "slack: HTTP %{http_code}\n" -H 'Content-type: application/json' \
-            --data @slack.json "$SLACK_WEBHOOK" || true
+          {
+            cat media-watch/latest.md
+            printf '\n---\n**To send to #communications:** reply `post` to this email for every story above, '
+            printf 'or `post 2 3` for just those (numbered in the order listed). Nothing is posted until you do.\n'
+          } > issue-body.md
+          title="Media watch: ${{ steps.watch.outputs.new }} new mention(s) — $(date -u +%F)"
+          gh issue create --title "$title" --label media-watch --assignee dtomkatsu \
+            --body-file issue-body.md \
+            || gh issue create --title "$title" --label media-watch --body-file issue-body.md
 
       # Last on purpose. The steps above must run first so that what the
       # working stages found is committed and announced; only then does a stage
