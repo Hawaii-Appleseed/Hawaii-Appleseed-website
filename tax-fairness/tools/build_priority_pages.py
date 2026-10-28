@@ -310,8 +310,8 @@ CV_ALLOC = fig("Where the money goes today",
   "Source: HRS 247-7 (current law). Each special fund gets its share or its cap, whichever is less.")
 
 CV_CLIFF = fig("What a $1,000 difference in price costs",
-  "Conveyance tax on an owner-occupied home that sells for $3,999,000 and for $4,000,000. Today a higher price tier raises the rate on the whole price. Under the Legislature&rsquo;s April 2026 draft, each rate applies only to the slice of the price in its band.",
-  table(["Sale price","Today<small>whole-price rates</small>","Proposed<small>marginal rates</small>"],
+  "Conveyance tax on an owner-occupied home that sells for $3,999,000 and for $4,000,000. Today, a higher price tier raises the rate on the entire price. Under the Legislature&rsquo;s April 2026 draft, each rate applies only to the slice of the price in its band.",
+  table(["Sale price","Today<small>one rate on the entire price</small>","Proposed<small>a rate on each slice</small>"],
    [["$3,999,000","$19,995","$66,260"],
     ["$4,000,000","$28,000","$66,300"],
     ["Extra tax for the extra $1,000","$8,005","$40"]],
@@ -369,8 +369,8 @@ cv = page("cv", 1,
         <p>Meanwhile, nearly 30,000 Native Hawaiians remain on DHHL&rsquo;s waitlist for a homestead (29,589 applicants as of November 2025), many for decades.</p>"""),
   sec("Where the money goes today", """        <p>The law splits conveyance tax collections three ways. The Rental Housing Revolving Fund gets 50 percent, up to $38 million a year. The Land Conservation Fund gets 10 percent, up to $5.1 million a year. The general fund gets the rest. <strong>Hawaiian Home Lands gets nothing.</strong></p>
         <p>Because both funds are capped, once collections pass about $76 million a year, every added dollar goes to the general fund.</p>""") + "\n    </section>\n" + CV_ALLOC + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Rates and allocation: Hawai&#699;i Revised Statutes sections 247-2 and 247-7.</p>',
-  sec("Why the tax should be marginal", """        <p>Today the conveyance tax uses <strong>whole-price rates</strong>. When a sale reaches a higher price tier, the higher rate applies to the entire price, not just the part above the line. That creates cliffs. An owner-occupied home that sells for $4,000,000 owes $8,005 more in tax than one that sells for $3,999,000. It also gives sellers a reason to price a home just under each line.</p>
-        <p>A <strong>marginal</strong> tax works like income tax brackets: each rate applies only to the slice of the price inside its band. The first $600,000 of every sale is taxed at the same low rate, whether the home sells for $700,000 or $7 million, and the tax rises smoothly as the price does.</p>
+  sec("Why the tax should be marginal", """        <p>Today the conveyance tax has price tiers, and the rate for a sale&rsquo;s tier applies to the entire price. When a sale crosses into the next tier, the higher rate applies to every dollar, not just the dollars above the line. That creates cliffs: an owner-occupied home that sells for $4,000,000 owes $8,005 more in tax than one that sells for $3,999,000. It also gives sellers a reason to price a home just under each line.</p>
+        <p>A <strong>marginal</strong> tax works like income tax brackets: each rate applies only to the slice of the price inside its band, so the tax rises smoothly as the price does.</p>
         <p>That is what lets the tax ask much more of the most expensive sales while charging typical buyers less. Under the Legislature&rsquo;s April 2026 draft, buyers who live in the home would owe less than today on every sale up to about $2.25 million, and other residential buyers on every sale up to about $2.07 million.</p>""") + "\n    </section>\n" + CV_CLIFF + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Draft: SB 3028 SD2 HD2 (April 8, 2026), which died in conference.</p>',
   sec("What we are asking for", """        <ul>
             <li><strong>Switch to marginal rates</strong>, so each rate applies only to the part of the price in its band and there are no cliffs.</li>
