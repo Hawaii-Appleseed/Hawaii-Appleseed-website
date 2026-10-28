@@ -236,7 +236,7 @@ cg = page("cg", 3,
  "Tax Wealth Like Work",
  "Tax capital gains at the same rates as ordinary income.",
  "Hawai&#699;i taxes a nurse&rsquo;s paycheck at higher rates than a investor&rsquo;s profit from selling stock or land. We want to close that gap.".replace("a investor","an investor"),
- [("$110M+","estimated new revenue each year"),("90%","of it from the top 1 percent of households"),("5.75 pts","gap between the top wage rate and the capital gains rate, up from 3.75")],
+ [("Over $100M","estimated new revenue each year"),("90%","of it from the top 1 percent of households"),("5.75 pts","gap between the top wage rate and the capital gains rate, up from 3.75")],
  [
   sec("The loophole", """        <p>A nurse or a hotel worker pays Hawai&#699;i&rsquo;s regular income tax rates on every paycheck. But profits from selling stocks, land, and other investments are capped at <strong>7.25 percent</strong>, even for the highest-income households, whose wages are now taxed at up to <strong>13 percent</strong>.</p>
         <ul class="tfc-pp-bars" aria-label="Top rates compared">
@@ -246,7 +246,7 @@ cg = page("cg", 3,
         <p>Act 24 (2026) raised the top rate on wages but left the capital gains rate alone, so the gap between work and wealth grew from 3.75 to 5.75 percentage points.</p>"""),
   sec("What we are asking for", """        <p>Tax capital gains at the same rates as ordinary income, so income from owning is taxed like income from working.</p>"""),
   sec("What it would do", """        <ul>
-            <li>Raise an estimated <strong>$110 million or more a year</strong>.</li>
+            <li>Raise <strong>over $100 million a year</strong>.</li>
             <li>Collect about <strong>90 percent</strong> of it from the top 1 percent of households. Most local families would pay nothing more.</li>
         </ul>""") + "\n    </section>\n" + CG_FIG1 + CG_FIG2 + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Estimate: Hawai&#699;i Appleseed tax model, tax year 2027, Hawai&#699;i residents only, accounting for fewer gains being realized at a higher rate.</p>',
  ],
