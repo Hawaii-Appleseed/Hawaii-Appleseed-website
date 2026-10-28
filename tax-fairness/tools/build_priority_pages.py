@@ -305,7 +305,7 @@ CV_ALLOC = fig("Where the money goes today",
    [["Rental Housing Revolving Fund","50%","$38 million"],
     ["Land Conservation Fund","10%","$5.1 million"],
     ["General fund","The rest","No cap"],
-    ["Hawaiian Home Lands","None","$0"]],
+    ["Hawaiian Home Lands","Not included","$0"]],
    hi=3),
   "Source: HRS 247-7 (current law). Each special fund gets its share or its cap, whichever is less.")
 
@@ -319,7 +319,7 @@ CV_CLIFF = fig("What a $1,000 difference in price costs",
   "Today&rsquo;s amounts follow HRS 247-2. Proposed amounts follow the SB 3028 SD2 HD2 rate schedule (April 2026) and are illustrations, not revenue estimates. Source: Hawai&#699;i Appleseed conveyance model (Census-Forecaster).")
 
 CV_FIG = fig("Where the new revenue could go",
-  "Estimated total conveyance tax revenue in a House committee&rsquo;s table for SB 3028, in millions of dollars. Under current law none of it goes to Hawaiian Home Lands.",
+  "Estimated total conveyance tax revenue in a House committee&rsquo;s table for SB 3028, in millions of dollars. Under current law, Hawaiian Home Lands does not receive a share.",
   """        <div class="tfc-pp-stack"><span>FY2027</span><div class="tfc-pp-stack-bar" title="FY2027: $271M total, up to $60M for DHHL"><i class="hi" style="width:19.8%"></i><i style="width:69.6%"></i></div><b>$271M</b></div>
         <div class="tfc-pp-stack"><span>FY2031</span><div class="tfc-pp-stack-bar" title="FY2031: $303M total, up to $60M for DHHL"><i class="hi" style="width:19.8%"></i><i style="width:80.2%"></i></div><b>$303M</b></div>
         <ul class="tfc-pp-legend"><li><span class="hi"></span>Hawaiian Home Lands, up to $60M a year</li><li><span></span>Rental housing, urban development, land conservation, general fund and other uses</li></ul>""",
@@ -365,9 +365,9 @@ cv = page("cv", 1,
  "Those who profit most from our islands should also invest the most in their future.",
  [("$271M","estimated total conveyance tax revenue in FY2027 in a House committee&rsquo;s estimate"),("$303M","estimated by FY2031"),("$60M","a year for Hawaiian Home Lands, at most")],
  [
-  sec("A tax that has not kept up", """        <p>The conveyance tax is paid when real estate changes hands. Its rates have not changed since 2009, even as high-end and investment property in Hawai&#699;i has soared in value. Today its revenue goes to the general fund, the Land Conservation Fund and the Rental Housing Revolving Fund. <strong>None of it goes to the Department of Hawaiian Home Lands (DHHL).</strong></p>
-        <p>Meanwhile, nearly 30,000 Native Hawaiians remain on DHHL&rsquo;s waitlist for a homestead (29,589 applicants as of November 2025), many for decades.</p>"""),
-  sec("Where the money goes today", """        <p>The law splits conveyance tax collections three ways. The Rental Housing Revolving Fund gets 50 percent, up to $38 million a year. The Land Conservation Fund gets 10 percent, up to $5.1 million a year. The general fund gets the rest. <strong>Hawaiian Home Lands gets nothing.</strong></p>
+  sec("Where the conveyance tax stands", """        <p>The conveyance tax is paid when real estate changes hands. Its rates were last changed in 2009, and property values in Hawai&#699;i have risen considerably since then. Today its revenue goes to the general fund, the Land Conservation Fund and the Rental Housing Revolving Fund. It does not currently include funding for the Department of Hawaiian Home Lands (DHHL).</p>
+        <p>DHHL&rsquo;s waitlist for a homestead had 29,589 applicants as of November 2025.</p>"""),
+  sec("Where the money goes today", """        <p>The law splits conveyance tax collections three ways. The Rental Housing Revolving Fund gets 50 percent, up to $38 million a year. The Land Conservation Fund gets 10 percent, up to $5.1 million a year. The general fund gets the rest. Hawaiian Home Lands is not currently part of the split.</p>
         <p>Because both funds are capped, once collections pass about $76 million a year, every added dollar goes to the general fund.</p>""") + "\n    </section>\n" + CV_ALLOC + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Rates and allocation: Hawai&#699;i Revised Statutes sections 247-2 and 247-7.</p>',
   sec("Why the tax should be marginal", """        <p>Today the conveyance tax has price tiers, and the rate for a sale&rsquo;s tier applies to the entire price. When a sale crosses into the next tier, the higher rate applies to every dollar, not just the dollars above the line. That creates cliffs: an owner-occupied home that sells for $4,000,000 owes $8,005 more in tax than one that sells for $3,999,000. It also gives sellers a reason to price a home just under each line.</p>
         <p>A <strong>marginal</strong> tax works like income tax brackets: each rate applies only to the slice of the price inside its band, so the tax rises smoothly as the price does.</p>
