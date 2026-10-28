@@ -92,6 +92,12 @@
 .tfc-pp-legend { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 4px 0 0; padding: 0; list-style: none; font-size: .88rem; }
 .tfc-pp-legend span { display: inline-block; width: 12px; height: 12px; margin-right: 6px; border-radius: 2px; background: var(--tfc-navy); opacity: .55; vertical-align: -1px; }
 .tfc-pp-legend span.hi { background: var(--tfc-blue); opacity: 1; }
+@container (max-width: 420px) {
+    .tfc-pp-table { font-size: .8rem; }
+    .tfc-pp-table th { font-size: .7rem; padding-left: 3px; padding-right: 3px; }
+    .tfc-pp-table td { padding: 8px 3px; }
+    .tfc-pp-fig { padding: 20px 12px; }
+}
 .tfc-pp-steps { margin: 0 0 14px; padding: 0; list-style: none; border-left: 3px solid var(--tfc-line); }
 .tfc-pp-steps li { position: relative; margin: 0; padding: 0 0 16px 20px; font-size: 1.02rem; }
 .tfc-pp-steps li::before { content: ""; position: absolute; left: -9px; top: 7px; width: 15px; height: 15px; border-radius: 50%; background: #fff; border: 3px solid var(--tfc-blue); }
@@ -129,6 +135,7 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-pp) { grid-row: 1 / 2 !importa
     .tfc-pp-stack { grid-template-columns: minmax(0, 1fr) 56px; gap: 4px 10px; }
     .tfc-pp-stack > span:first-child { grid-column: 1 / -1; font-weight: 700; }
     .tfc-pp-table { font-size: .88rem; }
+    .tfc-pp-table td:first-child small { font-size: .74rem; }
     .tfc-pp-table.hide2 th:nth-child(2), .tfc-pp-table.hide2 td:nth-child(2) { display: none; }
     .tfc-pp-table th, .tfc-pp-table td { padding-left: 6px; padding-right: 6px; }
     .tfc-pp-bars li { grid-template-columns: minmax(0, 1fr) 56px; }
@@ -137,6 +144,8 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-pp) { grid-row: 1 / 2 !importa
     .tfc-pp .tfc-pp-section h2 { font-size: 1.45rem; }
     .tfc-pp-cta { padding: 28px 22px; margin-top: 40px; }
 }
+/* The newsletter section: its form has no storage, so sign-ups were lost. */
+body:not(.sqs-is-page-editing) section[data-section-id="691b795a3409972cbc5443fa"] { display: none !important; }
 </style>
 
 <div class="tfc-pp">
