@@ -236,7 +236,7 @@ cg = page("cg", 3,
  "Tax Wealth Like Work",
  "Tax capital gains at the same rates as ordinary income.",
  "Hawai&#699;i taxes a nurse&rsquo;s paycheck at higher rates than a investor&rsquo;s profit from selling stock or land. We want to close that gap.".replace("a investor","an investor"),
- [("Over $100M","estimated new revenue each year"),("90%","of it from the top 1 percent of households"),("5.75 pts","gap between the top wage rate and the capital gains rate, up from 3.75")],
+ [("Over $100M","estimated new revenue each year"),("90%","of it from the top 1 percent of households"),("5.75 pts","gap between the top income tax rate on wages (13%) and the capital gains rate (7.25%), up from 3.75 points")],
  [
   sec("The loophole", """        <p>A nurse or a hotel worker pays Hawai&#699;i&rsquo;s regular income tax rates on every paycheck. But profits from selling stocks, land, and other investments are capped at <strong>7.25 percent</strong>, even for the highest-income households, whose wages are now taxed at up to <strong>13 percent</strong>.</p>
         <ul class="tfc-pp-bars" aria-label="Top rates compared">
