@@ -14,7 +14,7 @@ preview_urls = false
 # ---- internal staff pilot ----
 REQUIRE_ACCESS = "1"
 ACCESS_TEAM_DOMAIN = "lively-wildflower-989d"   # the staff hub's Zero Trust team
-ACCESS_AUD = ""                                 # fill in: this app's Audience tag (Zero Trust > Access > Applications)
+ACCESS_AUD = "e5cadb92041bb6137650b319ddd7e82d45b0477a67bd7d975ed7d76e25db3213"   # Access app "Ask HA chatbot (pilot)"
 ALLOWED_ORIGINS = ""                            # none: the widget is served by this Worker, so calls are same-origin
 MODEL = "claude-haiku-5-5"                      # pilot default; claude-sonnet-5-5 for the higher-quality (about 20x dearer) option
 DYNAMIC_GRAPHICS = "1"                          # let the model draw a chart whose every figure is quoted from the sources ("0" turns it off)
