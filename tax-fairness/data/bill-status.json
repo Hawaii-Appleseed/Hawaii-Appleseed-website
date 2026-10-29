@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T13:05:18.800Z",
+  "generatedAt": "2026-10-29T19:41:20.337Z",
   "source": "capitol.hawaii.gov RSS, fetched via GitHub Actions",
   "trackers": [
     {
@@ -26,7 +26,7 @@
     },
     {
       "trackerId": "capital-gains",
-      "issueArea": "Tax Wealth Like Work",
+      "issueArea": "Tax Profits Like Paychecks",
       "year": "2026",
       "hbNumbers": [
         "1850"
