@@ -145,9 +145,9 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-pp) { grid-row: 1 / 2 !importa
 </style>"""
 
 OTHERS = {
- "cg": ("/capital-gains", "Tax Wealth Like Work"),
+ "cg": ("/capital-gains", "Tax Profits Like Paychecks"),
  "cr": ("/tax-credits-2", "Keep Working Families&rsquo; Tax Credits"),
- "cv": ("/conveyance-tax", "Reform the Conveyance Tax"),
+ "cv": ("/conveyance-tax", "Increase the Tax on Luxury Homes"),
 }
 
 def page(key, n, head_comment, title, ask, lede, stats, sections, cta_h, cta_p):
@@ -233,7 +233,7 @@ cg = page("cg", 3,
      bracket (was 11%, so the gap went 3.75 -> 5.75 points). "$110M+" = Census-Forecaster
      forecast_cg_rate_options.py, option "ordinary", Act 24, TY2027, residents only, with behavioral
      response; ~90% from the top 1% (distribution_ty2027_act24.csv).""",
- "Tax Wealth Like Work",
+ "Tax Profits Like Paychecks",
  "Tax capital gains at the same rates as ordinary income.",
  "Hawai&#699;i taxes a nurse&rsquo;s paycheck at higher rates than a investor&rsquo;s profit from selling stock or land. We want to close that gap.".replace("a investor","an investor"),
  [("Over $100M","estimated new revenue each year"),("90%","of it from the top 1 percent of households"),("5.75 pts","gap between the top income tax rate on wages (13%) and the capital gains rate (7.25%), up from 3.75 points")],
@@ -360,7 +360,7 @@ cv = page("cv", 1,
      Allocation (HRS 247-7): LCF 10% or $5.1M, RHRF 50% or $38M, rest general fund (checked on capitol.hawaii.gov
      2026-10-28). Marginal explainer: HRS 247-2 cliff schedule vs SD2 HD2 marginal bands; $3,999,000 vs $4,000,000
      owner-occupied = $19,995 / $28,000 today, $66,260 / $66,300 proposed (CONVEYANCE_TAX_SCOPE.md).""",
- "Reform the Conveyance Tax to Fund Hawaiian Homes",
+ "Increase the Tax on Luxury Homes to Fund Hawaiian Homes",
  "Modernize the tax on property sales and dedicate its revenue to the Department of Hawaiian Home Lands.",
  "Those who profit most from our islands should also invest the most in their future.",
  [("$271M","estimated total conveyance tax revenue in FY2027 in a House committee&rsquo;s estimate"),("$303M","estimated by FY2031"),("$60M","a year for Hawaiian Home Lands, at most")],
