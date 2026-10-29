@@ -53,6 +53,7 @@ export function finalize(text, core, hits, pubs = {}) {
   const sources = [];
   const citedCore = [];
   const citedHits = new Set();
+  const cites = []; // one per [n] left in the answer, in order: the PDF page that mark's own excerpt came from
   const answer = text
     .replace(/https?:\/\/\S+/g, "")
     .replace(/\[(C\d+|\d+)\]/g, (_, id) => {
@@ -73,12 +74,13 @@ export function finalize(text, core, hits, pubs = {}) {
       if (src.pdf && ref.g) {
         src.pages = [...new Set([...(src.pages ?? []), ref.g[0]])].sort((a, b) => a - b);
       }
+      cites.push({ n, page: src.pdf && ref.g ? ref.g[0] : null });
       return `[${n}]`;
     })
     .replace(/[ \t]+([.,;:])/g, "$1")
     .replace(/[ \t]{2,}/g, " ")
     .trim();
-  return { answer, sources, citedCore, citedHits: citedHits.size };
+  return { answer, sources, cites, citedCore, citedHits: citedHits.size };
 }
 
 export async function handleChat({ messages: raw, index, client, env = {}, today = new Date().toISOString().slice(0, 10) }) {
@@ -164,7 +166,7 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
   // A chart the model drew itself is shown only when no vetted graphic covers the question, and only if every figure in it
   // is quoted from the text the model was given (charts.js).
   const drawn = takeChart(marked.text, resolver(index.core, hits, index.pubs));
-  const { answer, sources, citedCore, citedHits } = finalize(drawn.text, index.core, hits, index.pubs);
+  const { answer, sources, cites, citedCore, citedHits } = finalize(drawn.text, index.core, hits, index.pubs);
   const graphics = pickGraphics(index, { question: last, marked: marked.ids, answer });
   if (!graphics.length && drawn.chart && env.DYNAMIC_GRAPHICS !== "0") graphics.push(drawn.chart);
   const related = suggestResearch({
@@ -181,5 +183,5 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
     drawn: drawnStatus, handoff: handoffCause(index, { asked: staff.asked, answer }), routed: (handoff?.people ?? []).map((p) => p.id),
     ...(drawnStatus === "accepted" ? { chart: graphics[0] } : {}),
   };
-  return { status: 200, body: { answer, sources, related, graphics, handoff, flags: {} }, usage, model, meta };
+  return { status: 200, body: { answer, sources, cites, related, graphics, handoff, flags: {} }, usage, model, meta };
 }

@@ -25,10 +25,8 @@
     font-family: var(--ha-font-body); color: var(--ha-charcoal); background: var(--ha-bg); padding: var(--ha-section-y) var(--ha-gutter); box-sizing: border-box; }
   #ha-ask *, #ha-ask *::before, #ha-ask *::after { box-sizing: border-box; }
   #ha-ask .ha-ask { max-width: var(--ha-ask-wide); margin: 0 auto; }
-  #ha-ask .ha-ask__eyebrow, #ha-ask .ha-ask__title, #ha-ask .ha-ask__lede, #ha-ask .ha-ask__notice, #ha-ask .ha-ask__note { max-width: var(--ha-measure); }
-  #ha-ask .ha-ask__eyebrow { font-family: var(--ha-font-display); font-size: var(--ha-fs-eyebrow); font-weight: 700; letter-spacing: var(--ha-track-eyebrow); text-transform: uppercase; color: var(--ha-teal-ink); margin: 0 0 var(--ha-space-xs); }
-  #ha-ask .ha-ask__title { font-family: var(--ha-font-display); font-size: var(--ha-fs-h2); font-weight: 800; line-height: var(--ha-lh-heading); letter-spacing: var(--ha-track-display); color: var(--ha-charcoal); margin: 0 0 var(--ha-space-xs); }
-  #ha-ask .ha-ask__lede { font-size: var(--ha-fs-lead); line-height: var(--ha-lh-body); color: var(--ha-ink-muted); margin: 0 0 var(--ha-space-lg); }
+  #ha-ask .ha-ask__eyebrow, #ha-ask .ha-ask__notice, #ha-ask .ha-ask__note { max-width: var(--ha-measure); }
+  #ha-ask .ha-ask__eyebrow { font-family: var(--ha-font-display); font-size: var(--ha-fs-eyebrow); font-weight: 700; letter-spacing: var(--ha-track-eyebrow); text-transform: uppercase; color: var(--ha-teal-ink); margin: 0 0 var(--ha-space-sm); }
 
   #ha-ask .ha-ask__notice { font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-charcoal); background: var(--ha-ash-light); border-left: 4px solid var(--ha-teal-deep); border-radius: var(--ha-radius-callout); padding: var(--ha-space-xs) var(--ha-space-sm); margin: 0 0 var(--ha-space-md); }
   /* Under each answer: Copy, and (when feedback is on) thumbs up / down as quiet icons. A thumbs down opens a comment box. */
@@ -230,9 +228,7 @@
 </style>
 
 <section class="ha-ask" aria-labelledby="ha-ask-title">
-  <p class="ha-ask__eyebrow">Ask Hawai&#699;i Appleseed</p>
-  <h2 class="ha-ask__title" id="ha-ask-title">Questions about our work and positions</h2>
-  <p class="ha-ask__lede">Ask about our research, our policy positions, or how the 2026 session went. Answers come from our own published writing, with links to the source.</p>
+  <p class="ha-ask__eyebrow" id="ha-ask-title">Ask Hawai&#699;i Appleseed</p>
 
   <div class="ha-ask__panel">
     <ol class="ha-ask__log" role="log" aria-live="polite" aria-label="Conversation"></ol>
@@ -289,6 +285,7 @@
       parent.appendChild(i % 2 ? el('span', 'ha-ask__fig', bit) : document.createTextNode(bit));
     });
   }
+  var cites = [], citeAt = 0; // set by renderAnswer for the answer being drawn
   function inline(parent, text, sources) {
     text.split(/(\*\*[^*]+\*\*|\[\d+\])/).forEach(function (part) {
       if (!part) return;
@@ -296,8 +293,11 @@
       if (cite) {
         var s = sources.filter(function (x) { return x.n === Number(cite[1]); })[0];
         if (s) {
+          // The marks come in answer order, as the Worker listed them: each knows the PDF page its own excerpt is on.
+          var c = cites[citeAt++], page = c && c.n === s.n && c.page && s.pdf ? c.page : null;
           var a = el('a', 'ha-ask__cite', String(s.n));
-          a.href = s.url; a.target = '_blank'; a.rel = 'noopener'; a.setAttribute('aria-label', 'Source ' + s.n + ': ' + s.title);
+          a.href = page ? s.pdf + '#page=' + page : s.url; a.target = '_blank'; a.rel = 'noopener';
+          a.setAttribute('aria-label', 'Source ' + s.n + ': ' + s.title + (page ? ', PDF page ' + page : ''));
           parent.appendChild(a);
         }
       } else if (/^\*\*.+\*\*$/.test(part)) {
@@ -883,6 +883,7 @@
       var d = r.data || {};
       var text = d.answer || 'Something went wrong. Please try again, or browse hiappleseed.org.';
       tli.remove();
+      cites = d.cites || []; citeAt = 0;
       var shown = renderAnswer(text, d.sources || [], d.related || [], d.graphics || [], d.handoff || null, question);
       var wide = !!shown.querySelector('.ha-ask__gfx'); // a fragment is emptied by add(), so look first
       var botli = add('bot', shown);

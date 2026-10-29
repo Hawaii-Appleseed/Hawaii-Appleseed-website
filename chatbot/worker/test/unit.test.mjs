@@ -84,6 +84,15 @@ test("finalize gathers the cited PDF pages of a report, once each and in order",
   assert.equal(sources[1].pages, undefined); // no PDF, no page
 });
 
+test("finalize lists each citation mark's own page, in answer order", () => {
+  const u = "https://hiappleseed.org/publications/renters";
+  const pubs = { [u]: { t: "Renters", y: 2025, p: "https://hiappleseed.org/s/renters.pdf" } };
+  const hits = [{ t: "Renters", u, g: [9] }, { t: "Renters", u, g: [4, 5] }, { t: "Blog", u: "https://hiappleseed.org/blog/x", g: [2] }];
+  const { answer, cites } = finalize("A [2]. B [1]. C [3]. D [7].", [], hits, pubs);
+  assert.equal(answer, "A [1]. B [1]. C [2]. D.");
+  assert.deepEqual(cites, [{ n: 1, page: 4 }, { n: 1, page: 9 }, { n: 2, page: null }]);
+});
+
 test("index: report chunks carry their PDF page", () => {
   const pubChunks = index.chunks.filter((c) => c.k === "publication");
   assert.ok(pubChunks.length > 100);
