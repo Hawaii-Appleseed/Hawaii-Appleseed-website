@@ -19,6 +19,7 @@ ALLOWED_ORIGINS = ""                            # none: the widget is served by 
 MODEL = "claude-haiku-5-5"                      # pilot default; claude-sonnet-5-5 for the higher-quality (about 20x dearer) option
 DYNAMIC_GRAPHICS = "1"                          # let the model draw a chart whose every figure is quoted from the sources ("0" turns it off)
 FEEDBACK = "1"                                  # save ratings (with the question and answer) for review; the page says so
+REVIEWERS = "devin@hiappleseed.org"             # who may open /flags (it shows staff emails and questions); comma-separated
 PER_MINUTE = "6"
 PER_DAY = "40"
 DAILY_CAP = "500"          # requests per day, whole site

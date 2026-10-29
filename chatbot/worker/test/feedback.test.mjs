@@ -44,3 +44,38 @@ test("feedback: long text is clipped, and a person is limited to FEEDBACK_PER_DA
   assert.equal((await post(env, good)).status, 200);
   assert.equal((await post(env, good)).status, 429);
 });
+
+const listable = () => {
+  const s = kv();
+  s.list = async ({ prefix }) => ({ keys: [...s.m.keys()].filter((k) => k.startsWith(prefix)).sort().map((name) => ({ name })), list_complete: true });
+  return s;
+};
+const getFlags = (env, path = "/flags.json") => handleRequest(new Request(`https://ha-ask.example.workers.dev${path}`), env, {});
+
+test("flags: a flag keeps the earlier conversation, and /flags lists only flagged answers, newest first", async () => {
+  const env = { ...base, RATE: listable() };
+  const context = [{ role: "user", content: "What is the conveyance tax?" }, { role: "assistant", content: "A tax on property sales [1]." }, { role: "system", content: "drop me" }];
+  assert.equal((await post(env, { ...good, question: "Tell me more about that.", context })).status, 200);
+  assert.equal((await post(env, { ...good, rating: "up", question: "Who runs Appleseed?" })).status, 200);
+  await new Promise((r) => setTimeout(r, 5));
+  assert.equal((await post(env, { ...good, question: "Second flag" })).status, 200);
+  const { flags } = await (await getFlags(env)).json();
+  assert.deepEqual(flags.map((f) => f.question), ["Second flag", "Tell me more about that."]);
+  assert.deepEqual(flags[1].context.map((m) => m.role), ["user", "assistant"]);
+  const page = await (await getFlags(env, "/flags")).text();
+  assert.match(page, /Flagged answers/);
+  assert.match(page, /It said the bill passed/);
+  assert.match(page, /What is the conveyance tax\?/);
+  assert.doesNotMatch(page, /Who runs Appleseed/);
+});
+
+test("flags: REVIEWERS limits who may read them, and the page escapes what staff typed", async () => {
+  const env = { ...base, RATE: listable(), REVIEWERS: "lead@example.org" };
+  await post(env, { ...good, comment: "<script>alert(1)</script>" });
+  assert.equal((await getFlags(env)).status, 403); // the gate is off in tests, so there is no email
+  const open = { ...env, REVIEWERS: "" };
+  const page = await (await getFlags(open, "/flags")).text();
+  assert.doesNotMatch(page, /<script>alert/);
+  assert.match(page, /&lt;script&gt;/);
+  assert.equal((await getFlags({ ...base, FEEDBACK: "0", RATE: listable() })).status, 404);
+});

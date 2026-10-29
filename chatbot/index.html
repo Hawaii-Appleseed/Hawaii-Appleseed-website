@@ -42,6 +42,8 @@
   #ha-ask .ha-ask__icon:hover { background: var(--ha-ask-tone); color: var(--ha-charcoal); }
   #ha-ask .ha-ask__icon:focus-visible { outline: none; box-shadow: var(--ha-ask-glow); }
   #ha-ask .ha-ask__icon[aria-pressed="true"] { color: var(--ha-teal-deep); }
+  #ha-ask .ha-ask__icon--flag { width: auto; gap: var(--ha-space-3xs); padding: 0 var(--ha-space-xs); font: 600 var(--ha-fs-caption)/1 var(--ha-font-display); }
+  #ha-ask .ha-ask__icon--flag svg { width: var(--ha-space-sm); height: var(--ha-space-sm); }
   #ha-ask .ha-ask__actnote { margin-left: var(--ha-space-2xs); }
   #ha-ask .ha-ask__fbform { flex: 1 1 100%; display: flex; flex-wrap: wrap; gap: var(--ha-space-2xs); margin: var(--ha-space-2xs) 0 0; }
   #ha-ask .ha-ask__fbtn { font: inherit; font-family: var(--ha-font-display); font-size: var(--ha-fs-caption); font-weight: 700; letter-spacing: var(--ha-track-button); color: var(--ha-white); background: var(--ha-charcoal); border: 0; border-radius: var(--ha-radius-pill); padding: var(--ha-space-2xs) var(--ha-space-md); cursor: pointer; margin: 0; }
@@ -721,9 +723,13 @@
 
   // "Was this helpful?" under an answer, when the build turned feedback on. A "No" can say what was wrong.
   var feedbackOn = root.getAttribute('data-feedback') === '1';
-  function sendFeedback(rating, comment, question, d) {
+  function sendFeedback(rating, comment, question, d, earlier) {
+    var srcs = (d.sources || []).map(function (x) {
+      var pg = (x.pages || [])[0];
+      return x.title + (pg ? ' (p. ' + x.pages.join(', ') + ')' : '') + ' ' + (pg && x.pdf ? x.pdf + '#page=' + pg : x.url);
+    });
     return fetch(endpoint.replace(/\/chat$/, '/feedback'), { method: 'POST', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ rating: rating, comment: comment, question: question, answer: d.answer, sources: (d.sources || []).map(function (x) { return x.url; }) }) })
+      body: JSON.stringify({ rating: rating, comment: comment, question: question, answer: d.answer, sources: srcs, context: earlier || [] }) })
       .then(function (r) { return r.ok; }).catch(function () { return false; });
   }
   // Quiet icon buttons under an answer: Copy always; Helpful / Not helpful when feedback is on.
@@ -731,7 +737,7 @@
     copy: ['M9 9h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z', 'M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1'],
     check: ['M20 6 9 17l-5-5'],
     up: ['M7 10v12', 'M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z'],
-    down: ['M17 14V2', 'M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z']
+    flag: ['M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z', 'M4 22v-7']
   };
   function icon(name) {
     var ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg');
@@ -751,7 +757,7 @@
     return src.length ? text + '\n\nSources:\n' + src.join('\n') : text;
   }
   var MORE_Q = 'Tell me more about that.';
-  function actionsRow(question, d) {
+  function actionsRow(question, d, earlier) {
     var row = el('div', 'ha-ask__acts'), note = el('span', 'ha-ask__actnote');
     note.setAttribute('aria-live', 'polite');
     // A follow-up for the newest answer only (ask() removes it from older ones); not after a hand-off to staff.
@@ -769,17 +775,23 @@
     });
     row.appendChild(copy);
     if (feedbackOn) {
-      var up = iconBtn('up', 'Helpful'), down = iconBtn('down', 'Not helpful');
+      // Flag: the pilot's "this answer is wrong" button. It saves the answer with the conversation for the /flags page.
+      var up = iconBtn('up', 'Helpful'), down = iconBtn('flag', 'Flag this answer as wrong');
+      down.classList.add('ha-ask__icon--flag'); down.appendChild(el('span', null, 'Flag'));
       up.setAttribute('aria-pressed', 'false'); down.setAttribute('aria-pressed', 'false');
-      var done = function (ok) { note.textContent = ok ? 'Thanks, saved for the team.' : 'Could not save that. Please try again later.'; up.disabled = down.disabled = true; };
-      up.addEventListener('click', function () { up.setAttribute('aria-pressed', 'true'); sendFeedback('up', '', question, d).then(done); });
+      var done = function (ok, flagged) {
+        note.textContent = ok ? (flagged ? 'Flagged for review. Thank you.' : 'Thanks, saved for the team.') : 'Could not save that. Please try again later.';
+        if (ok) up.disabled = down.disabled = true;
+        else { up.setAttribute('aria-pressed', 'false'); down.setAttribute('aria-pressed', 'false'); } // let them try again
+      };
+      up.addEventListener('click', function () { up.setAttribute('aria-pressed', 'true'); sendFeedback('up', '', question, d, earlier).then(function (ok) { done(ok); }); });
       down.addEventListener('click', function () {
         if (down.getAttribute('aria-pressed') === 'true') return;
         down.setAttribute('aria-pressed', 'true');
         var form = el('div', 'ha-ask__fbform');
-        var box = el('textarea', 'ha-ask__fbtext'); box.maxLength = 500; box.setAttribute('aria-label', 'What was wrong or missing? (optional)'); box.placeholder = 'What was wrong or missing? (optional)';
-        var send = el('button', 'ha-ask__fbtn', 'Send'); send.type = 'button';
-        send.addEventListener('click', function () { sendFeedback('down', box.value, question, d).then(function (ok) { form.remove(); done(ok); }); });
+        var box = el('textarea', 'ha-ask__fbtext'); box.maxLength = 500; box.setAttribute('aria-label', 'What is wrong with this answer? (optional)'); box.placeholder = 'What is wrong with this answer? (optional)';
+        var send = el('button', 'ha-ask__fbtn', 'Flag it'); send.type = 'button';
+        send.addEventListener('click', function () { send.disabled = true; sendFeedback('down', box.value, question, d, earlier).then(function (ok) { form.remove(); done(ok, true); }); });
         form.appendChild(box); form.appendChild(send); row.appendChild(form); box.focus();
       });
       row.appendChild(up); row.appendChild(down);
@@ -832,6 +844,7 @@
     if (busy || !question.trim()) return;
     if (!endpoint) { status.textContent = 'The assistant is not connected yet.'; return; }
     chips.hidden = true; reset.hidden = false;
+    var earlier = history.slice(-6); // what came before this question, saved with a flag
     Array.prototype.forEach.call(log.querySelectorAll('.ha-ask__deeper'), function (b) { b.remove(); });
     var qli = add('user', question);
     history.push({ role: 'user', content: question });
@@ -859,7 +872,7 @@
       var wide = !!shown.querySelector('.ha-ask__gfx'); // a fragment is emptied by add(), so look first
       var botli = add('bot', shown);
       if (wide) botli.querySelector('.ha-ask__bubble').classList.add('ha-ask__bubble--wide');
-      if (r.ok && d.answer) botli.appendChild(actionsRow(question, d));
+      if (r.ok && d.answer) botli.appendChild(actionsRow(question, d, earlier));
       reveal(qli, 'start'); // read the answer from the top, with the question still above it
       if (r.ok && d.answer) history.push({ role: 'assistant', content: d.answer });
       else history.pop();

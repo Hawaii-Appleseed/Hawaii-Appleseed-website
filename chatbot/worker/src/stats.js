@@ -147,7 +147,7 @@ export function statsPage(days, { budgetUsd = null, spentToday = null, built = "
     ["Came up empty", pct(s.uncited, s.model), "model answers with no source"],
     ["Offered “ask a person”", s.handoff, Object.entries(s.handoffBy).map(([k, v]) => `${v} ${k}`).join(", ") || "never"],
     ["Charts the model drew", `${s.drawnAccepted} shown`, `${s.drawnRejected} refused`],
-    ["Rated Yes / No", `${s.feedback.up} / ${s.feedback.down}`, "ratings from the pilot"],
+    ["Helpful / Flagged", `${s.feedback.up} / ${s.feedback.down}`, "ratings from the pilot"],
   ];
   const head = ["Day", "Answers", "People", "Ready-made", "Model", "Spend", "Empty", "Person", "Charts ok/refused", "Yes/No", "Blocked"];
   const rows = days.map((d) => {
@@ -187,7 +187,7 @@ ${list("Staff the assistant pointed people to", top(s.routed), "Counts of who wa
 ${list("Why charts the model drew were refused", rejected, "A refused chart is dropped and the answer stands without it.")}
 ${list("Turned away", blocked, "Over a limit, over the day's budget, or failed verification.")}
 ${list("Where answers came from", top(s.route, 12))}
-<p class="m" style="margin-top:28px">Raw data: <a href="/stats.json">/stats.json</a>. <a href="/stats/charts">Read a sample of the charts the model drew</a>. Source: chatbot/worker/src/stats.js.</p>
+<p class="m" style="margin-top:28px">Raw data: <a href="/stats.json">/stats.json</a>. <a href="/flags">Read the flagged answers</a>. <a href="/stats/charts">Read a sample of the charts the model drew</a>. Source: chatbot/worker/src/stats.js.</p>
 </main></body></html>`;
 }
 
