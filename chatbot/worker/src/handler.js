@@ -68,6 +68,11 @@ export function finalize(text, core, hits, pubs = {}) {
         const pub = pubs[url];
         sources.push({ n, title: pub?.t ?? ref.title ?? ref.t, url, year: pub?.y ?? null, pdf: pub?.p || null });
       }
+      // A report excerpt knows its PDF page(s): collect every page the answer cited from this source.
+      const src = sources[n - 1];
+      if (src.pdf && ref.g) {
+        src.pages = [...new Set([...(src.pages ?? []), ref.g[0]])].sort((a, b) => a - b);
+      }
       return `[${n}]`;
     })
     .replace(/[ \t]+([.,;:])/g, "$1")

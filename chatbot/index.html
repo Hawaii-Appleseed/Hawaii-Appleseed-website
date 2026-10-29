@@ -87,7 +87,7 @@
   #ha-ask .ha-ask__sources a:hover { background-size: 100% 1px; }
   #ha-ask .ha-ask__sources + .ha-ask__sources { margin-top: var(--ha-space-2xs); }
   #ha-ask .ha-ask__meta { color: var(--ha-ink-subtle); white-space: nowrap; }
-  #ha-ask .ha-ask__pdf { font-family: var(--ha-font-display); font-weight: 700; font-size: var(--ha-fs-micro); letter-spacing: var(--ha-track-button); margin-left: var(--ha-space-2xs); }
+  #ha-ask .ha-ask__pdf { font-family: var(--ha-font-display); font-weight: 700; font-size: var(--ha-fs-micro); letter-spacing: var(--ha-track-button); margin-left: var(--ha-space-2xs); white-space: nowrap; }
   #ha-ask .ha-ask__typing { color: var(--ha-ink-subtle); font-size: var(--ha-fs-caption); }
   /* While an answer is on its way: the Appleseed seedling (exact logo artwork) sways gently from its base beside the
      label, above a placeholder card with a soft teal sweep across three lines. */
@@ -330,8 +330,10 @@
     li.appendChild(a);
     if (x.year) li.appendChild(el('span', 'ha-ask__meta', ' (' + x.year + ')'));
     if (x.pdf) {
-      var pdf = el('a', 'ha-ask__pdf', 'PDF'); pdf.href = x.pdf; pdf.target = '_blank'; pdf.rel = 'noopener';
-      pdf.setAttribute('aria-label', 'PDF of ' + x.title);
+      // Cited report pages are PDF page numbers (counted from the cover), so the link opens at the first one.
+      var pg = (x.pages || []).slice(0, 4), at = pg.length ? (pg.length > 1 ? 'pp. ' : 'p. ') + pg.join(', ') : '';
+      var pdf = el('a', 'ha-ask__pdf', at ? 'PDF, ' + at : 'PDF'); pdf.href = x.pdf + (pg.length ? '#page=' + pg[0] : ''); pdf.target = '_blank'; pdf.rel = 'noopener';
+      pdf.setAttribute('aria-label', 'PDF of ' + x.title + (at ? ', page' + (pg.length > 1 ? 's ' : ' ') + pg.join(', ') : ''));
       li.appendChild(pdf);
     }
     return li;

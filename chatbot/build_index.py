@@ -592,8 +592,51 @@ def corpus_docs(skipped: Counter):
             lines = list(_clean_lines(body))
             if kind == "blog" and lines and lines[0] == sources.source_title(rel):
                 lines = lines[1:]
+            # The PDF-to-text step kept each page break as a form feed, page for page with the PDF (checked against the files).
+            pages = [_squash(pg) for pg in body.split("\f")] if kind == "publication" and "\f" in body else None
             yield {"kind": kind, "title": title, "url": ref["url"], "stance": stance,
-                   "year": _year(rel, text), "lines": lines, "rel": rel}
+                   "year": _year(rel, text), "lines": lines, "rel": rel, "pages": pages}
+
+
+def _squash(s: str) -> str:
+    """Letters and digits only, lowercased: line breaks, hyphenation and spacing differ between a chunk and its page."""
+    return re.sub(r"[\W_]+", "", s).lower()
+
+
+class PageFinder:
+    """Which PDF pages a chunk of a report came from, so a footnote can say "p. 6" and open the PDF there. Chunks come in
+    document order, so each search starts where the last one was found."""
+
+    def __init__(self, pages: list[str]):
+        self.text = "".join(pages)
+        self.starts, at = [], 0
+        for pg in pages:
+            self.starts.append(at); at += len(pg)
+        self.cursor = 0
+
+    def page(self, pos: int) -> int:
+        lo, hi = 0, len(self.starts) - 1
+        while lo < hi:
+            mid = (lo + hi + 1) // 2
+            if self.starts[mid] <= pos: lo = mid
+            else: hi = mid - 1
+        return lo + 1
+
+    def find(self, piece: str) -> list[int] | None:
+        s = _squash(piece)
+        if len(s) < 40:
+            return None
+        head, tail = s[:40], s[-40:]
+        i = self.text.find(head, self.cursor)
+        if i < 0:
+            i = self.text.find(head)
+        if i < 0:
+            return None
+        j = self.text.find(tail, i)
+        end = j + len(tail) - 1 if j >= 0 and j - i < len(s) * 2 else i + len(s) - 1
+        self.cursor = i + 1
+        first, last = self.page(i), self.page(min(end, len(self.text) - 1))
+        return [first, last] if last > first else [first]
 
 
 # -------------------------------------------------------------------- build
@@ -704,10 +747,14 @@ def build(public: bool) -> dict:
     docs = []
     for d in corpus_docs(skipped):
         docs.append(d)
+        finder = PageFinder(d["pages"]) if d["pages"] else None
         for piece in chunk(d["lines"]):
             ci = len(chunks)
             chunks.append({"t": d["title"], "u": d["url"], "k": d["kind"],
                            "y": d["year"], "s": d["stance"], "x": piece})
+            pg = finder and finder.find(piece)
+            if pg:
+                chunks[-1]["g"] = pg  # PDF page, or [first, last] when the chunk runs across a page break
             toks = tokenize(d["title"] + " " + piece)
             dl.append(len(toks))
             for term, tf in Counter(toks).items():

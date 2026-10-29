@@ -75,6 +75,22 @@ test("finalize renumbers citations in order, drops unknown ids, strips raw URLs"
   ]);
 });
 
+test("finalize gathers the cited PDF pages of a report, once each and in order", () => {
+  const u = "https://hiappleseed.org/publications/renters";
+  const pubs = { [u]: { t: "Renters Left Behind", y: 2025, p: "https://hiappleseed.org/s/renters.pdf" } };
+  const hits = [{ t: "Renters", u, g: [9] }, { t: "Renters", u, g: [4, 5] }, { t: "Renters", u, g: [9] }, { t: "Blog", u: "https://hiappleseed.org/blog/x", g: [2] }];
+  const { sources } = finalize("A [1]. B [2]. C [3]. D [4].", [], hits, pubs);
+  assert.deepEqual(sources[0].pages, [4, 9]);
+  assert.equal(sources[1].pages, undefined); // no PDF, no page
+});
+
+test("index: report chunks carry their PDF page", () => {
+  const pubChunks = index.chunks.filter((c) => c.k === "publication");
+  assert.ok(pubChunks.length > 100);
+  assert.ok(pubChunks.every((c) => Array.isArray(c.g) && c.g[0] >= 1));
+  assert.ok(index.chunks.filter((c) => c.k !== "publication").every((c) => !c.g));
+});
+
 test("retrieval: topical queries find the right documents", () => {
   const top = (q) => search(index, q).map((h) => h.t.toLowerCase()).join(" | ");
   assert.match(top("universal free school meals HB1779"), /school meal|meals/);
