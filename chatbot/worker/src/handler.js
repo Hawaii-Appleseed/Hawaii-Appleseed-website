@@ -124,7 +124,9 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
   try {
     const params = {
       model,
-      max_tokens: 1100,
+      // Room for the model's reasoning as well as the answer: at 1100 a "tell me more" could spend it all thinking and
+      // come back with no text. Answers stay short by the prompt; this only caps a runaway.
+      max_tokens: 3000,
       output_config: { effort: env.EFFORT || "low" },
       system: [
         { type: "text", text: buildSystem(index.core, index.graphics, { draw: env.DYNAMIC_GRAPHICS !== "0", covered: index.session?.covered }), cache_control: { type: "ephemeral", ttl: "1h" } },
@@ -153,7 +155,7 @@ export async function handleChat({ messages: raw, index, client, env = {}, today
     return { status: 200, body: { answer: FRIENDLY.declined, sources: [], related: [], flags: { refusal: true } }, usage, model, meta: { route: "refusal" } };
   }
   const text = (resp.content ?? []).filter((b) => b.type === "text").map((b) => b.text).join("\n").trim();
-  if (!text) return { status: 502, body: { error: "empty", answer: FRIENDLY.unavailable, sources: [] }, usage, model, meta: { route: "empty" } };
+  if (!text) return { status: 502, body: { error: "empty", answer: FRIENDLY.unavailable, sources: [] }, usage, model, meta: { route: "empty", stop: resp.stop_reason } };
   if (text.startsWith(LEGAL_SENTINEL) || text.includes(LEGAL_SENTINEL)) {
     return { status: 200, body: { answer: LEGAL_REPLY, sources: LEGAL_SOURCES, related: [], handoff: null, flags: { legal: true } }, usage, model, meta: { route: "legal" } };
   }

@@ -96,6 +96,17 @@
   #ha-ask .ha-ask__think { display: flex; align-items: center; gap: var(--ha-space-xs); }
   #ha-ask .ha-ask__seedling { flex: 0 0 auto; width: var(--ha-space-xl); height: var(--ha-space-xl); color: var(--ha-teal-deep); transform-origin: 50% 88%; animation: ha-ask-sway 2.6s ease-in-out infinite; }
   @keyframes ha-ask-sway { 0%, 100% { transform: rotate(-3.5deg); } 50% { transform: rotate(3.5deg); } }
+  /* The label: a teal shine passes along the words, and the dots count up "." ".." "..." and start again. */
+  #ha-ask .ha-ask__thinktext { font-weight: 500; color: var(--ha-ink-subtle);
+    background: linear-gradient(90deg, var(--ha-ink-muted) 0%, var(--ha-ink-muted) 32%, color-mix(in srgb, var(--ha-teal-deep) 55%, var(--ha-white)) 50%, var(--ha-ink-muted) 68%, var(--ha-ink-muted) 100%);
+    background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    animation: ha-ask-shine 2.2s linear infinite; }
+  @keyframes ha-ask-shine { from { background-position: 100% 0; } to { background-position: 0 0; } }
+  #ha-ask .ha-ask__dots i { font-style: normal; }
+  #ha-ask .ha-ask__dots i:nth-child(2) { animation: ha-ask-dot2 1.5s linear infinite; }
+  #ha-ask .ha-ask__dots i:nth-child(3) { animation: ha-ask-dot3 1.5s linear infinite; }
+  @keyframes ha-ask-dot2 { 0%, 33% { opacity: 0; } 33.4%, 100% { opacity: 1; } }
+  @keyframes ha-ask-dot3 { 0%, 66% { opacity: 0; } 66.4%, 100% { opacity: 1; } }
   #ha-ask .ha-ask__msg--wait .ha-ask__bubble { width: min(92%, var(--ha-ask-bubble)); }
   #ha-ask .ha-ask__skel { display: block; margin: var(--ha-space-xs) 0 0; }
   #ha-ask .ha-ask__skel i { display: block; height: var(--ha-space-xs); margin: 0 0 var(--ha-space-2xs); border-radius: var(--ha-radius-pill);
@@ -850,7 +861,11 @@
     history.push({ role: 'user', content: question });
     input.value = ''; input.style.height = 'auto';
     var typing = el('span', 'ha-ask__typing'), think = el('span', 'ha-ask__think');
-    think.appendChild(seedling()); think.appendChild(document.createTextNode('Looking through our publications'));
+    var label = el('span', 'ha-ask__thinktext', 'Looking through our publications'), dots = el('span', 'ha-ask__dots');
+    dots.setAttribute('aria-hidden', 'true');
+    for (var k = 0; k < 3; k++) dots.appendChild(el('i', null, '.'));
+    label.appendChild(dots);
+    think.appendChild(seedling()); think.appendChild(label);
     typing.appendChild(think);
     var skel = el('span', 'ha-ask__skel'); skel.setAttribute('aria-hidden', 'true');
     for (var j = 0; j < 3; j++) skel.appendChild(el('i'));
