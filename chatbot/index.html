@@ -60,7 +60,11 @@
   #ha-ask .ha-ask__meta { color: var(--ha-ink-subtle); white-space: nowrap; }
   #ha-ask .ha-ask__pdf { font-family: var(--ha-font-display); font-weight: 700; font-size: var(--ha-fs-micro); letter-spacing: var(--ha-track-button); margin-left: var(--ha-space-2xs); }
   #ha-ask .ha-ask__typing { color: var(--ha-ink-subtle); font-size: var(--ha-fs-caption); }
-  /* While an answer is on its way: a placeholder card with a soft teal sweep across three lines. */
+  /* While an answer is on its way: the Appleseed seedling (exact logo artwork) sways gently from its base beside the
+     label, above a placeholder card with a soft teal sweep across three lines. */
+  #ha-ask .ha-ask__think { display: flex; align-items: center; gap: var(--ha-space-xs); }
+  #ha-ask .ha-ask__seedling { flex: 0 0 auto; width: var(--ha-space-xl); height: var(--ha-space-xl); color: var(--ha-teal-deep); transform-origin: 50% 88%; animation: ha-ask-sway 2.6s ease-in-out infinite; }
+  @keyframes ha-ask-sway { 0%, 100% { transform: rotate(-3.5deg); } 50% { transform: rotate(3.5deg); } }
   #ha-ask .ha-ask__msg--wait .ha-ask__bubble { width: min(92%, var(--ha-ask-bubble)); }
   #ha-ask .ha-ask__skel { display: block; margin: var(--ha-space-xs) 0 0; }
   #ha-ask .ha-ask__skel i { display: block; height: var(--ha-space-xs); margin: 0 0 var(--ha-space-2xs); border-radius: var(--ha-radius-pill);
@@ -69,11 +73,6 @@
   #ha-ask .ha-ask__skel i:nth-child(2) { width: 86%; animation-delay: .12s; }
   #ha-ask .ha-ask__skel i:nth-child(3) { width: 58%; margin-bottom: 0; animation-delay: .24s; }
   @keyframes ha-ask-sweep { from { background-position: 125% 0; } to { background-position: -125% 0; } }
-  #ha-ask .ha-ask__dots { display: inline-flex; gap: var(--ha-space-3xs); margin-left: var(--ha-space-2xs); vertical-align: middle; }
-  #ha-ask .ha-ask__dots i { width: var(--ha-space-3xs); height: var(--ha-space-3xs); border-radius: var(--ha-radius-pill); background: var(--ha-teal-deep); animation: ha-ask-pulse 1.2s var(--ha-ease-out) infinite; }
-  #ha-ask .ha-ask__dots i:nth-child(2) { animation-delay: .15s; }
-  #ha-ask .ha-ask__dots i:nth-child(3) { animation-delay: .3s; }
-  @keyframes ha-ask-pulse { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
 
   #ha-ask .ha-ask__chips { display: flex; flex-wrap: wrap; gap: var(--ha-space-2xs); padding: 0 var(--ha-space-lg) var(--ha-space-md); }
   #ha-ask .ha-ask__chip { font: inherit; font-family: var(--ha-font-body); font-size: var(--ha-fs-small); line-height: var(--ha-lh-snug); color: var(--ha-teal-ink); background: var(--ha-white); border: 1px solid var(--ha-teal-deep); border-radius: var(--ha-radius-pill); padding: var(--ha-space-2xs) var(--ha-space-sm); cursor: pointer; text-align: left;
@@ -663,6 +662,20 @@
     try { li.scrollIntoView({ block: where || 'nearest', behavior: calm ? 'auto' : 'smooth' }); } catch (e) { li.scrollIntoView(); }
   }
 
+  // The seedling from the Hawaiʻi Appleseed logo: the logo file's own paths (sprout and ground, seed, swoosh tip).
+  var SEEDLING = [
+    ['matrix(1,0,0,-1,69.7437,108.8723)', 'M0 0C-1.303-.233-2.431-.854-3.42-1.69-6.956-4.678-10.273-7.89-13.18-11.507-13.742-12.207-14.289-12.92-15.042-13.432-16.333-14.31-17.532-14.06-18.308-12.709-19.233-11.099-19.28-9.343-18.844-7.617-17.319-1.582-13.84 2.914-8.121 5.525-.63 8.945 6.974 8.857 14.635 6.123 16.566 5.433 18.384 4.535 19.933 3.158V2.882C16.504 1.496 14.372-1.273 12.478-4.243 10.649-7.11 8.98-10.08 7.172-12.961 5.723-15.271 3.996-17.357 1.81-19.034-1.541-21.604-5.253-21.893-9.191-20.822-10.301-20.52-11.391-20.161-12.447-19.699-12.846-19.525-13.26-19.375-13.68-19.265-14.611-19.024-15.091-19.222-15.595-20.042-17.082-22.463-18.27-25.032-19.112-27.739-21.503-35.435-22.731-43.31-22.613-51.383-22.567-54.564-21.803-57.515-20.001-60.177-19.746-60.554-19.551-60.439-19.269-60.341-15.135-58.905-10.888-58.038-6.509-57.933-1.005-57.802 4.324-58.597 9.214-61.315 11.677-62.685 13.988-64.272 15.715-66.568 16.077-67.048 16.402-67.547 16.637-68.1 16.693-68.232 16.819-68.416 16.605-68.519 16.449-68.594 16.363-68.434 16.274-68.337 15.825-67.845 15.465-67.28 14.973-66.82 12.128-64.158 8.731-62.515 4.994-61.611-.159-60.364-5.383-59.771-10.669-60.659-16.599-61.656-22.154-63.737-27.403-66.649-30.559-68.399-33.539-70.465-36.803-72.018-40.419-73.738-44.159-75.03-48.24-75.049-53.079-75.072-57.492-73.782-61.409-70.898-61.529-70.679-61.582-70.463-61.379-70.259-58.656-71.904-55.676-72.784-52.545-73.194-49.129-73.642-45.855-73.001-42.664-71.83-38.695-70.374-35.044-68.279-31.414-66.147-29.907-65.261-28.402-64.372-26.826-63.613-26.407-63.41-26.269-63.185-26.371-62.709-26.72-61.082-26.82-59.417-26.801-57.766-26.741-52.63-28.294-48.003-30.967-43.677-32.732-40.821-34.384-37.896-36.247-35.1-36.425-34.833-36.618-34.574-36.82-34.324-37.467-33.52-38.288-33.27-39.283-33.552-40.343-33.853-41.392-34.191-42.501-34.3-44.707-34.517-46.446-33.724-47.817-32.004-49.189-30.282-50.192-28.344-51.202-26.407-52.256-24.386-53.327-22.375-54.896-20.686-55.43-20.111-55.99-19.558-56.651-19.137-57.188-18.795-57.082-18.541-56.665-18.216-55.166-17.047-53.476-16.324-51.612-15.961-45.623-14.794-38.651-17.774-35.493-22.88-34.734-24.107-34.219-25.429-34.07-26.876-33.987-27.687-34.04-28.488-34.366-29.248-34.924-30.549-36.038-30.793-37.05-29.797-38.049-28.812-38.995-27.773-39.971-26.765-41.174-25.525-42.415-24.326-43.884-23.395-44.882-22.763-45.599-22.532-46.285-22.597-46.199-22.802-45.989-22.797-45.83-22.867-44.616-23.398-43.56-24.146-42.594-25.06-38.063-29.342-34.55-34.371-31.61-39.836-30.76-41.416-29.815-42.947-28.506-44.21-28.124-44.578-27.727-44.929-27.261-45.187-26.378-45.673-25.674-45.499-25.136-44.643-24.638-43.85-24.422-42.953-24.255-42.045-23.507-37.975-22.848-33.888-21.783-29.881-20.055-23.379-16.665-17.752-12.628-12.475-10.092-9.16-7.151-6.205-4.149-3.314-2.726-1.944-1.104-.877 .746-.167 .802-.073 .904-.03 1.001 .054 .654 .039 .324 .099 0 0'],
+    ['matrix(1,0,0,-1,54.3708,187.65219)', 'M0 0C-2.839 .608-7.99 1.771-7.967 2.901-7 7.173-2.463 11.303 .428 13.156 6.591 17.593 18.78 15.008 15.233 6.35 12.506 1.126 4.176-.895 0 0'],
+    ['matrix(1,0,0,-1,8.3652,179.13141)', 'M0 0C-.01-.213-.02-.426-.03-.639-.863-.148-1.443 .574-1.961 1.353-1.92 1.4-1.88 1.446-1.839 1.493-1.226 .996-.613 .498 0 0']
+  ];
+  function seedling() {
+    var ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', '4 99 90 90'); svg.setAttribute('fill', 'currentColor');
+    svg.setAttribute('class', 'ha-ask__seedling'); svg.setAttribute('aria-hidden', 'true'); svg.setAttribute('focusable', 'false');
+    SEEDLING.forEach(function (p) { var path = document.createElementNS(ns, 'path'); path.setAttribute('transform', p[0]); path.setAttribute('d', p[1]); svg.appendChild(path); });
+    return svg;
+  }
+
   function setBusy(v) { busy = v; send.disabled = v; input.disabled = v; if (!v) input.focus(); }
 
   function waitForToken() {
@@ -680,10 +693,9 @@
     var qli = add('user', question);
     history.push({ role: 'user', content: question });
     input.value = ''; input.style.height = 'auto';
-    var typing = el('span', 'ha-ask__typing', 'Looking through our publications');
-    var dots = el('span', 'ha-ask__dots'); dots.setAttribute('aria-hidden', 'true');
-    for (var i = 0; i < 3; i++) dots.appendChild(el('i'));
-    typing.appendChild(dots);
+    var typing = el('span', 'ha-ask__typing'), think = el('span', 'ha-ask__think');
+    think.appendChild(seedling()); think.appendChild(document.createTextNode('Looking through our publications'));
+    typing.appendChild(think);
     var skel = el('span', 'ha-ask__skel'); skel.setAttribute('aria-hidden', 'true');
     for (var j = 0; j < 3; j++) skel.appendChild(el('i'));
     typing.appendChild(skel);
