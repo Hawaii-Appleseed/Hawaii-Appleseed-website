@@ -59,6 +59,16 @@
   @keyframes ha-ask-in { from { opacity: 0; transform: translateY(10px); } }
   #ha-ask .ha-ask__bubble p { margin: 0 0 var(--ha-space-2xs); }
   #ha-ask .ha-ask__bubble p:last-child { margin-bottom: 0; }
+  /* Readability: the first sentence is the headline answer, figures stand out, and long answers fold. */
+  #ha-ask .ha-ask__msg--bot .ha-ask__bubble p { margin-bottom: var(--ha-space-xs); }
+  #ha-ask .ha-ask__bubble .ha-ask__lead { font-size: var(--ha-fs-lead); font-weight: 500; line-height: var(--ha-lh-small); color: var(--ha-charcoal); margin-bottom: var(--ha-space-sm); }
+  #ha-ask .ha-ask__fig { font-weight: 600; white-space: nowrap; }
+  #ha-ask .ha-ask__rest > :first-child { outline: none; }
+  #ha-ask .ha-ask__rest:not([hidden]) { animation: ha-ask-in .3s var(--ha-ease-out) both; }
+  #ha-ask .ha-ask__more { display: inline-flex; align-items: center; gap: var(--ha-space-3xs); font: inherit; font-family: var(--ha-font-display); font-size: var(--ha-fs-caption); font-weight: 700; letter-spacing: var(--ha-track-button); color: var(--ha-teal-ink); background: var(--ha-white); border: 0; border-radius: var(--ha-radius-pill); padding: var(--ha-space-2xs) var(--ha-space-sm); margin: var(--ha-space-3xs) 0 0; cursor: pointer; transition: background-color .15s var(--ha-ease-out), color .15s var(--ha-ease-out); }
+  #ha-ask .ha-ask__more::after { content: ""; width: .45em; height: .45em; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); margin-left: var(--ha-space-3xs); }
+  #ha-ask .ha-ask__more:hover { background: var(--ha-teal-deep); color: var(--ha-white); }
+  #ha-ask .ha-ask__more:focus-visible { outline: none; box-shadow: var(--ha-ask-glow); }
   #ha-ask .ha-ask__bubble ul, #ha-ask .ha-ask__bubble ol { margin: 0 0 var(--ha-space-2xs); padding-left: var(--ha-space-md); }
   #ha-ask .ha-ask__bubble li { margin: 0 0 var(--ha-space-3xs); }
   #ha-ask .ha-ask__bubble strong { font-weight: 600; }
@@ -254,6 +264,14 @@
   }
 
   // Inline text: **bold** and [n] citation markers, built as DOM nodes (never innerHTML).
+  // Dollar amounts and percentages, picked out so the eye can find them in a long answer.
+  var FIG = /(\$\d[\d,.]*(?:\s(?:million|billion|thousand|trillion))?|\b\d[\d,.]*(?:\s?percent|%))/;
+  function figures(parent, text) {
+    text.split(FIG).forEach(function (bit, i) {
+      if (!bit) return;
+      parent.appendChild(i % 2 ? el('span', 'ha-ask__fig', bit) : document.createTextNode(bit));
+    });
+  }
   function inline(parent, text, sources) {
     text.split(/(\*\*[^*]+\*\*|\[\d+\])/).forEach(function (part) {
       if (!part) return;
@@ -268,9 +286,36 @@
       } else if (/^\*\*.+\*\*$/.test(part)) {
         parent.appendChild(el('strong', null, part.slice(2, -2)));
       } else {
-        parent.appendChild(document.createTextNode(part));
+        figures(parent, part);
       }
     });
+  }
+
+  // Sentences, without splitting after an abbreviation or an initial, and keeping a trailing [n] with its sentence.
+  var ABBR = /(?:\b(?:U\.S|St|Dr|Mr|Ms|Mrs|No|vs|e\.g|i\.e|Inc|Jr|Sr|Jan|Feb|Mar|Apr|Aug|Sept?|Oct|Nov|Dec)|\b[A-Z])\.["”’)]*\s*(?:\[\d+\]\s*)*$/;
+  function sentences(text) {
+    var out = [], re = /[.!?]["”’)]*(?:\s*\[\d+\])*\s+/g, last = 0, m;
+    while ((m = re.exec(text))) {
+      var end = m.index + m[0].length;
+      if (ABBR.test(text.slice(last, end)) || /^[a-z]/.test(text.slice(end))) continue;
+      out.push(text.slice(last, end).trim()); last = end;
+    }
+    if (last < text.length) out.push(text.slice(last).trim());
+    return out.filter(Boolean).reduce(function (acc, s) {
+      if (acc.length && /^(\[\d+\]\s*)+$/.test(s)) acc[acc.length - 1] += ' ' + s; else acc.push(s);
+      return acc;
+    }, []);
+  }
+  // Two or three sentences to a paragraph, so no answer arrives as one block.
+  function chunk(list) {
+    var out = [], cur = [], words = 0;
+    list.forEach(function (s) {
+      var n = s.split(/\s+/).length;
+      if (cur.length && (cur.length >= 3 || words + n > 45)) { out.push(cur.join(' ')); cur = []; words = 0; }
+      cur.push(s); words += n;
+    });
+    if (cur.length) out.push(cur.join(' '));
+    return out;
   }
 
   // One list item: "[n. ]Title (year)" linking to the page, plus a PDF link when we have one.
@@ -619,21 +664,49 @@
     return box;
   }
 
+  // The words are never changed: the first sentence becomes the lead, paragraphs are cut to two or three sentences,
+  // and a long answer shows the lead and one paragraph, with the rest behind "Show the full answer" (a chart stays in view).
+  var FOLD_WORDS = 90, restIds = 0;
   function renderAnswer(text, sources, related, graphics, handoff, question) {
-    var box = document.createDocumentFragment();
-    text.split(/\n{2,}/).forEach(function (block) {
-      var lines = block.split('\n').filter(Boolean);
-      if (!lines.length) return;
-      var bullets = lines.every(function (l) { return /^\s*([-*\u2022]|\d+[.)])\s+/.test(l); });
-      if (bullets) {
+    var box = document.createDocumentFragment(), parts = [], lead = null, words = 0;
+    // Runs of list lines and runs of prose, even when a list follows its sentence with no blank line between.
+    var BUL = /^\s*([-*\u2022]|\d+[.)])\s+/, blocks = [];
+    text.split(/\n{2,}/).forEach(function (b) {
+      b.split('\n').filter(function (l) { return l.trim(); }).forEach(function (l) {
+        var isList = BUL.test(l), last = blocks[blocks.length - 1];
+        if (last && last.list === isList) last.lines.push(l); else blocks.push({ list: isList, lines: [l] });
+      });
+      blocks.push(null); // a blank line always ends a run
+    });
+    blocks = blocks.filter(Boolean);
+    blocks.forEach(function (block) {
+      var lines = block.lines;
+      words += lines.join(' ').split(/\s+/).length;
+      if (block.list) {
         var list = el(/^\s*\d/.test(lines[0]) ? 'ol' : 'ul');
         lines.forEach(function (l) { var li = el('li'); inline(li, l.replace(/^\s*([-*\u2022]|\d+[.)])\s+/, ''), sources); list.appendChild(li); });
-        box.appendChild(list);
-      } else {
-        var p = el('p'); inline(p, lines.join(' '), sources); box.appendChild(p);
+        parts.push(list);
+        return;
       }
+      var said = sentences(lines.join(' '));
+      if (!lead && !parts.length && (said.length > 1 || blocks.length > 1)) { lead = el('p', 'ha-ask__lead'); inline(lead, said.shift(), sources); }
+      chunk(said).forEach(function (t) { var p = el('p'); inline(p, t, sources); parts.push(p); });
     });
-    (graphics || []).slice(0, 2).forEach(function (g) { var f = drawGraphic(g, sources); if (f) box.appendChild(f); });
+    if (lead) box.appendChild(lead);
+    var drawn = (graphics || []).slice(0, 2).map(function (g) { return drawGraphic(g, sources); }).filter(Boolean);
+    if (words > FOLD_WORDS && parts.length > 1) {
+      box.appendChild(parts.shift());
+      var rest = el('div', 'ha-ask__rest'), id = 'ha-ask-rest-' + (++restIds);
+      rest.id = id; rest.hidden = true;
+      parts.forEach(function (n) { rest.appendChild(n); });
+      var more = el('button', 'ha-ask__more', 'Show the full answer'); more.type = 'button';
+      more.setAttribute('aria-expanded', 'false'); more.setAttribute('aria-controls', id);
+      more.addEventListener('click', function () { rest.hidden = false; more.remove(); var f = rest.firstChild; if (f) { f.tabIndex = -1; f.focus({ preventScroll: true }); } });
+      box.appendChild(rest); box.appendChild(more);
+    } else {
+      parts.forEach(function (n) { box.appendChild(n); });
+    }
+    drawn.forEach(function (f) { box.appendChild(f); });
     var person = personBox(handoff, question); if (person) box.appendChild(person);
     if (sources.length) box.appendChild(refList('Sources', sources, true));
     if (related && related.length) box.appendChild(refList('Related research', related, false));
