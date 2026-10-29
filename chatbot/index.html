@@ -33,6 +33,10 @@
   #ha-ask .ha-ask__notice { font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-charcoal); background: var(--ha-ash-light); border-left: 4px solid var(--ha-teal-deep); border-radius: var(--ha-radius-callout); padding: var(--ha-space-xs) var(--ha-space-sm); margin: 0 0 var(--ha-space-md); }
   /* Under each answer: Copy, and (when feedback is on) thumbs up / down as quiet icons. A thumbs down opens a comment box. */
   #ha-ask .ha-ask__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ha-space-3xs); margin: var(--ha-space-2xs) 0 0 var(--ha-space-xs); font-size: var(--ha-fs-caption); color: var(--ha-ink-subtle); width: min(92%, var(--ha-ask-bubble)); }
+  #ha-ask .ha-ask__deeper { font: 600 var(--ha-fs-caption)/1 var(--ha-font-display); color: var(--ha-charcoal); background: var(--ha-white); border: 1px solid var(--ha-rule); border-radius: 999px; padding: var(--ha-space-2xs) var(--ha-space-sm); margin: 0 var(--ha-space-2xs) 0 0; min-height: var(--ha-space-xl); cursor: pointer; transition: border-color .15s var(--ha-ease-out), color .15s var(--ha-ease-out); }
+  #ha-ask .ha-ask__deeper::after { content: " \2192"; }
+  #ha-ask .ha-ask__deeper:hover { border-color: var(--ha-teal-deep); color: var(--ha-teal-ink); }
+  #ha-ask .ha-ask__deeper:focus-visible { outline: none; box-shadow: var(--ha-ask-glow); }
   #ha-ask .ha-ask__icon { display: inline-flex; align-items: center; justify-content: center; width: var(--ha-space-xl); height: var(--ha-space-xl); padding: 0; margin: 0; color: var(--ha-ink-subtle); background: none; border: 0; border-radius: var(--ha-radius-card); cursor: pointer; transition: background-color .15s var(--ha-ease-out), color .15s var(--ha-ease-out); }
   #ha-ask .ha-ask__icon svg { width: 55%; height: 55%; }
   #ha-ask .ha-ask__icon:hover { background: var(--ha-ask-tone); color: var(--ha-charcoal); }
@@ -694,7 +698,7 @@
     });
     if (lead) box.appendChild(lead);
     var drawn = (graphics || []).slice(0, 2).map(function (g) { return drawGraphic(g, sources); }).filter(Boolean);
-    if (words > FOLD_WORDS && parts.length > 1) {
+    if (words > FOLD_WORDS && parts.length > 1 && question !== MORE_Q) { // asked for more: show it all
       box.appendChild(parts.shift());
       var rest = el('div', 'ha-ask__rest'), id = 'ha-ask-rest-' + (++restIds);
       rest.id = id; rest.hidden = true;
@@ -744,9 +748,16 @@
     var src = (d.sources || []).map(function (s) { return s.n + '. ' + s.title + ' ' + s.url; });
     return src.length ? text + '\n\nSources:\n' + src.join('\n') : text;
   }
+  var MORE_Q = 'Tell me more about that.';
   function actionsRow(question, d) {
     var row = el('div', 'ha-ask__acts'), note = el('span', 'ha-ask__actnote');
     note.setAttribute('aria-live', 'polite');
+    // A follow-up for the newest answer only (ask() removes it from older ones); not after a hand-off to staff.
+    if (!d.handoff && question !== MORE_Q) {
+      var deeper = el('button', 'ha-ask__deeper', 'Tell me more'); deeper.type = 'button';
+      deeper.addEventListener('click', function () { ask(MORE_Q); });
+      row.appendChild(deeper);
+    }
     var copy = iconBtn('copy', 'Copy answer');
     copy.addEventListener('click', function () {
       var ok = function () { copy.replaceChild(icon('check'), copy.firstChild); note.textContent = 'Copied';
@@ -819,6 +830,7 @@
     if (busy || !question.trim()) return;
     if (!endpoint) { status.textContent = 'The assistant is not connected yet.'; return; }
     chips.hidden = true; reset.hidden = false;
+    Array.prototype.forEach.call(log.querySelectorAll('.ha-ask__deeper'), function (b) { b.remove(); });
     var qli = add('user', question);
     history.push({ role: 'user', content: question });
     input.value = ''; input.style.height = 'auto';
