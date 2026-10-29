@@ -18,7 +18,8 @@
      button/input/p rules restyle us. Colours, type, and spacing are tokens only. */
   /* The chat panel runs wider than the reading measure; the heading, lede and notes keep the measure.
      Shadows and frosted fills are mixed from palette tokens, so no raw colour enters the page. */
-  #ha-ask { --ha-ask-wide: 1040px; --ha-ask-bubble: 46rem;
+  #ha-ask { --ha-ask-wide: 1040px; --ha-ask-bubble: 46rem; --ha-ask-round: 18px;
+    --ha-ask-tone: color-mix(in srgb, var(--ha-ash-light) 70%, var(--ha-bg));
     --ha-ask-shadow: 0 1px 2px color-mix(in srgb, var(--ha-charcoal) 8%, transparent), 0 4px 14px color-mix(in srgb, var(--ha-charcoal) 7%, transparent);
     --ha-ask-glow: 0 0 0 3px color-mix(in srgb, var(--ha-teal-deep) 28%, transparent);
     font-family: var(--ha-font-body); color: var(--ha-charcoal); background: var(--ha-bg); padding: var(--ha-section-y) var(--ha-gutter); box-sizing: border-box; }
@@ -30,32 +31,46 @@
   #ha-ask .ha-ask__lede { font-size: var(--ha-fs-lead); line-height: var(--ha-lh-body); color: var(--ha-ink-muted); margin: 0 0 var(--ha-space-lg); }
 
   #ha-ask .ha-ask__notice { font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-charcoal); background: var(--ha-ash-light); border-left: 4px solid var(--ha-teal-deep); border-radius: var(--ha-radius-callout); padding: var(--ha-space-xs) var(--ha-space-sm); margin: 0 0 var(--ha-space-md); }
-  #ha-ask .ha-ask__fb { margin: var(--ha-space-xs) 0 0; padding: var(--ha-space-xs) 0 0; border-top: 1px solid var(--ha-rule); font-size: var(--ha-fs-caption); color: var(--ha-ink-subtle); display: flex; flex-wrap: wrap; gap: var(--ha-space-2xs); align-items: center; }
-  #ha-ask .ha-ask__fbtn { font: inherit; font-family: var(--ha-font-body); font-size: var(--ha-fs-caption); color: var(--ha-teal-ink); background: var(--ha-white); border: 1px solid var(--ha-teal-deep); border-radius: var(--ha-radius-pill); padding: var(--ha-space-2xs) var(--ha-space-sm); cursor: pointer; margin: 0; }
-  #ha-ask .ha-ask__fbtn:hover { background: var(--ha-ash-light); }
-  #ha-ask .ha-ask__fbtext { flex: 1 1 100%; font: inherit; font-family: var(--ha-font-body); font-size: var(--ha-fs-small); color: var(--ha-charcoal); background: var(--ha-white); border: 1px solid var(--ha-teal-deep); border-radius: var(--ha-radius-card); padding: var(--ha-space-2xs) var(--ha-space-xs); resize: vertical; min-height: calc(var(--ha-space-xl) * 2); margin: 0; }
+  /* Under each answer: Copy, and (when feedback is on) thumbs up / down as quiet icons. A thumbs down opens a comment box. */
+  #ha-ask .ha-ask__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ha-space-3xs); margin: var(--ha-space-2xs) 0 0 var(--ha-space-xs); font-size: var(--ha-fs-caption); color: var(--ha-ink-subtle); width: min(92%, var(--ha-ask-bubble)); }
+  #ha-ask .ha-ask__icon { display: inline-flex; align-items: center; justify-content: center; width: var(--ha-space-xl); height: var(--ha-space-xl); padding: 0; margin: 0; color: var(--ha-ink-subtle); background: none; border: 0; border-radius: var(--ha-radius-card); cursor: pointer; transition: background-color .15s var(--ha-ease-out), color .15s var(--ha-ease-out); }
+  #ha-ask .ha-ask__icon svg { width: 55%; height: 55%; }
+  #ha-ask .ha-ask__icon:hover { background: var(--ha-ask-tone); color: var(--ha-charcoal); }
+  #ha-ask .ha-ask__icon:focus-visible { outline: none; box-shadow: var(--ha-ask-glow); }
+  #ha-ask .ha-ask__icon[aria-pressed="true"] { color: var(--ha-teal-deep); }
+  #ha-ask .ha-ask__actnote { margin-left: var(--ha-space-2xs); }
+  #ha-ask .ha-ask__fbform { flex: 1 1 100%; display: flex; flex-wrap: wrap; gap: var(--ha-space-2xs); margin: var(--ha-space-2xs) 0 0; }
+  #ha-ask .ha-ask__fbtn { font: inherit; font-family: var(--ha-font-display); font-size: var(--ha-fs-caption); font-weight: 700; letter-spacing: var(--ha-track-button); color: var(--ha-white); background: var(--ha-charcoal); border: 0; border-radius: var(--ha-radius-pill); padding: var(--ha-space-2xs) var(--ha-space-md); cursor: pointer; margin: 0; }
+  #ha-ask .ha-ask__fbtn:hover { background: var(--ha-teal-deep); }
+  #ha-ask .ha-ask__fbtext { flex: 1 1 100%; font: inherit; font-family: var(--ha-font-body); font-size: var(--ha-fs-small); color: var(--ha-charcoal); background: var(--ha-ask-tone); border: 0; border-radius: var(--ha-radius-card); padding: var(--ha-space-xs) var(--ha-space-sm); resize: vertical; min-height: calc(var(--ha-space-xl) * 2); margin: 0; }
+  #ha-ask .ha-ask__fbtext:focus { outline: none; box-shadow: var(--ha-ask-glow); }
   /* The conversation grows with the page (no scroll box inside a scrolling page); the question bar sticks to the
      bottom of the screen. overflow: clip, not hidden, so the panel keeps its rounded corners without breaking sticky. */
-  #ha-ask .ha-ask__panel { background: var(--ha-bg); border: 1px solid var(--ha-rule); border-radius: var(--ha-radius-card); overflow: clip; box-shadow: var(--ha-ask-shadow); }
+  /* Tonal: shapes come from shade alone, no borders or shadows on messages. Questions are Charcoal pills; answers sit
+     on a pale Ash panel; sources are a compact numbered list; copy and rating are quiet icons under each answer. */
+  #ha-ask .ha-ask__panel { background: var(--ha-white); border-radius: var(--ha-ask-round); overflow: clip; }
   #ha-ask .ha-ask__log { list-style: none; margin: 0; padding: var(--ha-space-lg) var(--ha-space-lg) var(--ha-space-md); display: flex; flex-direction: column; gap: var(--ha-space-md); }
   #ha-ask .ha-ask__msg { margin: 0; padding: 0; display: flex; scroll-margin: var(--ha-space-4xl) 0 calc(var(--ha-space-4xl) * 2); animation: ha-ask-in .32s var(--ha-ease-out) both; }
   #ha-ask .ha-ask__msg--me { justify-content: flex-end; }
   #ha-ask .ha-ask__bubble { max-width: min(92%, var(--ha-ask-bubble)); padding: var(--ha-space-sm) var(--ha-space-md); border-radius: var(--ha-radius-card); font-size: var(--ha-fs-body); line-height: var(--ha-lh-small); overflow-wrap: anywhere; }
-  #ha-ask .ha-ask__msg--me .ha-ask__bubble { background: linear-gradient(135deg, var(--ha-charcoal), var(--ha-slate) 60%, var(--ha-teal-deep)); color: var(--ha-white); border-radius: var(--ha-radius-card) var(--ha-radius-card) var(--ha-radius-callout) var(--ha-radius-card); box-shadow: var(--ha-ask-shadow); }
-  #ha-ask .ha-ask__msg--bot .ha-ask__bubble { background: var(--ha-white); color: var(--ha-charcoal); border: 1px solid var(--ha-rule); border-left: 3px solid var(--ha-teal-deep); border-radius: var(--ha-radius-callout) var(--ha-radius-card) var(--ha-radius-card) var(--ha-radius-card); box-shadow: var(--ha-ask-shadow); }
+  #ha-ask .ha-ask__msg--me .ha-ask__bubble { background: var(--ha-charcoal); color: var(--ha-white); padding: var(--ha-space-xs) var(--ha-space-md); border-radius: calc(var(--ha-ask-round) + var(--ha-space-3xs)); }
+  #ha-ask .ha-ask__msg--bot { flex-direction: column; align-items: flex-start; }
+  #ha-ask .ha-ask__msg--bot .ha-ask__bubble { background: var(--ha-ask-tone); color: var(--ha-charcoal); padding: var(--ha-space-md) var(--ha-space-lg); border-radius: var(--ha-ask-round); line-height: var(--ha-lh-body); }
   @keyframes ha-ask-in { from { opacity: 0; transform: translateY(10px); } }
   #ha-ask .ha-ask__bubble p { margin: 0 0 var(--ha-space-2xs); }
   #ha-ask .ha-ask__bubble p:last-child { margin-bottom: 0; }
   #ha-ask .ha-ask__bubble ul, #ha-ask .ha-ask__bubble ol { margin: 0 0 var(--ha-space-2xs); padding-left: var(--ha-space-md); }
   #ha-ask .ha-ask__bubble li { margin: 0 0 var(--ha-space-3xs); }
   #ha-ask .ha-ask__bubble strong { font-weight: 600; }
-  #ha-ask .ha-ask__cite { font-size: var(--ha-fs-caption); font-weight: 600; color: var(--ha-teal-ink); text-decoration: none; margin-left: 1px; }
-  #ha-ask .ha-ask__cite:hover { text-decoration: underline; }
-  #ha-ask .ha-ask__sources { margin: var(--ha-space-xs) 0 0; padding: var(--ha-space-xs) 0 0; border-top: 1px solid var(--ha-rule); font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); }
-  #ha-ask .ha-ask__sources-label { font-family: var(--ha-font-display); font-weight: 700; letter-spacing: var(--ha-track-tight); color: var(--ha-teal-ink); margin: 0 0 var(--ha-space-3xs); }
+  #ha-ask .ha-ask__cite { display: inline-block; font-size: var(--ha-fs-micro); font-weight: 600; line-height: var(--ha-lh-snug); color: var(--ha-teal-ink); background: var(--ha-white); border-radius: var(--ha-radius-panel); padding: 0 var(--ha-space-2xs); margin-left: var(--ha-space-3xs); text-decoration: none; vertical-align: 1px; transition: background-color .15s var(--ha-ease-out), color .15s var(--ha-ease-out); }
+  #ha-ask .ha-ask__cite:hover { background: var(--ha-teal-deep); color: var(--ha-white); }
+  #ha-ask .ha-ask__sources { margin: var(--ha-space-sm) 0 0; padding: 0; font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-muted); }
+  #ha-ask .ha-ask__sources-label { font-family: var(--ha-font-display); font-size: var(--ha-fs-micro); font-weight: 800; letter-spacing: var(--ha-track-eyebrow); text-transform: uppercase; color: var(--ha-teal-ink); margin: 0 0 var(--ha-space-2xs); }
   #ha-ask .ha-ask__sources ol { list-style: none; margin: 0; padding: 0; }
+  #ha-ask .ha-ask__srcn { display: inline-block; min-width: var(--ha-space-sm); font-weight: 600; color: var(--ha-teal-ink); margin-right: var(--ha-space-2xs); font-variant-numeric: tabular-nums; }
   #ha-ask .ha-ask__sources li { margin: 0 0 var(--ha-space-3xs); }
-  #ha-ask .ha-ask__sources a { color: var(--ha-teal-ink); text-decoration: underline; }
+  #ha-ask .ha-ask__sources a { color: var(--ha-charcoal); text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size .25s var(--ha-ease-out); }
+  #ha-ask .ha-ask__sources a:hover { background-size: 100% 1px; }
   #ha-ask .ha-ask__sources + .ha-ask__sources { margin-top: var(--ha-space-2xs); }
   #ha-ask .ha-ask__meta { color: var(--ha-ink-subtle); white-space: nowrap; }
   #ha-ask .ha-ask__pdf { font-family: var(--ha-font-display); font-weight: 700; font-size: var(--ha-fs-micro); letter-spacing: var(--ha-track-button); margin-left: var(--ha-space-2xs); }
@@ -68,7 +83,7 @@
   #ha-ask .ha-ask__msg--wait .ha-ask__bubble { width: min(92%, var(--ha-ask-bubble)); }
   #ha-ask .ha-ask__skel { display: block; margin: var(--ha-space-xs) 0 0; }
   #ha-ask .ha-ask__skel i { display: block; height: var(--ha-space-xs); margin: 0 0 var(--ha-space-2xs); border-radius: var(--ha-radius-pill);
-    background: linear-gradient(90deg, var(--ha-ash-light) 0%, color-mix(in srgb, var(--ha-teal-deep) 22%, var(--ha-ash-light)) 45%, var(--ha-ash-light) 90%);
+    background: linear-gradient(90deg, var(--ha-white) 0%, color-mix(in srgb, var(--ha-teal-deep) 18%, var(--ha-white)) 45%, var(--ha-white) 90%);
     background-size: 250% 100%; animation: ha-ask-sweep 1.6s linear infinite; }
   #ha-ask .ha-ask__skel i:nth-child(2) { width: 86%; animation-delay: .12s; }
   #ha-ask .ha-ask__skel i:nth-child(3) { width: 58%; margin-bottom: 0; animation-delay: .24s; }
@@ -86,7 +101,7 @@
 
   /* The question bar: a frosted pill pinned to the bottom of the screen while the conversation is in view. */
   #ha-ask .ha-ask__form { position: sticky; bottom: 0; z-index: 2; display: flex; gap: var(--ha-space-2xs); align-items: flex-end; padding: var(--ha-space-sm) var(--ha-space-lg) var(--ha-space-md);
-    background: color-mix(in srgb, var(--ha-bg) 82%, transparent); -webkit-backdrop-filter: blur(10px) saturate(1.2); backdrop-filter: blur(10px) saturate(1.2); }
+    background: color-mix(in srgb, var(--ha-white) 82%, transparent); -webkit-backdrop-filter: blur(10px) saturate(1.2); backdrop-filter: blur(10px) saturate(1.2); }
   #ha-ask .ha-ask__field { flex: 1; min-width: 0; display: flex; align-items: flex-end; gap: var(--ha-space-2xs); background: var(--ha-white); border: 1px solid var(--ha-teal-deep); border-radius: calc(var(--ha-space-xl) + var(--ha-space-3xs)); padding: var(--ha-space-3xs) var(--ha-space-3xs) var(--ha-space-3xs) var(--ha-space-sm); box-shadow: var(--ha-ask-shadow); transition: box-shadow .2s var(--ha-ease-out), border-color .2s var(--ha-ease-out); }
   #ha-ask .ha-ask__field:focus-within { box-shadow: var(--ha-ask-glow), var(--ha-ask-shadow); }
   #ha-ask .ha-ask__input { flex: 1; min-width: 0; align-self: center; font: inherit; font-family: var(--ha-font-body); font-size: var(--ha-fs-body); line-height: var(--ha-lh-small); color: var(--ha-charcoal); background: transparent; border: 0; border-radius: 0; padding: var(--ha-space-2xs) 0; resize: none; max-height: calc(var(--ha-space-4xl) * 2); margin: 0; outline: none; }
@@ -99,14 +114,14 @@
   #ha-ask .ha-ask__send:focus-visible { outline: none; box-shadow: var(--ha-ask-glow); }
   #ha-ask .ha-ask__send[disabled] { background: var(--ha-ink-subtle); cursor: not-allowed; transform: none; }
   #ha-ask .ha-ask__reset { font: inherit; font-family: var(--ha-font-body); font-size: var(--ha-fs-caption); color: var(--ha-teal-ink); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
-  #ha-ask .ha-ask__bar { display: flex; justify-content: space-between; align-items: center; gap: var(--ha-space-sm); padding: var(--ha-space-2xs) var(--ha-space-md); background: var(--ha-bg); font-size: var(--ha-fs-caption); color: var(--ha-ink-subtle); border-top: 1px solid var(--ha-rule); }
+  #ha-ask .ha-ask__bar { display: flex; justify-content: space-between; align-items: center; gap: var(--ha-space-sm); padding: 0 var(--ha-space-lg) var(--ha-space-sm); background: var(--ha-white); font-size: var(--ha-fs-caption); color: var(--ha-ink-subtle); }
   #ha-ask .ha-ask__note { font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); margin: var(--ha-space-sm) 0 0; }
   #ha-ask .ha-ask__note a { color: var(--ha-teal-ink); }
   #ha-ask .ha-ask__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
   /* Explainer graphics: drawn here from plain data the server sends (never markup), in chart tokens, one series one colour. */
   #ha-ask .ha-ask__bubble--wide { width: 92%; }
-  #ha-ask .ha-ask__gfx { margin: var(--ha-space-xs) 0 0; padding: var(--ha-space-sm); background: var(--ha-white); border: 1px solid var(--ha-rule); border-radius: var(--ha-radius-card); }
+  #ha-ask .ha-ask__gfx { margin: var(--ha-space-sm) 0 0; padding: var(--ha-space-md); background: var(--ha-white); border-radius: calc(var(--ha-ask-round) - var(--ha-space-2xs)); }
   #ha-ask .ha-ask__gfx-title { font-family: var(--ha-font-display); font-size: var(--ha-fs-small); font-weight: 700; line-height: var(--ha-lh-snug); letter-spacing: var(--ha-track-tight); color: var(--ha-charcoal); margin: 0 0 var(--ha-space-2xs); }
   #ha-ask .ha-ask__gfx-tag { display: inline-block; font-size: var(--ha-fs-micro); letter-spacing: var(--ha-track-button); text-transform: uppercase; color: var(--ha-teal-ink); border: 1px dashed var(--ha-teal-deep); border-radius: var(--ha-radius-pill); padding: 0 var(--ha-space-2xs); margin-left: var(--ha-space-2xs); vertical-align: middle; white-space: nowrap; }
   #ha-ask .ha-ask__bubble .ha-ask__gfx-unit { font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); margin: calc(var(--ha-space-3xs) * -1) 0 var(--ha-space-xs); }
@@ -153,7 +168,7 @@
   #ha-ask .ha-ask__sbout { display: block; font-size: var(--ha-fs-caption); line-height: var(--ha-lh-small); color: var(--ha-ink-subtle); }
 
   /* "Ask a person": offered under an answer the assistant could not give. A mailto: link the visitor sends themselves. */
-  #ha-ask .ha-ask__person { margin: var(--ha-space-xs) 0 0; padding: var(--ha-space-xs) var(--ha-space-sm); background: var(--ha-white); border: 1px solid var(--ha-rule); border-left: 4px solid var(--ha-teal-deep); border-radius: var(--ha-radius-callout); }
+  #ha-ask .ha-ask__person { margin: var(--ha-space-sm) 0 0; padding: var(--ha-space-sm) var(--ha-space-md); background: var(--ha-white); border-radius: calc(var(--ha-ask-round) - var(--ha-space-2xs)); }
   #ha-ask .ha-ask__bubble .ha-ask__person-label { font-family: var(--ha-font-display); font-size: var(--ha-fs-small); font-weight: 700; line-height: var(--ha-lh-snug); letter-spacing: var(--ha-track-tight); color: var(--ha-charcoal); margin: 0 0 var(--ha-space-2xs); }
   #ha-ask .ha-ask__bubble .ha-ask__person-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ha-space-3xs) var(--ha-space-sm); margin: 0; }
   #ha-ask .ha-ask__bubble .ha-ask__person-who { font-size: var(--ha-fs-small); line-height: var(--ha-lh-snug); color: var(--ha-charcoal); margin: var(--ha-space-2xs) 0 var(--ha-space-3xs); }
@@ -173,7 +188,10 @@
     #ha-ask .ha-ask__log { padding: var(--ha-space-sm); gap: var(--ha-space-sm); }
     #ha-ask .ha-ask__bubble { max-width: 96%; padding: var(--ha-space-xs) var(--ha-space-sm); }
     #ha-ask .ha-ask__bubble--wide, #ha-ask .ha-ask__msg--wait .ha-ask__bubble { width: 96%; }
-    #ha-ask .ha-ask__gfx { padding: var(--ha-space-xs); }
+    #ha-ask .ha-ask__msg--bot .ha-ask__bubble { max-width: 100%; padding: var(--ha-space-sm) var(--ha-space-sm); border-radius: var(--ha-radius-card); }
+    #ha-ask .ha-ask__msg--bot .ha-ask__bubble--wide, #ha-ask .ha-ask__msg--wait .ha-ask__bubble { width: 100%; }
+    #ha-ask .ha-ask__gfx, #ha-ask .ha-ask__person { padding: var(--ha-space-xs); border-radius: var(--ha-radius-card); }
+    #ha-ask .ha-ask__acts { width: 100%; margin-left: 0; }
     #ha-ask .ha-ask__chips { padding: 0 var(--ha-space-sm) var(--ha-space-sm); }
     #ha-ask .ha-ask__chip { width: 100%; border-radius: var(--ha-radius-card); }
     #ha-ask .ha-ask__pdf { display: inline-block; padding: var(--ha-space-2xs); margin: calc(var(--ha-space-2xs) * -1) 0 calc(var(--ha-space-2xs) * -1) var(--ha-space-3xs); }
@@ -243,7 +261,7 @@
       if (cite) {
         var s = sources.filter(function (x) { return x.n === Number(cite[1]); })[0];
         if (s) {
-          var a = el('a', 'ha-ask__cite', '[' + s.n + ']');
+          var a = el('a', 'ha-ask__cite', String(s.n));
           a.href = s.url; a.target = '_blank'; a.rel = 'noopener'; a.setAttribute('aria-label', 'Source ' + s.n + ': ' + s.title);
           parent.appendChild(a);
         }
@@ -258,7 +276,7 @@
   // One list item: "[n. ]Title (year)" linking to the page, plus a PDF link when we have one.
   function refItem(x, numbered) {
     var li = el('li');
-    if (numbered) li.appendChild(document.createTextNode(x.n + '. '));
+    if (numbered) li.appendChild(el('span', 'ha-ask__srcn', String(x.n)));
     var a = el('a', null, x.title); a.href = x.url; a.target = '_blank'; a.rel = 'noopener';
     li.appendChild(a);
     if (x.year) li.appendChild(el('span', 'ha-ask__meta', ' (' + x.year + ')'));
@@ -629,20 +647,58 @@
       body: JSON.stringify({ rating: rating, comment: comment, question: question, answer: d.answer, sources: (d.sources || []).map(function (x) { return x.url; }) }) })
       .then(function (r) { return r.ok; }).catch(function () { return false; });
   }
-  function feedbackRow(question, d) {
-    var row = el('div', 'ha-ask__fb'), label = el('span', null, 'Was this helpful?');
-    var yes = el('button', 'ha-ask__fbtn', 'Yes'), no = el('button', 'ha-ask__fbtn', 'No');
-    yes.type = no.type = 'button';
-    function done(ok) { row.textContent = ok ? 'Thanks, saved for the team.' : 'Could not save that. Please try again later.'; }
-    yes.addEventListener('click', function () { sendFeedback('up', '', question, d).then(done); });
-    no.addEventListener('click', function () {
-      row.textContent = '';
-      var box = el('textarea', 'ha-ask__fbtext'); box.maxLength = 500; box.setAttribute('aria-label', 'What was wrong or missing? (optional)'); box.placeholder = 'What was wrong or missing? (optional)';
-      var send = el('button', 'ha-ask__fbtn', 'Send'); send.type = 'button';
-      send.addEventListener('click', function () { sendFeedback('down', box.value, question, d).then(done); });
-      row.appendChild(box); row.appendChild(send); box.focus();
+  // Quiet icon buttons under an answer: Copy always; Helpful / Not helpful when feedback is on.
+  var ICON = {
+    copy: ['M9 9h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z', 'M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1'],
+    check: ['M20 6 9 17l-5-5'],
+    up: ['M7 10v12', 'M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z'],
+    down: ['M17 14V2', 'M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z']
+  };
+  function icon(name) {
+    var ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('fill', 'none'); svg.setAttribute('stroke', 'currentColor');
+    svg.setAttribute('stroke-width', '2'); svg.setAttribute('stroke-linecap', 'round'); svg.setAttribute('stroke-linejoin', 'round');
+    svg.setAttribute('aria-hidden', 'true'); svg.setAttribute('focusable', 'false');
+    ICON[name].forEach(function (d) { var p = document.createElementNS(ns, 'path'); p.setAttribute('d', d); svg.appendChild(p); });
+    return svg;
+  }
+  function iconBtn(name, label) {
+    var b = el('button', 'ha-ask__icon'); b.type = 'button'; b.setAttribute('aria-label', label); b.title = label;
+    b.appendChild(icon(name)); return b;
+  }
+  function plainAnswer(d) {
+    var text = (d.answer || '').replace(/\s*\[\d+\]/g, '').replace(/\*\*/g, '');
+    var src = (d.sources || []).map(function (s) { return s.n + '. ' + s.title + ' ' + s.url; });
+    return src.length ? text + '\n\nSources:\n' + src.join('\n') : text;
+  }
+  function actionsRow(question, d) {
+    var row = el('div', 'ha-ask__acts'), note = el('span', 'ha-ask__actnote');
+    note.setAttribute('aria-live', 'polite');
+    var copy = iconBtn('copy', 'Copy answer');
+    copy.addEventListener('click', function () {
+      var ok = function () { copy.replaceChild(icon('check'), copy.firstChild); note.textContent = 'Copied';
+        setTimeout(function () { copy.replaceChild(icon('copy'), copy.firstChild); note.textContent = ''; }, 2000); };
+      try { navigator.clipboard.writeText(plainAnswer(d)).then(ok, function () { note.textContent = 'Could not copy'; }); }
+      catch (e) { note.textContent = 'Could not copy'; }
     });
-    row.appendChild(label); row.appendChild(yes); row.appendChild(no);
+    row.appendChild(copy);
+    if (feedbackOn) {
+      var up = iconBtn('up', 'Helpful'), down = iconBtn('down', 'Not helpful');
+      up.setAttribute('aria-pressed', 'false'); down.setAttribute('aria-pressed', 'false');
+      var done = function (ok) { note.textContent = ok ? 'Thanks, saved for the team.' : 'Could not save that. Please try again later.'; up.disabled = down.disabled = true; };
+      up.addEventListener('click', function () { up.setAttribute('aria-pressed', 'true'); sendFeedback('up', '', question, d).then(done); });
+      down.addEventListener('click', function () {
+        if (down.getAttribute('aria-pressed') === 'true') return;
+        down.setAttribute('aria-pressed', 'true');
+        var form = el('div', 'ha-ask__fbform');
+        var box = el('textarea', 'ha-ask__fbtext'); box.maxLength = 500; box.setAttribute('aria-label', 'What was wrong or missing? (optional)'); box.placeholder = 'What was wrong or missing? (optional)';
+        var send = el('button', 'ha-ask__fbtn', 'Send'); send.type = 'button';
+        send.addEventListener('click', function () { sendFeedback('down', box.value, question, d).then(function (ok) { form.remove(); done(ok); }); });
+        form.appendChild(box); form.appendChild(send); row.appendChild(form); box.focus();
+      });
+      row.appendChild(up); row.appendChild(down);
+    }
+    row.appendChild(note);
     return row;
   }
 
@@ -713,10 +769,10 @@
       var text = d.answer || 'Something went wrong. Please try again, or browse hiappleseed.org.';
       tli.remove();
       var shown = renderAnswer(text, d.sources || [], d.related || [], d.graphics || [], d.handoff || null, question);
-      if (feedbackOn && r.ok && d.answer) shown.appendChild(feedbackRow(question, d));
       var wide = !!shown.querySelector('.ha-ask__gfx'); // a fragment is emptied by add(), so look first
       var botli = add('bot', shown);
       if (wide) botli.querySelector('.ha-ask__bubble').classList.add('ha-ask__bubble--wide');
+      if (r.ok && d.answer) botli.appendChild(actionsRow(question, d));
       reveal(qli, 'start'); // read the answer from the top, with the question still above it
       if (r.ok && d.answer) history.push({ role: 'assistant', content: d.answer });
       else history.pop();
