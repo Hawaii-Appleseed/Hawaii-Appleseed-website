@@ -279,14 +279,17 @@ cr = page("cr", 2,
      EITC and food/excise credits. Act 163 (2023) is repealed 12/31/2027 (L 2023, c 163, s 5); HB 2306
      (2026) did not pass. $76M / 2,100 people / 500 children = forecast_working_family_credits.py, TY2028
      (SB3125_CD1_FORECAST.md, Oct 8 2026 anchor). 78,000 = DOTAX TY2024 EITC report. The CTC ($650,
-     ages 0-18) and RxKids note carries over from the previous version of this page.""",
+     ages 0-18) and RxKids note carries over from the previous version of this page. The child and dependent
+     care credit sentence in "What is at stake" mirrors the Top Three fact sheet's page 1 bullet: no figure
+     and no Act 163 claim (the Estimates report covers only the EITC and food/excise changes).""",
  "Keep Working Families&rsquo; Tax Credits",
  "Extend the earned income and food/excise tax credits before they expire.",
  "Two credits that help Hawai&#699;i families afford groceries and other basics are set to shrink after 2027 unless the Legislature acts.",
  [("$76M","that working families would lose in 2028 if the credits expire"),("About 2,100","more people, including about 500 keiki, would fall into poverty"),("78,000","households claim the state EITC each year")],
  [
   sec("What is at stake", """        <p>In 2023, Act 163 doubled two of Hawai&#699;i&rsquo;s most important credits for working families: the state <strong>Earned Income Tax Credit</strong> (to 40 percent of the federal credit) and the refundable <strong>food/excise tax credit</strong>, which helps offset the general excise tax on groceries and other basics.</p>
-        <p>Those expansions end after the 2027 tax year.</p>"""),
+        <p>Those expansions end after the 2027 tax year.</p>
+        <p>The <strong>child and dependent care tax credit</strong> also helps working parents with the cost of childcare.</p>"""),
   sec("The timeline", """        <ol class="tfc-pp-steps">
             <li><b>2023</b>Act 163 doubles the EITC and the food/excise credit.</li>
             <li><b>2026</b>The Legislature does not extend them (HB 2306 did not pass).</li>
@@ -360,7 +363,7 @@ cv = page("cv", 1,
      Allocation (HRS 247-7): LCF 10% or $5.1M, RHRF 50% or $38M, rest general fund (checked on capitol.hawaii.gov
      2026-10-28). Marginal explainer: HRS 247-2 cliff schedule vs SD2 HD2 marginal bands; $3,999,000 vs $4,000,000
      owner-occupied = $19,995 / $28,000 today, $66,260 / $66,300 proposed (CONVEYANCE_TAX_SCOPE.md).""",
- "Increase the Tax on Luxury Homes to Fund Hawaiian Homes",
+ "Increase the Tax on Luxury Homes",
  "Modernize the tax on property sales and dedicate its revenue to the Department of Hawaiian Home Lands.",
  "Those who profit most from our islands should also invest the most in their future.",
  [("$271M","estimated total conveyance tax revenue in FY2027 in a House committee&rsquo;s estimate"),("$303M","estimated by FY2031"),("$60M","a year for Hawaiian Home Lands, at most")],
