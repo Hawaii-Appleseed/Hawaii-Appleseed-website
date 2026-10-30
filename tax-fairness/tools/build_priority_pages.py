@@ -277,8 +277,9 @@ cr = page("cr", 2,
      file into that block; the page's newsletter section stays hidden (its form had no storage; the panel
      at the end sends people to /subscribe). Rewritten for the 2027 priority: extend Act 163's expiring
      EITC and food/excise credits. Act 163 (2023) is repealed 12/31/2027 (L 2023, c 163, s 5); HB 2306
-     (2026) did not pass. $76M / 2,100 people / 500 children = forecast_working_family_credits.py, TY2028
-     (SB3125_CD1_FORECAST.md, Oct 8 2026 anchor). 78,000 = DOTAX TY2024 EITC report. The CTC ($650,
+     (2026) did not pass. $76M = forecast_working_family_credits.py, TY2028 (SB3125_CD1_FORECAST.md, Oct 8
+     2026 anchor). 78,000 = DOTAX TY2024 EITC report. The poverty estimate was dropped from this page and from
+     /2027-priorities on request; do not restore it without asking. The CTC ($650,
      ages 0-18) and RxKids note carries over from the previous version of this page. The child and dependent
      care credit sentence in the intro mirrors the Top Three fact sheet's page 1 bullet: no figure and no
      Act 163 claim (the Estimates report covers only the EITC and food/excise changes). The timeline sits on
@@ -287,7 +288,7 @@ cr = page("cr", 2,
  "Keep Working Families&rsquo; Tax Credits",
  "Extend the earned income and food/excise tax credits before they expire.",
  "Two credits that help Hawai&#699;i families afford groceries and other basics are set to shrink after 2027 unless the Legislature acts. The child and dependent care tax credit also helps working parents with the cost of childcare.",
- [("$76M","that working families would lose in 2028 if the credits expire"),("About 2,100","more people, including about 500 keiki, would fall into poverty"),("78,000","households claim the state EITC each year")],
+ [("$76M","that working families would lose in 2028 if the credits expire"),("78,000","households claim the state EITC each year")],
  [
   sec("What is at stake", """        <p>In 2023, Act 163 doubled two of Hawai&#699;i&rsquo;s most important credits for working families: the state <strong>Earned Income Tax Credit</strong> (to 40 percent of the federal credit) and the refundable <strong>food/excise tax credit</strong>, which helps offset the general excise tax on groceries and other basics.</p>
         <p>Those expansions end after the 2027 tax year.</p>"""),
@@ -299,15 +300,18 @@ cr = page("cr", 2,
                 <li class="end"><b>2028</b>First tax year without them: an estimated $76 million less for working families.</li>
             </ol>
         </div>"""),
-  sec("What we are asking for", """        <p>Extend both credits at their current levels, so families do not take a pay cut from the tax code in 2028.</p>""") + "\n    </section>\n" + CR_FIG1 + CR_FIG2 + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Estimates: Hawai&#699;i Appleseed tax model, tax year 2028; EITC claims from the Department of Taxation, tax year 2024. The poverty estimates have wide margins of error.</p>',
+  sec("What we are asking for", """        <p>Extend both credits at their current levels, so families do not take a pay cut from the tax code in 2028.</p>""") + "\n    </section>\n" + CR_FIG1 + CR_FIG2 + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Estimates: Hawai&#699;i Appleseed tax model, tax year 2028; EITC claims from the Department of Taxation, tax year 2024.</p>',
   sec("Also on our agenda", """        <p>We also support a refundable state Child Tax Credit of $650 per child aged 0&ndash;18, and RxKids, which would give cash payments to mothers in the first months of a child&rsquo;s life. We will post updates here as those proposals move.</p>"""),
  ],
  "Help us keep these credits", "Sign up and we&rsquo;ll tell you when these bills are moving and when to submit testimony.")
 
 # The timeline is only on this page, whose section background (#e0e0db) swallows the default light-grey line,
-# so it sits on a white card with a blue line. Added here rather than in CSS so the other two pages stay as they are.
+# so it sits on a white card with a blue line. With two stats instead of three, the stat cards use two columns on
+# wide screens (the narrow-screen rule in CSS already stacks them). Added here rather than in CSS so the other two
+# pages stay as they are.
 cr = cr.replace("</style>", """.tfc-pp-fig .tfc-pp-steps { margin: 0; border-left-color: var(--tfc-blue); }
 .tfc-pp-fig .tfc-pp-steps li:last-child { padding-bottom: 0; }
+@container (min-width: 761px) { .tfc-pp-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 </style>""", 1)
 
 

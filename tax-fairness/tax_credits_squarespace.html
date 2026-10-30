@@ -2,8 +2,9 @@
      file into that block; the page's newsletter section stays hidden (its form had no storage; the panel
      at the end sends people to /subscribe). Rewritten for the 2027 priority: extend Act 163's expiring
      EITC and food/excise credits. Act 163 (2023) is repealed 12/31/2027 (L 2023, c 163, s 5); HB 2306
-     (2026) did not pass. $76M / 2,100 people / 500 children = forecast_working_family_credits.py, TY2028
-     (SB3125_CD1_FORECAST.md, Oct 8 2026 anchor). 78,000 = DOTAX TY2024 EITC report. The CTC ($650,
+     (2026) did not pass. $76M = forecast_working_family_credits.py, TY2028 (SB3125_CD1_FORECAST.md, Oct 8
+     2026 anchor). 78,000 = DOTAX TY2024 EITC report. The poverty estimate was dropped from this page and from
+     /2027-priorities on request; do not restore it without asking. The CTC ($650,
      ages 0-18) and RxKids note carries over from the previous version of this page. The child and dependent
      care credit sentence in the intro mirrors the Top Three fact sheet's page 1 bullet: no figure and no
      Act 163 claim (the Estimates report covers only the EITC and food/excise changes). The timeline sits on
@@ -150,6 +151,7 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-pp) { grid-row: 1 / 2 !importa
 }
 .tfc-pp-fig .tfc-pp-steps { margin: 0; border-left-color: var(--tfc-blue); }
 .tfc-pp-fig .tfc-pp-steps li:last-child { padding-bottom: 0; }
+@container (min-width: 761px) { .tfc-pp-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* The newsletter section: its form has no storage, so sign-ups were lost. */
 body:not(.sqs-is-page-editing) section[data-section-id="691b795a3409972cbc5443fa"] { display: none !important; }
 </style>
@@ -163,7 +165,7 @@ body:not(.sqs-is-page-editing) section[data-section-id="691b795a3409972cbc5443fa
         <p class="tfc-pp-lede">Two credits that help Hawai&#699;i families afford groceries and other basics are set to shrink after 2027 unless the Legislature acts. The child and dependent care tax credit also helps working parents with the cost of childcare.</p>
     </header>
 
-    <div class="tfc-pp-stats"><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">$76M</div><p class="tfc-pp-stat-label">that working families would lose in 2028 if the credits expire</p></div><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">About 2,100</div><p class="tfc-pp-stat-label">more people, including about 500 keiki, would fall into poverty</p></div><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">78,000</div><p class="tfc-pp-stat-label">households claim the state EITC each year</p></div></div>
+    <div class="tfc-pp-stats"><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">$76M</div><p class="tfc-pp-stat-label">that working families would lose in 2028 if the credits expire</p></div><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">78,000</div><p class="tfc-pp-stat-label">households claim the state EITC each year</p></div></div>
 
     <section class="tfc-pp-section">
         <h2>What is at stake</h2>
@@ -200,7 +202,7 @@ body:not(.sqs-is-page-editing) section[data-section-id="691b795a3409972cbc5443fa
 <p class="tfc-pp-fig-note">Source: same model as above.</p>
     </figure>
     <section class="tfc-pp-section">
-        <p class="tfc-pp-source">Estimates: Hawai&#699;i Appleseed tax model, tax year 2028; EITC claims from the Department of Taxation, tax year 2024. The poverty estimates have wide margins of error.</p>
+        <p class="tfc-pp-source">Estimates: Hawai&#699;i Appleseed tax model, tax year 2028; EITC claims from the Department of Taxation, tax year 2024.</p>
     </section>
 
     <section class="tfc-pp-section">
