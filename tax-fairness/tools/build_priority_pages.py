@@ -280,26 +280,35 @@ cr = page("cr", 2,
      (2026) did not pass. $76M / 2,100 people / 500 children = forecast_working_family_credits.py, TY2028
      (SB3125_CD1_FORECAST.md, Oct 8 2026 anchor). 78,000 = DOTAX TY2024 EITC report. The CTC ($650,
      ages 0-18) and RxKids note carries over from the previous version of this page. The child and dependent
-     care credit sentence in "What is at stake" mirrors the Top Three fact sheet's page 1 bullet: no figure
-     and no Act 163 claim (the Estimates report covers only the EITC and food/excise changes).""",
+     care credit sentence in the intro mirrors the Top Three fact sheet's page 1 bullet: no figure and no
+     Act 163 claim (the Estimates report covers only the EITC and food/excise changes). The timeline sits on
+     a white card with a blue line because this page's section background (#e0e0db) swallowed the default
+     light-grey line.""",
  "Keep Working Families&rsquo; Tax Credits",
  "Extend the earned income and food/excise tax credits before they expire.",
- "Two credits that help Hawai&#699;i families afford groceries and other basics are set to shrink after 2027 unless the Legislature acts.",
+ "Two credits that help Hawai&#699;i families afford groceries and other basics are set to shrink after 2027 unless the Legislature acts. The child and dependent care tax credit also helps working parents with the cost of childcare.",
  [("$76M","that working families would lose in 2028 if the credits expire"),("About 2,100","more people, including about 500 keiki, would fall into poverty"),("78,000","households claim the state EITC each year")],
  [
   sec("What is at stake", """        <p>In 2023, Act 163 doubled two of Hawai&#699;i&rsquo;s most important credits for working families: the state <strong>Earned Income Tax Credit</strong> (to 40 percent of the federal credit) and the refundable <strong>food/excise tax credit</strong>, which helps offset the general excise tax on groceries and other basics.</p>
-        <p>Those expansions end after the 2027 tax year.</p>
-        <p>The <strong>child and dependent care tax credit</strong> also helps working parents with the cost of childcare.</p>"""),
-  sec("The timeline", """        <ol class="tfc-pp-steps">
-            <li><b>2023</b>Act 163 doubles the EITC and the food/excise credit.</li>
-            <li><b>2026</b>The Legislature does not extend them (HB 2306 did not pass).</li>
-            <li><b>December 31, 2027</b>The expansions are repealed.</li>
-            <li class="end"><b>2028</b>First tax year without them: an estimated $76 million less for working families.</li>
-        </ol>"""),
+        <p>Those expansions end after the 2027 tax year.</p>"""),
+  sec("The timeline", """        <div class="tfc-pp-fig">
+            <ol class="tfc-pp-steps">
+                <li><b>2023</b>Act 163 doubles the EITC and the food/excise credit.</li>
+                <li><b>2026</b>The Legislature does not extend them (HB 2306 did not pass).</li>
+                <li><b>December 31, 2027</b>The expansions are repealed.</li>
+                <li class="end"><b>2028</b>First tax year without them: an estimated $76 million less for working families.</li>
+            </ol>
+        </div>"""),
   sec("What we are asking for", """        <p>Extend both credits at their current levels, so families do not take a pay cut from the tax code in 2028.</p>""") + "\n    </section>\n" + CR_FIG1 + CR_FIG2 + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Estimates: Hawai&#699;i Appleseed tax model, tax year 2028; EITC claims from the Department of Taxation, tax year 2024. The poverty estimates have wide margins of error.</p>',
   sec("Also on our agenda", """        <p>We also support a refundable state Child Tax Credit of $650 per child aged 0&ndash;18, and RxKids, which would give cash payments to mothers in the first months of a child&rsquo;s life. We will post updates here as those proposals move.</p>"""),
  ],
  "Help us keep these credits", "Sign up and we&rsquo;ll tell you when these bills are moving and when to submit testimony.")
+
+# The timeline is only on this page, whose section background (#e0e0db) swallows the default light-grey line,
+# so it sits on a white card with a blue line. Added here rather than in CSS so the other two pages stay as they are.
+cr = cr.replace("</style>", """.tfc-pp-fig .tfc-pp-steps { margin: 0; border-left-color: var(--tfc-blue); }
+.tfc-pp-fig .tfc-pp-steps li:last-child { padding-bottom: 0; }
+</style>""", 1)
 
 
 CV_ALLOC = fig("Where the money goes today",
