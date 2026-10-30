@@ -1,0 +1,145 @@
+{
+ "_comment": "Who to talk to about what. `people` are as listed on the Our Team page (https://hiappleseed.org/our-team: names, titles and the work email each person publishes there, checked 2026-10-21); build_index.py checks that every name and title here is in content/about.md's Staff list and vice versa. `routes` are which of them to suggest for which topic: drawn from their titles and bios by Claude as a first draft, so staff must review them. The assistant may name at most two people from here, and the page then offers an email button for them; it never invents a person, title, address or area. `status` is \"draft\" until staff approve the people and routes in the sign-off review (approved by NAME YYYY-MM-DD, with `reviewed`: a hash of these exact words); a --public build leaves the whole thing out until then.",
+ "status": "draft",
+ "people": [
+  {
+   "id": "will-white",
+   "name": "Will White",
+   "title": "Executive Director",
+   "email": "willwhite@hiappleseed.org"
+  },
+  {
+   "id": "daniela-spoto",
+   "name": "Daniela Spoto",
+   "title": "Deputy Director",
+   "email": "daniela@hiappleseed.org"
+  },
+  {
+   "id": "arjuna-heim",
+   "name": "Arjuna Heim",
+   "title": "Director of Research and Director of Housing Policy",
+   "email": "arjuna@hiappleseed.org"
+  },
+  {
+   "id": "devin-thomas",
+   "name": "Devin Thomas",
+   "title": "Director of Tax & Budget Policy",
+   "email": "devin@hiappleseed.org"
+  },
+  {
+   "id": "abbey-seitz",
+   "name": "Abbey Seitz",
+   "title": "Director of Transportation Equity",
+   "email": "abbey@hiappleseed.org"
+  },
+  {
+   "id": "christy-macpherson",
+   "name": "Christy MacPherson",
+   "title": "Director of Community Engagement",
+   "email": "christy@hiappleseed.org"
+  },
+  {
+   "id": "will-caron",
+   "name": "Will Caron",
+   "title": "Director of Communications",
+   "email": "will@hiappleseed.org"
+  },
+  {
+   "id": "anthony-amador",
+   "name": "Anthony Amador",
+   "title": "Director of Development",
+   "email": "anthony@hiappleseed.org"
+  },
+  {
+   "id": "genevieve-mumma",
+   "name": "Genevieve Mumma",
+   "title": "Senior Food Equity Policy Analyst",
+   "email": "genevieve@hiappleseed.org"
+  },
+  {
+   "id": "kamakani-albano",
+   "name": "Kamakani Albano",
+   "title": "Housing Policy Analyst",
+   "email": "kamakani@hiappleseed.org"
+  },
+  {
+   "id": "malia-boksanski",
+   "name": "Malia Boksanski",
+   "title": "Transportation Equity Policy Analyst",
+   "email": "malia@hiappleseed.org"
+  },
+  {
+   "id": "maile-kawasaki",
+   "name": "Maile Kawasaki",
+   "title": "Community Organizer",
+   "email": "maile@hiappleseed.org"
+  }
+ ],
+ "routes": [
+  {
+   "about": "Housing: renters, rent, eviction, zoning and parking, empty homes, affordable housing",
+   "people": [
+    "arjuna-heim",
+    "kamakani-albano"
+   ]
+  },
+  {
+   "about": "Taxes and the state budget",
+   "people": [
+    "devin-thomas"
+   ]
+  },
+  {
+   "about": "Transportation equity: transit, fare-free transit, pedestrian safety",
+   "people": [
+    "abbey-seitz",
+    "malia-boksanski"
+   ]
+  },
+  {
+   "about": "Food equity: SNAP and school meals",
+   "people": [
+    "genevieve-mumma"
+   ]
+  },
+  {
+   "about": "Wages and labor",
+   "people": [
+    "arjuna-heim"
+   ],
+   "note": "The Our Team page lists no one with a wages or labor title. The Director of Research is the closest by title; the Executive Director or the office can route a question about wages, paid leave, or pay transparency."
+  },
+  {
+   "about": "Research and data: the reports, their numbers and methods",
+   "people": [
+    "arjuna-heim"
+   ]
+  },
+  {
+   "about": "Press, media interviews, and quotes",
+   "people": [
+    "will-caron"
+   ]
+  },
+  {
+   "about": "Volunteering, community organizing, workshops, and joining a coalition",
+   "people": [
+    "christy-macpherson",
+    "maile-kawasaki"
+   ]
+  },
+  {
+   "about": "Giving, sponsorships, and gifts",
+   "people": [
+    "anthony-amador"
+   ]
+  },
+  {
+   "about": "Partnerships, speaking invitations, and anything about the organization as a whole",
+   "people": [
+    "will-white",
+    "daniela-spoto"
+   ]
+  }
+ ]
+}
