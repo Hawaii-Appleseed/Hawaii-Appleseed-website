@@ -529,27 +529,6 @@
             margin: 0 auto 0.4rem;
         }
 
-        /* ── Budget pie grid ── */
-        .budget-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            justify-content: center;
-            max-width: 170px;
-            margin: 0.5rem auto 0.35rem;
-        }
-
-        .budget-pie {
-            width: 18px;
-            height: 15px;
-            border-radius: 4px;
-            background: rgba(var(--mint-rgb), 0.32);
-            overflow: hidden;
-        }
-
-        .budget-pie.is-partial { background: rgba(var(--white-rgb), 0.10); }
-        .budget-pie.is-partial i { display: block; height: 100%; background: rgba(var(--mint-rgb), 0.32); }
-
         /* ── Dropdown in banner ── */
         .dropdown-wrapper {
             position: relative;
@@ -1179,6 +1158,23 @@
             }
         }
 
+        /* Fortunes-in-state-budgets graphic */
+        .fortune-card { background:#2f3d47; color:#e6ebe3; border-radius:var(--r-lg); padding:clamp(1.25rem,4vw,2.25rem); margin:2rem 0; }
+        .fortune-kicker { margin:0 0 1rem; font-size:clamp(.78rem,2.2vw,.95rem); font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:#85a98f; }
+        .fortune-top { display:flex; flex-wrap:wrap; justify-content:space-between; gap:1.25rem 2rem; align-items:flex-start; }
+        .fortune-big { font-size:clamp(2.6rem,9vw,4.4rem); font-weight:900; line-height:1; color:#fff; }
+        .fortune-big small { font-size:.42em; font-weight:800; color:#c9d1c6; margin-left:.2em; }
+        .fortune-desc { margin:.6rem 0 0; font-size:clamp(.95rem,2.6vw,1.2rem); color:#c9d1c6; max-width:30ch; }
+        .fortune-desc strong { color:#fff; }
+        .fortune-mult { text-align:right; }
+        .fortune-mult .n { font-size:clamp(2.6rem,9vw,4.4rem); font-weight:900; line-height:1; color:#85a98f; }
+        .fortune-mult p { margin:.6rem 0 0; font-size:clamp(.95rem,2.6vw,1.2rem); color:#c9d1c6; }
+        .fortune-blocks { display:grid; grid-template-columns:repeat(13,1fr); gap:.3rem; margin:1.75rem 0 .5rem; }
+        .fortune-blocks span { background:#85a98f; border-radius:8px; aspect-ratio:1.1; }
+        .fortune-blocks span.p { background:#3f4f5a; overflow:hidden; }
+        .fortune-blocks span.p i { display:block; height:100%; background:#85a98f; }
+        .fortune-note { margin:.75rem 0 0; font-size:clamp(.85rem,2.4vw,1.05rem); color:#c9d1c6; }
+        .fortune-note strong { color:#fff; }
     </style>
 </head>
 <body>
@@ -1243,10 +1239,25 @@
             <div class="banner-stat">
                 <span class="banner-stat-value" id="budgetMultiple">12.4</span>
                 <span class="banner-stat-unit">times the state budget</span>
-                <div class="budget-grid" id="budgetGrid"></div>
-                <span class="banner-stat-label"><span style="display:inline-block;width:10px;height:8px;background:rgba(168,230,176,0.5);border-radius:2px;vertical-align:middle;margin-right:3px;"></span> = 1 state budget <span style="white-space:nowrap;">($23.7B &middot; 2026)</span>
             </div>
         </div>
+    </div>
+
+    <!-- 12.4x state budget: the banner stat's visual -->
+    <div class="fortune-card" id="budgetCard" role="img" aria-label="Hawaiʻi's millionaires hold 12.4 times the state's annual budget.">
+        <p class="fortune-kicker" id="fcKicker">Hawaiʻi&rsquo;s millionaires hold 12 state budgets</p>
+        <div class="fortune-top">
+            <div>
+                <div class="fortune-big"><span id="fcWealth">$292.7</span><small>billion</small></div>
+                <p class="fortune-desc">held by the <strong><span id="fcCount">81,814</span> Hawaiʻi <span id="fcWho">millionaires</span></strong> in 2024</p>
+            </div>
+            <div class="fortune-mult">
+                <div class="n"><span id="fcMult">12.4</span>&times;</div>
+                <p>the state&rsquo;s entire<br>annual budget</p>
+            </div>
+        </div>
+        <div class="fortune-blocks" id="fcBlocks" aria-hidden="true"></div>
+        <p class="fortune-note"><strong>One block = $23.7 billion,</strong> Hawaiʻi&rsquo;s annual state budget (2026).</p>
     </div>
 
     <!-- Wealth-tax revenue callout: the report's scenarios (Table 1 / Figure 4) -->
@@ -1342,6 +1353,7 @@
             The number of millionaires in Hawaiʻi has steadily increased since 2010, despite tax increases.
         </p>
     </div>
+
     <p class="source">Source: Wealth-X / Altrata &mdash; Market Sizing Wealth Data for Hawaiʻi (Nov 9, 2025)</p>
 
     <!-- Narrative Section -->
@@ -1910,15 +1922,18 @@
             requestAnimationFrame(tick);
         }
 
-        function updateBudgetGrid(multiple) {
-            const grid = document.getElementById('budgetGrid');
-            const full = Math.floor(multiple);
-            const partial = multiple - full;
-            let html = '<div class="budget-pie"></div>'.repeat(full);
-            if (partial > 0.05) {
-                html += `<div class="budget-pie is-partial"><i style="width:${(partial * 100).toFixed(0)}%"></i></div>`;
-            }
-            grid.innerHTML = html;
+        function updateBudgetCard(multiple, info) {
+            const full = Math.floor(multiple), partial = multiple - full;
+            let html = '<span></span>'.repeat(full);
+            if (partial > 0.05) html += `<span class="p"><i style="width:${(partial * 100).toFixed(0)}%"></i></span>`;
+            document.getElementById('fcBlocks').innerHTML = html;
+            document.getElementById('fcBlocks').style.gridTemplateColumns = `repeat(${Math.max(full + (partial > 0.05 ? 1 : 0), 1)}, 1fr)`;
+            document.getElementById('fcMult').textContent = multiple.toFixed(1);
+            document.getElementById('fcWealth').textContent = '$' + info.wealth.toFixed(1);
+            document.getElementById('fcCount').textContent = info.count.toLocaleString();
+            document.getElementById('fcWho').textContent = info.label;
+            const n = Math.round(multiple);
+            document.getElementById('fcKicker').textContent = `Hawaiʻi’s ${info.label} hold ${n} state budget${n === 1 ? '' : 's'}`;
         }
 
         // Summed series for the aggregate "all" view (2010–2024 counts)
@@ -1965,7 +1980,7 @@
             animateValue(summaryWealth, 0, info.wealth, 1000, v => '$' + v.toFixed(1));
             const multiple = info.wealth / STATE_BUDGET;
             budgetMultiple.textContent = multiple.toFixed(1);
-            updateBudgetGrid(multiple);
+            updateBudgetCard(multiple, info);
 
             // Trend: growth in this group since 2010
             const growthPct = Math.round((info.count / info.count2010 - 1) * 100);
