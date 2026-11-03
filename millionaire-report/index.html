@@ -1179,6 +1179,23 @@
                 margin-left: 0;
             }
         }
+
+        /* Fortunes-in-state-budgets graphic */
+        .fortune-card { background:#2f3d47; color:#e6ebe3; border-radius:var(--r-lg); padding:clamp(1.25rem,4vw,2.25rem); margin:2rem 0; }
+        .fortune-kicker { margin:0 0 1rem; font-size:clamp(.78rem,2.2vw,.95rem); font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:#85a98f; }
+        .fortune-top { display:flex; flex-wrap:wrap; justify-content:space-between; gap:1.25rem 2rem; align-items:flex-start; }
+        .fortune-big { font-size:clamp(2.6rem,9vw,4.4rem); font-weight:900; line-height:1; color:#fff; }
+        .fortune-big small { font-size:.42em; font-weight:800; color:#c9d1c6; margin-left:.2em; }
+        .fortune-desc { margin:.6rem 0 0; font-size:clamp(.95rem,2.6vw,1.2rem); color:#c9d1c6; max-width:30ch; }
+        .fortune-desc strong { color:#fff; }
+        .fortune-mult { text-align:right; }
+        .fortune-mult .n { font-size:clamp(2.6rem,9vw,4.4rem); font-weight:900; line-height:1; color:#85a98f; }
+        .fortune-mult p { margin:.6rem 0 0; font-size:clamp(.95rem,2.6vw,1.2rem); color:#c9d1c6; }
+        .fortune-blocks { display:grid; grid-template-columns:repeat(9,1fr) .15fr; gap:.4rem; margin:1.75rem 0 .5rem; align-items:stretch; }
+        .fortune-blocks span { background:#85a98f; border-radius:8px; aspect-ratio:1.2; padding:.4rem .5rem; display:flex; align-items:flex-end; font-weight:800; font-size:clamp(.7rem,2.2vw,1rem); color:#2f3d47; }
+        .fortune-blocks span.edge { background:#85a98f; border-radius:2px; padding:0; aspect-ratio:auto; max-width:3px; }
+        .fortune-note { margin:.75rem 0 0; font-size:clamp(.85rem,2.4vw,1.05rem); color:#c9d1c6; }
+        .fortune-note strong { color:#fff; }
     </style>
 </head>
 <body>
@@ -1341,6 +1358,23 @@
         <p class="chart-caption" id="individualsCaption" style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: #6b8f71; font-style: italic; display: none;">
             The number of millionaires in Hawaiʻi has steadily increased since 2010, despite tax increases.
         </p>
+    </div>
+
+    <!-- Wealth of $20M+ residents vs. state tax collections -->
+    <div class="fortune-card" role="img" aria-label="The 1,245 Hawaiʻi residents worth $20 million or more hold $95.6 billion, nine times the state's annual tax collections of $10.6 billion.">
+        <p class="fortune-kicker">Hawaiʻi&rsquo;s wealthiest residents hold nine years of state taxes</p>
+        <div class="fortune-top">
+            <div>
+                <div class="fortune-big">$95.6<small>billion</small></div>
+                <p class="fortune-desc">held by the <strong>1,245 Hawaiʻi residents</strong> worth $20 million or more in 2024</p>
+            </div>
+            <div class="fortune-mult">
+                <div class="n">9&times;</div>
+                <p>the state&rsquo;s entire<br>annual tax collections</p>
+            </div>
+        </div>
+        <div class="fortune-blocks" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span class="edge"></span></div>
+        <p class="fortune-note"><strong>One block = $10.6 billion,</strong> every dollar of state tax collected in fiscal 2024: income, general excise and all other state taxes.</p>
     </div>
 
     <p class="source">Source: Wealth-X / Altrata &mdash; Market Sizing Wealth Data for Hawaiʻi (Nov 9, 2025)</p>
