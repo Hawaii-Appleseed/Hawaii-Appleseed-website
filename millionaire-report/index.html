@@ -535,21 +535,20 @@
             flex-wrap: wrap;
             gap: 4px;
             justify-content: center;
-            max-width: 160px;
+            max-width: 170px;
             margin: 0.5rem auto 0.35rem;
         }
 
         .budget-pie {
-            width: 14px;
-            height: 14px;
-            position: relative;
+            width: 18px;
+            height: 15px;
+            border-radius: 4px;
+            background: rgba(var(--mint-rgb), 0.32);
+            overflow: hidden;
         }
 
-        .budget-pie svg {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
+        .budget-pie.is-partial { background: rgba(var(--white-rgb), 0.10); }
+        .budget-pie.is-partial i { display: block; height: 100%; background: rgba(var(--mint-rgb), 0.32); }
 
         /* ── Dropdown in banner ── */
         .dropdown-wrapper {
@@ -1180,22 +1179,6 @@
             }
         }
 
-        /* Fortunes-in-state-budgets graphic */
-        .fortune-card { background:#2f3d47; color:#e6ebe3; border-radius:var(--r-lg); padding:clamp(1.25rem,4vw,2.25rem); margin:2rem 0; }
-        .fortune-kicker { margin:0 0 1rem; font-size:clamp(.78rem,2.2vw,.95rem); font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:#85a98f; }
-        .fortune-top { display:flex; flex-wrap:wrap; justify-content:space-between; gap:1.25rem 2rem; align-items:flex-start; }
-        .fortune-big { font-size:clamp(2.6rem,9vw,4.4rem); font-weight:900; line-height:1; color:#fff; }
-        .fortune-big small { font-size:.42em; font-weight:800; color:#c9d1c6; margin-left:.2em; }
-        .fortune-desc { margin:.6rem 0 0; font-size:clamp(.95rem,2.6vw,1.2rem); color:#c9d1c6; max-width:30ch; }
-        .fortune-desc strong { color:#fff; }
-        .fortune-mult { text-align:right; }
-        .fortune-mult .n { font-size:clamp(2.6rem,9vw,4.4rem); font-weight:900; line-height:1; color:#85a98f; }
-        .fortune-mult p { margin:.6rem 0 0; font-size:clamp(.95rem,2.6vw,1.2rem); color:#c9d1c6; }
-        .fortune-blocks { display:grid; grid-template-columns:repeat(9,1fr) .15fr; gap:.4rem; margin:1.75rem 0 .5rem; align-items:stretch; }
-        .fortune-blocks span { background:#85a98f; border-radius:8px; aspect-ratio:1.2; padding:.4rem .5rem; display:flex; align-items:flex-end; font-weight:800; font-size:clamp(.7rem,2.2vw,1rem); color:#2f3d47; }
-        .fortune-blocks span.edge { background:#85a98f; border-radius:2px; padding:0; aspect-ratio:auto; max-width:3px; }
-        .fortune-note { margin:.75rem 0 0; font-size:clamp(.85rem,2.4vw,1.05rem); color:#c9d1c6; }
-        .fortune-note strong { color:#fff; }
     </style>
 </head>
 <body>
@@ -1258,10 +1241,10 @@
             </div>
             <div class="banner-divider"></div>
             <div class="banner-stat">
-                <span class="banner-stat-value" id="budgetMultiple">16.4</span>
+                <span class="banner-stat-value" id="budgetMultiple">12.4</span>
                 <span class="banner-stat-unit">times the state budget</span>
                 <div class="budget-grid" id="budgetGrid"></div>
-                <span class="banner-stat-label"><span style="display:inline-block;width:8px;height:8px;background:rgba(252,196,72,0.8);border-radius:50%;vertical-align:middle;margin-right:3px;"></span> = 1 state budget <span style="white-space:nowrap;">($23.7B &middot; 2026)</span>
+                <span class="banner-stat-label"><span style="display:inline-block;width:10px;height:8px;background:rgba(168,230,176,0.5);border-radius:2px;vertical-align:middle;margin-right:3px;"></span> = 1 state budget <span style="white-space:nowrap;">($23.7B &middot; 2026)</span>
             </div>
         </div>
     </div>
@@ -1359,24 +1342,6 @@
             The number of millionaires in Hawaiʻi has steadily increased since 2010, despite tax increases.
         </p>
     </div>
-
-    <!-- Wealth of $20M+ residents vs. state tax collections -->
-    <div class="fortune-card" role="img" aria-label="The 1,245 Hawaiʻi residents worth $20 million or more hold $95.6 billion, nine times the state's annual tax collections of $10.6 billion.">
-        <p class="fortune-kicker">Hawaiʻi&rsquo;s wealthiest residents hold nine years of state taxes</p>
-        <div class="fortune-top">
-            <div>
-                <div class="fortune-big">$95.6<small>billion</small></div>
-                <p class="fortune-desc">held by the <strong>1,245 Hawaiʻi residents</strong> worth $20 million or more in 2024</p>
-            </div>
-            <div class="fortune-mult">
-                <div class="n">9&times;</div>
-                <p>the state&rsquo;s entire<br>annual tax collections</p>
-            </div>
-        </div>
-        <div class="fortune-blocks" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span class="edge"></span></div>
-        <p class="fortune-note"><strong>One block = $10.6 billion,</strong> every dollar of state tax collected in fiscal 2024: income, general excise and all other state taxes.</p>
-    </div>
-
     <p class="source">Source: Wealth-X / Altrata &mdash; Market Sizing Wealth Data for Hawaiʻi (Nov 9, 2025)</p>
 
     <!-- Narrative Section -->
@@ -1945,44 +1910,13 @@
             requestAnimationFrame(tick);
         }
 
-        function pieSVG(fill, stroke, sliceColor) {
-            // Full pie with 4 slice lines
-            const c = 8; // center
-            const r = 7; // radius
-            const lines = [0, 90, 180, 270].map(deg => {
-                const rad = (deg - 90) * Math.PI / 180;
-                const x2 = c + r * Math.cos(rad);
-                const y2 = c + r * Math.sin(rad);
-                return `<line x1="${c}" y1="${c}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${sliceColor}" stroke-width="0.5"/>`;
-            }).join('');
-            return `<svg viewBox="0 0 16 16"><circle cx="${c}" cy="${c}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="1"/>${lines}</svg>`;
-        }
-
-        function partialPieSVG(fraction) {
-            const c = 8, r = 7;
-            const deg = fraction * 360;
-            const rad = (deg - 90) * Math.PI / 180;
-            const x = c + r * Math.cos(rad);
-            const y = c + r * Math.sin(rad);
-            const large = deg > 180 ? 1 : 0;
-            const path = `M${c},${c} L${c},${c - r} A${r},${r} 0 ${large},1 ${x.toFixed(2)},${y.toFixed(2)} Z`;
-            return `<svg viewBox="0 0 16 16"><circle cx="${c}" cy="${c}" r="${r}" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)" stroke-width="1"/><path d="${path}" fill="rgba(255,255,255,0.22)"/></svg>`;
-        }
-
         function updateBudgetGrid(multiple) {
             const grid = document.getElementById('budgetGrid');
             const full = Math.floor(multiple);
             const partial = multiple - full;
-            let html = '';
-            for (let i = 0; i < full; i++) {
-                if (i === 0) {
-                    html += `<div class="budget-pie">${pieSVG('rgba(252,196,72,0.75)', 'rgba(252,196,72,0.5)', 'rgba(252,196,72,0.3)')}</div>`;
-                } else {
-                    html += `<div class="budget-pie">${pieSVG('rgba(255,255,255,0.18)', 'rgba(255,255,255,0.10)', 'rgba(255,255,255,0.07)')}</div>`;
-                }
-            }
+            let html = '<div class="budget-pie"></div>'.repeat(full);
             if (partial > 0.05) {
-                html += `<div class="budget-pie">${partialPieSVG(partial)}</div>`;
+                html += `<div class="budget-pie is-partial"><i style="width:${(partial * 100).toFixed(0)}%"></i></div>`;
             }
             grid.innerHTML = html;
         }
