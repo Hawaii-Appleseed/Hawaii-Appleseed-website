@@ -1245,7 +1245,7 @@
 
     <!-- 12.4x state budget: the banner stat's visual -->
     <div class="fortune-card" id="budgetCard" role="img" aria-label="Hawaiʻi's millionaires hold 12.4 times the state's annual budget.">
-        <p class="fortune-kicker" id="fcKicker">Hawaiʻi&rsquo;s millionaires hold 12 state budgets</p>
+        <p class="fortune-kicker" id="fcKicker">Hawaiʻi&rsquo;s millionaires hold wealth equivalent to 12.4&times; the state budget</p>
         <div class="fortune-top">
             <div>
                 <div class="fortune-big"><span id="fcWealth">$292.7</span><small>billion</small></div>
@@ -1932,8 +1932,7 @@
             document.getElementById('fcWealth').textContent = '$' + info.wealth.toFixed(1);
             document.getElementById('fcCount').textContent = info.count.toLocaleString();
             document.getElementById('fcWho').textContent = info.label;
-            const n = Math.round(multiple);
-            document.getElementById('fcKicker').textContent = `Hawaiʻi’s ${info.label} hold ${n} state budget${n === 1 ? '' : 's'}`;
+            document.getElementById('fcKicker').textContent = `Hawaiʻi’s ${info.label} hold wealth equivalent to ${multiple.toFixed(1)}× the state budget`;
         }
 
         // Summed series for the aggregate "all" view (2010–2024 counts)
