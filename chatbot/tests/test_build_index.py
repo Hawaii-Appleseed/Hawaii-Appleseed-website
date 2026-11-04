@@ -48,6 +48,8 @@ class TestimonyLinks(unittest.TestCase):
         self.assertEqual(b.testimony_url("REITs_Testimony_SB2362.txt", ""), u.format("SB", 2362))
         self.assertEqual(b.testimony_url("Something.txt", "Support for SB 3025 – Relating"), u.format("SB", 3025))
         self.assertIsNone(b.testimony_url("Wealth_Proceeds_Tax_Testimony.txt", "Dear Chair, Vice Chair"))
+        self.assertTrue(b.testimony_url("SB1035_HSG_rent_2023.txt", "").endswith("billtype=SB&billnumber=1035&year=2023"))
+        self.assertEqual(b._year("testimony/housing/SB1035_HSG_rent_2023.txt", "2026"), 2023)
 
 
 class Corpus(unittest.TestCase):

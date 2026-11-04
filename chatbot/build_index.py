@@ -555,7 +555,8 @@ def chunk(lines: list[str], target: int = 140, hard: int = 230) -> list[str]:
 
 
 def _year(rel: str, text: str) -> int | None:
-    m = re.search(r"/(20\d\d)/", rel) or re.match(r"[a-z\-]+/(20\d\d)-\d\d-\d\d_", rel)
+    m = (re.search(r"/(20\d\d)/", rel) or re.match(r"[a-z\-]+/(20\d\d)-\d\d-\d\d_", rel)
+         or re.match(r"testimony/[^/]+/.*?(?<![A-Za-z\d])(20[12]\d)(?!\d)[^/]*\.txt$", rel))
     if m:
         return int(m.group(1))
     m = re.search(r"\b(20[12]\d)\b", text[:300])
@@ -568,11 +569,13 @@ _TESTIMONY_BILL = re.compile(r"(?<![A-Z])(HB|SB|HCR|SCR|HR|SR)[ _.]*(\d{1,4})(?!
 def testimony_url(filename: str, text: str) -> str | None:
     """Testimony has no page of its own on hiappleseed.org, so link the bill's page on capitol.hawaii.gov, which lists
     every testimony submitted on it (ours included). The bill comes from the file name, else the text; the session is
-    the one the material covers (content/session.json). No bill named -> no link."""
+    the year in the file name ("HB1234_FIN_2024.txt"), else the one the material covers (content/session.json).
+    No bill named -> no link."""
     m = _TESTIMONY_BILL.search(filename.upper()) or _TESTIMONY_BILL.search(text[:2000])
     if not m:
         return None
-    year = session_year()
+    y = re.search(r"(?<![A-Za-z\d])(20[12]\d)(?!\d)", filename)
+    year = int(y.group(1)) if y else session_year()
     return ("https://www.capitol.hawaii.gov/session/measure_indiv.aspx"
             f"?billtype={m.group(1)}&billnumber={int(m.group(2))}&year={year}")
 
