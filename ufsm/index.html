@@ -348,6 +348,9 @@
         .ufsm-cost-grid {
             display: grid; grid-template-columns: 1fr; gap: 36px; align-items: center;
         }
+        /* min-width:0 lets the table scroll inside its column instead of
+           stretching the whole grid past the viewport on phones */
+        .ufsm-cost-grid > * { min-width: 0; }
         .ufsm-chart-box { position: relative; height: 320px; }
         .ufsm-chart-caption { text-align: center; font-size: 0.85rem; color: var(--ufsm-muted); margin-top: 12px; }
         .ufsm-cost-subtitle {
@@ -360,6 +363,31 @@
         .ufsm-table.ufsm-cost-table thead th { font-size: 0.98rem; text-align: center; }
         .ufsm-table.ufsm-cost-table thead th:first-child { text-align: left; }
         .ufsm-table.ufsm-cost-table td.num { color: var(--ufsm-ink); text-align: center; }
+        .ufsm-table.ufsm-cost-table td.num.tot { font-weight: 800; color: var(--ufsm-charcoal); }
+        .ufsm-table.ufsm-cost-table tbody tr { border-bottom: 2px solid var(--ufsm-green-tint); }
+
+        /* Stacked cost bars (breakfast vs. breakfast + lunch) */
+        .ufsm-cost-bars { display: flex; flex-direction: column; gap: 26px; }
+        .ufsm-cost-row-label { font-family:OkinaManrope, 'Manrope', sans-serif; font-weight: 700; color: var(--ufsm-green-deep); font-size: 1.05rem; margin-bottom: 8px; }
+        .ufsm-cost-track { display: flex; align-items: center; gap: 10px; }
+        .ufsm-cost-bar {
+            display: flex; height: 46px; width: 0; flex: 0 0 auto;
+            border-radius: 8px; overflow: hidden; background: #fff;
+            box-shadow: 0 4px 14px rgba(63, 74, 74, 0.10);
+            transition: width 1.1s ease-out;
+        }
+        .ufsm-cost-seg { display: flex; align-items: center; justify-content: center; height: 100%; min-width: 0; }
+        .ufsm-cost-seg + .ufsm-cost-seg { border-left: 2px solid #fff; }
+        .ufsm-cost-seg.family { background: var(--c-copay); }
+        .ufsm-cost-seg.added { background: var(--c-federal); }
+        .ufsm-cost-seg em { font-style: normal; font-family:OkinaManrope, 'Manrope', sans-serif; font-weight: 800; font-size: 0.95rem; color: #fff; white-space: nowrap; }
+        .ufsm-cost-total { font-family:OkinaManrope, 'Manrope', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--ufsm-charcoal); white-space: nowrap; }
+        .ufsm-cost-total--below { text-align: right; margin-top: 6px; }
+        .ufsm-cost-legend { list-style: none; padding: 0; margin: 24px 0 0; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+        .ufsm-cost-legend li { display: flex; align-items: center; gap: 8px; font-size: 0.92rem; color: var(--ufsm-ink); }
+        .ufsm-cost-legend .dot { width: 14px; height: 14px; border-radius: 3px; flex: 0 0 auto; }
+        .ufsm-cost-legend .dot.family { background: var(--c-copay); }
+        .ufsm-cost-legend .dot.added { background: var(--c-federal); }
 
         .ufsm-callout {
             background: var(--ufsm-green-tint);
@@ -648,7 +676,7 @@
             .ufsm-hero h1 { font-size: 4.6rem; }
             .ufsm-hero h1 .ufsm-hero-sub { font-size: 3rem; }
             .ufsm-why-grid { grid-template-columns: repeat(2, 1fr); gap: 48px; max-width: 900px; margin: 0 auto; }
-            .ufsm-cost-grid { grid-template-columns: 1fr 1fr; }
+            .ufsm-cost-grid { grid-template-columns: 0.85fr 1.15fr; gap: 48px; }
             .ufsm-levers { grid-template-columns: repeat(3, 1fr); }
             .ufsm-fund-title { font-size: 3.4rem; }
             .ufsm-fund-grid { grid-template-columns: 1.05fr 1fr; gap: 48px; }
@@ -742,25 +770,39 @@
         </div>
     </section>
 
-    <!-- ===== ESTIMATED COSTS — funding sources ===== -->
-    <section class="ufsm-full-width ufsm-bg-band ufsm-reveal" data-anim="pie">
+    <!-- ===== ESTIMATED COSTS — breakfast vs. breakfast + lunch ===== -->
+    <section class="ufsm-full-width ufsm-bg-band ufsm-reveal" data-anim="costs">
         <div class="ufsm-container">
-            <h2 class="ufsm-section-title">Estimated Program Costs to the State</h2>
-            <p class="ufsm-cost-subtitle">This bill would cover the cost of student co-payments for school meals&mdash;an estimated $16.3M.</p>
+            <h2 class="ufsm-section-title" style="margin-bottom:36px;">Estimated Program Costs to the State</h2>
 
             <div class="ufsm-cost-grid">
                 <div>
-                    <div class="ufsm-chart-box"><canvas id="ufsm-pie"></canvas></div>
-                    <div class="ufsm-chart-caption">DOE School Food Services Branch Revenues by Funding Source, FY2025</div>
+                    <!-- Stacked bar for breakfast + lunch ($29,427,029). The bar wrapper
+                         grows in (data-target); segments are % of the bar. -->
+                    <div class="ufsm-cost-bars" role="img" aria-label="Free breakfast plus lunch: $29.4 million total additional funds needed, $21.3 million in family revenue to replace plus $8.1 million in added participation cost.">
+                        <div class="ufsm-cost-row">
+                            <div class="ufsm-cost-row-label">Free breakfast + lunch</div>
+                            <div class="ufsm-cost-track">
+                                <div class="ufsm-cost-bar" data-target="100%">
+                                    <span class="ufsm-cost-seg family" style="width:72.41%"><em>$21.3M</em></span>
+                                    <span class="ufsm-cost-seg added" style="width:27.59%"><em>$8.1M</em></span>
+                                </div>
+                            </div>
+                            <div class="ufsm-cost-total ufsm-cost-total--below">$29.4M total</div>
+                        </div>
+                    </div>
+                    <ul class="ufsm-cost-legend">
+                        <li><span class="dot family"></span>Family revenue to replace</li>
+                        <li><span class="dot added"></span>Added participation cost (10% increase)</li>
+                    </ul>
                 </div>
                 <div>
                     <div class="ufsm-table-scroll">
                         <table class="ufsm-table ufsm-cost-table">
-                            <thead><tr><th></th><th>Current Participation Levels</th><th>Projected Participation Rates<span class="ufsm-fn ufsm-fn--right" tabindex="0" data-tip="Assumes a 10% increase for breakfast and lunch over the SY24-25 average daily participation rates.">1</span></th></tr></thead>
+                            <thead><tr><th></th><th>Family Revenue to Replace</th><th>Added Participation Cost (10% increase)</th><th>Total Additional Funds Needed</th></tr></thead>
                             <tbody>
-                                <tr><td class="rowlabel">HIDOE Schools only</td><td class="num">$16,319,370</td><td class="num">$31,182,471</td></tr>
-                                <tr><td class="rowlabel">Public Charter Schools only</td><td class="num">$1,368,947</td><td class="num">N/A</td></tr>
-                                <tr class="total"><td class="rowlabel">Total</td><td class="num">$17,688,317</td><td class="num">$32,551,418</td></tr>
+                                <tr><td class="rowlabel">Free breakfast</td><td class="num">$2,318,218</td><td class="num">$1,461,630</td><td class="num tot">$3,779,849</td></tr>
+                                <tr><td class="rowlabel">Free breakfast + lunch</td><td class="num">$21,308,493</td><td class="num">$8,118,536</td><td class="num tot">$29,427,029</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -780,12 +822,12 @@
                         <div class="ufsm-fund-lever">
                             <p class="lead"><strong>By taxing wealth like work,</strong> closing the capital gains tax loophole for individuals and corporations would bring in up to</p>
                             <div class="amt">$85M</div>
-                            <p class="note">in annual revenue.<span class="ufsm-fn" tabindex="0" data-tip="Institute on Taxation and Economic Policy, January 2025.">2</span></p>
+                            <p class="note">in annual revenue.<span class="ufsm-fn" tabindex="0" data-tip="Institute on Taxation and Economic Policy, January 2025.">1</span></p>
                         </div>
                         <div class="ufsm-fund-lever">
                             <p class="lead"><strong>By raising the corporate income tax</strong> to a flat 9%, the state could bring in up to</p>
                             <div class="amt">$185M</div>
-                            <p class="note">in annual revenue.<span class="ufsm-fn" tabindex="0" data-tip="Hawaiʻi Appleseed, Funding Hawaiʻi&rsquo;s Future, October 2023, p. 8.">3</span></p>
+                            <p class="note">in annual revenue.<span class="ufsm-fn" tabindex="0" data-tip="Hawaiʻi Appleseed, Funding Hawaiʻi&rsquo;s Future, October 2023, p. 8.">2</span></p>
                         </div>
                     </div>
                 </div>
@@ -879,7 +921,7 @@
                         </svg>
                         <div class="ufsm-gauge-num" id="ufsm-gauge-num">0%</div>
                     </div>
-                    <p>of students nationally who were denied free or reduced-price meals were actually eligible to receive them.<span class="ufsm-fn" tabindex="0" data-tip="U.S. Department of Agriculture, Third Access, Participation, Eligibility, and Certification Study, September 2021.">4</span></p>
+                    <p>of students nationally who were denied free or reduced-price meals were actually eligible to receive them.<span class="ufsm-fn" tabindex="0" data-tip="U.S. Department of Agriculture, Third Access, Participation, Eligibility, and Certification Study, September 2021.">3</span></p>
                     <p>Language barriers, problems providing income records, and fear of disclosing information can prevent families from completing the application accurately &mdash; or at all.</p>
                 </div>
 
@@ -888,7 +930,7 @@
                     <h3>Teachers are affected, too</h3>
                     <div class="ufsm-quotemark" aria-hidden="true">&ldquo;</div>
                     <p>When students don't eat, teachers often have to provide their own snacks &mdash; paid for out of pocket.</p>
-                    <p style="font-style:italic; color:var(--ufsm-charcoal); background:var(--ufsm-green-tint); border-radius:12px; padding:18px 20px;">"Every classroom in every school I have worked in has a snack drawer&hellip; the contents provided by the teacher. The teachers see a need to provide food and nourishment for students, so they do."<span class="ufsm-fn" tabindex="0" data-tip="Sarah Fukuzono, educational assistant at a Hawaiʻi public school, in testimony before the Hawaiʻi State House Committee on Education, 2023.">5</span></p>
+                    <p style="font-style:italic; color:var(--ufsm-charcoal); background:var(--ufsm-green-tint); border-radius:12px; padding:18px 20px;">"Every classroom in every school I have worked in has a snack drawer&hellip; the contents provided by the teacher. The teachers see a need to provide food and nourishment for students, so they do."<span class="ufsm-fn" tabindex="0" data-tip="Sarah Fukuzono, educational assistant at a Hawaiʻi public school, in testimony before the Hawaiʻi State House Committee on Education, 2023.">4</span></p>
                 </div>
             </div>
         </div>
@@ -1095,91 +1137,15 @@
         }
 
         function animateFills(scope) {
-            (scope || document).querySelectorAll('.ufsm-gap-fill, .ufsm-lever-fill').forEach(function (el) {
+            (scope || document).querySelectorAll('.ufsm-gap-fill, .ufsm-lever-fill, .ufsm-cost-bar').forEach(function (el) {
                 var t = el.getAttribute('data-target');
                 if (t) el.style.width = t;
             });
         }
 
         /* ---------- Chart.js ---------- */
-        var pieDone = false, barDone = false;
-        var pieChart = null, barChart = null;
-        function initPie() {
-            if (pieDone || typeof Chart === 'undefined') return;
-            var ctx = document.getElementById('ufsm-pie');
-            if (!ctx) return;
-            pieDone = true;
-            // Clockwise from top: co-pays, then the small "other" sliver, then Federal, then General.
-            // Per source: the small sliver + the $16.3M co-pay slice together = $20,042,347
-            // (so the sliver = $3,742,347).
-            var labels = ['Student co-pays', 'Other', 'Federal funds', 'General funds'];
-            var values = [16.3, 3.742347, 41.6, 63.3];
-            var colors = [getVar('--c-copay'), '#3F7E3F', getVar('--c-federal'), getVar('--c-general')];
-            var hasLabels = (typeof ChartDataLabels !== 'undefined');
-            var teal = getVar('--c-copay'), tealDeep = '#1B6E6E';
-            function roundRect(c, x, y, w, h, r) {
-                if (c.roundRect) { c.beginPath(); c.roundRect(x, y, w, h, r); return; }
-                c.beginPath(); c.moveTo(x + r, y);
-                c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r);
-                c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath();
-            }
-            // Soft callout chip for the co-pays slice (white chip + shadow, $ dominant, leader line)
-            var copayCallout = {
-                id: 'copayCallout',
-                afterDatasetsDraw: function (chart) {
-                    var arc = chart.getDatasetMeta(0).data[0];
-                    if (!arc) return;
-                    var p = arc.getProps(['x', 'y', 'startAngle', 'endAngle', 'outerRadius'], true);
-                    var mid = (p.startAngle + p.endAngle) / 2;
-                    var ex = p.x + Math.cos(mid) * p.outerRadius;
-                    var ey = p.y + Math.sin(mid) * p.outerRadius;
-                    var c = chart.ctx, w = 124, h = 44, pad = 6, top = 6;
-                    var cx = Math.min(Math.max(ex, pad + w / 2), chart.width - pad - w / 2);
-                    var left = cx - w / 2;
-                    c.save();
-                    c.strokeStyle = teal; c.lineWidth = 1.5;
-                    c.beginPath(); c.moveTo(ex, ey); c.lineTo(cx, top + h); c.stroke();
-                    c.fillStyle = teal; c.beginPath(); c.arc(ex, ey, 3, 0, Math.PI * 2); c.fill();
-                    c.shadowColor = 'rgba(63,74,74,0.22)'; c.shadowBlur = 12; c.shadowOffsetY = 4;
-                    c.fillStyle = '#fff'; roundRect(c, left, top, w, h, 11); c.fill();
-                    c.shadowColor = 'transparent'; c.shadowBlur = 0; c.shadowOffsetY = 0;
-                    c.textAlign = 'center';
-                    c.fillStyle = '#7C8A80'; c.font = '600 9.5px Poppins, sans-serif';
-                    c.fillText('STUDENT CO-PAYS', cx, top + 17);
-                    c.fillStyle = tealDeep; c.font = '800 20px Manrope, sans-serif';
-                    c.fillText('$16.3M', cx, top + 37);
-                    c.restore();
-                }
-            };
-            pieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        data: values,
-                        backgroundColor: colors,
-                        borderColor: '#fff', borderWidth: 2, hoverOffset: 6,
-                        offset: function (c) { return c.dataIndex === 0 ? 18 : 0; } // explode the co-pays slice
-                    }]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    layout: { padding: { top: 54, right: 20, bottom: 18, left: 20 } },
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: { callbacks: { label: function (c) { return c.label + ': $' + c.parsed.toFixed(1) + 'M'; } } },
-                        datalabels: hasLabels ? {
-                            display: function (c) { return c.dataIndex !== 0 && c.dataset.data[c.dataIndex] >= 10; },
-                            textAlign: 'center', color: '#3F4A4A', anchor: 'center', align: 'center',
-                            font: { family: 'Poppins, sans-serif', weight: '600', size: 12.5 },
-                            formatter: function (v, c) { return c.chart.data.labels[c.dataIndex] + '\n$' + v + 'M'; }
-                        } : undefined
-                    }
-                },
-                plugins: (hasLabels ? [ChartDataLabels] : []).concat([copayCallout])
-            });
-        }
-
+        var barDone = false;
+        var barChart = null;
         function initBar() {
             if (barDone || typeof Chart === 'undefined') return;
             var ctx = document.getElementById('ufsm-bar');
@@ -1241,7 +1207,7 @@
         /* ---------- Scroll reveal + triggers ---------- */
         function triggerAnim(el) {
             var anim = el.getAttribute('data-anim');
-            if (anim === 'pie') initPie();
+            if (anim === 'costs') { animateFills(el); }
             if (anim === 'bar') initBar();
             if (anim === 'why') { animateFills(el); animateGauge(); }
             if (anim === 'levers') { animateFills(el); }
@@ -1293,19 +1259,19 @@
         });
 
         // Charts live in always-open sections — initialize on load (robust; guarded).
-        // Chart.js and its datalabels plugin come from a CDN, and initPie/initBar
+        // Chart.js and its datalabels plugin come from a CDN, and initBar
         // bail out when the library is not there yet. Embedded in a host page those
         // scripts can finish loading AFTER the reveal and load hooks have already
         // run, and nothing would ever retry — leaving the charts permanently blank.
         // Poll until the library shows up (both init functions are idempotent).
         var chartTries = 0;
         (function waitForChart() {
-            if (typeof Chart !== 'undefined') { initPie(); initBar(); return; }
+            if (typeof Chart !== 'undefined') { initBar(); return; }
             if (chartTries++ < 40) { setTimeout(waitForChart, 300); }
         })();
 
         window.addEventListener('load', function () {
-            setTimeout(function () { initPie(); initBar(); }, 150);
+            setTimeout(function () { initBar(); }, 150);
 
             // Safety net: never leave at/above-the-fold content hidden if the
             // observer somehow doesn't fire. Below-fold sections still wait for scroll.
@@ -1331,7 +1297,7 @@
         // the capture layout has settled — see the call site below for why once is
         // not enough.
         function fitCharts() {
-            [pieChart, barChart].forEach(function (ch) {
+            [barChart].forEach(function (ch) {
                 if (!ch) return;
                 ch.options.animation = false;
                 ch.resize();
@@ -1353,7 +1319,6 @@
                 e.style.transform = 'none';
             });
 
-            initPie();
             initBar();
             // Redraw the charts with animation switched off so they can't be caught
             // half-drawn — this previously relied on Chart.js's own ~1s entrance
@@ -1365,7 +1330,7 @@
             fitCharts();
 
             animateFills(document);
-            document.querySelectorAll('.ufsm-gap-fill, .ufsm-lever-fill').forEach(function (e) { e.style.transition = 'none'; });
+            document.querySelectorAll('.ufsm-gap-fill, .ufsm-lever-fill, .ufsm-cost-bar').forEach(function (e) { e.style.transition = 'none'; });
 
             var arc = document.getElementById('ufsm-gauge-arc');
             var num = document.getElementById('ufsm-gauge-num');
@@ -1395,7 +1360,7 @@
                 e.style.animation = 'none';
                 e.style.opacity = '1';
             });
-            document.querySelectorAll('.ufsm-gap-fill, .ufsm-lever-fill').forEach(function (e) { e.style.transition = ''; });
+            document.querySelectorAll('.ufsm-gap-fill, .ufsm-lever-fill, .ufsm-cost-bar').forEach(function (e) { e.style.transition = ''; });
             var arc = document.getElementById('ufsm-gauge-arc');
             if (arc) { arc.style.transition = ''; }
             // Re-measure the charts against the RESTORED layout. Capture runs with
@@ -1403,7 +1368,6 @@
             // so a chart resized during capture would otherwise stay stuck at the
             // capture-time size — leaving a shrunken or near-invisible chart behind
             // on the live page. Runs after the class has been removed by .finally().
-            if (pieChart) { pieChart.options.animation = undefined; pieChart.resize(); }
             if (barChart) { barChart.options.animation = undefined; barChart.resize(); }
             setFullBleedWidth();
         }
