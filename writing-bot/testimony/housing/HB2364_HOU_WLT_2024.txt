@@ -1,0 +1,66 @@
+\\LEJ-SERVER\Server Share Drive\Admin\Logos\GREEN\Horizontal.png 
+
+Testimony of the Hawaiʻi Appleseed Center for Law and Economic Justice
+Support for H.B. 2364 HD2 – Relating to Conveyance Tax
+Senate Committee on Housing and Water & Land
+Tuesday, March 19, 2024 at 1:00PM Conf. Rm. 225 and via Videoconference
+                                                                                                
+Dear Chair Chang, Vice Chair Hashimoto, Chair Inouye, Vice Chair Elefante, and fellow committees members: 
+
+Thank you for the opportunity to express our STRONG SUPPORT for H.B. 2364 HD2, which will increase the rates of conveyance tax starting at sales of $2,000,000 and above for non owner occupied and $6,000,000 for owner occupied sales. HB2364 HD2 also creates a dedicated 10% allocation to the Dwelling Unit Revolving Fund (DURF). We also offer suggested amendments to include language which would exempt affordable housing from HB2364 HD2.
+The Dwelling Unit Revolving Fund (DURF), established in 1970, supports infrastructure investments connected to housing development, crucial for maintaining housing production aligned with our increasing demand. Hawaii was given a D+ rating by the American Society of Civil Engineers in the “2019 Hawaii Infrastructure Report Card”[1]. Lack of adequate infrastructure further exacerbates delays to our needed additional housing construction. Increasing funding to DURF is necessary to reach the housing goals across the state. Hawaiʻi Appleseed commends the legislature for proposing a 10% dedicated fund from high cost property sales to address our infrastructure needs.
+Hawaiʻi Appleseed would also like to suggest amendments to H.B. 2364 HD1. Specifically, replace the language in exemption 18 with language which would exempt affordable housing from conveyance tax. Currently exemption 18 is more appropriate for property tax than conveyance tax and would be difficult to provide proof, it is much better to simply exempt affordable housing projects from the conveyance tax. Suggested language for amendment changes:
+Delete:    “(18)  Any document or instrument conveying real property to an individual who is an owner-occupant or renter-occupant of the property; provided the individual does not have a direct or indirect ownership interest in any other real property, including through ownership interest in a trust, partnership, corporation, limited liability company, or other entity."
+Add: “(18) Any document or instrument conveying real property that has a land use regulatory agreement or restrictive covenant that restricts the rental price or resale price from increasing above any increase in the consumer price index for a minimum of thirty years beyond the conveyance date."
+Increasing conveyance tax rates, removing caps on RHRF and LCF, and creating a dedicated DURF fund can provide millions of dollars to address some of the most pressing barriers to providing affordable housing to residents today. Including language to exempt affordable housing is additionally beneficial and can encourage the construction and sale of affordable units.
+It is imperative that we create a dedicated source of funding for DURF in order to meet our housing needs. Most recent estimate of infrastructure funding for pilot projects[2] on each island are:
+        Hawaii County: $461.7M
+        Maui County: $7.3M
+        Honolulu City & County: $667M
+        Kauai County: $8M
+
+Without dedicated funding for DURF we will continue to struggle to provide necessary new housing in a timely manner.
+Additionally, we recommend adjustments to the rate changes as well. Starting the rate of conveyance on sales of $4,000,000 properties and above at 2%. Our research has shown that the vast majority of properties sold and purchased at these high sales points are by investment owners and not residents. Our rate change suggestions are highlighted in the table below.
+Hawaii Appleseed Recommendations to HB 2364 tax rates: 
+Rate
+	< $600K
+	$600K- $1M
+	$1M- $2M
+	$2M- $4M
+	$4M- $6M
+	$6M- $10M
+	$10M- $14M
+	$14M- $18M
+	$18M- $22M
+	$22M- $26M
+	$26M+
+	Owner Occupied
+	0.10%
+	0.20%
+	0.30%
+	0.50%
+	2.00%
+	2.50%
+	3.00%
+	4.00%
+	5.00%
+	6.00%
+	7.00%
+	Non Owner Occupied
+	0.15%
+	0.25%
+	0.40%
+	1.00%
+	2.00%
+	2.50%
+	3.00%
+	4.00%
+	5.00%
+	6.00%
+	7.00%
+	Increasing the rates on properties sold at $4,000,000 and above in this way and removing the caps on all special funds could potentially triple the revenue collected by the conveyance tax without significant reduction of revenue deposited into the General Fund.
+We appreciate the opportunity to testify on this proposal and urge the committees to support H.B. 2364 HD1 and its objectives of promoting fairness in our tax system, fostering affordable housing opportunities, and strengthening our communities. By enacting this legislation, we can take significant strides towards building a more inclusive and equitable future for all residents of Hawaii.
+Mahalo for your consideration.
+________________
+[1] ASCE, “2019 Hawaii Infrastructure Report Card”, https://infrastructurereportcard.org/wp-content/uploads/2021/07/ASCE-24199_Full-REPORT-2019-FINAL.pdf 
+[2] https://files.hawaii.gov/dbedt/op/lud/Reports/TOD_InfraFin_Strategy_20231221.pdf
