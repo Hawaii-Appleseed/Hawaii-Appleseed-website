@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { cleanMessages, finalize, handleChat } from "../src/handler.js";
 import { isLegalHelpRequest, LEGAL_REPLY } from "../src/legal.js";
-import { queryFor, search } from "../src/retrieve.js";
+import { kindAsked, queryFor, search } from "../src/retrieve.js";
 import { tokenize } from "../src/tokenize.js";
 
 const here = new URL(".", import.meta.url);
@@ -106,6 +106,42 @@ test("retrieval: topical queries find the right documents", () => {
   assert.match(top("conveyance tax DHHL"), /conveyance/);
   assert.match(top("SNAP certification period ESAP"), /snap/);
   assert.equal(search(index, "the of and").length, 0);
+});
+
+test("retrieval: a question about one blog post or testimony gets the whole piece, in reading order", () => {
+  const whole = (q) => {
+    const hits = search(index, q);
+    const first = hits[0];
+    const all = index.chunks.filter((c) => (c.u ?? c.t) === (first.u ?? first.t));
+    return { hits, first, n: hits.filter((h) => (h.u ?? h.t) === (first.u ?? first.t)).length, total: all.length, all };
+  };
+  const blog = whole("What did your blog say about the billionaire tax California is debating?");
+  assert.equal(blog.first.k, "blog");
+  assert.match(blog.first.t, /billionaire tax California/);
+  assert.equal(blog.n, Math.min(blog.total, 10)); // the whole post, not 2 fragments
+  assert.deepEqual(blog.hits.slice(0, blog.n).map((h) => h.x), blog.all.slice(0, blog.n).map((c) => c.x)); // in order
+  assert.ok(blog.hits.length > blog.n, "other sources still follow the focused piece");
+  // The post whose title names the topic beats one that only mentions it.
+  assert.match(whole("What does Appleseed's blog say about keiki ride free?").first.t, /^Keiki Ride Free/);
+  const t = whole("What did Appleseed testify on the medical debt bill?");
+  assert.equal(t.first.k, "testimony");
+  assert.match(t.first.u, /billtype=SB&billnumber=3025&year=20\d\d$/);
+});
+
+test("retrieval: no focused piece for broad or practical questions", () => {
+  for (const q of ["How do I testify at the Legislature?", "How can I submit written testimony on a bill?", "food stamps", "rent control"]) {
+    assert.ok(search(index, q).length <= 6, q);
+  }
+  assert.equal(kindAsked("How do I testify at the Legislature?"), null);
+  assert.equal(kindAsked("What did you testify on HB2458?"), "testimony");
+  assert.equal(kindAsked("Summarize your latest blog post"), "blog");
+  assert.equal(kindAsked("What is the minimum wage?"), null);
+});
+
+test("index: testimony on a bill links that bill's capitol.hawaii.gov page; general testimony has no link", () => {
+  const t = index.chunks.filter((c) => c.k === "testimony");
+  assert.ok(t.filter((c) => c.u).length >= 0.8 * t.length);
+  for (const c of t.filter((c) => c.u)) assert.match(c.u, /^https:\/\/www\.capitol\.hawaii\.gov\/session\/measure_indiv\.aspx\?billtype=(HB|SB|HCR|SCR|HR|SR)&billnumber=\d+&year=20\d\d$/);
 });
 
 test("retrieval: a short follow-up reuses the previous question", () => {

@@ -562,6 +562,21 @@ def _year(rel: str, text: str) -> int | None:
     return int(m.group(1)) if m else None
 
 
+_TESTIMONY_BILL = re.compile(r"(?<![A-Z])(HB|SB|HCR|SCR|HR|SR)[ _.]*(\d{1,4})(?!\d)")
+
+
+def testimony_url(filename: str, text: str) -> str | None:
+    """Testimony has no page of its own on hiappleseed.org, so link the bill's page on capitol.hawaii.gov, which lists
+    every testimony submitted on it (ours included). The bill comes from the file name, else the text; the session is
+    the one the material covers (content/session.json). No bill named -> no link."""
+    m = _TESTIMONY_BILL.search(filename.upper()) or _TESTIMONY_BILL.search(text[:2000])
+    if not m:
+        return None
+    year = session_year()
+    return ("https://www.capitol.hawaii.gov/session/measure_indiv.aspx"
+            f"?billtype={m.group(1)}&billnumber={int(m.group(2))}&year={year}")
+
+
 def corpus_docs(skipped: Counter):
     for kind, pattern in (("publication", "publications/*.txt"),
                           ("blog", "blog-posts/*/*.txt"),
@@ -585,6 +600,7 @@ def corpus_docs(skipped: Counter):
             if kind == "testimony":
                 title = f"Hawaiʻi Appleseed testimony: {title}"
                 stance = sources.document_stance(rel)
+                ref = {**ref, "url": ref["url"] or testimony_url(p.name, text)}
             if kind == "publication":
                 body = text.split("=" * 10, 1)[-1]
             else:

@@ -39,6 +39,17 @@ class Content(unittest.TestCase):
         self.assertIn("Conveyance tax modernization", titles)
 
 
+class TestimonyLinks(unittest.TestCase):
+    def test_bill_from_file_name_then_text(self):
+        y = b.session_year()
+        u = "https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype={}&billnumber={}&year=" + str(y)
+        self.assertEqual(b.testimony_url("HB2010_Testimony.txt", "HR 1 text"), u.format("HB", 2010))  # "_" is not a boundary
+        self.assertEqual(b.testimony_url("HR86_HCR94_Farm.txt", ""), u.format("HR", 86))
+        self.assertEqual(b.testimony_url("REITs_Testimony_SB2362.txt", ""), u.format("SB", 2362))
+        self.assertEqual(b.testimony_url("Something.txt", "Support for SB 3025 – Relating"), u.format("SB", 3025))
+        self.assertIsNone(b.testimony_url("Wealth_Proceeds_Tax_Testimony.txt", "Dear Chair, Vice Chair"))
+
+
 class Corpus(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
