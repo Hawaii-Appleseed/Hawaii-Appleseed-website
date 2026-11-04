@@ -1,0 +1,50 @@
+\\LEJ-SERVER\Server Share Drive\Admin\Logos\GREEN\Horizontal.png 
+Testimony of the Hawaiʻi Appleseed Center for Law and Economic Justice
+Support for HB 464 – Relating to Housing
+House Committee on Housing
+Friday, January 31, 2025 at 9:15AM Conf. Rm. 430  and via Videoconference
+________________
+
+Aloha Chair Evslin, Vice Chair Miyake, and members of the committee;
+Mahalo for the opportunity to testify in strong support of HB 464, which would strengthen notice requirements prior to end of rental agreements for rental terminations and rent increases in Hawaii. 
+
+This bill would require notification periods for rent increases of:
+* 60 days written notice for any tenancy over 90 days 
+
+And would establish or increase notification for tenancy terminations to:
+* 90 days' written notice for tenancies of 3 years or more
+* 60 days' written notice for tenancies less than 3 years[a]
+* 15 days' written notice for tenancies less than month-to-month
+
+This bill addresses a critical gap in Hawaii's landlord-tenant code that currently leaves many renters vulnerable to sudden displacement. Under existing law, landlords are required to provide minimal advance notice before declining to renew a fixed-term lease, even for tenants in good standing. This lack of protection creates significant housing instability for Hawaii's working families.
+
+HB464 establishes critical guidelines for both landlords and tenants, ensuring transparency and fairness in rental agreements. Providing ample notice periods for rent increases and termination of rental agreements is essential for tenants to plan their housing arrangements and for landlords to manage their properties effectively. 
+
+In areas like Hawaii, where rental housing supply is constrained and demand is high, tenants often encounter difficulties securing alternative housing options within the standard notice periods. Without these protections, the 40% of households who rent their homes in Hawaii are vulnerable to sudden displacement. 
+
+Housing instability and displacement can cause significant financial and emotional hardship. When families are forced to move with little notice, it impacts their employment, their children's education, and their overall wellbeing. Research from the Urban Institute shows that housing instability is linked to negative health outcomes, lower academic achievement, and reduced earning potential.
+
+Hawaii's tight rental market makes sudden moves particularly burdensome. Residential vacancy rates are an indicator of how flexible a housing market is and the mobility options for residents, which determines how easy it would be to secure new housing. This rate is determined by the number of units that are available in the rental or for-sale market. Typically a “good” vacancy rate is considered to be between 5-8%.[1] Calculating residential vacancy rate using census bureau data, Hawaii has a true residential vacancy rate (excluding vacancies that are not available in the market such as seasonal, short term, or rented/sold but unoccupied units) of just 2.7%.[2] This implies securing new housing quickly in Hawaii is extremely challenging. The barrier is even worse for low income individuals, where the average wait for subsidized housing is nearly 2 years.[3] Yet current law provides no minimum notice period for fixed-term lease non-renewals outside of month to month rentals.
+
+The economic and emotional burden of sudden moves is severe. Beyond rent, tenants face substantial costs including:
+* Security deposits (typically first months rent): $3000[4].
+* Application fees: $20-$75 or any “cost of obtaining information about the applicant[5]”.
+* Lost wages from taking time off to search for housing and move, which could take anywhere from 1-3 days to fully move and could cost $120-$360 for a minimum wage person.
+* Replacement expenses due from loss of possessions associated with sudden moves and emotional expense of losing items which cannot be replaced.
+
+Extending the notice requirements for rental increases and tenancy terminations can greatly assist asset-limited families in preparing for increased housing costs or finding alternative housing with ample time before the end of the lease agreement. 
+
+The proposed 60-90 day notice requirements align with best practices from other high-cost rental markets. Similar protections have proven effective in other jurisdictions such as Seattle and Portland. These cities have implemented "just cause" eviction protections that include longer notice requirements which has resulted in 15-20% reduction in displacement rates.
+
+As Hawaii continues to face severe rental housing shortages, preventing displacement is critical in ensuring that households remain housed and their displacement doesn’t cause further stress onto our tight rental market. 
+
+We urge the committee to pass HB 464 to help prevent unnecessary displacement and support housing security for Hawaii's asset limited, renting families.
+
+Mahalo for the opportunity to testify on HB464.
+________________
+[1]https://www.nccor.org/tools-econindicators/healthy-economies/vacancy-rate-residential/#:~:text=The%20percentage%20of%20residential%20property,is%20between%205%E2%80%938%25. 
+[2]https://data.census.gov/table/ACSDT1Y2022.B25004?q=vacancy&g=040XX00US15_050XX00US15003. 
+[3] https://usafacts.org/answers/how-long-do-people-wait-for-subsidized-housing/state/hawaii/ 
+[4] https://www.zillow.com/rental-manager/market-trends/hi/ “Average Rent of All Property Types in Hawaii”
+[5] https://www.capitol.hawaii.gov/sessions/session2023/bills/GM1303_.PDF “Act 200 (SLH2023)”
+[a]Concerns that they need to amend language because less than month to month lease language might supersede the less than 3 years language for cumulative stays - unsure how often this occurs though.
