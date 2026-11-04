@@ -475,34 +475,18 @@
         #ha-ufsm-embed .ufsm-drop-panel{ max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
         #ha-ufsm-embed .ufsm-drop-panel-inner{ padding-top: 18px; }
 
-        /* ===== Costs: charts + tables ===== */
-        #ha-ufsm-embed .ufsm-cost-grid{
-            display: grid; grid-template-columns: 1fr; gap: 36px; align-items: center;
-        }
-        /* min-width:0 lets the table scroll inside its column instead of
-           stretching the whole grid past the viewport on phones */
-        #ha-ufsm-embed .ufsm-cost-grid > *{ min-width: 0; }
+        /* ===== Costs: charts ===== */
         #ha-ufsm-embed .ufsm-chart-box{ position: relative; height: 320px; }
         #ha-ufsm-embed .ufsm-chart-caption{ text-align: center; font-size: 0.85rem; color: var(--ufsm-muted); margin-top: 12px; }
-        #ha-ufsm-embed .ufsm-cost-subtitle{
-            font-family:OkinaManrope, 'Manrope', sans-serif; font-weight: 800; font-size: 1.5rem;
-            color: var(--ufsm-green); line-height: 1.25; max-width: 680px; margin: 0 0 36px;
-        }
-        #ha-ufsm-embed .ufsm-cost-table .rowlabel{ font-family:OkinaManrope, 'Manrope', sans-serif; font-weight: 700; color: var(--ufsm-green-deep); }
-        #ha-ufsm-embed .ufsm-table.ufsm-cost-table{ font-size: 1.1rem; }
-        #ha-ufsm-embed .ufsm-table.ufsm-cost-table th, #ha-ufsm-embed .ufsm-table.ufsm-cost-table td{ padding: 8px 14px; }
-        #ha-ufsm-embed .ufsm-table.ufsm-cost-table thead th{ font-size: 0.98rem; text-align: center; }
-        #ha-ufsm-embed .ufsm-table.ufsm-cost-table thead th:first-child{ text-align: left; }
-        #ha-ufsm-embed .ufsm-table.ufsm-cost-table td.num{ color: var(--ufsm-ink); text-align: center; }
-        #ha-ufsm-embed .ufsm-table.ufsm-cost-table td.num.tot{ font-weight: 800; color: var(--ufsm-charcoal); }
-        #ha-ufsm-embed .ufsm-table.ufsm-cost-table tbody tr{ border-bottom: 2px solid var(--ufsm-green-tint); }
 
-        /* Stacked cost bars (breakfast vs. breakfast + lunch) */
-        #ha-ufsm-embed .ufsm-cost-bars{ display: flex; flex-direction: column; gap: 26px; }
-        #ha-ufsm-embed .ufsm-cost-row-label{ font-family:OkinaManrope, 'Manrope', sans-serif; font-weight: 700; color: var(--ufsm-green-deep); font-size: 1.05rem; margin-bottom: 8px; }
-        #ha-ufsm-embed .ufsm-cost-track{ display: flex; align-items: center; gap: 10px; }
+        /* Stacked cost bars (breakfast vs. breakfast + lunch) \2014  not to scale; see .ufsm-cost-note */
+        #ha-ufsm-embed .ufsm-cost-bars{ display: flex; flex-direction: column; gap: 40px; max-width: 980px; }
+        #ha-ufsm-embed .ufsm-cost-head{ display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+        #ha-ufsm-embed .ufsm-cost-row-label{ font-family:OkinaManrope, 'Manrope', sans-serif; font-weight: 700; color: var(--ufsm-green-deep); font-size: 1.2rem; }
+        #ha-ufsm-embed .ufsm-cost-total{ font-family:OkinaManrope, 'Manrope', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--ufsm-charcoal); white-space: nowrap; }
+        #ha-ufsm-embed .ufsm-cost-total small{ display: block; text-align: right; font-family:OkinaPoppins, 'Poppins', sans-serif; font-weight: 500; font-size: 0.5em; color: var(--ufsm-muted); letter-spacing: 0.3px; }
         #ha-ufsm-embed .ufsm-cost-bar{
-            display: flex; height: 46px; width: 0; flex: 0 0 auto;
+            display: flex; height: 52px; width: 0;
             border-radius: 8px; overflow: hidden; background: #fff;
             box-shadow: 0 4px 14px rgba(63, 74, 74, 0.10);
             transition: width 1.1s ease-out;
@@ -511,14 +495,21 @@
         #ha-ufsm-embed .ufsm-cost-seg + .ufsm-cost-seg{ border-left: 2px solid #fff; }
         #ha-ufsm-embed .ufsm-cost-seg.family{ background: var(--c-copay); }
         #ha-ufsm-embed .ufsm-cost-seg.added{ background: var(--c-federal); }
-        #ha-ufsm-embed .ufsm-cost-seg em{ font-style: normal; font-family:OkinaManrope, 'Manrope', sans-serif; font-weight: 800; font-size: 0.95rem; color: #fff; white-space: nowrap; }
-        #ha-ufsm-embed .ufsm-cost-total{ font-family:OkinaManrope, 'Manrope', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--ufsm-charcoal); white-space: nowrap; }
-        #ha-ufsm-embed .ufsm-cost-total--below{ text-align: right; margin-top: 6px; }
-        #ha-ufsm-embed .ufsm-cost-legend{ list-style: none; padding: 0; margin: 24px 0 0; display: flex; flex-wrap: wrap; gap: 8px 22px; }
-        #ha-ufsm-embed .ufsm-cost-legend li{ display: flex; align-items: center; gap: 8px; font-size: 0.92rem; color: var(--ufsm-ink); }
-        #ha-ufsm-embed .ufsm-cost-legend .dot{ width: 14px; height: 14px; border-radius: 3px; flex: 0 0 auto; }
-        #ha-ufsm-embed .ufsm-cost-legend .dot.family{ background: var(--c-copay); }
-        #ha-ufsm-embed .ufsm-cost-legend .dot.added{ background: var(--c-federal); }
+        #ha-ufsm-embed .ufsm-cost-seg em{ font-style: normal; font-family:OkinaManrope, 'Manrope', sans-serif; font-weight: 800; font-size: 1rem; color: #fff; white-space: nowrap; }
+        /* exact figures under each bar, so the small breakfast bar still reads */
+        #ha-ufsm-embed .ufsm-cost-break{ list-style: none; padding: 0; margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 6px 26px; }
+        #ha-ufsm-embed .ufsm-cost-break li{ display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: var(--ufsm-ink); }
+        #ha-ufsm-embed .ufsm-cost-break strong{ font-family:OkinaManrope, 'Manrope', sans-serif; font-weight: 800; color: var(--ufsm-charcoal); }
+        #ha-ufsm-embed .ufsm-cost-break .dot{ width: 14px; height: 14px; border-radius: 3px; flex: 0 0 auto; }
+        #ha-ufsm-embed .ufsm-cost-break .dot.family{ background: var(--c-copay); }
+        #ha-ufsm-embed .ufsm-cost-break .dot.added{ background: var(--c-federal); }
+        #ha-ufsm-embed .ufsm-cost-note{ font-size: 0.85rem; font-style: italic; color: var(--ufsm-muted); margin: 32px 0 0; }
+        @media (max-width: 767px) {
+            #ha-ufsm-embed .ufsm-cost-bars{ gap: 32px; }
+            #ha-ufsm-embed .ufsm-cost-row-label{ font-size: 1.05rem; }
+            #ha-ufsm-embed .ufsm-cost-total{ font-size: 1.25rem; }
+            #ha-ufsm-embed .ufsm-cost-break{ flex-direction: column; }
+        }
 
         #ha-ufsm-embed .ufsm-callout{
             background: var(--ufsm-green-tint);
@@ -796,7 +787,6 @@
             #ha-ufsm-embed .ufsm-hero h1{ font-size: 4.6rem; }
             #ha-ufsm-embed .ufsm-hero h1 .ufsm-hero-sub{ font-size: 3rem; }
             #ha-ufsm-embed .ufsm-why-grid{ grid-template-columns: repeat(2, 1fr); gap: 48px; max-width: 900px; margin: 0 auto; }
-            #ha-ufsm-embed .ufsm-cost-grid{ grid-template-columns: 0.85fr 1.15fr; gap: 48px; }
             #ha-ufsm-embed .ufsm-levers{ grid-template-columns: repeat(3, 1fr); }
             #ha-ufsm-embed .ufsm-fund-title{ font-size: 3.4rem; }
             #ha-ufsm-embed .ufsm-fund-grid{ grid-template-columns: 1.05fr 1fr; gap: 48px; }
@@ -927,39 +917,41 @@
         <div class="ufsm-container">
             <h2 class="ufsm-section-title" style="margin-bottom:36px;">Estimated Program Costs to the State</h2>
 
-            <div class="ufsm-cost-grid">
-                <div>
-                    <!-- Stacked bar for breakfast + lunch ($29,427,029). The bar wrapper
-                         grows in (data-target); segments are % of the bar. -->
-                    <div class="ufsm-cost-bars" role="img" aria-label="Free breakfast plus lunch: $29.4 million total additional funds needed, $21.3 million in family revenue to replace plus $8.1 million in added participation cost.">
-                        <div class="ufsm-cost-row">
-                            <div class="ufsm-cost-row-label">Free breakfast + lunch</div>
-                            <div class="ufsm-cost-track">
-                                <div class="ufsm-cost-bar" data-target="100%">
-                                    <span class="ufsm-cost-seg family" style="width:72.41%"><em>$21.3M</em></span>
-                                    <span class="ufsm-cost-seg added" style="width:27.59%"><em>$8.1M</em></span>
-                                </div>
-                            </div>
-                            <div class="ufsm-cost-total ufsm-cost-total--below">$29.4M total</div>
-                        </div>
+            <!-- NOT to scale: the breakfast bar is widened so its labels fit
+                 (a note under the chart says so). Segments within each bar keep
+                 their true proportions. The bar grows in (data-target); exact
+                 figures are listed under each bar. -->
+            <div class="ufsm-cost-bars">
+                <div class="ufsm-cost-row">
+                    <div class="ufsm-cost-head">
+                        <span class="ufsm-cost-row-label">Free breakfast</span>
+                        <span class="ufsm-cost-total">$3,779,849<small>total additional funds</small></span>
                     </div>
-                    <ul class="ufsm-cost-legend">
-                        <li><span class="dot family"></span>Family revenue to replace</li>
-                        <li><span class="dot added"></span>Added participation cost (10% increase)</li>
+                    <div class="ufsm-cost-bar" data-target="45%">
+                        <span class="ufsm-cost-seg family" style="width:61.33%"><em>$2.3M</em></span>
+                        <span class="ufsm-cost-seg added" style="width:38.67%"><em>$1.5M</em></span>
+                    </div>
+                    <ul class="ufsm-cost-break">
+                        <li><span class="dot family"></span><span><strong>$2,318,218</strong> family revenue to replace</span></li>
+                        <li><span class="dot added"></span><span><strong>$1,461,630</strong> added participation cost (10% increase)</span></li>
                     </ul>
                 </div>
-                <div>
-                    <div class="ufsm-table-scroll">
-                        <table class="ufsm-table ufsm-cost-table">
-                            <thead><tr><th></th><th>Family Revenue to Replace</th><th>Added Participation Cost (10% increase)</th><th>Total Additional Funds Needed</th></tr></thead>
-                            <tbody>
-                                <tr><td class="rowlabel">Free breakfast</td><td class="num">$2,318,218</td><td class="num">$1,461,630</td><td class="num tot">$3,779,849</td></tr>
-                                <tr><td class="rowlabel">Free breakfast + lunch</td><td class="num">$21,308,493</td><td class="num">$8,118,536</td><td class="num tot">$29,427,029</td></tr>
-                            </tbody>
-                        </table>
+                <div class="ufsm-cost-row">
+                    <div class="ufsm-cost-head">
+                        <span class="ufsm-cost-row-label">Free breakfast + lunch</span>
+                        <span class="ufsm-cost-total">$29,427,029<small>total additional funds</small></span>
                     </div>
+                    <div class="ufsm-cost-bar" data-target="100%">
+                        <span class="ufsm-cost-seg family" style="width:72.41%"><em>$21.3M</em></span>
+                        <span class="ufsm-cost-seg added" style="width:27.59%"><em>$8.1M</em></span>
+                    </div>
+                    <ul class="ufsm-cost-break">
+                        <li><span class="dot family"></span><span><strong>$21,308,493</strong> family revenue to replace</span></li>
+                        <li><span class="dot added"></span><span><strong>$8,118,536</strong> added participation cost (10% increase)</span></li>
+                    </ul>
                 </div>
             </div>
+            <p class="ufsm-cost-note">Bars are not drawn to scale.</p>
         </div>
     </section>
 
