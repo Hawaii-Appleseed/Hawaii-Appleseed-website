@@ -1,0 +1,4 @@
+{
+ "_comment": "The legislative session the assistant's bill material covers (positions' outcome lines, the generated bill outcomes, the prompt). When the calendar year passes this, answers say a newer session may be underway and stance answers carry a note. Change it only after the new session's bills and outcomes are in the content.",
+ "covered": 2026
+}

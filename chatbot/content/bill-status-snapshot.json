@@ -1,0 +1,90 @@
+{
+ "_comment": "Last good copy of the bill-status feed's latest action per bill; see snapshot_bills.py. Used by build_index.py only for bills the live feed has no data for.",
+ "generatedAt": "2026-10-18T13:05:18.800Z",
+ "source": "capitol.hawaii.gov RSS, fetched via GitHub Actions",
+ "areas": {
+  "HB1850": "Tax Wealth Like Work",
+  "HB2010": "Millionaire's Income Tax",
+  "HB2049": "Tweak the Conveyance Tax",
+  "HB2150": "Closing the Real Estate Investment Trust Loophole",
+  "HB2306": "Stop Tax Cuts for the Wealthy",
+  "HB2623": "Wealth Proceeds Tax",
+  "SB2362": "Closing the Real Estate Investment Trust Loophole",
+  "SB2441": "Tax Wealth Like Work",
+  "SB2468": "Millionaire's Income Tax",
+  "SB3028": "Tweak the Conveyance Tax",
+  "SB3125": "Stop Tax Cuts for the Wealthy"
+ },
+ "bills": {
+  "HB1807": {
+   "year": "2026",
+   "date": "2026-01-26",
+   "description": "Referred to ECD, FIN, referral sheet 1"
+  },
+  "HB1850": {
+   "year": "2026",
+   "date": "2026-03-12",
+   "description": "Passed First Reading."
+  },
+  "HB2008": {
+   "year": "2026",
+   "date": "2026-01-28",
+   "description": "Referred to FIN, referral sheet 3"
+  },
+  "HB2010": {
+   "year": "2026",
+   "date": "2026-02-05",
+   "description": "The committee(s) on HSH recommend(s) that the measure be deferred."
+  },
+  "HB2049": {
+   "year": "2026",
+   "date": "2026-04-07",
+   "description": "The committee on WAM deferred the measure."
+  },
+  "HB2150": {
+   "year": "2026",
+   "date": "2026-01-31",
+   "description": "Referred to ECD, CPC, FIN, referral sheet 5"
+  },
+  "HB2306": {
+   "year": "2026",
+   "date": "2026-03-12",
+   "description": "Passed First Reading."
+  },
+  "HB2623": {
+   "year": "2026",
+   "date": "2026-02-02",
+   "description": "Referred to FIN, referral sheet 6"
+  },
+  "SB2362": {
+   "year": "2026",
+   "date": "2026-03-10",
+   "description": "Referred to ECD, FIN, referral sheet 16"
+  },
+  "SB2441": {
+   "year": "2026",
+   "date": "2026-01-28",
+   "description": "Referred to WAM."
+  },
+  "SB2468": {
+   "year": "2026",
+   "date": "2026-01-28",
+   "description": "Referred to HHS, WAM."
+  },
+  "SB2587": {
+   "year": "2026",
+   "date": "2026-01-29",
+   "description": "Referred to WAM."
+  },
+  "SB3028": {
+   "year": "2026",
+   "date": "2026-05-02",
+   "description": "Conference Committee Meeting will reconvene on Friday, 05-01-26 at 5:50PM in Conference Room 016."
+  },
+  "SB3125": {
+   "year": "2026",
+   "date": "2026-05-22",
+   "description": "Act 024, on 05/21/2026 (Gov. Msg. No. 1124)."
+  }
+ }
+}

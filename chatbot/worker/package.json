@@ -1,0 +1,29 @@
+{
+  "name": "ha-ask-worker",
+  "private": true,
+  "type": "module",
+  "description": "Hawaiʻi Appleseed public Q&A assistant: Cloudflare Worker backend",
+  "scripts": {
+    "index": "python3 ../build_index.py",
+    "index:public": "python3 ../build_index.py --public",
+    "pretest": "python3 ../build_index.py && npm run widget",
+    "test": "node --test test/unit.test.mjs test/budget.test.mjs test/access.test.mjs test/feedback.test.mjs test/canned.test.mjs test/stance.test.mjs test/graphics.test.mjs test/charts.test.mjs test/handoff.test.mjs test/stats.test.mjs test/session.test.mjs test/public.test.mjs",
+    "dev": "node dev-server.mjs",
+    "dev:mock": "node dev-server.mjs --mock",
+    "eval": "node ../eval/run_eval.mjs",
+    "eval:offline": "node ../eval/run_eval.mjs --offline",
+    "deploy": "npm run index && npm run widget && wrangler deploy",
+    "postdeploy": "python3 ../record_deploy.py",
+    "postdeploy:public": "python3 ../record_deploy.py",
+    "deploy:public": "npm run index:public && python3 ../build_embed.py --worker-module src/widget.js --out ../dist/embed.html && wrangler deploy",
+    "test:workerd": "node --test test/workerd.test.mjs",
+    "widget": "python3 ../build_embed.py --endpoint /chat --feedback --worker-module src/widget.js --out ../dist/embed-internal.html --notice \"Staff pilot: this assistant's policy positions are drafts that staff have not approved yet. Please do not quote its answers outside the organization, and tell the policy team about anything that looks wrong.\" --privacy-note \"This assistant uses AI and can make mistakes. It cannot give legal advice or help with a personal legal situation. Your messages are sent to Anthropic to generate answers. Hawaiʻi Appleseed does not keep them, except that when you rate an answer, the question, the answer, your rating and comment, and your email are saved for the policy team to review. Please do not share personal information.\"",
+    "pretest:workerd": "python3 ../build_index.py && npm run widget"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.137.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

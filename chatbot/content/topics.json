@@ -1,0 +1,261 @@
+{
+ "_comment": "Which issue area(s) each report belongs to, and a few words on what the title does not say. Slugs are the report's /publications/<slug>. Checked against each report's text, not just its title; add an entry when a new report is published.",
+ "reports": {
+  "beyond-the-ticket": {
+   "areas": [
+    "Transportation Equity"
+   ],
+   "about": "traffic enforcement"
+  },
+  "budget-primer-2022-23": {
+   "areas": [
+    "Taxes & Budget"
+   ]
+  },
+  "closing-capital-gains-loophole": {
+   "areas": [
+    "Taxes & Budget"
+   ]
+  },
+  "concentrating-wealth": {
+   "areas": [
+    "Taxes & Budget"
+   ],
+   "about": "wealth concentration and estate tax breaks"
+  },
+  "county-leadership-combating-food-insecurity": {
+   "areas": [
+    "Food Equity"
+   ]
+  },
+  "empty-homes-tax-honolulu": {
+   "areas": [
+    "Affordable Housing",
+    "Taxes & Budget"
+   ],
+   "about": "an empty homes tax for Honolulu"
+  },
+  "equity-on-the-menu": {
+   "areas": [
+    "Food Equity"
+   ],
+   "about": "school meals"
+  },
+  "eviction-prevention-mediation-hawaii": {
+   "areas": [
+    "Affordable Housing"
+   ]
+  },
+  "fair-tax-code-thriving-hawaii": {
+   "areas": [
+    "Taxes & Budget"
+   ]
+  },
+  "feed-our-keiki": {
+   "areas": [
+    "Food Equity"
+   ]
+  },
+  "food-is-medicine": {
+   "areas": [
+    "Food Equity"
+   ]
+  },
+  "freedom-to-walk": {
+   "areas": [
+    "Transportation Equity"
+   ],
+   "about": "decriminalizing jaywalking"
+  },
+  "fund-our-future-hawaii": {
+   "areas": [
+    "Taxes & Budget"
+   ]
+  },
+  "hawaii-budget-2024-2025": {
+   "areas": [
+    "Taxes & Budget"
+   ]
+  },
+  "hawaii-budget-primer-2024-25": {
+   "areas": [
+    "Taxes & Budget"
+   ]
+  },
+  "hawaii-budget-primer-2026-27": {
+   "areas": [
+    "Taxes & Budget"
+   ]
+  },
+  "hawaii-budget-primer-fy202526": {
+   "areas": [
+    "Taxes & Budget"
+   ]
+  },
+  "hawaii-childrens-budget-2022": {
+   "areas": [
+    "Taxes & Budget"
+   ]
+  },
+  "hawaii-snap": {
+   "areas": [
+    "Food Equity"
+   ]
+  },
+  "health-care-homelessness": {
+   "areas": [
+    "Affordable Housing"
+   ]
+  },
+  "health-housing-connection": {
+   "areas": [
+    "Affordable Housing"
+   ]
+  },
+  "helping-hawaii-families": {
+   "areas": [
+    "Taxes & Budget"
+   ]
+  },
+  "high-cost-low-wages": {
+   "areas": [
+    "Wages & Labor"
+   ]
+  },
+  "housing-market-hawaii-working-families": {
+   "areas": [
+    "Affordable Housing"
+   ]
+  },
+  "investing-in-our-future-a-keiki-credit-for-hawaii": {
+   "areas": [
+    "Taxes & Budget"
+   ]
+  },
+  "keeping-hawaii-housed": {
+   "areas": [
+    "Affordable Housing"
+   ]
+  },
+  "keiki-ride-free": {
+   "areas": [
+    "Transportation Equity"
+   ]
+  },
+  "oahu-mobility-needs": {
+   "areas": [
+    "Transportation Equity"
+   ]
+  },
+  "pedestrian-head-start": {
+   "areas": [
+    "Transportation Equity"
+   ]
+  },
+  "policy-in-perspective-2022": {
+   "areas": [
+    "Affordable Housing",
+    "Food Equity",
+    "Wages & Labor",
+    "Transportation Equity",
+    "Taxes & Budget"
+   ],
+   "about": "session review"
+  },
+  "policy-in-perspective-2023": {
+   "areas": [
+    "Affordable Housing",
+    "Food Equity",
+    "Wages & Labor",
+    "Transportation Equity",
+    "Taxes & Budget"
+   ],
+   "about": "session review"
+  },
+  "policy-in-perspective-2024": {
+   "areas": [
+    "Affordable Housing",
+    "Food Equity",
+    "Wages & Labor",
+    "Transportation Equity",
+    "Taxes & Budget"
+   ],
+   "about": "session review"
+  },
+  "policy-in-perspective-2025": {
+   "areas": [
+    "Affordable Housing",
+    "Food Equity",
+    "Wages & Labor",
+    "Transportation Equity",
+    "Taxes & Budget"
+   ],
+   "about": "session review"
+  },
+  "policy-perspective-2021": {
+   "areas": [
+    "Affordable Housing",
+    "Food Equity",
+    "Wages & Labor",
+    "Transportation Equity",
+    "Taxes & Budget"
+   ],
+   "about": "session review"
+  },
+  "policy-perspective-2026": {
+   "areas": [
+    "Affordable Housing",
+    "Food Equity",
+    "Wages & Labor",
+    "Transportation Equity",
+    "Taxes & Budget"
+   ],
+   "about": "session review"
+  },
+  "preserving-hawaii": {
+   "areas": [
+    "Taxes & Budget",
+    "Affordable Housing"
+   ],
+   "about": "the conveyance tax"
+  },
+  "refunding-hawaii": {
+   "areas": [
+    "Taxes & Budget"
+   ],
+   "about": "making the state EITC refundable"
+  },
+  "renters-left-behind-hawaii-state-legislature": {
+   "areas": [
+    "Affordable Housing"
+   ]
+  },
+  "rethinking-roads": {
+   "areas": [
+    "Transportation Equity"
+   ]
+  },
+  "stalled-parking-mandates-housing-costs": {
+   "areas": [
+    "Affordable Housing",
+    "Transportation Equity"
+   ],
+   "about": "parking mandates and housing costs"
+  },
+  "tax-credits-advance-prosperity": {
+   "areas": [
+    "Taxes & Budget"
+   ]
+  },
+  "understanding-hawaii-landlord-tenant-code": {
+   "areas": [
+    "Affordable Housing"
+   ]
+  },
+  "who-pays-climate-disasters": {
+   "areas": [
+    "Affordable Housing"
+   ]
+  }
+ }
+}

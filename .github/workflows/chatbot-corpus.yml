@@ -1,0 +1,78 @@
+name: Chatbot corpus check
+
+# The corpus changes underneath the assistant: refresh-corpus.yml adds reports, blog posts and testimony every Sunday, and the
+# bill feed refreshes every 30 minutes. Committing writing-bot/** with GITHUB_TOKEN does not trigger chatbot.yml, so nothing
+# would notice a new report with no topic, a position whose figure is no longer backed by what is published, or an assistant
+# that has fallen weeks behind. This runs chatbot/corpus_check.sh weekly, a day after the refresh, and keeps ONE open issue
+# (label chatbot-drift) up to date: opened or commented when something fails, closed when it is green again. It deploys nothing
+# (the Cloudflare deploy needs a token and stays a person's decision; see chatbot/README.md, "Keeping it current").
+#
+# It only does anything once chatbot/ is on main.
+
+on:
+  schedule:
+    - cron: "0 20 * * 1" # Mondays 20:00 UTC (10:00 Hawaii), after refresh-corpus.yml's Sunday 15:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: chatbot-corpus
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # freshness.py walks history since the last deploy
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: chatbot/worker/package-lock.json
+
+      - name: Install Worker dependencies
+        working-directory: chatbot/worker
+        run: npm ci --no-audit --no-fund
+
+      - name: Run the checks
+        id: run
+        continue-on-error: true
+        env:
+          REPORT: corpus-check.md
+          MAX_DAYS: "14"
+        run: ./chatbot/corpus_check.sh
+
+      - name: Open, update or close the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          OUTCOME: ${{ steps.run.outcome }}
+        run: |
+          num=$(gh issue list --label chatbot-drift --state open --json number --jq '.[0].number // empty')
+          if [ "$OUTCOME" = "failure" ]; then
+            { echo "The weekly check of the chatbot against the current corpus failed ([run]($RUN_URL)). The sections marked FAILED need a person:"; echo; head -c 30000 corpus-check.md; } > body.md
+            if [ -n "$num" ]; then
+              gh issue comment "$num" --body-file body.md
+            else
+              gh label create chatbot-drift --color 52796F --description "The chatbot has drifted from the corpus" 2>/dev/null || true
+              gh issue create --title "Chatbot: the weekly corpus check failed" --label chatbot-drift --body-file body.md
+            fi
+          elif [ -n "$num" ]; then
+            gh issue comment "$num" --body "Green again: the weekly corpus check passed ($RUN_URL)."
+            gh issue close "$num"
+          fi
+
+      - name: Fail the run if a check failed
+        if: steps.run.outcome == 'failure'
+        run: exit 1

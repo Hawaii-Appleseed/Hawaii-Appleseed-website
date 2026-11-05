@@ -1,0 +1,72 @@
+name: Chatbot checks
+
+# Tests for the public Q&A assistant (chatbot/). No API key, no network, no deploy: the index builds from files
+# already in this repo, and the model-dependent eval cases need a key and are run by hand (chatbot/README.md).
+# Deploying the Worker needs a Cloudflare token and is deliberately not automated here yet.
+
+on:
+  pull_request:
+    paths:
+      - "chatbot/**"
+      - "writing-bot/publications/**"
+      - "writing-bot/blog-posts/**"
+      - "writing-bot/testimony/**"
+      - "writing-bot/sources.py"
+      - "tax-fairness/data/bill-status.json"
+      - ".github/workflows/chatbot.yml"
+  push:
+    branches: [main]
+    paths:
+      - "chatbot/**"
+      - ".github/workflows/chatbot.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: chatbot-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: chatbot/worker/package-lock.json
+
+      - name: Install Worker dependencies
+        working-directory: chatbot/worker
+        run: npm ci --no-audit --no-fund
+
+      - name: Index builder tests (drafts, privacy guards, curated research links)
+        run: python3 -m unittest discover -s chatbot/tests -v
+
+      - name: Build the index and run Worker tests (pretest builds src/index.json)
+        working-directory: chatbot/worker
+        run: npm test
+
+      - name: Offline eval (legal gate, retrieval, related research)
+        run: node chatbot/eval/run_eval.mjs --offline
+
+      - name: Design-token lint on the widget
+        run: python3 scripts/lint_design_tokens.py --all chatbot/index.html
+
+      - name: Worker bundles for Cloudflare (dry run)
+        working-directory: chatbot/worker
+        env:
+          WRANGLER_SEND_METRICS: "false"
+        run: npx wrangler deploy --dry-run --outdir "$RUNNER_TEMP/worker-out"
+
+      - name: Worker runs in the Workers runtime (workerd, simulated KV)
+        working-directory: chatbot/worker
+        env:
+          WRANGLER_SEND_METRICS: "false"
+        run: npm run test:workerd

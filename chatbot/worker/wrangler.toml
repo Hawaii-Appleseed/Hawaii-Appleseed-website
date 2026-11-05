@@ -1,0 +1,36 @@
+name = "ha-ask"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Per-deployment preview URLs sit outside any Access application, so there are none. The Worker also checks the
+# Access token itself (src/access.js) and answers 503 on every route until the two ACCESS_ values below are set.
+workers_dev = true
+preview_urls = false
+
+# Run `npm run deploy`: it builds src/index.json and src/widget.js first (both generated, both git-ignored).
+
+[vars]
+# ---- internal staff pilot ----
+REQUIRE_ACCESS = "1"
+ACCESS_TEAM_DOMAIN = "lively-wildflower-989d"   # the staff hub's Zero Trust team
+ACCESS_AUD = "e5cadb92041bb6137650b319ddd7e82d45b0477a67bd7d975ed7d76e25db3213"   # Access app "Ask HA chatbot (pilot)"
+ALLOWED_ORIGINS = ""                            # none: the widget is served by this Worker, so calls are same-origin
+MODEL = "claude-haiku-5-5"                      # pilot default; claude-sonnet-5-5 for the higher-quality (about 20x dearer) option
+DYNAMIC_GRAPHICS = "1"                          # let the model draw a chart whose every figure is quoted from the sources ("0" turns it off)
+FEEDBACK = "1"                                  # save ratings (with the question and answer) for review; the page says so
+REVIEWERS = "devin@hiappleseed.org"             # who may open /flags (it shows staff emails and questions); comma-separated
+PER_MINUTE = "6"
+PER_DAY = "40"
+DAILY_CAP = "500"          # requests per day, whole site
+DAILY_BUDGET_USD = "3"     # spend per day, whole site, counted from real token usage
+
+# Secrets (never in this file):
+#   wrangler secret put ANTHROPIC_API_KEY
+#   wrangler secret put RATE_SALT          (any random string)
+#   wrangler secret put TURNSTILE_SECRET   (public launch only)
+
+# Per-person rate limits and the daily budget live here.
+[[kv_namespaces]]
+binding = "RATE"
+id = "934cd38016b74475a9b6209457466164"
