@@ -151,7 +151,7 @@ OTHERS = {
 }
 
 def page(key, n, head_comment, title, ask, lede, stats, sections, cta_h, cta_p):
-    others = [f'<a href="{OTHERS[k][0]}">{OTHERS[k][1]}</a>' for k in ("cg","cr","cv") if k != key]
+    others = [f'<a href="{OTHERS[k][0]}">{OTHERS[k][1]}</a>' for k in ("cv","cg","cr") if k != key]
     st = "".join(f'<div class="tfc-pp-stat"><div class="tfc-pp-stat-num">{a}</div><p class="tfc-pp-stat-label">{b}</p></div>' for a,b in stats)
     body = "\n".join(f'    <section class="tfc-pp-section">\n{s}\n    </section>\n' for s in sections)
     return f"""<!-- {head_comment} -->
@@ -226,7 +226,7 @@ CG_FIG2 = fig("Where the new tax would fall",
   "Averages are across every household in the group, including those who owe nothing more. Income is taxable income. Source: same model as above.")
 
 # ---------- Capital gains ----------
-cg = page("cg", 3,
+cg = page("cg", 2,
  """Capital Gains page (/capital-gains) - the page's Code Block. Paste everything in this file into that block.
      Replaces the 2019-data "Closing the Capital Gains Loophole" page. Same palette/Site Styles hooks as
      priorities_2027_squarespace.html. Figures: 7.25% alternative rate (HRS 235-51(f)) vs Act 24's 13% top
@@ -272,7 +272,7 @@ CR_FIG2 = fig("Single parents take the biggest hit",
   "Source: same model as above.")
 
 # ---------- Credits ----------
-cr = page("cr", 2,
+cr = page("cr", 3,
  """Tax Credits page (/tax-credits-2) - the Code Block in the page's first section. Paste everything in this
      file into that block; the page's newsletter section stays hidden (its form had no storage; the panel
      at the end sends people to /subscribe). Rewritten for the 2027 priority: extend Act 163's expiring
