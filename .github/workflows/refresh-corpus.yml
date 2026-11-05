@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      actions: write # to dispatch deploy-content-search.yml
+      actions: write # to dispatch deploy-content-search.yml and chatbot-refresh.yml
 
     steps:
       - uses: actions/checkout@v4
@@ -118,3 +118,4 @@ jobs:
         run: |
           sleep 15 # let the pushed commit become main's resolved head
           gh workflow run deploy-content-search.yml --ref main
+          gh workflow run chatbot-refresh.yml --ref main # the Q&A bot answers from the same corpus

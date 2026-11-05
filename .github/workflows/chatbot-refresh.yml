@@ -1,0 +1,91 @@
+name: Refresh the Q&A bot's knowledge
+
+# Rebuilds the Ask Hawaiʻi Appleseed staff-pilot bot (Cloudflare Worker "ha-ask")
+# from main's current corpus, so new blog posts, publications and testimony reach
+# it without anyone running a deploy by hand.
+#
+# The bot's code lives on the chatbot-pilot branch (draft PR #43) until staff sign
+# off; the corpus lives here on main. This job checks out both, copies main's corpus
+# into the bot (chatbot/vendor.py --from), runs every bot test, and deploys only if
+# they pass. Nothing is committed: the deploy record (chatbot/deployed.json) is only
+# written by hand deploys.
+#
+# Runs when refresh-corpus.yml or refresh-testimony.yml added something, weekly as
+# a backstop, or by hand. Needs CLOUDFLARE_API_TOKEN (a token from the "Edit
+# Cloudflare Workers" template on the account that owns ha-ask); without it the
+# tests still run and the deploy step says it was skipped.
+
+on:
+  schedule:
+    - cron: "30 16 * * 0" # Sundays 16:30 UTC, after both corpus refreshes
+  workflow_dispatch:
+
+concurrency:
+  group: chatbot-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - name: Corpus (main)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: src
+
+      - name: Bot code (chatbot-pilot)
+        uses: actions/checkout@v4
+        with:
+          ref: chatbot-pilot
+          path: bot
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: bot/chatbot/worker/package-lock.json
+
+      - name: Copy main's corpus into the bot
+        run: python3 bot/chatbot/vendor.py --from src
+
+      - name: Install Worker dependencies
+        working-directory: bot/chatbot/worker
+        run: npm ci --no-audit --no-fund
+
+      - name: Index builder tests
+        run: python3 -m unittest discover -s bot/chatbot/tests
+
+      - name: Build the index and run Worker tests (pretest builds src/index.json + the widget)
+        working-directory: bot/chatbot/worker
+        run: npm test
+
+      - name: Offline eval (legal gate, retrieval, related research)
+        run: node bot/chatbot/eval/run_eval.mjs --offline
+
+      - name: Deploy
+        working-directory: bot/chatbot/worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: d844f7c81a9353ee3ba8b4386bf75b92
+          WRANGLER_SEND_METRICS: "false"
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::warning::CLOUDFLARE_API_TOKEN is not set; tests passed but the bot was not redeployed."
+            exit 0
+          fi
+          npx wrangler deploy | tee /tmp/deploy.log
+          {
+            echo "### Q&A bot refreshed"
+            echo ""
+            grep -E "Version ID|Total Upload" /tmp/deploy.log || true
+            echo ""
+            echo "Corpus: main $(git -C ../../../src rev-parse --short HEAD); bot code: chatbot-pilot $(git -C ../../ rev-parse --short HEAD)"
+          } >> "$GITHUB_STEP_SUMMARY"
