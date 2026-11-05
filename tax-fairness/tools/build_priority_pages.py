@@ -146,7 +146,7 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-pp) { grid-row: 1 / 2 !importa
 
 OTHERS = {
  "cg": ("/capital-gains", "Tax Profits Like Paychecks"),
- "cr": ("/tax-credits-2", "Keep Working Families&rsquo; Tax Credits"),
+ "cr": ("/tax-credits-2", "Preserve Working Families&rsquo; Tax Credits"),
  "cv": ("/conveyance-tax", "Increase the Tax on Luxury Homes"),
 }
 
@@ -285,7 +285,7 @@ cr = page("cr", 2,
      Act 163 claim (the Estimates report covers only the EITC and food/excise changes). The timeline sits on
      a white card with a blue line because this page's section background (#e0e0db) swallowed the default
      light-grey line.""",
- "Keep Working Families&rsquo; Tax Credits",
+ "Preserve Working Families&rsquo; Tax Credits",
  "Extend the earned income and food/excise tax credits before they expire.",
  "Two credits that help Hawai&#699;i families afford groceries and other basics are set to shrink after 2027 unless the Legislature acts. The child and dependent care tax credit also helps working parents with the cost of childcare.",
  [("$76M","that working families would lose in 2028 if the credits expire"),("78,000","households claim the state EITC each year")],
