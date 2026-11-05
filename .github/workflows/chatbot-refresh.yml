@@ -81,6 +81,7 @@ jobs:
             echo "::warning::CLOUDFLARE_API_TOKEN is not set; tests passed but the bot was not redeployed."
             exit 0
           fi
+          set -o pipefail
           npx wrangler deploy | tee /tmp/deploy.log
           {
             echo "### Q&A bot refreshed"
