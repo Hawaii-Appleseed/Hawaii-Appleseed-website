@@ -16,10 +16,11 @@ name: Canary — scheduled workflow health
 # but real gaps of 50-82 min are routine even with no incident, so a naive
 # 35-40 min threshold would alert constantly on nothing.
 #
-# Caveat this can't fully solve: if THIS workflow's own trigger gets
-# dropped, nothing fires. No in-repo monitoring is immune to that failure
-# mode without an external pinger (e.g. a third-party uptime check hitting
-# a workflow_dispatch or a status endpoint) — out of scope for "lightweight."
+# This workflow and fetch-bill-status.yml are also dispatched on time from
+# outside GitHub by a Cloudflare Worker (workers/actions-cron/), because GitHub
+# drops most of this repo's cron triggers. If that Worker stops (say its token
+# expires), both fall back to their own schedule, and the bill-status limit
+# below is tight enough to notice.
 #
 # Second job: escalating a failure nobody got round to. triage.yml alerts
 # once, the moment a watched workflow fails, and then goes quiet. That is the
@@ -43,6 +44,12 @@ on:
 permissions:
   actions: read
   issues: write
+
+# The Worker's dispatch and GitHub's own cron fire at the same minute. Queue
+# the second run so two runs can't both open a tracking issue.
+concurrency:
+  group: canary
+  cancel-in-progress: false
 
 jobs:
   check:
