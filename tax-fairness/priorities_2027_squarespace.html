@@ -34,6 +34,9 @@
     --tfc-muted: #4a5568;
     --tfc-line: #dfe3ea;
     --tfc-soft: #f5f7fa;
+    --tfc-sand: #fbf3e4;
+    --tfc-sand-line: #ecd6ad;
+    --tfc-sand-ink: #8a5a12;
     container-type: inline-size;
     width: 100%;
     margin: 0 0 40px;
@@ -128,6 +131,22 @@
 .tfc-p27-body > :last-child { margin-bottom: 0; }
 .tfc-p27-source { font-size: .85rem !important; color: var(--tfc-muted); }
 
+/* ---------- Groups: revenue raisers, then the families card in warm sand ---------- */
+.tfc-p27 .tfc-p27-group {
+    margin: 0 0 12px;
+    font-family: var(--body-font-font-family), sans-serif;
+    font-size: .8rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--tfc-muted);
+}
+.tfc-p27 .tfc-p27-group--families { margin-top: 36px; color: var(--tfc-sand-ink); }
+.tfc-p27-item--families { background: var(--tfc-sand); border-color: var(--tfc-sand-line); }
+.tfc-p27-item--families .tfc-p27-num { background: var(--tfc-sand-ink); }
+.tfc-p27-item--families .tfc-p27-figure { color: var(--tfc-sand-ink); }
+
 /* ---------- Closing call to action ---------- */
 .tfc-p27-cta {
     display: flex;
@@ -178,12 +197,13 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27) { grid-row: 1 / 2 !import
         <p class="tfc-p27-lede">Local families are leaving because they can&rsquo;t afford to stay, while our tax code rewards those who profit most from our islands. In 2027, the Hawai&#699;i Tax Fairness Coalition is working on three changes that ask the wealthiest to pay their fair share and keep money in the pockets of working families.</p>
     </header>
 
+    <h2 class="tfc-p27-group">Raise revenue fairly</h2>
     <ol class="tfc-p27-list">
 
         <li class="tfc-p27-item">
             <div class="tfc-p27-lead">
                 <span class="tfc-p27-num" aria-hidden="true">1</span>
-                <h2 class="tfc-p27-item-title"><a href="/conveyance-tax">Increase the Tax on Luxury Homes</a></h2>
+                <h3 class="tfc-p27-item-title"><a href="/conveyance-tax">Increase the Tax on Luxury Homes</a></h3>
                 <p class="tfc-p27-ask">Modernize the tax on property sales and dedicate its revenue to the Department of Hawaiian Home Lands.</p>
                 <div class="tfc-p27-figure">Up to $60M a year</div>
                 <p class="tfc-p27-figure-label">for Hawaiian Home Lands under last session&rsquo;s House proposal</p>
@@ -205,7 +225,7 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27) { grid-row: 1 / 2 !import
         <li class="tfc-p27-item">
             <div class="tfc-p27-lead">
                 <span class="tfc-p27-num" aria-hidden="true">2</span>
-                <h2 class="tfc-p27-item-title"><a href="/capital-gains">Tax Profits Like Paychecks</a></h2>
+                <h3 class="tfc-p27-item-title"><a href="/capital-gains">Tax Profits Like Paychecks</a></h3>
                 <p class="tfc-p27-ask">Tax capital gains at the same rates as ordinary income.</p>
                 <div class="tfc-p27-figure">Over $100M</div>
                 <p class="tfc-p27-figure-label">estimated new revenue each year</p>
@@ -222,10 +242,15 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27) { grid-row: 1 / 2 !import
             </div>
         </li>
 
+    </ol>
+
+    <h2 class="tfc-p27-group tfc-p27-group--families">Protect working families</h2>
+    <ol class="tfc-p27-list" start="3">
+
         <li class="tfc-p27-item tfc-p27-item--families">
             <div class="tfc-p27-lead">
                 <span class="tfc-p27-num" aria-hidden="true">3</span>
-                <h2 class="tfc-p27-item-title"><a href="/tax-credits-2">Keep Working Families&rsquo; Tax Credits</a></h2>
+                <h3 class="tfc-p27-item-title"><a href="/tax-credits-2">Keep Working Families&rsquo; Tax Credits</a></h3>
                 <p class="tfc-p27-ask">Extend the earned income and food/excise tax credits before they expire, and protect the child and dependent care tax credit.</p>
                 <div class="tfc-p27-figure">$76M</div>
                 <p class="tfc-p27-figure-label">that working families would lose in 2028 if the credits expire</p>
