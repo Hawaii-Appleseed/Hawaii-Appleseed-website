@@ -69,6 +69,7 @@ jobs:
         env:
           GOOGLE_DRIVE_TOKEN: ${{ secrets.GOOGLE_DRIVE_TOKEN }}
         run: |
+          set -o pipefail
           python writing-bot/sync_testimony.py | tee /tmp/sync.log
           new=$(grep -oE 'NEW_FILES=[0-9]+' /tmp/sync.log | tail -1 | cut -d= -f2)
           echo "new_files=${new:-0}" >> "$GITHUB_OUTPUT"
