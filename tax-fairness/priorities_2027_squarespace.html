@@ -15,6 +15,9 @@
        - Credit totals: DOTAX "Tax Credits Claimed by Hawaii Taxpayers" TY2023 (newest year as of
          Nov 2026), table A-1, $ thousands: EITC 77,054; food/excise 63,957; child and dependent
          care 14,820; sum 155,832 -> "about $156 million".
+       - Cards trimmed (Nov 2026, Devin "Ship it" on a mockup): setup sentence, two stat boxes,
+         bullets; the longer text (House committee $271M paragraph, nurse/hotel-worker line, Act 24
+         history) lives on each priority's own page. $303M is TOTAL conveyance revenue, not new money.
        - Order (Nov 2026, Devin): the two revenue raisers first, the credits last and tinted.
        - Conveyance: rates unchanged since Act 59 (2009); revenue goes to the general fund,
          Land Conservation Fund and Rental Housing Revolving Fund, none to DHHL.
@@ -131,7 +134,15 @@
 .tfc-p27-body ul { margin: 0 0 14px; padding: 0 0 0 20px; list-style: disc; }
 .tfc-p27-body li { margin: 0 0 8px; }
 .tfc-p27-body > :last-child { margin-bottom: 0; }
-.tfc-p27-source { font-size: .85rem !important; color: var(--tfc-muted); }
+.tfc-p27-setup { margin: 0 0 20px !important; font-size: 1.08rem !important; line-height: 1.55; }
+.tfc-p27-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 0 0 20px; }
+.tfc-p27-stat { background: #fff; border: 1px solid var(--tfc-line); border-top: 3px solid var(--tfc-blue); border-radius: 6px; padding: 12px 14px; }
+.tfc-p27-stat b { display: block; font-family: var(--heading-font-font-family), sans-serif; font-weight: 700; font-size: 1.7rem; line-height: 1.1; color: var(--tfc-blue); }
+.tfc-p27-stat span { display: block; margin-top: 4px; font-size: .88rem; line-height: 1.35; color: var(--tfc-muted); }
+.tfc-p27 a.tfc-p27-more { display: inline-block; margin-top: 18px; font-weight: 700; font-size: .98rem; color: #2f62a3; text-decoration: none; }
+.tfc-p27 a.tfc-p27-more:hover, .tfc-p27 a.tfc-p27-more:focus-visible { text-decoration: underline; }
+/* Source line runs the full width of the card, under a hairline. */
+.tfc-p27 .tfc-p27-source { grid-column: 1 / -1; margin: -12px 0 0; padding-top: 12px; border-top: 1px solid var(--tfc-line); font-size: .8rem; color: var(--tfc-muted); }
 
 /* ---------- Groups: revenue raisers, then the families card in warm sand ---------- */
 .tfc-p27 .tfc-p27-group {
@@ -148,6 +159,10 @@
 .tfc-p27-item--families { background: var(--tfc-sand); border-color: var(--tfc-sand-line); }
 .tfc-p27-item--families .tfc-p27-num { background: var(--tfc-sand-ink); }
 .tfc-p27-item--families .tfc-p27-figure { color: var(--tfc-sand-ink); }
+.tfc-p27-item--families .tfc-p27-stat { border-color: var(--tfc-sand-line); border-top-color: var(--tfc-sand-ink); }
+.tfc-p27-item--families .tfc-p27-stat b { color: var(--tfc-sand-ink); }
+.tfc-p27 .tfc-p27-item--families a.tfc-p27-more { color: var(--tfc-sand-ink); }
+.tfc-p27 .tfc-p27-item--families .tfc-p27-source { border-top-color: var(--tfc-sand-line); }
 
 /* ---------- Closing call to action ---------- */
 .tfc-p27-cta {
@@ -189,6 +204,9 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27) { grid-row: 1 / 2 !import
     .tfc-p27-figure { font-size: 2rem; }
     .tfc-p27-cta { padding: 26px 22px; }
 }
+@container (max-width: 520px) {
+    .tfc-p27-stats { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+}
 </style>
 
 <div class="tfc-p27">
@@ -209,19 +227,20 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27) { grid-row: 1 / 2 !import
                 <p class="tfc-p27-ask">Modernize the tax on property sales and dedicate its revenue to the Department of Hawaiian Home Lands.</p>
                 <div class="tfc-p27-figure">Up to $60M a year</div>
                 <p class="tfc-p27-figure-label">for Hawaiian Home Lands under last session&rsquo;s House proposal</p>
+                <a class="tfc-p27-more" href="/conveyance-tax">Read more about the luxury homes tax &rarr;</a>
             </div>
             <div class="tfc-p27-body">
-                <p>The conveyance tax is paid when real estate changes hands. Its rates were last changed in 2009, and property values in Hawai&#699;i have risen considerably since then. Today its revenue does not include funding for the Department of Hawaiian Home Lands (DHHL).</p>
-                <p>DHHL&rsquo;s waitlist for a homestead had 29,589 applicants as of November 2025. We support a conveyance tax that:</p>
+                <p class="tfc-p27-setup">The conveyance tax is paid when real estate changes hands. Its rates haven&rsquo;t changed since 2009, and none of its revenue goes to the Department of Hawaiian Home Lands (DHHL).</p>
+                <div class="tfc-p27-stats">
+                    <div class="tfc-p27-stat"><b>29,589</b><span>applicants on DHHL&rsquo;s homestead waitlist (Nov. 2025)</span></div>
+                    <div class="tfc-p27-stat"><b>$303M</b><span>total conveyance tax revenue by FY2031 under the House proposal</span></div>
+                </div>
                 <ul>
-                    <li><strong>Asks more of high-value and investment property sales</strong>, while protecting local families buying a home to live in.</li>
-                    <li><strong>Dedicates the new revenue to DHHL</strong>, so the trust can build homes and infrastructure for its beneficiaries.</li>
+                    <li><strong>Ask more of high-value and investment property sales</strong>, while protecting local families buying a home to live in.</li>
+                    <li><strong>Dedicate the new revenue to DHHL</strong>, so the trust can build homes for its beneficiaries.</li>
                 </ul>
-                <p>A House committee estimated that, with the rates of HB 2049 HD3, the conveyance tax would bring in <strong>$271 million in total in FY2027, rising to $303 million by FY2031</strong>&mdash;all conveyance tax revenue, not just the increase. That would include <strong>up to $60 million a year for DHHL</strong>, plus dedicated funding for rental housing, urban development, and land conservation. SB 3028 SD2 HD2, the last draft before the bill died in conference, set the same $60 million ceiling for DHHL.</p>
-                <p>Those who profit most from our islands should also invest the most in their future.</p>
-                <p class="tfc-p27-source">Estimate: House committee report, SB 3028 SD2 HD1 with the rates of HB 2049 HD3 (2026), FY2027&ndash;FY2031; applies to residential property.</p>
-                <a class="tfc-btn sqs-block-button-element--small sqs-button-element--secondary sqs-block-button-element" href="/conveyance-tax">More</a>
             </div>
+            <p class="tfc-p27-source">Estimate: House committee report, SB 3028 SD2 HD1 with the rates of HB 2049 HD3 (2026), FY2027&ndash;FY2031; applies to residential property.</p>
         </li>
 
         <li class="tfc-p27-item">
@@ -231,17 +250,20 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27) { grid-row: 1 / 2 !import
                 <p class="tfc-p27-ask">Tax capital gains at the same rates as ordinary income.</p>
                 <div class="tfc-p27-figure">Over $100M</div>
                 <p class="tfc-p27-figure-label">estimated new revenue each year</p>
+                <a class="tfc-p27-more" href="/capital-gains">Read more about taxing profits like paychecks &rarr;</a>
             </div>
             <div class="tfc-p27-body">
-                <p>A nurse or a hotel worker pays Hawai&#699;i&rsquo;s regular income tax rates on every paycheck. But profits from selling stocks, land, and other investments are capped at <strong>7.25 percent</strong>&mdash;even for the highest-income households, whose wages are now taxed at up to <strong>13 percent</strong>.</p>
-                <p>Act 24 (2026) raised the top rate on wages but left the capital gains rate alone, so the gap between work and wealth grew from 3.75 to 5.75 percentage points.</p>
+                <p class="tfc-p27-setup">Wages are taxed at up to 13 percent. Profits from selling stocks, land, and other investments are capped at 7.25 percent.</p>
+                <div class="tfc-p27-stats">
+                    <div class="tfc-p27-stat"><b>90%</b><span>of the new revenue would come from the top 1 percent</span></div>
+                    <div class="tfc-p27-stat"><b>5.75 pts</b><span>gap between the top rate on wages and on capital gains</span></div>
+                </div>
                 <ul>
                     <li>Taxing capital gains like wages would raise <strong>over $100 million a year</strong>.</li>
-                    <li>About <strong>90 percent</strong> of it would come from the top 1 percent of households. Most local families would pay nothing more.</li>
+                    <li>Most local families would pay nothing more.</li>
                 </ul>
-                <p class="tfc-p27-source">Estimate: Hawai&#699;i Appleseed tax model, tax year 2027, Hawai&#699;i residents only, accounting for fewer gains being realized at a higher rate.</p>
-                <a class="tfc-btn sqs-block-button-element--small sqs-button-element--secondary sqs-block-button-element" href="/capital-gains">More</a>
             </div>
+            <p class="tfc-p27-source">Estimate: Hawai&#699;i Appleseed tax model, tax year 2027, Hawai&#699;i residents only, accounting for fewer gains being realized at a higher rate.</p>
         </li>
 
     </ol>
@@ -257,18 +279,19 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27) { grid-row: 1 / 2 !import
                 <div class="tfc-p27-figure">$76M<span class="tfc-p27-star" aria-hidden="true">*</span></div>
                 <p class="tfc-p27-figure-label">that working families would lose in 2028 if the credits expire</p>
                 <p class="tfc-p27-figure-note"><span aria-hidden="true">*</span>Earned Income Tax Credit and refundable food/excise tax credit only.</p>
+                <a class="tfc-p27-more" href="/tax-credits-2">Read more about working families&rsquo; tax credits &rarr;</a>
             </div>
             <div class="tfc-p27-body">
-                <p>In 2023, Act 163 doubled two of Hawai&#699;i&rsquo;s most important credits for working families: the state <strong>Earned Income Tax Credit</strong> (to 40 percent of the federal credit) and the refundable <strong>food/excise tax credit</strong>, which helps offset the general excise tax on groceries and other basics.</p>
-                <p>Those expansions end after the 2027 tax year. The 2026 Legislature did not extend them. Unless lawmakers act:</p>
+                <p class="tfc-p27-setup">Act 163 (2023) doubled the state Earned Income Tax Credit and the refundable food/excise tax credit. Those expansions end after the 2027 tax year unless lawmakers act.</p>
+                <div class="tfc-p27-stats">
+                    <div class="tfc-p27-stat"><b>78,000</b><span>Hawai&#699;i households claim the state EITC each year</span></div>
+                    <div class="tfc-p27-stat"><b>$156M</b><span>claimed through the EITC, food/excise, and child and dependent care credits in 2023</span></div>
+                </div>
                 <ul>
-                    <li>Working families would lose an estimated <strong>$76 million</strong> in 2028 alone.</li>
-                    <li>The EITC alone reaches about <strong>78,000</strong> Hawai&#699;i households a year.</li>
+                    <li>The <strong>child and dependent care tax credit</strong> also helps working parents with the cost of childcare.</li>
                 </ul>
-                <p>The <strong>child and dependent care tax credit</strong> also helps working parents with the cost of childcare. Together, Hawai&#699;i taxpayers claimed about <strong>$156 million</strong> through these three credits in 2023: $77 million from the EITC, $64 million from the food/excise credit, and $15 million from the child and dependent care credit.</p>
-                <p class="tfc-p27-source">Estimates: Hawai&#699;i Appleseed tax model, tax year 2028; EITC claims from the Department of Taxation, tax year 2024; credit totals from the Department of Taxation&rsquo;s Tax Credits Claimed report, tax year 2023.</p>
-                <a class="tfc-btn sqs-block-button-element--small sqs-button-element--secondary sqs-block-button-element" href="/tax-credits-2">More</a>
             </div>
+            <p class="tfc-p27-source">Estimates: Hawai&#699;i Appleseed tax model, tax year 2028; EITC claims from the Department of Taxation, tax year 2024; credit totals from the Department of Taxation&rsquo;s Tax Credits Claimed report, tax year 2023.</p>
         </li>
 
     </ol>
