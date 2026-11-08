@@ -2,6 +2,24 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "d207f175cea7",
+   "title": "Report calls for statewide fare-free bus system",
+   "outlet": "Honolulu Star-Advertiser",
+   "url": "https://www.staradvertiser.com/2026/11/08/hawaii-news/report-calls-for-statewide-fare-free-bus-system/",
+   "published": "2026-11-08T10:05:00Z",
+   "firstSeen": "2026-11-08T11:17:32Z",
+   "confidence": "high",
+   "reasons": [
+    "names Hawaiʻi Appleseed",
+    "staff: Malia Boksanski, with Hawaiʻi policy context; the text does not name Appleseed"
+   ],
+   "sources": [
+    "feed"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
    "id": "e7b1811a4f89",
    "title": "Will Caron: Navel Superiority",
    "outlet": "Honolulu Civil Beat",
