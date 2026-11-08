@@ -11,10 +11,12 @@
    "confidence": "high",
    "reasons": [
     "names Hawaiʻi Appleseed",
-    "staff: Malia Boksanski, with Hawaiʻi policy context; the text does not name Appleseed"
+    "staff: Malia Boksanski, with Hawaiʻi policy context; the text does not name Appleseed",
+    "search engine matched the phrase; article text not checked"
    ],
    "sources": [
-    "feed"
+    "feed",
+    "google"
    ],
    "onSite": "",
    "status": "new"
