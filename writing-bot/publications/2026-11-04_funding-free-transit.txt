@@ -1,0 +1,1097 @@
+Title: Funding Free Transit
+Date: 2026-11-04
+URL: https://hiappleseed.org/publications/funding-free-transit
+PDF: https://hiappleseed.org/s/Funding-Free-Transit_FINAL.pdf
+============================================================
+
+November 2026
+
+FUNDING FREE TRANSIT
+COST ESTIMATES AND REVENUE OPTIONS FOR 
+UNIVERSAL FARE-FREE BUS TRANSIT IN HAWAI‘I
+
+H AWA I‘I   A P P L E S E E D
+
+CENTER FOR LAW & ECONOMIC JUSTICE
+
+www.hiappleseed.org
+
+Author: Malia Boksanski
+
+Hawaiʻi Appleseed is committed to a more socially and economically just Hawaiʻi, where everyone has genuine 
+opportunities to achieve economic security and fulfill their potential. We change systems to address inequity 
+and foster greater opportunity by conducting data analysis and research to address income inequality, educating 
+policymakers and the public, engaging in collaborative problem solving and coalition building, and advocating 
+for policy and systems change.
+
+The work of Hawaiʻi Appleseed is about people. The issues we work on—housing, food, wages, mobility, the state 
+budget and taxation, and racial and indigenous equity—are important because they ensure people have access 
+to shelter, sustenance, and the means to survive and thrive individually and collectively. Addressing these issues 
+requires the knowledge and expertise of the people that have first-hand experience and live with the adverse 
+consequences of our flawed systems.
+
+TABLE OF CONTENTS
+
+Executive Summary
+
+Best Practices
+
+What Does It Cost?
+
+Funding Sources For Universal Fare-Free Bus Transit
+
+Hawai‘i’s Transit Landscape
+
+Why Universal, Not Targeted?
+
+Recommendations
+
+Endotes
+
+3
+
+5
+
+6
+
+10
+
+15
+
+16
+
+17
+
+18
+
+Copyright © 2026 Hawaiʻi Appleseed Center for Law & Economic Justice. All rights reserved. 
+733 Bishop Street, Suite 1180, Honolulu, HI 96813
+
+2 • FUNDING FREE TRANSIT
+
+EXECUTIVE SUMMARY
+
+PUBLIC TRANSIT connects people to opportunity: to jobs, school, medical care, and daily life. When we remove 
+the cost of a fare and develop our transit systems with reliability and accessibility in mind, we can directly 
+expand who can get where they need to go. 
+
+Hawaiʻi is one of the most expensive places to live in the United States. Housing, food, and transportation costs 
+place enormous pressure on working families, and the burden falls heaviest on those with the least. In 2025, the 
+public cost of the vehicle economy1 in Hawaiʻi was $14,400 per taxpayer, or $33,600 per household, regardless 
+of vehicle ownership.2 The additional private cost of vehicle ownership is substantial—an extra $21,800 per 
+household, per year.3 
+
+Public transit offers a powerful alternative. A single transit trip costs a fraction of what a vehicle trip costs, and 
+
+FUNDING FREE TRANSIT • 3
+
+sustained investment in transit infrastructure generates substantial economic returns—an estimated $5 billion in 
+GDP for every $1 billion in annual investment over 20 years.4
+
+Yet across counties, transit ridership varies significantly. Transit ridership on Oʻahu has yet to recover to pre-
+pandemic levels,5 and recent fare increases are making the problem worse. Hawaiʻi County tells a different story: 
+after bus ridership fell from 663,784 passenger trips in FY2019 to 325,049 in FY2021, it not only rebounded but 
+has since exceeded pre-pandemic level—a turnaround driven by the county’s shift to fare-free service.6
+
+Fare revenue covers only a small share of what it costs to run Hawaiʻi’s bus systems. On Oʻahu, fares cover 
+roughly 15 percent of TheBus’s operating costs, with the remaining 85 percent already funded through public 
+revenue regardless of what riders pay.7
+
+In February 2026, Hawaiʻi Appleseed released “Keiki Ride Free,” a policy report recommending that Hawaiʻi 
+enact statewide legislation to provide free transit for all residents age 18 and under.8 This report builds on that 
+foundation, estimates the cost of a universal fare-free bus transit program, and identifies funding sources the 
+state can use to pay for it. 
+
+A universal program does not replace Keiki Ride Free, rather it is a broader version of the same goal. Cost 
+estimates provided in this report are broken out by both county and rider age group to preserve that option.
+We estimate a statewide universal fare-free bus program would cost approximately $62.4 million annually in the 
+near term, assuming 10 percent utilization on Oʻahu and 5 percent on neighbor islands. Hawaiʻi County’s Hele-On 
+program, which has already been fare-free since 2022, adds no additional cost.
+
+This report focuses specifically on public bus transit, not rail or paratransit. The report does not recommend 
+fare-free access to Skyline in the near-term: the system is still in active construction and its operating picture is 
+not yet settled, so we recommend revisiting rail integration in a future report.
+
+Hawaiʻi Appleseed recommends:
+
+• 
+
+• 
+
+Enacting statewide legislation establishing a permanent, universal fare-free bus transit program;
+
+Funding it through the barrel tax, the Clean Fuel Standard (SHIFT), or the State Highway Fund, distributed to 
+counties by formula;
+
+•  Requiring county transit agencies to report ridership, cost, and utilization data annually; and
+
+• 
+
+Investing in service improvements alongside fare elimination.
+
+4 • FUNDING FREE TRANSIT
+
+Wikimedia Commons
+
+BEST PRACTICES
+
+Hawaiʻi County’s Hele-On system, and comparable mainland programs, such as Alburquerque’s ABQ Ride Zero Fares 
+and Alexandria’s DASH, point to a consistent set of features for a successful universal fare-free bus transit program. 
+
+Based on best practices, a universal program should include the following:
+
+•  No pass, no enrollment, no means-testing. The program should allow transit riders to board and depart 
+without paying. When anyone can board without paying, without showing a pass or proving eligibility, 
+ridership increases dramatically, boarding times decrease, and administrative costs fall.9 Albuquerque's 
+experience confirmed that eliminating fare infrastructure saves meaningful resources that can be redirected 
+to enhancing transit access, infrastructure and services.10 Hawaiʻi County's Hele-On system operates on 
+exactly this model today.
+
+• 
+
+Year-round, statewide access. The program should apply on all county bus transit systems, statewide, year-
+round. Seasonal or school-year-only restrictions leave riders without service during summers, holidays, and 
+breaks, precisely when some of the most vulnerable residents need it most.
+
+•  Build in data collection from day one. This program should prioritize the collection of detailed  transit 
+
+ridership data. Closing the gaps in Hawaiʻi’s transit ridership data allows for more accurate utilization and 
+cost estimates to sustainably fund a fare-free bus transit program.
+
+•  Prioritize service investments. Alongside a fare-free transit program, state and county agencies should 
+invest in transit service improvements. Evidence from Alexandria, VA suggests that eliminating fares can 
+increase ridership on high-frequency routes.11 State and county agencies should anticipate this and plan for 
+service investments such as larger buses and more frequent service on high-demand routes, alongside fare 
+elimination. Increased ridership strengthens the case for these investments and can help attract additional 
+federal and local transit funding.
+
+•  Distribute state funding to counties by formula. Funding for this program should be distributed by the state 
+counties based on population, ridership, and need, rather than a flat reimbursement for lost fare revenue.
+
+FUNDING FREE TRANSIT • 5
+
+WHAT DOES IT COST?
+
+WHAT DOES FREE BUS TRANSIT FOR EVERYONE ACTUALLY COST?
+
+Opponents of fare-free bus transit frequently assume that fare revenue is essential to keeping transit systems 
+running. It is not. In Hawaiʻi, as in most jurisdictions, fare revenue covers only a small fraction of operating costs, 
+with the large majority of county bus systems funded through public revenue, regardless of what riders pay.
+
+Estimated Cost of Universal Fare-Free Bus Transit
+
+We estimate that a statewide universal fare-free bus program would cost approximately $62.4 million annually 
+in the near term. This assumes 10 percent bus transit utilization on Oʻahu and 5 percent utilization on the 
+neighbor islands. 
+
+Hawaiʻi County is excluded because Hele-On is already fare-free for all riders statewide, so a universal policy 
+adds no incremental cost there. This estimate also does not include Maui County’s already fare-free populations, 
+as a universal policy would add no incremental cost for them either. Only Maui’s remaining, non-exempt riders 
+are reflected in the cost figures.
+
+It is worth noting that Hele-On’s fare-free status is not currently permanent. Hawaiʻi County has extended 
+it through fare suspensions, most recently via Ordinance 25-71, and it is presently authorized only through 
+December 31, 2028.12 The County extended the pilot program to maintain high ridership and to avoid installation 
+costs, as fares would generate about $750,000 annually, but it would cost over $1 million to install new 
+fareboxes13 (see Figure 1). 
+
+Maui County, on the other hand, has not structured its fare-free access as a pilot or a program set to expire on a 
+certain date. Free bus transit for Maui’s eligible groups is fare-free indefinitely, with no signs or indications that 
+the county intends to scale back the program or reinstate fares for these groups.
+
+Figure 1: New Fareboxes Would Cost More Than A Year of Fares
+
+Cost to Install Fareboxes
+
+$1M+
+
+Yearly Fare Revenue
+
+$750K
+
+6 • FUNDING FREE TRANSIT
+
+Table 1: Estimated Annual Cost Under Universal Fare-Free Bus Transit, by County
+
+County
+
+Near-Term Utilization
+
+Estimated Annual Cost
+
+Honolulu (O‘ahu)
+
+Kaua‘i
+
+Maui
+
+Hawai‘i
+
+10%
+
+5%
+
+5%
+
+$59.2 million
+
+$1.5 million
+
+$1.6 million
+
+Already Fare-Free
+
+$0
+
+Statewide Total
+
+—
+
+$62.4 million
+
+Table 2: Estimated Near-Term Cost by Rider Group, Statewide
+
+Rider Age Group*
+
+Near-Term Statewide Cost
+
+Share of Statewide Total
+
+Keiki / Youth**
+
+Kūpuna / Seniors (65+)
+
+Non-Reduced Adults**
+
+Statewide Total
+
+$7.6 million
+
+$1.2 million
+
+$53.6 million
+
+$62.4 million
+
+~12%
+
+~2%
+
+~86%
+
+100%
+
+• 
+
+• 
+
+*Rider Age Group is broken down into three categories: Keiki/Youth, Kūpuna/Seniors, and Non-Reduced Adults. 
+Caregivers are counted under Non-Reduced Adults rather than Keiki/Youth, and tourists are excluded from all three 
+categories.
+
+**Age brackets for each rider group vary slightly by county, since each county defines these categories differently for fare 
+purposes. On O‘ahu, Keiki/Youth are ages 6–17 and Non-Reduced Adults are ages 18–64. On Kaua‘i, Keiki/Youth are ages 
+7–18 and Non-Reduced Adults are ages 19–54. On Maui, Non-Reduced Adults ages 25–54. Table 2 groups these county-
+specific brackets into three consistent statewide categories for comparison.
+
+FUNDING FREE TRANSIT • 7
+
+Assumptions Behind These Estimates
+
+These figures estimate foregone fare revenue, not new operating spending. Looking at Oʻahu, for example, the 
+$47 million TheBus currently collects in fares is the floor, not the ceiling—since eliminating fares is expected to 
+increase ridership. Understanding this, the state should budget for replacing lost fare revenue, in addition to the 
+cost of new riders. 
+
+The net cost is also likely lower than Table 1 suggests once administrative savings are counted. A universal, fare-
+free system eliminates the overhead that comes with charging and managing fares in the first place. All of the 
+spending toward farebox collection and maintenance, processing and re-verifying reduced-fare eligibility, issuing 
+and replacing passes, fare enforcement, and other fare-related administrative tasks goes away. In Alburquerque, 
+the net annual cost of its fare-free program was approximately $1.8 million against a $58 million operating 
+budget, roughly 3 percent of costs, once fare-collection savings were factored in.14
+
+8 • FUNDING FREE TRANSIT
+
+What Utilization Rate Should We Expect?
+
+Most Oʻahu residents currently get around by driving alone (a 63.7 percent Census commute share), but that 
+figure only captures commuting to work, not the complete range of daily trips.15 Hawaiʻi Appleseed’s 2026 “Oʻahu 
+Mobility Needs” report found that half of the county’s residents say transportation costs limit their access to 
+essential destinations, and nearly one in four were unable to leave their homes in the past month due to lack of 
+transportation. This suggests that the utilization estimates discussed below, drawn from mainland comparisons, 
+may understate real demand for a reliable fare-free system in Hawaiʻi.
+
+Even where fare-free transit is available, not everyone rides it. It’s worth distinguishing regular riders, people 
+who use transit as a routine part of daily life, from residents who might ride only once in a while. The utilization 
+rates below are meant to capture the former: how many residents would become regular riders under a fare-free 
+program, not the broader (and much larger) share who might ride occasionally. 
+
+In Albuquerque, roughly 4 percent of residents regularly use its fare-free transit, with 23,800 riders in 202316—
+though service there still sits at only 64 percent of pre-pandemic levels.17 In Alexandria, a denser city with more 
+frequent service, an estimated 13 percent of residents use the fare-free system with a recorded 4.5 million 
+boardings in Fiscal Year 2023.18 Based on these figures, we assume 10 percent utilization on Oʻahu in the near 
+term and 5 percent in Maui and Kauaʻi counties, reflecting smaller, lower-frequency systems. This is consistent 
+with Hele-On, where an estimated 2–3 percent of Hawaiʻi Island residents regularly ride roughly 2,500 to 3,000 
+rides per day.19
+
+What Hawaiʻi is Already Spending on Free Bus Transit
+
+Before considering the cost of establishing a universal fare-free transit program, it is worth noting that Hawaiʻi 
+already invests significantly in free and reduced-fare transit. Beyond Hele-On, Maui County offers free bus transit 
+to income-eligible households, youth, seniors, Medicare cardholders and—as of August 2026—all students and 
+county employees.20 Extending fare-free access to all remaining riders in Maui County, as reflected in Table 2, 
+would build on a system the county has already made mostly free.
+
+The Hawaiʻi Department of Education’s EXPRESS program also provides free bus passes to eligible middle 
+and high school students during the school year, at a cost of $1 million annually, drawn from the Department 
+of Education’s budget rather than HDOT’s budget.21 Under a universal program, EXPRESS would become 
+unnecessary, and its budget could be redirected to other educational priorities.
+
+Administrative Cost Savings
+
+Every county in Hawaiʻi currently operates its own fare collection infrastructure, reduced-fare programs, and 
+eligibility verification processes. A universal program would eliminate that overhead across the board. Reduced-
+fare applications, pass issuance and replacement, eligibility verification, and fare enforcement would no longer 
+be needed. On Hawaiʻi Island, Hele-On already operates without fare infrastructure, offering a working example 
+of what that administrative baseline looks like.
+
+A universal program would also let HIDOE wind down the EXPRESS program entirely, freeing its $1 million budget 
+for reallocation. A precise statewide estimate of total administrative savings would require a formal cost study, 
+but the directional conclusion is clear: the net cost of universal fare-free bus transit is lower than what Table 1 
+suggests once these savings are accounted for.
+
+FUNDING FREE TRANSIT • 9
+
+FUNDING SOURCES FOR 
+UNIVERSAL FARE-FREE 
+BUS TRANSIT
+
+How Transit Funding Currently Works
+
+Fare revenue is a small piece of how Hawaiʻi’s bus systems are funded. In 2024, the City and County of Honolulu’s 
+transit system (TheBus) had operating costs of approximately $330 million. Passenger fares generated 
+approximately $47 million, an operating deficit of roughly $283 million, or 85 percent of costs, covered through 
+public funding regardless of the fare charged.22 A similar pattern held in 2022 and 2023, with fares covering less 
+than 20 percent of costs each year.23 
+
+This is not unique to Oʻahu. Nationally and across Hawaiʻi’s three other counties, fares consistently cover only a 
+small share of transit operating costs, with the balance funded through public revenue regardless of ridership or 
+fare levels.
+
+Transit planning and day-to-day operations in Hawaiʻi are primarily carried out by the respective county transit 
+agencies, with support from the state. It is important to distinguish between two kinds of public transit funding: 
+
+•  Capital Funding: Pays for buses, facilities, and infrastructure and comes disproportionately from federal 
+
+sources; and 
+
+•  Operating Funding: Pays for the day-to-day cost of running service, including the fare revenue this report 
+
+proposes to replace. 
+
+Counties receive substantial federal support for capital projects, but operating costs and any fare revenue 
+replacement fall mostly to state and county general and special funds. That distinction matters: federal capital 
+dollars cannot simply be redirected to cover an operating cost like fare-free bus transit.
+
+Potential Funding Sources
+
+Option 1: Barrel Tax
+
+Hawaiʻi’s Environmental Response, Energy, and Food Security Tax, known commonly as the Barrel Tax, was 
+established in 1993 as a per-barrel tax on petroleum products. Initially 5 cents per barrel to fund oil-spill 
+response,24 it was later raised to its current rate of $1.05 per barrel in 2010, generating roughly $27 million to $30 
+million per year.25 Table 3 breaks down how the $1.05 per barrel tax is currently allocated.
+
+10 • FUNDING FREE TRANSIT
+
+Table 3: Barrel Tax Allocation, FY2025, per $1.05
+
+Fund or Subaccount
+
+Amount Allocated
+
+Environmental Response Revolving Fund
+
+Energy Security Special Fund
+
+Energy Systems Development Special Fund
+
+Electric Vehicle Charging System Subaccount
+
+Hydrogen Fueling System Subaccount
+
+General Fund
+
+$0.05
+
+$0.04
+
+$0.05
+
+$0.03
+
+$0.03
+
+$0.85
+
+This existing tax is the primary mechanism the Legislature considered using in the 2026 session to fund a 
+statewide fare-free program for keiki. If passed, HB1879/SB2699 would have directed 28 cents of the per-barrel 
+petroleum tax and 7 cents of the non-petroleum fossil fuel tax into a dedicated free youth transit fund, estimated 
+to generate approximately $9.87 million annually.26 A universal program would need a larger allocation than a 
+youth-only program, but the same mechanism could scale to cover all riders.
+
+•  Advantages: The barrel tax is already established and would not require development of a new revenue 
+
+source. The tax would simply require legislative reallocation, potentially from the General Fund or through 
+the Hydrogen Fueling System Subaccount and the Electric Vehicle Charging System Subaccount, which have 
+not yet been utilized. Further, it ties transportation funding to petroleum consumption, the same activity 
+fare-free bus transit is meant to reduce.
+
+• 
+
+Trade-offs: Barrel tax revenue is currently allocated to the general fund, in addition to a range of other 
+programs; thus, allocating a portion of the barrel tax to be used for fare-free transit would mean diverting 
+revenue from those existing uses, reducing their funding unless the tax rate were also increased. Barrel tax 
+revenue also fluctuates with fuel prices and consumption, which could make it an unstable long-term base 
+for an ongoing operating cost.
+
+Option 2: Clean Fuel Standard Revenue
+
+As part of the Sustainable Hawaiʻi Initiative for Fuel Transformation (SHIFT), Hawaiʻi’s Clean Fuel Standard (CFS) 
+is a statewide initiative to accelerate the use of lower carbon transportation fuels such as biofuel, renewable 
+diesel, electricity used to charge electric vehicles, and sustainable aviation fuel. It is designed to reduce 
+emissions, strengthen local energy security, and build a more sustainable future for Hawaiʻi.27 
+
+Hawaiʻi paved the way for CFS adoption with the passage of Act 258 in 2026.28 Under this legislation, regulatory 
+adoption of CFS is required by January 1, 2028, and implementation by January 1, 2029. Once established, a 
+CFS would generate revenue through a credit system: utilities and public agencies that reduce transportation 
+
+FUNDING FREE TRANSIT • 11
+
+emissions by producing low carbon fuels earn credits, and the value of those credits becomes the program’s 
+revenue base. 
+
+By design, and legislatively required under Act 258 itself, at least 50 percent of Clean Fuel Standard proceeds 
+must go to underserved communities, and eligible investments include electric vehicle rebates, electric 
+micromobility, and charging infrastructure.29 
+
+HDOT has identified a CFS as an administrative strategy to incentivise cleaner fuels and reduce transportation 
+emissions. HDOT’s Energy Security and Waste Reduction Plan identifies strategies to reduce vehicle miles 
+traveled as a key means to meet the state’s climate targets. One of those strategies include using CFS revenue as 
+a funding source to make bus transit free for residents 18 and under.30 
+
+•  Advantages: HDOT has already-identified the CFS as a potential funding mechanism to fund fare-free youth 
+transit and the department is currently carrying out the administrative groundwork to establish the CFS. 
+
+• 
+
+Trade-offs: HDOT has not yet determined how CFS revenue will be used, or how CFS might support a fare-free 
+transit program. Current CFS language shows a bias toward electrification investments rather than transit 
+service.31 The implementation timeline doesn’t reach full effect until 2029, and there are no current estimates 
+of how much revenue the program would actually generate. 
+
+Option 3: Using a Share of the State Highway Fund
+
+HDOT is the state agency best positioned to fund universal bus transit directly, and the State Highway Fund is 
+a potential funding lever available. The State Highway Fund is Hawaiʻi’s dedicated fund for road construction 
+and maintenance, built from the state fuel tax, vehicle registration fees, and the state vehicle weight tax. In 2023 
+alone, the fund saw revenue of approximately $316 million.32 As estimated in this report, a statewide universal 
+fare-free transit program would cost roughly 20 percent of the fund's 2023 revenue.
+
+One targeted way to draw on this fund is to redirect a share of the rental motor vehicle surcharge tax to transit 
+before it reaches the State Highway Fund. Rental car companies pay this tax per vehicle per day, and nearly all 
+of it is deposited into the fund: about $118 million in FY 2025, up from approximately $106 million in FY 2024, an 
+increase of 4.6 percent.33 That growth reflects rate increases, from $3 to $5 per day in 201934 and then in steps to 
+$8 per day by 2027.35 
+
+12 • FUNDING FREE TRANSIT
+
+Act 174 (2019) stated that the increase was meant to fund projects that fund highway capacity and relieve 
+congestion, but the statute places no restrictions on how the money is spent. In practice, it has largely gone to 
+new road capacity—which in pracice only supports more driving, rather than easing congestion.36 
+
+Universal transit relieves congestion by giving people an alternative to driving, so it fits the surcharge’s stated 
+intent. At $62.4 million a year, a statewide program would cost just over half of the annual rental motor vehicle 
+surcharge revenue.
+
+•  Advantages: This strategy uses existing highway and transportation revenue more creatively rather than 
+
+relying solely on new taxes, and directly advances HDOT’s own climate mandate.
+
+• 
+
+Trade-offs: The fund has historically been earmarked for highway construction and maintenance, not transit, 
+so redirecting a share of it can be expected to draw pushback from stakeholders invested in road projects.
+
+That potential pushback is worth weighing against the way in which HDOT’s broader budget, which combines 
+the State Highway Fund with other funding sources, is currently being spent. Between FY2019 and FY2024, 66.3 
+percent of HDOT’s $5.68 billion budget went toward expanding vehicle capacity (road widening, new lanes, and 
+related infrastructure), while just 1.5 percent went toward reducing vehicle travel through transit, walking, and 
+biking (see Table 4). 37 Measured against that total capital budget, rather than the State Highway Fund alone, a 
+universal program’s $62.4 million annual cost is only 5 percent of HDOT’s average annual capital budget.
+
+HDOT is also legally-bound by the Navahine v. HDOT settlement to decarbonize Hawaiʻi’s transportation sector 
+by 2045, with an interim target of a 50 percent reduction in greenhouse gas emissions by 2030.38 This strengthens 
+the case for using existing highway and transportation revenue more creatively rather than relying on new taxes.
+
+Table 4: HDOT Budget Allocations, FY2019–FY2024, by Vehicle Travel and Project Category
+
+Vehicle Miles Traveled 
+(VMT) Category
+
+Project Category
+
+Total Funding
+
+Percentage of Funding
+
+Decreases VMT (1.5%)
+
+Pedestrian/Bike 
+Infrastructure
+
+$82,898,000
+
+Neutral (32.2%)
+
+Non-Capacity
+
+$1,229,202,000
+
+Operational Improvements
+
+$605,180,000
+
+Roadway Capacity or 
+Replacement with Bike/
+Pedestrian Enhancement
+
+$219,154,242
+
+Increases VMT (66.3%)
+
+Replacement
+
+$1,140,774,286
+
+New Roadway Capacity 
+(Lane or Road Connection)
+
+$2,403,465,000
+
+TOTAL
+
+$5,680,673,528
+
+1.5%
+
+21.6%
+
+10.6%
+
+3.9%
+
+20.1%
+
+42.3%
+
+100%
+
+FUNDING FREE TRANSIT • 13
+
+Table 5: Comparing Four Funding Options for Fare-Free Bus Transit
+
+Funding Source
+
+Size & Estimated Revenue
+
+Pros & Cons
+
+1. Barrel Tax
+(In place since 1993)
+
+2. Clean Fuel Standard
+(Starts 2029)
+
+3. State Highway Fund
+(Available now)
+
+$27–30 million per year
+(Covers <50% of need)
+
++ Ties transit to fossil fuels
+- Not enough revenue; volatile
+
+No estimate yet
+
++ HDOT supports use
+- No firm timeline or estimate
+
+$316 million per year
+(Need is ~20% of fund)
+
++ Large enough to cover
+- Hard to redirect from roads
+
+Other Funding Sources Worth Exploring
+
+Beyond the three options above, several other jurisdictions have turned to newer, less conventional revenue 
+sources that could be examined in future research. This includes: 
+
+•  A heavy or large-vehicle registration fee: Following the District of Columbia’s 2024 restructuring of 
+
+registration fees to charge heavier vehicles more;39 
+
+•  Rideshare trip fees dedicated to transit: An approach several states and cities have adopted and that Hawaiʻi 
+
+itself considered in a 2024 bill (SB3022);40 and 
+
+•  Delivery fees on services like Amazon: A growing number of states are examining this option as a way to 
+
+capture revenue from vehicle trips that gas taxes increasingly miss. 
+
+This report does not model these sources in detail, but they merit further study as the Legislature considers how 
+to fund fare-free transit over the long term.
+
+Formula-Based Grants to Counties
+
+Rather than a flat reimbursement of lost fare revenue, this report recommends the state distribute funding to 
+counties through a formula-based grant program, adjusted over time as ridership data becomes available. This 
+model is based on Washington State’s Transit Support Grant for their own statewide youth ride free program. 
+Washington’s program sends each county a set allocation based on population, regardless of exact ridership, 
+giving counties several years to collect the ridership data needed to refine the formula going forward.41 
+
+Applied to Hawaiʻi, a grant formula should account for each county’s population, current ridership levels, and 
+demonstrated need.
+
+•  Advantages: A grant model gives counties funding certainty, distributes state funds more precisely than 
+a uniform per-capita amount, and creates ongoing incentive to collect ridership data, since that data 
+determines future funding.
+
+• 
+
+Trade-offs: Designing and administering a formula-based grant program requires more upfront state capacity 
+than a flat funding transfer, and counties with weaker current data collection may be disadvantaged in the 
+early years unless the state provides transitional support.
+
+14 • FUNDING FREE TRANSIT
+
+HAWAI‘I’S CURRENT 
+TRANSIT LANDSCAPE
+
+Public transit in Hawaiʻi is managed by each county independently, producing a fare structure that varies widely 
+and inequitably across the state. The result is a system where identical residents pay different prices depending 
+solely on which island they call home.
+
+•  Kauaʻi County: No fare-free rider categories; ADA, youth, and senior riders receive a discounted fare.
+
+•  City and County of Honolulu: No fare-free rider categories; youth, seniors, people with disabilities, and low-
+
+income riders receive a reduced fare, however that fare has increased under Bill 54, the most recent fare hike.42
+
+•  Maui County: Free for income-eligible households, youth (under 25), seniors (55+), Medicare and Paratransit 
+cardholders, and, as of August 2026, all students and county employees. This leaves only a narrow band of 
+non-exempt adult riders still paying a fare.
+
+•  Hawaiʻi County: Fare-free for every rider since 2022. It is the only county in the state with no fare structure at 
+
+all.
+
+•  Statewide: the HIDOE EXPRESS program provides free county bus passes during the school year to eligible 
+
+public school students who live 1.5 miles or more from their home school.
+
+This patchwork has created inequities. Keiki on Oʻahu pay to ride while keiki on Maui ride free. Low-income 
+workers on Kauaʻi pay full fare while low-income workers on Maui do not. Kūpuna on the Big Island ride free 
+while kūpuna on Oʻahu pay a reduced fare (that just became more expensive under Bill 54).43 Where you live 
+should not determine whether you can afford to get around. A statewide universal program would end these 
+disparities once and for all.
+
+FUNDING FREE TRANSIT • 15
+
+WHY UNIVERSAL, 
+NOT TARGETED?
+
+Our “Keiki Ride Free” report laid out the broad case for fare-free transit: economic, health, safety, and 
+environmental benefits well documented by research and Hawaiʻi’s own experience with Hele-On. Rather than 
+repeat that case here, this section focuses narrowly on why programs that serve all riders, rather than only 
+specific exempted groups, consistently outperformed targeted ones:
+
+• 
+
+Lower administrative costs. A universal program eliminates eligibility requirements entirely. Targeted 
+programs, by contrast, require ongoing administration to determine and re-verify who qualifies, which in 
+itself is a real and recurring cost.
+
+•  Higher utilization. Removing fares for everyone, not just exempted groups, consistently drives the largest 
+ridership gains: fixed-route ridership in Albuquerque grew 49.4 percent in the first year of its universal 
+program,44 and daily ridership in Alexandria grew more than 152 percent between 2021 and 2023 after it went 
+fare-free for all riders.45 Targeted, exemption based programs do not produce ridership gains of that scale, 
+because most riders will still face a fare.
+
+•  No means-testing. A universal program avoids the two-tiered system that targeted exceptions create, where 
+some residents must document income, age, or another qualifying status to ride, and others don’t. That 
+barrier alone discourages ridership among eligible residents who don’t apply, whether because of stigma, 
+paperwork, or simply not knowing the program exists.
+
+•  Meeting state climate goals. State law requires Hawaiʻi to cut transportation emissions in half from 2005 
+levels by 2030 and to reach net-negative emissions by 2045.46 To get there, the Hawaiʻi Department of 
+Transportation calls for a 20 percent reduction in vehicle miles traveled by 2045.47 Its Energy Security and 
+Waste Reduction Plan already names fare-free bus access for youth as one strategy toward that target.48 A 
+universal program would go further. It removes the fare for the adults who make most car trips, which is 
+where the largest cuts in vehicle miles and emissions are.
+
+Taken together, these are the same reasons Hele-On’s fully open, no-exceptions model has been both effective 
+and comparatively simple to administer since 2022 and why we recommend the same approach statewide.
+
+16 • FUNDING FREE TRANSIT
+
+RECOMMENDATIONS
+
+This report recommends that the Hawaiʻi State Legislature:
+
+1.  Enact statewide legislation establishing a permanent, universal, fare-free bus transit program for all four 
+
+county bus systems, with no pass, enrollment, or means-testing, following the model of Hawaiʻi Island’s Hele-
+On and Albuquerque’s ABQ Ride Zero Fares.
+
+2.  Fund the program through the barrel tax, the Clean Fuel Standard, the State Highway Fund, or some 
+
+combination of these sources. In practice, this likely means a phased approach. A share of the State Highway 
+Fund or barrel tax revenue—both already established mechanisms—could fund a near-term expansion 
+along the lines of Keiki Ride Free,49 with Clean Fuel Standard or other revenue layered in as additional, 
+complementary sources as the program scales toward a full universal system over the long term. 
+
+3.  Direct that funding to counties through a formula-based grant, modeled on Washington State’s Transit 
+
+Support Grant, tied to population, ridership, and demonstrated need.
+
+4.  Require annual reporting from county transit agencies on ridership, costs, and program outcomes, to inform 
+
+legislative oversight and refind the grant formula over time.
+
+5. 
+
+Invest in service improvements alongside fare elimination. This includes more frequent service and added 
+capacity on high-demand routes to meet the ridership growth fare elimination is expected to produce.
+
+FUNDING FREE TRANSIT • 17
+
+ENDNOTES
+
+In addition to roadways and vehicles, the 
+1. 
+“vehicle economy” also includes the direct costs 
+of transportation infrastructure (e.g., bridges, on 
+off ramps, signs, speed bumps, parking, signals) as 
+well as indirect costs to society, such as pollution 
+and congestion resulting from the use of the ground 
+transportation system.
+
+Ulupono Initiative, “The Cost of the Vehicle 
+
+2. 
+Economy in Hawaiʻi,” April 2025.
+https://ulupono.com/media/rddfxc20/the-cost-of-the-
+vehicle-economy-in-hawaii_2025-7-14-final.pdf
+
+3. 
+
+Ibid.
+
+American Public Transportation Association, 
+
+4. 
+“Economic Impact of Public Transportation 
+Investment,” February 2026. https://www.apta.com/
+wp-content/uploads/2026/03/APTA-Economic-Impact-
+of-Public-Transportation-022026.pdf
+
+5. 
+City and County of Honolulu, “TheBus 
+Ridership and Performance Statistics, Monthly 
+Reports,” accessed August 2026. https://www.thebus.
+org/Performance/Performance_Bus.asp
+
+Ramos, Chavonnie, “Bringing New Life to 
+
+6. 
+Hawaiʻi Island’s ʻHele-On’ Service,” Hawaii Business, 
+April 3, 2023. https://www.hawaiibusiness.com/hawaii-
+hele-on-service-upgrades-public-transit-system
+
+Office of the City Auditor, “City and County 
+
+7. 
+of Honolulu Public Transportation System Bus 
+and Paratransit Operations,” p. 6, December 2024. 
+https://www.honolulu.gov/oca/wp-content/uploads/
+sites/39/2025/01/CC-PTS-FS-2024-Final.pdf
+
+Gilliam, Trinity and Abbey Seitz, “Keiki Ride 
+
+8. 
+Free: Adopting a Statewide Fare-Free Transit Policy,” 
+Hawaiʻi Appleseed Center for Law & Economic Justice, 
+February 2026. https://hiappleseed.org/publications/
+keiki-ride-free
+
+Washington State Department of 
+
+9. 
+Transportation, “Transit Support Grant: Frequently 
+Asked Questions,” April 2025.
+https://wsdot.wa.gov/sites/default/files/2023-07/PT-
+Guide-Grants-TransitSupportGrantFrequentlyAskedQu
+estions.pdf
+
+Rode, Erin, “What Free Transit Looks Like 
+
+10. 
+in Albuquerque, Nearly Two Years After the City 
+Eliminated Fares,” Next City, July 2025.
+https://nextcity.org/urbanist-news/what-free-transit-
+looks-like-in-albuquerque-nearly-two-years-after-the-
+city
+
+Alexandria Transit Company, “DASH Free Fare 
+
+11. 
+Program Annual Report – 2023,” April 2024.
+https://www.dashbus.com/wp-content/uploads/DASH-
+Fare-Free-Program-Report-2023_FINAL.pdf
+
+Hawai’i County, “Hele-On Bus Fares,” August 
+
+12. 
+2026. https://www.heleonbus.hawaiicounty.gov/fares
+
+13. 
+Harriman-Pote, Savannah, “Hawaiʻi Island 
+residents can keep riding Hele-On buses for free,” 
+Hawaiʻi Public Radio, December 3, 2025. https://www.
+hawaiipublicradio.org/local-news/2025-12-03/hawaii-
+island-residents-can-keep-riding-hele-on-buses-for-
+free
+
+Brey, Jared, “Albuquerque Makes Final Push for 
+
+14. 
+Fare-Free Transit,” Governing, October 2023. https://
+www.governing.com/transportation/albuquerque-
+makes-final-push-for-fare-free-transit
+
+Boksanski, Malia, “Oʻahu Mobility Needs,” 
+
+15. 
+Hawaiʻi Appleseed Center for Law & Economic Justice, 
+June 2026. https://hiappleseed.org/publications/oahu-
+mobility-needs
+
+16. 
+City of Albuquerque Transit Department, “Zero 
+Fares Is Here to Stay,” November 9, 2023. https://www.
+cabq.gov/transit/news/zero-fares-is-here-to-stay
+
+18 • FUNDING FREE TRANSIT
+
+17. 
+
+Rode, July 2025.
+
+Alexandria Transit Company (DASH), “DASH 
+
+18. 
+Sets New Ridership Record with 4.5 Million Boardings 
+in Fiscal Year 2023,” August 1, 2023. https://www.
+dashbus.com/ridership-23-celebration
+
+County of Hawaiʻi, “2022 Supplement to 
+
+19. 
+the County of Hawaiʻi Transit and Multi-Modal 
+Transportation Master Plan,” September 2022.
+
+Maui County Council, “Bill No. 95,” 2026. 
+
+20. 
+https://mauicounty.legistar.com/View.ashx?M=F&
+ID=15652436&GUID=68886DBC-5A04-4A90-BBD4-
+E38A32705DA5
+
+21. 
+Ordonio, Cassie, “Hawaii High School Students 
+To Get Free Rides On Public Transportation,” Honolulu 
+Civil Beat, September 12, 2022. https://www.civilbeat.
+org/2022/09/hawaii-high-school-students-to-get-free-
+rides-on-public-transportation
+
+22. 
+Office of the City Auditor, “City and County 
+of Honolulu Public Transportation System Bus and 
+Paratransit Operations,” p. 6, December 2024.
+
+23. 
+
+Ibid.
+
+hawaii.gov/newsroom/office-of-the-governor-news-
+release-gov-green-signs-legislation-to-modernize-our-
+transportation-system
+
+Hawaiʻi State Legislature, “Senate Bill 2999 
+
+29. 
+CD1,” 2026. https://www.capitol.hawaii.gov/sessions/
+session2026/bills/SB2999_CD1_.htm
+
+Hawaiʻi Department of Transportation, “Energy 
+
+30. 
+Security and Waste Reduction Plan,” p. 65, October 
+15, 2025. https://hidot.hawaii.gov/wp-content/
+uploads/2025/10/FINAL-ESWRP-2025-10-15.pdf
+
+Hawaiʻi State Legislature, “Senate Bill 2999 
+
+31. 
+CD1,” 2026.
+
+32. 
+Hawaiʻi State Department of Transportation, 
+Highways Division, “Financial Statements,” June 30, 
+2023. https://hidot.hawaii.gov/highways/files/2024/02/
+eDOT-Highways-6-30-2023-FS.pdf
+
+Hawaiʻi Department of Taxation, Annual Report 
+
+33. 
+2024–2025, p. 21, 2025.
+
+34. 
+Act 174, Session Laws of Hawaiʻi, 2019. https://
+www.capitol.hawaii.gov/slh/Years/SLH2019/SLH2019_
+Act174.pdf
+
+Hawaiʻi State Legislature, “House Bill 760,” 
+
+24. 
+2025. https://data.capitol.hawaii.gov/sessions/
+session2025/bills/HB760_.HTM
+
+35. 
+Act 237, Session Laws of Hawaiʻi, 2021. https://
+www.capitol.hawaii.gov/slh/Years/SLH2021/SLH2021_
+Act237.pdf
+
+Hawaiʻi Department of Taxation, “Annual 
+
+25. 
+Report 2024–2025,” p. 19, 2025. https://files.hawaii.
+gov/tax/stats/stats/annual/25annrpt.pdf
+
+Hawaiʻi State Legislature, “House Bill 1879,” 
+
+26. 
+2026. https://www.capitol.hawaii.gov/sessions/
+session2026/bills/HB1879_.PDF
+
+27. 
+Hawaiʻi Department of Transportation, 
+“Sustainable Hawaiʻi Initiative for Fuel Transformation 
+(SHIFT). https://highways.hidot.hawaii.gov/stories/s/
+SHIFT-Sustainable-Hawai-i-Initiative-for-Fuel-Tran/
+yk5e-riat
+
+28. 
+Office of the Governor, State of Hawaiʻi, 
+“Gov. Green Signs Legislation to Modernize Our 
+Transportation System,” July 2026. https://governor.
+
+Duranton, Gilles and Matthew A. Turner, “The 
+
+36. 
+Fundamental Law of Road Congestion: Evidence 
+from US Cities,” American Economic Review, 101:6, 
+p. 2616–52, October 2011. https://doi.org/10.1257/
+aer.101.6.2616
+
+Seitz, Abbey and Trinity Gilliam, “Rethinking 
+
+37. 
+Roads,” Hawaiʻi Appleseed Center for Law & Economic 
+Justice, December 2024. https://hiappleseed.org/
+publications/rethinking-roads
+
+Earthjustice, “Navahine v. Hawaiʻi Department 
+
+38. 
+of Transportation, Settlement Agreement,” June 1, 
+2022. https://earthjustice.org/cases/2022/navahine-v-
+hawaii-department-of-transportation
+
+39. 
+
+Segraves, Mark, “DC Vehicle Registration 
+
+FUNDING FREE TRANSIT • 19
+
+Will More Than Triple for Some SUVs, Trucks by 
+2024,” NBC4 Washington, May 27, 2022. https://
+www.nbcwashington.com/news/local/dc-vehicle-
+registration-will-more-than-triple-for-some-suvs-
+trucks-by-2024/3063961
+
+Hawaiʻi State Legislature, “Senate Bill 3022,” 
+
+40. 
+2024, https://data.capitol.hawaii.gov/sessions/
+session2024/bills/SB3022_.HTM
+
+City of Albuquerque, “ABQ RIDE, Monthly 
+
+44. 
+Informational Report,” December 2022, https://www.
+cabq.gov/transit/documents/december-zf-report-2022.
+pdf
+
+45. 
+
+Alexandria Transit Company, April 2024.
+
+Hawaiʻi Department of Transportation, October 
+
+46. 
+15, 2025, p. 1.
+
+Washington State Department of 
+
+41. 
+Transportation, April 2025. 
+
+Hawaiʻi Climate Change Mitigation and 
+
+47. 
+Adaptation Commission, “DRAFT Hawaiʻi Climate 
+Action Pathways 2025: Executive Summary,” p. 19.
+
+Honolulu City Council, “Bill 54 (CD1),” 2025. 
+
+42. 
+https://hnldoc.ehawaii.gov/hnldoc/document-
+download?id=25846
+
+Hawaiʻi Department of Transportation, October 
+
+48. 
+15, 2025, p. 65.
+
+43. 
+
+Ibid.
+
+49. 
+
+Gilliam, February 2026.
+
+20 • FUNDING FREE TRANSIT
