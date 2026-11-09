@@ -2,6 +2,43 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "f940fbfda86c",
+   "title": "Voters Said Yes To Food Security Fund. How Will Honolulu Spend It?",
+   "outlet": "Honolulu Civil Beat",
+   "url": "https://www.civilbeat.org/2026/11/voters-said-yes-to-food-security-fund-how-will-honolulu-spend-it/",
+   "published": "2026-11-09T10:01:00Z",
+   "firstSeen": "2026-11-09T12:52:59Z",
+   "confidence": "high",
+   "reasons": [
+    "search engine matched the phrase; article text not checked",
+    "names Hawaiʻi Appleseed",
+    "staff: Daniela Spoto, with Appleseed"
+   ],
+   "sources": [
+    "google",
+    "feed"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
+   "id": "7ad2ca271c0a",
+   "title": "Free Bus Rides For Waikiki Visitors Could End $500 Parking Bills",
+   "outlet": "Beat of Hawaii",
+   "url": "https://beatofhawaii.com/free-bus-rides-for-waikiki-visitors-could-end-500-parking-bills/",
+   "published": "2026-11-09T06:11:50Z",
+   "firstSeen": "2026-11-09T12:52:59Z",
+   "confidence": "high",
+   "reasons": [
+    "article text names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "google"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
    "id": "d207f175cea7",
    "title": "Report calls for statewide fare-free bus system",
    "outlet": "Honolulu Star-Advertiser",
