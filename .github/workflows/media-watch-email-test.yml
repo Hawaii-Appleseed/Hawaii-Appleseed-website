@@ -1,0 +1,35 @@
+name: Media watch email test
+
+# Sends one test email through the same Gmail login the approval flow uses, but
+# only to the sending address itself, never to staff. Run it by hand from the
+# Actions tab after changing the MEDIA_WATCH_GMAIL_* secrets.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      MAIL_USER: ${{ secrets.MEDIA_WATCH_GMAIL_USER }}
+      MAIL_PASS: ${{ secrets.MEDIA_WATCH_GMAIL_APP_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Send the test email to the sender only
+        run: |
+          python3 - <<'PY'
+          import os, smtplib
+          from email.message import EmailMessage
+          me = os.environ["MAIL_USER"]
+          m = EmailMessage()
+          m["Subject"], m["From"], m["To"] = "Media watch email test", me, me
+          m.set_content("The media watch Gmail login works. Approved stories will be emailed to staff from this address.")
+          with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=30) as s:
+              s.login(me, os.environ["MAIL_PASS"])
+              s.send_message(m)
+          print("test email sent")
+          PY
