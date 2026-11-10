@@ -15,8 +15,8 @@
     "staff: Daniela Spoto, with Appleseed"
    ],
    "sources": [
-    "google",
-    "feed"
+    "feed",
+    "google"
    ],
    "onSite": "",
    "status": "new"
@@ -30,7 +30,8 @@
    "firstSeen": "2026-11-09T12:52:59Z",
    "confidence": "high",
    "reasons": [
-    "article text names Hawaiʻi Appleseed"
+    "article text names Hawaiʻi Appleseed",
+    "search engine matched the phrase; article text not checked"
    ],
    "sources": [
     "google"
