@@ -19,6 +19,15 @@ jobs:
       MAIL_PASS: ${{ secrets.MEDIA_WATCH_GMAIL_APP_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
+      - name: Check the secrets' shape (lengths only, never values)
+        run: |
+          python3 - <<'PY'
+          import os, re
+          u, p = os.environ["MAIL_USER"], os.environ["MAIL_PASS"]
+          print("user: length", len(u), "| one @:", u.count("@") == 1, "| has whitespace:", bool(re.search(r"\s", u)))
+          q = "".join(p.split())
+          print("password: length", len(p), "| without spaces", len(q), "| letters only:", q.isalpha(), "| ascii:", q.isascii())
+          PY
       - name: Send the test email to the sender only
         run: |
           python3 - <<'PY'
