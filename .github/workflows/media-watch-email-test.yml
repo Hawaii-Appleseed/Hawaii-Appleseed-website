@@ -28,8 +28,10 @@ jobs:
           m = EmailMessage()
           m["Subject"], m["From"], m["To"] = "Media watch email test", me, me
           m.set_content("The media watch Gmail login works. Approved stories will be emailed to staff from this address.")
-          with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=30) as s:
-              s.login(me, os.environ["MAIL_PASS"])
+          pw = "".join(os.environ["MAIL_PASS"].split())  # app passwords are shown with spaces
+          with smtplib.SMTP("smtp.gmail.com", 587, timeout=30) as s:
+              s.ehlo(); s.starttls(); s.ehlo()
+              s.login(me.strip(), pw)
               s.send_message(m)
           print("test email sent")
           PY

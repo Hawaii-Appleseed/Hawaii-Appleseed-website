@@ -35,8 +35,12 @@ def build_message(slack_text, sender, to):
 def main():
     text = json.load(open(sys.argv[1], encoding="utf-8"))["text"]
     msg = build_message(text, os.environ["MAIL_USER"], os.environ["MAIL_TO"])
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=30) as smtp:
-        smtp.login(os.environ["MAIL_USER"], os.environ["MAIL_PASS"])
+    password = "".join(os.environ["MAIL_PASS"].split())  # app passwords are shown with spaces
+    with smtplib.SMTP("smtp.gmail.com", 587, timeout=30) as smtp:
+        smtp.ehlo()
+        smtp.starttls()
+        smtp.ehlo()
+        smtp.login(os.environ["MAIL_USER"].strip(), password)
         smtp.send_message(msg)
     print("emailed staff")
 
