@@ -80,6 +80,24 @@ jobs:
             echo "reply=Slack answered HTTP $code, so nothing was recorded as posted. Reply again to retry." >> "$GITHUB_OUTPUT"
           fi
 
+      # Staff get the same approved stories by email, from Devin's Gmail. Only
+      # runs after approval and never on a dry run; no secrets, no email (and no
+      # failure). MEDIA_WATCH_EMAIL_TO is comma-separated: the repo is public, so
+      # the addresses are secrets, not code.
+      - name: Email approved stories to staff
+        if: steps.decide.outputs.posted != '' && !contains(github.event.issue.labels.*.name, 'dry-run')
+        env:
+          MAIL_TO: ${{ secrets.MEDIA_WATCH_EMAIL_TO }}
+          MAIL_USER: ${{ secrets.MEDIA_WATCH_GMAIL_USER }}
+          MAIL_PASS: ${{ secrets.MEDIA_WATCH_GMAIL_APP_PASSWORD }}
+        run: |
+          if [ -z "$MAIL_TO" ] || [ -z "$MAIL_USER" ] || [ -z "$MAIL_PASS" ]; then
+            echo "email: secrets not set, no email sent"
+            exit 0
+          fi
+          python3 scripts/media_watch_email.py slack.json \
+            || echo "email: sending failed (stories are still posted to Slack)"
+
       - name: Reply on the issue
         run: |
           if [ "$DRY_RUN" = "true" ]; then
