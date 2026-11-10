@@ -39,8 +39,9 @@ What it does each run:
   2. Runs the stages, keeps stories inside the lookback window.
   3. De-duplicates across sources (by headline and by URL) and against
      media-watch/mentions.json.
-  4. Checks each story against news.json's `press` items (the In the News
-     page) so the digest lists only stories nobody has posted yet.
+  4. Checks each story against the In the News page, read live from the site
+     and from news.json's `press` items (a nightly copy that can be a day or
+     more behind), so the digest lists only stories nobody has posted yet.
 
 Outputs:
   media-watch/mentions.json   every kept story, with status. The script never
@@ -1218,6 +1219,34 @@ def load_site_press(path=None):
     return out
 
 
+LIVE_PRESS_URL = "https://hiappleseed.org/in-the-news?format=json"
+
+
+def load_live_press(url=None, pages=3):
+    """The In the News items as the website serves them right now.
+
+    news.json is only a copy, synced nightly and committed only when it changes,
+    so a story posted today is missing from it for up to a day or more and the
+    watcher announces something that is already up. The live page closes that
+    gap. Any failure returns what was read so far (an empty list at worst), and
+    the caller still has news.json, so this never stops a run.
+    """
+    out, url = [], url or LIVE_PRESS_URL
+    for _ in range(pages):
+        try:
+            data = json.loads(http_get(url))
+        except (RuntimeError, ValueError):
+            break
+        for p in data.get("items", []):
+            out.append({"url": canon_url(p.get("sourceUrl", "")) if p.get("sourceUrl") else "",
+                        "title": norm(p.get("title", "")), "fullUrl": p.get("fullUrl", "")})
+        nxt = (data.get("pagination") or {}).get("nextPageUrl")
+        if not nxt:
+            break
+        url = urllib.parse.urljoin(LIVE_PRESS_URL, nxt) + ("&format=json" if "format=json" not in nxt else "")
+    return out
+
+
 def on_site(item, press):
     """Return the In the News path if this story is already posted there."""
     cu = canon_url(item["url"]) if "news.google.com" not in item["url"] else ""
@@ -1530,7 +1559,7 @@ def run(days=None, dry_run=False, delay=REQUEST_DELAY, out=sys.stdout, only=None
     merged = merge_found(found)
     settle(merged, state, cfg, checked, today, delay=delay * 0.5, out=out)
     merged = {k: m for k, m in merged.items() if RANK[m["confidence"]] >= RANK[min_conf]}
-    press = load_site_press()
+    press = load_site_press() + load_live_press()
     for m in merged.values():
         m["on_site"] = on_site(m, press)
 

@@ -1088,6 +1088,31 @@ class Dedupe(unittest.TestCase):
         self.assertEqual((m["url"], m["confidence"]), ("https://www.civilbeat.org/2026/09/tax", "high"))
         self.assertEqual(sorted(m["sources"]), ["bing", "google"])
 
+    def test_live_press_catches_a_story_news_json_has_not_synced(self):
+        page1 = json.dumps({"items": [{"title": "Free bus rides for Waikīkī visitors", "sourceUrl": "https://www.beatofhawaii.com/free-bus/?utm_source=x",
+                                       "fullUrl": "/in-the-news/free-bus"}],
+                            "pagination": {"nextPageUrl": "/in-the-news?offset=1&format=json"}})
+        page2 = json.dumps({"items": [{"title": "Second", "sourceUrl": "https://example.org/two", "fullUrl": "/in-the-news/two"}]})
+        pages = {mw.LIVE_PRESS_URL: page1, "https://hiappleseed.org/in-the-news?offset=1&format=json": page2}
+        saved = mw.http_get
+        mw.http_get = lambda u, **k: pages[u]
+        try:
+            press = mw.load_live_press()
+        finally:
+            mw.http_get = saved
+        self.assertEqual(len(press), 2)
+        self.assertEqual(mw.on_site({"url": "https://beatofhawaii.com/free-bus", "title": "x"}, press), "/in-the-news/free-bus")
+
+    def test_live_press_failure_returns_nothing_not_an_error(self):
+        saved = mw.http_get
+        def boom(u, **k):
+            raise RuntimeError("down")
+        mw.http_get = boom
+        try:
+            self.assertEqual(mw.load_live_press(), [])
+        finally:
+            mw.http_get = saved
+
     def test_on_site_by_url_and_by_title(self):
         press = [{"url": mw.canon_url("https://www.staradvertiser.com/2026/09/16/a/"),
                   "title": mw.norm("Hawaiʻi wealth flight fears are overblown"), "fullUrl": "/in-the-news/x"}]
