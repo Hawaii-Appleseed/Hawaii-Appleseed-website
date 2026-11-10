@@ -2,6 +2,23 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "27ba59c501c3",
+   "title": "November 10, 2026 News Read",
+   "outlet": "Hawaii Free Press",
+   "url": "https://www.hawaiifreepress.com/Articles-Daily-News/ID/49973/November-10-2026-News-Read",
+   "published": "2026-11-10T18:32:00Z",
+   "firstSeen": "2026-11-10T21:48:34Z",
+   "confidence": "high",
+   "reasons": [
+    "article text names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "google"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
    "id": "f940fbfda86c",
    "title": "Voters Said Yes To Food Security Fund. How Will Honolulu Spend It?",
    "outlet": "Honolulu Civil Beat",
