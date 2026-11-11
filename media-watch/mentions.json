@@ -2,6 +2,23 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "77e95ea7537d",
+   "title": "Off the news: No free rides in life, public transportation",
+   "outlet": "Honolulu Star-Advertiser",
+   "url": "https://www.staradvertiser.com/2026/11/11/editorial/off-the-news/off-the-news-no-free-rides-in-life-public-transportation/",
+   "published": "2026-11-11T10:05:00Z",
+   "firstSeen": "2026-11-11T11:52:51Z",
+   "confidence": "high",
+   "reasons": [
+    "names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "feed"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
    "id": "a84368486305",
    "title": "The push for a fare-free bus system gains local support",
    "outlet": "Hawaii Public Radio",
@@ -15,9 +32,9 @@
     "staff: Malia Boksanski, with Appleseed"
    ],
    "sources": [
-    "google",
     "bing",
-    "feed"
+    "feed",
+    "google"
    ],
    "onSite": "/in-the-news/the-push-for-a-fare-free-bus-system-gains-local-support",
    "status": "on-site"
