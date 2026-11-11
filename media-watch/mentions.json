@@ -10,10 +10,12 @@
    "firstSeen": "2026-11-11T11:52:51Z",
    "confidence": "high",
    "reasons": [
-    "names Hawaiʻi Appleseed"
+    "names Hawaiʻi Appleseed",
+    "search engine matched the phrase; article text not checked"
    ],
    "sources": [
-    "feed"
+    "feed",
+    "google"
    ],
    "onSite": "",
    "status": "new"
