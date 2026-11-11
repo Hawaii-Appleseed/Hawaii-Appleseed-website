@@ -2,6 +2,27 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "a84368486305",
+   "title": "The push for a fare-free bus system gains local support",
+   "outlet": "Hawaii Public Radio",
+   "url": "https://www.hawaiipublicradio.org/local-news/2026-11-10/the-push-for-a-fare-free-bus-system-gains-local-support",
+   "published": "2026-11-10T22:16:00Z",
+   "firstSeen": "2026-11-11T01:56:50Z",
+   "confidence": "high",
+   "reasons": [
+    "search engine matched the phrase; article text not checked",
+    "names Hawaiʻi Appleseed",
+    "staff: Malia Boksanski, with Appleseed"
+   ],
+   "sources": [
+    "google",
+    "bing",
+    "feed"
+   ],
+   "onSite": "/in-the-news/the-push-for-a-fare-free-bus-system-gains-local-support",
+   "status": "on-site"
+  },
+  {
    "id": "27ba59c501c3",
    "title": "November 10, 2026 News Read",
    "outlet": "Hawaii Free Press",
@@ -10,7 +31,8 @@
    "firstSeen": "2026-11-10T21:48:34Z",
    "confidence": "high",
    "reasons": [
-    "article text names Hawaiʻi Appleseed"
+    "article text names Hawaiʻi Appleseed",
+    "search engine matched the phrase; article text not checked"
    ],
    "sources": [
     "google"
@@ -35,8 +57,8 @@
     "feed",
     "google"
    ],
-   "onSite": "",
-   "status": "new"
+   "onSite": "/in-the-news/voters-said-yes-to-food-security-fund-how-will-honolulu-spend-it",
+   "status": "on-site"
   },
   {
    "id": "7ad2ca271c0a",
