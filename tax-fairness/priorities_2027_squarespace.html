@@ -164,6 +164,24 @@
 .tfc-p27 .tfc-p27-item--families a.tfc-p27-more { color: var(--tfc-sand-ink); }
 .tfc-p27 .tfc-p27-item--families .tfc-p27-source { border-top-color: var(--tfc-sand-line); }
 
+/* ---------- Fact sheet download card ---------- */
+.tfc-p27-fact {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 28px;
+    align-items: center;
+    margin: 32px 0 0;
+    padding: 24px 28px;
+    border: 1px solid #d5dcea;
+    border-radius: 8px;
+    background: #f4f7fc;
+}
+.tfc-p27-fact-thumb { display: block; line-height: 0; }
+.tfc-p27-fact-thumb img { display: block; width: 100%; height: auto; border: 1px solid #c9d1e0; border-radius: 3px; background: #fff; box-shadow: 0 2px 8px rgba(37, 53, 81, .14); }
+.tfc-p27-fact-kicker { margin: 0 0 4px; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #2f62a3; }
+.tfc-p27 .tfc-p27-fact h2 { margin: 0 0 6px; font-size: 1.5rem; line-height: 1.2; color: var(--tfc-navy); }
+.tfc-p27-fact p.tfc-p27-fact-text { margin: 0 0 16px; color: var(--tfc-muted); }
+
 /* ---------- Closing call to action ---------- */
 .tfc-p27-cta {
     display: flex;
@@ -203,8 +221,11 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27) { grid-row: 1 / 2 !import
     .tfc-p27 .tfc-p27-item-title { font-size: 1.45rem; }
     .tfc-p27-figure { font-size: 2rem; }
     .tfc-p27-cta { padding: 26px 22px; }
+    .tfc-p27-fact { padding: 20px 22px; gap: 20px; }
 }
 @container (max-width: 520px) {
+    .tfc-p27-fact { grid-template-columns: minmax(0, 1fr); }
+    .tfc-p27-fact-thumb { max-width: 160px; }
     .tfc-p27-stats { grid-template-columns: minmax(0, 1fr); gap: 10px; }
 }
 </style>
@@ -295,6 +316,18 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-p27) { grid-row: 1 / 2 !import
         </li>
 
     </ol>
+
+    <section class="tfc-p27-fact" aria-labelledby="tfc-p27-fact-title">
+        <a class="tfc-p27-fact-thumb" href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/assets/fact-sheet/tfc-2027-top-three-fact-sheet.pdf" target="_blank" rel="noopener" aria-label="Open the two-page fact sheet (PDF)">
+            <img src="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/assets/fact-sheet/tfc-2027-top-three-fact-sheet-p1.png" alt="First page of the Tax Fairness Coalition 2027 Priorities fact sheet" loading="lazy" width="900" height="1165">
+        </a>
+        <div>
+            <p class="tfc-p27-fact-kicker">Two-page fact sheet</p>
+            <h2 id="tfc-p27-fact-title">Our top three 2027 priorities at a glance</h2>
+            <p class="tfc-p27-fact-text">The three priorities and the numbers behind them, on two pages you can print or share.</p>
+            <a class="tfc-btn sqs-block-button-element--medium sqs-button-element--primary sqs-block-button-element" href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/assets/fact-sheet/tfc-2027-top-three-fact-sheet.pdf" target="_blank" rel="noopener">Download the fact sheet (PDF)</a>
+        </div>
+    </section>
 
     <section class="tfc-p27-cta" aria-labelledby="tfc-p27-cta-title">
         <div>
