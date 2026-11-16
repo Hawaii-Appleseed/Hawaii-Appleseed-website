@@ -133,8 +133,13 @@ jobs:
           # (no declared incident) tripped it twice in one day. Widened again
           # 240->360 on 2026-08-30 — kept tripping every 1-2 days on gaps in
           # the 250-320min range that always self-recovered before anyone
-          # looked, so 240 was catching routine trigger jitter, not incidents
-          check "fetch-bill-status.yml"   360
+          # looked, so 240 was catching routine trigger jitter, not incidents.
+          # 360->900 on 2026-11-05: GitHub now fires this cron only 4-6 times
+          # a day. Over the 30 days to 2026-11-05, 34 gaps passed 360 (all
+          # self-recovered), the longest was 641, none passed 720. 900 sits
+          # clear of that and still flags a real stop within a working day.
+          # For on-time runs it needs an outside trigger, not a tighter limit.
+          check "fetch-bill-status.yml"   900
           # daily at 22:00 UTC
           check "sync-publications.yml"   1800
           # daily at 23:40 UTC. Reports stale until its FIRST run ever, because
@@ -143,6 +148,9 @@ jobs:
           check "site-drift.yml"          1800
           # weekly, Sundays 15:00 UTC
           check "refresh-corpus.yml"      11520
+          # weekly, Sundays 15:30 / 16:30 UTC (testimony from Drive, then the Q&A bot)
+          check "refresh-testimony.yml"   11520
+          check "chatbot-refresh.yml"     11520
           # four times a day (04:17 10:17 16:17 22:17 UTC). Like site-drift, this
           # reports stale until its first run ever — dispatch it once by hand.
           check "media-watch.yml"         1200

@@ -1,0 +1,42 @@
+\\LEJ-SERVER\Server Share Drive\Admin\Logos\GREEN\Horizontal.png 
+
+Testimony of the Hawaiʻi Appleseed Center for Law and Economic Justice
+Support for HB1410 HD2 – Relating to Housing
+House Committee on Finance
+Tuesday, February 25, 2025 at 10:00AM Conf. Rm. 308  and via Videoconference
+________________
+
+Aloha Chair Yamashita, Vice Chair Takenouchi, and members of the committee;
+Mahalo for the opportunity to testify in strong support of HB1410 HD2, which would modernize Hawaii's conveyance tax structure, reduce the tax burden on the average resident homeowner,  increase the burden of conveyance tax on investment owners, and create a dedicated 10% allocation to the Dwelling Unit Revolving Fund (DURF) and an 8% allocation to a Supportive Housing Special Fund. 
+Conveyance taxes are a necessary funding stream for affordable housing, infrastructure, and other housing services. By capturing revenue from real estate transactions, we create a direct link between market activity and community investment. When property values and sales increase, generating more conveyance tax revenue, we are able to expand our response to the heightened housing affordability challenges that often accompany such market conditions. These taxes help ensure that real estate development contributes to meeting the increased housing and infrastructure demands that it creates.
+However, the current conveyance tax structure is inadequate to address Hawaii's needs. Our housing crisis has intensified while our infrastructure and housing needs, particularly around transit-oriented development, have grown substantially. Yet Hawaii's current conveyance tax rates have remained unchanged since 2009, despite dramatic increases in property values.
+HB1410 HD2 recognizes that real estate transactions in Hawaii's high-cost market should contribute more equitably and aims to rectify this issue by:
+* Implementing a more progressive rate structure that primarily impacts high-value investment properties while protecting owner-occupants, 
+* Applying a cost-of-living adjustment mechanism that prevents future erosion of these critical revenue streams
+* Creating a dedicated 10% allocation to the Dwelling Unit Revolving Fund (DURF)
+* Establishing and creating a dedicated 8% allocation to a Supportive Housing Special Fund
+Infrastructure Needs around TOD
+The Dwelling Unit Revolving Fund (DURF), established in 1970, supports infrastructure investments connected to housing development, crucial for maintaining housing production aligned with our increasing demand. Hawaii was given a D+ rating by the American Society of Civil Engineers in the “2019 Hawaii Infrastructure Report Card”[1]. Lack of adequate infrastructure further exacerbates delays to our needed additional housing construction. Increasing funding to DURF is necessary to reach the housing goals across the state. Hawaiʻi Appleseed commends the legislature for proposing a 10% dedicated fund from high cost property sales to address our infrastructure needs.
+Housing Development Needs
+The 2019 Hawaii Housing Planning (HHPS 2019) Study identified the need for 50,000 additional housing units by 2025 to meet pent-up demand[2]. Estimates from the HHPS 2019 indicated that over 50 percent of our housing production needs to be affordable rentals (0-100% AMI) for low-income and workforce families to meet demand. The RHRF provides financing for Low Income Housing Tax Credit (LIHTC) projects for individuals making 0-60% AMI and financing for Tier 2 program which utilizes the RHRF for 80-100% AMI focused projects. Without financing of DURF for our infrastructure needs we will not be able to address the housing needs across the state[3].
+Marginal Tax Rate
+A marginal rate system prevents the "cliff effect" that exists in Hawaii's current tax structure, where a small increase in property value can trigger a dramatically higher tax bill on the entire amount. This creates artificial market barriers and incentivizes price manipulation to avoid threshold crossings.
+The proposed marginal rate system, modeled after the income tax structure, would apply higher rates only to the portion of a property's value exceeding each threshold. This approach ensures a fairer tax burden while creating a smoother, more equitable progression that better reflects the ability to pay and market realities. Additionally, it has the potential to increase conveyance tax revenue by approximately one-third, providing a significant boost to funding for critical housing and infrastructure needs.
+ For example, under the current system, a property valued at $1.1M, which was the median sales price for Oahu in December 2024[4] would be taxed at a 0.3% rate owing $3,300 in conveyance tax. Under the new proposed system a $1.1M home would owe $2,600–effectivley reducing the burden of conveyance tax on owner occupants.  
+This approach ensures that tax policy doesn't create unintended barriers to property transactions, especially for resident owners, shifting the burden to high valued property sales which are by-in-large investors. Under the current structure a $4.5M investment home would owe $22,500 on the sale, under the new system investors would owe $61,500.
+
+  
+
+Progressive Rates and Multiple Unit Dwellings
+HB1410 HD2 introduces a progressive tax approach for multifamily housing, specifically targeting rental properties with five or more units. Under this proposal, the building’s total sale price is divided by the number of units to determine the rate structure for each individual unit. These individual rates are then summed to calculate the total conveyance tax owed for the property.
+This change aims to address the disproportionate tax burden multifamily properties currently face compared to single-family investment properties. Many multifamily housing sales involve naturally occurring affordable housing (NOAH), and higher tax burdens on these properties could lead to rent increases for residents or discourage investment in affordable housing.
+For example, under the current system, a multifamily property in Honolulu priced at $4,250,000 with 17 units would be flat-taxed at 0.85%, resulting in a $36,125 conveyance tax. This significant tax burden is often passed onto residents in the form of higher rents. Under HB1410 HD2, the $4,250,000 sale price would be divided by 17, resulting in an average unit price of $250,000 which then the tax rate would be 0.15%. This price would then be taxed at a progressive rate of 0.15%, leading to a total tax of $6,375—a much lower and more equitable outcome for multifamily housing.  
+HB1410 HD2 represents an innovative step in addressing housing affordability and infrastructure challenges. By modernizing the conveyance tax structure with progressive rates, creating dedicated funding for the Dwelling Unit Revolving Fund and the Supportive Housing Special Fund, and introducing equitable measures like the marginal tax rate system, this bill ensures that Hawaii’s tax policy better aligns with our values of fairness and community investment.
+This proposal not only generates much-needed revenue to address housing and infrastructure needs but also provides targeted relief for owner-occupants and multifamily housing, preventing unintended burdens on local residents while holding high-value transactions and investment properties accountable.
+Mahalo for your time and consideration. 
+
+________________
+[1] ASCE, “2019 Hawaii Infrastructure Report Card”, https://infrastructurereportcard.org/wp-content/uploads/2021/07/ASCE-24199_Full-REPORT-2019-FINAL.pdf 
+[2]   “Hawaii Housing Planning Study, 2019” HHFDC, December 2019, pg. 38 https://dbedt.hawaii.gov/hhfdc/files/2020/01/FINAL-State_Hawaii-Housing-Planning-Study.pdf
+[3] “TOD Infrastructure Finance and Delivery Strategy” https://files.hawaii.gov/dbedt/op/lud/Reports/TOD_InfraFin_Strategy_20231221.pdf 
+[4] https://www.locationshawaii.com/learn/market-reports/oahu-real-estate-report/

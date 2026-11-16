@@ -1,0 +1,147 @@
+name: Media watch approve
+
+# Posts a media-watch digest to Slack #communications only after Devin says so.
+# media-watch.yml opens an issue per digest and never posts to Slack itself;
+# replying "post" (or "post 2 3") to the notification email makes a comment on
+# that issue, and this runs on the comment. See scripts/media_watch_approve.py.
+#
+# The repo is public, so anyone can comment on an issue. The `if:` below lets
+# only the allowed login through, and the comment text is only ever read from a
+# file, never put in a shell command.
+
+on:
+  issue_comment:
+    types: [created]
+  # "Run workflow" (or `gh workflow run "Media watch approve"`) opens a dry-run
+  # test digest made by the Actions bot, so the email reaches Devin exactly as a
+  # real one does. An issue he opened himself would not email him: GitHub does
+  # not notify you about your own activity.
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: read
+
+concurrency:
+  group: media-watch-approve-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  post:
+    if: >
+      github.event.issue.pull_request == null &&
+      github.event.comment.user.login == 'dtomkatsu' &&
+      contains(github.event.issue.labels.*.name, 'media-watch') &&
+      (startsWith(github.event.comment.body, 'post') || startsWith(github.event.comment.body, 'Post'))
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO: ${{ github.repository }}
+      NUM: ${{ github.event.issue.number }}
+      COMMENT_BODY: ${{ github.event.comment.body }}
+      SLACK_WEBHOOK: ${{ secrets.MEDIA_WATCH_SLACK_WEBHOOK }}
+      # An issue carrying the `dry-run` label never reaches Slack: the Slack step
+      # below is skipped outright, and the reply shows what it would have sent.
+      # That is how to try the reply flow without posting anything.
+      DRY_RUN: ${{ contains(github.event.issue.labels.*.name, 'dry-run') }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Decide what to post
+        id: decide
+        run: |
+          printf '%s' "$COMMENT_BODY" > comment.txt
+          gh api "repos/$REPO/issues/$NUM" --jq .body > issue.txt
+          gh api "repos/$REPO/issues/$NUM/comments" --paginate \
+            --jq '.[] | select(.user.login == "github-actions[bot]") | .body | @json' > posted.txt
+          python3 scripts/media_watch_approve.py --issue-body issue.txt --comment-body comment.txt \
+            --posted posted.txt --out slack.json > result.json
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          r = json.load(open("result.json"))
+          print("posted=" + ",".join(map(str, r["posted"])))
+          open("reply.txt", "w", encoding="utf-8").write(r["reply"])
+          PY
+
+      - name: Post to Slack #communications
+        id: slack
+        if: steps.decide.outputs.posted != '' && !contains(github.event.issue.labels.*.name, 'dry-run')
+        run: |
+          if [ -z "${SLACK_WEBHOOK:-}" ]; then
+            echo "reply=No MEDIA_WATCH_SLACK_WEBHOOK secret is set, so nothing was posted." >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          code=$(curl -s -m 15 -o /dev/null -w '%{http_code}' -H 'Content-type: application/json' \
+            --data @slack.json "$SLACK_WEBHOOK") || code=000
+          echo "slack: HTTP $code"
+          if [ "$code" = "200" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "reply=Slack answered HTTP $code, so nothing was recorded as posted. Reply again to retry." >> "$GITHUB_OUTPUT"
+          fi
+
+      # Staff get the same approved stories by email, from Devin's Gmail. Only
+      # runs after approval and never on a dry run; no secrets, no email (and no
+      # failure). MEDIA_WATCH_EMAIL_TO is comma-separated: the repo is public, so
+      # the addresses are secrets, not code.
+      - name: Email approved stories to staff
+        if: steps.decide.outputs.posted != '' && !contains(github.event.issue.labels.*.name, 'dry-run')
+        env:
+          MAIL_TO: ${{ secrets.MEDIA_WATCH_EMAIL_TO }}
+          MAIL_USER: ${{ secrets.MEDIA_WATCH_GMAIL_USER }}
+          MAIL_PASS: ${{ secrets.MEDIA_WATCH_GMAIL_APP_PASSWORD }}
+        run: |
+          if [ -z "$MAIL_TO" ] || [ -z "$MAIL_USER" ] || [ -z "$MAIL_PASS" ]; then
+            echo "email: secrets not set, no email sent"
+            exit 0
+          fi
+          python3 scripts/media_watch_email.py slack.json \
+            || echo "email: sending failed (stories are still posted to Slack)"
+
+      - name: Reply on the issue
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            if [ -n "${{ steps.decide.outputs.posted }}" ]; then
+              {
+                printf 'Dry run: nothing was sent to Slack. This is what stories %s would have posted:\n\n```\n' \
+                  "${{ steps.decide.outputs.posted }}"
+                jq -r .text slack.json
+                printf '```\n'
+              } > reply.txt
+            fi
+          elif [ "${{ steps.slack.outputs.ok }}" = "true" ]; then
+            n="${{ steps.decide.outputs.posted }}"
+            printf 'Posted to #communications: stories %s.\n\n<!-- posted:%s -->\n' "${n//,/, }" "$n" > reply.txt
+          elif [ -n "${{ steps.slack.outputs.reply }}" ]; then
+            printf '%s\n' "${{ steps.slack.outputs.reply }}" > reply.txt
+          fi
+          if [ -s reply.txt ]; then
+            gh issue comment "$NUM" --repo "$REPO" --body-file reply.txt
+          fi
+
+  test-digest:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}      # no checkout in this job, so gh cannot find the repo itself
+    steps:
+      - name: Open a dry-run test digest
+        run: |
+          gh label create media-watch --color 5F8575 \
+            --description "New press mentions of Hawaiʻi Appleseed" 2>/dev/null || true
+          gh label create dry-run --color BFD4F2 \
+            --description "Approval workflow shows what it would post and never calls Slack" 2>/dev/null || true
+          {
+            printf '# Media watch — TEST (dry run)\n\n'
+            printf '2 new stories mentioning Hawaiʻi Appleseed, its work, or its staff, not yet on In the News.\n\n'
+            printf '## Names Hawaiʻi Appleseed\n\n'
+            printf -- '- [TEST story one: a fake headline for the approval flow](https://example.org/test-one) — Example Outlet, %s  \n' "$(date -u +%F)"
+            printf '  _names Hawaiʻi Appleseed_\n'
+            printf -- '- [TEST story two: another fake headline](https://example.org/test-two) — Example Outlet, %s  \n' "$(date -u +%F)"
+            printf '  _names Hawaiʻi Appleseed_\n\n---\n'
+            printf '**This is a dry-run test.** It carries the `dry-run` label, so nothing you do here can post to Slack.\n'
+            printf '**To send to #communications:** reply `post` to this email for every story above, or `post 2` for just the second.\n'
+          } > body.md
+          gh issue create --title "TEST (dry run): Media watch approval flow — safe to ignore" \
+            --label media-watch --label dry-run --assignee dtomkatsu --body-file body.md

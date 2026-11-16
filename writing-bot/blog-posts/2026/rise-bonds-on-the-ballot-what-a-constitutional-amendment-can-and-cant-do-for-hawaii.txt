@@ -1,0 +1,51 @@
+RISE Bonds on the ballot: What a Constitutional Amendment can—and can’t—do for Hawaiʻi
+
+Infrastructure is one of
+the most important investments
+Hawaiʻi can make to address its housing and resource needs. The problem facing states and municipalities across the country is the same one facing us: how do we pay for it? Infrastructure is costly, and financing it up front without significant federal investment is difficult. On the ballot this year, a constitutional amendment (ConAm) proposes one solution: RISE Bonds.
+RISE is the state’s name for a tool most commonly known as tax increment financing, or TIF. It’s a nationally-recognized way for a county to pay for the infrastructure that new housing development requires up front by borrowing against the increased real property tax that properties in the developed district will generate in the future.
+The tool was discussed as a financing option back in 2023 in
+a report
+by the Office of Planning and Sustainable Development (OPSD) on state-level infrastructure financing, alongside the
+conveyance tax
+.
+ConAm Question #2:
+Directing the Hawaiʻi State Legislature to Establish Procedures for Counties to Issue RISE Bonds, Exempt from County Debt Limits.
+“Shall the Hawaiʻi State Constitution be amended to direct the legislature to authorize the counties to issue resilient infrastructure for shelter and equity bonds to fund public improvements in designated districts, repaid solely by future growth in property tax revenues within those districts, not by increasing real property tax rates, where such bonds are excluded from the counties’ debt limit and are subject to accountability and oversight requirements as may be provided by law?”
+Here’s How It Works
+A county draws a boundary around an area it wants to see grow and records the property values at that time to set a baseline. Real property taxes (RPT) generated from that baseline continue to flow to the county’s general fund. As new homes and higher property values increase the district’s RPT revenues, the
+extra
+amount—the “increment”—is set aside to repay bonds the county sold to build the infrastructure supporting that growth.
+A good example, studied by OPSD as a potential TIF district, is Iwilei-Kapālama. Property there is currently assessed at about $2.7 billion and produces roughly $28 million annually in RPT. Under a RISE district, that $28 million would keep going to the City’s general fund.
+The area is planned for just under 30,000 new homes. But before those can be built, it needs an estimated $667 million in infrastructure: 87 projects for drainage, electrical upgrades, sea level rise protection, roads, water, and wastewater. As the neighborhood grows, it’s estimated to generate an additional $1.3 billion in new RPT revenues between 2050 and 2070, adjusted for inflation. That growth is what would repay the RISE bonds.
+A RISE proposal has three key features:
+It’s not a new tax or rate increase, since the money comes from growth in the district rather than higher RPT rates;
+The bonds are repaid only from that area’s increment, not the county’s overall RPT; and
+They sit outside the county’s debt limit, so they don’t crowd out other borrowing needs.
+Can It Succeed?
+There are two questions to ask. First, funding: will a district generate enough new tax revenue over time to cover its infrastructure? Second, financing: can that future revenue be turned into cash now, when the pipes and roads have to be built?
+On funding:
+The money shows up eventually
+. Over 45 years, Iwilei-Kapālama is projected to generate about $1.3 billion in new RPT in today’s dollars—nearly double the $667 million in estimated infrastructure investment. On that estimate, the district can pay for itself.
+But look closer at where the money comes from. Of the more than 27,000 new homes planned, about 60 percent would be affordable—almost entirely rentals. Affordable rentals are exempt from RPT. So even though new construction drives most of the rise in property value, only about a quarter of the new tax revenue comes from that new development—roughly $300 million, less than half of what the infrastructure costs.
+The other three-quarters comes from existing homes and businesses in the district gaining value over time. Without a RISE district, that money would flow into the City’s general fund to pay for countywide services. In other words, “new growth pays for itself” is only partly true here. Much of the bill would be paid by redirecting tax growth the City would otherwise collect.
+On financing:
+The money doesn’t show up when it’s needed
+. We need infrastructure upgrades now—thousands of new homes can’t be built without additional sewer capacity, drainage, and power. But TIF revenue only arrives after the homes are built and occupied, and lenders will only lend against revenue that exists. The OPSD study estimates RISE bonds in Iwilei-Kapālama could raise around $48–77 million up front, depending on whether they’re issued in 2030 or 2040. That’s only about 7–11 percent of the $667 million price tag.
+Neighborhoods with more market-rate development are better suited to finance RISE bonds. The TOD corridor proposal in Kona along Ane Keohokalole Highway predicts about 71 percent of new tax revenue would come from new construction. Even so, RISE bonds there would only cover an estimated 8–13 percent of the $462 million in needed infrastructure.
+Question 2, the RISE Bond Constitutional Amendment, solves a
+legal
+problem, not the money problem. It allows counties to use the tool (though it does not require them to)—but on its own, it can’t pay for the up-front cost of TOD infrastructure. But there are other ways to close that timing gap.
+One is a state infrastructure bank: a dedicated public fund that makes low-cost loans to counties for pipes, power, and drainage, so projects don’t have to wait years for tax growth to arrive. New Jersey and California already have one. Hawaiʻi would need the Legislature to create and fund it.
+Another is rethinking how we already spend on infrastructure. The Hawaiʻi Department of Transportation keeps pouring money into highway widening, which tends to bring
+more
+traffic, not less. That money would go further around our rail stations, building infrastructure that lets people live, walk, and bike safely near transit in the first place.
+What The ConAm Asks of Taxpayers
+RISE bonds donʻt raise anyone’s tax rate, but they aren’t free. For as long as the bonds are outstanding, a district’s tax growth pays for its own infrastructure instead of flowing into the county’s general fund. In the Iwilei-Kapālama example, most of that growth would come from existing homes and businesses gaining value, not new construction—because nearly 60 percent of the new housing is slated to be affordable rentals. The City would be setting aside revenue it would otherwise use for countywide services.
+Because RISE bonds sit outside the debt limit, the main check on how much a county borrows will be whatever rules the Legislature and county councils write next: how districts are drawn, how long they last, how much RPT-exempt affordable housing is included, and how the public can track results. The ConAm itself sets none of those rules.
+Hawaiʻi has had a tax increment financing law on the books
+since 1985
+, but according to the Attorney General, counties can’t use it without a constitutional amendment. Lawmakers have tried to pass one at least four times since 2010. This year’s version,
+SB3219
+, passed the Legislature and became the question that goes to voters this November.
+A yes vote gives Hawaiʻi’s counties a tool other states already use to finance infrastructure. It won’t pay for transit-oriented development on its own. The hardest questions—who benefits, who carries the risk, and how to bridge the gap between money needed now and revenue arriving later—must be answered in the laws that structure the rules, should the amendment pass. If it does, the work shifts to the Legislature and county councils to make sure RISE districts can deliver both infrastructure and homes people can afford.

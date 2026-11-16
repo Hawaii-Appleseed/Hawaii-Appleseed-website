@@ -1,0 +1,51 @@
+Testimony for Hawaiʻi Appleseed Center for Law and Economic Justice  
+Support for HB1884 - Relating to Transportation
+House Committee on Finance (FIN)
+Tuesday, March 3, 2026 at 10:00AM
+________________
+
+Dear Chair Todd, Vice Chair Takenouchi, and members of the FIN committee, 
+Mahalo for the opportunity to express SUPPORT for HB1884, which would require the installation of leading pedestrian intervals (LPIs), accessible pedestrian signals, and other safety improvements, as necessary, at state-owned or operated pedestrian signal heads. We also offer suggested amendments for the committee’s consideration. 
+
+Signalized intersections are among the most dangerous places for people walking in Hawaiʻi. According to the Hawaiʻi Department of Transportation’s (HDOT) Vulnerable Road User Safety Assessment, more than half of all pedestrian crashes occur at intersections.[1] These locations place people walking—especially children, kūpuna, people with disabilities, and those using mobility devices—in direct conflict with turning vehicles.
+
+LPIs are a proven, low-cost safety countermeasure that directly address one of the most common and deadly crash types: drivers failing to yield while turning. LPIs give pedestrians a brief head start—typically three to seven seconds—before vehicles receive a green light, allowing people to establish visibility in the crosswalk and reducing conflicts with turning traffic. The Federal Highway Administration recognizes LPIs as a proven safety countermeasure and estimates they can reduce pedestrian crashes at intersections by at least 13 percent.[2] In practice, cities that have adopted LPIs at scale have seen even greater benefits, including: 
+* Seattle, where LPIs have been deployed since 2019. In Seattle, LPIs have resulted in a 48 percent reduction in pedestrian turning collisions and a 34 percent reduction in serious injury and fatal pedestrian collisions.[3] As of early 2024, the Seattle Department of Transportation had implemented LPIs at 628 intersections – representing 64 percent of all of all feasible signalized intersections citywide.[4]
+* New York City, where LPIs have been deployed since 2014. A 2025 Columbia University study analyzing 2,869 LPI-treated intersections in New York City found a 33 percent reduction in total pedestrian injuries (fatal and non-fatal) at those sites.[5] Importantly, fatal vehicle-pedestrian collisions in daytime hours dropped by 65 percent at treated intersections, indicating LPIs are especially effective at preventing the most severe collisions.[6]
+
+Just as important, Accessible Pedestrian Signals (APS) are essential for ensuring that signalized intersections are usable and safe for blind and low-vision pedestrians. APS communicate WALK and DON’T WALK information through audible and vibrotactile cues, reducing confusion, improving crossing accuracy, and increasing independence and confidence when navigating intersections. Without APS, many pedestrians with visual impairments must rely on inconsistent traffic sounds or guesswork to determine when it is safe to cross. 
+
+Critically, LPIs must be paired with APS to be truly equitable and effective. When LPIs are installed without APS, blind and low-vision pedestrians may miss the early walk interval entirely, unintentionally losing the safety benefit that LPIs are designed to provide. Pairing these treatments ensures compliance with accessibility standards while maximizing safety outcomes for all pedestrians.
+
+Despite their effectiveness and relatively low cost, LPIs and APS are largely absent across Hawaiʻi, and there is currently no transparent, systematic approach to installing them at state-controlled intersections. Other states and cities have recognized the urgency of this issue. California now requires LPIs and APS at newly installed and modified state-owned signals, treating pedestrian safety and accessibility as standard practice rather than optional upgrades. HB1884 would move Hawaiʻi in this same, evidence-based direction.
+
+From a fiscal standpoint, HB1884 represents a smart investment. LPIs are often implemented through signal retiming or minor programming changes, making them far less expensive than many other infrastructure improvements. The FHWA estimates the cost to add an LPI at an intersection ranges from about $200 up to $1,200 per intersection.[7] The lower end represents cases where only a simple controller setting change is needed, which can be done by municipal signal technicians.[8] In some cases, installing LPIs requires conducting a traffic study or installing a new APS device, which require additional fiscal resources. However, even the higher end of costs for LPIs is still very low compared to most road safety improvements. 
+
+Having a proactive approach to installing APS signals is also smart from a legal perspective. Because of stagnant implementation of APS in many localities, increasingly class-action lawsuits are being brought in major cities on the claims that municipal agencies are failing to make signaled intersections accessible for visually-impaired pedestrians, as required by the Americans with Disability Act. 
+
+At a minimum, these lawsuits have generally resulted in agreements requiring jurisdictions to establish programs for pedestrians to formally request an APS. However, in some localities, these agreements have also required municipalities to install APS at existing intersections. For example, in Chicago in 2019, Disability Rights Advocates filed a class action lawsuit – and was later joined by the federal Department of Justice – that challenged Chicago’s pedestrian planning practices, which overlooked the safety needs of vision-impaired pedestrians.[9] At the time of the filing, less than 0.5 percent of Chicago’s over 2,800 signalized intersections provided an APS.[10] Following years of litigation, an agreement was reached in 2025 requiring that Chicago equip at least 71% of its signalized intersections with pedestrian signals with APS in the next 10 years.[11] The agreement also outlines a minimum number of intersections where APS must be installed each year (ranging from 70 to 245 intersections per year).[12] A similar lawsuit and agreement was reached in New York City in 2020, requiring that APS be installed at over 10,000 intersections over the next ten years.[13] 
+Suggested Amendments
+The current language of the measure provides HDOT with the discretion to evaluate intersections for pedestrian safety upgrades based on data-driven criteria. We respectfully urge FIN to restore the original bill language requiring that upon the first placement or replacement of a pedestrian signal head, the signal shall be installed with a LPI and APS, should certain requirements be met; and, requiring the installation of LPI and APS at 25 intersections per year. 
+Requiring these installations is essential to ensure the bill’s intent on prioritizing pedestrian safety and accessibility is fully realized. Transitioning from “may evaluate” back to “shall install” removes ambiguity that could allow critical safety improvements to be deferred indefinitely. By establishing a clear requirement, the State can ensure that our pedestrian infrastructure proactively protects vulnerable road users, rather than leaving these crucial features to case-by-case discretion.
+In closing, when weighed against the immense human and economic costs of pedestrian injuries and fatalities, LPIs and APS signals are among the most cost-effective safety tools available. At a time when Hawaiʻi faces rising pedestrian fatalities, and urgent climate and transportation challenges, it is essential that the state prioritize solutions that make walking safer and more accessible. HB1884 does exactly that by institutionalizing proven safety measures at the intersections where risk is highest.
+
+Mahalo for the opportunity to testify on this important measure. 
+
+Abbey Seitz
+Hawaiʻi Appleseed Center for Law and Economic Justice
+Director of Transportation Equity
+Page 
+________________
+[1] Hawaiʻi Department of Transportation (HDOT), “Hawaiʻi Vulnerable Road User Safety Assessment,” November, 2023. https://hidot.hawaii.gov/highways/files/2023/11/Final_VRUSA_2023.pdf. 
+[2] U.S Dept. of Transportation, Federal Highways Administration. (2024). Leading Pedestrian Interval. Webpage. Available at: https://highways.dot.gov/safety/proven-safety-countermeasures/leading-pedestrian-interval. 
+[3] Seattle Department of Transportation. (2024). Leading Pedestrian Intervals. Webpage. Available at: https://www.seattle.gov/transportation/projects-and-programs/safety-first/vision-zero/leading-pedestrian-intervals. 
+[4] SDOT, “Vision Zero Action Plan: 2024 Update,” 2024. https://www.seattle.gov/documents/Departments/SDOT/VisionZero/VZ_Action_Plan.pdf
+[5] Columbia University Mailman School of Public Health, “New York City Intersections See One-Third Fewer Pedestrian Injuries with Longer Head-Start Intervals,” Phys.org, July 18, 2025. https://phys.org/news/2025-07-york-city-intersections-pedestrian-injuries.html. 
+[6] Ibid.
+[7] FHWA, “Leading Pedestrian Interval (LPI): Safe Transportation for Every Pedestrian Countermeasure Tech Sheet,” FHWA-SA-19-040, October 2019. https://highways.dot.gov/media/11841. 
+[8] Ibid. 
+[9] Disability Rights Advocates, “Press Release 06.02.2025: Court Orders Chicago to Install Thousands of Accessible Pedestrian Signals. Following Years of Litigation, Chicago’s Streets will be Safer for Blind Pedestrians,” June 2, 2025. https://dralegal.org/press/chicago-pedestrian-signals-remedial-plan-order/. 
+[10] Ibid. 
+[11] United States District Court for the Northern District of Illinois, “Remedial Plan Order: American Council of the Blind of Metropolitan Chicago et al. v. City of Chicago, No. 18-cv-04145,”  Disability Rights Advocates, September 23, 2019. https://dralegal.org/wp-content/uploads/2019/09/365_Remedial_Plan_Order_ACC.pdf. 
+[12] Ibid. 
+[13] United States District Court for the Southern District of New York. “Opinion & Order: American Council of the Blind of New York, Inc., Michael Golfo, and Christina Curry v. City of New York, et al., No. 1:18-cv-05792-PAE,” Disability Rights Advocates, December 27, 2021. https://dralegal.org/wp-content/uploads/2022/03/194_Opinion_and_Order_ACC.pdf.

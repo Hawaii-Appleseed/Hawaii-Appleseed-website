@@ -1,6 +1,6 @@
 # Citation library — HA testimony corpus
 
-Every footnote from the 37 real testimonies in `writing-bot/testimony/`, paired with the claim it supports. 58 citations, 58 with a locatable in-text claim.
+Every footnote from the 212 real testimonies in `writing-bot/testimony/`, paired with the claim it supports. 431 citations, 431 with a locatable in-text claim.
 
 **Use this before writing `CITATION NEEDED`.** If a figure you need appears below, reuse the source exactly as written — these are citations HA has already published and stood behind. If the figure is *not* here, say so rather than attaching the nearest-looking source: a citation that does not support the number is worse than a visible gap.
 
@@ -8,26 +8,41 @@ Verify a reused citation is still current before submitting. Several point to an
 
 ## Most-cited authorities
 
-- **U.S. Department of Agriculture** — 11 citations
-- **Hawaiʻi Foodbank** — 8 citations
-- **Amy E. Schwartz & Michah W. Rothbart** — 4 citations
-- **Hawaii News Now** — 3 citations
-- **Wang** — 2 citations
-- **Food Research & Action Center (FRAC)** — 2 citations
-- **https://alohachallenge.hawaii.gov/pages/local-food-production-and-consumption** — 2 citations
-- **AI Now Institute** — 2 citations
-- **Tan** — 2 citations
+- **U.S. Department of Agriculture** — 26 citations
+- **Hawaiʻi Foodbank** — 18 citations
+- **Seitz** — 12 citations
+- **Hawaiʻi State Department of Education** — 10 citations
+- **Amy E. Schwartz & Michah W. Rothbart** — 9 citations
+- **https://uhero.hawaii.edu/wp-content/uploads/2024/05/HawaiiHousingFactbook2024.pdf** — 9 citations
+- **United for ALICE** — 8 citations
+- **2023 ALICE in the Crosscurrents: COVID and Financial Hardship in Hawaiʻi** — 6 citations
+- **HDOT** — 6 citations
+- **D. Moore & N. Hix** — 5 citations
+- **State of Hawaiʻi Department of Transportation** — 5 citations
 
 ## Coverage — read this before relying on a gap
 
-Cited topics: **food-equity, labor, tax-and-budget**.
-
-**No citations at all for: housing, transportation.** Those corpus folders contain only `sample_*` template files, which are excluded. A claim in one of those areas will not be sourceable from here — that is a real gap, not a search failure. Ask the user for the source or write `CITATION NEEDED`.
+Cited topics: **food-equity, housing, labor, tax-and-budget, transportation**.
 
 Coverage follows the corpus, which is food-equity heavy. Absence here says nothing about whether a figure is true or whether HA has used it — only that no *published testimony* footnoted it.
 
 ## food-equity
 
+- **Claim:** …In Hawaiʻi, three in ten households with children face food insecurity.
+  - **Source:** Hawaiʻi Foodbank, “The State of Food Insecurity in Hawaiʻi,” 2023.
+  - <sub>`food-equity/HB1075_EDN_school_meals_price_1_4_of_cost_2025.txt`</sub>
+- **Claim:** …In Hawaiʻi, three in ten households with children face food insecurity.[1] While some of these children qualify for free meals, any family of four that makes at least $47,000 does not,
+  - **Source:** Hawaiʻi State Department of Education, “Free and Reduced Price Meals Program,” 2025. https://www.hawaiipublicschools.org/TeachingAndLearning/HealthAndNutrition/StudentHealthResources/Pages/ FreeReducedLunch.aspx
+  - <sub>`food-equity/HB1075_EDN_school_meals_price_1_4_of_cost_2025.txt`</sub>
+- **Claim:** …ouseholds with children face food insecurity.[1] While some of these children qualify for free meals, any family of four that makes at least $47,000 does not,[2] leaving two-thirds of the families over this threshold still struggling to cover their food costs.
+  - **Source:** United for ALICE, “ALICE in the Crosscurents: An Update on Financial Hardship in Hawaiʻi,” 2024.
+  - <sub>`food-equity/HB1075_EDN_school_meals_price_1_4_of_cost_2025.txt`</sub>
+- **Claim:** …Additionally, because of the recent rule change to eliminate net income limits for eligibility, there is expected to be an extra 14,000 households eligible for SNAP benefits later this year.
+  - **Source:** D. Moore & N. Hix, “ Hawaiʻi’s Unnecessary Benefit Cliff: How One Small Policy Change Could Deliver Tens of Millions in Federally-Funded SNAP Benefits,” University of Hawaiʻi Economic Research Organization (UHERO), https://uhero.hawaii.edu/hawai%CA%BBis-unnecessary-benefit-cliff-how-one-small-policy-change-could-deliver-in-45m-per-year-in-federally-funded-snap-benefits/#:~:text=UHERO's%20analysis%20suggests%20that%20eliminating,course%20of%20that%20same%20year.
+  - <sub>`food-equity/HB1099_HSH_SNAP_DHS_penalty_funds_2025.txt`</sub>
+- **Claim:** …Research consistently links proper nutrition to better educational and health outcomes and conversely, students who miss meals tend to perform poorly in school.
+  - **Source:** Amy E. Schwartz & Michah W. Rothbart, “Let Them Eat Lunch: The Impact of Universal Free Meals on Student Performance,” Maxwell School Center for Policy Research, July 2019.
+  - <sub>`food-equity/HB1500_EDN_eliminates_meal_price_statute_2025.txt`</sub>
 - **Claim:** …SNAP is a critical lifeline for more than 160,000 Hawaiʻi residents, supporting working families, individuals with disabilities, and others living on fixed or limited incomes.
   - **Source:** U.S. Department of Agriculture, “SNAP Data Tables: National and/or State Level Monthly and/or Annual Data,” Food and Nutrition Service, 2025. https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap
   - <sub>`food-equity/HB1518_FIN_Pre_release.txt`</sub>
@@ -52,6 +67,105 @@ Coverage follows the corpus, which is food-equity heavy. Absence here says nothi
 - **Claim:** …because they couldn’t afford food.[3] Thirteen states have already successfully used SNAP pre-release application waivers to accept and process SNAP applications from institutional residents nearing release, allowing benefits to begin immediately upon reentry.
   - **Source:** U.S. Department of Agriculture, “SNAP State Options Report,” Food and Nutrition Service, 2025, p. 35. https://fns-prod.azureedge.us/sites/default/files/resource-files/snap-stateOptionsReport-17edition-120925.pdf
   - <sub>`food-equity/HB1518_HHS_Pre_release.txt`</sub>
+- **Claim:** …However, Hawaiʻi’s costs of living require that a family with two adults and two children make at least $104,000 to simply survive.
+  - **Source:** Aloha United Way. ALICE in the Crosscurrents: COVID and Financial Hardship in Hawaiʻi (2023)
+  - <sub>`food-equity/HB1540_EDN_testimony_2024.txt`</sub>
+- **Claim:** …In school year 2022-2023, 38% (106) of DOE’s 257 sites participated in CEP.
+  - **Source:** Hawaiʻi Appleseed (2024). Equity on the Menu: The Case for Universal Free School Meals
+  - <sub>`food-equity/HB1540_EDN_testimony_2024.txt`</sub>
+- **Claim:** …(106) of DOE’s 257 sites participated in CEP.[2] In October 2023, the USDA issued a rule change lowering the CEP eligibility percentage to 25% resulting in a more than 30% increase in the number of DOE schools now eligible for CEP (72 to 162 eligible schools).
+  - **Source:** Hawaiʻi Appleseed (2024). Equity on the Menu: The Case for Universal Free School Meals
+  - <sub>`food-equity/HB1540_EDN_testimony_2024.txt`</sub>
+- **Claim:** …The proportion of students in public charter schools considered economically disadvantaged is on par with that of HIDOE schools,
+  - **Source:** State Public Charter School Commission, 2024–2025 Annual Report, Hawaiʻi State Public Charter School Commission, 2025, p. 45. https://www.chartercommission.hawaii.gov/images/Reports/24-25-Annual-Report-Final-reduced.pdf.
+  - <sub>`food-equity/HB1561_EDN_Charter_school_meals_2026.txt`</sub>
+- **Claim:** …The proportion of students in public charter schools considered economically disadvantaged is on par with that of HIDOE schools,[1] yet these families still need to make under $47,000 per year to qualify for this benefit.
+  - **Source:** Hawaiʻi State Department of Education, “Free and Reduced Price Meals Program,” 2025. https://www.hawaiipublicschools.org/TeachingAndLearning/HealthAndNutrition/StudentHealthResources/Pages/ FreeReducedLunch.aspx
+  - <sub>`food-equity/HB1561_EDN_Charter_school_meals_2026.txt`</sub>
+- **Claim:** …schools enrolled in NSLP are not participating in the Community Eligibility Provision (CEP), a federal designation that allows schools to provide free meals to all students based on a the percentage of students who are directly certified through means-testing.
+  - **Source:** Food Research & Action Center, “Community Eligibility (CEP) Database,” Food Research & Action Center, June 2025. https://www.frac.org/research/resource-library/community-eligibility-cep-database.
+  - <sub>`food-equity/HB1561_EDN_Charter_school_meals_2026.txt`</sub>
+- **Claim:** …In public charter schools, the threshold for eligibility is still set at 130 percent of the federal poverty level—so a family of four would need to make under $47,000 per year to qualify.
+  - **Source:** Hawaiʻi State Department of Education, “Free and Reduced Price Meals Program,” 2025. https://www.hawaiipublicschools.org/TeachingAndLearning/HealthAndNutrition/StudentHealthResources/Pages/ FreeReducedLunch.aspx
+  - <sub>`food-equity/HB1561_EDN_Charter_school_meals_2026.txt`</sub>
+- **Claim:** …In Hawaiʻi, 34 percent of children experience food insecurity, up from 29% in 2023.
+  - **Source:** Hawaiʻi Foodbank, “The State of Food Insecurity in Hawaiʻi,” 2025.
+  - <sub>`food-equity/HB1561_EDN_Charter_school_meals_2026.txt`</sub>
+- **Claim:** …Thirty-seven percent of students in Hawaiʻi’s public charter schools are Native Hawaiian, which is approximately 14 percent more than in HIDOE schools.
+  - **Source:** https://www.chartercommission.hawaii.gov/images/Reports/24-25-Annual-Report-Final-reduced.pdf p. 45
+  - <sub>`food-equity/HB1561_EDN_Charter_school_meals_2026.txt`</sub>
+- **Claim:** …Many public charter schools are culturally grounded learning environments, including six Hawaiian language immersion charter schools.
+  - **Source:** https://www.chartercommission.hawaii.gov/images/Reports/24-25-Annual-Report-Final-reduced.pdf p. 33
+  - <sub>`food-equity/HB1561_EDN_Charter_school_meals_2026.txt`</sub>
+- **Claim:** …y grounded learning environments, including six Hawaiian language immersion charter schools. [8] According to the Office of Hawaiian Affairs, 77 percent of the more than 4,000 students attending Hawaiian-focused charter schools are of Native Hawaiian ancestry.
+  - **Source:** https://spectrumlocalnews.com/hi/hawaii/news/2023/11/16/oha-awards--6m-in-grants-to-17-hawaiian-focused-charter-schools
+  - <sub>`food-equity/HB1561_EDN_Charter_school_meals_2026.txt`</sub>
+- **Claim:** …In Hawaiʻi, the bottom fifth of households spend nearly 9 percent of their annual income on the GET, compared with the top fifth of households that spend less than 4 percent.
+  - **Source:** Institute for Tax and Economic Policy, Who Pays? 7th Edition. 2024.
+  - <sub>`food-equity/HB1611_ECD_GET_on_food_2026.txt`</sub>
+- **Claim:** …Total GET currently comprises nearly half of general fund receipts, with GET from grocery and nonprescription drugs contributing an estimated $250 million per year.
+  - **Source:** Suganuma, Gary, Testimony on S.B. No. 1043, S.D. 1, Relating to Taxation, Hawaii Department of Taxation, February 27 2025, p. 1-2. https://www.capitol.hawaii.gov/sessions/session2025/Testimony/SB1043_SD1_TESTIMONY_WAM_02-27-25_.PDF
+  - <sub>`food-equity/HB1611_ECD_GET_on_food_2026.txt`</sub>
+- **Claim:** …loophole, taxing the sale of luxury homes, and most importantly, freezing the tax cuts passed in 2024. This last proposal alone would generate more than $296 million per year—enough to make up for the loss of GET revenue on groceries and nonprescription drugs.
+  - **Source:** Hawaiʻi Tax Fairness Coalition, “Revenue Options,” Hawaiʻi Tax Fairness Coalition, 2026. https://www.hitaxfairness.org/wealth-taxes
+  - <sub>`food-equity/HB1611_ECD_GET_on_food_2026.txt`</sub>
+- **Claim:** …In a recent assessment of Hawaiʻi’s SNAP population, our organization found that the federal income eligibility thresholds are too strict and do not adequately reflect Hawaiʻi’s cost of living.
+  - **Source:** Hawaiʻi Appleseed Center for Law and Economic Justice. Hawaiʻi SNAP: Challenges and Opportunities for Improving Food Security for Hawaiʻi Residents, January 2023.
+  - <sub>`food-equity/HB1661_HUS_SNAP_income_eligibility_increase_2024.txt`</sub>
+- **Claim:** …r organization found that the federal income eligibility thresholds are too strict and do not adequately reflect Hawaiʻi’s cost of living.[1] A household survival budget for a family of four in Hawaiʻi is $104,000 according to a recent Aloha United Way report.
+  - **Source:** 2023 ALICE in the Crosscurrents: COVID and Financial Hardship in Hawaiʻi
+  - <sub>`food-equity/HB1661_HUS_SNAP_income_eligibility_increase_2024.txt`</sub>
+- **Claim:** …FPL ($69,000 for a family of 4) leaves more than 1450,000 ALICE (Asset Limited, Income Constrained, Employed) households unable to achieve self-sufficiency yet ineligible for any meaningful support to access food in the face of rising costs and stagnant wages.
+  - **Source:** 2023 ALICE in the Crosscurrents: COVID and Financial Hardship in Hawaiʻi
+  - <sub>`food-equity/HB1661_HUS_SNAP_income_eligibility_increase_2024.txt`</sub>
+- **Claim:** …However, evidence from other states shows these restrictions have failed to yield meaningful health outcomes and can create serious unintended consequences–posing major challenges for Hawaiʻi’s 894 retailers
+  - **Source:** U.S. Department of Agriculture, Food and Nutrition Service. (n.d.). SNAP retailer locator.
+  - <sub>`food-equity/HB1747_HSH_SNAP_restrictions_2026.txt`</sub>
+- **Claim:** …However, evidence from other states shows these restrictions have failed to yield meaningful health outcomes and can create serious unintended consequences–posing major challenges for Hawaiʻi’s 894 retailers[1] and 157,000 residents
+  - **Source:** U.S. Department of Agriculture, “SNAP Data Tables: National and/or State Level Monthly and/or Annual Data,” Food and Nutrition Service, 2025. https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap
+  - <sub>`food-equity/HB1747_HSH_SNAP_restrictions_2026.txt`</sub>
+- **Claim:** …lenges for Hawaiʻi’s 894 retailers[1] and 157,000 residents[2] who rely on SNAP. These waivers have been publicly opposed by dozens of national and local groups representing public health professionals, child and anti-poverty advocates, and the food industry,
+  - **Source:** Alliance to End Hunger, Bread for the World, Church World Service, et al. 2024. Sign-On Letter: SNAP-Choice. May 20, 2024.
+  - <sub>`food-equity/HB1747_HSH_SNAP_restrictions_2026.txt`</sub>
+- **Claim:** …es for Hawaiʻi’s 894 retailers[1] and 157,000 residents[2] who rely on SNAP. These waivers have been publicly opposed by dozens of national and local groups representing public health professionals, child and anti-poverty advocates, and the food industry,[3],
+  - **Source:** Child & Student Nutrition Alliance, et al. 2024. Letter to the Senate: Oppose SNAP Restriction Pilots. March 1, 2024.
+  - <sub>`food-equity/HB1747_HSH_SNAP_restrictions_2026.txt`</sub>
+- **Claim:** …or Hawaiʻi’s 894 retailers[1] and 157,000 residents[2] who rely on SNAP. These waivers have been publicly opposed by dozens of national and local groups representing public health professionals, child and anti-poverty advocates, and the food industry,[3],[4],
+  - **Source:** American Bakers Association, Alliance to End Hunger, American Beverage Association, et al. 2024. Letter to the Honorable Thomas J. Vilsack, USDA: Avoid Advancing SNAP Food-Choice Restrictions. July 30, 2024.
+  - <sub>`food-equity/HB1747_HSH_SNAP_restrictions_2026.txt`</sub>
+- **Claim:** …Costs will likely be passed on to all customers, potentially driving up the price of food across the board.
+  - **Source:** Krobath, Danielle M., et al. “Safeguarding SNAP as an Effective Antihunger Program: Myths and Potential Harms of Adding Diet Quality as a Core Objective.” American Journal of Public Health, vol. 115, 2025, pp. 37–41, https://doi.org/10.2105/AJPH.2024.307863
+  - <sub>`food-equity/HB1747_HSH_SNAP_restrictions_2026.txt`</sub>
+- **Claim:** …d on to all customers, potentially driving up the price of food across the board.[6] * Administrative Burden: DHS is working hard to implement the recently passed federal budget reconciliation bill, which adds new costs and eligibility changes onto the state.
+  - **Source:** Hay, Jeremy. “New Federal Rules Ramp Up the Pressure on People Who Count on Food Stamps.” Honolulu Civil Beat, October 29, 2025, https://www.civilbeat.org/2025/10/new-federal-rules-ramp-up-pressure-people-who-rely-food-stamps/
+  - <sub>`food-equity/HB1747_HSH_SNAP_restrictions_2026.txt`</sub>
+- **Claim:** …Research has found no significant improvements in diet quality among SNAP participants subject to restrictions
+  - **Source:** Krobath, Danielle M., et al. “Safeguarding SNAP as an Effective Antihunger Program: Myths and Potential Harms of Adding Diet Quality as a Core Objective.” American Journal of Public Health, vol. 115, 2025, pp. 37–41, https://doi.org/10.2105/AJPH.2024.307863
+  - <sub>`food-equity/HB1747_HSH_SNAP_restrictions_2026.txt`</sub>
+- **Claim:** …diet quality among SNAP participants subject to restrictions[8]; however, increasing fruit and vegetable incentives amongst SNAP participants has been proven to increase fruit and vegetable purchases while also decreasing purchase of sugar-sweetened beverages.
+  - **Source:** Thapa, Keshab, et al. “Sugar-Sweetened Beverage Restriction or Fruit and Vegetable Purchase Incentive in the Supplemental Nutrition Assistance Program (SNAP): Participant’s Voice and Choice Behavior.” Journal of Hunger & Environmental Nutrition, vol. 19, no. 1, 2024, pp. 1–22, https://doi.org/10.1080/19320248.2023.2179448
+  - <sub>`food-equity/HB1747_HSH_SNAP_restrictions_2026.txt`</sub>
+- **Claim:** …proven to increase fruit and vegetable purchases while also decreasing purchase of sugar-sweetened beverages.[9] Programs like Hawaiʻi’s DA BUX are proven to be much more effective at producing healthy outcomes than restrictions, while preferred by the public.
+  - **Source:** Durward, Carrie M., et al. “Double Up Food Bucks Participation Is Associated with Increased Fruit and Vegetable Consumption and Food Security among Low-Income Adults.” Journal of Nutrition Education and Behavior, vol. 51, no. 3, 2019, pp. 342–347, https://doi.org/10.1016/j.jneb.2018.08.011
+  - <sub>`food-equity/HB1747_HSH_SNAP_restrictions_2026.txt`</sub>
+- **Claim:** …However, there are still up to one in four children in Hawaiʻi that regularly go without enough nutritious meals at home.
+  - **Source:** Feeding America estimates of Food Insecurity among the Child (<18 years) Population in Hawaiʻi (2020)
+  - <sub>`food-equity/HB1775_FIN_testimony_2024.txt`</sub>
+- **Claim:** …However, Hawaiʻi’s costs of living require that a family with two adults and two children make at least $104,000 to simply survive.
+  - **Source:** Aloha United Way. ALICE in the Crosscurrents: COVID and Financial Hardship in Hawaiʻi (2023)
+  - <sub>`food-equity/HB1775_FIN_testimony_2024.txt`</sub>
+- **Claim:** …A 2022 study of schools implementing UFSM found an almost 5% decline in households classified as food insecure.
+  - **Source:** Journal of Health Economics. “The Effect of Free School Meals on Household Food Purchases” (2022)
+  - <sub>`food-equity/HB1775_FIN_testimony_2024.txt`</sub>
+- **Claim:** …Estimated State Costs
+  - **Source:** Lost revenue from co-pays only. Does not take into account any changes in administrative costs.
+  - <sub>`food-equity/HB1775_FIN_testimony_2024.txt`</sub>
+- **Claim:** …Estimated State Costs[4] Pre-pandemic participation rates
+  - **Source:** Assumes SY 2018-19 average daily participation rates and SY2022-23 eligibility data for reduced price and paid students for all participating public and charter schools.
+  - <sub>`food-equity/HB1775_FIN_testimony_2024.txt`</sub>
+- **Claim:** …Estimated State Costs[4] Pre-pandemic participation rates[5] Projected participation rates
+  - **Source:** Assumes a 6.8% increase for lunch and 12.1% increase for breakfast over SY18-19 average daily participation rates for reduced price, and paid students (USDA estimates).
+  - <sub>`food-equity/HB1775_FIN_testimony_2024.txt`</sub>
 - **Claim:** …In Hawaiʻi, 34% of children experience food insecurity, up from 29% in 2023.
   - **Source:** Hawaiʻi Foodbank, “The State of Food Insecurity in Hawaiʻi,” 2025.
   - <sub>`food-equity/HB1779_EDN_UFSM_by_2030.txt`</sub>
@@ -79,12 +193,42 @@ Coverage follows the corpus, which is food-equity heavy. Absence here says nothi
 - **Claim:** …Our state has set goals to double our local food production by 2030; passing this bill is one step to getting us there.
   - **Source:** https://alohachallenge.hawaii.gov/pages/local-food-production-and-consumption
   - <sub>`food-equity/HB2208_HHS_Farm_to_families.txt`</sub>
+- **Claim:** …This program would help make healthy, whole foods available to more people, thereby alleviating hunger and preventing long-term health issues like diabetes, heart disease, stroke, and depression.
+  - **Source:** Food Research & Action Center (FRAC), “Hunger & Health: The Impact of Poverty, Food Insecurity, and Poor Nutrition on Health and Well-Being,” FRAC, December 2017, p. 1-2.
+  - <sub>`food-equity/HB2208_HSH_Farm_to_families_2026.txt`</sub>
+- **Claim:** …Our state has set goals to double our local food production by 2030; passing this bill is one step to getting us there.
+  - **Source:** https://alohachallenge.hawaii.gov/pages/local-food-production-and-consumption
+  - <sub>`food-equity/HB2208_HSH_Farm_to_families_2026.txt`</sub>
 - **Claim:** …This critical funding was eliminated by Congress’ passage of H.R. 1 also known as the One Big Beautiful Bill Act.
   - **Source:** Section 10107 of Public Law 119-21 (the One Big Beautiful Bill Act of 2025) amends Section 28(d)(1) of the Food and Nutrition Act of 2008 by ending required funding for the SNAP Nutrition Education and Obesity Prevention Grant Program (SNAP-Ed) with the FY 2025 grant allocation; unexpended FY 2025 funds may be used in FY 2026 to operate SNAP-Ed but mandatory funding thereafter is eliminated.
   - <sub>`food-equity/HB2233_FIN_SNAP_ED.txt`</sub>
 - **Claim:** …Data from direct education classes show that the program delivers tangible results—improving diet quality, building practical budgeting and meal-planning skills, and enabling families to afford more food without increasing their monthly budget.
   - **Source:** UH SNAP-Ed program serving ʻohana, keiki and kūpuna threatened by federal cuts,” Maui Now, June 9, 2025.
   - <sub>`food-equity/HB2233_FIN_SNAP_ED.txt`</sub>
+- **Claim:** …This critical funding was eliminated by Congress’ passage of H.R. 1 also known as the One Big Beautiful Bill Act.
+  - **Source:** Section 10107 of Public Law 119-21 (the One Big Beautiful Bill Act of 2025) amends Section 28(d)(1) of the Food and Nutrition Act of 2008 by ending required funding for the SNAP Nutrition Education and Obesity Prevention Grant Program (SNAP-Ed) with the FY 2025 grant allocation; unexpended FY 2025 funds may be used in FY 2026 to operate SNAP-Ed but mandatory funding thereafter is eliminated.
+  - <sub>`food-equity/HB2233_HED_SNAP_ED_2026.txt`</sub>
+- **Claim:** …Data from direct education classes show that the program delivers tangible results—improving diet quality, building practical budgeting and meal-planning skills, and enabling families to afford more food without increasing their monthly budget.
+  - **Source:** UH SNAP-Ed program serving ʻohana, keiki and kūpuna threatened by federal cuts,” Maui Now, June 9, 2025.
+  - <sub>`food-equity/HB2233_HED_SNAP_ED_2026.txt`</sub>
+- **Claim:** …However, Hawaiʻi’s costs of living require that a family with two adults and two children make at least $104,000 to simply survive.
+  - **Source:** Aloha United Way. ALICE in the Crosscurrents: COVID and Financial Hardship in Hawaiʻi (2023)
+  - <sub>`food-equity/HB2256_EDN_Reduced_price_co_pay_elimination_2024.txt`</sub>
+- **Claim:** …For school year 2023-2024, of the DOE’s more than 156,000 enrolled students, 7% or nearly 11,000 are eligible for reduced-priced meals.
+  - **Source:** Hawaii Child Nutrition Programs October Data 2024 All SFAs
+  - <sub>`food-equity/HB2256_EDN_Reduced_price_co_pay_elimination_2024.txt`</sub>
+- **Claim:** …Estimated State Costs
+  - **Source:** Lost revenue from co-pays only. Does not take into account any changes in administrative costs.
+  - <sub>`food-equity/HB2256_EDN_Reduced_price_co_pay_elimination_2024.txt`</sub>
+- **Claim:** …Estimated State Costs[3] Pre-pandemic participation rates
+  - **Source:** Assumes SY 2018-19 average daily participation rates and SY2022-23 eligibility data for reduced price and paid students for all participating public and charter schools.
+  - <sub>`food-equity/HB2256_EDN_Reduced_price_co_pay_elimination_2024.txt`</sub>
+- **Claim:** …Estimated State Costs[3] Pre-pandemic participation rates[4] Projected participation rates
+  - **Source:** Assumes a 6.8% increase for lunch and 12.1% increase for breakfast over SY18-19 average daily participation rates for reduced price, and paid students (USDA estimates).
+  - <sub>`food-equity/HB2256_EDN_Reduced_price_co_pay_elimination_2024.txt`</sub>
+- **Claim:** …tes[4] Projected participation rates[5] Reduced-Price Breakfast Only $143,316.00 $424,244.02 Reduced-Price Lunch Only $646,272.00 $1,632,870.84 Breakfast & Lunch $789,588.00 $2,057,114.86 Average Daily Breakfast Participation Rates by Meal Type
+  - **Source:** Appleseed analysis of the FRAC School Breakfast Report Card SY13-14 to SY17-18
+  - <sub>`food-equity/HB2256_EDN_Reduced_price_co_pay_elimination_2024.txt`</sub>
 - **Claim:** …This also provides HIDOE the flexibility to extend free meals to any student going forward, aligning with Governor Josh Green’s stated commitment to achieving free school meals for all students in the next five years.
   - **Source:** Hawaii News Now, “Gov. Green Revisits Hawaiʻi’s Tsunami Preparedness, Food Security, His Future in Politics,” August 4 2025, www.hawaiinewsnow.com/video/2025/08/04/gov-green-revisits-hawaiis-tsunami-preparedness-food-security-his-future-politics/
   - <sub>`food-equity/HB2296_EDU_School_meals.txt`</sub>
@@ -106,6 +250,30 @@ Coverage follows the corpus, which is food-equity heavy. Absence here says nothi
 - **Claim:** …Research consistently links proper nutrition to better educational and health outcomes and conversely, students who miss meals tend to perform poorly in school.
   - **Source:** Amy E. Schwartz & Michah W. Rothbart, “Let Them Eat Lunch: The Impact of Universal Free Meals on Student Performance,” Maxwell School Center for Policy Research, July 2019.
   - <sub>`food-equity/HB2296_FIN_School_meals.txt`</sub>
+- **Claim:** …This clears the way for the possibility of universal free school meals by the 2029-2030 school year, aligning with Governor Josh Green’s stated commitment to achieving free school meals for all students in the next five years.
+  - **Source:** Hawaii News Now, “Gov. Green Revisits Hawaiʻi’s Tsunami Preparedness, Food Security, His Future in Politics,” August 4 2025, www.hawaiinewsnow.com/video/2025/08/04/gov-green-revisits-hawaiis-tsunami-preparedness-food-security-his-future-politics/
+  - <sub>`food-equity/HB2296_WAM_School_meals_cost_requirement_2026.txt`</sub>
+- **Claim:** …But they provide more than just nutritional benefits; they are consistently linked with better educational and health outcomes.
+  - **Source:** Amy E. Schwartz & Michah W. Rothbart, “Let Them Eat Lunch: The Impact of Universal Free Meals on Student Performance,” Maxwell School Center for Policy Research, July 2019.
+  - <sub>`food-equity/HB2296_WAM_School_meals_cost_requirement_2026.txt`</sub>
+- **Claim:** …With recent numbers showing three in ten Hawaiʻi households with children face food insecurity,
+  - **Source:** Hawaiʻi Foodbank, “The State of Food Insecurity in Hawaiʻi,” 2023.
+  - <sub>`food-equity/HB2296_WAM_School_meals_cost_requirement_2026.txt`</sub>
+- **Claim:** …With recent figures showing one in three Hawaiʻi residents struggle to afford enough food,
+  - **Source:** Hawaiʻi Foodbank, “The State of Food Insecurity in Hawaiʻi 2024-2025: Executive Summary,” Hawaiʻi Foodbank, November 2025. https://hawaiifoodbank.org/wp-content/uploads/2025/12/HFB.ExecutiveSummary2025_Web-FINAL.pdf
+  - <sub>`food-equity/HB2458_CPC_Surveillance_pricing_2026.txt`</sub>
+- **Claim:** …Surveillance pricing, where prices are adjusted based on consumer data, behavior, or technology use, threatens affordability and predictability for any consumer—especially for over 160,000 Hawaiʻi residents
+  - **Source:** U.S. Department of Agriculture, “SNAP Data Tables: National and/or State Level Monthly and/or Annual Data,” Food and Nutrition Service, 2025. https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap
+  - <sub>`food-equity/HB2458_CPC_Surveillance_pricing_2026.txt`</sub>
+- **Claim:** …re adjusted based on consumer data, behavior, or technology use, threatens affordability and predictability for any consumer—especially for over 160,000 Hawaiʻi residents[2] relying on SNAP and 25,000 pregnant people, infants, and young children served by WIC.
+  - **Source:** U.S. Department of Agriculture, “WIC Data Tables: Monthly Data – State Level Participation by Category and Program Costs,” Food and Nutrition Service, 2025. https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap https://www.fns.usda.gov/pd/wic-program
+  - <sub>`food-equity/HB2458_CPC_Surveillance_pricing_2026.txt`</sub>
+- **Claim:** …eople, infants, and young children served by WIC.[3] These practices are more than just inconsistent pricing, they are a way for large companies to use personal, demographic, consumer, workplace, and contextual data to charge higher prices for essential foods.
+  - **Source:** AI Now Institute, et al. Prohibiting Surveillance Prices and Wages. February 2025, American Economic Liberties Project, https://www.economicliberties.us/wp-content/uploads/2025/02/Real-Surveillance-Prices-and-Wages-Report.pdf
+  - <sub>`food-equity/HB2458_CPC_Surveillance_pricing_2026.txt`</sub>
+- **Claim:** …tual data to charge higher prices for essential foods.[4] Other states such as Maryland, California, and New York have proposed similar bans on these forms of predatory pricing for groceries, citing concerns about unfair and unpredictable costs for consumers.
+  - **Source:** Tan, Cheyenne. How U.S. States Are Tackling Algorithmic Pricing: 2025 Bill Tracker and Analysis. Innovation at Consumer Reports, 1 Aug. 2025, https://innovation.consumerreports.org/how-u-s-states-are-tackling-algorithmic-pricing-2025-bill-tracker-and-analysis/.
+  - <sub>`food-equity/HB2458_CPC_Surveillance_pricing_2026.txt`</sub>
 - **Claim:** …This affordability crisis has led to one in three households struggling to afford food.
   - **Source:** Hawaiʻi Foodbank, “The State of Food Insecurity in Hawaiʻi 2024-2025: Executive Summary,” Hawaiʻi Foodbank, November 2025. https://hawaiifoodbank.org/wp-content/uploads/2025/12/HFB.ExecutiveSummary2025_Web-FINAL.pdf
   - <sub>`food-equity/HB2458_FIN_Surveillance_pricing.txt`</sub>
@@ -124,9 +292,159 @@ Coverage follows the corpus, which is food-equity heavy. Absence here says nothi
 - **Claim:** …ual data to charge higher prices for essential foods.[2] Other states such as Maryland, California, and New York have proposed similar bans on these forms of predatory pricing for groceries, citing concerns about unfair and unpredictable costs for consumers.
   - **Source:** Tan, Cheyenne. How U.S. States Are Tackling Algorithmic Pricing: 2025 Bill Tracker and Analysis. Innovation at Consumer Reports, 1 Aug. 2025, https://innovation.consumerreports.org/how-u-s-states-are-tackling-algorithmic-pricing-2025-bill-tracker-and-analysis/.
   - <sub>`food-equity/HB2458_LBT_Surveillance_pricing.txt`</sub>
+- **Claim:** …The average household lost $82 in monthly benefits and some of our most vulnerable households like those with kupuna lost up to $238.
+  - **Source:** Hunger Cliff 2023: HAWAII
+  - <sub>`food-equity/HB2771_AEN_1_DA_BUX_HHS_2024.txt`</sub>
+- **Claim:** …Factoring in the $2.10 multiplier would ultimately result in more than $8M in local economic impact.
+  - **Source:** For each program dollar issues for local produce incentives generate $2.10 in Hawaiʻi’s economy.
+  - <sub>`food-equity/HB2771_AEN_1_DA_BUX_HHS_2024.txt`</sub>
+- **Claim:** …The average household lost $82 in monthly benefits and some of our most vulnerable households like those with kupuna lost up to $238.
+  - **Source:** Hunger Cliff 2023: HAWAII
+  - <sub>`food-equity/HB2771_DA_BUX_2024.txt`</sub>
+- **Claim:** …Factoring in the $2.10 multiplier would ultimately result in more than $8M in local economic impact.
+  - **Source:** For each program dollar issues for local produce incentives generate $2.10 in Hawaiʻi’s economy.
+  - <sub>`food-equity/HB2771_DA_BUX_2024.txt`</sub>
+- **Claim:** …his is seen as an incremental step toward the ultimate goal of providing free meals to all students, as proposed by another bill before the committee today, HB 757. To be eligible for reduced-price meals, a family of four must make between $46,644 and $66,378.
+  - **Source:** Hawaiʻi State Department of Education, “Free and Reduced Price Meals Program,” 2025. https://www.hawaiipublicschools.org/TeachingAndLearning/HealthAndNutrition/StudentHealthResources/Pages/ FreeReducedLunch.aspx
+  - <sub>`food-equity/HB424_EDN_reduced_price_meals_only_2025.txt`</sub>
+- **Claim:** …proposed by another bill before the committee today, HB 757. To be eligible for reduced-price meals, a family of four must make between $46,644 and $66,378.[1] However, Hawaiʻi’s costs of living require that same family to make over $107,000 to simply survive.
+  - **Source:** United for ALICE, “ALICE in the Crosscurents: An Update on Financial Hardship in Hawaiʻi,” 2024. https://www.unitedforalice.org/Attachments/AllReports/2024-ALICE-Update-HI-FINAL-v2.pdf
+  - <sub>`food-equity/HB424_EDN_reduced_price_meals_only_2025.txt`</sub>
+- **Claim:** …One study found that 34 percent of students who were denied free or reduced price meals were actually eligible to receive them.
+  - **Source:** United States Department of Agriculture, Third Access, Participation, Eligibility, and Certification Study, September 2021.
+  - <sub>`food-equity/HB424_EDN_reduced_price_meals_only_2025.txt`</sub>
+- **Claim:** …Here is a breakdown: DOE School Food Services: Revenue by source (FY2024)
+  - **Source:** Hawaiʻi Department of Education, Fiscal Year 2024 Report, School Food Services.
+  - <sub>`food-equity/HB424_FIN_reduced_price_meals_only_2025.txt`</sub>
+- **Claim:** …To be eligible for reduced-price meals, a family of four must make between $46,644 and $66,378.
+  - **Source:** Hawaiʻi State Department of Education, “Free and Reduced Price Meals Program,” 2025. https://www.hawaiipublicschools.org/TeachingAndLearning/HealthAndNutrition/StudentHealthResources/Pages/ FreeReducedLunch.aspx
+  - <sub>`food-equity/HB424_FIN_reduced_price_meals_only_2025.txt`</sub>
+- **Claim:** …To be eligible for reduced-price meals, a family of four must make between $46,644 and $66,378.[3] However, Hawaiʻi’s costs of living require that same family to make over $107,000 to simply survive.
+  - **Source:** United for ALICE, “ALICE in the Crosscurents: An Update on Financial Hardship in Hawaiʻi,” 2024. https://www.unitedforalice.org/Attachments/AllReports/2024-ALICE-Update-HI-FINAL-v2.pdf
+  - <sub>`food-equity/HB424_FIN_reduced_price_meals_only_2025.txt`</sub>
+- **Claim:** …Cost estimates: Reduced price students only
+  - **Source:** Hawaiʻi Appleseed analysis, using DOE participation data and cost estimates, February 2025.
+  - <sub>`food-equity/HB424_FIN_reduced_price_meals_only_2025.txt`</sub>
+- **Claim:** …One study found that 34 percent of students who were denied free or reduced-price meals were actually eligible to receive them.
+  - **Source:** United States Department of Agriculture, Third Access, Participation, Eligibility, and Certification Study, September 2021.
+  - <sub>`food-equity/HB424_FIN_reduced_price_meals_only_2025.txt`</sub>
+- **Claim:** …In Hawaiʻi, there are still three in 10 households with children facing food insecurity.
+  - **Source:** Hawaiʻi Foodbank, “The State of Food Insecurity in Hawaiʻi,” 2023. https://hawaiifoodbank.org/wp-content/uploads/2024/07/HawaiiFoodbank_TheStateOfFoodInsecurityInHawaii_2023.pdf
+  - <sub>`food-equity/HB757_EDN_UFSM_2025.txt`</sub>
+- **Claim:** …For example, a family of four that makes $47,000 per year doesn’t qualify for free lunch,
+  - **Source:** Hawaiʻi State Department of Education, “Free and Reduced Price Meals Program,” 2025. https://www.hawaiipublicschools.org/TeachingAndLearning/HealthAndNutrition/StudentHealthResources/Pages/ FreeReducedLunch.aspx
+  - <sub>`food-equity/HB757_EDN_UFSM_2025.txt`</sub>
+- **Claim:** …For example, a family of four that makes $47,000 per year doesn’t qualify for free lunch,[2] while Hawaiʻi’s costs of living require that same family to make over $107,000 to simply survive.
+  - **Source:** United for ALICE, “ALICE in the Crosscurents: An Update on Financial Hardship in Hawaiʻi,” 2024. https://www.unitedforalice.org/Attachments/AllReports/2024-ALICE-Update-HI-FINAL-v2.pdf
+  - <sub>`food-equity/HB757_EDN_UFSM_2025.txt`</sub>
+- **Claim:** …In fact, one study found that 34 percent of students not receiving school meals were actually eligible to receive them.
+  - **Source:** R. Milfort, J. Taylor, L. May, & M. Collins, “Third Access, Participation, Eligibility, and Certification Study (APEC-III) Final Report,” Prepared for USDA, Westat Corp., September 2021. https://fns-prod.azureedge.us/sites/default/files/resource-files/APECIII-Vol1.pdf
+  - <sub>`food-equity/HB757_EDN_UFSM_2025.txt`</sub>
+- **Claim:** …Research consistently links proper nutrition to better healthy development and learning outcomes.
+  - **Source:** Amy E. Schwartz & Michah W. Rothbart, “Let Them Eat Lunch: The Impact of Universal Free Meals on Student Performance,” Maxwell School Center for Policy Research, July 2019. https://www.maxwell.syr.edu/docs/default-source/research/cpr/working-papers/wp-203-let-them-eat-lunch.pdf?sfvrsn=efae783d_8
+  - <sub>`food-equity/HB757_EDN_UFSM_2025.txt`</sub>
+- **Claim:** …Research has shown that older adults who are enrolled in SNAP see significant improvements in health outcomes, including: * Less costly hospital stays and fewer hospital admissions,
+  - **Source:** Samuel, Laura J., Sarah L. Szanton, Rachel Cahill, Jennifer L. Wolff, Pinchuan Ong, Ginger Zielinskie, Charles Betly, “Does the Supplemental Nutrition Assistance Program Affect Hospital Utilization Among Older Adults? The Case of Maryland,” Population Health Management, Volume 21, Issue 2, April 2018.
+  - <sub>`food-equity/HCR146_HHS_ESAP_2025.txt`</sub>
+- **Claim:** …search has shown that older adults who are enrolled in SNAP see significant improvements in health outcomes, including: * Less costly hospital stays and fewer hospital admissions,[1] * A decrease in skipping medication doses to save money and/or delay refills,
+  - **Source:** Hartline-Grafton, Heather, Olivia Dean, “The Role of the Supplemental Nutrition Assistance Program in Improving Health and Well-Being,” Food Research & Action Center, Washington, D.C., December 2017.
+  - <sub>`food-equity/HCR146_HHS_ESAP_2025.txt`</sub>
+- **Claim:** …ho are enrolled in SNAP see significant improvements in health outcomes, including: * Less costly hospital stays and fewer hospital admissions,[1] * A decrease in skipping medication doses to save money and/or delay refills,[2] * Fewer nursing home admissions.
+  - **Source:** Sarah L. Szanton et al., “Food assistance is associated with decreased nursing home admissions for Maryland’s Dually Eligible Older Adults,” BMC Geriatrics, 17(1), 162, 2017.
+  - <sub>`food-equity/HCR146_HHS_ESAP_2025.txt`</sub>
+- **Claim:** …In one particularly notable example, Alabama’s ESAP contributed to the addition of 42,000 additional SNAP-participating senior households from 2008 to 2016—a 21 percent increase.
+  - **Source:** Herd, Pamela, “How Administrative Burdens Are Preventing Access to Critical Income Supports for Older Adults: The Case of the Supplemental Nutrition Assistance Program,” Public Policy & Aging Report, Volume 25, Issue 2, June 20, 2015.
+  - <sub>`food-equity/HCR146_HHS_ESAP_2025.txt`</sub>
+- **Claim:** …In one particularly notable example, Alabama’s ESAP contributed to the addition of 42,000 additional SNAP-participating senior households from 2008 to 2016—a 21 percent increase.[4]
+  - **Source:** National Council on Aging and Benefits Data Trust, “An Advocate’s Guide to the Elderly Simplified Application Project,” March 2017.
+  - <sub>`food-equity/HCR146_HHS_ESAP_2025.txt`</sub>
+- **Claim:** …ddition of 42,000 additional SNAP-participating senior households from 2008 to 2016—a 21 percent increase.[4][5] A similar scale increase in Hawaiʻi would reach more than 6,500 seniors and bring Hawaiʻi’s senior SNAP participation rate up to nearly 60 percent.
+  - **Source:** Hawaiʻi Appleseed, “Feeding our Kupuna: An overview of Hawaiʻi senior hunger safety net and how to strengthen it,” January 2020, p. 13.
+  - <sub>`food-equity/HCR146_HHS_ESAP_2025.txt`</sub>
+- **Claim:** …ncrease.[4][5] A similar scale increase in Hawaiʻi would reach more than 6,500 seniors and bring Hawaiʻi’s senior SNAP participation rate up to nearly 60 percent.[6] As of 2024, 23 other states have already implemented ESAP and there are more to follow suit.
+  - **Source:** U.S. Department of Agriculture, “SNAP State Options Report,” Food and Nutrition Service, 2024, p. 26.
+  - <sub>`food-equity/HCR146_HHS_ESAP_2025.txt`</sub>
+- **Claim:** …Research has shown that older adults who are enrolled in SNAP actually see improvements in health outcomes, including: * Less costly hospital stays and fewer hospital admissions,
+  - **Source:** Samuel, Laura J., Sarah L. Szanton, Rachel Cahill, Jennifer L. Wolff, Pinchuan Ong, Ginger Zielinskie, Charles Betly, “Does the Supplemental Nutrition Assistance Program Affect Hospital Utilization Among Older Adults? The Case of Maryland,” Population Health Management, Volume 21, Issue 2, April 2018, https://www.ncbi.nlm.nih. gov/pubmed/28683219
+  - <sub>`food-equity/HCR146_HSH_ESAP_requirement_2025.txt`</sub>
+- **Claim:** …Research has shown that older adults who are enrolled in SNAP actually see improvements in health outcomes, including: * Less costly hospital stays and fewer hospital admissions,[1] * A decrease in skipping medication doses to save money and/or delay refills,
+  - **Source:** Hartline-Grafton, Heather, Olivia Dean, “The Role of the Supplemental Nutrition Assistance Program in Improving Health and Well-Being,” Food Research & Action Center, Washington, D.C., December 2017, https://frac.org/ wp-content/uploads/hunger-health-role-snap-improvinghealth-well-being.pdf
+  - <sub>`food-equity/HCR146_HSH_ESAP_requirement_2025.txt`</sub>
+- **Claim:** …s who are enrolled in SNAP actually see improvements in health outcomes, including: * Less costly hospital stays and fewer hospital admissions,[1] * A decrease in skipping medication doses to save money and/or delay refills,[2] * Fewer nursing home admissions.
+  - **Source:** Sarah L. Szanton et al., “Food assistance is associated with decreased nursing home admissions for Maryland’s Dually Eligible Older Adults,” BMC Geriatrics, 17(1), 162, 2017, https://bmcgeriatr.biomedcentral.com/articles/10.1186/s12877-017-0553-x;
+  - <sub>`food-equity/HCR146_HSH_ESAP_requirement_2025.txt`</sub>
+- **Claim:** …As of 2024, 23 other states have already implemented ESAP and there are more to follow suit.
+  - **Source:** U.S. Department of Agriculture, “SNAP State Options Report,” Food and Nutrition Service, 2024, p. 26. https://fns-prod.azureedge.us/sites/default/files/resource-files/snap-16th-state-options-report-june24.pdf
+  - <sub>`food-equity/HCR146_HSH_ESAP_requirement_2025.txt`</sub>
+- **Claim:** …However, in a recent assessment of Hawaiʻi’s SNAP population, our organization found that the federal income eligibility thresholds are too strict and do not adequately reflect Hawaiʻi’s cost of living.
+  - **Source:** Hawaiʻi Appleseed Center for Law and Economic Justice. Hawaiʻi SNAP: Challenges and Opportunities for Improving Food Security for Hawaiʻi Residents, January 2023.
+  - <sub>`food-equity/HCR42_HUS_UHERO_snap_study_2024.txt`</sub>
+- **Claim:** …ization found that the federal income eligibility thresholds are too strict and do not adequately reflect Hawaiʻi’s cost of living.[1] A household survival budget for a family of four in Hawaiʻi is $104,000 according to the most recent Aloha United Way report.
+  - **Source:** 2023 ALICE in the Crosscurrents: COVID and Financial Hardship in Hawaiʻi
+  - <sub>`food-equity/HCR42_HUS_UHERO_snap_study_2024.txt`</sub>
+- **Claim:** …,000 for a family of 4) leaves more than 145,000 ALICE (Asset Limited, Income Constrained, Employed) households unable to achieve self-sufficiency yet ineligible for any meaningful support to access SNAP benefits in the face of rising costs and stagnant wages.
+  - **Source:** 2023 ALICE in the Crosscurrents: COVID and Financial Hardship in Hawaiʻi
+  - <sub>`food-equity/HCR42_HUS_UHERO_snap_study_2024.txt`</sub>
+- **Claim:** …As of 2024, 23 other states have already implemented ESAP and there are more to follow suit.
+  - **Source:** U.S. Department of Agriculture, “SNAP State Options Report,” Food and Nutrition Service, 2024, p. 26. https://fns-prod.azureedge.us/sites/default/files/resource-files/snap-16th-state-options-report-june24.pdf
+  - <sub>`food-equity/HR140_HSH_ESAP_requirement_2025.txt`</sub>
 - **Claim:** …This was corroborated by the recent Audit of the HIDOE’s farm to school efforts.
   - **Source:** Office of the Auditor, State of Hawaiʻi, Audit of the Department of Education’s Efforts to Meet Its Mandate to Incorporate Local Foods in School Meals, Report No. 26-08 (March 2026).
   - <sub>`food-equity/HR86_HCR94_Farm_to_Institution.txt`</sub>
+- **Claim:** …In Hawaiʻi, three in ten households with children face food insecurity.
+  - **Source:** Hawaiʻi Foodbank, “The State of Food Insecurity in Hawaiʻi,” 2023.
+  - <sub>`food-equity/SB1300_EDN_ALICE_school_meal_subsidy_2025.txt`</sub>
+- **Claim:** …In Hawaiʻi, three in ten households with children face food insecurity.[1] While some of these children qualify for free meals, any family of four that makes at least $47,000 does not,
+  - **Source:** Hawaiʻi State Department of Education, “Free and Reduced Price Meals Program,” 2025. https://www.hawaiipublicschools.org/TeachingAndLearning/HealthAndNutrition/StudentHealthResources/Pages/ FreeReducedLunch.aspx
+  - <sub>`food-equity/SB1300_EDN_ALICE_school_meal_subsidy_2025.txt`</sub>
+- **Claim:** …ouseholds with children face food insecurity.[1] While some of these children qualify for free meals, any family of four that makes at least $47,000 does not,[2] leaving two-thirds of the families over this threshold still struggling to cover their food costs.
+  - **Source:** United for ALICE, “ALICE in the Crosscurents: An Update on Financial Hardship in Hawaiʻi,” 2024.
+  - <sub>`food-equity/SB1300_EDN_ALICE_school_meal_subsidy_2025.txt`</sub>
+- **Claim:** …Research consistently links proper nutrition to better educational and health outcomes and conversely, students who miss meals tend to perform poorly in school.
+  - **Source:** Amy E. Schwartz & Michah W. Rothbart, “Let Them Eat Lunch: The Impact of Universal Free Meals on Student Performance,” Maxwell School Center for Policy Research, July 2019.
+  - <sub>`food-equity/SB1300_EDN_ALICE_school_meal_subsidy_2025.txt`</sub>
+- **Claim:** …One study found that 34 percent of students who were denied free or reduced price meals were actually eligible to receive them.
+  - **Source:** United States Department of Agriculture, Third Access, Participation, Eligibility, and Certification Study, September 2021.
+  - <sub>`food-equity/SB1300_EDN_ALICE_school_meal_subsidy_2025.txt`</sub>
+- **Claim:** …nied free or reduced price meals were actually eligible to receive them.[5] 3. Most public school students likely already fall within the ALICE threshold: Hawaiʻi has the highest percentage of students enrolled in private schools of every state in the nation.
+  - **Source:** National Center for Education Statistics, Private School Enrollment data, 2021.
+  - <sub>`food-equity/SB1300_EDN_ALICE_school_meal_subsidy_2025.txt`</sub>
+- **Claim:** …In Hawaiʻi, three in ten households with children face food insecurity.
+  - **Source:** Hawaiʻi Foodbank, “The State of Food Insecurity in Hawaiʻi,” 2023.
+  - <sub>`food-equity/SB1300_FIN_ALICE_school_meal_subsidy_2025.txt`</sub>
+- **Claim:** …ith children face food insecurity.[1] While there is a provision for some children to receive free meals, the threshold for eligibility is set at 130 percent of the federal poverty level–so a family of four would need to make under $47,000 per year to qualify.
+  - **Source:** Hawaiʻi State Department of Education, “Free and Reduced Price Meals Program,” 2025. https://www.hawaiipublicschools.org/TeachingAndLearning/HealthAndNutrition/StudentHealthResources/Pages/ FreeReducedLunch.aspx
+  - <sub>`food-equity/SB1300_FIN_ALICE_school_meal_subsidy_2025.txt`</sub>
+- **Claim:** …n to receive free meals, the threshold for eligibility is set at 130 percent of the federal poverty level–so a family of four would need to make under $47,000 per year to qualify.[2] This leaves thousands of families still struggling to cover their food costs,
+  - **Source:** United for ALICE, “ALICE in the Crosscurents: An Update on Financial Hardship in Hawaiʻi,” 2024.
+  - <sub>`food-equity/SB1300_FIN_ALICE_school_meal_subsidy_2025.txt`</sub>
+- **Claim:** …One study found that 34 percent of students who were denied free or reduced price meals were actually eligible to receive them.
+  - **Source:** United States Department of Agriculture, Third Access, Participation, Eligibility, and Certification Study, September 2021.
+  - <sub>`food-equity/SB1300_FIN_ALICE_school_meal_subsidy_2025.txt`</sub>
+- **Claim:** …tion increase Total SB1300 (300% FPL) $3,304,347 $3,634,781.61 Total SB1300 (With suggested amendments) $20,479,277 $22,527,204.59 Table 1. The DOE estimated cost for covering 300% FPL and for Universal Free School Meals As shown in the figure below,
+  - **Source:** Capital gains estimates: Institute on Taxation and Economic Policy, January 2025. Corporate income tax rates: Hawaiʻi Appleseed Center for Law & Economic Justice, Funding Hawaiʻi's Future, October 2023, p. 8.
+  - <sub>`food-equity/SB1300_FIN_ALICE_school_meal_subsidy_2025.txt`</sub>
+- **Claim:** …Additionally, because of the recent rule change to eliminate net income limits for eligibility, there is expected to be an extra 14,000 households eligible for SNAP benefits later this year.
+  - **Source:** D. Moore & N. Hix, “ Hawaiʻi’s Unnecessary Benefit Cliff: How One Small Policy Change Could Deliver Tens of Millions in Federally-Funded SNAP Benefits,” University of Hawaiʻi Economic Research Organization (UHERO), https://uhero.hawaii.edu/hawai%CA%BBis-unnecessary-benefit-cliff-how-one-small-policy-change-could-deliver-in-45m-per-year-in-federally-funded-snap-benefits/#:~:text=UHERO's%20analysis%20suggests%20that%20eliminating,course%20of%20that%20same%20year.
+  - <sub>`food-equity/SB1418_WAM_SNAP_DHS_penalty_funds_2025.txt`</sub>
+- **Claim:** …In a recent assessment of Hawaiʻi’s SNAP population, our organization found that the federal income eligibility thresholds are too strict and do not adequately reflect Hawaiʻi’s cost of living.
+  - **Source:** Hawaiʻi Appleseed Center for Law and Economic Justice. Hawaiʻi SNAP: Challenges and Opportunities for Improving Food Security for Hawaiʻi Residents, January 2023.
+  - <sub>`food-equity/SB2135_HUS_SNAP_income_eligibility_increase_2024.txt`</sub>
+- **Claim:** …r organization found that the federal income eligibility thresholds are too strict and do not adequately reflect Hawaiʻi’s cost of living.[1] A household survival budget for a family of four in Hawaiʻi is $104,000 according to a recent Aloha United Way report.
+  - **Source:** 2023 ALICE in the Crosscurrents: COVID and Financial Hardship in Hawaiʻi
+  - <sub>`food-equity/SB2135_HUS_SNAP_income_eligibility_increase_2024.txt`</sub>
+- **Claim:** …FPL ($69,000 for a family of 4) leaves more than 145,000 ALICE (Asset Limited, Income Constrained, Employed) households unable to achieve self-sufficiency yet ineligible for any meaningful support to access food in the face of rising costs and stagnant wages.
+  - **Source:** 2023 ALICE in the Crosscurrents: COVID and Financial Hardship in Hawaiʻi
+  - <sub>`food-equity/SB2135_HUS_SNAP_income_eligibility_increase_2024.txt`</sub>
+- **Claim:** …SNAP is a critical lifeline for more than 155,000 Hawaiʻi residents, supporting working families, individuals with disabilities, and others living on fixed or limited incomes.
+  - **Source:** U.S. Department of Agriculture, “SNAP Data Tables: National and/or State Level Monthly and/or Annual Data,” Food and Nutrition Service, 2025. https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap
+  - <sub>`food-equity/SB2211_HHS_Emergency_appropriation_2026.txt`</sub>
+- **Claim:** …Additionally, 1 in 3 Hawaiʻi residents remain food insecure, struggling with the state’s continued high cost of living.
+  - **Source:** Hawaiʻi Foodbank, “The State of Food Insecurity in Hawaiʻi 2024-2025: Executive Summary,” Hawaiʻi Foodbank, November 2025. https://hawaiifoodbank.org/wp-content/uploads/2025/12/HFB.ExecutiveSummary2025_Web-FINAL.pdf
+  - <sub>`food-equity/SB2211_HHS_Emergency_appropriation_2026.txt`</sub>
+- **Claim:** …d insecure, struggling with the state’s continued high cost of living.[2] During the federal shutdown, Hawaiʻi acted rapidly in distributing an emergency benefit of $250 in food assistance, by leveraging the existing Electronic Benefits Transfer (EBT) system.
+  - **Source:** Department of Human Services, “DHS ISSUES UPDATE ON SNAP BENEFITS AND THE HAWAI‘I EMERGENCY FOOD ASSISTANCE PROGRAM,” November 2025. https://humanservices.hawaii.gov/dhs-issues-update-on-snap-benefits-and/
+  - <sub>`food-equity/SB2211_HHS_Emergency_appropriation_2026.txt`</sub>
 - **Claim:** …SNAP is a critical lifeline for more than 155,000 Hawaiʻi residents, supporting working families, individuals with disabilities, and others living on fixed or limited incomes.
   - **Source:** U.S. Department of Agriculture, “SNAP Data Tables: National and/or State Level Monthly and/or Annual Data,” Food and Nutrition Service, 2025. https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap
   - <sub>`food-equity/SB2211_HSH_Emergency_appropriation.txt`</sub>
@@ -136,6 +454,21 @@ Coverage follows the corpus, which is food-equity heavy. Absence here says nothi
 - **Claim:** …insecure, struggling with the state’s continued high cost of living.[2] During the federal shutdown, Hawaiʻi acted rapidly in distributing an emergency benefit of $250 in food assistance, by leveraging the existing Electronic Benefits Transfer (EBT) system.
   - **Source:** Department of Human Services, “DHS ISSUES UPDATE ON SNAP BENEFITS AND THE HAWAIʻI EMERGENCY FOOD ASSISTANCE PROGRAM,” November 2025. https://humanservices.hawaii.gov/dhs-issues-update-on-snap-benefits-and/
   - <sub>`food-equity/SB2211_HSH_Emergency_appropriation.txt`</sub>
+- **Claim:** …In Hawaiʻi, the bottom fifth of households spend nearly 9 percent of their annual income on the GET, compared with the top fifth of households that spend less than 4 percent.
+  - **Source:** Institute for Tax and Economic Policy, Who Pays? 7th Edition. 2024.
+  - <sub>`food-equity/SB2935_HHS_GET_on_groceries_and_supplies_2026.txt`</sub>
+- **Claim:** …Total GET currently comprises nearly half of general fund receipts, with GET from grocery and nonprescription drugs contributing an estimated $250 million per year.
+  - **Source:** Suganuma, Gary, Testimony on S.B. No. 1043, S.D. 1, Relating to Taxation, Hawaii Department of Taxation, February 27 2025, p. 1-2. https://www.capitol.hawaii.gov/sessions/session2025/Testimony/SB1043_SD1_TESTIMONY_WAM_02-27-25_.PDF
+  - <sub>`food-equity/SB2935_HHS_GET_on_groceries_and_supplies_2026.txt`</sub>
+- **Claim:** …loophole, taxing the sale of luxury homes, and most importantly, freezing the tax cuts passed in 2024. This last proposal alone would generate more than $296 million per year—enough to make up for the loss of GET revenue on groceries and nonprescription drugs.
+  - **Source:** Hawaiʻi Tax Fairness Coalition, “Revenue Options,” Hawaiʻi Tax Fairness Coalition, 2026. https://www.hitaxfairness.org/wealth-taxes
+  - <sub>`food-equity/SB2935_HHS_GET_on_groceries_and_supplies_2026.txt`</sub>
+- **Claim:** …Since benefits are federally funded, federal rules require tedious paperwork and documentation both upon initial application and for periodic recertification.
+  - **Source:** U.S. Department of Agriculture, “SNAP Data Tables: National and/or State Level Monthly and/or Annual Data,” Food and Nutrition Service, 2024. https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap
+  - <sub>`food-equity/SB3245_FIN_SNAP_ESAP_2026.txt`</sub>
+- **Claim:** …As of 2024, 23 other states have already implemented ESAP and there are more to follow suit.
+  - **Source:** U.S. Department of Agriculture, “SNAP State Options Report,” Food and Nutrition Service, 2024, p. 26. https://fns-prod.azureedge.us/sites/default/files/resource-files/snap-16th-state-options-report-june24.pdf
+  - <sub>`food-equity/SB3245_FIN_SNAP_ESAP_2026.txt`</sub>
 - **Claim:** …Since benefits are federally funded, federal rules require tedious paperwork and documentation both upon initial application and for periodic recertification.
   - **Source:** U.S. Department of Agriculture, “SNAP Data Tables: National and/or State Level Monthly and/or Annual Data,” Food and Nutrition Service, 2024. https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap
   - <sub>`food-equity/SB3245_HSH_SNAP_ESAP.txt`</sub>
@@ -148,6 +481,330 @@ Coverage follows the corpus, which is food-equity heavy. Absence here says nothi
 - **Claim:** …As of 2024, 23 other states have already implemented ESAP and there are more to follow suit.
   - **Source:** U.S. Department of Agriculture, “SNAP State Options Report,” Food and Nutrition Service, 2024, p. 26. https://fns-prod.azureedge.us/sites/default/files/resource-files/snap-16th-state-options-report-june24.pdf
   - <sub>`food-equity/SB3245_WAM_SNAP_ESAP.txt`</sub>
+- **Claim:** …With recent statistics that 1 in 3 households in Hawaiʻi are food insecure,
+  - **Source:** Hawaiʻi Foodbank, “The State of Food Insecurity in Hawaiʻi,” 2023, p. 6. https://hawaiifoodbank.org/wp-content/uploads/2024/07/HawaiiFoodbank_TheStateOfFoodInsecurityInHawaii_2023.pdf
+  - <sub>`food-equity/SB53_HHS_SNAP_income_eligibility_increase_2025.txt`</sub>
+- **Claim:** …One major barrier is that federal income eligibility thresholds are too strict and do not adequately reflect Hawaiʻi’s cost of living.
+  - **Source:** Hawaiʻi Appleseed Center for Law and Economic Justice. Hawaiʻi SNAP: Challenges and Opportunities for Improving Food Security for Hawaiʻi Residents, January 2023.
+  - <sub>`food-equity/SB53_HHS_SNAP_income_eligibility_increase_2025.txt`</sub>
+- **Claim:** …One major barrier is that federal income eligibility thresholds are too strict and do not adequately reflect Hawaiʻi’s cost of living.[2] According to Aloha United Way, a household survival budget for a family of four is over $107,000.
+  - **Source:** Aloha United Way, “ALICE in Hawaiʻi: 2024 Facts and Figures,” January 2025. https://www.auw.org/about/alice-initiative/alice-reports/
+  - <sub>`food-equity/SB53_HHS_SNAP_income_eligibility_increase_2025.txt`</sub>
+- **Claim:** …our is over $107,000.[3] The current SNAP eligibility cut off of 200% FPL ($71,760 for a family of 4) leaves households making just $1 above the income limit without benefits or meaningful support to access food in the face of rising costs and stagnant wages.
+  - **Source:** U.S. Department of Health and Human Services, “Poverty Guidelines: A chart with percentages of the guidelines,” Office of the Assistant Secretary for Planning and Evaluation, 2025. https://aspe.hhs.gov/sites/default/files/documents/8aa67da24fa1e8cebfe5c144d9fe2532/detailed-guidelines-2024.xlsx
+  - <sub>`food-equity/SB53_HHS_SNAP_income_eligibility_increase_2025.txt`</sub>
+- **Claim:** …In Hawaiʻi, three in ten households with children face food insecurity.
+  - **Source:** Hawaiʻi Foodbank, “The State of Food Insecurity in Hawaiʻi,” 2023.
+  - <sub>`food-equity/SB789_EDN_school_meal_cost_2025.txt`</sub>
+- **Claim:** …In Hawaiʻi, three in ten households with children face food insecurity.[1] While some of these children qualify for free meals, any family of four that makes at least $47,000 does not,
+  - **Source:** Hawaiʻi State Department of Education, “Free and Reduced Price Meals Program,” 2025. https://www.hawaiipublicschools.org/TeachingAndLearning/HealthAndNutrition/StudentHealthResources/Pages/ FreeReducedLunch.aspx
+  - <sub>`food-equity/SB789_EDN_school_meal_cost_2025.txt`</sub>
+- **Claim:** …ouseholds with children face food insecurity.[1] While some of these children qualify for free meals, any family of four that makes at least $47,000 does not,[2] leaving two-thirds of the families over this threshold still struggling to cover their food costs.
+  - **Source:** United for ALICE, “ALICE in the Crosscurents: An Update on Financial Hardship in Hawaiʻi,” 2024.
+  - <sub>`food-equity/SB789_EDN_school_meal_cost_2025.txt`</sub>
+- **Claim:** …Research consistently links proper nutrition to better educational and health outcomes and conversely, students who miss meals tend to perform poorly in school.
+  - **Source:** Amy E. Schwartz & Michah W. Rothbart, “Let Them Eat Lunch: The Impact of Universal Free Meals on Student Performance,” Maxwell School Center for Policy Research, July 2019.
+  - <sub>`food-equity/SB789_EDN_school_meal_cost_2025.txt`</sub>
+- **Claim:** …Serving more than 160,000 residents, SNAP is one of the most critical public benefit programs in the nation.
+  - **Source:** U.S. Department of Agriculture, “SNAP Data Tables: National and/or State Level Monthly and/or Annual Data,” 2024. https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap
+  - <sub>`food-equity/SB960_FIN_SNAP_DHS_staffing_funds_2025.txt`</sub>
+- **Claim:** …Because of the recent rule change to eliminate net income limits for eligibility, there is expected to be an extra 14,000 households eligible for SNAP benefits later this year.
+  - **Source:** D. Moore & N. Hix, “ Hawaiʻi’s Unnecessary Benefit Cliff: How One Small Policy Change Could Deliver Tens of Millions in Federally-Funded SNAP Benefits,” University of Hawaiʻi Economic Research Organization (UHERO), https://uhero.hawaii.edu/hawai%CA%BBis-unnecessary-benefit-cliff-how-one-small-policy-change-could-deliver-in-45m-per-year-in-federally-funded-snap-benefits/#:~:text=UHERO's%20analysis%20suggests%20that%20eliminating,course%20of%20that%20same%20year.
+  - <sub>`food-equity/SB960_FIN_SNAP_DHS_staffing_funds_2025.txt`</sub>
+- **Claim:** …Serving more than 160,000 residents, SNAP is one of the most critical public benefit programs in the nation.
+  - **Source:** U.S. Department of Agriculture, “SNAP Data Tables: National and/or State Level Monthly and/or Annual Data,” 2024. https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap
+  - <sub>`food-equity/SB960_HSH_SNAP_DHS_staffing_funds_2025.txt`</sub>
+- **Claim:** …As a result, only 62% of eligible residents end up enrolled in SNAP—only 35% of our kūpuna population.
+  - **Source:** American Community Survey, “Supplemental Nutrition Assistance Program (SNAP) Eligibility & Access,” U.S. Census Bureau, October 18, 2024. https://www.census.gov/library/visualizations/interactive/snap-eligibility-access.html
+  - <sub>`food-equity/SB960_HSH_SNAP_DHS_staffing_funds_2025.txt`</sub>
+- **Claim:** …Because of the recent rule change to eliminate net income limits for eligibility, there is expected to be an extra 14,000 households eligible for SNAP benefits later this year.
+  - **Source:** D. Moore & N. Hix, “ Hawaiʻi’s Unnecessary Benefit Cliff: How One Small Policy Change Could Deliver Tens of Millions in Federally-Funded SNAP Benefits,” University of Hawaiʻi Economic Research Organization (UHERO), https://uhero.hawaii.edu/hawai%CA%BBis-unnecessary-benefit-cliff-how-one-small-policy-change-could-deliver-in-45m-per-year-in-federally-funded-snap-benefits/#:~:text=UHERO's%20analysis%20suggests%20that%20eliminating,course%20of%20that%20same%20year.
+  - <sub>`food-equity/SB960_HSH_SNAP_DHS_staffing_funds_2025.txt`</sub>
+- **Claim:** …Research has shown that older adults who are enrolled in SNAP actually see improvements in health outcomes, including: * Less costly hospital stays and fewer hospital admissions,
+  - **Source:** Samuel, Laura J., Sarah L. Szanton, Rachel Cahill, Jennifer L. Wolff, Pinchuan Ong, Ginger Zielinskie, Charles Betly, “Does the Supplemental Nutrition Assistance Program Affect Hospital Utilization Among Older Adults? The Case of Maryland,” Population Health Management, Volume 21, Issue 2, April 2018, https://www.ncbi.nlm.nih. gov/pubmed/28683219
+  - <sub>`food-equity/SB961_FIN_SNAP_Extended_certifications_2025.txt`</sub>
+- **Claim:** …Research has shown that older adults who are enrolled in SNAP actually see improvements in health outcomes, including: * Less costly hospital stays and fewer hospital admissions,[1] * A decrease in skipping medication doses to save money and/or delay refills,
+  - **Source:** Hartline-Grafton, Heather, Olivia Dean, “The Role of the Supplemental Nutrition Assistance Program in Improving Health and Well-Being,” Food Research & Action Center, Washington, D.C., December 2017, https://frac.org/ wp-content/uploads/hunger-health-role-snap-improvinghealth-well-being.pdf
+  - <sub>`food-equity/SB961_FIN_SNAP_Extended_certifications_2025.txt`</sub>
+- **Claim:** …s who are enrolled in SNAP actually see improvements in health outcomes, including: * Less costly hospital stays and fewer hospital admissions,[1] * A decrease in skipping medication doses to save money and/or delay refills,[2] * Fewer nursing home admissions.
+  - **Source:** Sarah L. Szanton et al., “Food assistance is associated with decreased nursing home admissions for Maryland’s Dually Eligible Older Adults,” BMC Geriatrics, 17(1), 162, 2017, https://bmcgeriatr.biomedcentral.com/articles/10.1186/s12877-017-0553-x;
+  - <sub>`food-equity/SB961_FIN_SNAP_Extended_certifications_2025.txt`</sub>
+- **Claim:** …Since benefits are federally funded, federal rules require tedious paperwork and documentation both upon initial application and for periodic recertification.
+  - **Source:** U.S. Department of Agriculture, “SNAP Data Tables: National and/or State Level Monthly and/or Annual Data,” Food and Nutrition Service, 2024. https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap
+  - <sub>`food-equity/SB961_FIN_SNAP_Extended_certifications_2025.txt`</sub>
+- **Claim:** …As of 2024, 23 other states have already implemented ESAP and there are more to follow suit.
+  - **Source:** U.S. Department of Agriculture, “SNAP State Options Report,” Food and Nutrition Service, 2024, p. 26. https://fns-prod.azureedge.us/sites/default/files/resource-files/snap-16th-state-options-report-june24.pdf
+  - <sub>`food-equity/SB961_FIN_SNAP_Extended_certifications_2025.txt`</sub>
+- **Claim:** …This was corroborated by the recent Audit of the HIDOE’s farm to school efforts.
+  - **Source:** Office of the Auditor, State of Hawaiʻi, Audit of the Department of Education’s Efforts to Meet Its Mandate to Incorporate Local Foods in School Meals, Report No. 26-08 (March 2026).
+  - <sub>`food-equity/SCR130_EDU_AEN_Farm_to_Institution_coordination_pla_2026.txt`</sub>
+
+## housing
+
+- **Claim:** …Moreover, research from UCLA Lewis Center conducted a study on common rhetoric in opposition to new development and found that often the argument is distilled down to opposition to the developers themselves, not necessarily the development
+  - **Source:** https://www-tandfonline-com.eres.library.manoa.hawaii.edu/doi/full/10.1080/07352166.2019.1623684#d1e127
+  - <sub>`housing/HB1325_Right_of_Return_201H_projects_2025.txt`</sub>
+- **Claim:** …Despite evidence to the contrary that new development actually slows the increase of housing cost in the area at scale and lowers displacement through providing more housing options
+  - **Source:** https://escholarship.org/content/qt7bx938fx/qt7bx938fx.pdf
+  - <sub>`housing/HB1325_Right_of_Return_201H_projects_2025.txt`</sub>
+- **Claim:** …Hawaii faces one of the most severe housing shortages in the nation, with thousands of families struggling to secure safe and affordable housing
+  - **Source:** https://uhero.hawaii.edu/wp-content/uploads/2024/05/HawaiiHousingFactbook2024.pdf
+  - <sub>`housing/HB1409_WAM_Define_TOD_2025.txt`</sub>
+- **Claim:** …By defining TOD density, this bill would incentivize counties to adopt a density standard which would benefit residents with limited financial means and reduce their housing and transportation costs, two of the largest household expenses
+  - **Source:** https://iri.hks.harvard.edu/files/iri/files/fostering-equitable-and-sustainable-transit-oriented-development.pdf
+  - <sub>`housing/HB1409_WAM_Define_TOD_2025.txt`</sub>
+- **Claim:** …Mixed-income developments, as incentivized by this bill, foster vibrant, integrated communities where people of different economic backgrounds can live, work, and thrive together
+  - **Source:** https://housingmatters.urban.org/research-summary/how-transit-oriented-development-can-promote-equitable-healthy-communities
+  - <sub>`housing/HB1409_WAM_Define_TOD_2025.txt`</sub>
+- **Claim:** …Increased density in TOD zones also brings significant economic benefits by creating opportunities for local businesses and reducing public infrastructure costs
+  - **Source:** https://tod.itdp.org/why-tod-matters.html
+  - <sub>`housing/HB1409_WAM_Define_TOD_2025.txt`</sub>
+- **Claim:** …Furthermore, higher residential density increases ridership on public transit systems, making them more sustainable and reducing Hawaii’s reliance on imported fossil fuels, aligning with the State’s climate goals to reduce VMT by 2050
+  - **Source:** https://climate.hawaii.gov/hi-mitigation/hi-clean-cars-faq/transportation-choices/?utm_source=chatgpt.com
+  - <sub>`housing/HB1409_WAM_Define_TOD_2025.txt`</sub>
+- **Claim:** …Hawaii was given a D+ rating by the American Society of Civil Engineers in the “2019 Hawaii Infrastructure Report Card”
+  - **Source:** ASCE, “2019 Hawaii Infrastructure Report Card”, https://infrastructurereportcard.org/wp-content/uploads/2021/07/ASCE-24199_Full-REPORT-2019-FINAL.pdf
+  - <sub>`housing/HB1410_Conveyance_Tax_2025.txt`</sub>
+- **Claim:** …Housing Development Needs The 2019 Hawaii Housing Planning (HHPS 2019) Study identified the need for 50,000 additional housing units by 2025 to meet pent-up demand
+  - **Source:** “Hawaii Housing Planning Study, 2019” HHFDC, December 2019, pg. 38 https://dbedt.hawaii.gov/hhfdc/files/2020/01/FINAL-State_Hawaii-Housing-Planning-Study.pdf
+  - <sub>`housing/HB1410_Conveyance_Tax_2025.txt`</sub>
+- **Claim:** …Without financing of DURF for our infrastructure needs we will not be able to address the housing needs across the state
+  - **Source:** “TOD Infrastructure Finance and Delivery Strategy” https://files.hawaii.gov/dbedt/op/lud/Reports/TOD_InfraFin_Strategy_20231221.pdf
+  - <sub>`housing/HB1410_Conveyance_Tax_2025.txt`</sub>
+- **Claim:** …For example, under the current system, a property valued at $1.1M, which was the median sales price for Oahu in December 2024
+  - **Source:** https://www.locationshawaii.com/learn/market-reports/oahu-real-estate-report/
+  - <sub>`housing/HB1410_Conveyance_Tax_2025.txt`</sub>
+- **Claim:** …Hawaii was given a D+ rating by the American Society of Civil Engineers in the “2019 Hawaii Infrastructure Report Card”
+  - **Source:** ASCE, “2019 Hawaii Infrastructure Report Card”, https://infrastructurereportcard.org/wp-content/uploads/2021/07/ASCE-24199_Full-REPORT-2019-FINAL.pdf
+  - <sub>`housing/HB2364_HOU_WLT_2024.txt`</sub>
+- **Claim:** …Most recent estimate of infrastructure funding for pilot projects
+  - **Source:** https://files.hawaii.gov/dbedt/op/lud/Reports/TOD_InfraFin_Strategy_20231221.pdf
+  - <sub>`housing/HB2364_HOU_WLT_2024.txt`</sub>
+- **Claim:** …Hawaii was given a D+ rating by the American Society of Civil Engineers in the “2019 Hawaii Infrastructure Report Card”
+  - **Source:** ASCE, “2019 Hawaii Infrastructure Report Card”, https://infrastructurereportcard.org/wp-content/uploads/2021/07/ASCE-24199_Full-REPORT-2019-FINAL.pdf
+  - <sub>`housing/HB2364_HSG_WAL_2024.txt`</sub>
+- **Claim:** …The 2019 Hawaii Housing Planning (HHPS 2019) Study identified the need for 50,000 additional housing units by 2025 to meet pent-up demand
+  - **Source:** “Hawaii Housing Planning Study, 2019” HHFDC, December 2019, pg. 38 https://dbedt.hawaii.gov/hhfdc/files/2020/01/FINAL-State_Hawaii-Housing-Planning-Study.pdf
+  - <sub>`housing/HB2364_HSG_WAL_2024.txt`</sub>
+- **Claim:** …Our research reports consistently indicate that investments in preventive social services generate significant savings in emergency response costs for the state.
+  - **Source:** https://hiappleseed.org/publications
+  - <sub>`housing/HB244_testimony_2025.txt`</sub>
+- **Claim:** …s difficult to estimate the exact fiscal impacts and cuts in funding we are expected to see under the current administration, we can anticipate a significant loss in federal financial support for affordable housing that will have devastating impacts in Hawaii.
+  - **Source:** https://www.cbpp.org/research/state-budget-and-tax/president-trump-congressional-republican-proposals-would-shift-large
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …This estimate does not account for additional residents at risk of losing housing by not expanding the program or those at risk due to potential cuts to project-based vouchers currently being discussed.
+  - **Source:** https://www.cbpp.org/research/housing/to-better-meet-record-levels-of-need-keep-families-housed-congress-must-increase
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …onal residents at risk of losing housing by not expanding the program or those at risk due to potential cuts to project-based vouchers currently being discussed.[2] The current administration's directives also include mandating 50% reduction in HUD workforce.
+  - **Source:** https://apnews.com/article/doge-hud-trump-turner-affordable-housing-musk-0176c8539fa9b5959198c351c97b8652
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …g HUD staff will significantly impede the state’s ability to access approved federal investments needed to address our housing challenges, with additional funding cuts anticipated for operating and repairing public housing and homelessness assistance programs.
+  - **Source:** https://nlihc.org/resource/senate-democrats-demand-answers-huds-doge-task-force-and-potential-housing-cuts
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …ance programs.[4] There is also a risk that the administration will return to past proposals of cutting funds to critical affordable housing development programs, such as the HOME program, Community Development Block Grant, and Choice Neighborhoods initiative.
+  - **Source:** https://www.brookings.edu/articles/trump-administration-budgets-and-programs-for-people-of-limited-means/
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …Every $1 spent on rent assistance saves the public $6 on homeless services.
+  - **Source:** https://static1.squarespace.com/static/601374ae84e51e430a1829d8/t/65b1a4d6430f7676ae24ea08/1706140892699/Keeping+Hawaii+Housed_FINAL.pdf
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …For example, in FY25, the transportation CIP budget was around 59 percent of the total state CIP budget, representing nearly $2.6 billion of $4.4 billion in total spending.
+  - **Source:** Seitz, A., “Rethinking roads: Shifting budget priorities to expand mobility options & reduce vehicle travel,” Hawaiʻi Appleseed Center for Law and Economic Justice, December, 2025. https://static1.squarespace.com/static/601374ae84e51e430a1829d8/t/6750d500e0d1b478185cf1ae/1733350677880/Rethinking+Roads_FINAL.pdf.
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …as around 59 percent of the total state CIP budget, representing nearly $2.6 billion of $4.4 billion in total spending.[7] The largest funding source for state transportation projects (included in the state’s CIP budgets from FY19 to FY24) was federal funding.
+  - **Source:** Seitz, 2025.
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …largest funding source for state transportation projects (included in the state’s CIP budgets from FY19 to FY24) was federal funding.[8] From federal fiscal year (FFY) 22 to FFY 25, there were 241 transportation projects to receive federal funding in Hawaiʻi.
+  - **Source:** HDOT, “Statewide Transportation Improvement Program, FFY 2022 through FFY 2025,” Revision #22, Amendment Approved, Revision Effective Date: May 28, 2024. https://drive.google.com/file/d/1mA4P90Y7m5wXvxDIwQY65J3Av8bSAsLQ/view.
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …Based on recent analysis from the Transportation for America, $131,963,319 of federal transportation funds could be at risk of being cancelled in Hawaiʻi due to new memos implementing President Trump’s executive orders.
+  - **Source:** Salerno, C., “Unflooding the zone: What do the Trump administration’s latest actions signal for transportation?” Transportation for America, February 5, 2025. https://t4america.org/2025/02/05/unflooding-the-zone-what-do-the-trump-administrations-latest-actions-signal-for-transportation/
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …At the extreme end, if Hawaiʻi decided to drop its Medicaid expansion entirely, 58,000 local recipients could lose their insurance coverage.
+  - **Source:** M. Buettgens, “Reducing Federal Support for Medicaid Expansion Would Shift Costs to States and Likely Result in Coverage Losses,” Urban Institute, February 2025. https://www.urban.org/sites/default/files/2025-02/Reducing_Federal_Support_for_Medicaid_Expansion_Would_Shift_Costs_to_States_and_Likely_Result_in_Coverage_Losses_0.pdf
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …Food Equity The proposed federal cuts are as high as $230 billion for the Supplemental Nutrition Assistance Program (SNAP), which is one of the most critical public benefit programs in the nation.
+  - **Source:** U.S. Department of Agriculture, “SNAP Data Tables: National and/or State Level Monthly and/or Annual Data,” 2024. https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …l Nutrition Assistance Program (SNAP), which is one of the most critical public benefit programs in the nation.[12] These cuts could cause all 160,000 Hawaiʻi users to lose some or all benefits, increasing food insecurity among our most vulnerable populations.
+  - **Source:** https://www.cbpp.org/research/food-assistance/millions-of-low-income-households-would-lose-food-aid-under-proposed-house
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …sing food insecurity among our most vulnerable populations.[13] At the state level, because of the recent rule change to eliminate net income limits for eligibility, there is expected to be an extra 14,000 households eligible for SNAP benefits later this year.
+  - **Source:** D. Moore & N. Hix, “ Hawaiʻi’s Unnecessary Benefit Cliff: How One Small Policy Change Could Deliver Tens of Millions in Federally-Funded SNAP Benefits,” University of Hawaiʻi Economic Research Organization (UHERO), https://uhero.Hawaiʻi.edu/hawai%CA%BBis-unnecessary-benefit-cliff-how-one-small-policy-change-could-deliver-in-45m-per-year-in-federally-funded-snap-benefits/#:~:text=UHERO's%20analysis%20suggests%20that%20eliminating,course%20of%20that%20same%20year.
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …In states across the nation, schools are already bracing for proposed cuts and restrictions, including one that would take away free meals from 52 participating Hawaiʻi schools and over 27,000 students.
+  - **Source:** https://frac.org/blog/new-proposal-drastically-reduces-number-of-schools-eligible-for-community-eligibility-provision
+  - <sub>`housing/HB300_State_Budget_2025.txt`</sub>
+- **Claim:** …Full repeal is the only effective solution
+  - **Source:** https://files.hawaii.gov/auditor/Reports/2019/19-13.pdf
+  - <sub>`housing/HB330_Relating_to_School_Impact_Fees_asking_fo_2025.txt`</sub>
+- **Claim:** …Hawaii faces one of the most severe housing crises in the nation, with median home prices surpassing $1.1 million in 2024 and interest rates making it increasingly difficult for residents to secure home loans
+  - **Source:** https://governor.hawaii.gov/emergency-proclamation-relating-to-housing/
+  - <sub>`housing/HB416_201H_County_Bypass_2025.txt`</sub>
+- **Claim:** …A study by UHERO found that only 20% of residents can afford the median home sale price, while over 50% of Hawaii renters are cost-burdened, spending more than 30% of their income on housing
+  - **Source:** https://uhero.hawaii.edu/wp-content/uploads/2024/05/HawaiiHousingFactbook2024.pdf
+  - <sub>`housing/HB416_201H_County_Bypass_2025.txt`</sub>
+- **Claim:** …As a result, Kailua has not seen a new affordable housing project since 1992
+  - **Source:** https://www.civilbeat.org/2020/07/kailua-project-illustrates-affordable-housing-dilemma/
+  - <sub>`housing/HB416_201H_County_Bypass_2025.txt`</sub>
+- **Claim:** …While intended to fund new school construction in high-growth areas, these fees have instead accumulated in a special fund, failing to serve their purpose while adding to Hawaiʻi’s already high housing costs
+  - **Source:** https://files.hawaii.gov/auditor/Reports/2019/19-13.pdf
+  - <sub>`housing/HB422_for_School_Impact_Fees_2025.txt`</sub>
+- **Claim:** …With some of the highest development costs in the nation,
+  - **Source:** https://uhero.hawaii.edu/wp-content/uploads/2024/02/WhyAreCondominiumsSoExpensiveInHawaii_Report.pdf
+  - <sub>`housing/HB422_for_School_Impact_Fees_2025.txt`</sub>
+- **Claim:** …This leaves a significant gap for working families earning between 60-140% of AMI who don't qualify for low-income housing but cannot afford market rates.
+  - **Source:** https://storymaps.arcgis.com/stories/4104adb1cf1d4ec88a110c9d783b620f
+  - <sub>`housing/HB432_Tier_II_subaccount_2025.txt`</sub>
+- **Claim:** …The median income required to afford a median-priced home in Hawaii is nearly double the actual median household income.
+  - **Source:** https://uhero.hawaii.edu/wp-content/uploads/2024/02/WhyAreCondominiumsSoExpensiveInHawaii_Report.pdf
+  - <sub>`housing/HB432_Tier_II_subaccount_2025.txt`</sub>
+- **Claim:** …The median income required to afford a median-priced home in Hawaii is nearly double the actual median household income.[2] Meanwhile, Hawaii ranks one of the worst states in the nation for middle class affordability.
+  - **Source:** https://www.news-journal.com/hawaii-is-the-12th-worst-state-for-middle-class-affordability/article_64e79f23-6c41-53b3-aa8a-da80930a375f.html
+  - <sub>`housing/HB432_Tier_II_subaccount_2025.txt`</sub>
+- **Claim:** …ordability.[3] According to the U.S. Bureau of Labor Statistics, those making 80-140% AMI in Hawaii include essential workers such as firefighters, teachers, and home healthcare workers, yet market-rate housing remains beyond what these individuals can afford.
+  - **Source:** https://storymaps.arcgis.com/stories/4104adb1cf1d4ec88a110c9d783b620f
+  - <sub>`housing/HB432_Tier_II_subaccount_2025.txt`</sub>
+- **Claim:** …With the highest costs of land and construction in any state,
+  - **Source:** Ibed
+  - <sub>`housing/HB432_Tier_II_subaccount_2025.txt`</sub>
+- **Claim:** …With the highest costs of land and construction in any state,[5] combined with the nation's strictest regulatory process,
+  - **Source:** https://uhero.hawaii.edu/wp-content/uploads/2022/04/MeasuringTheBurdenOfHousingRegulationInHawaii.pdf
+  - <sub>`housing/HB432_Tier_II_subaccount_2025.txt`</sub>
+- **Claim:** …While RHRF funds can technically finance middle-income projects, these funds are prioritized for projects that also qualify for federal and state low-income housing tax credits.
+  - **Source:** https://dbedt.hawaii.gov/hhfdc/developers/rhtf_html/
+  - <sub>`housing/HB432_Tier_II_subaccount_2025.txt`</sub>
+- **Claim:** …Of the nearly 17,000 units needed for those making between 80-140% AMI, only about 3000 units, or one-third, of housing developments in the pipeline will satisfy that income criteria.
+  - **Source:** https://hale.hawaii.gov/affordable-housing-pipeline-dashboard/
+  - <sub>`housing/HB432_Tier_II_subaccount_2025.txt`</sub>
+- **Claim:** …0-140% AMI, only about 3000 units, or one-third, of housing developments in the pipeline will satisfy that income criteria.[8] Hawaii has experienced consistent net out-migration of working-age adults, with housing unaffordability cited as the primary reason.
+  - **Source:** https://uhero.hawaii.edu/wp-content/uploads/2024/05/HawaiiHousingFactbook2024.pdf
+  - <sub>`housing/HB432_Tier_II_subaccount_2025.txt`</sub>
+- **Claim:** …Hawaii faces one of the worst physician shortages in the U.S., across all specialties;
+  - **Source:** https://pmc.ncbi.nlm.nih.gov/articles/PMC9036453
+  - <sub>`housing/HB432_Tier_II_subaccount_2025.txt`</sub>
+- **Claim:** …Hawaii faces one of the worst physician shortages in the U.S., across all specialties;[10] The Department of Education reports significant teacher vacancies;
+  - **Source:** https://www.hsta.org/news/recent-stories/teacher-shortage-differentials-will-continue-for-sy-2024-25
+  - <sub>`housing/HB432_Tier_II_subaccount_2025.txt`</sub>
+- **Claim:** …Hawaii faces one of the worst physician shortages in the U.S., across all specialties;[10] The Department of Education reports significant teacher vacancies;[11] and DBEDT continues to report slow labor growth.
+  - **Source:** https://dbedt.hawaii.gov/blog/23-67/
+  - <sub>`housing/HB432_Tier_II_subaccount_2025.txt`</sub>
+- **Claim:** …Studies have indicated that this creates insurmountable barriers to future housing access
+  - **Source:** https://scholarlycommons.law.northwestern.edu/cgi/viewcontent.cgi?article=1202&context=njlsp
+  - <sub>`housing/HB463_HD1_Eviction_Record_Sealing_2025.txt`</sub>
+- **Claim:** …e of the most comprehensive initiatives to track eviction filings across the nation, notes that court record data is consistently inaccurate and misleading - often not including information on the judgment in an eviction case, even when in favor of the tenant.
+  - **Source:** https:/www.tandfonline.com/doi/pdf/10.1080/10511482.2020.1748084?needAccess=true
+  - <sub>`housing/HB463_HD1_Eviction_Record_Sealing_2025.txt`</sub>
+- **Claim:** …nation, notes that court record data is consistently inaccurate and misleading - often not including information on the judgment in an eviction case, even when in favor of the tenant.[2] In one study, less than half of eviction filings led to actual evictions.
+  - **Source:** https://housingactionil.org/downloads/EvictionBrief_February2019.pdf
+  - <sub>`housing/HB463_HD1_Eviction_Record_Sealing_2025.txt`</sub>
+- **Claim:** …Studies indicate that simply being named in an eviction complaint, regardless of the merits or outcome, can severely limit future housing options and prolong housing insecurity.
+  - **Source:** https://poverty.umich.edu/2024/07/16/research-shows-far-reaching-costs-of-eviction-filings-to-tenants-regardless-of-the-outcome-in-court/
+  - <sub>`housing/HB463_HD1_Eviction_Record_Sealing_2025.txt`</sub>
+- **Claim:** …Without access to stable housing, individuals struggle to maintain employment, their children's education is disrupted, and their health suffers while costs ripple out to the entire community through increased use of emergency housing services.
+  - **Source:** https://static1.squarespace.com/static/601374ae84e51e430a1829d8/t/65b1a4d6430f7676ae24ea08/1706140892699/Keeping+Hawaii+Housed_FINAL.pdf
+  - <sub>`housing/HB463_HD1_Eviction_Record_Sealing_2025.txt`</sub>
+- **Claim:** …Typically a “good” vacancy rate is considered to be between 5-8%.
+  - **Source:** https://www.nccor.org/tools-econindicators/healthy-economies/vacancy-rate-residential/#:~:text=The%20percentage%20of%20residential%20property,is%20between%205%E2%80%938%25.
+  - <sub>`housing/HB464_Extended_Notice_2025.txt`</sub>
+- **Claim:** …etween 5-8%.[1] Calculating residential vacancy rate using census bureau data, Hawaii has a true residential vacancy rate (excluding vacancies that are not available in the market such as seasonal, short term, or rented/sold but unoccupied units) of just 2.7%.
+  - **Source:** https://data.census.gov/table/ACSDT1Y2022.B25004?q=vacancy&g=040XX00US15_050XX00US15003.
+  - <sub>`housing/HB464_Extended_Notice_2025.txt`</sub>
+- **Claim:** …The barrier is even worse for low income individuals, where the average wait for subsidized housing is nearly 2 years.
+  - **Source:** https://usafacts.org/answers/how-long-do-people-wait-for-subsidized-housing/state/hawaii/
+  - <sub>`housing/HB464_Extended_Notice_2025.txt`</sub>
+- **Claim:** …Beyond rent, tenants face substantial costs including: * Security deposits (typically first months rent): $3000
+  - **Source:** https://www.zillow.com/rental-manager/market-trends/hi/ “Average Rent of All Property Types in Hawaii”
+  - <sub>`housing/HB464_Extended_Notice_2025.txt`</sub>
+- **Claim:** …Beyond rent, tenants face substantial costs including: * Security deposits (typically first months rent): $3000[4]. * Application fees: $20-$75 or any “cost of obtaining information about the applicant
+  - **Source:** https://www.capitol.hawaii.gov/sessions/session2023/bills/GM1303_.PDF “Act 200 (SLH2023)” [a]Concerns that they need to amend language because less than month to month lease language might supersede the less than 3 years language for cumulative stays - unsure how often this occurs though.
+  - <sub>`housing/HB464_Extended_Notice_2025.txt`</sub>
+- **Claim:** …This blanket requirement adds to Hawaii's already strictest-in-nation regulatory barriers, which drives construction costs to triple the national average, and burdens the department with reviews of routine maintenance.
+  - **Source:** https://uhero.hawaii.edu/wp-content/uploads/2022/04/MeasuringTheBurdenOfHousingRegulationInHawaii.pdf
+  - <sub>`housing/HB737_SHPD_Historic_Definition_2025.txt`</sub>
+- **Claim:** …As of 2021, the median aged home was built in 1980, with an approximate age of 41 years old.
+  - **Source:** https://uhero.hawaii.edu/wp-content/uploads/2023/06/TheHawaiiHousingFactbook.pdf. Page 7.
+  - <sub>`housing/HB737_SHPD_Historic_Definition_2025.txt`</sub>
+- **Claim:** …structure expansion and protects our current housing stock This legislation is thoughtful and based on successful models like the “Vail InDEED” program in Colorado which is a nationally recognized model being duplicated in many jurisdictions across the country
+  - **Source:** https://www.huduser.gov/portal/casestudies/study-081121.html
+  - <sub>`housing/HB739_JHA_HD1_Kamaaina_Homes_2025.txt`</sub>
+- **Claim:** …workforce and has been an efficient use of tax payer money–in 2020 it was reported that the InDEED program acquired 153 units costing $10.5M through the voluntary deed restriction program in comparison to when the town purchased a 288 unit apartment for $200M
+  - **Source:** https://www.vaildaily.com/news/vail-indeed-program-earns-national-recognition-for-innovation/
+  - <sub>`housing/HB739_JHA_HD1_Kamaaina_Homes_2025.txt`</sub>
+- **Claim:** …Under current market conditions, Hawaii’s soaring housing costs–now with median home prices exceeding $900,000
+  - **Source:** https://www.locationshawaii.com/learn/market-reports/hawaii-statewide-real-estate-report/
+  - <sub>`housing/HB739_JHA_HD1_Kamaaina_Homes_2025.txt`</sub>
+- **Claim:** …According to UHERO’s “Hawaii Housing Factbook 2024,” only 20% of residents can afford to purchase a home in the current market
+  - **Source:** https://uhero.hawaii.edu/wp-content/uploads/2024/05/HawaiiHousingFactbook2024.pdf
+  - <sub>`housing/HB739_JHA_HD1_Kamaaina_Homes_2025.txt`</sub>
+- **Claim:** …Amid Hawaiʻi’s housing crisis, approximately 56% of households across the state are rent-burdened, that is spending more than 30% of their income on rent, while only one in five households could afford purchasing the median single family home.
+  - **Source:** https://uhero.hawaii.edu/wp-content/uploads/2024/05/HawaiiHousingFactbook2024.pdf
+  - <sub>`housing/HB740_JHA_HD_1_ADU_Financing_2025.txt`</sub>
+- **Claim:** …We strongly support the intent of this measure for several key reasons: Addresses Financial Barriers: Estimates for ADU construction in Hawaii is about $250-$350 per square feet
+  - **Source:** https://www.talbuilders.com/adu/#:~:text=How%20Much%20Do%20ADUs%20Cost,to%20$350%20per%20square%20foot.
+  - <sub>`housing/HB740_JHA_HD_1_ADU_Financing_2025.txt`</sub>
+- **Claim:** …ts for the Iwilei/Kapalama and University of Hawaii West Oahu transit-oriented development infrastructure improvement districts, both areas where both state and county own a large portion of surrounding lands in proximity to proposed and existing rail stations
+  - **Source:** https://planning.hawaii.gov/wp-content/uploads/State-TOD-Strategic-Plan_Dec-2017-Rev-Aug-2018.pdf
+  - <sub>`housing/HB742_TOD_EIS_Iwelei_Kapalama_West_Oahu_2025.txt`</sub>
+- **Claim:** …re investments—such as highway expansion projects—do not pay for themselves and instead create ongoing financial burdens: * $2.4B allocated by DOT for new roadways from FY2019-FY2024 * $1.14B for replacement of existing highway infrastructure for FY2019-FY2024
+  - **Source:** https://static1.squarespace.com/static/601374ae84e51e430a1829d8/t/6750d500e0d1b478185cf1ae/1733350677880/Rethinking+Roads_FINAL.pdf
+  - <sub>`housing/HB743_Untitled_document_2025.txt`</sub>
+- **Claim:** …g financial burdens: * $2.4B allocated by DOT for new roadways from FY2019-FY2024 * $1.14B for replacement of existing highway infrastructure for FY2019-FY2024[1] None of our investments in road widening have alleviated nor will alleviate our issues of traffic
+  - **Source:** https://www.civilbeat.org/2020/07/stop-falling-for-the-congestion-con/#:~:text=Kathleen%20Rooney%20is%20the%20transportation,And%20it's%20been%20incredibly%20expensive.
+  - <sub>`housing/HB743_Untitled_document_2025.txt`</sub>
+- **Claim:** …Federal Highway Administration data indicates that it costs $24,000 per lane-mile per year to keep a road in “good” condition
+  - **Source:** https://t4america.org/wp-content/uploads/2019/05/Repair-Priorities-2019.pdf
+  - <sub>`housing/HB743_Untitled_document_2025.txt`</sub>
+- **Claim:** …For example, traditional downtown-style development typically generates 10-40 times more tax revenue per acre than suburban-style development
+  - **Source:** https://www.strongtowns.org/journal/2022/12/15/2022-the-year-in-maps-and-charts-from-urban3#:~:text=Lanier%20Hagerty%2C%20Analyst,on%20a%20per%2Dacre%20basis.
+  - <sub>`housing/HB743_Untitled_document_2025.txt`</sub>
+- **Claim:** …When we consider that it costs $24,000 per lane-mile per year just to maintain a road in "good" condition, the fiscal advantages of compact, walkable development become even more apparent
+  - **Source:** https://t4america.org/wp-content/uploads/2019/05/Repair-Priorities-2019.pdf
+  - <sub>`housing/HB743_Untitled_document_2025.txt`</sub>
+- **Claim:** …Extensive research has shown that housing instability as a result of these situations leads to significant adverse impacts related to health and economic mobility.
+  - **Source:** https://tobin.yale.edu/research/eviction-and-poverty-american-cities
+  - <sub>`housing/HB979_Landlord_GET_License_2025.txt`</sub>
+- **Claim:** …t equity, reducing their upfront costs and incentivizing more affordable housing development According to UHERO, Housing costs was cited as the primary driver of outmigration from Hawaii, with only 20% of Hawaii households being able to afford a home mortgage
+  - **Source:** https://uhero.hawaii.edu/wp-content/uploads/2024/05/HawaiiHousingFactbook2024.pdf
+  - <sub>`housing/SB1229_DURF_Equity_Program_2025.txt`</sub>
+- **Claim:** …As of December 2024, Hawaii's median home price was $555,000 for a typical condominium.
+  - **Source:** https://www.locationshawaii.com/learn/market-reports/hawaii-statewide-real-estate-report/
+  - <sub>`housing/SB1229_DURF_Equity_Program_2025.txt`</sub>
+- **Claim:** …As of December 2024, Hawaii's median home price was $555,000 for a typical condominium.[2] At current mortgage rates of 6.54%
+  - **Source:** https://www.zillow.com/mortgage-rates/hi/ | accessed:Wednesday, January 29, 2025
+  - <sub>`housing/SB1229_DURF_Equity_Program_2025.txt`</sub>
+- **Claim:** …Hawaii is currently experiencing one of the most severe housing crises in the nation
+  - **Source:** https://uhero.hawaii.edu/wp-content/uploads/2024/05/HawaiiHousingFactbook2024.pdf
+  - <sub>`housing/SB27_State_Financing_County_Bypass_2025.txt`</sub>
+- **Claim:** …For example, in 2020 the Kawainui Street Apartments in Kailua—a project offering affordable rents starting at $521 for one-bedroom units—faced substantial delays and opposition under the current approval process
+  - **Source:** https://www.civilbeat.org/2020/06/when-housing-turns-political-in-kailua/
+  - <sub>`housing/SB27_State_Financing_County_Bypass_2025.txt`</sub>
+- **Claim:** …For example, similar streamlining measures in California have reduced development timelines by 25–48%
+  - **Source:** https://ternercenter.berkeley.edu/blog/sb-35-evaluation/
+  - <sub>`housing/SB27_State_Financing_County_Bypass_2025.txt`</sub>
+- **Claim:** …This legislation is thoughtful and based on successful models like the “Vail InDEED” program in Colorado which is a nationally recognized model being duplicated in many jurisdictions across the country
+  - **Source:** https://www.huduser.gov/portal/casestudies/study-081121.html
+  - <sub>`housing/SB490_Kamaaina_homes_2025.txt`</sub>
+- **Claim:** …workforce and has been an efficient use of tax payer money–in 2020 it was reported that the InDEED program acquired 153 units costing $10.5M through the voluntary deed restriction program in comparison to when the town purchased a 288 unit apartment for $200M
+  - **Source:** https://www.vaildaily.com/news/vail-indeed-program-earns-national-recognition-for-innovation/
+  - <sub>`housing/SB490_Kamaaina_homes_2025.txt`</sub>
+- **Claim:** …Under current market conditions, Hawaii’s soaring housing costs–now with median home prices exceeding $900,000
+  - **Source:** https://www.locationshawaii.com/learn/market-reports/hawaii-statewide-real-estate-report/
+  - <sub>`housing/SB490_Kamaaina_homes_2025.txt`</sub>
+- **Claim:** …According to UHERO’s “Hawaii Housing Factbook 2024,” only 20% of residents can afford to purchase a home in the current market
+  - **Source:** https://uhero.hawaii.edu/wp-content/uploads/2024/05/HawaiiHousingFactbook2024.pdf
+  - <sub>`housing/SB490_Kamaaina_homes_2025.txt`</sub>
+- **Claim:** …Prioritizing monies for the Kamaaina Homes Program towards counties with significant infrastructure constraints is important as lagging infrastructure capacity is one of the major barriers to construction of new housing
+  - **Source:** https://dbedt.hawaii.gov/hhfdc/files/2022/12/Act-305-Report-to-the-Legislature-FINAL-2022-12-12.pdf
+  - <sub>`housing/SB490_Kamaaina_homes_2025.txt`</sub>
+- **Claim:** …Approximately 56% of households across the state are rent-burdened, that is spending more than 30% of their income on rent
+  - **Source:** https://uhero.hawaii.edu/wp-content/uploads/2024/05/HawaiiHousingFactbook2024.pdf
+  - <sub>`housing/SB491_HOU_ADU_Financing_Deed_Restriction_2025.txt`</sub>
+- **Claim:** …We strongly support this measure for several key reasons: Addresses Financial Barriers: Estimates for ADU construction in Hawaii is about $250-$350 per square feet
+  - **Source:** https://www.talbuilders.com/adu/#:~:text=How%20Much%20Do%20ADUs%20Cost,to%20$350%20per%20square%20foot.
+  - <sub>`housing/SB491_HOU_ADU_Financing_Deed_Restriction_2025.txt`</sub>
+- **Claim:** …According to research by Hawaiʻi Appleseed Center, for every tax dollar spent on landlord-tenant mediation programs and rental assistance, the public saves six dollars on homeless services.
+  - **Source:** https://hiappleseed.org/publications/eviction-prevention-mediation-hawaii
+  - <sub>`housing/SB825_Eviction_Mediation_Advance_Notice_2025.txt`</sub>
 
 ## labor
 
@@ -202,9 +859,477 @@ Coverage follows the corpus, which is food-equity heavy. Absence here says nothi
 - **Claim:** …ual pay would mean for Hawaiʻi's working women reveals profound impacts: * Poverty reduction: If women earned the same pay as comparable men, the poverty rate among working women in Hawaiʻi would decrease by more than half—from 5.4 percent to just 2.5 percent.
   - **Source:** “The Economic Impact of Equal Pay by State,” Institute for Women's Policy Research, February 2015, https://statusofwomendata.org/wp-content/uploads/2015/02/C457.pdf
   - <sub>`labor/HB2367_2026_Pay_Transparency.txt`</sub>
+- **Claim:** …According to the U.S. Bureau of Labor Statistics, Hawaiʻi women had median usual weekly earnings of $797 in 2018, or just 82.6 percent of the $965 median earnings of their male counterparts.
+  - **Source:** “Highlights of women's earnings in 2018,” U.S. Bureau of Labor Statistics, November 2019, https://www.bls.gov/opub/reports/womens-earnings/2018/home.htm
+  - <sub>`labor/SB2386_in_Support_Pay_Transparency_2026.txt`</sub>
+- **Claim:** …women had median usual weekly earnings of $797 in 2018, or just 82.6 percent of the $965 median earnings of their male counterparts.[1] In 2023, the Bureau of Labor Statistics reported women in Hawaiʻi earned 82.4 percent of what men earned ($902 vs. $1,095).
+  - **Source:** Bureau of Labor Statistics, “Women’s Earnings in Hawaii — 2023,” October 17, 2024. https://www.bls.gov/regions/west/news-release/womensearnings_hawaii.htm#:~:text=In%202023%2C%20Hawaii%20women%20who,chart%201%20and%20table%201.)
+  - <sub>`labor/SB2386_in_Support_Pay_Transparency_2026.txt`</sub>
+- **Claim:** …ir male counterparts.[1] In 2023, the Bureau of Labor Statistics reported women in Hawaiʻi earned 82.4 percent of what men earned ($902 vs. $1,095).[2] For 2024, updated estimates place the ratio at approximately 87 percent ($987 for women vs. $1,138 for men).
+  - **Source:** USA Facts, “What is the current gender pay gap in Hawaii?” Retrieved February 18, 2026. https://usafacts.org/answers/what-is-the-gender-pay-gap-in-the-us/state/hawaii/
+  - <sub>`labor/SB2386_in_Support_Pay_Transparency_2026.txt`</sub>
+- **Claim:** …Hawaiʻi women's earnings relative to men peaked at 92.8 percent in 2014 and have since fallen by more than five percentage points.
+  - **Source:** “Highlights of women’s earnings in 2014,” U.S. Bureau of Labor Statistics, November 2015, https://www.bls.gov/opub/reports/womens-earnings/archive/highlights-of-womens-earnings-in-2014.pdf
+  - <sub>`labor/SB2386_in_Support_Pay_Transparency_2026.txt`</sub>
+- **Claim:** …ual pay would mean for Hawaiʻi's working women reveals profound impacts: * Poverty reduction: If women earned the same pay as comparable men, the poverty rate among working women in Hawaiʻi would decrease by more than half—from 5.4 percent to just 2.5 percent.
+  - **Source:** “The Economic Impact of Equal Pay by State,” Institute for Women's Policy Research, February 2015, https://statusofwomendata.org/wp-content/uploads/2015/02/C457.pdf
+  - <sub>`labor/SB2386_in_Support_Pay_Transparency_2026.txt`</sub>
 
 ## tax-and-budget
 
+- **Claim:** …In total, this means that 44% of Hawaiʻi's residents had some difficulty with making ends meet.
+  - **Source:** https://www.auw.org/sites/default/files/pictures/ALICE%20in%20Hawaii%20-%202022%20Facts%20and%20Figures%20Full%20Report.pdf
+  - <sub>`tax-and-budget/HB1662_Child_Tax_Credit_2024.txt`</sub>
+- **Claim:** …A total of 162,000 families in Hawaiʻi (with more than 272,000 children) reaped the benefits of the expanded federal CTC, receiving an average tax refund of $2,426.
+  - **Source:** “State-by State Analysis on American Rescue Plan: Child Tax Credit,” The White House, 2021. https://www.whitehouse.gov/wp-content/uploads/2022/03/Hawaiʻi-Tax-Credit-1-pager-3.8.pdf.
+  - <sub>`tax-and-budget/HB1662_Child_Tax_Credit_2024.txt`</sub>
+- **Claim:** …72,000 children) reaped the benefits of the expanded federal CTC, receiving an average tax refund of $2,426.[2] Analysis shows that had this expansion been made permanent, the child poverty rate in Hawaiʻi would have dropped from 9.8 percent to just 5 percent.
+  - **Source:** “How a Permanent Expansion of the Child Tax Credit Could Affect Poverty,” Urban Institute, July 2021. https://www.urban.org/sites/default/files/publication/104626/how-a-permanent-expansion-of-the-child-tax-credit-could-affect-poverty_1.pdf
+  - <sub>`tax-and-budget/HB1662_Child_Tax_Credit_2024.txt`</sub>
+- **Claim:** …Average Tax Cut for Hawaiʻi Residents Receiving CTC by Income Bracket (2023)
+  - **Source:** Institute on Taxation and Economic Policy, 2023 analysis.
+  - <sub>`tax-and-budget/HB1662_Child_Tax_Credit_2024.txt`</sub>
 - **Claim:** …In comparison, local taxpayers in the $40,000 to $50,000 range earn just 0.7 percent of their taxable income through capital gains.
   - **Source:** https://files.hawaii.gov/tax/stats/stats/indinc/2021indinc.pdf
   - <sub>`tax-and-budget/HB1850_Testimony.txt`</sub>
+- **Claim:** …In comparison, local taxpayers in the $40,000 to $50,000 range earn just 0.7 percent of their taxable income through capital gains.
+  - **Source:** https://files.hawaii.gov/tax/stats/stats/indinc/2021indinc.pdf
+  - <sub>`tax-and-budget/HB476_Capital_Gains_2025.txt`</sub>
+- **Claim:** …tinue to contend with the ever-increasing cost of living, and in 2021, 41 percent of households in the state were beneath the ALICE Threshold—indicating that they could not afford to pay for all of their basic necessities such as housing, food, and healthcare.
+  - **Source:** https://www.unitedforalice.org/state-overview/hawaii#:~:text=In%202019%2C%20195%2C202%20households%20in,number%20had%20changed%20to%20202%2C968.
+  - <sub>`tax-and-budget/SB462_testimony_2024.txt`</sub>
+- **Claim:** …they could not afford to pay for all of their basic necessities such as housing, food, and healthcare.[1] In addition, Hawaiʻi residents had an average debt of $77,000 during that same year, which was significantly higher than the national average of $55,000.
+  - **Source:** https://files.hawaii.gov/dbedt/economic/reports/HawaiiConsumerDebtReport_2022.pdf
+  - <sub>`tax-and-budget/SB462_testimony_2024.txt`</sub>
+
+## transportation
+
+- **Claim:** …In 2024 alone, there were 102 traffic fatalities statewide and a staggering 42% of those fatalities involved pedestrians and bicyclists.
+  - **Source:** HDOT, “Traffic Fatalities Up 10% From 2023,” December 31, 2024.
+  - <sub>`transportation/HB1231_Request_to_Governor_2025.txt`</sub>
+- **Claim:** …In 2024 alone, there were 102 traffic fatalities statewide and a staggering 42% of those fatalities involved pedestrians and bicyclists.[1] Between 2015 and 2020, nearly 49% of pedestrian fatalities on Oʻahu occurred on state-owned roadways.
+  - **Source:** CCH-DTS, “Oʻahu Vision Zero Action Plan,” 2024.
+  - <sub>`transportation/HB1231_Request_to_Governor_2025.txt`</sub>
+- **Claim:** …For example, the average annual number of statewide pedestrian fatalities rose by 26 percent during the 2014–2018 time period, when compared to the 2009–2013 time period.
+  - **Source:** State of Hawaiʻi Department of Transportation, “State of Hawaiʻi Traffic Fatalities,” 2022.
+  - <sub>`transportation/HB1231_Request_to_Governor_2025.txt`</sub>
+- **Claim:** …More specifically, SRTS programs can increase school participation by 18-37%, while simultaneously reducing pedestrian injuries in school zones by 44-75%.
+  - **Source:** HWY-S-25-2.45019-DOT-Report-for-Act-244-SLH-2023-Safe-Routes-to-School.pdf
+  - <sub>`transportation/HB1231_Request_to_Governor_2025.txt`</sub>
+- **Claim:** …Benefits: A 2023 study published in the The Lancet medical journal found a growing body of evidence demonstrating that Summer Streets programs are important public health interventions that address many health challenges including obesity and social isolation.
+  - **Source:** Velázquez-Cortés, Daniel et al., Health benefits of Open Streets programmes in Latin America: a quantitative health impact assessment, The Lancet Planetary Health, Volume 7, Issue 7, e590 - e599. July, 2023.
+  - <sub>`transportation/HB1260_Summer_Streets_HA_2025.txt`</sub>
+- **Claim:** …ams are important public health interventions that address many health challenges including obesity and social isolation.[1] This is important as almost a quarter of American adults report that they do not engage in any physical activity outside of their jobs.
+  - **Source:** US Department of Transportation, Active Transportation and Health, June 10, 2024. https://www.transportation.gov/mission/health/active-transportation-and-health.
+  - <sub>`transportation/HB1260_Summer_Streets_HA_2025.txt`</sub>
+- **Claim:** …A 2022 found that Summer Streets had a significant positive economic impact and increased sales for businesses in corridors where these programs were occurring.
+  - **Source:** New York City DOT, Streets for Recovery: The Economic Benefits of the NYC Open Streets Program, October 2022. https://www.nyc.gov/html/dot/downloads/pdf/streets-for-recovery.pdf.
+  - <sub>`transportation/HB1260_Summer_Streets_HA_2025.txt`</sub>
+- **Claim:** …Benefits: A 2023 study published in the The Lancet medical journal found a growing body of evidence demonstrating that Summer Streets programs are important public health interventions that address many health challenges including obesity and social isolation.
+  - **Source:** Velázquez-Cortés, Daniel et al., Health benefits of Open Streets programmes in Latin America: a quantitative health impact assessment, The Lancet Planetary Health, Volume 7, Issue 7, e590 - e599. July, 2023.
+  - <sub>`transportation/HB1260_WAM_Summer_Streets_2025.txt`</sub>
+- **Claim:** …ams are important public health interventions that address many health challenges including obesity and social isolation.[1] This is important as almost a quarter of American adults report that they do not engage in any physical activity outside of their jobs.
+  - **Source:** US Department of Transportation, Active Transportation and Health, June 10, 2024. https://www.transportation.gov/mission/health/active-transportation-and-health.
+  - <sub>`transportation/HB1260_WAM_Summer_Streets_2025.txt`</sub>
+- **Claim:** …A 2022 found that Summer Streets had a significant positive economic impact and increased sales for businesses in corridors where these programs were occurring.
+  - **Source:** New York City DOT, Streets for Recovery: The Economic Benefits of the NYC Open Streets Program, October 2022. https://www.nyc.gov/html/dot/downloads/pdf/streets-for-recovery.pdf.
+  - <sub>`transportation/HB1260_WAM_Summer_Streets_2025.txt`</sub>
+- **Claim:** …In 2024 alone, there were 102 traffic fatalities statewide and a staggering 42% of those fatalities involved pedestrians and bicyclists.
+  - **Source:** HDOT, “Traffic Fatalities Up 10% From 2023,” December 31, 2024.
+  - <sub>`transportation/HB1471_SRTS_HA_2025.txt`</sub>
+- **Claim:** …In 2024 alone, there were 102 traffic fatalities statewide and a staggering 42% of those fatalities involved pedestrians and bicyclists.[1] Between 2015 and 2020, nearly 49% of pedestrian fatalities on Oʻahu occurred on state-owned roadways.
+  - **Source:** CCH-DTS, “Oʻahu Vision Zero Action Plan,” 2024.
+  - <sub>`transportation/HB1471_SRTS_HA_2025.txt`</sub>
+- **Claim:** …For example, the average annual number of statewide pedestrian fatalities rose by 26 percent during the 2014–2018 time period, when compared to the 2009–2013 time period.
+  - **Source:** State of Hawaiʻi Department of Transportation, “State of Hawaiʻi Traffic Fatalities,” 2022.
+  - <sub>`transportation/HB1471_SRTS_HA_2025.txt`</sub>
+- **Claim:** …For example, the New York City City Department of Transportation (NYC DOT) found that each LPI costs on average only $1,200.
+  - **Source:** Transportation Alternatives, “Five Lessons for the 10-Year Anniversary of Vision Zero in New York City,” 2024.
+  - <sub>`transportation/HB1471_SRTS_HA_2025.txt`</sub>
+- **Claim:** …partment of Transportation (NYC DOT) found that each LPI costs on average only $1,200.[4] The National Association of City Transportation Officials (NACTO) found that LPIs can reduce vehicle-pedestrian collisions by up to 60 percent at treated intersections.
+  - **Source:** NACTO, “ Urban Street Design Guide: Leading Pedestrian Interval,” 2021.
+  - <sub>`transportation/HB1471_SRTS_HA_2025.txt`</sub>
+- **Claim:** …As shown in Figure 1, the NYC DOT estimates that during this time, LPIs reduced the number of pedestrians killed and seriously injured in New York City by 34%.
+  - **Source:** NYC DOT, “Safety Treatment Evaluation (2005-2018),” 2022.
+  - <sub>`transportation/HB1471_SRTS_HA_2025.txt`</sub>
+- **Claim:** …This undertaking will require a significant investment, as the Hawaiʻi Climate Commission identified nearly $1 billion in high-priority pedestrian, bicycle, and multimodal projects across the state that are currently unfunded.
+  - **Source:** State of Hawaiʻi Climate Commission, “Transportation Projects,” 2025. https://climate.hawaii.gov/grants-to-projects-bridge/transportation-projects/.
+  - <sub>`transportation/HB1471_SRTS_HA_2025.txt`</sub>
+- **Claim:** …As Hawaiʻi Appleseed’s research demonstrates, Hawaiʻi relies heavily on pedestrian enforcement—issuing more than 30,000 jaywalking-related citations between 2018 and 2023—without evidence that this approach reduces pedestrian injuries or fatalities.
+  - **Source:** Seitz, A, “Freedom to Walk: Decriminalizing Jaywalking and Shifting Investment Towards Safe, Accessible Pedestrian Infrastructure,” Hawaiʻi Appleseed Center for Law and Economic Justice, March, 2024. https://hiappleseed.org/publications/freedom-to-walk.
+  - <sub>`transportation/HB1523_Pedestrian_Countdown_Timer_2026.txt`</sub>
+- **Claim:** …According to national best practices, including guidance used by cities like San Francisco, countdown timers exist to provide pedestrians with additional information—specifically, how much time remains to safely cross the street.
+  - **Source:** City and County of San Francisco, “Pedestrian Signals,” sfbetterstreets, 2025. https://sfbetterstreets.org/find-project-types/pedestrian-safety-and-traffic-calming/pedestrian-signals/index.html.
+  - <sub>`transportation/HB1523_Pedestrian_Countdown_Timer_2026.txt`</sub>
+- **Claim:** …Based on a report titled “Freedom to Walk”, published by Hawaiʻi Appleseed Center for Law and Economic Justice, from 2018 to 2023 there were more than 30,000 jaywalking citations issued statewide—an average of over 5,000 citations per year.
+  - **Source:** Seitz, A, “Freedom to Walk: Decriminalizing Jaywalking and Shifting Investment Towards Safe, Accessible Pedestrian Infrastructure,” Hawaiʻi Appleseed Center for Law and Economic Justice, March, 2024. https://hiappleseed.org/publications/freedom-to-walk.
+  - <sub>`transportation/HB1524_Reducing_Pedestrian_Fines_2026.txt`</sub>
+- **Claim:** …For example, on Oʻahu, speeding (1–10 miles over the posted speed limit) only results in a fine of $62 (plus $5/mph over).
+  - **Source:** Honolulu Police Department, “Motor Vehicle Safety,” 2024, https://www.honolulupd.org/information/motor-vehicle-safety
+  - <sub>`transportation/HB1524_Reducing_Pedestrian_Fines_2026.txt`</sub>
+- **Claim:** …ermore, HB1790 is important because the existing information on policing and incarceration highlights racial and ethnic disparities within our criminal-legal system: * Native Hawaiians make up 20% of the general population but 40% of the population in prison.
+  - **Source:** West, Charlotte, “Native Hawaiians Are Overrepresented In Prisons. Cultural Education Could Help,” Honolulu Civil Beat, May 2023. https://www.civilbeat.org/2023/05/native-hawaiians-are-overrepresented-in-prisons-cultural-education-could-help/
+  - <sub>`transportation/HB1790_Police_Data_Collection_2026.txt`</sub>
+- **Claim:** …A report by HPD found that between 2015-2019, 34.5% of uses of force were against and 38.1% of custodial arrests were of Native Hawaiians and Pacific Islanders.
+  - **Source:** C.Jedra and A. Hofschneider, “Significant Disparity In Use Of Force Questioned By Honolulu Police Commission,” Honolulu Civil Beat, February 2021. https://www.civilbeat.org/2021/02/significant-disparity-in-use-of-force-against-some-groups-questioned-by-honolulu-police-commission/
+  - <sub>`transportation/HB1790_Police_Data_Collection_2026.txt`</sub>
+- **Claim:** …The evaluation found that Hawaiʻi police departments scored “below” average when it comes racial disparities in deadly force (23%) and deadly force per arrest (11%).
+  - **Source:** National Police Scorecard, “Police Scorecard: Hawaiʻi,” accessed January 2026. https://policescorecard.org/hi.
+  - <sub>`transportation/HB1790_Police_Data_Collection_2026.txt`</sub>
+- **Claim:** …According to the National Household Travel Survey, in 2023, 53 percent of U.S. students got dropped off at school or drove themselves to school.
+  - **Source:** (2023). National Household Travel Survey.
+  - <sub>`transportation/HB1797_HA_School_Bus_Funding_2024.txt`</sub>
+- **Claim:** …For example, based on some studies, exhaust from school pickup lines can make its way into classrooms within 35 minutes to 73 minutes.
+  - **Source:** Mendoza, D.L., et. al. (2022). Investigation of Indoor and Outdoor Fine Particulate Matter Concentrations in Schools in Salt Lake City, Utah. Pollutants, 2(1):82-97. https://doi.org/10.3390/pollutants2010009.
+  - <sub>`transportation/HB1797_HA_School_Bus_Funding_2024.txt`</sub>
+- **Claim:** …Long-term exposure to these pollutants are also associated with childhood obesity, asthma, depression and anxiety, attention-deficit/hyperactivity disorder and other conditions.
+  - **Source:** Vam Damn, Andrew. (2024). The school bus is disappearing. Welcome to the era of the school pickup line. Washington Post. Available at: https://www.washingtonpost.com/business/2024/02/02/school-bus-era-ends/
+  - <sub>`transportation/HB1797_HA_School_Bus_Funding_2024.txt`</sub>
+- **Claim:** …e-free transit programs have been shown to produce several social, economic, and environmental benefits, including: * Significant increases in overall transit ridership; * Boosted local economic activity; and * Reduced fuel consumption and carbon emissions.
+  - **Source:** Massachusetts Budget & Policy Center, “Freeing the Climate: Environmental Benefits of Eliminating Transit Fares,” 2021. https://massbudget.org/2021/03/24/freeing-the-climate-environmental-benefits-of-eliminating-transit-fares/.
+  - <sub>`transportation/HB1879_Keiki_Ride_Free_2026.txt`</sub>
+- **Claim:** …ation’s EXPRESS County Bus Pass Program provides free rides for some intermediate and highschool students—but only during the school year, only for those who attend their home schools (no-Geographical Exemptions), and only if they live at least 1.5 miles away.
+  - **Source:** Hawaiʻi Department of Education, “EXPRESS County Bus Pass Program,” accessed January, 2026. https://hawaiipublicschools.org/school-services/express-county-bus-pass-program/
+  - <sub>`transportation/HB1879_Keiki_Ride_Free_2026.txt`</sub>
+- **Claim:** …That’s despite Honolulu’s transit fares being raised twice over the last five years, and most recently, in January, 2025 the Honolulu City Council voted to pass Bill 54, which will once again increase transit fares.
+  - **Source:** Honolulu City Council, Bill 54 (CD1): Relating to Public Transit, 2025. https://hnldoc.ehawaii.gov/hnldoc/document-download?id=25846.
+  - <sub>`transportation/HB1879_Keiki_Ride_Free_2026.txt`</sub>
+- **Claim:** …e last five years, and most recently, in January, 2025 the Honolulu City Council voted to pass Bill 54, which will once again increase transit fares.[3] Under Bill 54, youth monthly and annual passes will increase by 12.5 percent, costing nearly $500 per year.
+  - **Source:** Honolulu City Council, “Bill 54: Relating to Public Transit,” Introduced July 22, 2025. https://hnldoc.ehawaii.gov/hnldoc/measure/3424
+  - <sub>`transportation/HB1879_Keiki_Ride_Free_2026.txt`</sub>
+- **Claim:** …Based on Hawaiʻi Appleseed’s 2024 analysis, Hawaiʻi Department of Transportation’s (HDOT) capital improvement program (CIP) budget averaged about $700 million over the past decade.
+  - **Source:** Seitz, A., “Shifting budget priorities to expand mobility options & reduce vehicle travel,” Hawaiʻi Appleseed Center for Law and Economic Justice, December, 2024. https://hiappleseed.org/publications/rethinking-roads.
+  - <sub>`transportation/HB1879_Keiki_Ride_Free_2026.txt`</sub>
+- **Claim:** …According to the Hawaiʻi Department of Transportation’s (HDOT) Vulnerable Road User Safety Assessment, more than half of all pedestrian crashes occur at intersections.
+  - **Source:** Hawaiʻi Department of Transportation (HDOT), “Hawaiʻi Vulnerable Road User Safety Assessment,” November, 2023. https://hidot.hawaii.gov/highways/files/2023/11/Final_VRUSA_2023.pdf.
+  - <sub>`transportation/HB1884_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …The Federal Highway Administration recognizes LPIs as a proven safety countermeasure and estimates they can reduce pedestrian crashes at intersections by at least 13 percent.
+  - **Source:** U.S Dept. of Transportation, Federal Highways Administration. (2024). Leading Pedestrian Interval. Webpage. Available at: https://highways.dot.gov/safety/proven-safety-countermeasures/leading-pedestrian-interval.
+  - <sub>`transportation/HB1884_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …seen even greater benefits, including: * Seattle, where LPIs have been deployed since 2019. In Seattle, LPIs have resulted in a 48 percent reduction in pedestrian turning collisions and a 34 percent reduction in serious injury and fatal pedestrian collisions.
+  - **Source:** Seattle Department of Transportation. (2024). Leading Pedestrian Intervals. Webpage. Available at: https://www.seattle.gov/transportation/projects-and-programs/safety-first/vision-zero/leading-pedestrian-intervals.
+  - <sub>`transportation/HB1884_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …34 percent reduction in serious injury and fatal pedestrian collisions.[3] As of early 2024, the Seattle Department of Transportation had implemented LPIs at 628 intersections – representing 64 percent of all of all feasible signalized intersections citywide.
+  - **Source:** SDOT, “Vision Zero Action Plan: 2024 Update,” 2024. https://www.seattle.gov/documents/Departments/SDOT/VisionZero/VZ_Action_Plan.pdf
+  - <sub>`transportation/HB1884_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …citywide.[4] * New York City, where LPIs have been deployed since 2014. A 2025 Columbia University study analyzing 2,869 LPI-treated intersections in New York City found a 33 percent reduction in total pedestrian injuries (fatal and non-fatal) at those sites.
+  - **Source:** Columbia University Mailman School of Public Health, “New York City Intersections See One-Third Fewer Pedestrian Injuries with Longer Head-Start Intervals,” Phys.org, July 18, 2025. https://phys.org/news/2025-07-york-city-intersections-pedestrian-injuries.html.
+  - <sub>`transportation/HB1884_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …The FHWA estimates the cost to add an LPI at an intersection ranges from about $200 up to $1,200 per intersection.
+  - **Source:** FHWA, “Leading Pedestrian Interval (LPI): Safe Transportation for Every Pedestrian Countermeasure Tech Sheet,” FHWA-SA-19-040, October 2019. https://highways.dot.gov/media/11841.
+  - <sub>`transportation/HB1884_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …n Chicago in 2019, Disability Rights Advocates filed a class action lawsuit – and was later joined by the federal Department of Justice – that challenged Chicago’s pedestrian planning practices, which overlooked the safety needs of vision-impaired pedestrians.
+  - **Source:** Disability Rights Advocates, “Press Release 06.02.2025: Court Orders Chicago to Install Thousands of Accessible Pedestrian Signals. Following Years of Litigation, Chicago’s Streets will be Safer for Blind Pedestrians,” June 2, 2025. https://dralegal.org/press/chicago-pedestrian-signals-remedial-plan-order/.
+  - <sub>`transportation/HB1884_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …Chicago’s over 2,800 signalized intersections provided an APS.[10] Following years of litigation, an agreement was reached in 2025 requiring that Chicago equip at least 71% of its signalized intersections with pedestrian signals with APS in the next 10 years.
+  - **Source:** United States District Court for the Northern District of Illinois, “Remedial Plan Order: American Council of the Blind of Metropolitan Chicago et al. v. City of Chicago, No. 18-cv-04145,” Disability Rights Advocates, September 23, 2019. https://dralegal.org/wp-content/uploads/2019/09/365_Remedial_Plan_Order_ACC.pdf.
+  - <sub>`transportation/HB1884_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …intersections where APS must be installed each year (ranging from 70 to 245 intersections per year).[12] A similar lawsuit and agreement was reached in New York City in 2020, requiring that APS be installed at over 10,000 intersections over the next ten years.
+  - **Source:** United States District Court for the Southern District of New York. “Opinion & Order: American Council of the Blind of New York, Inc., Michael Golfo, and Christina Curry v. City of New York, et al., No. 1:18-cv-05792-PAE,” Disability Rights Advocates, December 27, 2021. https://dralegal.org/wp-content/uploads/2022/03/194_Opinion_and_Order_ACC.pdf.
+  - <sub>`transportation/HB1884_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …A recent study by the Ulupono Initiative revealed that households with the highest reliance on gasoline spend an average of $13,700 on their gasoline bills each year, accounting for 14 percent of their incomes.
+  - **Source:** Ulupono Initiative, Power Pivot: Transitioning Hawaiʻi Gasoline Superusers to EVs (Honolulu: Ulupono Initiative, 2024), https://ulupono.com/media/yfnlqx5v/power-pivot-transitioning-hawai-i-gasoline-superusers-to-evs.pdf.
+  - <sub>`transportation/HB2030_HD2_EV_Rebate_2026.txt`</sub>
+- **Claim:** …regon’s Clean Vehicle Rebate Program has demonstrated strong public demand, with over 33,000 rebates having been issued as of April 2025. The program is sustainably funded by a portion of Oregon's Vehicle Privilege Tax, providing at least $12 million annually.
+  - **Source:** Oregon Department of Environmental Quality, “Clean Vehicle Rebate Program,” accessed March 12, 2026, https://www.oregon.gov/deq/aq/programs/Pages/About-EV-Rebate.aspx.
+  - <sub>`transportation/HB2030_HD2_EV_Rebate_2026.txt`</sub>
+- **Claim:** …ding at least $12 million annually.[3] * The California Clean Cars 4 All Program serves as a successful model by replacing nearly 30,000 older vehicles with cleaner alternatives, resulting in a reduction of over 221,000 metric tons of CO2 equivalent emissions.
+  - **Source:** California Air Resources Board, “Annual Performance Goals for the Enhanced Fleet Modernization Program and Clean Cars 4 All,” accessed March 12, 2026, https://ww2.arb.ca.gov/resources/documents/annual-performance-goals-enhanced-fleet-modernization-program-and-clean-cars-4.
+  - <sub>`transportation/HB2030_HD2_EV_Rebate_2026.txt`</sub>
+- **Claim:** …In 2024 alone, there were 102 traffic fatalities statewide and a staggering 42% of those fatalities involved pedestrians and bicyclists.
+  - **Source:** HDOT, “Traffic Fatalities Up 10% From 2023,” December 31, 2024.
+  - <sub>`transportation/HB235_SRTS_HA_2025.txt`</sub>
+- **Claim:** …In 2024 alone, there were 102 traffic fatalities statewide and a staggering 42% of those fatalities involved pedestrians and bicyclists.[1] Between 2015 and 2020, nearly 49% of pedestrian fatalities on Oʻahu occurred on state-owned roadways.
+  - **Source:** CCH-DTS, “Oʻahu Vision Zero Action Plan,” 2024.
+  - <sub>`transportation/HB235_SRTS_HA_2025.txt`</sub>
+- **Claim:** …For example, the average annual number of statewide pedestrian fatalities rose by 26 percent during the 2014–2018 time period, when compared to the 2009–2013 time period.
+  - **Source:** State of Hawaiʻi Department of Transportation, “State of Hawaiʻi Traffic Fatalities,” 2022.
+  - <sub>`transportation/HB235_SRTS_HA_2025.txt`</sub>
+- **Claim:** …e-free transit programs have been shown to produce several social, economic, and environmental benefits, including: * Significant increases in overall transit ridership; * Boosted local economic activity; and * Reduced fuel consumption and carbon emissions.
+  - **Source:** Massachusetts Budget & Policy Center, “Freeing the Climate: Environmental Benefits of Eliminating Transit Fares,” 2021. https://massbudget.org/2021/03/24/freeing-the-climate-environmental-benefits-of-eliminating-transit-fares/.
+  - <sub>`transportation/HB2373_Keiki_Ride_Free_2026.txt`</sub>
+- **Claim:** …ation’s EXPRESS County Bus Pass Program provides free rides for some intermediate and highschool students—but only during the school year, only for those who attend their home schools (no-Geographical Exemptions), and only if they live at least 1.5 miles away.
+  - **Source:** Hawaiʻi Department of Education, “EXPRESS County Bus Pass Program,” accessed January, 2026. https://hawaiipublicschools.org/school-services/express-county-bus-pass-program/
+  - <sub>`transportation/HB2373_Keiki_Ride_Free_2026.txt`</sub>
+- **Claim:** …That’s despite Honolulu’s transit fares being raised twice over the last five years, and most recently, in January, 2025 the Honolulu City Council voted to pass Bill 54, which will once again increase transit fares.
+  - **Source:** Honolulu City Council, Bill 54 (CD1): Relating to Public Transit, 2025. https://hnldoc.ehawaii.gov/hnldoc/document-download?id=25846.
+  - <sub>`transportation/HB2373_Keiki_Ride_Free_2026.txt`</sub>
+- **Claim:** …e last five years, and most recently, in January, 2025 the Honolulu City Council voted to pass Bill 54, which will once again increase transit fares.[3] Under Bill 54, youth monthly and annual passes will increase by 12.5 percent, costing nearly $500 per year.
+  - **Source:** Honolulu City Council, “Bill 54: Relating to Public Transit,” Introduced July 22, 2025. https://hnldoc.ehawaii.gov/hnldoc/measure/3424
+  - <sub>`transportation/HB2373_Keiki_Ride_Free_2026.txt`</sub>
+- **Claim:** …Based on Hawaiʻi Appleseed’s 2024 analysis, Hawaiʻi Department of Transportation’s (HDOT) capital improvement program (CIP) budget averaged about $700 million over the past decade.
+  - **Source:** Seitz, A., “Shifting budget priorities to expand mobility options & reduce vehicle travel,” Hawaiʻi Appleseed Center for Law and Economic Justice, December, 2024. https://hiappleseed.org/publications/rethinking-roads.
+  - <sub>`transportation/HB2373_Keiki_Ride_Free_2026.txt`</sub>
+- **Claim:** …On Oʻahu an estimated 21 percent of bus riders have a household annual income of less than $20,000, and 71 percent have a household income of less than $60,000.
+  - **Source:** Department of Transportation Services, 2025 Public Transit Title VI Program, City and County of Honolulu, accessed September 2025. https://www4.honolulu.gov/docushare/dsweb/Get/Document-352782/Final%202025%20DTS%20Public%20Transit%20TVI%20Program%20Report%20%20-%2008-2025.pdf
+  - <sub>`transportation/HB2451_Free_Transit_for_All_2026.txt`</sub>
+- **Claim:** …at eliminating fares leads to increased transit ridership, reduced household transportation costs, increased access to employment and essential services, boosted local economic activity, and reductions in vehicle travel, fuel consumption, and carbon emissions.
+  - **Source:** Massachusetts Budget & Policy Center, “Freeing the Climate: Environmental Benefits of Eliminating Transit Fares,” 2021. https://massbudget.org/2021/03/24/freeing-the-climate-environmental-benefits-of-eliminating-transit-fares/.
+  - <sub>`transportation/HB2451_Free_Transit_for_All_2026.txt`</sub>
+- **Claim:** …nsportation’s capital improvement program averaged roughly $700 million annually over the past decade, with more than two-thirds directed toward expanding vehicle capacity and only a small fraction invested in pedestrian, bicycling, and transit infrastructure.
+  - **Source:** Seitz, A., “Shifting budget priorities to expand mobility options & reduce vehicle travel,” Hawaiʻi Appleseed Center for Law and Economic Justice, December, 2024. https://hiappleseed.org/publications/rethinking-roads.
+  - <sub>`transportation/HB2451_Free_Transit_for_All_2026.txt`</sub>
+- **Claim:** …ations process for projects under the safe routes to school program and determine awards for selected projects; and 4. Appropriate funds for priority projects that will improve safety and allow keiki and their families to safely walk, bike, or roll to school.
+  - **Source:** Paraphrased from https://www.capitol.hawaii.gov/slh/Years/SLH2023/SLH2023_Act244.pdf [a]update when available [b]update when available
+  - <sub>`transportation/HB2454_HD2_SRTS_Reform_2026.txt`</sub>
+- **Claim:** …hermore, HB278 is important because the existing information on policing and incarceration highlights racial and ethnic disparities within our criminal-legal system: * Native Hawaiians make up 20% of the general population but 40% of the population in prison.
+  - **Source:** https://www.civilbeat.org/2023/05/native-hawaiians-are-overrepresented-in-prisons-cultural-education-could-help/
+  - <sub>`transportation/HB278_JHA_Police_Accountability_House_HA_2025.txt`</sub>
+- **Claim:** …A report by HPD found that between 2015-2019, 34.5% of uses of force were against and 38.1% of custodial arrests were of Native Hawaiians and Pacific Islanders.
+  - **Source:** https://www.civilbeat.org/2021/02/significant-disparity-in-use-of-force-against-some-groups-questioned-by-honolulu-police-commission/.
+  - <sub>`transportation/HB278_JHA_Police_Accountability_House_HA_2025.txt`</sub>
+- **Claim:** …of Native Hawaiians and Pacific Islanders.[2] * A national evaluation of 13,147 police departments found that Hawaiʻi police departments were above average when it comes to racial disparities in deadly force (60%) and racial disparities in drug arrests (72%).
+  - **Source:** https://policescorecard.org/hi.
+  - <sub>`transportation/HB278_JHA_Police_Accountability_House_HA_2025.txt`</sub>
+- **Claim:** …In Hawaiʻi, owning a personal vehicle costs about $8,100 per year.
+  - **Source:** Yerton, Steward. (2020). Why It Costs So Much To Own A Car In Hawaii. Honolulu Civil Beat. Available at: https://www.civilbeat.org/2022/03/why-it-costs-so-much-to-own-a-car-in-hawaii/.
+  - <sub>`transportation/HB670_Ebike_Rebate_Program_HA_2025.txt`</sub>
+- **Claim:** …ʻi, owning a personal vehicle costs about $8,100 per year.[1] Notably, Hawaiʻi households own an average of two cars per household, which means vehicle ownership costs families $16,200 per year, representing about 20 percent of pre-tax median household income.
+  - **Source:** Steward (2020)
+  - <sub>`transportation/HB670_Ebike_Rebate_Program_HA_2025.txt`</sub>
+- **Claim:** …In just nine months, 4,734 Denver residents became new ebike owners who cumulatively saved an estimated $1 million from avoided fuel and electricity costs.
+  - **Source:** City and County of Denver. (2022) Denver’s 2022 Ebike Incentive Program: Results and Recommendations.
+  - <sub>`transportation/HB670_Ebike_Rebate_Program_HA_2025.txt`</sub>
+- **Claim:** …For these reasons, a recent article from the Bloomberg City Lab went so far to state that “No mobility innovation in recent memory offers a comparable opportunity to simultaneously boost health, protect the environment and improve urban quality of life.”
+  - **Source:** Zipper, David. (2023). The Untapped Power of E-Bike Rebates. Bloomberg City Lab. Available at: https://www.bloomberg.com/news/articles/2023-07-07/release-the-e-bike-rebates.
+  - <sub>`transportation/HB670_Ebike_Rebate_Program_HA_2025.txt`</sub>
+- **Claim:** …Recent research from the National Institute for Transportation and Communities found that point of sale mechanisms for e-bike programs are 30 percent more effective than other rebate programs.
+  - **Source:** Jones, Luke, et al. (2024). Consumer purchase response to e-bike incentives: Results form a nationwide stated preference study. Available at: https://www.sciencedirect.com/science/article/abs/pii/S1361920924000713?via%3Dihub.
+  - <sub>`transportation/HB670_Ebike_Rebate_Program_HA_2025.txt`</sub>
+- **Claim:** …By August 2024, nearly 3,720 public school students were left without transportation due to the suspension of 108 bus routes in Central Oʻahu and East Hawaiʻi Island.
+  - **Source:** Green, J., “Proclamation, Relating to School Bus Services,” Office of the Governor, Hawaiʻi, August 2, 2024.
+  - <sub>`transportation/HB862_School_Bus_Services_HA_2025.txt`</sub>
+- **Claim:** …These efforts resumed bus services for approximately 1,200 student riders and 23 schools.
+  - **Source:** HNN Staff, “DOE announces 34 previously suspended school bus routes to be restored starting Monday,” Hawaii News Now, August 8, 2024.
+  - <sub>`transportation/HB862_School_Bus_Services_HA_2025.txt`</sub>
+- **Claim:** …According to the National Household Travel Survey, in 2023, 53 percent of U.S. students got dropped off at school or drove themselves to school, which poses both environmental and safety concerns.
+  - **Source:** Federal Highway Administration, “National Household Travel Survey,” 2023.
+  - <sub>`transportation/HB862_School_Bus_Services_HA_2025.txt`</sub>
+- **Claim:** …For example, Arizona permits the use of 11-15 passenger vehicles for regular routes, with increased route mileage eligibility for state funding,
+  - **Source:** Arizona Revised Statues, “15-925. School transportation; allowable vehicles,” February 4, 2025.
+  - <sub>`transportation/HB862_School_Bus_Services_HA_2025.txt`</sub>
+- **Claim:** …For example, Arizona permits the use of 11-15 passenger vehicles for regular routes, with increased route mileage eligibility for state funding,[4] while Georgia allows local boards to use smaller vehicles (8 passengers or fewer).
+  - **Source:** Georgia General Assembly, “20-2-1076. Alternative vehicles for school buses; limitations on use; requirements; insurance,” February 4, 2025.
+  - <sub>`transportation/HB862_School_Bus_Services_HA_2025.txt`</sub>
+- **Claim:** …gibility for state funding,[4] while Georgia allows local boards to use smaller vehicles (8 passengers or fewer).[5] Maryland amended previous rigid regulation for school transportation by allowing alternative vehicles, such as taxicabs and commercial coaches.
+  - **Source:** Code of Maryland Regulations, “Sec. 13a.06.07.11. General Standards,” February 4, 2025.
+  - <sub>`transportation/HB862_School_Bus_Services_HA_2025.txt`</sub>
+- **Claim:** …For example, in a 2019 study of local coverage of crashes involving pedestrians or bicyclists in Hawaiʻi, 69% of the articles did not mention a driver or vehicle.
+  - **Source:** L. Brooke Keliikoa, et. al. (2019). Public health framing in local media coverage of crashes involving pedestrians or bicyclists in Hawaiʻi: A content analysis. Transportation Research Interdisciplinary Perspectives, Volume 13.
+  - <sub>`transportation/HB941_Pedestrian_Fees_HA_2025.txt`</sub>
+- **Claim:** …as proven to be true in every place jaywalking has been studied, including New York City, where a 2019 study found that 90% of jaywalking tickets in New York City were given to Black and Hispanic people, although they only make up 55% of the city’s population.
+  - **Source:** Kuntzman, Gersh. (2020). ‘Jaywalking While Black’: Final 2019 Numbers Show Race-Based NYPD Crackdown Continues. StreetsBlog NYC. Available at https://nyc.streetsblog.org/.
+  - <sub>`transportation/HB941_Pedestrian_Fees_HA_2025.txt`</sub>
+- **Claim:** …In 2024 alone, there were 102 traffic fatalities statewide and a staggering 42% of those fatalities involved pedestrians and bicyclists.
+  - **Source:** HDOT, “Traffic Fatalities Up 10% From 2023,” December 31, 2024.
+  - <sub>`transportation/SB1009_SRTS_HA_2025.txt`</sub>
+- **Claim:** …In 2024 alone, there were 102 traffic fatalities statewide and a staggering 42% of those fatalities involved pedestrians and bicyclists.[1] Between 2015 and 2020, nearly 49% of pedestrian fatalities on Oʻahu occurred on state-owned roadways.
+  - **Source:** CCH-DTS, “Oʻahu Vision Zero Action Plan,” 2024.
+  - <sub>`transportation/SB1009_SRTS_HA_2025.txt`</sub>
+- **Claim:** …For example, the average annual number of statewide pedestrian fatalities rose by 26 percent during the 2014–2018 time period, when compared to the 2009–2013 time period.
+  - **Source:** State of Hawaiʻi Department of Transportation, “State of Hawaiʻi Traffic Fatalities,” 2022.
+  - <sub>`transportation/SB1009_SRTS_HA_2025.txt`</sub>
+- **Claim:** …This undertaking will require a significant investment, as the Hawaiʻi Climate Commission identified nearly $1 billion in high-priority pedestrian, bicycle, and multimodal projects across the state that are currently unfunded.
+  - **Source:** State of Hawaiʻi Climate Commission, “Transportation Projects,” 2025. https://climate.hawaii.gov/grants-to-projects-bridge/transportation-projects/.
+  - <sub>`transportation/SB1009_SRTS_HA_2025.txt`</sub>
+- **Claim:** …For example, in a 2019 study of local coverage of crashes involving pedestrians or bicyclists in Hawaiʻi, 69% of the articles did not mention a driver or vehicle.
+  - **Source:** L. Brooke Keliikoa, et. al. (2019). Public health framing in local media coverage of crashes involving pedestrians or bicyclists in Hawaiʻi: A content analysis. Transportation Research Interdisciplinary Perspectives, Volume 13.
+  - <sub>`transportation/SB106_HA_Freedom_to_Walk_2025.txt`</sub>
+- **Claim:** …as proven to be true in every place jaywalking has been studied, including New York City, where a 2019 study found that 90% of jaywalking tickets in New York City were given to Black and Hispanic people, although they only make up 55% of the city’s population.
+  - **Source:** Kuntzman, Gersh. (2020). ‘Jaywalking While Black’: Final 2019 Numbers Show Race-Based NYPD Crackdown Continues. StreetsBlog NYC. Available at https://nyc.streetsblog.org/.
+  - <sub>`transportation/SB106_HA_Freedom_to_Walk_2025.txt`</sub>
+- **Claim:** …recommended priority incentives included: * Fully subsidized transit passes; * Fully subsidized bikeshare passes; and * Financial incentive for employees who opt out of employee parking, and instead commute via walk, roll, bike, transit, carpool, or vanpool.
+  - **Source:** OahuMPO, “State Government Employee Transportation Demand Management Study: Recommended TDM Strategies,” Fall, 2024. https://engage.oahumpo.org/transportation-demand-management-tdm-study.
+  - <sub>`transportation/SB1092_State_TDM_HA_2025.txt`</sub>
+- **Claim:** …As of November 2024, 24% of all civil service positions in Hawaiʻi are vacant.
+  - **Source:** Department of Human Resources Development, “2024 State of Hawaiʻi Act 57, SLH 2019 Vacancy Report,” December 2024. https://dhrd.hawaii.gov/wp-content/uploads/2024/12/Act-57-Report-signed.pdf
+  - <sub>`transportation/SB1092_State_TDM_HA_2025.txt`</sub>
+- **Claim:** …In Hawaiʻi, owning a personal vehicle costs about $8,100 per year.
+  - **Source:** Yerton, Steward. (2020). Why It Costs So Much To Own A Car In Hawaii. Honolulu Civil Beat. Available at: https://www.civilbeat.org/2022/03/why-it-costs-so-much-to-own-a-car-in-hawaii/.
+  - <sub>`transportation/SB1117_HA_Ebike_Rebate_2025.txt`</sub>
+- **Claim:** …ʻi, owning a personal vehicle costs about $8,100 per year.[1] Notably, Hawaiʻi households own an average of two cars per household, which means vehicle ownership costs families $16,200 per year, representing about 20 percent of pre-tax median household income.
+  - **Source:** Steward (2020)
+  - <sub>`transportation/SB1117_HA_Ebike_Rebate_2025.txt`</sub>
+- **Claim:** …In just nine months, 4,734 Denver residents became new ebike owners who cumulatively saved an estimated $1 million from avoided fuel and electricity costs.
+  - **Source:** City and County of Denver. (2022) Denver’s 2022 Ebike Incentive Program: Results and Recommendations.
+  - <sub>`transportation/SB1117_HA_Ebike_Rebate_2025.txt`</sub>
+- **Claim:** …For these reasons, a recent article from the Bloomberg City Lab went so far to state that “No mobility innovation in recent memory offers a comparable opportunity to simultaneously boost health, protect the environment and improve urban quality of life.”
+  - **Source:** Zipper, David. (2023). The Untapped Power of E-Bike Rebates. Bloomberg City Lab. Available at: https://www.bloomberg.com/news/articles/2023-07-07/release-the-e-bike-rebates.
+  - <sub>`transportation/SB1117_HA_Ebike_Rebate_2025.txt`</sub>
+- **Claim:** …Across the state, the average annual number of pedestrian fatalities rose by 26 percent from the 2009–2013 time period to the 2014–2018 time period.
+  - **Source:** State of Hawaiʻi Department of Transportation, “State of Hawaiʻi Traffic Fatalities,” 2022.
+  - <sub>`transportation/SB1195_Crosswalk_Buffers_HA_2025.txt`</sub>
+- **Claim:** …e annual number of pedestrian fatalities rose by 26 percent from the 2009–2013 time period to the 2014–2018 time period.[1] In 2024 alone, there were 102 traffic fatalities statewide and a staggering 42% of those fatalities involved pedestrians and bicyclists.
+  - **Source:** HDOT, “Traffic Fatalities Up 10% From 2023,” December 31, 2024.
+  - <sub>`transportation/SB1195_Crosswalk_Buffers_HA_2025.txt`</sub>
+- **Claim:** …According to the FHWA, restricting parking near intersections has been found to reduce pedestrian crashes by 30%.
+  - **Source:** Federal Highway Administration “Toolbox of pedestrian countermeasures and their potential effectiveness (Toolbox of Pedestrian Countermeasures FHWA-SA-18-041),” 2018. https://www.fhwa.dot.gov/publications/research/safety/pedbike/18041/index.cfm.
+  - <sub>`transportation/SB1195_Crosswalk_Buffers_HA_2025.txt`</sub>
+- **Claim:** …This undertaking will require a significant investment, as the Hawaiʻi Climate Commission identified nearly $1 billion in high-priority pedestrian, bicycle, and multimodal projects across the state that are currently unfunded.
+  - **Source:** State of Hawaiʻi Climate Commission, “Transportation Projects,” 2025. https://climate.hawaii.gov/grants-to-projects-bridge/transportation-projects/.
+  - <sub>`transportation/SB1195_Crosswalk_Buffers_HA_2025.txt`</sub>
+- **Claim:** …FHWA estimates that LPIs can achieve a 13% reduction in pedestrian-related crashes at intersections.
+  - **Source:** U.S Dept. of Transportation, Federal Highways Administration. (2024). Leading Pedestrian Interval. Webpage. Available here.
+  - <sub>`transportation/SB1667_TRN_Ped_Safety_HA_2025.txt`</sub>
+- **Claim:** …At locations where LPI's had been installed in Seattle saw a 48% reduction in pedestrian turning collisions and a 34% reduction in serious injury and fatal pedestrian collisions.
+  - **Source:** Seattle Department of Transportation. (2024). Leading Pedestrian Intervals. Webpage. Available here.
+  - <sub>`transportation/SB1667_TRN_Ped_Safety_HA_2025.txt`</sub>
+- **Claim:** …For example, in 2020, the Ulupono Initiative estimated that parking cost the developer $42,000 per space within a structured, multi-level podium building in urban Honolulu.
+  - **Source:** Ulupono Initiative, “The Costs of Parking in Hawaiʻi,” 2020. https://ulupono.com/media/ivcfs2pu/the-cost-of-parking-in-hawaii-report-2020-08.pdf.
+  - <sub>`transportation/SB1669_TCA_TOD_Board_Senate_HA_2025.txt`</sub>
+- **Claim:** …rt found that 38 percent of people with fines for violations such as low-level vehicle infractions and non-payment of exorbitant court fees ended up committing more serious crimes, such as selling drugs, illegal sex work, or robbery, to raise the needed money.
+  - **Source:** Nelson, Leah, Frank Knaack and Dana Sweeney, “Under Pressure: How fines and fees hurt people, undermine public safety, and drive Alabama’s racial wealth divide,” Alabama Appleseed Center for Law and Justice, 2018. https://alabamaappleseed.org/ wp-content/uploads/2018/10/AA1240-FinesandFees10-10-FINAL.pdf
+  - <sub>`transportation/SB2146_Traffic_Fines_Task_Force_2026.txt`</sub>
+- **Claim:** …In early 2025, Hawaiʻi Appleseed released a policy report, Beyond the Ticket, which examined the negative impacts of traffic enforcement and provided recommendations for a more equitable approach to roadway enforcement.
+  - **Source:** Seitz, A. and Gilliam, T. “Beyond the Ticket: Recommendations for a More Equitable Traffic Enforcement System,” Hawaiʻi Appleseed Center for Law and Economic Justice, March 2025. https://static1.squarespace.com/static/601374ae84e51e430a1829d8/t/67c0cf0aceba832254eb5391/1740689172475/Beyond+The+Ticket_FINAL.pdf
+  - <sub>`transportation/SB2146_Traffic_Fines_Task_Force_2026.txt`</sub>
+- **Claim:** …of suspension offered an array of practical alternative collection methods — including an ability to pay determination and opportunities for reduced payments, payment plans, or community service—their collection rate for newly issued tickets increased by 8.9%.
+  - **Source:** American Legislative Exchange Council, Resolution in Support of Limiting Driver’s License Suspensions to Violations that Involve Dangerous Driving (2018), available at https://alec.org/model-policy/resolution-in-support-of-limiting-drivers-license-suspensions-to-violations-that-involve-dangerous-driving/.
+  - <sub>`transportation/SB2146_Traffic_Fines_Task_Force_2026.txt`</sub>
+- **Claim:** …A 2020 study from the Ulupono Initiative found that the cost to build parking in high-rise buildings (with podium-style parking) for affordable and mixed-income rentals in Honolulu’s urban core costs up to $55,000 per unit.
+  - **Source:** Ulupono Initiative, “The Costs of Parking in Hawaiʻi,” Prepared by PBR Hawaiʻi, August, 2020. https://ulupono.com/media/ivcfs2pu/the-cost-of-parking-in-hawaii-report-2020-08.pdf.
+  - <sub>`transportation/SB2356_TOD_Parking_Reform_2026.txt`</sub>
+- **Claim:** …Across the country, over 90 jurisdictions have eliminated or significantly reduced parking minimums, recognizing that such mandates hinder housing production and promote sprawl.
+  - **Source:** Parking Reform Network, “Parking Mandates Map,” January 6, 2025. https://parkingreform.org/resources/mandates-map/
+  - <sub>`transportation/SB2356_TOD_Parking_Reform_2026.txt`</sub>
+- **Claim:** …i Appleseed shows that permitted parking within housing developments in TOD areas on Oʻahu approved from 2010–2025 decreased by over 12 percent following passage of Ordinance 20-41, with the greatest reductions in parking made by affordable housing developers.
+  - **Source:** Seitz, A., Gilliam, T., and Heim, A, “Stalled: How Parking Mandates Drive Up Housing Costs,” Hawaiʻi Appleseed Center for Law and Economic Justice, October 2025. https://static1.squarespace.com/static/601374ae84e51e430a1829d8/t/68f15c7cbf563d6a7080bf8f/1760648316670/Stalled_FINAL.pdf.
+  - <sub>`transportation/SB2356_TOD_Parking_Reform_2026.txt`</sub>
+- **Claim:** …e-free transit programs have been shown to produce several social, economic, and environmental benefits, including: * Significant increases in overall transit ridership; * Boosted local economic activity; and * Reduced fuel consumption and carbon emissions.
+  - **Source:** Massachusetts Budget & Policy Center, “Freeing the Climate: Environmental Benefits of Eliminating Transit Fares,” 2021. https://massbudget.org/2021/03/24/freeing-the-climate-environmental-benefits-of-eliminating-transit-fares/.
+  - <sub>`transportation/SB2395_Free_School_Buses_Free_Lunches_Only_2026.txt`</sub>
+- **Claim:** …ation’s EXPRESS County Bus Pass Program provides free rides for some intermediate and highschool students—but only during the school year, only for those who attend their home schools (no-Geographical Exemptions), and only if they live at least 1.5 miles away.
+  - **Source:** Hawaiʻi Department of Education, “EXPRESS County Bus Pass Program,” accessed January, 2026. https://hawaiipublicschools.org/school-services/express-county-bus-pass-program/
+  - <sub>`transportation/SB2395_Free_School_Buses_Free_Lunches_Only_2026.txt`</sub>
+- **Claim:** …Based on Hawaiʻi Appleseed’s 2024 analysis, Hawaiʻi Department of Transportation’s (HDOT) capital improvement program (CIP) budget averaged about $700 million over the past decade.
+  - **Source:** Seitz, A., “Shifting budget priorities to expand mobility options & reduce vehicle travel,” Hawaiʻi Appleseed Center for Law and Economic Justice, December, 2024. https://hiappleseed.org/publications/rethinking-roads.
+  - <sub>`transportation/SB2395_Free_School_Buses_Free_Lunches_Only_2026.txt`</sub>
+- **Claim:** …According to the HDOT’s Vulnerable Road User Safety Assessment, more than half of all pedestrian crashes occur at intersections.
+  - **Source:** Hawaiʻi Department of Transportation (HDOT), “Hawaiʻi Vulnerable Road User Safety Assessment,” November, 2023. https://hidot.hawaii.gov/highways/files/2023/11/Final_VRUSA_2023.pdf.
+  - <sub>`transportation/SB2470_S2470_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …The Federal Highway Administration recognizes LPIs as a proven safety countermeasure and estimates they can reduce pedestrian crashes at intersections by at least 13 percent.
+  - **Source:** U.S Dept. of Transportation, Federal Highways Administration. (2024). Leading Pedestrian Interval. Webpage. Available at: https://highways.dot.gov/safety/proven-safety-countermeasures/leading-pedestrian-interval.
+  - <sub>`transportation/SB2470_S2470_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …seen even greater benefits, including: * Seattle, where LPIs have been deployed since 2019. In Seattle, LPIs have resulted in a 48 percent reduction in pedestrian turning collisions and a 34 percent reduction in serious injury and fatal pedestrian collisions.
+  - **Source:** Seattle Department of Transportation. (2024). Leading Pedestrian Intervals. Webpage. Available at: https://www.seattle.gov/transportation/projects-and-programs/safety-first/vision-zero/leading-pedestrian-intervals.
+  - <sub>`transportation/SB2470_S2470_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …34 percent reduction in serious injury and fatal pedestrian collisions.[3] As of early 2024, the Seattle Department of Transportation had implemented LPIs at 628 intersections – representing 64 percent of all of all feasible signalized intersections citywide.
+  - **Source:** SDOT, “Vision Zero Action Plan: 2024 Update,” 2024. https://www.seattle.gov/documents/Departments/SDOT/VisionZero/VZ_Action_Plan.pdf
+  - <sub>`transportation/SB2470_S2470_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …citywide.[4] * New York City, where LPIs have been deployed since 2014. A 2025 Columbia University study analyzing 2,869 LPI-treated intersections in New York City found a 33 percent reduction in total pedestrian injuries (fatal and non-fatal) at those sites.
+  - **Source:** Columbia University Mailman School of Public Health, “New York City Intersections See One-Third Fewer Pedestrian Injuries with Longer Head-Start Intervals,” Phys.org, July 18, 2025. https://phys.org/news/2025-07-york-city-intersections-pedestrian-injuries.html.
+  - <sub>`transportation/SB2470_S2470_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …The FHWA estimates the cost to add an LPI at an intersection ranges from about $200 up to $1,200 per intersection.
+  - **Source:** FHWA, “Leading Pedestrian Interval (LPI): Safe Transportation for Every Pedestrian Countermeasure Tech Sheet,” FHWA-SA-19-040, October 2019. https://highways.dot.gov/media/11841.
+  - <sub>`transportation/SB2470_S2470_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …n Chicago in 2019, Disability Rights Advocates filed a class action lawsuit – and was later joined by the federal Department of Justice – that challenged Chicago’s pedestrian planning practices, which overlooked the safety needs of vision-impaired pedestrians.
+  - **Source:** Disability Rights Advocates, “Press Release 06.02.2025: Court Orders Chicago to Install Thousands of Accessible Pedestrian Signals. Following Years of Litigation, Chicago’s Streets will be Safer for Blind Pedestrians,” June 2, 2025. https://dralegal.org/press/chicago-pedestrian-signals-remedial-plan-order/.
+  - <sub>`transportation/SB2470_S2470_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …Chicago’s over 2,800 signalized intersections provided an APS.[10] Following years of litigation, an agreement was reached in 2025 requiring that Chicago equip at least 71% of its signalized intersections with pedestrian signals with APS in the next 10 years.
+  - **Source:** United States District Court for the Northern District of Illinois, “Remedial Plan Order: American Council of the Blind of Metropolitan Chicago et al. v. City of Chicago, No. 18-cv-04145,” Disability Rights Advocates, September 23, 2019. https://dralegal.org/wp-content/uploads/2019/09/365_Remedial_Plan_Order_ACC.pdf.
+  - <sub>`transportation/SB2470_S2470_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …intersections where APS must be installed each year (ranging from 70 to 245 intersections per year).[12] A similar lawsuit and agreement was reached in New York City in 2020, requiring that APS be installed at over 10,000 intersections over the next ten years.
+  - **Source:** United States District Court for the Southern District of New York. “Opinion & Order: American Council of the Blind of New York, Inc., Michael Golfo, and Christina Curry v. City of New York, et al., No. 1:18-cv-05792-PAE,” Disability Rights Advocates, December 27, 2021. https://dralegal.org/wp-content/uploads/2022/03/194_Opinion_and_Order_ACC.pdf.
+  - <sub>`transportation/SB2470_S2470_Pedestrian_Head_Start_2026.txt`</sub>
+- **Claim:** …For example, in a 2019 study of local coverage of crashes involving pedestrians or bicyclists in Hawaiʻi, 69% of the articles did not mention a driver or vehicle.
+  - **Source:** L. Brooke Keliikoa, et. al. (2019). Public health framing in local media coverage of crashes involving pedestrians or bicyclists in Hawaiʻi: A content analysis. Transportation Research Interdisciplinary Perspectives, Volume 13.
+  - <sub>`transportation/SB2630_HA_Freedom_to_Walk_House_Judiciary_and_H_2024.txt`</sub>
+- **Claim:** …as proven to be true in every place jaywalking has been studied, including New York City, where a 2019 study found that 90% of jaywalking tickets in New York City were given to Black and Hispanic people, although they only make up 55% of the city’s population.
+  - **Source:** Kuntzman, Gersh. (2020). ‘Jaywalking While Black’: Final 2019 Numbers Show Race-Based NYPD Crackdown Continues. StreetsBlog NYC. Available at https://nyc.streetsblog.org/.
+  - <sub>`transportation/SB2630_HA_Freedom_to_Walk_House_Judiciary_and_H_2024.txt`</sub>
+- **Claim:** …Fines for jaywalking range between $100 and $150 (plus fines), depending on the county, and the type of jaywalking violation.
+  - **Source:** State of Hawaiʻi Department of Transportation. Frequently Asked Questions: What is the fine for pedestrians who jaywalk. (2024). Available at: https://hidot.hawaii.gov/highways/safe-communites/walkwisehawaii/faq/.
+  - <sub>`transportation/SB2630_HA_Freedom_to_Walk_House_Judiciary_and_H_2024.txt`</sub>
+- **Claim:** …Many states have found that by decriminalizing jaywalking
+  - **Source:** Streetsblog “These Communities Are Making Progress After ‘Jaywalking’” Reformhttps://usa.streetsblog.org/2022/06/23/these-u-s-communities-are-making-safety-progress-after-jaywalking-reform/
+  - <sub>`transportation/SB2630_HA_Freedom_to_Walk_House_Judiciary_and_H_2024.txt`</sub>
+- **Claim:** …er, in a 2019 study of local coverage of crashes involving pedestrians or bicyclists in Hawaiʻi, 77% of the 162 media articles analyzed were found to focus on the actions of the pedestrian/bicyclist, and 69% of the articles did not mention a driver or vehicle.
+  - **Source:** L. Brooke Keliikoa, et. al. Public health framing in local media coverage of crashes involving pedestrians or bicyclists in Hawaiʻi, 2019: A content analysis. Transportation Research Interdisciplinary Perspectives, Volume 13, 2022, 100525, ISSN 2590-1982, https://doi.org/10.1016/j.trip.2021.100525.
+  - <sub>`transportation/SB2630_HA_Freedom_to_Walk_Senate_Transportation_2024.txt`</sub>
+- **Claim:** …proven to be true in every place jaywalking has been studied, including: * New York City - a 2019 study found that 90% of jaywalking tickets in New York City were given to Black and Hispanic people, although they only make up 55% of the city’s population.
+  - **Source:** Kuntzman, Gersh. (2020). ‘Jaywalking While Black’: Final 2019 Numbers Show Race-Based NYPD Crackdown Continues. StreetsBlog NYC. Available at https://nyc.streetsblog.org/.
+  - <sub>`transportation/SB2630_HA_Freedom_to_Walk_Senate_Transportation_2024.txt`</sub>
+- **Claim:** …ough they only make up 55% of the city’s population.[2] * Jacksonville - A 2017 investigation by ProPublica and the Florida Times-Union found that Black people in Jacksonville are three times as likely to be stopped and cited for jaywalking as white people.
+  - **Source:** Sanders, T., et. al. Walking While Black: Jacksonville’s enforcement of pedestrian violations raises concerns that it’s another example of racial profiling. Co-published by ProPublica and Florida Times-Union. Available at https://features.propublica.org/walking-while-black/jacksonville-pedestrian-violations-racial-profiling/.
+  - <sub>`transportation/SB2630_HA_Freedom_to_Walk_Senate_Transportation_2024.txt`</sub>
+- **Claim:** …In Hawaiʻi, it has been well-documented that Native Hawaiians and Pacific Islanders are over-represented in the state’s criminal-legal system as well as the houseless population.
+  - **Source:** Office of Hawaiian Affairs. (2010). The Disparate Treatment of Native Hawaiians in the Criminal Justice System. Available at: https://www.oha.org/wp-content/uploads/2014/11/es_final_web_0.pdf.
+  - <sub>`transportation/SB2630_HA_Freedom_to_Walk_Senate_Transportation_2024.txt`</sub>
+- **Claim:** …iʻi, it has been well-documented that Native Hawaiians and Pacific Islanders are over-represented in the state’s criminal-legal system as well as the houseless population.[4] In 2022, nearly half of the state’s pedestrian fatalities were houseless individuals.
+  - **Source:** State of Hawaiʻi Department of Transportation. (2022). State of Hawaiʻi Traffic Fatalities. Available at https://hidot.hawaii.gov/highways/files/2021/06/Fatality-Breakdown-by-Counties_10012020-16.pdf.
+  - <sub>`transportation/SB2630_HA_Freedom_to_Walk_Senate_Transportation_2024.txt`</sub>
+- **Claim:** …Fines for jaywalking range between $100 and $150 (plus fines), depending on the county, and the type of jaywalking violation.
+  - **Source:** State of Hawaiʻi Department of Transportation. Frequently Asked Questions: What is the fine for pedestrians who jaywalk. (2024). Available at: https://hidot.hawaii.gov/highways/safe-communites/walkwisehawaii/faq/.
+  - <sub>`transportation/SB2630_HA_Freedom_to_Walk_Senate_Transportation_2024.txt`</sub>
+- **Claim:** …For example, on Oʻahu, speeding (one to ten miles over the posted speed limit) only results in a fine of $62 (plus $5/mph over).
+  - **Source:** Honolulu Police Department. (2024). Motor Vehicle Safety. Available at: https://www.honolulupd.org/information/motor-vehicle-safety/.
+  - <sub>`transportation/SB2630_HA_Freedom_to_Walk_Senate_Transportation_2024.txt`</sub>
+- **Claim:** …The High Pedestrian Injury Corridors comprise only 2% of City roadway mileage, yet they account for 60% of pedestrian fatalities and 42% of injuries.
+  - **Source:** City and County of Honolulu, Department of Transportation Services. (2022). Oʻahu Pedestrian Plan.
+  - <sub>`transportation/SB2630_HA_Freedom_to_Walk_Senate_Transportation_2024.txt`</sub>
+- **Claim:** …Many states have found that by decriminalizing jaywalking
+  - **Source:** Streetsblog “These Communities Are Making Progress After ‘Jaywalking’” Reformhttps://usa.streetsblog.org/2022/06/23/these-u-s-communities-are-making-safety-progress-after-jaywalking-reform/
+  - <sub>`transportation/SB2630_HA_Freedom_to_Walk_Senate_Transportation_2024.txt`</sub>
+- **Claim:** …This is important as owning a personal vehicle in Hawaiʻi costs about $8,100 per year.
+  - **Source:** Yerton, Steward. (2020). Why It Costs So Much To Own A Car In Hawaii. Honolulu Civil Beat. Available at: https://www.civilbeat.org/2022/03/why-it-costs-so-much-to-own-a-car-in-hawaii/.
+  - <sub>`transportation/SB2894_HA_State_Commuters_Benefits_2024.txt`</sub>
+- **Claim:** …a personal vehicle in Hawaiʻi costs about $8,100 per year.[1] Notably, Hawaiʻi households own an average of two cars per household, which means vehicle ownership costs families $16,200 per year, representing about 20 percent of pre-tax median household income.
+  - **Source:** Steward (2020)
+  - <sub>`transportation/SB2894_HA_State_Commuters_Benefits_2024.txt`</sub>
+- **Claim:** …According to the State Climate Commission Report, Drivers of VMT and Priority Reduction Strategies in Hawaiʻi, approximately 30% of all trips taken are under 1 mile, 60% of all trips are under 3 miles, and 70% of all trips are under 5 miles.
+  - **Source:** Smart Growth America and the State Smart Transportation Initiative. (2021). Drivers of VMT and Priority Reduction Strategies in Hawaiʻi. Available at: https://climate.hawaii.gov/wp-content/uploads/2023/07/USCA_Hawaii_VMT_strategies_Feb22.pdf.
+  - <sub>`transportation/SB2894_HA_State_Commuters_Benefits_2024.txt`</sub>
+- **Claim:** …Studies published by the Transit Cooperative Research Program show that going fare free typically increases a transit system’s ridership by 25% to 50%.
+  - **Source:** Volinski J. (2012). Implementation and outcomes of fare-free transit systems. Transit Cooperative Research Program. TCRP Synthesis 101. Available at: https://nap.nationalacademies.org/read/22753/chapter/1#ii.
+  - <sub>`transportation/SB2894_HA_State_Commuters_Benefits_2024.txt`</sub>
+- **Claim:** …In the 1970s, Honolulu instituted a free fare program for all senior citizens over the age of 65. Less than three years later, the bus system was averaging nearly 350,000 senior trips per month, an increase of 88%.
+  - **Source:** U.S. Department of Transportation. (1974). The Effects of Fare Reduction on Public Transit Ridership. Available at: https://drive.google.com/file/d/1_x7JpVGmcb3SZJLGkiAoZ0yK9Wb5n8av/view.
+  - <sub>`transportation/SB2894_HA_State_Commuters_Benefits_2024.txt`</sub>
+- **Claim:** …ior trips per month, an increase of 88%.[5] However, as transit fares have been gradually increasing, former Department of Transportation Services Director Wes Frysztacki noted, “for every 10% increase in fare, TheBus generally sees a 3% decline in ridership.”
+  - **Source:** Honore, Marcel. Honolulu Traffic Is Terrible. So Why Aren’t More People Riding TheBus? Honolulu Civil Beat. Available at: https://www.civilbeat.org/2019/11/honolulu-traffic-is-terrible-so-why-arent-more-people-riding-thebus/.
+  - <sub>`transportation/SB2894_HA_State_Commuters_Benefits_2024.txt`</sub>
+- **Claim:** …A 2020 study from the Ulupono Initiative found that the cost to build parking in high-rise buildings (with podium-style parking) for affordable and mixed-income rentals in Honolulu’s urban core costs up to $55,000 per unit.
+  - **Source:** Ulupono Initiative, “The Costs of Parking in Hawaiʻi,” Prepared by PBR Hawaiʻi, August, 2020. https://ulupono.com/media/ivcfs2pu/the-cost-of-parking-in-hawaii-report-2020-08.pdf.
+  - <sub>`transportation/SB2981_Parking_Reform_Urban_Districts_2026.txt`</sub>
+- **Claim:** …Across the country, over 90 jurisdictions have eliminated or significantly reduced parking minimums, recognizing that such mandates hinder housing production and promote sprawl.
+  - **Source:** Parking Reform Network, “Parking Mandates Map,” January 6, 2025. https://parkingreform.org/resources/mandates-map/
+  - <sub>`transportation/SB2981_Parking_Reform_Urban_Districts_2026.txt`</sub>
+- **Claim:** …i Appleseed shows that permitted parking within housing developments in TOD areas on Oʻahu approved from 2010–2025 decreased by over 12 percent following passage of Ordinance 20-41, with the greatest reductions in parking made by affordable housing developers.
+  - **Source:** Seitz, A., Gilliam, T., and Heim, A, “Stalled: How Parking Mandates Drive Up Housing Costs,” Hawaiʻi Appleseed Center for Law and Economic Justice, October 2025. https://static1.squarespace.com/static/601374ae84e51e430a1829d8/t/68f15c7cbf563d6a7080bf8f/1760648316670/Stalled_FINAL.pdf.
+  - <sub>`transportation/SB2981_Parking_Reform_Urban_Districts_2026.txt`</sub>
+- **Claim:** …The plan identified fully subsidized transit passes as a high impact strategy to reduce vehicle travel among state workers.
+  - **Source:** OʻahuMPO, “Final Report Hawaiʻi State Government Transportation Demand Management Plan,” June, 2025. https://hdp-us-prod-app-oahumpo-engage-files.s3.us-west-2.amazonaws.com/9317/5400/9163/Hawaii_State_Government_Employee_TDM_Study_Final_Report.pdf.
+  - <sub>`transportation/SB2993_State_Worker_Subsidized_Transit_2026.txt`</sub>
+- **Claim:** …In Hawaiʻi, owning a personal vehicle costs about $8,100 per year.
+  - **Source:** Yerton, Steward. (2020). Why It Costs So Much To Own A Car In Hawaii. Honolulu Civil Beat. Available at: https://www.civilbeat.org/2022/03/why-it-costs-so-much-to-own-a-car-in-hawaii/.
+  - <sub>`transportation/SB3021_FIN_HA_EMobility_Rebate_House_2024.txt`</sub>
+- **Claim:** …ʻi, owning a personal vehicle costs about $8,100 per year.[1] Notably, Hawaiʻi households own an average of two cars per household, which means vehicle ownership costs families $16,200 per year, representing about 20 percent of pre-tax median household income.
+  - **Source:** Steward (2020)
+  - <sub>`transportation/SB3021_FIN_HA_EMobility_Rebate_House_2024.txt`</sub>
+- **Claim:** …In just nine months, 4,734 Denver residents became new ebike owners who cumulatively saved an estimated $1 million from avoided fuel and electricity costs.
+  - **Source:** City and County of Denver. (2022) Denver’s 2022 Ebike Incentive Program: Results and Recommendations.
+  - <sub>`transportation/SB3021_FIN_HA_EMobility_Rebate_House_2024.txt`</sub>
+- **Claim:** …For these reasons, a recent article from the Bloomberg City Lab went so far to state that “No mobility innovation in recent memory offers a comparable opportunity to simultaneously boost health, protect the environment and improve urban quality of life.”
+  - **Source:** Zipper, David. (2023). The Untapped Power of E-Bike Rebates. Bloomberg City Lab. Available at: https://www.bloomberg.com/news/articles/2023-07-07/release-the-e-bike-rebates.
+  - <sub>`transportation/SB3021_FIN_HA_EMobility_Rebate_House_2024.txt`</sub>
+- **Claim:** …ster deeper community connections. * NYC’s Summer Streets serves as a proven model for SB3029. Launched in 2008, the program has grown for nearly two decades, reaching its largest footprint in 2025 by opening 400+ blocks across all five boroughs to the public.
+  - **Source:** City of New York, “Mayor Adams Continues ‘We Outside’ Summer, Announcing Largest-Ever Summer Streets and More,” July 1, 2025, https://www.nyc.gov/mayors-office/news/2025/07/mayor-adams-continues-we-outside-summer-announcing-largest-ever-summer-streets-more.
+  - <sub>`transportation/SB3029_SD1_Summer_Streets_Program_2026.txt`</sub>
+- **Claim:** …easurable benefits, including 10,000 average visitors per event, a 27% increase in pedestrian activity compared to prior-year Sundays, a 38% average increase in sales for participating businesses and a 26% increase in in-store foot traffic on Open Streets days
+  - **Source:** Center City District, Open Streets: Reimagining Streets for People in Philadelphia, February 2025, https://centercityphila.org/research-reports/open-streets-reimagining-streets-for-people-in-philadelphia.
+  - <sub>`transportation/SB3029_SD1_Summer_Streets_Program_2026.txt`</sub>
+- **Claim:** …According to HDOT’s Vulnerable Road User Safety Assessment, more than half of all pedestrian crashes occur at intersections.
+  - **Source:** Hawaiʻi Department of Transportation (HDOT), “Hawaiʻi Vulnerable Road User Safety Assessment,” November, 2023. https://hidot.hawaii.gov/highways/files/2023/11/Final_VRUSA_2023.pdf.
+  - <sub>`transportation/SB3234_SD2_HD1_Pedestrian_Safety_Improvements_2026.txt`</sub>
+- **Claim:** …A San Francisco study found vehicle-pedestrian conflicts decreased from 7.0 percent to 1.1 percent
+  - **Source:** FHWA, “FHWA Highway Safety Programs: Safety Countermeasures”, accessed March 2026. https://highways.dot.gov/safety/pedestrian-bicyclist/safety-countermeasures/san-francisco-pedsafe-phase-ii-final-5.
+  - <sub>`transportation/SB3234_SD2_HD1_Pedestrian_Safety_Improvements_2026.txt`</sub>
+- **Claim:** …A San Francisco study found vehicle-pedestrian conflicts decreased from 7.0 percent to 1.1 percent[2] and a Los Angeles intersection that averaged 13 crashes per year experienced zero crashes after installation of an all-way crosswalk.
+  - **Source:** The Carlson Law Firm, “What are the Benefits of Pedestrian Scramble Crosswalk?” October 2023. https://www.carlsonattorneys.com/what-are-the-benefits-of-pedestrian-scramble-crosswalk/.
+  - <sub>`transportation/SB3234_SD2_HD1_Pedestrian_Safety_Improvements_2026.txt`</sub>
+- **Claim:** …In 2020, the City and County Department of Transportation Services successfully designed and installed an all-way crosswalk at the intersection of Kalakaua Avenue and Lewers Street in Waikiki.
+  - **Source:** City and County of Honolulu, “Complete Streets Progress Report: Fiscal Year 2020,” December 2020. https://www.honolulu.gov/completestreets/wp-content/uploads/sites/37/2024/03/Complete-Streets-Progress-Report-FINAL-DEC-2020.pdf.
+  - <sub>`transportation/SB3234_SD2_HD1_Pedestrian_Safety_Improvements_2026.txt`</sub>
+- **Claim:** …In contrast, over the past decade, the state’s transportation capital budget has averaged around $700 million per year, and in 2023 alone, the State Highway Fund had a revenue of approximately $316 million.
+  - **Source:** Seitz, Abbey and Gilliam, Trinity, “Rethinking roads: shifting budget priorities to expand mobility options & reduce vehicle travel,” Hawaiʻi Appleseed Center for Law and Economic Justice, December 2024. https://static1.squarespace.com/static/601374ae84e51e430a1829d8/t/6750d500e0d1b478185cf1ae/1733350677880/Rethinking+Roads_FINAL.pdf
+  - <sub>`transportation/SB3234_SD2_HD1_Pedestrian_Safety_Improvements_2026.txt`</sub>

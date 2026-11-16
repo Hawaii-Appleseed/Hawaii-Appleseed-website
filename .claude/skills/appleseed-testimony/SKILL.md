@@ -266,4 +266,25 @@ bleeding onto adjacent text.
 
 </details>
 
-Do not submit to the Capitol testimony portal. Shipping stops at a document the user reviews.
+## Step 6 — File it on the staff hub, for sign-off
+
+Testimony goes out under the organization's name, so somebody other than the writer reads it first. That review happens on the staff hub's task board: the hearing's testimony task carries the draft and a **Sign-off** (Drafting → In review → Approved → Submitted). Filing the draft there is the last step of drafting, and it replaces the old copy-paste (open the board, find or make the task, paste the link):
+
+```bash
+python3 "${CLAUDE_SKILL_DIR}/file_to_hub.py" draft.txt \
+  --bill HB1884 --hearing 2026-03-05T10:15 --committee WAM --position support \
+  --author "<the drafter's @hiappleseed.org address>" \
+  --html out/HB1884.html --area "Tax and Budget" \
+  --note "CITATION NEEDED: the DBEDT vacancy figure" --note "hearing room unverified"
+```
+
+- `--hearing` and `--committee` are the notice's (what `bill_lookup.py` printed, Honolulu time; the committee by its code, `JDC/WAM` for a joint hearing). **Never guess them**: with no hearing yet, there is nothing to file against, so stop here and say so.
+- `--author` is the person you are drafting for, by their hub address. Ask if you do not know it; never put your own guess on the record.
+- `--html` is the page `render_testimony.py` made: the hub files it as a Google Doc in the issue area's Testimony folder and links the task to it (so Step 5's Drive route is not needed when this runs). `--doc <url>` instead, when the Doc already exists.
+- `--note`, repeatable, is the handoff: every `CITATION NEEDED`, every hearing detail you could not verify, the closing-line divergence if it came up. The reviewer sees them on the task.
+
+It prints the task's link and the hearing packet's. **Give the user both.** The hub makes the task if the hearings feed has not already (same id, due at the Capitol's 24-hour cutoff, held by the author) and otherwise puts the draft on the feed's task; running it again for the same bill and hearing replaces the draft (a numbered version), never a second task. Testimony the hub shows as already submitted is refused.
+
+It needs the hub's Access service token, read from the Mac's Keychain, and exits 2 with the reason when there is none on this machine. Then the draft is still on disk: tell the user to ask Devin Thomas to file it. **Never ask anyone for the token, and never paste one into chat.**
+
+Do not submit to the Capitol testimony portal. Shipping stops at a document the user reviews, and the hub's sign-off is where that review is recorded.

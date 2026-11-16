@@ -1,0 +1,61 @@
+\\LEJ-SERVER\Server Share Drive\Admin\Logos\GREEN\Horizontal.png 
+
+Testimony of the Hawaiʻi Appleseed Center for Law and Economic Justice
+Support for H.B. 2364 – Relating to Conveyance Tax
+Joint House Committee on Housing and Water & Land
+Wednesday, February 7, 2024 at 8:30AM Conf. Rm. 430 and via Videoconference
+                                                                                                
+Dear Chair Evslin, Vice Chair Aiu, Chair Ichiyama, Vice Chair Poepoe, and members of the Committees on Housing and Water & Land: 
+
+Thank you for the opportunity to express our STRONG SUPPORT for H.B. 2364, which will increase the rates of conveyance tax starting at sales of $4,000,000 and above and create a dedicated 10% allocation to the Dwelling Unit Revolving Fund (DURF). We also offer suggested amendments to remove the funding caps on the Rental Housing Revolving Fund (RHRF) and Land Conservation Fund (LCF) as well as suggested changes to the tax rates. 
+The Dwelling Unit Revolving Fund (DURF), established in 1970, supports infrastructure investments connected to housing development, crucial for maintaining housing production aligned with our increasing demand. Hawaii was given a D+ rating by the American Society of Civil Engineers in the “2019 Hawaii Infrastructure Report Card”[1]. Lack of adequate infrastructure further exacerbates delays to our needed additional housing construction. Increasing funding to DURF is necessary to reach the housing goals across the state. Hawaiʻi Appleseed commends the legislature for proposing a 10% dedicated fund from high cost property sales to address our infrastructure needs.
+Hawaiʻi Appleseed would also like to suggest amendments to H.B. 2364. Specifically, removing the funding caps from the RHRF and LCF. The conveyance tax is one of the only dedicated funds for creating affordable housing and land conservation, two critical needs to support the health and security of Hawaiʻi’s residents. 
+The 2019 Hawaii Housing Planning (HHPS 2019) Study identified the need for 50,000 additional housing units by 2025 to meet pent-up demand[2]. Estimates from the HHPS 2019 indicated that over 50 percent of our housing production needs to be affordable rentals (0-100% AMI) for low-income and workforce families to meet demand. The RHRF provides financing for Low Income Housing Tax Credit (LIHTC) projects for individuals making 0-60% AMI and financing for Tier 2 program which utilizes the RHRF for 80-100% AMI focused projects. Hawaiʻi Appleseed recommends the following language change in S.B 3053: 
+“§247-7 Disposition of taxes”
+1. Ten percent or $5,100,000, whichever is less, shall be paid into the land conservation fund established pursuant to section 173A-5; and
+2. Fifty per cent or $38,000,000, whichever is less, shall be paid into the rental housing revolving fund established by section 201H-202
+Increasing conveyance tax rates, removing caps on RHRF and LCF, and creating a dedicated DURF fund can provide millions of dollars to address some of the most pressing barriers to providing affordable housing to residents today.
+Additionally, we recommend adjustments to the rate changes as well. Starting the rate of conveyance on sales of $4,000,000 properties and above at 2%. Our research has shown that the vast majority of properties sold and purchased at these high sales points are by investment owners and not residents. Our rate change suggestions are highlighted in the table below.
+Hawaii Appleseed Recommendations to HB 2364 tax rates: 
+Rate
+	< $600K
+	$600K- $1M
+	$1M- $2M
+	$2M- $4M
+	$4M- $6M
+	$6M- $10M
+	$10M- $14M
+	$14M- $18M
+	$18M- $22M
+	$22M- $26M
+	$26M+
+	Owner Occupied
+	0.10%
+	0.20%
+	0.30%
+	0.50%
+	2.00%
+	2.50%
+	3.00%
+	4.00%
+	5.00%
+	6.00%
+	7.00%
+	Non Owner Occupied
+	0.15%
+	0.25%
+	0.40%
+	1.00%
+	2.00%
+	2.50%
+	3.00%
+	4.00%
+	5.00%
+	6.00%
+	7.00%
+	Increasing the rates on properties sold at $4,000,000 and above in this way and removing the caps on all special funds could potentially triple the revenue collected by the conveyance tax without significant reduction of revenue deposited into the General Fund.
+We appreciate the opportunity to testify on this proposal and urge the committees to support H.B. 2364 and its objectives of promoting fairness in our tax system, fostering affordable housing opportunities, and strengthening our communities. By enacting this legislation, we can take significant strides towards building a more inclusive and equitable future for all residents of Hawaii.
+Mahalo for your consideration.
+________________
+[1] ASCE, “2019 Hawaii Infrastructure Report Card”, https://infrastructurereportcard.org/wp-content/uploads/2021/07/ASCE-24199_Full-REPORT-2019-FINAL.pdf 
+[2]   “Hawaii Housing Planning Study, 2019” HHFDC, December 2019, pg. 38 https://dbedt.hawaii.gov/hhfdc/files/2020/01/FINAL-State_Hawaii-Housing-Planning-Study.pdf

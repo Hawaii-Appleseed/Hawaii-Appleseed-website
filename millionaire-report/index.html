@@ -181,7 +181,7 @@
         .infographic-banner {
             max-width: 960px;
             margin: 0 auto 0;
-            background: linear-gradient(160deg, var(--field-deepest) 0%, var(--field) 30%, var(--field-lift) 70%, var(--field-edge) 100%);
+            background: #27343d;
             border-radius: var(--r-lg) var(--r-lg) 0 0;
             padding: clamp(1.5rem, 4vw, 2.8rem) clamp(1.5rem, 4vw, 3rem);
             display: flex;
@@ -200,9 +200,6 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background:
-                linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 55%),
-                radial-gradient(ellipse at 90% 20%, rgba(var(--mint-rgb), 0.07) 0%, transparent 55%);
             pointer-events: none;
             border-radius: var(--r-lg);
         }
@@ -236,7 +233,7 @@
             font-weight: 900;
             line-height: 1;
             letter-spacing: -1px;
-            background: linear-gradient(180deg, rgba(var(--mint-rgb), 0.15) 60%, rgba(var(--mint-rgb), 0.25) 100%);
+            background: rgba(133, 169, 143, 0.18);
             padding: 2px 8px 4px;
             border-radius: var(--r-xs);
         }
@@ -253,7 +250,7 @@
             background:
                 radial-gradient(ellipse 70% 120% at 50% 0%, rgba(var(--mint-rgb), 0.07) 0%, transparent 70%),
                 linear-gradient(160deg, var(--field-edge) 0%, var(--field-mid) 45%, var(--field-deep) 100%);
-            border-radius: 0 0 var(--r-lg) var(--r-lg);
+            border-radius: var(--r-lg);
             text-align: center;
             /* Same elevation as the banner — they're one object, so they must
                cast one shadow, not two different ones. */
@@ -388,14 +385,12 @@
         /* Stats row */
         .banner-stats {
             display: grid;
-            grid-template-columns: 1fr auto 1fr auto 1fr;
+            grid-template-columns: 1fr;
             gap: 0;
             position: relative;
             z-index: 2;
-            background: rgba(255,255,255,0.05);
-            border-radius: var(--r-md);
-            border: 1px solid rgba(255,255,255,0.07);
-            padding: clamp(1rem, 2.5vw, 1.5rem) 0;
+            border-top: 1px solid #3f4f5a;
+            padding: clamp(1rem, 2.5vw, 1.5rem) 0 0;
         }
 
         .banner-stat {
@@ -408,7 +403,7 @@
 
         .banner-stat-value {
             font-family: 'Nunito', system-ui, sans-serif;
-            color: var(--mint);
+            color: #cfe3d4;
             font-size: clamp(1.6rem, 4.5vw, 2.4rem);
             font-weight: 900;
             line-height: 1.1;
@@ -416,7 +411,7 @@
         }
 
         .banner-stat-unit {
-            color: rgba(var(--mint-rgb), 0.5);
+            color: #85a98f;
             font-size: 0.95rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -449,8 +444,8 @@
             align-items: center;
             gap: 0.55rem;
             padding: 0.45rem 0.85rem;
-            background: rgba(var(--mint-rgb), 0.1);
-            border: 1px solid rgba(var(--mint-rgb), 0.18);
+            background: rgba(133, 169, 143, 0.12);
+            border: 1px solid rgba(133, 169, 143, 0.3);
             border-radius: var(--r-md);
         }
         .banner-trend-spark {
@@ -464,7 +459,7 @@
         }
         .banner-trend-figure {
             font-family: 'Nunito', system-ui, sans-serif;
-            color: var(--mint);
+            color: #cfe3d4;
             font-weight: 900;
             font-size: 1.3rem;
             letter-spacing: -0.01em;
@@ -495,7 +490,7 @@
         .conc-bar-fill {
             display: block;
             height: 100%;
-            background: linear-gradient(90deg, var(--green), var(--mint-soft));
+            background: #85a98f;
             border-radius: var(--r-xs);
             transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -524,32 +519,6 @@
         }
 
         /* ── Coin stack ── */
-        .coin-stack-svg {
-            display: block;
-            margin: 0 auto 0.4rem;
-        }
-
-        /* ── Budget pie grid ── */
-        .budget-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            justify-content: center;
-            max-width: 160px;
-            margin: 0.5rem auto 0.35rem;
-        }
-
-        .budget-pie {
-            width: 14px;
-            height: 14px;
-            position: relative;
-        }
-
-        .budget-pie svg {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
 
         /* ── Dropdown in banner ── */
         .dropdown-wrapper {
@@ -1179,6 +1148,25 @@
                 margin-left: 0;
             }
         }
+
+        /* Fortunes-in-state-budgets graphic */
+        .fortune-card { max-width:960px; margin:0 auto var(--space-block); background:#2f3d47; color:#e6ebe3; border-radius:0 0 var(--r-lg) var(--r-lg); padding:clamp(1.5rem,4vw,2.8rem) clamp(1.5rem,4vw,3rem); box-shadow:var(--shadow-hero); }
+        .fortune-kicker { margin:0 0 1rem; font-size:clamp(.78rem,2.2vw,.95rem); font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:#85a98f; }
+        .fortune-top { display:flex; flex-wrap:wrap; justify-content:space-between; gap:1.25rem 2rem; align-items:flex-start; }
+        .fortune-big { font-size:clamp(2.6rem,9vw,4.4rem); font-weight:900; line-height:1; color:#fff; }
+        .fortune-big small { font-size:.42em; font-weight:800; color:#c9d1c6; margin-left:.2em; }
+        .fortune-desc { margin:.6rem 0 0; font-size:clamp(.95rem,2.6vw,1.2rem); color:#c9d1c6; max-width:30ch; }
+        .fortune-desc strong { color:#fff; }
+        .fortune-mult { text-align:right; }
+        .fortune-mult .n { font-size:clamp(2.6rem,9vw,4.4rem); font-weight:900; line-height:1; color:#85a98f; }
+        .fortune-mult p { margin:.6rem 0 0; font-size:clamp(.95rem,2.6vw,1.2rem); color:#c9d1c6; }
+        .fortune-blocks { display:grid; grid-template-columns:repeat(13,1fr); gap:.3rem; margin:1.75rem 0 .5rem; }
+        .fortune-blocks span { background:#85a98f; border-radius:8px; aspect-ratio:1.1; }
+        .fortune-blocks span.p { background:#3f4f5a; overflow:hidden; }
+        .fortune-blocks span.p i { display:block; height:100%; background:#85a98f; }
+        @media (max-width: 600px) { .fortune-mult { text-align:left; } .fortune-blocks { grid-template-columns:repeat(7,1fr) !important; } }
+        .fortune-note { margin:.75rem 0 0; font-size:clamp(.85rem,2.4vw,1.05rem); color:#c9d1c6; }
+        .fortune-note strong { color:#fff; }
     </style>
 </head>
 <body>
@@ -1211,42 +1199,29 @@
         </div>
         <div class="banner-stats">
             <div class="banner-stat">
-                <svg class="coin-stack-svg" width="38" height="38" viewBox="0 0 38 38">
-                    <!-- Bottom coin side -->
-                    <path d="M4,27 L4,31 A15,5 0 0 0 34,31 L34,27 Z" fill="rgba(45,100,58,0.6)"/>
-                    <!-- Bottom coin face -->
-                    <ellipse cx="19" cy="27" rx="15" ry="5" fill="rgba(72,145,88,0.45)" stroke="rgba(168,230,176,0.28)" stroke-width="1"/>
-                    <!-- Middle coin side -->
-                    <path d="M4,18 L4,22 A15,5 0 0 0 34,22 L34,18 Z" fill="rgba(55,118,70,0.68)"/>
-                    <!-- Middle coin face -->
-                    <ellipse cx="19" cy="18" rx="15" ry="5" fill="rgba(88,165,104,0.58)" stroke="rgba(168,230,176,0.38)" stroke-width="1"/>
-                    <!-- Top coin side -->
-                    <path d="M4,9 L4,13 A15,5 0 0 0 34,13 L34,9 Z" fill="rgba(65,135,80,0.75)"/>
-                    <!-- Top coin face -->
-                    <ellipse cx="19" cy="9" rx="15" ry="5" fill="rgba(105,188,122,0.72)" stroke="rgba(168,230,176,0.55)" stroke-width="1"/>
-                    <!-- Inner ring on top -->
-                    <ellipse cx="19" cy="9" rx="10" ry="3.3" fill="none" stroke="rgba(168,230,176,0.3)" stroke-width="0.7"/>
-                    <text x="19" y="11.5" text-anchor="middle" fill="rgba(168,230,176,0.85)" font-size="6.5" font-weight="900" font-family="Nunito,sans-serif">$</text>
-                </svg>
-                <span class="banner-stat-value" id="summaryWealth">$292.7</span>
-                <span class="banner-stat-unit">billion</span>
-                <span class="banner-stat-label">total wealth held</span>
-            </div>
-            <div class="banner-divider"></div>
-            <div class="banner-stat">
                 <span class="banner-stat-value" id="concentrationValue">24%</span>
                 <span class="banner-stat-unit" id="concentrationUnit">of all wealth</span>
                 <div class="conc-bar" id="concBar" aria-hidden="true"><span class="conc-bar-fill" id="concBarFill" style="width:23.7%"></span></div>
                 <span class="banner-stat-label" id="concentrationLabel">held by the top 365 (0.4%)</span>
             </div>
-            <div class="banner-divider"></div>
-            <div class="banner-stat">
-                <span class="banner-stat-value" id="budgetMultiple">16.4</span>
-                <span class="banner-stat-unit">times the state budget</span>
-                <div class="budget-grid" id="budgetGrid"></div>
-                <span class="banner-stat-label"><span style="display:inline-block;width:8px;height:8px;background:rgba(252,196,72,0.8);border-radius:50%;vertical-align:middle;margin-right:3px;"></span> = 1 state budget <span style="white-space:nowrap;">($23.7B &middot; 2026)</span>
+        </div>
+    </div>
+
+    <!-- 12.4x state budget: the banner stat's visual -->
+    <div class="fortune-card" id="budgetCard" role="img" aria-label="Hawaiʻi's millionaires hold 12.4 times the state's annual budget.">
+        <p class="fortune-kicker" id="fcKicker">Hawaiʻi&rsquo;s millionaires hold wealth equivalent to 12.4&times; the state budget</p>
+        <div class="fortune-top">
+            <div>
+                <div class="fortune-big"><span id="fcWealth">$292.7</span><small>billion</small></div>
+                <p class="fortune-desc">held by the <strong><span id="fcCount">81,814</span> Hawaiʻi <span id="fcWho">millionaires</span></strong> in 2024</p>
+            </div>
+            <div class="fortune-mult">
+                <div class="n"><span id="fcMult">12.4</span>&times;</div>
+                <p>the state&rsquo;s entire<br>annual budget</p>
             </div>
         </div>
+        <div class="fortune-blocks" id="fcBlocks" aria-hidden="true"></div>
+        <p class="fortune-note"><strong>One block = $23.7 billion,</strong> Hawaiʻi&rsquo;s annual state budget (2026).</p>
     </div>
 
     <!-- Wealth-tax revenue callout: the report's scenarios (Table 1 / Figure 4) -->
@@ -1306,7 +1281,7 @@
         <div class="chart-header">
             <div class="chart-title-group">
                 <select class="chart-switcher" id="chartSwitcher">
-                    <option value="wealth">Wealth Held by Wealthy Individuals, Billions</option>
+                    <option value="wealth">Wealth Held by Millionaires, Billions</option>
                     <option value="individuals"># of Individuals by Wealth Tier</option>
                 </select>
                 <span class="subtitle" id="chartSubtitle">Hawaiʻi, 2010&ndash;2024 (USD) &middot; Stacked area shows tiers as portions of total</span>
@@ -1894,8 +1869,6 @@
         const tierBtn = document.getElementById('tierBtn');
         const tierMenu = document.getElementById('tierMenu');
         const summaryCount = document.getElementById('summaryCount');
-        const summaryWealth = document.getElementById('summaryWealth');
-        const budgetMultiple = document.getElementById('budgetMultiple');
 
         // ── Count-up animation ──
         function animateValue(el, start, end, duration, formatter) {
@@ -1911,46 +1884,17 @@
             requestAnimationFrame(tick);
         }
 
-        function pieSVG(fill, stroke, sliceColor) {
-            // Full pie with 4 slice lines
-            const c = 8; // center
-            const r = 7; // radius
-            const lines = [0, 90, 180, 270].map(deg => {
-                const rad = (deg - 90) * Math.PI / 180;
-                const x2 = c + r * Math.cos(rad);
-                const y2 = c + r * Math.sin(rad);
-                return `<line x1="${c}" y1="${c}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${sliceColor}" stroke-width="0.5"/>`;
-            }).join('');
-            return `<svg viewBox="0 0 16 16"><circle cx="${c}" cy="${c}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="1"/>${lines}</svg>`;
-        }
-
-        function partialPieSVG(fraction) {
-            const c = 8, r = 7;
-            const deg = fraction * 360;
-            const rad = (deg - 90) * Math.PI / 180;
-            const x = c + r * Math.cos(rad);
-            const y = c + r * Math.sin(rad);
-            const large = deg > 180 ? 1 : 0;
-            const path = `M${c},${c} L${c},${c - r} A${r},${r} 0 ${large},1 ${x.toFixed(2)},${y.toFixed(2)} Z`;
-            return `<svg viewBox="0 0 16 16"><circle cx="${c}" cy="${c}" r="${r}" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)" stroke-width="1"/><path d="${path}" fill="rgba(255,255,255,0.22)"/></svg>`;
-        }
-
-        function updateBudgetGrid(multiple) {
-            const grid = document.getElementById('budgetGrid');
-            const full = Math.floor(multiple);
-            const partial = multiple - full;
-            let html = '';
-            for (let i = 0; i < full; i++) {
-                if (i === 0) {
-                    html += `<div class="budget-pie">${pieSVG('rgba(252,196,72,0.75)', 'rgba(252,196,72,0.5)', 'rgba(252,196,72,0.3)')}</div>`;
-                } else {
-                    html += `<div class="budget-pie">${pieSVG('rgba(255,255,255,0.18)', 'rgba(255,255,255,0.10)', 'rgba(255,255,255,0.07)')}</div>`;
-                }
-            }
-            if (partial > 0.05) {
-                html += `<div class="budget-pie">${partialPieSVG(partial)}</div>`;
-            }
-            grid.innerHTML = html;
+        function updateBudgetCard(multiple, info) {
+            const full = Math.floor(multiple), partial = multiple - full;
+            let html = '<span></span>'.repeat(full);
+            if (partial > 0.05) html += `<span class="p"><i style="width:${(partial * 100).toFixed(0)}%"></i></span>`;
+            document.getElementById('fcBlocks').innerHTML = html;
+            document.getElementById('fcBlocks').style.gridTemplateColumns = `repeat(${Math.max(full + (partial > 0.05 ? 1 : 0), 1)}, 1fr)`;
+            document.getElementById('fcMult').textContent = multiple.toFixed(1);
+            document.getElementById('fcWealth').textContent = '$' + info.wealth.toFixed(1);
+            document.getElementById('fcCount').textContent = info.count.toLocaleString();
+            document.getElementById('fcWho').textContent = info.label;
+            document.getElementById('fcKicker').textContent = `Hawaiʻi’s ${info.label} hold wealth equivalent to ${multiple.toFixed(1)}× the state budget`;
         }
 
         // Summed series for the aggregate "all" view (2010–2024 counts)
@@ -1975,12 +1919,12 @@
             const last = pts[n - 1];
             svg.innerHTML =
                 '<defs><linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">' +
-                '<stop offset="0%" stop-color="rgba(138,214,160,0.4)"/>' +
-                '<stop offset="100%" stop-color="rgba(138,214,160,0)"/>' +
+                '<stop offset="0%" stop-color="rgba(133,169,143,0.45)"/>' +
+                '<stop offset="100%" stop-color="rgba(133,169,143,0)"/>' +
                 '</linearGradient></defs>' +
                 '<path d="' + area + '" fill="url(#sparkFill)"/>' +
-                '<path d="' + line + '" fill="none" stroke="#8ad6a0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>' +
-                '<circle cx="' + last[0].toFixed(1) + '" cy="' + last[1].toFixed(1) + '" r="1.9" fill="#a8e6b0"/>';
+                '<path d="' + line + '" fill="none" stroke="#a9c7b2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>' +
+                '<circle cx="' + last[0].toFixed(1) + '" cy="' + last[1].toFixed(1) + '" r="1.9" fill="#cfe3d4"/>';
         }
 
         function updateSummary(info) {
@@ -1994,10 +1938,8 @@
             }
             
             summaryCount.textContent = info.count.toLocaleString();
-            animateValue(summaryWealth, 0, info.wealth, 1000, v => '$' + v.toFixed(1));
             const multiple = info.wealth / STATE_BUDGET;
-            budgetMultiple.textContent = multiple.toFixed(1);
-            updateBudgetGrid(multiple);
+            updateBudgetCard(multiple, info);
 
             // Trend: growth in this group since 2010
             const growthPct = Math.round((info.count / info.count2010 - 1) * 100);

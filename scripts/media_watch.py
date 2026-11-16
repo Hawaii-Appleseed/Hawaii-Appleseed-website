@@ -39,8 +39,9 @@ What it does each run:
   2. Runs the stages, keeps stories inside the lookback window.
   3. De-duplicates across sources (by headline and by URL) and against
      media-watch/mentions.json.
-  4. Checks each story against news.json's `press` items (the In the News
-     page) so the digest lists only stories nobody has posted yet.
+  4. Checks each story against the In the News page, read live from the site
+     and from news.json's `press` items (a nightly copy that can be a day or
+     more behind), so the digest lists only stories nobody has posted yet.
 
 Outputs:
   media-watch/mentions.json   every kept story, with status. The script never
@@ -736,6 +737,14 @@ class Reader:
                 self.checked[iid] = self.today        # cannot show it is recent
                 continue
 
+            if needs_content_check(it, cfg):
+                if unread:                                # cannot rule it out, so it is not reported
+                    self.checked[iid] = blind_mark(self.today)
+                    continue
+                if content_excluded(it, text, cfg):
+                    self.checked[iid] = self.today
+                    continue
+
             def judge(t):
                 return classify({"title": it["title"], "snippet": t}, cfg, staff,
                                 kind="org" if alert and unread else "", full_text=len(t) >= 1500)
@@ -748,6 +757,9 @@ class Reader:
                     self.seen -= 1
                     continue
                 if page is not None:
+                    if content_excluded(it, page, cfg):
+                        self.checked[iid] = self.today
+                        continue
                     verdict = judge(page)
                     d = d or parse_any_date(published or "")
             if verdict is None or verdict[0] == "low":
@@ -1132,10 +1144,20 @@ def classify(item, cfg, staff, kind="", full_text=False):
 UNCHECKED = "search engine matched the phrase; article text not checked"
 
 
+HEADLINE_STAFF = re.compile(r"^staff: .+, with Hawaiʻi policy context$")   # no "; the text does not name Appleseed" tail
+
+
+def is_guess(reason):
+    """A reason nobody has read the article behind: the engine's phrase match
+    (UNCHECKED), or a staff name that sat near Hawaiʻi and policy words in a
+    headline or snippet. A namesake looks exactly like that."""
+    return reason == UNCHECKED or bool(HEADLINE_STAFF.match(reason))
+
+
 def is_weak(rec):
     """Needs the article read before it is believed: a bare staff name, or a
     match nobody has seen the words of."""
-    return rec["confidence"] == "low" or rec["reasons"] == [UNCHECKED]
+    return rec["confidence"] == "low" or (bool(rec["reasons"]) and all(is_guess(r) for r in rec["reasons"]))
 
 
 def verify_article(text, cfg):
@@ -1197,6 +1219,34 @@ def load_site_press(path=None):
     return out
 
 
+LIVE_PRESS_URL = "https://hiappleseed.org/in-the-news?format=json"
+
+
+def load_live_press(url=None, pages=3):
+    """The In the News items as the website serves them right now.
+
+    news.json is only a copy, synced nightly and committed only when it changes,
+    so a story posted today is missing from it for up to a day or more and the
+    watcher announces something that is already up. The live page closes that
+    gap. Any failure returns what was read so far (an empty list at worst), and
+    the caller still has news.json, so this never stops a run.
+    """
+    out, url = [], url or LIVE_PRESS_URL
+    for _ in range(pages):
+        try:
+            data = json.loads(http_get(url))
+        except (RuntimeError, ValueError):
+            break
+        for p in data.get("items", []):
+            out.append({"url": canon_url(p.get("sourceUrl", "")) if p.get("sourceUrl") else "",
+                        "title": norm(p.get("title", "")), "fullUrl": p.get("fullUrl", "")})
+        nxt = (data.get("pagination") or {}).get("nextPageUrl")
+        if not nxt:
+            break
+        url = urllib.parse.urljoin(LIVE_PRESS_URL, nxt) + ("&format=json" if "format=json" not in nxt else "")
+    return out
+
+
 def on_site(item, press):
     """Return the In the News path if this story is already posted there."""
     cu = canon_url(item["url"]) if "news.google.com" not in item["url"] else ""
@@ -1218,7 +1268,46 @@ def is_ignored(item, cfg):
     The default is "Candidate Q&A": an election guide lists every candidate, so a
     staff member who ran shows up on six rivals' pages as well as their own, in a
     public digest, for a reason that is not press coverage of the org."""
-    return any(re.search(pat, item["title"], re.I) for pat in cfg.get("ignore_titles", []))
+    return (any(re.search(pat, item["title"], re.I) for pat in cfg.get("ignore_titles", []))
+            or any(re.search(pat, item.get("url", ""), re.I) for pat in cfg.get("ignore_urls", []))
+            or is_blocked(item, cfg))
+
+
+def _content_rules(item, cfg):
+    """The config `ignore_content` rules that apply to this story's outlet: {host, contains}."""
+    hosts = {host_of(item.get("outlet_url", "")), host_of(item.get("url", ""))} - {""}
+    return [r for r in cfg.get("ignore_content", [])
+            if any(h == r["host"] or h.endswith("." + r["host"]) for h in hosts)]
+
+
+def needs_content_check(item, cfg):
+    """True when an `ignore_content` rule covers this story's outlet, so its text must be read."""
+    return bool(_content_rules(item, cfg))
+
+
+def content_excluded(item, text, cfg):
+    """A story from a rule's outlet whose text contains the rule's phrase (config
+    ignore_content: Civil Beat + "Will Caron"). Not about us, so never a mention."""
+    t = norm(text or "")
+    return any(has_phrase(t, r["contains"]) for r in _content_rules(item, cfg))
+
+
+def is_blocked(item, cfg):
+    """A source a person has said is junk (config block_sources). Each entry is a host
+    ("example.com", which also covers its subdomains) or a host plus path prefix
+    ("facebook.com/somepage", which blocks that page and leaves the rest of the host
+    alone). Matched against the story's own URL and its outlet URL, never the title."""
+    for u in (item.get("url", ""), item.get("outlet_url", "")):
+        if not u:
+            continue
+        host = host_of(u)
+        path = urllib.parse.urlsplit(u if "//" in u else "//" + u).path.strip("/").lower()
+        for entry in cfg.get("block_sources", []):
+            bhost, _, bpath = entry.lower().strip("/").partition("/")
+            if host and (host == bhost or host.endswith("." + bhost)) and (
+                    not bpath or path == bpath or path.startswith(bpath + "/")):
+                return True
+    return False
 
 
 def is_own(item, cfg):
@@ -1343,8 +1432,10 @@ def settle(merged, state, cfg, checked, today, delay=0.5, out=sys.stdout):
     match by URL), then reads the article behind every weak match. A page that
     loads and never says Appleseed is a rejection, remembered in
     `checked` so it is not fetched again tomorrow. A page that will not
-    load leaves the match as it was: an unchecked engine match stays, a bare
-    staff name is dropped by the confidence filter. Mutates `merged`."""
+    load (a Facebook post, a bot wall, a Google link that did not resolve, the
+    per-run read budget) settles nothing, and a story nobody has read is NOT
+    reported: it is dropped for this run and not remembered, so the next run
+    tries it again while it is inside the lookback window. Mutates `merged`."""
     known = {i["id"] for i in state["items"]}
     resolved = read = 0
     for key in list(merged):
@@ -1360,12 +1451,28 @@ def settle(merged, state, cfg, checked, today, delay=0.5, out=sys.stdout):
             time.sleep(delay)
             if real:
                 m["url"] = real
-        if not is_weak(m) or "news.google.com" in m["url"] or read >= MAX_VERIFY:
+        if is_ignored(m, cfg):                     # the real URL is known now
+            del merged[key]
+            continue
+        check, weak = needs_content_check(m, cfg), is_weak(m)
+        if "news.google.com" in m["url"] or read >= MAX_VERIFY:
+            if check:                              # cannot read it, cannot rule it out
+                del merged[key]
+            continue
+        if not (weak or check):
             continue
         read += 1
         text = fetch_article_text(m["url"])
         time.sleep(delay)
         if text is None:
+            if check:
+                del merged[key]
+            continue
+        if check and content_excluded(m, text, cfg):
+            checked[iid] = today
+            del merged[key]
+            continue
+        if not weak:
             continue
         verdict = verify_article(text, cfg)
         if verdict is None:
@@ -1374,8 +1481,11 @@ def settle(merged, state, cfg, checked, today, delay=0.5, out=sys.stdout):
             continue
         m["confidence"] = verdict[0]
         # the weak reasons ("Will Caron only", "not checked") are settled now
-        m["reasons"] = [r for r in m["reasons"] if r != UNCHECKED and not r.endswith(" only")] + [verdict[1]]
-    print(f"resolved {resolved} links, read {read} articles", file=out)
+        m["reasons"] = [r for r in m["reasons"] if not is_guess(r) and not r.endswith(" only")] + [verdict[1]]
+    unread = [k for k, m in merged.items() if story_id(k) not in known and is_weak(m)]
+    for k in unread:
+        del merged[k]
+    print(f"resolved {resolved} links, read {read} articles, held back {len(unread)} nobody could read", file=out)
 
 
 STAGES = ("engines", "feeds", "search", "podcasts")
@@ -1449,7 +1559,7 @@ def run(days=None, dry_run=False, delay=REQUEST_DELAY, out=sys.stdout, only=None
     merged = merge_found(found)
     settle(merged, state, cfg, checked, today, delay=delay * 0.5, out=out)
     merged = {k: m for k, m in merged.items() if RANK[m["confidence"]] >= RANK[min_conf]}
-    press = load_site_press()
+    press = load_site_press() + load_live_press()
     for m in merged.values():
         m["on_site"] = on_site(m, press)
 

@@ -1,6 +1,48 @@
 {
   "blog": [
     {
+      "id": "6af3be8a486b344743f3383e",
+      "title": "Waipahu residents want homes and groceries, not gas pumps next to rail",
+      "excerpt": "<p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">Costco wants to build a 24-pump gas station next to the H\u014d\u02bbae\u02bbae rail station. Waipahu residents are fighting for affordable homes and a grocery store.</p>",
+      "fullUrl": "/blog/waipahu-costco-gas-station-housing-grocery",
+      "publishOn": 1794506402029,
+      "categories": [
+        "Transportation Equity"
+      ],
+      "author": {
+        "displayName": "Malia Boksanski"
+      },
+      "assetUrl": "https://images.squarespace-cdn.com/content/v1/601374ae84e51e430a1829d8/1794359359129-BXK3YJPWC3ZW9A2CKHXO/unsplash-image-aL05xpge6IM.jpg"
+    },
+    {
+      "id": "6aed095f599ffa24b27ba853",
+      "title": "As 44 percent of local families struggle, Hawai\u02bbi\u2019s ultra-wealthy hoard $95.6 billion",
+      "excerpt": "<p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">Hawai\u02bbi's 1,245 ultra-millionaires hold $95.6 billion\u2014nine times the state budget. Here's how a wealth tax could fund critical programs and services.</p>",
+      "fullUrl": "/blog//hawaii-wealth-tax-top-1-percent",
+      "publishOn": 1793919601587,
+      "categories": [
+        "Taxes & Budget"
+      ],
+      "author": {
+        "displayName": "Devin Thomas"
+      },
+      "assetUrl": "https://images.squarespace-cdn.com/content/v1/601374ae84e51e430a1829d8/1710356924999-XV1GBIEDZD1MOBE13UJH/pexels-andrea-piacquadio-3771100.jpeg"
+    },
+    {
+      "id": "6ae3dd4260ac3d1df5db9c77",
+      "title": "The compounding trap: What federal changes really mean for SNAP access",
+      "excerpt": "<p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">New federal SNAP rules add impossible hurdles for Hawai\u02bbi families while cutting state resources. Here's how the compounding trap threatens food security.</p>",
+      "fullUrl": "/blog/the-compounding-trap-what-federal-changes-really-mean-for-snap-access",
+      "publishOn": 1793323593798,
+      "categories": [
+        "Food Equity"
+      ],
+      "author": {
+        "displayName": "Genevieve Mumma and Daniela Spoto"
+      },
+      "assetUrl": "https://images.squarespace-cdn.com/content/v1/601374ae84e51e430a1829d8/1793323235374-DZCZHLDHGDFIQ9OYUC07/unsplash-image-CZtK_E89omo.jpg"
+    },
+    {
       "id": "6ad65ea4122952435da48739",
       "title": "RISE Bonds on the ballot: What a Constitutional Amendment can\u2014and can\u2019t\u2014do for Hawai\u02bbi",
       "excerpt": "<p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">Question 2 on your ballot would let counties use RISE bonds to fund infrastructure. Here's what the ConAm can\u2014and can't\u2014do for Hawai\u02bbi.</p>",
@@ -3536,6 +3578,70 @@
     }
   ],
   "press": [
+    {
+      "id": "6af3a653dcdeec7bc83d0eb5",
+      "title": "The push for a fare-free bus system gains local support",
+      "excerpt": "<p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">A free bus fare system could be more accessible than some think, according to the newest report from the Hawai\u02bbi Appleseed Center for Law and Economic Justice.</p>",
+      "fullUrl": "/in-the-news/the-push-for-a-fare-free-bus-system-gains-local-support",
+      "sourceUrl": "https://www.hawaiipublicradio.org/local-news/2026-11-10/the-push-for-a-fare-free-bus-system-gains-local-support",
+      "publishOn": 1794351642723,
+      "categories": [
+        "Transportation Equity"
+      ],
+      "author": {
+        "displayName": "Emma Caires",
+        "bio": "<p><em>Hawai\u02bbi Public Radio</em></p>"
+      },
+      "outlet": "Hawai\u02bbi Public Radio"
+    },
+    {
+      "id": "6af3911bd6de274e9a6e76e3",
+      "title": "Voters said yes to food security fund. How will Honolulu spend it?",
+      "excerpt": "<p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">A key question: Should it only support existing programs or is this an opportunity to try something new?</p>",
+      "fullUrl": "/in-the-news/voters-said-yes-to-food-security-fund-how-will-honolulu-spend-it",
+      "sourceUrl": "https://www.civilbeat.org/2026/11/voters-said-yes-to-food-security-fund-how-will-honolulu-spend-it/",
+      "publishOn": 1794250810985,
+      "categories": [
+        "Food Equity"
+      ],
+      "author": {
+        "displayName": "Jeremy Hay",
+        "bio": "<p><em>Honolulu Civil Beat</em></p>"
+      },
+      "outlet": "Honolulu Civil Beat"
+    },
+    {
+      "id": "6af26adfbf50fe663d3e902e",
+      "title": "Free bus rides for Waik\u012bk\u012b visitors could end $500 parking bills",
+      "excerpt": "<p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">A new proposal would eliminate fares for everyone, including tourists, offering another reason to reconsider expensive rental cars and hotel parking.</p>",
+      "fullUrl": "/in-the-news/free-bus-rides-for-waikk-visitors-could-end-500-parking-bills",
+      "sourceUrl": "https://beatofhawaii.com/free-bus-rides-for-waikiki-visitors-could-end-500-parking-bills/",
+      "publishOn": 1794165047028,
+      "categories": [
+        "Transportation Equity"
+      ],
+      "author": {
+        "displayName": "Jeff Tucker and Rob Kvidt",
+        "bio": "<p>Beat of Hawaii</p>"
+      },
+      "outlet": "Beat of Hawaii"
+    },
+    {
+      "id": "6af263c72a82027e54576c80",
+      "title": "Report calls for statewide fare-free bus system",
+      "excerpt": "<p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">A new report from the Hawai\u02bbi Appleseed Center for Law &amp; Economic Justice estimates that making bus transit free for all riders statewide would cost roughly $62.4 million a year and recommends using existing transportation-related revenues to fund the program.</p>",
+      "fullUrl": "/in-the-news/report-calls-for-statewide-fare-free-bus-system",
+      "sourceUrl": "https://www.staradvertiser.com/2026/11/08/hawaii-news/report-calls-for-statewide-fare-free-bus-system/",
+      "publishOn": 1794164431216,
+      "categories": [
+        "Transportation Equity"
+      ],
+      "author": {
+        "displayName": "Victoria Budiono",
+        "bio": "<p><em>Honolulu Star-Advertiser</em></p>"
+      },
+      "outlet": "Honolulu Star-Advertiser"
+    },
     {
       "id": "6aac2e5699cfcf75f75d3933",
       "title": "Hawai\u02bbi wealth flight fears are overblown",
@@ -13681,6 +13787,20 @@
   ],
   "press_releases": [
     {
+      "id": "6af26fded4fb634438147ed2",
+      "title": "Universal fare-free bus transit statewide would cost $62.4 million annually; could unlock billions in economic prosperity",
+      "excerpt": "<p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">New report: Universal fare-free bus transit in Hawai\u02bbi would cost $62.4M a year and could unlock billions in economic prosperity. Here's how to fund it.</p>",
+      "fullUrl": "/press-releases/universal-fare-free-bus-transit-hawaii-cost",
+      "publishOn": 1793901605901,
+      "categories": [
+        "Transportation Equity"
+      ],
+      "author": {
+        "displayName": "Will Caron"
+      },
+      "assetUrl": "https://images.squarespace-cdn.com/content/v1/601374ae84e51e430a1829d8/a0cb3464-b8d9-4d37-9d8d-338e861a54cd/iStock-2219912261.jpg"
+    },
+    {
       "id": "6aa4a98cc20cf700423777df",
       "title": "New Hawai\u02bbi Appleseed report makes landlord-tenant law accessible, offers a path toward greater housing stability for tenants and landlords",
       "excerpt": "<p style=\"white-space:pre-wrap;\" data-rte-preserve-empty=\"true\">With Hawai\u02bbi\u2019s rental market among the nation\u2019s tightest\u2014and an estimated 38 percent of households renting\u2014the need for clear, accessible information about tenant and landlord rights has never been greater.</p>",
@@ -15052,5 +15172,5 @@
     }
   ],
   "_generated": "DO NOT HAND-EDIT \u2014 regenerated by scripts/sync-news.py via .github/workflows/sync-publications.yml (nightly).",
-  "lastSynced": 1792457700542
+  "lastSynced": 1794536627927
 }

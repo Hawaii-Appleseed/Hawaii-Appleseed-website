@@ -2,6 +2,176 @@
  "_generated": "Written by scripts/media_watch.py. `status` is the one field a person may edit (new | added | ignore); the script never overwrites it.",
  "items": [
   {
+   "id": "77e95ea7537d",
+   "title": "Off the news: No free rides in life, public transportation",
+   "outlet": "Honolulu Star-Advertiser",
+   "url": "https://www.staradvertiser.com/2026/11/11/editorial/off-the-news/off-the-news-no-free-rides-in-life-public-transportation/",
+   "published": "2026-11-11T10:05:00Z",
+   "firstSeen": "2026-11-11T11:52:51Z",
+   "confidence": "high",
+   "reasons": [
+    "names Hawaiʻi Appleseed",
+    "search engine matched the phrase; article text not checked"
+   ],
+   "sources": [
+    "feed",
+    "google"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
+   "id": "a84368486305",
+   "title": "The push for a fare-free bus system gains local support",
+   "outlet": "Hawaii Public Radio",
+   "url": "https://www.hawaiipublicradio.org/local-news/2026-11-10/the-push-for-a-fare-free-bus-system-gains-local-support",
+   "published": "2026-11-10T22:16:00Z",
+   "firstSeen": "2026-11-11T01:56:50Z",
+   "confidence": "high",
+   "reasons": [
+    "search engine matched the phrase; article text not checked",
+    "names Hawaiʻi Appleseed",
+    "staff: Malia Boksanski, with Appleseed"
+   ],
+   "sources": [
+    "bing",
+    "feed",
+    "google"
+   ],
+   "onSite": "/in-the-news/the-push-for-a-fare-free-bus-system-gains-local-support",
+   "status": "on-site"
+  },
+  {
+   "id": "27ba59c501c3",
+   "title": "November 10, 2026 News Read",
+   "outlet": "Hawaii Free Press",
+   "url": "https://www.hawaiifreepress.com/Articles-Daily-News/ID/49973/November-10-2026-News-Read",
+   "published": "2026-11-10T18:32:00Z",
+   "firstSeen": "2026-11-10T21:48:34Z",
+   "confidence": "high",
+   "reasons": [
+    "article text names Hawaiʻi Appleseed",
+    "search engine matched the phrase; article text not checked"
+   ],
+   "sources": [
+    "google"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
+   "id": "f940fbfda86c",
+   "title": "Voters Said Yes To Food Security Fund. How Will Honolulu Spend It?",
+   "outlet": "Honolulu Civil Beat",
+   "url": "https://www.civilbeat.org/2026/11/voters-said-yes-to-food-security-fund-how-will-honolulu-spend-it/",
+   "published": "2026-11-09T10:01:00Z",
+   "firstSeen": "2026-11-09T12:52:59Z",
+   "confidence": "high",
+   "reasons": [
+    "search engine matched the phrase; article text not checked",
+    "names Hawaiʻi Appleseed",
+    "staff: Daniela Spoto, with Appleseed"
+   ],
+   "sources": [
+    "feed",
+    "google"
+   ],
+   "onSite": "/in-the-news/voters-said-yes-to-food-security-fund-how-will-honolulu-spend-it",
+   "status": "on-site"
+  },
+  {
+   "id": "7ad2ca271c0a",
+   "title": "Free Bus Rides For Waikiki Visitors Could End $500 Parking Bills",
+   "outlet": "Beat of Hawaii",
+   "url": "https://beatofhawaii.com/free-bus-rides-for-waikiki-visitors-could-end-500-parking-bills/",
+   "published": "2026-11-09T06:11:50Z",
+   "firstSeen": "2026-11-09T12:52:59Z",
+   "confidence": "high",
+   "reasons": [
+    "article text names Hawaiʻi Appleseed",
+    "search engine matched the phrase; article text not checked"
+   ],
+   "sources": [
+    "google"
+   ],
+   "onSite": "/in-the-news/free-bus-rides-for-waikk-visitors-could-end-500-parking-bills",
+   "status": "on-site"
+  },
+  {
+   "id": "d207f175cea7",
+   "title": "Report calls for statewide fare-free bus system",
+   "outlet": "Honolulu Star-Advertiser",
+   "url": "https://www.staradvertiser.com/2026/11/08/hawaii-news/report-calls-for-statewide-fare-free-bus-system/",
+   "published": "2026-11-08T10:05:00Z",
+   "firstSeen": "2026-11-08T11:17:32Z",
+   "confidence": "high",
+   "reasons": [
+    "names Hawaiʻi Appleseed",
+    "staff: Malia Boksanski, with Hawaiʻi policy context; the text does not name Appleseed",
+    "search engine matched the phrase; article text not checked"
+   ],
+   "sources": [
+    "feed",
+    "google"
+   ],
+   "onSite": "/in-the-news/report-calls-for-statewide-fare-free-bus-system",
+   "status": "on-site"
+  },
+  {
+   "id": "e7b1811a4f89",
+   "title": "Will Caron: Navel Superiority",
+   "outlet": "Honolulu Civil Beat",
+   "url": "https://www.civilbeat.org/2026/10/will-caron-navel-superiority/",
+   "published": "2026-10-25T10:05:39Z",
+   "firstSeen": "2026-10-25T14:23:27Z",
+   "confidence": "high",
+   "reasons": [
+    "staff: Will Caron only",
+    "names Hawaiʻi Appleseed",
+    "staff: Will Caron, with Appleseed"
+   ],
+   "sources": [
+    "google",
+    "feed"
+   ],
+   "onSite": "",
+   "status": "ignore"
+  },
+  {
+   "id": "837db905bb0c",
+   "title": "At the recent Puahona orientation in Hawaii , financial representatives outlined the eligibility ...",
+   "outlet": "facebook.com",
+   "url": "https://www.facebook.com/citizenportalnews/posts/at-the-recent-puahona-orientation-in-hawaii-financial-representatives-outlined-t/122181715358723792/",
+   "published": "2026-10-23T11:29:16Z",
+   "firstSeen": "2026-10-24T14:00:57Z",
+   "confidence": "high",
+   "reasons": [
+    "names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "feed"
+   ],
+   "onSite": "",
+   "status": "ignore"
+  },
+  {
+   "id": "cde02474a0f0",
+   "title": "A new ACLU report reveals that mass deportation breaks our democracy and directly ... - Facebook",
+   "outlet": "facebook.com",
+   "url": "https://www.facebook.com/acluhawaii/posts/a-new-aclu-report-reveals-that-mass-deportation-breaks-our-democracy-and-directl/1553137100186925/",
+   "published": "2026-10-22T20:09:24Z",
+   "firstSeen": "2026-10-23T15:04:36Z",
+   "confidence": "high",
+   "reasons": [
+    "names Hawaiʻi Appleseed"
+   ],
+   "sources": [
+    "feed"
+   ],
+   "onSite": "",
+   "status": "new"
+  },
+  {
    "id": "eda7f7ef86dd",
    "title": "Will Caron: Zip Pact",
    "outlet": "Honolulu Civil Beat",
