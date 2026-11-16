@@ -299,9 +299,9 @@ test("research: browsing questions get the newest reports, in the named issue ar
   const { suggestResearch } = await import("../src/research.js");
   const rel = (q) => suggestResearch({ index, query: q, hits: [], fromHits: false });
   const slugs = (q) => rel(q).map((r) => r.url.split("/").pop());
-  assert.deepEqual(slugs("What is your latest report?"), ["understanding-hawaii-landlord-tenant-code", "hawaii-budget-primer-2026-27", "policy-perspective-2026"]);
+  assert.deepEqual(slugs("What is your latest report?"), ["funding-free-transit", "understanding-hawaii-landlord-tenant-code", "hawaii-budget-primer-2026-27"]);
   assert.equal(slugs("What research do you have on housing?")[0], "understanding-hawaii-landlord-tenant-code");
-  assert.ok(slugs("any recent reports on transit?").every((s) => ["oahu-mobility-needs", "pedestrian-head-start", "keiki-ride-free", "policy-perspective-2026"].includes(s)));
+  assert.ok(slugs("any recent reports on transit?").every((s) => ["funding-free-transit", "oahu-mobility-needs", "pedestrian-head-start", "keiki-ride-free", "policy-perspective-2026"].includes(s)));
   assert.ok(rel("What research do you have on food?").every((r) => r.title));
   // ordinary questions are not browsing
   const { browseResearch } = await import("../src/research.js");
