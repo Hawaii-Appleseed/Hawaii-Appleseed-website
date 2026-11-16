@@ -12,6 +12,7 @@ preview_urls = false
 
 [vars]
 # ---- internal staff pilot ----
+PAUSED = "The Ask Hawaiʻi Appleseed assistant is disabled for now. Thank you for trying it. It will return when the pilot resumes."   # "" turns the assistant back on
 REQUIRE_ACCESS = "1"
 ACCESS_TEAM_DOMAIN = "lively-wildflower-989d"   # the staff hub's Zero Trust team
 ACCESS_AUD = "e5cadb92041bb6137650b319ddd7e82d45b0477a67bd7d975ed7d76e25db3213"   # Access app "Ask HA chatbot (pilot)"

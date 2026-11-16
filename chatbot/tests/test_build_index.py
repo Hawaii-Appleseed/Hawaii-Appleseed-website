@@ -136,7 +136,8 @@ class Vendoring(unittest.TestCase):
     def test_manifest_records_the_snapshot(self):
         m = self.manifest
         self.assertTrue(m["source_commit"])
-        self.assertEqual(m["counts"], {"publications": 43, "blog-posts": m["counts"]["blog-posts"], "testimony": m["counts"]["testimony"]})
+        n_pubs = len(list((HERE.parent / "writing-bot" / "publications").glob("*.txt")))  # whatever the tree holds: a new report must not break this
+        self.assertEqual(m["counts"], {"publications": n_pubs, "blog-posts": m["counts"]["blog-posts"], "testimony": m["counts"]["testimony"]})
         self.assertGreater(len(m["files"]), 200)
 
     def test_internal_notes_are_never_vendored(self):

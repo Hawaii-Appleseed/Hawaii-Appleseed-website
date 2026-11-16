@@ -15,6 +15,9 @@
 //   GET /stats, /stats.json   the daily roll-up of counts (stats.js), behind the same gate: no text, no emails
 //   GET /flags, /flags.json   answers staff flagged as wrong, with the conversation (flags.js); REVIEWERS (comma-separated
 //                       emails) limits who may read them
+//   PAUSED              a message (any non-empty text): the assistant is switched off. GET / shows that message in place of
+//                       the chat box, and /chat answers 503 with it before any model call or rate-limit work. Empty or
+//                       unset turns the assistant back on.
 //   REQUIRE_ACCESS "1", ACCESS_TEAM_DOMAIN, ACCESS_AUD   internal pilot: every route needs a valid Cloudflare Access
 //                       token and the Worker answers 503 until both are set (access.js). GET / serves the widget.
 import Anthropic from "@anthropic-ai/sdk";
@@ -139,12 +142,22 @@ async function handleStats(env, url) {
   return new Response(statsPage(days, { budgetUsd: Number(env.DAILY_BUDGET_USD ?? 5), spentToday, built: index.built }), { headers: PAGE_HEADERS });
 }
 
+/** The widget page with the chat box swapped for a "switched off" notice (PAUSED is set). */
+function pausedPage(html, message) {
+  const safe = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const notice = `\n  <p class="ha-ask__notice" role="status">${safe}</p>`;
+  const hide = "<style>#ha-ask .ha-ask__panel, #ha-ask .ha-ask__note { display: none !important; }</style>";
+  const out = html.replace(/(<section class="ha-ask"[^>]*>)/, (m) => m + notice);
+  return out === html ? html : out.replace("</body>", `${hide}</body>`);
+}
+
 export async function handleRequest(request, env, deps = {}) {
   const url = new URL(request.url);
   // Internal pilot: nothing, not even /health, answers without a verified Access token. Fail closed.
   const who = await gate(request, env, deps.access);
   if (!who.ok) return json({ error: who.error }, who.status);
-  if (request.method === "GET" && url.pathname === "/") return new Response(widgetHtml, { headers: PAGE_HEADERS });
+  const paused = (env.PAUSED ?? "").trim();
+  if (request.method === "GET" && url.pathname === "/") return new Response(paused ? pausedPage(widgetHtml, paused) : widgetHtml, { headers: PAGE_HEADERS });
   if (request.method === "GET" && (url.pathname === "/stats" || url.pathname === "/stats.json")) return handleStats(env, url);
   if (request.method === "GET" && (url.pathname === "/stats/charts" || url.pathname === "/stats/charts.json")) return handleCharts(env, url);
   if (request.method === "GET" && (url.pathname === "/flags" || url.pathname === "/flags.json")) return handleFlags(env, url, who);
@@ -155,6 +168,7 @@ export async function handleRequest(request, env, deps = {}) {
   if (url.pathname === "/feedback" && request.method === "POST") return handleFeedback(request, env, cors, who, url);
   if (url.pathname !== "/chat" || request.method !== "POST") return json({ error: "not_found" }, 404);
   if (!cors) return json({ error: "forbidden" }, 403);
+  if (paused) return json({ error: "paused", answer: paused, sources: [], related: [] }, 503, cors);
 
   if (Number(request.headers.get("content-length") ?? 0) > MAX_BODY) return json({ error: "too_large" }, 413, cors);
   let payload;
