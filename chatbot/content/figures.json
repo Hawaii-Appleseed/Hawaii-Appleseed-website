@@ -1,0 +1,85 @@
+{
+ "_comment": "Figures in content/positions.md that the build's cross-check (figures.py) could not tie to a published sentence about the same thing, accepted on purpose after a person read the cited source. `figure` is the key check_figures.py prints. A reason is required. Entries here were checked against the cited text by Claude on 2026-10-21 as a draft; staff confirm them at sign-off.",
+ "allow": [
+  {
+   "section": "Universal free school meals",
+   "figure": "usd:107000",
+   "source": "Helping Hawaiʻi Families (2025)",
+   "reason": "\"A family of four with two young children would have to earn over $107,000 to stay above the ALICE threshold\". The position says about $107,000 is needed to cover living costs.",
+   "checked": "2026-10-21",
+   "by": "Claude (draft), from the cited text"
+  },
+  {
+   "section": "Universal free school meals",
+   "figure": "pct:14",
+   "source": "Blog: One step forward, a few meals short (2026)",
+   "reason": "\"public charter schools serve the largest percentage of Native Hawaiian students ... that is 14 percent more than HIDOE schools\". The blog is on hiappleseed.org but is not in the assistant's corpus (no live URL in blog-sources.json), so it cannot be linked.",
+   "checked": "2026-10-21",
+   "by": "Claude (draft), from the cited text"
+  },
+  {
+   "section": "Paid family and medical leave",
+   "figure": "pct:90",
+   "source": "Testimony: HB2360 2026 Paid Family Medical Leave",
+   "reason": "\"A statewide poll for Hawaiʻi showed a 90 percent favorable perception of paid family leave.\"",
+   "checked": "2026-10-21",
+   "by": "Claude (draft), from the cited text"
+  },
+  {
+   "section": "Pay transparency and wage equity",
+   "figure": "pct:87",
+   "source": "Testimony: HB2367 2026 Pay Transparency",
+   "reason": "\"For 2024, updated estimates place the ratio at approximately 87 percent ($987 for women vs. $1,138 for men).\" (82.4 percent is the 2023 figure in the same testimony.)",
+   "checked": "2026-10-21",
+   "by": "Claude (draft), from the cited text"
+  },
+  {
+   "section": "Pay transparency and wage equity",
+   "figure": "pct:92.8",
+   "source": "Testimony: HB2367 2026 Pay Transparency",
+   "reason": "\"Hawaiʻi women's earnings relative to men peaked at 92.8 percent in 2014\".",
+   "checked": "2026-10-21",
+   "by": "Claude (draft), from the cited text"
+  },
+  {
+   "section": "Capital gains tax",
+   "figure": "usd:55000000",
+   "source": "Testimony: HB1850 Testimony",
+   "reason": "\"In FY 2027, this bill would boost our state's tax revenue by $55 million\".",
+   "checked": "2026-10-21",
+   "by": "Claude (draft), from the cited text"
+  },
+  {
+   "section": "Taxing real estate investment trusts (REITs)",
+   "figure": "usd:17000000000",
+   "source": "Policy in Perspective 2022; A Fairer Tax Code for a Thriving Hawaiʻi",
+   "reason": "\"In Hawaiʻi, REITs own over $17 billion in the form of hotels, shopping centers, and other lucrative\" property.",
+   "checked": "2026-10-21",
+   "by": "Claude (draft), from the cited text"
+  },
+  {
+   "section": "Taxing real estate investment trusts (REITs)",
+   "figure": "usd:0",
+   "source": "Testimony: REITs Testimony",
+   "reason": "\"in 2014 alone, REITs in Hawaiʻi reported more than $900 million in income, yet Hawaiʻi collected no taxes on this amount.\"",
+   "checked": "2026-10-21",
+   "by": "Claude (draft), from the cited text"
+  },
+  {
+   "section": "Millionaire's income surcharge",
+   "figure": "usd:71000000",
+   "source": "Testimony: HB2010 Testimony",
+   "reason": "\"Estimated revenues would be $71 million a year with a 2% surcharge\".",
+   "checked": "2026-10-21",
+   "by": "Claude (draft), from the cited text"
+  },
+  {
+   "section": "Transit equity and fare-free transit",
+   "figure": "pct:0.87",
+   "source": "Blog: Moving toward a future where transit works for everyone (2026)",
+   "reason": "\"the program would represent less than 1 percent (0.87 percent) of total spending\".",
+   "checked": "2026-10-21",
+   "by": "Claude (draft), from the cited text"
+  }
+ ]
+}

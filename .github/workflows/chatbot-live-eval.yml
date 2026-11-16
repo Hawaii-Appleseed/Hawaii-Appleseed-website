@@ -1,0 +1,99 @@
+name: Chatbot live eval
+
+# Every night, every golden case through the real model, so a change to the prompt, the corpus or the model that breaks an
+# answer is noticed the next morning and not by a visitor. The offline suites in chatbot.yml cannot see this: they never call a
+# model. About 60 of the ~150 cases reach the model; on Haiku a night costs a few cents, and --max-usd stops the run (and fails
+# it) if the running cost passes $1.
+#
+# It does nothing until the repository secret ANTHROPIC_API_KEY exists: a key from a dedicated Console workspace with its own
+# spend limit (Settings > Secrets and variables > Actions). Add the secret deliberately; this workflow never creates one.
+# The first live run will probably show failures nobody has seen yet, since no case has ever run against the real API.
+#
+# It keeps ONE open issue (label chatbot-eval): opened or commented when cases fail, closed when a night is clean.
+# It only does anything once chatbot/ is on main.
+
+on:
+  schedule:
+    - cron: "30 9 * * *" # 09:30 UTC, 11:30 pm Hawaii
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "Model to evaluate (the pilot runs claude-haiku-5-5; claude-sonnet-5-5 is the dearer option)"
+        default: "claude-haiku-5-5"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: chatbot-live-eval
+  cancel-in-progress: false
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      KEY_SET: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+      MODEL: ${{ inputs.model || 'claude-haiku-5-5' }}
+    steps:
+      - name: No API key
+        if: env.KEY_SET != 'true'
+        run: echo "::notice::The repository secret ANTHROPIC_API_KEY is not set, so the nightly live eval is skipped."
+
+      - uses: actions/checkout@v4
+        if: env.KEY_SET == 'true'
+
+      - uses: actions/setup-python@v5
+        if: env.KEY_SET == 'true'
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        if: env.KEY_SET == 'true'
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: chatbot/worker/package-lock.json
+
+      - name: Install Worker dependencies and build the index
+        if: env.KEY_SET == 'true'
+        working-directory: chatbot/worker
+        run: |
+          npm ci --no-audit --no-fund
+          python3 ../build_index.py
+
+      - name: Run every case against the model
+        id: eval
+        if: env.KEY_SET == 'true'
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          set -o pipefail
+          node chatbot/eval/run_eval.mjs --model "$MODEL" --max-usd 1 | tee eval.txt
+
+      - name: Open, update or close the issue
+        if: env.KEY_SET == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          OUTCOME: ${{ steps.eval.outcome }}
+        run: |
+          num=$(gh issue list --label chatbot-eval --state open --json number --jq '.[0].number // empty')
+          if [ "$OUTCOME" = "failure" ]; then
+            { echo "Last night's live eval on \`$MODEL\` had failures ([run]($RUN_URL)):"; echo; echo '```'; grep -E '^(FAIL|LIVE|COST CAP|  [a-z-]+ +[0-9]+/[0-9]+|cost|tokens)' eval.txt | head -c 30000; echo '```'; } > body.md
+            if [ -n "$num" ]; then
+              gh issue comment "$num" --body-file body.md
+            else
+              gh label create chatbot-eval --color BF8A30 --description "A live eval case failed" 2>/dev/null || true
+              gh issue create --title "Chatbot: live eval cases are failing" --label chatbot-eval --body-file body.md
+            fi
+          elif [ -n "$num" ]; then
+            gh issue comment "$num" --body "A clean night: every case passed on $MODEL ($RUN_URL)."
+            gh issue close "$num"
+          fi
+
+      - name: Fail the run if a case failed
+        if: env.KEY_SET == 'true' && steps.eval.outcome == 'failure'
+        run: exit 1

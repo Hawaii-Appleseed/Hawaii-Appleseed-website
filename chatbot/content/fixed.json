@@ -1,0 +1,26 @@
+{
+  "_comment": "Approval status of the fixed replies and page text (chatbot/fixed.py lists their exact words). There is no fallback for these, so a --public build (npm run deploy:public) refuses to run until every one is approved: `status` \"approved by NAME YYYY-MM-DD\" and `reviewed` (a hash of the exact words, written by signoff_doc.py --apply; an edit after approval un-approves it).",
+  "items": {
+    "legal-help": {
+      "status": "draft"
+    },
+    "cannot-answer": {
+      "status": "draft"
+    },
+    "unavailable": {
+      "status": "draft"
+    },
+    "ask-a-person": {
+      "status": "draft"
+    },
+    "share-chart": {
+      "status": "draft"
+    },
+    "welcome": {
+      "status": "draft"
+    },
+    "privacy-note": {
+      "status": "draft"
+    }
+  }
+}
