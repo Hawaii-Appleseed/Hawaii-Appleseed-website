@@ -26,6 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: read # to look up when the last good fetch happened (see "Fetch bill status")
     steps:
       - uses: actions/checkout@v4
 
@@ -33,8 +34,45 @@ jobs:
         with:
           node-version: "20"
 
+      # capitol.hawaii.gov refuses GitHub's runners now and then (HTTP 403), usually for under an hour. When EVERY fetch
+      # is refused the script leaves the stored data alone and exits 3; this step then reports a warning instead of a
+      # red run, as long as a fetch worked within MAX_BLOCKED_HOURS. Past that, or on any other error, it fails loudly.
+      # The "last good fetch" is a one-day artifact that each run which really fetched leaves behind: the data file
+      # itself cannot say, because it is (rightly) not rewritten when nothing changed.
       - name: Fetch bill status
-        run: node tax-fairness/scripts/fetch-bill-status.mjs
+        id: fetch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAX_BLOCKED_HOURS: "6"
+        run: |
+          set +e
+          node tax-fairness/scripts/fetch-bill-status.mjs
+          code=$?
+          set -e
+          if [ "$code" -ne 3 ]; then exit "$code"; fi
+
+          last=$(gh api "repos/${{ github.repository }}/actions/artifacts?name=bill-status-last-good&per_page=20" \
+            --jq '[.artifacts[] | select(.expired | not)] | first | .created_at // empty')
+          if [ -n "$last" ]; then
+            age_h=$(( ( $(date +%s) - $(date -d "$last" +%s) ) / 3600 ))
+            if [ "$age_h" -lt "$MAX_BLOCKED_HOURS" ]; then
+              echo "::warning::capitol.hawaii.gov refused every request. Last good fetch was ${age_h}h ago (limit ${MAX_BLOCKED_HOURS}h); keeping the stored data and trying again next run."
+              echo "blocked=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+          echo "::error::capitol.hawaii.gov has refused every request for ${MAX_BLOCKED_HOURS}+ hours (or no recent good fetch is on record)."
+          exit 1
+
+      - name: Record the last good fetch
+        if: steps.fetch.outputs.blocked != 'true'
+        run: date -u +%FT%TZ > last-good-fetch.txt
+      - uses: actions/upload-artifact@v4
+        if: steps.fetch.outputs.blocked != 'true'
+        with:
+          name: bill-status-last-good
+          path: last-good-fetch.txt
+          retention-days: 1
 
       - name: Commit if changed
         uses: ./.github/actions/commit-push

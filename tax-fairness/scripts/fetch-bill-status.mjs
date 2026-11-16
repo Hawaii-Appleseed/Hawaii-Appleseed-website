@@ -262,8 +262,10 @@ async function main() {
       (result.stale.length ? ` Kept the last good data for ${result.stale.join(', ')} (flagged staleError).` : ''));
   }
   if (result.abort) {
-    console.error(`::error::Every one of ${bills.length} fetches failed (${result.failed[0]}). Leaving bill-status.json untouched.`);
-    process.exit(1);
+    // Exit 3 (not 1) = "the site refused us", which the workflow treats as a warning while the last good fetch is
+    // recent. Exit 1 stays for real breakage (no bills discovered, a crash).
+    console.error(`::warning::Every one of ${bills.length} fetches failed (${result.failed[0]}). Leaving bill-status.json untouched.`);
+    process.exit(3);
   }
   const billStatus = result.bills;
 
