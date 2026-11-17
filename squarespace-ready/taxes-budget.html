@@ -1208,6 +1208,12 @@
 @media (max-width:900px) {
   .ha-topic__priorities { grid-template-columns:1fr; gap:36px; }
 }
+.ha-topic__priorities--four { grid-template-columns:repeat(2, 1fr); gap:56px 48px; max-width:960px; }
+.ha-topic__priorities--four .ha-topic__priority:nth-child(odd) { border-left:none; padding-left:0; }
+@media (max-width:900px) {
+  .ha-topic__priorities--four { grid-template-columns:1fr; gap:36px; }
+  .ha-topic__priorities--four .ha-topic__priority:nth-child(n+2) { border-left:none; padding-left:0; }
+}
 .ha-topic__priority { position:relative; overflow:visible; }
 .ha-topic__priority:nth-child(n+2) {
   border-left:1px solid var(--ha-rule); padding-left:40px;
@@ -2055,30 +2061,27 @@
     <div class="ha-topic__opps">
     <div class="ha-topic__opps-head">
       <div class="ha-topic__eyebrow">Legislative Priorities</div>
-      <h2 class="ha-topic__h2">The ultra-wealthy should pay their fair share</h2>
+      <h2 class="ha-topic__h2">A fairer tax system that invests in Hawai&#699;i&#8217;s families</h2>
       <div class="ha-topic__h2-rule"></div>
       <p class="ha-topic__lede">
-        Three areas where Hawai&#699;i can build a more equitable tax system and invest in the communities that need it most.
+        Four areas where Hawai&#699;i can build a more equitable tax system and invest in the communities that need it most.
       </p>
     </div>
-    <div class="ha-topic__priorities">
+    <div class="ha-topic__priorities ha-topic__priorities--four">
       <article class="ha-topic__priority">
         <div class="ha-topic__priority-head">
           <span class="ha-topic__priority-num">1</span>
           <div>
-            <h3 class="ha-topic__priority-title">Income</h3>
-            <div class="ha-topic__priority-sub">Tax on Multi-Millionaires</div>
+            <h3 class="ha-topic__priority-title">Keiki</h3>
+            <div class="ha-topic__priority-sub">Rx Kids</div>
           </div>
         </div>
         <p class="ha-topic__priority-desc">
-          Hawai&#699;i has 1,800 people who earn more than $1 million a year. They are not struggling to pay their bills &#8212; and they should be taxed at a higher rate than everyone else.
+          Rx Kids would give every Hawai&#699;i family a cash payment during pregnancy and through a baby&#8217;s first year &#8212; no income test and no strings attached.
         </p>
         <div class="ha-topic__priority-stat">
-          <div class="ha-topic__priority-stat-num">$71M+</div>
-          <div class="ha-topic__priority-stat-label">per year from a 2% surcharge on income above $1 million</div>
-        </div>
-        <div class="ha-topic__priority-bills">
-          <a class="ha-topic__priority-bill" href="https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=HB&billnumber=2008&year=2026" target="_blank" rel="noopener">HB 2008 &#8594;</a>
+          <div class="ha-topic__priority-stat-num">$4,500</div>
+          <div class="ha-topic__priority-stat-label">per baby: $1,500 during pregnancy plus $500 a month for the first six months (draft 2027 bill)</div>
         </div>
       </article>
 
@@ -2120,6 +2123,23 @@
         </div>
         <div class="ha-topic__priority-bills">
           <a class="ha-topic__priority-bill" href="https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=HB&billnumber=2049&year=2026" target="_blank" rel="noopener">HB 2049 &#8594;</a>
+        </div>
+      </article>
+
+      <article class="ha-topic__priority">
+        <div class="ha-topic__priority-head">
+          <span class="ha-topic__priority-num">4</span>
+          <div>
+            <h3 class="ha-topic__priority-title">Working Families</h3>
+            <div class="ha-topic__priority-sub">Preserve Working Families&#8217; Tax Credits</div>
+          </div>
+        </div>
+        <p class="ha-topic__priority-desc">
+          Act 163 (2023) doubled the state Earned Income Tax Credit and the refundable food/excise tax credit. Those expansions end after the 2027 tax year unless lawmakers act.
+        </p>
+        <div class="ha-topic__priority-stat">
+          <div class="ha-topic__priority-stat-num">$76M</div>
+          <div class="ha-topic__priority-stat-label">that working families would lose in 2028 if the credits expire</div>
         </div>
       </article>
     </div>
