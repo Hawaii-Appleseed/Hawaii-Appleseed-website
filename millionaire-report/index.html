@@ -208,34 +208,46 @@
             content: none;
         }
 
-        /* Headline row */
-        .banner-headline {
-            display: flex;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 0.3rem 0.5rem;
+        /* Banner strip: title | wealth by tier | growth since 2010.
+           Every cell is eyebrow -> figure -> caption. */
+        .banner-strip {
+            display: grid;
+            grid-template-columns: 1.45fr 1fr 1.15fr;
+            border: 1px solid #3f4f5a;
+            border-radius: var(--r-md);
             position: relative;
-            z-index: 20;
-            margin-bottom: clamp(1.2rem, 3vw, 2rem);
-            padding-right: 172px; /* reserve room for the pinned trend pill */
+            z-index: 20; /* keeps the tier dropdown above the cards below */
         }
-
-        .banner-headline .label {
-            color: rgba(255,255,255,0.6);
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            font-weight: 500;
+        .banner-cell {
+            padding: 1.05rem 1.3rem 1.15rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            justify-content: space-between;
+            min-width: 0;
         }
-
-        .banner-headline .count {
+        .banner-cell + .banner-cell { border-left: 1px solid #3f4f5a; }
+        .banner-eyebrow {
+            color: #85a98f;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            line-height: 1.25;
+        }
+        .banner-title-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.4rem 0.6rem;
+        }
+        .banner-title-row .count {
             font-family: 'Nunito', system-ui, sans-serif;
             color: #ffffff;
-            font-size: clamp(2rem, 6vw, 3.2rem);
+            font-size: clamp(2.2rem, 5.5vw, 3rem);
             font-weight: 900;
             line-height: 1;
             letter-spacing: -1px;
-            background: rgba(133, 169, 143, 0.18);
-            padding: 2px 8px 4px;
-            border-radius: var(--r-xs);
         }
 
         /* Revenue callout — sits flush under the dark banner */
@@ -382,48 +394,39 @@
             text-wrap: balance;
         }
 
-        /* Stats row */
-        .banner-stats {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0;
-            position: relative;
-            z-index: 2;
-            border-top: 1px solid #3f4f5a;
-            padding: clamp(1rem, 2.5vw, 1.5rem) 0 0;
-        }
-
         .banner-stat {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 0 clamp(0.75rem, 3vw, 1.5rem);
+            gap: 0.55rem;
+            justify-content: space-between;
+            height: 100%;
         }
+        /* eyebrow first, then the big figure (tier view only), then bar, then caption */
+        .banner-stat-unit  { order: -3; }
+        .banner-stat-value { order: -2; }
 
         .banner-stat-value {
             font-family: 'Nunito', system-ui, sans-serif;
             color: #cfe3d4;
-            font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+            font-size: 2.1rem;
             font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -0.5px;
+            line-height: 1;
+            letter-spacing: -0.02em;
         }
 
         .banner-stat-unit {
             color: #85a98f;
-            font-size: 0.95rem;
-            font-weight: 600;
+            font-size: 0.72rem;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 0.15rem;
+            letter-spacing: 0.1em;
+            line-height: 1.25;
         }
 
         .banner-stat-label {
-            color: rgba(255,255,255,0.45);
-            font-size: clamp(0.85rem, 1.8vw, 0.92rem);
-            font-weight: 500;
-            margin-top: 0.5rem;
+            color: rgba(255,255,255,0.75);
+            font-size: 0.84rem;
+            font-weight: 700;
             line-height: 1.3;
         }
 
@@ -433,56 +436,40 @@
             align-self: stretch;
         }
 
-        /* ── Trend pill (headline-right) ── */
+        /* ── Growth cell ── */
         .banner-trend {
-            /* Pinned to the headline's top-right so it never shifts when the
-               count / dropdown label width changes between tier selections. */
-            position: absolute;
-            top: 0.2rem;
-            right: 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.55rem;
-            padding: 0.45rem 0.85rem;
-            background: rgba(133, 169, 143, 0.12);
-            border: 1px solid rgba(133, 169, 143, 0.3);
-            border-radius: var(--r-md);
-        }
-        .banner-trend-spark {
-            display: block;
-            flex-shrink: 0;
-        }
-        .banner-trend-text {
             display: flex;
             flex-direction: column;
-            line-height: 1.05;
+            gap: 0.55rem;
+            justify-content: space-between;
+            height: 100%;
         }
+        .banner-trend-row { display: flex; align-items: center; gap: 0.6rem; }
+        .banner-trend-spark { display: block; flex-shrink: 0; }
         .banner-trend-figure {
             font-family: 'Nunito', system-ui, sans-serif;
             color: #cfe3d4;
             font-weight: 900;
-            font-size: 1.3rem;
-            letter-spacing: -0.01em;
+            font-size: 2.1rem;
+            line-height: 1;
+            letter-spacing: -0.02em;
         }
-        .banner-trend-since {
-            color: rgba(255, 255, 255, 0.45);
-            font-size: 0.7rem;
+        .banner-trend-caption {
+            color: rgba(255,255,255,0.55);
+            font-size: 0.84rem;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-top: 0.1rem;
+            line-height: 1.3;
         }
+        .banner-trend-caption b { color: rgba(255,255,255,0.88); font-weight: 800; }
 
         /* ── Concentration proportion bar ── */
         .conc-bar {
             display: flex;
             width: 100%;
-            max-width: 170px;
-            height: 16px;
+            height: 14px;
             background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: var(--r-sm);
-            margin: 0.55rem auto 0.45rem;
+            border-radius: 999px;
+            margin: 0;
             overflow: hidden;
         }
         /* Segments are interactive in the "all" wealth-by-tier view */
@@ -500,14 +487,14 @@
             transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .conc-seg:not(:last-child) {
-            box-shadow: inset -1.5px 0 0 rgba(255, 255, 255, 0.4);
+            box-shadow: inset -2px 0 0 #27343d;
         }
         /* Color-keyed percentage legend under the stacked bar */
         .conc-key {
             display: inline-flex;
             align-items: center;
             gap: 0.28rem;
-            margin: 0 0.32rem;
+            margin: 0 0.7rem 0 0;
             font-weight: 700;
             white-space: nowrap;
         }
@@ -531,11 +518,11 @@
             background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.12);
             color: rgba(255,255,255,0.85);
-            font-size: clamp(0.85rem, 2vw, 1rem);
-            font-weight: 600;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            font-weight: 700;
             cursor: pointer;
-            padding: 0.4rem 0.8rem;
-            border-radius: var(--r-sm);
+            padding: 0.38rem 0.75rem;
+            border-radius: 999px;
             font-family: inherit;
             transition: all 0.2s;
             white-space: nowrap;
@@ -1100,34 +1087,13 @@
         }
 
         @media (max-width: 600px) {
-            .banner-headline {
-                justify-content: center;
-                padding-right: 0;
-            }
-            /* "Hawaiʻi has" leads on its own line so the count + dropdown stay together */
-            .banner-headline .label {
-                flex-basis: 100%;
-                text-align: center;
-            }
-            .banner-headline .count {
-                margin-top: 0.15rem;
-            }
-            .banner-trend {
-                position: static;
-                margin: 0.6rem auto 0;
-            }
-            .banner-stats {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
+            .banner-strip { grid-template-columns: 1fr; }
+            .banner-cell + .banner-cell { border-left: 0; border-top: 1px solid #3f4f5a; }
             .banner-divider {
                 width: 60%;
                 height: 1px;
                 margin: 0.8rem auto;
                 background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-            }
-            .banner-stat {
-                padding: 0.4rem 1rem;
             }
             .header { padding-left: 0; text-align: center; }
             .header .kicker::before { margin-left: auto; margin-right: auto; }
@@ -1177,32 +1143,39 @@
 
     <!-- Infographic Banner -->
     <div class="infographic-banner">
-        <div class="banner-headline">
-            <span class="label">Hawaiʻi has</span>
-            <span class="count" id="summaryCount">81,814</span>
-            <div class="dropdown-wrapper">
-                <button class="dropdown-btn" id="tierBtn">millionaires &#9662;</button>
-                <div class="dropdown-menu" id="tierMenu">
-                    <button data-tier="all" class="active">millionaires (all)</button>
-                    <button data-tier="$1M-$20M">millionaires ($1M&ndash;$20M)</button>
-                    <button data-tier="$20M-$50M">ultra-millionaires ($20M&ndash;$50M)</button>
-                    <button data-tier="$50M+">ultra-millionaires ($50M+)</button>
+        <div class="banner-strip">
+            <div class="banner-cell">
+                <span class="banner-eyebrow">Hawaiʻi has</span>
+                <div class="banner-title-row">
+                    <span class="count" id="summaryCount">81,814</span>
+                    <div class="dropdown-wrapper">
+                        <button class="dropdown-btn" id="tierBtn">millionaires &#9662;</button>
+                        <div class="dropdown-menu" id="tierMenu">
+                            <button data-tier="all" class="active">millionaires (all)</button>
+                            <button data-tier="$1M-$20M">millionaires ($1M&ndash;$20M)</button>
+                            <button data-tier="$20M-$50M">ultra-millionaires ($20M&ndash;$50M)</button>
+                            <button data-tier="$50M+">ultra-millionaires ($50M+)</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="banner-trend" id="bannerTrend">
-                <svg class="banner-trend-spark" id="trendSpark" width="52" height="26" viewBox="0 0 52 26" aria-hidden="true"></svg>
-                <span class="banner-trend-text">
-                    <span class="banner-trend-figure" id="trendFigure">+184%</span>
-                    <span class="banner-trend-since">since 2010</span>
-                </span>
+            <div class="banner-cell">
+                <div class="banner-stat">
+                    <span class="banner-stat-value" id="concentrationValue">24%</span>
+                    <span class="banner-stat-unit" id="concentrationUnit">of all wealth</span>
+                    <div class="conc-bar" id="concBar" aria-hidden="true"><span class="conc-bar-fill" id="concBarFill" style="width:23.7%"></span></div>
+                    <span class="banner-stat-label" id="concentrationLabel">held by the top 365 (0.4%)</span>
+                </div>
             </div>
-        </div>
-        <div class="banner-stats">
-            <div class="banner-stat">
-                <span class="banner-stat-value" id="concentrationValue">24%</span>
-                <span class="banner-stat-unit" id="concentrationUnit">of all wealth</span>
-                <div class="conc-bar" id="concBar" aria-hidden="true"><span class="conc-bar-fill" id="concBarFill" style="width:23.7%"></span></div>
-                <span class="banner-stat-label" id="concentrationLabel">held by the top 365 (0.4%)</span>
+            <div class="banner-cell">
+                <div class="banner-trend" id="bannerTrend">
+                    <span class="banner-eyebrow" id="trendEyebrow">More millionaires than 2010</span>
+                    <div class="banner-trend-row">
+                        <svg class="banner-trend-spark" id="trendSpark" width="52" height="26" viewBox="0 0 52 26" aria-hidden="true"></svg>
+                        <span class="banner-trend-figure" id="trendFigure">+184%</span>
+                    </div>
+                    <span class="banner-trend-caption" id="trendCaption"><b>28,801</b> in 2010 &rarr; <b>81,814</b> today</span>
+                </div>
             </div>
         </div>
     </div>
@@ -1944,6 +1917,9 @@
             // Trend: growth in this group since 2010
             const growthPct = Math.round((info.count / info.count2010 - 1) * 100);
             document.getElementById('trendFigure').textContent = '+' + growthPct + '%';
+            document.getElementById('trendEyebrow').textContent = 'More ' + info.label.split(' (')[0] + ' than 2010';
+            document.getElementById('trendCaption').innerHTML =
+                '<b>' + info.count2010.toLocaleString() + '</b> in 2010 &rarr; <b>' + info.count.toLocaleString() + '</b> today';
 
             // Sparkline of this group's 2010–2024 trajectory
             const trendKey = info.label.includes('(') ? info.label.match(/\(([^)]+)\)/)[1] : null;
