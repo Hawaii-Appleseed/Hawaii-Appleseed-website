@@ -1,0 +1,312 @@
+<!-- Resources page (/resources) - the "Guides" Code Block, below the three cards.
+     Paste everything in this file into that block. Added 2026-11-19 so the page matches the
+     public tabs of the Tax Fairness notes doc (1eQpkFh1GB0MswSyUuHscYRTx8f3Cy1IqylBW6DIZ8hg):
+       - Messaging Guide tab          -> #messaging-guide  (internal "Did you know" draft bullets,
+                                          "Parking lot" and the comms-plan notes are left out)
+       - Talking Points tab           -> #talking-points   (2027 Campaign Talking Points)
+       - How to get involved tab      -> #get-involved
+     Palette and Site Styles hooks match priorities_2027_squarespace.html. -->
+
+<style>
+.tfc-res {
+    --tfc-navy: #253551;
+    --tfc-blue: #3c73b9;
+    --tfc-muted: #4a5568;
+    --tfc-line: #dfe3ea;
+    --tfc-soft: #f5f7fa;
+    container-type: inline-size;
+    width: 100%;
+    margin: 0 0 40px;
+    font-family: var(--body-font-font-family), sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--tfc-navy);
+}
+.tfc-res *, .tfc-res *::before, .tfc-res *::after { box-sizing: border-box; }
+.tfc-res h2, .tfc-res h3, .tfc-res h4 {
+    font-family: var(--heading-font-font-family), sans-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--tfc-navy);
+}
+.tfc-res-head { max-width: 820px; margin: 0 0 28px; }
+.tfc-res .tfc-res-title { font-size: 2.2rem; line-height: 1.15; margin: 0 0 10px; }
+.tfc-res-head p { margin: 0; color: var(--tfc-muted); }
+
+.tfc-res-guide {
+    background: #fff;
+    border: 1px solid var(--tfc-line);
+    border-radius: 8px;
+    margin: 0 0 20px;
+    scroll-margin-top: 120px;
+}
+.tfc-res-guide > summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 26px 32px;
+}
+.tfc-res-guide > summary::-webkit-details-marker { display: none; }
+.tfc-res-guide > summary:focus-visible { outline: 3px solid var(--tfc-blue); outline-offset: -3px; border-radius: 8px; }
+.tfc-res-sum-title { display: block; font-family: var(--heading-font-font-family), sans-serif; font-size: 1.75rem; line-height: 1.2; }
+.tfc-res-sum-sub { display: block; margin-top: 4px; font-size: 1rem; color: var(--tfc-muted); }
+.tfc-res-chev {
+    flex: none;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--tfc-navy);
+    position: relative;
+}
+.tfc-res-chev::after {
+    content: "";
+    position: absolute;
+    left: 14px; top: 13px;
+    width: 10px; height: 10px;
+    border-right: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    transform: rotate(45deg);
+    transition: transform .2s;
+}
+.tfc-res-guide[open] .tfc-res-chev::after { transform: rotate(-135deg); top: 17px; }
+.tfc-res-body { padding: 4px 32px 32px; border-top: 1px solid var(--tfc-line); }
+.tfc-res-body > :first-child { margin-top: 24px; }
+.tfc-res .tfc-res-body h3 { font-size: 1.5rem; line-height: 1.25; margin: 32px 0 10px; }
+.tfc-res .tfc-res-body h4 { font-size: 1.2rem; line-height: 1.3; margin: 22px 0 6px; font-weight: 700; }
+.tfc-res-body p { margin: 0 0 14px; }
+.tfc-res-body ul { margin: 0 0 16px; padding: 0 0 0 22px; list-style: disc; }
+.tfc-res-body li { margin: 0 0 8px; }
+.tfc-res-body a { color: var(--tfc-blue); text-decoration: underline; text-underline-offset: 3px; }
+.tfc-res-lede { font-size: 1.15rem; color: var(--tfc-muted); }
+.tfc-res-tags { font-weight: 700; color: var(--tfc-blue); }
+
+.tfc-res-table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 1rem; line-height: 1.5; }
+.tfc-res-table th, .tfc-res-table td { text-align: left; vertical-align: top; padding: 12px 14px; border: 1px solid var(--tfc-line); }
+.tfc-res-table th { background: var(--tfc-navy); color: #fff; font-weight: 700; }
+.tfc-res-table td:first-child { background: var(--tfc-soft); font-weight: 600; width: 30%; }
+.tfc-res-table td p { margin: 0 0 8px; }
+.tfc-res-table td p:last-child { margin: 0; }
+.tfc-res-note { font-size: .92rem; color: var(--tfc-muted); }
+
+@container (max-width: 640px) {
+    .tfc-res .tfc-res-title { font-size: 1.8rem; }
+    .tfc-res-guide > summary { padding: 20px 18px; gap: 14px; }
+    .tfc-res-sum-title { font-size: 1.4rem; }
+    .tfc-res-body { padding: 4px 18px 24px; }
+    .tfc-res-table, .tfc-res-table tbody, .tfc-res-table tr, .tfc-res-table td, .tfc-res-table th { display: block; width: 100%; }
+    .tfc-res-table thead { display: none; }
+    .tfc-res-table tr { margin: 0 0 14px; border: 1px solid var(--tfc-line); border-radius: 6px; overflow: hidden; }
+    .tfc-res-table td { border: 0; border-top: 1px solid var(--tfc-line); }
+    .tfc-res-table td:first-child { border-top: 0; width: 100%; }
+}
+</style>
+
+<div class="tfc-res">
+  <div class="tfc-res-head">
+    <h2 class="tfc-res-title">Guides for advocates and partners</h2>
+    <p>The same messaging, talking points and ways to plug in that coalition members use. Open a guide to read it here.</p>
+  </div>
+
+  <details class="tfc-res-guide" id="messaging-guide">
+    <summary>
+      <span><span class="tfc-res-sum-title">Messaging Guide</span><span class="tfc-res-sum-sub">A Fair Tax System to Fund Hawaiʻi’s Future: topline messages, language that works, and answers to common arguments</span></span>
+      <span class="tfc-res-chev" aria-hidden="true"></span>
+    </summary>
+    <div class="tfc-res-body">
+      <h3>3 topline messages</h3>
+
+      <h4>Goods for the Common Good</h4>
+      <p>Taxes pay for things that help our communities thrive, like housing, healthcare, food security, roads, schools, and care for our keiki and kupuna. Our local businesses rely on these investments to produce a healthy and educated workforce they need to succeed. These investments are the building blocks of a healthy, thriving community and we deserve to have the very best. Fair taxation is how we’ll get there. And it’s how Hawaiʻi stays affordable for the people who work here — not by cutting the services families depend on, but by finally asking those who’ve profited most from this state to pay their share.</p>
+
+      <h4>Everyone Pays Their Fair Share</h4>
+      <p>Tax fairness means those with more pay more. A tax system that ensures everyone pays what they can afford—especially those who have benefited most from Hawaiʻi’s land, resources, and public infrastructure—ensures a resilient local economy. Asking those with over $1M household income to pay their fair share is not only responsible, it’s smart. The ultra-wealthy will still be wealthy, even if their taxes go up a couple of percentage points.</p>
+
+      <h4>The Choice is Clear, and the Time is Now</h4>
+      <p>Federal cuts to critical safety net programs, an affordability crisis, and the growing threat of climate change mean that the State could be facing an unprecedented budget shortfall that cannot simply be ignored. Our policymakers have 3 very clear choices:</p>
+      <ul>
+        <li><strong>Austerity:</strong> Cut education programs and public services, putting an even larger strain on already struggling families and community resources.</li>
+        <li><strong>Issue bonds:</strong> This is essentially using the State’s “credit card,” passing more debt on to future generations.</li>
+        <li><strong>Apply taxes fairly</strong> to grow the middle class, support the needs of our communities, and to fund our future.</li>
+      </ul>
+      <p class="tfc-res-tags">#FundOurFuture &nbsp; #HITaxFairness &nbsp; #TaxTheRich</p>
+
+      <h3>Language matters</h3>
+      <p>For a topic as complex as the State budget and tax system, it’s important to use language that is clear, easy to understand, and, most importantly, to avoid language that might trigger backlash or make people feel defensive.</p>
+      <table class="tfc-res-table">
+        <thead><tr><th scope="col">Don’t say…</th><th scope="col">Do say…</th><th scope="col">Why?</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>The “rich” or “the poor”</td>
+            <td><p>The ultra wealthy and multi-national corporations</p><p>The wealthiest people and corporations</p><p>Working families, working people, struggling families</p></td>
+            <td>Many people aspire to be “rich” and many low-income people do not identify as “poor.” While concepts of “rich” and “poor” may vary, most people agree the ultra wealthy have more than they need and should pay more in taxes.</td>
+          </tr>
+          <tr>
+            <td>Businesses, business owners</td>
+            <td><p>Wealthy corporations, wealthy CEOs</p><p>Small businesses, small business owners, small locally owned businesses</p></td>
+            <td>Wealthy corporations use tax loopholes to hide their profits and avoid paying what they owe. These corporations have an unfair advantage over small businesses, who can often struggle to compete. We need to frame small business and working people as the heroes of our economy.</td>
+          </tr>
+          <tr>
+            <td>Tax burden, tax relief, tax break</td>
+            <td><p>Working families pay more than their fair share. It’s time for the wealthiest to do the same.</p><p>Working families shouldn’t have to pick up the slack when the ultra-wealthy don’t pay their fair share.</p></td>
+            <td>Framing taxes as a “burden” can lead people to think that all taxes are bad. Taxes pay for the public goods that we all share. Instead, frame taxes as either fair or unfair to working people.</td>
+          </tr>
+          <tr>
+            <td>Taxpayers</td>
+            <td>Residents, neighbors, local families</td>
+            <td>This term implies that some people don’t pay taxes, when we all do in some way.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Responding to opposition</h3>
+      <p>For generations, wealthy interests have been able to afford to lobby against paying their fair share in taxes. To counter these narratives, familiarize yourself with these common arguments, and be prepared to provide a calm and educated response.</p>
+      <table class="tfc-res-table">
+        <thead><tr><th scope="col">When they say…</th><th scope="col">Say…</th></tr></thead>
+        <tbody>
+          <tr><td>Raising taxes will hurt the economy</td><td>Raising taxes on the wealthiest people and corporations ensures our shared public goods are strong and well-funded. That means high quality schools and services that produce a healthy and educated workforce our local businesses need to thrive. This is the foundation of a healthy and resilient local economy.</td></tr>
+          <tr><td>We need to live within our means</td><td>When people work for meaningful investments that support our community, we are constantly told that there is no money. Meanwhile, loopholes and tax giveaways are created for the benefit of the ultra-wealthy and corporations. Too often, working people are told to settle for something less or that new ideas won’t work. When we ask the wealthy to pay their fair share, we unlock new possibilities for our state to invest in working people, so they can succeed.</td></tr>
+          <tr><td>The government is inefficient with our resources.</td><td><p>If the government seems inefficient, it’s because they lack the resources to invest in creating high quality schools, 21st century infrastructure, and health care systems that keep our people healthy and ready to succeed. If anything, we need to talk about ways to ensure the wealthiest among us pay their fair share, so the government can truly invest in what working people and local small businesses need to thrive.</p><p>Why are we focusing on a small percentage of waste at the state level when there is a truly significant amount of waste with federal dollars going towards the military?</p></td></tr>
+          <tr><td>Why do you want to punish success?</td><td>The ultra-wealthy won’t feel the impact of increased taxes. When their taxes go up, they will still be wealthy. If anything, we are working to promote success by raising funds for good schools, high-quality health care systems and supporting our neighbors when times are tough. These things help to grow success for everyone, both now and for generations to come.</td></tr>
+          <tr><td>Taxes are boring</td><td>The ultra-wealthy and corporations want us to think taxes are boring, so that we don’t pay attention to how they’ve rigged the system in their favor. Taxes are the engine behind all of the programs and services in our state.</td></tr>
+          <tr><td>Investors will just take their capital to another state.</td><td>These investors benefit from Hawaiʻi’s natural environment, culture, and labor force. They build their lives and businesses within the state. Because of these deep connections they are the least likely to uproot themselves just because of a small tax increase.</td></tr>
+          <tr><td>This tax (millionaire’s tax) won’t raise the revenue you think it will.</td><td>Even in the most conservative case, this still raises hundreds of millions for Hawaiʻi. States that have already done this saw a promising pattern: Massachusetts and Washington have more than doubled the amounts they expected to raise with their millionaire’s tax.</td></tr>
+          <tr><td>Once taxes go up, they never come back down.</td><td>This is demonstrably false. Governments cut taxes all the time. What is permanent is the harm of underfunding schools and health care because we are reluctant to ask the ultra-wealthy to pay their fair share.</td></tr>
+          <tr><td>Hawaiʻi already has the highest tax burden in the country — we can’t afford more taxes.</td><td>What matters is who is paying more and who is not paying their fair share. Hawaiʻi has a very high tax burden on low-income and working-class families, and some of the lowest taxes on wealth, like property and investments. These proposals don’t raise taxes on working families at all — they ask the wealthy few and the corporations to finally pay what they owe.</td></tr>
+        </tbody>
+      </table>
+      <p class="tfc-res-note"><strong>Sources for the above:</strong> Hawaiʻi modeling from Census-Forecaster microsimulation (MID scenario: $766.7M over 5 years; LOW / maximum-behavioral-response scenario: $651.8M over 5 years; ETI and migration offset about $79M over 5 years against a $499M static gain). Migration elasticity per Young, Varner, Lurie &amp; Prisinzano, <em>American Sociological Review</em> (2016), applied at 50% of the published national rate to reflect Hawaiʻi’s geography. Massachusetts Fair Share Amendment: FY24 $2.46B actual vs. $1.0B budgeted; FY25 about $3.0B actual vs. $1.3B budgeted (Mass. DOR). Washington capital gains tax: FY23 $847.5M actual vs. $248M original fiscal-note estimate (WA ERFC). The REIT 90% distribution requirement is a federal REIT-qualification rule (IRC § 857).</p>
+    </div>
+  </details>
+
+  <details class="tfc-res-guide" id="talking-points">
+    <summary>
+      <span><span class="tfc-res-sum-title">2027 Campaign Talking Points</span><span class="tfc-res-sum-sub">Working families tax credits, women, and children</span></span>
+      <span class="tfc-res-chev" aria-hidden="true"></span>
+    </summary>
+    <div class="tfc-res-body">
+      <h3>Working families tax credits</h3>
+      <p class="tfc-res-lede">Working families tax credits help local households keep more of what they earn.</p>
+      <ul>
+        <li>Working families would lose about $100 million a year if the expanded Earned Income Tax Credit, Food Excise Tax Credit and Child and Dependent Care Tax Credit are allowed to expire after 2027.</li>
+        <li>The state Earned Income Tax Credit reaches approximately 78,000 Hawaiʻi households annually, and almost all recipients are raising children.</li>
+        <li>The Food Excise Tax Credit helps offset the taxes families pay on groceries and other necessities.</li>
+        <li>The Child and Dependent Care Tax Credit helps working parents and caregivers afford preschool, daycare, and before- and after-school care.</li>
+      </ul>
+
+      <h3>Women</h3>
+      <p class="tfc-res-lede">Hawaiʻi’s women are working hard, but too many still cannot afford to support their families.</p>
+      <ul>
+        <li>Working mothers deserve economic security, affordable child care, and a fair tax system.</li>
+        <li>74% of Hawaiʻi mothers with young children participated in the workforce, yet 55% of female-headed households with children lived at or below 200% of the federal poverty level in 2023 (<a href="https://humanservices.hawaii.gov/wp-content/uploads/2026/01/FY25-HSCSW-Annual-Report-FINAL_for-2026-Leg-signed.pdf" target="_blank" rel="noopener">Commission on the Status of Women</a>).</li>
+        <li>Hawaiʻi women working full-time earned just 82.4% of men’s median weekly earnings in 2023 (<a href="https://blsmon1.bls.gov/regions/west/news-release/womensearnings_hawaii.htm" target="_blank" rel="noopener">BLS</a>).</li>
+        <li>Mothers in Hawaiʻi earned just 66 cents for every dollar fathers earned in 2019–2023 (<a href="https://nwlc.org/wp-content/uploads/2024/07/Motherhood-Wage-Gap-for-Mothers-Overall-2025.pdf" target="_blank" rel="noopener">NWLC</a>).</li>
+        <li>Our tax system should help close these economic gaps, not make them worse.</li>
+        <li>A nurse, teacher, hotel worker, or home care worker pays regular income tax rates on her paycheck, while profits from selling investments are taxed at a maximum rate of 7.25%, compared with the top 13% rate on wages.</li>
+        <li>Working women shouldn’t pay higher tax rates than wealthy investors.</li>
+      </ul>
+
+      <h3>Children</h3>
+      <p class="tfc-res-lede">Protect tax credits that help parents feed, house, and care for their children.</p>
+      <ul>
+        <li>Working families tax credits put money directly into family budgets, helping parents afford housing, food, clothing, transportation, and other necessities.</li>
+        <li>Protecting these credits is an investment in children’s well-being and future opportunities.</li>
+        <li>34% of Hawaiʻi children live in households where at least one child is food insecure (<a href="https://hawaiifoodbank.org/wp-content/uploads/2026/02/HawaiiFoodbank_FoodInsecurityReport_2024-25.pdf" target="_blank" rel="noopener">Hawaiʻi Foodbank</a>).</li>
+        <li>No child should go hungry or grow up in poverty because their family cannot afford the cost of living.</li>
+        <li>The Earned Income Tax Credit helps working parents keep more of their earnings, even when they work in low-wage jobs.</li>
+        <li>The Child and Dependent Care Tax Credit helps parents afford the child care they need to work.</li>
+        <li>Every keiki deserves a stable home and a future in Hawaiʻi. There were 29,589 applicants on the Hawaiian Home Lands homestead waitlist in November 2025.</li>
+        <li>Increasing the tax on luxury homes would dedicate up to $60 million annually to Hawaiian Home Lands, helping address the longstanding shortage of homestead opportunities for Native Hawaiian families.</li>
+        <li>Revenue from a fairer tax system can support the public investments children depend on, including schools, health care, affordable housing, and other essential services.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="tfc-res-guide" id="get-involved">
+    <summary>
+      <span><span class="tfc-res-sum-title">How to Get Involved</span><span class="tfc-res-sum-sub">Who we are, our core priorities, and ways for organizations to join the work</span></span>
+      <span class="tfc-res-chev" aria-hidden="true"></span>
+    </summary>
+    <div class="tfc-res-body">
+      <h3>Who we are</h3>
+      <p>The Hawaiʻi Tax Fairness Coalition is a statewide alliance of nonprofits, community organizations, unions, advocates, researchers, and service providers working to create a more equitable tax system—one that raises the revenue our state needs without placing the burden on low- and moderate-income families.</p>
+      <p>We advocate for practical, achievable reforms that ensure those who benefit most from Hawaiʻi’s economy contribute fairly so the state can sustainably fund housing, healthcare, education, infrastructure, and essential community services.</p>
+
+      <h3>A fair tax system: the “why” and the “how”</h3>
+      <p>A fair tax system isn’t just good economic policy—it’s foundational to a healthy democracy.</p>
+      <ul>
+        <li><strong>Funds essential services.</strong> It ensures Hawaiʻi can sustain strong public services and safety-net programs, which are the backbone of stable democracies worldwide.</li>
+        <li><strong>Builds public trust.</strong> People lose faith in government when they see loopholes for the wealthy or when working families carry more than their share. Fair taxation shows that the rules apply evenly, strengthening confidence in our institutions.</li>
+        <li><strong>Balances political power.</strong> When wealth is overly concentrated, a small group can exert outsized influence over policy and elections. We’re seeing this play out now with federal cuts to essential programs like SNAP and Medicaid—decisions that don’t reflect the needs of most people.</li>
+      </ul>
+
+      <h3>Our core policy priorities</h3>
+      <p>A fair tax system is one where the wealth gap shrinks after taxes are paid—not grows. But in Hawaiʻi, the opposite is happening: the wealthiest pay a smaller share of their income than those with the least, widening the gap every year. To fix this, we pursue two main strategies.</p>
+      <h4>Raise revenue to support critical services</h4>
+      <p>In 2026, especially after recent federal cuts, our top priority is restoring sustainable state revenue by:</p>
+      <ul>
+        <li><strong>Modernizing the income tax:</strong> Freeze the income tax cuts passed in 2024. Restore higher marginal rates for top earners.</li>
+        <li><strong>Closing the capital gains loophole:</strong> Tax investment income the same as wages.</li>
+        <li><strong>Reforming property and real estate taxes:</strong> Increase conveyance tax rates on luxury and investment properties, and ensure Real Estate Investment Trusts (REITs) contribute appropriately.</li>
+      </ul>
+      <h4>Strengthen credits for working families</h4>
+      <p>Our coalition also supports expanding refundable credits—like the EITC, child credits, dependent care credits, and the food excise tax credit—to boost take-home income for low- and moderate-income households.</p>
+
+      <h3>How you can get involved</h3>
+      <p>There are multiple, flexible pathways for organizations to join this work based on their capacity, expertise, and community reach.</p>
+      <h4>Join coalition meetings</h4>
+      <p>Participating in our regular coalition meetings is the most direct and impactful way to get involved. We have several working groups where we coordinate strategy, share updates, prepare testimony, develop messaging, and identify opportunities for joint action. Regular meetings are every other Thursday at 9:00 AM on Zoom.</p>
+      <h4>Subject-matter expertise</h4>
+      <ul>
+        <li>Contribute research, data, or real-world insights to help refine proposals.</li>
+        <li>Participate in working groups focused on messaging, policy, and community engagement.</li>
+        <li>Provide technical guidance on how tax policies affect your community or sector.</li>
+      </ul>
+      <h4>Advocacy and legislative engagement</h4>
+      <ul>
+        <li>Submit written or oral testimony on priority bills.</li>
+        <li>Contact legislators directly to share your perspective or experience.</li>
+        <li>Join meetings with lawmakers alongside coalition partners.</li>
+      </ul>
+      <h4>Community engagement, communications, and storytelling</h4>
+      <ul>
+        <li>Co-host public events, webinars, or community conversations.</li>
+        <li>Amplify our messaging through newsletters, social media, or community networks.</li>
+        <li>Co-author or support op-eds, letters to the editor, and media pieces.</li>
+        <li>Provide quotes, stories, data, or examples from your field to strengthen our shared messaging.</li>
+      </ul>
+
+      <h3>What we provide to partners</h3>
+      <p>We aim to make collaboration easy, effective, and meaningful. Coalition partners receive:</p>
+      <ul>
+        <li>Talking points, fact sheets, bill summaries, and messaging tailored to your audience.</li>
+        <li>Support drafting testimony, op-eds, public statements, or educational materials.</li>
+        <li>Graphic and social media content you can share with your networks.</li>
+        <li>Visibility and amplification: we highlight partner work and priorities across our website, newsletters, and media channels.</li>
+        <li>Connections to lawmakers, policy experts, and other coalition members working on related issues.</li>
+        <li>Coordination, reminders, and rapid updates throughout the legislative session so your organization knows exactly when and how to plug in.</li>
+      </ul>
+
+      <h3>Join us</h3>
+      <p>Whether you can offer expertise, communications reach, frontline experience, or policymaking insight, your participation strengthens the push for a tax system that works for everyone in Hawaiʻi. To connect with the coalition or explore partnership options, email <a href="mailto:info@hitaxfairness.org">info@hitaxfairness.org</a>.</p>
+    </div>
+  </details>
+</div>
+
+<script>
+(function () {
+  function openFromHash() {
+    var id = (location.hash || '').slice(1);
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (el && el.tagName === 'DETAILS' && el.classList.contains('tfc-res-guide')) {
+      el.open = true;
+      setTimeout(function () { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
+    }
+  }
+  window.addEventListener('hashchange', openFromHash);
+  window.addEventListener('load', openFromHash);
+})();
+</script>
