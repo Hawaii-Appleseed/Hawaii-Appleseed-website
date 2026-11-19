@@ -122,8 +122,7 @@
         .narrative-stat-figure,
         .revenue-callout-range,
         .revenue-callout-basis,
-        .revenue-callout-prompt strong,
-        .revenue-callout-context,
+        .revenue-share-figure,
         .tier-tip-amt,
         .tier-tip-pct {
             font-variant-numeric: tabular-nums;
@@ -251,148 +250,128 @@
         }
 
         /* Revenue callout — sits flush under the dark banner */
+        /* Revenue callout: same strip grammar as the banner above
+           (eyebrow -> figure -> caption), in a mid slate: the same hue as
+           the card above, one clear step lighter. */
         .revenue-callout {
             max-width: 960px;
             margin: 0 auto var(--space-block);
-            padding: 1.6rem 2rem 1.75rem;
-            /* Continues the banner's field rather than dropping to a light
-               band: picks up at the banner's end color (var(--field-edge)) and deepens
-               toward the bottom edge so the composition lands. The banner and
-               this block read as one object whose last line is the payoff. */
-            background:
-                radial-gradient(ellipse 70% 120% at 50% 0%, rgba(var(--mint-rgb), 0.07) 0%, transparent 70%),
-                linear-gradient(160deg, var(--field-edge) 0%, var(--field-mid) 45%, var(--field-deep) 100%);
+            background: linear-gradient(160deg, #52666f, #435660);
             border-radius: var(--r-lg);
-            text-align: center;
-            /* Same elevation as the banner — they're one object, so they must
-               cast one shadow, not two different ones. */
-            box-shadow: var(--shadow-hero);
+            padding: clamp(1.5rem, 4vw, 2.8rem) clamp(1.5rem, 4vw, 3rem);
+            box-shadow: 0 10px 30px rgba(39, 52, 61, 0.2);
             position: relative;
             z-index: 1;
         }
-        /* Hairline fold between the stats above and the conclusion below.
-           The two fields now match, so this only needs to suggest a crease —
-           the old bright seam existed to patch a hard color break. */
-        .revenue-callout::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 72%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(var(--mint-rgb), 0.22), transparent);
+        .revenue-strip {
+            display: grid;
+            grid-template-columns: 1.05fr 1.25fr 1fr;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--r-md);
         }
-        .revenue-callout-prompt {
-            font-size: 1.07rem;
-            color: rgba(255,255,255,0.74);
-            font-weight: 500;
-            line-height: 1.6;
-            letter-spacing: 0.005em;
-            max-width: 32em;
-            margin: 0 auto 0.85rem;
-            /* Avoids the orphaned last word this line otherwise breaks to on
-               narrow screens. Ignored by browsers that don't support it. */
-            text-wrap: balance;
-        }
-        /* Exactly one emphasis in this line. The rate is the new information —
-           the population is already the banner's headline — so it takes the
-           chip treatment (echoing .banner-headline .count) and the tier label
-           steps back to plain weight. Previously both were emphasized and
-           neither won. */
-        .revenue-callout-prompt strong {
-            color: var(--mint-bright);
-            font-weight: 800;
-            background: linear-gradient(180deg, rgba(var(--mint-rgb), 0.14) 60%, rgba(var(--mint-rgb), 0.22) 100%);
-            padding: 1px 0.34em 2px;
-            border-radius: var(--r-xs);
-            white-space: nowrap;
-        }
-        /* No pill. The figure now sits directly on the dark field, the same
-           way $292.7 billion does in the banner above — one visual language
-           instead of a dark chip stranded on a light band. Dropping the pill
-           also reclaims its 48px of horizontal padding, which is what forced
-           "/ year" onto its own line at 375px. */
-        .revenue-callout-figure {
+        .revenue-cell {
+            padding: 1.15rem 1.35rem 1.25rem;
             display: flex;
-            align-items: baseline;
-            justify-content: center;
-            gap: 0.45rem;
-            margin: 0 auto;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 0.55rem;
+            min-width: 0;
         }
-        .revenue-callout-range {
-            font-size: clamp(2rem, 5.4vw, 2.9rem);
-            font-weight: 800;
-            color: var(--mint);
-            letter-spacing: -0.015em;
-            line-height: 1.15;
-            text-shadow: 0 0 26px rgba(var(--money-rgb), 0.32);
-        }
-        .revenue-controls {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.6rem 1rem;
-            margin: 1.1rem 0 0;
-        }
+        .revenue-cell + .revenue-cell { border-left: 1px solid rgba(255, 255, 255, 0.2); }
+        .revenue-callout .banner-eyebrow { color: #dcefe2; }
+        .revenue-cell--hero { justify-content: center; }
+        .revenue-ctrl { display: flex; flex-direction: column; gap: 0.45rem; }
+        .revenue-ctrl + .revenue-ctrl { margin-top: 0.55rem; }
         .revenue-seg {
             display: inline-flex;
+            width: max-content;
             padding: 3px;
             gap: 2px;
-            border-radius: var(--r-sm);
-            background: rgba(var(--white-rgb), 0.07);
-            border: 1px solid rgba(var(--mint-rgb), 0.2);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.14);
         }
         .revenue-seg button {
             font: inherit;
-            font-size: 0.9rem;
-            font-weight: 700;
-            min-width: 3.4rem;
-            min-height: 2.4rem;
-            padding: 0 0.85rem;
+            font-size: 0.92rem;
+            font-weight: 800;
+            min-width: 3.3rem;
+            min-height: 2.3rem;
+            padding: 0 0.95rem;
             border: 0;
-            border-radius: var(--r-xs);
+            border-radius: 999px;
             background: transparent;
-            color: rgba(var(--white-rgb), 0.74);
+            color: rgba(255, 255, 255, 0.88);
             cursor: pointer;
             font-variant-numeric: tabular-nums;
+            transition: background 0.15s, color 0.15s;
         }
-        .revenue-seg button:hover { color: var(--surface); }
+        .revenue-seg button:hover { color: #fff; }
         .revenue-seg button[aria-checked="true"] {
-            background: rgba(var(--mint-rgb), 0.9);
-            color: rgb(var(--field-rgb));
+            background: #fff;
+            color: #27343d;
         }
         .revenue-seg button:focus-visible {
-            outline: 2px solid var(--mint-bright);
+            outline: 2px solid #bff0c9;
             outline-offset: 2px;
         }
-        .revenue-callout-basis {
-            font-size: 0.82rem;
-            line-height: 1.5;
-            color: rgba(var(--white-rgb), 0.62);
-            font-weight: 500;
-            max-width: 38em;
-            margin: 0.5rem auto 0;
-            text-wrap: balance;
+        .revenue-callout-figure {
+            display: flex;
+            align-items: baseline;
+            gap: 0.4rem;
+            flex-wrap: wrap;
         }
-        /* Unit stays welded to the number it modifies */
+        .revenue-callout-range {
+            font-family: 'Nunito', system-ui, sans-serif;
+            font-size: clamp(2.8rem, 7vw, 3.9rem);
+            font-weight: 900;
+            color: #bff0c9;
+            letter-spacing: -0.02em;
+            line-height: 1;
+        }
         .revenue-callout-per {
-            font-size: 1.02rem;
-            font-weight: 700;
-            color: rgba(var(--mint-rgb), 0.82);
-            letter-spacing: 0.04em;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #cfe6d6;
+            letter-spacing: 0.02em;
             white-space: nowrap;
         }
-        .revenue-callout-context {
-            font-size: 0.92rem;
-            /* Was var(--muted) on the light band = 2.91:1, below the 4.5:1 WCAG AA
-               floor for body text. On the dark field this clears it. */
-            color: rgba(255,255,255,0.66);
-            font-weight: 500;
-            margin: 0.85rem 0 0;
-            text-wrap: balance;
+        .revenue-cap {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.86rem;
+            font-weight: 600;
+            line-height: 1.35;
         }
+        .revenue-cap b { color: #fff; font-weight: 800; }
+        .revenue-share-figure {
+            font-family: 'Nunito', system-ui, sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            color: #fff;
+        }
+        .revenue-meter {
+            height: 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.18);
+            overflow: hidden;
+        }
+        .revenue-meter i {
+            display: block;
+            height: 100%;
+            min-width: 6px;
+            border-radius: 999px;
+            background: #bff0c9;
+            transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .revenue-callout-basis {
+            margin: 1.1rem 0 0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .revenue-callout-basis b { color: #fff; font-weight: 800; }
 
         .banner-stat {
             display: flex;
@@ -582,7 +561,7 @@
                card is what made a column of these read as a dashboard;
                the border defines the card without lifting it. */
             border: 1px solid var(--hairline);
-            padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem) 1.5rem;
+            padding: 0; /* header strip + body carry the padding */
             /* Charts sit close together — they're one movement, read in
                sequence. The larger break comes before the narrative. */
             margin-bottom: var(--space-block);
@@ -624,6 +603,65 @@
             border-color: var(--green);
             box-shadow: 0 0 0 3px rgba(var(--money-rgb), 0.25);
         }
+
+        /* ── Section header strips (map + chart cards) ──
+           Same grammar as the revenue box: caps label, then figure cells,
+           on the same mid slate. The card body stays white. */
+        .section-head {
+            background: linear-gradient(160deg, #52666f, #435660);
+            padding: clamp(1rem, 3vw, 1.6rem) clamp(1rem, 3vw, 2rem);
+            border-radius: var(--r-lg) var(--r-lg) 0 0;
+            color: #fff;
+        }
+        .section-head .banner-eyebrow { color: #dcefe2; }
+        .section-strip { grid-template-columns: var(--cols, 1.9fr 1fr 1fr); }
+        .section-body { padding: clamp(1rem, 3vw, 1.6rem) clamp(1rem, 3vw, 2rem) 1.4rem; }
+        .section-title {
+            font-family: 'Nunito', system-ui, sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #fff;
+        }
+        .section-fig {
+            font-family: 'Nunito', system-ui, sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            color: #fff;
+            font-variant-numeric: tabular-nums;
+        }
+        .section-fig--accent { color: #bff0c9; }
+        .section-head .section-cap {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.86rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        .section-head .section-cap b { color: #fff; font-weight: 800; }
+        .section-body .section-cap {
+            color: #566872;
+            font-size: 0.86rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-top: 0.9rem;
+        }
+        .section-body .section-cap:first-child { margin: 0 0 0.6rem; }
+        /* Chart switcher: white pill on the slate header */
+        .section-head .chart-switcher {
+            background-color: #fff;
+            color: #27343d;
+            border: 0;
+            border-radius: 999px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            padding: 0.45rem 2.1rem 0.45rem 0.9rem;
+            width: max-content;
+            max-width: 100%;
+        }
+        .section-head .chart-switcher:hover { background-color: #f0f5f1; }
+        .section-head .chart-switcher:focus { box-shadow: 0 0 0 3px rgba(191, 240, 201, 0.55); }
 
         .map-embed-wrapper {
             position: relative;
@@ -759,18 +797,9 @@
             position: relative;
         }
 
-        /* The accent was a full-bleed strip across the top of the card. With
-           the card gone, it becomes the same short kicker bar the page already
-           uses above section titles — a prose idiom rather than a card one. */
-        .narrative-section::before {
-            content: '';
-            display: block;
-            width: 54px;
-            height: 4px;
-            border-radius: var(--r-pill);
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--green-deep) 0%, var(--green) 50%, var(--money) 100%);
-        }
+        /* The old gradient kicker bar is replaced by the same caps eyebrow
+           used in every strip above. */
+        .narrative-section .banner-eyebrow { color: #386a50; }
 
         .narrative-title {
             font-family: 'Nunito', system-ui, sans-serif;
@@ -864,24 +893,29 @@
            a tinted panel inside a card. Held slightly wider than the prose
            measure so it reads as a break in the text, not part of it. */
         .narrative-stat {
-            display: flex;
-            align-items: center;
-            gap: 1.1rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
             margin: 1.4rem 0 0 0;
-            padding: 1.1rem 1.4rem;
             max-width: calc(var(--measure) + 8ch);
-            background:
-                radial-gradient(ellipse 70% 120% at 12% 50%, rgba(var(--money-rgb), 0.14) 0%, transparent 70%),
-                linear-gradient(135deg, var(--tint) 0%, #e3f0e8 100%);
-            border-left: 4px solid var(--green);
-            border-radius: 0 var(--r-md) var(--r-md) 0;
+            border: 1px solid rgba(39, 52, 61, 0.18);
+            border-radius: var(--r-md);
+            background: rgba(39, 52, 61, 0.04);
         }
+        .narrative-stat-cell {
+            padding: 1rem 1.3rem 1.1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            justify-content: center;
+            min-width: 0;
+        }
+        .narrative-stat-cell + .narrative-stat-cell { border-left: 1px solid rgba(39, 52, 61, 0.18); }
 
         .narrative-stat-figure {
             font-family: 'Nunito', system-ui, sans-serif;
             font-size: clamp(1.7rem, 4.5vw, 2.2rem);
             font-weight: 900;
-            color: var(--green-deep);
+            color: #2a6b4f;
             line-height: 1;
             white-space: nowrap;
             letter-spacing: -0.015em;
@@ -1107,12 +1141,10 @@
             .revenue-callout {
                 padding: 1.1rem 1.25rem;
             }
-            .narrative-stat {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.4rem;
-                margin-left: 0;
-            }
+            .revenue-strip { grid-template-columns: 1fr; }
+            .revenue-cell + .revenue-cell { border-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.2); }
+            .narrative-stat { grid-template-columns: 1fr; margin-left: 0; }
+            .narrative-stat-cell + .narrative-stat-cell { border-left: 0; border-top: 1px solid rgba(39, 52, 61, 0.18); }
         }
 
         /* Fortunes-in-state-budgets graphic */
@@ -1199,102 +1231,125 @@
 
     <!-- Wealth-tax revenue callout: the report's scenarios (Table 1 / Figure 4) -->
     <div class="revenue-callout">
-        <p class="revenue-callout-prompt">
-            A <strong id="revenueRateLabel">2%</strong> wealth tax on wealth above <span id="revenueThresholdLabel">$50 million</span> could raise
-        </p>
-        <div class="revenue-callout-figure">
-            <span class="revenue-callout-range" id="revenueValue">$1.02B</span>
-            <span class="revenue-callout-per">/ year</span>
-        </div>
-        <div class="revenue-controls">
-            <div class="revenue-seg" role="radiogroup" aria-label="Wealth threshold" id="thresholdSeg">
-                <button type="button" role="radio" aria-checked="false" data-threshold="20">$20M+</button>
-                <button type="button" role="radio" aria-checked="true" data-threshold="50">$50M+</button>
+        <div class="revenue-strip">
+            <div class="revenue-cell">
+                <div class="revenue-ctrl">
+                    <span class="banner-eyebrow">Tax wealth above</span>
+                    <div class="revenue-seg" role="radiogroup" aria-label="Wealth threshold" id="thresholdSeg">
+                        <button type="button" role="radio" aria-checked="true" data-threshold="20">$20M</button>
+                        <button type="button" role="radio" aria-checked="false" data-threshold="50">$50M</button>
+                    </div>
+                </div>
+                <div class="revenue-ctrl">
+                    <span class="banner-eyebrow">At a rate of</span>
+                    <div class="revenue-seg" role="radiogroup" aria-label="Tax rate" id="rateSeg">
+                        <button type="button" role="radio" aria-checked="false" data-rate="1">1%</button>
+                        <button type="button" role="radio" aria-checked="true" data-rate="2">2%</button>
+                        <button type="button" role="radio" aria-checked="false" data-rate="3">3%</button>
+                    </div>
+                </div>
             </div>
-            <div class="revenue-seg" role="radiogroup" aria-label="Tax rate" id="rateSeg">
-                <button type="button" role="radio" aria-checked="false" data-rate="1">1%</button>
-                <button type="button" role="radio" aria-checked="true" data-rate="2">2%</button>
-                <button type="button" role="radio" aria-checked="false" data-rate="3">3%</button>
+            <div class="revenue-cell revenue-cell--hero">
+                <span class="banner-eyebrow">Could raise each year</span>
+                <div class="revenue-callout-figure">
+                    <span class="revenue-callout-range" id="revenueValue">$1.41B</span>
+                    <span class="revenue-callout-per">/ year</span>
+                </div>
+                <span class="revenue-cap"><b id="revenueRateLabel">2%</b> on wealth above <b id="revenueThresholdLabel">$20M</b></span>
+            </div>
+            <div class="revenue-cell">
+                <span class="banner-eyebrow">Share of state budget</span>
+                <div class="revenue-share-figure" id="revenueBudgetPct">6.0%</div>
+                <div class="revenue-meter" aria-hidden="true"><i id="revenueMeter" style="width:6%"></i></div>
+                <span class="revenue-cap">of Hawaiʻi&rsquo;s <b>$23.7B</b> annual budget</span>
             </div>
         </div>
-        <p class="revenue-callout-context">
-            &asymp; <span id="revenueBudgetPct">4.3%</span> of Hawaiʻi&rsquo;s annual state budget
-        </p>
-        <p class="revenue-callout-basis" id="revenueBasis">
-            Applied only to the $51.1B held above $50M by 365 residents. Static estimate: no avoidance or out-migration.
+        <p class="revenue-callout-basis">
+            Applied only to the <b id="revenueBase">$70.7B</b> held above <span id="revenueBaseThr">$20M</span> by <b id="revenuePeople">1,245</b> residents. Static estimate: no avoidance or out-migration.
         </p>
     </div>
 
     <!-- Geographic Map (embedded dashboard) -->
     <div class="chart-container">
-        <div class="chart-header">
-            <div class="chart-title-group">
-                <h2 style="font-size: 1.15rem; font-weight: 700; color: #1a3c34; margin: 0;">
-                    Where Hawaiʻi&rsquo;s Millionaires Live
-                </h2>
-                <span class="subtitle">Circle size and color scale with the number of millionaires per city</span>
+        <div class="section-head">
+            <div class="revenue-strip section-strip" style="--cols: 1.5fr 1fr;">
+                <div class="revenue-cell">
+                    <span class="banner-eyebrow">Map</span>
+                    <h2 class="section-title">Where Hawaiʻi&rsquo;s millionaires live</h2>
+                </div>
+                <div class="revenue-cell">
+                    <span class="banner-eyebrow">Circle size and color</span>
+                    <span class="section-cap">Scale with the number of millionaires per city</span>
+                </div>
             </div>
         </div>
-        <div class="map-embed-wrapper">
-            <iframe
-                src="https://hawaii-appleseed.github.io/hawaii-appleseed-dashboard/?var=millionaires&amp;embed=1"
-                title="Map of millionaire locations in Hawaiʻi"
-                loading="lazy"
-                allow="fullscreen"
-                referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
+        <div class="section-body">
+            <div class="map-embed-wrapper">
+                <iframe
+                    src="https://hawaii-appleseed.github.io/hawaii-appleseed-dashboard/?var=millionaires&amp;embed=1"
+                    title="Map of millionaire locations in Hawaiʻi"
+                    loading="lazy"
+                    allow="fullscreen"
+                    referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+            </div>
+            <p class="chart-caption section-cap">
+                Honolulu dominates the count, but ultra-wealth pockets exist on every island.
+            </p>
         </div>
-        <p class="chart-caption" style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: #6b8f71; font-style: italic;">
-            Honolulu dominates the count, but ultra-wealth pockets exist on every island.
-        </p>
     </div>
 
     <!-- Single Chart Container with Switcher -->
     <div class="chart-container">
-        <div class="chart-header">
-            <div class="chart-title-group">
-                <select class="chart-switcher" id="chartSwitcher">
-                    <option value="wealth">Wealth Held by Millionaires, Billions</option>
-                    <option value="individuals"># of Individuals by Wealth Tier</option>
-                </select>
-                <span class="subtitle" id="chartSubtitle">Hawaiʻi, 2010&ndash;2024 (USD) &middot; Stacked area shows tiers as portions of total</span>
+        <div class="section-head">
+            <div class="revenue-strip section-strip">
+                <div class="revenue-cell">
+                    <span class="banner-eyebrow">Chart</span>
+                    <select class="chart-switcher" id="chartSwitcher">
+                        <option value="wealth">Wealth Held by Millionaires, Billions</option>
+                        <option value="individuals"># of Individuals by Wealth Tier</option>
+                    </select>
+                </div>
+                <div class="revenue-cell">
+                    <span class="banner-eyebrow" id="chartFromLabel">2010 total</span>
+                    <span class="section-fig" id="aggregate2010">$105.7B</span>
+                </div>
+                <div class="revenue-cell">
+                    <span class="banner-eyebrow" id="chartToLabel">2024 total</span>
+                    <span class="section-fig section-fig--accent" id="aggregateTotal">$292.7B</span>
+                    <span class="section-cap" id="chartGrowth"><b>+177%</b> since 2010</span>
+                </div>
             </div>
             <select class="year-select" id="yearSelect" style="display:none;"></select>
         </div>
-        
-        <!-- Wealth Chart Wrapper -->
-        <div id="wealthWrapper">
-            <div class="chart-totals-row">
-                <span class="chart-total is-past">
-                    <span class="chart-total-label">2010 Total</span>
-                    <span class="chart-total-value" id="aggregate2010">$105.7B</span>
-                </span>
-                <span class="chart-total is-current">
-                    <span class="chart-total-label">2024 Total</span>
-                    <span class="chart-total-value" id="aggregateTotal">$292.7B</span>
-                </span>
-            </div>
-            <div class="chart-wrapper">
-                <canvas id="wealthChart"></canvas>
-            </div>
-        </div>
-        <p class="chart-caption" id="wealthCaption" style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: #6b8f71; font-style: italic;">
-            Even with tax increases, the wealth held by millionaires in Hawaiʻi has almost tripled since 2010.
-        </p>
+        <div class="section-body">
+            <span class="section-cap" id="chartSubtitle">Hawaiʻi, 2010&ndash;2024 (USD) &middot; Stacked area shows tiers as portions of total</span>
 
-        <!-- Individuals Chart Wrapper -->
-        <div class="chart-wrapper" id="individualsWrapper" style="display:none;">
-            <canvas id="individualsChart"></canvas>
+            <!-- Wealth Chart Wrapper -->
+            <div id="wealthWrapper">
+                <div class="chart-wrapper">
+                    <canvas id="wealthChart"></canvas>
+                </div>
+            </div>
+            <p class="chart-caption section-cap" id="wealthCaption">
+                Even with tax increases, the wealth held by millionaires in Hawaiʻi has almost tripled since 2010.
+            </p>
+
+            <!-- Individuals Chart Wrapper -->
+            <div class="chart-wrapper" id="individualsWrapper" style="display:none;">
+                <canvas id="individualsChart"></canvas>
+            </div>
+            <p class="chart-caption section-cap" id="individualsCaption" style="display: none;">
+                The number of millionaires in Hawaiʻi has steadily increased since 2010, despite tax increases.
+            </p>
         </div>
-        <p class="chart-caption" id="individualsCaption" style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: #6b8f71; font-style: italic; display: none;">
-            The number of millionaires in Hawaiʻi has steadily increased since 2010, despite tax increases.
-        </p>
     </div>
 
     <p class="source">Source: Wealth-X / Altrata &mdash; Market Sizing Wealth Data for Hawaiʻi (Nov 9, 2025)</p>
 
     <!-- Narrative Section -->
     <div class="narrative-section">
+        <span class="banner-eyebrow">Why it matters</span>
         <h2 class="narrative-title">Ultra-millionaires have advantages over the rest of us</h2>
         <div class="narrative-point">
             <div class="narrative-point-header">
@@ -1302,8 +1357,13 @@
             </div>
             <p>Hawaiʻi is one of only nine states that taxes capital gains at a lower rate than ordinary income&mdash;effectively a loophole that almost entirely benefits the wealthy.</p>
             <div class="narrative-stat">
-                <span class="narrative-stat-figure">$180M<span class="unit">/year</span></span>
-                <span class="narrative-stat-desc">in new revenue if capital gains were taxed like regular income &mdash; with <strong>97% paid by the top 5%</strong> of earners, and nothing more from the bottom 80%.</span>
+                <div class="narrative-stat-cell">
+                    <span class="banner-eyebrow">New revenue</span>
+                    <span class="narrative-stat-figure">$180M<span class="unit">/ year</span></span>
+                </div>
+                <div class="narrative-stat-cell">
+                    <span class="narrative-stat-desc">If capital gains were taxed like regular income, with <strong>97% paid by the top 5%</strong> of earners and nothing more from the bottom 80%.</span>
+                </div>
             </div>
             <button class="narrative-more-toggle" data-target="narrative-1">More</button>
             <div class="narrative-more-content" id="narrative-1">
@@ -1459,6 +1519,7 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                onResize: function(chart) { responsiveBar(chart); },
                 interaction: { mode: 'index', intersect: false },
                 layout: {
                     padding: { left: 20, right: 20, top: 30 }
@@ -1579,6 +1640,7 @@
         const lastTotal = wealthTotal[wealthTotal.length - 1];
         document.getElementById('aggregate2010').textContent = '$' + firstTotal.toFixed(1) + 'B';
         document.getElementById('aggregateTotal').textContent = '$' + lastTotal.toFixed(1) + 'B';
+        document.getElementById('chartGrowth').innerHTML = '<b>+' + Math.round((lastTotal / firstTotal - 1) * 100) + '%</b> since 2010';
 
         // Tax increase annotation using Chart.js annotation plugin
         const taxIncreaseAnnotation = {
@@ -1628,6 +1690,7 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                onResize: function(chart) { responsiveWealth(chart); },
                 interaction: { mode: 'index', intersect: false },
                 layout: {
                     padding: { left: 50, right: 78, top: 18 }
@@ -1636,7 +1699,7 @@
                     datalabels: {
                         // 2010 label floats above its point (clear of the y-axis); 2024 label sits in the right margin
                         align: function(ctx) {
-                            return ctx.dataIndex === 0 ? 'top' : 'right';
+                            return ctx.dataIndex === 0 ? (ctx.chart.width < 520 ? 'bottom' : 'top') : 'right';
                         },
                         anchor: 'center',
                         offset: function(ctx) { return ctx.dataIndex === 0 ? 4 : 10; },
@@ -1739,6 +1802,45 @@
             }
         });
 
+        // ── Narrow screens ──
+        // The wealth chart reserves 50px left / 78px right for its end labels, which
+        // leaves a ~130px plot on a phone. Below NARROW_PX the margins, legend and
+        // tick type tighten so the plot gets the width.
+        const NARROW_PX = 520;
+        function responsiveWealth(chart) {
+            // Chart.js fires onResize while it is still being constructed; wait until
+            // the chart has been tagged below.
+            if (chart._narrow === undefined) return;
+            const narrow = chart.width < NARROW_PX;
+            if (chart._narrow === narrow) return;
+            chart._narrow = narrow;
+            const o = chart.options;
+            o.layout.padding = narrow ? { left: 4, right: 70, top: 18 } : { left: 50, right: 78, top: 18 };
+            o.plugins.legend.labels.padding = narrow ? 12 : 20;
+            o.plugins.legend.labels.font.size = narrow ? 12 : 14;
+            o.plugins.datalabels.font.size = narrow ? 11 : 12;
+            o.scales.x.ticks.font.size = narrow ? 11 : 13;
+            o.scales.x.ticks.maxRotation = narrow ? 0 : 50;
+            o.scales.x.ticks.maxTicksLimit = narrow ? 5 : undefined;
+            o.scales.y.ticks.font.size = narrow ? 11 : 13;
+            chart.update('none');
+        }
+        function responsiveBar(chart) {
+            if (chart._narrow === undefined) return;
+            const narrow = chart.width < NARROW_PX;
+            if (chart._narrow === narrow) return;
+            chart._narrow = narrow;
+            const o = chart.options;
+            o.layout.padding = narrow ? { left: 6, right: 6, top: 30 } : { left: 20, right: 20, top: 30 };
+            o.plugins.legend.labels.padding = narrow ? 12 : 20;
+            o.plugins.legend.labels.font.size = narrow ? 12 : 14;
+            o.plugins.datalabels.font.size = narrow ? 11 : 12;
+            o.scales.y.ticks.font.size = narrow ? 10 : 11;
+            chart.update('none');
+        }
+        wealthChart._narrow = null;
+        responsiveWealth(wealthChart);
+
         // ── Tax Popup Functions ──
         const taxPopup = document.getElementById('taxPopup');
         let popupTimeout;
@@ -1804,7 +1906,15 @@
             const individualsCaption = document.getElementById('individualsCaption');
             const wealthCaption = document.getElementById('wealthCaption');
             
+            const fromEl = document.getElementById('chartFromLabel'), toEl = document.getElementById('chartToLabel');
+            const aggFrom = document.getElementById('aggregate2010'), aggTo = document.getElementById('aggregateTotal');
+            const growthEl = document.getElementById('chartGrowth');
             if (e.target.value === 'wealth') {
+                fromEl.textContent = '2010 total';
+                toEl.textContent = '2024 total';
+                aggFrom.textContent = '$' + firstTotal.toFixed(1) + 'B';
+                aggTo.textContent = '$' + lastTotal.toFixed(1) + 'B';
+                growthEl.innerHTML = '<b>+' + Math.round((lastTotal / firstTotal - 1) * 100) + '%</b> since 2010';
                 wealthWrapper.style.display = 'block';
                 yearSelect.style.display = 'none';
                 individualsWrapper.style.display = 'none';
@@ -1812,6 +1922,12 @@
                 wealthCaption.style.display = 'block';
                 chartSubtitle.innerHTML = "Hawaiʻi, 2010&ndash;2024 (USD) &middot; Stacked area shows tiers as portions of total";
             } else {
+                const all = summaryMapping['all'];
+                fromEl.textContent = '2010 millionaires';
+                toEl.textContent = '2024 millionaires';
+                aggFrom.textContent = all.count2010.toLocaleString();
+                aggTo.textContent = all.count.toLocaleString();
+                growthEl.innerHTML = '<b>+' + Math.round((all.count / all.count2010 - 1) * 100) + '%</b> since 2010';
                 wealthWrapper.style.display = 'none';
                 yearSelect.style.display = 'none';
                 individualsWrapper.style.display = 'block';
@@ -1824,6 +1940,8 @@
                 void individualsWrapper.offsetWidth;
                 if (!barChart) {
                     barChart = createBarChart();
+                    barChart._narrow = null;
+                    responsiveBar(barChart);
                 } else {
                     barChart.resize();
                     barChart.update();
@@ -1975,18 +2093,20 @@
             20: { people: 1245, totalB: 95.6 },
             50: { people: 365,  totalB: 69.3 }
         };
-        let revThreshold = 50, revRate = 2;
+        let revThreshold = 20, revRate = 2;
         function updateRevenue() {
             const t = REVENUE_TIERS[revThreshold];
             const baseB = t.totalB - t.people * revThreshold / 1000;
             const revB = baseB * revRate / 100;
+            const pct = revB / STATE_BUDGET * 100;
             document.getElementById('revenueRateLabel').textContent = revRate + '%';
-            document.getElementById('revenueThresholdLabel').textContent = '$' + revThreshold + ' million';
+            document.getElementById('revenueThresholdLabel').textContent = '$' + revThreshold + 'M';
             document.getElementById('revenueValue').textContent = '$' + revB.toFixed(2) + 'B';
-            document.getElementById('revenueBudgetPct').textContent = (revB / STATE_BUDGET * 100).toFixed(1) + '%';
-            document.getElementById('revenueBasis').textContent =
-                'Applied only to the $' + (Math.round(baseB * 10 + 1e-6) / 10).toFixed(1) + 'B held above $' + revThreshold + 'M by '
-                + t.people.toLocaleString() + ' residents. Static estimate: no avoidance or out-migration.';
+            document.getElementById('revenueBudgetPct').textContent = pct.toFixed(1) + '%';
+            document.getElementById('revenueMeter').style.width = Math.min(pct, 100).toFixed(1) + '%';
+            document.getElementById('revenueBase').textContent = '$' + (Math.round(baseB * 10 + 1e-6) / 10).toFixed(1) + 'B';
+            document.getElementById('revenueBaseThr').textContent = '$' + revThreshold + 'M';
+            document.getElementById('revenuePeople').textContent = t.people.toLocaleString();
         }
         function bindSeg(id, attr, setter) {
             const seg = document.getElementById(id);
