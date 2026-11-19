@@ -53,6 +53,9 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-res) { grid-row-start: 1; grid
     border-radius: 4px;
 }
 @container (min-width: 900px) { .tfc-res-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.tfc-res-card p.tfc-res-pdfline { flex: none; margin: -10px 0 14px; font-size: 1rem; min-height: 1.6em; }
+.tfc-res-card .tfc-res-pdfline a { color: var(--tfc-navy); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.tfc-res-card .tfc-res-pdfline a::before { content: "\2193  "; }
 .tfc-res .tfc-res-card h2 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 14px; }
 .tfc-res-card p { margin: 0 0 28px; flex: 1; font-size: 1.05rem; }
 .tfc-res .tfc-res-card a.tfc-btn { display: block; text-align: center; text-decoration: none; }
@@ -106,6 +109,7 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-res) { grid-row-start: 1; grid
 .tfc-res-body ul { margin: 0 0 16px; padding: 0 0 0 22px; list-style: disc; }
 .tfc-res-body li { margin: 0 0 8px; }
 .tfc-res-body a { color: var(--tfc-blue); text-decoration: underline; text-underline-offset: 3px; }
+.tfc-res-pdfnote { font-size: .95rem; color: var(--tfc-muted); }
 .tfc-res-lede { font-size: 1.15rem; color: var(--tfc-muted); }
 .tfc-res-tags { font-weight: 700; color: var(--tfc-blue); }
 
@@ -139,26 +143,31 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-res) { grid-row-start: 1; grid
     <div class="tfc-res-card">
       <h2>2027 Legislative Priorities</h2>
       <p>The Hawaiʻi Tax Fairness Coalition has set multiple policy priorities for the 2027 Hawaiʻi legislative session aimed at raising revenue through fair taxes on extreme wealth. See the full list of priorities.</p>
+      <p class="tfc-res-pdfline" aria-hidden="true">&nbsp;</p>
       <a class="tfc-btn sqs-block-button-element--medium sqs-button-element--primary sqs-block-button-element" href="/2027-priorities">See Priorities</a>
     </div>
     <div class="tfc-res-card">
       <h2>2027 Messaging Guide</h2>
       <p>The Hawaiʻi Tax Fairness Coalition’s messaging guide for advocates: our three topline messages, the language that works, and calm answers to the arguments opponents make.</p>
+      <p class="tfc-res-pdfline"><a href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/assets/guides/Hawaii-Tax-Fairness-2027-Messaging-Guide.pdf" target="_blank" rel="noopener">Preview PDF</a></p>
       <a class="tfc-btn sqs-block-button-element--medium sqs-button-element--primary sqs-block-button-element" href="#messaging-guide">Read the Guide</a>
     </div>
     <div class="tfc-res-card">
       <h2>2027 Campaign Talking Points</h2>
       <p>Talking points on working families tax credits, women, and children, with sources, for testimony, op-eds and conversations.</p>
+      <p class="tfc-res-pdfline"><a href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/assets/guides/Hawaii-Tax-Fairness-2027-Talking-Points.pdf" target="_blank" rel="noopener">Preview PDF</a></p>
       <a class="tfc-btn sqs-block-button-element--medium sqs-button-element--primary sqs-block-button-element" href="#talking-points">Read the Talking Points</a>
     </div>
     <div class="tfc-res-card">
       <h2>How to Get Involved</h2>
       <p>Who we are, our core priorities, and the flexible ways organizations can join the coalition.</p>
+      <p class="tfc-res-pdfline"><a href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/assets/guides/Hawaii-Tax-Fairness-How-to-Get-Involved.pdf" target="_blank" rel="noopener">Preview PDF</a></p>
       <a class="tfc-btn sqs-block-button-element--medium sqs-button-element--primary sqs-block-button-element" href="#get-involved">Join the Coalition</a>
     </div>
     <div class="tfc-res-card">
       <h2>Research Archive</h2>
       <p>Browse policy briefs, fact sheets and research reports from the Hawaiʻi Tax Fairness Coalition and its members covering tax credits, the state budget, progressive revenue policies and ways to achieve a fair tax code.</p>
+      <p class="tfc-res-pdfline" aria-hidden="true">&nbsp;</p>
       <a class="tfc-btn sqs-block-button-element--medium sqs-button-element--primary sqs-block-button-element" href="/research">Browse Archive</a>
     </div>
   </div>
@@ -174,6 +183,7 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-res) { grid-row-start: 1; grid
       <span class="tfc-res-chev" aria-hidden="true"></span>
     </summary>
     <div class="tfc-res-body">
+      <p class="tfc-res-pdfnote">Prefer a printable copy? <a href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/assets/guides/Hawaii-Tax-Fairness-2027-Messaging-Guide.pdf" target="_blank" rel="noopener">Preview or download the PDF</a>.</p>
       <h3>3 topline messages</h3>
 
       <h4>Goods for the Common Good</h4>
@@ -245,6 +255,7 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-res) { grid-row-start: 1; grid
       <span class="tfc-res-chev" aria-hidden="true"></span>
     </summary>
     <div class="tfc-res-body">
+      <p class="tfc-res-pdfnote">Prefer a printable copy? <a href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/assets/guides/Hawaii-Tax-Fairness-2027-Talking-Points.pdf" target="_blank" rel="noopener">Preview or download the PDF</a>.</p>
       <h3>Working families tax credits</h3>
       <p class="tfc-res-lede">Working families tax credits help local households keep more of what they earn.</p>
       <ul>
@@ -288,6 +299,7 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-res) { grid-row-start: 1; grid
       <span class="tfc-res-chev" aria-hidden="true"></span>
     </summary>
     <div class="tfc-res-body">
+      <p class="tfc-res-pdfnote">Prefer a printable copy? <a href="https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/tax-fairness/assets/guides/Hawaii-Tax-Fairness-How-to-Get-Involved.pdf" target="_blank" rel="noopener">Preview or download the PDF</a>.</p>
       <h3>Who we are</h3>
       <p>The Hawaiʻi Tax Fairness Coalition is a statewide alliance of nonprofits, community organizations, unions, advocates, researchers, and service providers working to create a more equitable tax system—one that raises the revenue our state needs without placing the burden on low- and moderate-income families.</p>
       <p>We advocate for practical, achievable reforms that ensure those who benefit most from Hawaiʻi’s economy contribute fairly so the state can sustainably fund housing, healthcare, education, infrastructure, and essential community services.</p>
