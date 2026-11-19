@@ -8,6 +8,13 @@
      Palette and Site Styles hooks match priorities_2027_squarespace.html. -->
 
 <style>
+/* Layout: span the page grid under the three cards and size the row to the content.
+   Scoped so the editor's own view of the page is left alone. */
+body:not(.sqs-is-page-editing) .fluid-engine:has(.tfc-res) { grid-template-rows: auto !important; }
+body:not(.sqs-is-page-editing) .fe-block:has(.tfc-res) { grid-row-start: 1; grid-row-end: 2; grid-column-start: 2; grid-column-end: -2; }
+@media (min-width: 768px) {
+    body:not(.sqs-is-page-editing) .fe-block:has(.tfc-res) { grid-column-start: 2; grid-column-end: 25; }
+}
 .tfc-res {
     --tfc-navy: #253551;
     --tfc-blue: #3c73b9;
