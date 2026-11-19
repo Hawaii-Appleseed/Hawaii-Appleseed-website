@@ -16,9 +16,6 @@
    Scoped so the editor's own view of the page is left alone. */
 body:not(.sqs-is-page-editing) .fluid-engine:has(.tfc-res) { grid-template-rows: auto !important; }
 body:not(.sqs-is-page-editing) .fe-block:has(.tfc-res) { grid-row-start: 1; grid-row-end: 2; grid-column-start: 2; grid-column-end: -2; }
-@media (min-width: 768px) {
-    body:not(.sqs-is-page-editing) .fe-block:has(.tfc-res) { grid-column-start: 2; grid-column-end: 25; }
-}
 .tfc-res {
     --tfc-navy: #253551;
     --tfc-blue: #3c73b9;
@@ -55,6 +52,7 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-res) { grid-row-start: 1; grid
     background: #dfe0da;
     border-radius: 4px;
 }
+@container (min-width: 900px) { .tfc-res-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .tfc-res .tfc-res-card h2 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 14px; }
 .tfc-res-card p { margin: 0 0 28px; flex: 1; font-size: 1.05rem; }
 .tfc-res .tfc-res-card a.tfc-btn { display: block; text-align: center; text-decoration: none; }
