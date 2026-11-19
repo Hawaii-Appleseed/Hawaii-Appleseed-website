@@ -209,13 +209,11 @@ html body header.header .header-nav-folder-item a:hover {
     box-shadow: 0 0 0 1px rgba(37, 53, 81, 0.12);
 }
 
-/* ---- Announcement bar: 2027 priorities ----------------------------------
-   Text and link (/2027-priorities) are set in Pages > Marketing Tools >
-   Announcement Bar. Shown on the homepage only; logo-blue so it reads apart
-   from the navy header (white on #3c73b9 is 4.7:1). */
-body:not(.homepage) .sqs-announcement-bar-dropzone {
-    display: none !important;
-}
+/* ---- Announcement bar: Pau Hana campaign launch (Dec 10 2026) ------------
+   Text and link (Eventbrite) are set in Pages > Marketing Tools >
+   Announcement Bar. Squarespace shows it on every page; logo-blue so it
+   reads apart from the navy header (white on #3c73b9 is 4.7:1). Until
+   2026-11-19 it was hidden off the homepage (2027 priorities banner). */
 .sqs-announcement-bar {
     background: #3c73b9 !important;
 }
