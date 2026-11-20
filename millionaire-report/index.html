@@ -373,6 +373,47 @@
         }
         .revenue-callout-basis b { color: #fff; font-weight: 800; }
 
+        /* "How we estimated this": worked calculation behind the revenue figure */
+        .revenue-method-btn {
+            margin-top: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font: inherit;
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 999px;
+            padding: 0.55rem 1.05rem;
+            min-height: 2.3rem;
+            cursor: pointer;
+        }
+        .revenue-method-btn:hover { background: rgba(255, 255, 255, 0.22); }
+        .revenue-method-btn:focus-visible { outline: 2px solid #bff0c9; outline-offset: 2px; }
+        .revenue-method-btn svg { transition: transform 0.2s; }
+        .revenue-method-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+        .revenue-method {
+            margin-top: 0.9rem;
+            background: rgba(20, 32, 40, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: var(--r-md);
+            padding: 1.2rem 1.4rem 1.3rem;
+            color: rgba(255, 255, 255, 0.92);
+        }
+        .revenue-method[hidden] { display: none; }
+        .revenue-method h3 { margin: 0 0 0.7rem; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #dcefe2; }
+        .revenue-calc { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+        .revenue-calc td { padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.14); font-size: 0.95rem; font-weight: 600; vertical-align: top; }
+        .revenue-calc td:last-child { text-align: right; font-weight: 800; color: #fff; white-space: nowrap; padding-left: 1rem; }
+        .revenue-calc small { display: block; font-size: 0.82rem; font-weight: 600; color: rgba(255, 255, 255, 0.78); }
+        .revenue-calc tr.sum td { border-bottom: 0; border-top: 2px solid rgba(255, 255, 255, 0.4); color: #bff0c9; font-size: 1.05rem; }
+        .revenue-calc tr.sum td:last-child { color: #bff0c9; }
+        .revenue-method ul { margin: 0.9rem 0 0; padding-left: 1.15rem; font-size: 0.9rem; font-weight: 600; line-height: 1.5; }
+        .revenue-method li + li { margin-top: 0.25rem; }
+        .revenue-method-src { margin: 0.9rem 0 0; font-size: 0.85rem; font-weight: 600; line-height: 1.5; color: rgba(255, 255, 255, 0.85); }
+
         .banner-stat {
             display: flex;
             flex-direction: column;
@@ -1162,6 +1203,11 @@
         .fortune-blocks span { background:#85a98f; border-radius:8px; aspect-ratio:1.1; }
         .fortune-blocks span.p { background:#3f4f5a; overflow:hidden; }
         .fortune-blocks span.p i { display:block; height:100%; background:#85a98f; }
+        /* First block = one year of the state budget; the light slice is what the wealth tax below raises. */
+        .fortune-blocks span.tax { position:relative; outline:2px solid #ecfff1; outline-offset:2px; }
+        .fortune-blocks span.tax i { position:absolute; left:0; top:0; bottom:0; min-width:8px; background:#ecfff1; border-right:2px solid #2f3d47; border-radius:8px 0 0 8px; transition:width .5s cubic-bezier(.16,1,.3,1); }
+        .fortune-taxcap { margin:.15rem 0 .4rem; font-size:clamp(.88rem,2.4vw,.98rem); font-weight:700; line-height:1.35; color:#bff0c9; }
+        .fortune-taxcap b { color:#fff; font-weight:800; }
         @media (max-width: 600px) { .fortune-mult { text-align:left; } .fortune-blocks { grid-template-columns:repeat(7,1fr) !important; } }
         .fortune-note { margin:.75rem 0 0; font-size:clamp(.85rem,2.4vw,1.05rem); color:#c9d1c6; }
         .fortune-note strong { color:#fff; }
@@ -1226,6 +1272,7 @@
             </div>
         </div>
         <div class="fortune-blocks" id="fcBlocks" aria-hidden="true"></div>
+        <p class="fortune-taxcap" id="fcTaxCap">&#9650; The light slice: <b id="fcTaxRate">2%</b> on wealth above <b id="fcTaxThr">$20M</b> raises <b id="fcTaxPct">6.0%</b> of one year&rsquo;s budget.</p>
         <p class="fortune-note"><strong>One block = $23.7 billion,</strong> Hawaiʻi&rsquo;s annual state budget (2026).</p>
     </div>
 
@@ -1267,6 +1314,24 @@
         <p class="revenue-callout-basis">
             Applied only to the <b id="revenueBase">$70.7B</b> held above <span id="revenueBaseThr">$20M</span> by <b id="revenuePeople">1,245</b> residents. Static estimate: no avoidance or out-migration.
         </p>
+        <button type="button" class="revenue-method-btn" id="methodBtn" aria-expanded="false" aria-controls="methodPanel">How we estimated this <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <div class="revenue-method" id="methodPanel" hidden>
+            <h3>How we estimated this</h3>
+            <table class="revenue-calc">
+                <tr><td>Wealth held by residents worth <span class="mThr">$20M</span> or more<small>Wealth-X / Altrata estimate, 2024</small></td><td id="mTotal">$95.6B</td></tr>
+                <tr><td>Minus the untaxed first <span class="mThr">$20M</span> of each of <span id="mPeople">1,245</span> people</td><td>&minus; <span id="mExempt">$24.9B</span></td></tr>
+                <tr><td>Taxable wealth</td><td id="mBase">$70.7B</td></tr>
+                <tr><td>Times the rate</td><td>&times; <span id="mRate">2%</span></td></tr>
+                <tr class="sum"><td>Revenue per year</td><td id="mRev">$1.41B</td></tr>
+                <tr><td>As a share of the <b>$23.7B</b> state budget (2026)</td><td id="mPct">6.0%</td></tr>
+            </table>
+            <ul>
+                <li>Static: 2024 wealth held fixed. No tax avoidance, out-migration, or change in asset values.</li>
+                <li>Only wealth above the threshold is taxed; everyone below it pays nothing.</li>
+                <li>One year of revenue, compared with one year of the budget.</li>
+            </ul>
+            <p class="revenue-method-src">Source: Wealth-X / Altrata, <i>Market Sizing Wealth Data for Hawaiʻi</i> (Nov 9, 2025). Same scenarios as Table 1 of the Hawaiʻi Appleseed wealth tax report.</p>
+        </div>
     </div>
 
     <!-- Geographic Map (embedded dashboard) -->
@@ -1949,6 +2014,13 @@
             }
         });
         const STATE_BUDGET = 23.7; // $23.7B in 2026
+        let revPct = 0; // wealth-tax revenue as % of one year's budget; drawn as the slice in block one
+
+        function paintTaxSlice() {
+            const slice = document.querySelector('#fcBlocks .tax i');
+            if (slice) slice.style.width = Math.min(revPct, 100).toFixed(2) + '%';
+            document.getElementById('fcTaxCap').hidden = !slice;
+        }
 
         const summaryMapping = {
             'all':       { label: 'millionaires',                         count: 81814, wealth: 292.7, count2010: 28801 },
@@ -1977,10 +2049,11 @@
 
         function updateBudgetCard(multiple, info) {
             const full = Math.floor(multiple), partial = multiple - full;
-            let html = '<span></span>'.repeat(full);
+            let html = full > 0 ? '<span class="tax"><i></i></span>' + '<span></span>'.repeat(full - 1) : '';
             if (partial > 0.05) html += `<span class="p"><i style="width:${(partial * 100).toFixed(0)}%"></i></span>`;
             document.getElementById('fcBlocks').innerHTML = html;
             document.getElementById('fcBlocks').style.gridTemplateColumns = `repeat(${Math.max(full + (partial > 0.05 ? 1 : 0), 1)}, 1fr)`;
+            paintTaxSlice();
             document.getElementById('fcMult').textContent = multiple.toFixed(1);
             document.getElementById('fcWealth').textContent = '$' + info.wealth.toFixed(1);
             document.getElementById('fcCount').textContent = info.count.toLocaleString();
@@ -2107,7 +2180,32 @@
             document.getElementById('revenueBase').textContent = '$' + (Math.round(baseB * 10 + 1e-6) / 10).toFixed(1) + 'B';
             document.getElementById('revenueBaseThr').textContent = '$' + revThreshold + 'M';
             document.getElementById('revenuePeople').textContent = t.people.toLocaleString();
+
+            // Worked calculation ("How we estimated this")
+            const exemptB = t.people * revThreshold / 1000;
+            const r1 = (n) => '$' + (Math.round(n * 10 + 1e-6) / 10).toFixed(1) + 'B';
+            document.querySelectorAll('.mThr').forEach(e => { e.textContent = '$' + revThreshold + 'M'; });
+            document.getElementById('mTotal').textContent = r1(t.totalB);
+            document.getElementById('mPeople').textContent = t.people.toLocaleString();
+            document.getElementById('mExempt').textContent = r1(exemptB);
+            document.getElementById('mBase').textContent = r1(baseB);
+            document.getElementById('mRate').textContent = revRate + '%';
+            document.getElementById('mRev').textContent = '$' + revB.toFixed(2) + 'B';
+            document.getElementById('mPct').textContent = pct.toFixed(1) + '%';
+
+            // Same revenue, drawn as a slice of block one in the budget card above
+            revPct = pct;
+            document.getElementById('fcTaxRate').textContent = revRate + '%';
+            document.getElementById('fcTaxThr').textContent = '$' + revThreshold + 'M';
+            document.getElementById('fcTaxPct').textContent = pct.toFixed(1) + '%';
+            paintTaxSlice();
         }
+        const methodBtn = document.getElementById('methodBtn');
+        methodBtn.addEventListener('click', () => {
+            const open = methodBtn.getAttribute('aria-expanded') === 'true';
+            methodBtn.setAttribute('aria-expanded', String(!open));
+            document.getElementById('methodPanel').hidden = open;
+        });
         function bindSeg(id, attr, setter) {
             const seg = document.getElementById(id);
             seg.addEventListener('click', (e) => {
