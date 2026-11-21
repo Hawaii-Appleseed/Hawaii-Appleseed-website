@@ -139,6 +139,19 @@
             min-height: 100vh;
         }
 
+        /* Visible to screen readers only: section headings and the live status line */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         .header {
             text-align: left;
             margin-bottom: 2.5rem;
@@ -1243,6 +1256,7 @@
     </style>
 </head>
 <body>
+    <main>
     <div class="header">
         <p class="kicker">Data Breakdown</p>
         <h1>Millionaires in Hawaiʻi</h1>
@@ -1288,7 +1302,8 @@
     </div>
 
     <!-- 12.4x state budget: the banner stat's visual -->
-    <div class="fortune-card" id="budgetCard" role="img" aria-label="Hawaiʻi's millionaires hold 12.4 times the state's annual budget.">
+    <div class="fortune-card" id="budgetCard">
+        <h2 class="sr-only">Wealth compared with the state budget</h2>
         <p class="fortune-kicker" id="fcKicker">Hawaiʻi&rsquo;s millionaires hold wealth equivalent to 12.4&times; the state budget</p>
         <div class="fortune-top">
             <div>
@@ -1301,12 +1316,14 @@
             </div>
         </div>
         <div class="fortune-blocks" id="fcBlocks" aria-hidden="true"></div>
-        <p class="fortune-taxcap" id="fcTaxCap">&#9650; The light slice: <b id="fcTaxRate">2%</b> on wealth above <b id="fcTaxThr">$20M</b> raises <b id="fcTaxPct">6.0%</b> of one year&rsquo;s budget.</p>
+        <p class="fortune-taxcap" id="fcTaxCap"><span aria-hidden="true">&#9650; </span>The light slice: <b id="fcTaxRate">2%</b> on wealth above <b id="fcTaxThr">$20M</b> raises <b id="fcTaxPct">6.0%</b> of one year&rsquo;s budget.</p>
         <p class="fortune-note"><strong>One block = $23.7 billion,</strong> Hawaiʻi&rsquo;s annual state budget (2026).</p>
     </div>
 
     <!-- Wealth-tax revenue callout: the report's scenarios (Table 1 / Figure 4) -->
     <div class="revenue-callout">
+        <h2 class="sr-only">What a wealth tax could raise</h2>
+        <p class="sr-only" id="revenueStatus" role="status" aria-live="polite" aria-atomic="true"></p>
         <div class="revenue-scenario" role="group" aria-label="Scenario">
             <span class="revenue-sentence">If Hawaiʻi taxed each person&rsquo;s wealth above</span>
             <div class="revenue-seg" role="radiogroup" aria-label="Wealth threshold" id="thresholdSeg">
@@ -1391,11 +1408,12 @@
 
     <!-- Single Chart Container with Switcher -->
     <div class="chart-container">
+        <h2 class="sr-only">Millionaires over time</h2>
         <div class="section-head">
             <div class="revenue-strip section-strip">
                 <div class="revenue-cell">
                     <span class="banner-eyebrow">Chart</span>
-                    <select class="chart-switcher" id="chartSwitcher">
+                    <select class="chart-switcher" id="chartSwitcher" aria-label="Chart">
                         <option value="wealth">Wealth Held by Millionaires, Billions</option>
                         <option value="individuals"># of Individuals by Wealth Tier</option>
                     </select>
@@ -1462,6 +1480,7 @@
             <span class="narrative-source">Source: <a href="https://www.hitaxfairness.org/capital-gains" target="_blank">HI Tax Fairness Coalition &mdash; Capital Gains Tax Reform</a></span>
         </div>
     </div>
+    </main>
 
     <!-- Wealth-by-tier segment hover tooltip -->
     <div class="tier-tip" id="tierTip" role="status" aria-hidden="true"></div>
@@ -1732,6 +1751,29 @@
         document.getElementById('aggregateTotal').textContent = '$' + lastTotal.toFixed(1) + 'B';
         document.getElementById('chartGrowth').innerHTML = '<b>+' + Math.round((lastTotal / firstTotal - 1) * 100) + '%</b> since 2010';
 
+        // Text alternatives for the two charts (a canvas has no content of its own).
+        // Built from the same arrays that draw the charts, so they cannot drift from them.
+        (function () {
+            const last = years.length - 1;
+            const growth = (a, b) => Math.round((b / a - 1) * 100);
+            const wealthNow = wealthTiers.map(t => t + ' tier, $' + wealthData[t][last].toFixed(1) + ' billion').join('; ');
+            const wc = document.getElementById('wealthChart');
+            wc.setAttribute('role', 'img');
+            wc.setAttribute('aria-label',
+                'Stacked area chart, Hawaiʻi, ' + years[0] + ' to ' + years[last] + '. Wealth held by millionaires rose from $' +
+                firstTotal.toFixed(1) + ' billion to $' + lastTotal.toFixed(1) + ' billion, up ' + growth(firstTotal, lastTotal) +
+                ' percent. In ' + years[last] + ', by tier: ' + wealthNow + '. A marker shows the 2017 tax increase.');
+            const tiersI = Object.keys(individualsData);
+            const people = yi => tiersI.reduce((s, t) => s + individualsData[t][yi], 0);
+            const ic = document.getElementById('individualsChart');
+            ic.setAttribute('role', 'img');
+            ic.setAttribute('aria-label',
+                'Bar chart on a log scale, Hawaiʻi, ' + years[0] + ' to ' + years[last] + '. The number of millionaires rose from ' +
+                people(0).toLocaleString() + ' to ' + people(last).toLocaleString() + ', up ' + growth(people(0), people(last)) +
+                ' percent. In ' + years[last] + ', by tier: ' +
+                tiersI.map(t => t + ' tier, ' + individualsData[t][last].toLocaleString() + ' people').join('; ') + '.');
+        })();
+
         // Tax increase annotation using Chart.js annotation plugin
         const taxIncreaseAnnotation = {
             id: 'taxIncreaseAnnotation',
@@ -1921,11 +1963,15 @@
             if (chart._narrow === narrow) return;
             chart._narrow = narrow;
             const o = chart.options;
-            o.layout.padding = narrow ? { left: 6, right: 6, top: 30 } : { left: 20, right: 20, top: 30 };
+            // right: room for the value pill centred on the last bar (it was clipped at 6px).
+            o.layout.padding = narrow ? { left: 6, right: 24, top: 30 } : { left: 20, right: 20, top: 30 };
             o.plugins.legend.labels.padding = narrow ? 12 : 20;
             o.plugins.legend.labels.font.size = narrow ? 12 : 14;
             o.plugins.datalabels.font.size = narrow ? 11 : 12;
             o.scales.y.ticks.font.size = narrow ? 10 : 11;
+            // Headroom above the tallest bar: on a phone the legend spans the full width,
+            // and the 2024 value pill ("80,569") used to sit on top of its last entry.
+            o.scales.y.max = narrow ? 200000 : undefined;
             chart.update('none');
         }
         wealthChart._narrow = null;
@@ -2192,7 +2238,7 @@
             50: { people: 365,  totalB: 69.3 }
         };
         let revThreshold = 20, revRate = 2;
-        function updateRevenue() {
+        function updateRevenue(announce) {
             const t = REVENUE_TIERS[revThreshold];
             const baseB = t.totalB - t.people * revThreshold / 1000;
             const revB = baseB * revRate / 100;
@@ -2221,6 +2267,14 @@
             document.getElementById('fcTaxThr').textContent = '$' + revThreshold + 'M';
             document.getElementById('fcTaxPct').textContent = pct.toFixed(1) + '%';
             paintTaxSlice();
+
+            // Tell screen-reader users what the new scenario raises. Only on a change the
+            // user made, so nothing is announced when the page first loads.
+            if (announce) {
+                document.getElementById('revenueStatus').textContent =
+                    'Taxing each person’s wealth above $' + revThreshold + 'M at ' + revRate + '% could raise $' +
+                    revB.toFixed(2) + ' billion a year, ' + pct.toFixed(1) + ' percent of the state budget.';
+            }
         }
         const methodBtn = document.getElementById('methodBtn');
         methodBtn.addEventListener('click', () => {
@@ -2235,7 +2289,7 @@
                 if (!btn) return;
                 seg.querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', b === btn ? 'true' : 'false'));
                 setter(Number(btn.dataset[attr]));
-                updateRevenue();
+                updateRevenue(true);
             });
         }
         bindSeg('thresholdSeg', 'threshold', v => { revThreshold = v; });
