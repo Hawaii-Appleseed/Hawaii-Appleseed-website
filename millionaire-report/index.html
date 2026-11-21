@@ -278,12 +278,40 @@
         }
         .revenue-cell + .revenue-cell { border-left: 1px solid rgba(255, 255, 255, 0.2); }
         .revenue-callout .banner-eyebrow { color: #dcefe2; }
+        .revenue-strip--two { grid-template-columns: 1.45fr 1fr; }
         .revenue-cell--hero { justify-content: center; }
-        .revenue-ctrl { display: flex; flex-direction: column; gap: 0.45rem; }
-        .revenue-ctrl + .revenue-ctrl { margin-top: 0.55rem; }
+
+        /* Scenario panel: the two controls are the first line of a sentence
+           ("If Hawaiʻi taxed each person's wealth above $20M at a rate of 2%…")
+           and the figures below finish it. */
+        .revenue-scenario {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.6rem 0.7rem;
+            margin: 0 0 1rem;
+            padding: 1.05rem 1.3rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--r-md);
+        }
+        .revenue-sentence {
+            font-size: clamp(1.1rem, 2.8vw, 1.4rem);
+            font-weight: 800;
+            line-height: 1.3;
+            color: #fff;
+            text-wrap: balance;
+        }
+        .revenue-sentence-grp {
+            display: inline-flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.7rem;
+        }
         .revenue-seg {
             display: inline-flex;
             width: max-content;
+            max-width: 100%;
             padding: 3px;
             gap: 2px;
             border-radius: 999px;
@@ -1182,6 +1210,7 @@
             .revenue-callout {
                 padding: 1.1rem 1.25rem;
             }
+            .revenue-scenario { padding: 0.95rem 1rem; }
             .revenue-strip { grid-template-columns: 1fr; }
             .revenue-cell + .revenue-cell { border-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.2); }
             .narrative-stat { grid-template-columns: 1fr; margin-left: 0; }
@@ -1278,31 +1307,29 @@
 
     <!-- Wealth-tax revenue callout: the report's scenarios (Table 1 / Figure 4) -->
     <div class="revenue-callout">
-        <div class="revenue-strip">
-            <div class="revenue-cell">
-                <div class="revenue-ctrl">
-                    <span class="banner-eyebrow">Tax wealth above</span>
-                    <div class="revenue-seg" role="radiogroup" aria-label="Wealth threshold" id="thresholdSeg">
-                        <button type="button" role="radio" aria-checked="true" data-threshold="20">$20M</button>
-                        <button type="button" role="radio" aria-checked="false" data-threshold="50">$50M</button>
-                    </div>
-                </div>
-                <div class="revenue-ctrl">
-                    <span class="banner-eyebrow">At a rate of</span>
-                    <div class="revenue-seg" role="radiogroup" aria-label="Tax rate" id="rateSeg">
-                        <button type="button" role="radio" aria-checked="false" data-rate="1">1%</button>
-                        <button type="button" role="radio" aria-checked="true" data-rate="2">2%</button>
-                        <button type="button" role="radio" aria-checked="false" data-rate="3">3%</button>
-                    </div>
+        <div class="revenue-scenario" role="group" aria-label="Scenario">
+            <span class="revenue-sentence">If Hawaiʻi taxed each person&rsquo;s wealth above</span>
+            <div class="revenue-seg" role="radiogroup" aria-label="Wealth threshold" id="thresholdSeg">
+                <button type="button" role="radio" aria-checked="true" data-threshold="20">$20M</button>
+                <button type="button" role="radio" aria-checked="false" data-threshold="50">$50M</button>
+            </div>
+            <div class="revenue-sentence-grp">
+                <span class="revenue-sentence">at a rate of</span>
+                <div class="revenue-seg" role="radiogroup" aria-label="Tax rate" id="rateSeg">
+                    <button type="button" role="radio" aria-checked="false" data-rate="1">1%</button>
+                    <button type="button" role="radio" aria-checked="true" data-rate="2">2%</button>
+                    <button type="button" role="radio" aria-checked="false" data-rate="3">3%</button>
                 </div>
             </div>
+        </div>
+        <div class="revenue-strip revenue-strip--two">
             <div class="revenue-cell revenue-cell--hero">
                 <span class="banner-eyebrow">Could raise each year</span>
                 <div class="revenue-callout-figure">
                     <span class="revenue-callout-range" id="revenueValue">$1.41B</span>
                     <span class="revenue-callout-per">/ year</span>
                 </div>
-                <span class="revenue-cap"><b id="revenueRateLabel">2%</b> on wealth above <b id="revenueThresholdLabel">$20M</b></span>
+                <span class="revenue-cap">on <b id="revenueBase">$70.7B</b> of taxable wealth held by <b id="revenuePeople">1,245</b> residents</span>
             </div>
             <div class="revenue-cell">
                 <span class="banner-eyebrow">Share of state budget</span>
@@ -1311,9 +1338,7 @@
                 <span class="revenue-cap">of Hawaiʻi&rsquo;s <b>$23.7B</b> annual budget</span>
             </div>
         </div>
-        <p class="revenue-callout-basis">
-            Applied only to the <b id="revenueBase">$70.7B</b> held above <span id="revenueBaseThr">$20M</span> by <b id="revenuePeople">1,245</b> residents. Static estimate: no avoidance or out-migration.
-        </p>
+        <p class="revenue-callout-basis">Static estimate: no avoidance or out-migration.</p>
         <button type="button" class="revenue-method-btn" id="methodBtn" aria-expanded="false" aria-controls="methodPanel">How we estimated this <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <div class="revenue-method" id="methodPanel" hidden>
             <h3>How we estimated this</h3>
@@ -2172,13 +2197,10 @@
             const baseB = t.totalB - t.people * revThreshold / 1000;
             const revB = baseB * revRate / 100;
             const pct = revB / STATE_BUDGET * 100;
-            document.getElementById('revenueRateLabel').textContent = revRate + '%';
-            document.getElementById('revenueThresholdLabel').textContent = '$' + revThreshold + 'M';
             document.getElementById('revenueValue').textContent = '$' + revB.toFixed(2) + 'B';
             document.getElementById('revenueBudgetPct').textContent = pct.toFixed(1) + '%';
             document.getElementById('revenueMeter').style.width = Math.min(pct, 100).toFixed(1) + '%';
             document.getElementById('revenueBase').textContent = '$' + (Math.round(baseB * 10 + 1e-6) / 10).toFixed(1) + 'B';
-            document.getElementById('revenueBaseThr').textContent = '$' + revThreshold + 'M';
             document.getElementById('revenuePeople').textContent = t.people.toLocaleString();
 
             // Worked calculation ("How we estimated this")
