@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Banner top row — mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--slate:#27343d;--slate2:#2f3d47;--line:#3f4f5a;--sage:#85a98f;--pale:#cfe3d4;--t1:#5dae80;--t2:#86d29b;--t3:#bfeaca}
+  *{box-sizing:border-box}
+  body{margin:0;padding:24px 16px 60px;background:#f4f1eb;font-family:'Nunito',system-ui,sans-serif;color:#1a3c34}
+  .wrap{max-width:960px;margin:0 auto}
+  h2.opt{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin:36px 0 4px;color:#4a6b5a}
+  p.note{margin:0 0 10px;font-size:.92rem;color:#4a5a52}
+  .banner{background:var(--slate);border-radius:20px 20px 0 0;padding:clamp(1.2rem,4vw,2.4rem) clamp(1.2rem,4vw,3rem)}
+  .fortune{background:var(--slate2);border-radius:0 0 20px 20px;padding:1.4rem clamp(1.2rem,4vw,3rem);color:#e6ebe3}
+  .fortune .k{font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--sage)}
+  .fortune .big{font-size:2.6rem;font-weight:900;color:#fff;line-height:1.1;margin-top:.3rem}
+  .fortune .big small{font-size:1.1rem;color:var(--pale);font-weight:700;margin-left:.3rem}
+
+  /* shared atoms */
+  .label{color:rgba(255,255,255,.6);font-size:1.1rem;font-weight:500}
+  .count{color:#fff;font-size:clamp(2.2rem,6vw,3.2rem);font-weight:900;line-height:1;letter-spacing:-1px;background:rgba(133,169,143,.18);padding:2px 8px 4px;border-radius:8px}
+  .dd{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.85);font:600 1rem 'Nunito';padding:.4rem .8rem;border-radius:8px;white-space:nowrap}
+  .bar{display:flex;height:16px;border-radius:5px;overflow:hidden;background:rgba(255,255,255,.08)}
+  .bar i{display:block;height:100%}
+  .bar i:not(:last-child){box-shadow:inset -1.5px 0 0 rgba(255,255,255,.4)}
+  .caps{color:var(--sage);font-size:.74rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+  .keys{display:flex;gap:.6rem;font-size:.82rem;font-weight:700;color:rgba(255,255,255,.7)}
+  .keys span:before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.28rem;background:var(--c)}
+  .spark{display:block}
+
+  /* ───────── A: three equal cells in one strip ───────── */
+  .A .strip{display:grid;grid-template-columns:1.5fr 1fr 1fr;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .A .cell{padding:1rem 1.2rem;display:flex;flex-direction:column;justify-content:center;gap:.45rem;min-height:104px}
+  .A .cell+.cell{border-left:1px solid var(--line)}
+  .A .cell.title{flex-direction:row;align-items:center;flex-wrap:wrap;gap:.5rem}
+  .A .cell.title .label{flex-basis:100%}
+  .A .trendfig{color:var(--pale);font-weight:900;font-size:2rem;line-height:1;letter-spacing:-.02em}
+  .A .trendrow{display:flex;align-items:center;gap:.6rem}
+
+  /* ───────── B: three matching tiles, title stays free-standing ───────── */
+  .B .row{display:flex;align-items:stretch;gap:.9rem}
+  .B .title{flex:0 0 auto;display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;max-width:62%}
+  .B .title .label{flex-basis:100%;font-size:1rem}
+  .B .tile{flex:1;background:rgba(133,169,143,.1);border:1px solid rgba(133,169,143,.28);border-radius:12px;padding:.8rem 1rem;display:flex;flex-direction:column;justify-content:center;gap:.4rem;min-width:0}
+  .B .tile .figure{color:var(--pale);font-weight:900;font-size:1.9rem;line-height:1;letter-spacing:-.02em}
+  .B .tile .trendrow{display:flex;align-items:center;gap:.6rem}
+
+  /* ───────── C: title left, two "figure → caps label" stats right, hairline dividers, no boxes ───────── */
+  .C .row{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap}
+  .C .title{flex:1;display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;min-width:260px}
+  .C .stat{display:flex;flex-direction:column;gap:.3rem;padding-left:1.4rem;border-left:1px solid var(--line);min-width:150px}
+  .C .stat .figure{color:var(--pale);font-weight:900;font-size:1.9rem;line-height:1;letter-spacing:-.02em;display:flex;align-items:center;gap:.5rem;height:32px}
+  .C .stat .figure.barfig{height:32px;align-items:center}
+
+  @media (max-width:640px){
+    .A .strip{grid-template-columns:1fr}
+    .A .cell+.cell{border-left:0;border-top:1px solid var(--line)}
+    .B .row{flex-direction:column}
+    .B .title{justify-content:center}
+    .C .stat{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:.8rem;width:100%}
+    .C .title{justify-content:center}
+  }
+</style></head><body><div class="wrap">
+
+<!-- ───────── A ───────── -->
+<h2 class="opt">Option A — One strip, three cells</h2>
+<p class="note">The title and both stats live in a single bordered strip. Every cell is the same height, and the two stats share the same "figure → caps label" rhythm.</p>
+<div class="A">
+  <div class="banner">
+    <div class="strip">
+      <div class="cell title">
+        <span class="label">Hawaiʻi has</span>
+        <span class="count">81,814</span>
+        <span class="dd">millionaires ▾</span>
+      </div>
+      <div class="cell">
+        <div class="bar"><i style="width:67%;background:var(--t1)"></i><i style="width:9%;background:var(--t2)"></i><i style="width:24%;background:var(--t3)"></i></div>
+        <div class="keys"><span style="--c:var(--t1)">67%</span><span style="--c:var(--t2)">9%</span><span style="--c:var(--t3)">24%</span></div>
+        <span class="caps">Wealth by tier</span>
+      </div>
+      <div class="cell">
+        <div class="trendrow">
+          <svg class="spark" width="52" height="28" viewBox="0 0 52 28"><polyline points="2,24 12,20 22,21 32,13 42,9 50,3" fill="none" stroke="#cfe3d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="trendfig">+184%</span>
+        </div>
+        <span class="caps">Since 2010</span>
+      </div>
+    </div>
+  </div>
+  <div class="fortune"><div class="k">Hawaiʻi’s millionaires hold wealth equivalent to 12.4× the state budget</div><div class="big">$292.7<small>billion</small></div></div>
+</div>
+
+<!-- ───────── B ───────── -->
+<h2 class="opt">Option B — Title plus two matching tiles</h2>
+<p class="note">The title stays free-standing on the left. The share bar and the trend get the same tile treatment as the pill that exists today, so the two read as a pair.</p>
+<div class="B">
+  <div class="banner">
+    <div class="row">
+      <div class="title">
+        <span class="label">Hawaiʻi has</span>
+        <span class="count">81,814</span>
+        <span class="dd">millionaires ▾</span>
+      </div>
+      <div class="tile">
+        <span class="caps">Wealth by tier</span>
+        <div class="bar"><i style="width:67%;background:var(--t1)"></i><i style="width:9%;background:var(--t2)"></i><i style="width:24%;background:var(--t3)"></i></div>
+        <div class="keys"><span style="--c:var(--t1)">67%</span><span style="--c:var(--t2)">9%</span><span style="--c:var(--t3)">24%</span></div>
+      </div>
+      <div class="tile">
+        <span class="caps">Since 2010</span>
+        <div class="trendrow">
+          <svg class="spark" width="52" height="28" viewBox="0 0 52 28"><polyline points="2,24 12,20 22,21 32,13 42,9 50,3" fill="none" stroke="#cfe3d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="figure">+184%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fortune"><div class="k">Hawaiʻi’s millionaires hold wealth equivalent to 12.4× the state budget</div><div class="big">$292.7<small>billion</small></div></div>
+</div>
+
+<!-- ───────── C ───────── -->
+<h2 class="opt">Option C — No boxes, hairline dividers</h2>
+<p class="note">Lightest touch. The title sits left, then two stats separated by hairlines. Each stat is a figure on top with a caps label beneath, the same pattern as the budget card below.</p>
+<div class="C">
+  <div class="banner">
+    <div class="row">
+      <div class="title">
+        <span class="label">Hawaiʻi has</span>
+        <span class="count">81,814</span>
+        <span class="dd">millionaires ▾</span>
+      </div>
+      <div class="stat">
+        <div class="figure barfig" style="width:150px"><div class="bar" style="width:150px"><i style="width:67%;background:var(--t1)"></i><i style="width:9%;background:var(--t2)"></i><i style="width:24%;background:var(--t3)"></i></div></div>
+        <span class="caps">Wealth by tier · <span style="color:rgba(255,255,255,.7)">67 / 9 / 24%</span></span>
+      </div>
+      <div class="stat">
+        <div class="figure">
+          <svg class="spark" width="44" height="26" viewBox="0 0 52 28"><polyline points="2,24 12,20 22,21 32,13 42,9 50,3" fill="none" stroke="#cfe3d4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          +184%
+        </div>
+        <span class="caps">Since 2010</span>
+      </div>
+    </div>
+  </div>
+  <div class="fortune"><div class="k">Hawaiʻi’s millionaires hold wealth equivalent to 12.4× the state budget</div><div class="big">$292.7<small>billion</small></div></div>
+</div>
+
+</div></body></html>

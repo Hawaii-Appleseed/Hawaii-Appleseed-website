@@ -1,0 +1,10 @@
+<!-- Pau Hana banner expiry: hides the Announcement Bar from Dec 11 2026 00:00 HST (the event ends Dec 10, 8:30 PM). Delete this block once the bar is cleared in Marketing Tools. -->
+<script>
+(function(){
+  if (Date.now() >= Date.UTC(2026, 11, 11, 10, 0, 0)) {
+    var s = document.createElement("style");
+    s.textContent = ".sqs-announcement-bar-dropzone,#sqs-announcement-bar,.sqs-announcement-bar{display:none!important}";
+    document.head.appendChild(s);
+  }
+})();
+</script>

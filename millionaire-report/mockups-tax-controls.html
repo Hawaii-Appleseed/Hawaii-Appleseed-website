@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tax wealth above — mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;padding:24px 16px 80px;background:#f4f1eb;font-family:'Nunito',system-ui,sans-serif;color:#1a3c34}
+  .wrap{max-width:960px;margin:0 auto}
+  h1{font-size:1.3rem;margin:0 0 4px}
+  h3.opt{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin:36px 0 4px;color:#4a6b5a}
+  p.note{margin:0 0 12px;font-size:.92rem;line-height:1.45;color:#4a5a52;max-width:72ch}
+  p.note b{color:#1a3c34}
+
+  /* ── revenue box (mirrors .revenue-callout) ── */
+  .rbox{background:linear-gradient(160deg,#52666f,#435660);border-radius:20px;padding:clamp(1.5rem,4vw,2.8rem) clamp(1.5rem,4vw,3rem);box-shadow:0 10px 30px rgba(39,52,61,.2);color:#fff}
+  .rstrip{display:grid;grid-template-columns:1.05fr 1.25fr 1fr;border:1px solid rgba(255,255,255,.2);border-radius:16px}
+  .rstrip.two{grid-template-columns:1.45fr 1fr}
+  .rcell{padding:1.15rem 1.35rem 1.25rem;display:flex;flex-direction:column;gap:.55rem;min-width:0}
+  .rcell+.rcell{border-left:1px solid rgba(255,255,255,.2)}
+  .rcell.hero{justify-content:center}
+  .eyebrow{color:#dcefe2;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1.25}
+  .ctrl{display:flex;flex-direction:column;gap:.45rem}.ctrl+.ctrl{margin-top:.55rem}
+  .seg{display:inline-flex;width:max-content;max-width:100%;padding:3px;gap:2px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14)}
+  .seg button{font:800 .92rem 'Nunito';min-width:3.3rem;min-height:2.3rem;padding:0 .95rem;border:0;border-radius:999px;background:transparent;color:rgba(255,255,255,.88);cursor:pointer;font-variant-numeric:tabular-nums}
+  .seg button:hover{color:#fff}
+  .seg button[aria-checked="true"]{background:#fff;color:#27343d}
+  .seg.full{display:flex;width:100%}
+  .seg.full button{flex:1;min-width:0}
+  .seg.sm button{min-height:2.05rem;min-width:2.9rem;padding:0 .8rem;font-size:.88rem}
+  .big{font-weight:900;font-size:clamp(2.8rem,7vw,3.9rem);letter-spacing:-.02em;line-height:1;color:#bff0c9;display:flex;align-items:baseline;gap:.4rem;flex-wrap:wrap;font-variant-numeric:tabular-nums}
+  .big small{font-size:1.05rem;font-weight:800;color:#cfe6d6}
+  .cap{font-size:.86rem;font-weight:600;line-height:1.35;color:rgba(255,255,255,.9)}
+  .cap b{color:#fff;font-weight:800}
+  .share{font-size:2.5rem;font-weight:900;letter-spacing:-.02em;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+  .meter{height:14px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden}
+  .meter i{display:block;height:100%;min-width:6px;border-radius:999px;background:#bff0c9;transition:width .5s cubic-bezier(.16,1,.3,1)}
+  .basis{margin:1.1rem 0 0;font-size:.85rem;font-weight:600;line-height:1.5;color:rgba(255,255,255,.9)}
+  .basis b{color:#fff;font-weight:800}
+  .mbtn{margin-top:.9rem;display:inline-flex;align-items:center;gap:.5rem;font:800 .92rem 'Nunito';color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:.55rem 1.05rem;min-height:2.3rem;cursor:default}
+
+  /* S1: sentence panel */
+  .scn{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem .7rem;margin:0 0 1rem;padding:1.05rem 1.3rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:16px}
+  .sent{font-size:clamp(1.1rem,2.8vw,1.4rem);font-weight:800;line-height:1.3;color:#fff}
+  .grp{display:inline-flex;align-items:center;flex-wrap:wrap;gap:.5rem .7rem}
+  .sent,.by>span{text-wrap:balance}
+
+  /* S2: scenario grid */
+  .sgrid{display:grid;grid-template-columns:minmax(6rem,1.2fr) repeat(3,1fr);gap:.45rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:1.05rem 1.2rem 1.2rem;margin-bottom:1rem}
+  .sgrid .h{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#dcefe2;align-self:end;padding:0 .2rem .15rem;text-align:center;line-height:1.25}
+  .sgrid .h:first-child{text-align:left}
+  .sgrid .h.on{color:#bff0c9}
+  .sgrid .rh{display:flex;flex-direction:column;justify-content:center;font-weight:900;font-size:1.35rem;line-height:1.1;color:#fff;padding-right:.4rem}
+  .sgrid .rh small{font-size:.78rem;font-weight:700;color:rgba(255,255,255,.82);margin-top:.15rem}
+  .sgrid .rh.on{color:#bff0c9}
+  .sgrid button.c{font:900 1.35rem 'Nunito';font-variant-numeric:tabular-nums;min-height:3.3rem;border:1px solid rgba(255,255,255,.22);border-radius:12px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;transition:background .15s}
+  .sgrid button.c{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1rem;padding:0 .3rem;min-width:0}
+  .sgrid .rv{font-size:1.35rem;font-weight:900;line-height:1.1}
+  .sgrid .rt,.sgrid .pre{display:none}
+  .sgrid button.c:hover{background:rgba(255,255,255,.2)}
+  .sgrid button.c[aria-checked="true"]{background:#fff;color:#27343d;border-color:#fff}
+
+  /* S3: who's taxed */
+  .rc{display:flex;align-items:center;justify-content:space-between;gap:.75rem;width:100%;min-height:3rem;padding:.5rem .95rem;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:#fff;cursor:pointer;font:inherit;text-align:left}
+  .rc:hover{background:rgba(255,255,255,.16)}
+  .rc b{font-size:1.3rem;font-weight:900;font-variant-numeric:tabular-nums}
+  .rc small{font-size:.8rem;font-weight:700;color:rgba(255,255,255,.88);text-align:right}
+  .rc[aria-checked="true"]{background:#fff;color:#27343d;border-color:#fff}
+  .rc[aria-checked="true"] small{color:#3d5560}
+  .rcs{display:flex;flex-direction:column;gap:.4rem}
+
+  /* S4: number first */
+  .by{margin-top:.55rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .6rem;font-size:.98rem;font-weight:700;line-height:1.3;color:rgba(255,255,255,.94)}
+
+  @media (max-width:600px){
+    .rstrip,.rstrip.two{grid-template-columns:1fr}
+    .rcell+.rcell{border-left:0;border-top:1px solid rgba(255,255,255,.2)}
+    .rbox{padding:1.1rem 1.25rem}
+    .scn{padding:.95rem 1rem}
+    /* phone: each row becomes a heading line, and each cell carries its own rate */
+    .sgrid{padding:.9rem .85rem 1rem;gap:.4rem;grid-template-columns:repeat(3,minmax(0,1fr))}
+    .sgrid .h{display:none}
+    .sgrid .rh{grid-column:1/-1;flex-direction:row;justify-content:flex-start;align-items:baseline;flex-wrap:wrap;gap:.1rem .4rem;font-size:1.2rem;padding:.35rem 0 0}
+    .sgrid .rh[data-hth="20"]{padding-top:0}
+    .sgrid .pre{display:inline;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#dcefe2}
+    .sgrid .rh small{margin:0 0 0 .3rem}
+    .sgrid button.c{min-height:3.5rem;border-radius:10px}
+    .sgrid .rt{display:block;font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+    .sgrid .rv{font-size:1.2rem}
+  }
+</style></head><body><div class="wrap">
+
+<h1>“Tax wealth above” — mockups</h1>
+<p class="note">All five boxes are live: change a control in any one and the others follow. Only the controls area changes; the number, the budget share and the “How we estimated this” button are the same. In <b>S1–S3</b> I also moved “applied only to the $70.7B…” up into the caption under the number, so each fact is said once instead of three times.</p>
+
+<h3 class="opt">Now (for comparison)</h3>
+<p class="note">The controls sit in a cell that looks just like the two result cells, so they read as a third result. “Tax wealth above” doesn’t say it’s per person. And “2% on wealth above $20M” is then repeated under the number and again in the footnote.</p>
+<div id="NOW"></div>
+
+<h3 class="opt">S1 — One sentence</h3>
+<p class="note">The two controls become the first line of a sentence, “If Hawaiʻi taxed each person’s wealth above $20M at a rate of 2%…”, and the results below finish it. The inputs get their own filled panel, so they stop looking like a third result card. This is the biggest change in how it reads.</p>
+<div id="S1"></div>
+
+<h3 class="opt">S2 — Scenario grid</h3>
+<p class="note">All six scenarios from the report at once. Rows are the threshold (with how many residents it covers), columns are the rate, and each cell is the answer. Tap a cell and the big number and budget share follow. Nothing to decode, and the whole range is visible without touching anything. It’s the tallest option.</p>
+<div id="S2"></div>
+
+<h3 class="opt">S3 — Who’s taxed</h3>
+<p class="note">Keeps today’s three-cell strip, but the threshold choice explains itself: $20M covers 1,245 residents, $50M covers 365. Both controls now run the full width of the cell so they line up. The smallest change; it answers “above what, and who does that hit?”</p>
+<div id="S3"></div>
+
+<h3 class="opt">S4 — Number first</h3>
+<p class="note">Flips the order: the answer is the headline, and the “how” is one line under it with the two pills inline. Only two cells, so the box is shorter and the number gets more room. The footnote stays as it is today.</p>
+<div id="S4"></div>
+
+</div>
+<script>
+const TIERS={20:{people:1245,total:95.6},50:{people:365,total:69.3}}, BUDGET=23.7;
+let th=20, rate=2;
+const calc=(t,r)=>{const T=TIERS[t], base=T.total-T.people*t/1000, rev=base*r/100; return {base,rev,pct:rev/BUDGET*100,ppl:T.people}};
+const r1=n=>'$'+(Math.round(n*10+1e-6)/10).toFixed(1)+'B';
+
+const segTh=(cls='')=>`<div class="seg ${cls}" role="radiogroup" aria-label="Wealth threshold" data-seg="th"><button type="button" role="radio" data-v="20">$20M</button><button type="button" role="radio" data-v="50">$50M</button></div>`;
+const segRate=(cls='')=>`<div class="seg ${cls}" role="radiogroup" aria-label="Tax rate" data-seg="rate"><button type="button" role="radio" data-v="1">1%</button><button type="button" role="radio" data-v="2">2%</button><button type="button" role="radio" data-v="3">3%</button></div>`;
+const heroCell=(cap,extra='')=>`<div class="rcell hero"><span class="eyebrow">Could raise each year</span><div class="big"><span data-t="rev">$1.41B</span><small>/ year</small></div>${cap?`<span class="cap">${cap}</span>`:''}${extra}</div>`;
+const shareCell=`<div class="rcell"><span class="eyebrow">Share of state budget</span><div class="share" data-t="pct">6.0%</div><div class="meter"><i data-meter></i></div><span class="cap">of Hawaiʻi’s <b>$23.7B</b> annual budget</span></div>`;
+const chev='<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+const mbtn=`<button class="mbtn" type="button" tabindex="-1">How we estimated this ${chev}</button>`;
+const basisNow=`<p class="basis">Applied only to the <b data-t="base">$70.7B</b> held above <span data-t="thr">$20M</span> by <b data-t="ppl">1,245</b> residents. Static estimate: no avoidance or out-migration.</p>`;
+const basisShort=`<p class="basis">Static estimate: no avoidance or out-migration.</p>`;
+const box=(inner,tail)=>`<div class="rbox">${inner}${tail}</div>`;
+
+// NOW
+const ctrlsNow=`<div class="rcell"><div class="ctrl"><span class="eyebrow">Tax wealth above</span>${segTh()}</div><div class="ctrl"><span class="eyebrow">At a rate of</span>${segRate()}</div></div>`;
+document.getElementById('NOW').innerHTML=box(`<div class="rstrip">${ctrlsNow}${heroCell('<b data-t="rate">2%</b> on wealth above <b data-t="thr">$20M</b>')}${shareCell}</div>`,basisNow+mbtn);
+
+// S1
+document.getElementById('S1').innerHTML=box(
+  `<div class="scn"><span class="sent">If Hawaiʻi taxed each person’s wealth above</span>${segTh()}<span class="grp"><span class="sent">at a rate of</span>${segRate()}</span></div>
+   <div class="rstrip two">${heroCell('on <b data-t="base">$70.7B</b> of taxable wealth held by <b data-t="ppl">1,245</b> residents')}${shareCell}</div>`,basisShort+mbtn);
+
+// S2
+const cellBtn=(t,r)=>{const c=calc(t,r);return `<button type="button" class="c" role="radio" data-th="${t}" data-rate="${r}" aria-label="Wealth above $${t}M at ${r} percent: $${c.rev.toFixed(2)}B a year"><span class="rt">At ${r}%</span><span class="rv">$${c.rev.toFixed(2)}B</span></button>`};
+const grid=`<div class="sgrid" role="radiogroup" aria-label="Scenario: wealth threshold and tax rate">
+  <div class="h">Wealth above</div><div class="h" data-hr="1">At 1%</div><div class="h" data-hr="2">At 2%</div><div class="h" data-hr="3">At 3%</div>
+  <div class="rh" data-hth="20"><span class="pre">Wealth above</span><span>$20M</span><small>1,245 residents</small></div>${[1,2,3].map(r=>cellBtn(20,r)).join('')}
+  <div class="rh" data-hth="50"><span class="pre">Wealth above</span><span>$50M</span><small>365 residents</small></div>${[1,2,3].map(r=>cellBtn(50,r)).join('')}
+</div>`;
+document.getElementById('S2').innerHTML=box(
+  `${grid}<div class="rstrip two">${heroCell('on <b data-t="base">$70.7B</b> of taxable wealth')}${shareCell}</div>`,basisShort+mbtn);
+
+// S3
+const ctrlsS3=`<div class="rcell"><div class="ctrl"><span class="eyebrow">Tax wealth above</span>
+  <div class="rcs" role="radiogroup" aria-label="Wealth threshold">
+    <button type="button" class="rc" role="radio" data-th="20"><b>$20M</b><small>1,245 residents</small></button>
+    <button type="button" class="rc" role="radio" data-th="50"><b>$50M</b><small>365 residents</small></button>
+  </div></div>
+  <div class="ctrl"><span class="eyebrow">At a rate of</span>${segRate('full')}</div></div>`;
+document.getElementById('S3').innerHTML=box(
+  `<div class="rstrip">${ctrlsS3}${heroCell('on <b data-t="base">$70.7B</b> of taxable wealth')}${shareCell}</div>`,basisShort+mbtn);
+
+// S4
+document.getElementById('S4').innerHTML=box(
+  `<div class="rstrip two">${heroCell('',`<div class="by"><span>by taxing each person’s wealth above</span>${segTh('sm')}<span class="grp"><span>at a rate of</span>${segRate('sm')}</span></div>`)}${shareCell}</div>`,basisNow+mbtn);
+
+function paint(){
+  const c=calc(th,rate), set=(k,v)=>document.querySelectorAll('[data-t="'+k+'"]').forEach(e=>e.textContent=v);
+  set('rev','$'+c.rev.toFixed(2)+'B'); set('pct',c.pct.toFixed(1)+'%'); set('base',r1(c.base));
+  set('thr','$'+th+'M'); set('rate',rate+'%'); set('ppl',c.ppl.toLocaleString());
+  document.querySelectorAll('[data-meter]').forEach(e=>e.style.width=Math.min(c.pct,100)+'%');
+  document.querySelectorAll('[data-seg="th"] button').forEach(b=>b.setAttribute('aria-checked',+b.dataset.v===th));
+  document.querySelectorAll('[data-seg="rate"] button').forEach(b=>b.setAttribute('aria-checked',+b.dataset.v===rate));
+  document.querySelectorAll('.rc').forEach(b=>b.setAttribute('aria-checked',+b.dataset.th===th));
+  document.querySelectorAll('.sgrid button.c').forEach(b=>b.setAttribute('aria-checked',+b.dataset.th===th&&+b.dataset.rate===rate));
+  document.querySelectorAll('.sgrid .h[data-hr]').forEach(e=>e.classList.toggle('on',+e.dataset.hr===rate));
+  document.querySelectorAll('.sgrid .rh').forEach(e=>e.classList.toggle('on',+e.dataset.hth===th));
+}
+document.addEventListener('click',e=>{
+  const s=e.target.closest('.seg button');
+  if(s){ if(s.closest('.seg').dataset.seg==='th') th=+s.dataset.v; else rate=+s.dataset.v; paint(); return; }
+  const g=e.target.closest('.sgrid button.c'); if(g){ th=+g.dataset.th; rate=+g.dataset.rate; paint(); return; }
+  const c=e.target.closest('.rc'); if(c){ th=+c.dataset.th; paint(); }
+});
+paint();
+</script></body></html>

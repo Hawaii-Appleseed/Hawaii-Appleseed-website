@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Revenue callout — mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--slate:#27343d;--slate2:#2f3d47;--line:#3f4f5a;--sage:#85a98f;--pale:#cfe3d4;--mint:#a8e6b0;--mint2:#bdf0c6;--t1:#5dae80;--field:#1a3c34}
+  *{box-sizing:border-box}
+  body{margin:0;padding:24px 16px 60px;background:#f4f1eb;font-family:'Nunito',system-ui,sans-serif;color:#1a3c34}
+  .wrap{max-width:960px;margin:0 auto}
+  h2.opt{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin:40px 0 4px;color:#4a6b5a}
+  p.note{margin:0 0 10px;font-size:.92rem;color:#4a5a52}
+  .eyebrow{color:var(--sage);font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1.25}
+  .cap{color:rgba(255,255,255,.58);font-size:.86rem;font-weight:600;line-height:1.35}
+  .cap b{color:rgba(255,255,255,.9);font-weight:800}
+  .num{font-weight:900;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+
+  /* segmented controls (shared) */
+  .seg{display:inline-flex;padding:3px;gap:2px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);width:max-content}
+  .seg button{font:800 .92rem 'Nunito';min-width:3.3rem;min-height:2.3rem;padding:0 .95rem;border:0;border-radius:999px;background:transparent;color:rgba(255,255,255,.72);cursor:pointer;font-variant-numeric:tabular-nums;transition:background .15s,color .15s}
+  .seg button:hover{color:#fff}
+  .seg button[aria-checked="true"]{background:var(--mint);color:var(--field)}
+  .seg button:focus-visible{outline:2px solid var(--mint2);outline-offset:2px}
+
+  /* ───────── R1: calculator strip (matches the banner) ───────── */
+  .R1 .card{background:var(--slate);border-radius:20px;padding:clamp(1.2rem,4vw,2.4rem) clamp(1.2rem,4vw,3rem)}
+  .R1 .strip{display:grid;grid-template-columns:1.05fr 1.25fr 1fr;border:1px solid var(--line);border-radius:16px}
+  .R1 .cell{padding:1.15rem 1.35rem 1.25rem;display:flex;flex-direction:column;gap:.55rem;min-width:0}
+  .R1 .cell+.cell{border-left:1px solid var(--line)}
+  .R1 .ctrl{display:flex;flex-direction:column;gap:.45rem}
+  .R1 .ctrl+.ctrl{margin-top:.55rem}
+  .R1 .big{font-size:clamp(2.8rem,7vw,3.9rem);color:var(--mint);text-shadow:0 0 28px rgba(106,188,122,.3);display:flex;align-items:baseline;gap:.4rem;flex-wrap:wrap}
+  .R1 .big small{font-size:1.05rem;font-weight:800;color:rgba(168,230,176,.8);letter-spacing:.02em;text-shadow:none}
+  .R1 .fig2{font-size:2.5rem;color:var(--pale)}
+  .R1 .meter{height:14px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+  .R1 .meter i{display:block;height:100%;border-radius:999px;background:var(--mint);min-width:6px}
+  .R1 .foot{margin:1.1rem 0 0;font-size:.85rem;color:rgba(255,255,255,.55);font-weight:600;line-height:1.5}
+  .R1 .foot b{color:rgba(255,255,255,.85)}
+
+  /* ───────── R2: sentence builder, green hero ───────── */
+  .R2 .card{text-align:center;border-radius:20px;padding:clamp(1.6rem,4vw,2.8rem) clamp(1.2rem,4vw,3rem);background:radial-gradient(ellipse 70% 90% at 50% 0%,rgba(168,230,176,.13),transparent 70%),linear-gradient(160deg,#245a48 0%,#1a4437 45%,#14322a 100%);color:#fff}
+  .R2 .sentence{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.55rem .6rem;font-size:clamp(1.05rem,2.6vw,1.25rem);font-weight:600;color:rgba(255,255,255,.8)}
+  .R2 .big{font-size:clamp(3.4rem,10vw,5.6rem);color:var(--mint);text-shadow:0 0 40px rgba(106,188,122,.4);margin:1rem 0 .1rem}
+  .R2 .big small{font-size:clamp(1.1rem,3vw,1.5rem);font-weight:800;color:rgba(168,230,176,.8);margin-left:.5rem;letter-spacing:.02em}
+  .R2 .meterwrap{max-width:520px;margin:1.3rem auto 0}
+  .R2 .meter{height:12px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden}
+  .R2 .meter i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#6abc7a,var(--mint2));min-width:6px}
+  .R2 .meterlbl{margin-top:.55rem;font-size:.95rem;font-weight:700;color:rgba(255,255,255,.8)}
+  .R2 .meterlbl b{color:var(--mint2);font-weight:900}
+  .R2 .chips{display:flex;justify-content:center;flex-wrap:wrap;gap:.7rem;margin-top:1.4rem}
+  .R2 .chip{background:rgba(255,255,255,.07);border:1px solid rgba(168,230,176,.2);border-radius:14px;padding:.7rem 1.1rem;min-width:150px;text-align:left}
+  .R2 .chip .v{font-size:1.5rem;color:var(--pale);margin-top:.3rem}
+  .R2 .fine{margin:1rem 0 0;font-size:.82rem;color:rgba(255,255,255,.55);font-weight:600}
+  .R2 .eyebrow{color:rgba(168,230,176,.8)}
+
+  /* ───────── R3: the budget block, same visual as the card above ───────── */
+  .R3 .card{background:var(--slate2);border-radius:20px;padding:clamp(1.3rem,4vw,2.6rem) clamp(1.2rem,4vw,3rem);color:#e6ebe3}
+  .R3 .top{display:grid;grid-template-columns:1fr auto;gap:1.2rem 2rem;align-items:end}
+  .R3 .kicker{font-size:clamp(.78rem,2.2vw,.95rem);font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--sage);margin:0 0 .6rem}
+  .R3 .big{font-size:clamp(3rem,8vw,4.6rem);color:#fff;display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+  .R3 .big small{font-size:1.1rem;font-weight:800;color:var(--pale);letter-spacing:.02em}
+  .R3 .desc{margin:.5rem 0 0;font-size:1rem;color:#c9d1c6;font-weight:600}
+  .R3 .desc b{color:#fff}
+  .R3 .controls{display:flex;flex-direction:column;gap:.55rem;align-items:flex-end}
+  .R3 .controls .row{display:flex;align-items:center;gap:.7rem}
+  .R3 .controls .row .eyebrow{min-width:4.2rem;text-align:right}
+  .R3 .blockrow{margin-top:1.5rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:1rem}
+  .R3 .block{position:relative;height:64px;border-radius:12px;background:#3f4f5a;overflow:hidden}
+  .R3 .block i{position:absolute;left:0;top:0;bottom:0;background:#85a98f;border-radius:12px 0 0 12px;min-width:10px}
+  .R3 .blockrow .pct{font-size:clamp(1.8rem,5vw,2.6rem);color:#85a98f}
+  .R3 .note2{margin:.75rem 0 0;font-size:.95rem;color:#c9d1c6}
+  .R3 .note2 strong{color:#fff}
+  .R3 .fine{margin:.6rem 0 0;font-size:.82rem;color:rgba(255,255,255,.5);font-weight:600}
+
+  @media (max-width:700px){
+    .R1 .strip{grid-template-columns:1fr}
+    .R1 .cell+.cell{border-left:0;border-top:1px solid var(--line)}
+    .R3 .top{grid-template-columns:1fr}
+    .R3 .controls{align-items:flex-start}
+    .R3 .controls .row .eyebrow{text-align:left}
+    .R3 .blockrow{grid-template-columns:1fr}
+  }
+</style></head><body><div class="wrap">
+
+<!-- ───────── R1 ───────── -->
+<h2 class="opt">R1 — Calculator strip, same grammar as the new banner</h2>
+<p class="note">Three cells: the two controls (now labelled), the revenue as the hero, and the share of the state budget as a meter. The fine print becomes one line under the strip.</p>
+<div class="R1"><div class="card">
+  <div class="strip">
+    <div class="cell">
+      <div class="ctrl"><span class="eyebrow">Tax wealth above</span>
+        <div class="seg" role="radiogroup" aria-label="Wealth threshold" data-seg="th"><button role="radio" data-v="20">$20M</button><button role="radio" data-v="50">$50M</button></div></div>
+      <div class="ctrl"><span class="eyebrow">At a rate of</span>
+        <div class="seg" role="radiogroup" aria-label="Tax rate" data-seg="rate"><button role="radio" data-v="1">1%</button><button role="radio" data-v="2">2%</button><button role="radio" data-v="3">3%</button></div></div>
+    </div>
+    <div class="cell" style="justify-content:center">
+      <span class="eyebrow">Could raise each year</span>
+      <div class="big num"><span data-b="rev">$1.41B</span><small>/ year</small></div>
+      <span class="cap"><b data-b="rate">2%</b> on wealth above <b data-b="thr">$20M</b></span>
+    </div>
+    <div class="cell">
+      <span class="eyebrow">Share of state budget</span>
+      <div class="fig2 num" data-b="pct">6.0%</div>
+      <div class="meter"><i data-b="meter" style="width:6%"></i></div>
+      <span class="cap">of Hawaiʻi’s <b>$23.7B</b> annual budget</span>
+    </div>
+  </div>
+  <p class="foot">Applied only to the <b data-b="base">$70.7B</b> held above <span data-b="thr">$20M</span> by <b data-b="ppl">1,245</b> residents. Static estimate: no avoidance or out-migration.</p>
+</div></div>
+
+<!-- ───────── R2 ───────── -->
+<h2 class="opt">R2 — Sentence builder, green hero</h2>
+<p class="note">Keeps the green brand field. The controls sit inside the sentence, so it reads as a question you're answering. The number gets room to be the hero, with the fine print as three scannable chips.</p>
+<div class="R2"><div class="card">
+  <div class="sentence">
+    <span>A</span>
+    <div class="seg" role="radiogroup" aria-label="Tax rate" data-seg="rate"><button role="radio" data-v="1">1%</button><button role="radio" data-v="2">2%</button><button role="radio" data-v="3">3%</button></div>
+    <span>wealth tax on everything above</span>
+    <div class="seg" role="radiogroup" aria-label="Wealth threshold" data-seg="th"><button role="radio" data-v="20">$20M</button><button role="radio" data-v="50">$50M</button></div>
+    <span>could raise</span>
+  </div>
+  <div class="big num"><span data-b="rev">$1.41B</span><small>a year</small></div>
+  <div class="meterwrap">
+    <div class="meter"><i data-b="meter" style="width:6%"></i></div>
+    <div class="meterlbl"><b data-b="pct">6.0%</b> of Hawaiʻi’s $23.7B annual state budget</div>
+  </div>
+  <div class="chips">
+    <div class="chip"><div class="eyebrow">Taxable wealth</div><div class="v num" data-b="base">$70.7B</div></div>
+    <div class="chip"><div class="eyebrow">Residents taxed</div><div class="v num" data-b="ppl">1,245</div></div>
+    <div class="chip"><div class="eyebrow">Method</div><div class="v num" style="font-size:1.05rem;line-height:1.25;margin-top:.45rem;font-weight:800">Static estimate,<br>no avoidance</div></div>
+  </div>
+</div></div>
+
+<!-- ───────── R3 ───────── -->
+<h2 class="opt">R3 — The budget block (continues the card above)</h2>
+<p class="note">Reuses the "one block = the state budget" idea from the $292.7B card: one block, and the tax fills a slice of it. It follows the same layout as that card (kicker, big figure, description, a visual underneath).</p>
+<div class="R3"><div class="card">
+  <p class="kicker">A wealth tax could pay for <span data-b="pct">6.0%</span> of the state budget</p>
+  <div class="top">
+    <div>
+      <div class="big num"><span data-b="rev">$1.41B</span><small>a year</small></div>
+      <p class="desc"><b data-b="rate">2%</b> on the <b data-b="base">$70.7B</b> held above <b data-b="thr">$20M</b> by <b data-b="ppl">1,245</b> Hawaiʻi residents</p>
+    </div>
+    <div class="controls">
+      <div class="row"><span class="eyebrow">Above</span><div class="seg" role="radiogroup" aria-label="Wealth threshold" data-seg="th"><button role="radio" data-v="20">$20M</button><button role="radio" data-v="50">$50M</button></div></div>
+      <div class="row"><span class="eyebrow">Rate</span><div class="seg" role="radiogroup" aria-label="Tax rate" data-seg="rate"><button role="radio" data-v="1">1%</button><button role="radio" data-v="2">2%</button><button role="radio" data-v="3">3%</button></div></div>
+    </div>
+  </div>
+  <div class="blockrow">
+    <div class="block"><i data-b="meter" style="width:6%"></i></div>
+    <div class="pct num" data-b="pct">6.0%</div>
+  </div>
+  <p class="note2"><strong>One block = $23.7 billion,</strong> Hawaiʻi’s annual state budget (2026).</p>
+  <p class="fine">Static estimate: no avoidance or out-migration.</p>
+</div></div>
+
+</div>
+<script>
+  const TIERS={20:{people:1245,total:95.6},50:{people:365,total:69.3}}, BUDGET=23.7;
+  let th=20, rate=2;
+  function paint(){
+    const t=TIERS[th], base=t.total-t.people*th/1000, rev=base*rate/100, pct=rev/BUDGET*100;
+    const set=(k,v)=>document.querySelectorAll('[data-b="'+k+'"]').forEach(e=>e.textContent=v);
+    set('rev','$'+rev.toFixed(2)+'B'); set('rate',rate+'%'); set('thr','$'+th+'M');
+    set('pct',pct.toFixed(1)+'%'); set('base','$'+base.toFixed(1)+'B'); set('ppl',t.people.toLocaleString());
+    document.querySelectorAll('[data-b="meter"]').forEach(e=>e.style.width=Math.min(pct,100)+'%');
+    document.querySelectorAll('[data-seg="th"] button').forEach(b=>b.setAttribute('aria-checked',+b.dataset.v===th));
+    document.querySelectorAll('[data-seg="rate"] button').forEach(b=>b.setAttribute('aria-checked',+b.dataset.v===rate));
+  }
+  document.addEventListener('click',e=>{const b=e.target.closest('.seg button'); if(!b) return;
+    const k=b.closest('.seg').dataset.seg; if(k==='th') th=+b.dataset.v; else rate=+b.dataset.v; paint();});
+  paint();
+</script></body></html>

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lower sections aligned with the top — mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0}
+  body{padding:24px 16px 80px;background:#f4f1eb;font-family:'Nunito',system-ui,sans-serif;color:#1a3c34}
+  .wrap{max-width:960px;margin:0 auto}
+  h2.opt{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin:44px 0 4px;color:#4a6b5a}
+  p.note{margin:0 0 14px;font-size:.92rem;color:#4a5a52}
+
+  /* context: the revenue box as it will be (M2) */
+  .rev{background:linear-gradient(160deg,#52666f,#435660);border-radius:20px;padding:20px 28px;color:#fff;box-shadow:0 10px 30px rgba(39,52,61,.2);display:flex;justify-content:space-between;align-items:center;font-weight:800}
+  .rev span:first-child{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#dcefe2}
+  .rev b{font-size:2rem;color:#bff0c9;letter-spacing:-.02em}
+  .stack{display:flex;flex-direction:column;gap:28px;margin-top:28px}
+
+  /* shared atoms */
+  .eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1.25}
+  .num{font-weight:900;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+  .pill{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;font:800 .95rem 'Nunito';padding:.45rem .9rem;white-space:nowrap;cursor:default}
+  .strip{display:grid;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .cell{padding:1rem 1.3rem 1.1rem;display:flex;flex-direction:column;gap:.5rem;min-width:0;justify-content:center}
+  .cell+.cell{border-left:1px solid var(--line)}
+  .s3{grid-template-columns:1.5fr 1fr 1fr}
+  .s2{grid-template-columns:auto 1fr}
+  .cap{font-size:.86rem;font-weight:600;line-height:1.4;color:var(--muted)}
+  .cap b{color:var(--text);font-weight:800}
+  .mapph{height:340px;border-radius:14px;background:#e9eef0;position:relative;overflow:hidden}
+  .mapph svg{width:100%;height:100%;display:block}
+  .legend{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;font-size:.85rem;font-weight:700;margin:.2rem 0 .6rem;color:var(--text)}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:.35rem;vertical-align:-1px}
+  .chartsvg{width:100%;height:auto;display:block}
+  .narr h3{font-size:1.05rem;font-weight:800;margin:0 0 .5rem}
+  .narr p{font-size:1.02rem;line-height:1.72;max-width:62ch;color:#3a4a44}
+  .narr .title{font-size:clamp(1.45rem,3.2vw,1.85rem);font-weight:800;letter-spacing:-.015em;line-height:1.25;max-width:30ch;text-wrap:balance;margin:.35rem 0 1.4rem}
+
+  /* ════════ N1 — white cards with a mid-slate header strip ════════ */
+  .N1{--line:rgba(255,255,255,.2);--text:#1f2b33;--muted:#566872}
+  .N1 .card{background:#fff;border:1px solid #e6e2d8;border-radius:20px;overflow:hidden}
+  .N1 .head{background:linear-gradient(160deg,#52666f,#435660);padding:clamp(1rem,3vw,1.6rem) clamp(1rem,3vw,2rem);color:#fff}
+  .N1 .head .eyebrow{color:#dcefe2}
+  .N1 .head .t{font-size:1.25rem;font-weight:800;line-height:1.2}
+  .N1 .head .cap{color:rgba(255,255,255,.9)}.N1 .head .cap b{color:#fff}
+  .N1 .head .fig{font-size:2rem;color:#fff}
+  .N1 .head .fig.g{color:#bff0c9}
+  .N1 .head .pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#fff}
+  .N1 .head .pill.on{background:#fff;color:#27343d;border-color:#fff}
+  .N1 .body{padding:clamp(1rem,3vw,1.6rem) clamp(1rem,3vw,2rem) 1.4rem}
+  .N1 .body .cap{margin-top:.9rem}
+  .N1 .narr .eyebrow{color:#386a50}
+  .N1 .narr .strip{--line:rgba(39,52,61,.18);background:rgba(39,52,61,.04);margin-top:1.4rem;max-width:760px;grid-template-columns:auto 1fr}
+  .N1 .narr .strip .fig{font-size:2.2rem;color:#2a6b4f}
+  .N1 .narr .strip .cap{color:#3a4a44}.N1 .narr .strip .cap b{color:#1f2b33}
+
+  /* ════════ N2 — light cards, same grammar (eyebrow -> figure -> caption), no dark headers ════════ */
+  .N2{--line:rgba(39,52,61,.15);--text:#1f2b33;--muted:#566872}
+  .N2 .card{background:linear-gradient(160deg,#f7fafa,#ecf1f2);border:1px solid rgba(39,52,61,.1);border-radius:20px;padding:clamp(1.2rem,3vw,2.2rem) clamp(1.2rem,3vw,2.4rem);box-shadow:0 10px 30px rgba(39,52,61,.08)}
+  .N2 .eyebrow{color:#386a50}
+  .N2 .t{font-size:1.45rem;font-weight:800;letter-spacing:-.01em;margin:.3rem 0 1.1rem;color:#1f2b33}
+  .N2 .strip{background:rgba(255,255,255,.55);margin-bottom:1.1rem}
+  .N2 .fig{font-size:2rem;color:#2a6b4f}
+  .N2 .pill{background:#27343d;color:#fff}
+  .N2 .inner{background:#fff;border-radius:14px;padding:1rem 1.1rem}
+  .N2 .narr .strip{margin-top:1.4rem;max-width:760px;grid-template-columns:auto 1fr}
+
+  /* ════════ N3 — mid-slate all the way down, mint charts ════════ */
+  .N3{--line:rgba(255,255,255,.2);--text:#fff;--muted:rgba(255,255,255,.9)}
+  .N3 .card{background:linear-gradient(160deg,#52666f,#435660);border-radius:20px;padding:clamp(1.2rem,3vw,2.2rem) clamp(1.2rem,3vw,2.4rem);box-shadow:0 10px 30px rgba(39,52,61,.2);color:#fff}
+  .N3 .eyebrow{color:#dcefe2}
+  .N3 .t{font-size:1.45rem;font-weight:800;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+  .N3 .strip{margin-bottom:1.1rem}
+  .N3 .fig{font-size:2rem;color:#bff0c9}
+  .N3 .pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#fff}
+  .N3 .legend{color:#fff}
+  .N3 .mapph{background:#dfe7ea}
+  .N3 .narr{color:#1f2b33}
+  .N3 .narr .eyebrow{color:#386a50}
+  .N3 .narr .strip{background:linear-gradient(160deg,#52666f,#435660);margin-top:1.4rem;max-width:760px;grid-template-columns:auto 1fr;color:#fff}
+
+  @media (max-width:640px){
+    .s3,.s2,.N1 .narr .strip,.N2 .narr .strip,.N3 .narr .strip{grid-template-columns:1fr}
+    .cell+.cell{border-left:0;border-top:1px solid var(--line)}
+    .mapph{height:260px}
+  }
+</style></head><body><div class="wrap">
+
+<h2 class="opt">N1 — White cards, mid-slate header strip</h2>
+<p class="note">Each section keeps its white body but gets the same header strip as the revenue box: a caps label, then figure cells. The chart's two total chips become real cells. Captions lose the italics. The narrative stat becomes a strip cell.</p>
+<div class="N1"><div class="rev"><span>Share of state budget</span><b class="num">6.0%</b></div><div class="stack" id="N1"></div></div>
+
+<h2 class="opt">N2 — Light cards, same grammar</h2>
+<p class="note">No dark headers, so the page stays light and calm. Cards use the same pale-slate gradient, caps eyebrow, bordered figure cells and pill controls as the top. The map and chart sit in a white inset.</p>
+<div class="N2"><div class="rev"><span>Share of state budget</span><b class="num">6.0%</b></div><div class="stack" id="N2"></div></div>
+
+<h2 class="opt">N3 — Mid-slate all the way down</h2>
+<p class="note">Continues the revenue box's color through every section. The charts switch to mint tones on slate and the map sits in a pale inset. The most unified, and also the heaviest.</p>
+<div class="N3"><div class="rev"><span>Share of state budget</span><b class="num">6.0%</b></div><div class="stack" id="N3"></div></div>
+
+</div>
+<script>
+  /* static chart: stacked area, tiers as shares of the total (illustrative, not the live data) */
+  const TOT=[105.7,102,112,135,143,145,152,178,175,188,185,205,195,235,292.7];
+  function chart(c){ // c: colors + text
+    const W=860,H=300,L=44,R=14,T=14,B=30,pw=W-L-R,ph=H-T-B,max=300;
+    const x=i=>L+pw*i/14, y=v=>T+ph*(1-v/max);
+    const sh=i=>({a:.72-.05*i/14,b:.09});
+    const lay=(f)=>TOT.map((t,i)=>f(t,sh(i)));
+    const A=lay((t,s)=>t*s.a), Bm=lay((t,s)=>t*(s.a+s.b)), C=TOT;
+    const top=arr=>arr.map((v,i)=>(i?'L':'M')+x(i).toFixed(1)+','+y(v).toFixed(1)).join(' ');
+    const poly=(hi,lo)=>top(hi)+' '+lo.map((v,i)=>'L'+x(14-i).toFixed(1)+','+y(lo[14-i]).toFixed(1)).join(' ')+' Z';
+    const zero=new Array(15).fill(0);
+    let g='';[0,100,200,300].forEach(v=>g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="${c.grid}"/><text x="${L-8}" y="${y(v)+4}" text-anchor="end" font-size="11" font-weight="700" fill="${c.axis}">$${v}B</text>`);
+    let xs='';[0,2,4,6,8,10,12,14].forEach(i=>xs+=`<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="11" font-weight="700" fill="${c.axis}">${2010+i}</text>`);
+    return `<svg class="chartsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Stacked area chart, illustrative">${g}${xs}
+      <path d="${poly(C,Bm)}" fill="${c.t3}"/><path d="${poly(Bm,A)}" fill="${c.t2}"/><path d="${poly(A,zero)}" fill="${c.t1}"/></svg>`;
+  }
+  const MAP=`<svg viewBox="0 0 860 340" preserveAspectRatio="xMidYMid slice"><rect width="860" height="340" fill="#e4ebee"/>
+    <g fill="#c6d4c3"><ellipse cx="250" cy="150" rx="22" ry="12" transform="rotate(-30 250 150)"/><ellipse cx="400" cy="190" rx="34" ry="22"/><ellipse cx="505" cy="225" rx="26" ry="16"/><ellipse cx="540" cy="250" rx="34" ry="24"/><ellipse cx="640" cy="290" rx="52" ry="40"/></g>
+    <g fill="#2f5fa3" fill-opacity=".85"><circle cx="402" cy="192" r="26"/><circle cx="512" cy="228" r="16"/><circle cx="545" cy="250" r="14"/></g>
+    <g fill="#8db3dd" fill-opacity=".9"><circle cx="252" cy="148" r="9"/><circle cx="640" cy="292" r="9"/><circle cx="620" cy="270" r="7"/><circle cx="663" cy="303" r="6"/></g></svg>`;
+  const L=(c)=>`<div class="legend"><span><i style="background:${c.t1}"></i>$1M–$20M</span><span><i style="background:${c.t2}"></i>$20M–$50M</span><span><i style="background:${c.t3}"></i>$50M+</span></div>`;
+  const NARR=`<div class="narr"><div class="eyebrow">Why it matters</div><h2 class="title">Ultra-millionaires have advantages over the rest of us</h2>
+    <h3>They pay low taxes on their investments</h3>
+    <p>Hawaiʻi is one of only nine states that taxes capital gains at a lower rate than ordinary income—effectively a loophole that almost entirely benefits the wealthy.</p>
+    <div class="strip"><div class="cell"><span class="eyebrow" style="color:inherit;opacity:.8">New revenue</span><span class="fig num">$180M<span style="font-size:.5em;font-weight:800;margin-left:.2em">/ year</span></span></div>
+      <div class="cell"><span class="cap">If capital gains were taxed like regular income, with <b>97% paid by the top 5%</b> of earners and nothing more from the bottom 80%.</span></div></div></div>`;
+  const CAPMAP='Honolulu dominates the count, but ultra-wealth pockets exist on every island.';
+  const CAPCH='Even with tax increases, the wealth held by millionaires in Hawaiʻi has almost tripled since 2010.';
+
+  /* N1 */
+  const c1={grid:'#e3e9e5',axis:'#6b7f75',t1:'#2a6b4f',t2:'#6bb08a',t3:'#b7e2c3'};
+  document.getElementById('N1').innerHTML=`
+   <div class="card"><div class="head"><div class="strip s3">
+      <div class="cell"><span class="eyebrow">Map</span><span class="t">Where Hawaiʻi’s millionaires live</span></div>
+      <div class="cell"><span class="eyebrow">Circle size</span><span class="cap">Number of millionaires per city</span></div>
+      <div class="cell"><span class="pill on">Map</span><span class="pill" style="margin-top:.2rem">Data</span></div></div></div>
+     <div class="body"><div class="mapph">${MAP}</div><p class="cap">${CAPMAP}</p></div></div>
+   <div class="card"><div class="head"><div class="strip s3">
+      <div class="cell"><span class="eyebrow">Chart</span><span class="pill on" style="width:max-content">Wealth held by millionaires ▾</span></div>
+      <div class="cell"><span class="eyebrow">2010 total</span><span class="fig num">$105.7B</span></div>
+      <div class="cell"><span class="eyebrow">2024 total</span><span class="fig g num">$292.7B</span><span class="cap"><b>+177%</b> since 2010</span></div></div></div>
+     <div class="body">${L(c1)}${chart(c1)}<p class="cap">${CAPCH}</p></div></div>
+   ${NARR}`;
+
+  /* N2 */
+  const c2={grid:'#e3e9e5',axis:'#6b7f75',t1:'#2a6b4f',t2:'#6bb08a',t3:'#b7e2c3'};
+  document.getElementById('N2').innerHTML=`
+   <div class="card"><span class="eyebrow">Map</span><h3 class="t">Where Hawaiʻi’s millionaires live</h3>
+     <div class="strip s3"><div class="cell"><span class="eyebrow">Circle size</span><span class="cap">Number of millionaires per city</span></div>
+       <div class="cell"><span class="eyebrow">Biggest cluster</span><span class="cap"><b>Honolulu</b>, with pockets on every island</span></div>
+       <div class="cell"><div style="display:flex;gap:.4rem"><span class="pill">Map</span><span class="pill" style="background:rgba(39,52,61,.08);color:#4a5d68">Data</span></div></div></div>
+     <div class="inner"><div class="mapph" style="background:#e9eef0">${MAP}</div></div></div>
+   <div class="card"><span class="eyebrow">Chart</span><h3 class="t">Wealth held by millionaires</h3>
+     <div class="strip s3"><div class="cell"><span class="eyebrow">Show</span><span class="pill" style="width:max-content">Billions of dollars ▾</span></div>
+       <div class="cell"><span class="eyebrow">2010 total</span><span class="fig num">$105.7B</span></div>
+       <div class="cell"><span class="eyebrow">2024 total</span><span class="fig num">$292.7B</span></div></div>
+     <div class="inner">${L(c2)}${chart(c2)}</div><p class="cap" style="margin-top:.9rem">${CAPCH}</p></div>
+   ${NARR}`;
+
+  /* N3 */
+  const c3={grid:'rgba(255,255,255,.18)',axis:'rgba(255,255,255,.85)',t1:'#5dae80',t2:'#9fdcb2',t3:'#d8f6df'};
+  document.getElementById('N3').innerHTML=`
+   <div class="card"><span class="eyebrow">Map</span><h3 class="t">Where Hawaiʻi’s millionaires live</h3>
+     <div class="strip s3"><div class="cell"><span class="eyebrow">Circle size</span><span class="cap">Number of millionaires per city</span></div>
+       <div class="cell"><span class="eyebrow">Biggest cluster</span><span class="cap"><b>Honolulu</b>, with pockets on every island</span></div>
+       <div class="cell"><div style="display:flex;gap:.4rem"><span class="pill" style="background:#fff;color:#27343d">Map</span><span class="pill">Data</span></div></div></div>
+     <div class="mapph">${MAP}</div></div>
+   <div class="card"><span class="eyebrow">Chart</span><h3 class="t">Wealth held by millionaires</h3>
+     <div class="strip s3"><div class="cell"><span class="eyebrow">Show</span><span class="pill" style="width:max-content;background:#fff;color:#27343d">Billions of dollars ▾</span></div>
+       <div class="cell"><span class="eyebrow">2010 total</span><span class="fig num">$105.7B</span></div>
+       <div class="cell"><span class="eyebrow">2024 total</span><span class="fig num">$292.7B</span></div></div>
+     ${L(c3)}${chart(c3)}<p class="cap" style="margin-top:.9rem">${CAPCH}</p></div>
+   ${NARR}`;
+</script></body></html>

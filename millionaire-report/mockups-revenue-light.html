@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Revenue box, lighter schemes — mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;padding:24px 16px 60px;background:#f4f1eb;font-family:'Nunito',system-ui,sans-serif;color:#1a3c34}
+  .wrap{max-width:960px;margin:0 auto}
+  h2.opt{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin:34px 0 4px;color:#4a6b5a}
+  p.note{margin:0 0 12px;font-size:.92rem;color:#4a5a52}
+
+  /* the real card above, shown only for context */
+  .above{background:#2f3d47;border-radius:0 0 20px 20px;height:44px;box-shadow:0 10px 30px rgba(26,60,52,.15)}
+  .gap{height:28px}
+
+  /* shared structure (identical to the live R1 layout) */
+  .card{border-radius:20px;padding:clamp(1.5rem,4vw,2.8rem) clamp(1.5rem,4vw,3rem);background:var(--bg);box-shadow:var(--shadow);color:var(--text)}
+  .strip{display:grid;grid-template-columns:1.05fr 1.25fr 1fr;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .cell{padding:1.15rem 1.35rem 1.25rem;display:flex;flex-direction:column;gap:.55rem;min-width:0}
+  .cell+.cell{border-left:1px solid var(--line)}
+  .cell.hero{justify-content:center;background:var(--hero-cell,transparent)}
+  .eyebrow{color:var(--eyebrow);font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1.25}
+  .ctrl{display:flex;flex-direction:column;gap:.45rem}.ctrl+.ctrl{margin-top:.55rem}
+  .seg{display:inline-flex;width:max-content;padding:3px;gap:2px;border-radius:999px;background:var(--seg-bg);border:1px solid var(--seg-line)}
+  .seg button{font:800 .92rem 'Nunito';min-width:3.3rem;min-height:2.3rem;padding:0 .95rem;border:0;border-radius:999px;background:transparent;color:var(--seg-text);cursor:pointer;font-variant-numeric:tabular-nums;transition:background .15s,color .15s}
+  .seg button:hover{color:var(--text)}
+  .seg button[aria-checked="true"]{background:var(--seg-on);color:var(--seg-on-text);box-shadow:var(--seg-on-shadow,none)}
+  .big{font-weight:900;font-size:clamp(2.8rem,7vw,3.9rem);letter-spacing:-.02em;line-height:1;color:var(--hero);display:flex;align-items:baseline;gap:.4rem;flex-wrap:wrap;font-variant-numeric:tabular-nums;text-shadow:var(--hero-glow,none)}
+  .big small{font-size:1.05rem;font-weight:800;letter-spacing:.02em;color:var(--hero-sub);text-shadow:none}
+  .cap{font-size:.86rem;font-weight:600;line-height:1.35;color:var(--muted)}
+  .cap b{color:var(--text);font-weight:800}
+  .share{font-size:2.5rem;font-weight:900;letter-spacing:-.02em;line-height:1;color:var(--share);font-variant-numeric:tabular-nums}
+  .meter{height:14px;border-radius:999px;background:var(--meter-bg);overflow:hidden}
+  .meter i{display:block;height:100%;min-width:6px;border-radius:999px;background:var(--meter-fill);transition:width .5s cubic-bezier(.16,1,.3,1)}
+  .foot{margin:1.1rem 0 0;font-size:.85rem;font-weight:600;line-height:1.5;color:var(--muted)}
+  .foot b{color:var(--text);font-weight:800}
+
+  /* L1 — pale mint */
+  .L1{--bg:linear-gradient(160deg,#f3faf5,#dff1e5);--shadow:0 10px 30px rgba(26,60,52,.1);--text:#14322a;--muted:#4a6b5a;--line:rgba(26,60,52,.14);--eyebrow:#2a6b4f;
+      --seg-bg:rgba(26,60,52,.06);--seg-line:rgba(26,60,52,.1);--seg-text:#3f6455;--seg-on:#1f5a44;--seg-on-text:#fff;
+      --hero:#1f5a44;--hero-sub:#2a6b4f;--share:#1f5a44;--meter-bg:rgba(26,60,52,.1);--meter-fill:#4f9b72}
+  /* L2 — white card, mint hero cell */
+  .L2{--bg:#fff;--shadow:0 10px 30px rgba(26,60,52,.09);--text:#14322a;--muted:#55705f;--line:#dfe8e2;--eyebrow:#2a6b4f;
+      --hero-cell:linear-gradient(160deg,#d9f4df,#bfeaca);
+      --seg-bg:#f0f5f1;--seg-line:#e1eae4;--seg-text:#456352;--seg-on:#1a3c34;--seg-on-text:#fff;
+      --hero:#14322a;--hero-sub:#2a6b4f;--share:#1f5a44;--meter-bg:#e6eee9;--meter-fill:#4f9b72}
+  .L2 .cell.hero .eyebrow{color:#1f5a44}.L2 .cell.hero .cap{color:#2f5a46}
+  /* L3 — mid brand green */
+  .L3{--bg:linear-gradient(160deg,#35805c,#245d45);--shadow:0 12px 32px rgba(26,60,52,.22);--text:#fff;--muted:rgba(255,255,255,.82);--line:rgba(255,255,255,.26);--eyebrow:#d4f3dc;
+      --seg-bg:rgba(255,255,255,.14);--seg-line:rgba(255,255,255,.18);--seg-text:rgba(255,255,255,.9);--seg-on:#fff;--seg-on-text:#1a3c34;
+      --hero:#fff;--hero-glow:0 0 30px rgba(255,255,255,.25);--hero-sub:#d4f3dc;--share:#fff;--meter-bg:rgba(255,255,255,.25);--meter-fill:#fff}
+  .L3 .seg button:hover{color:#fff}
+  /* L4 — pale slate, echoes the banner without the weight */
+  .L4{--bg:linear-gradient(160deg,#f1f5f6,#e0e8eb);--shadow:0 10px 30px rgba(39,52,61,.12);--text:#27343d;--muted:#566872;--line:rgba(39,52,61,.15);--eyebrow:#386a50;
+      --seg-bg:rgba(39,52,61,.07);--seg-line:rgba(39,52,61,.1);--seg-text:#4a5d68;--seg-on:#27343d;--seg-on-text:#fff;
+      --hero:#2a6b4f;--hero-sub:#3f7357;--share:#27343d;--meter-bg:rgba(39,52,61,.12);--meter-fill:#4f9b72}
+
+  @media (max-width:600px){
+    .strip{grid-template-columns:1fr}
+    .cell+.cell{border-left:0;border-top:1px solid var(--line)}
+  }
+</style></head><body><div class="wrap">
+
+<h2 class="opt">L1 — Pale mint</h2>
+<p class="note">Same green family as the page, just washed out. Deep-green numbers on a soft mint field. The calmest option.</p>
+<div class="above"></div><div class="gap"></div><div id="L1" class="L1"></div>
+
+<h2 class="opt">L2 — White card, mint hero</h2>
+<p class="note">Clean white card with thin dividers. Only the revenue cell is tinted mint, so the number is the one pop of color.</p>
+<div class="above"></div><div class="gap"></div><div id="L2" class="L2"></div>
+
+<h2 class="opt">L3 — Mid brand green</h2>
+<p class="note">Still a colored block, but a medium green instead of near-black, with white type. The brightest and most confident option.</p>
+<div class="above"></div><div class="gap"></div><div id="L3" class="L3"></div>
+
+<h2 class="opt">L4 — Pale slate</h2>
+<p class="note">Echoes the slate of the banner and $292.7B card above, but light. Slate text, a green hero number.</p>
+<div class="above"></div><div class="gap"></div><div id="L4" class="L4"></div>
+
+</div>
+<script>
+  const TPL=`<div class="card"><div class="strip">
+    <div class="cell">
+      <div class="ctrl"><span class="eyebrow">Tax wealth above</span>
+        <div class="seg" role="radiogroup" aria-label="Wealth threshold" data-seg="th"><button role="radio" data-v="20">$20M</button><button role="radio" data-v="50">$50M</button></div></div>
+      <div class="ctrl"><span class="eyebrow">At a rate of</span>
+        <div class="seg" role="radiogroup" aria-label="Tax rate" data-seg="rate"><button role="radio" data-v="1">1%</button><button role="radio" data-v="2">2%</button><button role="radio" data-v="3">3%</button></div></div>
+    </div>
+    <div class="cell hero">
+      <span class="eyebrow">Could raise each year</span>
+      <div class="big"><span data-b="rev">$1.41B</span><small>/ year</small></div>
+      <span class="cap"><b data-b="rate">2%</b> on wealth above <b data-b="thr">$20M</b></span>
+    </div>
+    <div class="cell">
+      <span class="eyebrow">Share of state budget</span>
+      <div class="share" data-b="pct">6.0%</div>
+      <div class="meter"><i data-b="meter" style="width:6%"></i></div>
+      <span class="cap">of Hawaiʻi’s <b>$23.7B</b> annual budget</span>
+    </div>
+  </div>
+  <p class="foot">Applied only to the <b data-b="base">$70.7B</b> held above <span data-b="thr">$20M</span> by <b data-b="ppl">1,245</b> residents. Static estimate: no avoidance or out-migration.</p></div>`;
+  ['L1','L2','L3','L4'].forEach(id=>document.getElementById(id).innerHTML=TPL);
+
+  const TIERS={20:{people:1245,total:95.6},50:{people:365,total:69.3}}, BUDGET=23.7;
+  let th=20, rate=2;
+  function paint(){
+    const t=TIERS[th], base=t.total-t.people*th/1000, rev=base*rate/100, pct=rev/BUDGET*100;
+    const set=(k,v)=>document.querySelectorAll('[data-b="'+k+'"]').forEach(e=>e.textContent=v);
+    set('rev','$'+rev.toFixed(2)+'B'); set('rate',rate+'%'); set('thr','$'+th+'M');
+    set('pct',pct.toFixed(1)+'%'); set('base','$'+base.toFixed(1)+'B'); set('ppl',t.people.toLocaleString());
+    document.querySelectorAll('[data-b="meter"]').forEach(e=>e.style.width=Math.min(pct,100)+'%');
+    document.querySelectorAll('[data-seg="th"] button').forEach(b=>b.setAttribute('aria-checked',+b.dataset.v===th));
+    document.querySelectorAll('[data-seg="rate"] button').forEach(b=>b.setAttribute('aria-checked',+b.dataset.v===rate));
+  }
+  document.addEventListener('click',e=>{const b=e.target.closest('.seg button'); if(!b) return;
+    const k=b.closest('.seg').dataset.seg; if(k==='th') th=+b.dataset.v; else rate=+b.dataset.v; paint();});
+  paint();
+</script></body></html>

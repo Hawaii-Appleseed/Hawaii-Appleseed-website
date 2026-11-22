@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Revenue box, blending with the card above — mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;padding:24px 16px 60px;background:#f4f1eb;font-family:'Nunito',system-ui,sans-serif;color:#1a3c34}
+  .wrap{max-width:960px;margin:0 auto}
+  h2.opt{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin:34px 0 4px;color:#4a6b5a}
+  p.note{margin:0 0 12px;font-size:.92rem;color:#4a5a52}
+
+  /* the real card above (shown for context): blocks + budget kicker */
+  .above{background:#2f3d47;border-radius:0 0 20px 20px;padding:20px clamp(1.5rem,4vw,3rem) 22px;box-shadow:0 10px 30px rgba(26,60,52,.15);color:#c9d1c6;font-weight:600;font-size:.95rem}
+  .above .blocks{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin-bottom:10px}
+  .above .blocks i{height:26px;border-radius:6px;background:#85a98f}
+  .above .blocks i:last-child{background:#3f4f5a}
+  .above strong{color:#fff}
+  .J .above{border-radius:0;box-shadow:none}           /* joined variant: flush, no gap */
+  .gap{height:28px}.J .gap{display:none}
+
+  /* shared structure (same layout as the live box) */
+  .card{border-radius:20px;padding:clamp(1.5rem,4vw,2.8rem) clamp(1.5rem,4vw,3rem);background:var(--bg);box-shadow:var(--shadow);color:var(--text)}
+  .J .card{border-radius:0 0 20px 20px}
+  .strip{display:grid;grid-template-columns:1.05fr 1.25fr 1fr;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .cell{padding:1.15rem 1.35rem 1.25rem;display:flex;flex-direction:column;gap:.55rem;min-width:0}
+  .cell+.cell{border-left:1px solid var(--line)}
+  .cell.hero{justify-content:center;background:var(--hero-cell,transparent)}
+  .eyebrow{color:var(--eyebrow);font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1.25}
+  .ctrl{display:flex;flex-direction:column;gap:.45rem}.ctrl+.ctrl{margin-top:.55rem}
+  .seg{display:inline-flex;width:max-content;padding:3px;gap:2px;border-radius:999px;background:var(--seg-bg);border:1px solid var(--seg-line)}
+  .seg button{font:800 .92rem 'Nunito';min-width:3.3rem;min-height:2.3rem;padding:0 .95rem;border:0;border-radius:999px;background:transparent;color:var(--seg-text);cursor:pointer;font-variant-numeric:tabular-nums;transition:background .15s,color .15s}
+  .seg button:hover{color:var(--text)}
+  .seg button[aria-checked="true"]{background:var(--seg-on);color:var(--seg-on-text)}
+  .big{font-weight:900;font-size:clamp(2.8rem,7vw,3.9rem);letter-spacing:-.02em;line-height:1;color:var(--hero);display:flex;align-items:baseline;gap:.4rem;flex-wrap:wrap;font-variant-numeric:tabular-nums;text-shadow:var(--hero-glow,none)}
+  .big small{font-size:1.05rem;font-weight:800;letter-spacing:.02em;color:var(--hero-sub);text-shadow:none}
+  .cap{font-size:.86rem;font-weight:600;line-height:1.35;color:var(--muted)}
+  .cap b{color:var(--text);font-weight:800}
+  .share{font-size:2.5rem;font-weight:900;letter-spacing:-.02em;line-height:1;color:var(--share);font-variant-numeric:tabular-nums}
+  .meter{height:14px;border-radius:999px;background:var(--meter-bg);overflow:hidden}
+  .meter i{display:block;height:100%;min-width:6px;border-radius:999px;background:var(--meter-fill);transition:width .5s cubic-bezier(.16,1,.3,1)}
+  .foot{margin:1.1rem 0 0;font-size:.85rem;font-weight:600;line-height:1.5;color:var(--muted)}
+  .foot b{color:var(--text);font-weight:800}
+
+  /* M1 — joined: flush under the card, one step lighter in the same slate ramp */
+  .M1{--bg:#3a4a56;--shadow:none;--text:#fff;--muted:rgba(255,255,255,.76);--line:rgba(255,255,255,.18);--eyebrow:#c3dccb;
+      --seg-bg:rgba(255,255,255,.1);--seg-line:rgba(255,255,255,.12);--seg-text:rgba(255,255,255,.85);--seg-on:#a8e6b0;--seg-on-text:#1a3c34;
+      --hero:#a8e6b0;--hero-sub:#c3dccb;--share:#fff;--meter-bg:rgba(255,255,255,.14);--meter-fill:#a8e6b0}
+  /* M2 — mid slate, separate card */
+  .M2{--bg:linear-gradient(160deg,#52666f,#435660);--shadow:0 10px 30px rgba(39,52,61,.2);--text:#fff;--muted:rgba(255,255,255,.9);--line:rgba(255,255,255,.2);--eyebrow:#dcefe2;
+      --seg-bg:rgba(255,255,255,.12);--seg-line:rgba(255,255,255,.14);--seg-text:rgba(255,255,255,.88);--seg-on:#fff;--seg-on-text:#27343d;
+      --hero:#bff0c9;--hero-sub:#cfe6d6;--share:#fff;--meter-bg:rgba(255,255,255,.18);--meter-fill:#bff0c9}
+  /* M3 — sage, borrowed from the blocks above */
+  .M3{--bg:linear-gradient(160deg,#527365,#44625a);--shadow:0 10px 30px rgba(39,52,61,.2);--text:#fff;--muted:rgba(255,255,255,.96);--line:rgba(255,255,255,.26);--eyebrow:#f0fbf3;
+      --seg-bg:rgba(255,255,255,.14);--seg-line:rgba(255,255,255,.16);--seg-text:rgba(255,255,255,.9);--seg-on:#fff;--seg-on-text:#27343d;
+      --hero:#fff;--hero-glow:0 0 28px rgba(255,255,255,.2);--hero-sub:#dcf3e2;--share:#fff;--meter-bg:rgba(255,255,255,.22);--meter-fill:#fff}
+  /* M4 — mid-light sage-gray, slate text */
+  .M4{--bg:linear-gradient(160deg,#c5d3cc,#b3c4bb);--shadow:0 10px 30px rgba(39,52,61,.14);--text:#1f2b33;--muted:#2d414b;--line:rgba(39,52,61,.22);--eyebrow:#21503a;
+      --seg-bg:rgba(39,52,61,.09);--seg-line:rgba(39,52,61,.12);--seg-text:#3f5560;--seg-on:#27343d;--seg-on-text:#fff;
+      --hero:#1f5a44;--hero-sub:#2c5a43;--share:#27343d;--meter-bg:rgba(39,52,61,.15);--meter-fill:#2f7a58}
+
+  @media (max-width:600px){
+    .strip{grid-template-columns:1fr}
+    .cell+.cell{border-left:0;border-top:1px solid var(--line)}
+    .above .blocks{grid-template-columns:repeat(7,1fr)}
+  }
+</style></head><body><div class="wrap">
+
+<h2 class="opt">M1 — Joined under the card, one step lighter</h2>
+<p class="note">No gap and no new color family. The box continues the card above as the next step in the same slate ramp (banner, then card, then this). The least contrast of the four.</p>
+<div class="J"><div class="above"><div class="blocks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><strong>One block = $23.7 billion,</strong> Hawaiʻi’s annual state budget (2026).</div><div class="gap"></div><div id="M1" class="M1"></div></div>
+
+<h2 class="opt">M2 — Mid slate</h2>
+<p class="note">Same blue-grey hue as the card above, lifted to a medium value. It's a clear step down in weight, but not a sudden jump to white.</p>
+<div class="above"><div class="blocks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><strong>One block = $23.7 billion,</strong> Hawaiʻi’s annual state budget (2026).</div><div class="gap"></div><div id="M2" class="M2"></div>
+
+<h2 class="opt">M3 — Sage, from the blocks above</h2>
+<p class="note">Takes the sage green of the budget blocks and makes it the box color, so the two sections visibly share a color.</p>
+<div class="above"><div class="blocks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><strong>One block = $23.7 billion,</strong> Hawaiʻi’s annual state budget (2026).</div><div class="gap"></div><div id="M3" class="M3"></div>
+
+<h2 class="opt">M4 — Mid-light sage-gray</h2>
+<p class="note">Still light, but muted instead of near-white, so it sits between the dark card and the cream page instead of fighting either.</p>
+<div class="above"><div class="blocks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><strong>One block = $23.7 billion,</strong> Hawaiʻi’s annual state budget (2026).</div><div class="gap"></div><div id="M4" class="M4"></div>
+
+</div>
+<script>
+  const TPL=`<div class="card"><div class="strip">
+    <div class="cell">
+      <div class="ctrl"><span class="eyebrow">Tax wealth above</span>
+        <div class="seg" role="radiogroup" aria-label="Wealth threshold" data-seg="th"><button role="radio" data-v="20">$20M</button><button role="radio" data-v="50">$50M</button></div></div>
+      <div class="ctrl"><span class="eyebrow">At a rate of</span>
+        <div class="seg" role="radiogroup" aria-label="Tax rate" data-seg="rate"><button role="radio" data-v="1">1%</button><button role="radio" data-v="2">2%</button><button role="radio" data-v="3">3%</button></div></div>
+    </div>
+    <div class="cell hero">
+      <span class="eyebrow">Could raise each year</span>
+      <div class="big"><span data-b="rev">$1.41B</span><small>/ year</small></div>
+      <span class="cap"><b data-b="rate">2%</b> on wealth above <b data-b="thr">$20M</b></span>
+    </div>
+    <div class="cell">
+      <span class="eyebrow">Share of state budget</span>
+      <div class="share" data-b="pct">6.0%</div>
+      <div class="meter"><i data-b="meter" style="width:6%"></i></div>
+      <span class="cap">of Hawaiʻi’s <b>$23.7B</b> annual budget</span>
+    </div>
+  </div>
+  <p class="foot">Applied only to the <b data-b="base">$70.7B</b> held above <span data-b="thr">$20M</span> by <b data-b="ppl">1,245</b> residents. Static estimate: no avoidance or out-migration.</p></div>`;
+  ['M1','M2','M3','M4'].forEach(id=>document.getElementById(id).innerHTML=TPL);
+
+  const TIERS={20:{people:1245,total:95.6},50:{people:365,total:69.3}}, BUDGET=23.7;
+  let th=20, rate=2;
+  function paint(){
+    const t=TIERS[th], base=t.total-t.people*th/1000, rev=base*rate/100, pct=rev/BUDGET*100;
+    const set=(k,v)=>document.querySelectorAll('[data-b="'+k+'"]').forEach(e=>e.textContent=v);
+    set('rev','$'+rev.toFixed(2)+'B'); set('rate',rate+'%'); set('thr','$'+th+'M');
+    set('pct',pct.toFixed(1)+'%'); set('base','$'+base.toFixed(1)+'B'); set('ppl',t.people.toLocaleString());
+    document.querySelectorAll('[data-b="meter"]').forEach(e=>e.style.width=Math.min(pct,100)+'%');
+    document.querySelectorAll('[data-seg="th"] button').forEach(b=>b.setAttribute('aria-checked',+b.dataset.v===th));
+    document.querySelectorAll('[data-seg="rate"] button').forEach(b=>b.setAttribute('aria-checked',+b.dataset.v===rate));
+  }
+  document.addEventListener('click',e=>{const b=e.target.closest('.seg button'); if(!b) return;
+    const k=b.closest('.seg').dataset.seg; if(k==='th') th=+b.dataset.v; else rate=+b.dataset.v; paint();});
+  paint();
+</script></body></html>

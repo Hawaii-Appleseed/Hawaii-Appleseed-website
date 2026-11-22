@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Banner top row v2 — Option A refinements</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--slate:#27343d;--slate2:#2f3d47;--line:#3f4f5a;--sage:#85a98f;--pale:#cfe3d4;--t1:#5dae80;--t2:#86d29b;--t3:#bfeaca}
+  *{box-sizing:border-box}
+  body{margin:0;padding:24px 16px 60px;background:#f4f1eb;font-family:'Nunito',system-ui,sans-serif;color:#1a3c34}
+  .wrap{max-width:960px;margin:0 auto}
+  h2.opt{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin:36px 0 4px;color:#4a6b5a}
+  p.note{margin:0 0 10px;font-size:.92rem;color:#4a5a52}
+  .banner{background:var(--slate);border-radius:20px 20px 0 0;padding:clamp(1.2rem,4vw,2.4rem) clamp(1.2rem,4vw,3rem)}
+  .fortune{background:var(--slate2);border-radius:0 0 20px 20px;padding:1.4rem clamp(1.2rem,4vw,3rem);color:#e6ebe3}
+  .fortune .k{font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--sage)}
+  .fortune .big{font-size:2.6rem;font-weight:900;color:#fff;line-height:1.1;margin-top:.3rem}
+  .fortune .big small{font-size:1.1rem;color:var(--pale);font-weight:700;margin-left:.3rem}
+
+  /* atoms */
+  .count{color:#fff;font-size:clamp(2.2rem,5.5vw,3rem);font-weight:900;line-height:1;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+  .dd{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.88);font:700 .95rem 'Nunito';padding:.38rem .75rem;border-radius:999px;white-space:nowrap}
+  .bar{display:flex;height:14px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.08)}
+  .bar i{display:block;height:100%}
+  .bar i:not(:last-child){box-shadow:inset -2px 0 0 var(--slate)}
+  .eyebrow{color:var(--sage);font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+  .cap{color:rgba(255,255,255,.55);font-size:.84rem;font-weight:600;line-height:1.3}
+  .cap b{color:rgba(255,255,255,.88);font-weight:800}
+  .keys{display:flex;gap:.7rem;font-size:.84rem;font-weight:700;color:rgba(255,255,255,.75)}
+  .keys span:before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.3rem;background:var(--c)}
+  .fig{color:var(--pale);font-weight:900;font-size:2.1rem;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .fig sub{font-size:1rem;vertical-align:baseline;margin-left:.15rem;color:var(--sage);font-weight:800;letter-spacing:0}
+
+  .strip{display:grid;border-radius:16px;overflow:hidden}
+  .cell{padding:1.05rem 1.3rem 1.15rem;display:flex;flex-direction:column;gap:.55rem;justify-content:space-between;min-width:0}
+
+  /* ───────── A1: strip + labelled growth cell ───────── */
+  .A1 .strip{grid-template-columns:1.45fr 1fr 1.15fr;border:1px solid var(--line)}
+  .A1 .cell+.cell{border-left:1px solid var(--line)}
+  .A1 .tcell{display:flex;align-items:center;flex-wrap:wrap;gap:.2rem .55rem}
+  .A1 .tcell .eyebrow{flex-basis:100%;margin-bottom:.25rem}
+  .A1 .trend{display:flex;align-items:center;gap:.6rem}
+
+  /* ───────── A2: every cell = eyebrow → figure → caption ───────── */
+  .A2 .strip{grid-template-columns:1.45fr 1fr 1.15fr;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid var(--line)}
+  .A2 .cell+.cell{border-left:1px solid var(--line)}
+  .A2 .row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;min-height:44px}
+  .A2 .trend{display:flex;align-items:center;gap:.6rem;min-height:44px}
+
+  /* ───────── A3: glass cells, accent rules, 2010→now bars explain the % ───────── */
+  .A3 .strip{grid-template-columns:1.75fr .95fr 1.3fr;gap:.75rem;overflow:visible}
+  .A3 .cell{background:linear-gradient(160deg,rgba(133,169,143,.16),rgba(133,169,143,.05));border:1px solid rgba(133,169,143,.22);border-radius:14px;position:relative;overflow:hidden}
+  .A3 .cell:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--t2);opacity:.85}
+  .A3 .cell.hero{background:linear-gradient(160deg,rgba(133,169,143,.24),rgba(133,169,143,.07))}
+  .A3 .row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;min-height:44px}
+  .A3 .grow{display:flex;flex-direction:column;gap:.3rem}
+  .A3 .gline{display:grid;grid-template-columns:2.4rem 1fr auto;align-items:center;gap:.5rem;font-size:.78rem;font-weight:800;color:rgba(255,255,255,.6)}
+  .A3 .gline i{display:block;height:8px;border-radius:999px;background:var(--sage)}
+  .A3 .gline.now i{background:var(--t3)}
+  .A3 .gline.now{color:#fff}
+  .A3 .top{display:flex;align-items:baseline;gap:.6rem}
+
+  @media (max-width:700px){
+    .A1 .strip,.A2 .strip,.A3 .strip{grid-template-columns:1fr}
+    .A1 .cell+.cell,.A2 .cell+.cell{border-left:0;border-top:1px solid var(--line)}
+  }
+</style></head><body><div class="wrap">
+
+<!-- ───────── A1 ───────── -->
+<h2 class="opt">A1 — Strip, growth cell labelled</h2>
+<p class="note">Closest to the strip you picked. The third cell now says what the percentage measures ("More millionaires than 2010") and gives the actual before and after.</p>
+<div class="A1">
+  <div class="banner"><div class="strip">
+    <div class="cell"><div class="tcell"><span class="eyebrow">Hawaiʻi has</span><span class="count">81,814</span><span class="dd">millionaires ▾</span></div></div>
+    <div class="cell">
+      <span class="eyebrow">Wealth by tier</span>
+      <div class="bar"><i style="width:67%;background:var(--t1)"></i><i style="width:9%;background:var(--t2)"></i><i style="width:24%;background:var(--t3)"></i></div>
+      <div class="keys"><span style="--c:var(--t1)">67%</span><span style="--c:var(--t2)">9%</span><span style="--c:var(--t3)">24%</span></div>
+    </div>
+    <div class="cell">
+      <span class="eyebrow">More millionaires than 2010</span>
+      <div class="trend">
+        <svg width="50" height="28" viewBox="0 0 52 28"><polyline points="2,24 12,20 22,21 32,13 42,9 50,3" fill="none" stroke="#cfe3d4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="fig">+184%</span>
+      </div>
+      <span class="cap"><b>28,801</b> in 2010 → <b>81,814</b> today</span>
+    </div>
+  </div></div>
+  <div class="fortune"><div class="k">Hawaiʻi’s millionaires hold wealth equivalent to 12.4× the state budget</div><div class="big">$292.7<small>billion</small></div></div>
+</div>
+
+<!-- ───────── A2 ───────── -->
+<h2 class="opt">A2 — Same rhythm in every cell</h2>
+<p class="note">Each cell has the same three layers: a small caps label, a figure and a caption. Pill-shaped dropdown. The strip has a subtle top-lit gradient. "+184%" now reads "+184% growth" with the 2010 baseline underneath.</p>
+<div class="A2">
+  <div class="banner"><div class="strip">
+    <div class="cell">
+      <span class="eyebrow">Hawaiʻi has</span>
+      <div class="row"><span class="count">81,814</span><span class="dd">millionaires ▾</span></div>
+      <span class="cap">Residents with $1M+ in net worth, 2024</span>
+    </div>
+    <div class="cell">
+      <span class="eyebrow">Wealth by tier</span>
+      <div class="bar"><i style="width:67%;background:var(--t1)"></i><i style="width:9%;background:var(--t2)"></i><i style="width:24%;background:var(--t3)"></i></div>
+      <div class="keys"><span style="--c:var(--t1)">67%</span><span style="--c:var(--t2)">9%</span><span style="--c:var(--t3)">24%</span></div>
+    </div>
+    <div class="cell">
+      <span class="eyebrow">Growth since 2010</span>
+      <div class="trend">
+        <svg width="50" height="28" viewBox="0 0 52 28"><polyline points="2,24 12,20 22,21 32,13 42,9 50,3" fill="none" stroke="#cfe3d4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="fig">+184%</span>
+      </div>
+      <span class="cap">In the number of millionaires: <b>28,801</b> then, <b>81,814</b> now</span>
+    </div>
+  </div></div>
+  <div class="fortune"><div class="k">Hawaiʻi’s millionaires hold wealth equivalent to 12.4× the state budget</div><div class="big">$292.7<small>billion</small></div></div>
+</div>
+
+<!-- ───────── A3 ───────── -->
+<h2 class="opt">A3 — Glass cells with a mini 2010 vs 2024 comparison</h2>
+<p class="note">The sleekest of the three. Three soft cells with a mint accent edge. In the growth cell, two bars show the 2010 and 2024 counts, so +184% explains itself without any text.</p>
+<div class="A3">
+  <div class="banner"><div class="strip">
+    <div class="cell hero">
+      <span class="eyebrow">Hawaiʻi has</span>
+      <div class="row"><span class="count">81,814</span><span class="dd">millionaires ▾</span></div>
+    </div>
+    <div class="cell">
+      <span class="eyebrow">Wealth by tier</span>
+      <div class="bar"><i style="width:67%;background:var(--t1)"></i><i style="width:9%;background:var(--t2)"></i><i style="width:24%;background:var(--t3)"></i></div>
+      <div class="keys"><span style="--c:var(--t1)">67%</span><span style="--c:var(--t2)">9%</span><span style="--c:var(--t3)">24%</span></div>
+    </div>
+    <div class="cell">
+      <div class="top"><span class="fig">+184%</span><span class="eyebrow">more millionaires<br>than in 2010</span></div>
+      <div class="grow">
+        <div class="gline"><span>2010</span><i style="width:35.2%"></i><span>28,801</span></div>
+        <div class="gline now"><span>2024</span><i style="width:100%"></i><span>81,814</span></div>
+      </div>
+    </div>
+  </div></div>
+  <div class="fortune"><div class="k">Hawaiʻi’s millionaires hold wealth equivalent to 12.4× the state budget</div><div class="big">$292.7<small>billion</small></div></div>
+</div>
+
+</div></body></html>

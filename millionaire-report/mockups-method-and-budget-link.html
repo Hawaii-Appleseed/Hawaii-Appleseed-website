@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Method + budget link — mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;padding:24px 16px 80px;background:#f4f1eb;font-family:'Nunito',system-ui,sans-serif;color:#1a3c34}
+  .wrap{max-width:960px;margin:0 auto}
+  h1{font-size:1.3rem;margin:0 0 4px}
+  h2.part{font-size:1.05rem;margin:44px 0 2px;padding-top:18px;border-top:2px solid #cfd8d2}
+  h3.opt{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin:30px 0 4px;color:#4a6b5a}
+  p.note{margin:0 0 12px;font-size:.92rem;color:#4a5a52;max-width:70ch}
+  .tip{font-size:.9rem;background:#fff;border:1px solid #dfe8e2;border-radius:12px;padding:.7rem 1rem;margin:10px 0 0;max-width:70ch}
+
+  /* ── dark budget card (mirrors .fortune-card) ── */
+  .fcard{background:#2f3d47;color:#e6ebe3;border-radius:0 0 20px 20px;padding:clamp(1.5rem,4vw,2.8rem) clamp(1.5rem,4vw,3rem);box-shadow:0 10px 30px rgba(39,52,61,.16)}
+  .fk{margin:0 0 1rem;font-size:clamp(.78rem,2.2vw,.95rem);font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#85a98f}
+  .ftop{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.25rem 2rem;align-items:flex-start}
+  .fbig{font-size:clamp(2.6rem,9vw,4.4rem);font-weight:900;line-height:1;color:#fff}
+  .fbig small{font-size:.42em;font-weight:800;color:#c9d1c6;margin-left:.2em}
+  .fdesc{margin:.6rem 0 0;font-size:clamp(.95rem,2.6vw,1.2rem);color:#c9d1c6;max-width:30ch}
+  .fdesc strong{color:#fff}
+  .fmult{text-align:right}
+  .fmult .n{font-size:clamp(2.6rem,9vw,4.4rem);font-weight:900;line-height:1;color:#85a98f}
+  .fmult p{margin:.6rem 0 0;font-size:clamp(.95rem,2.6vw,1.2rem);color:#c9d1c6}
+  .blocks{display:grid;grid-template-columns:repeat(13,1fr);gap:.3rem;margin:1.75rem 0 .5rem}
+  .blocks span{background:#85a98f;border-radius:8px;aspect-ratio:1.1;position:relative;overflow:hidden}
+  .blocks span.p{background:#3f4f5a}
+  .blocks span.p i{display:block;height:100%;background:#85a98f}
+  .blocks span.tax{overflow:visible;outline:2px solid #ecfff1;outline-offset:2px}
+  .blocks span.tax i.slice{position:absolute;left:0;top:0;bottom:0;background:#ecfff1;border-right:2px solid #2f3d47;min-width:8px;border-radius:8px 0 0 8px;transition:width .5s cubic-bezier(.16,1,.3,1)}
+  .fnote{margin:.75rem 0 0;font-size:clamp(.85rem,2.4vw,1.05rem);color:#c9d1c6}
+  .fnote strong{color:#fff}
+  .taxcap{margin:.15rem 0 .4rem;font-size:.95rem;font-weight:700;color:#bff0c9;line-height:1.35}
+  .taxcap b{color:#fff}
+  .gap{height:32px}
+
+  /* ── revenue box (mirrors .revenue-callout) ── */
+  .rbox{background:linear-gradient(160deg,#52666f,#435660);border-radius:20px;padding:clamp(1.5rem,4vw,2.8rem) clamp(1.5rem,4vw,3rem);box-shadow:0 10px 30px rgba(39,52,61,.2);color:#fff;position:relative}
+  .rstrip{display:grid;grid-template-columns:1.05fr 1.25fr 1fr;border:1px solid rgba(255,255,255,.2);border-radius:16px}
+  .rcell{padding:1.15rem 1.35rem 1.25rem;display:flex;flex-direction:column;gap:.55rem;min-width:0}
+  .rcell+.rcell{border-left:1px solid rgba(255,255,255,.2)}
+  .rcell.hero{justify-content:center}
+  .eyebrow{color:#dcefe2;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1.25;display:flex;align-items:center;gap:.5rem}
+  .ctrl{display:flex;flex-direction:column;gap:.45rem}.ctrl+.ctrl{margin-top:.55rem}
+  .seg{display:inline-flex;width:max-content;padding:3px;gap:2px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14)}
+  .seg button{font:800 .92rem 'Nunito';min-width:3.3rem;min-height:2.3rem;padding:0 .95rem;border:0;border-radius:999px;background:transparent;color:rgba(255,255,255,.88);cursor:pointer;font-variant-numeric:tabular-nums}
+  .seg button:hover{color:#fff}
+  .seg button[aria-checked="true"]{background:#fff;color:#27343d}
+  .big{font-weight:900;font-size:clamp(2.8rem,7vw,3.9rem);letter-spacing:-.02em;line-height:1;color:#bff0c9;display:flex;align-items:baseline;gap:.4rem;flex-wrap:wrap;font-variant-numeric:tabular-nums}
+  .big small{font-size:1.05rem;font-weight:800;color:#cfe6d6}
+  .cap{font-size:.86rem;font-weight:600;line-height:1.35;color:rgba(255,255,255,.9)}
+  .cap b{color:#fff;font-weight:800}
+  .share{font-size:2.5rem;font-weight:900;letter-spacing:-.02em;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+  .meter{height:14px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden}
+  .meter i{display:block;height:100%;min-width:6px;border-radius:999px;background:#bff0c9;transition:width .5s cubic-bezier(.16,1,.3,1)}
+  .basis{margin:1.1rem 0 0;font-size:.85rem;font-weight:600;line-height:1.5;color:rgba(255,255,255,.9)}
+  .basis b{color:#fff;font-weight:800}
+
+  /* B2 waffle */
+  .waffle{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;max-width:210px}
+  .waffle span{aspect-ratio:1;border-radius:3px;background:rgba(255,255,255,.18)}
+  .waffle span.on{background:#bff0c9}
+  /* B3 block-style meter */
+  .bmeter{position:relative;height:40px;border-radius:8px;background:#85a98f;overflow:hidden}
+  .bmeter i{position:absolute;left:0;top:0;bottom:0;background:#ecfff1;border-right:2px solid #435660;min-width:4px;transition:width .5s cubic-bezier(.16,1,.3,1)}
+
+  /* A1 expander */
+  .mbtn{margin-top:.9rem;display:inline-flex;align-items:center;gap:.5rem;font:800 .92rem 'Nunito';color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:.55rem 1.05rem;cursor:pointer}
+  .mbtn:hover{background:rgba(255,255,255,.22)}
+  .mbtn svg{transition:transform .2s}
+  .mbtn[aria-expanded="true"] svg{transform:rotate(180deg)}
+  .mpanel{margin-top:.9rem;background:rgba(20,32,40,.28);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:1.2rem 1.4rem 1.3rem}
+  .mpanel[hidden]{display:none}
+  .mpanel h4{margin:0 0 .7rem;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#dcefe2}
+  .calc{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+  .calc td{padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:.95rem;font-weight:600;color:rgba(255,255,255,.92);vertical-align:top}
+  .calc td:last-child{text-align:right;font-weight:800;color:#fff;white-space:nowrap;padding-left:1rem}
+  .calc td small{display:block;font-size:.8rem;font-weight:600;color:rgba(255,255,255,.75)}
+  .calc tr.sum td{border-bottom:0;border-top:2px solid rgba(255,255,255,.4);color:#bff0c9;font-size:1.05rem}
+  .calc tr.sum td:last-child{color:#bff0c9}
+  .mpanel ul{margin:.9rem 0 0;padding-left:1.15rem;font-size:.9rem;font-weight:600;line-height:1.5;color:rgba(255,255,255,.92)}
+  .mpanel ul li+li{margin-top:.25rem}
+  .msrc{margin:.9rem 0 0;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.8)}
+  .msrc a{color:#bff0c9}
+
+  /* A2 equation chips */
+  .eq{margin-top:1.1rem;display:flex;flex-wrap:wrap;align-items:stretch;gap:.5rem}
+  .chip{background:rgba(20,32,40,.26);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:.6rem .85rem;min-width:0}
+  .chip .v{font-size:1.45rem;font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums;color:#fff}
+  .chip .l{font-size:.78rem;font-weight:600;line-height:1.3;color:rgba(255,255,255,.82);margin-top:.15rem;max-width:15ch}
+  .chip.res{background:rgba(191,240,201,.16);border-color:rgba(191,240,201,.5)}
+  .chip.res .v{color:#bff0c9}
+  .op{align-self:center;font-size:1.4rem;font-weight:800;color:rgba(255,255,255,.75)}
+  details.assume{margin-top:.9rem;font-size:.88rem;font-weight:600;color:rgba(255,255,255,.92)}
+  details.assume summary{cursor:pointer;font-weight:800;color:#fff;list-style:none;display:inline-flex;gap:.4rem;align-items:center}
+  details.assume summary::-webkit-details-marker{display:none}
+  details.assume summary::before{content:"▸";transition:transform .15s}
+  details.assume[open] summary::before{transform:rotate(90deg)}
+  details.assume ul{margin:.6rem 0 0;padding-left:1.15rem;line-height:1.5}
+
+  /* A3 popover + method section */
+  .ibtn{width:22px;height:22px;border-radius:50%;border:1.5px solid #dcefe2;background:transparent;color:#dcefe2;font:800 .75rem 'Nunito';cursor:pointer;line-height:1;padding:0;flex:none}
+  .ibtn:hover,.ibtn[aria-expanded="true"]{background:#dcefe2;color:#27343d}
+  .pop{position:absolute;z-index:5;left:calc(1.35rem + 0px);top:calc(100% + 8px);width:min(340px,86vw);background:#fff;color:#27343d;border-radius:14px;padding:1rem 1.1rem 1.05rem;box-shadow:0 14px 34px rgba(20,32,40,.35);font-size:.9rem;font-weight:600;line-height:1.45}
+  .pop[hidden]{display:none}
+  .pop .f{font-size:1.15rem;font-weight:900;color:#27343d;margin:.15rem 0 .35rem;font-variant-numeric:tabular-nums}
+  .pop .f em{font-style:normal;color:#2a6b4f}
+  .pop a{font-weight:800;color:#2a6b4f}
+  .pop::before{content:"";position:absolute;top:-7px;left:26px;width:14px;height:14px;background:#fff;transform:rotate(45deg);border-radius:3px}
+  .hero{position:relative}
+  .msec{background:#fff;border-radius:20px;padding:clamp(1.5rem,4vw,2.4rem) clamp(1.5rem,4vw,3rem);box-shadow:0 10px 30px rgba(26,60,52,.1);color:#27343d}
+  .msec .eyebrow{color:#386a50}
+  .msec h4{margin:.35rem 0 1rem;font-size:1.35rem;font-weight:900;color:#1a3c34}
+  .msec ol{margin:0;padding-left:1.3rem;font-size:.98rem;font-weight:600;line-height:1.55;color:#34454e}
+  .msec ol li+li{margin-top:.55rem}
+  .msec ol b{color:#1a3c34;font-weight:800}
+  .msec a{color:#2a6b4f;font-weight:800}
+  .above-note{font-size:.8rem;color:#4a6b5a;margin:0 0 6px}
+
+  @media (max-width:600px){
+    .rstrip{grid-template-columns:1fr}
+    .rcell+.rcell{border-left:0;border-top:1px solid rgba(255,255,255,.2)}
+    .blocks{grid-template-columns:repeat(7,1fr)!important}
+    .fmult{text-align:left}
+    .op{display:none}
+    .chip{flex:1 1 40%}
+    .rbox{padding:1.1rem 1.25rem}
+  }
+</style></head><body><div class="wrap">
+
+<h1>Method + budget-link mockups</h1>
+<p class="note">Everything below is live: change the threshold or rate in any revenue box and all of them update together. Part 1 is how the tax connects to the budget blocks. Part 2 is how the page explains where $1.41B comes from.</p>
+
+<h2 class="part">Part 1 — Tie the revenue to the budget blocks</h2>
+<p class="note">Today the 12.4 blocks above and the 6.0% meter below say the same thing in two different pictures. These make them one picture: <b>one block is a full year of the state budget, and the tax fills a slice of it.</b></p>
+
+<h3 class="opt">B1 — A mint slice inside the first block</h3>
+<p class="note">The first block of the big bar gets a bright slice that grows and shrinks as you change the rate. A caption under it says what it is. The meter below stays as it is.</p>
+<div id="B1"></div>
+
+<h3 class="opt">B2 — Hundred squares</h3>
+<p class="note">The meter becomes a 10×10 grid: the whole grid is one year’s budget, lit squares are what the tax raises. Self-contained; doesn’t touch the dark card.</p>
+<div id="B2"></div>
+
+<h3 class="opt">B3 — The meter becomes a block</h3>
+<p class="note">Same idea as B1 but at the bottom: the thin meter is redrawn as one of the sage blocks from the bar above, with the mint slice in it, and the caption says “same block as above.”</p>
+<div id="B3"></div>
+
+<h2 class="part">Part 2 — Show where the number comes from</h2>
+<p class="note">All three keep the current layout of the box. Each one shows the working for whichever threshold and rate is selected.</p>
+
+<h3 class="opt">A1 — “How we estimated this” expander</h3>
+<p class="note">A pill under the box opens a short worked calculation, what the estimate leaves out, and the source. Closed by default on the real page; shown open here (click it).</p>
+<div id="A1"></div>
+
+<h3 class="opt">A2 — The equation is always on screen</h3>
+<p class="note">Replaces the one-line footnote with the arithmetic as a row of chips: held, minus the untaxed first $20M each, equals taxable, times the rate, equals the revenue. Assumptions fold out underneath.</p>
+<div id="A2"></div>
+
+<h3 class="opt">A3 — ⓘ at the number, full “Method and sources” section at the bottom</h3>
+<p class="note">A small ⓘ next to “Could raise each year” opens a one-line formula (shown open here). The full explanation lives in a light card further down the page, in the same style as “Why it matters.”</p>
+<div id="A3"></div>
+
+<div class="tip"><b>Worth confirming before I build:</b> the budget line says “$23.7B, the state’s annual budget (2026)” exactly as the page does today. If that figure is the general-fund budget or the all-funds budget, the method text should say which. I haven’t guessed.</div>
+
+</div>
+<script>
+const TIERS={20:{people:1245,total:95.6},50:{people:365,total:69.3}}, BUDGET=23.7;
+let th=20, rate=2;
+
+const fcard=(variant)=>{
+  let blocks='';
+  for(let i=0;i<12;i++) blocks+=(variant==='B1'&&i===0)?'<span class="tax"><i class="slice" data-slice></i></span>':'<span></span>';
+  blocks+='<span class="p"><i style="width:40%"></i></span>';
+  return `<div class="fcard" style="margin-bottom:0">
+    <p class="fk">Hawaiʻi’s millionaires hold wealth equivalent to 12.4× the state budget</p>
+    <div class="ftop"><div><div class="fbig">$292.7<small>billion</small></div>
+      <p class="fdesc">held by the <strong>81,814 Hawaiʻi millionaires</strong> in 2024</p></div>
+      <div class="fmult"><div class="n">12.4×</div><p>the state’s entire<br>annual budget</p></div></div>
+    <div class="blocks">${blocks}</div>
+    ${variant==='B1'?'<p class="taxcap">▲ The light slice: <b data-t="rate">2%</b> on wealth above <b data-t="thr">$20M</b> raises <b data-t="pct">6.0%</b> of one year’s budget.</p>':''}
+    <p class="fnote"><strong>One block = $23.7 billion,</strong> Hawaiʻi’s annual state budget (2026).</p></div>`;
+};
+
+const ctrls=`<div class="rcell"><div class="ctrl"><span class="eyebrow">Tax wealth above</span>
+  <div class="seg" role="radiogroup" data-seg="th"><button role="radio" data-v="20">$20M</button><button role="radio" data-v="50">$50M</button></div></div>
+  <div class="ctrl"><span class="eyebrow">At a rate of</span>
+  <div class="seg" role="radiogroup" data-seg="rate"><button role="radio" data-v="1">1%</button><button role="radio" data-v="2">2%</button><button role="radio" data-v="3">3%</button></div></div></div>`;
+const hero=(info)=>`<div class="rcell hero">
+  <span class="eyebrow">Could raise each year${info?'<button class="ibtn" aria-label="How this is estimated" aria-expanded="true" data-pop>i</button>':''}</span>
+  <div class="big"><span data-t="rev">$1.41B</span><small>/ year</small></div>
+  <span class="cap"><b data-t="rate">2%</b> on wealth above <b data-t="thr">$20M</b></span>
+  ${info?`<div class="pop" data-popbox><div class="eyebrow" style="color:#386a50">How it’s worked out</div>
+    <div class="f"><span data-t="base">$70.7B</span> taxable × <span data-t="rate">2%</span> = <em data-t="rev">$1.41B</em></div>
+    Taxable wealth is what the <b data-t="ppl">1,245</b> residents hold <i>above</i> <span data-t="thr">$20M</span> each. Their first <span data-t="thr">$20M</span> isn’t taxed. <a href="#methodsec">Full method ↓</a></div>`:''}
+  </div>`;
+const share=(v)=>{
+  const body=v==='waffle'?`<div class="waffle" data-waffle></div>`:v==='block'?`<div class="bmeter"><i data-bm></i></div>`:`<div class="meter"><i data-meter></i></div>`;
+  const cap=v==='waffle'?'<span class="cap">Each square is 1% of Hawaiʻi’s <b>$23.7B</b> annual budget</span>':v==='block'?'<span class="cap">Same block as above: a full <b>$23.7B</b> year of the state budget</span>':'<span class="cap">of Hawaiʻi’s <b>$23.7B</b> annual budget</span>';
+  return `<div class="rcell"><span class="eyebrow">Share of state budget</span><div class="share" data-t="pct">6.0%</div>${body}${cap}</div>`;
+};
+const basisLine=`<p class="basis">Applied only to the <b data-t="base">$70.7B</b> held above <span data-t="thr">$20M</span> by <b data-t="ppl">1,245</b> residents. Static estimate: no avoidance or out-migration.</p>`;
+
+const chev='<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+const methodPanel=`<div class="mpanel" data-panel><h4>How we estimated this</h4>
+  <table class="calc">
+   <tr><td>Wealth held by residents worth <span data-t="thr">$20M</span> or more<small>Wealth-X / Altrata estimate, 2024</small></td><td><span data-t="total">$95.6B</span></td></tr>
+   <tr><td>Minus the untaxed first <span data-t="thr">$20M</span> of each of <span data-t="ppl">1,245</span> people</td><td>− <span data-t="exempt">$24.9B</span></td></tr>
+   <tr><td>Taxable wealth</td><td><span data-t="base">$70.7B</span></td></tr>
+   <tr><td>Times the rate</td><td>× <span data-t="rate">2%</span></td></tr>
+   <tr class="sum"><td>Revenue per year</td><td data-t="rev">$1.41B</td></tr>
+   <tr><td>As a share of the <b>$23.7B</b> state budget (2026)</td><td><span data-t="pct">6.0%</span></td></tr>
+  </table>
+  <ul><li>Static: 2024 wealth held fixed. No tax avoidance, out-migration, or change in asset values.</li>
+      <li>Only wealth above the threshold is taxed; everyone below it pays nothing.</li>
+      <li>One year of revenue, compared with one year of the budget.</li></ul>
+  <p class="msrc">Source: Wealth-X / Altrata, <i>Market Sizing Wealth Data for Hawaiʻi</i> (Nov 9, 2025). Same scenarios as Table 1 of the Hawaiʻi Appleseed wealth tax report.</p></div>`;
+
+const eq=`<div class="eq" aria-label="How the estimate is calculated">
+  <div class="chip"><div class="v" data-t="total">$95.6B</div><div class="l">held by <span data-t="ppl">1,245</span> residents</div></div><span class="op">−</span>
+  <div class="chip"><div class="v" data-t="exempt">$24.9B</div><div class="l">their first <span data-t="thr">$20M</span> each, untaxed</div></div><span class="op">=</span>
+  <div class="chip"><div class="v" data-t="base">$70.7B</div><div class="l">taxable wealth</div></div><span class="op">×</span>
+  <div class="chip"><div class="v" data-t="rate">2%</div><div class="l">tax rate</div></div><span class="op">=</span>
+  <div class="chip res"><div class="v" data-t="rev">$1.41B</div><div class="l">a year</div></div></div>
+  <details class="assume"><summary>What this leaves out</summary><ul>
+   <li>Static: 2024 wealth held fixed. No tax avoidance, out-migration, or change in asset values.</li>
+   <li>Only wealth above the threshold is taxed.</li></ul></details>
+  <p class="msrc" style="color:rgba(255,255,255,.85)">Source: Wealth-X / Altrata (Nov 9, 2025). Same scenarios as Table 1 of the Hawaiʻi Appleseed wealth tax report.</p>`;
+
+const methodSec=`<div class="msec" id="methodsec"><span class="eyebrow">Method and sources</span>
+  <h4>How the wealth tax estimate is worked out</h4>
+  <ol>
+   <li><b>Who is counted.</b> Wealth-X / Altrata estimates how many Hawaiʻi residents hold at least $1M, $20M and $50M, and how much they hold in total (2024).</li>
+   <li><b>What is taxed.</b> Only wealth <i>above</i> the threshold. For the $20M threshold: $95.6B held by 1,245 people, minus 1,245 × $20M, leaves $70.7B.</li>
+   <li><b>The rate.</b> Taxable wealth × 1%, 2% or 3%. At 2% on wealth above $20M that is $1.41B a year.</li>
+   <li><b>Compared with the budget.</b> Divided by the state’s $23.7B annual budget (2026).</li>
+   <li><b>What it leaves out.</b> No avoidance, out-migration or change in asset values. It is a one-year, static estimate, not a forecast.</li>
+   <li><b>Source.</b> Wealth-X / Altrata, <i>Market Sizing Wealth Data for Hawaiʻi</i> (Nov 9, 2025). Same scenarios as Table 1 of the Hawaiʻi Appleseed wealth tax report.</li>
+  </ol></div>`;
+
+function rbox({share:sv='meter',tail='basis',info=false}){
+  let t='';
+  if(tail==='basis') t=basisLine;
+  if(tail==='a1') t=basisLine+`<button class="mbtn" aria-expanded="true" data-mbtn>How we estimated this ${chev}</button>`+methodPanel;
+  if(tail==='a2') t=eq;
+  if(tail==='a3') t=basisLine;
+  return `<div class="rbox"><div class="rstrip">${ctrls}${hero(info)}${share(sv)}</div>${t}</div>`;
+}
+const stack=(v,box)=>`<div class="above-note">(the dark budget card, as on the page)</div>${fcard(v)}<div class="gap"></div>${box}`;
+
+document.getElementById('B1').innerHTML=stack('B1',rbox({}));
+document.getElementById('B2').innerHTML=stack('',rbox({share:'waffle'}));
+document.getElementById('B3').innerHTML=stack('',rbox({share:'block'}));
+document.getElementById('A1').innerHTML=rbox({tail:'a1'});
+document.getElementById('A2').innerHTML=rbox({tail:'a2'});
+document.getElementById('A3').innerHTML=rbox({tail:'a3',info:true})+'<div class="gap"></div><div class="above-note">(further down the page, after “Why it matters”)</div>'+methodSec;
+
+function paint(){
+  const t=TIERS[th], exempt=t.people*th/1000, base=t.total-exempt, rev=base*rate/100, pct=rev/BUDGET*100;
+  const set=(k,v)=>document.querySelectorAll('[data-t="'+k+'"]').forEach(e=>e.textContent=v);
+  set('rev','$'+rev.toFixed(2)+'B'); set('rate',rate+'%'); set('thr','$'+th+'M'); set('pct',pct.toFixed(1)+'%');
+  set('base','$'+(Math.round(base*10+1e-6)/10).toFixed(1)+'B'); set('total','$'+t.total.toFixed(1)+'B'); set('exempt','$'+exempt.toFixed(1)+'B'); set('ppl',t.people.toLocaleString());
+  document.querySelectorAll('[data-meter]').forEach(e=>e.style.width=Math.min(pct,100)+'%');
+  document.querySelectorAll('[data-bm]').forEach(e=>e.style.width=Math.min(pct,100)+'%');
+  document.querySelectorAll('[data-slice]').forEach(e=>e.style.width=Math.min(pct,100)+'%');
+  document.querySelectorAll('[data-waffle]').forEach(w=>{
+    let h=''; for(let i=0;i<100;i++){ const f=Math.max(0,Math.min(1,pct-i)); h+= f>=1?'<span class="on"></span>':f>0.02?'<span class="on" style="opacity:'+(0.25+0.75*f).toFixed(2)+'"></span>':'<span></span>'; } w.innerHTML=h;});
+  document.querySelectorAll('[data-seg="th"] button').forEach(b=>b.setAttribute('aria-checked',+b.dataset.v===th));
+  document.querySelectorAll('[data-seg="rate"] button').forEach(b=>b.setAttribute('aria-checked',+b.dataset.v===rate));
+}
+document.addEventListener('click',e=>{
+  const s=e.target.closest('.seg button');
+  if(s){ if(s.closest('.seg').dataset.seg==='th') th=+s.dataset.v; else rate=+s.dataset.v; paint(); return; }
+  const m=e.target.closest('[data-mbtn]');
+  if(m){ const p=m.parentElement.querySelector('[data-panel]'); const open=m.getAttribute('aria-expanded')==='true'; m.setAttribute('aria-expanded',!open); p.hidden=open; return; }
+  const i=e.target.closest('[data-pop]');
+  if(i){ const b=i.closest('.hero').querySelector('[data-popbox]'); const open=i.getAttribute('aria-expanded')==='true'; i.setAttribute('aria-expanded',!open); b.hidden=open; }
+});
+paint();
+</script></body></html>
