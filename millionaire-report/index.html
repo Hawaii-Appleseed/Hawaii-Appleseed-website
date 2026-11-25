@@ -105,6 +105,34 @@
                Note ch is the width of "0", which is narrower than Nunito's
                average glyph — 58ch measures out to ~70 real characters. */
             --measure: 58ch;
+
+            /* Slate cards. These values were hand-typed across the hero, the
+               revenue box and the section headers; named here so every card
+               draws from one set. Raw values are allowed on these lines only:
+               this page predates assets/tokens.css and keeps its own palette. */
+            --white:        #ffffff; /* design-lint: allow (page palette) */
+            --slate-deep:   #27343d; /* design-lint: allow (page palette) */
+            --slate-a:      #52666f; /* design-lint: allow (page palette) */
+            --slate-b:      #435660; /* design-lint: allow (page palette) */
+            --sage:         #85a98f; /* design-lint: allow (page palette) */
+            --mint-pale:    #dcefe2; /* design-lint: allow (page palette) */
+            --mint-glow:    #bff0c9; /* design-lint: allow (page palette) */
+            --slice:        #ecfff1; /* design-lint: allow (page palette) */
+            --empty-block:  #3f4f5a; /* design-lint: allow (page palette) */
+            --ink-quiet:    #566872; /* design-lint: allow (page palette) */
+            --eyebrow-ink:  #386a50; /* design-lint: allow (page palette) */
+            --on-dark:      rgba(255, 255, 255, 0.88); /* design-lint: allow (page palette) */
+            --on-dark-rule: rgba(255, 255, 255, 0.18); /* design-lint: allow (page palette) */
+
+            /* Type scale. The page had 26 font sizes; new and reworked rules
+               use these seven. 13px is the floor for anything a reader needs. */
+            --fs-label: 0.8125rem;                  /* caps eyebrows, sources */
+            --fs-small: 0.9375rem;                  /* captions, keys, buttons */
+            --fs-body:  1.0625rem;                  /* prose */
+            --fs-h3:    1.375rem;                   /* card titles */
+            --fs-h2:    clamp(1.6rem, 4vw, 2rem);   /* section heading */
+            --fs-stat:  clamp(2.4rem, 7vw, 3.4rem); /* secondary figures */
+            --fs-hero:  clamp(3.2rem, 11vw, 5.25rem); /* the one figure per card */
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -158,7 +186,8 @@
             max-width: 960px;
             margin-left: auto;
             margin-right: auto;
-            padding-left: 2.5rem;
+            /* Same left edge as the cards below. */
+            padding-left: 0;
         }
 
         .header h1 {
@@ -181,86 +210,80 @@
         }
 
         .header .kicker {
-            color: #5e8268;
-            font-size: 0.95rem;
+            color: var(--eyebrow-ink);
+            font-size: var(--fs-small);
             margin: 0 0 0.55rem;
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        /* ── Infographic Summary Banner ── */
-        .infographic-banner {
+        /* Caps eyebrow, used on every card. */
+        .banner-eyebrow {
+            color: var(--sage);
+            font-size: var(--fs-label);
+            font-weight: 800;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            line-height: 1.3;
+        }
+
+        /* ── Hero card ──
+           One card, one tone, one headline figure: the wealth, how many state
+           budgets it equals, the blocks that draw that, then two supporting
+           facts under a rule. The tier dropdown sits in the sentence under the
+           headline because that sentence is what it changes. */
+        .hero-card {
             max-width: 960px;
-            margin: 0 auto 0;
-            background: #27343d;
-            border-radius: var(--r-lg) var(--r-lg) 0 0;
-            padding: clamp(1.5rem, 4vw, 2.8rem) clamp(1.5rem, 4vw, 3rem);
-            display: flex;
-            flex-direction: column;
-            gap: 0;
+            margin: 0 auto var(--space-block);
+            background: var(--slate-deep);
+            color: var(--on-dark);
+            border-radius: var(--r-lg);
+            padding: clamp(1.4rem, 4vw, 2.6rem) clamp(1.25rem, 4vw, 3rem);
             /* The hero is the one thing on the page that should read as
-               lifted off the cream, so it keeps a shadow — but one, not the
-               three stacked layers it had. */
+               lifted off the cream, so it keeps a shadow. */
             box-shadow: var(--shadow-hero);
             position: relative;
-            overflow: visible;
-            z-index: 100;
+            z-index: 100; /* keeps the tier dropdown above the cards below */
         }
-
-        .infographic-banner::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            pointer-events: none;
-            border-radius: var(--r-lg);
-        }
-
-        .infographic-banner::after {
-            content: none;
-        }
-
-        /* Banner strip: title | wealth by tier | growth since 2010.
-           Every cell is eyebrow -> figure -> caption. */
-        .banner-strip {
-            display: grid;
-            grid-template-columns: 1.45fr 1fr 1.15fr;
-            border: 1px solid #3f4f5a;
-            border-radius: var(--r-md);
-            position: relative;
-            z-index: 20; /* keeps the tier dropdown above the cards below */
-        }
-        .banner-cell {
-            padding: 1.05rem 1.3rem 1.15rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.55rem;
-            justify-content: space-between;
-            min-width: 0;
-        }
-        .banner-cell + .banner-cell { border-left: 1px solid #3f4f5a; }
-        .banner-eyebrow {
-            color: #85a98f;
-            font-size: 0.72rem;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            line-height: 1.25;
-        }
-        .banner-title-row {
+        .hero-card .banner-eyebrow { color: var(--sage); }
+        .hero-desc-row {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            gap: 0.4rem 0.6rem;
+            gap: 0.4rem 0.5rem;
         }
-        .banner-title-row .count {
-            font-family: 'Nunito', system-ui, sans-serif;
-            color: #ffffff;
-            font-size: clamp(2.2rem, 5.5vw, 3rem);
-            font-weight: 900;
-            line-height: 1;
-            letter-spacing: -1px;
+        .hero-desc-row .count { color: var(--white); font-weight: 800; }
+        /* Open the tier menu leftward so it stays on screen on a phone */
+        .hero-desc-row .dropdown-menu { left: auto; right: 0; min-width: min(260px, 75vw); }
+        .blocks-key {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.6rem;
+            font-size: var(--fs-small);
+            line-height: 1.4;
+            color: var(--on-dark);
         }
+        .blocks-key b { color: var(--white); font-weight: 800; }
+        .blocks-key .sw {
+            display: inline-block;
+            width: 0.8rem;
+            height: 0.8rem;
+            border-radius: 3px;
+            vertical-align: -1px;
+            margin-right: 0.4rem;
+        }
+        .blocks-key .sw-block { background: var(--sage); }
+        .blocks-key .sw-slice { background: var(--slice); }
+        .hero-facts {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 1.5rem 2.5rem;
+            margin-top: 1.8rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--on-dark-rule);
+        }
+        .hero-facts > div { min-width: 0; }
 
         /* Revenue callout — sits flush under the dark banner */
         /* Revenue callout: same strip grammar as the banner above
@@ -269,9 +292,9 @@
         .revenue-callout {
             max-width: 960px;
             margin: 0 auto var(--space-block);
-            background: linear-gradient(160deg, #52666f, #435660);
+            background: linear-gradient(160deg, var(--slate-a), var(--slate-b));
             border-radius: var(--r-lg);
-            padding: clamp(1.5rem, 4vw, 2.8rem) clamp(1.5rem, 4vw, 3rem);
+            padding: clamp(1.4rem, 4vw, 2.6rem) clamp(1.25rem, 4vw, 3rem);
             box-shadow: 0 10px 30px rgba(39, 52, 61, 0.2);
             position: relative;
             z-index: 1;
@@ -290,9 +313,19 @@
             min-width: 0;
         }
         .revenue-cell + .revenue-cell { border-left: 1px solid rgba(255, 255, 255, 0.2); }
-        .revenue-callout .banner-eyebrow { color: #dcefe2; }
-        .revenue-strip--two { grid-template-columns: 1.45fr 1fr; }
-        .revenue-cell--hero { justify-content: center; }
+        .revenue-callout .banner-eyebrow { color: var(--mint-pale); }
+        /* Result row: no box, just a rule under the sentence that sets it. */
+        .revenue-strip--two {
+            grid-template-columns: 1.5fr 1fr;
+            gap: 1.5rem 2.5rem;
+            border: 0;
+            border-top: 1px solid var(--on-dark-rule);
+            border-radius: 0;
+            padding-top: 1.4rem;
+        }
+        .revenue-strip--two .revenue-cell { padding: 0; }
+        .revenue-strip--two .revenue-cell + .revenue-cell { border: 0; }
+        .revenue-cell--hero { justify-content: flex-start; }
 
         /* Scenario panel: the two controls are the first line of a sentence
            ("If Hawaiʻi taxed each person's wealth above $20M at a rate of 2%…")
@@ -302,11 +335,7 @@
             flex-wrap: wrap;
             align-items: center;
             gap: 0.6rem 0.7rem;
-            margin: 0 0 1rem;
-            padding: 1.05rem 1.3rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: var(--r-md);
+            margin: 0 0 1.4rem;
         }
         .revenue-sentence {
             font-size: clamp(1.1rem, 2.8vw, 1.4rem);
@@ -333,10 +362,10 @@
         }
         .revenue-seg button {
             font: inherit;
-            font-size: 0.92rem;
+            font-size: 1rem;
             font-weight: 800;
-            min-width: 3.3rem;
-            min-height: 2.3rem;
+            min-width: 3.4rem;
+            min-height: 2.75rem;
             padding: 0 0.95rem;
             border: 0;
             border-radius: 999px;
@@ -363,33 +392,33 @@
         }
         .revenue-callout-range {
             font-family: 'Nunito', system-ui, sans-serif;
-            font-size: clamp(2.8rem, 7vw, 3.9rem);
+            font-size: var(--fs-hero);
             font-weight: 900;
-            color: #bff0c9;
+            color: var(--mint-glow);
             letter-spacing: -0.02em;
             line-height: 1;
         }
         .revenue-callout-per {
-            font-size: 1.05rem;
+            font-size: var(--fs-small);
             font-weight: 800;
-            color: #cfe6d6;
+            color: var(--mint-pale);
             letter-spacing: 0.02em;
             white-space: nowrap;
         }
         .revenue-cap {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.86rem;
+            color: var(--on-dark);
+            font-size: var(--fs-small);
             font-weight: 600;
-            line-height: 1.35;
+            line-height: 1.4;
         }
         .revenue-cap b { color: #fff; font-weight: 800; }
         .revenue-share-figure {
             font-family: 'Nunito', system-ui, sans-serif;
-            font-size: 2.5rem;
+            font-size: var(--fs-stat);
             font-weight: 900;
             line-height: 1;
             letter-spacing: -0.02em;
-            color: #fff;
+            color: var(--white);
         }
         .revenue-meter {
             height: 14px;
@@ -402,33 +431,38 @@
             height: 100%;
             min-width: 6px;
             border-radius: 999px;
-            background: #bff0c9;
+            background: var(--mint-glow);
             transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .revenue-foot {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem 1.2rem;
+            margin-top: 1.5rem;
+        }
         .revenue-callout-basis {
-            margin: 1.1rem 0 0;
-            font-size: 0.85rem;
+            font-size: var(--fs-small);
             font-weight: 600;
             line-height: 1.5;
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--on-dark);
         }
         .revenue-callout-basis b { color: #fff; font-weight: 800; }
 
         /* "How we estimated this": worked calculation behind the revenue figure */
         .revenue-method-btn {
-            margin-top: 0.9rem;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             font: inherit;
-            font-size: 0.92rem;
+            font-size: var(--fs-small);
             font-weight: 800;
             color: #fff;
             background: rgba(255, 255, 255, 0.14);
             border: 1px solid rgba(255, 255, 255, 0.25);
             border-radius: 999px;
-            padding: 0.55rem 1.05rem;
-            min-height: 2.3rem;
+            padding: 0.55rem 1.1rem;
+            min-height: 2.75rem;
             cursor: pointer;
         }
         .revenue-method-btn:hover { background: rgba(255, 255, 255, 0.22); }
@@ -444,7 +478,7 @@
             color: rgba(255, 255, 255, 0.92);
         }
         .revenue-method[hidden] { display: none; }
-        .revenue-method h3 { margin: 0 0 0.7rem; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #dcefe2; }
+        .revenue-method h3 { margin: 0 0 0.7rem; font-size: var(--fs-label); font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--mint-pale); }
         .revenue-calc { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
         .revenue-calc td { padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.14); font-size: 0.95rem; font-weight: 600; vertical-align: top; }
         .revenue-calc td:last-child { text-align: right; font-weight: 800; color: #fff; white-space: nowrap; padding-left: 1rem; }
@@ -468,27 +502,27 @@
 
         .banner-stat-value {
             font-family: 'Nunito', system-ui, sans-serif;
-            color: #cfe3d4;
-            font-size: 2.1rem;
+            color: var(--white);
+            font-size: 1.9rem;
             font-weight: 900;
             line-height: 1;
             letter-spacing: -0.02em;
         }
 
         .banner-stat-unit {
-            color: #85a98f;
-            font-size: 0.72rem;
+            color: var(--sage);
+            font-size: var(--fs-label);
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            line-height: 1.25;
+            letter-spacing: 0.09em;
+            line-height: 1.3;
         }
 
         .banner-stat-label {
-            color: rgba(255,255,255,0.75);
-            font-size: 0.84rem;
-            font-weight: 700;
-            line-height: 1.3;
+            color: var(--on-dark);
+            font-size: var(--fs-small);
+            font-weight: 600;
+            line-height: 1.4;
         }
 
         .banner-divider {
@@ -509,26 +543,26 @@
         .banner-trend-spark { display: block; flex-shrink: 0; }
         .banner-trend-figure {
             font-family: 'Nunito', system-ui, sans-serif;
-            color: #cfe3d4;
+            color: var(--mint-glow);
             font-weight: 900;
-            font-size: 2.1rem;
+            font-size: 1.9rem;
             line-height: 1;
             letter-spacing: -0.02em;
         }
         .banner-trend-caption {
-            color: rgba(255,255,255,0.55);
-            font-size: 0.84rem;
+            color: var(--on-dark);
+            font-size: var(--fs-small);
             font-weight: 600;
-            line-height: 1.3;
+            line-height: 1.4;
         }
-        .banner-trend-caption b { color: rgba(255,255,255,0.88); font-weight: 800; }
+        .banner-trend-caption b { color: var(--white); font-weight: 800; }
 
         /* ── Concentration proportion bar ── */
         .conc-bar {
             display: flex;
             width: 100%;
             height: 14px;
-            background: rgba(255, 255, 255, 0.08);
+            background: var(--on-dark-rule);
             border-radius: 999px;
             margin: 0;
             overflow: hidden;
@@ -538,7 +572,7 @@
         .conc-bar-fill {
             display: block;
             height: 100%;
-            background: #85a98f;
+            background: var(--sage);
             border-radius: var(--r-xs);
             transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -548,21 +582,23 @@
             transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .conc-seg:not(:last-child) {
-            box-shadow: inset -2px 0 0 #27343d;
+            box-shadow: inset -2px 0 0 var(--slate-deep);
         }
         /* Color-keyed percentage legend under the stacked bar */
         .conc-key {
             display: inline-flex;
             align-items: center;
-            gap: 0.28rem;
-            margin: 0 0.7rem 0 0;
-            font-weight: 700;
+            gap: 0.4rem;
+            margin: 0 1.1rem 0.2rem 0;
+            font-weight: 600;
             white-space: nowrap;
         }
+        .conc-key b { color: var(--white); font-weight: 800; }
+        /* Square swatches, the same shape as the block key above. */
         .conc-key-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
+            width: 0.8rem;
+            height: 0.8rem;
+            border-radius: 3px;
             flex-shrink: 0;
         }
 
@@ -578,9 +614,9 @@
         .dropdown-btn {
             background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.12);
-            color: rgba(255,255,255,0.85);
-            font-size: clamp(0.85rem, 2vw, 0.95rem);
-            font-weight: 700;
+            color: var(--white);
+            font-size: var(--fs-small);
+            font-weight: 800;
             cursor: pointer;
             padding: 0.38rem 0.75rem;
             border-radius: 999px;
@@ -592,7 +628,7 @@
         }
 
         .dropdown-btn .small {
-            font-size: 0.7rem;
+            font-size: var(--fs-label);
             opacity: 0.7;
             white-space: nowrap;
         }
@@ -686,64 +722,81 @@
             box-shadow: 0 0 0 3px rgba(var(--money-rgb), 0.25);
         }
 
-        /* ── Section header strips (map + chart cards) ──
-           Same grammar as the revenue box: caps label, then figure cells,
-           on the same mid slate. The card body stays white. */
+        /* ── Section headers (map + chart cards) ──
+           A slim slate band: caps label and the card's finding as its title on
+           the left, the one supporting note or figure on the right. The card
+           body stays white. */
         .section-head {
-            background: linear-gradient(160deg, #52666f, #435660);
-            padding: clamp(1rem, 3vw, 1.6rem) clamp(1rem, 3vw, 2rem);
+            background: linear-gradient(160deg, var(--slate-a), var(--slate-b));
+            padding: 1.1rem clamp(1.25rem, 4vw, 2rem) 1.2rem;
             border-radius: var(--r-lg) var(--r-lg) 0 0;
-            color: #fff;
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 0.8rem 2rem;
         }
-        .section-head .banner-eyebrow { color: #dcefe2; }
-        .section-strip { grid-template-columns: var(--cols, 1.9fr 1fr 1fr); }
-        .section-body { padding: clamp(1rem, 3vw, 1.6rem) clamp(1rem, 3vw, 2rem) 1.4rem; }
+        .section-head .banner-eyebrow { color: var(--mint-pale); }
         .section-title {
             font-family: 'Nunito', system-ui, sans-serif;
-            font-size: 1.25rem;
+            font-size: var(--fs-h3);
             font-weight: 800;
-            line-height: 1.2;
-            color: #fff;
+            line-height: 1.25;
+            color: var(--white);
+            margin-top: 0.2rem;
+            max-width: 30ch;
+            text-wrap: balance;
         }
-        .section-fig {
-            font-family: 'Nunito', system-ui, sans-serif;
-            font-size: 2rem;
+        .section-side {
+            font-size: var(--fs-small);
+            font-weight: 600;
+            line-height: 1.45;
+            color: var(--on-dark);
+            text-align: right;
+        }
+        .section-side b {
+            color: var(--mint-glow);
+            font-size: 1.25rem;
             font-weight: 900;
-            line-height: 1;
-            letter-spacing: -0.02em;
-            color: #fff;
             font-variant-numeric: tabular-nums;
         }
-        .section-fig--accent { color: #bff0c9; }
-        .section-head .section-cap {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.86rem;
-            font-weight: 600;
-            line-height: 1.4;
-        }
-        .section-head .section-cap b { color: #fff; font-weight: 800; }
+        .section-body { padding: 1.4rem clamp(1.25rem, 4vw, 2rem) 1.6rem; }
         .section-body .section-cap {
-            color: #566872;
-            font-size: 0.86rem;
+            color: var(--ink-quiet);
+            font-size: var(--fs-small);
             font-weight: 600;
             line-height: 1.4;
-            margin-top: 0.9rem;
         }
-        .section-body .section-cap:first-child { margin: 0 0 0.6rem; }
-        /* Chart switcher: white pill on the slate header */
-        .section-head .chart-switcher {
-            background-color: #fff;
-            color: #27343d;
-            border: 0;
-            border-radius: 999px;
-            font-size: 0.95rem;
+        .card-source {
+            margin-top: 0.9rem;
+            font-size: var(--fs-label);
+            line-height: 1.45;
+            color: var(--ink-quiet);
+        }
+        /* Chart picker and the note on what the chart shows */
+        .chart-tools {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.6rem 1rem;
+            margin-bottom: 0.9rem;
+        }
+        /* Phone only: the tier key the chart draws at its right end on wider
+           screens, as a row under the chart so the plot keeps its width. */
+        .wealth-key { display: none; }
+        .wealth-key span { display: inline-flex; align-items: center; gap: 0.4rem; margin: 0 1rem 0.3rem 0; font-size: var(--fs-small); color: var(--ink-soft); white-space: nowrap; }
+        .wealth-key b { color: var(--field); font-weight: 800; }
+        .wealth-key i { width: 0.8rem; height: 0.8rem; border-radius: 3px; }
+        .chart-tools .chart-switcher {
+            border-radius: var(--r-pill);
+            font-size: var(--fs-small);
             font-weight: 800;
-            padding: 0.45rem 2.1rem 0.45rem 0.9rem;
+            min-height: 2.75rem;
+            padding: 0.45rem 2.2rem 0.45rem 1rem;
             width: max-content;
             max-width: 100%;
         }
-        .section-head .chart-switcher:hover { background-color: #f0f5f1; }
-        .section-head .chart-switcher:focus { box-shadow: 0 0 0 3px rgba(191, 240, 201, 0.55); }
 
         .map-embed-wrapper {
             position: relative;
@@ -852,173 +905,117 @@
             margin-top: 0.75rem;
         }
 
-        .source {
-            text-align: center;
-            font-size: 0.78rem;
-            color: #b3ab9e;
-            margin-top: 1.25rem;
-            max-width: 960px;
-            margin-left: auto;
-            margin-right: auto;
-            font-style: italic;
-        }
-
         /* budget-callout removed — now integrated into banner */
 
         /* ── Narrative Section ──
-           Deliberately NOT a card. The charts and the map are instruments and
-           belong in cards; this section is the argument being made about them.
-           Giving it the same white-rounded-bordered treatment made the whole
-           page read as a stack of widgets. On the page background, with a
-           reading measure and room around it, it reads as the report's
-           closing argument — which is what it is. */
+           The argument the data above supports. It sits on the same 960px grid
+           and left edge as the cards: heading on the page, then each point as a
+           white card with its prose on the left and its figure on the right
+           (stacked on a phone). */
         .narrative-section {
             max-width: 960px;
             margin: var(--space-movement) auto var(--space-block);
-            padding: 0 clamp(0rem, 2vw, 0.5rem);
             position: relative;
         }
-
-        /* The old gradient kicker bar is replaced by the same caps eyebrow
-           used in every strip above. */
-        .narrative-section .banner-eyebrow { color: #386a50; }
-
+        .narrative-section .banner-eyebrow { color: var(--eyebrow-ink); }
         .narrative-title {
             font-family: 'Nunito', system-ui, sans-serif;
-            font-size: clamp(1.45rem, 3.2vw, 1.85rem);
-            font-weight: 800;
+            font-size: var(--fs-h2);
+            font-weight: 900;
             color: var(--field);
             letter-spacing: -0.015em;
-            line-height: 1.25;
-            /* Balance the line lengths rather than filling greedily — at a
-               fixed width this headline drops a lone "us" onto a third line. */
-            max-width: 30ch;
+            line-height: 1.15;
+            max-width: 28ch;
             text-wrap: balance;
-            margin-bottom: 1.75rem;
-            padding-bottom: 0;
-            border-bottom: none;
+            margin: 0.2rem 0 1.4rem;
         }
-
         .narrative-point {
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 1.5rem 2.5rem;
+            align-items: start;
+            background: var(--surface);
+            border: 1px solid var(--hairline);
+            border-radius: var(--r-lg);
+            padding: clamp(1.25rem, 4vw, 2rem);
             margin-bottom: 1.25rem;
         }
-
-        .narrative-point-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.6rem;
-        }
-
-        .narrative-point-header h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
+        .narrative-point h3 {
+            font-size: var(--fs-h3);
+            font-weight: 800;
+            line-height: 1.25;
             color: var(--field);
+            margin-bottom: 0.5rem;
         }
-
-        /* 0.92rem was sized for body text inside a card. As the page's prose
-           it carries the argument, so it sizes up — and is held to a reading
-           measure instead of running the full 960px (118 chars/line). */
         .narrative-point p {
-            font-size: 1.02rem;
-            line-height: 1.72;
+            font-size: var(--fs-body);
+            line-height: 1.65;
             color: var(--ink-soft);
-            margin-left: 0;
             max-width: var(--measure);
         }
-        .narrative-more-content p {
-            max-width: var(--measure);
-        }
-
+        .narrative-more-content p { margin-top: 0.6rem; }
         .narrative-source {
             display: block;
-            font-size: 0.85rem;
-            color: var(--muted-2);
-            margin-top: 0.5rem;
-            margin-left: 0;
+            font-size: var(--fs-label);
+            line-height: 1.45;
+            color: var(--ink-quiet);
+            margin-top: 0.8rem;
         }
-
+        .narrative-source a {
+            color: var(--green-mid);
+            font-weight: 700;
+            text-decoration: underline;
+        }
         .narrative-more-toggle {
             background: none;
             border: none;
             color: var(--green-mid);
-            font-weight: 600;
-            font-size: 0.92rem;
+            font: inherit;
+            font-weight: 800;
+            font-size: var(--fs-small);
             cursor: pointer;
-            padding: 0;
-            margin-left: 0;
-            margin-top: 0.5rem;
+            padding: 0.5rem 0;
+            margin-top: 0.4rem;
             text-decoration: underline;
-            transition: opacity 0.2s;
         }
-
-        .narrative-more-toggle:hover {
-            opacity: 0.8;
-        }
-
+        .narrative-more-toggle:hover { opacity: 0.8; }
         .narrative-more-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
         }
 
-        .narrative-more-content.open {
-            max-height: 500px;
-        }
-
-        .narrative-source a {
-            color: var(--green-mid);
-            text-decoration: underline;
-        }
-
-        /* Pull-stat: now a genuine pull-quote sitting on the page rather than
-           a tinted panel inside a card. Held slightly wider than the prose
-           measure so it reads as a break in the text, not part of it. */
+        /* The point's figure, in a tinted panel beside the prose */
         .narrative-stat {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            margin: 1.4rem 0 0 0;
-            max-width: calc(var(--measure) + 8ch);
-            border: 1px solid rgba(39, 52, 61, 0.18);
-            border-radius: var(--r-md);
-            background: rgba(39, 52, 61, 0.04);
-        }
-        .narrative-stat-cell {
-            padding: 1rem 1.3rem 1.1rem;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
-            justify-content: center;
-            min-width: 0;
+            gap: 0.4rem;
+            background: var(--tint);
+            border-radius: var(--r-md);
+            padding: 1.2rem 1.3rem 1.3rem;
         }
-        .narrative-stat-cell + .narrative-stat-cell { border-left: 1px solid rgba(39, 52, 61, 0.18); }
-
         .narrative-stat-figure {
             font-family: 'Nunito', system-ui, sans-serif;
-            font-size: clamp(1.7rem, 4.5vw, 2.2rem);
+            font-size: var(--fs-stat);
             font-weight: 900;
-            color: #2a6b4f;
+            color: var(--green-deep);
             line-height: 1;
             white-space: nowrap;
             letter-spacing: -0.015em;
-            flex-shrink: 0;
         }
-
         .narrative-stat-figure .unit {
-            font-size: 0.46em;
-            font-weight: 700;
-            color: var(--muted);
-            margin-left: 0.18em;
+            font-size: var(--fs-small);
+            font-weight: 800;
+            color: var(--eyebrow-ink);
+            margin-left: 0.35em;
             letter-spacing: 0;
         }
-
         .narrative-stat-desc {
-            font-size: 0.92rem;
-            line-height: 1.55;
-            color: #3a5a4d;
+            font-size: var(--fs-small);
+            line-height: 1.5;
+            color: var(--ink-soft);
         }
-
-        .narrative-stat-desc strong { color: #173a31; font-weight: 800; }
+        .narrative-stat-desc strong { color: var(--field); font-weight: 800; }
 
         /* ── Wealth-chart total badges (label segment + value segment) ── */
         .chart-totals-row {
@@ -1203,16 +1200,12 @@
         }
 
         @media (max-width: 600px) {
-            .banner-strip { grid-template-columns: 1fr; }
-            .banner-cell + .banner-cell { border-left: 0; border-top: 1px solid #3f4f5a; }
             .banner-divider {
                 width: 60%;
                 height: 1px;
                 margin: 0.8rem auto;
                 background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
             }
-            .header { padding-left: 0; text-align: center; }
-            .header .kicker::before { margin-left: auto; margin-right: auto; }
             .map-embed-wrapper {
                 aspect-ratio: 4 / 5;
             }
@@ -1223,36 +1216,35 @@
             .revenue-callout {
                 padding: 1.1rem 1.25rem;
             }
-            .revenue-scenario { padding: 0.95rem 1rem; }
             .revenue-strip { grid-template-columns: 1fr; }
+            .narrative-point { grid-template-columns: 1fr; }
+            .wealth-key { display: block; margin-top: 0.6rem; }
+            .chart-wrapper { height: 340px; }
+            .section-side { text-align: left; }
             .revenue-cell + .revenue-cell { border-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.2); }
-            .narrative-stat { grid-template-columns: 1fr; margin-left: 0; }
-            .narrative-stat-cell + .narrative-stat-cell { border-left: 0; border-top: 1px solid rgba(39, 52, 61, 0.18); }
         }
 
-        /* Fortunes-in-state-budgets graphic */
-        .fortune-card { max-width:960px; margin:0 auto var(--space-block); background:#2f3d47; color:#e6ebe3; border-radius:0 0 var(--r-lg) var(--r-lg); padding:clamp(1.5rem,4vw,2.8rem) clamp(1.5rem,4vw,3rem); box-shadow:var(--shadow-hero); }
-        .fortune-kicker { margin:0 0 1rem; font-size:clamp(.78rem,2.2vw,.95rem); font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:#85a98f; }
-        .fortune-top { display:flex; flex-wrap:wrap; justify-content:space-between; gap:1.25rem 2rem; align-items:flex-start; }
-        .fortune-big { font-size:clamp(2.6rem,9vw,4.4rem); font-weight:900; line-height:1; color:#fff; }
-        .fortune-big small { font-size:.42em; font-weight:800; color:#c9d1c6; margin-left:.2em; }
-        .fortune-desc { margin:.6rem 0 0; font-size:clamp(.95rem,2.6vw,1.2rem); color:#c9d1c6; max-width:30ch; }
-        .fortune-desc strong { color:#fff; }
+        /* Wealth-vs-budget graphic inside the hero card */
+        .fortune-top { display:flex; flex-wrap:wrap; justify-content:space-between; gap:1.25rem 2rem; align-items:flex-end; }
+        .fortune-kicker { margin:0 0 0.5rem; }
+        .fortune-big { font-size:var(--fs-hero); font-weight:900; line-height:0.95; letter-spacing:-0.02em; color:var(--white); font-variant-numeric:tabular-nums; }
+        .fortune-big small { font-size:.32em; font-weight:800; color:var(--mint-pale); margin-left:.25em; letter-spacing:0; }
+        .fortune-desc { margin:.6rem 0 0; font-size:clamp(1.05rem,2.6vw,1.2rem); line-height:1.35; color:var(--on-dark); }
         .fortune-mult { text-align:right; }
-        .fortune-mult .n { font-size:clamp(2.6rem,9vw,4.4rem); font-weight:900; line-height:1; color:#85a98f; }
-        .fortune-mult p { margin:.6rem 0 0; font-size:clamp(.95rem,2.6vw,1.2rem); color:#c9d1c6; }
-        .fortune-blocks { display:grid; grid-template-columns:repeat(13,1fr); gap:.3rem; margin:1.75rem 0 .5rem; }
-        .fortune-blocks span { background:#85a98f; border-radius:8px; aspect-ratio:1.1; }
-        .fortune-blocks span.p { background:#3f4f5a; overflow:hidden; }
-        .fortune-blocks span.p i { display:block; height:100%; background:#85a98f; }
+        .fortune-mult .n { font-size:var(--fs-stat); font-weight:900; line-height:1; color:var(--mint-glow); font-variant-numeric:tabular-nums; }
+        .fortune-mult p { margin:.35rem 0 0; font-size:var(--fs-small); color:var(--on-dark); }
+        .fortune-blocks { display:grid; grid-template-columns:repeat(13,1fr); gap:.375rem; margin:1.6rem 0 .8rem; }
+        .fortune-blocks span { background:var(--sage); border-radius:8px; aspect-ratio:1.1; }
+        .fortune-blocks span.p { background:var(--empty-block); overflow:hidden; }
+        .fortune-blocks span.p i { display:block; height:100%; background:var(--sage); }
         /* First block = one year of the state budget; the light slice is what the wealth tax below raises. */
-        .fortune-blocks span.tax { position:relative; outline:2px solid #ecfff1; outline-offset:2px; }
-        .fortune-blocks span.tax i { position:absolute; left:0; top:0; bottom:0; min-width:8px; background:#ecfff1; border-right:2px solid #2f3d47; border-radius:8px 0 0 8px; transition:width .5s cubic-bezier(.16,1,.3,1); }
-        .fortune-taxcap { margin:.15rem 0 .4rem; font-size:clamp(.88rem,2.4vw,.98rem); font-weight:700; line-height:1.35; color:#bff0c9; }
-        .fortune-taxcap b { color:#fff; font-weight:800; }
-        @media (max-width: 600px) { .fortune-mult { text-align:left; } .fortune-blocks { grid-template-columns:repeat(7,1fr) !important; } }
-        .fortune-note { margin:.75rem 0 0; font-size:clamp(.85rem,2.4vw,1.05rem); color:#c9d1c6; }
-        .fortune-note strong { color:#fff; }
+        .fortune-blocks span.tax { position:relative; outline:2px solid var(--slice); outline-offset:2px; }
+        .fortune-blocks span.tax i { position:absolute; left:0; top:0; bottom:0; min-width:8px; background:var(--slice); border-right:2px solid var(--slate-deep); border-radius:8px 0 0 8px; transition:width .5s cubic-bezier(.16,1,.3,1); }
+        @media (max-width: 600px) {
+            .fortune-mult { text-align:left; }
+            .fortune-blocks { grid-template-columns:repeat(7,1fr) !important; }
+            .hero-facts { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -1262,15 +1254,17 @@
         <h1>Millionaires in Hawaiʻi</h1>
     </div>
 
-    <!-- Infographic Banner -->
-    <div class="infographic-banner">
-        <div class="banner-strip">
-            <div class="banner-cell">
-                <span class="banner-eyebrow">Hawaiʻi has</span>
-                <div class="banner-title-row">
-                    <span class="count" id="summaryCount">81,814</span>
+    <!-- Hero: the wealth, how many state budgets it equals, and two supporting facts -->
+    <div class="hero-card" id="budgetCard">
+        <h2 class="sr-only">How much wealth Hawaiʻi&rsquo;s millionaires hold</h2>
+        <div class="fortune-top">
+            <div>
+                <p class="banner-eyebrow fortune-kicker" id="fcKicker">Wealth held by Hawaiʻi&rsquo;s millionaires, 2024</p>
+                <div class="fortune-big"><span id="fcWealth">$292.7</span><small>billion</small></div>
+                <div class="fortune-desc hero-desc-row">
+                    <span>held by <span class="count" id="summaryCount">81,814</span></span>
                     <div class="dropdown-wrapper">
-                        <button class="dropdown-btn" id="tierBtn">millionaires &#9662;</button>
+                        <button class="dropdown-btn" id="tierBtn" aria-haspopup="true" aria-label="Choose a wealth tier">millionaires &#9662;</button>
                         <div class="dropdown-menu" id="tierMenu">
                             <button data-tier="all" class="active">millionaires (all)</button>
                             <button data-tier="$1M-$20M">millionaires ($1M&ndash;$20M)</button>
@@ -1280,44 +1274,32 @@
                     </div>
                 </div>
             </div>
-            <div class="banner-cell">
-                <div class="banner-stat">
-                    <span class="banner-stat-value" id="concentrationValue">24%</span>
-                    <span class="banner-stat-unit" id="concentrationUnit">of all wealth</span>
-                    <div class="conc-bar" id="concBar" aria-hidden="true"><span class="conc-bar-fill" id="concBarFill" style="width:23.7%"></span></div>
-                    <span class="banner-stat-label" id="concentrationLabel">held by the top 365 (0.4%)</span>
-                </div>
-            </div>
-            <div class="banner-cell">
-                <div class="banner-trend" id="bannerTrend">
-                    <span class="banner-eyebrow" id="trendEyebrow">More millionaires than 2010</span>
-                    <div class="banner-trend-row">
-                        <svg class="banner-trend-spark" id="trendSpark" width="52" height="26" viewBox="0 0 52 26" aria-hidden="true"></svg>
-                        <span class="banner-trend-figure" id="trendFigure">+184%</span>
-                    </div>
-                    <span class="banner-trend-caption" id="trendCaption"><b>28,801</b> in 2010 &rarr; <b>81,814</b> today</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 12.4x state budget: the banner stat's visual -->
-    <div class="fortune-card" id="budgetCard">
-        <h2 class="sr-only">Wealth compared with the state budget</h2>
-        <p class="fortune-kicker" id="fcKicker">Hawaiʻi&rsquo;s millionaires hold wealth equivalent to 12.4&times; the state budget</p>
-        <div class="fortune-top">
-            <div>
-                <div class="fortune-big"><span id="fcWealth">$292.7</span><small>billion</small></div>
-                <p class="fortune-desc">held by the <strong><span id="fcCount">81,814</span> Hawaiʻi <span id="fcWho">millionaires</span></strong> in 2024</p>
-            </div>
             <div class="fortune-mult">
                 <div class="n"><span id="fcMult">12.4</span>&times;</div>
-                <p>the state&rsquo;s entire<br>annual budget</p>
+                <p>the state&rsquo;s annual budget</p>
             </div>
         </div>
         <div class="fortune-blocks" id="fcBlocks" aria-hidden="true"></div>
-        <p class="fortune-taxcap" id="fcTaxCap"><span aria-hidden="true">&#9650; </span>The light slice: <b id="fcTaxRate">2%</b> on wealth above <b id="fcTaxThr">$20M</b> raises <b id="fcTaxPct">6.0%</b> of one year&rsquo;s budget.</p>
-        <p class="fortune-note"><strong>One block = $23.7 billion,</strong> Hawaiʻi&rsquo;s annual state budget (2026).</p>
+        <div class="blocks-key">
+            <span><span class="sw sw-block" aria-hidden="true"></span><b>One block</b> = one year&rsquo;s state budget, $23.7 billion (2026)</span>
+            <span id="fcTaxCap"><span class="sw sw-slice" aria-hidden="true"></span><b>Light slice</b> = what <b id="fcTaxRate">2%</b> on wealth above <b id="fcTaxThr">$20M</b> raises: <b id="fcTaxPct">6.0%</b> of one year&rsquo;s budget</span>
+        </div>
+        <div class="hero-facts">
+            <div class="banner-trend" id="bannerTrend">
+                <span class="banner-eyebrow" id="trendEyebrow">Growth since 2010</span>
+                <div class="banner-trend-row">
+                    <svg class="banner-trend-spark" id="trendSpark" width="52" height="26" viewBox="0 0 52 26" aria-hidden="true"></svg>
+                    <span class="banner-trend-figure" id="trendFigure">+184%</span>
+                </div>
+                <span class="banner-trend-caption" id="trendCaption"><b>28,801</b> in 2010 &rarr; <b>81,814</b> today</span>
+            </div>
+            <div class="banner-stat">
+                <span class="banner-stat-value" id="concentrationValue">24%</span>
+                <span class="banner-stat-unit" id="concentrationUnit">Who holds the wealth</span>
+                <div class="conc-bar" id="concBar" aria-hidden="true"><span class="conc-bar-fill" id="concBarFill" style="width:23.7%"></span></div>
+                <span class="banner-stat-label" id="concentrationLabel">held by the top 365 (0.4%)</span>
+            </div>
+        </div>
     </div>
 
     <!-- Wealth-tax revenue callout: the report's scenarios (Table 1 / Figure 4) -->
@@ -1341,7 +1323,7 @@
         </div>
         <div class="revenue-strip revenue-strip--two">
             <div class="revenue-cell revenue-cell--hero">
-                <span class="banner-eyebrow">Could raise each year</span>
+                <span class="banner-eyebrow">It could raise each year</span>
                 <div class="revenue-callout-figure">
                     <span class="revenue-callout-range" id="revenueValue">$1.41B</span>
                     <span class="revenue-callout-per">/ year</span>
@@ -1355,8 +1337,10 @@
                 <span class="revenue-cap">of Hawaiʻi&rsquo;s <b>$23.7B</b> annual budget</span>
             </div>
         </div>
-        <p class="revenue-callout-basis">Static estimate: no avoidance or out-migration.</p>
-        <button type="button" class="revenue-method-btn" id="methodBtn" aria-expanded="false" aria-controls="methodPanel">How we estimated this <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <div class="revenue-foot">
+            <button type="button" class="revenue-method-btn" id="methodBtn" aria-expanded="false" aria-controls="methodPanel">How we estimated this <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+            <p class="revenue-callout-basis">Static estimate: no avoidance or out-migration.</p>
+        </div>
         <div class="revenue-method" id="methodPanel" hidden>
             <h3>How we estimated this</h3>
             <table class="revenue-calc">
@@ -1379,105 +1363,80 @@
     <!-- Geographic Map (embedded dashboard) -->
     <div class="chart-container">
         <div class="section-head">
-            <div class="revenue-strip section-strip" style="--cols: 1.5fr 1fr;">
-                <div class="revenue-cell">
-                    <span class="banner-eyebrow">Map</span>
-                    <h2 class="section-title">Where Hawaiʻi&rsquo;s millionaires live</h2>
-                </div>
-                <div class="revenue-cell">
-                    <span class="banner-eyebrow">Circle size and color</span>
-                    <span class="section-cap">Scale with the number of millionaires per city</span>
-                </div>
+            <div>
+                <span class="banner-eyebrow">Map</span>
+                <h2 class="section-title">Honolulu dominates, but every island has ultra-wealth</h2>
             </div>
+            <p class="section-side">Bigger, darker circle = more millionaires in that city</p>
         </div>
         <div class="section-body">
             <div class="map-embed-wrapper">
                 <iframe
-                    src="https://hawaii-appleseed.github.io/hawaii-appleseed-dashboard/?var=millionaires&amp;embed=1"
-                    title="Map of millionaire locations in Hawaiʻi"
+                    src="https://hawaii-appleseed.github.io/hawaii-appleseed-dashboard/?var=millionaires&amp;embed=1&amp;scheme=green&amp;controls=0"
+                    title="Map of where Hawaiʻi’s millionaires live, by city"
                     loading="lazy"
                     allow="fullscreen"
                     referrerpolicy="no-referrer-when-downgrade"
                 ></iframe>
             </div>
-            <p class="chart-caption section-cap">
-                Honolulu dominates the count, but ultra-wealth pockets exist on every island.
-            </p>
+            <p class="card-source">Source: Altrata Wealth-X, 2024.</p>
         </div>
     </div>
 
     <!-- Single Chart Container with Switcher -->
     <div class="chart-container">
-        <h2 class="sr-only">Millionaires over time</h2>
         <div class="section-head">
-            <div class="revenue-strip section-strip">
-                <div class="revenue-cell">
-                    <span class="banner-eyebrow">Chart</span>
-                    <select class="chart-switcher" id="chartSwitcher" aria-label="Chart">
-                        <option value="wealth">Wealth Held by Millionaires, Billions</option>
-                        <option value="individuals"># of Individuals by Wealth Tier</option>
-                    </select>
-                </div>
-                <div class="revenue-cell">
-                    <span class="banner-eyebrow" id="chartFromLabel">2010 total</span>
-                    <span class="section-fig" id="aggregate2010">$105.7B</span>
-                </div>
-                <div class="revenue-cell">
-                    <span class="banner-eyebrow" id="chartToLabel">2024 total</span>
-                    <span class="section-fig section-fig--accent" id="aggregateTotal">$292.7B</span>
-                    <span class="section-cap" id="chartGrowth"><b>+177%</b> since 2010</span>
-                </div>
+            <div>
+                <span class="banner-eyebrow">Chart</span>
+                <h2 class="section-title" id="chartTitle">Millionaire wealth has almost tripled since 2010</h2>
             </div>
-            <select class="year-select" id="yearSelect" style="display:none;"></select>
+            <p class="section-side"><span id="aggregate2010">$105.7B</span> &rarr; <b id="aggregateTotal">$292.7B</b><br><span id="chartGrowth">+177% since 2010</span></p>
         </div>
         <div class="section-body">
-            <span class="section-cap" id="chartSubtitle">Hawaiʻi, 2010&ndash;2024 (USD) &middot; Stacked area shows tiers as portions of total</span>
+            <div class="chart-tools">
+                <select class="chart-switcher" id="chartSwitcher" aria-label="Chart">
+                    <option value="wealth">Wealth held, billions</option>
+                    <option value="individuals">Number of people, by tier</option>
+                </select>
+                <span class="section-cap" id="chartSubtitle">Hawaiʻi, 2010&ndash;2024 &middot; tiers stacked to the total</span>
+            </div>
+            <select class="year-select" id="yearSelect" style="display:none;"></select>
 
             <!-- Wealth Chart Wrapper -->
             <div id="wealthWrapper">
                 <div class="chart-wrapper">
                     <canvas id="wealthChart"></canvas>
                 </div>
+                <p class="wealth-key" id="wealthKey" aria-hidden="true"></p>
             </div>
-            <p class="chart-caption section-cap" id="wealthCaption">
-                Even with tax increases, the wealth held by millionaires in Hawaiʻi has almost tripled since 2010.
-            </p>
 
             <!-- Individuals Chart Wrapper -->
             <div class="chart-wrapper" id="individualsWrapper" style="display:none;">
                 <canvas id="individualsChart"></canvas>
             </div>
-            <p class="chart-caption section-cap" id="individualsCaption" style="display: none;">
-                The number of millionaires in Hawaiʻi has steadily increased since 2010, despite tax increases.
-            </p>
+            <p class="card-source">Source: Wealth-X / Altrata, <i>Market Sizing Wealth Data for Hawaiʻi</i> (Nov 9, 2025).</p>
         </div>
     </div>
-
-    <p class="source">Source: Wealth-X / Altrata &mdash; Market Sizing Wealth Data for Hawaiʻi (Nov 9, 2025)</p>
 
     <!-- Narrative Section -->
     <div class="narrative-section">
         <span class="banner-eyebrow">Why it matters</span>
         <h2 class="narrative-title">Ultra-millionaires have advantages over the rest of us</h2>
         <div class="narrative-point">
-            <div class="narrative-point-header">
+            <div>
                 <h3>They pay low taxes on their investments</h3>
+                <p>Hawaiʻi is one of only nine states that taxes capital gains at a lower rate than ordinary income&mdash;effectively a loophole that almost entirely benefits the wealthy.</p>
+                <button class="narrative-more-toggle" data-target="narrative-1" aria-expanded="false" aria-controls="narrative-1">Read more</button>
+                <div class="narrative-more-content" id="narrative-1">
+                    <p>Of taxpayers who reported capital gains in 2019, the 7.7% who earned $400,000+ received <strong>79.4% of all capital gains income</strong> in the state. Those making over $1&nbsp;million a year actually pay a <em>lower</em> effective tax rate than the income group just below them, because Hawaiʻi taxes long-term capital gains at just 7.25% versus the top marginal rate of 11%. If capital gains were taxed like regular income, the state would gain roughly <strong>$180&nbsp;million per year</strong>&mdash;with 97% paid by the top 5% of earners. The bottom 80% of taxpayers would pay nothing additional.</p>
+                </div>
+                <span class="narrative-source">Source: <a href="https://www.hitaxfairness.org/capital-gains" target="_blank">HI Tax Fairness Coalition, Capital Gains Tax Reform</a></span>
             </div>
-            <p>Hawaiʻi is one of only nine states that taxes capital gains at a lower rate than ordinary income&mdash;effectively a loophole that almost entirely benefits the wealthy.</p>
             <div class="narrative-stat">
-                <div class="narrative-stat-cell">
-                    <span class="banner-eyebrow">New revenue</span>
-                    <span class="narrative-stat-figure">$180M<span class="unit">/ year</span></span>
-                </div>
-                <div class="narrative-stat-cell">
-                    <span class="narrative-stat-desc">If capital gains were taxed like regular income, with <strong>97% paid by the top 5%</strong> of earners and nothing more from the bottom 80%.</span>
-                </div>
+                <span class="banner-eyebrow">New revenue</span>
+                <span class="narrative-stat-figure">$180M<span class="unit">/ year</span></span>
+                <span class="narrative-stat-desc">If capital gains were taxed like regular income, with <strong>97% paid by the top 5%</strong> of earners and nothing more from the bottom 80%.</span>
             </div>
-            <button class="narrative-more-toggle" data-target="narrative-1">More</button>
-            <div class="narrative-more-content" id="narrative-1">
-                <p style="margin-left: 0; margin-top: 0.5rem; font-size: 0.92rem; line-height: 1.7; color: #3a3a3a;">Of taxpayers who reported capital gains in 2019, the 7.7% who earned $400,000+ received <strong>79.4% of all capital gains income</strong> in the state. Those making over $1&nbsp;million a year actually pay a <em>lower</em> effective tax rate than the income group just below them, because Hawaiʻi taxes long-term capital gains at just 7.25% versus the top marginal rate of 11%. If capital gains were taxed like regular income, the state would gain roughly <strong>$180&nbsp;million per year</strong>&mdash;with 97% paid by the top 5% of earners. The bottom 80% of taxpayers would pay nothing additional.</p>
-            </div>
-            <span class="narrative-source">Source: <a href="https://www.hitaxfairness.org/capital-gains" target="_blank">HI Tax Fairness Coalition &mdash; Capital Gains Tax Reform</a></span>
         </div>
     </div>
     </main>
@@ -1491,6 +1450,13 @@
     </div>
 
     <script>
+        // Page colour tokens, for canvas drawing (charts can't read CSS vars themselves)
+        const cssVar = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        // Below this chart width the charts tighten their margins and short labels.
+        const NARROW_PX = 520;
+        // Chart text in the page font (Chart.js defaults to Helvetica/Arial)
+        Chart.defaults.font.family = "'Nunito', system-ui, sans-serif";
+
         // ── Data ──
         const years = [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
 
@@ -1691,8 +1657,8 @@
                         border: { display: false },
                         ticks: {
                             padding: 8,
-                            font: { size: 11 },
-                            color: '#a3b8aa',
+                            font: { size: 13 },
+                            color: cssVar('--ink-quiet'),
                             callback: function(value) {
                                 if (value === 100 || value === 1000 || value === 10000 || value === 100000) {
                                     return value.toLocaleString();
@@ -1722,9 +1688,10 @@
                 pointBorderColor: '#fff',
                 pointHoverBackgroundColor: '#fff',
                 pointHoverBorderColor: tierShades[i].main,
-                borderWidth: 2.5,
-                pointRadius: 4,
-                pointHoverRadius: 9,
+                borderWidth: 2,
+                // No per-year dots: hovering still shows each year's values.
+                pointRadius: 0,
+                pointHoverRadius: 6,
                 tension: 0.3,
                 // Bottom tier fills to baseline; upper tiers fill to the band below → clean stacked bands
                 fill: i === 0 ? 'origin' : '-1',
@@ -1749,7 +1716,7 @@
         const lastTotal = wealthTotal[wealthTotal.length - 1];
         document.getElementById('aggregate2010').textContent = '$' + firstTotal.toFixed(1) + 'B';
         document.getElementById('aggregateTotal').textContent = '$' + lastTotal.toFixed(1) + 'B';
-        document.getElementById('chartGrowth').innerHTML = '<b>+' + Math.round((lastTotal / firstTotal - 1) * 100) + '%</b> since 2010';
+        document.getElementById('chartGrowth').textContent = '+' + Math.round((lastTotal / firstTotal - 1) * 100) + '% since 2010';
 
         // Text alternatives for the two charts (a canvas has no content of its own).
         // Built from the same arrays that draw the charts, so they cannot drift from them.
@@ -1794,7 +1761,7 @@
                 
                 // Draw dotted vertical line
                 ctx.save();
-                ctx.strokeStyle = '#2a6b4f';
+                ctx.strokeStyle = cssVar('--field');
                 ctx.lineWidth = 2;
                 ctx.setLineDash([5, 5]);
                 ctx.beginPath();
@@ -1802,11 +1769,11 @@
                 ctx.lineTo(x, yMiddle);
                 ctx.stroke();
                 
-                // Draw label
-                ctx.fillStyle = '#2a6b4f';
-                ctx.font = 'bold 12px Nunito, sans-serif';
+                // Draw label: what the line marks, not just that it is there
+                ctx.fillStyle = cssVar('--field');
+                ctx.font = '800 13px Nunito, sans-serif';
                 ctx.textAlign = 'center';
-                ctx.fillText('tax increase', x, yMiddle - 8);
+                ctx.fillText(chart.width < NARROW_PX ? '2017: top rate to 11%' : '2017: top income tax rate raised to 11%', x, yMiddle - 8);
                 ctx.restore();
                 
                 // Store position for interaction
@@ -1814,7 +1781,56 @@
             }
         };
 
-        Chart.register(taxIncreaseAnnotation);
+        // Direct labels for the wealth chart: each tier named at its band's
+        // right end with its 2024 value, plus the 2010 and 2024 totals. This
+        // replaces the legend and the single-tier value badges.
+        const wealthEndLabels = {
+            id: 'wealthEndLabels',
+            afterDraw: function(chart) {
+                if (chart.canvas.id !== 'wealthChart') return;
+                const ctx = chart.ctx, y = chart.scales.y, n = years.length - 1;
+                const ink = cssVar('--field'), quiet = cssVar('--ink-soft');
+                const lastX = chart.getDatasetMeta(0).data[n].x;
+                const narrow = chart.width < NARROW_PX; // phone: the #wealthKey row under the chart names the tiers
+                let below = 0;
+                const labels = chart.data.datasets.map((ds, i) => {
+                    const top = below + ds.data[n];
+                    const mid = (y.getPixelForValue(below) + y.getPixelForValue(top)) / 2;
+                    below = top;
+                    return { name: ds.label, value: ds.data[n], y: mid };
+                }).sort((a, b) => a.y - b.y);
+                for (let i = 1; i < labels.length; i++) {
+                    if (labels[i].y - labels[i - 1].y < 36) labels[i].y = labels[i - 1].y + 36;
+                }
+                ctx.save();
+                ctx.textAlign = 'left';
+                if (!narrow) labels.forEach(l => {
+                    ctx.fillStyle = ink;
+                    ctx.font = '800 13px Nunito, sans-serif';
+                    ctx.fillText(l.name, lastX + 10, l.y - 2);
+                    ctx.fillStyle = quiet;
+                    ctx.font = '600 13px Nunito, sans-serif';
+                    ctx.fillText('$' + l.value.toFixed(1) + 'B', lastX + 10, l.y + 14);
+                });
+                // Totals: 2024 above the last point, 2010 above the first
+                ctx.fillStyle = ink;
+                ctx.font = '900 15px Nunito, sans-serif';
+                ctx.lineJoin = 'round';
+                ctx.strokeStyle = cssVar('--white');
+                ctx.lineWidth = 4;
+                ctx.textAlign = 'right';
+                const endTop = y.getPixelForValue(lastTotal) - 10;
+                ctx.fillText('$' + lastTotal.toFixed(1) + 'B total', lastX, endTop);
+                const firstX = chart.getDatasetMeta(0).data[0].x;
+                const firstTop = y.getPixelForValue(firstTotal) - 10;
+                ctx.textAlign = 'left';
+                ctx.strokeText('$' + firstTotal.toFixed(1) + 'B', firstX + 2, firstTop);
+                ctx.fillText('$' + firstTotal.toFixed(1) + 'B', firstX + 2, firstTop);
+                ctx.restore();
+            }
+        };
+
+        Chart.register(taxIncreaseAnnotation, wealthEndLabels);
 
         const wealthChart = new Chart(wealthCtx, {
             type: 'line',
@@ -1825,11 +1841,12 @@
                 onResize: function(chart) { responsiveWealth(chart); },
                 interaction: { mode: 'index', intersect: false },
                 layout: {
-                    padding: { left: 50, right: 78, top: 18 }
+                    padding: { left: 8, right: 132, top: 34 }
                 },
                 plugins: {
                     datalabels: {
-                        // 2010 label floats above its point (clear of the y-axis); 2024 label sits in the right margin
+                        // Off: the wealthEndLabels plugin labels this chart directly.
+                        // The settings below are kept for the bar chart's defaults.
                         align: function(ctx) {
                             return ctx.dataIndex === 0 ? (ctx.chart.width < 520 ? 'bottom' : 'top') : 'right';
                         },
@@ -1844,12 +1861,10 @@
                         font: { size: 12, weight: '800' },
                         color: function(ctx) { return ctx.dataset.borderColor; },
                         formatter: function(v) { return '$' + v.toFixed(1) + 'B'; },
-                        display: function(ctx) {
-                            if (ctx.datasetIndex !== 0) return false;
-                            return ctx.dataIndex === 0 || ctx.dataIndex === ctx.chart.data.labels.length - 1;
-                        }
+                        display: false
                     },
                     legend: {
+                        display: false,
                         position: 'top',
                         labels: {
                             usePointStyle: true,
@@ -1867,7 +1882,7 @@
                 scales: {
                     x: {
                         grid: { display: false },
-                        ticks: { font: { size: 13 }, color: '#8fa89a' }
+                        ticks: { font: { size: 13 }, color: cssVar('--ink-quiet') }
                     },
                     y: {
                         stacked: true,
@@ -1877,7 +1892,7 @@
                         ticks: {
                             stepSize: 100,
                             font: { size: 13 },
-                            color: '#8fa89a',
+                            color: cssVar('--ink-quiet'),
                             callback: function(v) { return '$' + v + 'B'; }
                         },
                         title: {
@@ -1907,8 +1922,7 @@
                             ds.borderColor = ds._origColor;
                             ds.backgroundColor = ds._origFill;
                             ds.pointBackgroundColor = ds._origColor;
-                            ds.borderWidth = 2.5;
-                            ds.pointRadius = 4;
+                            ds.borderWidth = 2;
                         });
                         highlightedIdx = null;
                     } else {
@@ -1917,14 +1931,12 @@
                                 ds.borderColor = ds._origColor;
                                 ds.backgroundColor = ds._origFill;
                                 ds.pointBackgroundColor = ds._origColor;
-                                ds.borderWidth = 4;
-                                ds.pointRadius = 6;
+                                ds.borderWidth = 3;
                             } else {
                                 ds.borderColor = ds._fadedColor;
                                 ds.backgroundColor = ds._fadedFill;
                                 ds.pointBackgroundColor = ds._fadedColor;
                                 ds.borderWidth = 1.5;
-                                ds.pointRadius = 2;
                             }
                         });
                         highlightedIdx = ci;
@@ -1938,7 +1950,7 @@
         // The wealth chart reserves 50px left / 78px right for its end labels, which
         // leaves a ~130px plot on a phone. Below NARROW_PX the margins, legend and
         // tick type tighten so the plot gets the width.
-        const NARROW_PX = 520;
+        // NARROW_PX is declared at the top of the script (the chart plugins read it while drawing).
         function responsiveWealth(chart) {
             // Chart.js fires onResize while it is still being constructed; wait until
             // the chart has been tagged below.
@@ -1947,14 +1959,13 @@
             if (chart._narrow === narrow) return;
             chart._narrow = narrow;
             const o = chart.options;
-            o.layout.padding = narrow ? { left: 4, right: 70, top: 18 } : { left: 50, right: 78, top: 18 };
-            o.plugins.legend.labels.padding = narrow ? 12 : 20;
-            o.plugins.legend.labels.font.size = narrow ? 12 : 14;
-            o.plugins.datalabels.font.size = narrow ? 11 : 12;
-            o.scales.x.ticks.font.size = narrow ? 11 : 13;
+            o.layout.padding = narrow ? { left: 0, right: 12, top: 34 } : { left: 8, right: 132, top: 34 };
             o.scales.x.ticks.maxRotation = narrow ? 0 : 50;
-            o.scales.x.ticks.maxTicksLimit = narrow ? 5 : undefined;
-            o.scales.y.ticks.font.size = narrow ? 11 : 13;
+            // On a phone, four years that include 2024, where the tier labels sit
+            o.scales.x.ticks.autoSkip = !narrow;
+            o.scales.x.ticks.callback = narrow
+                ? function(v, i) { return [0, 5, 10, 14].includes(i) ? years[i] : ''; }
+                : function(v) { return this.getLabelForValue(v); };
             chart.update('none');
         }
         function responsiveBar(chart) {
@@ -1967,8 +1978,8 @@
             o.layout.padding = narrow ? { left: 6, right: 24, top: 30 } : { left: 20, right: 20, top: 30 };
             o.plugins.legend.labels.padding = narrow ? 12 : 20;
             o.plugins.legend.labels.font.size = narrow ? 12 : 14;
-            o.plugins.datalabels.font.size = narrow ? 11 : 12;
-            o.scales.y.ticks.font.size = narrow ? 10 : 11;
+            o.plugins.datalabels.font.size = narrow ? 12 : 13;
+            o.scales.y.ticks.font.size = 13;
             // Headroom above the tallest bar: on a phone the legend spans the full width,
             // and the 2024 value pill ("80,569") used to sit on top of its last entry.
             o.scales.y.max = narrow ? 200000 : undefined;
@@ -1976,6 +1987,10 @@
         }
         wealthChart._narrow = null;
         responsiveWealth(wealthChart);
+        document.getElementById('wealthKey').innerHTML = wealthTiers.slice().reverse().map((t, k) => {
+            const i = wealthTiers.length - 1 - k;
+            return '<span><i style="background:' + tierShades[i].main + '"></i>' + t + ' <b>$' + wealthData[t][years.length - 1].toFixed(1) + 'B</b></span>';
+        }).join('');
 
         // ── Tax Popup Functions ──
         const taxPopup = document.getElementById('taxPopup');
@@ -2039,37 +2054,28 @@
         const chartSubtitle = document.getElementById('chartSubtitle');
 
         chartSwitcher.addEventListener('change', (e) => {
-            const individualsCaption = document.getElementById('individualsCaption');
-            const wealthCaption = document.getElementById('wealthCaption');
-            
-            const fromEl = document.getElementById('chartFromLabel'), toEl = document.getElementById('chartToLabel');
+            const titleEl = document.getElementById('chartTitle');
             const aggFrom = document.getElementById('aggregate2010'), aggTo = document.getElementById('aggregateTotal');
             const growthEl = document.getElementById('chartGrowth');
             if (e.target.value === 'wealth') {
-                fromEl.textContent = '2010 total';
-                toEl.textContent = '2024 total';
+                titleEl.textContent = 'Millionaire wealth has almost tripled since 2010';
                 aggFrom.textContent = '$' + firstTotal.toFixed(1) + 'B';
                 aggTo.textContent = '$' + lastTotal.toFixed(1) + 'B';
-                growthEl.innerHTML = '<b>+' + Math.round((lastTotal / firstTotal - 1) * 100) + '%</b> since 2010';
+                growthEl.textContent = '+' + Math.round((lastTotal / firstTotal - 1) * 100) + '% since 2010';
                 wealthWrapper.style.display = 'block';
                 yearSelect.style.display = 'none';
                 individualsWrapper.style.display = 'none';
-                individualsCaption.style.display = 'none';
-                wealthCaption.style.display = 'block';
-                chartSubtitle.innerHTML = "Hawaiʻi, 2010&ndash;2024 (USD) &middot; Stacked area shows tiers as portions of total";
+                chartSubtitle.innerHTML = "Hawaiʻi, 2010&ndash;2024 &middot; tiers stacked to the total";
             } else {
                 const all = summaryMapping['all'];
-                fromEl.textContent = '2010 millionaires';
-                toEl.textContent = '2024 millionaires';
+                titleEl.textContent = 'The number of millionaires has climbed steadily since 2010';
                 aggFrom.textContent = all.count2010.toLocaleString();
-                aggTo.textContent = all.count.toLocaleString();
-                growthEl.innerHTML = '<b>+' + Math.round((all.count / all.count2010 - 1) * 100) + '%</b> since 2010';
+                aggTo.textContent = all.count.toLocaleString() + ' people';
+                growthEl.textContent = '+' + Math.round((all.count / all.count2010 - 1) * 100) + '% since 2010';
                 wealthWrapper.style.display = 'none';
                 yearSelect.style.display = 'none';
                 individualsWrapper.style.display = 'block';
-                individualsCaption.style.display = 'block';
-                wealthCaption.style.display = 'none';
-                chartSubtitle.innerHTML = "Hawaiʻi, 2010&ndash;2024 &middot; Number of individuals by wealth tier &middot; log scale";
+                chartSubtitle.innerHTML = "Hawaiʻi, 2010&ndash;2024 &middot; log scale: each labelled line is ten times the one below";
                 // Create the bar chart on first reveal (it can't size while hidden).
                 // Force a reflow so the now-visible wrapper has real dimensions, then
                 // create or resize the chart synchronously against the correct size.
@@ -2127,9 +2133,7 @@
             paintTaxSlice();
             document.getElementById('fcMult').textContent = multiple.toFixed(1);
             document.getElementById('fcWealth').textContent = '$' + info.wealth.toFixed(1);
-            document.getElementById('fcCount').textContent = info.count.toLocaleString();
-            document.getElementById('fcWho').textContent = info.label;
-            document.getElementById('fcKicker').textContent = `Hawaiʻi’s ${info.label} hold wealth equivalent to ${multiple.toFixed(1)}× the state budget`;
+            document.getElementById('fcKicker').textContent = `Wealth held by Hawaiʻi’s ${info.label.split(' (')[0]}, 2024`;
         }
 
         // Summed series for the aggregate "all" view (2010–2024 counts)
@@ -2179,7 +2183,6 @@
             // Trend: growth in this group since 2010
             const growthPct = Math.round((info.count / info.count2010 - 1) * 100);
             document.getElementById('trendFigure').textContent = '+' + growthPct + '%';
-            document.getElementById('trendEyebrow').textContent = 'More ' + info.label.split(' (')[0] + ' than 2010';
             document.getElementById('trendCaption').innerHTML =
                 '<b>' + info.count2010.toLocaleString() + '</b> in 2010 &rarr; <b>' + info.count.toLocaleString() + '</b> today';
 
@@ -2208,14 +2211,14 @@
                 // Bar leads as the column's "figure" so all three stats share the
                 // same rhythm: figure → caps label → caption.
                 concBarEl.style.order = '-1';
-                concUnitEl.textContent = 'wealth by tier';
+                concUnitEl.textContent = 'Who holds the wealth';
                 concBarEl.innerHTML = shares.map(s => {
                     const millions = '$' + Math.round(summaryMapping[s.key].wealth * 1000).toLocaleString() + 'M';
                     return '<span class="conc-seg" style="width:' + s.pct.toFixed(1) + '%;background:' + s.color + '"'
                         + ' data-tier="' + s.label + '" data-amt="' + millions + '" data-pct="' + Math.round(s.pct) + '" data-color="' + s.color + '"></span>';
                 }).join('');
                 concLabelEl.innerHTML = shares.map(s =>
-                    '<span class="conc-key"><span class="conc-key-dot" style="background:' + s.color + '"></span>' + Math.round(s.pct) + '%</span>'
+                    '<span class="conc-key"><span class="conc-key-dot" style="background:' + s.color + '"></span>' + s.label + ' <b>' + Math.round(s.pct) + '%</b></span>'
                 ).join('');
             } else {
                 const tierKey = info.label.match(/\(([^)]+)\)/)[1];
@@ -2225,7 +2228,7 @@
                 concValueEl.style.display = '';
                 concValueEl.textContent = Math.round(share) + '%';
                 concBarEl.style.order = '';
-                concUnitEl.textContent = 'of all wealth';
+                concUnitEl.textContent = 'Share of all millionaire wealth';
                 concBarEl.innerHTML = '<span class="conc-bar-fill" style="width:' + share.toFixed(1) + '%;background:' + color + '"></span>';
                 concLabelEl.textContent = 'held by the ' + tierKey + ' tier';
             }
@@ -2324,8 +2327,11 @@
                 e.preventDefault();
                 const targetId = btn.dataset.target;
                 const content = document.getElementById(targetId);
-                content.classList.toggle('open');
-                btn.textContent = content.classList.contains('open') ? 'Less' : 'More';
+                const open = content.classList.toggle('open');
+                // Open to the text's real height: a fixed cap clipped it on a phone
+                content.style.maxHeight = open ? content.scrollHeight + 'px' : '';
+                btn.textContent = open ? 'Read less' : 'Read more';
+                btn.setAttribute('aria-expanded', String(open));
             });
         });
 
