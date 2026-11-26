@@ -14,6 +14,9 @@
      2026-10-28). Marginal explainer: HRS 247-2 cliff schedule vs SD2 HD2 marginal bands; $3,999,000 vs $4,000,000
      owner-occupied = $19,995 / $28,000 today, $66,260 / $66,300 proposed (CONVEYANCE_TAX_SCOPE.md). -->
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap">
 <style>
 .tfc-pp {
     --tfc-navy: #253551;
@@ -155,7 +158,7 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-pp) { grid-row: 1 / 2 !importa
 
 /* ===== Chapters layout: pale-sky hero, a band per section, cards for the figures ===== */
 body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wrapper { padding-top: 0 !important; padding-bottom: 0 !important; }
-.tfc-pp-ch { --tfc-deep: #16223a; --tfc-sky: #e2eefb; --tfc-pale: #eaf1fa; --tfc-amber: #f5a524; --tfc-mute: #46536b; --tfc-ink: #1c2740; margin: 0; }
+.tfc-pp-ch { --tfc-deep: #16223a; --tfc-sky: #e2eefb; --tfc-pale: #eaf1fa; --tfc-amber: #f5a524; --tfc-mute: #46536b; --tfc-ink: #1c2740; --tfc-serif: "Newsreader", "TFC Okina", Georgia, "Times New Roman", serif; margin: 0; }
 
 /* hero: pale-sky band flush under the header; ask and intro sit beside the title */
 .tfc-pp-ch .tfc-pp-hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 80px; align-items: start; margin: 0; padding: 60px 0 180px; border: 0; background: var(--tfc-sky); box-shadow: 0 0 0 100vmax var(--tfc-sky); clip-path: inset(0 -100vmax); }
@@ -172,52 +175,64 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 .tfc-pp-ch .tfc-pp-stat:last-child { display: flex; flex-direction: column; justify-content: center; background: linear-gradient(160deg, #cfe3f9 0%, #b9d5f3 100%); }
 .tfc-pp-ch .tfc-pp-stat:last-child .tfc-pp-stat-label { color: #2f3f5c; }
 
-/* sections: h2 on the left, text on the right; figures and source lines inside a section span both columns */
-.tfc-pp-ch .tfc-pp-section { margin: 0; padding: 0; }
-.tfc-pp-ch .tfc-pp-section h2 { padding-top: 0; border-top: 0; font-size: 2.5rem; line-height: 1.08; font-weight: 400; letter-spacing: -.012em; }
-.tfc-pp-ch .tfc-pp-part-lead, .tfc-pp-ch .tfc-pp-part-tint, .tfc-pp-ch .tfc-pp-part-plain, .tfc-pp-ch .tfc-pp-part-ask, .tfc-pp-ch .tfc-pp-part-agenda { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 56px; }
-.tfc-pp-ch .tfc-pp-section > .tfc-pp-fig, .tfc-pp-ch .tfc-pp-section > .tfc-pp-source { grid-column: 1 / -1; max-width: none; }
-.tfc-pp-ch .tfc-pp-section > .tfc-pp-fig { margin-top: 32px; }
-.tfc-pp-ch .tfc-pp-section > .tfc-pp-source { margin: 22px 0 0; }
+/* sections: the heading sits above its content; text and figures are cards on a 12-column grid */
+.tfc-pp-ch .tfc-pp-section { display: block; margin: 0; padding: 88px 0; }
+.tfc-pp-ch .tfc-pp-section > * { max-width: none; }
+.tfc-pp-ch .tfc-pp-section h2 { margin: 0 0 36px; padding: 0; border: 0; font-family: var(--tfc-serif); font-size: clamp(2.1rem, 3.8cqi, 3.2rem); line-height: 1.05; font-weight: 600; letter-spacing: -.015em; color: var(--tfc-deep); }
+.tfc-pp-ch .tfc-pp-section:not(.tfc-pp-part-ask) h2::before { content: ""; display: block; width: 44px; height: 4px; margin-bottom: 16px; border-radius: 2px; background: var(--tfc-blue); }
+.tfc-pp-ch h1, .tfc-pp-ch h2, .tfc-pp-ch h3, .tfc-pp-ch .tfc-pp-facts > li strong, .tfc-pp-ch .tfc-pp-card--stat strong, .tfc-pp-ch .tfc-pp-part-ask > p { text-wrap: balance; }
+.tfc-pp-ch .tfc-pp-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
+.tfc-pp-ch .tfc-pp-grid > * { grid-column: span 12; min-width: 0; }
+.tfc-pp-ch .tfc-pp-w4 { grid-column: span 4; }
+.tfc-pp-ch .tfc-pp-w5 { grid-column: span 5; }
+.tfc-pp-ch .tfc-pp-w6 { grid-column: span 6; }
+.tfc-pp-ch .tfc-pp-w7 { grid-column: span 7; }
+.tfc-pp-ch .tfc-pp-w8 { grid-column: span 8; }
+.tfc-pp-ch .tfc-pp-r2 { grid-row: span 2; }
+.tfc-pp-ch .tfc-pp-part-tint { background: var(--tfc-pale); box-shadow: 0 0 0 100vmax var(--tfc-pale); clip-path: inset(0 -100vmax); }
 
-/* lead: white, big first paragraph */
-.tfc-pp-ch .tfc-pp-part-lead { padding: 112px 0 96px; }
-.tfc-pp-ch .tfc-pp-part-lead > p { color: var(--tfc-mute); }
-.tfc-pp-ch .tfc-pp-part-lead h2 + p { margin-bottom: 22px; font-size: 1.55rem; line-height: 1.42; color: var(--tfc-navy); }
+/* text cards: tinted on white bands, white on pale ones */
+.tfc-pp-ch .tfc-pp-card { margin: 0; padding: 36px 40px; border: 1px solid #e1eaf5; border-radius: 24px; background: #f3f7fd; font-family: var(--tfc-serif); font-size: 1.25rem; line-height: 1.6; color: #34425e; }
+.tfc-pp-ch .tfc-pp-part-tint .tfc-pp-card { border-color: #d6e2f2; background: #fff; }
+.tfc-pp-ch .tfc-pp-card > p { margin: 0 0 14px; font-size: inherit; line-height: inherit; text-wrap: pretty; }
+.tfc-pp-ch .tfc-pp-card > p:last-child { margin-bottom: 0; }
+.tfc-pp-ch .tfc-pp-card strong { color: var(--tfc-navy); }
+.tfc-pp-ch .tfc-pp-card > .tfc-pp-source { margin: 22px 0 0; padding-top: 16px; border-top: 1px solid #d6e2f2; font-family: var(--body-font-font-family), sans-serif; line-height: 1.55; }
+.tfc-pp-ch .tfc-pp-card--lead { border-left: 5px solid var(--tfc-blue); font-size: clamp(1.35rem, 2.4cqi, 1.7rem); font-weight: 500; line-height: 1.4; color: var(--tfc-navy); }
+.tfc-pp-ch .tfc-pp-card--alert { display: flex; align-items: center; border-color: #f2d9a6; background: #fff3d9; font-size: 1.6rem; font-weight: 600; line-height: 1.25; color: var(--tfc-deep); }
+.tfc-pp-ch .tfc-pp-card--stat { display: flex; flex-direction: column; justify-content: center; border-color: #b9d5f3; background: linear-gradient(160deg, #cfe3f9 0%, #b9d5f3 100%); color: #2f3f5c; }
+.tfc-pp-ch .tfc-pp-card--stat strong { display: block; margin: 10px 0 12px; font-size: clamp(2.6rem, 4.6cqi, 3.6rem); font-weight: 600; line-height: 1; letter-spacing: -.02em; color: var(--tfc-navy); }
+.tfc-pp-ch .tfc-pp-card--stat strong span { display: block; margin-top: 8px; font-size: .46em; font-style: italic; font-weight: 500; letter-spacing: 0; }
+.tfc-pp-ch .tfc-pp-stat-pre { display: block; font-size: 1.3rem; font-style: italic; line-height: 1.3; }
+.tfc-pp-ch .tfc-pp-stat-post { display: block; font-family: var(--body-font-font-family), sans-serif; font-size: 1rem; line-height: 1.4; color: #2f3f5c; }
 
-/* tint: pale-blue band; wide: heading above the content instead of beside it */
-.tfc-pp-ch .tfc-pp-part-tint { padding: 92px 0 100px; background: var(--tfc-pale); box-shadow: 0 0 0 100vmax var(--tfc-pale); clip-path: inset(0 -100vmax); }
-.tfc-pp-ch .tfc-pp-part-tint > p, .tfc-pp-ch .tfc-pp-part-plain > p { font-size: 1.1rem; line-height: 1.65; }
-.tfc-pp-ch .tfc-pp-part-tint > p { color: #3d4c68; }
-.tfc-pp-ch .tfc-pp-part-tint > ul { margin: 0; padding: 0; list-style: none; }
-.tfc-pp-ch .tfc-pp-part-tint > ul > li { position: relative; margin: 0 0 18px; padding-left: 34px; font-size: 1.3rem; line-height: 1.45; color: var(--tfc-ink); }
-.tfc-pp-ch .tfc-pp-part-tint > ul > li::before { content: ""; position: absolute; left: 0; top: .5em; width: 14px; height: 14px; border-radius: 50%; background: var(--tfc-blue); }
-.tfc-pp-ch .tfc-pp-part-tint > ul > li strong { color: var(--tfc-navy); }
-.tfc-pp-ch .tfc-pp-part-wide { display: block; }
-.tfc-pp-ch .tfc-pp-part-wide > * { max-width: none; }
-.tfc-pp-ch .tfc-pp-part-wide h2 { margin: 0 0 56px; }
+/* text style (Devin picked "Editorial" from three options, Nov 2026): serif for headings and prose, the site's sans for data; the first sentence of a card leads as a bold standfirst, and dollar amounts and percentages stand out */
+.tfc-pp-ch .tfc-pp-first { display: block; margin-bottom: .4em; font-size: 1.2em; font-weight: 600; line-height: 1.3; color: var(--tfc-navy); text-wrap: balance; }
+.tfc-pp-ch .tfc-pp-card--lead .tfc-pp-first { font-size: 1em; font-weight: 700; }
+.tfc-pp-ch .tfc-pp-num { font-weight: 700; color: #2f62a3; white-space: nowrap; }
 
-/* plain: white */
-.tfc-pp-ch .tfc-pp-part-plain { padding: 104px 0 96px; }
-.tfc-pp-ch .tfc-pp-part-plain > p { color: var(--tfc-mute); }
+/* a short row of facts (three cards) */
+.tfc-pp-ch .tfc-pp-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
+.tfc-pp-ch .tfc-pp-facts > li { margin: 0; padding: 34px 36px; border: 1px solid #d6e2f2; border-radius: 24px; background: #fff; font-family: var(--tfc-serif); font-size: 1.3rem; line-height: 1.45; color: #34425e; }
+.tfc-pp-ch .tfc-pp-facts > li strong { display: block; margin: 8px 0; font-size: clamp(1.9rem, 3.2cqi, 2.6rem); line-height: 1.1; letter-spacing: -.015em; font-weight: 600; color: var(--tfc-navy); }
 
-/* ask: brand-blue band, one big statement or a short list */
-.tfc-pp-ch .tfc-pp-part-ask { padding: 112px 0; background: var(--tfc-blue); box-shadow: 0 0 0 100vmax var(--tfc-blue); clip-path: inset(0 -100vmax); }
-.tfc-pp-ch .tfc-pp-part-ask h2 { padding-top: 12px; font-size: 1.25rem; font-weight: 600; letter-spacing: 0; color: #fff; }
-.tfc-pp-ch .tfc-pp-part-ask > p { max-width: none; margin: 0; font-size: clamp(1.7rem, 3.2cqi, 2.4rem); line-height: 1.22; font-weight: 400; letter-spacing: -.012em; color: #fff; }
-.tfc-pp-ch .tfc-pp-part-ask > ul { max-width: none; margin: 0; padding: 0; list-style: none; }
-.tfc-pp-ch .tfc-pp-part-ask > ul > li { position: relative; margin: 0; padding: 28px 0 28px 36px; border-top: 1px solid rgba(255, 255, 255, .35); font-size: clamp(1.2rem, 2cqi, 1.6rem); line-height: 1.4; color: #fff; }
-.tfc-pp-ch .tfc-pp-part-ask > ul > li:first-child { padding-top: 0; border-top: 0; }
-.tfc-pp-ch .tfc-pp-part-ask > ul > li:last-child { padding-bottom: 0; }
-.tfc-pp-ch .tfc-pp-part-ask > ul > li::before { content: ""; position: absolute; left: 0; top: calc(28px + .7em - 6px); width: 12px; height: 12px; border-radius: 50%; background: var(--tfc-amber); }
-.tfc-pp-ch .tfc-pp-part-ask > ul > li:first-child::before { top: calc(.7em - 6px); }
-.tfc-pp-ch .tfc-pp-part-ask > ul > li strong { color: #fff; font-weight: 600; }
+/* ask: brand-blue band; the label sits above one big statement, or above a row of cards */
+.tfc-pp-ch .tfc-pp-part-ask { background: var(--tfc-blue); box-shadow: 0 0 0 100vmax var(--tfc-blue); clip-path: inset(0 -100vmax); }
+.tfc-pp-ch .tfc-pp-part-ask h2 { display: flex; align-items: center; gap: 16px; margin: 0 0 28px; font-size: clamp(1.55rem, 2.7cqi, 2rem); font-weight: 600; letter-spacing: -.005em; color: #fff; }
+.tfc-pp-ch .tfc-pp-part-ask h2::before { content: ""; flex: none; width: 36px; height: 5px; border-radius: 3px; background: var(--tfc-amber); }
+.tfc-pp-ch .tfc-pp-part-ask > p { max-width: 34ch; margin: 0; font-family: var(--tfc-serif); font-size: clamp(1.8rem, 3.6cqi, 2.8rem); line-height: 1.2; font-weight: 500; letter-spacing: -.01em; color: #fff; }
+.tfc-pp-ch .tfc-pp-asks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
+.tfc-pp-ch .tfc-pp-asks > li { margin: 0; padding: 32px 34px; border-top: 5px solid var(--tfc-amber); border-radius: 24px; background: #fff; font-family: var(--tfc-serif); font-size: 1.4rem; line-height: 1.4; color: #34425e; }
+.tfc-pp-ch .tfc-pp-asks > li strong { color: var(--tfc-navy); font-weight: 600; }
 
 /* figures: cards (a figure inside a section keeps its own text styles, not the section's paragraph and list styles) */
 .tfc-pp-ch .tfc-pp-section .tfc-pp-fig-sub { max-width: 64rem; margin: 0 0 24px; font-size: .95rem; line-height: 1.6; color: var(--tfc-mute); }
 .tfc-pp-ch .tfc-pp-section .tfc-pp-fig-note { margin: 18px 0 0; padding-top: 12px; font-size: .82rem; line-height: 1.6; color: var(--tfc-mute); }
 .tfc-pp-ch .tfc-pp-section .tfc-pp-legend { margin: 4px 0 0; padding: 0; list-style: none; font-size: .88rem; }
 .tfc-pp-ch .tfc-pp-section .tfc-pp-legend li { margin: 0; font-size: .88rem; }
+.tfc-pp-ch .tfc-pp-fig { display: flex; flex-direction: column; align-self: start; }
+.tfc-pp-ch .tfc-pp-fig > .tfc-pp-fig-note { margin-top: auto; }
+.tfc-pp-ch .tfc-pp-fig > :nth-last-child(2) { margin-bottom: 18px; }
 .tfc-pp-ch .tfc-pp-figs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; padding: 104px 0 28px; }
 .tfc-pp-ch .tfc-pp-fig { margin: 0; padding: 38px 42px; border: 1px solid #dbe4f0; border-radius: 24px; background: #fff; box-shadow: none; }
 .tfc-pp-ch .tfc-pp-fig h3 { margin: 0 0 6px; font-size: 1.5rem; line-height: 1.3; font-weight: 600; letter-spacing: -.01em; }
@@ -230,20 +245,29 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 .tfc-pp-ch .tfc-pp-part-src { display: block; padding: 8px 0 64px; }
 .tfc-pp-ch .tfc-pp-part-src > .tfc-pp-source { max-width: 56rem; margin: 0 0 14px; }
 
-/* agenda, call to action, links */
-.tfc-pp-ch .tfc-pp-part-agenda { padding: 52px 0; border-top: 1px solid #dbe4f0; }
-.tfc-pp-ch .tfc-pp-part-agenda h2 { font-size: 1.6rem; }
+/* agenda, call to action, links to the other priorities */
+.tfc-pp-ch .tfc-pp-part-agenda { padding: 24px 0 72px; }
+.tfc-pp-ch .tfc-pp-part-agenda h2 { font-size: 2rem; }
 .tfc-pp-ch .tfc-pp-cta { margin: 16px 0 0; padding: 68px; border-radius: 28px; background: linear-gradient(120deg, #3c73b9 0%, #2f62a3 100%); }
-.tfc-pp-ch .tfc-pp-cta h2 { font-size: 2.3rem; line-height: 1.1; letter-spacing: -.012em; }
+.tfc-pp-ch .tfc-pp-cta h2 { font-family: var(--tfc-serif); font-size: 2.4rem; line-height: 1.1; font-weight: 600; letter-spacing: -.015em; }
 .tfc-pp-ch .tfc-pp-cta p { font-size: 1.1rem; color: #fff; }
 .tfc-pp-ch .tfc-pp-cta a.tfc-btn.sqs-button-element--primary { border-color: var(--tfc-amber) !important; border-radius: 999px !important; background: var(--tfc-amber) !important; color: var(--tfc-deep) !important; }
 .tfc-pp-ch .tfc-pp-cta a.tfc-btn.sqs-button-element--secondary { border: 1.5px solid rgba(255, 255, 255, .55) !important; border-radius: 999px !important; background: transparent !important; color: #fff !important; }
-.tfc-pp-ch .tfc-pp-more { margin: 40px 0 0; padding: 0 0 80px; border: 0; }
+.tfc-pp-ch .tfc-pp-more { margin: 0; padding: 64px 0 88px; border: 0; }
+.tfc-pp-ch .tfc-pp-more-title { margin: 0 0 18px; font-size: 1.1rem; font-weight: 600; color: var(--tfc-mute); }
+.tfc-pp-ch .tfc-pp-more-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.tfc-pp-ch .tfc-pp-more-card { display: block; padding: 26px 30px; border: 1px solid #dbe4f0; border-radius: 20px; background: #f3f7fd; color: var(--tfc-navy); text-decoration: none; }
+.tfc-pp-ch .tfc-pp-more-card:hover { border-color: var(--tfc-blue); background: #fff; }
+.tfc-pp-ch .tfc-pp-more-card:focus-visible, .tfc-pp-ch .tfc-pp-more-all:focus-visible { outline: 3px solid var(--tfc-blue); outline-offset: 3px; }
+.tfc-pp-ch .tfc-pp-more-card span { display: block; margin-bottom: 6px; font-size: .85rem; color: var(--tfc-mute); }
+.tfc-pp-ch .tfc-pp-more-card b { display: block; font-size: 1.25rem; font-weight: 600; line-height: 1.3; }
+.tfc-pp-ch .tfc-pp-more-all { display: inline-block; margin-top: 20px; font-weight: 600; color: #2f62a3; }
 
 /* narrower containers */
 @container (max-width: 1100px) {
     .tfc-pp-ch .tfc-pp-figs { grid-template-columns: minmax(0, 1fr); }
     .tfc-pp-ch:not(.tfc-pp-cr) .tfc-pp-stat { padding: 32px 30px 30px; }
+    .tfc-pp-ch .tfc-pp-card { padding: 30px 32px; }
 }
 @container (max-width: 900px) {
     .tfc-pp-ch .tfc-pp-hero { grid-template-columns: minmax(0, 1fr); padding: 48px 0 150px; }
@@ -253,17 +277,16 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
     .tfc-pp-ch .tfc-pp-lede { max-width: 56ch; }
     .tfc-pp-ch .tfc-pp-stats { margin-top: -96px; }
     .tfc-pp-ch:not(.tfc-pp-cr) .tfc-pp-stats { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-    .tfc-pp-ch .tfc-pp-part-lead, .tfc-pp-ch .tfc-pp-part-tint, .tfc-pp-ch .tfc-pp-part-plain, .tfc-pp-ch .tfc-pp-part-ask, .tfc-pp-ch .tfc-pp-part-agenda { display: block; }
-    .tfc-pp-ch .tfc-pp-section h2 { margin: 0 0 22px; font-size: 2rem; }
-    .tfc-pp-ch .tfc-pp-part-lead { padding: 80px 0 64px; }
-    .tfc-pp-ch .tfc-pp-part-tint { padding: 64px 0 72px; }
-    .tfc-pp-ch .tfc-pp-part-plain { padding: 72px 0 64px; }
-    .tfc-pp-ch .tfc-pp-part-wide h2 { margin-bottom: 36px; }
-    .tfc-pp-ch .tfc-pp-part-ask { padding: 80px 0; }
-    .tfc-pp-ch .tfc-pp-part-ask h2 { padding-top: 0; margin-bottom: 18px; }
-    .tfc-pp-ch .tfc-pp-figs { padding-top: 72px; }
-    .tfc-pp-ch .tfc-pp-part-agenda { padding: 44px 0; }
+    .tfc-pp-ch .tfc-pp-section { padding: 64px 0; }
+    .tfc-pp-ch .tfc-pp-section h2 { margin-bottom: 26px; font-size: 2rem; }
+    .tfc-pp-ch .tfc-pp-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .tfc-pp-ch .tfc-pp-grid > * { grid-column: 1 / -1; grid-row: auto; }
+    .tfc-pp-ch .tfc-pp-facts, .tfc-pp-ch .tfc-pp-asks { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .tfc-pp-ch .tfc-pp-part-ask h2 { margin-bottom: 20px; font-size: 1.55rem; }
+    .tfc-pp-ch .tfc-pp-figs { padding-top: 64px; }
+    .tfc-pp-ch .tfc-pp-part-agenda { padding: 8px 0 56px; }
     .tfc-pp-ch .tfc-pp-cta { padding: 48px 40px; }
+    .tfc-pp-ch .tfc-pp-more-cards { grid-template-columns: minmax(0, 1fr); gap: 14px; }
 }
 @container (max-width: 760px) {
     .tfc-pp-ch .tfc-pp-fig { padding: 28px 22px; border-radius: 20px; }
@@ -276,21 +299,28 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
     .tfc-pp-ch .tfc-pp-stats { margin-top: -88px; }
     .tfc-pp-ch .tfc-pp-stat { padding: 26px 24px; border-radius: 20px; }
     .tfc-pp-ch .tfc-pp-stat-label { font-size: 1rem; }
-    .tfc-pp-ch .tfc-pp-section h2 { font-size: 1.8rem; }
-    .tfc-pp-ch .tfc-pp-part-lead { padding: 64px 0 48px; }
-    .tfc-pp-ch .tfc-pp-part-lead h2 + p { font-size: 1.25rem; }
-    .tfc-pp-ch .tfc-pp-part-tint > ul > li { font-size: 1.15rem; }
-    .tfc-pp-ch .tfc-pp-part-ask { padding: 64px 0; }
+    .tfc-pp-ch .tfc-pp-section { padding: 56px 0; }
+    .tfc-pp-ch .tfc-pp-section h2 { font-size: 1.85rem; }
+    .tfc-pp-ch .tfc-pp-section:not(.tfc-pp-part-ask) h2::before { width: 36px; height: 4px; margin-bottom: 12px; }
+    .tfc-pp-ch .tfc-pp-card { padding: 26px 24px; border-radius: 20px; font-size: 1.12rem; }
+    .tfc-pp-ch .tfc-pp-part-ask h2 { font-size: 1.4rem; }
+    .tfc-pp-ch .tfc-pp-card--lead { font-size: 1.28rem; }
+    .tfc-pp-ch .tfc-pp-card--alert { font-size: 1.35rem; }
+    .tfc-pp-ch .tfc-pp-facts > li, .tfc-pp-ch .tfc-pp-asks > li { padding: 26px 24px; border-radius: 20px; font-size: 1.2rem; }
     .tfc-pp-ch .tfc-pp-fig { padding: 24px 16px; }
     .tfc-pp-ch .tfc-pp-fig h3 { font-size: 1.3rem; }
     .tfc-pp-ch .tfc-pp-cta { padding: 36px 24px; border-radius: 22px; }
-    .tfc-pp-ch .tfc-pp-cta h2 { font-size: 1.8rem; }
-    .tfc-pp-ch .tfc-pp-more { padding-bottom: 56px; }
+    .tfc-pp-ch .tfc-pp-cta h2 { font-size: 1.9rem; }
+    .tfc-pp-ch .tfc-pp-more { padding: 48px 0 56px; }
+    .tfc-pp-ch .tfc-pp-more-card { padding: 22px 24px; }
 }
 
 /* ===== Conveyance page ===== */
 .tfc-pp-cv .tfc-pp-stack-bar { height: 34px; }
 .tfc-pp-cv .tfc-pp-stack-bar i { border-radius: 8px; }
+@container (max-width: 1100px) {
+    .tfc-pp-cv .tfc-pp-asks { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}
 </style>
 
 <div class="tfc-pp tfc-pp-ch tfc-pp-cv">
@@ -306,40 +336,51 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 
     <section class="tfc-pp-section tfc-pp-part-lead">
         <h2>Where the conveyance tax stands</h2>
-        <p>The conveyance tax is paid when real estate changes hands. Its rates were last changed in 2009, and property values in Hawai&#699;i have risen considerably since then. Today its revenue goes to the general fund, the Land Conservation Fund and the Rental Housing Revolving Fund. It does not currently include funding for the Department of Hawaiian Home Lands (DHHL).</p>
-        <p>DHHL&rsquo;s waitlist for a homestead had 29,589 applicants as of November 2025.</p>
+        <div class="tfc-pp-grid">
+        <p class="tfc-pp-card tfc-pp-w8 tfc-pp-card--lead"><span class="tfc-pp-first">The conveyance tax is paid when real estate changes hands.</span> Its rates were last changed in 2009, and property values in Hawai&#699;i have risen considerably since then. Today its revenue goes to the general fund, the Land Conservation Fund and the Rental Housing Revolving Fund. It does not currently include funding for the Department of Hawaiian Home Lands (DHHL).</p>
+        <p class="tfc-pp-card tfc-pp-w4 tfc-pp-card--stat"><span class="tfc-pp-stat-pre">DHHL&rsquo;s waitlist for a homestead had</span><strong>29,589 <span>applicants</span></strong><span class="tfc-pp-stat-post">as of November 2025.</span></p>
+        </div>
     </section>
 
     <section class="tfc-pp-section tfc-pp-part-tint">
         <h2>Where the money goes today</h2>
-        <p>The law splits conveyance tax collections three ways. The Rental Housing Revolving Fund gets 50 percent, up to $38 million a year. The Land Conservation Fund gets 10 percent, up to $5.1 million a year. The general fund gets the rest. Hawaiian Home Lands is not currently part of the split.</p>
-        <p>Because both funds are capped, once collections pass about $76 million a year, every added dollar goes to the general fund.</p>
-    <figure class="tfc-pp-fig" style="margin-left:0;margin-right:0">
-        <h3>Where the money goes today</h3>
-        <p class="tfc-pp-fig-sub">How Hawai&#699;i law splits conveyance tax collections. The two special funds are capped, so the general fund gets everything above the caps.</p>
+        <div class="tfc-pp-grid">
+            <div class="tfc-pp-card tfc-pp-copy tfc-pp-w5">
+        <p><span class="tfc-pp-first">The law splits conveyance tax collections three ways.</span> The Rental Housing Revolving Fund gets <span class="tfc-pp-num">50 percent</span>, up to <span class="tfc-pp-num">$38 million</span> a year. The Land Conservation Fund gets <span class="tfc-pp-num">10 percent</span>, up to <span class="tfc-pp-num">$5.1 million</span> a year. The general fund gets the rest. Hawaiian Home Lands is not currently part of the split.</p>
+        <p>Because both funds are capped, once collections pass about <span class="tfc-pp-num">$76 million</span> a year, every added dollar goes to the general fund.</p>
+    
+            <p class="tfc-pp-source">Rates and allocation: Hawai&#699;i Revised Statutes sections 247-2 and 247-7.</p>
+            </div>
+            <figure class="tfc-pp-fig tfc-pp-w7" style="margin-left:0;margin-right:0">
+                <p class="tfc-pp-fig-sub">How Hawai&#699;i law splits conveyance tax collections. The two special funds are capped, so the general fund gets everything above the caps.</p>
 <div class="tfc-pp-tablewrap"><table class="tfc-pp-table "><thead><tr><th>Fund</th><th>Share of collections</th><th>Most it can get each year</th></tr></thead><tbody><tr><td>Rental Housing Revolving Fund</td><td>50%</td><td>$38 million</td></tr><tr><td>Land Conservation Fund</td><td>10%</td><td>$5.1 million</td></tr><tr><td>General fund</td><td>The rest</td><td>No cap</td></tr><tr class=hi><td>Hawaiian Home Lands</td><td>Not included</td><td>$0</td></tr></tbody></table></div>
 <p class="tfc-pp-fig-note">Source: HRS 247-7 (current law). Each special fund gets its share or its cap, whichever is less.</p>
     </figure>
-        <p class="tfc-pp-source">Rates and allocation: Hawai&#699;i Revised Statutes sections 247-2 and 247-7.</p>
+        </div>
     </section>
 
     <section class="tfc-pp-section tfc-pp-part-plain">
         <h2>Why the tax should be marginal</h2>
-        <p>Today the conveyance tax has price tiers, and the rate for a sale&rsquo;s tier applies to the entire price. When a sale crosses into the next tier, the higher rate applies to every dollar, not just the dollars above the line. That creates cliffs: an owner-occupied home that sells for $4,000,000 owes $8,005 more in tax than one that sells for $3,999,000. It also gives sellers a reason to price a home just under each line.</p>
+        <div class="tfc-pp-grid">
+            <div class="tfc-pp-card tfc-pp-copy tfc-pp-w5">
+        <p><span class="tfc-pp-first">Today the conveyance tax has price tiers, and the rate for a sale&rsquo;s tier applies to the entire price.</span> When a sale crosses into the next tier, the higher rate applies to every dollar, not just the dollars above the line. That creates cliffs: an owner-occupied home that sells for <span class="tfc-pp-num">$4,000,000</span> owes <span class="tfc-pp-num">$8,005</span> more in tax than one that sells for <span class="tfc-pp-num">$3,999,000</span>. It also gives sellers a reason to price a home just under each line.</p>
         <p>A <strong>marginal</strong> tax works like income tax brackets: each rate applies only to the slice of the price inside its band, so the tax rises smoothly as the price does.</p>
-        <p>That is what lets the tax ask much more of the most expensive sales while charging typical buyers less. Under the Legislature&rsquo;s April 2026 draft, buyers who live in the home would owe less than today on every sale up to about $2.25 million, and other residential buyers on every sale up to about $2.07 million.</p>
-    <figure class="tfc-pp-fig" style="margin-left:0;margin-right:0">
+        <p>That is what lets the tax ask much more of the most expensive sales while charging typical buyers less. Under the Legislature&rsquo;s April 2026 draft, buyers who live in the home would owe less than today on every sale up to about <span class="tfc-pp-num">$2.25 million</span>, and other residential buyers on every sale up to about <span class="tfc-pp-num">$2.07 million</span>.</p>
+    
+            <p class="tfc-pp-source">Draft: SB 3028 SD2 HD2 (April 8, 2026), which died in conference.</p>
+            </div>
+            <figure class="tfc-pp-fig tfc-pp-w7" style="margin-left:0;margin-right:0">
         <h3>What a $1,000 difference in price costs</h3>
         <p class="tfc-pp-fig-sub">Conveyance tax on an owner-occupied home that sells for $3,999,000 and for $4,000,000. Today, a higher price tier raises the rate on the entire price. Under the Legislature&rsquo;s April 2026 draft, each rate applies only to the slice of the price in its band.</p>
 <div class="tfc-pp-tablewrap"><table class="tfc-pp-table "><thead><tr><th>Sale price</th><th>Today<small>one rate on the entire price</small></th><th>Proposed<small>a rate on each slice</small></th></tr></thead><tbody><tr><td>$3,999,000</td><td>$19,995</td><td>$66,260</td></tr><tr><td>$4,000,000</td><td>$28,000</td><td>$66,300</td></tr><tr class=hi><td>Extra tax for the extra $1,000</td><td>$8,005</td><td>$40</td></tr></tbody></table></div>
 <p class="tfc-pp-fig-note">Today&rsquo;s amounts follow HRS 247-2. Proposed amounts follow the SB 3028 SD2 HD2 rate schedule (April 2026) and are illustrations, not revenue estimates. Source: Hawai&#699;i Appleseed conveyance model (Census-Forecaster).</p>
     </figure>
-        <p class="tfc-pp-source">Draft: SB 3028 SD2 HD2 (April 8, 2026), which died in conference.</p>
+        </div>
     </section>
 
     <section class="tfc-pp-section tfc-pp-part-ask">
         <h2>What we are asking for</h2>
-        <ul>
+        <ul class="tfc-pp-asks">
             <li><strong>Switch to marginal rates</strong>, so each rate applies only to the part of the price in its band and there are no cliffs.</li>
             <li><strong>Ask more of high-value and investment property sales</strong>, while protecting local families buying a home to live in.</li>
             <li><strong>Dedicate the new revenue to DHHL</strong>, so the trust can build homes and infrastructure for its beneficiaries.</li>
@@ -348,9 +389,14 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 
     <section class="tfc-pp-section tfc-pp-part-tint">
         <h2>What it could raise</h2>
+        <div class="tfc-pp-grid">
+            <div class="tfc-pp-card tfc-pp-copy tfc-pp-w5">
         <p>A House committee estimated what the conveyance tax would bring in if SB 3028 used the rates of HB 2049 HD3: <strong>$271 million in total in FY2027, rising to $303 million by FY2031</strong>. That is all conveyance tax revenue, not just the increase. It would fill every special fund to its cap, including <strong>$60 million a year for DHHL</strong>, and send the rest to the general fund.</p>
-        <p>SB 3028 SD2 HD2, the last draft before the bill died in conference, would send 30 percent of collections, up to $60 million a year, to Hawaiian Home Lands, along with dedicated funding for rental housing, urban development, and land conservation.</p>
-    <figure class="tfc-pp-fig" style="margin-left:0;margin-right:0">
+        <p>SB 3028 SD2 HD2, the last draft before the bill died in conference, would send <span class="tfc-pp-num">30 percent</span> of collections, up to <span class="tfc-pp-num">$60 million</span> a year, to Hawaiian Home Lands, along with dedicated funding for rental housing, urban development, and land conservation.</p>
+    
+            <p class="tfc-pp-source">Estimate: House committee report, SB 3028 SD2 HD1 with the rates of HB 2049 HD3 (2026), FY2027&ndash;FY2031; applies to residential property.</p>
+            </div>
+            <figure class="tfc-pp-fig tfc-pp-w7" style="margin-left:0;margin-right:0">
         <h3>Where the new revenue could go</h3>
         <p class="tfc-pp-fig-sub">Estimated total conveyance tax revenue in a House committee&rsquo;s table for SB 3028, in millions of dollars. Under current law, Hawaiian Home Lands does not receive a share.</p>
         <div class="tfc-pp-stack"><span>FY2027</span><div class="tfc-pp-stack-bar" title="FY2027: $271M total, up to $60M for DHHL"><i class="hi" style="width:19.8%"></i><i style="width:69.6%"></i></div><b>$271M</b></div>
@@ -358,20 +404,20 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
         <ul class="tfc-pp-legend"><li><span class="hi"></span>Hawaiian Home Lands, up to $60M a year</li><li><span></span>Rental housing, urban development, land conservation, general fund and other uses</li></ul>
 <p class="tfc-pp-fig-note">Source: House committee report, SB 3028 SD2 HD1 estimated revenue allocation (2026). The bill itself left its rates blank, so the estimate assumes the rates of HB 2049 HD3. The $60M is the table&rsquo;s figure for DHHL and matches the cap in SB 3028 SD2 HD2; the remainder is total minus $60M.</p>
     </figure>
-    <figure class="tfc-pp-fig" style="margin-left:0;margin-right:0">
+            <figure class="tfc-pp-fig tfc-pp-w7" style="margin-left:0;margin-right:0">
         <h3>What one sale would owe</h3>
         <p class="tfc-pp-fig-sub">Conveyance tax on a single sale at each price, today and under the Legislature&rsquo;s April 2026 draft (SB 3028 SD2 HD2), for a buyer who lives in the home and for one who does not. The draft breaks even at about $2.2 million for owner-occupants and $2.1 million for everyone else.</p>
 <div class="tfc-pp-tablewrap"><table class="tfc-pp-table "><thead><tr><th>Sale price</th><th>Lives in the home<small>today &rarr; proposed</small></th><th>Does not live in the home<small>today &rarr; proposed</small></th></tr></thead><tbody><tr><td>$800,000</td><td>$1,600 &rarr; $1,200</td><td>$2,000 &rarr; $1,600</td></tr><tr><td>$1.5 million</td><td>$4,500 &rarr; $4,050</td><td>$6,000 &rarr; $5,550</td></tr><tr><td>$2 million</td><td>$10,000 &rarr; $6,300</td><td>$12,000 &rarr; $8,800</td></tr><tr><td>$3 million</td><td>$15,000 &rarr; $26,300</td><td>$18,000 &rarr; $58,800</td></tr><tr><td>$5 million</td><td>$35,000 &rarr; $106,300</td><td>$42,500 &rarr; $198,800</td></tr><tr><td>$10 million</td><td>$100,000 &rarr; $346,300</td><td>$125,000 &rarr; $588,800</td></tr></tbody></table></div>
 <p class="tfc-pp-fig-note">Amounts follow the SD2 HD2 rate schedule and today&rsquo;s law (HRS 247-2) and are illustrations, not revenue estimates. The revenue estimate above assumes HB 2049 HD3&rsquo;s steeper rates. Source: Hawai&#699;i Appleseed conveyance model (Census-Forecaster).</p>
     </figure>
-    <figure class="tfc-pp-fig" style="margin-left:0;margin-right:0">
+            <figure class="tfc-pp-fig tfc-pp-w5" style="margin-left:0;margin-right:0">
         <h3>Most buyers would pay less or the same</h3>
         <p class="tfc-pp-fig-sub">Share of Maui County sales that would owe less, the same, or more under the draft. Maui is the one county that publishes every recorded sale with its price and tax paid. In the model, 88 percent of the statewide increase would come from buyers who do not live in the home.</p>
         <div class="tfc-pp-stack"><span>Maui</span><div class="tfc-pp-stack-bar" title="43% pay less, 42% pay the same, 15% pay more"><i class="mid" style="width:43%"></i><i style="width:42.3%"></i><i class="hi" style="width:14.7%"></i></div><b></b></div>
         <ul class="tfc-pp-legend"><li><span class="mid"></span>Pay less, 43%</li><li><span></span>Pay the same, 42%</li><li><span class="hi"></span>Pay more, 15%</li></ul>
 <p class="tfc-pp-fig-note">Source: Hawai&#699;i Appleseed conveyance model (Census-Forecaster), Maui recorded sales, first year.</p>
     </figure>
-        <p class="tfc-pp-source">Estimate: House committee report, SB 3028 SD2 HD1 with the rates of HB 2049 HD3 (2026), FY2027&ndash;FY2031; applies to residential property.</p>
+        </div>
     </section>
 
     <section class="tfc-pp-cta" aria-labelledby="tfc-pp-cta-title">
@@ -385,6 +431,10 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
         </div>
     </section>
 
-    <p class="tfc-pp-more">Our other 2027 priorities: <a href="/capital-gains">Tax Profits Like Paychecks</a> and <a href="/tax-credits-2">Preserve Working Families&rsquo; Tax Credits</a>. <a href="/2027-priorities">See all three</a>.</p>
+    <nav class="tfc-pp-more" aria-label="Our other 2027 priorities">
+        <p class="tfc-pp-more-title">Our other 2027 priorities</p>
+        <div class="tfc-pp-more-cards"><a class="tfc-pp-more-card" href="/capital-gains"><span>Priority 2 of 3</span><b>Tax Profits Like Paychecks</b></a><a class="tfc-pp-more-card" href="/tax-credits-2"><span>Priority 3 of 3</span><b>Preserve Working Families&rsquo; Tax Credits</b></a></div>
+        <a class="tfc-pp-more-all" href="/2027-priorities">See all three</a>
+    </nav>
 
 </div>
