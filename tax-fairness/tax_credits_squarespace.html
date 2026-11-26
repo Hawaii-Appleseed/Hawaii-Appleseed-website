@@ -178,7 +178,8 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 /* sections: the heading sits above its content; text and figures are cards on a 12-column grid */
 .tfc-pp-ch .tfc-pp-section { display: block; margin: 0; padding: 88px 0; }
 .tfc-pp-ch .tfc-pp-section > * { max-width: none; }
-.tfc-pp-ch .tfc-pp-section h2 { margin: 0 0 36px; padding: 0; border: 0; font-size: 2.3rem; line-height: 1.1; font-weight: 400; letter-spacing: -.012em; }
+.tfc-pp-ch .tfc-pp-section h2 { margin: 0 0 36px; padding: 0; border: 0; font-size: clamp(2rem, 3.4cqi, 2.9rem); line-height: 1.05; font-weight: 600; letter-spacing: -.02em; color: var(--tfc-deep); }
+.tfc-pp-ch .tfc-pp-section:not(.tfc-pp-part-ask) h2::after { content: ""; display: block; width: 56px; height: 6px; margin-top: 16px; border-radius: 3px; background: var(--tfc-amber); }
 .tfc-pp-ch h1, .tfc-pp-ch h2, .tfc-pp-ch h3, .tfc-pp-ch .tfc-pp-facts > li strong, .tfc-pp-ch .tfc-pp-card--stat strong, .tfc-pp-ch .tfc-pp-part-ask > p { text-wrap: balance; }
 .tfc-pp-ch .tfc-pp-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
 .tfc-pp-ch .tfc-pp-grid > * { grid-column: span 12; min-width: 0; }
@@ -201,6 +202,10 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 .tfc-pp-ch .tfc-pp-card--alert { display: flex; align-items: center; border-color: #f2d9a6; background: #fff3d9; font-size: 1.35rem; font-weight: 600; line-height: 1.35; color: var(--tfc-deep); }
 .tfc-pp-ch .tfc-pp-card--stat { display: flex; flex-direction: column; justify-content: center; border-color: #b9d5f3; background: linear-gradient(160deg, #cfe3f9 0%, #b9d5f3 100%); color: #2f3f5c; }
 .tfc-pp-ch .tfc-pp-card--stat strong { display: block; margin: 6px 0; font-size: clamp(1.9rem, 3.2cqi, 2.7rem); line-height: 1.05; letter-spacing: -.02em; color: var(--tfc-navy); }
+
+/* text style: the first sentence of a text card leads in bold, and dollar amounts and percentages stand out */
+.tfc-pp-ch .tfc-pp-first { font-weight: 700; color: var(--tfc-navy); }
+.tfc-pp-ch .tfc-pp-num { font-weight: 700; color: #2f62a3; }
 
 /* a short row of facts (three cards) */
 .tfc-pp-ch .tfc-pp-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
@@ -238,7 +243,7 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 
 /* agenda, call to action, links to the other priorities */
 .tfc-pp-ch .tfc-pp-part-agenda { padding: 24px 0 72px; }
-.tfc-pp-ch .tfc-pp-part-agenda h2 { font-size: 1.6rem; }
+.tfc-pp-ch .tfc-pp-part-agenda h2 { font-size: 1.9rem; }
 .tfc-pp-ch .tfc-pp-cta { margin: 16px 0 0; padding: 68px; border-radius: 28px; background: linear-gradient(120deg, #3c73b9 0%, #2f62a3 100%); }
 .tfc-pp-ch .tfc-pp-cta h2 { font-size: 2.3rem; line-height: 1.1; letter-spacing: -.012em; }
 .tfc-pp-ch .tfc-pp-cta p { font-size: 1.1rem; color: #fff; }
@@ -292,6 +297,7 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
     .tfc-pp-ch .tfc-pp-stat-label { font-size: 1rem; }
     .tfc-pp-ch .tfc-pp-section { padding: 56px 0; }
     .tfc-pp-ch .tfc-pp-section h2 { font-size: 1.7rem; }
+    .tfc-pp-ch .tfc-pp-section:not(.tfc-pp-part-ask) h2::after { width: 44px; height: 5px; margin-top: 12px; }
     .tfc-pp-ch .tfc-pp-card { padding: 26px 24px; border-radius: 20px; }
     .tfc-pp-ch .tfc-pp-part-ask h2 { font-size: 1.05rem; }
     .tfc-pp-ch .tfc-pp-card--lead { font-size: 1.1rem; }
