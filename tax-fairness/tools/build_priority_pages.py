@@ -144,6 +144,226 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-pp) { grid-row: 1 / 2 !importa
 }
 </style>"""
 
+
+# ===== "Chapters" layout: navy hero flush under the header, a band per section, cards for the figures =====
+# Applied to all three priority pages (root class tfc-pp-ch). Page-specific bits hang off tfc-pp-cg / -cr / -cv.
+CHAPTERS = """
+/* ===== Chapters layout: navy hero, a band per section, cards for the figures ===== */
+body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wrapper { padding-top: 0 !important; padding-bottom: 0 !important; }
+.tfc-pp-ch { --tfc-deep: #16223a; --tfc-pale: #eaf1fa; --tfc-amber: #f5a524; --tfc-mute: #46536b; --tfc-ink: #1c2740; margin: 0; }
+
+/* hero: navy band flush under the header; ask and intro sit beside the title */
+.tfc-pp-ch .tfc-pp-hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 80px; align-items: start; margin: 0; padding: 60px 0 180px; border: 0; background: var(--tfc-navy); box-shadow: 0 0 0 100vmax var(--tfc-navy); clip-path: inset(0 -100vmax); }
+.tfc-pp-ch .tfc-pp-eyebrow { grid-column: 1 / -1; justify-self: start; margin-bottom: 6px; padding: 5px 14px; border: 1px solid rgba(255, 255, 255, .24); background: rgba(255, 255, 255, .1); color: #d3e2f7; font-size: .8rem; font-weight: 600; letter-spacing: .02em; text-transform: none; }
+.tfc-pp-ch .tfc-pp-title { grid-column: 1; grid-row: 2 / 4; max-width: 15ch; margin: 22px 0 0; font-size: clamp(2.4rem, 5.2cqi, 4.3rem); line-height: 1.02; letter-spacing: -.012em; color: #fff; }
+.tfc-pp-ch .tfc-pp-ask { grid-column: 2; grid-row: 2; max-width: 30ch; margin: 34px 0 14px; font-size: 1.45rem; font-weight: 600; color: #fff; }
+.tfc-pp-ch .tfc-pp-lede { grid-column: 2; grid-row: 3; max-width: 46ch; margin: 0; font-size: 1.1rem; color: #b9c8df; }
+
+/* stat cards overlap the hero; the last one is blue */
+.tfc-pp-ch .tfc-pp-stats { position: relative; z-index: 2; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: -104px 0 0; }
+.tfc-pp-ch .tfc-pp-stat { padding: 38px 42px 36px; border: 0; border-radius: 24px; background: #fff; box-shadow: 0 30px 60px -28px rgba(10, 20, 40, .55), 0 2px 6px rgba(10, 20, 40, .08); }
+.tfc-pp-ch .tfc-pp-stat-num { font-size: clamp(2.4rem, 4.4cqi, 3.6rem); line-height: 1; letter-spacing: -.025em; }
+.tfc-pp-ch .tfc-pp-stat-label { max-width: 34ch; margin: 14px 0 0; font-size: 1.1rem; line-height: 1.45; color: var(--tfc-mute); }
+.tfc-pp-ch .tfc-pp-stat:last-child { display: flex; flex-direction: column; justify-content: center; background: var(--tfc-blue); }
+.tfc-pp-ch .tfc-pp-stat:last-child .tfc-pp-stat-num, .tfc-pp-ch .tfc-pp-stat:last-child .tfc-pp-stat-label { color: #fff; }
+
+/* sections: h2 on the left, text on the right; figures and source lines inside a section span both columns */
+.tfc-pp-ch .tfc-pp-section { margin: 0; padding: 0; }
+.tfc-pp-ch .tfc-pp-section h2 { padding-top: 0; border-top: 0; font-size: 2.5rem; line-height: 1.08; font-weight: 400; letter-spacing: -.012em; }
+.tfc-pp-ch .tfc-pp-part-lead, .tfc-pp-ch .tfc-pp-part-tint, .tfc-pp-ch .tfc-pp-part-plain, .tfc-pp-ch .tfc-pp-part-ask, .tfc-pp-ch .tfc-pp-part-agenda { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 56px; }
+.tfc-pp-ch .tfc-pp-section > .tfc-pp-fig, .tfc-pp-ch .tfc-pp-section > .tfc-pp-source { grid-column: 1 / -1; max-width: none; }
+.tfc-pp-ch .tfc-pp-section > .tfc-pp-fig { margin-top: 32px; }
+.tfc-pp-ch .tfc-pp-section > .tfc-pp-source { margin: 22px 0 0; }
+
+/* lead: white, big first paragraph */
+.tfc-pp-ch .tfc-pp-part-lead { padding: 112px 0 96px; }
+.tfc-pp-ch .tfc-pp-part-lead p { color: var(--tfc-mute); }
+.tfc-pp-ch .tfc-pp-part-lead h2 + p { margin-bottom: 22px; font-size: 1.55rem; line-height: 1.42; color: var(--tfc-navy); }
+
+/* tint: pale-blue band; wide: heading above the content instead of beside it */
+.tfc-pp-ch .tfc-pp-part-tint { padding: 92px 0 100px; background: var(--tfc-pale); box-shadow: 0 0 0 100vmax var(--tfc-pale); clip-path: inset(0 -100vmax); }
+.tfc-pp-ch .tfc-pp-part-tint p, .tfc-pp-ch .tfc-pp-part-plain p { font-size: 1.1rem; line-height: 1.65; }
+.tfc-pp-ch .tfc-pp-part-tint p { color: #3d4c68; }
+.tfc-pp-ch .tfc-pp-part-tint ul { margin: 0; padding: 0; list-style: none; }
+.tfc-pp-ch .tfc-pp-part-tint ul > li { position: relative; margin: 0 0 18px; padding-left: 34px; font-size: 1.3rem; line-height: 1.45; color: var(--tfc-ink); }
+.tfc-pp-ch .tfc-pp-part-tint ul > li::before { content: ""; position: absolute; left: 0; top: .5em; width: 14px; height: 14px; border-radius: 50%; background: var(--tfc-blue); }
+.tfc-pp-ch .tfc-pp-part-tint ul > li strong { color: var(--tfc-navy); }
+.tfc-pp-ch .tfc-pp-part-wide { display: block; }
+.tfc-pp-ch .tfc-pp-part-wide > * { max-width: none; }
+.tfc-pp-ch .tfc-pp-part-wide h2 { margin: 0 0 56px; }
+
+/* plain: white */
+.tfc-pp-ch .tfc-pp-part-plain { padding: 104px 0 96px; }
+.tfc-pp-ch .tfc-pp-part-plain p { color: var(--tfc-mute); }
+
+/* ask: deep-navy band, one big statement or a short list */
+.tfc-pp-ch .tfc-pp-part-ask { padding: 112px 0; background: var(--tfc-deep); box-shadow: 0 0 0 100vmax var(--tfc-deep); clip-path: inset(0 -100vmax); }
+.tfc-pp-ch .tfc-pp-part-ask h2 { padding-top: 12px; font-size: 1.25rem; font-weight: 600; letter-spacing: 0; color: var(--tfc-amber); }
+.tfc-pp-ch .tfc-pp-part-ask p { max-width: none; margin: 0; font-size: clamp(1.7rem, 3.2cqi, 2.4rem); line-height: 1.22; font-weight: 400; letter-spacing: -.012em; color: #fff; }
+.tfc-pp-ch .tfc-pp-part-ask ul { max-width: none; margin: 0; padding: 0; list-style: none; }
+.tfc-pp-ch .tfc-pp-part-ask ul > li { position: relative; margin: 0; padding: 28px 0 28px 36px; border-top: 1px solid rgba(255, 255, 255, .2); font-size: clamp(1.2rem, 2cqi, 1.6rem); line-height: 1.4; color: #cdd9ec; }
+.tfc-pp-ch .tfc-pp-part-ask ul > li:first-child { padding-top: 0; border-top: 0; }
+.tfc-pp-ch .tfc-pp-part-ask ul > li:last-child { padding-bottom: 0; }
+.tfc-pp-ch .tfc-pp-part-ask ul > li::before { content: ""; position: absolute; left: 0; top: calc(28px + .7em - 6px); width: 12px; height: 12px; border-radius: 50%; background: var(--tfc-amber); }
+.tfc-pp-ch .tfc-pp-part-ask ul > li:first-child::before { top: calc(.7em - 6px); }
+.tfc-pp-ch .tfc-pp-part-ask ul > li strong { color: #fff; font-weight: 600; }
+
+/* figures: cards */
+.tfc-pp-ch .tfc-pp-figs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; padding: 104px 0 28px; }
+.tfc-pp-ch .tfc-pp-fig { margin: 0; padding: 38px 42px; border: 1px solid #dbe4f0; border-radius: 24px; background: #fff; box-shadow: none; }
+.tfc-pp-ch .tfc-pp-fig h3 { margin: 0 0 6px; font-size: 1.5rem; line-height: 1.3; font-weight: 600; letter-spacing: -.01em; }
+.tfc-pp-ch .tfc-pp-fig-sub { font-size: .95rem; }
+.tfc-pp-ch .tfc-pp-track { height: 22px; border-radius: 999px; background: #edf2f9; }
+.tfc-pp-ch .tfc-pp-track i { border-radius: 999px; opacity: 1; background: #b6cbe8; }
+.tfc-pp-ch .tfc-pp-hb.hi .tfc-pp-track i { background: linear-gradient(90deg, #3c73b9, #5f98da); }
+.tfc-pp-ch .tfc-pp-table th { border-bottom: 1.5px solid var(--tfc-navy); }
+.tfc-pp-ch .tfc-pp-table tr.hi td { background: #f1f6fc; }
+.tfc-pp-ch .tfc-pp-part-src { display: block; padding: 8px 0 64px; }
+
+/* agenda, call to action, links */
+.tfc-pp-ch .tfc-pp-part-agenda { padding: 52px 0; border-top: 1px solid #dbe4f0; }
+.tfc-pp-ch .tfc-pp-part-agenda h2 { font-size: 1.6rem; }
+.tfc-pp-ch .tfc-pp-cta { margin: 16px 0 0; padding: 68px; border-radius: 28px; background: linear-gradient(120deg, #16223a 0%, #2a4d85 100%); }
+.tfc-pp-ch .tfc-pp-cta h2 { font-size: 2.3rem; line-height: 1.1; letter-spacing: -.012em; }
+.tfc-pp-ch .tfc-pp-cta p { font-size: 1.1rem; }
+.tfc-pp-ch .tfc-pp-cta a.tfc-btn.sqs-button-element--primary { border-color: var(--tfc-amber) !important; border-radius: 999px !important; background: var(--tfc-amber) !important; color: var(--tfc-deep) !important; }
+.tfc-pp-ch .tfc-pp-cta a.tfc-btn.sqs-button-element--secondary { border: 1.5px solid rgba(255, 255, 255, .55) !important; border-radius: 999px !important; background: transparent !important; color: #fff !important; }
+.tfc-pp-ch .tfc-pp-more { margin: 40px 0 0; padding: 0 0 80px; border: 0; }
+
+/* narrower containers */
+@container (max-width: 1100px) {
+    .tfc-pp-ch .tfc-pp-figs { grid-template-columns: minmax(0, 1fr); }
+    .tfc-pp-ch:not(.tfc-pp-cr) .tfc-pp-stat { padding: 32px 30px 30px; }
+}
+@container (max-width: 900px) {
+    .tfc-pp-ch .tfc-pp-hero { grid-template-columns: minmax(0, 1fr); padding: 48px 0 150px; }
+    .tfc-pp-ch .tfc-pp-title, .tfc-pp-ch .tfc-pp-ask, .tfc-pp-ch .tfc-pp-lede { grid-column: 1; grid-row: auto; }
+    .tfc-pp-ch .tfc-pp-title { margin: 20px 0 0; }
+    .tfc-pp-ch .tfc-pp-ask { max-width: 36ch; margin: 22px 0 12px; }
+    .tfc-pp-ch .tfc-pp-lede { max-width: 56ch; }
+    .tfc-pp-ch .tfc-pp-stats { margin-top: -96px; }
+    .tfc-pp-ch:not(.tfc-pp-cr) .tfc-pp-stats { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .tfc-pp-ch .tfc-pp-part-lead, .tfc-pp-ch .tfc-pp-part-tint, .tfc-pp-ch .tfc-pp-part-plain, .tfc-pp-ch .tfc-pp-part-ask, .tfc-pp-ch .tfc-pp-part-agenda { display: block; }
+    .tfc-pp-ch .tfc-pp-section h2 { margin: 0 0 22px; font-size: 2rem; }
+    .tfc-pp-ch .tfc-pp-part-lead { padding: 80px 0 64px; }
+    .tfc-pp-ch .tfc-pp-part-tint { padding: 64px 0 72px; }
+    .tfc-pp-ch .tfc-pp-part-plain { padding: 72px 0 64px; }
+    .tfc-pp-ch .tfc-pp-part-wide h2 { margin-bottom: 36px; }
+    .tfc-pp-ch .tfc-pp-part-ask { padding: 80px 0; }
+    .tfc-pp-ch .tfc-pp-part-ask h2 { padding-top: 0; margin-bottom: 18px; }
+    .tfc-pp-ch .tfc-pp-figs { padding-top: 72px; }
+    .tfc-pp-ch .tfc-pp-part-agenda { padding: 44px 0; }
+    .tfc-pp-ch .tfc-pp-cta { padding: 48px 40px; }
+}
+@container (max-width: 760px) {
+    .tfc-pp-ch .tfc-pp-fig { padding: 28px 22px; border-radius: 20px; }
+}
+@container (max-width: 560px) {
+    .tfc-pp-ch .tfc-pp-hero { padding: 36px 0 128px; }
+    .tfc-pp-ch .tfc-pp-title { font-size: 2.3rem; }
+    .tfc-pp-ch .tfc-pp-ask { font-size: 1.2rem; }
+    .tfc-pp-ch .tfc-pp-lede { font-size: 1rem; }
+    .tfc-pp-ch .tfc-pp-stats { margin-top: -88px; }
+    .tfc-pp-ch .tfc-pp-stat { padding: 26px 24px; border-radius: 20px; }
+    .tfc-pp-ch .tfc-pp-stat-num { font-size: 3rem; }
+    .tfc-pp-ch .tfc-pp-stat-label { font-size: 1rem; }
+    .tfc-pp-ch .tfc-pp-section h2 { font-size: 1.8rem; }
+    .tfc-pp-ch .tfc-pp-part-lead { padding: 64px 0 48px; }
+    .tfc-pp-ch .tfc-pp-part-lead h2 + p { font-size: 1.25rem; }
+    .tfc-pp-ch .tfc-pp-part-tint ul > li { font-size: 1.15rem; }
+    .tfc-pp-ch .tfc-pp-part-ask { padding: 64px 0; }
+    .tfc-pp-ch .tfc-pp-fig { padding: 24px 16px; }
+    .tfc-pp-ch .tfc-pp-fig h3 { font-size: 1.3rem; }
+    .tfc-pp-ch .tfc-pp-cta { padding: 36px 24px; border-radius: 22px; }
+    .tfc-pp-ch .tfc-pp-cta h2 { font-size: 1.8rem; }
+    .tfc-pp-ch .tfc-pp-more { padding-bottom: 56px; }
+}
+"""
+
+# Credits page only: 2 stat cards with the credit breakdown bar, the timeline, the table dots.
+CR_EXTRA = """
+/* ===== Credits page ===== */
+.tfc-pp-cr .tfc-pp-stats { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.tfc-pp-cr .tfc-pp-stat-num { font-size: clamp(2.8rem, 6.2cqi, 4.8rem); }
+.tfc-pp-seg { display: flex; gap: 4px; height: 14px; margin: 30px 0 16px; }
+.tfc-pp-seg i { display: block; border-radius: 999px; }
+.tfc-pp-seg i:nth-child(1), .tfc-pp-seg-key li:nth-child(1) b { background: var(--tfc-navy); }
+.tfc-pp-seg i:nth-child(2), .tfc-pp-seg-key li:nth-child(2) b { background: var(--tfc-blue); }
+.tfc-pp-seg i:nth-child(3), .tfc-pp-seg-key li:nth-child(3) b { background: var(--tfc-amber); }
+.tfc-pp-seg-key { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; padding: 0; list-style: none; }
+.tfc-pp-seg-key li { display: flex; align-items: center; gap: 8px; margin: 0; font-size: .92rem; color: var(--tfc-mute); }
+.tfc-pp-seg-key b { flex: none; width: 10px; height: 10px; border-radius: 50%; }
+.tfc-pp-seg-key em { font-style: normal; font-weight: 700; color: var(--tfc-navy); }
+.tfc-pp-cr .tfc-pp-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; border-left: 0; }
+.tfc-pp-cr .tfc-pp-steps li { margin: 0; padding: 46px 40px 0 0; font-size: 1.05rem; line-height: 1.5; color: #3d4c68; }
+.tfc-pp-cr .tfc-pp-steps li::before { left: 0; top: 0; width: 22px; height: 22px; border: 4px solid var(--tfc-blue); background: var(--tfc-pale); }
+.tfc-pp-cr .tfc-pp-steps li::after { content: ""; position: absolute; top: 10px; left: 34px; right: 12px; height: 2px; background: #b3c8e6; }
+.tfc-pp-cr .tfc-pp-steps li.end::after { display: none; }
+.tfc-pp-cr .tfc-pp-steps li.end::before { background: var(--tfc-amber); border-color: var(--tfc-amber); box-shadow: 0 0 0 8px rgba(245, 165, 36, .3); }
+.tfc-pp-cr .tfc-pp-steps b { margin-bottom: 10px; font-size: 1.7rem; line-height: 1.15; font-weight: 600; }
+.tfc-pp-cr .tfc-pp-steps li.end { font-weight: 600; color: var(--tfc-ink); }
+.tfc-pp-cr .tfc-pp-steps li.end b { color: #9a5a00; }
+.tfc-pp-cr .tfc-pp-figs > .tfc-pp-fig:nth-child(3) { grid-column: 1 / -1; }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) th:first-child { width: 44%; }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr td:first-child::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 10px; border-radius: 50%; }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr:nth-child(1) td:first-child::before { background: var(--tfc-navy); }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr:nth-child(2) td:first-child::before { background: var(--tfc-blue); }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr:nth-child(3) td:first-child::before { background: var(--tfc-amber); }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr.hi td { background: none; font-weight: 400; }
+@container (max-width: 900px) {
+    .tfc-pp-cr .tfc-pp-steps { grid-template-columns: minmax(0, 1fr); margin-left: 11px; border-left: 3px solid #b3c8e6; }
+    .tfc-pp-cr .tfc-pp-steps li { padding: 0 0 30px 32px; }
+    .tfc-pp-cr .tfc-pp-steps li:last-child { padding-bottom: 0; }
+    .tfc-pp-cr .tfc-pp-steps li::before { left: -12.5px; top: 2px; }
+    .tfc-pp-cr .tfc-pp-steps li::after { display: none; }
+    .tfc-pp-cr .tfc-pp-steps b { font-size: 1.45rem; }
+}
+@container (max-width: 760px) {
+    .tfc-pp-cr .tfc-pp-stats { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .tfc-pp-cr .tfc-pp-stat:last-child { justify-content: flex-start; }
+}
+@container (max-width: 560px) {
+    .tfc-pp-cr .tfc-pp-stat-num { font-size: 3.4rem; }
+    .tfc-pp-seg { margin: 24px 0 14px; }
+}
+"""
+
+# Capital gains page only: the two-rate comparison bars and the figure layout.
+CG_EXTRA = """
+/* ===== Capital gains page ===== */
+.tfc-pp-cg .tfc-pp-figs > .tfc-pp-fig:first-child { grid-column: 1 / -1; }
+.tfc-pp-cg .tfc-pp-bars { max-width: none; margin: 26px 0 30px; padding: 0; list-style: none; }
+.tfc-pp-cg .tfc-pp-bars li { grid-template-columns: 190px minmax(0, 1fr) 68px; gap: 16px; margin: 0 0 14px; font-size: 1rem; color: var(--tfc-navy); }
+.tfc-pp-cg .tfc-pp-bar { height: 26px; border-radius: 999px; }
+.tfc-pp-cg .tfc-pp-bars b { font-size: 1.15rem; }
+@container (max-width: 760px) {
+    .tfc-pp-cg .tfc-pp-bars li { grid-template-columns: minmax(0, 1fr) 60px; gap: 6px 12px; }
+    .tfc-pp-cg .tfc-pp-bars li span { grid-column: 1 / -1; }
+    .tfc-pp-cg .tfc-pp-bars li .tfc-pp-bar { grid-column: 1; }
+}
+"""
+
+# Conveyance page only: thicker bars.
+CV_EXTRA = """
+/* ===== Conveyance page ===== */
+.tfc-pp-cv .tfc-pp-stack-bar { height: 34px; }
+.tfc-pp-cv .tfc-pp-stack-bar i { border-radius: 8px; }
+"""
+
+def mark(html, parts):
+    """Give the sections whose heading matches a part class, so the CSS does not depend on element order."""
+    for name, cls in parts.items():
+        old = f'<section class="tfc-pp-section">\n        <h2>{name}</h2>'
+        assert html.count(old) == 1, name
+        html = html.replace(old, f'<section class="tfc-pp-section {cls}">\n        <h2>{name}</h2>')
+    return html
+
+def mark_src(html, expect):
+    old = '<section class="tfc-pp-section">\n        <p class="tfc-pp-source">'
+    assert html.count(old) == expect, (html.count(old), expect)
+    return html.replace(old, '<section class="tfc-pp-section tfc-pp-part-src">\n        <p class="tfc-pp-source">')
+
+
 OTHERS = {
  "cg": ("/capital-gains", "Tax Profits Like Paychecks"),
  "cr": ("/tax-credits-2", "Preserve Working Families&rsquo; Tax Credits"),
@@ -261,9 +481,10 @@ cg = page("cg", 2,
             <li>Raise about <strong>$179 million in 2027</strong> ($130 million from residents and $49 million from nonresidents).</li>
             <li>Collect about <strong>92 percent</strong> of the resident revenue from the top 1 percent of households. Most local families would pay nothing more.</li>
             <li>A 9% cap on capital gains would raise about <strong>$67 million</strong> ($48 million from residents and $19 million from nonresidents).</li>
-        </ul>""") + "\n    </section>\n" + CG_FIG0 + CG_FIG1 + CG_FIG2 + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Estimate: Hawai&#699;i Appleseed estimate, Census-Forecaster tax model, tax year 2027, Act 24 brackets, accounting for fewer gains being realized at a higher rate.</p>',
+        </ul>""") + "\n    </section>\n" + '    <div class="tfc-pp-figs">\n' + CG_FIG0 + CG_FIG1 + CG_FIG2 + '    </div>\n' + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Estimate: Hawai&#699;i Appleseed estimate, Census-Forecaster tax model, tax year 2027, Act 24 brackets, accounting for fewer gains being realized at a higher rate.</p>',
  ],
- "Help us close the gap", "Sign up and we&rsquo;ll tell you when this bill is moving and when to submit testimony.")
+ "Help us close the gap", "Sign up and we&rsquo;ll tell you when this bill is moving and when to submit testimony.",
+ root_cls="tfc-pp-ch tfc-pp-cg")
 
 
 CR_AMTS = [("Earned Income Tax Credit", 40.3), ("Food/excise tax credit", 33.6), ("Child and dependent care tax credit", 9.2)]
@@ -310,8 +531,9 @@ cr = page("cr", 3,
      ages 0-18) and RxKids note carries over from the previous version of this page. The child and dependent
      care credit sentence in the intro mirrors the Top Three fact sheet's page 1 bullet: no figure and no
      Act 163 claim (the Estimates report covers only the EITC and food/excise changes). "Chapters" layout
-     (Nov 2026, Devin picked it from three mockups): navy hero flush under the site header, full-width bands
-     per section (pale-blue timeline, deep-navy ask), cards for the figures. The three credit amounts
+     (Nov 2026, Devin picked it from three mockups, then asked for the other two pages to match): navy hero
+     flush under the site header, full-width bands per section (pale-blue timeline, deep-navy ask), cards for
+     the figures. The three credit amounts
      (CR_AMTS in tools/build_priority_pages.py) feed the segmented bar and the credits table. The section's own
      top and bottom padding is removed by the CSS at the end so the hero touches the header; its background is
      white. Sections carry tfc-pp-part-* classes (added by the generator) so the CSS does not depend on order.""",
@@ -335,152 +557,9 @@ cr = page("cr", 3,
   sec("Also on our agenda", """        <p>We also support a refundable state Child Tax Credit of $650 per child aged 0&ndash;18, and RxKids, which would give cash payments to mothers in the first months of a child&rsquo;s life. We will post updates here as those proposals move.</p>"""),
  ],
  "Help us keep these credits", "Sign up and we&rsquo;ll tell you when these bills are moving and when to submit testimony.",
- root_cls="tfc-pp-cr")
+ root_cls="tfc-pp-ch tfc-pp-cr")
 
-# Section classes for the credits page, so its CSS does not depend on element order.
-for _name, _cls in (("What is at stake", "stake"), ("The timeline", "timeline"), ("What we are asking for", "ask"), ("Also on our agenda", "agenda")):
-    _old = f'<section class="tfc-pp-section">\n        <h2>{_name}</h2>'
-    assert cr.count(_old) == 1, _name
-    cr = cr.replace(_old, f'<section class="tfc-pp-section tfc-pp-part-{_cls}">\n        <h2>{_name}</h2>')
-_old = '<section class="tfc-pp-section">\n        <p class="tfc-pp-source">'
-assert cr.count(_old) == 1
-cr = cr.replace(_old, '<section class="tfc-pp-section tfc-pp-part-src">\n        <p class="tfc-pp-source">')
-
-# "Chapters" look for the credits page only (the other two priority pages keep the shared CSS above).
-CR_CHAPTERS = """
-/* ===== Credits page: Chapters layout ===== */
-body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-cr) .content-wrapper { padding-top: 0 !important; padding-bottom: 0 !important; }
-.tfc-pp-cr { --tfc-deep: #16223a; --tfc-pale: #eaf1fa; --tfc-amber: #f5a524; --tfc-mute: #46536b; --tfc-ink: #1c2740; margin: 0; }
-
-/* hero: navy band flush under the header; ask and intro sit beside the title */
-.tfc-pp-cr .tfc-pp-hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 80px; align-items: start; margin: 0; padding: 60px 0 180px; border: 0; background: var(--tfc-navy); box-shadow: 0 0 0 100vmax var(--tfc-navy); clip-path: inset(0 -100vmax); }
-.tfc-pp-cr .tfc-pp-eyebrow { grid-column: 1 / -1; justify-self: start; margin-bottom: 6px; padding: 5px 14px; border: 1px solid rgba(255, 255, 255, .24); background: rgba(255, 255, 255, .1); color: #d3e2f7; font-size: .8rem; font-weight: 600; letter-spacing: .02em; text-transform: none; }
-.tfc-pp-cr .tfc-pp-title { grid-column: 1; grid-row: 2 / 4; max-width: 15ch; margin: 22px 0 0; font-size: clamp(2.4rem, 5.2cqi, 4.3rem); line-height: 1.02; letter-spacing: -.012em; color: #fff; }
-.tfc-pp-cr .tfc-pp-ask { grid-column: 2; grid-row: 2; max-width: 30ch; margin: 34px 0 14px; font-size: 1.45rem; font-weight: 600; color: #fff; }
-.tfc-pp-cr .tfc-pp-lede { grid-column: 2; grid-row: 3; max-width: 46ch; margin: 0; font-size: 1.1rem; color: #b9c8df; }
-
-/* stat cards overlap the hero; the first one carries the credit breakdown */
-.tfc-pp-cr .tfc-pp-stats { position: relative; z-index: 2; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px; margin: -104px 0 0; }
-.tfc-pp-cr .tfc-pp-stat { padding: 38px 42px 36px; border: 0; border-radius: 24px; background: #fff; box-shadow: 0 30px 60px -28px rgba(10, 20, 40, .55), 0 2px 6px rgba(10, 20, 40, .08); }
-.tfc-pp-cr .tfc-pp-stat-num { font-size: clamp(2.8rem, 6.2cqi, 4.8rem); line-height: 1; letter-spacing: -.025em; }
-.tfc-pp-cr .tfc-pp-stat-label { max-width: 34ch; margin: 14px 0 0; font-size: 1.1rem; line-height: 1.45; color: var(--tfc-mute); }
-.tfc-pp-cr .tfc-pp-stat:nth-child(2) { display: flex; flex-direction: column; justify-content: center; background: var(--tfc-blue); }
-.tfc-pp-cr .tfc-pp-stat:nth-child(2) .tfc-pp-stat-num, .tfc-pp-cr .tfc-pp-stat:nth-child(2) .tfc-pp-stat-label { color: #fff; }
-.tfc-pp-seg { display: flex; gap: 4px; height: 14px; margin: 30px 0 16px; }
-.tfc-pp-seg i { display: block; border-radius: 999px; }
-.tfc-pp-seg i:nth-child(1), .tfc-pp-seg-key li:nth-child(1) b { background: var(--tfc-navy); }
-.tfc-pp-seg i:nth-child(2), .tfc-pp-seg-key li:nth-child(2) b { background: var(--tfc-blue); }
-.tfc-pp-seg i:nth-child(3), .tfc-pp-seg-key li:nth-child(3) b { background: var(--tfc-amber); }
-.tfc-pp-seg-key { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; padding: 0; list-style: none; }
-.tfc-pp-seg-key li { display: flex; align-items: center; gap: 8px; margin: 0; font-size: .92rem; color: var(--tfc-mute); }
-.tfc-pp-seg-key b { flex: none; width: 10px; height: 10px; border-radius: 50%; }
-.tfc-pp-seg-key em { font-style: normal; font-weight: 700; color: var(--tfc-navy); }
-
-/* sections */
-.tfc-pp-cr .tfc-pp-section { margin: 0; padding: 0; }
-.tfc-pp-cr .tfc-pp-section h2 { padding-top: 0; border-top: 0; font-size: 2.5rem; line-height: 1.08; font-weight: 400; letter-spacing: -.012em; }
-.tfc-pp-cr .tfc-pp-part-stake { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 56px; padding: 112px 0 96px; }
-.tfc-pp-cr .tfc-pp-part-stake p { color: var(--tfc-mute); }
-.tfc-pp-cr .tfc-pp-part-stake h2 + p { margin-bottom: 22px; font-size: 1.55rem; line-height: 1.42; color: var(--tfc-navy); }
-.tfc-pp-cr .tfc-pp-part-timeline { display: block; padding: 92px 0 100px; background: var(--tfc-pale); box-shadow: 0 0 0 100vmax var(--tfc-pale); clip-path: inset(0 -100vmax); }
-.tfc-pp-cr .tfc-pp-part-timeline > * { max-width: none; }
-.tfc-pp-cr .tfc-pp-part-timeline h2 { margin: 0 0 56px; }
-.tfc-pp-cr .tfc-pp-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; border-left: 0; }
-.tfc-pp-cr .tfc-pp-steps li { margin: 0; padding: 46px 40px 0 0; font-size: 1.05rem; line-height: 1.5; color: #3d4c68; }
-.tfc-pp-cr .tfc-pp-steps li::before { left: 0; top: 0; width: 22px; height: 22px; border: 4px solid var(--tfc-blue); background: var(--tfc-pale); }
-.tfc-pp-cr .tfc-pp-steps li::after { content: ""; position: absolute; top: 10px; left: 34px; right: 12px; height: 2px; background: #b3c8e6; }
-.tfc-pp-cr .tfc-pp-steps li.end::after { display: none; }
-.tfc-pp-cr .tfc-pp-steps li.end::before { background: var(--tfc-amber); border-color: var(--tfc-amber); box-shadow: 0 0 0 8px rgba(245, 165, 36, .3); }
-.tfc-pp-cr .tfc-pp-steps b { margin-bottom: 10px; font-size: 1.7rem; line-height: 1.15; font-weight: 600; }
-.tfc-pp-cr .tfc-pp-steps li.end { font-weight: 600; color: var(--tfc-ink); }
-.tfc-pp-cr .tfc-pp-steps li.end b { color: #9a5a00; }
-.tfc-pp-cr .tfc-pp-part-ask { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 56px; padding: 112px 0; background: var(--tfc-deep); box-shadow: 0 0 0 100vmax var(--tfc-deep); clip-path: inset(0 -100vmax); }
-.tfc-pp-cr .tfc-pp-part-ask h2 { padding-top: 12px; font-size: 1.25rem; font-weight: 600; letter-spacing: 0; color: var(--tfc-amber); }
-.tfc-pp-cr .tfc-pp-part-ask p { max-width: none; margin: 0; font-size: clamp(1.7rem, 3.2cqi, 2.4rem); line-height: 1.22; font-weight: 400; letter-spacing: -.012em; color: #fff; }
-
-/* figures */
-.tfc-pp-cr .tfc-pp-figs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; padding: 104px 0 28px; }
-.tfc-pp-cr .tfc-pp-figs > .tfc-pp-fig:nth-child(3) { grid-column: 1 / -1; }
-.tfc-pp-cr .tfc-pp-fig { margin: 0; padding: 38px 42px; border: 1px solid #dbe4f0; border-radius: 24px; background: #fff; box-shadow: none; }
-.tfc-pp-cr .tfc-pp-fig h3 { margin: 0 0 6px; font-size: 1.5rem; line-height: 1.3; font-weight: 600; letter-spacing: -.01em; }
-.tfc-pp-cr .tfc-pp-fig-sub { font-size: .95rem; }
-.tfc-pp-cr .tfc-pp-track { height: 22px; border-radius: 999px; background: #edf2f9; }
-.tfc-pp-cr .tfc-pp-track i { border-radius: 999px; opacity: 1; background: #b6cbe8; }
-.tfc-pp-cr .tfc-pp-hb.hi .tfc-pp-track i { background: linear-gradient(90deg, #3c73b9, #5f98da); }
-.tfc-pp-cr .tfc-pp-table th { border-bottom: 1.5px solid var(--tfc-navy); }
-.tfc-pp-cr .tfc-pp-table tr.hi td { background: #f1f6fc; }
-.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) th:first-child { width: 44%; }
-.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr td:first-child::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 10px; border-radius: 50%; }
-.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr:nth-child(1) td:first-child::before { background: var(--tfc-navy); }
-.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr:nth-child(2) td:first-child::before { background: var(--tfc-blue); }
-.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr:nth-child(3) td:first-child::before { background: var(--tfc-amber); }
-.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr.hi td { background: none; font-weight: 400; }
-.tfc-pp-cr .tfc-pp-part-src { display: block; padding: 8px 0 64px; }
-
-/* agenda, call to action */
-.tfc-pp-cr .tfc-pp-part-agenda { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 56px; padding: 52px 0; border-top: 1px solid #dbe4f0; }
-.tfc-pp-cr .tfc-pp-part-agenda h2 { font-size: 1.6rem; }
-.tfc-pp-cr .tfc-pp-cta { margin: 16px 0 0; padding: 68px; border-radius: 28px; background: linear-gradient(120deg, #16223a 0%, #2a4d85 100%); }
-.tfc-pp-cr .tfc-pp-cta h2 { font-size: 2.3rem; line-height: 1.1; letter-spacing: -.012em; }
-.tfc-pp-cr .tfc-pp-cta p { font-size: 1.1rem; }
-.tfc-pp-cr .tfc-pp-cta a.tfc-btn.sqs-button-element--primary { border-color: var(--tfc-amber) !important; border-radius: 999px !important; background: var(--tfc-amber) !important; color: var(--tfc-deep) !important; }
-.tfc-pp-cr .tfc-pp-cta a.tfc-btn.sqs-button-element--secondary { border: 1.5px solid rgba(255, 255, 255, .55) !important; border-radius: 999px !important; background: transparent !important; color: #fff !important; }
-.tfc-pp-cr .tfc-pp-more { margin: 40px 0 0; padding: 0 0 80px; border: 0; }
-
-/* narrower containers */
-@container (max-width: 1100px) {
-    .tfc-pp-cr .tfc-pp-figs { grid-template-columns: minmax(0, 1fr); }
-}
-@container (max-width: 900px) {
-    .tfc-pp-cr .tfc-pp-hero { grid-template-columns: minmax(0, 1fr); padding: 48px 0 150px; }
-    .tfc-pp-cr .tfc-pp-title, .tfc-pp-cr .tfc-pp-ask, .tfc-pp-cr .tfc-pp-lede { grid-column: 1; grid-row: auto; }
-    .tfc-pp-cr .tfc-pp-title { margin: 20px 0 0; }
-    .tfc-pp-cr .tfc-pp-ask { max-width: 36ch; margin: 22px 0 12px; }
-    .tfc-pp-cr .tfc-pp-lede { max-width: 56ch; }
-    .tfc-pp-cr .tfc-pp-stats { margin-top: -96px; }
-    .tfc-pp-cr .tfc-pp-part-stake, .tfc-pp-cr .tfc-pp-part-ask, .tfc-pp-cr .tfc-pp-part-agenda { display: block; }
-    .tfc-pp-cr .tfc-pp-section h2 { margin: 0 0 22px; font-size: 2rem; }
-    .tfc-pp-cr .tfc-pp-part-stake { padding: 80px 0 64px; }
-    .tfc-pp-cr .tfc-pp-part-timeline { padding: 64px 0 72px; }
-    .tfc-pp-cr .tfc-pp-part-timeline h2 { margin-bottom: 36px; }
-    .tfc-pp-cr .tfc-pp-steps { grid-template-columns: minmax(0, 1fr); margin-left: 11px; border-left: 3px solid #b3c8e6; }
-    .tfc-pp-cr .tfc-pp-steps li { padding: 0 0 30px 32px; }
-    .tfc-pp-cr .tfc-pp-steps li:last-child { padding-bottom: 0; }
-    .tfc-pp-cr .tfc-pp-steps li::before { left: -12.5px; top: 2px; }
-    .tfc-pp-cr .tfc-pp-steps li::after { display: none; }
-    .tfc-pp-cr .tfc-pp-steps b { font-size: 1.45rem; }
-    .tfc-pp-cr .tfc-pp-part-ask { padding: 80px 0; }
-    .tfc-pp-cr .tfc-pp-part-ask h2 { padding-top: 0; margin-bottom: 18px; }
-    .tfc-pp-cr .tfc-pp-figs { padding-top: 72px; }
-    .tfc-pp-cr .tfc-pp-part-agenda { padding: 44px 0; }
-    .tfc-pp-cr .tfc-pp-cta { padding: 48px 40px; }
-}
-@container (max-width: 760px) {
-    .tfc-pp-cr .tfc-pp-stats { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-    .tfc-pp-cr .tfc-pp-stat:nth-child(2) { justify-content: flex-start; }
-    .tfc-pp-cr .tfc-pp-fig { padding: 28px 22px; border-radius: 20px; }
-}
-@container (max-width: 560px) {
-    .tfc-pp-cr .tfc-pp-hero { padding: 36px 0 128px; }
-    .tfc-pp-cr .tfc-pp-title { font-size: 2.3rem; }
-    .tfc-pp-cr .tfc-pp-ask { font-size: 1.2rem; }
-    .tfc-pp-cr .tfc-pp-lede { font-size: 1rem; }
-    .tfc-pp-cr .tfc-pp-stats { margin-top: -88px; }
-    .tfc-pp-cr .tfc-pp-stat { padding: 26px 24px; border-radius: 20px; }
-    .tfc-pp-cr .tfc-pp-stat-label { font-size: 1rem; }
-    .tfc-pp-cr .tfc-pp-seg { margin: 24px 0 14px; }
-    .tfc-pp-cr .tfc-pp-section h2 { font-size: 1.8rem; }
-    .tfc-pp-cr .tfc-pp-part-stake { padding: 64px 0 48px; }
-    .tfc-pp-cr .tfc-pp-part-stake h2 + p { font-size: 1.25rem; }
-    .tfc-pp-cr .tfc-pp-part-ask { padding: 64px 0; }
-    .tfc-pp-cr .tfc-pp-fig { padding: 24px 16px; }
-    .tfc-pp-cr .tfc-pp-fig h3 { font-size: 1.3rem; }
-    .tfc-pp-cr .tfc-pp-cta { padding: 36px 24px; border-radius: 22px; }
-    .tfc-pp-cr .tfc-pp-cta h2 { font-size: 1.8rem; }
-    .tfc-pp-cr .tfc-pp-more { padding-bottom: 56px; }
-}
-"""
-cr = cr.replace("</style>", CR_CHAPTERS + "</style>", 1)
+# (the Chapters CSS and section classes for all three pages are applied just before the files are written, below)
 
 
 CV_ALLOC = fig("Where the money goes today",
@@ -552,20 +631,29 @@ cv = page("cv", 1,
   sec("Where the conveyance tax stands", """        <p>The conveyance tax is paid when real estate changes hands. Its rates were last changed in 2009, and property values in Hawai&#699;i have risen considerably since then. Today its revenue goes to the general fund, the Land Conservation Fund and the Rental Housing Revolving Fund. It does not currently include funding for the Department of Hawaiian Home Lands (DHHL).</p>
         <p>DHHL&rsquo;s waitlist for a homestead had 29,589 applicants as of November 2025.</p>"""),
   sec("Where the money goes today", """        <p>The law splits conveyance tax collections three ways. The Rental Housing Revolving Fund gets 50 percent, up to $38 million a year. The Land Conservation Fund gets 10 percent, up to $5.1 million a year. The general fund gets the rest. Hawaiian Home Lands is not currently part of the split.</p>
-        <p>Because both funds are capped, once collections pass about $76 million a year, every added dollar goes to the general fund.</p>""") + "\n    </section>\n" + CV_ALLOC + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Rates and allocation: Hawai&#699;i Revised Statutes sections 247-2 and 247-7.</p>',
+        <p>Because both funds are capped, once collections pass about $76 million a year, every added dollar goes to the general fund.</p>""" + "\n" + CV_ALLOC + '        <p class="tfc-pp-source">Rates and allocation: Hawai&#699;i Revised Statutes sections 247-2 and 247-7.</p>'),
   sec("Why the tax should be marginal", """        <p>Today the conveyance tax has price tiers, and the rate for a sale&rsquo;s tier applies to the entire price. When a sale crosses into the next tier, the higher rate applies to every dollar, not just the dollars above the line. That creates cliffs: an owner-occupied home that sells for $4,000,000 owes $8,005 more in tax than one that sells for $3,999,000. It also gives sellers a reason to price a home just under each line.</p>
         <p>A <strong>marginal</strong> tax works like income tax brackets: each rate applies only to the slice of the price inside its band, so the tax rises smoothly as the price does.</p>
-        <p>That is what lets the tax ask much more of the most expensive sales while charging typical buyers less. Under the Legislature&rsquo;s April 2026 draft, buyers who live in the home would owe less than today on every sale up to about $2.25 million, and other residential buyers on every sale up to about $2.07 million.</p>""") + "\n    </section>\n" + CV_CLIFF + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Draft: SB 3028 SD2 HD2 (April 8, 2026), which died in conference.</p>',
+        <p>That is what lets the tax ask much more of the most expensive sales while charging typical buyers less. Under the Legislature&rsquo;s April 2026 draft, buyers who live in the home would owe less than today on every sale up to about $2.25 million, and other residential buyers on every sale up to about $2.07 million.</p>""" + "\n" + CV_CLIFF + '        <p class="tfc-pp-source">Draft: SB 3028 SD2 HD2 (April 8, 2026), which died in conference.</p>'),
   sec("What we are asking for", """        <ul>
             <li><strong>Switch to marginal rates</strong>, so each rate applies only to the part of the price in its band and there are no cliffs.</li>
             <li><strong>Ask more of high-value and investment property sales</strong>, while protecting local families buying a home to live in.</li>
             <li><strong>Dedicate the new revenue to DHHL</strong>, so the trust can build homes and infrastructure for its beneficiaries.</li>
         </ul>"""),
   sec("What it could raise", """        <p>A House committee estimated what the conveyance tax would bring in if SB 3028 used the rates of HB 2049 HD3: <strong>$271 million in total in FY2027, rising to $303 million by FY2031</strong>. That is all conveyance tax revenue, not just the increase. It would fill every special fund to its cap, including <strong>$60 million a year for DHHL</strong>, and send the rest to the general fund.</p>
-        <p>SB 3028 SD2 HD2, the last draft before the bill died in conference, would send 30 percent of collections, up to $60 million a year, to Hawaiian Home Lands, along with dedicated funding for rental housing, urban development, and land conservation.</p>""") + "\n    </section>\n" + CV_FIG + CV_FIG2 + CV_FIG3 + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Estimate: House committee report, SB 3028 SD2 HD1 with the rates of HB 2049 HD3 (2026), FY2027&ndash;FY2031; applies to residential property.</p>',
+        <p>SB 3028 SD2 HD2, the last draft before the bill died in conference, would send 30 percent of collections, up to $60 million a year, to Hawaiian Home Lands, along with dedicated funding for rental housing, urban development, and land conservation.</p>""" + "\n" + CV_FIG + CV_FIG2 + CV_FIG3 + '        <p class="tfc-pp-source">Estimate: House committee report, SB 3028 SD2 HD1 with the rates of HB 2049 HD3 (2026), FY2027&ndash;FY2031; applies to residential property.</p>'),
  ],
- "Help us fund Hawaiian homes", "Sign up and we&rsquo;ll tell you when this bill is moving and when to submit testimony.")
+ "Help us fund Hawaiian homes", "Sign up and we&rsquo;ll tell you when this bill is moving and when to submit testimony.",
+ root_cls="tfc-pp-ch tfc-pp-cv")
 
+cg = mark(cg, {"The loophole": "tfc-pp-part-lead", "What we are asking for": "tfc-pp-part-ask", "What it would do": "tfc-pp-part-tint"})
+cg = mark_src(cg, 1)
+cg = cg.replace("</style>", CHAPTERS + CG_EXTRA + "</style>", 1)
+cr = mark(cr, {"What is at stake": "tfc-pp-part-lead", "The timeline": "tfc-pp-part-tint tfc-pp-part-wide", "What we are asking for": "tfc-pp-part-ask", "Also on our agenda": "tfc-pp-part-agenda"})
+cr = mark_src(cr, 1)
+cr = cr.replace("</style>", CHAPTERS + CR_EXTRA + "</style>", 1)
+cv = mark(cv, {"Where the conveyance tax stands": "tfc-pp-part-lead", "Where the money goes today": "tfc-pp-part-tint", "Why the tax should be marginal": "tfc-pp-part-plain", "What we are asking for": "tfc-pp-part-ask", "What it could raise": "tfc-pp-part-tint"})
+cv = cv.replace("</style>", CHAPTERS + CV_EXTRA + "</style>", 1)
 open(OUT+"capital_gains_squarespace.html","w").write(cg)
 HIDE = """/* White behind this page (Devin, Nov 2026; tried warm sand first); replaces the section's grey #e0e0db. */
 body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp) .section-background { background-color: #ffffff !important; }
