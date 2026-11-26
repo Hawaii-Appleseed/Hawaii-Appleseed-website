@@ -196,12 +196,12 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 .tfc-pp-ch .tfc-pp-part-plain { padding: 104px 0 96px; }
 .tfc-pp-ch .tfc-pp-part-plain > p { color: var(--tfc-mute); }
 
-/* ask: deep-navy band, one big statement or a short list */
-.tfc-pp-ch .tfc-pp-part-ask { padding: 112px 0; background: var(--tfc-deep); box-shadow: 0 0 0 100vmax var(--tfc-deep); clip-path: inset(0 -100vmax); }
-.tfc-pp-ch .tfc-pp-part-ask h2 { padding-top: 12px; font-size: 1.25rem; font-weight: 600; letter-spacing: 0; color: var(--tfc-amber); }
+/* ask: brand-blue band, one big statement or a short list */
+.tfc-pp-ch .tfc-pp-part-ask { padding: 112px 0; background: var(--tfc-blue); box-shadow: 0 0 0 100vmax var(--tfc-blue); clip-path: inset(0 -100vmax); }
+.tfc-pp-ch .tfc-pp-part-ask h2 { padding-top: 12px; font-size: 1.25rem; font-weight: 600; letter-spacing: 0; color: #fff; }
 .tfc-pp-ch .tfc-pp-part-ask > p { max-width: none; margin: 0; font-size: clamp(1.7rem, 3.2cqi, 2.4rem); line-height: 1.22; font-weight: 400; letter-spacing: -.012em; color: #fff; }
 .tfc-pp-ch .tfc-pp-part-ask > ul { max-width: none; margin: 0; padding: 0; list-style: none; }
-.tfc-pp-ch .tfc-pp-part-ask > ul > li { position: relative; margin: 0; padding: 28px 0 28px 36px; border-top: 1px solid rgba(255, 255, 255, .2); font-size: clamp(1.2rem, 2cqi, 1.6rem); line-height: 1.4; color: #cdd9ec; }
+.tfc-pp-ch .tfc-pp-part-ask > ul > li { position: relative; margin: 0; padding: 28px 0 28px 36px; border-top: 1px solid rgba(255, 255, 255, .35); font-size: clamp(1.2rem, 2cqi, 1.6rem); line-height: 1.4; color: #fff; }
 .tfc-pp-ch .tfc-pp-part-ask > ul > li:first-child { padding-top: 0; border-top: 0; }
 .tfc-pp-ch .tfc-pp-part-ask > ul > li:last-child { padding-bottom: 0; }
 .tfc-pp-ch .tfc-pp-part-ask > ul > li::before { content: ""; position: absolute; left: 0; top: calc(28px + .7em - 6px); width: 12px; height: 12px; border-radius: 50%; background: var(--tfc-amber); }
@@ -228,9 +228,9 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 /* agenda, call to action, links */
 .tfc-pp-ch .tfc-pp-part-agenda { padding: 52px 0; border-top: 1px solid #dbe4f0; }
 .tfc-pp-ch .tfc-pp-part-agenda h2 { font-size: 1.6rem; }
-.tfc-pp-ch .tfc-pp-cta { margin: 16px 0 0; padding: 68px; border-radius: 28px; background: linear-gradient(120deg, #16223a 0%, #2a4d85 100%); }
+.tfc-pp-ch .tfc-pp-cta { margin: 16px 0 0; padding: 68px; border-radius: 28px; background: linear-gradient(120deg, #3c73b9 0%, #2f62a3 100%); }
 .tfc-pp-ch .tfc-pp-cta h2 { font-size: 2.3rem; line-height: 1.1; letter-spacing: -.012em; }
-.tfc-pp-ch .tfc-pp-cta p { font-size: 1.1rem; }
+.tfc-pp-ch .tfc-pp-cta p { font-size: 1.1rem; color: #fff; }
 .tfc-pp-ch .tfc-pp-cta a.tfc-btn.sqs-button-element--primary { border-color: var(--tfc-amber) !important; border-radius: 999px !important; background: var(--tfc-amber) !important; color: var(--tfc-deep) !important; }
 .tfc-pp-ch .tfc-pp-cta a.tfc-btn.sqs-button-element--secondary { border: 1.5px solid rgba(255, 255, 255, .55) !important; border-radius: 999px !important; background: transparent !important; color: #fff !important; }
 .tfc-pp-ch .tfc-pp-more { margin: 40px 0 0; padding: 0 0 80px; border: 0; }
@@ -536,7 +536,7 @@ cr = page("cr", 3,
      care credit sentence in the intro mirrors the Top Three fact sheet's page 1 bullet: no figure and no
      Act 163 claim (the Estimates report covers only the EITC and food/excise changes). "Chapters" layout
      (Nov 2026, Devin picked it from three mockups, then asked for the other two pages to match): pale-sky hero
-     flush under the site header, full-width bands per section (pale-blue timeline, deep-navy ask), cards for
+     flush under the site header, full-width bands per section (pale-blue timeline, brand-blue ask), cards for
      the figures. Hero is pale sky (#e2eefb) with navy text; Devin picked it over navy, brand blue and a gradient. The three credit amounts
      (CR_AMTS in tools/build_priority_pages.py) feed the segmented bar and the credits table. The section's own
      top and bottom padding is removed by the CSS at the end so the hero touches the header; its background is
