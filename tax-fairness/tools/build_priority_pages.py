@@ -172,6 +172,7 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 .tfc-pp-ch .tfc-pp-section { display: block; margin: 0; padding: 88px 0; }
 .tfc-pp-ch .tfc-pp-section > * { max-width: none; }
 .tfc-pp-ch .tfc-pp-section h2 { margin: 0 0 36px; padding: 0; border: 0; font-size: 2.3rem; line-height: 1.1; font-weight: 400; letter-spacing: -.012em; }
+.tfc-pp-ch h1, .tfc-pp-ch h2, .tfc-pp-ch h3, .tfc-pp-ch .tfc-pp-facts > li strong, .tfc-pp-ch .tfc-pp-card--stat strong, .tfc-pp-ch .tfc-pp-part-ask > p { text-wrap: balance; }
 .tfc-pp-ch .tfc-pp-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
 .tfc-pp-ch .tfc-pp-grid > * { grid-column: span 12; min-width: 0; }
 .tfc-pp-ch .tfc-pp-w4 { grid-column: span 4; }
@@ -189,7 +190,7 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 .tfc-pp-ch .tfc-pp-card > p:last-child { margin-bottom: 0; }
 .tfc-pp-ch .tfc-pp-card strong { color: var(--tfc-navy); }
 .tfc-pp-ch .tfc-pp-card > .tfc-pp-source { margin: 22px 0 0; padding-top: 16px; border-top: 1px solid #d6e2f2; line-height: 1.55; }
-.tfc-pp-ch .tfc-pp-card--lead { font-size: 1.3rem; line-height: 1.5; color: var(--tfc-navy); }
+.tfc-pp-ch .tfc-pp-card--lead { font-size: clamp(1.25rem, 2.1cqi, 1.5rem); line-height: 1.5; color: var(--tfc-navy); }
 .tfc-pp-ch .tfc-pp-card--alert { display: flex; align-items: center; border-color: #f2d9a6; background: #fff3d9; font-size: 1.35rem; font-weight: 600; line-height: 1.35; color: var(--tfc-deep); }
 .tfc-pp-ch .tfc-pp-card--stat { display: flex; flex-direction: column; justify-content: center; border-color: #b9d5f3; background: linear-gradient(160deg, #cfe3f9 0%, #b9d5f3 100%); color: #2f3f5c; }
 .tfc-pp-ch .tfc-pp-card--stat strong { display: block; margin: 6px 0; font-size: clamp(1.9rem, 3.2cqi, 2.7rem); line-height: 1.05; letter-spacing: -.02em; color: var(--tfc-navy); }
@@ -203,7 +204,7 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 .tfc-pp-ch .tfc-pp-part-ask { background: var(--tfc-blue); box-shadow: 0 0 0 100vmax var(--tfc-blue); clip-path: inset(0 -100vmax); }
 .tfc-pp-ch .tfc-pp-part-ask h2 { display: flex; align-items: center; gap: 14px; margin: 0 0 24px; font-size: 1.15rem; font-weight: 600; letter-spacing: 0; color: #fff; }
 .tfc-pp-ch .tfc-pp-part-ask h2::before { content: ""; width: 28px; height: 4px; border-radius: 2px; background: var(--tfc-amber); }
-.tfc-pp-ch .tfc-pp-part-ask > p { max-width: 30ch; margin: 0; font-size: clamp(1.7rem, 3.4cqi, 2.6rem); line-height: 1.2; font-weight: 400; letter-spacing: -.012em; color: #fff; }
+.tfc-pp-ch .tfc-pp-part-ask > p { max-width: 34ch; margin: 0; font-size: clamp(1.8rem, 3.6cqi, 2.8rem); line-height: 1.2; font-weight: 400; letter-spacing: -.012em; color: #fff; }
 .tfc-pp-ch .tfc-pp-asks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
 .tfc-pp-ch .tfc-pp-asks > li { margin: 0; padding: 32px 34px; border-top: 5px solid var(--tfc-amber); border-radius: 24px; background: #fff; font-size: 1.1rem; line-height: 1.55; color: #3d4c68; }
 .tfc-pp-ch .tfc-pp-asks > li strong { color: var(--tfc-navy); font-weight: 600; }
@@ -213,6 +214,9 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 .tfc-pp-ch .tfc-pp-section .tfc-pp-fig-note { margin: 18px 0 0; padding-top: 12px; font-size: .82rem; line-height: 1.6; color: var(--tfc-mute); }
 .tfc-pp-ch .tfc-pp-section .tfc-pp-legend { margin: 4px 0 0; padding: 0; list-style: none; font-size: .88rem; }
 .tfc-pp-ch .tfc-pp-section .tfc-pp-legend li { margin: 0; font-size: .88rem; }
+.tfc-pp-ch .tfc-pp-fig { display: flex; flex-direction: column; }
+.tfc-pp-ch .tfc-pp-fig > .tfc-pp-fig-note { margin-top: auto; }
+.tfc-pp-ch .tfc-pp-fig > :nth-last-child(2) { margin-bottom: 18px; }
 .tfc-pp-ch .tfc-pp-figs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; padding: 104px 0 28px; }
 .tfc-pp-ch .tfc-pp-fig { margin: 0; padding: 38px 42px; border: 1px solid #dbe4f0; border-radius: 24px; background: #fff; box-shadow: none; }
 .tfc-pp-ch .tfc-pp-fig h3 { margin: 0 0 6px; font-size: 1.5rem; line-height: 1.3; font-weight: 600; letter-spacing: -.01em; }
