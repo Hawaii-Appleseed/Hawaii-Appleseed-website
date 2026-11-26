@@ -393,6 +393,43 @@ def mark_src(html, expect):
     assert html.count(old) == expect, (html.count(old), expect)
     return html.replace(old, '<section class="tfc-pp-section tfc-pp-part-src">\n        <p class="tfc-pp-source">')
 
+
+# ---- text hooks: no visible change on their own; the page CSS can style them
+NUM_RE = re.compile(r"(\$\d[\d,]*(?:\.\d+)?(?:\s(?:million|billion))?|\d+(?:\.\d+)?\s?(?:percent\b|%)|\b\d{1,3}(?:,\d{3})+\b)")
+
+def mark_numbers(html):
+    """Wrap dollar amounts, percentages and big counts in <span class="tfc-pp-num"> (not inside <strong>, not inside tags)."""
+    out, depth = [], 0
+    for tok in re.split(r"(<[^>]+>)", html):
+        if tok.startswith("<"):
+            if tok.startswith("<strong"): depth += 1
+            elif tok.startswith("</strong"): depth -= 1
+            out.append(tok)
+        elif depth == 0:
+            out.append(NUM_RE.sub(lambda m: f'<span class="tfc-pp-num">{m.group(0)}</span>', tok))
+        else:
+            out.append(tok)
+    return "".join(out)
+
+def mark_first(html, limit=120):
+    """Wrap a paragraph's first sentence in <span class="tfc-pp-first"> when a later sentence follows and it is short enough."""
+    m = re.match(r"^(.*?\.)(\s+)(?=[A-Z$])", html, re.S)
+    if not m:
+        return html
+    plain = re.sub(r"<[^>]+>|&[#\w]+;", "x", m.group(1))
+    if len(plain) > limit:
+        return html
+    return f'<span class="tfc-pp-first">{m.group(1)}</span>{m.group(2)}{html[m.end():]}'
+
+def decorate_p(p_html, first=True):
+    """Apply the text hooks to one <p>...</p>."""
+    m = re.match(r"^(<p[^>]*>)(.*)(</p>)$", p_html, re.S)
+    assert m, p_html[:60]
+    inner = m.group(2)
+    if first:
+        inner = mark_first(inner)
+    return m.group(1) + mark_numbers(inner) + m.group(3)
+
 def rework(html, name, fn):
     """Rebuild one section's content (everything after its h2) with fn(inner)."""
     head = f'<h2>{name}</h2>\n'
@@ -404,7 +441,7 @@ def rework(html, name, fn):
 def as_cards(inner, classes):
     """Each <p> in a section becomes a card on the section's grid; classes[i] says how wide and which kind."""
     it = iter(classes)
-    body = re.sub(r"<p>", lambda m: '<p class="tfc-pp-card ' + next(it) + '">', inner)
+    body = re.sub(r"<p>(.*?)</p>", lambda m: decorate_p('<p class="tfc-pp-card ' + (c := next(it)) + '">' + m.group(1) + '</p>', first=not re.search(r"alert|stat", c)), inner, flags=re.S)
     return '        <div class="tfc-pp-grid">\n' + body + '\n        </div>'
 
 def split_section(inner, fig_classes, drop_title=None):
@@ -412,6 +449,9 @@ def split_section(inner, fig_classes, drop_title=None):
     first = inner.index("<figure")
     last = inner.rindex("</figure>") + len("</figure>")
     copy, figs, tail = inner[:first].strip("\n"), inner[first:last], inner[last:].strip()
+    paras = re.findall(r"<p>.*?</p>", copy, re.S)
+    for i, para in enumerate(paras):
+        copy = copy.replace(para, decorate_p(para, first=(i == 0)), 1)
     parts = re.findall(r"<figure.*?</figure>", figs, re.S)
     assert len(parts) == len(fig_classes), (len(parts), len(fig_classes))
     out = ""
@@ -426,6 +466,7 @@ def split_section(inner, fig_classes, drop_title=None):
 def rate_section(inner):
     """Capital gains: the explanation on the left, the two rates compared in a card on the right."""
     p1, p3 = re.findall(r"<p>.*?</p>", inner, re.S)
+    p1 = decorate_p(p1)
     ul = re.search(r'<ul class="tfc-pp-bars".*?</ul>', inner, re.S).group(0)
     return ('        <div class="tfc-pp-grid">\n'
             f'            <div class="tfc-pp-card tfc-pp-card--lead tfc-pp-w6">{p1}</div>\n'
