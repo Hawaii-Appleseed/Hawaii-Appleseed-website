@@ -311,6 +311,12 @@
         #snap-medicaid-timeline .timeline-sources li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 5px; height: 5px; border-radius: 50%; background: var(--ash); }
         #snap-medicaid-timeline .sources-updated { margin-top: 12px; }
 
+        /* Too narrow for two cost cards side by side: stack them. */
+        @container (max-width: 400px) {
+            #snap-medicaid-timeline .totals { flex-direction: column; }
+            #snap-medicaid-timeline .total-amount { font-size: 1.35rem; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             #snap-medicaid-timeline .pin { transition: none; }
             #snap-medicaid-timeline .pin:hover { transform: none; }
@@ -327,6 +333,7 @@
             #snap-medicaid-timeline .total { flex: 1 1 0; min-width: 0; padding: 12px 10px; }
             #snap-medicaid-timeline .total-amount { font-size: 1.15rem; }
             #snap-medicaid-timeline .total-sub { font-size: 0.75rem; line-height: 1.35; }
+            #snap-medicaid-timeline .total-amount { white-space: nowrap; }
             #snap-medicaid-timeline .board { display: block; margin-top: 30px; }
             #snap-medicaid-timeline .ylab { display: block; margin: 28px 0 2px; }
             #snap-medicaid-timeline .ylab:first-child { margin-top: 0; }
