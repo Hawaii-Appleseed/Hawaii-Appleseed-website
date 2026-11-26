@@ -213,16 +213,16 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 
 /* a short row of facts (three cards) */
 .tfc-pp-ch .tfc-pp-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
-.tfc-pp-ch .tfc-pp-facts > li { margin: 0; padding: 34px 36px; border: 1px solid #d6e2f2; border-radius: 24px; background: #fff; font-family: var(--tfc-serif); font-size: 1.2rem; line-height: 1.5; color: #34425e; }
+.tfc-pp-ch .tfc-pp-facts > li { margin: 0; padding: 34px 36px; border: 1px solid #d6e2f2; border-radius: 24px; background: #fff; font-family: var(--tfc-serif); font-size: 1.3rem; line-height: 1.45; color: #34425e; }
 .tfc-pp-ch .tfc-pp-facts > li strong { display: block; margin: 8px 0; font-size: clamp(1.9rem, 3.2cqi, 2.6rem); line-height: 1.1; letter-spacing: -.015em; font-weight: 600; color: var(--tfc-navy); }
 
 /* ask: brand-blue band; the label sits above one big statement, or above a row of cards */
 .tfc-pp-ch .tfc-pp-part-ask { background: var(--tfc-blue); box-shadow: 0 0 0 100vmax var(--tfc-blue); clip-path: inset(0 -100vmax); }
-.tfc-pp-ch .tfc-pp-part-ask h2 { display: flex; align-items: center; gap: 16px; margin: 0 0 28px; font-size: clamp(1.45rem, 2.4cqi, 1.75rem); font-weight: 600; letter-spacing: -.005em; color: #fff; }
+.tfc-pp-ch .tfc-pp-part-ask h2 { display: flex; align-items: center; gap: 16px; margin: 0 0 28px; font-size: clamp(1.55rem, 2.7cqi, 2rem); font-weight: 600; letter-spacing: -.005em; color: #fff; }
 .tfc-pp-ch .tfc-pp-part-ask h2::before { content: ""; flex: none; width: 36px; height: 5px; border-radius: 3px; background: var(--tfc-amber); }
 .tfc-pp-ch .tfc-pp-part-ask > p { max-width: 34ch; margin: 0; font-family: var(--tfc-serif); font-size: clamp(1.8rem, 3.6cqi, 2.8rem); line-height: 1.2; font-weight: 500; letter-spacing: -.01em; color: #fff; }
 .tfc-pp-ch .tfc-pp-asks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
-.tfc-pp-ch .tfc-pp-asks > li { margin: 0; padding: 32px 34px; border-top: 5px solid var(--tfc-amber); border-radius: 24px; background: #fff; font-family: var(--tfc-serif); font-size: 1.2rem; line-height: 1.5; color: #34425e; }
+.tfc-pp-ch .tfc-pp-asks > li { margin: 0; padding: 32px 34px; border-top: 5px solid var(--tfc-amber); border-radius: 24px; background: #fff; font-family: var(--tfc-serif); font-size: 1.4rem; line-height: 1.4; color: #34425e; }
 .tfc-pp-ch .tfc-pp-asks > li strong { color: var(--tfc-navy); font-weight: 600; }
 
 /* figures: cards (a figure inside a section keeps its own text styles, not the section's paragraph and list styles) */
@@ -282,7 +282,7 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
     .tfc-pp-ch .tfc-pp-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
     .tfc-pp-ch .tfc-pp-grid > * { grid-column: 1 / -1; grid-row: auto; }
     .tfc-pp-ch .tfc-pp-facts, .tfc-pp-ch .tfc-pp-asks { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-    .tfc-pp-ch .tfc-pp-part-ask h2 { margin-bottom: 20px; font-size: 1.4rem; }
+    .tfc-pp-ch .tfc-pp-part-ask h2 { margin-bottom: 20px; font-size: 1.55rem; }
     .tfc-pp-ch .tfc-pp-figs { padding-top: 64px; }
     .tfc-pp-ch .tfc-pp-part-agenda { padding: 8px 0 56px; }
     .tfc-pp-ch .tfc-pp-cta { padding: 48px 40px; }
@@ -303,10 +303,10 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
     .tfc-pp-ch .tfc-pp-section h2 { font-size: 1.85rem; }
     .tfc-pp-ch .tfc-pp-section:not(.tfc-pp-part-ask) h2::before { width: 36px; height: 4px; margin-bottom: 12px; }
     .tfc-pp-ch .tfc-pp-card { padding: 26px 24px; border-radius: 20px; font-size: 1.12rem; }
-    .tfc-pp-ch .tfc-pp-part-ask h2 { font-size: 1.25rem; }
+    .tfc-pp-ch .tfc-pp-part-ask h2 { font-size: 1.4rem; }
     .tfc-pp-ch .tfc-pp-card--lead { font-size: 1.28rem; }
     .tfc-pp-ch .tfc-pp-card--alert { font-size: 1.35rem; }
-    .tfc-pp-ch .tfc-pp-facts > li, .tfc-pp-ch .tfc-pp-asks > li { padding: 26px 24px; border-radius: 20px; }
+    .tfc-pp-ch .tfc-pp-facts > li, .tfc-pp-ch .tfc-pp-asks > li { padding: 26px 24px; border-radius: 20px; font-size: 1.2rem; }
     .tfc-pp-ch .tfc-pp-fig { padding: 24px 16px; }
     .tfc-pp-ch .tfc-pp-fig h3 { font-size: 1.3rem; }
     .tfc-pp-ch .tfc-pp-cta { padding: 36px 24px; border-radius: 22px; }
