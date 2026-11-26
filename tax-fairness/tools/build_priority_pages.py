@@ -198,7 +198,7 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 
 /* text style: the first sentence of a text card leads in bold, and dollar amounts and percentages stand out */
 .tfc-pp-ch .tfc-pp-first { font-weight: 700; color: var(--tfc-navy); }
-.tfc-pp-ch .tfc-pp-num { font-weight: 700; color: #2f62a3; }
+.tfc-pp-ch .tfc-pp-num { font-weight: 700; color: #2f62a3; white-space: nowrap; }
 
 /* a short row of facts (three cards) */
 .tfc-pp-ch .tfc-pp-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
