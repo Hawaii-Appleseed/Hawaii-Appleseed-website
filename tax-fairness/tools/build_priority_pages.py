@@ -177,13 +177,13 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 
 /* lead: white, big first paragraph */
 .tfc-pp-ch .tfc-pp-part-lead { padding: 112px 0 96px; }
-.tfc-pp-ch .tfc-pp-part-lead p { color: var(--tfc-mute); }
+.tfc-pp-ch .tfc-pp-part-lead > p { color: var(--tfc-mute); }
 .tfc-pp-ch .tfc-pp-part-lead h2 + p { margin-bottom: 22px; font-size: 1.55rem; line-height: 1.42; color: var(--tfc-navy); }
 
 /* tint: pale-blue band; wide: heading above the content instead of beside it */
 .tfc-pp-ch .tfc-pp-part-tint { padding: 92px 0 100px; background: var(--tfc-pale); box-shadow: 0 0 0 100vmax var(--tfc-pale); clip-path: inset(0 -100vmax); }
-.tfc-pp-ch .tfc-pp-part-tint p, .tfc-pp-ch .tfc-pp-part-plain p { font-size: 1.1rem; line-height: 1.65; }
-.tfc-pp-ch .tfc-pp-part-tint p { color: #3d4c68; }
+.tfc-pp-ch .tfc-pp-part-tint > p, .tfc-pp-ch .tfc-pp-part-plain > p { font-size: 1.1rem; line-height: 1.65; }
+.tfc-pp-ch .tfc-pp-part-tint > p { color: #3d4c68; }
 .tfc-pp-ch .tfc-pp-part-tint > ul { margin: 0; padding: 0; list-style: none; }
 .tfc-pp-ch .tfc-pp-part-tint > ul > li { position: relative; margin: 0 0 18px; padding-left: 34px; font-size: 1.3rem; line-height: 1.45; color: var(--tfc-ink); }
 .tfc-pp-ch .tfc-pp-part-tint > ul > li::before { content: ""; position: absolute; left: 0; top: .5em; width: 14px; height: 14px; border-radius: 50%; background: var(--tfc-blue); }
@@ -194,12 +194,12 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 
 /* plain: white */
 .tfc-pp-ch .tfc-pp-part-plain { padding: 104px 0 96px; }
-.tfc-pp-ch .tfc-pp-part-plain p { color: var(--tfc-mute); }
+.tfc-pp-ch .tfc-pp-part-plain > p { color: var(--tfc-mute); }
 
 /* ask: deep-navy band, one big statement or a short list */
 .tfc-pp-ch .tfc-pp-part-ask { padding: 112px 0; background: var(--tfc-deep); box-shadow: 0 0 0 100vmax var(--tfc-deep); clip-path: inset(0 -100vmax); }
 .tfc-pp-ch .tfc-pp-part-ask h2 { padding-top: 12px; font-size: 1.25rem; font-weight: 600; letter-spacing: 0; color: var(--tfc-amber); }
-.tfc-pp-ch .tfc-pp-part-ask p { max-width: none; margin: 0; font-size: clamp(1.7rem, 3.2cqi, 2.4rem); line-height: 1.22; font-weight: 400; letter-spacing: -.012em; color: #fff; }
+.tfc-pp-ch .tfc-pp-part-ask > p { max-width: none; margin: 0; font-size: clamp(1.7rem, 3.2cqi, 2.4rem); line-height: 1.22; font-weight: 400; letter-spacing: -.012em; color: #fff; }
 .tfc-pp-ch .tfc-pp-part-ask > ul { max-width: none; margin: 0; padding: 0; list-style: none; }
 .tfc-pp-ch .tfc-pp-part-ask > ul > li { position: relative; margin: 0; padding: 28px 0 28px 36px; border-top: 1px solid rgba(255, 255, 255, .2); font-size: clamp(1.2rem, 2cqi, 1.6rem); line-height: 1.4; color: #cdd9ec; }
 .tfc-pp-ch .tfc-pp-part-ask > ul > li:first-child { padding-top: 0; border-top: 0; }
@@ -208,7 +208,11 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 .tfc-pp-ch .tfc-pp-part-ask > ul > li:first-child::before { top: calc(.7em - 6px); }
 .tfc-pp-ch .tfc-pp-part-ask > ul > li strong { color: #fff; font-weight: 600; }
 
-/* figures: cards */
+/* figures: cards (a figure inside a section keeps its own text styles, not the section's paragraph and list styles) */
+.tfc-pp-ch .tfc-pp-section .tfc-pp-fig-sub { max-width: 64rem; margin: 0 0 24px; font-size: .95rem; line-height: 1.6; color: var(--tfc-mute); }
+.tfc-pp-ch .tfc-pp-section .tfc-pp-fig-note { margin: 18px 0 0; padding-top: 12px; font-size: .82rem; line-height: 1.6; color: var(--tfc-mute); }
+.tfc-pp-ch .tfc-pp-section .tfc-pp-legend { margin: 4px 0 0; padding: 0; list-style: none; font-size: .88rem; }
+.tfc-pp-ch .tfc-pp-section .tfc-pp-legend li { margin: 0; font-size: .88rem; }
 .tfc-pp-ch .tfc-pp-figs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; padding: 104px 0 28px; }
 .tfc-pp-ch .tfc-pp-fig { margin: 0; padding: 38px 42px; border: 1px solid #dbe4f0; border-radius: 24px; background: #fff; box-shadow: none; }
 .tfc-pp-ch .tfc-pp-fig h3 { margin: 0 0 6px; font-size: 1.5rem; line-height: 1.3; font-weight: 600; letter-spacing: -.01em; }
