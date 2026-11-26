@@ -276,7 +276,7 @@ CR_FIG0 = fig("What each credit is worth",
    [["Earned Income Tax Credit","13%","$618",f"${CR_AMTS[0][1]}M"],
     ["Food/excise tax credit","34%","$200",f"${CR_AMTS[1][1]}M"],
     ["Child and dependent care tax credit<small>about 16,300 claimants</small>","2%","$1,031",f"${CR_AMTS[2][1]}M"]],
-   hi=0, total=["All three","38%","$439","$83.2M"]),
+   hi=0, total=["All three","38%","$439","$83.2M"], cls="hide2"),
   "Source: Hawai&#699;i Appleseed estimate, Census-Forecaster tax model, tax year 2028.")
 CR_FIG1 = fig("The lowest-income families lose the most",
   "Average loss per household in 2028 if the three credits expire, by household income group. Three in four households in the lowest-income fifth would be affected, losing $396 on average.",
