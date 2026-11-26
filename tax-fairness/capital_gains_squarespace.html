@@ -2,8 +2,12 @@
      Replaces the 2019-data "Closing the Capital Gains Loophole" page. Same palette/Site Styles hooks as
      priorities_2027_squarespace.html. Figures: 7.25% alternative rate (HRS 235-51(f)) vs Act 24's 13% top
      bracket (was 11%, so the gap went 3.75 -> 5.75 points). "$110M+" = Census-Forecaster
-     forecast_cg_rate_options.py, option "ordinary", Act 24, TY2027, residents only, with behavioral
-     response; ~90% from the top 1% (distribution_ty2027_act24.csv). -->
+     forecast_cg_rate_options.py, option "ordinary", Act 24, TY2027, with behavioral response.
+     Nov 2026 refresh (Census-Forecaster main c6bf232, site/data/capital-gains/): ordinary $130M
+     residents + $49M nonresidents = $179M (range $158M-$214M); 9% cap $48M + $19M = $67M
+     (range $62M-$77M); later years ordinary $173M (2028-30), $177M (2031), cap $64-66M. Residents-only
+     distribution (table/chart): $130M, top 1% = 92.3%. Higher than earlier versions because the model
+     now uses CBO's Feb 2026 capital-gains forecast. -->
 
 <style>
 .tfc-pp {
@@ -154,7 +158,7 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-pp) { grid-row: 1 / 2 !importa
         <p class="tfc-pp-lede">Hawai&#699;i taxes a nurse&rsquo;s paycheck at higher rates than an investor&rsquo;s profit from selling stock or land. We want to close that gap.</p>
     </header>
 
-    <div class="tfc-pp-stats"><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">Over $100M</div><p class="tfc-pp-stat-label">estimated new revenue each year</p></div><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">90%</div><p class="tfc-pp-stat-label">of it from the top 1 percent of households</p></div><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">5.75 pts</div><p class="tfc-pp-stat-label">gap between the top income tax rate on wages (13%) and the capital gains rate (7.25%), up from 3.75 points</p></div></div>
+    <div class="tfc-pp-stats"><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">$179M</div><p class="tfc-pp-stat-label">estimated new revenue in 2027 at ordinary rates (range $158M&ndash;$214M)</p></div><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">92%</div><p class="tfc-pp-stat-label">of the revenue from residents would come from the top 1 percent of households</p></div><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">5.75 pts</div><p class="tfc-pp-stat-label">gap between the top income tax rate on wages (13%) and the capital gains rate (7.25%), up from 3.75 points</p></div></div>
 
     <section class="tfc-pp-section">
         <h2>The loophole</h2>
@@ -174,24 +178,31 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-pp) { grid-row: 1 / 2 !importa
     <section class="tfc-pp-section">
         <h2>What it would do</h2>
         <ul>
-            <li>Raise <strong>over $100 million a year</strong>.</li>
-            <li>Collect about <strong>90 percent</strong> of it from the top 1 percent of households. Most local families would pay nothing more.</li>
+            <li>Raise about <strong>$179 million in 2027</strong> ($130 million from residents and $49 million from nonresidents).</li>
+            <li>Collect about <strong>92 percent</strong> of the resident revenue from the top 1 percent of households. Most local families would pay nothing more.</li>
+            <li>A 9% cap on capital gains would raise about <strong>$67 million</strong> ($48 million from residents and $19 million from nonresidents).</li>
         </ul>
     </section>
     <figure class="tfc-pp-fig" style="margin-left:0;margin-right:0">
+        <h3>Two ways to raise revenue from capital gains</h3>
+        <p class="tfc-pp-fig-sub">Estimated new revenue in tax year 2027 under Act 24&rsquo;s brackets, accounting for fewer gains being realized at a higher rate, in millions of dollars.</p>
+<div class="tfc-pp-tablewrap"><table class="tfc-pp-table "><thead><tr><th>Option</th><th>Residents</th><th>Nonresidents</th><th>Total</th></tr></thead><tbody><tr class=hi><td>Taxing gains at ordinary rates<small>range $158M&ndash;$214M</small></td><td>$130M</td><td>$49M</td><td>$179M</td></tr><tr><td>9% cap on capital gains<small>range $62M&ndash;$77M</small></td><td>$48M</td><td>$19M</td><td>$67M</td></tr></tbody></table></div>
+<p class="tfc-pp-fig-note">These are Hawai&#699;i Appleseed&rsquo;s own estimates from our Census-Forecaster tax model, not Department of Taxation or Legislature figures. Nonresidents are people who sell Hawai&#699;i property or hold Hawai&#699;i business interests while living elsewhere. Most of the range comes from the nonresident share, which swings with out-of-state home sales. In later years the totals are $173M (2028&ndash;2030) and $177M (2031) at ordinary rates, and $64M&ndash;$66M with a 9% cap. The figures are higher than earlier versions because the model now uses the Congressional Budget Office&rsquo;s February 2026 capital-gains forecast. Source: Hawai&#699;i Appleseed estimate, Census-Forecaster tax model.</p>
+    </figure>
+    <figure class="tfc-pp-fig" style="margin-left:0;margin-right:0">
         <h3>The 7.25% rate mostly benefits the top 1 percent</h3>
-        <p class="tfc-pp-fig-sub">Share of the tax break today, which is essentially the share of new tax if gains were taxed like wages. Hawai&#699;i households ranked by taxable income, tax year 2027.</p>
-<div class="tfc-pp-hb hi" title="Top 1%: 89.6%"><span class="tfc-pp-hb-lbl">Top 1%<small>income over $661,000</small></span><span class="tfc-pp-track"><i style="width:89.6%"></i></span><b>89.6%</b></div><div class="tfc-pp-hb" title="Next 4%: 9.4%"><span class="tfc-pp-hb-lbl">Next 4%<small>$373,000&ndash;$660,000</small></span><span class="tfc-pp-track"><i style="width:9.4%"></i></span><b>9.4%</b></div><div class="tfc-pp-hb" title="Next 15%: 0.9%"><span class="tfc-pp-hb-lbl">Next 15%<small>$204,000&ndash;$373,000</small></span><span class="tfc-pp-track"><i style="width:0.9%"></i></span><b>0.9%</b></div><div class="tfc-pp-hb" title="Bottom 80%: under 0.1%"><span class="tfc-pp-hb-lbl">Bottom 80%<small>income under $204,000</small></span><span class="tfc-pp-track"><i style="width:0.04%"></i></span><b>&lt;0.1%</b></div>
-<p class="tfc-pp-fig-note">Source: Hawai&#699;i Appleseed tax model (Census-Forecaster), Act 24 baseline, tax year 2027, residents only, with behavioral response.</p>
+        <p class="tfc-pp-fig-sub">Share of the new tax if gains were taxed like wages. Hawai&#699;i resident households ranked by taxable income, tax year 2027.</p>
+<div class="tfc-pp-hb hi" title="Top 1%: 92.3%"><span class="tfc-pp-hb-lbl">Top 1%<small>income over $656,000</small></span><span class="tfc-pp-track"><i style="width:92.3%"></i></span><b>92.3%</b></div><div class="tfc-pp-hb" title="Next 4%: 6.9%"><span class="tfc-pp-hb-lbl">Next 4%<small>$373,000&ndash;$656,000</small></span><span class="tfc-pp-track"><i style="width:6.9%"></i></span><b>6.9%</b></div><div class="tfc-pp-hb" title="Next 15%: 0.8%"><span class="tfc-pp-hb-lbl">Next 15%<small>$204,000&ndash;$372,000</small></span><span class="tfc-pp-track"><i style="width:0.8%"></i></span><b>0.8%</b></div><div class="tfc-pp-hb" title="Bottom 80%: under 0.1%"><span class="tfc-pp-hb-lbl">Bottom 80%<small>income under $204,000</small></span><span class="tfc-pp-track"><i style="width:0.04%"></i></span><b>&lt;0.1%</b></div>
+<p class="tfc-pp-fig-note">Source: Hawai&#699;i Appleseed estimate, Census-Forecaster tax model, Act 24 brackets, tax year 2027, residents only, with a realization response.</p>
     </figure>
     <figure class="tfc-pp-fig" style="margin-left:0;margin-right:0">
         <h3>Where the new tax would fall</h3>
-        <p class="tfc-pp-fig-sub">Taxing capital gains like ordinary income, by household income group, tax year 2027.</p>
-<div class="tfc-pp-tablewrap"><table class="tfc-pp-table "><thead><tr><th>Household group</th><th>Average new tax per household</th><th>Households paying more</th><th>Total new revenue</th></tr></thead><tbody><tr class=hi><td>Top 1%<small>over $661,000</small></td><td>$20,060</td><td>99%</td><td>$98.9M</td></tr><tr><td>Next 4%<small>$373,000&ndash;$660,000</small></td><td>$524</td><td>86%</td><td>$10.3M</td></tr><tr><td>Next 15%<small>$204,000&ndash;$373,000</small></td><td>$14</td><td>24%</td><td>$1.0M</td></tr><tr><td>Next 20%<small>$130,000&ndash;$204,000</small></td><td>under $1</td><td>8%</td><td>&lt;$0.1M</td></tr><tr><td>Bottom 60%<small>under $130,000</small></td><td>$0</td><td>0%</td><td>$0</td></tr><tr class="tot"><td>All households</td><td></td><td></td><td>$110M</td></tr></tbody></table></div>
+        <p class="tfc-pp-fig-sub">Taxing capital gains like ordinary income, by resident household income group, tax year 2027. Nonresidents are shown in the table above.</p>
+<div class="tfc-pp-tablewrap"><table class="tfc-pp-table "><thead><tr><th>Household group</th><th>Average new tax per household</th><th>Households paying more</th><th>Total new revenue</th></tr></thead><tbody><tr class=hi><td>Top 1%<small>over $656,000</small></td><td>$24,320</td><td>99%</td><td>$120.1M</td></tr><tr><td>Next 4%<small>$373,000&ndash;$656,000</small></td><td>$454</td><td>86%</td><td>$9.0M</td></tr><tr><td>Next 15%<small>$204,000&ndash;$372,000</small></td><td>$14</td><td>26%</td><td>$1.1M</td></tr><tr><td>Next 20%<small>$130,000&ndash;$204,000</small></td><td>under $1</td><td>9%</td><td>&lt;$0.1M</td></tr><tr><td>Bottom 60%<small>under $130,000</small></td><td>$0</td><td>0%</td><td>$0</td></tr><tr class="tot"><td>All resident households</td><td></td><td></td><td>$130M</td></tr></tbody></table></div>
 <p class="tfc-pp-fig-note">Averages are across every household in the group, including those who owe nothing more. Income is taxable income. Source: same model as above.</p>
     </figure>
     <section class="tfc-pp-section">
-        <p class="tfc-pp-source">Estimate: Hawai&#699;i Appleseed tax model, tax year 2027, Hawai&#699;i residents only, accounting for fewer gains being realized at a higher rate.</p>
+        <p class="tfc-pp-source">Estimate: Hawai&#699;i Appleseed estimate, Census-Forecaster tax model, tax year 2027, Act 24 brackets, accounting for fewer gains being realized at a higher rate.</p>
     </section>
 
     <section class="tfc-pp-cta" aria-labelledby="tfc-pp-cta-title">
