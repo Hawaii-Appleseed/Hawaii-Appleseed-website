@@ -2,6 +2,7 @@
 # Run: python3 tax-fairness/tools/build_priority_pages.py   Then paste each output file into its page's Code Block.
 import sys
 import os
+import re
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..") + os.sep
 
 CSS = """<style>
@@ -167,46 +168,45 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 .tfc-pp-ch .tfc-pp-stat:last-child { display: flex; flex-direction: column; justify-content: center; background: linear-gradient(160deg, #cfe3f9 0%, #b9d5f3 100%); }
 .tfc-pp-ch .tfc-pp-stat:last-child .tfc-pp-stat-label { color: #2f3f5c; }
 
-/* sections: h2 on the left, text on the right; figures and source lines inside a section span both columns */
-.tfc-pp-ch .tfc-pp-section { margin: 0; padding: 0; }
-.tfc-pp-ch .tfc-pp-section h2 { padding-top: 0; border-top: 0; font-size: 2.5rem; line-height: 1.08; font-weight: 400; letter-spacing: -.012em; }
-.tfc-pp-ch .tfc-pp-part-lead, .tfc-pp-ch .tfc-pp-part-tint, .tfc-pp-ch .tfc-pp-part-plain, .tfc-pp-ch .tfc-pp-part-ask, .tfc-pp-ch .tfc-pp-part-agenda { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 56px; }
-.tfc-pp-ch .tfc-pp-section > .tfc-pp-fig, .tfc-pp-ch .tfc-pp-section > .tfc-pp-source { grid-column: 1 / -1; max-width: none; }
-.tfc-pp-ch .tfc-pp-section > .tfc-pp-fig { margin-top: 32px; }
-.tfc-pp-ch .tfc-pp-section > .tfc-pp-source { margin: 22px 0 0; }
+/* sections: the heading sits above its content; text and figures are cards on a 12-column grid */
+.tfc-pp-ch .tfc-pp-section { display: block; margin: 0; padding: 88px 0; }
+.tfc-pp-ch .tfc-pp-section > * { max-width: none; }
+.tfc-pp-ch .tfc-pp-section h2 { margin: 0 0 36px; padding: 0; border: 0; font-size: 2.3rem; line-height: 1.1; font-weight: 400; letter-spacing: -.012em; }
+.tfc-pp-ch .tfc-pp-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
+.tfc-pp-ch .tfc-pp-grid > * { grid-column: span 12; min-width: 0; }
+.tfc-pp-ch .tfc-pp-w4 { grid-column: span 4; }
+.tfc-pp-ch .tfc-pp-w5 { grid-column: span 5; }
+.tfc-pp-ch .tfc-pp-w6 { grid-column: span 6; }
+.tfc-pp-ch .tfc-pp-w7 { grid-column: span 7; }
+.tfc-pp-ch .tfc-pp-w8 { grid-column: span 8; }
+.tfc-pp-ch .tfc-pp-r2 { grid-row: span 2; }
+.tfc-pp-ch .tfc-pp-part-tint { background: var(--tfc-pale); box-shadow: 0 0 0 100vmax var(--tfc-pale); clip-path: inset(0 -100vmax); }
 
-/* lead: white, big first paragraph */
-.tfc-pp-ch .tfc-pp-part-lead { padding: 112px 0 96px; }
-.tfc-pp-ch .tfc-pp-part-lead > p { color: var(--tfc-mute); }
-.tfc-pp-ch .tfc-pp-part-lead h2 + p { margin-bottom: 22px; font-size: 1.55rem; line-height: 1.42; color: var(--tfc-navy); }
+/* text cards: tinted on white bands, white on pale ones */
+.tfc-pp-ch .tfc-pp-card { margin: 0; padding: 36px 40px; border: 1px solid #e1eaf5; border-radius: 24px; background: #f3f7fd; font-size: 1.1rem; line-height: 1.65; color: #3d4c68; }
+.tfc-pp-ch .tfc-pp-part-tint .tfc-pp-card { border-color: #d6e2f2; background: #fff; }
+.tfc-pp-ch .tfc-pp-card > p { margin: 0 0 14px; font-size: inherit; line-height: inherit; }
+.tfc-pp-ch .tfc-pp-card > p:last-child { margin-bottom: 0; }
+.tfc-pp-ch .tfc-pp-card strong { color: var(--tfc-navy); }
+.tfc-pp-ch .tfc-pp-card > .tfc-pp-source { margin: 22px 0 0; padding-top: 16px; border-top: 1px solid #d6e2f2; line-height: 1.55; }
+.tfc-pp-ch .tfc-pp-card--lead { font-size: 1.3rem; line-height: 1.5; color: var(--tfc-navy); }
+.tfc-pp-ch .tfc-pp-card--alert { display: flex; align-items: center; border-color: #f2d9a6; background: #fff3d9; font-size: 1.35rem; font-weight: 600; line-height: 1.35; color: var(--tfc-deep); }
+.tfc-pp-ch .tfc-pp-card--stat { display: flex; flex-direction: column; justify-content: center; border-color: #b9d5f3; background: linear-gradient(160deg, #cfe3f9 0%, #b9d5f3 100%); color: #2f3f5c; }
+.tfc-pp-ch .tfc-pp-card--stat strong { display: block; margin: 6px 0; font-size: clamp(1.9rem, 3.2cqi, 2.7rem); line-height: 1.05; letter-spacing: -.02em; color: var(--tfc-navy); }
 
-/* tint: pale-blue band; wide: heading above the content instead of beside it */
-.tfc-pp-ch .tfc-pp-part-tint { padding: 92px 0 100px; background: var(--tfc-pale); box-shadow: 0 0 0 100vmax var(--tfc-pale); clip-path: inset(0 -100vmax); }
-.tfc-pp-ch .tfc-pp-part-tint > p, .tfc-pp-ch .tfc-pp-part-plain > p { font-size: 1.1rem; line-height: 1.65; }
-.tfc-pp-ch .tfc-pp-part-tint > p { color: #3d4c68; }
-.tfc-pp-ch .tfc-pp-part-tint > ul { margin: 0; padding: 0; list-style: none; }
-.tfc-pp-ch .tfc-pp-part-tint > ul > li { position: relative; margin: 0 0 18px; padding-left: 34px; font-size: 1.3rem; line-height: 1.45; color: var(--tfc-ink); }
-.tfc-pp-ch .tfc-pp-part-tint > ul > li::before { content: ""; position: absolute; left: 0; top: .5em; width: 14px; height: 14px; border-radius: 50%; background: var(--tfc-blue); }
-.tfc-pp-ch .tfc-pp-part-tint > ul > li strong { color: var(--tfc-navy); }
-.tfc-pp-ch .tfc-pp-part-wide { display: block; }
-.tfc-pp-ch .tfc-pp-part-wide > * { max-width: none; }
-.tfc-pp-ch .tfc-pp-part-wide h2 { margin: 0 0 56px; }
+/* a short row of facts (three cards) */
+.tfc-pp-ch .tfc-pp-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
+.tfc-pp-ch .tfc-pp-facts > li { margin: 0; padding: 34px 36px; border: 1px solid #d6e2f2; border-radius: 24px; background: #fff; font-size: 1.1rem; line-height: 1.55; color: #3d4c68; }
+.tfc-pp-ch .tfc-pp-facts > li strong { display: block; margin: 8px 0; font-size: clamp(1.8rem, 3cqi, 2.4rem); line-height: 1.1; letter-spacing: -.015em; font-weight: 700; color: var(--tfc-navy); }
 
-/* plain: white */
-.tfc-pp-ch .tfc-pp-part-plain { padding: 104px 0 96px; }
-.tfc-pp-ch .tfc-pp-part-plain > p { color: var(--tfc-mute); }
-
-/* ask: brand-blue band, one big statement or a short list */
-.tfc-pp-ch .tfc-pp-part-ask { padding: 112px 0; background: var(--tfc-blue); box-shadow: 0 0 0 100vmax var(--tfc-blue); clip-path: inset(0 -100vmax); }
-.tfc-pp-ch .tfc-pp-part-ask h2 { padding-top: 12px; font-size: 1.25rem; font-weight: 600; letter-spacing: 0; color: #fff; }
-.tfc-pp-ch .tfc-pp-part-ask > p { max-width: none; margin: 0; font-size: clamp(1.7rem, 3.2cqi, 2.4rem); line-height: 1.22; font-weight: 400; letter-spacing: -.012em; color: #fff; }
-.tfc-pp-ch .tfc-pp-part-ask > ul { max-width: none; margin: 0; padding: 0; list-style: none; }
-.tfc-pp-ch .tfc-pp-part-ask > ul > li { position: relative; margin: 0; padding: 28px 0 28px 36px; border-top: 1px solid rgba(255, 255, 255, .35); font-size: clamp(1.2rem, 2cqi, 1.6rem); line-height: 1.4; color: #fff; }
-.tfc-pp-ch .tfc-pp-part-ask > ul > li:first-child { padding-top: 0; border-top: 0; }
-.tfc-pp-ch .tfc-pp-part-ask > ul > li:last-child { padding-bottom: 0; }
-.tfc-pp-ch .tfc-pp-part-ask > ul > li::before { content: ""; position: absolute; left: 0; top: calc(28px + .7em - 6px); width: 12px; height: 12px; border-radius: 50%; background: var(--tfc-amber); }
-.tfc-pp-ch .tfc-pp-part-ask > ul > li:first-child::before { top: calc(.7em - 6px); }
-.tfc-pp-ch .tfc-pp-part-ask > ul > li strong { color: #fff; font-weight: 600; }
+/* ask: brand-blue band; the label sits above one big statement, or above a row of cards */
+.tfc-pp-ch .tfc-pp-part-ask { background: var(--tfc-blue); box-shadow: 0 0 0 100vmax var(--tfc-blue); clip-path: inset(0 -100vmax); }
+.tfc-pp-ch .tfc-pp-part-ask h2 { display: flex; align-items: center; gap: 14px; margin: 0 0 24px; font-size: 1.15rem; font-weight: 600; letter-spacing: 0; color: #fff; }
+.tfc-pp-ch .tfc-pp-part-ask h2::before { content: ""; width: 28px; height: 4px; border-radius: 2px; background: var(--tfc-amber); }
+.tfc-pp-ch .tfc-pp-part-ask > p { max-width: 30ch; margin: 0; font-size: clamp(1.7rem, 3.4cqi, 2.6rem); line-height: 1.2; font-weight: 400; letter-spacing: -.012em; color: #fff; }
+.tfc-pp-ch .tfc-pp-asks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
+.tfc-pp-ch .tfc-pp-asks > li { margin: 0; padding: 32px 34px; border-top: 5px solid var(--tfc-amber); border-radius: 24px; background: #fff; font-size: 1.1rem; line-height: 1.55; color: #3d4c68; }
+.tfc-pp-ch .tfc-pp-asks > li strong { color: var(--tfc-navy); font-weight: 600; }
 
 /* figures: cards (a figure inside a section keeps its own text styles, not the section's paragraph and list styles) */
 .tfc-pp-ch .tfc-pp-section .tfc-pp-fig-sub { max-width: 64rem; margin: 0 0 24px; font-size: .95rem; line-height: 1.6; color: var(--tfc-mute); }
@@ -225,20 +225,29 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 .tfc-pp-ch .tfc-pp-part-src { display: block; padding: 8px 0 64px; }
 .tfc-pp-ch .tfc-pp-part-src > .tfc-pp-source { max-width: 56rem; margin: 0 0 14px; }
 
-/* agenda, call to action, links */
-.tfc-pp-ch .tfc-pp-part-agenda { padding: 52px 0; border-top: 1px solid #dbe4f0; }
+/* agenda, call to action, links to the other priorities */
+.tfc-pp-ch .tfc-pp-part-agenda { padding: 24px 0 72px; }
 .tfc-pp-ch .tfc-pp-part-agenda h2 { font-size: 1.6rem; }
 .tfc-pp-ch .tfc-pp-cta { margin: 16px 0 0; padding: 68px; border-radius: 28px; background: linear-gradient(120deg, #3c73b9 0%, #2f62a3 100%); }
 .tfc-pp-ch .tfc-pp-cta h2 { font-size: 2.3rem; line-height: 1.1; letter-spacing: -.012em; }
 .tfc-pp-ch .tfc-pp-cta p { font-size: 1.1rem; color: #fff; }
 .tfc-pp-ch .tfc-pp-cta a.tfc-btn.sqs-button-element--primary { border-color: var(--tfc-amber) !important; border-radius: 999px !important; background: var(--tfc-amber) !important; color: var(--tfc-deep) !important; }
 .tfc-pp-ch .tfc-pp-cta a.tfc-btn.sqs-button-element--secondary { border: 1.5px solid rgba(255, 255, 255, .55) !important; border-radius: 999px !important; background: transparent !important; color: #fff !important; }
-.tfc-pp-ch .tfc-pp-more { margin: 40px 0 0; padding: 0 0 80px; border: 0; }
+.tfc-pp-ch .tfc-pp-more { margin: 0; padding: 64px 0 88px; border: 0; }
+.tfc-pp-ch .tfc-pp-more-title { margin: 0 0 18px; font-size: 1.1rem; font-weight: 600; color: var(--tfc-mute); }
+.tfc-pp-ch .tfc-pp-more-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.tfc-pp-ch .tfc-pp-more-card { display: block; padding: 26px 30px; border: 1px solid #dbe4f0; border-radius: 20px; background: #f3f7fd; color: var(--tfc-navy); text-decoration: none; }
+.tfc-pp-ch .tfc-pp-more-card:hover { border-color: var(--tfc-blue); background: #fff; }
+.tfc-pp-ch .tfc-pp-more-card:focus-visible, .tfc-pp-ch .tfc-pp-more-all:focus-visible { outline: 3px solid var(--tfc-blue); outline-offset: 3px; }
+.tfc-pp-ch .tfc-pp-more-card span { display: block; margin-bottom: 6px; font-size: .85rem; color: var(--tfc-mute); }
+.tfc-pp-ch .tfc-pp-more-card b { display: block; font-size: 1.25rem; font-weight: 600; line-height: 1.3; }
+.tfc-pp-ch .tfc-pp-more-all { display: inline-block; margin-top: 20px; font-weight: 600; color: #2f62a3; }
 
 /* narrower containers */
 @container (max-width: 1100px) {
     .tfc-pp-ch .tfc-pp-figs { grid-template-columns: minmax(0, 1fr); }
     .tfc-pp-ch:not(.tfc-pp-cr) .tfc-pp-stat { padding: 32px 30px 30px; }
+    .tfc-pp-ch .tfc-pp-card { padding: 30px 32px; }
 }
 @container (max-width: 900px) {
     .tfc-pp-ch .tfc-pp-hero { grid-template-columns: minmax(0, 1fr); padding: 48px 0 150px; }
@@ -248,17 +257,16 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
     .tfc-pp-ch .tfc-pp-lede { max-width: 56ch; }
     .tfc-pp-ch .tfc-pp-stats { margin-top: -96px; }
     .tfc-pp-ch:not(.tfc-pp-cr) .tfc-pp-stats { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-    .tfc-pp-ch .tfc-pp-part-lead, .tfc-pp-ch .tfc-pp-part-tint, .tfc-pp-ch .tfc-pp-part-plain, .tfc-pp-ch .tfc-pp-part-ask, .tfc-pp-ch .tfc-pp-part-agenda { display: block; }
-    .tfc-pp-ch .tfc-pp-section h2 { margin: 0 0 22px; font-size: 2rem; }
-    .tfc-pp-ch .tfc-pp-part-lead { padding: 80px 0 64px; }
-    .tfc-pp-ch .tfc-pp-part-tint { padding: 64px 0 72px; }
-    .tfc-pp-ch .tfc-pp-part-plain { padding: 72px 0 64px; }
-    .tfc-pp-ch .tfc-pp-part-wide h2 { margin-bottom: 36px; }
-    .tfc-pp-ch .tfc-pp-part-ask { padding: 80px 0; }
-    .tfc-pp-ch .tfc-pp-part-ask h2 { padding-top: 0; margin-bottom: 18px; }
-    .tfc-pp-ch .tfc-pp-figs { padding-top: 72px; }
-    .tfc-pp-ch .tfc-pp-part-agenda { padding: 44px 0; }
+    .tfc-pp-ch .tfc-pp-section { padding: 64px 0; }
+    .tfc-pp-ch .tfc-pp-section h2 { margin-bottom: 26px; font-size: 1.9rem; }
+    .tfc-pp-ch .tfc-pp-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .tfc-pp-ch .tfc-pp-grid > * { grid-column: 1 / -1; grid-row: auto; }
+    .tfc-pp-ch .tfc-pp-facts, .tfc-pp-ch .tfc-pp-asks { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .tfc-pp-ch .tfc-pp-part-ask h2 { margin-bottom: 18px; }
+    .tfc-pp-ch .tfc-pp-figs { padding-top: 64px; }
+    .tfc-pp-ch .tfc-pp-part-agenda { padding: 8px 0 56px; }
     .tfc-pp-ch .tfc-pp-cta { padding: 48px 40px; }
+    .tfc-pp-ch .tfc-pp-more-cards { grid-template-columns: minmax(0, 1fr); gap: 14px; }
 }
 @container (max-width: 760px) {
     .tfc-pp-ch .tfc-pp-fig { padding: 28px 22px; border-radius: 20px; }
@@ -271,16 +279,18 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
     .tfc-pp-ch .tfc-pp-stats { margin-top: -88px; }
     .tfc-pp-ch .tfc-pp-stat { padding: 26px 24px; border-radius: 20px; }
     .tfc-pp-ch .tfc-pp-stat-label { font-size: 1rem; }
-    .tfc-pp-ch .tfc-pp-section h2 { font-size: 1.8rem; }
-    .tfc-pp-ch .tfc-pp-part-lead { padding: 64px 0 48px; }
-    .tfc-pp-ch .tfc-pp-part-lead h2 + p { font-size: 1.25rem; }
-    .tfc-pp-ch .tfc-pp-part-tint > ul > li { font-size: 1.15rem; }
-    .tfc-pp-ch .tfc-pp-part-ask { padding: 64px 0; }
+    .tfc-pp-ch .tfc-pp-section { padding: 56px 0; }
+    .tfc-pp-ch .tfc-pp-section h2 { font-size: 1.7rem; }
+    .tfc-pp-ch .tfc-pp-card { padding: 26px 24px; border-radius: 20px; }
+    .tfc-pp-ch .tfc-pp-card--lead { font-size: 1.2rem; }
+    .tfc-pp-ch .tfc-pp-card--alert { font-size: 1.2rem; }
+    .tfc-pp-ch .tfc-pp-facts > li, .tfc-pp-ch .tfc-pp-asks > li { padding: 26px 24px; border-radius: 20px; }
     .tfc-pp-ch .tfc-pp-fig { padding: 24px 16px; }
     .tfc-pp-ch .tfc-pp-fig h3 { font-size: 1.3rem; }
     .tfc-pp-ch .tfc-pp-cta { padding: 36px 24px; border-radius: 22px; }
     .tfc-pp-ch .tfc-pp-cta h2 { font-size: 1.8rem; }
-    .tfc-pp-ch .tfc-pp-more { padding-bottom: 56px; }
+    .tfc-pp-ch .tfc-pp-more { padding: 48px 0 56px; }
+    .tfc-pp-ch .tfc-pp-more-card { padding: 22px 24px; }
 }
 """
 
@@ -298,9 +308,10 @@ CR_EXTRA = """
 .tfc-pp-seg-key li { display: flex; align-items: center; gap: 8px; margin: 0; font-size: .92rem; color: var(--tfc-mute); }
 .tfc-pp-seg-key b { flex: none; width: 10px; height: 10px; border-radius: 50%; }
 .tfc-pp-seg-key em { font-style: normal; font-weight: 700; color: var(--tfc-navy); }
+.tfc-pp-cr .tfc-pp-tl { padding: 20px 44px 40px; border: 1px solid #d6e2f2; border-radius: 24px; background: #fff; }
 .tfc-pp-cr .tfc-pp-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; border-left: 0; }
 .tfc-pp-cr .tfc-pp-steps li { margin: 0; padding: 46px 40px 0 0; font-size: 1.05rem; line-height: 1.5; color: #3d4c68; }
-.tfc-pp-cr .tfc-pp-steps li::before { left: 0; top: 0; width: 22px; height: 22px; border: 4px solid var(--tfc-blue); background: var(--tfc-pale); }
+.tfc-pp-cr .tfc-pp-steps li::before { left: 0; top: 0; width: 22px; height: 22px; border: 4px solid var(--tfc-blue); background: #fff; }
 .tfc-pp-cr .tfc-pp-steps li::after { content: ""; position: absolute; top: 10px; left: 34px; right: 12px; height: 2px; background: #b3c8e6; }
 .tfc-pp-cr .tfc-pp-steps li.end::after { display: none; }
 .tfc-pp-cr .tfc-pp-steps li.end::before { background: var(--tfc-amber); border-color: var(--tfc-amber); box-shadow: 0 0 0 8px rgba(245, 165, 36, .3); }
@@ -315,6 +326,7 @@ CR_EXTRA = """
 .tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr:nth-child(3) td:first-child::before { background: var(--tfc-amber); }
 .tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr.hi td { background: none; font-weight: 400; }
 @container (max-width: 900px) {
+    .tfc-pp-cr .tfc-pp-tl { padding: 30px 24px 26px; }
     .tfc-pp-cr .tfc-pp-steps { grid-template-columns: minmax(0, 1fr); margin-left: 11px; border-left: 3px solid #b3c8e6; }
     .tfc-pp-cr .tfc-pp-steps li { padding: 0 0 30px 32px; }
     .tfc-pp-cr .tfc-pp-steps li:last-child { padding-bottom: 0; }
@@ -331,14 +343,20 @@ CR_EXTRA = """
 }
 """
 
-# Capital gains page only: the two-rate comparison bars and the figure layout.
+# Capital gains page only: the rate-comparison card and the figure layout.
 CG_EXTRA = """
 /* ===== Capital gains page ===== */
 .tfc-pp-cg .tfc-pp-figs > .tfc-pp-fig:first-child { grid-column: 1 / -1; }
-.tfc-pp-cg .tfc-pp-bars { max-width: none; margin: 26px 0 30px; padding: 0; list-style: none; }
-.tfc-pp-cg .tfc-pp-bars li { grid-template-columns: 190px minmax(0, 1fr) 68px; gap: 16px; margin: 0 0 14px; font-size: 1rem; color: var(--tfc-navy); }
+.tfc-pp-cg .tfc-pp-ratecard { border-color: #dbe4f0; background: #fff; }
+.tfc-pp-cg .tfc-pp-ratecard h3 { margin: 0; font-size: 1.3rem; line-height: 1.3; font-weight: 600; letter-spacing: -.01em; color: var(--tfc-navy); }
+.tfc-pp-cg .tfc-pp-ratecard > p { margin: 22px 0 0; padding-top: 18px; border-top: 1px solid #e1eaf5; font-size: 1rem; line-height: 1.6; color: var(--tfc-mute); }
+.tfc-pp-cg .tfc-pp-bars { max-width: none; margin: 24px 0 4px; padding: 0; list-style: none; }
+.tfc-pp-cg .tfc-pp-bars li { grid-template-columns: 170px minmax(0, 1fr) 64px; gap: 16px; margin: 0 0 14px; font-size: 1rem; color: var(--tfc-navy); }
 .tfc-pp-cg .tfc-pp-bar { height: 26px; border-radius: 999px; }
 .tfc-pp-cg .tfc-pp-bars b { font-size: 1.15rem; }
+@container (max-width: 1100px) {
+    .tfc-pp-cg .tfc-pp-facts { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}
 @container (max-width: 760px) {
     .tfc-pp-cg .tfc-pp-table.hide3 th:nth-child(3), .tfc-pp-cg .tfc-pp-table.hide3 td:nth-child(3) { display: none; }
     .tfc-pp-cg .tfc-pp-bars li { grid-template-columns: minmax(0, 1fr) 60px; gap: 6px 12px; }
@@ -347,11 +365,14 @@ CG_EXTRA = """
 }
 """
 
-# Conveyance page only: thicker bars.
+# Conveyance page only: thicker bars, the three asks stack earlier.
 CV_EXTRA = """
 /* ===== Conveyance page ===== */
 .tfc-pp-cv .tfc-pp-stack-bar { height: 34px; }
 .tfc-pp-cv .tfc-pp-stack-bar i { border-radius: 8px; }
+@container (max-width: 1100px) {
+    .tfc-pp-cv .tfc-pp-asks { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}
 """
 
 def mark(html, parts):
@@ -367,7 +388,47 @@ def mark_src(html, expect):
     assert html.count(old) == expect, (html.count(old), expect)
     return html.replace(old, '<section class="tfc-pp-section tfc-pp-part-src">\n        <p class="tfc-pp-source">')
 
+def rework(html, name, fn):
+    """Rebuild one section's content (everything after its h2) with fn(inner)."""
+    head = f'<h2>{name}</h2>\n'
+    assert html.count(head) == 1, name
+    i = html.index(head) + len(head)
+    j = html.index('\n    </section>', i)
+    return html[:i] + fn(html[i:j]) + html[j:]
 
+def as_cards(inner, classes):
+    """Each <p> in a section becomes a card on the section's grid; classes[i] says how wide and which kind."""
+    it = iter(classes)
+    body = re.sub(r"<p>", lambda m: '<p class="tfc-pp-card ' + next(it) + '">', inner)
+    return '        <div class="tfc-pp-grid">\n' + body + '\n        </div>'
+
+def split_section(inner, fig_classes, drop_title=None):
+    """Text card on the left (its source line sits at the bottom), figures on the right."""
+    first = inner.index("<figure")
+    last = inner.rindex("</figure>") + len("</figure>")
+    copy, figs, tail = inner[:first].strip("\n"), inner[first:last], inner[last:].strip()
+    parts = re.findall(r"<figure.*?</figure>", figs, re.S)
+    assert len(parts) == len(fig_classes), (len(parts), len(fig_classes))
+    out = ""
+    for part, cls in zip(parts, fig_classes):
+        part = part.replace('<figure class="tfc-pp-fig"', '<figure class="tfc-pp-fig ' + cls + '"', 1)
+        if drop_title:
+            part = part.replace(f"<h3>{drop_title}</h3>\n", "", 1)
+        out += "            " + part.strip() + "\n"
+    return ('        <div class="tfc-pp-grid">\n            <div class="tfc-pp-card tfc-pp-copy tfc-pp-w5">\n' + copy + "\n"
+            + ("            " + tail + "\n" if tail else "") + "            </div>\n" + out + "        </div>")
+
+def rate_section(inner):
+    """Capital gains: the explanation on the left, the two rates compared in a card on the right."""
+    p1, p3 = re.findall(r"<p>.*?</p>", inner, re.S)
+    ul = re.search(r'<ul class="tfc-pp-bars".*?</ul>', inner, re.S).group(0)
+    return ('        <div class="tfc-pp-grid">\n'
+            f'            <div class="tfc-pp-card tfc-pp-card--lead tfc-pp-w6">{p1}</div>\n'
+            f'            <div class="tfc-pp-card tfc-pp-ratecard tfc-pp-w6"><h3>Top rates compared</h3>{ul}{p3}</div>\n'
+            '        </div>')
+
+
+PRIORITY_NO = {"cv": 1, "cg": 2, "cr": 3}
 OTHERS = {
  "cg": ("/capital-gains", "Tax Profits Like Paychecks"),
  "cr": ("/tax-credits-2", "Preserve Working Families&rsquo; Tax Credits"),
@@ -375,7 +436,7 @@ OTHERS = {
 }
 
 def page(key, n, head_comment, title, ask, lede, stats, sections, cta_h, cta_p, root_cls=""):
-    others = [f'<a href="{OTHERS[k][0]}">{OTHERS[k][1]}</a>' for k in ("cv","cg","cr") if k != key]
+    others = "".join(f'<a class="tfc-pp-more-card" href="{OTHERS[k][0]}"><span>Priority {PRIORITY_NO[k]} of 3</span><b>{OTHERS[k][1]}</b></a>' for k in ("cv","cg","cr") if k != key)
     st = "".join(f'<div class="tfc-pp-stat"><div class="tfc-pp-stat-num">{a}</div><p class="tfc-pp-stat-label">{b}</p>{"".join(x)}</div>' for a,b,*x in stats)
     body = "\n".join(f'    <section class="tfc-pp-section">\n{s}\n    </section>\n' for s in sections)
     return f"""<!-- {head_comment} -->
@@ -405,7 +466,11 @@ def page(key, n, head_comment, title, ask, lede, stats, sections, cta_h, cta_p, 
         </div>
     </section>
 
-    <p class="tfc-pp-more">Our other 2027 priorities: {" and ".join(others)}. <a href="/2027-priorities">See all three</a>.</p>
+    <nav class="tfc-pp-more" aria-label="Our other 2027 priorities">
+        <p class="tfc-pp-more-title">Our other 2027 priorities</p>
+        <div class="tfc-pp-more-cards">{others}</div>
+        <a class="tfc-pp-more-all" href="/2027-priorities">See all three</a>
+    </nav>
 
 </div>
 """
@@ -650,12 +715,21 @@ cv = page("cv", 1,
  "Help us fund Hawaiian homes", "Sign up and we&rsquo;ll tell you when this bill is moving and when to submit testimony.",
  root_cls="tfc-pp-ch tfc-pp-cv")
 
+cg = rework(cg, "The loophole", rate_section)
+cg = rework(cg, "What it would do", lambda x: x.replace("<ul>", '<ul class="tfc-pp-facts">', 1))
 cg = mark(cg, {"The loophole": "tfc-pp-part-lead", "What we are asking for": "tfc-pp-part-ask", "What it would do": "tfc-pp-part-tint"})
 cg = mark_src(cg, 1)
 cg = cg.replace("</style>", CHAPTERS + CG_EXTRA + "</style>", 1)
+cr = rework(cr, "What is at stake", lambda x: as_cards(x, ["tfc-pp-w7 tfc-pp-r2 tfc-pp-card--lead", "tfc-pp-w5 tfc-pp-card--alert", "tfc-pp-w5"]))
+cr = rework(cr, "Also on our agenda", lambda x: as_cards(x, ["tfc-pp-w8"]))
 cr = mark(cr, {"What is at stake": "tfc-pp-part-lead", "The timeline": "tfc-pp-part-tint tfc-pp-part-wide", "What we are asking for": "tfc-pp-part-ask", "Also on our agenda": "tfc-pp-part-agenda"})
 cr = mark_src(cr, 1)
 cr = cr.replace("</style>", CHAPTERS + CR_EXTRA + "</style>", 1)
+cv = rework(cv, "Where the conveyance tax stands", lambda x: as_cards(x.replace("29,589 applicants", "<strong>29,589 applicants</strong>"), ["tfc-pp-w8 tfc-pp-card--lead", "tfc-pp-w4 tfc-pp-card--stat"]))
+cv = rework(cv, "Where the money goes today", lambda x: split_section(x, ["tfc-pp-w7"], drop_title="Where the money goes today"))
+cv = rework(cv, "Why the tax should be marginal", lambda x: split_section(x, ["tfc-pp-w7"]))
+cv = rework(cv, "What we are asking for", lambda x: x.replace("<ul>", '<ul class="tfc-pp-asks">', 1))
+cv = rework(cv, "What it could raise", lambda x: split_section(x, ["tfc-pp-w7", "tfc-pp-w7", "tfc-pp-w5"]))
 cv = mark(cv, {"Where the conveyance tax stands": "tfc-pp-part-lead", "Where the money goes today": "tfc-pp-part-tint", "Why the tax should be marginal": "tfc-pp-part-plain", "What we are asking for": "tfc-pp-part-ask", "What it could raise": "tfc-pp-part-tint"})
 cv = cv.replace("</style>", CHAPTERS + CV_EXTRA + "</style>", 1)
 open(OUT+"capital_gains_squarespace.html","w").write(cg)
