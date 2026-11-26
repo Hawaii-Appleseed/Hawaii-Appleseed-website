@@ -19,6 +19,13 @@ function __haOnReady(f){document.readyState!=='loading'?setTimeout(f,0):document
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
+        /* The one deliberate exception to the scoping below: on Squarespace,
+           close the gap between the page title's section and the section
+           holding this embed (their default section padding left ~90px).
+           :has() matches only the section that contains this timeline. */
+        .page-section:has(#snap-medicaid-timeline) > .content-wrapper { padding-top: 8px !important; }
+        .page-section:has(+ .page-section #snap-medicaid-timeline) > .content-wrapper { padding-bottom: 0 !important; }
+
         /* Every rule is scoped to the wrapper. This block is pasted into a
            Squarespace page, where an unscoped rule restyles the site's own
            header and footer, and the site's h3/p/button rules restyle us. */
