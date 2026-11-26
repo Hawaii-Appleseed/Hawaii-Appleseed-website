@@ -9,9 +9,12 @@
      /2027-priorities on request; do not restore it without asking. The CTC ($650,
      ages 0-18) and RxKids note carries over from the previous version of this page. The child and dependent
      care credit sentence in the intro mirrors the Top Three fact sheet's page 1 bullet: no figure and no
-     Act 163 claim (the Estimates report covers only the EITC and food/excise changes). The timeline sits on
-     a white card with a blue line because this page's section background (#e0e0db) swallowed the default
-     light-grey line. -->
+     Act 163 claim (the Estimates report covers only the EITC and food/excise changes). "Chapters" layout
+     (Nov 2026, Devin picked it from three mockups): navy hero flush under the site header, full-width bands
+     per section (pale-blue timeline, deep-navy ask), cards for the figures. The three credit amounts
+     (CR_AMTS in tools/build_priority_pages.py) feed the segmented bar and the credits table. The section's own
+     top and bottom padding is removed by the CSS at the end so the hero touches the header; its background is
+     white. Sections carry tfc-pp-part-* classes (added by the generator) so the CSS does not depend on order. -->
 
 <style>
 .tfc-pp {
@@ -151,16 +154,145 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-pp) { grid-row: 1 / 2 !importa
     .tfc-pp .tfc-pp-section h2 { font-size: 1.45rem; }
     .tfc-pp-cta { padding: 28px 22px; margin-top: 40px; }
 }
-.tfc-pp-fig .tfc-pp-steps { margin: 0; border-left-color: var(--tfc-blue); }
-.tfc-pp-fig .tfc-pp-steps li:last-child { padding-bottom: 0; }
-@container (min-width: 761px) { .tfc-pp-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ===== Credits page: Chapters layout ===== */
+body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-cr) .content-wrapper { padding-top: 0 !important; padding-bottom: 0 !important; }
+.tfc-pp-cr { --tfc-deep: #16223a; --tfc-pale: #eaf1fa; --tfc-amber: #f5a524; --tfc-mute: #46536b; --tfc-ink: #1c2740; margin: 0; }
+
+/* hero: navy band flush under the header; ask and intro sit beside the title */
+.tfc-pp-cr .tfc-pp-hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 80px; align-items: start; margin: 0; padding: 60px 0 180px; border: 0; background: var(--tfc-navy); box-shadow: 0 0 0 100vmax var(--tfc-navy); clip-path: inset(0 -100vmax); }
+.tfc-pp-cr .tfc-pp-eyebrow { grid-column: 1 / -1; justify-self: start; margin-bottom: 6px; padding: 5px 14px; border: 1px solid rgba(255, 255, 255, .24); background: rgba(255, 255, 255, .1); color: #d3e2f7; font-size: .8rem; font-weight: 600; letter-spacing: .02em; text-transform: none; }
+.tfc-pp-cr .tfc-pp-title { grid-column: 1; grid-row: 2 / 4; max-width: 15ch; margin: 22px 0 0; font-size: clamp(2.4rem, 5.2cqi, 4.3rem); line-height: 1.02; letter-spacing: -.012em; color: #fff; }
+.tfc-pp-cr .tfc-pp-ask { grid-column: 2; grid-row: 2; max-width: 30ch; margin: 34px 0 14px; font-size: 1.45rem; font-weight: 600; color: #fff; }
+.tfc-pp-cr .tfc-pp-lede { grid-column: 2; grid-row: 3; max-width: 46ch; margin: 0; font-size: 1.1rem; color: #b9c8df; }
+
+/* stat cards overlap the hero; the first one carries the credit breakdown */
+.tfc-pp-cr .tfc-pp-stats { position: relative; z-index: 2; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px; margin: -104px 0 0; }
+.tfc-pp-cr .tfc-pp-stat { padding: 38px 42px 36px; border: 0; border-radius: 24px; background: #fff; box-shadow: 0 30px 60px -28px rgba(10, 20, 40, .55), 0 2px 6px rgba(10, 20, 40, .08); }
+.tfc-pp-cr .tfc-pp-stat-num { font-size: clamp(2.8rem, 6.2cqi, 4.8rem); line-height: 1; letter-spacing: -.025em; }
+.tfc-pp-cr .tfc-pp-stat-label { max-width: 34ch; margin: 14px 0 0; font-size: 1.1rem; line-height: 1.45; color: var(--tfc-mute); }
+.tfc-pp-cr .tfc-pp-stat:nth-child(2) { display: flex; flex-direction: column; justify-content: center; background: var(--tfc-blue); }
+.tfc-pp-cr .tfc-pp-stat:nth-child(2) .tfc-pp-stat-num, .tfc-pp-cr .tfc-pp-stat:nth-child(2) .tfc-pp-stat-label { color: #fff; }
+.tfc-pp-seg { display: flex; gap: 4px; height: 14px; margin: 30px 0 16px; }
+.tfc-pp-seg i { display: block; border-radius: 999px; }
+.tfc-pp-seg i:nth-child(1), .tfc-pp-seg-key li:nth-child(1) b { background: var(--tfc-navy); }
+.tfc-pp-seg i:nth-child(2), .tfc-pp-seg-key li:nth-child(2) b { background: var(--tfc-blue); }
+.tfc-pp-seg i:nth-child(3), .tfc-pp-seg-key li:nth-child(3) b { background: var(--tfc-amber); }
+.tfc-pp-seg-key { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; padding: 0; list-style: none; }
+.tfc-pp-seg-key li { display: flex; align-items: center; gap: 8px; margin: 0; font-size: .92rem; color: var(--tfc-mute); }
+.tfc-pp-seg-key b { flex: none; width: 10px; height: 10px; border-radius: 50%; }
+.tfc-pp-seg-key em { font-style: normal; font-weight: 700; color: var(--tfc-navy); }
+
+/* sections */
+.tfc-pp-cr .tfc-pp-section { margin: 0; padding: 0; }
+.tfc-pp-cr .tfc-pp-section h2 { padding-top: 0; border-top: 0; font-size: 2.5rem; line-height: 1.08; font-weight: 400; letter-spacing: -.012em; }
+.tfc-pp-cr .tfc-pp-part-stake { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 56px; padding: 112px 0 96px; }
+.tfc-pp-cr .tfc-pp-part-stake p { color: var(--tfc-mute); }
+.tfc-pp-cr .tfc-pp-part-stake h2 + p { margin-bottom: 22px; font-size: 1.55rem; line-height: 1.42; color: var(--tfc-navy); }
+.tfc-pp-cr .tfc-pp-part-timeline { display: block; padding: 92px 0 100px; background: var(--tfc-pale); box-shadow: 0 0 0 100vmax var(--tfc-pale); clip-path: inset(0 -100vmax); }
+.tfc-pp-cr .tfc-pp-part-timeline > * { max-width: none; }
+.tfc-pp-cr .tfc-pp-part-timeline h2 { margin: 0 0 56px; }
+.tfc-pp-cr .tfc-pp-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; border-left: 0; }
+.tfc-pp-cr .tfc-pp-steps li { margin: 0; padding: 46px 40px 0 0; font-size: 1.05rem; line-height: 1.5; color: #3d4c68; }
+.tfc-pp-cr .tfc-pp-steps li::before { left: 0; top: 0; width: 22px; height: 22px; border: 4px solid var(--tfc-blue); background: var(--tfc-pale); }
+.tfc-pp-cr .tfc-pp-steps li::after { content: ""; position: absolute; top: 10px; left: 34px; right: 12px; height: 2px; background: #b3c8e6; }
+.tfc-pp-cr .tfc-pp-steps li.end::after { display: none; }
+.tfc-pp-cr .tfc-pp-steps li.end::before { background: var(--tfc-amber); border-color: var(--tfc-amber); box-shadow: 0 0 0 8px rgba(245, 165, 36, .3); }
+.tfc-pp-cr .tfc-pp-steps b { margin-bottom: 10px; font-size: 1.7rem; line-height: 1.15; font-weight: 600; }
+.tfc-pp-cr .tfc-pp-steps li.end { font-weight: 600; color: var(--tfc-ink); }
+.tfc-pp-cr .tfc-pp-steps li.end b { color: #9a5a00; }
+.tfc-pp-cr .tfc-pp-part-ask { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 56px; padding: 112px 0; background: var(--tfc-deep); box-shadow: 0 0 0 100vmax var(--tfc-deep); clip-path: inset(0 -100vmax); }
+.tfc-pp-cr .tfc-pp-part-ask h2 { padding-top: 12px; font-size: 1.25rem; font-weight: 600; letter-spacing: 0; color: var(--tfc-amber); }
+.tfc-pp-cr .tfc-pp-part-ask p { max-width: none; margin: 0; font-size: clamp(1.7rem, 3.2cqi, 2.4rem); line-height: 1.22; font-weight: 400; letter-spacing: -.012em; color: #fff; }
+
+/* figures */
+.tfc-pp-cr .tfc-pp-figs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; padding: 104px 0 28px; }
+.tfc-pp-cr .tfc-pp-figs > .tfc-pp-fig:nth-child(3) { grid-column: 1 / -1; }
+.tfc-pp-cr .tfc-pp-fig { margin: 0; padding: 38px 42px; border: 1px solid #dbe4f0; border-radius: 24px; background: #fff; box-shadow: none; }
+.tfc-pp-cr .tfc-pp-fig h3 { margin: 0 0 6px; font-size: 1.5rem; line-height: 1.3; font-weight: 600; letter-spacing: -.01em; }
+.tfc-pp-cr .tfc-pp-fig-sub { font-size: .95rem; }
+.tfc-pp-cr .tfc-pp-track { height: 22px; border-radius: 999px; background: #edf2f9; }
+.tfc-pp-cr .tfc-pp-track i { border-radius: 999px; opacity: 1; background: #b6cbe8; }
+.tfc-pp-cr .tfc-pp-hb.hi .tfc-pp-track i { background: linear-gradient(90deg, #3c73b9, #5f98da); }
+.tfc-pp-cr .tfc-pp-table th { border-bottom: 1.5px solid var(--tfc-navy); }
+.tfc-pp-cr .tfc-pp-table tr.hi td { background: #f1f6fc; }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) th:first-child { width: 44%; }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr td:first-child::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 10px; border-radius: 50%; }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr:nth-child(1) td:first-child::before { background: var(--tfc-navy); }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr:nth-child(2) td:first-child::before { background: var(--tfc-blue); }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr:nth-child(3) td:first-child::before { background: var(--tfc-amber); }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr.hi td { background: none; font-weight: 400; }
+.tfc-pp-cr .tfc-pp-part-src { display: block; padding: 8px 0 64px; }
+
+/* agenda, call to action */
+.tfc-pp-cr .tfc-pp-part-agenda { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 56px; padding: 52px 0; border-top: 1px solid #dbe4f0; }
+.tfc-pp-cr .tfc-pp-part-agenda h2 { font-size: 1.6rem; }
+.tfc-pp-cr .tfc-pp-cta { margin: 16px 0 0; padding: 68px; border-radius: 28px; background: linear-gradient(120deg, #16223a 0%, #2a4d85 100%); }
+.tfc-pp-cr .tfc-pp-cta h2 { font-size: 2.3rem; line-height: 1.1; letter-spacing: -.012em; }
+.tfc-pp-cr .tfc-pp-cta p { font-size: 1.1rem; }
+.tfc-pp-cr .tfc-pp-cta a.tfc-btn.sqs-button-element--primary { border-color: var(--tfc-amber) !important; border-radius: 999px !important; background: var(--tfc-amber) !important; color: var(--tfc-deep) !important; }
+.tfc-pp-cr .tfc-pp-cta a.tfc-btn.sqs-button-element--secondary { border: 1.5px solid rgba(255, 255, 255, .55) !important; border-radius: 999px !important; background: transparent !important; color: #fff !important; }
+.tfc-pp-cr .tfc-pp-more { margin: 40px 0 0; padding: 0 0 80px; border: 0; }
+
+/* narrower containers */
+@container (max-width: 1100px) {
+    .tfc-pp-cr .tfc-pp-figs { grid-template-columns: minmax(0, 1fr); }
+}
+@container (max-width: 900px) {
+    .tfc-pp-cr .tfc-pp-hero { grid-template-columns: minmax(0, 1fr); padding: 48px 0 150px; }
+    .tfc-pp-cr .tfc-pp-title, .tfc-pp-cr .tfc-pp-ask, .tfc-pp-cr .tfc-pp-lede { grid-column: 1; grid-row: auto; }
+    .tfc-pp-cr .tfc-pp-title { margin: 20px 0 0; }
+    .tfc-pp-cr .tfc-pp-ask { max-width: 36ch; margin: 22px 0 12px; }
+    .tfc-pp-cr .tfc-pp-lede { max-width: 56ch; }
+    .tfc-pp-cr .tfc-pp-stats { margin-top: -96px; }
+    .tfc-pp-cr .tfc-pp-part-stake, .tfc-pp-cr .tfc-pp-part-ask, .tfc-pp-cr .tfc-pp-part-agenda { display: block; }
+    .tfc-pp-cr .tfc-pp-section h2 { margin: 0 0 22px; font-size: 2rem; }
+    .tfc-pp-cr .tfc-pp-part-stake { padding: 80px 0 64px; }
+    .tfc-pp-cr .tfc-pp-part-timeline { padding: 64px 0 72px; }
+    .tfc-pp-cr .tfc-pp-part-timeline h2 { margin-bottom: 36px; }
+    .tfc-pp-cr .tfc-pp-steps { grid-template-columns: minmax(0, 1fr); margin-left: 11px; border-left: 3px solid #b3c8e6; }
+    .tfc-pp-cr .tfc-pp-steps li { padding: 0 0 30px 32px; }
+    .tfc-pp-cr .tfc-pp-steps li:last-child { padding-bottom: 0; }
+    .tfc-pp-cr .tfc-pp-steps li::before { left: -12.5px; top: 2px; }
+    .tfc-pp-cr .tfc-pp-steps li::after { display: none; }
+    .tfc-pp-cr .tfc-pp-steps b { font-size: 1.45rem; }
+    .tfc-pp-cr .tfc-pp-part-ask { padding: 80px 0; }
+    .tfc-pp-cr .tfc-pp-part-ask h2 { padding-top: 0; margin-bottom: 18px; }
+    .tfc-pp-cr .tfc-pp-figs { padding-top: 72px; }
+    .tfc-pp-cr .tfc-pp-part-agenda { padding: 44px 0; }
+    .tfc-pp-cr .tfc-pp-cta { padding: 48px 40px; }
+}
+@container (max-width: 760px) {
+    .tfc-pp-cr .tfc-pp-stats { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .tfc-pp-cr .tfc-pp-stat:nth-child(2) { justify-content: flex-start; }
+    .tfc-pp-cr .tfc-pp-fig { padding: 28px 22px; border-radius: 20px; }
+}
+@container (max-width: 560px) {
+    .tfc-pp-cr .tfc-pp-hero { padding: 36px 0 128px; }
+    .tfc-pp-cr .tfc-pp-title { font-size: 2.3rem; }
+    .tfc-pp-cr .tfc-pp-ask { font-size: 1.2rem; }
+    .tfc-pp-cr .tfc-pp-lede { font-size: 1rem; }
+    .tfc-pp-cr .tfc-pp-stats { margin-top: -88px; }
+    .tfc-pp-cr .tfc-pp-stat { padding: 26px 24px; border-radius: 20px; }
+    .tfc-pp-cr .tfc-pp-stat-label { font-size: 1rem; }
+    .tfc-pp-cr .tfc-pp-seg { margin: 24px 0 14px; }
+    .tfc-pp-cr .tfc-pp-section h2 { font-size: 1.8rem; }
+    .tfc-pp-cr .tfc-pp-part-stake { padding: 64px 0 48px; }
+    .tfc-pp-cr .tfc-pp-part-stake h2 + p { font-size: 1.25rem; }
+    .tfc-pp-cr .tfc-pp-part-ask { padding: 64px 0; }
+    .tfc-pp-cr .tfc-pp-fig { padding: 24px 16px; }
+    .tfc-pp-cr .tfc-pp-fig h3 { font-size: 1.3rem; }
+    .tfc-pp-cr .tfc-pp-cta { padding: 36px 24px; border-radius: 22px; }
+    .tfc-pp-cr .tfc-pp-cta h2 { font-size: 1.8rem; }
+    .tfc-pp-cr .tfc-pp-more { padding-bottom: 56px; }
+}
 /* White behind this page (Devin, Nov 2026; tried warm sand first); replaces the section's grey #e0e0db. */
 body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp) .section-background { background-color: #ffffff !important; }
 /* The newsletter section: its form has no storage, so sign-ups were lost. */
 body:not(.sqs-is-page-editing) section[data-section-id="691b795a3409972cbc5443fa"] { display: none !important; }
 </style>
 
-<div class="tfc-pp">
+<div class="tfc-pp tfc-pp-cr">
 
     <header class="tfc-pp-hero">
         <span class="tfc-pp-eyebrow">2027 priority 3 of 3</span>
@@ -169,18 +301,18 @@ body:not(.sqs-is-page-editing) section[data-section-id="691b795a3409972cbc5443fa
         <p class="tfc-pp-lede">Two credits that help Hawai&#699;i families afford groceries and other basics are set to shrink after 2027 unless the Legislature acts. The child and dependent care tax credit also helps working parents with the cost of childcare.</p>
     </header>
 
-    <div class="tfc-pp-stats"><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">$83.2M</div><p class="tfc-pp-stat-label">that working families would lose in 2028 if the three credits expire</p></div><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">78,000</div><p class="tfc-pp-stat-label">households claim the state EITC each year</p></div></div>
+    <div class="tfc-pp-stats"><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">$83.2M</div><p class="tfc-pp-stat-label">that working families would lose in 2028 if the three credits expire</p><div class="tfc-pp-seg" aria-hidden="true"><i style="flex:40.3"></i><i style="flex:33.6"></i><i style="flex:9.2"></i></div><ul class="tfc-pp-seg-key"><li><b></b>Earned Income Tax Credit <em>$40.3M</em></li><li><b></b>Food/excise tax credit <em>$33.6M</em></li><li><b></b>Child and dependent care tax credit <em>$9.2M</em></li></ul></div><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">78,000</div><p class="tfc-pp-stat-label">households claim the state EITC each year</p></div></div>
 
-    <section class="tfc-pp-section">
+    <section class="tfc-pp-section tfc-pp-part-stake">
         <h2>What is at stake</h2>
         <p>In 2023, Act 163 doubled two of Hawai&#699;i&rsquo;s most important credits for working families: the state <strong>Earned Income Tax Credit</strong> (to 40 percent of the federal credit) and the refundable <strong>food/excise tax credit</strong>, which helps offset the general excise tax on groceries and other basics.</p>
         <p>Those expansions end after the 2027 tax year.</p>
         <p>Our estimate also counts the <strong>child and dependent care tax credit</strong>. About 16,300 households claim it, and a household that would lose it would lose $1,031 on average.</p>
     </section>
 
-    <section class="tfc-pp-section">
+    <section class="tfc-pp-section tfc-pp-part-timeline">
         <h2>The timeline</h2>
-        <div class="tfc-pp-fig">
+        <div class="tfc-pp-tl">
             <ol class="tfc-pp-steps">
                 <li><b>2023</b>Act 163 doubles the EITC and the food/excise credit.</li>
                 <li><b>2026</b>The Legislature does not extend them (HB 2306 did not pass).</li>
@@ -190,10 +322,11 @@ body:not(.sqs-is-page-editing) section[data-section-id="691b795a3409972cbc5443fa
         </div>
     </section>
 
-    <section class="tfc-pp-section">
+    <section class="tfc-pp-section tfc-pp-part-ask">
         <h2>What we are asking for</h2>
         <p>Extend these credits at their current levels, so families do not take a pay cut from the tax code in 2028.</p>
     </section>
+    <div class="tfc-pp-figs">
     <figure class="tfc-pp-fig" style="margin-left:0;margin-right:0">
         <h3>What each credit is worth</h3>
         <p class="tfc-pp-fig-sub">Cost of keeping the expansions in tax year 2028, in millions of dollars.</p>
@@ -212,11 +345,12 @@ body:not(.sqs-is-page-editing) section[data-section-id="691b795a3409972cbc5443fa
 <div class="tfc-pp-tablewrap"><table class="tfc-pp-table hide2"><thead><tr><th>Family type</th><th>Households</th><th>Households losing</th><th>Average loss per household</th><th>Total loss</th></tr></thead><tbody><tr class=hi><td>Single parent</td><td>63,900</td><td>67%</td><td>$526</td><td>$33.6M</td></tr><tr><td>Couple with children</td><td>110,300</td><td>40%</td><td>$312</td><td>$34.4M</td></tr><tr><td>Single, no children</td><td>185,200</td><td>37%</td><td>$48</td><td>$8.9M</td></tr><tr><td>Couple, no children</td><td>133,800</td><td>25%</td><td>$47</td><td>$6.2M</td></tr><tr class="tot"><td>All households</td><td>493,000</td><td></td><td></td><td>$83.2M</td></tr></tbody></table></div>
 <p class="tfc-pp-fig-note">Source: same model as above.</p>
     </figure>
-    <section class="tfc-pp-section">
+    </div>
+    <section class="tfc-pp-section tfc-pp-part-src">
         <p class="tfc-pp-source">Estimates: Hawai&#699;i Appleseed tax model, tax year 2028; EITC claims from the Department of Taxation, tax year 2024.</p>
     </section>
 
-    <section class="tfc-pp-section">
+    <section class="tfc-pp-section tfc-pp-part-agenda">
         <h2>Also on our agenda</h2>
         <p>We also support a refundable state Child Tax Credit of $650 per child aged 0&ndash;18, and RxKids, which would give cash payments to mothers in the first months of a child&rsquo;s life. We will post updates here as those proposals move.</p>
     </section>

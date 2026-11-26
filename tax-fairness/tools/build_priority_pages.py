@@ -150,15 +150,15 @@ OTHERS = {
  "cv": ("/conveyance-tax", "Increase the Tax on Luxury Homes"),
 }
 
-def page(key, n, head_comment, title, ask, lede, stats, sections, cta_h, cta_p):
+def page(key, n, head_comment, title, ask, lede, stats, sections, cta_h, cta_p, root_cls=""):
     others = [f'<a href="{OTHERS[k][0]}">{OTHERS[k][1]}</a>' for k in ("cv","cg","cr") if k != key]
-    st = "".join(f'<div class="tfc-pp-stat"><div class="tfc-pp-stat-num">{a}</div><p class="tfc-pp-stat-label">{b}</p></div>' for a,b in stats)
+    st = "".join(f'<div class="tfc-pp-stat"><div class="tfc-pp-stat-num">{a}</div><p class="tfc-pp-stat-label">{b}</p>{"".join(x)}</div>' for a,b,*x in stats)
     body = "\n".join(f'    <section class="tfc-pp-section">\n{s}\n    </section>\n' for s in sections)
     return f"""<!-- {head_comment} -->
 
 {CSS}
 
-<div class="tfc-pp">
+<div class="tfc-pp{root_cls and " " + root_cls}">
 
     <header class="tfc-pp-hero">
         <span class="tfc-pp-eyebrow">2027 priority {n} of 3</span>
@@ -266,12 +266,16 @@ cg = page("cg", 2,
  "Help us close the gap", "Sign up and we&rsquo;ll tell you when this bill is moving and when to submit testimony.")
 
 
+CR_AMTS = [("Earned Income Tax Credit", 40.3), ("Food/excise tax credit", 33.6), ("Child and dependent care tax credit", 9.2)]
+CR_SEG = ('<div class="tfc-pp-seg" aria-hidden="true">' + "".join(f'<i style="flex:{v}"></i>' for _, v in CR_AMTS) + '</div>'
+          '<ul class="tfc-pp-seg-key">' + "".join(f'<li><b></b>{n} <em>${v}M</em></li>' for n, v in CR_AMTS) + '</ul>')
+
 CR_FIG0 = fig("What each credit is worth",
   "Cost of keeping the expansions in tax year 2028, in millions of dollars.",
   table(["Credit","Households losing","Average loss per household that loses it","Total in 2028"],
-   [["Earned Income Tax Credit","13%","$618","$40.3M"],
-    ["Food/excise tax credit","34%","$200","$33.6M"],
-    ["Child and dependent care tax credit<small>about 16,300 claimants</small>","2%","$1,031","$9.2M"]],
+   [["Earned Income Tax Credit","13%","$618",f"${CR_AMTS[0][1]}M"],
+    ["Food/excise tax credit","34%","$200",f"${CR_AMTS[1][1]}M"],
+    ["Child and dependent care tax credit<small>about 16,300 claimants</small>","2%","$1,031",f"${CR_AMTS[2][1]}M"]],
    hi=0, total=["All three","38%","$439","$83.2M"]),
   "Source: Hawai&#699;i Appleseed estimate, Census-Forecaster tax model, tax year 2028.")
 CR_FIG1 = fig("The lowest-income families lose the most",
@@ -305,18 +309,21 @@ cr = page("cr", 3,
      /2027-priorities on request; do not restore it without asking. The CTC ($650,
      ages 0-18) and RxKids note carries over from the previous version of this page. The child and dependent
      care credit sentence in the intro mirrors the Top Three fact sheet's page 1 bullet: no figure and no
-     Act 163 claim (the Estimates report covers only the EITC and food/excise changes). The timeline sits on
-     a white card with a blue line because this page's section background (#e0e0db) swallowed the default
-     light-grey line.""",
+     Act 163 claim (the Estimates report covers only the EITC and food/excise changes). "Chapters" layout
+     (Nov 2026, Devin picked it from three mockups): navy hero flush under the site header, full-width bands
+     per section (pale-blue timeline, deep-navy ask), cards for the figures. The three credit amounts
+     (CR_AMTS in tools/build_priority_pages.py) feed the segmented bar and the credits table. The section's own
+     top and bottom padding is removed by the CSS at the end so the hero touches the header; its background is
+     white. Sections carry tfc-pp-part-* classes (added by the generator) so the CSS does not depend on order.""",
  "Preserve Working Families&rsquo; Tax Credits",
  "Extend the earned income and food/excise tax credits before they expire.",
  "Two credits that help Hawai&#699;i families afford groceries and other basics are set to shrink after 2027 unless the Legislature acts. The child and dependent care tax credit also helps working parents with the cost of childcare.",
- [("$83.2M","that working families would lose in 2028 if the three credits expire"),("78,000","households claim the state EITC each year")],
+ [("$83.2M","that working families would lose in 2028 if the three credits expire", CR_SEG),("78,000","households claim the state EITC each year")],
  [
   sec("What is at stake", """        <p>In 2023, Act 163 doubled two of Hawai&#699;i&rsquo;s most important credits for working families: the state <strong>Earned Income Tax Credit</strong> (to 40 percent of the federal credit) and the refundable <strong>food/excise tax credit</strong>, which helps offset the general excise tax on groceries and other basics.</p>
         <p>Those expansions end after the 2027 tax year.</p>
         <p>Our estimate also counts the <strong>child and dependent care tax credit</strong>. About 16,300 households claim it, and a household that would lose it would lose $1,031 on average.</p>"""),
-  sec("The timeline", """        <div class="tfc-pp-fig">
+  sec("The timeline", """        <div class="tfc-pp-tl">
             <ol class="tfc-pp-steps">
                 <li><b>2023</b>Act 163 doubles the EITC and the food/excise credit.</li>
                 <li><b>2026</b>The Legislature does not extend them (HB 2306 did not pass).</li>
@@ -324,19 +331,156 @@ cr = page("cr", 3,
                 <li class="end"><b>2028</b>First tax year without them: an estimated $83.2 million less for working families.</li>
             </ol>
         </div>"""),
-  sec("What we are asking for", """        <p>Extend these credits at their current levels, so families do not take a pay cut from the tax code in 2028.</p>""") + "\n    </section>\n" + CR_FIG0 + CR_FIG1 + CR_FIG2 + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Estimates: Hawai&#699;i Appleseed tax model, tax year 2028; EITC claims from the Department of Taxation, tax year 2024.</p>',
+  sec("What we are asking for", """        <p>Extend these credits at their current levels, so families do not take a pay cut from the tax code in 2028.</p>""") + "\n    </section>\n" + '    <div class="tfc-pp-figs">\n' + CR_FIG0 + CR_FIG1 + CR_FIG2 + '    </div>\n' + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Estimates: Hawai&#699;i Appleseed tax model, tax year 2028; EITC claims from the Department of Taxation, tax year 2024.</p>',
   sec("Also on our agenda", """        <p>We also support a refundable state Child Tax Credit of $650 per child aged 0&ndash;18, and RxKids, which would give cash payments to mothers in the first months of a child&rsquo;s life. We will post updates here as those proposals move.</p>"""),
  ],
- "Help us keep these credits", "Sign up and we&rsquo;ll tell you when these bills are moving and when to submit testimony.")
+ "Help us keep these credits", "Sign up and we&rsquo;ll tell you when these bills are moving and when to submit testimony.",
+ root_cls="tfc-pp-cr")
 
-# The timeline is only on this page, whose section background (#e0e0db) swallows the default light-grey line,
-# so it sits on a white card with a blue line. With two stats instead of three, the stat cards use two columns on
-# wide screens (the narrow-screen rule in CSS already stacks them). Added here rather than in CSS so the other two
-# pages stay as they are.
-cr = cr.replace("</style>", """.tfc-pp-fig .tfc-pp-steps { margin: 0; border-left-color: var(--tfc-blue); }
-.tfc-pp-fig .tfc-pp-steps li:last-child { padding-bottom: 0; }
-@container (min-width: 761px) { .tfc-pp-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-</style>""", 1)
+# Section classes for the credits page, so its CSS does not depend on element order.
+for _name, _cls in (("What is at stake", "stake"), ("The timeline", "timeline"), ("What we are asking for", "ask"), ("Also on our agenda", "agenda")):
+    _old = f'<section class="tfc-pp-section">\n        <h2>{_name}</h2>'
+    assert cr.count(_old) == 1, _name
+    cr = cr.replace(_old, f'<section class="tfc-pp-section tfc-pp-part-{_cls}">\n        <h2>{_name}</h2>')
+_old = '<section class="tfc-pp-section">\n        <p class="tfc-pp-source">'
+assert cr.count(_old) == 1
+cr = cr.replace(_old, '<section class="tfc-pp-section tfc-pp-part-src">\n        <p class="tfc-pp-source">')
+
+# "Chapters" look for the credits page only (the other two priority pages keep the shared CSS above).
+CR_CHAPTERS = """
+/* ===== Credits page: Chapters layout ===== */
+body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-cr) .content-wrapper { padding-top: 0 !important; padding-bottom: 0 !important; }
+.tfc-pp-cr { --tfc-deep: #16223a; --tfc-pale: #eaf1fa; --tfc-amber: #f5a524; --tfc-mute: #46536b; --tfc-ink: #1c2740; margin: 0; }
+
+/* hero: navy band flush under the header; ask and intro sit beside the title */
+.tfc-pp-cr .tfc-pp-hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 80px; align-items: start; margin: 0; padding: 60px 0 180px; border: 0; background: var(--tfc-navy); box-shadow: 0 0 0 100vmax var(--tfc-navy); clip-path: inset(0 -100vmax); }
+.tfc-pp-cr .tfc-pp-eyebrow { grid-column: 1 / -1; justify-self: start; margin-bottom: 6px; padding: 5px 14px; border: 1px solid rgba(255, 255, 255, .24); background: rgba(255, 255, 255, .1); color: #d3e2f7; font-size: .8rem; font-weight: 600; letter-spacing: .02em; text-transform: none; }
+.tfc-pp-cr .tfc-pp-title { grid-column: 1; grid-row: 2 / 4; max-width: 15ch; margin: 22px 0 0; font-size: clamp(2.4rem, 5.2cqi, 4.3rem); line-height: 1.02; letter-spacing: -.012em; color: #fff; }
+.tfc-pp-cr .tfc-pp-ask { grid-column: 2; grid-row: 2; max-width: 30ch; margin: 34px 0 14px; font-size: 1.45rem; font-weight: 600; color: #fff; }
+.tfc-pp-cr .tfc-pp-lede { grid-column: 2; grid-row: 3; max-width: 46ch; margin: 0; font-size: 1.1rem; color: #b9c8df; }
+
+/* stat cards overlap the hero; the first one carries the credit breakdown */
+.tfc-pp-cr .tfc-pp-stats { position: relative; z-index: 2; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px; margin: -104px 0 0; }
+.tfc-pp-cr .tfc-pp-stat { padding: 38px 42px 36px; border: 0; border-radius: 24px; background: #fff; box-shadow: 0 30px 60px -28px rgba(10, 20, 40, .55), 0 2px 6px rgba(10, 20, 40, .08); }
+.tfc-pp-cr .tfc-pp-stat-num { font-size: clamp(2.8rem, 6.2cqi, 4.8rem); line-height: 1; letter-spacing: -.025em; }
+.tfc-pp-cr .tfc-pp-stat-label { max-width: 34ch; margin: 14px 0 0; font-size: 1.1rem; line-height: 1.45; color: var(--tfc-mute); }
+.tfc-pp-cr .tfc-pp-stat:nth-child(2) { display: flex; flex-direction: column; justify-content: center; background: var(--tfc-blue); }
+.tfc-pp-cr .tfc-pp-stat:nth-child(2) .tfc-pp-stat-num, .tfc-pp-cr .tfc-pp-stat:nth-child(2) .tfc-pp-stat-label { color: #fff; }
+.tfc-pp-seg { display: flex; gap: 4px; height: 14px; margin: 30px 0 16px; }
+.tfc-pp-seg i { display: block; border-radius: 999px; }
+.tfc-pp-seg i:nth-child(1), .tfc-pp-seg-key li:nth-child(1) b { background: var(--tfc-navy); }
+.tfc-pp-seg i:nth-child(2), .tfc-pp-seg-key li:nth-child(2) b { background: var(--tfc-blue); }
+.tfc-pp-seg i:nth-child(3), .tfc-pp-seg-key li:nth-child(3) b { background: var(--tfc-amber); }
+.tfc-pp-seg-key { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; padding: 0; list-style: none; }
+.tfc-pp-seg-key li { display: flex; align-items: center; gap: 8px; margin: 0; font-size: .92rem; color: var(--tfc-mute); }
+.tfc-pp-seg-key b { flex: none; width: 10px; height: 10px; border-radius: 50%; }
+.tfc-pp-seg-key em { font-style: normal; font-weight: 700; color: var(--tfc-navy); }
+
+/* sections */
+.tfc-pp-cr .tfc-pp-section { margin: 0; padding: 0; }
+.tfc-pp-cr .tfc-pp-section h2 { padding-top: 0; border-top: 0; font-size: 2.5rem; line-height: 1.08; font-weight: 400; letter-spacing: -.012em; }
+.tfc-pp-cr .tfc-pp-part-stake { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 56px; padding: 112px 0 96px; }
+.tfc-pp-cr .tfc-pp-part-stake p { color: var(--tfc-mute); }
+.tfc-pp-cr .tfc-pp-part-stake h2 + p { margin-bottom: 22px; font-size: 1.55rem; line-height: 1.42; color: var(--tfc-navy); }
+.tfc-pp-cr .tfc-pp-part-timeline { display: block; padding: 92px 0 100px; background: var(--tfc-pale); box-shadow: 0 0 0 100vmax var(--tfc-pale); clip-path: inset(0 -100vmax); }
+.tfc-pp-cr .tfc-pp-part-timeline > * { max-width: none; }
+.tfc-pp-cr .tfc-pp-part-timeline h2 { margin: 0 0 56px; }
+.tfc-pp-cr .tfc-pp-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; border-left: 0; }
+.tfc-pp-cr .tfc-pp-steps li { margin: 0; padding: 46px 40px 0 0; font-size: 1.05rem; line-height: 1.5; color: #3d4c68; }
+.tfc-pp-cr .tfc-pp-steps li::before { left: 0; top: 0; width: 22px; height: 22px; border: 4px solid var(--tfc-blue); background: var(--tfc-pale); }
+.tfc-pp-cr .tfc-pp-steps li::after { content: ""; position: absolute; top: 10px; left: 34px; right: 12px; height: 2px; background: #b3c8e6; }
+.tfc-pp-cr .tfc-pp-steps li.end::after { display: none; }
+.tfc-pp-cr .tfc-pp-steps li.end::before { background: var(--tfc-amber); border-color: var(--tfc-amber); box-shadow: 0 0 0 8px rgba(245, 165, 36, .3); }
+.tfc-pp-cr .tfc-pp-steps b { margin-bottom: 10px; font-size: 1.7rem; line-height: 1.15; font-weight: 600; }
+.tfc-pp-cr .tfc-pp-steps li.end { font-weight: 600; color: var(--tfc-ink); }
+.tfc-pp-cr .tfc-pp-steps li.end b { color: #9a5a00; }
+.tfc-pp-cr .tfc-pp-part-ask { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 56px; padding: 112px 0; background: var(--tfc-deep); box-shadow: 0 0 0 100vmax var(--tfc-deep); clip-path: inset(0 -100vmax); }
+.tfc-pp-cr .tfc-pp-part-ask h2 { padding-top: 12px; font-size: 1.25rem; font-weight: 600; letter-spacing: 0; color: var(--tfc-amber); }
+.tfc-pp-cr .tfc-pp-part-ask p { max-width: none; margin: 0; font-size: clamp(1.7rem, 3.2cqi, 2.4rem); line-height: 1.22; font-weight: 400; letter-spacing: -.012em; color: #fff; }
+
+/* figures */
+.tfc-pp-cr .tfc-pp-figs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; padding: 104px 0 28px; }
+.tfc-pp-cr .tfc-pp-figs > .tfc-pp-fig:nth-child(3) { grid-column: 1 / -1; }
+.tfc-pp-cr .tfc-pp-fig { margin: 0; padding: 38px 42px; border: 1px solid #dbe4f0; border-radius: 24px; background: #fff; box-shadow: none; }
+.tfc-pp-cr .tfc-pp-fig h3 { margin: 0 0 6px; font-size: 1.5rem; line-height: 1.3; font-weight: 600; letter-spacing: -.01em; }
+.tfc-pp-cr .tfc-pp-fig-sub { font-size: .95rem; }
+.tfc-pp-cr .tfc-pp-track { height: 22px; border-radius: 999px; background: #edf2f9; }
+.tfc-pp-cr .tfc-pp-track i { border-radius: 999px; opacity: 1; background: #b6cbe8; }
+.tfc-pp-cr .tfc-pp-hb.hi .tfc-pp-track i { background: linear-gradient(90deg, #3c73b9, #5f98da); }
+.tfc-pp-cr .tfc-pp-table th { border-bottom: 1.5px solid var(--tfc-navy); }
+.tfc-pp-cr .tfc-pp-table tr.hi td { background: #f1f6fc; }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) th:first-child { width: 44%; }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr td:first-child::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 10px; border-radius: 50%; }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr:nth-child(1) td:first-child::before { background: var(--tfc-navy); }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr:nth-child(2) td:first-child::before { background: var(--tfc-blue); }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr:nth-child(3) td:first-child::before { background: var(--tfc-amber); }
+.tfc-pp-cr .tfc-pp-figs .tfc-pp-fig:nth-child(1) tbody tr.hi td { background: none; font-weight: 400; }
+.tfc-pp-cr .tfc-pp-part-src { display: block; padding: 8px 0 64px; }
+
+/* agenda, call to action */
+.tfc-pp-cr .tfc-pp-part-agenda { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 56px; padding: 52px 0; border-top: 1px solid #dbe4f0; }
+.tfc-pp-cr .tfc-pp-part-agenda h2 { font-size: 1.6rem; }
+.tfc-pp-cr .tfc-pp-cta { margin: 16px 0 0; padding: 68px; border-radius: 28px; background: linear-gradient(120deg, #16223a 0%, #2a4d85 100%); }
+.tfc-pp-cr .tfc-pp-cta h2 { font-size: 2.3rem; line-height: 1.1; letter-spacing: -.012em; }
+.tfc-pp-cr .tfc-pp-cta p { font-size: 1.1rem; }
+.tfc-pp-cr .tfc-pp-cta a.tfc-btn.sqs-button-element--primary { border-color: var(--tfc-amber) !important; border-radius: 999px !important; background: var(--tfc-amber) !important; color: var(--tfc-deep) !important; }
+.tfc-pp-cr .tfc-pp-cta a.tfc-btn.sqs-button-element--secondary { border: 1.5px solid rgba(255, 255, 255, .55) !important; border-radius: 999px !important; background: transparent !important; color: #fff !important; }
+.tfc-pp-cr .tfc-pp-more { margin: 40px 0 0; padding: 0 0 80px; border: 0; }
+
+/* narrower containers */
+@container (max-width: 1100px) {
+    .tfc-pp-cr .tfc-pp-figs { grid-template-columns: minmax(0, 1fr); }
+}
+@container (max-width: 900px) {
+    .tfc-pp-cr .tfc-pp-hero { grid-template-columns: minmax(0, 1fr); padding: 48px 0 150px; }
+    .tfc-pp-cr .tfc-pp-title, .tfc-pp-cr .tfc-pp-ask, .tfc-pp-cr .tfc-pp-lede { grid-column: 1; grid-row: auto; }
+    .tfc-pp-cr .tfc-pp-title { margin: 20px 0 0; }
+    .tfc-pp-cr .tfc-pp-ask { max-width: 36ch; margin: 22px 0 12px; }
+    .tfc-pp-cr .tfc-pp-lede { max-width: 56ch; }
+    .tfc-pp-cr .tfc-pp-stats { margin-top: -96px; }
+    .tfc-pp-cr .tfc-pp-part-stake, .tfc-pp-cr .tfc-pp-part-ask, .tfc-pp-cr .tfc-pp-part-agenda { display: block; }
+    .tfc-pp-cr .tfc-pp-section h2 { margin: 0 0 22px; font-size: 2rem; }
+    .tfc-pp-cr .tfc-pp-part-stake { padding: 80px 0 64px; }
+    .tfc-pp-cr .tfc-pp-part-timeline { padding: 64px 0 72px; }
+    .tfc-pp-cr .tfc-pp-part-timeline h2 { margin-bottom: 36px; }
+    .tfc-pp-cr .tfc-pp-steps { grid-template-columns: minmax(0, 1fr); margin-left: 11px; border-left: 3px solid #b3c8e6; }
+    .tfc-pp-cr .tfc-pp-steps li { padding: 0 0 30px 32px; }
+    .tfc-pp-cr .tfc-pp-steps li:last-child { padding-bottom: 0; }
+    .tfc-pp-cr .tfc-pp-steps li::before { left: -12.5px; top: 2px; }
+    .tfc-pp-cr .tfc-pp-steps li::after { display: none; }
+    .tfc-pp-cr .tfc-pp-steps b { font-size: 1.45rem; }
+    .tfc-pp-cr .tfc-pp-part-ask { padding: 80px 0; }
+    .tfc-pp-cr .tfc-pp-part-ask h2 { padding-top: 0; margin-bottom: 18px; }
+    .tfc-pp-cr .tfc-pp-figs { padding-top: 72px; }
+    .tfc-pp-cr .tfc-pp-part-agenda { padding: 44px 0; }
+    .tfc-pp-cr .tfc-pp-cta { padding: 48px 40px; }
+}
+@container (max-width: 760px) {
+    .tfc-pp-cr .tfc-pp-stats { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .tfc-pp-cr .tfc-pp-stat:nth-child(2) { justify-content: flex-start; }
+    .tfc-pp-cr .tfc-pp-fig { padding: 28px 22px; border-radius: 20px; }
+}
+@container (max-width: 560px) {
+    .tfc-pp-cr .tfc-pp-hero { padding: 36px 0 128px; }
+    .tfc-pp-cr .tfc-pp-title { font-size: 2.3rem; }
+    .tfc-pp-cr .tfc-pp-ask { font-size: 1.2rem; }
+    .tfc-pp-cr .tfc-pp-lede { font-size: 1rem; }
+    .tfc-pp-cr .tfc-pp-stats { margin-top: -88px; }
+    .tfc-pp-cr .tfc-pp-stat { padding: 26px 24px; border-radius: 20px; }
+    .tfc-pp-cr .tfc-pp-stat-label { font-size: 1rem; }
+    .tfc-pp-cr .tfc-pp-seg { margin: 24px 0 14px; }
+    .tfc-pp-cr .tfc-pp-section h2 { font-size: 1.8rem; }
+    .tfc-pp-cr .tfc-pp-part-stake { padding: 64px 0 48px; }
+    .tfc-pp-cr .tfc-pp-part-stake h2 + p { font-size: 1.25rem; }
+    .tfc-pp-cr .tfc-pp-part-ask { padding: 64px 0; }
+    .tfc-pp-cr .tfc-pp-fig { padding: 24px 16px; }
+    .tfc-pp-cr .tfc-pp-fig h3 { font-size: 1.3rem; }
+    .tfc-pp-cr .tfc-pp-cta { padding: 36px 24px; border-radius: 22px; }
+    .tfc-pp-cr .tfc-pp-cta h2 { font-size: 1.8rem; }
+    .tfc-pp-cr .tfc-pp-more { padding-bottom: 56px; }
+}
+"""
+cr = cr.replace("</style>", CR_CHAPTERS + "</style>", 1)
 
 
 CV_ALLOC = fig("Where the money goes today",
