@@ -336,6 +336,7 @@ CG_EXTRA = """
 .tfc-pp-cg .tfc-pp-bar { height: 26px; border-radius: 999px; }
 .tfc-pp-cg .tfc-pp-bars b { font-size: 1.15rem; }
 @container (max-width: 760px) {
+    .tfc-pp-cg .tfc-pp-table.hide3 th:nth-child(3), .tfc-pp-cg .tfc-pp-table.hide3 td:nth-child(3) { display: none; }
     .tfc-pp-cg .tfc-pp-bars li { grid-template-columns: minmax(0, 1fr) 60px; gap: 6px 12px; }
     .tfc-pp-cg .tfc-pp-bars li span { grid-column: 1 / -1; }
     .tfc-pp-cg .tfc-pp-bars li .tfc-pp-bar { grid-column: 1; }
@@ -441,7 +442,7 @@ CG_FIG2 = fig("Where the new tax would fall",
     ["Next 15%<small>$204,000&ndash;$372,000</small>","$14","26%","$1.1M"],
     ["Next 20%<small>$130,000&ndash;$204,000</small>","under $1","9%","&lt;$0.1M"],
     ["Bottom 60%<small>under $130,000</small>","$0","0%","$0"]],
-   hi=0, total=["All resident households","","","$130M"]),
+   hi=0, total=["All resident households","","","$130M"], cls="hide3"),
   "Averages are across every household in the group, including those who owe nothing more. Income is taxable income. Source: same model as above.")
 
 CG_FIG0 = fig("Two ways to raise revenue from capital gains",

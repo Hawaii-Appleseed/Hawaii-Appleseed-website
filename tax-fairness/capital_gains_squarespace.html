@@ -286,6 +286,7 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 .tfc-pp-cg .tfc-pp-bar { height: 26px; border-radius: 999px; }
 .tfc-pp-cg .tfc-pp-bars b { font-size: 1.15rem; }
 @container (max-width: 760px) {
+    .tfc-pp-cg .tfc-pp-table.hide3 th:nth-child(3), .tfc-pp-cg .tfc-pp-table.hide3 td:nth-child(3) { display: none; }
     .tfc-pp-cg .tfc-pp-bars li { grid-template-columns: minmax(0, 1fr) 60px; gap: 6px 12px; }
     .tfc-pp-cg .tfc-pp-bars li span { grid-column: 1 / -1; }
     .tfc-pp-cg .tfc-pp-bars li .tfc-pp-bar { grid-column: 1; }
@@ -342,7 +343,7 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
     <figure class="tfc-pp-fig" style="margin-left:0;margin-right:0">
         <h3>Where the new tax would fall</h3>
         <p class="tfc-pp-fig-sub">Taxing capital gains like ordinary income, by resident household income group, tax year 2027. Nonresidents are shown in the table above.</p>
-<div class="tfc-pp-tablewrap"><table class="tfc-pp-table "><thead><tr><th>Household group</th><th>Average new tax per household</th><th>Households paying more</th><th>Total new revenue</th></tr></thead><tbody><tr class=hi><td>Top 1%<small>over $656,000</small></td><td>$24,320</td><td>99%</td><td>$120.1M</td></tr><tr><td>Next 4%<small>$373,000&ndash;$656,000</small></td><td>$454</td><td>86%</td><td>$9.0M</td></tr><tr><td>Next 15%<small>$204,000&ndash;$372,000</small></td><td>$14</td><td>26%</td><td>$1.1M</td></tr><tr><td>Next 20%<small>$130,000&ndash;$204,000</small></td><td>under $1</td><td>9%</td><td>&lt;$0.1M</td></tr><tr><td>Bottom 60%<small>under $130,000</small></td><td>$0</td><td>0%</td><td>$0</td></tr><tr class="tot"><td>All resident households</td><td></td><td></td><td>$130M</td></tr></tbody></table></div>
+<div class="tfc-pp-tablewrap"><table class="tfc-pp-table hide3"><thead><tr><th>Household group</th><th>Average new tax per household</th><th>Households paying more</th><th>Total new revenue</th></tr></thead><tbody><tr class=hi><td>Top 1%<small>over $656,000</small></td><td>$24,320</td><td>99%</td><td>$120.1M</td></tr><tr><td>Next 4%<small>$373,000&ndash;$656,000</small></td><td>$454</td><td>86%</td><td>$9.0M</td></tr><tr><td>Next 15%<small>$204,000&ndash;$372,000</small></td><td>$14</td><td>26%</td><td>$1.1M</td></tr><tr><td>Next 20%<small>$130,000&ndash;$204,000</small></td><td>under $1</td><td>9%</td><td>&lt;$0.1M</td></tr><tr><td>Bottom 60%<small>under $130,000</small></td><td>$0</td><td>0%</td><td>$0</td></tr><tr class="tot"><td>All resident households</td><td></td><td></td><td>$130M</td></tr></tbody></table></div>
 <p class="tfc-pp-fig-note">Averages are across every household in the group, including those who owe nothing more. Income is taxable income. Source: same model as above.</p>
     </figure>
     </div>
