@@ -2,8 +2,10 @@
      file into that block; the page's newsletter section stays hidden (its form had no storage; the panel
      at the end sends people to /subscribe). Rewritten for the 2027 priority: extend Act 163's expiring
      EITC and food/excise credits. Act 163 (2023) is repealed 12/31/2027 (L 2023, c 163, s 5); HB 2306
-     (2026) did not pass. $76M = forecast_working_family_credits.py, TY2028 (SB3125_CD1_FORECAST.md, Oct 8
-     2026 anchor). 78,000 = DOTAX TY2024 EITC report. The poverty estimate was dropped from this page and from
+     (2026) did not pass. $83.2M = EITC 40.3 + food/excise 33.6 + CDCTC 9.2, TY2028, Census-Forecaster main c6bf232
+     site/data/working-family-credits/by_credit_ty2028.csv (Nov 25 2026 refresh; replaced the
+     older $76M, which was EITC + food/excise only). CDCTC ~16,300 claimants (revenue_by_year.csv,
+     cdcc_claimants 2028), $1,031 = average loss per household that loses it. 78,000 = DOTAX TY2024 EITC report. The poverty estimate was dropped from this page and from
      /2027-priorities on request; do not restore it without asking. The CTC ($650,
      ages 0-18) and RxKids note carries over from the previous version of this page. The child and dependent
      care credit sentence in the intro mirrors the Top Three fact sheet's page 1 bullet: no figure and no
@@ -165,12 +167,13 @@ body:not(.sqs-is-page-editing) section[data-section-id="691b795a3409972cbc5443fa
         <p class="tfc-pp-lede">Two credits that help Hawai&#699;i families afford groceries and other basics are set to shrink after 2027 unless the Legislature acts. The child and dependent care tax credit also helps working parents with the cost of childcare.</p>
     </header>
 
-    <div class="tfc-pp-stats"><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">$76M</div><p class="tfc-pp-stat-label">that working families would lose in 2028 if the credits expire</p></div><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">78,000</div><p class="tfc-pp-stat-label">households claim the state EITC each year</p></div></div>
+    <div class="tfc-pp-stats"><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">$83.2M</div><p class="tfc-pp-stat-label">that working families would lose in 2028 if the three credits expire</p></div><div class="tfc-pp-stat"><div class="tfc-pp-stat-num">78,000</div><p class="tfc-pp-stat-label">households claim the state EITC each year</p></div></div>
 
     <section class="tfc-pp-section">
         <h2>What is at stake</h2>
         <p>In 2023, Act 163 doubled two of Hawai&#699;i&rsquo;s most important credits for working families: the state <strong>Earned Income Tax Credit</strong> (to 40 percent of the federal credit) and the refundable <strong>food/excise tax credit</strong>, which helps offset the general excise tax on groceries and other basics.</p>
         <p>Those expansions end after the 2027 tax year.</p>
+        <p>Our estimate also counts the <strong>child and dependent care tax credit</strong>. About 16,300 households claim it, and a household that would lose it would lose $1,031 on average.</p>
     </section>
 
     <section class="tfc-pp-section">
@@ -180,25 +183,31 @@ body:not(.sqs-is-page-editing) section[data-section-id="691b795a3409972cbc5443fa
                 <li><b>2023</b>Act 163 doubles the EITC and the food/excise credit.</li>
                 <li><b>2026</b>The Legislature does not extend them (HB 2306 did not pass).</li>
                 <li><b>December 31, 2027</b>The expansions are repealed.</li>
-                <li class="end"><b>2028</b>First tax year without them: an estimated $76 million less for working families.</li>
+                <li class="end"><b>2028</b>First tax year without them: an estimated $83.2 million less for working families.</li>
             </ol>
         </div>
     </section>
 
     <section class="tfc-pp-section">
         <h2>What we are asking for</h2>
-        <p>Extend both credits at their current levels, so families do not take a pay cut from the tax code in 2028.</p>
+        <p>Extend these credits at their current levels, so families do not take a pay cut from the tax code in 2028.</p>
     </section>
     <figure class="tfc-pp-fig" style="margin-left:0;margin-right:0">
+        <h3>What each credit is worth</h3>
+        <p class="tfc-pp-fig-sub">Cost of keeping the expansions in tax year 2028, in millions of dollars.</p>
+<div class="tfc-pp-tablewrap"><table class="tfc-pp-table "><thead><tr><th>Credit</th><th>Households losing</th><th>Average loss per household that loses it</th><th>Total in 2028</th></tr></thead><tbody><tr class=hi><td>Earned Income Tax Credit</td><td>13%</td><td>$618</td><td>$40.3M</td></tr><tr><td>Food/excise tax credit</td><td>34%</td><td>$200</td><td>$33.6M</td></tr><tr><td>Child and dependent care tax credit<small>about 16,300 claimants</small></td><td>2%</td><td>$1,031</td><td>$9.2M</td></tr><tr class="tot"><td>All three</td><td>38%</td><td>$439</td><td>$83.2M</td></tr></tbody></table></div>
+<p class="tfc-pp-fig-note">Source: Hawai&#699;i Appleseed estimate, Census-Forecaster tax model, tax year 2028.</p>
+    </figure>
+    <figure class="tfc-pp-fig" style="margin-left:0;margin-right:0">
         <h3>The lowest-income families lose the most</h3>
-        <p class="tfc-pp-fig-sub">Average loss per household in 2028 if the credits expire, by household income group. Three in four households in the lowest-income fifth would be affected, losing $460 on average.</p>
-<div class="tfc-pp-hb hi" title="Lowest 20%: $347 average, 75% of households lose"><span class="tfc-pp-hb-lbl">Lowest 20%<small>income under $44,700</small></span><span class="tfc-pp-track"><i style="width:100%"></i></span><b>$347</b></div><div class="tfc-pp-hb" title="Second 20%: $191"><span class="tfc-pp-hb-lbl">Second 20%<small>$44,700&ndash;$83,200</small></span><span class="tfc-pp-track"><i style="width:54.9%"></i></span><b>$191</b></div><div class="tfc-pp-hb" title="Middle 20%: $90"><span class="tfc-pp-hb-lbl">Middle 20%<small>$83,300&ndash;$130,400</small></span><span class="tfc-pp-track"><i style="width:25.9%"></i></span><b>$90</b></div><div class="tfc-pp-hb" title="Fourth 20%: $70"><span class="tfc-pp-hb-lbl">Fourth 20%<small>$130,400&ndash;$203,800</small></span><span class="tfc-pp-track"><i style="width:20.2%"></i></span><b>$70</b></div><div class="tfc-pp-hb" title="Top 20%: $77"><span class="tfc-pp-hb-lbl">Top 20%<small>over $203,900</small></span><span class="tfc-pp-track"><i style="width:22.2%"></i></span><b>$77</b></div>
+        <p class="tfc-pp-fig-sub">Average loss per household in 2028 if the three credits expire, by household income group. Three in four households in the lowest-income fifth would be affected, losing $396 on average.</p>
+<div class="tfc-pp-hb hi" title="Lowest 20%: $301 average, 76% of households lose"><span class="tfc-pp-hb-lbl">Lowest 20%<small>income under $44,700</small></span><span class="tfc-pp-track"><i style="width:100%"></i></span><b>$301</b></div><div class="tfc-pp-hb" title="Second 20%: $180"><span class="tfc-pp-hb-lbl">Second 20%<small>$44,700&ndash;$83,200</small></span><span class="tfc-pp-track"><i style="width:59.8%"></i></span><b>$180</b></div><div class="tfc-pp-hb" title="Middle 20%: $122"><span class="tfc-pp-hb-lbl">Middle 20%<small>$83,300&ndash;$130,400</small></span><span class="tfc-pp-track"><i style="width:40.4%"></i></span><b>$122</b></div><div class="tfc-pp-hb" title="Fourth 20%: $116"><span class="tfc-pp-hb-lbl">Fourth 20%<small>$130,400&ndash;$203,800</small></span><span class="tfc-pp-track"><i style="width:38.5%"></i></span><b>$116</b></div><div class="tfc-pp-hb" title="Top 20%: $125"><span class="tfc-pp-hb-lbl">Top 20%<small>over $203,900</small></span><span class="tfc-pp-track"><i style="width:41.5%"></i></span><b>$125</b></div>
 <p class="tfc-pp-fig-note">Average across all households in each group, including those who do not claim the credits. Source: Hawai&#699;i Appleseed tax model, tax year 2028.</p>
     </figure>
     <figure class="tfc-pp-fig" style="margin-left:0;margin-right:0">
         <h3>Single parents take the biggest hit</h3>
-        <p class="tfc-pp-fig-sub">Loss in 2028 if the credits expire, by family type.</p>
-<div class="tfc-pp-tablewrap"><table class="tfc-pp-table hide2"><thead><tr><th>Family type</th><th>Households</th><th>Households losing</th><th>Average loss per household</th><th>Total loss</th></tr></thead><tbody><tr class=hi><td>Single parent</td><td>63,900</td><td>64%</td><td>$524</td><td>$33.5M</td></tr><tr><td>Couple with children</td><td>110,300</td><td>35%</td><td>$260</td><td>$28.7M</td></tr><tr><td>Single, no children</td><td>185,200</td><td>36%</td><td>$45</td><td>$8.4M</td></tr><tr><td>Couple, no children</td><td>133,800</td><td>25%</td><td>$45</td><td>$6.0M</td></tr><tr class="tot"><td>All households</td><td>493,000</td><td></td><td></td><td>$76M</td></tr></tbody></table></div>
+        <p class="tfc-pp-fig-sub">Loss in 2028 if the three credits expire, by family type.</p>
+<div class="tfc-pp-tablewrap"><table class="tfc-pp-table hide2"><thead><tr><th>Family type</th><th>Households</th><th>Households losing</th><th>Average loss per household</th><th>Total loss</th></tr></thead><tbody><tr class=hi><td>Single parent</td><td>63,900</td><td>67%</td><td>$526</td><td>$33.6M</td></tr><tr><td>Couple with children</td><td>110,300</td><td>40%</td><td>$312</td><td>$34.4M</td></tr><tr><td>Single, no children</td><td>185,200</td><td>37%</td><td>$48</td><td>$8.9M</td></tr><tr><td>Couple, no children</td><td>133,800</td><td>25%</td><td>$47</td><td>$6.2M</td></tr><tr class="tot"><td>All households</td><td>493,000</td><td></td><td></td><td>$83.2M</td></tr></tbody></table></div>
 <p class="tfc-pp-fig-note">Source: same model as above.</p>
     </figure>
     <section class="tfc-pp-section">

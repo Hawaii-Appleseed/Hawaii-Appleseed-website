@@ -208,22 +208,30 @@ def table(head, rows, hi=0, total=None, cls=''):
 
 
 CG_FIG1 = fig("The 7.25% rate mostly benefits the top 1 percent",
-  "Share of the tax break today, which is essentially the share of new tax if gains were taxed like wages. Hawai&#699;i households ranked by taxable income, tax year 2027.",
-  hb("Top 1%","income over $661,000",89.6,"89.6%",True,"Top 1%: 89.6%")
-  + hb("Next 4%","$373,000&ndash;$660,000",9.4,"9.4%",False,"Next 4%: 9.4%")
-  + hb("Next 15%","$204,000&ndash;$373,000",0.9,"0.9%",False,"Next 15%: 0.9%")
+  "Share of the new tax if gains were taxed like wages. Hawai&#699;i resident households ranked by taxable income, tax year 2027.",
+  hb("Top 1%","income over $656,000",92.3,"92.3%",True,"Top 1%: 92.3%")
+  + hb("Next 4%","$373,000&ndash;$656,000",6.9,"6.9%",False,"Next 4%: 6.9%")
+  + hb("Next 15%","$204,000&ndash;$372,000",0.8,"0.8%",False,"Next 15%: 0.8%")
   + hb("Bottom 80%","income under $204,000",0.04,"&lt;0.1%",False,"Bottom 80%: under 0.1%"),
-  "Source: Hawai&#699;i Appleseed tax model (Census-Forecaster), Act 24 baseline, tax year 2027, residents only, with behavioral response.")
+  "Source: Hawai&#699;i Appleseed estimate, Census-Forecaster tax model, Act 24 brackets, tax year 2027, residents only, with a realization response.")
 CG_FIG2 = fig("Where the new tax would fall",
-  "Taxing capital gains like ordinary income, by household income group, tax year 2027.",
+  "Taxing capital gains like ordinary income, by resident household income group, tax year 2027. Nonresidents are shown in the table above.",
   table(["Household group","Average new tax per household","Households paying more","Total new revenue"],
-   [["Top 1%<small>over $661,000</small>","$20,060","99%","$98.9M"],
-    ["Next 4%<small>$373,000&ndash;$660,000</small>","$524","86%","$10.3M"],
-    ["Next 15%<small>$204,000&ndash;$373,000</small>","$14","24%","$1.0M"],
-    ["Next 20%<small>$130,000&ndash;$204,000</small>","under $1","8%","&lt;$0.1M"],
+   [["Top 1%<small>over $656,000</small>","$24,320","99%","$120.1M"],
+    ["Next 4%<small>$373,000&ndash;$656,000</small>","$454","86%","$9.0M"],
+    ["Next 15%<small>$204,000&ndash;$372,000</small>","$14","26%","$1.1M"],
+    ["Next 20%<small>$130,000&ndash;$204,000</small>","under $1","9%","&lt;$0.1M"],
     ["Bottom 60%<small>under $130,000</small>","$0","0%","$0"]],
-   hi=0, total=["All households","","","$110M"]),
+   hi=0, total=["All resident households","","","$130M"]),
   "Averages are across every household in the group, including those who owe nothing more. Income is taxable income. Source: same model as above.")
+
+CG_FIG0 = fig("Two ways to raise revenue from capital gains",
+  "Estimated new revenue in tax year 2027 under Act 24&rsquo;s brackets, accounting for fewer gains being realized at a higher rate, in millions of dollars.",
+  table(["Option","Residents","Nonresidents","Total"],
+   [["Taxing gains at ordinary rates<small>range $158M&ndash;$214M</small>","$130M","$49M","$179M"],
+    ["9% cap on capital gains<small>range $62M&ndash;$77M</small>","$48M","$19M","$67M"]],
+   hi=0),
+  "These are Hawai&#699;i Appleseed&rsquo;s own estimates from our Census-Forecaster tax model, not Department of Taxation or Legislature figures. Nonresidents are people who sell Hawai&#699;i property or hold Hawai&#699;i business interests while living elsewhere. Most of the range comes from the nonresident share, which swings with out-of-state home sales. In later years the totals are $173M (2028&ndash;2030) and $177M (2031) at ordinary rates, and $64M&ndash;$66M with a 9% cap. The figures are higher than earlier versions because the model now uses the Congressional Budget Office&rsquo;s February 2026 capital-gains forecast. Source: Hawai&#699;i Appleseed estimate, Census-Forecaster tax model.")
 
 # ---------- Capital gains ----------
 cg = page("cg", 2,
@@ -231,12 +239,16 @@ cg = page("cg", 2,
      Replaces the 2019-data "Closing the Capital Gains Loophole" page. Same palette/Site Styles hooks as
      priorities_2027_squarespace.html. Figures: 7.25% alternative rate (HRS 235-51(f)) vs Act 24's 13% top
      bracket (was 11%, so the gap went 3.75 -> 5.75 points). "$110M+" = Census-Forecaster
-     forecast_cg_rate_options.py, option "ordinary", Act 24, TY2027, residents only, with behavioral
-     response; ~90% from the top 1% (distribution_ty2027_act24.csv).""",
+     forecast_cg_rate_options.py, option "ordinary", Act 24, TY2027, with behavioral response.
+     Nov 2026 refresh (Census-Forecaster main c6bf232, site/data/capital-gains/): ordinary $130M
+     residents + $49M nonresidents = $179M (range $158M-$214M); 9% cap $48M + $19M = $67M
+     (range $62M-$77M); later years ordinary $173M (2028-30), $177M (2031), cap $64-66M. Residents-only
+     distribution (table/chart): $130M, top 1% = 92.3%. Higher than earlier versions because the model
+     now uses CBO's Feb 2026 capital-gains forecast.""",
  "Tax Profits Like Paychecks",
  "Tax capital gains at the same rates as ordinary income.",
  "Hawai&#699;i taxes a nurse&rsquo;s paycheck at higher rates than a investor&rsquo;s profit from selling stock or land. We want to close that gap.".replace("a investor","an investor"),
- [("Over $100M","estimated new revenue each year"),("90%","of it from the top 1 percent of households"),("5.75 pts","gap between the top income tax rate on wages (13%) and the capital gains rate (7.25%), up from 3.75 points")],
+ [("$179M","estimated new revenue in 2027 at ordinary rates (range $158M&ndash;$214M)"),("92%","of the revenue from residents would come from the top 1 percent of households"),("5.75 pts","gap between the top income tax rate on wages (13%) and the capital gains rate (7.25%), up from 3.75 points")],
  [
   sec("The loophole", """        <p>A nurse or a hotel worker pays Hawai&#699;i&rsquo;s regular income tax rates on every paycheck. But profits from selling stocks, land, and other investments are capped at <strong>7.25 percent</strong>, even for the highest-income households, whose wages are now taxed at up to <strong>13 percent</strong>.</p>
         <ul class="tfc-pp-bars" aria-label="Top rates compared">
@@ -246,29 +258,38 @@ cg = page("cg", 2,
         <p>Act 24 (2026) raised the top rate on wages but left the capital gains rate alone, so the gap between work and wealth grew from 3.75 to 5.75 percentage points.</p>"""),
   sec("What we are asking for", """        <p>Tax capital gains at the same rates as ordinary income, so income from owning is taxed like income from working.</p>"""),
   sec("What it would do", """        <ul>
-            <li>Raise <strong>over $100 million a year</strong>.</li>
-            <li>Collect about <strong>90 percent</strong> of it from the top 1 percent of households. Most local families would pay nothing more.</li>
-        </ul>""") + "\n    </section>\n" + CG_FIG1 + CG_FIG2 + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Estimate: Hawai&#699;i Appleseed tax model, tax year 2027, Hawai&#699;i residents only, accounting for fewer gains being realized at a higher rate.</p>',
+            <li>Raise about <strong>$179 million in 2027</strong> ($130 million from residents and $49 million from nonresidents).</li>
+            <li>Collect about <strong>92 percent</strong> of the resident revenue from the top 1 percent of households. Most local families would pay nothing more.</li>
+            <li>A 9% cap on capital gains would raise about <strong>$67 million</strong> ($48 million from residents and $19 million from nonresidents).</li>
+        </ul>""") + "\n    </section>\n" + CG_FIG0 + CG_FIG1 + CG_FIG2 + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Estimate: Hawai&#699;i Appleseed estimate, Census-Forecaster tax model, tax year 2027, Act 24 brackets, accounting for fewer gains being realized at a higher rate.</p>',
  ],
  "Help us close the gap", "Sign up and we&rsquo;ll tell you when this bill is moving and when to submit testimony.")
 
 
+CR_FIG0 = fig("What each credit is worth",
+  "Cost of keeping the expansions in tax year 2028, in millions of dollars.",
+  table(["Credit","Households losing","Average loss per household that loses it","Total in 2028"],
+   [["Earned Income Tax Credit","13%","$618","$40.3M"],
+    ["Food/excise tax credit","34%","$200","$33.6M"],
+    ["Child and dependent care tax credit<small>about 16,300 claimants</small>","2%","$1,031","$9.2M"]],
+   hi=0, total=["All three","38%","$439","$83.2M"]),
+  "Source: Hawai&#699;i Appleseed estimate, Census-Forecaster tax model, tax year 2028.")
 CR_FIG1 = fig("The lowest-income families lose the most",
-  "Average loss per household in 2028 if the credits expire, by household income group. Three in four households in the lowest-income fifth would be affected, losing $460 on average.",
-  hb("Lowest 20%","income under $44,700",100,"$347",True,"Lowest 20%: $347 average, 75% of households lose")
-  + hb("Second 20%","$44,700&ndash;$83,200",54.9,"$191",False,"Second 20%: $191")
-  + hb("Middle 20%","$83,300&ndash;$130,400",25.9,"$90",False,"Middle 20%: $90")
-  + hb("Fourth 20%","$130,400&ndash;$203,800",20.2,"$70",False,"Fourth 20%: $70")
-  + hb("Top 20%","over $203,900",22.2,"$77",False,"Top 20%: $77"),
+  "Average loss per household in 2028 if the three credits expire, by household income group. Three in four households in the lowest-income fifth would be affected, losing $396 on average.",
+  hb("Lowest 20%","income under $44,700",100,"$301",True,"Lowest 20%: $301 average, 76% of households lose")
+  + hb("Second 20%","$44,700&ndash;$83,200",59.8,"$180",False,"Second 20%: $180")
+  + hb("Middle 20%","$83,300&ndash;$130,400",40.4,"$122",False,"Middle 20%: $122")
+  + hb("Fourth 20%","$130,400&ndash;$203,800",38.5,"$116",False,"Fourth 20%: $116")
+  + hb("Top 20%","over $203,900",41.5,"$125",False,"Top 20%: $125"),
   "Average across all households in each group, including those who do not claim the credits. Source: Hawai&#699;i Appleseed tax model, tax year 2028.")
 CR_FIG2 = fig("Single parents take the biggest hit",
-  "Loss in 2028 if the credits expire, by family type.",
+  "Loss in 2028 if the three credits expire, by family type.",
   table(["Family type","Households","Households losing","Average loss per household","Total loss"],
-   [["Single parent","63,900","64%","$524","$33.5M"],
-    ["Couple with children","110,300","35%","$260","$28.7M"],
-    ["Single, no children","185,200","36%","$45","$8.4M"],
-    ["Couple, no children","133,800","25%","$45","$6.0M"]],
-   hi=0, total=["All households","493,000","","","$76M"], cls="hide2"),
+   [["Single parent","63,900","67%","$526","$33.6M"],
+    ["Couple with children","110,300","40%","$312","$34.4M"],
+    ["Single, no children","185,200","37%","$48","$8.9M"],
+    ["Couple, no children","133,800","25%","$47","$6.2M"]],
+   hi=0, total=["All households","493,000","","","$83.2M"], cls="hide2"),
   "Source: same model as above.")
 
 # ---------- Credits ----------
@@ -277,8 +298,10 @@ cr = page("cr", 3,
      file into that block; the page's newsletter section stays hidden (its form had no storage; the panel
      at the end sends people to /subscribe). Rewritten for the 2027 priority: extend Act 163's expiring
      EITC and food/excise credits. Act 163 (2023) is repealed 12/31/2027 (L 2023, c 163, s 5); HB 2306
-     (2026) did not pass. $76M = forecast_working_family_credits.py, TY2028 (SB3125_CD1_FORECAST.md, Oct 8
-     2026 anchor). 78,000 = DOTAX TY2024 EITC report. The poverty estimate was dropped from this page and from
+     (2026) did not pass. $83.2M = EITC 40.3 + food/excise 33.6 + CDCTC 9.2, TY2028, Census-Forecaster main c6bf232
+     site/data/working-family-credits/by_credit_ty2028.csv (Nov 25 2026 refresh; replaced the
+     older $76M, which was EITC + food/excise only). CDCTC ~16,300 claimants (revenue_by_year.csv,
+     cdcc_claimants 2028), $1,031 = average loss per household that loses it. 78,000 = DOTAX TY2024 EITC report. The poverty estimate was dropped from this page and from
      /2027-priorities on request; do not restore it without asking. The CTC ($650,
      ages 0-18) and RxKids note carries over from the previous version of this page. The child and dependent
      care credit sentence in the intro mirrors the Top Three fact sheet's page 1 bullet: no figure and no
@@ -288,19 +311,20 @@ cr = page("cr", 3,
  "Preserve Working Families&rsquo; Tax Credits",
  "Extend the earned income and food/excise tax credits before they expire.",
  "Two credits that help Hawai&#699;i families afford groceries and other basics are set to shrink after 2027 unless the Legislature acts. The child and dependent care tax credit also helps working parents with the cost of childcare.",
- [("$76M","that working families would lose in 2028 if the credits expire"),("78,000","households claim the state EITC each year")],
+ [("$83.2M","that working families would lose in 2028 if the three credits expire"),("78,000","households claim the state EITC each year")],
  [
   sec("What is at stake", """        <p>In 2023, Act 163 doubled two of Hawai&#699;i&rsquo;s most important credits for working families: the state <strong>Earned Income Tax Credit</strong> (to 40 percent of the federal credit) and the refundable <strong>food/excise tax credit</strong>, which helps offset the general excise tax on groceries and other basics.</p>
-        <p>Those expansions end after the 2027 tax year.</p>"""),
+        <p>Those expansions end after the 2027 tax year.</p>
+        <p>Our estimate also counts the <strong>child and dependent care tax credit</strong>. About 16,300 households claim it, and a household that would lose it would lose $1,031 on average.</p>"""),
   sec("The timeline", """        <div class="tfc-pp-fig">
             <ol class="tfc-pp-steps">
                 <li><b>2023</b>Act 163 doubles the EITC and the food/excise credit.</li>
                 <li><b>2026</b>The Legislature does not extend them (HB 2306 did not pass).</li>
                 <li><b>December 31, 2027</b>The expansions are repealed.</li>
-                <li class="end"><b>2028</b>First tax year without them: an estimated $76 million less for working families.</li>
+                <li class="end"><b>2028</b>First tax year without them: an estimated $83.2 million less for working families.</li>
             </ol>
         </div>"""),
-  sec("What we are asking for", """        <p>Extend both credits at their current levels, so families do not take a pay cut from the tax code in 2028.</p>""") + "\n    </section>\n" + CR_FIG1 + CR_FIG2 + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Estimates: Hawai&#699;i Appleseed tax model, tax year 2028; EITC claims from the Department of Taxation, tax year 2024.</p>',
+  sec("What we are asking for", """        <p>Extend these credits at their current levels, so families do not take a pay cut from the tax code in 2028.</p>""") + "\n    </section>\n" + CR_FIG0 + CR_FIG1 + CR_FIG2 + '    <section class="tfc-pp-section">\n        <p class="tfc-pp-source">Estimates: Hawai&#699;i Appleseed tax model, tax year 2028; EITC claims from the Department of Taxation, tax year 2024.</p>',
   sec("Also on our agenda", """        <p>We also support a refundable state Child Tax Credit of $650 per child aged 0&ndash;18, and RxKids, which would give cash payments to mothers in the first months of a child&rsquo;s life. We will post updates here as those proposals move.</p>"""),
  ],
  "Help us keep these credits", "Sign up and we&rsquo;ll tell you when these bills are moving and when to submit testimony.")
