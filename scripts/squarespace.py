@@ -645,6 +645,7 @@ return "saved:" + (s2 ? s2.disabled : "gone");
 """
 
 ADMIN_MATCH = "/config"
+SITE_NAME = "Appleseed"  # in the admin tab's title; picks this site's admin when several are open
 
 
 class ChromeJSUnavailable(Exception):
@@ -738,23 +739,27 @@ def focus_admin_tab():
     Find + focus + verify must stay in ONE osascript: any tool call in between
     hands focus back to the caller."""
     rc, out, err = _osj('''
-var found = false;
-chrome.activate();
+// Other Squarespace sites' admins may be open too (the Tax Fairness
+// Coalition's, for one): prefer the tab whose title names this site, and
+// fall back to the first admin tab only when none does.
+var match = %s, name = %s, pick = null, fallback = null;
 chrome.windows().forEach(function (win) {
-  if (found) return;
   var ts = win.tabs();
   for (var t = 0; t < ts.length; t++) {
-    if (ts[t].url().indexOf(%s) >= 0) {
-      win.activeTabIndex = t + 1;
-      win.index = 1;
-      found = true;
-      break;
-    }
+    if (ts[t].url().indexOf(match) < 0) continue;
+    if (!pick && ts[t].title().indexOf(name) >= 0) pick = [win, t];
+    if (!fallback) fallback = [win, t];
   }
 });
-delay(1.5);
-found ? chrome.windows[0].activeTab.url() : "";
-''' % json.dumps(ADMIN_MATCH))
+pick = pick || fallback;
+if (pick) {
+  chrome.activate();
+  pick[0].activeTabIndex = pick[1] + 1;
+  pick[0].index = 1;
+  delay(1.5);
+}
+pick ? chrome.windows[0].activeTab.url() : "";
+''' % (json.dumps(ADMIN_MATCH), json.dumps(SITE_NAME)))
     return out or None
 
 
