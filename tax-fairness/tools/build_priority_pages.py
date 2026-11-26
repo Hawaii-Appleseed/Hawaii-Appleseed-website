@@ -266,7 +266,6 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
     .tfc-pp-ch .tfc-pp-lede { font-size: 1rem; }
     .tfc-pp-ch .tfc-pp-stats { margin-top: -88px; }
     .tfc-pp-ch .tfc-pp-stat { padding: 26px 24px; border-radius: 20px; }
-    .tfc-pp-ch .tfc-pp-stat-num { font-size: 3rem; }
     .tfc-pp-ch .tfc-pp-stat-label { font-size: 1rem; }
     .tfc-pp-ch .tfc-pp-section h2 { font-size: 1.8rem; }
     .tfc-pp-ch .tfc-pp-part-lead { padding: 64px 0 48px; }
@@ -324,7 +323,6 @@ CR_EXTRA = """
     .tfc-pp-cr .tfc-pp-stat:last-child { justify-content: flex-start; }
 }
 @container (max-width: 560px) {
-    .tfc-pp-cr .tfc-pp-stat-num { font-size: 3.4rem; }
     .tfc-pp-seg { margin: 24px 0 14px; }
 }
 """
