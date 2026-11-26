@@ -423,8 +423,8 @@ cv = page("cv", 1,
  "Help us fund Hawaiian homes", "Sign up and we&rsquo;ll tell you when this bill is moving and when to submit testimony.")
 
 open(OUT+"capital_gains_squarespace.html","w").write(cg)
-HIDE = """/* Warm sand behind this page (Devin, Nov 2026); replaces the section's grey #e0e0db. */
-body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp) .section-background { background-color: #f6efe3 !important; }
+HIDE = """/* White behind this page (Devin, Nov 2026; tried warm sand first); replaces the section's grey #e0e0db. */
+body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp) .section-background { background-color: #ffffff !important; }
 /* The newsletter section: its form has no storage, so sign-ups were lost. */
 body:not(.sqs-is-page-editing) section[data-section-id="691b795a3409972cbc5443fa"] { display: none !important; }
 """
