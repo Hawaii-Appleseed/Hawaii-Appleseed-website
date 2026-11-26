@@ -151,7 +151,7 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-pp) { grid-row: 1 / 2 !importa
 CHAPTERS = """
 /* ===== Chapters layout: pale-sky hero, a band per section, cards for the figures ===== */
 body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wrapper { padding-top: 0 !important; padding-bottom: 0 !important; }
-.tfc-pp-ch { --tfc-deep: #16223a; --tfc-sky: #e2eefb; --tfc-pale: #eaf1fa; --tfc-amber: #f5a524; --tfc-mute: #46536b; --tfc-ink: #1c2740; margin: 0; }
+.tfc-pp-ch { --tfc-deep: #16223a; --tfc-sky: #e2eefb; --tfc-pale: #eaf1fa; --tfc-amber: #f5a524; --tfc-mute: #46536b; --tfc-ink: #1c2740; --tfc-serif: "Newsreader", "TFC Okina", Georgia, "Times New Roman", serif; margin: 0; }
 
 /* hero: pale-sky band flush under the header; ask and intro sit beside the title */
 .tfc-pp-ch .tfc-pp-hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 80px; align-items: start; margin: 0; padding: 60px 0 180px; border: 0; background: var(--tfc-sky); box-shadow: 0 0 0 100vmax var(--tfc-sky); clip-path: inset(0 -100vmax); }
@@ -171,8 +171,8 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 /* sections: the heading sits above its content; text and figures are cards on a 12-column grid */
 .tfc-pp-ch .tfc-pp-section { display: block; margin: 0; padding: 88px 0; }
 .tfc-pp-ch .tfc-pp-section > * { max-width: none; }
-.tfc-pp-ch .tfc-pp-section h2 { margin: 0 0 36px; padding: 0; border: 0; font-size: clamp(2rem, 3.4cqi, 2.9rem); line-height: 1.05; font-weight: 600; letter-spacing: -.02em; color: var(--tfc-deep); }
-.tfc-pp-ch .tfc-pp-section:not(.tfc-pp-part-ask) h2::after { content: ""; display: block; width: 56px; height: 6px; margin-top: 16px; border-radius: 3px; background: var(--tfc-amber); }
+.tfc-pp-ch .tfc-pp-section h2 { margin: 0 0 36px; padding: 0; border: 0; font-family: var(--tfc-serif); font-size: clamp(2.1rem, 3.8cqi, 3.2rem); line-height: 1.05; font-weight: 600; letter-spacing: -.015em; color: var(--tfc-deep); }
+.tfc-pp-ch .tfc-pp-section:not(.tfc-pp-part-ask) h2::before { content: ""; display: block; width: 44px; height: 4px; margin-bottom: 16px; border-radius: 2px; background: var(--tfc-blue); }
 .tfc-pp-ch h1, .tfc-pp-ch h2, .tfc-pp-ch h3, .tfc-pp-ch .tfc-pp-facts > li strong, .tfc-pp-ch .tfc-pp-card--stat strong, .tfc-pp-ch .tfc-pp-part-ask > p { text-wrap: balance; }
 .tfc-pp-ch .tfc-pp-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
 .tfc-pp-ch .tfc-pp-grid > * { grid-column: span 12; min-width: 0; }
@@ -185,33 +185,37 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 .tfc-pp-ch .tfc-pp-part-tint { background: var(--tfc-pale); box-shadow: 0 0 0 100vmax var(--tfc-pale); clip-path: inset(0 -100vmax); }
 
 /* text cards: tinted on white bands, white on pale ones */
-.tfc-pp-ch .tfc-pp-card { margin: 0; padding: 36px 40px; border: 1px solid #e1eaf5; border-radius: 24px; background: #f3f7fd; font-size: 1.1rem; line-height: 1.65; color: #3d4c68; }
+.tfc-pp-ch .tfc-pp-card { margin: 0; padding: 36px 40px; border: 1px solid #e1eaf5; border-radius: 24px; background: #f3f7fd; font-family: var(--tfc-serif); font-size: 1.25rem; line-height: 1.6; color: #34425e; }
 .tfc-pp-ch .tfc-pp-part-tint .tfc-pp-card { border-color: #d6e2f2; background: #fff; }
 .tfc-pp-ch .tfc-pp-card > p { margin: 0 0 14px; font-size: inherit; line-height: inherit; text-wrap: pretty; }
 .tfc-pp-ch .tfc-pp-card > p:last-child { margin-bottom: 0; }
 .tfc-pp-ch .tfc-pp-card strong { color: var(--tfc-navy); }
-.tfc-pp-ch .tfc-pp-card > .tfc-pp-source { margin: 22px 0 0; padding-top: 16px; border-top: 1px solid #d6e2f2; line-height: 1.55; }
-.tfc-pp-ch .tfc-pp-card--lead { font-size: clamp(1.25rem, 2.1cqi, 1.5rem); line-height: 1.5; color: var(--tfc-navy); }
-.tfc-pp-ch .tfc-pp-card--alert { display: flex; align-items: center; border-color: #f2d9a6; background: #fff3d9; font-size: 1.35rem; font-weight: 600; line-height: 1.35; color: var(--tfc-deep); }
+.tfc-pp-ch .tfc-pp-card > .tfc-pp-source { margin: 22px 0 0; padding-top: 16px; border-top: 1px solid #d6e2f2; font-family: var(--body-font-font-family), sans-serif; line-height: 1.55; }
+.tfc-pp-ch .tfc-pp-card--lead { border-left: 5px solid var(--tfc-blue); font-size: clamp(1.35rem, 2.4cqi, 1.7rem); font-weight: 500; line-height: 1.4; color: var(--tfc-navy); }
+.tfc-pp-ch .tfc-pp-card--alert { display: flex; align-items: center; border-color: #f2d9a6; background: #fff3d9; font-size: 1.6rem; font-weight: 600; line-height: 1.25; color: var(--tfc-deep); }
 .tfc-pp-ch .tfc-pp-card--stat { display: flex; flex-direction: column; justify-content: center; border-color: #b9d5f3; background: linear-gradient(160deg, #cfe3f9 0%, #b9d5f3 100%); color: #2f3f5c; }
-.tfc-pp-ch .tfc-pp-card--stat strong { display: block; margin: 6px 0; font-size: clamp(1.9rem, 3.2cqi, 2.7rem); line-height: 1.05; letter-spacing: -.02em; color: var(--tfc-navy); }
+.tfc-pp-ch .tfc-pp-card--stat strong { display: block; margin: 10px 0 12px; font-size: clamp(2.6rem, 4.6cqi, 3.6rem); font-weight: 600; line-height: 1; letter-spacing: -.02em; color: var(--tfc-navy); }
+.tfc-pp-ch .tfc-pp-card--stat strong span { display: block; margin-top: 8px; font-size: .46em; font-style: italic; font-weight: 500; letter-spacing: 0; }
+.tfc-pp-ch .tfc-pp-stat-pre { display: block; font-size: 1.3rem; font-style: italic; line-height: 1.3; }
+.tfc-pp-ch .tfc-pp-stat-post { display: block; font-family: var(--body-font-font-family), sans-serif; font-size: 1rem; line-height: 1.4; color: #2f3f5c; }
 
-/* text style: the first sentence of a text card leads in bold, and dollar amounts and percentages stand out */
-.tfc-pp-ch .tfc-pp-first { font-weight: 700; color: var(--tfc-navy); }
+/* text style (Devin picked "Editorial" from three options, Nov 2026): serif for headings and prose, the site's sans for data; the first sentence of a card leads as a bold standfirst, and dollar amounts and percentages stand out */
+.tfc-pp-ch .tfc-pp-first { display: block; margin-bottom: .4em; font-size: 1.2em; font-weight: 600; line-height: 1.3; color: var(--tfc-navy); text-wrap: balance; }
+.tfc-pp-ch .tfc-pp-card--lead .tfc-pp-first { font-size: 1em; font-weight: 700; }
 .tfc-pp-ch .tfc-pp-num { font-weight: 700; color: #2f62a3; white-space: nowrap; }
 
 /* a short row of facts (three cards) */
 .tfc-pp-ch .tfc-pp-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
-.tfc-pp-ch .tfc-pp-facts > li { margin: 0; padding: 34px 36px; border: 1px solid #d6e2f2; border-radius: 24px; background: #fff; font-size: 1.1rem; line-height: 1.55; color: #3d4c68; }
-.tfc-pp-ch .tfc-pp-facts > li strong { display: block; margin: 8px 0; font-size: clamp(1.8rem, 3cqi, 2.4rem); line-height: 1.1; letter-spacing: -.015em; font-weight: 700; color: var(--tfc-navy); }
+.tfc-pp-ch .tfc-pp-facts > li { margin: 0; padding: 34px 36px; border: 1px solid #d6e2f2; border-radius: 24px; background: #fff; font-family: var(--tfc-serif); font-size: 1.2rem; line-height: 1.5; color: #34425e; }
+.tfc-pp-ch .tfc-pp-facts > li strong { display: block; margin: 8px 0; font-size: clamp(1.9rem, 3.2cqi, 2.6rem); line-height: 1.1; letter-spacing: -.015em; font-weight: 600; color: var(--tfc-navy); }
 
 /* ask: brand-blue band; the label sits above one big statement, or above a row of cards */
 .tfc-pp-ch .tfc-pp-part-ask { background: var(--tfc-blue); box-shadow: 0 0 0 100vmax var(--tfc-blue); clip-path: inset(0 -100vmax); }
-.tfc-pp-ch .tfc-pp-part-ask h2 { display: flex; align-items: center; gap: 14px; margin: 0 0 24px; font-size: 1.15rem; font-weight: 600; letter-spacing: 0; color: #fff; }
-.tfc-pp-ch .tfc-pp-part-ask h2::before { content: ""; width: 28px; height: 4px; border-radius: 2px; background: var(--tfc-amber); }
-.tfc-pp-ch .tfc-pp-part-ask > p { max-width: 34ch; margin: 0; font-size: clamp(1.8rem, 3.6cqi, 2.8rem); line-height: 1.2; font-weight: 400; letter-spacing: -.012em; color: #fff; }
+.tfc-pp-ch .tfc-pp-part-ask h2 { display: flex; align-items: center; gap: 16px; margin: 0 0 28px; font-size: clamp(1.45rem, 2.4cqi, 1.75rem); font-weight: 600; letter-spacing: -.005em; color: #fff; }
+.tfc-pp-ch .tfc-pp-part-ask h2::before { content: ""; flex: none; width: 36px; height: 5px; border-radius: 3px; background: var(--tfc-amber); }
+.tfc-pp-ch .tfc-pp-part-ask > p { max-width: 34ch; margin: 0; font-family: var(--tfc-serif); font-size: clamp(1.8rem, 3.6cqi, 2.8rem); line-height: 1.2; font-weight: 500; letter-spacing: -.01em; color: #fff; }
 .tfc-pp-ch .tfc-pp-asks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
-.tfc-pp-ch .tfc-pp-asks > li { margin: 0; padding: 32px 34px; border-top: 5px solid var(--tfc-amber); border-radius: 24px; background: #fff; font-size: 1.1rem; line-height: 1.55; color: #3d4c68; }
+.tfc-pp-ch .tfc-pp-asks > li { margin: 0; padding: 32px 34px; border-top: 5px solid var(--tfc-amber); border-radius: 24px; background: #fff; font-family: var(--tfc-serif); font-size: 1.2rem; line-height: 1.5; color: #34425e; }
 .tfc-pp-ch .tfc-pp-asks > li strong { color: var(--tfc-navy); font-weight: 600; }
 
 /* figures: cards (a figure inside a section keeps its own text styles, not the section's paragraph and list styles) */
@@ -236,9 +240,9 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 
 /* agenda, call to action, links to the other priorities */
 .tfc-pp-ch .tfc-pp-part-agenda { padding: 24px 0 72px; }
-.tfc-pp-ch .tfc-pp-part-agenda h2 { font-size: 1.9rem; }
+.tfc-pp-ch .tfc-pp-part-agenda h2 { font-size: 2rem; }
 .tfc-pp-ch .tfc-pp-cta { margin: 16px 0 0; padding: 68px; border-radius: 28px; background: linear-gradient(120deg, #3c73b9 0%, #2f62a3 100%); }
-.tfc-pp-ch .tfc-pp-cta h2 { font-size: 2.3rem; line-height: 1.1; letter-spacing: -.012em; }
+.tfc-pp-ch .tfc-pp-cta h2 { font-family: var(--tfc-serif); font-size: 2.4rem; line-height: 1.1; font-weight: 600; letter-spacing: -.015em; }
 .tfc-pp-ch .tfc-pp-cta p { font-size: 1.1rem; color: #fff; }
 .tfc-pp-ch .tfc-pp-cta a.tfc-btn.sqs-button-element--primary { border-color: var(--tfc-amber) !important; border-radius: 999px !important; background: var(--tfc-amber) !important; color: var(--tfc-deep) !important; }
 .tfc-pp-ch .tfc-pp-cta a.tfc-btn.sqs-button-element--secondary { border: 1.5px solid rgba(255, 255, 255, .55) !important; border-radius: 999px !important; background: transparent !important; color: #fff !important; }
@@ -267,11 +271,11 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
     .tfc-pp-ch .tfc-pp-stats { margin-top: -96px; }
     .tfc-pp-ch:not(.tfc-pp-cr) .tfc-pp-stats { grid-template-columns: minmax(0, 1fr); gap: 16px; }
     .tfc-pp-ch .tfc-pp-section { padding: 64px 0; }
-    .tfc-pp-ch .tfc-pp-section h2 { margin-bottom: 26px; font-size: 1.9rem; }
+    .tfc-pp-ch .tfc-pp-section h2 { margin-bottom: 26px; font-size: 2rem; }
     .tfc-pp-ch .tfc-pp-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
     .tfc-pp-ch .tfc-pp-grid > * { grid-column: 1 / -1; grid-row: auto; }
     .tfc-pp-ch .tfc-pp-facts, .tfc-pp-ch .tfc-pp-asks { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-    .tfc-pp-ch .tfc-pp-part-ask h2 { margin-bottom: 18px; font-size: 1.1rem; }
+    .tfc-pp-ch .tfc-pp-part-ask h2 { margin-bottom: 20px; font-size: 1.4rem; }
     .tfc-pp-ch .tfc-pp-figs { padding-top: 64px; }
     .tfc-pp-ch .tfc-pp-part-agenda { padding: 8px 0 56px; }
     .tfc-pp-ch .tfc-pp-cta { padding: 48px 40px; }
@@ -289,17 +293,17 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
     .tfc-pp-ch .tfc-pp-stat { padding: 26px 24px; border-radius: 20px; }
     .tfc-pp-ch .tfc-pp-stat-label { font-size: 1rem; }
     .tfc-pp-ch .tfc-pp-section { padding: 56px 0; }
-    .tfc-pp-ch .tfc-pp-section h2 { font-size: 1.7rem; }
-    .tfc-pp-ch .tfc-pp-section:not(.tfc-pp-part-ask) h2::after { width: 44px; height: 5px; margin-top: 12px; }
-    .tfc-pp-ch .tfc-pp-card { padding: 26px 24px; border-radius: 20px; }
-    .tfc-pp-ch .tfc-pp-part-ask h2 { font-size: 1.05rem; }
-    .tfc-pp-ch .tfc-pp-card--lead { font-size: 1.1rem; }
-    .tfc-pp-ch .tfc-pp-card--alert { font-size: 1.15rem; }
+    .tfc-pp-ch .tfc-pp-section h2 { font-size: 1.85rem; }
+    .tfc-pp-ch .tfc-pp-section:not(.tfc-pp-part-ask) h2::before { width: 36px; height: 4px; margin-bottom: 12px; }
+    .tfc-pp-ch .tfc-pp-card { padding: 26px 24px; border-radius: 20px; font-size: 1.12rem; }
+    .tfc-pp-ch .tfc-pp-part-ask h2 { font-size: 1.25rem; }
+    .tfc-pp-ch .tfc-pp-card--lead { font-size: 1.28rem; }
+    .tfc-pp-ch .tfc-pp-card--alert { font-size: 1.35rem; }
     .tfc-pp-ch .tfc-pp-facts > li, .tfc-pp-ch .tfc-pp-asks > li { padding: 26px 24px; border-radius: 20px; }
     .tfc-pp-ch .tfc-pp-fig { padding: 24px 16px; }
     .tfc-pp-ch .tfc-pp-fig h3 { font-size: 1.3rem; }
     .tfc-pp-ch .tfc-pp-cta { padding: 36px 24px; border-radius: 22px; }
-    .tfc-pp-ch .tfc-pp-cta h2 { font-size: 1.8rem; }
+    .tfc-pp-ch .tfc-pp-cta h2 { font-size: 1.9rem; }
     .tfc-pp-ch .tfc-pp-more { padding: 48px 0 56px; }
     .tfc-pp-ch .tfc-pp-more-card { padding: 22px 24px; }
 }
@@ -358,7 +362,7 @@ CR_EXTRA = """
 CG_EXTRA = """
 /* ===== Capital gains page ===== */
 .tfc-pp-cg .tfc-pp-figs > .tfc-pp-fig:first-child { grid-column: 1 / -1; }
-.tfc-pp-cg .tfc-pp-ratecard { border-color: #dbe4f0; background: #fff; }
+.tfc-pp-cg .tfc-pp-ratecard { border-color: #dbe4f0; background: #fff; font-family: var(--body-font-font-family), sans-serif; font-size: 1.1rem; color: #3d4c68; }
 .tfc-pp-cg .tfc-pp-ratecard h3 { margin: 0; font-size: 1.3rem; line-height: 1.3; font-weight: 600; letter-spacing: -.01em; color: var(--tfc-navy); }
 .tfc-pp-cg .tfc-pp-ratecard > p { margin: 22px 0 0; padding-top: 18px; border-top: 1px solid #e1eaf5; font-size: 1rem; line-height: 1.6; color: var(--tfc-mute); }
 .tfc-pp-cg .tfc-pp-bars { max-width: none; margin: 24px 0 4px; padding: 0; list-style: none; }
@@ -487,12 +491,17 @@ OTHERS = {
  "cv": ("/conveyance-tax", "Increase the Tax on Luxury Homes"),
 }
 
+FONT_LINKS = """<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap">"""
+
 def page(key, n, head_comment, title, ask, lede, stats, sections, cta_h, cta_p, root_cls=""):
     others = "".join(f'<a class="tfc-pp-more-card" href="{OTHERS[k][0]}"><span>Priority {PRIORITY_NO[k]} of 3</span><b>{OTHERS[k][1]}</b></a>' for k in ("cv","cg","cr") if k != key)
     st = "".join(f'<div class="tfc-pp-stat"><div class="tfc-pp-stat-num">{a}</div><p class="tfc-pp-stat-label">{b}</p>{"".join(x)}</div>' for a,b,*x in stats)
     body = "\n".join(f'    <section class="tfc-pp-section">\n{s}\n    </section>\n' for s in sections)
     return f"""<!-- {head_comment} -->
 
+{FONT_LINKS}
 {CSS}
 
 <div class="tfc-pp{root_cls and " " + root_cls}">
@@ -657,7 +666,10 @@ cr = page("cr", 3,
      the figures. Hero is pale sky (#e2eefb) with navy text; Devin picked it over navy, brand blue and a gradient. The three credit amounts
      (CR_AMTS in tools/build_priority_pages.py) feed the segmented bar and the credits table. The section's own
      top and bottom padding is removed by the CSS at the end so the hero touches the header; its background is
-     white. Sections carry tfc-pp-part-* classes (added by the generator) so the CSS does not depend on order.""",
+     white. Sections carry tfc-pp-part-* classes (added by the generator) so the CSS does not depend on order.
+     Text style (Nov 2026): Devin picked "Editorial" from three options. Newsreader (Google Fonts, loaded by the
+     link tags at the top of this block) sets the headings and the prose in the cards; the site sans stays on
+     tables, charts and buttons. The first sentence of a card leads as a bold standfirst; amounts are bold blue.""",
  "Preserve Working Families&rsquo; Tax Credits",
  "Extend the earned income and food/excise tax credits before they expire.",
  "Two credits that help Hawai&#699;i families afford groceries and other basics are set to shrink after 2027 unless the Legislature acts. The child and dependent care tax credit also helps working parents with the cost of childcare.",
@@ -777,7 +789,7 @@ cr = rework(cr, "Also on our agenda", lambda x: as_cards(x, ["tfc-pp-w8"]))
 cr = mark(cr, {"What is at stake": "tfc-pp-part-lead", "The timeline": "tfc-pp-part-tint tfc-pp-part-wide", "What we are asking for": "tfc-pp-part-ask", "Also on our agenda": "tfc-pp-part-agenda"})
 cr = mark_src(cr, 1)
 cr = cr.replace("</style>", CHAPTERS + CR_EXTRA + "</style>", 1)
-cv = rework(cv, "Where the conveyance tax stands", lambda x: as_cards(x.replace("29,589 applicants", "<strong>29,589 applicants</strong>"), ["tfc-pp-w8 tfc-pp-card--lead", "tfc-pp-w4 tfc-pp-card--stat"]))
+cv = rework(cv, "Where the conveyance tax stands", lambda x: as_cards(x.replace("DHHL&rsquo;s waitlist for a homestead had 29,589 applicants as of November 2025.", '<span class="tfc-pp-stat-pre">DHHL&rsquo;s waitlist for a homestead had</span><strong>29,589 <span>applicants</span></strong><span class="tfc-pp-stat-post">as of November 2025.</span>'), ["tfc-pp-w8 tfc-pp-card--lead", "tfc-pp-w4 tfc-pp-card--stat"]))
 cv = rework(cv, "Where the money goes today", lambda x: split_section(x, ["tfc-pp-w7"], drop_title="Where the money goes today"))
 cv = rework(cv, "Why the tax should be marginal", lambda x: split_section(x, ["tfc-pp-w7"]))
 cv = rework(cv, "What we are asking for", lambda x: x.replace("<ul>", '<ul class="tfc-pp-asks">', 1))
