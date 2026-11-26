@@ -219,6 +219,7 @@ body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wra
 .tfc-pp-ch .tfc-pp-table th { border-bottom: 1.5px solid var(--tfc-navy); }
 .tfc-pp-ch .tfc-pp-table tr.hi td { background: #f1f6fc; }
 .tfc-pp-ch .tfc-pp-part-src { display: block; padding: 8px 0 64px; }
+.tfc-pp-ch .tfc-pp-part-src > .tfc-pp-source { max-width: 56rem; margin: 0 0 14px; }
 
 /* agenda, call to action, links */
 .tfc-pp-ch .tfc-pp-part-agenda { padding: 52px 0; border-top: 1px solid #dbe4f0; }
