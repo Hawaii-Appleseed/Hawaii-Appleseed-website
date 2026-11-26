@@ -153,24 +153,24 @@ body:not(.sqs-is-page-editing) .fe-block:has(.tfc-pp) { grid-row: 1 / 2 !importa
     .tfc-pp-cta { padding: 28px 22px; margin-top: 40px; }
 }
 
-/* ===== Chapters layout: navy hero, a band per section, cards for the figures ===== */
+/* ===== Chapters layout: pale-sky hero, a band per section, cards for the figures ===== */
 body:not(.sqs-is-page-editing) section.page-section:has(.tfc-pp-ch) .content-wrapper { padding-top: 0 !important; padding-bottom: 0 !important; }
-.tfc-pp-ch { --tfc-deep: #16223a; --tfc-pale: #eaf1fa; --tfc-amber: #f5a524; --tfc-mute: #46536b; --tfc-ink: #1c2740; margin: 0; }
+.tfc-pp-ch { --tfc-deep: #16223a; --tfc-sky: #e2eefb; --tfc-pale: #eaf1fa; --tfc-amber: #f5a524; --tfc-mute: #46536b; --tfc-ink: #1c2740; margin: 0; }
 
-/* hero: navy band flush under the header; ask and intro sit beside the title */
-.tfc-pp-ch .tfc-pp-hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 80px; align-items: start; margin: 0; padding: 60px 0 180px; border: 0; background: var(--tfc-navy); box-shadow: 0 0 0 100vmax var(--tfc-navy); clip-path: inset(0 -100vmax); }
-.tfc-pp-ch .tfc-pp-eyebrow { grid-column: 1 / -1; justify-self: start; margin-bottom: 6px; padding: 5px 14px; border: 1px solid rgba(255, 255, 255, .24); background: rgba(255, 255, 255, .1); color: #d3e2f7; font-size: .8rem; font-weight: 600; letter-spacing: .02em; text-transform: none; }
-.tfc-pp-ch .tfc-pp-title { grid-column: 1; grid-row: 2 / 4; max-width: 15ch; margin: 22px 0 0; font-size: clamp(2.4rem, 5.2cqi, 4.3rem); line-height: 1.02; letter-spacing: -.012em; color: #fff; }
-.tfc-pp-ch .tfc-pp-ask { grid-column: 2; grid-row: 2; max-width: 30ch; margin: 34px 0 14px; font-size: 1.45rem; font-weight: 600; color: #fff; }
-.tfc-pp-ch .tfc-pp-lede { grid-column: 2; grid-row: 3; max-width: 46ch; margin: 0; font-size: 1.1rem; color: #b9c8df; }
+/* hero: pale-sky band flush under the header; ask and intro sit beside the title */
+.tfc-pp-ch .tfc-pp-hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 80px; align-items: start; margin: 0; padding: 60px 0 180px; border: 0; background: var(--tfc-sky); box-shadow: 0 0 0 100vmax var(--tfc-sky); clip-path: inset(0 -100vmax); }
+.tfc-pp-ch .tfc-pp-eyebrow { grid-column: 1 / -1; justify-self: start; margin-bottom: 6px; padding: 5px 14px; border: 1px solid var(--tfc-navy); background: var(--tfc-navy); color: #fff; font-size: .8rem; font-weight: 600; letter-spacing: .02em; text-transform: none; }
+.tfc-pp-ch .tfc-pp-title { grid-column: 1; grid-row: 2 / 4; max-width: 15ch; margin: 22px 0 0; font-size: clamp(2.4rem, 5.2cqi, 4.3rem); line-height: 1.02; letter-spacing: -.012em; color: var(--tfc-deep); }
+.tfc-pp-ch .tfc-pp-ask { grid-column: 2; grid-row: 2; max-width: 30ch; margin: 34px 0 14px; font-size: 1.45rem; font-weight: 600; color: var(--tfc-deep); }
+.tfc-pp-ch .tfc-pp-lede { grid-column: 2; grid-row: 3; max-width: 46ch; margin: 0; font-size: 1.1rem; color: #3d4c68; }
 
-/* stat cards overlap the hero; the last one is blue */
+/* stat cards overlap the hero; the last one is a deeper sky tint */
 .tfc-pp-ch .tfc-pp-stats { position: relative; z-index: 2; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: -104px 0 0; }
-.tfc-pp-ch .tfc-pp-stat { padding: 38px 42px 36px; border: 0; border-radius: 24px; background: #fff; box-shadow: 0 30px 60px -28px rgba(10, 20, 40, .55), 0 2px 6px rgba(10, 20, 40, .08); }
+.tfc-pp-ch .tfc-pp-stat { padding: 38px 42px 36px; border: 0; border-radius: 24px; background: #fff; box-shadow: 0 26px 50px -26px rgba(37, 53, 81, .35), 0 2px 6px rgba(37, 53, 81, .08); }
 .tfc-pp-ch .tfc-pp-stat-num { font-size: clamp(2.4rem, 4.4cqi, 3.6rem); line-height: 1; letter-spacing: -.025em; }
 .tfc-pp-ch .tfc-pp-stat-label { max-width: 34ch; margin: 14px 0 0; font-size: 1.1rem; line-height: 1.45; color: var(--tfc-mute); }
-.tfc-pp-ch .tfc-pp-stat:last-child { display: flex; flex-direction: column; justify-content: center; background: var(--tfc-blue); }
-.tfc-pp-ch .tfc-pp-stat:last-child .tfc-pp-stat-num, .tfc-pp-ch .tfc-pp-stat:last-child .tfc-pp-stat-label { color: #fff; }
+.tfc-pp-ch .tfc-pp-stat:last-child { display: flex; flex-direction: column; justify-content: center; background: linear-gradient(160deg, #cfe3f9 0%, #b9d5f3 100%); }
+.tfc-pp-ch .tfc-pp-stat:last-child .tfc-pp-stat-label { color: #2f3f5c; }
 
 /* sections: h2 on the left, text on the right; figures and source lines inside a section span both columns */
 .tfc-pp-ch .tfc-pp-section { margin: 0; padding: 0; }
