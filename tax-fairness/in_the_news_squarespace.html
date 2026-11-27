@@ -1,0 +1,196 @@
+<!-- In The News page (hitaxfairness.org/in-the-news) - the page's single Code Block.
+     Paste everything in this file into that block. It replaces the hand-posted Squarespace blog.
+     Data: Hawaiʻi Appleseed's own feed, news.json, rebuilt every day by
+     .github/workflows/sync-publications.yml (scripts/sync-news.py) and served by GitHub Pages
+     with CORS open. This page keeps only items whose categories include "Taxes & Budget"
+     (blog posts, press mentions, press releases), newest first. Nothing here is edited by hand:
+     a new tax post on hiappleseed.org appears here after the next daily sync.
+     Press mentions link to the outlet (sourceUrl); blog posts and releases link to hiappleseed.org.
+     Same palette and Site Styles hooks as priorities_2027_squarespace.html. -->
+
+<style>
+.tfc-news {
+    --tfc-navy: #253551;
+    --tfc-blue: #3c73b9;
+    --tfc-muted: #4a5568;
+    --tfc-line: #dfe3ea;
+    --tfc-soft: #f5f7fa;
+    container-type: inline-size;
+    width: 100%;
+    margin: 0 0 40px;
+    font-family: var(--body-font-font-family), sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    color: var(--tfc-navy);
+}
+.tfc-news *, .tfc-news *::before, .tfc-news *::after { box-sizing: border-box; }
+.tfc-news h1, .tfc-news h2, .tfc-news h3 {
+    font-family: var(--heading-font-font-family), sans-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--tfc-navy);
+}
+.tfc-news__head h1 { font-size: clamp(2.25rem, 6cqw, 3.5rem); line-height: 1.08; margin: 0 0 12px; }
+.tfc-news__head p { font-size: 1.1875rem; color: var(--tfc-muted); margin: 0 0 24px; max-width: 46rem; }
+.tfc-news__bar { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 24px; }
+.tfc-news__chip {
+    font: inherit; font-size: 1rem; font-weight: 600; cursor: pointer;
+    padding: 9px 18px; border-radius: 999px;
+    border: 1.5px solid var(--tfc-line); background: #fff; color: var(--tfc-navy);
+}
+.tfc-news__chip[aria-pressed="true"] { background: var(--tfc-navy); border-color: var(--tfc-navy); color: #fff; }
+.tfc-news__chip:focus-visible, .tfc-news__more:focus-visible, .tfc-news__card a:focus-visible { outline: 3px solid var(--tfc-blue); outline-offset: 2px; }
+.tfc-news__list { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@container (min-width: 760px) { .tfc-news__list { grid-template-columns: 1fr 1fr; } }
+.tfc-news__card {
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 24px; border: 1px solid var(--tfc-line); border-radius: 14px; background: #fff;
+}
+.tfc-news__meta { font-size: 0.9375rem; font-weight: 600; color: var(--tfc-muted); display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; }
+.tfc-news__tag {
+    font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 999px; background: var(--tfc-soft); color: var(--tfc-navy);
+}
+.tfc-news__card h2 { font-size: 1.5rem; line-height: 1.22; margin: 0; }
+.tfc-news__card h2 a { color: var(--tfc-navy); text-decoration: none; }
+.tfc-news__card h2 a:hover { color: var(--tfc-blue); text-decoration: underline; }
+.tfc-news__card p { margin: 0; color: var(--tfc-muted); }
+.tfc-news__read { margin-top: auto; font-weight: 700; color: var(--tfc-blue); text-decoration: none; }
+.tfc-news__read:hover { text-decoration: underline; }
+.tfc-news__foot { text-align: center; margin-top: 28px; }
+.tfc-news__more {
+    font: inherit; font-size: 1.0625rem; font-weight: 700; cursor: pointer;
+    padding: 12px 28px; border-radius: 999px; border: 0; background: var(--tfc-navy); color: #fff;
+}
+.tfc-news__note { margin: 20px 0 0; font-size: 0.9375rem; color: var(--tfc-muted); text-align: center; }
+.tfc-news__note a { color: var(--tfc-blue); }
+.tfc-news__status { padding: 24px; border: 1px dashed var(--tfc-line); border-radius: 14px; color: var(--tfc-muted); }
+</style>
+
+<section class="tfc-news" id="tfc-news" aria-label="Tax Fairness in the news">
+  <div class="tfc-news__head">
+    <h1>In The News</h1>
+    <p>Coverage, blog posts and press releases on Hawaiʻi’s tax system and budget from Hawaiʻi Appleseed, newest first.</p>
+  </div>
+  <div class="tfc-news__bar" id="tfc-news-bar" role="group" aria-label="Filter by type"></div>
+  <div class="tfc-news__list" id="tfc-news-list" aria-live="polite">
+    <div class="tfc-news__status">Loading the latest coverage…</div>
+  </div>
+  <div class="tfc-news__foot"><button type="button" class="tfc-news__more" id="tfc-news-more" hidden>Show more</button></div>
+  <p class="tfc-news__note" id="tfc-news-note">All of Hawaiʻi Appleseed’s coverage is at <a href="https://hiappleseed.org/in-the-news" target="_blank" rel="noopener">hiappleseed.org/in-the-news</a>.</p>
+</section>
+
+<script>
+(function () {
+  var FEED = 'https://hawaii-appleseed.github.io/Hawaii-Appleseed-website/news.json';
+  var SITE = 'https://hiappleseed.org';
+  var CATEGORY = 'Taxes & Budget';
+  var PAGE = 12;
+  var TYPES = [
+    { key: 'all', label: 'All' },
+    { key: 'press', label: 'In the news' },
+    { key: 'blog', label: 'Blog' },
+    { key: 'press_releases', label: 'Press releases' }
+  ];
+  var TAGS = { press: 'In the news', blog: 'Blog', press_releases: 'Press release' };
+  var root = document.getElementById('tfc-news');
+  if (!root) return;
+  var list = document.getElementById('tfc-news-list');
+  var bar = document.getElementById('tfc-news-bar');
+  var more = document.getElementById('tfc-news-more');
+  var items = [], type = 'all', shown = PAGE;
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function plain(html) {
+    var d = new DOMParser().parseFromString(html || '', 'text/html');
+    return (d.body.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+  function clip(s, n) {
+    if (s.length <= n) return s;
+    var c = s.slice(0, n), i = c.lastIndexOf(' ');
+    return (i > 80 ? c.slice(0, i) : c) + '…';
+  }
+  function fmt(ms) {
+    return new Date(ms).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Pacific/Honolulu' });
+  }
+  function link(it) {
+    if (it.kind === 'press' && /^https?:\/\//i.test(it.sourceUrl || '')) return it.sourceUrl;
+    return it.fullUrl ? SITE + '/' + it.fullUrl.replace(/\/{2,}/g, '/').replace(/^\//, '') : null;
+  }
+  function card(it) {
+    var href = link(it);
+    var c = el('article', 'tfc-news__card');
+    var meta = el('div', 'tfc-news__meta');
+    meta.appendChild(el('span', 'tfc-news__tag', TAGS[it.kind]));
+    if (it.kind === 'press' && it.outlet) meta.appendChild(el('span', '', it.outlet));
+    meta.appendChild(el('span', '', fmt(it.publishOn)));
+    c.appendChild(meta);
+    var h = el('h2');
+    if (href) {
+      var a = el('a', '', plain(it.title));
+      a.href = href; a.target = '_blank'; a.rel = 'noopener';
+      h.appendChild(a);
+    } else h.textContent = plain(it.title);
+    c.appendChild(h);
+    var ex = clip(plain(it.excerpt), 200);
+    if (ex) c.appendChild(el('p', '', ex));
+    if (href) {
+      var r = el('a', 'tfc-news__read', it.kind === 'press' ? 'Read the story →' : 'Read more →');
+      r.href = href; r.target = '_blank'; r.rel = 'noopener';
+      c.appendChild(r);
+    }
+    return c;
+  }
+  function render() {
+    var rows = items.filter(function (i) { return type === 'all' || i.kind === type; });
+    list.textContent = '';
+    if (!rows.length) {
+      list.appendChild(el('div', 'tfc-news__status', 'Nothing in this category yet.'));
+      more.hidden = true;
+      return;
+    }
+    rows.slice(0, shown).forEach(function (i) { list.appendChild(card(i)); });
+    more.hidden = rows.length <= shown;
+  }
+  function chips() {
+    TYPES.forEach(function (t) {
+      var b = el('button', 'tfc-news__chip', t.label);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', t.key === type ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        type = t.key; shown = PAGE;
+        Array.prototype.forEach.call(bar.children, function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        render();
+      });
+      bar.appendChild(b);
+    });
+  }
+  more.addEventListener('click', function () { shown += PAGE; render(); });
+  chips();
+
+  fetch(FEED).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
+    ['press', 'blog', 'press_releases'].forEach(function (k) {
+      (d[k] || []).forEach(function (i) {
+        if ((i.categories || []).indexOf(CATEGORY) !== -1 && i.publishOn) {
+          i.kind = k; items.push(i);
+        }
+      });
+    });
+    items.sort(function (a, b) { return b.publishOn - a.publishOn; });
+    render();
+  }).catch(function () {
+    list.textContent = '';
+    var s = el('div', 'tfc-news__status', 'We couldn’t load the latest coverage just now. See all of it at ');
+    var a = el('a', '', 'hiappleseed.org/in-the-news');
+    a.href = SITE + '/in-the-news'; a.target = '_blank'; a.rel = 'noopener';
+    s.appendChild(a);
+    list.appendChild(s);
+  });
+})();
+</script>
